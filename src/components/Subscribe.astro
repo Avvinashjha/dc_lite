@@ -1,0 +1,147 @@
+---
+import { getSiteConfig } from '../utils/contentLoader';
+const config = getSiteConfig();
+const scriptUrl = (config as any).newsletter?.googleScriptUrl || '';
+const enabled = (config as any).newsletter?.enabled && scriptUrl && scriptUrl !== 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+---
+
+<div class="subscribe" id="subscribe-section">
+  <h2 class="subscribe__title">Stay in the loop</h2>
+  <p class="subscribe__desc">
+    Get notified when new posts, courses, or guides are published. No spam, unsubscribe anytime.
+  </p>
+
+  {enabled ? (
+    <form id="subscribe-form" class="subscribe__form">
+      <div class="subscribe__input-group">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="subscribe__input"
+          id="subscribe-email"
+        />
+        <button type="submit" class="button subscribe__btn" id="subscribe-btn">
+          Subscribe
+        </button>
+      </div>
+      <p class="subscribe__status" id="subscribe-status"></p>
+    </form>
+  ) : (
+    <div class="subscribe__rss-fallback">
+      <p style="margin-bottom: 1rem;">Subscribe via RSS to stay updated:</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/rss.xml" target="_blank" rel="noopener" class="button">Open RSS Feed</a>
+        <button onclick="navigator.clipboard.writeText(window.location.origin+'/rss.xml');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Feed URL',2000)" class="button button--secondary">Copy Feed URL</button>
+      </div>
+    </div>
+  )}
+</div>
+
+{enabled && (
+  <script is:inline define:vars={{ scriptUrl }}>
+    document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('subscribe-btn');
+      const status = document.getElementById('subscribe-status');
+      const email = document.getElementById('subscribe-email').value;
+
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+      status.textContent = '';
+      status.className = 'subscribe__status';
+
+      try {
+        const res = await fetch(scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'email=' + encodeURIComponent(email) + '&timestamp=' + encodeURIComponent(new Date().toISOString())
+        });
+
+        // no-cors always returns opaque response, so we assume success
+        status.textContent = 'You\'re subscribed! Check your inbox.';
+        status.className = 'subscribe__status subscribe__status--success';
+        document.getElementById('subscribe-email').value = '';
+      } catch (err) {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.className = 'subscribe__status subscribe__status--error';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    });
+  </script>
+)}
+
+<style>
+  .subscribe {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .subscribe__title {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .subscribe__desc {
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+  .subscribe__form {
+    width: 100%;
+  }
+  .subscribe__input-group {
+    display: flex;
+    gap: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-background);
+    transition: border-color var(--transition-fast);
+  }
+  .subscribe__input-group:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  .subscribe__input {
+    flex: 1;
+    padding: 0.85rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 1rem;
+    outline: none;
+    min-width: 0;
+  }
+  .subscribe__input::placeholder {
+    color: var(--color-text-light);
+  }
+  .subscribe__btn {
+    border-radius: 0;
+    padding: 0.85rem 1.5rem;
+    flex-shrink: 0;
+    margin: 0;
+  }
+  .subscribe__status {
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    min-height: 1.25rem;
+  }
+  .subscribe__status--success {
+    color: #16a34a;
+  }
+  .subscribe__status--error {
+    color: #dc2626;
+  }
+  @media (max-width: 480px) {
+    .subscribe__input-group {
+      flex-direction: column;
+    }
+    .subscribe__btn {
+      border-radius: 0;
+    }
+  }
+</style>

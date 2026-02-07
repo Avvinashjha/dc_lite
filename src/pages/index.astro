@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import { getBlogPostsSorted } from '../utils/contentLoader';
-import { getCourses } from '../utils/contentLoader';
-import { getDocProjects } from '../utils/contentLoader';
+import Subscribe from '../components/Subscribe.astro';
+import { getBlogPostsSorted, getCourses, getDocProjects } from '../utils/contentLoader';
 
 const recentPosts = getBlogPostsSorted().slice(0, 3);
 const courses = getCourses();
@@ -106,14 +105,10 @@ const docProjects = getDocProjects();
     </section>
   )}
 
-  <!-- CTA -->
-  <section style="background: var(--color-surface); padding: 4rem 0; text-align: center;">
+  <!-- Subscribe -->
+  <section style="background: var(--color-surface); padding: 4rem 0;">
     <div class="container">
-      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Stay Updated</h2>
-      <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
-        Subscribe to the RSS feed to get notified when new content is published.
-      </p>
-      <a href="/rss.xml" class="button">Subscribe via RSS</a>
+      <Subscribe />
     </div>
   </section>
 </BaseLayout>

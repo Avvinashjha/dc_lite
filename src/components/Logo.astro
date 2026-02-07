@@ -1,0 +1,15 @@
+---
+interface Props {
+  size?: number;
+  color?: string;
+}
+const { size = 32, color = 'currentColor' } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke={color} stroke-width="10" stroke-linecap="round" stroke-linejoin="round" width={size} height={size}>
+  <g transform="translate(100,100)">
+    <rect x="-60" y="-60" width="120" height="120" rx="4" transform="rotate(45)" />
+    <rect x="-38" y="-38" width="76" height="76" rx="4" transform="rotate(45) translate(20, -20)" />
+    <rect x="-16" y="-16" width="32" height="32" rx="2" transform="rotate(45)" />
+  </g>
+</svg>

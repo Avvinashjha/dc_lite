@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+---
+
+<BaseLayout title="404 - Page Not Found | DailyCoder" description="The page you're looking for doesn't exist.">
+  <div class="not-found">
+    <div class="not-found__icon">
+      <Logo size={80} color="var(--color-text-light)" />
+    </div>
+    <h1 class="not-found__code">404</h1>
+    <p class="not-found__message">The page you're looking for doesn't exist or has been moved.</p>
+    <div class="not-found__actions">
+      <a href="/" class="button">Go Home</a>
+      <a href="/blog" class="button button--secondary">Browse Blog</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 2rem;
+  }
+  .not-found__icon {
+    margin-bottom: 2rem;
+    opacity: 0.4;
+  }
+  .not-found__code {
+    font-size: 6rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-primary), #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .not-found__message {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    max-width: 450px;
+    margin-bottom: 2rem;
+  }
+  .not-found__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

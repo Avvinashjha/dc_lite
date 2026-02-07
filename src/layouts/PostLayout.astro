@@ -16,10 +16,13 @@ interface Props {
 
 const { title, description, date, author, image, tags, category, content } = Astro.props;
 const readingTime = calculateReadingTime(content);
+const postUrl = Astro.url.href;
+const encodedUrl = encodeURIComponent(postUrl);
+const encodedTitle = encodeURIComponent(title);
 ---
 
 <BaseLayout
-  title={`${title} | My Blog`}
+  title={`${title} | DailyCoder`}
   description={description}
   image={image}
   type="article"
@@ -29,79 +32,116 @@ const readingTime = calculateReadingTime(content);
 >
   <article class="article">
     <div class="container content">
+      <a href="/blog" class="back-link">&larr; Back to Blog</a>
+
       <header class="article__header">
         <div class="article__meta">
           <time datetime={date.toISOString()}>{formatDate(date)}</time>
-          <span>•</span>
+          <span>&bull;</span>
           <span>{readingTime}</span>
-          <span>•</span>
+          <span>&bull;</span>
           <span>{author}</span>
         </div>
         
         <h1 class="article__title">{title}</h1>
-        
         <p class="article__description">{description}</p>
         
         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
-          <a href={`/blog/category/${category}`} class="tag">
-            {category}
-          </a>
+          <a href={`/blog/category/${category}`} class="tag">{category}</a>
           {tags.map(tag => (
-            <a href={`/blog/tag/${tag}`} class="tag">
-              {tag}
-            </a>
+            <a href={`/blog/tag/${tag}`} class="tag">{tag}</a>
           ))}
         </div>
       </header>
       
       {image && (
-        <img
-          src={image}
-          alt={title}
-          class="article__image"
-          loading="eager"
-        />
+        <img src={image} alt={title} class="article__image" loading="eager" />
       )}
       
       <div class="article__content">
         <slot />
       </div>
       
-      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+      <!-- Share -->
+      <div class="share-section">
         <h3>Share this article</h3>
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.href)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button button--secondary"
-          >
-            Twitter
+        <div class="share-buttons">
+          <a href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="share-btn share-btn--twitter" title="Share on Twitter">
+            <span class="share-btn__icon">𝕏</span>
+            <span>Twitter</span>
           </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button button--secondary"
-          >
-            Facebook
+          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="share-btn share-btn--linkedin" title="Share on LinkedIn">
+            <span class="share-btn__icon">in</span>
+            <span>LinkedIn</span>
           </a>
-          <a
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button button--secondary"
-          >
-            LinkedIn
+          <a href={`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`} target="_blank" rel="noopener noreferrer" class="share-btn share-btn--reddit" title="Share on Reddit">
+            <span class="share-btn__icon">&#9650;</span>
+            <span>Reddit</span>
           </a>
-          <button
-            onclick={`navigator.clipboard.writeText('${Astro.url.href}'); alert('Link copied!')`}
-            class="button button--secondary"
-          >
-            Copy Link
+          <button onclick={`navigator.clipboard.writeText('${postUrl}');this.querySelector('span:last-child').textContent='Copied!';setTimeout(()=>this.querySelector('span:last-child').textContent='Copy Link',2000)`} class="share-btn share-btn--copy" title="Copy link">
+            <span class="share-btn__icon">&#128279;</span>
+            <span>Copy Link</span>
           </button>
         </div>
+      </div>
+
+      <div style="margin-top: 2rem; text-align: center;">
+        <a href="/blog" class="back-link">&larr; Back to Blog</a>
       </div>
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  .back-link:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .share-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .share-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+  .share-btn:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .share-btn__icon {
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .share-btn--twitter:hover { background: #1da1f2; color: white; border-color: #1da1f2; }
+  .share-btn--linkedin:hover { background: #0077b5; color: white; border-color: #0077b5; }
+  .share-btn--reddit:hover { background: #ff4500; color: white; border-color: #ff4500; }
+  .share-btn--copy:hover { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+</style>

@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSiteConfig } from '../utils/contentLoader';
+const config = getSiteConfig();
+---
+
+<BaseLayout title={`Contact | ${config.site.title}`} description="Get in touch with us. We'd love to hear from you.">
+  <div class="container content" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Get in Touch</h1>
+    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 3rem;">
+      Have a question, suggestion, or just want to say hi? We'd love to hear from you.
+    </p>
+
+    <div class="contact-grid">
+      <!-- Contact Methods -->
+      <div class="contact-methods">
+        <div class="contact-card">
+          <span class="contact-card__icon">&#9993;</span>
+          <h3>Email</h3>
+          <p>For general inquiries and feedback</p>
+          <a href="mailto:hello@dailycoder.in">hello@dailycoder.in</a>
+        </div>
+
+        <div class="contact-card">
+          <span class="contact-card__icon">&#128187;</span>
+          <h3>GitHub</h3>
+          <p>Report bugs, request features, or contribute</p>
+          {config.socialLinks.github && (
+            <a href={config.socialLinks.github} target="_blank" rel="noopener">Visit GitHub</a>
+          )}
+        </div>
+
+        <div class="contact-card">
+          <span class="contact-card__icon">&#128038;</span>
+          <h3>Twitter</h3>
+          <p>Follow for updates and quick conversations</p>
+          {config.socialLinks.twitter && (
+            <a href={config.socialLinks.twitter} target="_blank" rel="noopener">Follow on Twitter</a>
+          )}
+        </div>
+
+        <div class="contact-card">
+          <span class="contact-card__icon">&#128188;</span>
+          <h3>LinkedIn</h3>
+          <p>Connect for professional opportunities</p>
+          {config.socialLinks.linkedin && (
+            <a href={config.socialLinks.linkedin} target="_blank" rel="noopener">Connect on LinkedIn</a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .contact-methods {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .contact-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: all 250ms ease;
+  }
+  .contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .contact-card__icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .contact-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+  .contact-card p {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+  .contact-card a {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  @media (max-width: 600px) {
+    .contact-methods {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

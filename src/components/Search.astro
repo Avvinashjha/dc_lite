@@ -1,46 +1,30 @@
 ---
-// Search component using Pagefind
+// Pagefind search component
+// Pagefind generates /pagefind/pagefind-ui.js and /pagefind/pagefind-ui.css at build time
 ---
 
 <div class="search">
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
   <div id="search"></div>
 </div>
 
-<script>
-  // This will be initialized by Pagefind after build
-  // Pagefind is added in the build step
-  
-  window.addEventListener('DOMContentLoaded', async () => {
-    const searchDiv = document.getElementById('search');
-    if (!searchDiv) return;
-    
-    try {
-      // @ts-ignore - Pagefind is added during build
-      if (typeof window.PagefindUI !== 'undefined') {
-        // @ts-ignore
-        new window.PagefindUI({
-          element: '#search',
-          showSubResults: true,
-          showImages: false,
-          excerptLength: 30,
-        });
-      } else {
-        // Fallback if Pagefind is not available
-        searchDiv.innerHTML = `
-          <input 
-            type="search" 
-            placeholder="Search posts..." 
-            class="search__input"
-            disabled
-          />
-          <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;">
-            Search will be available after the site is built.
-          </p>
-        `;
-      }
-    } catch (error) {
-      console.error('Search initialization error:', error);
-    }
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', function() {
+    var script = document.createElement('script');
+    script.src = '/pagefind/pagefind-ui.js';
+    script.onload = function() {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+      });
+    };
+    script.onerror = function() {
+      document.getElementById('search').innerHTML =
+        '<input type="search" placeholder="Search posts..." class="search__input" disabled />' +
+        '<p style="font-size:0.875rem;color:var(--color-text-light);margin-top:0.5rem;">Search available on the deployed site.</p>';
+    };
+    document.head.appendChild(script);
   });
 </script>
 
@@ -48,32 +32,39 @@
   :global(#search) {
     margin: 2rem 0;
   }
-  
   :global(.pagefind-ui__search-input) {
-    width: 100%;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-size: 1rem;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    font-size: 1rem !important;
   }
-  
+  :global(.pagefind-ui__search-input:focus) {
+    outline: none !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+  }
   :global(.pagefind-ui__result) {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    background: var(--color-surface);
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    background: var(--color-surface) !important;
   }
-  
-  :global(.pagefind-ui__result-title) {
-    color: var(--color-text);
-    font-weight: 600;
+  :global(.pagefind-ui__result-link) {
+    color: var(--color-primary) !important;
+    font-weight: 600 !important;
   }
-  
   :global(.pagefind-ui__result-excerpt) {
-    color: var(--color-text-light);
-    font-size: 0.875rem;
+    color: var(--color-text-light) !important;
+    font-size: 0.875rem !important;
+  }
+  :global(.pagefind-ui__message) {
+    color: var(--color-text-light) !important;
+  }
+  :global(.pagefind-ui__form::before) {
+    opacity: 0.5;
   }
 </style>

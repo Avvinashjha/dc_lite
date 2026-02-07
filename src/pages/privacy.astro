@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSiteConfig } from '../utils/contentLoader';
+const config = getSiteConfig();
+---
+
+<BaseLayout title={`Privacy Policy | ${config.site.title}`} description="Privacy policy for DailyCoder - how we handle your data.">
+  <div class="container content" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">Privacy Policy</h1>
+    <p style="color: var(--color-text-light); margin-bottom: 2rem;">Last updated: February 2026</p>
+    
+    <div class="article__content">
+      <h2>Overview</h2>
+      <p>
+        At {config.site.title}, we take your privacy seriously. This Privacy Policy explains how we collect, 
+        use, and protect your information when you visit our website.
+      </p>
+
+      <h2>Information We Collect</h2>
+      <h3>Automatically Collected</h3>
+      <p>When you visit our site, we may automatically collect:</p>
+      <ul>
+        <li>Browser type and version</li>
+        <li>Pages visited and time spent</li>
+        <li>Referring website</li>
+        <li>Device information (screen size, OS)</li>
+      </ul>
+
+      <h3>Information You Provide</h3>
+      <p>We may collect information you voluntarily provide, such as:</p>
+      <ul>
+        <li>Name and email (if you contact us)</li>
+        <li>Comments or feedback</li>
+      </ul>
+
+      <h2>How We Use Your Information</h2>
+      <p>We use collected information to:</p>
+      <ul>
+        <li>Improve our content and user experience</li>
+        <li>Analyze site traffic and usage patterns</li>
+        <li>Respond to your inquiries</li>
+        <li>Maintain site security</li>
+      </ul>
+
+      <h2>Cookies</h2>
+      <p>
+        We use minimal cookies and local storage for essential functionality only:
+      </p>
+      <ul>
+        <li><strong>Theme preference</strong> - To remember your dark/light mode choice</li>
+        <li><strong>Reading mode</strong> - To remember your reading mode preference</li>
+      </ul>
+      <p>We do not use tracking cookies or third-party advertising cookies.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>Our site is hosted on GitHub Pages. We may use:</p>
+      <ul>
+        <li><strong>GitHub Pages</strong> - For hosting (subject to <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>)</li>
+      </ul>
+
+      <h2>Data Security</h2>
+      <p>
+        We implement appropriate security measures to protect your information. 
+        As a static site, we don't store personal data on our servers.
+      </p>
+
+      <h2>Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Request deletion of your data</li>
+        <li>Opt out of data collection</li>
+        <li>Contact us about privacy concerns</li>
+      </ul>
+
+      <h2>Children's Privacy</h2>
+      <p>
+        Our site is not directed at children under 13. We do not knowingly collect 
+        personal information from children.
+      </p>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Changes will be posted on this page 
+        with an updated revision date.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions about this Privacy Policy, please <a href="/contact">contact us</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

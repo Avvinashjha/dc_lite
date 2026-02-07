@@ -1,6 +1,7 @@
 ---
 import '../styles/global.scss';
 import '../styles/components.scss';
+import Logo from '../components/Logo.astro';
 import { getSiteConfig } from '../utils/contentLoader';
 
 interface Props {
@@ -17,7 +18,7 @@ const config = getSiteConfig();
 const {
   title,
   description,
-  image = '/og-image.jpg',
+  image,
   type = 'website',
   publishedTime,
   author = config.site.author,
@@ -25,14 +26,15 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImage = new URL(image, Astro.site);
+// Use provided image, or fall back to the site logo/favicon
+const ogImage = image ? new URL(image, Astro.site).href : new URL('/favicon.ico', Astro.site).href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': type === 'article' ? 'Article' : 'WebSite',
   headline: title,
   description,
-  image: socialImage.href,
+  image: ogImage,
   url: canonicalURL.href,
   ...(publishedTime && { datePublished: publishedTime.toISOString() }),
   ...(author && { author: { '@type': 'Person', name: author } }),
@@ -45,24 +47,38 @@ const jsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={socialImage} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={config.site.title} />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImage} />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    
+    <!-- Theme (inline for no flash) -->
     <script is:inline>
       const theme = localStorage.getItem('theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -75,16 +91,16 @@ const jsonLd = {
     <header class="header">
       <div class="container">
         <div class="header__inner">
-          <a href="/" class="header__logo">{config.site.title}</a>
+          <a href="/" class="header__logo">
+            <Logo size={28} color="var(--color-primary)" />
+            <span>{config.site.title}</span>
+          </a>
           <nav class="header__nav">
             {config.navigation.map(item => (
               <a href={item.path}>{item.label}</a>
             ))}
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
               <span id="theme-icon">🌙</span>
-            </button>
-            <button id="reading-mode-toggle" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
-              <span>📖</span>
             </button>
           </nav>
         </div>
@@ -97,12 +113,48 @@ const jsonLd = {
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; {new Date().getFullYear()} {config.site.title}. Built with Astro.</p>
-        <p style="margin-top: 0.5rem;">
-          <a href="/rss.xml" style="margin-right: 1rem;">RSS Feed</a>
-          {config.socialLinks.github && <a href={config.socialLinks.github} target="_blank" rel="noopener" style="margin-right: 1rem;">GitHub</a>}
-          {config.socialLinks.twitter && <a href={config.socialLinks.twitter} target="_blank" rel="noopener">Twitter</a>}
-        </p>
+        <div class="footer__grid">
+          <!-- Brand -->
+          <div class="footer__brand">
+            <a href="/" class="footer__logo">
+              <Logo size={24} color="var(--color-primary)" />
+              <span>{config.site.title}</span>
+            </a>
+            <p class="footer__tagline">{config.site.description}</p>
+            <div class="footer__social">
+              {config.socialLinks.github && (
+                <a href={config.socialLinks.github} target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">GH</a>
+              )}
+              {config.socialLinks.twitter && (
+                <a href={config.socialLinks.twitter} target="_blank" rel="noopener" aria-label="Twitter" title="Twitter">TW</a>
+              )}
+              {config.socialLinks.linkedin && (
+                <a href={config.socialLinks.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">LI</a>
+              )}
+            </div>
+          </div>
+
+          <!-- Content links -->
+          <div class="footer__links">
+            <h4>Content</h4>
+            <a href="/blog">Blog</a>
+            <a href="/courses">Courses</a>
+            <a href="/docs">Documentation</a>
+            <a href="/rss.xml" target="_blank" rel="noopener">RSS Feed</a>
+          </div>
+
+          <!-- Site links -->
+          <div class="footer__links">
+            <h4>Site</h4>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy">Privacy Policy</a>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p>&copy; {new Date().getFullYear()} {config.site.title}. Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>.</p>
+        </div>
       </div>
     </footer>
 
@@ -117,12 +169,6 @@ const jsonLd = {
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         updateIcon(next);
-      });
-      document.getElementById('reading-mode-toggle')?.addEventListener('click', () => {
-        const on = document.documentElement.getAttribute('data-reading-mode') === 'true';
-        if (on) document.documentElement.removeAttribute('data-reading-mode');
-        else document.documentElement.setAttribute('data-reading-mode', 'true');
-        localStorage.setItem('readingMode', String(!on));
       });
     </script>
   </body>

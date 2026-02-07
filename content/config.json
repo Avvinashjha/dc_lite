@@ -1,9 +1,9 @@
 {
   "site": {
-    "title": "DevContent",
+    "title": "DailyCoder",
     "description": "Blog, courses, and documentation for modern web development",
     "author": "Your Name",
-    "url": "https://yourdomain.com",
+    "url": "https://dailycoder.in",
     "logo": "/images/logo.svg"
   },
   "navigation": [
@@ -16,5 +16,9 @@
     "twitter": "https://twitter.com/yourusername",
     "github": "https://github.com/yourusername",
     "linkedin": "https://linkedin.com/in/yourusername"
+  },
+  "newsletter": {
+    "enabled": true,
+    "googleScriptUrl": "YOUR_GOOGLE_SCRIPT_URL_HERE"
   }
 }
