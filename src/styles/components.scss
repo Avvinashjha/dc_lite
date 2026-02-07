@@ -362,17 +362,10 @@
       color: var(--color-text-light);
     }
     
-    // Code blocks full-width on mobile
     pre {
-      margin-left: calc(-1 * var(--spacing-md));
-      margin-right: calc(-1 * var(--spacing-md));
-      border-radius: 0;
-      
-      @media (min-width: 769px) {
-        margin-left: 0;
-        margin-right: 0;
-        border-radius: var(--radius-md);
-      }
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
   }
 }
