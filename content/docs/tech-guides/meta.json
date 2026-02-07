@@ -1,0 +1,9 @@
+{
+  "title": "Tech Guides",
+  "description": "Practical technical guides and references",
+  "version": "1.0.0",
+  "sidebar": [
+    { "slug": "git-workflow", "title": "Git Workflow" },
+    { "slug": "docker-basics", "title": "Docker Basics" }
+  ]
+}

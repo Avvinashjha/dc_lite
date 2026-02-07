@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import TagList from '../../../components/TagList.astro';
+import { getBlogPosts, getAllTags } from '../../../utils/contentLoader';
+
+export function getStaticPaths() {
+  const tags = getAllTags();
+  return tags.map(tag => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+const allPosts = getBlogPosts();
+const filtered = allPosts
+  .filter(p => p.tags.includes(tag!))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout
+  title={`Posts tagged "${tag}" | DevContent`}
+  description={`Browse all blog posts tagged with ${tag}`}
+>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">
+      Posts tagged <span style="color: var(--color-primary);">"{tag}"</span>
+    </h1>
+    <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
+      {filtered.length} post{filtered.length !== 1 ? 's' : ''} found
+    </p>
+    <TagList currentTag={tag} />
+    <div class="grid grid--3">
+      {filtered.map(post => (
+        <PostCard
+          title={post.title} description={post.description} date={new Date(post.date)}
+          slug={post.slug} tags={post.tags} category={post.category}
+          image={post.image} content={post.content}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

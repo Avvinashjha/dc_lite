@@ -1,0 +1,9 @@
+{
+  "title": "Getting Started with Astro: A Modern Static Site Generator",
+  "description": "Learn how Astro combines the best of static site generation with modern web development practices to create lightning-fast websites.",
+  "date": "2026-02-01",
+  "author": "Tech Writer",
+  "tags": ["astro", "web-development", "javascript"],
+  "category": "tutorials",
+  "draft": false
+}

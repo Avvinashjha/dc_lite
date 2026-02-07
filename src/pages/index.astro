@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getBlogPostsSorted } from '../utils/contentLoader';
+import { getCourses } from '../utils/contentLoader';
+import { getDocProjects } from '../utils/contentLoader';
+
+const recentPosts = getBlogPostsSorted().slice(0, 3);
+const courses = getCourses();
+const docProjects = getDocProjects();
+---
+
+<BaseLayout
+  title="DevContent - Blog, Courses & Docs"
+  description="A modern platform for web development tutorials, courses, and documentation."
+>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container">
+      <h1 class="hero__title">Learn. Build. Ship.</h1>
+      <p class="hero__description">
+        In-depth blog posts, hands-on courses, and comprehensive documentation
+        for modern web development.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/blog" class="button">Read the Blog</a>
+        <a href="/courses" class="button button--secondary">Browse Courses</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Blog Posts -->
+  <section class="container section">
+    <div class="section__header">
+      <h2>Recent Posts</h2>
+      <a href="/blog">View all &rarr;</a>
+    </div>
+    <div class="grid grid--3">
+      {recentPosts.map(post => (
+        <PostCard
+          title={post.title}
+          description={post.description}
+          date={new Date(post.date)}
+          slug={post.slug}
+          tags={post.tags}
+          category={post.category}
+          image={post.image}
+          content={post.content}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Courses -->
+  {courses.length > 0 && (
+    <section style="background: var(--color-surface); padding: 4rem 0;">
+      <div class="container">
+        <div class="section__header">
+          <h2>Courses</h2>
+          <a href="/courses">View all &rarr;</a>
+        </div>
+        <div class="grid grid--2">
+          {courses.map(course => (
+            <a href={`/courses/${course.slug}`} class="post-card">
+              <div class="post-card__meta">
+                <span>{course.level}</span>
+                <span>&bull;</span>
+                <span>{course.duration}</span>
+                <span>&bull;</span>
+                <span>{course.totalLessons} lessons</span>
+              </div>
+              <h3 class="post-card__title">{course.title}</h3>
+              <p class="post-card__description">{course.description}</p>
+              <div class="post-card__tags">
+                {course.tags.slice(0, 3).map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Docs -->
+  {docProjects.length > 0 && (
+    <section class="container section">
+      <div class="section__header">
+        <h2>Documentation</h2>
+        <a href="/docs">View all &rarr;</a>
+      </div>
+      <div class="grid grid--2">
+        {docProjects.map(project => (
+          <a href={`/docs/${project.slug}/${project.sidebar[0]?.slug || ''}`} class="post-card">
+            <h3 class="post-card__title">{project.title}</h3>
+            <p class="post-card__description">{project.description}</p>
+            <div class="post-card__meta">
+              <span>v{project.version}</span>
+              <span>&bull;</span>
+              <span>{project.sidebar.length} pages</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section style="background: var(--color-surface); padding: 4rem 0; text-align: center;">
+    <div class="container">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Stay Updated</h2>
+      <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
+        Subscribe to the RSS feed to get notified when new content is published.
+      </p>
+      <a href="/rss.xml" class="button">Subscribe via RSS</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section {
+    padding: 4rem 0;
+  }
+  .section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .section__header h2 {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+  .section__header a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>

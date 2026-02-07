@@ -1,0 +1,101 @@
+---
+interface Props {
+  question: string;
+  options: string[];
+  answer: number;
+  explanation: string;
+}
+
+const { question, options, answer, explanation } = Astro.props;
+const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="quiz" id={quizId} data-answer={answer}>
+  <div class="quiz__header">
+    <span class="quiz__badge">Quiz</span>
+    <h4 class="quiz__question">{question}</h4>
+  </div>
+  <div class="quiz__options">
+    {options.map((opt, i) => (
+      <button class="quiz__option" data-index={i} onclick={`handleQuiz('${quizId}', ${i})`}>
+        <span class="quiz__letter">{String.fromCharCode(65 + i)}</span>
+        <span>{opt}</span>
+      </button>
+    ))}
+  </div>
+  <div class="quiz__result" style="display: none;">
+    <p class="quiz__feedback"></p>
+    <p class="quiz__explanation">{explanation}</p>
+  </div>
+</div>
+
+<script is:inline>
+  function handleQuiz(quizId, selected) {
+    const quiz = document.getElementById(quizId);
+    if (!quiz || quiz.dataset.answered === 'true') return;
+    quiz.dataset.answered = 'true';
+    const correct = parseInt(quiz.dataset.answer);
+    const options = quiz.querySelectorAll('.quiz__option');
+    options.forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === correct) btn.classList.add('quiz__option--correct');
+      if (i === selected && i !== correct) btn.classList.add('quiz__option--wrong');
+    });
+    const result = quiz.querySelector('.quiz__result');
+    const feedback = quiz.querySelector('.quiz__feedback');
+    result.style.display = 'block';
+    feedback.textContent = selected === correct ? 'Correct!' : 'Incorrect.';
+    feedback.style.color = selected === correct ? '#16a34a' : '#dc2626';
+  }
+</script>
+
+<style>
+  .quiz {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    background: var(--color-surface);
+  }
+  .quiz__badge {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .quiz__question { font-size: 1.125rem; margin-bottom: var(--spacing-md); }
+  .quiz__options { display: flex; flex-direction: column; gap: 0.5rem; }
+  .quiz__option {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+    transition: all var(--transition-fast);
+  }
+  .quiz__option:hover:not(:disabled) { border-color: var(--color-primary); background: var(--color-surface); }
+  .quiz__option--correct { border-color: #16a34a !important; background: rgba(22,163,74,.1) !important; }
+  .quiz__option--wrong { border-color: #dc2626 !important; background: rgba(220,38,38,.1) !important; }
+  .quiz__letter {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--color-code-bg); font-weight: 700; font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+  .quiz__result {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+  }
+  .quiz__feedback { font-weight: 700; font-size: 1.125rem; }
+  .quiz__explanation { color: var(--color-text-light); margin-top: 0.5rem; }
+</style>

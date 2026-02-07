@@ -1,0 +1,25 @@
+{
+  "name": "dc_lite",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && npm run postbuild",
+    "postbuild": "pagefind --site dist",
+    "preview": "astro preview",
+    "astro": "astro",
+    "new-post": "node scripts/add-post.js",
+    "validate": "node scripts/validate-posts.js"
+  },
+  "dependencies": {
+    "astro": "^5.17.1",
+    "marked": "^17.0.1"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
+    "pagefind": "^1.4.0",
+    "sass": "^1.97.3"
+  }
+}

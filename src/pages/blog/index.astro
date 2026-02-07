@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Search from '../../components/Search.astro';
+import { getBlogPostsSorted } from '../../utils/contentLoader';
+
+const sortedPosts = getBlogPostsSorted();
+---
+
+<BaseLayout
+  title="All Posts | DevContent"
+  description="Browse all blog posts about web development, TypeScript, CSS, and modern web technologies."
+>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Blog</h1>
+    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
+      {sortedPosts.length} post{sortedPosts.length !== 1 ? 's' : ''} and counting
+    </p>
+    <Search />
+    <div class="grid grid--3">
+      {sortedPosts.map(post => (
+        <PostCard
+          title={post.title}
+          description={post.description}
+          date={new Date(post.date)}
+          slug={post.slug}
+          tags={post.tags}
+          category={post.category}
+          image={post.image}
+          content={post.content}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

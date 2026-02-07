@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCourses, getCoursesIndex } from '../../utils/contentLoader';
+
+const index = getCoursesIndex();
+const courses = getCourses();
+---
+
+<BaseLayout title={`${index.title} | DevContent`} description={index.description}>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">{index.title}</h1>
+    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 3rem;">{index.description}</p>
+
+    <div class="grid grid--2">
+      {courses.map(course => (
+        <a href={`/courses/${course.slug}`} class="post-card">
+          <div class="post-card__meta">
+            <span style="text-transform: capitalize;">{course.level}</span>
+            <span>&bull;</span>
+            <span>{course.duration}</span>
+            <span>&bull;</span>
+            <span>{course.totalLessons} lessons</span>
+          </div>
+          <h3 class="post-card__title">{course.title}</h3>
+          <p class="post-card__description">{course.description}</p>
+          <div class="post-card__tags">
+            {course.tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

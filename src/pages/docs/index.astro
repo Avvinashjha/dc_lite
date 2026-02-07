@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getDocsIndex, getDocProjects } from '../../utils/contentLoader';
+
+const index = getDocsIndex();
+const projects = getDocProjects();
+---
+
+<BaseLayout title={`${index.title} | DevContent`} description={index.description}>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">{index.title}</h1>
+    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 3rem;">{index.description}</p>
+
+    <div class="grid grid--2">
+      {projects.map(project => (
+        <a href={`/docs/${project.slug}/${project.sidebar[0]?.slug || ''}`} class="post-card">
+          <h3 class="post-card__title">{project.title}</h3>
+          <p class="post-card__description">{project.description}</p>
+          <div class="post-card__meta">
+            <span>v{project.version}</span>
+            <span>&bull;</span>
+            <span>{project.sidebar.length} pages</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

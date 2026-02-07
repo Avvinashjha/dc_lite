@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "DevContent",
+    "description": "Blog, courses, and documentation for modern web development",
+    "author": "Your Name",
+    "url": "https://yourdomain.com",
+    "logo": "/images/logo.svg"
+  },
+  "navigation": [
+    { "label": "Blog", "path": "/blog" },
+    { "label": "Courses", "path": "/courses" },
+    { "label": "Docs", "path": "/docs" },
+    { "label": "About", "path": "/about" }
+  ],
+  "socialLinks": {
+    "twitter": "https://twitter.com/yourusername",
+    "github": "https://github.com/yourusername",
+    "linkedin": "https://linkedin.com/in/yourusername"
+  }
+}

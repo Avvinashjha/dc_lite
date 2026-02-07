@@ -1,0 +1,99 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { DocProject, DocPage } from '../types/post';
+
+interface Props {
+  project: DocProject;
+  page: DocPage;
+}
+
+const { project, page } = Astro.props;
+const currentIdx = project.sidebar.findIndex(s => s.slug === page.slug);
+const prev = currentIdx > 0 ? project.sidebar[currentIdx - 1] : null;
+const next = currentIdx < project.sidebar.length - 1 ? project.sidebar[currentIdx + 1] : null;
+---
+
+<BaseLayout
+  title={`${page.title} | ${project.title} Docs`}
+  description={`${page.title} - ${project.title} documentation`}
+>
+  <div class="doc-layout">
+    <!-- Sidebar -->
+    <aside class="doc-sidebar">
+      <h3 class="doc-sidebar__title">
+        <a href={`/docs/${project.slug}/${project.sidebar[0]?.slug}`}>{project.title}</a>
+      </h3>
+      <span class="doc-sidebar__version">v{project.version}</span>
+      <nav class="doc-sidebar__nav">
+        {project.sidebar.map(item => (
+          <a
+            href={`/docs/${project.slug}/${item.slug}`}
+            class={`doc-sidebar__link ${item.slug === page.slug ? 'doc-sidebar__link--active' : ''}`}
+          >
+            {item.title}
+          </a>
+        ))}
+      </nav>
+    </aside>
+
+    <!-- Content -->
+    <article class="doc-content">
+      <nav class="doc-breadcrumb">
+        <a href="/docs">Docs</a>
+        <span>/</span>
+        <a href={`/docs/${project.slug}/${project.sidebar[0]?.slug}`}>{project.title}</a>
+        <span>/</span>
+        <span>{page.title}</span>
+      </nav>
+
+      <div class="article__content">
+        <div set:html={page.htmlContent} />
+      </div>
+
+      <div class="doc-nav">
+        {prev ? (
+          <a href={`/docs/${project.slug}/${prev.slug}`} class="button button--secondary">&larr; {prev.title}</a>
+        ) : <span />}
+        {next ? (
+          <a href={`/docs/${project.slug}/${next.slug}`} class="button">{next.title} &rarr;</a>
+        ) : <span />}
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .doc-layout { display: flex; min-height: calc(100vh - 160px); }
+  .doc-sidebar {
+    width: 260px; flex-shrink: 0;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    padding: var(--spacing-lg);
+    position: sticky; top: 60px; height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+  .doc-sidebar__title { margin-bottom: 0.25rem; }
+  .doc-sidebar__title a { color: var(--color-text); text-decoration: none; }
+  .doc-sidebar__title a:hover { color: var(--color-primary); }
+  .doc-sidebar__version { font-size: 0.75rem; color: var(--color-text-light); display: block; margin-bottom: var(--spacing-lg); }
+  .doc-sidebar__nav { display: flex; flex-direction: column; gap: 0.25rem; }
+  .doc-sidebar__link {
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md); font-size: 0.9rem;
+    color: var(--color-text); text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+  .doc-sidebar__link:hover { background: var(--color-code-bg); text-decoration: none; }
+  .doc-sidebar__link--active { background: var(--color-primary); color: white; }
+  .doc-sidebar__link--active:hover { background: var(--color-primary-dark); }
+  .doc-content { flex: 1; padding: var(--spacing-2xl); max-width: var(--content-max-width); margin: 0 auto; }
+  .doc-breadcrumb { display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-light); margin-bottom: var(--spacing-xl); }
+  .doc-breadcrumb a { color: var(--color-text-light); }
+  .doc-breadcrumb a:hover { color: var(--color-primary); }
+  .doc-nav { display: flex; justify-content: space-between; margin-top: var(--spacing-2xl); padding-top: var(--spacing-xl); border-top: 1px solid var(--color-border); }
+  @media (max-width: 900px) {
+    .doc-layout { flex-direction: column; }
+    .doc-sidebar { width: 100%; position: static; height: auto; border-right: none; border-bottom: 1px solid var(--color-border); }
+    .doc-content { padding: var(--spacing-lg); }
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { getBlogPosts, getAllCategories } from '../../../utils/contentLoader';
+
+export function getStaticPaths() {
+  const categories = getAllCategories();
+  return categories.map(category => ({ params: { category } }));
+}
+
+const { category } = Astro.params;
+const allPosts = getBlogPosts();
+const allCategories = getAllCategories();
+const filtered = allPosts
+  .filter(p => p.category === category)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+---
+
+<BaseLayout
+  title={`${category} Posts | DevContent`}
+  description={`Browse all blog posts in the ${category} category`}
+>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-transform: capitalize;">{category} Posts</h1>
+    <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
+      {filtered.length} post{filtered.length !== 1 ? 's' : ''} in this category
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
+      {allCategories.map(cat => (
+        <a href={`/blog/category/${cat}`}
+           class={`tag ${category === cat ? 'tag--active' : ''}`}
+           style="text-transform: capitalize;">
+          {cat}
+        </a>
+      ))}
+    </div>
+    <div class="grid grid--3">
+      {filtered.map(post => (
+        <PostCard
+          title={post.title} description={post.description} date={new Date(post.date)}
+          slug={post.slug} tags={post.tags} category={post.category}
+          image={post.image} content={post.content}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .tag--active { background: var(--color-primary); color: white; }
+</style>

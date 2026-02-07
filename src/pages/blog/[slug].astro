@@ -1,0 +1,28 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getBlogPosts, getBlogPost } from '../../utils/contentLoader';
+
+export function getStaticPaths() {
+  const posts = getBlogPosts();
+  return posts.map(post => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = getBlogPost(slug!);
+if (!post) return Astro.redirect('/blog');
+---
+
+<PostLayout
+  title={post.title}
+  description={post.description}
+  date={new Date(post.date)}
+  author={post.author}
+  image={post.image}
+  tags={post.tags}
+  category={post.category}
+  content={post.content}
+>
+  <div set:html={post.htmlContent} />
+</PostLayout>

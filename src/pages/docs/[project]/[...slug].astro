@@ -1,0 +1,28 @@
+---
+import DocLayout from '../../../layouts/DocLayout.astro';
+import { getDocProjects, getDocProject, getDocPage } from '../../../utils/contentLoader';
+
+export function getStaticPaths() {
+  const projects = getDocProjects();
+  const paths: any[] = [];
+
+  projects.forEach(project => {
+    project.pages.forEach(page => {
+      paths.push({
+        params: { project: project.slug, slug: page.slug },
+      });
+    });
+  });
+
+  return paths;
+}
+
+const { project: projectSlug, slug: pageSlug } = Astro.params;
+const project = getDocProject(projectSlug as string);
+if (!project) return Astro.redirect('/docs');
+
+const page = getDocPage(projectSlug as string, pageSlug as string);
+if (!page) return Astro.redirect('/docs');
+---
+
+<DocLayout project={project} page={page} />

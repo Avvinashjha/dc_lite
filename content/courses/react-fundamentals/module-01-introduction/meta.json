@@ -1,0 +1,25 @@
+{
+  "title": "Introduction to React",
+  "description": "Learn what React is, why it matters, and set up your development environment",
+  "lessons": [
+    {
+      "slug": "01-what-is-react",
+      "title": "What is React?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-setup-environment",
+      "title": "Setting Up Your Environment",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-first-component",
+      "title": "Your First Component",
+      "type": "video",
+      "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "duration": "20 min"
+    }
+  ]
+}

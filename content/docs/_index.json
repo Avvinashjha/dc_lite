@@ -1,0 +1,16 @@
+{
+  "title": "Documentation",
+  "description": "Project documentation and technical guides",
+  "categories": [
+    {
+      "slug": "my-project",
+      "title": "My Project",
+      "icon": "package"
+    },
+    {
+      "slug": "tech-guides",
+      "title": "Tech Guides",
+      "icon": "book"
+    }
+  ]
+}

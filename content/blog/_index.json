@@ -1,0 +1,6 @@
+{
+  "title": "Blog",
+  "description": "Latest articles on web development, design, and programming",
+  "postsPerPage": 10,
+  "featured": ["getting-started-with-astro", "typescript-best-practices"]
+}

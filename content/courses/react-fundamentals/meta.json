@@ -1,0 +1,20 @@
+{
+  "title": "React Fundamentals",
+  "description": "Learn React from scratch with hands-on projects and real-world examples",
+  "author": "Your Name",
+  "level": "beginner",
+  "duration": "4 hours",
+  "image": "/images/courses/react.jpg",
+  "tags": ["react", "javascript", "frontend"],
+  "modules": [
+    {
+      "slug": "module-01-introduction",
+      "title": "Introduction to React"
+    },
+    {
+      "slug": "module-02-components",
+      "title": "Components and Props"
+    }
+  ],
+  "draft": false
+}

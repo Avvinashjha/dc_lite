@@ -1,0 +1,10 @@
+{
+  "title": "My Project",
+  "description": "Complete documentation for My Project",
+  "version": "1.0.0",
+  "sidebar": [
+    { "slug": "getting-started", "title": "Getting Started" },
+    { "slug": "installation", "title": "Installation" },
+    { "slug": "api-reference", "title": "API Reference" }
+  ]
+}

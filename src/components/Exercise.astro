@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  starterCode?: string;
+}
+
+const { title, description, starterCode } = Astro.props;
+---
+
+<div class="exercise">
+  <div class="exercise__header">
+    <span class="exercise__badge">Exercise</span>
+    <h4 class="exercise__title">{title}</h4>
+  </div>
+  <p class="exercise__desc">{description}</p>
+  {starterCode && (
+    <div class="exercise__code">
+      <div class="exercise__code-header">
+        <span>Starter Code</span>
+      </div>
+      <pre><code>{starterCode.trim()}</code></pre>
+    </div>
+  )}
+</div>
+
+<style>
+  .exercise {
+    border: 2px solid var(--color-border);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    background: var(--color-surface);
+  }
+  .exercise__badge {
+    display: inline-block;
+    background: #7c3aed;
+    color: #fff;
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .exercise__title { font-size: 1.125rem; margin-bottom: 0.5rem; }
+  .exercise__desc { color: var(--color-text-light); margin-bottom: var(--spacing-md); }
+  .exercise__code-header {
+    background: var(--color-code-bg);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+  }
+  .exercise__code pre {
+    margin: 0;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+</style>

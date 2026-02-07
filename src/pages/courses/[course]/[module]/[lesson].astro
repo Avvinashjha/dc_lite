@@ -1,0 +1,43 @@
+---
+import LessonLayout from '../../../../layouts/LessonLayout.astro';
+import { getCourses, getCourse, getLesson } from '../../../../utils/contentLoader';
+import type { Lesson } from '../../../../types/post';
+
+export function getStaticPaths() {
+  const courses = getCourses();
+  const paths: any[] = [];
+
+  courses.forEach(course => {
+    course.resolvedModules.forEach(mod => {
+      mod.lessons.forEach(lesson => {
+        paths.push({
+          params: { course: course.slug, module: mod.slug, lesson: lesson.slug },
+        });
+      });
+    });
+  });
+
+  return paths;
+}
+
+const { course: courseSlug, module: moduleSlug, lesson: lessonSlug } = Astro.params;
+const course = getCourse(courseSlug!);
+if (!course) return Astro.redirect('/courses');
+
+const lesson = getLesson(courseSlug!, moduleSlug!, lessonSlug!);
+if (!lesson) return Astro.redirect(`/courses/${courseSlug}`);
+
+// Build flat lesson list for prev/next
+type NavLesson = { courseSlug: string; moduleSlug: string; slug: string; title: string };
+const allLessons: NavLesson[] = [];
+course.resolvedModules.forEach(mod => {
+  mod.lessons.forEach(l => {
+    allLessons.push({ courseSlug: course.slug, moduleSlug: mod.slug, slug: l.slug, title: l.title });
+  });
+});
+const currentIdx = allLessons.findIndex(l => l.slug === lessonSlug && l.moduleSlug === moduleSlug);
+const prevLesson = currentIdx > 0 ? allLessons[currentIdx - 1] : null;
+const nextLesson = currentIdx < allLessons.length - 1 ? allLessons[currentIdx + 1] : null;
+---
+
+<LessonLayout lesson={lesson} course={course} prevLesson={prevLesson} nextLesson={nextLesson} />

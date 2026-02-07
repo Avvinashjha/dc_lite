@@ -1,0 +1,18 @@
+{
+  "title": "Components and Props",
+  "description": "Deep dive into React components, props patterns, and composition",
+  "lessons": [
+    {
+      "slug": "01-jsx-in-depth",
+      "title": "JSX In Depth",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-props-and-state",
+      "title": "Props vs State",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

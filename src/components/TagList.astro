@@ -1,0 +1,23 @@
+---
+import { getAllTags } from '../utils/contentLoader';
+const allTags = getAllTags();
+
+interface Props { currentTag?: string; }
+const { currentTag } = Astro.props;
+---
+
+<div style="margin-bottom: 2rem;">
+  <h2 style="margin-bottom: 1rem;">Tags</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+    {allTags.map(tag => (
+      <a href={`/blog/tag/${tag}`}
+         class={`tag ${currentTag === tag ? 'tag--active' : ''}`}>
+        {tag}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tag--active { background: var(--color-primary); color: white; }
+</style>
