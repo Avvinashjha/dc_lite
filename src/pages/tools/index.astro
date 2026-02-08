@@ -1,18 +1,47 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const tools = [
-  { name: 'JSON Formatter', desc: 'Format, validate, and minify JSON data', href: '/tools/json-formatter', category: 'JSON', icon: '{ }' },
-  { name: 'JSON Diff', desc: 'Compare two JSON objects side by side', href: '/tools/json-diff', category: 'JSON', icon: '⇄' },
-  { name: 'CSV ↔ JSON', desc: 'Convert between CSV and JSON formats', href: '/tools/csv-json', category: 'Converter', icon: '↹' },
-  { name: 'Regex Tester', desc: 'Test regular expressions with live matching', href: '/tools/regex-tester', category: 'Utility', icon: '.*' },
-  { name: 'JWT Decoder', desc: 'Decode and inspect JSON Web Tokens', href: '/tools/jwt-decoder', category: 'Utility', icon: '🔑' },
-  { name: 'Timestamp', desc: 'Convert Unix timestamps to human dates', href: '/tools/timestamp', category: 'Utility', icon: '⏱' },
-  { name: 'Color Converter', desc: 'Convert between HEX, RGB, and HSL', href: '/tools/color-converter', category: 'Utility', icon: '🎨' },
-  { name: 'Color Picker', desc: 'Pick colors, gradients, save palettes, export CSS/SASS', href: '/tools/color-picker', category: 'Design', icon: '🖌' },
-  { name: 'Diff Checker', desc: 'Compare two texts and see the differences', href: '/tools/diff-checker', category: 'Utility', icon: '±' },
-  { name: 'Markdown Preview', desc: 'Write markdown and see live preview', href: '/tools/markdown-preview', category: 'Utility', icon: 'MD' },
+const categories = [
+  {
+    name: 'JSON Tools',
+    icon: '{ }',
+    tools: [
+      { name: 'JSON Formatter', desc: 'Format, validate, minify with multi-tab support', href: '/tools/json-formatter', icon: '{ }' },
+      { name: 'JSON Diff', desc: 'Compare JSON objects side-by-side with saved tabs', href: '/tools/json-diff', icon: '⇄' },
+      { name: 'CSV ↔ JSON', desc: 'Convert between CSV and JSON formats', href: '/tools/csv-json', icon: '↹' },
+    ]
+  },
+  {
+    name: 'Code & Text',
+    icon: '</>',
+    tools: [
+      { name: 'Diff Checker', desc: 'Compare texts side-by-side with git-style highlighting', href: '/tools/diff-checker', icon: '±' },
+      { name: 'Regex Tester', desc: 'Test regular expressions with live matching', href: '/tools/regex-tester', icon: '.*' },
+      { name: 'Markdown Preview', desc: 'Write markdown with live preview and PDF export', href: '/tools/markdown-preview', icon: 'MD' },
+    ]
+  },
+  {
+    name: 'Design',
+    icon: '🎨',
+    tools: [
+      { name: 'Color Picker', desc: 'Pick colors, gradients, save palettes, export CSS/SASS', href: '/tools/color-picker', icon: '🖌' },
+      { name: 'Color Converter', desc: 'Convert between HEX, RGB, and HSL', href: '/tools/color-converter', icon: '🎨' },
+      { name: 'QR Generator', desc: 'Generate QR codes for URLs, WiFi, email, phone', href: '/tools/qr-generator', icon: '▣' },
+    ]
+  },
+  {
+    name: 'Developer Utilities',
+    icon: '🔧',
+    tools: [
+      { name: 'JWT Decoder', desc: 'Decode and inspect JSON Web Tokens', href: '/tools/jwt-decoder', icon: '🔑' },
+      { name: 'Timestamp', desc: 'Convert Unix timestamps and timezone converter', href: '/tools/timestamp', icon: '⏱' },
+      { name: 'Timezone', desc: 'Convert time between timezones with world clocks', href: '/tools/timezone', icon: '🌐' },
+      { name: 'Clipboard Manager', desc: 'Save, search, and organize clipboard snippets', href: '/tools/clipboard', icon: '📋' },
+    ]
+  }
 ];
+
+const allTools = categories.flatMap(c => c.tools.map(t => ({ ...t, category: c.name })));
 ---
 
 <BaseLayout title="Developer Tools | DailyCoder" description="Free online developer tools — JSON formatter, regex tester, JWT decoder, and more. All client-side, no data leaves your browser.">
@@ -21,35 +50,93 @@ const tools = [
     <p style="text-align: center; color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem;">
       Free, fast, and private. Everything runs in your browser.
     </p>
-    <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7; margin-bottom: 2.5rem;">
-      No data is sent to any server.
+    <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7; margin-bottom: 1.5rem;">
+      No data is sent to any server. {allTools.length} tools available.
     </p>
 
-    <div class="tools-grid">
-      {tools.map(tool => (
-        <a href={tool.href} class="tool-card">
-          <span class="tool-card__icon">{tool.icon}</span>
-          <div>
-            <h3 class="tool-card__name">{tool.name}</h3>
-            <p class="tool-card__desc">{tool.desc}</p>
-          </div>
-          <span class="tool-card__cat">{tool.category}</span>
-        </a>
+    <!-- Quick filter -->
+    <div class="tools-filter">
+      <button class="tools-filter__btn tools-filter__btn--active" data-filter="all">All</button>
+      {categories.map(cat => (
+        <button class="tools-filter__btn" data-filter={cat.name}>{cat.name}</button>
       ))}
     </div>
+
+    <!-- Categorized sections -->
+    {categories.map(cat => (
+      <section class="tools-section" data-category={cat.name}>
+        <h2 class="tools-section__title">
+          <span class="tools-section__icon">{cat.icon}</span>
+          {cat.name}
+          <span class="tools-section__count">{cat.tools.length}</span>
+        </h2>
+        <div class="tools-grid">
+          {cat.tools.map(tool => (
+            <a href={tool.href} class="tool-card">
+              <span class="tool-card__icon">{tool.icon}</span>
+              <div>
+                <h3 class="tool-card__name">{tool.name}</h3>
+                <p class="tool-card__desc">{tool.desc}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
   </div>
 </BaseLayout>
 
+<script is:inline>
+  document.querySelectorAll('.tools-filter__btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tools-filter__btn').forEach(function(b) { b.classList.remove('tools-filter__btn--active'); });
+      btn.classList.add('tools-filter__btn--active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.tools-section').forEach(function(sec) {
+        sec.style.display = (filter === 'all' || sec.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
 <style>
+  .tools-filter {
+    display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 2.5rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .tools-filter__btn {
+    padding: 0.4rem 1rem; border: 1px solid var(--color-border);
+    border-radius: 100px; background: var(--color-surface); color: var(--color-text-light);
+    font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 150ms;
+    white-space: nowrap;
+  }
+  .tools-filter__btn:hover { border-color: var(--color-primary); color: var(--color-text); }
+  .tools-filter__btn--active {
+    background: var(--color-primary); color: white; border-color: var(--color-primary);
+  }
+
+  .tools-section { margin-bottom: 2.5rem; }
+  .tools-section__title {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 1.25rem; margin-bottom: 1rem; padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .tools-section__icon { font-size: 1.1rem; }
+  .tools-section__count {
+    font-size: 0.7rem; font-weight: 700; background: var(--color-code-bg);
+    color: var(--color-text-light); padding: 0.1rem 0.5rem; border-radius: 100px;
+    margin-left: auto;
+  }
+
   .tools-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
   }
   .tool-card {
     display: flex; align-items: flex-start; gap: 0.75rem;
-    padding: 1.25rem; border-radius: var(--radius-lg);
+    padding: 1rem 1.1rem; border-radius: var(--radius-lg);
     border: 1px solid var(--color-border); background: var(--color-surface);
     text-decoration: none; color: inherit; transition: all 200ms ease;
-    position: relative;
   }
   .tool-card:hover {
     transform: translateY(-2px); box-shadow: var(--shadow-md);
@@ -57,19 +144,13 @@ const tools = [
   }
   .tool-card * { text-decoration: none; }
   .tool-card__icon {
-    font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono);
-    background: var(--color-code-bg); width: 42px; height: 42px;
+    font-size: 1.1rem; font-weight: 700; font-family: var(--font-mono);
+    background: var(--color-code-bg); width: 38px; height: 38px;
     display: flex; align-items: center; justify-content: center;
     border-radius: var(--radius-md); flex-shrink: 0;
   }
-  .tool-card__name { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; color: var(--color-text); }
-  .tool-card__desc { font-size: 0.8rem; color: var(--color-text-light); line-height: 1.4; }
-  .tool-card__cat {
-    position: absolute; top: 0.75rem; right: 0.75rem;
-    font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
-    background: var(--color-code-bg); padding: 0.15rem 0.5rem;
-    border-radius: var(--radius-sm); color: var(--color-text-light);
-  }
+  .tool-card__name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem; color: var(--color-text); }
+  .tool-card__desc { font-size: 0.78rem; color: var(--color-text-light); line-height: 1.4; }
 
   @media (max-width: 1024px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .tools-grid { grid-template-columns: 1fr; } }

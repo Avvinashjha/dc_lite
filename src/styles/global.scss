@@ -301,3 +301,81 @@ img {
   .jd-num { width: 30px; font-size: 0.65rem; }
   .jd-pre { width: 16px; }
 }
+
+// ──── Shared Tab Bar Styles (used by JSON Formatter, JSON Diff, Diff Checker) ────
+.tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--color-border);
+  overflow-x: auto;
+}
+.tab-list {
+  display: flex;
+  gap: 0;
+  flex: 1;
+  overflow-x: auto;
+}
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 150ms;
+}
+.tab-item:hover {
+  color: var(--color-text);
+  background: var(--color-code-bg);
+}
+.tab-item--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+.tab-item__name {
+  pointer-events: none;
+}
+.tab-item__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: none;
+  color: var(--color-text-light);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  line-height: 1;
+  transition: all 150ms;
+}
+.tab-item__close:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+.tab-add {
+  width: 32px;
+  height: 32px;
+  border: 1px dashed var(--color-border);
+  background: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  transition: all 150ms;
+}
+.tab-add:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-code-bg);
+}

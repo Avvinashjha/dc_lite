@@ -2,14 +2,19 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="JSON Formatter" description="Format, validate, and minify JSON data instantly." toolName="JSON Formatter">
+<ToolLayout title="JSON Formatter" description="Format, validate, and minify JSON — with multiple tabs and persistent storage." toolName="JSON Formatter">
+  <div class="tab-bar" id="tab-bar">
+    <div class="tab-list" id="tab-list"></div>
+    <button class="tab-add" id="btn-add-tab" title="New tab">+</button>
+  </div>
+
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-format">Format</button>
     <button class="tool-btn" id="btn-minify">Minify</button>
     <button class="tool-btn" id="btn-validate">Validate</button>
     <button class="tool-btn" id="btn-copy">Copy Output</button>
-    <button class="tool-btn" id="btn-download">Download JSON</button>
-    <button class="tool-btn" id="btn-clear">Clear</button>
+    <button class="tool-btn" id="btn-download">Download</button>
+    <button class="tool-btn" id="btn-save">Save Tab</button>
   </div>
 
   <div class="tool-panels">
@@ -25,7 +30,11 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   <div id="status"></div>
 </ToolLayout>
 
+<script src="/js/store.js" is:inline></script>
 <script is:inline>
+  var TOOL = 'json-formatter';
+  var tabs = [];
+  var activeTab = null;
   var input = document.getElementById('input');
   var output = document.getElementById('output');
   var status = document.getElementById('status');
@@ -35,45 +44,148 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     status.textContent = msg;
   }
 
+  function genId() { return 'tab-' + Date.now().toString(36); }
+
+  // --- Tab rendering ---
+  function renderTabs() {
+    var list = document.getElementById('tab-list');
+    list.innerHTML = '';
+    tabs.forEach(function(tab) {
+      var el = document.createElement('div');
+      el.className = 'tab-item' + (tab.id === activeTab ? ' tab-item--active' : '');
+      el.innerHTML = '<span class="tab-item__name">' + (tab.name || 'Untitled') + '</span>' +
+        (tabs.length > 1 ? '<button class="tab-item__close" data-id="' + tab.id + '">&times;</button>' : '');
+      el.addEventListener('click', function(e) {
+        if (e.target.classList.contains('tab-item__close')) return;
+        switchTab(tab.id);
+      });
+      list.appendChild(el);
+    });
+    // Close buttons
+    list.querySelectorAll('.tab-item__close').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeTab(btn.dataset.id);
+      });
+    });
+  }
+
+  function switchTab(id) {
+    // Save current
+    saveCurrentToMemory();
+    activeTab = id;
+    var tab = tabs.find(function(t) { return t.id === id; });
+    if (tab) {
+      input.value = tab.content || '';
+      output.textContent = tab.output || '';
+      status.textContent = '';
+    }
+    renderTabs();
+  }
+
+  function saveCurrentToMemory() {
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    if (tab) {
+      tab.content = input.value;
+      tab.output = output.textContent;
+    }
+  }
+
+  function addTab(data) {
+    var tab = { id: genId(), name: data && data.name || 'Tab ' + (tabs.length + 1), content: data && data.content || '', output: '' };
+    tabs.push(tab);
+    switchTab(tab.id);
+  }
+
+  function closeTab(id) {
+    if (tabs.length <= 1) return;
+    tabs = tabs.filter(function(t) { return t.id !== id; });
+    if (activeTab === id) switchTab(tabs[0].id);
+    else renderTabs();
+    saveToDB();
+  }
+
+  // --- IndexedDB persistence ---
+  async function saveToDB() {
+    saveCurrentToMemory();
+    await DCStore.init();
+    await DCStore.clear(TOOL);
+    for (var i = 0; i < tabs.length; i++) {
+      await DCStore.set(TOOL, tabs[i].id, { name: tabs[i].name, content: tabs[i].content, order: i, isActive: tabs[i].id === activeTab });
+    }
+  }
+
+  async function loadFromDB() {
+    await DCStore.init();
+    var items = await DCStore.getAll(TOOL);
+    if (items.length === 0) {
+      addTab({ name: 'Tab 1' });
+      return;
+    }
+    items.sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
+    tabs = items.map(function(item) { return { id: item.id, name: item.name, content: item.content || '', output: '' }; });
+    var active = items.find(function(i) { return i.isActive; });
+    activeTab = active ? active.id : tabs[0].id;
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    input.value = tab ? tab.content : '';
+    renderTabs();
+  }
+
+  // --- Actions ---
   document.getElementById('btn-format').addEventListener('click', function() {
     try {
       var parsed = JSON.parse(input.value);
       output.textContent = JSON.stringify(parsed, null, 2);
-      setStatus('Formatted successfully', 'success');
+      setStatus('Formatted', 'success');
     } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
   });
 
   document.getElementById('btn-minify').addEventListener('click', function() {
     try {
-      var parsed = JSON.parse(input.value);
-      output.textContent = JSON.stringify(parsed);
-      setStatus('Minified successfully', 'success');
+      output.textContent = JSON.stringify(JSON.parse(input.value));
+      setStatus('Minified', 'success');
     } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
   });
 
   document.getElementById('btn-validate').addEventListener('click', function() {
     try {
       JSON.parse(input.value);
-      setStatus('Valid JSON!', 'success');
       output.textContent = 'Valid JSON ✓';
-    } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
+      setStatus('Valid JSON!', 'success');
+    } catch(e) { output.textContent = ''; setStatus('Invalid: ' + e.message, 'error'); }
   });
 
   document.getElementById('btn-copy').addEventListener('click', function() {
-    if (output.textContent) {
-      navigator.clipboard.writeText(output.textContent);
-      setStatus('Copied to clipboard!', 'success');
-    }
+    if (output.textContent) { navigator.clipboard.writeText(output.textContent); setStatus('Copied!', 'success'); }
   });
 
   document.getElementById('btn-download').addEventListener('click', function() {
     if (!output.textContent) return;
     var blob = new Blob([output.textContent], { type: 'application/json' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'formatted.json'; a.click();
+    a.download = (tabs.find(function(t) { return t.id === activeTab; }).name || 'formatted') + '.json';
+    a.click();
   });
 
-  document.getElementById('btn-clear').addEventListener('click', function() {
-    input.value = ''; output.textContent = ''; status.textContent = '';
+  document.getElementById('btn-save').addEventListener('click', function() {
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    var name = prompt('Tab name:', tab ? tab.name : '');
+    if (name !== null && tab) { tab.name = name; renderTabs(); saveToDB(); setStatus('Saved!', 'success'); }
   });
+
+  document.getElementById('btn-add-tab').addEventListener('click', function() {
+    addTab(); saveToDB();
+  });
+
+  // Auto-save on input
+  var saveTimer;
+  input.addEventListener('input', function() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function() { saveToDB(); }, 1000);
+  });
+
+  // Init
+  loadFromDB();
 </script>
+
+<!-- Tab styles are in global.scss -->

@@ -2,12 +2,18 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="CSV ↔ JSON Converter" description="Convert between CSV and JSON formats instantly." toolName="CSV ↔ JSON Converter">
+<ToolLayout title="CSV ↔ JSON Converter" description="Convert between CSV and JSON formats — with multiple tabs." toolName="CSV ↔ JSON Converter">
+  <div class="tab-bar" id="tab-bar">
+    <div class="tab-list" id="tab-list"></div>
+    <button class="tab-add" id="btn-add-tab" title="New conversion">+</button>
+  </div>
+
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-csv2json">CSV → JSON</button>
     <button class="tool-btn tool-btn--primary" id="btn-json2csv">JSON → CSV</button>
     <button class="tool-btn" id="btn-copy">Copy Output</button>
     <button class="tool-btn" id="btn-download">Download</button>
+    <button class="tool-btn" id="btn-save">Save Tab</button>
     <button class="tool-btn" id="btn-clear">Clear</button>
   </div>
 
@@ -24,11 +30,16 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   <div id="status"></div>
 </ToolLayout>
 
+<script src="/js/store.js" is:inline></script>
 <script is:inline>
+  var TOOL = 'csv-json';
+  var tabs = [], activeTab = null;
   var input = document.getElementById('input');
   var output = document.getElementById('output');
   var status = document.getElementById('status');
   var lastMode = 'json';
+
+  function genId() { return 'csv-' + Date.now().toString(36); }
 
   function parseCSV(text) {
     var lines = text.trim().split('\n');
@@ -58,22 +69,90 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     return csv;
   }
 
+  // --- Tab system ---
+  function renderTabs() {
+    var list = document.getElementById('tab-list');
+    list.innerHTML = '';
+    tabs.forEach(function(tab) {
+      var el = document.createElement('div');
+      el.className = 'tab-item' + (tab.id === activeTab ? ' tab-item--active' : '');
+      el.innerHTML = '<span class="tab-item__name">' + (tab.name || 'Untitled') + '</span>' +
+        (tabs.length > 1 ? '<button class="tab-item__close" data-id="' + tab.id + '">&times;</button>' : '');
+      el.addEventListener('click', function(e) { if (!e.target.classList.contains('tab-item__close')) switchTab(tab.id); });
+      list.appendChild(el);
+    });
+    list.querySelectorAll('.tab-item__close').forEach(function(btn) {
+      btn.addEventListener('click', function(e) { e.stopPropagation(); closeTab(btn.dataset.id); });
+    });
+  }
+
+  function switchTab(id) {
+    saveCurrentToMemory();
+    activeTab = id;
+    var tab = tabs.find(function(t) { return t.id === id; });
+    if (tab) { input.value = tab.content || ''; output.textContent = tab.output || ''; }
+    status.textContent = '';
+    renderTabs();
+  }
+
+  function saveCurrentToMemory() {
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    if (tab) { tab.content = input.value; tab.output = output.textContent; }
+  }
+
+  function addTab(data) {
+    var tab = { id: genId(), name: data && data.name || 'Convert ' + (tabs.length + 1), content: data && data.content || '', output: '' };
+    tabs.push(tab);
+    switchTab(tab.id);
+  }
+
+  function closeTab(id) {
+    if (tabs.length <= 1) return;
+    tabs = tabs.filter(function(t) { return t.id !== id; });
+    if (activeTab === id) switchTab(tabs[0].id);
+    else renderTabs();
+    saveToDB();
+  }
+
+  async function saveToDB() {
+    saveCurrentToMemory();
+    await DCStore.init();
+    await DCStore.clear(TOOL);
+    for (var i = 0; i < tabs.length; i++)
+      await DCStore.set(TOOL, tabs[i].id, { name: tabs[i].name, content: tabs[i].content, order: i, isActive: tabs[i].id === activeTab });
+  }
+
+  async function loadFromDB() {
+    await DCStore.init();
+    var items = await DCStore.getAll(TOOL);
+    if (items.length === 0) { addTab({ name: 'Convert 1' }); return; }
+    items.sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
+    tabs = items.map(function(i) { return { id: i.id, name: i.name, content: i.content || '', output: '' }; });
+    var active = items.find(function(i) { return i.isActive; });
+    activeTab = active ? active.id : tabs[0].id;
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    if (tab) input.value = tab.content;
+    renderTabs();
+  }
+
+  // --- Actions ---
   document.getElementById('btn-csv2json').addEventListener('click', function() {
     try {
       var result = parseCSV(input.value);
       output.textContent = JSON.stringify(result, null, 2);
       lastMode = 'json';
       status.className = 'tool-success'; status.textContent = 'Converted ' + result.length + ' rows to JSON';
+      saveToDB();
     } catch(e) { status.className = 'tool-error'; status.textContent = e.message; }
   });
 
   document.getElementById('btn-json2csv').addEventListener('click', function() {
     try {
-      var arr = JSON.parse(input.value);
-      var csv = jsonToCSV(arr);
+      var csv = jsonToCSV(JSON.parse(input.value));
       output.textContent = csv;
       lastMode = 'csv';
       status.className = 'tool-success'; status.textContent = 'Converted to CSV';
+      saveToDB();
     } catch(e) { status.className = 'tool-error'; status.textContent = e.message; }
   });
 
@@ -86,10 +165,24 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     var ext = lastMode === 'csv' ? 'csv' : 'json';
     var blob = new Blob([output.textContent], { type: 'text/' + ext });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'converted.' + ext; a.click();
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    a.download = (tab ? tab.name : 'converted') + '.' + ext; a.click();
   });
+
+  document.getElementById('btn-save').addEventListener('click', function() {
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    var name = prompt('Tab name:', tab ? tab.name : '');
+    if (name !== null && tab) { tab.name = name; renderTabs(); saveToDB(); }
+  });
+
+  document.getElementById('btn-add-tab').addEventListener('click', function() { addTab(); saveToDB(); });
 
   document.getElementById('btn-clear').addEventListener('click', function() {
     input.value = ''; output.textContent = ''; status.textContent = '';
   });
+
+  var st;
+  input.addEventListener('input', function() { clearTimeout(st); st = setTimeout(saveToDB, 1000); });
+
+  loadFromDB();
 </script>

@@ -1,0 +1,178 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="Clipboard Manager" description="Save, organize, and quickly access your clipboard snippets." toolName="Clipboard Manager">
+  <div class="tool-actions">
+    <button class="tool-btn tool-btn--primary" id="btn-paste">Paste from Clipboard</button>
+    <button class="tool-btn" id="btn-add-manual">Add Manually</button>
+    <button class="tool-btn" id="btn-clear-all">Clear All</button>
+  </div>
+
+  <div id="clip-stats" style="font-size: 0.8rem; color: var(--color-text-light); margin-bottom: 1rem;"></div>
+
+  <div class="clip-search" style="margin-bottom: 1rem;">
+    <input id="clip-search" class="tool-input" placeholder="Search snippets..." />
+  </div>
+
+  <div id="clip-list"></div>
+</ToolLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script is:inline>
+  var TOOL = 'clipboard';
+  var items = [];
+
+  function genId() { return 'clip-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function preview(text, len) {
+    len = len || 120;
+    if (text.length <= len) return text;
+    return text.substring(0, len) + '...';
+  }
+
+  function timeAgo(ts) {
+    var diff = (Date.now() - ts) / 1000;
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    return Math.floor(diff / 86400) + 'd ago';
+  }
+
+  async function loadItems() {
+    await DCStore.init();
+    items = await DCStore.getAll(TOOL);
+    items.sort(function(a, b) { return (b.updatedAt || 0) - (a.updatedAt || 0); });
+    render();
+  }
+
+  async function saveItem(text, name) {
+    var id = genId();
+    await DCStore.set(TOOL, id, { name: name || '', text: text, createdAt: Date.now() });
+    await loadItems();
+  }
+
+  async function removeItem(id) {
+    await DCStore.remove(TOOL, id);
+    await loadItems();
+  }
+
+  async function updateName(id, name) {
+    var item = items.find(function(i) { return i.id === id; });
+    if (item) {
+      await DCStore.set(TOOL, id, { name: name, text: item.text, createdAt: item.createdAt });
+      await loadItems();
+    }
+  }
+
+  async function clearAll() {
+    if (!confirm('Delete all saved clips?')) return;
+    await DCStore.clear(TOOL);
+    await loadItems();
+  }
+
+  function render(filter) {
+    var el = document.getElementById('clip-list');
+    var filtered = items;
+    if (filter) {
+      var q = filter.toLowerCase();
+      filtered = items.filter(function(i) {
+        return (i.text && i.text.toLowerCase().indexOf(q) >= 0) || (i.name && i.name.toLowerCase().indexOf(q) >= 0);
+      });
+    }
+
+    document.getElementById('clip-stats').textContent = items.length + ' snippet(s) saved' + (filter ? ', ' + filtered.length + ' shown' : '');
+
+    if (filtered.length === 0) {
+      el.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--color-text-light);border:1px dashed var(--color-border);border-radius:var(--radius-md);">' +
+        (items.length === 0 ? 'No clips saved yet. Paste from clipboard or add manually.' : 'No results for "' + esc(filter) + '"') + '</div>';
+      return;
+    }
+
+    el.innerHTML = filtered.map(function(item) {
+      var isCode = item.text && (item.text.indexOf('{') >= 0 || item.text.indexOf('function') >= 0 || item.text.indexOf('<') >= 0);
+      return '<div class="clip-card">' +
+        '<div class="clip-card__header">' +
+          '<span class="clip-card__name" title="Click to rename" data-id="' + item.id + '">' + esc(item.name || 'Untitled') + '</span>' +
+          '<span class="clip-card__time">' + timeAgo(item.createdAt || item.updatedAt) + '</span>' +
+        '</div>' +
+        '<pre class="clip-card__text">' + esc(preview(item.text || '', 200)) + '</pre>' +
+        '<div class="clip-card__actions">' +
+          '<button class="cp-btn-copy" onclick="navigator.clipboard.writeText(items.find(function(i){return i.id===\'' + item.id + '\'}).text);this.textContent=\'Copied\';var b=this;setTimeout(function(){b.textContent=\'Copy\'},1500)">Copy</button>' +
+          '<button class="cp-btn-copy" onclick="renameClip(\'' + item.id + '\')">Rename</button>' +
+          '<button class="cp-btn-del" onclick="deleteClip(\'' + item.id + '\')">Delete</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Global functions for onclick handlers
+  window.items = items;
+  window.renameClip = function(id) {
+    var item = items.find(function(i) { return i.id === id; });
+    if (!item) return;
+    var name = prompt('Snippet name:', item.name || '');
+    if (name !== null) updateName(id, name);
+  };
+  window.deleteClip = function(id) { removeItem(id); };
+
+  document.getElementById('btn-paste').addEventListener('click', async function() {
+    try {
+      var text = await navigator.clipboard.readText();
+      if (text) {
+        var name = prompt('Name this snippet (optional):', '');
+        await saveItem(text, name || '');
+      }
+    } catch(e) {
+      // Fallback
+      var text = prompt('Paste your text here:');
+      if (text) {
+        var name = prompt('Name this snippet (optional):', '');
+        await saveItem(text, name || '');
+      }
+    }
+  });
+
+  document.getElementById('btn-add-manual').addEventListener('click', function() {
+    var text = prompt('Enter text to save:');
+    if (text) {
+      var name = prompt('Name this snippet (optional):', '');
+      saveItem(text, name || '');
+    }
+  });
+
+  document.getElementById('btn-clear-all').addEventListener('click', clearAll);
+
+  document.getElementById('clip-search').addEventListener('input', function() {
+    render(this.value);
+  });
+
+  loadItems();
+</script>
+
+<style is:global>
+  .clip-card {
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    padding: 0.75rem 1rem; margin-bottom: 0.6rem; background: var(--color-surface);
+    transition: all 150ms;
+  }
+  .clip-card:hover { border-color: var(--color-primary); }
+  .clip-card__header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 0.4rem;
+  }
+  .clip-card__name {
+    font-weight: 700; font-size: 0.85rem; color: var(--color-text);
+    cursor: pointer;
+  }
+  .clip-card__name:hover { color: var(--color-primary); }
+  .clip-card__time { font-size: 0.7rem; color: var(--color-text-light); }
+  .clip-card__text {
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-light);
+    background: var(--color-code-bg); padding: 0.5rem 0.6rem; border-radius: var(--radius-sm);
+    margin: 0 0 0.5rem; overflow: hidden; white-space: pre-wrap; word-break: break-all;
+    max-height: 100px; line-height: 1.5;
+  }
+  .clip-card__actions { display: flex; gap: 0.4rem; }
+</style>

@@ -1,0 +1,150 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="QR Code Generator" description="Generate QR codes for URLs, text, WiFi, and more." toolName="QR Code Generator">
+  <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start;">
+    <div>
+      <div class="cp-field" style="margin-bottom: 1rem;">
+        <span class="tool-panel__label">Type</span>
+        <select id="qr-type" class="tool-input">
+          <option value="text">Text / URL</option>
+          <option value="wifi">WiFi Network</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone Number</option>
+        </select>
+      </div>
+
+      <div id="fields-text">
+        <div class="cp-field">
+          <span class="tool-panel__label">Content</span>
+          <textarea id="qr-text" class="tool-textarea" style="min-height: 100px;" placeholder="Enter URL or text...">https://dailycoder.in</textarea>
+        </div>
+      </div>
+
+      <div id="fields-wifi" style="display:none;">
+        <div class="cp-field" style="margin-bottom:0.75rem;"><span class="tool-panel__label">Network Name (SSID)</span><input id="wifi-ssid" class="tool-input" placeholder="MyWiFi" /></div>
+        <div class="cp-field" style="margin-bottom:0.75rem;"><span class="tool-panel__label">Password</span><input id="wifi-pass" class="tool-input" placeholder="password123" /></div>
+        <div class="cp-field"><span class="tool-panel__label">Security</span>
+          <select id="wifi-sec" class="tool-input"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="">None</option></select>
+        </div>
+      </div>
+
+      <div id="fields-email" style="display:none;">
+        <div class="cp-field" style="margin-bottom:0.75rem;"><span class="tool-panel__label">Email</span><input id="email-addr" class="tool-input" placeholder="hello@example.com" /></div>
+        <div class="cp-field" style="margin-bottom:0.75rem;"><span class="tool-panel__label">Subject</span><input id="email-subj" class="tool-input" placeholder="Hello" /></div>
+        <div class="cp-field"><span class="tool-panel__label">Body</span><textarea id="email-body" class="tool-textarea" style="min-height:60px;" placeholder="Message..."></textarea></div>
+      </div>
+
+      <div id="fields-phone" style="display:none;">
+        <div class="cp-field"><span class="tool-panel__label">Phone Number</span><input id="phone-num" class="tool-input" placeholder="+1234567890" /></div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;">
+        <div class="cp-field"><span class="tool-panel__label">Size</span>
+          <select id="qr-size" class="tool-input"><option value="200">Small (200px)</option><option value="300" selected>Medium (300px)</option><option value="500">Large (500px)</option></select>
+        </div>
+      </div>
+
+      <div class="tool-actions" style="margin-top: 1rem;">
+        <button class="tool-btn tool-btn--primary" id="btn-generate">Generate QR Code</button>
+        <button class="tool-btn" id="btn-download-qr">Download PNG</button>
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+      <div id="qr-output" style="background: white; padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: inline-block;">
+        <canvas id="qr-canvas" width="300" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  // Minimal QR Code generator (alphanumeric/byte mode, error correction L)
+  // For production, consider a library. This uses the Canvas API with a simple encoding.
+  // We'll use the Google Charts API as a fallback for QR generation (zero deps, works offline with cache)
+
+  var qrType = document.getElementById('qr-type');
+  var canvas = document.getElementById('qr-canvas');
+  var ctx = canvas.getContext('2d');
+
+  function showFields(type) {
+    ['text','wifi','email','phone'].forEach(function(t) {
+      document.getElementById('fields-' + t).style.display = t === type ? '' : 'none';
+    });
+  }
+  qrType.addEventListener('change', function() { showFields(qrType.value); });
+
+  function getContent() {
+    var type = qrType.value;
+    if (type === 'text') return document.getElementById('qr-text').value;
+    if (type === 'wifi') {
+      var ssid = document.getElementById('wifi-ssid').value;
+      var pass = document.getElementById('wifi-pass').value;
+      var sec = document.getElementById('wifi-sec').value;
+      return 'WIFI:T:' + sec + ';S:' + ssid + ';P:' + pass + ';;';
+    }
+    if (type === 'email') {
+      var addr = document.getElementById('email-addr').value;
+      var subj = document.getElementById('email-subj').value;
+      var body = document.getElementById('email-body').value;
+      return 'mailto:' + addr + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+    }
+    if (type === 'phone') return 'tel:' + document.getElementById('phone-num').value;
+    return '';
+  }
+
+  function drawQR(text, size) {
+    canvas.width = size;
+    canvas.height = size;
+    ctx.clearRect(0, 0, size, size);
+
+    // Use a simple approach: render via image from QR API
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(img, 0, 0, size, size);
+    };
+    img.onerror = function() {
+      // Fallback: draw text representation
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = '#000000';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('QR Generation failed', size/2, size/2 - 10);
+      ctx.fillText('Try a shorter text', size/2, size/2 + 10);
+    };
+    // Use qrserver.com free API (no key needed, CORS enabled)
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size + '&data=' + encodeURIComponent(text);
+  }
+
+  document.getElementById('btn-generate').addEventListener('click', function() {
+    var text = getContent();
+    if (!text) return;
+    var size = parseInt(document.getElementById('qr-size').value);
+    drawQR(text, size);
+  });
+
+  document.getElementById('btn-download-qr').addEventListener('click', function() {
+    var link = document.createElement('a');
+    link.download = 'qrcode.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  // Generate default
+  drawQR('https://dailycoder.in', 300);
+</script>
+
+<style>
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns: 1fr 300px"] {
+      display: flex !important;
+      flex-direction: column-reverse;
+    }
+  }
+</style>

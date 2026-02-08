@@ -2,12 +2,18 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Markdown Preview" description="Write markdown and see a live rendered preview." toolName="Markdown Preview">
+<ToolLayout title="Markdown Preview" description="Write markdown and see a live rendered preview — with multiple tabs." toolName="Markdown Preview">
+  <div class="tab-bar" id="tab-bar">
+    <div class="tab-list" id="tab-list"></div>
+    <button class="tab-add" id="btn-add-tab" title="New document">+</button>
+  </div>
+
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-pdf">Download PDF</button>
     <button class="tool-btn" id="btn-copy-html">Copy HTML</button>
     <button class="tool-btn" id="btn-download-html">Download HTML</button>
     <button class="tool-btn" id="btn-download-md">Download .md</button>
+    <button class="tool-btn" id="btn-save">Save Tab</button>
     <button class="tool-btn" id="btn-clear">Clear</button>
   </div>
 
@@ -23,60 +29,128 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   </div>
 </ToolLayout>
 
+<script src="/js/store.js" is:inline></script>
 <script is:inline>
-  // Minimal markdown parser (no library needed for basic preview)
+  var TOOL = 'markdown-preview';
+  var tabs = [], activeTab = null;
+  var input = document.getElementById('input');
+  var preview = document.getElementById('preview');
+
+  function genId() { return 'md-' + Date.now().toString(36); }
+
+  // --- Markdown parser ---
   function parseMd(md) {
-    var html = md
-      // Code blocks
+    return md
       .replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
         return '<pre><code class="language-' + lang + '">' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code></pre>';
       })
-      // Tables
       .replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm, function(m, header, body) {
         var ths = header.split('|').map(function(h) { return '<th>' + h.trim() + '</th>'; }).join('');
         var rows = body.trim().split('\n').map(function(row) {
-          var tds = row.replace(/^\||\|$/g, '').split('|').map(function(c) { return '<td>' + c.trim() + '</td>'; }).join('');
-          return '<tr>' + tds + '</tr>';
+          return '<tr>' + row.replace(/^\||\|$/g, '').split('|').map(function(c) { return '<td>' + c.trim() + '</td>'; }).join('') + '</tr>';
         }).join('');
         return '<table><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>';
       })
-      // Headers
       .replace(/^######\s+(.+)$/gm, '<h6>$1</h6>')
       .replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>')
       .replace(/^####\s+(.+)$/gm, '<h4>$1</h4>')
       .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
       .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
       .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
-      // Blockquotes
       .replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>')
-      // Bold, italic, inline code
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>')
-      // Links, images
       .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-      // Unordered lists
       .replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>')
-      // Horizontal rule
       .replace(/^---$/gm, '<hr />')
-      // Paragraphs
       .replace(/\n\n/g, '</p><p>')
-      .replace(/^(?!<[hupoltbr])/gm, '');
-    // Wrap loose li in ul
-    html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
-    return '<div class="article__content">' + html + '</div>';
+      .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
   }
 
-  var input = document.getElementById('input');
-  var preview = document.getElementById('preview');
+  function render() { preview.innerHTML = '<div class="article__content">' + parseMd(input.value) + '</div>'; }
 
-  // Default sample
-  input.value = "# Hello World\n\nThis is **bold** and *italic*.\n\n## Code Example\n\n```javascript\nfunction greet(n) {\n  console.log('Hello, ' + n);\n}\n```\n\n## List\n\n- Item one\n- Item two\n- Item three\n\n> A blockquote for emphasis.\n\n[Visit DailyCoder](https://dailycoder.in)\n\n| Header 1 | Header 2 |\n|----------|----------|\n| Cell 1   | Cell 2   |";
+  // --- Tab system ---
+  function renderTabs() {
+    var list = document.getElementById('tab-list');
+    list.innerHTML = '';
+    tabs.forEach(function(tab) {
+      var el = document.createElement('div');
+      el.className = 'tab-item' + (tab.id === activeTab ? ' tab-item--active' : '');
+      el.innerHTML = '<span class="tab-item__name">' + (tab.name || 'Untitled') + '</span>' +
+        (tabs.length > 1 ? '<button class="tab-item__close" data-id="' + tab.id + '">&times;</button>' : '');
+      el.addEventListener('click', function(e) { if (!e.target.classList.contains('tab-item__close')) switchTab(tab.id); });
+      list.appendChild(el);
+    });
+    list.querySelectorAll('.tab-item__close').forEach(function(btn) {
+      btn.addEventListener('click', function(e) { e.stopPropagation(); closeTab(btn.dataset.id); });
+    });
+  }
 
-  function render() { preview.innerHTML = parseMd(input.value); }
-  input.addEventListener('input', render);
-  render();
+  function switchTab(id) {
+    saveCurrentToMemory();
+    activeTab = id;
+    var tab = tabs.find(function(t) { return t.id === id; });
+    if (tab) input.value = tab.content || '';
+    render();
+    renderTabs();
+  }
+
+  function saveCurrentToMemory() {
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    if (tab) tab.content = input.value;
+  }
+
+  function addTab(data) {
+    var tab = { id: genId(), name: data && data.name || 'Doc ' + (tabs.length + 1), content: data && data.content || '' };
+    tabs.push(tab);
+    switchTab(tab.id);
+  }
+
+  function closeTab(id) {
+    if (tabs.length <= 1) return;
+    tabs = tabs.filter(function(t) { return t.id !== id; });
+    if (activeTab === id) switchTab(tabs[0].id);
+    else renderTabs();
+    saveToDB();
+  }
+
+  async function saveToDB() {
+    saveCurrentToMemory();
+    await DCStore.init();
+    await DCStore.clear(TOOL);
+    for (var i = 0; i < tabs.length; i++)
+      await DCStore.set(TOOL, tabs[i].id, { name: tabs[i].name, content: tabs[i].content, order: i, isActive: tabs[i].id === activeTab });
+  }
+
+  async function loadFromDB() {
+    await DCStore.init();
+    var items = await DCStore.getAll(TOOL);
+    if (items.length === 0) {
+      addTab({ name: 'Doc 1', content: "# Hello World\n\nThis is **bold** and *italic*.\n\n## Code Example\n\n```javascript\nfunction greet(n) {\n  console.log('Hello, ' + n);\n}\n```\n\n## List\n\n- Item one\n- Item two\n- Item three\n\n> A blockquote for emphasis.\n\n[Visit DailyCoder](https://dailycoder.in)\n\n| Header 1 | Header 2 |\n|----------|----------|\n| Cell 1   | Cell 2   |" });
+      return;
+    }
+    items.sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
+    tabs = items.map(function(i) { return { id: i.id, name: i.name, content: i.content || '' }; });
+    var active = items.find(function(i) { return i.isActive; });
+    activeTab = active ? active.id : tabs[0].id;
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    if (tab) input.value = tab.content;
+    render();
+    renderTabs();
+  }
+
+  // --- Actions ---
+  input.addEventListener('input', function() { render(); clearTimeout(window._mdSave); window._mdSave = setTimeout(saveToDB, 1000); });
+
+  document.getElementById('btn-save').addEventListener('click', function() {
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    var name = prompt('Tab name:', tab ? tab.name : '');
+    if (name !== null && tab) { tab.name = name; renderTabs(); saveToDB(); }
+  });
+
+  document.getElementById('btn-add-tab').addEventListener('click', function() { addTab(); saveToDB(); });
 
   document.getElementById('btn-copy-html').addEventListener('click', function() {
     navigator.clipboard.writeText(preview.innerHTML);
@@ -84,42 +158,29 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   });
 
   document.getElementById('btn-pdf').addEventListener('click', function() {
-    var content = preview.innerHTML;
     var win = window.open('', '_blank');
-    win.document.write('<!DOCTYPE html><html><head><title>Markdown PDF</title><style>' +
-      'body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:800px;margin:2rem auto;padding:0 1.5rem;color:#1f2937;line-height:1.7;}' +
-      'h1,h2,h3,h4{margin-top:1.5em;margin-bottom:0.5em;}' +
-      'pre{background:#f3f4f6;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.85rem;}' +
-      'code{font-family:SFMono-Regular,Menlo,monospace;font-size:0.85em;background:#f3f4f6;padding:0.15em 0.3em;border-radius:3px;}' +
-      'pre code{background:none;padding:0;}' +
-      'blockquote{border-left:3px solid #2563eb;padding-left:1rem;color:#6b7280;font-style:italic;margin:1rem 0;}' +
-      'table{border-collapse:collapse;width:100%;margin:1rem 0;}' +
-      'th,td{border:1px solid #e5e7eb;padding:0.5rem 0.75rem;text-align:left;}' +
-      'th{background:#f9fafb;font-weight:600;}' +
-      'img{max-width:100%;}' +
-      'hr{border:none;border-top:1px solid #e5e7eb;margin:1.5rem 0;}' +
-      '@media print{body{margin:0;padding:1rem;}}' +
-      '</style></head><body>' + content + '</body></html>');
+    win.document.write('<!DOCTYPE html><html><head><title>Markdown PDF</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:800px;margin:2rem auto;padding:0 1.5rem;color:#1f2937;line-height:1.7;}h1,h2,h3,h4{margin-top:1.5em;margin-bottom:0.5em;}pre{background:#f3f4f6;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.85rem;}code{font-family:SFMono-Regular,Menlo,monospace;font-size:0.85em;background:#f3f4f6;padding:0.15em 0.3em;border-radius:3px;}pre code{background:none;padding:0;}blockquote{border-left:3px solid #2563eb;padding-left:1rem;color:#6b7280;font-style:italic;margin:1rem 0;}table{border-collapse:collapse;width:100%;margin:1rem 0;}th,td{border:1px solid #e5e7eb;padding:0.5rem 0.75rem;text-align:left;}th{background:#f9fafb;font-weight:600;}img{max-width:100%;}hr{border:none;border-top:1px solid #e5e7eb;margin:1.5rem 0;}@media print{body{margin:0;padding:1rem;}}</style></head><body>' + preview.innerHTML + '</body></html>');
     win.document.close();
     setTimeout(function() { win.print(); }, 300);
   });
 
   document.getElementById('btn-download-html').addEventListener('click', function() {
-    var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Document</title></head><body>' + preview.innerHTML + '</body></html>';
-    var blob = new Blob([html], { type: 'text/html' });
+    var blob = new Blob(['<!DOCTYPE html><html><head><meta charset="utf-8"><title>Document</title></head><body>' + preview.innerHTML + '</body></html>'], { type: 'text/html' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'document.html'; a.click();
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    a.download = (tab ? tab.name : 'document') + '.html'; a.click();
   });
 
   document.getElementById('btn-download-md').addEventListener('click', function() {
     var blob = new Blob([input.value], { type: 'text/markdown' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'document.md'; a.click();
+    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    a.download = (tab ? tab.name : 'document') + '.md'; a.click();
   });
 
-  document.getElementById('btn-clear').addEventListener('click', function() {
-    input.value = ''; preview.innerHTML = '';
-  });
+  document.getElementById('btn-clear').addEventListener('click', function() { input.value = ''; preview.innerHTML = ''; });
+
+  loadFromDB();
 </script>
 
 <style>
@@ -128,20 +189,10 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     border-radius: var(--radius-md); background: var(--color-surface);
     overflow: auto; font-size: 0.9rem; line-height: 1.7;
   }
-  .md-preview :global(table) {
-    width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem;
-  }
-  .md-preview :global(th), .md-preview :global(td) {
-    border: 1px solid var(--color-border); padding: 0.5rem 0.75rem; text-align: left;
-  }
+  .md-preview :global(table) { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  .md-preview :global(th), .md-preview :global(td) { border: 1px solid var(--color-border); padding: 0.5rem 0.75rem; text-align: left; }
   .md-preview :global(th) { background: var(--color-code-bg); font-weight: 600; }
-  .md-preview :global(blockquote) {
-    border-left: 3px solid var(--color-primary); padding-left: 1rem;
-    color: var(--color-text-light); margin: 1rem 0; font-style: italic;
-  }
-  .md-preview :global(pre) {
-    background: #1e293b; color: #e2e8f0; padding: 0.75rem;
-    border-radius: var(--radius-md); overflow-x: auto; margin: 1rem 0;
-  }
+  .md-preview :global(blockquote) { border-left: 3px solid var(--color-primary); padding-left: 1rem; color: var(--color-text-light); margin: 1rem 0; font-style: italic; }
+  .md-preview :global(pre) { background: #1e293b; color: #e2e8f0; padding: 0.75rem; border-radius: var(--radius-md); overflow-x: auto; margin: 1rem 0; }
   .md-preview :global(hr) { border: none; border-top: 1px solid var(--color-border); margin: 1.5rem 0; }
 </style>
