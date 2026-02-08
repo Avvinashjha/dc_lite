@@ -2,9 +2,11 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Diff Checker" description="Compare two texts and see line-by-line differences." toolName="Diff Checker">
+<ToolLayout title="Diff Checker" description="Compare two texts side-by-side with git-style highlighting." toolName="Diff Checker">
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-diff">Compare</button>
+    <button class="tool-btn" id="btn-swap">Swap</button>
+    <button class="tool-btn" id="btn-sample">Load Sample</button>
     <button class="tool-btn" id="btn-clear">Clear</button>
   </div>
 
@@ -20,42 +22,94 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   </div>
 
   <div id="status" style="margin-top: 1rem;"></div>
+  <div id="diff-stats" style="display:none; margin-top: 0.75rem;"></div>
   <div id="diff-output" style="margin-top: 1rem;"></div>
 </ToolLayout>
 
 <script is:inline>
-  function computeDiff(a, b) {
-    var linesA = a.split('\n'), linesB = b.split('\n');
-    var result = [];
-    var maxLen = Math.max(linesA.length, linesB.length);
-    // Simple line-by-line comparison (LCS would be better but this is fast)
-    var i = 0, j = 0;
-    while (i < linesA.length || j < linesB.length) {
-      if (i < linesA.length && j < linesB.length) {
-        if (linesA[i] === linesB[j]) {
-          result.push({ type: 'same', lineA: i+1, lineB: j+1, text: linesA[i] });
-          i++; j++;
-        } else {
-          // Look ahead to find if lineA[i] exists later in B
-          var foundInB = linesB.indexOf(linesA[i], j+1);
-          var foundInA = linesA.indexOf(linesB[j], i+1);
-          if (foundInB >= 0 && (foundInA < 0 || foundInB - j <= foundInA - i)) {
-            while (j < foundInB) { result.push({ type: 'added', lineB: j+1, text: linesB[j] }); j++; }
-          } else if (foundInA >= 0) {
-            while (i < foundInA) { result.push({ type: 'removed', lineA: i+1, text: linesA[i] }); i++; }
-          } else {
-            result.push({ type: 'removed', lineA: i+1, text: linesA[i] });
-            result.push({ type: 'added', lineB: j+1, text: linesB[j] });
-            i++; j++;
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  // LCS diff
+  function lcs(a, b) {
+    var m = a.length, n = b.length;
+    var dp = [];
+    for (var i = 0; i <= m; i++) { dp[i] = []; for (var j = 0; j <= n; j++) dp[i][j] = 0; }
+    for (var i = 1; i <= m; i++)
+      for (var j = 1; j <= n; j++)
+        dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+    var result = [], i = m, j = n;
+    while (i > 0 && j > 0) {
+      if (a[i-1] === b[j-1]) { result.unshift({ type: 'same', lineA: i, lineB: j, text: a[i-1] }); i--; j--; }
+      else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ type: 'removed', lineA: i, text: a[i-1] }); i--; }
+      else { result.unshift({ type: 'added', lineB: j, text: b[j-1] }); j--; }
+    }
+    while (i > 0) { result.unshift({ type: 'removed', lineA: i, text: a[i-1] }); i--; }
+    while (j > 0) { result.unshift({ type: 'added', lineB: j, text: b[j-1] }); j--; }
+    return result;
+  }
+
+  function renderSideBySide(diff) {
+    var left = [], right = [], adds = 0, rems = 0, same = 0;
+    diff.forEach(function(d) {
+      if (d.type === 'same') {
+        left.push({ num: d.lineA, text: d.text, type: 'same' });
+        right.push({ num: d.lineB, text: d.text, type: 'same' });
+        same++;
+      } else if (d.type === 'removed') {
+        left.push({ num: d.lineA, text: d.text, type: 'removed' });
+        right.push({ num: '', text: '', type: 'empty' });
+        rems++;
+      } else {
+        left.push({ num: '', text: '', type: 'empty' });
+        right.push({ num: d.lineB, text: d.text, type: 'added' });
+        adds++;
+      }
+    });
+    // Pair adjacent rem+add as changed
+    for (var i = 0; i < left.length; i++) {
+      if (left[i].type === 'removed' && right[i].type === 'empty') {
+        for (var j = i + 1; j < left.length && j < i + 4; j++) {
+          if (left[j].type === 'empty' && right[j].type === 'added') {
+            right[i] = right[j]; right[i].type = 'changed-add'; left[i].type = 'changed-rem';
+            left[j] = { num: '', text: '', type: 'empty' };
+            right[j] = { num: '', text: '', type: 'empty' };
+            break;
           }
         }
-      } else if (i < linesA.length) {
-        result.push({ type: 'removed', lineA: i+1, text: linesA[i] }); i++;
-      } else {
-        result.push({ type: 'added', lineB: j+1, text: linesB[j] }); j++;
       }
     }
-    return result;
+    var fl = [], fr = [];
+    for (var i = 0; i < left.length; i++) {
+      if (left[i].type === 'empty' && right[i].type === 'empty') continue;
+      fl.push(left[i]); fr.push(right[i]);
+    }
+    return { left: fl, right: fr, adds: adds, rems: rems, same: same };
+  }
+
+  function lineClass(type) {
+    if (type === 'removed' || type === 'changed-rem') return 'jd-rem';
+    if (type === 'added' || type === 'changed-add') return 'jd-add';
+    if (type === 'empty') return 'jd-empty';
+    return '';
+  }
+
+  function buildHtml(left, right) {
+    var html = '<div class="jd-wrap"><div class="jd-side jd-side--left"><div class="jd-header">Original</div>';
+    left.forEach(function(l) {
+      html += '<div class="jd-line ' + lineClass(l.type) + '">' +
+        '<span class="jd-num">' + (l.num || '') + '</span>' +
+        '<span class="jd-pre">' + (l.type === 'removed' || l.type === 'changed-rem' ? '-' : ' ') + '</span>' +
+        '<span class="jd-code">' + esc(l.text) + '</span></div>';
+    });
+    html += '</div><div class="jd-side jd-side--right"><div class="jd-header">Modified</div>';
+    right.forEach(function(r) {
+      html += '<div class="jd-line ' + lineClass(r.type) + '">' +
+        '<span class="jd-num">' + (r.num || '') + '</span>' +
+        '<span class="jd-pre">' + (r.type === 'added' || r.type === 'changed-add' ? '+' : ' ') + '</span>' +
+        '<span class="jd-code">' + esc(r.text) + '</span></div>';
+    });
+    html += '</div></div>';
+    return html;
   }
 
   document.getElementById('btn-diff').addEventListener('click', function() {
@@ -63,51 +117,52 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     var b = document.getElementById('inputB').value;
     var status = document.getElementById('status');
     var out = document.getElementById('diff-output');
-    if (!a && !b) { status.textContent = ''; out.innerHTML = ''; return; }
-    var diff = computeDiff(a, b);
-    var adds = diff.filter(function(d){ return d.type==='added'; }).length;
-    var rems = diff.filter(function(d){ return d.type==='removed'; }).length;
-    status.className = 'tool-success';
-    status.textContent = adds === 0 && rems === 0 ? 'No differences found!' : '+' + adds + ' added, -' + rems + ' removed';
+    var stats = document.getElementById('diff-stats');
+    if (!a && !b) { status.textContent = ''; out.innerHTML = ''; stats.style.display = 'none'; return; }
 
-    var html = '<div class="diff-lines">';
-    diff.forEach(function(d) {
-      var cls = d.type === 'added' ? 'dl-added' : d.type === 'removed' ? 'dl-removed' : 'dl-same';
-      var prefix = d.type === 'added' ? '+' : d.type === 'removed' ? '-' : ' ';
-      var ln = d.lineA || d.lineB || '';
-      var esc = (d.text || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      html += '<div class="dl ' + cls + '"><span class="dl-ln">' + ln + '</span><span class="dl-pre">' + prefix + '</span><span class="dl-text">' + (esc || '&nbsp;') + '</span></div>';
-    });
-    out.innerHTML = html + '</div>';
+    var linesA = a.split('\n'), linesB = b.split('\n');
+    var diff = lcs(linesA, linesB);
+    var result = renderSideBySide(diff);
+
+    if (result.adds === 0 && result.rems === 0) {
+      status.className = 'tool-success'; status.textContent = 'No differences — texts are identical.';
+      stats.style.display = 'none';
+      out.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--color-text-light);border:1px dashed var(--color-border);border-radius:var(--radius-md);">Texts are identical</div>';
+    } else {
+      status.className = 'tool-success'; status.textContent = 'Comparison complete';
+      stats.style.display = 'flex';
+      stats.innerHTML = '<span class="jd-stat jd-stat--add">+' + result.adds + ' added</span>' +
+        '<span class="jd-stat jd-stat--rem">-' + result.rems + ' removed</span>' +
+        '<span class="jd-stat jd-stat--same">' + result.same + ' unchanged</span>';
+      out.innerHTML = buildHtml(result.left, result.right);
+
+      // Sync scroll
+      var ls = out.querySelector('.jd-side--left'), rs = out.querySelector('.jd-side--right');
+      var syncing = false;
+      ls.addEventListener('scroll', function() { if (!syncing) { syncing = true; rs.scrollTop = ls.scrollTop; syncing = false; } });
+      rs.addEventListener('scroll', function() { if (!syncing) { syncing = true; ls.scrollTop = rs.scrollTop; syncing = false; } });
+    }
+  });
+
+  document.getElementById('btn-swap').addEventListener('click', function() {
+    var a = document.getElementById('inputA'), b = document.getElementById('inputB');
+    var tmp = a.value; a.value = b.value; b.value = tmp;
+  });
+
+  document.getElementById('btn-sample').addEventListener('click', function() {
+    document.getElementById('inputA').value =
+      'function greet(name) {\n  console.log("Hello, " + name);\n  return true;\n}\n\nconst users = ["Alice", "Bob"];\n\nusers.forEach(function(user) {\n  greet(user);\n});';
+    document.getElementById('inputB').value =
+      'function greet(name, greeting) {\n  const message = `${greeting}, ${name}!`;\n  console.log(message);\n  return message;\n}\n\nconst users = ["Alice", "Bob", "Charlie"];\n\nusers.forEach((user) => {\n  greet(user, "Hi");\n});';
   });
 
   document.getElementById('btn-clear').addEventListener('click', function() {
     document.getElementById('inputA').value = '';
     document.getElementById('inputB').value = '';
     document.getElementById('diff-output').innerHTML = '';
+    document.getElementById('diff-stats').style.display = 'none';
     document.getElementById('status').textContent = '';
   });
 </script>
 
-<style>
-  .diff-lines {
-    font-family: var(--font-mono); font-size: 0.8rem; border: 1px solid var(--color-border);
-    border-radius: var(--radius-md); overflow: hidden;
-  }
-  .dl {
-    display: flex; padding: 0.1rem 0; border-bottom: 1px solid rgba(128,128,128,0.1);
-  }
-  .dl-ln {
-    width: 40px; text-align: right; padding: 0 0.5rem; color: var(--color-text-light);
-    font-size: 0.75rem; flex-shrink: 0; user-select: none;
-  }
-  .dl-pre {
-    width: 20px; text-align: center; flex-shrink: 0; font-weight: 700; user-select: none;
-  }
-  .dl-text { flex: 1; padding-right: 0.5rem; white-space: pre-wrap; word-break: break-all; }
-  .dl-same { background: transparent; }
-  .dl-added { background: rgba(34,197,94,.1); }
-  .dl-added .dl-pre { color: #22c55e; }
-  .dl-removed { background: rgba(239,68,68,.1); }
-  .dl-removed .dl-pre { color: #ef4444; }
-</style>
+<!-- Reuses same jd-* classes from json-diff (already global) -->
