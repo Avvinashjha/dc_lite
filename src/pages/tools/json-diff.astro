@@ -2,100 +2,267 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="JSON Diff" description="Compare two JSON objects and see the differences." toolName="JSON Diff">
+<ToolLayout title="JSON Diff" description="Compare two JSON objects with a git-style side-by-side diff view." toolName="JSON Diff">
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-compare">Compare</button>
+    <button class="tool-btn" id="btn-swap">Swap</button>
+    <button class="tool-btn" id="btn-sample">Load Sample</button>
     <button class="tool-btn" id="btn-clear">Clear</button>
   </div>
 
   <div class="tool-panels">
     <div class="tool-panel">
-      <span class="tool-panel__label">JSON A</span>
-      <textarea id="inputA" class="tool-textarea" placeholder='{"name": "John", "age": 30}'></textarea>
+      <span class="tool-panel__label">Original (A)</span>
+      <textarea id="inputA" class="tool-textarea" placeholder='Paste JSON here...'></textarea>
     </div>
     <div class="tool-panel">
-      <span class="tool-panel__label">JSON B</span>
-      <textarea id="inputB" class="tool-textarea" placeholder='{"name": "Jane", "age": 25}'></textarea>
+      <span class="tool-panel__label">Modified (B)</span>
+      <textarea id="inputB" class="tool-textarea" placeholder='Paste JSON here...'></textarea>
     </div>
   </div>
 
-  <div id="status"></div>
+  <div id="status" style="margin-top: 1rem;"></div>
+
+  <div id="diff-stats" style="display:none; margin-top: 0.75rem;"></div>
+
   <div id="diff-output" style="margin-top: 1rem;"></div>
 </ToolLayout>
 
 <script is:inline>
-  function deepDiff(a, b, path) {
-    path = path || '';
-    var diffs = [];
-    if (typeof a !== typeof b) {
-      diffs.push({ path: path || '(root)', type: 'changed', from: JSON.stringify(a), to: JSON.stringify(b) });
-      return diffs;
+  // --- LCS-based diff ---
+  function lcs(a, b) {
+    var m = a.length, n = b.length;
+    var dp = [];
+    for (var i = 0; i <= m; i++) { dp[i] = []; for (var j = 0; j <= n; j++) dp[i][j] = 0; }
+    for (var i = 1; i <= m; i++)
+      for (var j = 1; j <= n; j++)
+        dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+    // Backtrack
+    var result = [];
+    var i = m, j = n;
+    while (i > 0 && j > 0) {
+      if (a[i-1] === b[j-1]) { result.unshift({ type: 'same', lineA: i, lineB: j, text: a[i-1] }); i--; j--; }
+      else if (dp[i-1][j] >= dp[i][j-1]) { result.unshift({ type: 'removed', lineA: i, text: a[i-1] }); i--; }
+      else { result.unshift({ type: 'added', lineB: j, text: b[j-1] }); j--; }
     }
-    if (a === null || b === null || typeof a !== 'object') {
-      if (a !== b) diffs.push({ path: path || '(root)', type: 'changed', from: JSON.stringify(a), to: JSON.stringify(b) });
-      return diffs;
-    }
-    var allKeys = new Set(Object.keys(a).concat(Object.keys(b)));
-    allKeys.forEach(function(key) {
-      var p = path ? path + '.' + key : key;
-      if (!(key in a)) diffs.push({ path: p, type: 'added', to: JSON.stringify(b[key]) });
-      else if (!(key in b)) diffs.push({ path: p, type: 'removed', from: JSON.stringify(a[key]) });
-      else diffs = diffs.concat(deepDiff(a[key], b[key], p));
+    while (i > 0) { result.unshift({ type: 'removed', lineA: i, text: a[i-1] }); i--; }
+    while (j > 0) { result.unshift({ type: 'added', lineB: j, text: b[j-1] }); j--; }
+    return result;
+  }
+
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function renderSideBySide(diff) {
+    var leftLines = [], rightLines = [];
+    var adds = 0, rems = 0, same = 0;
+
+    diff.forEach(function(d) {
+      if (d.type === 'same') {
+        leftLines.push({ num: d.lineA, text: d.text, type: 'same' });
+        rightLines.push({ num: d.lineB, text: d.text, type: 'same' });
+        same++;
+      } else if (d.type === 'removed') {
+        leftLines.push({ num: d.lineA, text: d.text, type: 'removed' });
+        rightLines.push({ num: '', text: '', type: 'empty' });
+        rems++;
+      } else {
+        leftLines.push({ num: '', text: '', type: 'empty' });
+        rightLines.push({ num: d.lineB, text: d.text, type: 'added' });
+        adds++;
+      }
     });
-    return diffs;
+
+    // Merge adjacent removed+added into "changed" pairs
+    for (var i = 0; i < leftLines.length; i++) {
+      if (leftLines[i].type === 'removed' && rightLines[i].type === 'empty') {
+        // Look for next added on right that has empty on left
+        for (var j = i + 1; j < leftLines.length && j < i + 4; j++) {
+          if (leftLines[j].type === 'empty' && rightLines[j].type === 'added') {
+            // Swap to align
+            rightLines[i] = rightLines[j];
+            rightLines[i].type = 'changed-add';
+            leftLines[i].type = 'changed-rem';
+            leftLines[j] = { num: '', text: '', type: 'empty' };
+            rightLines[j] = { num: '', text: '', type: 'empty' };
+            break;
+          }
+        }
+      }
+    }
+
+    // Remove empty pairs
+    var finalLeft = [], finalRight = [];
+    for (var i = 0; i < leftLines.length; i++) {
+      if (leftLines[i].type === 'empty' && rightLines[i].type === 'empty') continue;
+      finalLeft.push(leftLines[i]);
+      finalRight.push(rightLines[i]);
+    }
+
+    return { left: finalLeft, right: finalRight, adds: adds, rems: rems, same: same };
+  }
+
+  function lineClass(type) {
+    if (type === 'removed' || type === 'changed-rem') return 'jd-rem';
+    if (type === 'added' || type === 'changed-add') return 'jd-add';
+    if (type === 'empty') return 'jd-empty';
+    return '';
+  }
+
+  function buildHtml(left, right) {
+    var html = '<div class="jd-wrap"><div class="jd-side jd-side--left"><div class="jd-header">Original (A)</div>';
+    left.forEach(function(l, i) {
+      var cls = lineClass(l.type);
+      html += '<div class="jd-line ' + cls + '">';
+      html += '<span class="jd-num">' + (l.num || '') + '</span>';
+      html += '<span class="jd-pre">' + (l.type === 'removed' || l.type === 'changed-rem' ? '-' : ' ') + '</span>';
+      html += '<span class="jd-code">' + esc(l.text) + '</span>';
+      html += '</div>';
+    });
+    html += '</div><div class="jd-side jd-side--right"><div class="jd-header">Modified (B)</div>';
+    right.forEach(function(r, i) {
+      var cls = lineClass(r.type);
+      html += '<div class="jd-line ' + cls + '">';
+      html += '<span class="jd-num">' + (r.num || '') + '</span>';
+      html += '<span class="jd-pre">' + (r.type === 'added' || r.type === 'changed-add' ? '+' : ' ') + '</span>';
+      html += '<span class="jd-code">' + esc(r.text) + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+    return html;
   }
 
   document.getElementById('btn-compare').addEventListener('click', function() {
     var status = document.getElementById('status');
     var out = document.getElementById('diff-output');
+    var stats = document.getElementById('diff-stats');
     try {
       var a = JSON.parse(document.getElementById('inputA').value);
       var b = JSON.parse(document.getElementById('inputB').value);
-      var diffs = deepDiff(a, b);
-      if (diffs.length === 0) {
-        status.className = 'tool-success'; status.textContent = 'No differences found!';
-        out.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--color-text-light)">Objects are identical</div>';
+      var linesA = JSON.stringify(a, null, 2).split('\n');
+      var linesB = JSON.stringify(b, null, 2).split('\n');
+      var diff = lcs(linesA, linesB);
+      var result = renderSideBySide(diff);
+
+      if (result.adds === 0 && result.rems === 0) {
+        status.className = 'tool-success'; status.textContent = 'No differences — objects are identical.';
+        stats.style.display = 'none';
+        out.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--color-text-light);border:1px dashed var(--color-border);border-radius:var(--radius-md);">Objects are identical</div>';
       } else {
-        status.className = 'tool-success'; status.textContent = diffs.length + ' difference(s) found';
-        var html = '<div class="diff-table">';
-        diffs.forEach(function(d) {
-          var cls = d.type === 'added' ? 'diff-added' : d.type === 'removed' ? 'diff-removed' : 'diff-changed';
-          html += '<div class="diff-row ' + cls + '">';
-          html += '<span class="diff-path">' + d.path + '</span>';
-          html += '<span class="diff-type">' + d.type + '</span>';
-          if (d.from) html += '<span class="diff-val diff-val--old">' + d.from + '</span>';
-          if (d.to) html += '<span class="diff-val diff-val--new">' + d.to + '</span>';
-          html += '</div>';
+        status.className = 'tool-success'; status.textContent = 'Comparison complete';
+        stats.style.display = 'flex';
+        stats.innerHTML = '<span class="jd-stat jd-stat--add">+' + result.adds + ' added</span>' +
+          '<span class="jd-stat jd-stat--rem">-' + result.rems + ' removed</span>' +
+          '<span class="jd-stat jd-stat--same">' + result.same + ' unchanged</span>';
+        out.innerHTML = buildHtml(result.left, result.right);
+
+        // Sync scroll
+        var leftSide = out.querySelector('.jd-side--left');
+        var rightSide = out.querySelector('.jd-side--right');
+        var syncing = false;
+        leftSide.addEventListener('scroll', function() {
+          if (syncing) return; syncing = true;
+          rightSide.scrollTop = leftSide.scrollTop;
+          syncing = false;
         });
-        out.innerHTML = html + '</div>';
+        rightSide.addEventListener('scroll', function() {
+          if (syncing) return; syncing = true;
+          leftSide.scrollTop = rightSide.scrollTop;
+          syncing = false;
+        });
       }
-    } catch(e) { status.className = 'tool-error'; status.textContent = 'Invalid JSON: ' + e.message; out.innerHTML = ''; }
+    } catch(e) {
+      status.className = 'tool-error'; status.textContent = 'Invalid JSON: ' + e.message;
+      out.innerHTML = ''; stats.style.display = 'none';
+    }
+  });
+
+  document.getElementById('btn-swap').addEventListener('click', function() {
+    var a = document.getElementById('inputA');
+    var b = document.getElementById('inputB');
+    var tmp = a.value; a.value = b.value; b.value = tmp;
+  });
+
+  document.getElementById('btn-sample').addEventListener('click', function() {
+    document.getElementById('inputA').value = JSON.stringify({
+      name: "John Doe", age: 30, email: "john@example.com",
+      address: { street: "123 Main St", city: "New York", zip: "10001" },
+      hobbies: ["reading", "coding", "gaming"],
+      active: true
+    }, null, 2);
+    document.getElementById('inputB').value = JSON.stringify({
+      name: "John Doe", age: 31, email: "john.doe@example.com",
+      address: { street: "123 Main St", city: "San Francisco", zip: "94102", state: "CA" },
+      hobbies: ["reading", "coding", "hiking"],
+      active: true, role: "admin"
+    }, null, 2);
   });
 
   document.getElementById('btn-clear').addEventListener('click', function() {
     document.getElementById('inputA').value = '';
     document.getElementById('inputB').value = '';
     document.getElementById('diff-output').innerHTML = '';
+    document.getElementById('diff-stats').style.display = 'none';
     document.getElementById('status').textContent = '';
   });
 </script>
 
-<style>
-  .diff-table { display: flex; flex-direction: column; gap: 0.4rem; }
-  .diff-row {
-    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
-    padding: 0.6rem 0.75rem; border-radius: var(--radius-md); font-size: 0.8rem;
-    font-family: var(--font-mono); border: 1px solid var(--color-border);
+<style is:global>
+  #diff-stats {
+    display: flex; gap: 1rem; flex-wrap: wrap;
   }
-  .diff-added { background: rgba(34,197,94,.08); border-color: rgba(34,197,94,.3); }
-  .diff-removed { background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.3); }
-  .diff-changed { background: rgba(234,179,8,.08); border-color: rgba(234,179,8,.3); }
-  .diff-path { font-weight: 700; color: var(--color-text); }
-  .diff-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); }
-  .diff-added .diff-type { background: #22c55e; color: white; }
-  .diff-removed .diff-type { background: #ef4444; color: white; }
-  .diff-changed .diff-type { background: #eab308; color: white; }
-  .diff-val { word-break: break-all; }
-  .diff-val--old { color: #ef4444; }
-  .diff-val--new { color: #22c55e; }
+  .jd-stat {
+    font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+  .jd-stat--add { background: rgba(34,197,94,.1); color: #16a34a; }
+  .jd-stat--rem { background: rgba(239,68,68,.1); color: #dc2626; }
+  .jd-stat--same { background: var(--color-code-bg); color: var(--color-text-light); }
+
+  .jd-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .jd-side {
+    overflow: auto; max-height: 600px;
+    font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.55;
+  }
+  .jd-side--left { border-right: 1px solid var(--color-border); }
+  .jd-header {
+    position: sticky; top: 0; z-index: 2;
+    padding: 0.5rem 0.75rem; font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--color-text-light); background: var(--color-code-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .jd-line {
+    display: flex; min-height: 1.55em;
+    border-bottom: 1px solid rgba(128,128,128,0.06);
+  }
+  .jd-num {
+    width: 36px; flex-shrink: 0; text-align: right; padding: 0 0.4rem;
+    color: var(--color-text-light); opacity: 0.5; user-select: none;
+    font-size: 0.7rem;
+  }
+  .jd-pre {
+    width: 18px; flex-shrink: 0; text-align: center;
+    font-weight: 700; user-select: none;
+  }
+  .jd-code {
+    flex: 1; padding-right: 0.5rem; white-space: pre;
+  }
+  /* Colors */
+  .jd-add { background: rgba(34,197,94,.1); }
+  .jd-add .jd-pre { color: #16a34a; }
+  .jd-add .jd-code { color: #16a34a; }
+  .jd-rem { background: rgba(239,68,68,.1); }
+  .jd-rem .jd-pre { color: #dc2626; }
+  .jd-rem .jd-code { color: #dc2626; text-decoration: line-through; opacity: 0.8; }
+  .jd-empty { background: var(--color-code-bg); opacity: 0.4; }
+
+  @media (max-width: 768px) {
+    .jd-wrap { grid-template-columns: 1fr; }
+    .jd-side--left { border-right: none; border-bottom: 2px solid var(--color-border); }
+    .jd-side { max-height: 400px; }
+  }
 </style>
