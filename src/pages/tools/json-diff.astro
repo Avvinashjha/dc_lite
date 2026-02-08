@@ -1,0 +1,101 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="JSON Diff" description="Compare two JSON objects and see the differences." toolName="JSON Diff">
+  <div class="tool-actions">
+    <button class="tool-btn tool-btn--primary" id="btn-compare">Compare</button>
+    <button class="tool-btn" id="btn-clear">Clear</button>
+  </div>
+
+  <div class="tool-panels">
+    <div class="tool-panel">
+      <span class="tool-panel__label">JSON A</span>
+      <textarea id="inputA" class="tool-textarea" placeholder='{"name": "John", "age": 30}'></textarea>
+    </div>
+    <div class="tool-panel">
+      <span class="tool-panel__label">JSON B</span>
+      <textarea id="inputB" class="tool-textarea" placeholder='{"name": "Jane", "age": 25}'></textarea>
+    </div>
+  </div>
+
+  <div id="status"></div>
+  <div id="diff-output" style="margin-top: 1rem;"></div>
+</ToolLayout>
+
+<script is:inline>
+  function deepDiff(a, b, path) {
+    path = path || '';
+    var diffs = [];
+    if (typeof a !== typeof b) {
+      diffs.push({ path: path || '(root)', type: 'changed', from: JSON.stringify(a), to: JSON.stringify(b) });
+      return diffs;
+    }
+    if (a === null || b === null || typeof a !== 'object') {
+      if (a !== b) diffs.push({ path: path || '(root)', type: 'changed', from: JSON.stringify(a), to: JSON.stringify(b) });
+      return diffs;
+    }
+    var allKeys = new Set(Object.keys(a).concat(Object.keys(b)));
+    allKeys.forEach(function(key) {
+      var p = path ? path + '.' + key : key;
+      if (!(key in a)) diffs.push({ path: p, type: 'added', to: JSON.stringify(b[key]) });
+      else if (!(key in b)) diffs.push({ path: p, type: 'removed', from: JSON.stringify(a[key]) });
+      else diffs = diffs.concat(deepDiff(a[key], b[key], p));
+    });
+    return diffs;
+  }
+
+  document.getElementById('btn-compare').addEventListener('click', function() {
+    var status = document.getElementById('status');
+    var out = document.getElementById('diff-output');
+    try {
+      var a = JSON.parse(document.getElementById('inputA').value);
+      var b = JSON.parse(document.getElementById('inputB').value);
+      var diffs = deepDiff(a, b);
+      if (diffs.length === 0) {
+        status.className = 'tool-success'; status.textContent = 'No differences found!';
+        out.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--color-text-light)">Objects are identical</div>';
+      } else {
+        status.className = 'tool-success'; status.textContent = diffs.length + ' difference(s) found';
+        var html = '<div class="diff-table">';
+        diffs.forEach(function(d) {
+          var cls = d.type === 'added' ? 'diff-added' : d.type === 'removed' ? 'diff-removed' : 'diff-changed';
+          html += '<div class="diff-row ' + cls + '">';
+          html += '<span class="diff-path">' + d.path + '</span>';
+          html += '<span class="diff-type">' + d.type + '</span>';
+          if (d.from) html += '<span class="diff-val diff-val--old">' + d.from + '</span>';
+          if (d.to) html += '<span class="diff-val diff-val--new">' + d.to + '</span>';
+          html += '</div>';
+        });
+        out.innerHTML = html + '</div>';
+      }
+    } catch(e) { status.className = 'tool-error'; status.textContent = 'Invalid JSON: ' + e.message; out.innerHTML = ''; }
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', function() {
+    document.getElementById('inputA').value = '';
+    document.getElementById('inputB').value = '';
+    document.getElementById('diff-output').innerHTML = '';
+    document.getElementById('status').textContent = '';
+  });
+</script>
+
+<style>
+  .diff-table { display: flex; flex-direction: column; gap: 0.4rem; }
+  .diff-row {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    padding: 0.6rem 0.75rem; border-radius: var(--radius-md); font-size: 0.8rem;
+    font-family: var(--font-mono); border: 1px solid var(--color-border);
+  }
+  .diff-added { background: rgba(34,197,94,.08); border-color: rgba(34,197,94,.3); }
+  .diff-removed { background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.3); }
+  .diff-changed { background: rgba(234,179,8,.08); border-color: rgba(234,179,8,.3); }
+  .diff-path { font-weight: 700; color: var(--color-text); }
+  .diff-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); }
+  .diff-added .diff-type { background: #22c55e; color: white; }
+  .diff-removed .diff-type { background: #ef4444; color: white; }
+  .diff-changed .diff-type { background: #eab308; color: white; }
+  .diff-val { word-break: break-all; }
+  .diff-val--old { color: #ef4444; }
+  .diff-val--new { color: #22c55e; }
+</style>

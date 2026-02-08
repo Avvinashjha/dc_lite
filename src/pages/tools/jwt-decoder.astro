@@ -1,0 +1,92 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="JWT Decoder" description="Decode and inspect JSON Web Tokens (JWT) — header, payload, and expiration." toolName="JWT Decoder">
+  <div class="tool-panel" style="margin-bottom: 1rem;">
+    <span class="tool-panel__label">Paste JWT Token</span>
+    <textarea id="input" class="tool-textarea" style="min-height: 100px;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"></textarea>
+  </div>
+
+  <div class="tool-actions">
+    <button class="tool-btn tool-btn--primary" id="btn-decode">Decode</button>
+    <button class="tool-btn" id="btn-clear">Clear</button>
+  </div>
+  <div id="status"></div>
+
+  <div id="jwt-result" style="display: none; margin-top: 1.5rem;">
+    <div class="jwt-section jwt-section--header">
+      <h3 class="jwt-section__title">Header <span style="font-weight:400;font-size:0.8rem;color:var(--color-text-light);">(Algorithm & Type)</span></h3>
+      <pre id="jwt-header" class="tool-output" style="min-height: auto;"></pre>
+    </div>
+    <div class="jwt-section jwt-section--payload">
+      <h3 class="jwt-section__title">Payload <span style="font-weight:400;font-size:0.8rem;color:var(--color-text-light);">(Data)</span></h3>
+      <pre id="jwt-payload" class="tool-output" style="min-height: auto;"></pre>
+    </div>
+    <div id="jwt-expiry" class="jwt-section"></div>
+    <div class="jwt-section jwt-section--sig">
+      <h3 class="jwt-section__title">Signature</h3>
+      <p style="font-size: 0.85rem; color: var(--color-text-light);">Signature verification requires the secret key (not done client-side).</p>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  function b64decode(str) {
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (str.length % 4) str += '=';
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  }
+
+  document.getElementById('btn-decode').addEventListener('click', function() {
+    var input = document.getElementById('input').value.trim();
+    var status = document.getElementById('status');
+    var result = document.getElementById('jwt-result');
+    try {
+      var parts = input.split('.');
+      if (parts.length !== 3) throw new Error('JWT must have 3 parts (header.payload.signature)');
+      var header = JSON.parse(b64decode(parts[0]));
+      var payload = JSON.parse(b64decode(parts[1]));
+      document.getElementById('jwt-header').textContent = JSON.stringify(header, null, 2);
+      document.getElementById('jwt-payload').textContent = JSON.stringify(payload, null, 2);
+
+      var expiryEl = document.getElementById('jwt-expiry');
+      if (payload.exp) {
+        var expDate = new Date(payload.exp * 1000);
+        var now = new Date();
+        var expired = expDate < now;
+        expiryEl.innerHTML = '<h3 class="jwt-section__title">Expiration</h3>' +
+          '<p style="font-size:0.9rem;"><strong>Expires:</strong> ' + expDate.toLocaleString() + '</p>' +
+          '<p style="font-size:0.9rem;font-weight:700;color:' + (expired ? '#ef4444' : '#22c55e') + ';">' +
+          (expired ? 'Token is EXPIRED' : 'Token is VALID') + '</p>';
+      } else {
+        expiryEl.innerHTML = '<p style="font-size:0.85rem;color:var(--color-text-light);">No expiration (exp) claim found.</p>';
+      }
+      if (payload.iat) {
+        var iatDate = new Date(payload.iat * 1000);
+        expiryEl.innerHTML += '<p style="font-size:0.85rem;color:var(--color-text-light);margin-top:0.25rem;"><strong>Issued:</strong> ' + iatDate.toLocaleString() + '</p>';
+      }
+
+      result.style.display = 'block';
+      status.className = 'tool-success'; status.textContent = 'Decoded successfully';
+    } catch(e) {
+      result.style.display = 'none';
+      status.className = 'tool-error'; status.textContent = e.message;
+    }
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', function() {
+    document.getElementById('input').value = '';
+    document.getElementById('jwt-result').style.display = 'none';
+    document.getElementById('status').textContent = '';
+  });
+</script>
+
+<style>
+  .jwt-section { margin-bottom: 1.5rem; }
+  .jwt-section__title { font-size: 1rem; margin-bottom: 0.5rem; }
+  .jwt-section--header .tool-output { border-left: 3px solid #ef4444; }
+  .jwt-section--payload .tool-output { border-left: 3px solid #a855f7; }
+</style>

@@ -1,0 +1,378 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="Color Picker & Palette" description="Pick colors, create gradients, save palettes, and export as CSS/SASS variables." toolName="Color Picker & Palette">
+
+  <!-- Tabs -->
+  <div class="cp-tabs">
+    <button class="cp-tab cp-tab--active" data-tab="picker">Solid Color</button>
+    <button class="cp-tab" data-tab="gradient">Gradient</button>
+    <button class="cp-tab" data-tab="palette">Saved Palette</button>
+  </div>
+
+  <!-- Tab: Picker -->
+  <div id="tab-picker" class="cp-content cp-content--active">
+    <div class="cp-picker-row">
+      <div class="cp-preview-col">
+        <div id="color-swatch" class="cp-swatch"></div>
+        <input type="color" id="native-picker" value="#2563eb" class="cp-native-picker" />
+      </div>
+      <div class="cp-inputs-col">
+        <div class="cp-field">
+          <label class="tool-panel__label">HEX</label>
+          <input id="cp-hex" class="tool-input" value="#2563eb" />
+        </div>
+        <div class="cp-field-row">
+          <div class="cp-field"><label class="tool-panel__label">R</label><input id="cp-r" class="tool-input" type="number" min="0" max="255" value="37" /></div>
+          <div class="cp-field"><label class="tool-panel__label">G</label><input id="cp-g" class="tool-input" type="number" min="0" max="255" value="99" /></div>
+          <div class="cp-field"><label class="tool-panel__label">B</label><input id="cp-b" class="tool-input" type="number" min="0" max="255" value="235" /></div>
+        </div>
+        <div class="cp-field-row">
+          <div class="cp-field"><label class="tool-panel__label">H</label><input id="cp-h" class="tool-input" type="number" min="0" max="360" value="221" /></div>
+          <div class="cp-field"><label class="tool-panel__label">S%</label><input id="cp-s" class="tool-input" type="number" min="0" max="100" value="83" /></div>
+          <div class="cp-field"><label class="tool-panel__label">L%</label><input id="cp-l" class="tool-input" type="number" min="0" max="100" value="53" /></div>
+        </div>
+        <div class="cp-field">
+          <label class="tool-panel__label">Opacity</label>
+          <input id="cp-alpha" class="tool-input" type="range" min="0" max="100" value="100" style="width:100%;" />
+          <span id="cp-alpha-val" style="font-size:0.8rem;color:var(--color-text-light);">100%</span>
+        </div>
+        <div class="cp-field">
+          <label class="tool-panel__label">CSS Value</label>
+          <div id="cp-css" style="font-family:var(--font-mono);font-size:0.8rem;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.5rem;word-break:break-all;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-actions">
+      <input id="save-name" class="tool-input" placeholder="Color name (e.g. primary)" style="max-width: 200px;" />
+      <button class="tool-btn tool-btn--primary" id="btn-save-color">Save to Palette</button>
+      <button class="tool-btn" id="btn-copy-css">Copy CSS</button>
+    </div>
+  </div>
+
+  <!-- Tab: Gradient -->
+  <div id="tab-gradient" class="cp-content">
+    <div class="cp-gradient-preview" id="gradient-preview"></div>
+    <div class="cp-gradient-controls">
+      <div class="cp-field-row">
+        <div class="cp-field">
+          <label class="tool-panel__label">Type</label>
+          <select id="grad-type" class="tool-input">
+            <option value="linear">Linear</option>
+            <option value="radial">Radial</option>
+            <option value="conic">Conic</option>
+          </select>
+        </div>
+        <div class="cp-field">
+          <label class="tool-panel__label">Angle</label>
+          <input id="grad-angle" class="tool-input" type="number" value="135" min="0" max="360" />
+        </div>
+      </div>
+      <div class="cp-field-row">
+        <div class="cp-field">
+          <label class="tool-panel__label">Color 1</label>
+          <input id="grad-c1" type="color" value="#2563eb" class="cp-color-input" />
+        </div>
+        <div class="cp-field">
+          <label class="tool-panel__label">Color 2</label>
+          <input id="grad-c2" type="color" value="#7c3aed" class="cp-color-input" />
+        </div>
+        <div class="cp-field">
+          <label class="tool-panel__label">Color 3 (optional)</label>
+          <input id="grad-c3" type="color" value="#ec4899" class="cp-color-input" />
+        </div>
+      </div>
+      <div class="cp-field">
+        <label class="tool-panel__label">
+          <input type="checkbox" id="grad-c3-on" checked /> Use 3rd color
+        </label>
+      </div>
+    </div>
+    <div class="cp-field" style="margin-top:1rem;">
+      <label class="tool-panel__label">CSS</label>
+      <div id="grad-css" style="font-family:var(--font-mono);font-size:0.8rem;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.5rem;word-break:break-all;"></div>
+    </div>
+    <div class="tool-actions">
+      <button class="tool-btn tool-btn--primary" id="btn-copy-gradient">Copy Gradient CSS</button>
+      <input id="grad-save-name" class="tool-input" placeholder="Gradient name" style="max-width: 200px;" />
+      <button class="tool-btn" id="btn-save-gradient">Save to Palette</button>
+    </div>
+  </div>
+
+  <!-- Tab: Palette -->
+  <div id="tab-palette" class="cp-content">
+    <div class="tool-actions">
+      <button class="tool-btn tool-btn--primary" id="btn-export-css">Export CSS Variables</button>
+      <button class="tool-btn" id="btn-export-sass">Export SASS Variables</button>
+      <button class="tool-btn" id="btn-clear-palette">Clear All</button>
+    </div>
+    <div id="palette-list" class="cp-palette-list"></div>
+    <div id="export-output" style="display:none;margin-top:1rem;">
+      <div class="tool-actions">
+        <button class="tool-btn" id="btn-copy-export">Copy</button>
+        <button class="tool-btn" id="btn-download-export">Download</button>
+      </div>
+      <pre id="export-code" class="tool-output" style="min-height:auto;"></pre>
+    </div>
+  </div>
+
+  <div id="status" style="margin-top:0.75rem;"></div>
+</ToolLayout>
+
+<script is:inline>
+  // --- Color conversion ---
+  function hexToRgb(hex) {
+    hex = hex.replace('#','');
+    if (hex.length===3) hex=hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    return {r:parseInt(hex.substr(0,2),16),g:parseInt(hex.substr(2,2),16),b:parseInt(hex.substr(4,2),16)};
+  }
+  function rgbToHex(r,g,b){return '#'+[r,g,b].map(function(x){return x.toString(16).padStart(2,'0');}).join('');}
+  function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),h,s,l=(mx+mn)/2;if(mx===mn){h=s=0;}else{var d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);if(mx===r)h=((g-b)/d+(g<b?6:0))/6;else if(mx===g)h=((b-r)/d+2)/6;else h=((r-g)/d+4)/6;}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+  function hslToRgb(h,s,l){h/=360;s/=100;l/=100;var r,g,b;if(s===0){r=g=b=l;}else{function f(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}var q=l<0.5?l*(1+s):l+s-l*s,p=2*l-q;r=f(p,q,h+1/3);g=f(p,q,h);b=f(p,q,h-1/3);}return{r:Math.round(r*255),g:Math.round(g*255),b:Math.round(b*255)};}
+
+  // --- Elements ---
+  var swatch=document.getElementById('color-swatch'),picker=document.getElementById('native-picker');
+  var hexEl=document.getElementById('cp-hex'),rEl=document.getElementById('cp-r'),gEl=document.getElementById('cp-g'),bEl=document.getElementById('cp-b');
+  var hEl=document.getElementById('cp-h'),sEl=document.getElementById('cp-s'),lEl=document.getElementById('cp-l');
+  var alphaEl=document.getElementById('cp-alpha'),alphaVal=document.getElementById('cp-alpha-val'),cssEl=document.getElementById('cp-css');
+  var statusEl=document.getElementById('status');
+
+  function setStatus(msg,type){statusEl.className=type==='error'?'tool-error':'tool-success';statusEl.textContent=msg;setTimeout(function(){statusEl.textContent='';},3000);}
+
+  function updateColor(r,g,b,src){
+    var hex=rgbToHex(r,g,b),hsl=rgbToHsl(r,g,b),a=alphaEl.value/100;
+    if(src!=='hex')hexEl.value=hex;
+    if(src!=='rgb'){rEl.value=r;gEl.value=g;bEl.value=b;}
+    if(src!=='hsl'){hEl.value=hsl.h;sEl.value=hsl.s;lEl.value=hsl.l;}
+    swatch.style.background=a<1?'rgba('+r+','+g+','+b+','+a+')':hex;
+    picker.value=hex;
+    alphaVal.textContent=Math.round(a*100)+'%';
+    var css=a<1?'rgba('+r+', '+g+', '+b+', '+a.toFixed(2)+')':hex;
+    cssEl.innerHTML='<div>'+hex+'</div><div>rgb('+r+', '+g+', '+b+')</div><div>hsl('+hsl.h+', '+hsl.s+'%, '+hsl.l+'%)</div>'+(a<1?'<div>rgba('+r+', '+g+', '+b+', '+a.toFixed(2)+')</div>':'');
+  }
+
+  hexEl.addEventListener('input',function(){try{var c=hexToRgb(hexEl.value);updateColor(c.r,c.g,c.b,'hex');}catch(e){}});
+  [rEl,gEl,bEl].forEach(function(el){el.addEventListener('input',function(){updateColor(+rEl.value,+gEl.value,+bEl.value,'rgb');});});
+  [hEl,sEl,lEl].forEach(function(el){el.addEventListener('input',function(){var c=hslToRgb(+hEl.value,+sEl.value,+lEl.value);updateColor(c.r,c.g,c.b,'hsl');});});
+  picker.addEventListener('input',function(){hexEl.value=picker.value;var c=hexToRgb(picker.value);updateColor(c.r,c.g,c.b,'hex');});
+  alphaEl.addEventListener('input',function(){updateColor(+rEl.value,+gEl.value,+bEl.value,'alpha');});
+  updateColor(37,99,235,'');
+
+  document.getElementById('btn-copy-css').addEventListener('click',function(){
+    navigator.clipboard.writeText(cssEl.textContent);setStatus('Copied!','success');
+  });
+
+  // --- Gradient ---
+  var gradType=document.getElementById('grad-type'),gradAngle=document.getElementById('grad-angle');
+  var gradC1=document.getElementById('grad-c1'),gradC2=document.getElementById('grad-c2'),gradC3=document.getElementById('grad-c3');
+  var gradC3On=document.getElementById('grad-c3-on');
+  var gradPreview=document.getElementById('gradient-preview'),gradCss=document.getElementById('grad-css');
+
+  function updateGradient(){
+    var t=gradType.value,a=gradAngle.value,c=[gradC1.value,gradC2.value];
+    if(gradC3On.checked)c.push(gradC3.value);
+    var css;
+    if(t==='linear')css='linear-gradient('+a+'deg, '+c.join(', ')+')';
+    else if(t==='radial')css='radial-gradient(circle, '+c.join(', ')+')';
+    else css='conic-gradient(from '+a+'deg, '+c.join(', ')+')';
+    gradPreview.style.background=css;
+    gradCss.textContent=css;
+  }
+  [gradType,gradAngle,gradC1,gradC2,gradC3,gradC3On].forEach(function(el){el.addEventListener('input',updateGradient);el.addEventListener('change',updateGradient);});
+  updateGradient();
+
+  document.getElementById('btn-copy-gradient').addEventListener('click',function(){
+    navigator.clipboard.writeText(gradCss.textContent);setStatus('Gradient CSS copied!','success');
+  });
+
+  // --- Palette (localStorage) ---
+  var STORAGE_KEY='dc_color_palette';
+  function loadPalette(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[];}catch(e){return[];}}
+  function savePalette(p){localStorage.setItem(STORAGE_KEY,JSON.stringify(p));}
+
+  document.getElementById('btn-save-color').addEventListener('click',function(){
+    var name=document.getElementById('save-name').value.trim()||'color-'+(loadPalette().length+1);
+    var p=loadPalette();
+    p.push({name:name,value:hexEl.value,type:'solid'});
+    savePalette(p);renderPalette();document.getElementById('save-name').value='';
+    setStatus('Saved "'+name+'"!','success');
+  });
+
+  document.getElementById('btn-save-gradient').addEventListener('click',function(){
+    var name=document.getElementById('grad-save-name').value.trim()||'gradient-'+(loadPalette().length+1);
+    var p=loadPalette();
+    p.push({name:name,value:gradCss.textContent,type:'gradient'});
+    savePalette(p);renderPalette();document.getElementById('grad-save-name').value='';
+    setStatus('Saved gradient "'+name+'"!','success');
+  });
+
+  function renderPalette(){
+    var p=loadPalette();var el=document.getElementById('palette-list');
+    if(p.length===0){el.innerHTML='<p style="color:var(--color-text-light);text-align:center;padding:2rem;">No saved colors yet. Pick a color and save it!</p>';return;}
+    var html='<table class="cp-table">' +
+      '<colgroup><col class="cp-col-name"><col class="cp-col-value"><col class="cp-col-preview"><col class="cp-col-actions"></colgroup>' +
+      '<thead><tr><th>Name</th><th>Value</th><th>Preview</th><th>Actions</th></tr></thead><tbody>';
+    html+=p.map(function(c,i){
+      var escaped=c.value.replace(/'/g,"\\'");
+      return '<tr>'+
+        '<td class="cp-td-name">'+c.name+'</td>'+
+        '<td class="cp-td-val" title="'+c.value+'"><code>'+c.value+'</code></td>'+
+        '<td class="cp-td-preview"><div class="cp-td-swatch" style="background:'+c.value+';"></div></td>'+
+        '<td class="cp-td-actions">'+
+          '<button class="cp-btn-copy" onclick="navigator.clipboard.writeText(\''+escaped+'\');this.textContent=\'Copied\';var b=this;setTimeout(function(){b.textContent=\'Copy\'},1500)" title="Copy value">Copy</button>'+
+          '<button class="cp-btn-del" onclick="removePaletteItem('+i+')" title="Remove">Delete</button>'+
+        '</td></tr>';
+    }).join('');
+    el.innerHTML=html+'</tbody></table>';
+  }
+
+  window.removePaletteItem=function(i){var p=loadPalette();p.splice(i,1);savePalette(p);renderPalette();};
+
+  document.getElementById('btn-clear-palette').addEventListener('click',function(){
+    if(confirm('Clear all saved colors?')){savePalette([]);renderPalette();setStatus('Palette cleared','success');}
+  });
+
+  var lastExportType='css';
+  document.getElementById('btn-export-css').addEventListener('click',function(){
+    var p=loadPalette();if(p.length===0){setStatus('No colors to export','error');return;}
+    var css=':root {\n'+p.map(function(c){return '  --'+c.name.replace(/\s+/g,'-').toLowerCase()+': '+c.value+';';}).join('\n')+'\n}';
+    document.getElementById('export-code').textContent=css;
+    document.getElementById('export-output').style.display='block';
+    lastExportType='css';
+  });
+
+  document.getElementById('btn-export-sass').addEventListener('click',function(){
+    var p=loadPalette();if(p.length===0){setStatus('No colors to export','error');return;}
+    var sass=p.map(function(c){return '$'+c.name.replace(/\s+/g,'-').toLowerCase()+': '+c.value+';';}).join('\n');
+    document.getElementById('export-code').textContent=sass;
+    document.getElementById('export-output').style.display='block';
+    lastExportType='scss';
+  });
+
+  document.getElementById('btn-copy-export').addEventListener('click',function(){
+    navigator.clipboard.writeText(document.getElementById('export-code').textContent);
+    setStatus('Copied!','success');
+  });
+
+  document.getElementById('btn-download-export').addEventListener('click',function(){
+    var code=document.getElementById('export-code').textContent;
+    var ext=lastExportType==='scss'?'scss':'css';
+    var blob=new Blob([code],{type:'text/'+ext});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='colors.'+ext;a.click();
+  });
+
+  renderPalette();
+
+  // --- Tabs ---
+  document.querySelectorAll('.cp-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      document.querySelectorAll('.cp-tab').forEach(function(t){t.classList.remove('cp-tab--active');});
+      document.querySelectorAll('.cp-content').forEach(function(c){c.classList.remove('cp-content--active');});
+      tab.classList.add('cp-tab--active');
+      document.getElementById('tab-'+tab.dataset.tab).classList.add('cp-content--active');
+    });
+  });
+</script>
+
+<style>
+  .cp-tabs {
+    display: flex; gap: 0; border-bottom: 2px solid var(--color-border); margin-bottom: 1.5rem;
+  }
+  .cp-tab {
+    padding: 0.6rem 1.25rem; background: none; border: none; cursor: pointer;
+    font-size: 0.9rem; font-weight: 600; color: var(--color-text-light);
+    border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 150ms;
+  }
+  .cp-tab:hover { color: var(--color-text); }
+  .cp-tab--active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+  .cp-content { display: none; }
+  .cp-content--active { display: block; }
+
+  .cp-picker-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .cp-preview-col { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .cp-swatch {
+    width: 140px; height: 140px; border-radius: var(--radius-lg);
+    border: 2px solid var(--color-border); background: #2563eb;
+  }
+  .cp-native-picker { width: 140px; height: 40px; cursor: pointer; border: none; border-radius: var(--radius-md); }
+  .cp-inputs-col { flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 0.75rem; }
+  .cp-field { display: flex; flex-direction: column; gap: 0.25rem; }
+  .cp-field-row { display: flex; gap: 0.5rem; }
+  .cp-field-row .cp-field { flex: 1; }
+  .cp-color-input { width: 100%; height: 40px; cursor: pointer; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+
+  .cp-gradient-preview {
+    width: 100%; height: 160px; border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border); margin-bottom: 1rem;
+  }
+  .cp-gradient-controls { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .cp-palette-list { margin-top: 1rem; overflow-x: auto; }
+
+  @media (max-width: 640px) {
+    .cp-swatch { width: 100px; height: 100px; }
+    .cp-native-picker { width: 100px; }
+    .cp-gradient-preview { height: 100px; }
+  }
+</style>
+
+<!-- Global styles for JS-generated palette table -->
+<style is:global>
+  .cp-table {
+    width: 100%; border-collapse: collapse; font-size: 0.85rem;
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  }
+  .cp-col-name { width: 140px; }
+  .cp-col-preview { width: 100px; }
+  .cp-col-actions { width: 160px; }
+  .cp-table th {
+    text-align: left; padding: 0.65rem 1rem; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+    color: var(--color-text-light); background: var(--color-code-bg);
+    border-bottom: 2px solid var(--color-border);
+  }
+  .cp-table td {
+    padding: 0.6rem 1rem; border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+  }
+  .cp-table tbody tr:last-child td { border-bottom: none; }
+  .cp-table tbody tr:hover td { background: var(--color-code-bg); }
+  .cp-td-name { font-weight: 700; white-space: nowrap; color: var(--color-text); }
+  .cp-td-val code {
+    font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600;
+    color: var(--color-text); background: var(--color-code-bg);
+    padding: 0.15em 0.4em; border-radius: 3px;
+    display: inline-block; max-width: 280px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .cp-td-preview { text-align: center; }
+  .cp-td-swatch {
+    width: 100%; height: 28px; min-width: 50px; border-radius: 5px;
+    border: 1px solid var(--color-border); display: block;
+  }
+  .cp-td-actions { white-space: nowrap; }
+  .cp-btn-copy, .cp-btn-del {
+    padding: 0.3rem 0.7rem; font-size: 0.75rem; font-weight: 600;
+    border-radius: var(--radius-sm); cursor: pointer; transition: all 150ms;
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    color: var(--color-text); margin-right: 0.4rem;
+  }
+  .cp-btn-copy:hover {
+    background: var(--color-primary); color: white; border-color: var(--color-primary);
+  }
+  .cp-btn-del {
+    color: var(--color-text-light); border-color: transparent; background: none;
+  }
+  .cp-btn-del:hover {
+    background: rgba(239,68,68,.1); color: #ef4444; border-color: rgba(239,68,68,.3);
+  }
+  @media (max-width: 640px) {
+    .cp-col-name { width: 80px; }
+    .cp-col-actions { width: 120px; }
+    .cp-td-val code { max-width: 120px; font-size: 0.7rem; }
+    .cp-table td, .cp-table th { padding: 0.4rem 0.5rem; }
+  }
+</style>

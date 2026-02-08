@@ -1,0 +1,77 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="Unix Timestamp Converter" description="Convert between Unix timestamps and human-readable dates." toolName="Timestamp Converter">
+  <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; margin-bottom: 2rem;">
+    <span class="tool-panel__label">Current Unix Timestamp</span>
+    <div id="live-ts" style="font-size: 2rem; font-weight: 700; font-family: var(--font-mono); margin: 0.5rem 0;"></div>
+    <div id="live-date" style="font-size: 0.9rem; color: var(--color-text-light);"></div>
+  </div>
+
+  <div class="tool-panels">
+    <div class="tool-panel">
+      <span class="tool-panel__label">Unix Timestamp → Date</span>
+      <input id="ts-input" class="tool-input" type="number" placeholder="e.g. 1706745600" />
+      <button class="tool-btn tool-btn--primary" id="btn-ts" style="margin-top: 0.5rem;">Convert</button>
+      <div id="ts-result" style="margin-top: 0.75rem; padding: 0.75rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; display: none;"></div>
+    </div>
+    <div class="tool-panel">
+      <span class="tool-panel__label">Date → Unix Timestamp</span>
+      <input id="date-input" class="tool-input" type="datetime-local" />
+      <button class="tool-btn tool-btn--primary" id="btn-date" style="margin-top: 0.5rem;">Convert</button>
+      <div id="date-result" style="margin-top: 0.75rem; padding: 0.75rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; display: none;"></div>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  function relativeTime(date) {
+    var diff = (new Date() - date) / 1000;
+    var abs = Math.abs(diff);
+    var suffix = diff > 0 ? ' ago' : ' from now';
+    if (abs < 60) return Math.round(abs) + ' seconds' + suffix;
+    if (abs < 3600) return Math.round(abs/60) + ' minutes' + suffix;
+    if (abs < 86400) return Math.round(abs/3600) + ' hours' + suffix;
+    if (abs < 2592000) return Math.round(abs/86400) + ' days' + suffix;
+    return Math.round(abs/2592000) + ' months' + suffix;
+  }
+
+  // Live clock
+  function tick() {
+    var now = new Date();
+    document.getElementById('live-ts').textContent = Math.floor(now.getTime() / 1000);
+    document.getElementById('live-date').textContent = now.toUTCString();
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Set default datetime-local to now
+  var now = new Date(); now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('date-input').value = now.toISOString().slice(0, 16);
+
+  document.getElementById('btn-ts').addEventListener('click', function() {
+    var val = document.getElementById('ts-input').value;
+    var r = document.getElementById('ts-result');
+    if (!val) return;
+    var ts = Number(val);
+    var ms = ts > 1e12 ? ts : ts * 1000; // auto-detect seconds vs milliseconds
+    var d = new Date(ms);
+    r.style.display = 'block';
+    r.innerHTML = '<div><strong>UTC:</strong> ' + d.toUTCString() + '</div>' +
+      '<div><strong>Local:</strong> ' + d.toLocaleString() + '</div>' +
+      '<div><strong>ISO:</strong> ' + d.toISOString() + '</div>' +
+      '<div style="color:var(--color-text-light);margin-top:0.25rem;">' + relativeTime(d) + '</div>';
+  });
+
+  document.getElementById('btn-date').addEventListener('click', function() {
+    var val = document.getElementById('date-input').value;
+    var r = document.getElementById('date-result');
+    if (!val) return;
+    var d = new Date(val);
+    var ts = Math.floor(d.getTime() / 1000);
+    r.style.display = 'block';
+    r.innerHTML = '<div><strong>Seconds:</strong> ' + ts + '</div>' +
+      '<div><strong>Milliseconds:</strong> ' + d.getTime() + '</div>' +
+      '<div style="color:var(--color-text-light);margin-top:0.25rem;">' + relativeTime(d) + '</div>';
+  });
+</script>

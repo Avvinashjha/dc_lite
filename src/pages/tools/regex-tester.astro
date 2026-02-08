@@ -1,0 +1,82 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="Regex Tester" description="Test regular expressions with live matching and group capture." toolName="Regex Tester">
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
+    <span class="tool-panel__label" style="margin: 0;">Pattern</span>
+    <span style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--color-text-light);">/</span>
+    <input id="regex" class="tool-input" style="flex: 1; min-width: 150px;" placeholder="[a-z]+@[a-z]+\.[a-z]+" />
+    <span style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--color-text-light);">/</span>
+    <input id="flags" class="tool-input" style="width: 60px; text-align: center;" value="gi" placeholder="gi" />
+  </div>
+
+  <div class="tool-panel" style="margin-bottom: 1rem;">
+    <span class="tool-panel__label">Test String</span>
+    <textarea id="input" class="tool-textarea" placeholder="Enter text to test against the regex...">Contact us at hello@example.com or support@test.org for help.</textarea>
+  </div>
+
+  <div id="status" style="margin-bottom: 1rem;"></div>
+
+  <div class="tool-panel">
+    <span class="tool-panel__label">Matches</span>
+    <div id="matches" class="tool-output" style="min-height: 80px;"></div>
+  </div>
+
+  <div class="tool-panel" style="margin-top: 1rem;">
+    <span class="tool-panel__label">Highlighted Text</span>
+    <div id="highlighted" style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); font-size: 0.9rem; line-height: 1.8; word-break: break-word;"></div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  var regexEl = document.getElementById('regex');
+  var flagsEl = document.getElementById('flags');
+  var inputEl = document.getElementById('input');
+  var matchesEl = document.getElementById('matches');
+  var highlightedEl = document.getElementById('highlighted');
+  var statusEl = document.getElementById('status');
+
+  function run() {
+    var pattern = regexEl.value;
+    var flags = flagsEl.value;
+    var text = inputEl.value;
+    if (!pattern) { matchesEl.textContent = ''; highlightedEl.innerHTML = text; statusEl.textContent = ''; return; }
+    try {
+      var re = new RegExp(pattern, flags);
+      var matches = [];
+      var m;
+      if (flags.indexOf('g') >= 0) {
+        while ((m = re.exec(text)) !== null) {
+          matches.push({ match: m[0], index: m.index, groups: m.slice(1) });
+          if (!m[0]) break;
+        }
+      } else {
+        m = re.exec(text);
+        if (m) matches.push({ match: m[0], index: m.index, groups: m.slice(1) });
+      }
+      statusEl.className = 'tool-success';
+      statusEl.textContent = matches.length + ' match(es) found';
+      matchesEl.textContent = matches.map(function(m, i) {
+        var s = 'Match ' + (i+1) + ': "' + m.match + '" at index ' + m.index;
+        if (m.groups.length) s += ' | Groups: ' + m.groups.map(function(g,j){ return '(' + (j+1) + ') ' + g; }).join(', ');
+        return s;
+      }).join('\n') || 'No matches';
+
+      // Highlight
+      var escaped = text.replace(/[&<>]/g, function(c) { return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; });
+      var re2 = new RegExp(pattern, flags);
+      highlightedEl.innerHTML = escaped.replace(re2, function(m) {
+        return '<mark style="background:#fbbf24;color:#000;padding:0.1em 0.2em;border-radius:3px;">' + m + '</mark>';
+      });
+    } catch(e) {
+      statusEl.className = 'tool-error'; statusEl.textContent = e.message;
+      matchesEl.textContent = ''; highlightedEl.innerHTML = text;
+    }
+  }
+
+  regexEl.addEventListener('input', run);
+  flagsEl.addEventListener('input', run);
+  inputEl.addEventListener('input', run);
+  run();
+</script>

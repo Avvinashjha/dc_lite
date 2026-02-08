@@ -1,0 +1,109 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  toolName: string;
+}
+
+const { title, description, toolName } = Astro.props;
+---
+
+<BaseLayout title={`${toolName} | DailyCoder Tools`} description={description}>
+  <div class="tool-page">
+    <div class="container">
+      <a href="/tools" class="tool-back">&larr; All Tools</a>
+      <h1 class="tool-title">{toolName}</h1>
+      <p class="tool-desc">{description}</p>
+      <p class="tool-privacy">Your data never leaves your browser.</p>
+
+      <div class="tool-body">
+        <slot />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .tool-page { padding: 2rem 0 4rem; }
+  .tool-back {
+    display: inline-block; color: var(--color-text-light); font-size: 0.85rem;
+    margin-bottom: 1rem; text-decoration: none;
+  }
+  .tool-back:hover { color: var(--color-primary); text-decoration: none; }
+  .tool-title { font-size: 2rem; margin-bottom: 0.5rem; }
+  .tool-desc { color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem; }
+  .tool-privacy {
+    font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  .tool-body { width: 100%; }
+
+  @media (max-width: 768px) {
+    .tool-title { font-size: 1.5rem; }
+  }
+</style>
+
+<style is:global>
+  /* Shared tool styles */
+  .tool-panels {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .tool-panel {
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .tool-panel__label {
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--color-text-light);
+  }
+  .tool-textarea {
+    width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md);
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    color: var(--color-text); font-family: var(--font-mono); font-size: 0.8rem;
+    resize: vertical; line-height: 1.5;
+  }
+  .tool-textarea:focus {
+    outline: none; border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+  }
+  .tool-input {
+    width: 100%; padding: 0.6rem 0.75rem; border-radius: var(--radius-md);
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    color: var(--color-text); font-family: var(--font-mono); font-size: 0.85rem;
+  }
+  .tool-input:focus {
+    outline: none; border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+  }
+  .tool-actions {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;
+  }
+  .tool-btn {
+    padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border);
+    background: var(--color-surface); color: var(--color-text); font-size: 0.8rem;
+    font-weight: 600; cursor: pointer; transition: all 150ms ease;
+  }
+  .tool-btn:hover { border-color: var(--color-primary); background: var(--color-code-bg); }
+  .tool-btn--primary {
+    background: var(--color-primary); color: white; border-color: var(--color-primary);
+  }
+  .tool-btn--primary:hover { background: var(--color-primary-dark); }
+  .tool-output {
+    width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md);
+    border: 1px solid var(--color-border); background: #1e293b; color: #e2e8f0;
+    font-family: var(--font-mono); font-size: 0.8rem; overflow: auto;
+    line-height: 1.5; white-space: pre-wrap; word-break: break-all;
+  }
+  .tool-error {
+    color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;
+  }
+  .tool-success {
+    color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .tool-panels { grid-template-columns: 1fr; }
+    .tool-textarea, .tool-output { min-height: 180px; }
+  }
+</style>

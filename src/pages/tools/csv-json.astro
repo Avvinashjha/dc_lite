@@ -1,0 +1,95 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="CSV ↔ JSON Converter" description="Convert between CSV and JSON formats instantly." toolName="CSV ↔ JSON Converter">
+  <div class="tool-actions">
+    <button class="tool-btn tool-btn--primary" id="btn-csv2json">CSV → JSON</button>
+    <button class="tool-btn tool-btn--primary" id="btn-json2csv">JSON → CSV</button>
+    <button class="tool-btn" id="btn-copy">Copy Output</button>
+    <button class="tool-btn" id="btn-download">Download</button>
+    <button class="tool-btn" id="btn-clear">Clear</button>
+  </div>
+
+  <div class="tool-panels">
+    <div class="tool-panel">
+      <span class="tool-panel__label">Input</span>
+      <textarea id="input" class="tool-textarea" placeholder="Paste CSV or JSON here..."></textarea>
+    </div>
+    <div class="tool-panel">
+      <span class="tool-panel__label">Output</span>
+      <div id="output" class="tool-output"></div>
+    </div>
+  </div>
+  <div id="status"></div>
+</ToolLayout>
+
+<script is:inline>
+  var input = document.getElementById('input');
+  var output = document.getElementById('output');
+  var status = document.getElementById('status');
+  var lastMode = 'json';
+
+  function parseCSV(text) {
+    var lines = text.trim().split('\n');
+    if (lines.length < 2) throw new Error('CSV needs at least a header row and one data row');
+    var headers = lines[0].split(',').map(function(h) { return h.trim().replace(/^"|"$/g, ''); });
+    var result = [];
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var vals = lines[i].split(',').map(function(v) { return v.trim().replace(/^"|"$/g, ''); });
+      var obj = {};
+      headers.forEach(function(h, j) { obj[h] = isNaN(vals[j]) ? vals[j] : Number(vals[j]); });
+      result.push(obj);
+    }
+    return result;
+  }
+
+  function jsonToCSV(arr) {
+    if (!Array.isArray(arr) || arr.length === 0) throw new Error('JSON must be an array of objects');
+    var headers = Object.keys(arr[0]);
+    var csv = headers.join(',') + '\n';
+    arr.forEach(function(row) {
+      csv += headers.map(function(h) {
+        var v = row[h] == null ? '' : String(row[h]);
+        return v.indexOf(',') >= 0 ? '"' + v + '"' : v;
+      }).join(',') + '\n';
+    });
+    return csv;
+  }
+
+  document.getElementById('btn-csv2json').addEventListener('click', function() {
+    try {
+      var result = parseCSV(input.value);
+      output.textContent = JSON.stringify(result, null, 2);
+      lastMode = 'json';
+      status.className = 'tool-success'; status.textContent = 'Converted ' + result.length + ' rows to JSON';
+    } catch(e) { status.className = 'tool-error'; status.textContent = e.message; }
+  });
+
+  document.getElementById('btn-json2csv').addEventListener('click', function() {
+    try {
+      var arr = JSON.parse(input.value);
+      var csv = jsonToCSV(arr);
+      output.textContent = csv;
+      lastMode = 'csv';
+      status.className = 'tool-success'; status.textContent = 'Converted to CSV';
+    } catch(e) { status.className = 'tool-error'; status.textContent = e.message; }
+  });
+
+  document.getElementById('btn-copy').addEventListener('click', function() {
+    if (output.textContent) { navigator.clipboard.writeText(output.textContent); status.className = 'tool-success'; status.textContent = 'Copied!'; }
+  });
+
+  document.getElementById('btn-download').addEventListener('click', function() {
+    if (!output.textContent) return;
+    var ext = lastMode === 'csv' ? 'csv' : 'json';
+    var blob = new Blob([output.textContent], { type: 'text/' + ext });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'converted.' + ext; a.click();
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', function() {
+    input.value = ''; output.textContent = ''; status.textContent = '';
+  });
+</script>

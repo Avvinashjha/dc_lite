@@ -2,7 +2,7 @@
   "site": {
     "title": "DailyCoder",
     "description": "Blog, courses, and documentation for modern web development",
-    "author": "Your Name",
+    "author": "Avinash Jha",
     "url": "https://dailycoder.in",
     "logo": "/images/logo.svg"
   },
@@ -10,12 +10,15 @@
     { "label": "Blog", "path": "/blog" },
     { "label": "Courses", "path": "/courses" },
     { "label": "Docs", "path": "/docs" },
+    { "label": "Tools", "path": "/tools" },
     { "label": "About", "path": "/about" }
   ],
   "socialLinks": {
-    "twitter": "https://twitter.com/yourusername",
-    "github": "https://github.com/yourusername",
-    "linkedin": "https://linkedin.com/in/yourusername"
+    "twitter": "https://x.com/dailycoder_in",
+    "github": "https://github.com/dailycoder",
+    "linkedin": "https://www.linkedin.com/company/dailycoder/",
+    "youtube": "https://www.youtube.com/@dailycoder",
+    "instagram": "https://www.instagram.com/dailycoder.in/"
   },
   "newsletter": {
     "enabled": true,

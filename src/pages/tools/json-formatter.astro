@@ -1,0 +1,79 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout title="JSON Formatter" description="Format, validate, and minify JSON data instantly." toolName="JSON Formatter">
+  <div class="tool-actions">
+    <button class="tool-btn tool-btn--primary" id="btn-format">Format</button>
+    <button class="tool-btn" id="btn-minify">Minify</button>
+    <button class="tool-btn" id="btn-validate">Validate</button>
+    <button class="tool-btn" id="btn-copy">Copy Output</button>
+    <button class="tool-btn" id="btn-download">Download JSON</button>
+    <button class="tool-btn" id="btn-clear">Clear</button>
+  </div>
+
+  <div class="tool-panels">
+    <div class="tool-panel">
+      <span class="tool-panel__label">Input JSON</span>
+      <textarea id="input" class="tool-textarea" placeholder='{"name": "John", "age": 30}'></textarea>
+    </div>
+    <div class="tool-panel">
+      <span class="tool-panel__label">Output</span>
+      <div id="output" class="tool-output"></div>
+    </div>
+  </div>
+  <div id="status"></div>
+</ToolLayout>
+
+<script is:inline>
+  var input = document.getElementById('input');
+  var output = document.getElementById('output');
+  var status = document.getElementById('status');
+
+  function setStatus(msg, type) {
+    status.className = type === 'error' ? 'tool-error' : 'tool-success';
+    status.textContent = msg;
+  }
+
+  document.getElementById('btn-format').addEventListener('click', function() {
+    try {
+      var parsed = JSON.parse(input.value);
+      output.textContent = JSON.stringify(parsed, null, 2);
+      setStatus('Formatted successfully', 'success');
+    } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
+  });
+
+  document.getElementById('btn-minify').addEventListener('click', function() {
+    try {
+      var parsed = JSON.parse(input.value);
+      output.textContent = JSON.stringify(parsed);
+      setStatus('Minified successfully', 'success');
+    } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
+  });
+
+  document.getElementById('btn-validate').addEventListener('click', function() {
+    try {
+      JSON.parse(input.value);
+      setStatus('Valid JSON!', 'success');
+      output.textContent = 'Valid JSON ✓';
+    } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
+  });
+
+  document.getElementById('btn-copy').addEventListener('click', function() {
+    if (output.textContent) {
+      navigator.clipboard.writeText(output.textContent);
+      setStatus('Copied to clipboard!', 'success');
+    }
+  });
+
+  document.getElementById('btn-download').addEventListener('click', function() {
+    if (!output.textContent) return;
+    var blob = new Blob([output.textContent], { type: 'application/json' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'formatted.json'; a.click();
+  });
+
+  document.getElementById('btn-clear').addEventListener('click', function() {
+    input.value = ''; output.textContent = ''; status.textContent = '';
+  });
+</script>

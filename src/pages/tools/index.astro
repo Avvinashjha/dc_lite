@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const tools = [
+  { name: 'JSON Formatter', desc: 'Format, validate, and minify JSON data', href: '/tools/json-formatter', category: 'JSON', icon: '{ }' },
+  { name: 'JSON Diff', desc: 'Compare two JSON objects side by side', href: '/tools/json-diff', category: 'JSON', icon: '⇄' },
+  { name: 'CSV ↔ JSON', desc: 'Convert between CSV and JSON formats', href: '/tools/csv-json', category: 'Converter', icon: '↹' },
+  { name: 'Regex Tester', desc: 'Test regular expressions with live matching', href: '/tools/regex-tester', category: 'Utility', icon: '.*' },
+  { name: 'JWT Decoder', desc: 'Decode and inspect JSON Web Tokens', href: '/tools/jwt-decoder', category: 'Utility', icon: '🔑' },
+  { name: 'Timestamp', desc: 'Convert Unix timestamps to human dates', href: '/tools/timestamp', category: 'Utility', icon: '⏱' },
+  { name: 'Color Converter', desc: 'Convert between HEX, RGB, and HSL', href: '/tools/color-converter', category: 'Utility', icon: '🎨' },
+  { name: 'Color Picker', desc: 'Pick colors, gradients, save palettes, export CSS/SASS', href: '/tools/color-picker', category: 'Design', icon: '🖌' },
+  { name: 'Diff Checker', desc: 'Compare two texts and see the differences', href: '/tools/diff-checker', category: 'Utility', icon: '±' },
+  { name: 'Markdown Preview', desc: 'Write markdown and see live preview', href: '/tools/markdown-preview', category: 'Utility', icon: 'MD' },
+];
+---
+
+<BaseLayout title="Developer Tools | DailyCoder" description="Free online developer tools — JSON formatter, regex tester, JWT decoder, and more. All client-side, no data leaves your browser.">
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem; text-align: center;">Developer Tools</h1>
+    <p style="text-align: center; color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem;">
+      Free, fast, and private. Everything runs in your browser.
+    </p>
+    <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7; margin-bottom: 2.5rem;">
+      No data is sent to any server.
+    </p>
+
+    <div class="tools-grid">
+      {tools.map(tool => (
+        <a href={tool.href} class="tool-card">
+          <span class="tool-card__icon">{tool.icon}</span>
+          <div>
+            <h3 class="tool-card__name">{tool.name}</h3>
+            <p class="tool-card__desc">{tool.desc}</p>
+          </div>
+          <span class="tool-card__cat">{tool.category}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .tool-card {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 1.25rem; border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    text-decoration: none; color: inherit; transition: all 200ms ease;
+    position: relative;
+  }
+  .tool-card:hover {
+    transform: translateY(-2px); box-shadow: var(--shadow-md);
+    border-color: var(--color-primary); text-decoration: none; color: inherit;
+  }
+  .tool-card * { text-decoration: none; }
+  .tool-card__icon {
+    font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono);
+    background: var(--color-code-bg); width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md); flex-shrink: 0;
+  }
+  .tool-card__name { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; color: var(--color-text); }
+  .tool-card__desc { font-size: 0.8rem; color: var(--color-text-light); line-height: 1.4; }
+  .tool-card__cat {
+    position: absolute; top: 0.75rem; right: 0.75rem;
+    font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+    background: var(--color-code-bg); padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm); color: var(--color-text-light);
+  }
+
+  @media (max-width: 1024px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .tools-grid { grid-template-columns: 1fr; } }
+</style>
