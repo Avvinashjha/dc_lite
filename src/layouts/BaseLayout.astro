@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site).href : new URL('/favicon.ico', Astro.site).href;
+const ogImage = image ? new URL(image, Astro.site).href : new URL('/og-default.svg', Astro.site).href;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -68,6 +68,7 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <slot name="head" />
     <script is:inline>
       const theme = localStorage.getItem('theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');

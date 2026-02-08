@@ -1,61 +1,63 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSiteConfig } from '../utils/contentLoader';
+const config = getSiteConfig();
 ---
 
 <BaseLayout
-  title="About | My Blog"
-  description="Learn more about this blog and its mission to share web development knowledge."
+  title={`About | ${config.site.title}`}
+  description="Learn more about DailyCoder — a platform for web development tutorials, courses, tools, and documentation."
 >
   <div class="container content" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">About This Blog</h1>
+    <h1 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">About {config.site.title}</h1>
     
     <div class="article__content">
       <p>
-        Welcome to my blog! This is a space where I share my thoughts, learnings, and experiences
-        in web development, programming, and technology.
+        Welcome to <strong>{config.site.title}</strong>! We're a platform dedicated to helping developers 
+        learn, build, and ship better software. Founded by <strong>{config.site.author}</strong>, we share 
+        in-depth tutorials, hands-on courses, and free developer tools.
       </p>
       
       <h2>What You'll Find Here</h2>
-      <p>
-        This blog covers a wide range of topics including:
-      </p>
       <ul>
-        <li>Modern JavaScript and TypeScript</li>
-        <li>Web frameworks like Astro, React, and more</li>
-        <li>CSS and modern web design</li>
-        <li>Best practices and coding patterns</li>
-        <li>Performance optimization</li>
-        <li>SEO and accessibility</li>
+        <li><strong>Blog</strong> — In-depth articles on JavaScript, TypeScript, CSS, React, and modern web development</li>
+        <li><strong>Courses</strong> — Structured learning paths with interactive quizzes and exercises</li>
+        <li><strong>Documentation</strong> — Technical guides and project docs</li>
+        <li><strong>Developer Tools</strong> — 13+ free client-side tools (JSON formatter, diff checker, regex tester, and more)</li>
       </ul>
       
       <h2>Built With Modern Tech</h2>
       <p>
-        This blog is built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>,
-        a modern static site generator that prioritizes performance and developer experience.
+        This platform is built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a> 
+        for blazing-fast performance, and hosted on GitHub Pages. Every tool runs 100% in your browser — 
+        no data ever leaves your device.
       </p>
-      
-      <p>Key features include:</p>
-      <ul>
-        <li>Lightning-fast page loads with static site generation</li>
-        <li>SEO optimized with proper meta tags and structured data</li>
-        <li>Full-text search powered by Pagefind</li>
-        <li>RSS feed for easy subscription</li>
-        <li>Dark mode and reading mode for comfortable reading</li>
-        <li>Mobile-responsive design</li>
-      </ul>
       
       <h2>Get in Touch</h2>
       <p>
-        I love connecting with fellow developers and readers. Feel free to reach out via:
+        We love connecting with fellow developers! Reach out through any of these channels:
       </p>
       <ul>
-        <li>Twitter: <a href="https://twitter.com/yourusername" target="_blank" rel="noopener">@yourusername</a></li>
-        <li>GitHub: <a href="https://github.com/yourusername" target="_blank" rel="noopener">@yourusername</a></li>
-        <li>Email: your.email@example.com</li>
+        {config.socialLinks.twitter && (
+          <li>Twitter/X: <a href={config.socialLinks.twitter} target="_blank" rel="noopener">@dailycoder_in</a></li>
+        )}
+        {config.socialLinks.github && (
+          <li>GitHub: <a href={config.socialLinks.github} target="_blank" rel="noopener">@dailycoder</a></li>
+        )}
+        {config.socialLinks.linkedin && (
+          <li>LinkedIn: <a href={config.socialLinks.linkedin} target="_blank" rel="noopener">DailyCoder</a></li>
+        )}
+        {config.socialLinks.youtube && (
+          <li>YouTube: <a href={config.socialLinks.youtube} target="_blank" rel="noopener">@dailycoder</a></li>
+        )}
+        {config.socialLinks.instagram && (
+          <li>Instagram: <a href={config.socialLinks.instagram} target="_blank" rel="noopener">@dailycoder.in</a></li>
+        )}
+        <li>Email: <a href="mailto:dailycoder.in@gmail.com">dailycoder.in@gmail.com</a></li>
       </ul>
       
       <p>
-        Subscribe to the <a href="/rss.xml">RSS feed</a> to stay updated with new posts!
+        Subscribe to the <a href="/rss.xml" target="_blank">RSS feed</a> to stay updated with new content!
       </p>
     </div>
   </div>

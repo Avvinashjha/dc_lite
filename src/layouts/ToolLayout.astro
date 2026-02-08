@@ -1,23 +1,49 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { getSiteConfig } from '../utils/contentLoader';
 
 interface Props {
   title: string;
   description: string;
   toolName: string;
+  keywords?: string;
 }
 
-const { title, description, toolName } = Astro.props;
+const config = getSiteConfig();
+const { title, description, toolName, keywords = '' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// SEO structured data for each tool
+const toolJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: toolName,
+  description: description,
+  url: canonicalURL.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'All',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  author: { '@type': 'Organization', name: config.site.title, url: config.site.url },
+  browserRequirements: 'Requires JavaScript',
+};
 ---
 
-<BaseLayout title={`${toolName} | DailyCoder Tools`} description={description}>
+<BaseLayout title={`${toolName} - Free Online Tool | DailyCoder`} description={description}>
+  <Fragment slot="head">
+    <meta name="keywords" content={`${toolName}, ${keywords}, free online tool, developer tool, no signup, client-side`} />
+    <meta name="robots" content="index, follow" />
+    <script type="application/ld+json" set:html={JSON.stringify(toolJsonLd)} />
+  </Fragment>
+
   <div class="tool-page">
     <div class="container">
       <a href="/tools" class="tool-back">&larr; All Tools</a>
       <h1 class="tool-title">{toolName}</h1>
       <p class="tool-desc">{description}</p>
-      <p class="tool-privacy">Your data never leaves your browser.</p>
-
+      <p class="tool-privacy">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:-1px;margin-right:3px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Your data never leaves your browser. 100% client-side.
+      </p>
       <div class="tool-body">
         <slot />
       </div>
@@ -39,71 +65,24 @@ const { title, description, toolName } = Astro.props;
     margin-bottom: 2rem;
   }
   .tool-body { width: 100%; }
-
-  @media (max-width: 768px) {
-    .tool-title { font-size: 1.5rem; }
-  }
+  @media (max-width: 768px) { .tool-title { font-size: 1.5rem; } }
 </style>
 
 <style is:global>
-  /* Shared tool styles */
-  .tool-panels {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-  }
-  .tool-panel {
-    display: flex; flex-direction: column; gap: 0.5rem;
-  }
-  .tool-panel__label {
-    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.04em; color: var(--color-text-light);
-  }
-  .tool-textarea {
-    width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md);
-    border: 1px solid var(--color-border); background: var(--color-surface);
-    color: var(--color-text); font-family: var(--font-mono); font-size: 0.8rem;
-    resize: vertical; line-height: 1.5;
-  }
-  .tool-textarea:focus {
-    outline: none; border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
-  }
-  .tool-input {
-    width: 100%; padding: 0.6rem 0.75rem; border-radius: var(--radius-md);
-    border: 1px solid var(--color-border); background: var(--color-surface);
-    color: var(--color-text); font-family: var(--font-mono); font-size: 0.85rem;
-  }
-  .tool-input:focus {
-    outline: none; border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
-  }
-  .tool-actions {
-    display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;
-  }
-  .tool-btn {
-    padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border);
-    background: var(--color-surface); color: var(--color-text); font-size: 0.8rem;
-    font-weight: 600; cursor: pointer; transition: all 150ms ease;
-  }
+  .tool-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .tool-panel { display: flex; flex-direction: column; gap: 0.5rem; }
+  .tool-panel__label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-light); }
+  .tool-textarea { width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-family: var(--font-mono); font-size: 0.8rem; resize: vertical; line-height: 1.5; }
+  .tool-textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+  .tool-input { width: 100%; padding: 0.6rem 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-family: var(--font-mono); font-size: 0.85rem; }
+  .tool-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+  .tool-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+  .tool-btn { padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 150ms ease; }
   .tool-btn:hover { border-color: var(--color-primary); background: var(--color-code-bg); }
-  .tool-btn--primary {
-    background: var(--color-primary); color: white; border-color: var(--color-primary);
-  }
+  .tool-btn--primary { background: var(--color-primary); color: white; border-color: var(--color-primary); }
   .tool-btn--primary:hover { background: var(--color-primary-dark); }
-  .tool-output {
-    width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md);
-    border: 1px solid var(--color-border); background: #1e293b; color: #e2e8f0;
-    font-family: var(--font-mono); font-size: 0.8rem; overflow: auto;
-    line-height: 1.5; white-space: pre-wrap; word-break: break-all;
-  }
-  .tool-error {
-    color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;
-  }
-  .tool-success {
-    color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .tool-panels { grid-template-columns: 1fr; }
-    .tool-textarea, .tool-output { min-height: 180px; }
-  }
+  .tool-output { width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: #1e293b; color: #e2e8f0; font-family: var(--font-mono); font-size: 0.8rem; overflow: auto; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  .tool-error { color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+  .tool-success { color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+  @media (max-width: 768px) { .tool-panels { grid-template-columns: 1fr; } .tool-textarea, .tool-output { min-height: 180px; } }
 </style>

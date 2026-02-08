@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#111827"/>
+  <g transform="translate(600,260)">
+    <rect x="-60" y="-60" width="120" height="120" rx="4" transform="rotate(45)" fill="none" stroke="#2563eb" stroke-width="6"/>
+    <rect x="-38" y="-38" width="76" height="76" rx="4" transform="rotate(45) translate(20, -20)" fill="none" stroke="#2563eb" stroke-width="6"/>
+    <rect x="-16" y="-16" width="32" height="32" rx="2" transform="rotate(45)" fill="none" stroke="#2563eb" stroke-width="6"/>
+  </g>
+  <text x="600" y="420" text-anchor="middle" fill="#f9fafb" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="52" font-weight="700">DailyCoder</text>
+  <text x="600" y="470" text-anchor="middle" fill="#9ca3af" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="24">Blog · Courses · Tools · Docs</text>
+</svg>
