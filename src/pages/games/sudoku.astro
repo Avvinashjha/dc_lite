@@ -1,0 +1,114 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Sudoku" description="Classic 9x9 Sudoku puzzle. Fill every row, column, and 3x3 box with 1-9." instructions="Click a cell, then type a number <strong>1-9</strong>. Each row, column, and 3×3 box must contain all digits 1-9 without repeats. Press <strong>Delete</strong> to clear a cell." keywords="sudoku, sudoku puzzle, number puzzle, brain game">
+  <div id="sudoku-game" style="padding:1.5rem;text-align:center;width:100%;">
+    <div style="display:flex;gap:0.5rem;justify-content:center;margin-bottom:1rem;">
+      <button class="game-btn" id="diff-easy">Easy</button>
+      <button class="game-btn game-btn--primary" id="diff-med">Medium</button>
+      <button class="game-btn" id="diff-hard">Hard</button>
+      <button class="game-btn" id="btn-check">Check</button>
+    </div>
+    <div id="timer-display" style="font-family:var(--font-mono);font-size:0.9rem;color:var(--color-text-light);margin-bottom:0.75rem;">00:00</div>
+    <div id="board" style="display:inline-grid;grid-template-columns:repeat(9,1fr);gap:0;border:2px solid var(--color-text);"></div>
+    <div id="msg" style="margin-top:1rem;font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
+  </div>
+</GameLayout>
+<style is:global>
+  .su-cell{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:600;cursor:pointer;border:1px solid var(--color-border);background:var(--color-background);color:var(--color-text);transition:background 100ms;}
+  .su-cell:hover{background:var(--color-code-bg);}
+  .su-cell--fixed{font-weight:800;color:var(--color-text);cursor:default;}
+  .su-cell--selected{background:rgba(37,99,235,.15)!important;outline:2px solid var(--color-primary);}
+  .su-cell--error{color:#ef4444!important;}
+  .su-cell--br{border-right:2px solid var(--color-text);}
+  .su-cell--bb{border-bottom:2px solid var(--color-text);}
+  @media(max-width:400px){.su-cell{width:30px;height:30px;font-size:0.9rem;}}
+</style>
+<script is:inline>
+(function(){
+  var BEST_KEY='dc_sudoku_best';
+  var board=[],solution=[],fixed=[],selected=null,seconds=0,timerInterval;
+
+  function generateSolved(){
+    var b=Array.from({length:9},function(){return Array(9).fill(0);});
+    function isValid(b,r,c,n){
+      for(var i=0;i<9;i++){if(b[r][i]===n||b[i][c]===n)return false;}
+      var br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;
+      for(var i=br;i<br+3;i++)for(var j=bc;j<bc+3;j++)if(b[i][j]===n)return false;
+      return true;
+    }
+    function solve(b){
+      for(var r=0;r<9;r++)for(var c=0;c<9;c++){
+        if(b[r][c]===0){
+          var nums=[1,2,3,4,5,6,7,8,9];for(var i=nums.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=nums[i];nums[i]=nums[j];nums[j]=t;}
+          for(var k=0;k<9;k++){if(isValid(b,r,c,nums[k])){b[r][c]=nums[k];if(solve(b))return true;b[r][c]=0;}}
+          return false;
+        }
+      }
+      return true;
+    }
+    solve(b);return b;
+  }
+
+  function newGame(holes){
+    clearInterval(timerInterval);seconds=0;updateTimer();
+    solution=generateSolved();
+    board=solution.map(function(r){return r.slice();});
+    fixed=Array.from({length:9},function(){return Array(9).fill(true);});
+    var cells=[];for(var r=0;r<9;r++)for(var c=0;c<9;c++)cells.push([r,c]);
+    for(var i=cells.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=cells[i];cells[i]=cells[j];cells[j]=t;}
+    for(var i=0;i<holes;i++){board[cells[i][0]][cells[i][1]]=0;fixed[cells[i][0]][cells[i][1]]=false;}
+    selected=null;render();
+    timerInterval=setInterval(function(){seconds++;updateTimer();},1000);
+    document.getElementById('msg').textContent='';
+  }
+
+  function updateTimer(){
+    var m=Math.floor(seconds/60),s=seconds%60;
+    document.getElementById('timer-display').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }
+
+  function render(){
+    var el=document.getElementById('board');el.innerHTML='';
+    for(var r=0;r<9;r++)for(var c=0;c<9;c++){
+      var cell=document.createElement('div');
+      cell.className='su-cell'+(fixed[r][c]?' su-cell--fixed':'')+(selected&&selected[0]===r&&selected[1]===c?' su-cell--selected':'')+(c%3===2&&c<8?' su-cell--br':'')+(r%3===2&&r<8?' su-cell--bb':'');
+      cell.textContent=board[r][c]||'';
+      cell.dataset.r=r;cell.dataset.c=c;
+      cell.addEventListener('click',function(){
+        var rr=+this.dataset.r,cc=+this.dataset.c;
+        if(!fixed[rr][cc]){selected=[rr,cc];render();}
+      });
+      el.appendChild(cell);
+    }
+  }
+
+  document.addEventListener('keydown',function(e){
+    if(!selected)return;var r=selected[0],c=selected[1];
+    if(e.key>='1'&&e.key<='9'){board[r][c]=+e.key;render();}
+    else if(e.key==='Backspace'||e.key==='Delete'){board[r][c]=0;render();}
+  });
+
+  document.getElementById('btn-check').addEventListener('click',function(){
+    var complete=true,errors=false;
+    for(var r=0;r<9;r++)for(var c=0;c<9;c++){
+      if(board[r][c]===0)complete=false;
+      else if(board[r][c]!==solution[r][c])errors=true;
+    }
+    var msg=document.getElementById('msg');
+    if(!complete){msg.textContent='Not complete yet!';msg.style.color='var(--color-text-light)';}
+    else if(errors){msg.textContent='Some numbers are wrong!';msg.style.color='#ef4444';}
+    else{clearInterval(timerInterval);msg.textContent='🎉 Solved in '+document.getElementById('timer-display').textContent+'!';msg.style.color='#22c55e';
+      var b=parseInt(localStorage.getItem(BEST_KEY))||99999;if(seconds<b){localStorage.setItem(BEST_KEY,seconds);document.getElementById('best-score').textContent=Math.floor(seconds/60)+'m '+seconds%60+'s';}
+    }
+  });
+
+  document.getElementById('diff-easy').onclick=function(){newGame(30);};
+  document.getElementById('diff-med').onclick=function(){newGame(45);};
+  document.getElementById('diff-hard').onclick=function(){newGame(55);};
+  document.getElementById('btn-start').onclick=function(){newGame(45);this.style.display='none';document.getElementById('btn-restart').style.display='';};
+  document.getElementById('btn-restart').onclick=function(){newGame(45);};
+  document.getElementById('score-display').style.display='none';
+  newGame(45);
+})();
+</script>

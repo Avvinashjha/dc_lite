@@ -1,0 +1,48 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Tetris" description="Classic block-stacking puzzle. Clear lines to score!" instructions="<strong>Left/Right</strong> arrows to move, <strong>Up</strong> to rotate, <strong>Down</strong> to soft drop, <strong>Space</strong> for hard drop. Clear lines to score. Speed increases each level!" keywords="tetris, block game, puzzle game, falling blocks">
+  <canvas id="game" width="300" height="600"></canvas>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d');
+  var W=300,H=600,S=30,COLS=10,ROWS=20;
+  var SHAPES=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[0,1,1],[1,1,0]],[[1,1,0],[0,1,1]]];
+  var COLORS=['#06b6d4','#eab308','#a855f7','#2563eb','#f97316','#22c55e','#ef4444'];
+  var grid,piece,pieceX,pieceY,pieceType,score,level,lines,best,running,interval,gameOver;
+  var BEST_KEY='dc_tetris_best';best=parseInt(localStorage.getItem(BEST_KEY))||0;
+  document.getElementById('best-score').textContent=best;
+
+  function init(){grid=Array.from({length:ROWS},function(){return Array(COLS).fill(0);});score=0;level=1;lines=0;gameOver=false;running=false;newPiece();draw();}
+  function newPiece(){pieceType=Math.floor(Math.random()*7);piece=SHAPES[pieceType].map(function(r){return r.slice();});pieceX=Math.floor((COLS-piece[0].length)/2);pieceY=0;
+    if(!canMove(0,0)){gameOver=true;running=false;clearInterval(interval);document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';}
+  }
+  function canMove(dx,dy,p){p=p||piece;for(var r=0;r<p.length;r++)for(var c=0;c<p[r].length;c++){if(p[r][c]){var nx=pieceX+c+dx,ny=pieceY+r+dy;if(nx<0||nx>=COLS||ny>=ROWS||(ny>=0&&grid[ny][nx]))return false;}}return true;}
+  function lock(){for(var r=0;r<piece.length;r++)for(var c=0;c<piece[r].length;c++){if(piece[r][c]&&pieceY+r>=0)grid[pieceY+r][pieceX+c]=pieceType+1;}clearLines();newPiece();}
+  function clearLines(){var cleared=0;for(var r=ROWS-1;r>=0;r--){if(grid[r].every(function(v){return v>0;})){grid.splice(r,1);grid.unshift(Array(COLS).fill(0));cleared++;r++;}}
+    if(cleared){lines+=cleared;score+=[0,100,300,500,800][cleared]*level;level=Math.floor(lines/10)+1;updateScore();if(running){clearInterval(interval);interval=setInterval(step,Math.max(100,500-level*40));}}}
+  function rotate(){var p=piece[0].map(function(_,i){return piece.map(function(r){return r[i];});}).reverse();if(canMove(0,0,p))piece=p;}
+  function updateScore(){document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem(BEST_KEY,best);document.getElementById('best-score').textContent=best;}}
+  function draw(){
+    ctx.fillStyle='#111827';ctx.fillRect(0,0,W,H);
+    for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){ctx.strokeStyle='#1f2937';ctx.strokeRect(c*S,r*S,S,S);if(grid[r][c]){ctx.fillStyle=COLORS[grid[r][c]-1];ctx.fillRect(c*S+1,r*S+1,S-2,S-2);}}
+    if(piece)for(var r=0;r<piece.length;r++)for(var c=0;c<piece[r].length;c++){if(piece[r][c]){ctx.fillStyle=COLORS[pieceType];ctx.fillRect((pieceX+c)*S+1,(pieceY+r)*S+1,S-2,S-2);}}
+    if(gameOver){ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='bold 24px sans-serif';ctx.textAlign='center';ctx.fillText('Game Over!',W/2,H/2-10);ctx.font='16px sans-serif';ctx.fillText('Score: '+score+' | Level: '+level,W/2,H/2+20);}
+  }
+  function step(){if(!canMove(0,1)){lock();}else pieceY++;draw();}
+  function start(){if(running)return;running=true;document.getElementById('btn-start').style.display='none';document.getElementById('btn-pause').style.display='';interval=setInterval(step,500);}
+  function restart(){clearInterval(interval);init();start();document.getElementById('btn-restart').style.display='none';}
+  document.getElementById('btn-start').onclick=start;document.getElementById('btn-restart').onclick=restart;
+  document.getElementById('btn-pause').onclick=function(){if(running){clearInterval(interval);running=false;this.textContent='Resume';}else{interval=setInterval(step,Math.max(100,500-level*40));running=true;this.textContent='Pause';}};
+  document.addEventListener('keydown',function(e){if(gameOver)return;
+    if(e.key==='ArrowLeft'&&canMove(-1,0)){pieceX--;draw();}
+    else if(e.key==='ArrowRight'&&canMove(1,0)){pieceX++;draw();}
+    else if(e.key==='ArrowDown'&&canMove(0,1)){pieceY++;draw();}
+    else if(e.key==='ArrowUp'){rotate();draw();}
+    else if(e.key===' '){while(canMove(0,1))pieceY++;lock();draw();}
+    if(!running&&!gameOver)start();
+  });
+  init();
+})();
+</script>

@@ -1,0 +1,63 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Car Dodge" description="Dodge oncoming traffic and collect coins in this fast-paced racing game!" instructions="Use <strong>Left/Right</strong> arrow keys or <strong>swipe</strong> to move your car. Dodge red cars, collect yellow coins. Speed increases over time!" keywords="car game, dodge game, racing game, car dodge">
+  <canvas id="game" width="300" height="500"></canvas>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d'),W=300,H=500;
+  var LANES=[60,135,210],CAR_W=40,CAR_H=60,COIN_R=12;
+  var player,obstacles,coins,score,best,speed,running,gameOver,frame;
+  var BEST_KEY='dc_cardodge_best';best=parseInt(localStorage.getItem(BEST_KEY))||0;
+  document.getElementById('best-score').textContent=best;
+
+  function init(){player={lane:1,x:LANES[1],y:H-80};obstacles=[];coins=[];score=0;speed=3;frame=0;gameOver=false;running=false;draw();}
+  function updateScore(){document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem(BEST_KEY,best);document.getElementById('best-score').textContent=best;}}
+  function spawn(){
+    if(frame%40===0){var lane=Math.floor(Math.random()*3);obstacles.push({x:LANES[lane],y:-CAR_H,lane:lane});}
+    if(frame%60===0){var lane=Math.floor(Math.random()*3);coins.push({x:LANES[lane]+CAR_W/2,y:-20});}
+  }
+  function draw(){
+    // Road
+    ctx.fillStyle='#374151';ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#4b5563';ctx.fillRect(20,0,W-40,H);
+    // Dashes
+    for(var i=0;i<H;i+=40){ctx.fillStyle='#9ca3af';ctx.fillRect(97,(i+frame*2)%H,4,20);ctx.fillRect(172,(i+frame*2)%H,4,20);}
+    // Coins
+    coins.forEach(function(co){ctx.fillStyle='#eab308';ctx.beginPath();ctx.arc(co.x,co.y,COIN_R,0,Math.PI*2);ctx.fill();ctx.fillStyle='#854d0e';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.fillText('$',co.x,co.y+4);});
+    // Obstacles
+    obstacles.forEach(function(o){ctx.fillStyle='#ef4444';roundRect(ctx,o.x-CAR_W/2,o.y,CAR_W,CAR_H,6);ctx.fillStyle='#fca5a5';ctx.fillRect(o.x-12,o.y+8,24,10);});
+    // Player
+    ctx.fillStyle='#2563eb';roundRect(ctx,player.x-CAR_W/2,player.y,CAR_W,CAR_H,6);
+    ctx.fillStyle='#93c5fd';ctx.fillRect(player.x-12,player.y+CAR_H-18,24,10);
+    if(gameOver){ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='bold 28px sans-serif';ctx.textAlign='center';ctx.fillText('Game Over!',W/2,H/2-10);ctx.font='16px sans-serif';ctx.fillText('Score: '+score,W/2,H/2+20);}
+  }
+  function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.fill();}
+  function update(){
+    frame++;spawn();speed=3+Math.floor(frame/300)*0.5;
+    obstacles.forEach(function(o){o.y+=speed;});
+    coins.forEach(function(co){co.y+=speed;});
+    obstacles=obstacles.filter(function(o){return o.y<H+CAR_H;});
+    coins=coins.filter(function(co){return co.y<H+20;});
+    // Collision
+    for(var i=0;i<obstacles.length;i++){var o=obstacles[i];if(Math.abs(o.x-player.x)<CAR_W-5&&o.y+CAR_H>player.y&&o.y<player.y+CAR_H){gameOver=true;running=false;document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';return;}}
+    // Coins
+    for(var i=coins.length-1;i>=0;i--){if(Math.abs(coins[i].x-player.x-CAR_W/2+20)<25&&Math.abs(coins[i].y-player.y-CAR_H/2)<25){coins.splice(i,1);score+=10;updateScore();}}
+    score++;updateScore();
+  }
+  function loop(){if(!running||gameOver)return;update();draw();requestAnimationFrame(loop);}
+  function start(){if(running)return;running=true;document.getElementById('btn-start').style.display='none';document.getElementById('btn-pause').style.display='';loop();}
+  function restart(){init();start();document.getElementById('btn-restart').style.display='none';}
+  document.getElementById('btn-start').onclick=start;document.getElementById('btn-restart').onclick=restart;
+  document.getElementById('btn-pause').onclick=function(){if(running){running=false;this.textContent='Resume';}else{running=true;this.textContent='Pause';loop();}};
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'&&player.lane>0){player.lane--;player.x=LANES[player.lane];}
+    else if(e.key==='ArrowRight'&&player.lane<2){player.lane++;player.x=LANES[player.lane];}
+    if(!running&&!gameOver)start();
+  });
+  var tx;c.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;e.preventDefault();},{passive:false});
+  c.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx;if(dx>30&&player.lane<2){player.lane++;player.x=LANES[player.lane];}else if(dx<-30&&player.lane>0){player.lane--;player.x=LANES[player.lane];}if(!running&&!gameOver)start();});
+  init();
+})();
+</script>

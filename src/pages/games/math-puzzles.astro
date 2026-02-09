@@ -1,0 +1,85 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Math Puzzles" description="Solve math problems as fast as you can! Test your mental math skills." instructions="Select a difficulty, then solve the math problem shown. Type your answer and press Enter. You have <strong>60 seconds</strong>. Each correct answer scores a point!" keywords="math game, math puzzles, mental math, brain training">
+  <div id="math-game" style="padding:2rem;text-align:center;width:100%;max-width:500px;">
+    <div id="diff-select" style="margin-bottom:1.5rem;">
+      <label class="tool-panel__label">Difficulty</label>
+      <div style="display:flex;gap:0.5rem;justify-content:center;margin-top:0.5rem;">
+        <button class="game-btn" data-diff="easy" style="flex:1;">Easy</button>
+        <button class="game-btn" data-diff="medium" style="flex:1;">Medium</button>
+        <button class="game-btn" data-diff="hard" style="flex:1;">Hard</button>
+      </div>
+    </div>
+    <div id="game-area" style="display:none;">
+      <div id="timer" style="font-size:1.5rem;font-weight:700;color:var(--color-primary);margin-bottom:1rem;">60</div>
+      <div id="problem" style="font-size:2.5rem;font-weight:800;font-family:var(--font-mono);margin-bottom:1.5rem;"></div>
+      <input id="answer-input" class="tool-input" type="number" style="font-size:1.5rem;text-align:center;max-width:200px;margin:0 auto;" placeholder="?" autofocus />
+      <div id="feedback" style="margin-top:1rem;font-size:1.1rem;font-weight:700;min-height:1.5rem;"></div>
+      <div id="streak" style="margin-top:0.5rem;font-size:0.85rem;color:var(--color-text-light);"></div>
+    </div>
+    <div id="result-area" style="display:none;">
+      <div style="font-size:3rem;font-weight:800;color:var(--color-primary);" id="final-score"></div>
+      <p style="color:var(--color-text-light);margin:0.5rem 0 1.5rem;" id="final-msg"></p>
+    </div>
+  </div>
+</GameLayout>
+<script is:inline>
+(function(){
+  var BEST_KEY='dc_math_best',best=parseInt(localStorage.getItem(BEST_KEY))||0;
+  document.getElementById('best-score').textContent=best;
+  var score=0,timeLeft=60,diff='easy',timer,curAnswer,streak=0;
+  var ops={easy:['+','-'],medium:['+','-','×'],hard:['+','-','×','÷']};
+  var ranges={easy:[1,20],medium:[1,50],hard:[1,100]};
+
+  function genProblem(){
+    var r=ranges[diff],opList=ops[diff],op=opList[Math.floor(Math.random()*opList.length)];
+    var a=Math.floor(Math.random()*(r[1]-r[0]))+r[0],b=Math.floor(Math.random()*(r[1]-r[0]))+r[0];
+    if(op==='÷'){b=Math.floor(Math.random()*12)+1;a=b*(Math.floor(Math.random()*12)+1);}
+    if(op==='-'&&a<b){var t=a;a=b;b=t;}
+    var ans;if(op==='+')ans=a+b;else if(op==='-')ans=a-b;else if(op==='×')ans=a*b;else ans=a/b;
+    curAnswer=ans;
+    document.getElementById('problem').textContent=a+' '+op+' '+b+' = ?';
+  }
+  function updateScore(){document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem(BEST_KEY,best);document.getElementById('best-score').textContent=best;}}
+  function startGame(d){
+    diff=d;score=0;timeLeft=60;streak=0;updateScore();
+    document.getElementById('diff-select').style.display='none';
+    document.getElementById('game-area').style.display='';
+    document.getElementById('result-area').style.display='none';
+    document.getElementById('btn-start').style.display='none';
+    document.getElementById('btn-restart').style.display='';
+    genProblem();document.getElementById('answer-input').value='';document.getElementById('answer-input').focus();
+    timer=setInterval(function(){
+      timeLeft--;document.getElementById('timer').textContent=timeLeft;
+      if(timeLeft<=10)document.getElementById('timer').style.color='#ef4444';
+      if(timeLeft<=0)endGame();
+    },1000);
+  }
+  function endGame(){
+    clearInterval(timer);
+    document.getElementById('game-area').style.display='none';
+    document.getElementById('result-area').style.display='';
+    document.getElementById('final-score').textContent=score+' points';
+    document.getElementById('final-msg').textContent='Difficulty: '+diff+' | Best: '+best;
+  }
+  document.querySelectorAll('[data-diff]').forEach(function(btn){
+    btn.addEventListener('click',function(){startGame(btn.dataset.diff);});
+  });
+  document.getElementById('answer-input').addEventListener('keydown',function(e){
+    if(e.key==='Enter'){
+      var val=parseInt(this.value);var fb=document.getElementById('feedback');
+      if(val===curAnswer){score++;streak++;updateScore();fb.textContent='✓ Correct!';fb.style.color='#22c55e';}
+      else{streak=0;fb.textContent='✗ '+curAnswer;fb.style.color='#ef4444';}
+      document.getElementById('streak').textContent=streak>1?'Streak: '+streak+'🔥':'';
+      this.value='';setTimeout(function(){fb.textContent='';genProblem();},600);
+    }
+  });
+  document.getElementById('btn-start').addEventListener('click',function(){startGame('easy');});
+  document.getElementById('btn-restart').addEventListener('click',function(){
+    clearInterval(timer);document.getElementById('diff-select').style.display='';
+    document.getElementById('game-area').style.display='none';document.getElementById('result-area').style.display='none';
+    document.getElementById('timer').style.color='var(--color-primary)';
+  });
+})();
+</script>

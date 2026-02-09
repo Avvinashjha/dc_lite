@@ -1,0 +1,96 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Yatzy" description="Roll 5 dice and fill your scorecard — aim for the perfect Yatzy!" instructions="Roll up to <strong>3 times</strong> per turn. Click dice to <strong>hold</strong> them between rolls. Then choose a <strong>category</strong> to score. Fill all categories to finish!" keywords="yatzy, yahtzee, dice game, yatzy online, scorecard">
+  <div id="yatzy-game" style="padding:1.5rem;width:100%;max-width:500px;margin:0 auto;">
+    <div id="yz-dice" style="display:flex;gap:0.5rem;justify-content:center;margin-bottom:1rem;"></div>
+    <div id="yz-rolls" style="text-align:center;margin-bottom:1rem;font-size:0.9rem;color:var(--color-text-light);"></div>
+    <div style="display:flex;gap:0.5rem;justify-content:center;margin-bottom:1.5rem;">
+      <button class="game-btn game-btn--primary" id="yz-roll">Roll Dice</button>
+    </div>
+    <div id="yz-scorecard"></div>
+    <div id="yz-total" style="text-align:center;margin-top:1rem;font-size:1.25rem;font-weight:700;"></div>
+  </div>
+</GameLayout>
+<script is:inline>
+(function(){
+  var DICE_FACES=['','⚀','⚁','⚂','⚃','⚄','⚅'];
+  var dice=[0,0,0,0,0],held=[false,false,false,false,false],rollsLeft=3;
+  var categories=[
+    {name:'Ones',fn:function(d){return d.filter(function(v){return v===1;}).length;}},
+    {name:'Twos',fn:function(d){return d.filter(function(v){return v===2;}).length*2;}},
+    {name:'Threes',fn:function(d){return d.filter(function(v){return v===3;}).length*3;}},
+    {name:'Fours',fn:function(d){return d.filter(function(v){return v===4;}).length*4;}},
+    {name:'Fives',fn:function(d){return d.filter(function(v){return v===5;}).length*5;}},
+    {name:'Sixes',fn:function(d){return d.filter(function(v){return v===6;}).length*6;}},
+    {name:'Three of a Kind',fn:function(d){var c=counts(d);for(var i=1;i<=6;i++)if(c[i]>=3)return sum(d);return 0;}},
+    {name:'Four of a Kind',fn:function(d){var c=counts(d);for(var i=1;i<=6;i++)if(c[i]>=4)return sum(d);return 0;}},
+    {name:'Full House',fn:function(d){var c=counts(d),has2=false,has3=false;for(var i=1;i<=6;i++){if(c[i]===2)has2=true;if(c[i]===3)has3=true;}return has2&&has3?25:0;}},
+    {name:'Small Straight',fn:function(d){var s=unique(d);return(has(s,[1,2,3,4])||has(s,[2,3,4,5])||has(s,[3,4,5,6]))?30:0;}},
+    {name:'Large Straight',fn:function(d){var s=unique(d);return(has(s,[1,2,3,4,5])||has(s,[2,3,4,5,6]))?40:0;}},
+    {name:'Yatzy!',fn:function(d){var c=counts(d);for(var i=1;i<=6;i++)if(c[i]===5)return 50;return 0;}},
+    {name:'Chance',fn:function(d){return sum(d);}}
+  ];
+  var scores=categories.map(function(){return null;});
+
+  document.getElementById('score-display').style.display='none';document.getElementById('best-display').style.display='none';
+  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';
+
+  function counts(d){var c=[0,0,0,0,0,0,0];d.forEach(function(v){c[v]++;});return c;}
+  function sum(d){return d.reduce(function(a,b){return a+b;},0);}
+  function unique(d){return d.filter(function(v,i,a){return a.indexOf(v)===i;}).sort();}
+  function has(arr,seq){return seq.every(function(v){return arr.indexOf(v)>=0;});}
+
+  function roll(){
+    if(rollsLeft<=0)return;
+    for(var i=0;i<5;i++){if(!held[i])dice[i]=Math.floor(Math.random()*6)+1;}
+    rollsLeft--;render();
+  }
+
+  function chooseCategory(idx){
+    if(scores[idx]!==null||rollsLeft===3)return;
+    scores[idx]=categories[idx].fn(dice);
+    dice=[0,0,0,0,0];held=[false,false,false,false,false];rollsLeft=3;
+    if(scores.every(function(s){return s!==null;})){
+      var total=scores.reduce(function(a,b){return a+b;},0);
+      var best=parseInt(localStorage.getItem('dc_yatzy_best'))||0;
+      if(total>best)localStorage.setItem('dc_yatzy_best',total);
+    }
+    render();
+  }
+
+  function render(){
+    // Dice
+    var dEl=document.getElementById('yz-dice');dEl.innerHTML='';
+    dice.forEach(function(v,i){
+      dEl.innerHTML+='<button class="fk-die'+(held[i]?' fk-die--sel':'')+'" data-i="'+i+'"'+(v?'':' disabled')+'>'+(v?DICE_FACES[v]:'?')+'</button>';
+    });
+    dEl.querySelectorAll('.fk-die').forEach(function(btn){
+      btn.addEventListener('click',function(){if(rollsLeft<3)held[+btn.dataset.i]=!held[+btn.dataset.i];render();});
+    });
+    document.getElementById('yz-rolls').textContent='Rolls left: '+rollsLeft;
+    document.getElementById('yz-roll').disabled=rollsLeft<=0;
+
+    // Scorecard
+    var html='<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">';
+    html+='<tr style="border-bottom:2px solid var(--color-border);"><th style="text-align:left;padding:0.4rem;">Category</th><th style="width:60px;text-align:center;padding:0.4rem;">Score</th><th style="width:80px;text-align:center;padding:0.4rem;">Preview</th></tr>';
+    categories.forEach(function(cat,i){
+      var scored=scores[i]!==null;var preview=dice[0]?cat.fn(dice):'-';
+      var canChoose=!scored&&rollsLeft<3;
+      html+='<tr style="border-bottom:1px solid var(--color-border);'+(canChoose?'cursor:pointer;':'')+(canChoose&&preview>0?'background:rgba(37,99,235,.05);':'')+'"><td style="padding:0.4rem;">'+cat.name+'</td><td style="text-align:center;padding:0.4rem;font-weight:700;'+(scored?'':'color:var(--color-text-light);')+'">'+(scored?scores[i]:'-')+'</td><td style="text-align:center;padding:0.4rem;color:var(--color-primary);font-weight:'+(preview>0?'700':'400')+';">'+(canChoose?'<button class="yz-pick" data-cat="'+i+'" style="background:none;border:1px solid '+(preview>0?'var(--color-primary)':'var(--color-border)');+';border-radius:4px;padding:0.2rem 0.5rem;cursor:pointer;font-size:0.8rem;font-weight:700;color:'+(preview>0?'var(--color-primary)':'var(--color-text-light)')+';">'+preview+'</button>':'')+'</td></tr>';
+    });
+    var total=scores.reduce(function(a,b){return a+(b||0);},0);
+    html+='</table>';
+    document.getElementById('yz-scorecard').innerHTML=html;
+    document.getElementById('yz-total').textContent='Total: '+total;
+
+    document.querySelectorAll('.yz-pick').forEach(function(btn){
+      btn.addEventListener('click',function(){chooseCategory(+btn.dataset.cat);});
+    });
+  }
+
+  document.getElementById('yz-roll').addEventListener('click',roll);
+  document.getElementById('btn-restart').onclick=function(){scores=categories.map(function(){return null;});dice=[0,0,0,0,0];held=[false,false,false,false,false];rollsLeft=3;render();};
+  render();
+})();
+</script>

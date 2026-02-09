@@ -1,0 +1,102 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Hearts" description="Classic Hearts card game. Avoid hearts and the Queen of Spades!" instructions="Play the lowest card in each trick. Avoid taking <strong>hearts</strong> (1 point each) and the <strong>Queen of Spades</strong> (13 points). Lowest score wins! Click a card to play it." keywords="hearts card game, hearts online, trick taking game">
+  <div id="hearts-game" style="padding:1rem;width:100%;max-width:600px;margin:0 auto;">
+    <div id="hg-info" style="text-align:center;margin-bottom:1rem;font-size:0.9rem;color:var(--color-text-light);"></div>
+    <div id="hg-trick" style="display:flex;justify-content:center;gap:0.5rem;min-height:110px;align-items:center;margin-bottom:1rem;"></div>
+    <div id="hg-scores" style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;font-size:0.8rem;"></div>
+    <div id="hg-hand" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;"></div>
+    <div id="hg-msg" style="text-align:center;margin-top:1rem;font-weight:700;font-size:1.1rem;min-height:1.5rem;"></div>
+  </div>
+</GameLayout>
+<script is:inline>
+(function(){
+  var suits=['♠','♥','♦','♣'],suitNames=['spades','hearts','diamonds','clubs'];
+  var rankNames=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+  document.getElementById('score-display').style.display='none';document.getElementById('best-display').style.display='none';
+  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';
+
+  var hands,scores,trick,trickPlayers,currentPlayer,trickSuit,heartsBroken,roundScores;
+
+  function Card(s,r){this.suit=s;this.rank=r;}
+  Card.prototype.name=function(){return rankNames[this.rank]+suits[this.suit];};
+  Card.prototype.points=function(){if(this.suit===1)return 1;if(this.suit===0&&this.rank===10)return 13;return 0;};
+  Card.prototype.color=function(){return this.suit<=1?(this.suit===1?'#dc2626':'#1f2937'):(this.suit===2?'#dc2626':'#1f2937');};
+
+  function makeDeck(){var d=[];for(var s=0;s<4;s++)for(var r=0;r<13;r++)d.push(new Card(s,r));for(var i=d.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=d[i];d[i]=d[j];d[j]=t;}return d;}
+
+  function init(){
+    var deck=makeDeck();hands=[[],[],[],[]];scores=[0,0,0,0];roundScores=[0,0,0,0];
+    for(var i=0;i<52;i++)hands[i%4].push(deck[i]);
+    hands.forEach(function(h){h.sort(function(a,b){return a.suit===b.suit?a.rank-b.rank:a.suit-b.suit;});});
+    trick=[];trickPlayers=[];currentPlayer=0;trickSuit=-1;heartsBroken=false;
+    render();
+  }
+
+  function canPlay(card){
+    if(trick.length===0){if(!heartsBroken&&card.suit===1&&hands[0].some(function(c){return c.suit!==1;}))return false;return true;}
+    if(trickSuit>=0&&card.suit!==trickSuit&&hands[0].some(function(c){return c.suit===trickSuit;}))return false;
+    return true;
+  }
+
+  function playCard(playerIdx,card){
+    var idx=hands[playerIdx].indexOf(card);if(idx<0)return;hands[playerIdx].splice(idx,1);
+    if(trick.length===0)trickSuit=card.suit;
+    trick.push(card);trickPlayers.push(playerIdx);
+    if(card.suit===1)heartsBroken=true;
+    if(trick.length===4){
+      // Determine winner
+      var winIdx=0;for(var i=1;i<4;i++){if(trick[i].suit===trickSuit&&(trick[winIdx].suit!==trickSuit||trick[i].rank>trick[winIdx].rank))winIdx=i;}
+      var winner=trickPlayers[winIdx];var pts=trick.reduce(function(s,c){return s+c.points();},0);roundScores[winner]+=pts;
+      setTimeout(function(){trick=[];trickPlayers=[];trickSuit=-1;currentPlayer=winner;
+        if(hands[0].length===0){scores=scores.map(function(s,i){return s+roundScores[i];});
+          document.getElementById('hg-msg').textContent='Round over! You: '+scores[0]+' pts';
+          roundScores=[0,0,0,0];setTimeout(init,2000);return;
+        }
+        render();if(currentPlayer!==0)setTimeout(aiPlay,400);
+      },800);
+    }else{currentPlayer=(playerIdx+1)%4;render();if(currentPlayer!==0)setTimeout(aiPlay,400);}
+    render();
+  }
+
+  function aiPlay(){
+    if(currentPlayer===0)return;
+    var hand=hands[currentPlayer],playable=hand.filter(function(c){
+      if(trick.length===0)return !(!heartsBroken&&c.suit===1&&hand.some(function(cc){return cc.suit!==1;}));
+      if(trickSuit>=0&&c.suit!==trickSuit&&hand.some(function(cc){return cc.suit===trickSuit;}))return false;
+      return true;
+    });
+    if(playable.length===0)playable=hand;
+    // Simple AI: play lowest non-point card if possible
+    playable.sort(function(a,b){return a.points()-b.points()||a.rank-b.rank;});
+    playCard(currentPlayer,playable[0]);
+  }
+
+  function render(){
+    document.getElementById('hg-info').textContent=(currentPlayer===0?'Your turn':'Player '+(currentPlayer+1)+' thinking...');
+    // Trick
+    var trickEl=document.getElementById('hg-trick');trickEl.innerHTML='';
+    trick.forEach(function(c,i){trickEl.innerHTML+='<div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:0.5rem;min-width:50px;text-align:center;"><div style="font-size:0.7rem;color:#9ca3af;">P'+(trickPlayers[i]+1)+'</div><div style="font-size:1.3rem;color:'+c.color()+';">'+c.name()+'</div></div>';});
+    // Scores
+    document.getElementById('hg-scores').innerHTML=scores.map(function(s,i){return '<span style="'+(i===0?'font-weight:700;':'')+'">P'+(i+1)+': '+s+'</span>';}).join('');
+    // Hand
+    var handEl=document.getElementById('hg-hand');handEl.innerHTML='';
+    hands[0].forEach(function(c){
+      var ok=currentPlayer===0&&canPlay(c);
+      handEl.innerHTML+='<button class="hcard'+(ok?' hcard--ok':'')+'" data-s="'+c.suit+'" data-r="'+c.rank+'" style="color:'+c.color()+';"'+(ok?'':' disabled')+'>'+c.name()+'</button>';
+    });
+    handEl.querySelectorAll('.hcard--ok').forEach(function(btn){
+      btn.addEventListener('click',function(){var card=hands[0].find(function(c){return c.suit==+btn.dataset.s&&c.rank==+btn.dataset.r;});if(card)playCard(0,card);});
+    });
+  }
+
+  document.getElementById('btn-restart').onclick=init;
+  init();if(currentPlayer!==0)setTimeout(aiPlay,400);
+})();
+</script>
+<style is:global>
+  .hcard{padding:0.4rem 0.5rem;border:1px solid var(--color-border);border-radius:6px;background:var(--color-background);font-size:1rem;font-weight:700;cursor:pointer;transition:all 150ms;min-width:42px;}
+  .hcard:disabled{opacity:0.4;cursor:default;}
+  .hcard--ok:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--color-primary);}
+</style>

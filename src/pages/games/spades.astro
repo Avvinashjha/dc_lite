@@ -1,0 +1,106 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Spades" description="Classic Spades card game — bid, play tricks, score points!" instructions="<strong>Bid</strong> how many tricks you think you'll win. Then play cards — highest card of the led suit wins, unless a <strong>spade</strong> trumps. Meet your bid to score!" keywords="spades card game, spades online, trick taking, bid game">
+  <div id="spades-game" style="padding:1rem;width:100%;max-width:600px;margin:0 auto;">
+    <div id="sp-phase" style="text-align:center;margin-bottom:1rem;"></div>
+    <div id="sp-trick" style="display:flex;justify-content:center;gap:0.5rem;min-height:110px;align-items:center;margin-bottom:1rem;"></div>
+    <div id="sp-scores" style="display:flex;justify-content:center;gap:1.5rem;margin-bottom:1rem;font-size:0.8rem;"></div>
+    <div id="sp-hand" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;"></div>
+    <div id="sp-msg" style="text-align:center;margin-top:1rem;font-weight:700;min-height:1.5rem;"></div>
+  </div>
+</GameLayout>
+<script is:inline>
+(function(){
+  var suits=['♠','♥','♦','♣'],rankNames=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+  document.getElementById('score-display').style.display='none';document.getElementById('best-display').style.display='none';
+  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';
+  var hands,scores,bids,tricksTaken,trick,trickPlayers,currentPlayer,trickSuit,phase,spadesBroken;
+
+  function Card(s,r){this.suit=s;this.rank=r;}
+  Card.prototype.name=function(){return rankNames[this.rank]+suits[this.suit];};
+  Card.prototype.color=function(){return this.suit===1||this.suit===2?'#dc2626':'#1f2937';};
+
+  function makeDeck(){var d=[];for(var s=0;s<4;s++)for(var r=0;r<13;r++)d.push(new Card(s,r));for(var i=d.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=d[i];d[i]=d[j];d[j]=t;}return d;}
+
+  function init(){
+    var deck=makeDeck();hands=[[],[],[],[]];scores=[0,0,0,0];bids=[0,0,0,0];tricksTaken=[0,0,0,0];
+    for(var i=0;i<52;i++)hands[i%4].push(deck[i]);
+    hands.forEach(function(h){h.sort(function(a,b){return a.suit===b.suit?a.rank-b.rank:a.suit-b.suit;});});
+    trick=[];trickPlayers=[];currentPlayer=0;trickSuit=-1;phase='bid';spadesBroken=false;
+    // AI bids
+    for(var i=1;i<4;i++)bids[i]=Math.max(1,Math.floor(hands[i].filter(function(c){return c.rank>=10||c.suit===0;}).length*0.6));
+    renderBid();
+  }
+
+  function renderBid(){
+    var html='<h3 style="margin-bottom:1rem;">Your Bid</h3><p style="color:var(--color-text-light);font-size:0.85rem;margin-bottom:1rem;">How many tricks will you win? (1-13)</p><div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:center;">';
+    for(var i=1;i<=7;i++)html+='<button class="game-btn" data-bid="'+i+'">'+i+'</button>';
+    html+='</div>';
+    document.getElementById('sp-phase').innerHTML=html;
+    document.getElementById('sp-phase').querySelectorAll('[data-bid]').forEach(function(btn){
+      btn.addEventListener('click',function(){bids[0]=+btn.dataset.bid;phase='play';currentPlayer=0;render();});
+    });
+    renderHand();
+  }
+
+  function renderHand(){
+    var el=document.getElementById('sp-hand');el.innerHTML='';
+    hands[0].forEach(function(c){el.innerHTML+='<button class="hcard" style="color:'+c.color()+';" disabled>'+c.name()+'</button>';});
+  }
+
+  function canPlay(card){
+    if(trick.length===0){if(!spadesBroken&&card.suit===0&&hands[0].some(function(c){return c.suit!==0;}))return false;return true;}
+    if(trickSuit>=0&&card.suit!==trickSuit&&hands[0].some(function(c){return c.suit===trickSuit;}))return false;
+    return true;
+  }
+
+  function playCard(pi,card){
+    hands[pi].splice(hands[pi].indexOf(card),1);
+    if(trick.length===0)trickSuit=card.suit;
+    trick.push(card);trickPlayers.push(pi);
+    if(card.suit===0)spadesBroken=true;
+    if(trick.length===4){
+      var winIdx=0;for(var i=1;i<4;i++){
+        if(trick[i].suit===0&&trick[winIdx].suit!==0){winIdx=i;}
+        else if(trick[i].suit===trick[winIdx].suit&&trick[i].rank>trick[winIdx].rank)winIdx=i;
+      }
+      var winner=trickPlayers[winIdx];tricksTaken[winner]++;
+      setTimeout(function(){trick=[];trickPlayers=[];trickSuit=-1;currentPlayer=winner;
+        if(hands[0].length===0){
+          for(var i=0;i<4;i++){scores[i]+=tricksTaken[i]>=bids[i]?bids[i]*10+(tricksTaken[i]-bids[i]):-bids[i]*10;}
+          document.getElementById('sp-msg').textContent='Round over! You: '+scores[0]+' pts';
+          setTimeout(init,2500);return;
+        }
+        render();if(currentPlayer!==0)setTimeout(aiPlay,400);
+      },800);
+    }else{currentPlayer=(pi+1)%4;render();if(currentPlayer!==0)setTimeout(aiPlay,400);}
+    render();
+  }
+
+  function aiPlay(){
+    var hand=hands[currentPlayer],playable=hand.filter(function(c){
+      if(trick.length===0)return true;if(trickSuit>=0&&c.suit!==trickSuit&&hand.some(function(cc){return cc.suit===trickSuit;}))return false;return true;
+    });
+    if(!playable.length)playable=hand;playable.sort(function(a,b){return a.rank-b.rank;});
+    playCard(currentPlayer,playable[0]);
+  }
+
+  function render(){
+    document.getElementById('sp-phase').innerHTML='<div style="font-size:0.85rem;color:var(--color-text-light);">Bids: You='+bids[0]+' | P2='+bids[1]+' | P3='+bids[2]+' | P4='+bids[3]+'</div>';
+    var tEl=document.getElementById('sp-trick');tEl.innerHTML='';
+    trick.forEach(function(c,i){tEl.innerHTML+='<div style="background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:0.5rem;min-width:50px;text-align:center;"><div style="font-size:0.7rem;color:#9ca3af;">P'+(trickPlayers[i]+1)+'</div><div style="font-size:1.3rem;color:'+c.color()+';">'+c.name()+'</div></div>';});
+    document.getElementById('sp-scores').innerHTML=scores.map(function(s,i){return '<span>P'+(i+1)+': '+s+' ('+tricksTaken[i]+'/'+bids[i]+')</span>';}).join('');
+    var hEl=document.getElementById('sp-hand');hEl.innerHTML='';
+    hands[0].forEach(function(c){var ok=currentPlayer===0&&canPlay(c);
+      hEl.innerHTML+='<button class="hcard'+(ok?' hcard--ok':'')+'" data-s="'+c.suit+'" data-r="'+c.rank+'" style="color:'+c.color()+';"'+(ok?'':' disabled')+'>'+c.name()+'</button>';
+    });
+    hEl.querySelectorAll('.hcard--ok').forEach(function(btn){
+      btn.addEventListener('click',function(){var card=hands[0].find(function(c){return c.suit==+btn.dataset.s&&c.rank==+btn.dataset.r;});if(card)playCard(0,card);});
+    });
+  }
+
+  document.getElementById('btn-restart').onclick=init;
+  init();
+})();
+</script>

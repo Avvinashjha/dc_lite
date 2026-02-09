@@ -1,0 +1,74 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Dino Runner" description="Jump and duck in this endless runner — inspired by Chrome's offline game!" instructions="Press <strong>Space</strong> or <strong>tap</strong> to jump. Press <strong>Down arrow</strong> or <strong>swipe down</strong> to duck. Avoid cacti and birds!" keywords="dino game, endless runner, chrome dino, jump game, offline game">
+  <canvas id="game" width="600" height="200"></canvas>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d'),W=600,H=200;
+  var GROUND=H-30,DINO_W=30,DINO_H=40;
+  var dino,obstacles,score,best,speed,running,gameOver,frame;
+  var BEST_KEY='dc_dino_best';best=parseInt(localStorage.getItem(BEST_KEY))||0;
+  document.getElementById('best-score').textContent=best;
+
+  function init(){dino={x:50,y:GROUND-DINO_H,vy:0,ducking:false,jumping:false};obstacles=[];score=0;speed=5;frame=0;gameOver=false;running=false;draw();}
+  function updateScore(){document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem(BEST_KEY,best);document.getElementById('best-score').textContent=best;}}
+  function jump(){if(dino.jumping)return;dino.vy=-12;dino.jumping=true;dino.ducking=false;}
+  function duck(d){dino.ducking=d;if(d&&!dino.jumping){dino.y=GROUND-DINO_H/2;}}
+  function draw(){
+    var night=Math.floor(score/500)%2===1;
+    ctx.fillStyle=night?'#111827':'#f9fafb';ctx.fillRect(0,0,W,H);
+    // Ground
+    ctx.fillStyle=night?'#374151':'#d1d5db';ctx.fillRect(0,GROUND,W,2);
+    // Dino
+    var dh=dino.ducking&&!dino.jumping?DINO_H/2:DINO_H;
+    var dy=dino.ducking&&!dino.jumping?GROUND-dh:dino.y;
+    ctx.fillStyle=night?'#f9fafb':'#374151';
+    ctx.fillRect(dino.x,dy,DINO_W,dh);
+    // Eye
+    ctx.fillStyle=night?'#111827':'#f9fafb';ctx.fillRect(dino.x+DINO_W-8,dy+5,5,5);
+    // Obstacles
+    obstacles.forEach(function(o){
+      if(o.type==='cactus'){ctx.fillStyle='#16a34a';ctx.fillRect(o.x,GROUND-o.h,o.w,o.h);}
+      else{ctx.fillStyle=night?'#9ca3af':'#6b7280';ctx.fillRect(o.x,o.y,30,15);ctx.fillRect(o.x+5,o.y-5,20,5);}
+    });
+    // Score
+    ctx.fillStyle=night?'#9ca3af':'#6b7280';ctx.font='bold 14px monospace';ctx.textAlign='right';ctx.fillText('HI '+best+'  '+score,W-10,20);
+    if(gameOver){ctx.fillStyle=night?'#f9fafb':'#374151';ctx.font='bold 20px sans-serif';ctx.textAlign='center';ctx.fillText('GAME OVER',W/2,H/2);}
+  }
+  function update(){
+    frame++;score=Math.floor(frame/3);updateScore();speed=5+Math.floor(frame/200)*0.3;
+    // Dino physics
+    if(dino.jumping){dino.vy+=0.8;dino.y+=dino.vy;if(dino.y>=GROUND-DINO_H){dino.y=GROUND-DINO_H;dino.jumping=false;dino.vy=0;}}
+    // Spawn
+    if(frame%Math.max(30,80-Math.floor(speed*3))===0){
+      if(Math.random()>0.3){var h=20+Math.random()*25;obstacles.push({type:'cactus',x:W,y:0,w:15+Math.random()*10,h:h});}
+      else{obstacles.push({type:'bird',x:W,y:GROUND-50-Math.random()*30,w:30,h:15});}
+    }
+    obstacles.forEach(function(o){o.x-=speed;});
+    obstacles=obstacles.filter(function(o){return o.x>-50;});
+    // Collision
+    var dh=dino.ducking&&!dino.jumping?DINO_H/2:DINO_H;
+    var dy=dino.ducking&&!dino.jumping?GROUND-dh:dino.y;
+    for(var i=0;i<obstacles.length;i++){var o=obstacles[i];
+      var ox=o.x,oy=o.type==='cactus'?GROUND-o.h:o.y,ow=o.type==='cactus'?o.w:30,oh=o.type==='cactus'?o.h:15;
+      if(dino.x+DINO_W-5>ox&&dino.x+5<ox+ow&&dy+dh-3>oy&&dy+3<oy+oh){
+        gameOver=true;running=false;document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';return;
+      }
+    }
+  }
+  function loop(){if(!running||gameOver)return;update();draw();requestAnimationFrame(loop);}
+  function start(){if(running)return;running=true;document.getElementById('btn-start').style.display='none';document.getElementById('btn-pause').style.display='';loop();}
+  function restart(){init();start();document.getElementById('btn-restart').style.display='none';}
+  document.getElementById('btn-start').onclick=start;document.getElementById('btn-restart').onclick=restart;
+  document.getElementById('btn-pause').onclick=function(){if(running){running=false;this.textContent='Resume';}else{running=true;this.textContent='Pause';loop();}};
+  document.addEventListener('keydown',function(e){
+    if(e.key===' '||e.key==='ArrowUp'){e.preventDefault();jump();if(!running&&!gameOver)start();}
+    if(e.key==='ArrowDown'){e.preventDefault();duck(true);}
+  });
+  document.addEventListener('keyup',function(e){if(e.key==='ArrowDown')duck(false);});
+  c.addEventListener('touchstart',function(e){e.preventDefault();jump();if(!running&&!gameOver)start();},{passive:false});
+  init();
+})();
+</script>

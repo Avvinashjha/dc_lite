@@ -1,0 +1,64 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Cricket" description="Hit sixes and fours in this simple batting game!" instructions="Click or press <strong>Space</strong> when the ball is in the hitting zone. Time your shot perfectly for a six! Miss and you're out." keywords="cricket game, batting game, hit six, cricket browser game">
+  <canvas id="game" width="400" height="400"></canvas>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d'),W=400,H=400;
+  var ball,bat,score,best,wickets,running,gameOver,hitAnim,hitText;
+  var BEST_KEY='dc_cricket_best';best=parseInt(localStorage.getItem(BEST_KEY))||0;
+  document.getElementById('best-score').textContent=best;
+
+  function init(){ball={x:W/2,y:50,speed:3,active:true};bat={x:W/2,y:H-60};score=0;wickets=0;gameOver=false;running=false;hitAnim=0;hitText='';draw();}
+  function updateScore(){document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem(BEST_KEY,best);document.getElementById('best-score').textContent=best;}}
+  function newBall(){ball={x:W/2+(Math.random()-0.5)*100,y:50,speed:3+Math.random()*2,active:true};}
+  function hit(){
+    if(!ball.active||gameOver)return;
+    var dist=Math.abs(ball.y-bat.y);
+    if(dist<25){
+      ball.active=false;
+      if(dist<8){hitText='SIX! 🏏';score+=6;}
+      else if(dist<15){hitText='FOUR!';score+=4;}
+      else{hitText='Single';score+=1;}
+      hitAnim=30;updateScore();
+    }
+  }
+  function draw(){
+    // Pitch
+    ctx.fillStyle='#166534';ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#a16207';ctx.fillRect(W/2-30,30,60,H-60);
+    // Crease
+    ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(W/2-25,bat.y+10);ctx.lineTo(W/2+25,bat.y+10);ctx.stroke();
+    // Stumps
+    ctx.fillStyle='#eab308';ctx.fillRect(W/2-12,bat.y+10,3,20);ctx.fillRect(W/2-1,bat.y+10,3,20);ctx.fillRect(W/2+10,bat.y+10,3,20);
+    // Bat
+    ctx.fillStyle='#d4a373';ctx.fillRect(bat.x-20,bat.y-5,40,10);ctx.fillStyle='#8b5e3c';ctx.fillRect(bat.x+18,bat.y-3,15,6);
+    // Ball
+    if(ball.active){ctx.fillStyle='#dc2626';ctx.beginPath();ctx.arc(ball.x,ball.y,8,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ball.x,ball.y,8,0.5,1.2);ctx.stroke();}
+    // Hit text
+    if(hitAnim>0){ctx.fillStyle='#fff';ctx.font='bold '+Math.min(36,20+hitAnim)+'px sans-serif';ctx.textAlign='center';ctx.fillText(hitText,W/2,H/2);hitAnim--;}
+    // Info
+    ctx.fillStyle='#fff';ctx.font='14px sans-serif';ctx.textAlign='left';ctx.fillText('Wickets: '+wickets+'/3',10,25);
+    if(gameOver){ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='bold 28px sans-serif';ctx.textAlign='center';ctx.fillText('OUT!',W/2,H/2-15);ctx.font='18px sans-serif';ctx.fillText('Score: '+score,W/2,H/2+20);}
+  }
+  function update(){
+    if(!ball.active){if(hitAnim<=0)newBall();return;}
+    ball.y+=ball.speed;
+    if(ball.y>bat.y+30){// Missed
+      ball.active=false;wickets++;hitText='MISS!';hitAnim=20;
+      if(wickets>=3){gameOver=true;running=false;document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';}
+      else setTimeout(newBall,800);
+    }
+  }
+  function loop(){if(!running||gameOver){draw();return;}update();draw();requestAnimationFrame(loop);}
+  function start(){if(running)return;running=true;document.getElementById('btn-start').style.display='none';document.getElementById('btn-pause').style.display='';loop();}
+  function restart(){init();start();document.getElementById('btn-restart').style.display='none';}
+  document.getElementById('btn-start').onclick=start;document.getElementById('btn-restart').onclick=restart;
+  document.addEventListener('keydown',function(e){if(e.key===' '){e.preventDefault();hit();if(!running&&!gameOver)start();}});
+  c.addEventListener('click',function(){hit();if(!running&&!gameOver)start();});
+  c.addEventListener('touchstart',function(e){e.preventDefault();hit();if(!running&&!gameOver)start();},{passive:false});
+  init();
+})();
+</script>

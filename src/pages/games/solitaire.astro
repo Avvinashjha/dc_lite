@@ -1,0 +1,117 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Solitaire" description="Classic Klondike solitaire card game." instructions="Click cards to select, click destination to move. Build <strong>foundations</strong> (top right) from Ace to King by suit. Build <strong>tableau</strong> columns in descending, alternating colors. Click the <strong>stock</strong> (top left) to draw cards." keywords="solitaire, klondike, card game, patience">
+  <canvas id="game" width="630" height="460"></canvas>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d'),W=630,H=460;
+  var CW=72,CH=100,GAP=8,suits=['♠','♥','♦','♣'],colors={0:'#1f2937',1:'#dc2626',2:'#dc2626',3:'#1f2937'};
+  var deck,stock,waste,foundations,tableau,selected,moves,wins;
+  var BEST_KEY='dc_solitaire_wins';wins=parseInt(localStorage.getItem(BEST_KEY))||0;
+  document.getElementById('best-score').textContent=wins;document.getElementById('score-display').innerHTML='Moves: <span id="score">0</span>';document.getElementById('best-display').innerHTML='Wins: <span id="best-score">'+wins+'</span>';
+
+  function Card(suit,rank){this.suit=suit;this.rank=rank;this.faceUp=false;this.color=suit===1||suit===2?'red':'black';}
+  Card.prototype.name=function(){return['A','2','3','4','5','6','7','8','9','10','J','Q','K'][this.rank]+suits[this.suit];};
+
+  function makeDeck(){var d=[];for(var s=0;s<4;s++)for(var r=0;r<13;r++)d.push(new Card(s,r));return shuffle(d);}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  function init(){
+    deck=makeDeck();stock=[];waste=[];foundations=[[],[],[],[]];tableau=[[],[],[],[],[],[],[]];moves=0;selected=null;
+    for(var i=0;i<7;i++){for(var j=i;j<7;j++)tableau[j].push(deck.pop());tableau[i][tableau[i].length-1].faceUp=true;}
+    stock=deck.splice(0);draw();
+  }
+
+  function canPlace(card,pile,type){
+    if(type==='foundation'){if(pile.length===0)return card.rank===0;var top=pile[pile.length-1];return card.suit===top.suit&&card.rank===top.rank+1;}
+    if(type==='tableau'){if(pile.length===0)return card.rank===12;var top=pile[pile.length-1];return top.faceUp&&card.color!==top.color&&card.rank===top.rank-1;}
+    return false;
+  }
+
+  function drawCard(ctx,card,x,y,sel){
+    ctx.fillStyle=sel?'#dbeafe':'#fff';ctx.strokeStyle='#9ca3af';ctx.lineWidth=1;
+    ctx.beginPath();ctx.roundRect(x,y,CW,CH,5);ctx.fill();ctx.stroke();
+    if(!card.faceUp){ctx.fillStyle='#2563eb';ctx.beginPath();ctx.roundRect(x+3,y+3,CW-6,CH-6,3);ctx.fill();return;}
+    ctx.fillStyle=colors[card.suit];ctx.font='bold 14px sans-serif';ctx.textAlign='left';
+    var name=card.name();ctx.fillText(name,x+5,y+18);ctx.textAlign='right';ctx.fillText(name,x+CW-5,y+CH-8);
+    ctx.font='24px sans-serif';ctx.textAlign='center';ctx.fillText(suits[card.suit],x+CW/2,y+CH/2+8);
+  }
+
+  function draw(){
+    ctx.fillStyle='#0d5016';ctx.fillRect(0,0,W,H);
+    // Stock
+    if(stock.length>0){ctx.fillStyle='#2563eb';ctx.beginPath();ctx.roundRect(GAP,GAP,CW,CH,5);ctx.fill();ctx.strokeStyle='#1e40af';ctx.stroke();ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.fillText(stock.length,GAP+CW/2,GAP+CH/2+4);}
+    else{ctx.strokeStyle='#166534';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(GAP,GAP,CW,CH,5);ctx.stroke();ctx.fillStyle='#166534';ctx.font='14px sans-serif';ctx.textAlign='center';ctx.fillText('↻',GAP+CW/2,GAP+CH/2+5);}
+    // Waste
+    if(waste.length>0)drawCard(ctx,waste[waste.length-1],GAP*2+CW,GAP,selected&&selected.src==='waste');
+    // Foundations
+    for(var i=0;i<4;i++){var fx=GAP*4+CW*3+i*(CW+GAP);ctx.strokeStyle='#166534';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(fx,GAP,CW,CH,5);ctx.stroke();
+      ctx.fillStyle='#166534';ctx.font='18px sans-serif';ctx.textAlign='center';ctx.fillText(suits[i],fx+CW/2,GAP+CH/2+6);
+      if(foundations[i].length>0)drawCard(ctx,foundations[i][foundations[i].length-1],fx,GAP,false);}
+    // Tableau
+    for(var i=0;i<7;i++){var tx=GAP+i*(CW+GAP),ty=CH+GAP*3;
+      if(tableau[i].length===0){ctx.strokeStyle='#166534';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(tx,ty,CW,CH,5);ctx.stroke();}
+      for(var j=0;j<tableau[i].length;j++){var isSel=selected&&selected.src==='tableau'&&selected.col===i&&j>=selected.idx;
+        drawCard(ctx,tableau[i][j],tx,ty+j*22,isSel);}
+    }
+    document.getElementById('score').textContent=moves;
+  }
+
+  function getClick(e){var rect=c.getBoundingClientRect();return{x:(e.clientX-rect.left)*(W/rect.width),y:(e.clientY-rect.top)*(H/rect.height)};}
+
+  c.addEventListener('click',function(e){
+    var p=getClick(e);
+    // Stock click
+    if(p.x>=GAP&&p.x<=GAP+CW&&p.y>=GAP&&p.y<=GAP+CH){
+      if(stock.length>0){var card=stock.pop();card.faceUp=true;waste.push(card);}
+      else{stock=waste.reverse();stock.forEach(function(c){c.faceUp=false;});waste=[];}
+      selected=null;moves++;draw();return;
+    }
+    // Waste click
+    if(p.x>=GAP*2+CW&&p.x<=GAP*2+CW*2&&p.y>=GAP&&p.y<=GAP+CH&&waste.length>0){
+      if(selected&&selected.src==='waste'){selected=null;}else{selected={src:'waste',cards:[waste[waste.length-1]]};}draw();return;
+    }
+    // Foundation click
+    for(var i=0;i<4;i++){var fx=GAP*4+CW*3+i*(CW+GAP);
+      if(p.x>=fx&&p.x<=fx+CW&&p.y>=GAP&&p.y<=GAP+CH){
+        if(selected){var card=selected.cards[0];if(selected.cards.length===1&&canPlace(card,foundations[i],'foundation')){
+          foundations[i].push(card);if(selected.src==='waste')waste.pop();else{tableau[selected.col].splice(selected.idx,1);if(tableau[selected.col].length>0)tableau[selected.col][tableau[selected.col].length-1].faceUp=true;}
+          moves++;selected=null;
+          if(foundations.every(function(f){return f.length===13;})){wins++;localStorage.setItem(BEST_KEY,wins);}
+        }else selected=null;}draw();return;
+      }
+    }
+    // Tableau click
+    for(var i=0;i<7;i++){var tx=GAP+i*(CW+GAP),ty=CH+GAP*3;
+      var colH=ty+(tableau[i].length>0?(tableau[i].length-1)*22+CH:CH);
+      if(p.x>=tx&&p.x<=tx+CW&&p.y>=ty&&p.y<=colH){
+        if(selected){// Try to place
+          if(selected.cards.length>0&&canPlace(selected.cards[0],tableau[i],'tableau')){
+            selected.cards.forEach(function(c){tableau[i].push(c);});
+            if(selected.src==='waste')waste.pop();
+            else{tableau[selected.col].splice(selected.idx,selected.cards.length);if(tableau[selected.col].length>0)tableau[selected.col][tableau[selected.col].length-1].faceUp=true;}
+            moves++;
+          }
+          selected=null;
+        }else{// Select
+          var clickIdx=Math.min(Math.floor((p.y-ty)/22),tableau[i].length-1);
+          if(clickIdx>=0&&tableau[i][clickIdx]&&tableau[i][clickIdx].faceUp){
+            selected={src:'tableau',col:i,idx:clickIdx,cards:tableau[i].slice(clickIdx)};
+          }
+        }
+        draw();return;
+      }
+    }
+    selected=null;draw();
+  });
+
+  document.getElementById('btn-start').style.display='none';
+  document.getElementById('btn-restart').style.display='';
+  document.getElementById('btn-restart').onclick=function(){init();};
+  // Polyfill roundRect
+  if(!ctx.roundRect)ctx.roundRect=function(x,y,w,h,r){this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.arcTo(x+w,y,x+w,y+r,r);this.lineTo(x+w,y+h-r);this.arcTo(x+w,y+h,x+w-r,y+h,r);this.lineTo(x+r,y+h);this.arcTo(x,y+h,x,y+h-r,r);this.lineTo(x,y+r);this.arcTo(x,y,x+r,y,r);};
+  init();
+})();
+</script>

@@ -1,0 +1,109 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Farkle" description="Push your luck dice game — roll, score, or risk it all!" instructions="Roll 6 dice. Select scoring dice (1s=100, 5s=50, three-of-a-kind, straights). Click <strong>Bank</strong> to keep your points or <strong>Roll Again</strong> to risk them. If no dice score, you <strong>Farkle</strong> and lose your turn!" keywords="farkle, dice game, push your luck, farkle online">
+  <div id="farkle-game" style="padding:1.5rem;text-align:center;width:100%;max-width:500px;margin:0 auto;">
+    <div id="fk-scores" style="display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;font-size:0.9rem;"></div>
+    <div id="fk-dice" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;min-height:60px;"></div>
+    <div id="fk-turn-score" style="font-size:1.25rem;font-weight:700;color:var(--color-primary);margin-bottom:1rem;"></div>
+    <div id="fk-actions" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;"></div>
+    <div id="fk-msg" style="font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
+  </div>
+</GameLayout>
+<script is:inline>
+(function(){
+  var DICE_FACES=['','⚀','⚁','⚂','⚃','⚄','⚅'];
+  var playerScore=0,aiScore=0,dice=[],selected=[],turnScore=0,isPlayerTurn=true,TARGET=5000;
+  document.getElementById('score-display').innerHTML='You: <span id="score">0</span>';
+  document.getElementById('best-display').innerHTML='AI: <span id="best-score">0</span>';
+  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';
+
+  function rollDice(n){var d=[];for(var i=0;i<n;i++)d.push(Math.floor(Math.random()*6)+1);return d;}
+  
+  function scoreDice(d){
+    var counts=[0,0,0,0,0,0,0];d.forEach(function(v){counts[v]++;});
+    var score=0,used=0;
+    // Three of a kind
+    for(var i=1;i<=6;i++){if(counts[i]>=3){score+=i===1?1000:i*100;used+=3;counts[i]-=3;}}
+    // Singles
+    score+=counts[1]*100;used+=counts[1];
+    score+=counts[5]*50;used+=counts[5];
+    return{score:score,used:used};
+  }
+
+  function hasScoringDice(d){return scoreDice(d).score>0;}
+
+  function roll(){
+    var numDice=dice.length===0?6:dice.filter(function(_,i){return!selected[i];}).length;
+    if(numDice===0)numDice=6;
+    dice=rollDice(numDice);selected=dice.map(function(){return false;});
+    if(!hasScoringDice(dice)){turnScore=0;
+      document.getElementById('fk-msg').textContent='FARKLE! No scoring dice!';document.getElementById('fk-msg').style.color='#ef4444';
+      setTimeout(function(){document.getElementById('fk-msg').textContent='';endTurn();},1500);
+    }
+    render();
+  }
+
+  function bank(){
+    var sel=dice.filter(function(_,i){return selected[i];});
+    if(sel.length>0)turnScore+=scoreDice(sel).score;
+    if(isPlayerTurn){playerScore+=turnScore;document.getElementById('score').textContent=playerScore;}
+    else{aiScore+=turnScore;document.getElementById('best-score').textContent=aiScore;}
+    if(playerScore>=TARGET||aiScore>=TARGET){
+      document.getElementById('fk-msg').textContent=(playerScore>=TARGET?'You win!':'AI wins!')+' 🎉';
+      document.getElementById('fk-msg').style.color='#22c55e';return;
+    }
+    turnScore=0;endTurn();
+  }
+
+  function endTurn(){turnScore=0;dice=[];selected=[];isPlayerTurn=!isPlayerTurn;
+    if(!isPlayerTurn)setTimeout(aiTurn,600);
+    render();
+  }
+
+  function aiTurn(){
+    roll();if(!hasScoringDice(dice))return;
+    // AI: select all scoring dice, then decide to bank or roll
+    var counts=[0,0,0,0,0,0,0];dice.forEach(function(v){counts[v]++;});
+    dice.forEach(function(v,i){if(v===1||v===5||counts[v]>=3)selected[i]=true;});
+    var sel=dice.filter(function(_,i){return selected[i];});
+    turnScore+=scoreDice(sel).score;render();
+    // Bank if turnScore > 300 or few dice left
+    var remaining=dice.filter(function(_,i){return!selected[i];}).length;
+    if(turnScore>=300||remaining<=2){setTimeout(bank,600);}
+    else{dice=[];selected=[];setTimeout(function(){aiTurn();},600);}
+  }
+
+  function render(){
+    document.getElementById('fk-scores').innerHTML='<span style="font-weight:700;">You: '+playerScore+'</span><span>AI: '+aiScore+'</span><span style="color:var(--color-text-light);">Goal: '+TARGET+'</span>';
+    document.getElementById('fk-turn-score').textContent='Turn: '+turnScore+(isPlayerTurn?'':' (AI thinking...)');
+    var dEl=document.getElementById('fk-dice');dEl.innerHTML='';
+    dice.forEach(function(v,i){
+      dEl.innerHTML+='<button class="fk-die'+(selected[i]?' fk-die--sel':'')+'" data-i="'+i+'"'+(isPlayerTurn?'':' disabled')+'>'+DICE_FACES[v]+'</button>';
+    });
+    if(isPlayerTurn){dEl.querySelectorAll('.fk-die').forEach(function(btn){
+      btn.addEventListener('click',function(){selected[+btn.dataset.i]=!selected[+btn.dataset.i];render();});
+    });}
+    var aEl=document.getElementById('fk-actions');
+    if(isPlayerTurn&&dice.length>0){
+      var sel=dice.filter(function(_,i){return selected[i];});var selScore=sel.length?scoreDice(sel).score:0;
+      aEl.innerHTML='<button class="game-btn" id="fk-score"'+(selScore?'':' disabled')+'>Score Selected (+'+selScore+')</button><button class="game-btn game-btn--primary" id="fk-bank"'+(turnScore+selScore?'':' disabled')+'>Bank '+(turnScore+selScore)+'</button>';
+      document.getElementById('fk-score').addEventListener('click',function(){if(!selScore)return;turnScore+=selScore;dice=dice.filter(function(_,i){return!selected[i];});selected=dice.map(function(){return false;});if(dice.length===0)dice=rollDice(6);selected=dice.map(function(){return false;});if(!hasScoringDice(dice)){turnScore=0;document.getElementById('fk-msg').textContent='FARKLE!';document.getElementById('fk-msg').style.color='#ef4444';setTimeout(function(){document.getElementById('fk-msg').textContent='';endTurn();},1500);}render();});
+      document.getElementById('fk-bank').addEventListener('click',function(){
+        var sel2=dice.filter(function(_,i){return selected[i];});if(sel2.length)turnScore+=scoreDice(sel2).score;bank();
+      });
+    }else if(isPlayerTurn){aEl.innerHTML='<button class="game-btn game-btn--primary" id="fk-roll">Roll Dice</button>';
+      document.getElementById('fk-roll').addEventListener('click',roll);
+    }else{aEl.innerHTML='';}
+  }
+
+  document.getElementById('btn-restart').onclick=function(){playerScore=0;aiScore=0;turnScore=0;isPlayerTurn=true;dice=[];selected=[];document.getElementById('fk-msg').textContent='';document.getElementById('score').textContent=0;document.getElementById('best-score').textContent=0;render();};
+  render();
+})();
+</script>
+<style is:global>
+  .fk-die{font-size:2.5rem;width:52px;height:52px;border:2px solid var(--color-border);border-radius:8px;background:var(--color-background);cursor:pointer;transition:all 150ms;display:flex;align-items:center;justify-content:center;}
+  .fk-die:hover{border-color:var(--color-primary);}
+  .fk-die--sel{border-color:var(--color-primary);background:rgba(37,99,235,.1);transform:translateY(-4px);}
+  .fk-die:disabled{cursor:default;opacity:0.6;}
+</style>

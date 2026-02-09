@@ -1,0 +1,138 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Ludo" description="Classic Ludo board game — roll the dice and race to the finish!" instructions="Click <strong>Roll Dice</strong> to roll. Click a piece to move it. Roll a <strong>6</strong> to enter the board. First to get all 4 pieces home wins!" keywords="ludo game, board game, ludo online, dice game">
+  <div id="ludo-game" style="padding:1.5rem;text-align:center;width:100%;">
+    <div id="dice-area" style="margin-bottom:1rem;">
+      <div id="dice" style="font-size:3rem;margin-bottom:0.5rem;">🎲</div>
+      <button class="game-btn game-btn--primary" id="btn-roll">Roll Dice</button>
+      <div id="turn-info" style="margin-top:0.5rem;font-size:0.9rem;color:var(--color-text-light);"></div>
+    </div>
+    <canvas id="game" width="400" height="400"></canvas>
+    <div id="ludo-msg" style="margin-top:1rem;font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
+  </div>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d'),S=400,SQ=S/15;
+  var COLORS=['#ef4444','#2563eb','#22c55e','#eab308'];
+  var NAMES=['Red (You)','Blue','Green','Yellow'];
+  var players,turn,diceVal,rolled,gameOver,movePhase;
+  document.getElementById('score-display').style.display='none';document.getElementById('best-display').style.display='none';
+  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';
+
+  // Simplified path positions (each player has a start, main path, and home stretch)
+  var mainPath=[];
+  // Generate 52-step main path (simplified as positions on 15x15 grid)
+  var pathCoords=[[6,1],[6,2],[6,3],[6,4],[6,5],[5,6],[4,6],[3,6],[2,6],[1,6],[0,6],[0,7],[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[6,9],[6,10],[6,11],[6,12],[6,13],[6,14],[7,14],[8,14],[8,13],[8,12],[8,11],[8,10],[8,9],[9,8],[10,8],[11,8],[12,8],[13,8],[14,8],[14,7],[14,6],[13,6],[12,6],[11,6],[10,6],[9,6],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0],[7,0],[6,0]];
+  var homeStretch=[ // 6 steps per player toward center
+    [[7,1],[7,2],[7,3],[7,4],[7,5],[7,6]],
+    [[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
+    [[7,13],[7,12],[7,11],[7,10],[7,9],[7,8]],
+    [[13,7],[12,7],[11,7],[10,7],[9,7],[8,7]]
+  ];
+  var startPositions=[0,13,26,39]; // Index into pathCoords for each player's entry
+
+  function init(){
+    players=COLORS.map(function(_,i){return{pieces:[{pos:-1,home:false},{pos:-1,home:false},{pos:-1,home:false},{pos:-1,home:false}],start:startPositions[i]};});
+    turn=0;diceVal=0;rolled=false;gameOver=false;movePhase=false;
+    document.getElementById('ludo-msg').textContent='';
+    updateTurnInfo();draw();
+  }
+
+  function updateTurnInfo(){document.getElementById('turn-info').textContent=NAMES[turn]+"'s turn"+(rolled?' — Rolled '+diceVal:'');}
+
+  function roll(){
+    if(rolled||gameOver)return;
+    diceVal=Math.floor(Math.random()*6)+1;rolled=true;movePhase=true;
+    var diceEmojis=['','⚀','⚁','⚂','⚃','⚄','⚅'];
+    document.getElementById('dice').textContent=diceEmojis[diceVal];
+    updateTurnInfo();
+
+    // Check if any move is possible
+    var p=players[turn],canMove=false;
+    p.pieces.forEach(function(pc){
+      if(pc.home)return;
+      if(pc.pos===-1&&diceVal===6)canMove=true;
+      else if(pc.pos>=0)canMove=true;
+    });
+    if(!canMove){endTurn();return;}
+    if(turn>0)setTimeout(aiTurn,500); // AI
+  }
+
+  function movePiece(pIdx){
+    if(!movePhase||gameOver)return;
+    var p=players[turn],pc=p.pieces[pIdx];
+    if(pc.home)return;
+    if(pc.pos===-1){if(diceVal!==6)return;pc.pos=0;} // Enter board
+    else{pc.pos+=diceVal;if(pc.pos>=52+6){pc.home=true;}} // Move forward
+    // Check win
+    if(p.pieces.every(function(pp){return pp.home;})){gameOver=true;document.getElementById('ludo-msg').textContent=NAMES[turn]+' wins!';document.getElementById('ludo-msg').style.color=COLORS[turn];}
+    endTurn();
+  }
+
+  function endTurn(){
+    movePhase=false;rolled=false;
+    if(!gameOver){if(diceVal!==6)turn=(turn+1)%4;updateTurnInfo();}
+    draw();
+    if(!gameOver&&turn>0)setTimeout(roll,800);
+  }
+
+  function aiTurn(){
+    var p=players[turn];var moved=false;
+    // Try to enter a piece first
+    if(diceVal===6){for(var i=0;i<4;i++){if(p.pieces[i].pos===-1){movePiece(i);return;}}}
+    // Move the furthest piece
+    var best=-1,bestPos=-1;
+    for(var i=0;i<4;i++){if(!p.pieces[i].home&&p.pieces[i].pos>=0&&p.pieces[i].pos>bestPos){bestPos=p.pieces[i].pos;best=i;}}
+    if(best>=0)movePiece(best);
+    else endTurn();
+  }
+
+  function draw(){
+    ctx.fillStyle='#fefce8';ctx.fillRect(0,0,S,S);
+    // Colored corners
+    var corners=[[0,0],[0,9],[9,9],[9,0]];
+    corners.forEach(function(co,i){ctx.fillStyle=COLORS[i]+'33';ctx.fillRect(co[1]*SQ,co[0]*SQ,6*SQ,6*SQ);ctx.strokeStyle=COLORS[i];ctx.lineWidth=2;ctx.strokeRect(co[1]*SQ,co[0]*SQ,6*SQ,6*SQ);});
+    // Center
+    ctx.fillStyle='#e5e7eb';ctx.fillRect(6*SQ,6*SQ,3*SQ,3*SQ);
+    // Path cells
+    pathCoords.forEach(function(p){ctx.strokeStyle='#d1d5db';ctx.strokeRect(p[1]*SQ,p[0]*SQ,SQ,SQ);});
+    homeStretch.forEach(function(hs,pi){hs.forEach(function(p){ctx.fillStyle=COLORS[pi]+'44';ctx.fillRect(p[1]*SQ,p[0]*SQ,SQ,SQ);ctx.strokeStyle=COLORS[pi];ctx.strokeRect(p[1]*SQ,p[0]*SQ,SQ,SQ);});});
+    // Pieces
+    players.forEach(function(pl,pi){
+      var baseX=[2,2,11,11],baseY=[2,11,11,2];
+      pl.pieces.forEach(function(pc,pci){
+        var x,y;
+        if(pc.home){x=7*SQ+SQ/2;y=7*SQ+SQ/2;} // Center
+        else if(pc.pos===-1){x=(baseX[pi]+(pci%2))*SQ+SQ/2;y=(baseY[pi]+Math.floor(pci/2))*SQ+SQ/2;}
+        else{
+          var absPos=(pc.pos+pl.start)%52;
+          if(pc.pos>=52){var hi=pc.pos-52;var hp=homeStretch[pi][Math.min(hi,5)];x=hp[1]*SQ+SQ/2;y=hp[0]*SQ+SQ/2;}
+          else{x=pathCoords[absPos][1]*SQ+SQ/2;y=pathCoords[absPos][0]*SQ+SQ/2;}
+        }
+        ctx.beginPath();ctx.arc(x,y,SQ*0.35,0,Math.PI*2);ctx.fillStyle=COLORS[pi];ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+        if(pi===0&&!pc.home){ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(pci+1,x,y);}
+      });
+    });
+  }
+
+  // Player click on piece
+  c.addEventListener('click',function(e){
+    if(turn!==0||!movePhase)return;
+    var rect=c.getBoundingClientRect(),mx=(e.clientX-rect.left)*(S/rect.width),my=(e.clientY-rect.top)*(S/rect.height);
+    players[0].pieces.forEach(function(pc,i){
+      if(pc.home)return;
+      var x,y;
+      if(pc.pos===-1){x=(2+(i%2))*SQ+SQ/2;y=(2+Math.floor(i/2))*SQ+SQ/2;}
+      else if(pc.pos>=52){var hi=pc.pos-52;var hp=homeStretch[0][Math.min(hi,5)];x=hp[1]*SQ+SQ/2;y=hp[0]*SQ+SQ/2;}
+      else{var absPos=(pc.pos+players[0].start)%52;x=pathCoords[absPos][1]*SQ+SQ/2;y=pathCoords[absPos][0]*SQ+SQ/2;}
+      if(Math.abs(mx-x)<SQ&&Math.abs(my-y)<SQ)movePiece(i);
+    });
+  });
+
+  document.getElementById('btn-roll').onclick=roll;
+  document.getElementById('btn-restart').onclick=init;
+  init();
+})();
+</script>

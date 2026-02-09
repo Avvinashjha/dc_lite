@@ -1,0 +1,129 @@
+---
+import GameLayout from '../../layouts/GameLayout.astro';
+---
+<GameLayout gameName="Chess" description="Play chess against the computer. Simple AI opponent." instructions="Click a piece to select it, then click a valid square to move. You play as <strong>White</strong>. The AI plays Black with a simple strategy." keywords="chess game, chess online, play chess, chess vs computer">
+  <canvas id="game" width="400" height="400"></canvas>
+</GameLayout>
+<script is:inline>
+(function(){
+  var c=document.getElementById('game'),ctx=c.getContext('2d'),SIZE=400,SQ=SIZE/8;
+  var PIECES={K:'♔',Q:'♕',R:'♖',B:'♗',N:'♘',P:'♙',k:'♚',q:'♛',r:'♜',b:'♝',n:'♞',p:'♟'};
+  var board,turn,selected,validMoves,gameStatus;
+  document.getElementById('score-display').style.display='none';document.getElementById('best-display').style.display='none';
+
+  function initBoard(){
+    board=[
+      ['r','n','b','q','k','b','n','r'],
+      ['p','p','p','p','p','p','p','p'],
+      [0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],
+      ['P','P','P','P','P','P','P','P'],
+      ['R','N','B','Q','K','B','N','R']
+    ];
+    turn='w';selected=null;validMoves=[];gameStatus='';
+  }
+  function isWhite(p){return p&&p===p.toUpperCase();}
+  function isBlack(p){return p&&p===p.toLowerCase();}
+  function isOwn(p,t){return t==='w'?isWhite(p):isBlack(p);}
+  function isEnemy(p,t){return t==='w'?isBlack(p):isWhite(p);}
+
+  function getMoves(r,c,b){
+    var p=b[r][c],moves=[],t=isWhite(p)?'w':'b',pl=p.toLowerCase();
+    function add(nr,nc){if(nr>=0&&nr<8&&nc>=0&&nc<8&&!isOwn(b[nr][nc],t)){moves.push([nr,nc]);return !b[nr][nc];}return false;}
+    function slide(dirs){dirs.forEach(function(d){for(var i=1;i<8;i++){if(!add(r+d[0]*i,c+d[1]*i))break;}});}
+    if(pl==='p'){var dir=t==='w'?-1:1,start=t==='w'?6:1;
+      if(!b[r+dir]||!b[r+dir][c]){add(r+dir,c);if(r===start&&!b[r+dir*2][c])add(r+dir*2,c);}
+      if(c>0&&isEnemy(b[r+dir][c-1],t))moves.push([r+dir,c-1]);
+      if(c<7&&isEnemy(b[r+dir][c+1],t))moves.push([r+dir,c+1]);
+    }
+    if(pl==='r')slide([[0,1],[0,-1],[1,0],[-1,0]]);
+    if(pl==='b')slide([[1,1],[1,-1],[-1,1],[-1,-1]]);
+    if(pl==='q')slide([[0,1],[0,-1],[1,0],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]]);
+    if(pl==='n'){[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(function(d){add(r+d[0],c+d[1]);});}
+    if(pl==='k'){[[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(function(d){add(r+d[0],c+d[1]);});}
+    return moves;
+  }
+
+  function makeMove(b,fr,fc,tr,tc){
+    var nb=b.map(function(r){return r.slice();});
+    nb[tr][tc]=nb[fr][fc];nb[fr][fc]=0;
+    // Pawn promotion
+    if(nb[tr][tc]==='P'&&tr===0)nb[tr][tc]='Q';
+    if(nb[tr][tc]==='p'&&tr===7)nb[tr][tc]='q';
+    return nb;
+  }
+
+  function inCheck(b,t){
+    var kr=-1,kc=-1,king=t==='w'?'K':'k';
+    for(var r=0;r<8;r++)for(var cc=0;cc<8;cc++)if(b[r][cc]===king){kr=r;kc=cc;}
+    for(var r=0;r<8;r++)for(var cc=0;cc<8;cc++){if(isEnemy(b[r][cc],t)){var m=getMoves(r,cc,b);for(var i=0;i<m.length;i++)if(m[i][0]===kr&&m[i][1]===kc)return true;}}
+    return false;
+  }
+
+  function legalMoves(r,c,b){
+    var t=isWhite(b[r][c])?'w':'b';
+    return getMoves(r,c,b).filter(function(m){var nb=makeMove(b,r,c,m[0],m[1]);return !inCheck(nb,t);});
+  }
+
+  function hasLegalMoves(t,b){
+    for(var r=0;r<8;r++)for(var cc=0;cc<8;cc++){if(isOwn(b[r][cc],t)&&legalMoves(r,cc,b).length>0)return true;}
+    return false;
+  }
+
+  // Simple AI: evaluate material and pick best
+  var pieceVal={p:1,n:3,b:3,r:5,q:9,k:0};
+  function evaluate(b){
+    var s=0;for(var r=0;r<8;r++)for(var cc=0;cc<8;cc++){var p=b[r][cc];if(p){var v=pieceVal[p.toLowerCase()]||0;s+=isWhite(p)?v:-v;}}return s;
+  }
+  function aiMove(){
+    var bestScore=Infinity,bestMoves=[];
+    for(var r=0;r<8;r++)for(var cc=0;cc<8;cc++){
+      if(isBlack(board[r][cc])){var moves=legalMoves(r,cc,board);
+        moves.forEach(function(m){
+          var nb=makeMove(board,r,cc,m[0],m[1]);var sc=evaluate(nb);
+          // Look one more move ahead
+          var worst=-Infinity;
+          for(var r2=0;r2<8;r2++)for(var c2=0;c2<8;c2++){if(isWhite(nb[r2][c2])){legalMoves(r2,c2,nb).forEach(function(m2){var nb2=makeMove(nb,r2,c2,m2[0],m2[1]);worst=Math.max(worst,evaluate(nb2));});}}
+          if(worst===-Infinity)worst=sc;sc=sc-worst*0.3;
+          if(sc<bestScore){bestScore=sc;bestMoves=[[r,cc,m[0],m[1]]];}
+          else if(sc===bestScore)bestMoves.push([r,cc,m[0],m[1]]);
+        });
+      }
+    }
+    if(bestMoves.length>0){var m=bestMoves[Math.floor(Math.random()*bestMoves.length)];board=makeMove(board,m[0],m[1],m[2],m[3]);turn='w';checkStatus();}
+  }
+
+  function checkStatus(){
+    if(!hasLegalMoves(turn,board)){gameStatus=inCheck(board,turn)?(turn==='w'?'Black wins!':'White wins!'):'Stalemate!';
+    }else if(inCheck(board,turn)){gameStatus='Check!';}else gameStatus='';
+    draw();
+  }
+
+  function draw(){
+    for(var r=0;r<8;r++)for(var cc=0;cc<8;cc++){
+      var light=(r+cc)%2===0;
+      ctx.fillStyle=light?'#f0d9b5':'#b58863';
+      if(selected&&selected[0]===r&&selected[1]===cc)ctx.fillStyle='#7cb342';
+      if(validMoves.some(function(m){return m[0]===r&&m[1]===cc;}))ctx.fillStyle=light?'#e8f5e9':'#a5d6a7';
+      ctx.fillRect(cc*SQ,r*SQ,SQ,SQ);
+      if(board[r][cc]){ctx.font='36px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=isWhite(board[r][cc])?'#fff':'#000';ctx.strokeStyle=isWhite(board[r][cc])?'#000':'#fff';ctx.lineWidth=0.5;ctx.fillText(PIECES[board[r][cc]],cc*SQ+SQ/2,r*SQ+SQ/2+2);ctx.strokeText(PIECES[board[r][cc]],cc*SQ+SQ/2,r*SQ+SQ/2+2);}
+    }
+    if(gameStatus){ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(0,SIZE/2-25,SIZE,50);ctx.fillStyle='#fff';ctx.font='bold 22px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(gameStatus,SIZE/2,SIZE/2);}
+  }
+
+  c.addEventListener('click',function(e){
+    if(turn!=='w'||gameStatus.indexOf('wins')>=0||gameStatus==='Stalemate!')return;
+    var rect=c.getBoundingClientRect();var cc=Math.floor((e.clientX-rect.left)*(8/rect.width)),r=Math.floor((e.clientY-rect.top)*(8/rect.height));
+    if(selected){
+      if(validMoves.some(function(m){return m[0]===r&&m[1]===cc;})){
+        board=makeMove(board,selected[0],selected[1],r,cc);selected=null;validMoves=[];turn='b';checkStatus();
+        if(turn==='b'&&!gameStatus.match(/wins|Stalemate/))setTimeout(aiMove,300);
+      }else{selected=null;validMoves=[];if(isWhite(board[r][cc])){selected=[r,cc];validMoves=legalMoves(r,cc,board);}draw();}
+    }else{if(isWhite(board[r][cc])){selected=[r,cc];validMoves=legalMoves(r,cc,board);}draw();}
+  });
+
+  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';
+  document.getElementById('btn-restart').onclick=function(){initBoard();draw();};
+  document.getElementById('btn-pause').style.display='none';
+  initBoard();draw();
+})();
+</script>

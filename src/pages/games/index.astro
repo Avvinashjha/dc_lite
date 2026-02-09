@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const categories = [
+  {
+    name: 'Ready to Play', icon: '🎮',
+    games: [
+      { name: 'Snake', desc: 'Classic snake — eat, grow, survive', href: '/games/snake', icon: '🐍' },
+      { name: 'Tetris', desc: 'Stack falling blocks, clear lines', href: '/games/tetris', icon: '🧱' },
+      { name: 'Sudoku', desc: '9x9 number puzzle with difficulty levels', href: '/games/sudoku', icon: '🔢' },
+    ]
+  },
+  {
+    name: 'Coming Soon', icon: '🚧',
+    games: [
+      { name: 'Math Puzzles', desc: 'Tricky math challenges', href: '#', icon: '➕' },
+      { name: 'Dino Runner', desc: 'Endless runner — jump and duck', href: '#', icon: '🦕' },
+      { name: 'Car Dodge', desc: 'Dodge traffic and collect coins', href: '#', icon: '🚗' },
+      { name: 'Cricket', desc: 'Stickman cricket batting game', href: '#', icon: '🏏' },
+      { name: 'Chess', desc: 'Play chess against the computer', href: '#', icon: '♟️' },
+      { name: 'Ludo', desc: 'Classic board game vs AI', href: '#', icon: '🎲' },
+      { name: 'Solitaire', desc: 'Klondike solitaire with drag & drop', href: '#', icon: '♠️' },
+      { name: 'Hearts', desc: 'Trick-taking card game vs AI', href: '#', icon: '♥️' },
+      { name: 'Spades', desc: 'Bid and take tricks vs AI', href: '#', icon: '♣️' },
+      { name: 'Farkle', desc: 'Push your luck dice game', href: '#', icon: '🎲' },
+      { name: 'Yatzy', desc: 'Roll dice and fill your scorecard', href: '#', icon: '🎯' },
+    ]
+  }
+];
+const readyCount = categories[0].games.length;
+const totalCount = categories.reduce((s, c) => s + c.games.length, 0);
+---
+
+<BaseLayout title="Free Online Games | DailyCoder" description={`Play ${readyCount} free browser games — no download, no signup. Snake, Tetris, Sudoku, and more coming soon.`}>
+  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem; text-align: center;">Games</h1>
+    <p style="text-align: center; color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem;">Free, instant, no download. Play right in your browser.</p>
+    <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7; margin-bottom: 2.5rem;">{readyCount} playable now · {totalCount - readyCount} more coming soon</p>
+
+    {categories.map(cat => (
+      <section class="games-section">
+        <h2 class="games-section__title">
+          <span>{cat.icon}</span> {cat.name}
+          <span class="games-section__count">{cat.games.length}</span>
+        </h2>
+        <div class="games-grid">
+          {cat.games.map(g => (
+            <a href={g.href} class={`game-card ${g.href === '#' ? 'game-card--disabled' : ''}`}>
+              <span class="game-card__icon">{g.icon}</span>
+              <h3 class="game-card__name">{g.name}</h3>
+              <p class="game-card__desc">{g.desc}</p>
+              {g.href === '#' && <span class="game-card__badge">Soon</span>}
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .games-section { margin-bottom: 2.5rem; }
+  .games-section__title { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border); }
+  .games-section__count { font-size: 0.7rem; font-weight: 700; background: var(--color-code-bg); color: var(--color-text-light); padding: 0.1rem 0.5rem; border-radius: 100px; margin-left: auto; }
+  .games-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .game-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 1.25rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); text-decoration: none; color: inherit; transition: all 200ms; position: relative; }
+  .game-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--color-primary); text-decoration: none; color: inherit; }
+  .game-card * { text-decoration: none; }
+  .game-card--disabled { opacity: 0.5; pointer-events: none; }
+  .game-card--disabled:hover { transform: none; box-shadow: none; border-color: var(--color-border); }
+  .game-card__icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .game-card__name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem; color: var(--color-text); }
+  .game-card__desc { font-size: 0.75rem; color: var(--color-text-light); line-height: 1.3; }
+  .game-card__badge {
+    position: absolute; top: 0.5rem; right: 0.5rem;
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+    background: var(--color-code-bg); color: var(--color-text-light);
+    padding: 0.15rem 0.4rem; border-radius: var(--radius-sm);
+  }
+  @media (max-width: 1024px) { .games-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px) { .games-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .games-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; } .game-card { padding: 1rem 0.5rem; } }
+</style>

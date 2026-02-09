@@ -11,6 +11,7 @@
     { "label": "Courses", "path": "/courses" },
     { "label": "Docs", "path": "/docs" },
     { "label": "Tools", "path": "/tools" },
+    { "label": "Games", "path": "/games" },
     { "label": "About", "path": "/about" }
   ],
   "socialLinks": {

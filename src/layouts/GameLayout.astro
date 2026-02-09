@@ -1,0 +1,130 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getSiteConfig } from '../utils/contentLoader';
+const config = getSiteConfig();
+
+interface Props {
+  gameName: string;
+  description: string;
+  instructions: string;
+  keywords?: string;
+}
+
+const { gameName, description, instructions, keywords = '' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const gameJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: gameName,
+  description,
+  url: canonicalURL.href,
+  playMode: 'SinglePlayer',
+  applicationCategory: 'Game',
+  operatingSystem: 'All',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  author: { '@type': 'Organization', name: config.site.title },
+};
+---
+
+<BaseLayout title={`${gameName} - Free Online Game | DailyCoder`} description={description}>
+  <Fragment slot="head">
+    <meta name="keywords" content={`${gameName}, ${keywords}, free online game, browser game, no download`} />
+    <script type="application/ld+json" set:html={JSON.stringify(gameJsonLd)} />
+  </Fragment>
+
+  <div class="game-page">
+    <div class="container">
+      <a href="/games" class="game-back">&larr; All Games</a>
+      <div class="game-header">
+        <div>
+          <h1 class="game-title">{gameName}</h1>
+          <p class="game-desc">{description}</p>
+        </div>
+        <div class="game-scores">
+          <div class="game-score" id="score-display">Score: <span id="score">0</span></div>
+          <div class="game-score game-score--best" id="best-display">Best: <span id="best-score">0</span></div>
+        </div>
+      </div>
+
+      <div class="game-canvas-wrap" id="game-container" tabindex="0">
+        <slot />
+      </div>
+
+      <div class="game-controls" id="game-controls">
+        <button class="game-btn game-btn--primary" id="btn-start">Start Game</button>
+        <button class="game-btn" id="btn-restart" style="display:none;">Restart</button>
+        <button class="game-btn" id="btn-pause" style="display:none;">Pause</button>
+      </div>
+
+      <details class="game-instructions">
+        <summary>How to Play</summary>
+        <p set:html={instructions} />
+      </details>
+    </div>
+  </div>
+</BaseLayout>
+
+<!-- Prevent page scroll when game is focused -->
+<script is:inline>
+(function(){
+  var container = document.getElementById('game-container');
+  if (!container) return;
+  
+  // Focus game container on click
+  container.addEventListener('click', function() { container.focus(); });
+  
+  // Prevent page scroll for game keys when container is focused
+  var gameKeys = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' ','Space'];
+  document.addEventListener('keydown', function(e) {
+    if (gameKeys.indexOf(e.key) >= 0 || gameKeys.indexOf(e.code) >= 0) {
+      // Check if we're inside the game page
+      if (container.contains(document.activeElement) || document.activeElement === container || document.activeElement === document.body) {
+        e.preventDefault();
+      }
+    }
+  });
+  
+  // Auto-focus on game start
+  var startBtn = document.getElementById('btn-start');
+  if (startBtn) {
+    startBtn.addEventListener('click', function() {
+      setTimeout(function() { container.focus(); }, 100);
+    });
+  }
+  var restartBtn = document.getElementById('btn-restart');
+  if (restartBtn) {
+    restartBtn.addEventListener('click', function() {
+      setTimeout(function() { container.focus(); }, 100);
+    });
+  }
+})();
+</script>
+
+<style>
+  .game-page { padding: 1.5rem 0 4rem; }
+  .game-back { display: inline-block; color: var(--color-text-light); font-size: 0.85rem; margin-bottom: 1rem; text-decoration: none; }
+  .game-back:hover { color: var(--color-primary); text-decoration: none; }
+  .game-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+  .game-title { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .game-desc { color: var(--color-text-light); font-size: 0.9rem; }
+  .game-scores { display: flex; gap: 0.75rem; flex-shrink: 0; }
+  .game-score { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.4rem 0.85rem; }
+  .game-score--best { color: var(--color-primary); }
+  .game-canvas-wrap {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 300px; outline: none;
+  }
+  .game-canvas-wrap:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+  .game-canvas-wrap canvas { display: block; max-width: 100%; }
+  .game-controls { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .game-btn { padding: 0.5rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 150ms; }
+  .game-btn:hover { border-color: var(--color-primary); }
+  .game-btn--primary { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+  .game-btn--primary:hover { background: var(--color-primary-dark); }
+  .game-instructions { margin-top: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+  .game-instructions summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--color-text); }
+  .game-instructions p { padding: 0 1rem 1rem; font-size: 0.85rem; color: var(--color-text-light); line-height: 1.6; }
+  @media (max-width: 640px) { .game-title { font-size: 1.4rem; } .game-header { flex-direction: column; } }
+</style>
