@@ -1,138 +1,496 @@
 ---
 import GameLayout from '../../layouts/GameLayout.astro';
 ---
-<GameLayout gameName="Ludo" description="Classic Ludo board game — roll the dice and race to the finish!" instructions="Click <strong>Roll Dice</strong> to roll. Click a piece to move it. Roll a <strong>6</strong> to enter the board. First to get all 4 pieces home wins!" keywords="ludo game, board game, ludo online, dice game">
-  <div id="ludo-game" style="padding:1.5rem;text-align:center;width:100%;">
-    <div id="dice-area" style="margin-bottom:1rem;">
-      <div id="dice" style="font-size:3rem;margin-bottom:0.5rem;">🎲</div>
-      <button class="game-btn game-btn--primary" id="btn-roll">Roll Dice</button>
-      <div id="turn-info" style="margin-top:0.5rem;font-size:0.9rem;color:var(--color-text-light);"></div>
+<GameLayout gameName="Ludo" description="Classic Ludo board game — roll dice, capture opponents, race home!" instructions="Click <strong>Roll Dice</strong> to roll. Roll a <strong>6</strong> to bring a piece onto the board. Click a highlighted piece to move it. <strong>Capture</strong> opponents by landing on them (except safe ★ spots). First to get all 4 pieces home wins!" keywords="ludo game, ludo online, board game, dice game, ludo multiplayer">
+  <div id="ludo-ui" style="display:flex;gap:1.5rem;justify-content:center;align-items:flex-start;width:100%;padding:1rem;">
+    <div style="position:relative;">
+      <canvas id="game" width="504" height="504"></canvas>
     </div>
-    <canvas id="game" width="400" height="400"></canvas>
-    <div id="ludo-msg" style="margin-top:1rem;font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
+    <div id="ludo-panel" style="width:200px;flex-shrink:0;">
+      <div id="dice-area" style="text-align:center;margin-bottom:1rem;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:1rem;">
+        <div id="dice" style="font-size:3.5rem;line-height:1;margin-bottom:0.75rem;">🎲</div>
+        <button id="btn-roll" style="width:100%;padding:0.6rem 1rem;border-radius:8px;border:2px solid var(--color-primary);background:var(--color-primary);color:#fff;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 150ms;letter-spacing:0.02em;">Roll Dice</button>
+      </div>
+      <div id="turn-info" style="font-weight:700;font-size:0.9rem;text-align:center;padding:0.5rem;border-radius:var(--radius-md);margin-bottom:1rem;min-height:38px;display:flex;align-items:center;justify-content:center;"></div>
+      <div id="ludo-scores" style="font-size:0.8rem;"></div>
+      <div id="ludo-msg" style="text-align:center;margin-top:1rem;font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
+      <div id="ludo-log" style="font-size:0.7rem;color:var(--color-text-light);max-height:150px;overflow-y:auto;margin-top:0.75rem;font-family:var(--font-mono);"></div>
+    </div>
   </div>
 </GameLayout>
+
 <script is:inline>
 (function(){
-  var c=document.getElementById('game'),ctx=c.getContext('2d'),S=400,SQ=S/15;
-  var COLORS=['#ef4444','#2563eb','#22c55e','#eab308'];
-  var NAMES=['Red (You)','Blue','Green','Yellow'];
-  var players,turn,diceVal,rolled,gameOver,movePhase;
-  document.getElementById('score-display').style.display='none';document.getElementById('best-display').style.display='none';
-  document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';
+  var c = document.getElementById('game'), ctx = c.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var PAD = 12; // Padding around board
+  var BOARD = 480, SIZE = BOARD + PAD * 2, SQ = BOARD / 15;
+  c.width = SIZE * dpr; c.height = SIZE * dpr;
+  c.style.width = SIZE + 'px'; c.style.height = SIZE + 'px';
+  ctx.scale(dpr, dpr);
 
-  // Simplified path positions (each player has a start, main path, and home stretch)
-  var mainPath=[];
-  // Generate 52-step main path (simplified as positions on 15x15 grid)
-  var pathCoords=[[6,1],[6,2],[6,3],[6,4],[6,5],[5,6],[4,6],[3,6],[2,6],[1,6],[0,6],[0,7],[0,8],[1,8],[2,8],[3,8],[4,8],[5,8],[6,9],[6,10],[6,11],[6,12],[6,13],[6,14],[7,14],[8,14],[8,13],[8,12],[8,11],[8,10],[8,9],[9,8],[10,8],[11,8],[12,8],[13,8],[14,8],[14,7],[14,6],[13,6],[12,6],[11,6],[10,6],[9,6],[8,5],[8,4],[8,3],[8,2],[8,1],[8,0],[7,0],[6,0]];
-  var homeStretch=[ // 6 steps per player toward center
-    [[7,1],[7,2],[7,3],[7,4],[7,5],[7,6]],
-    [[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],
-    [[7,13],[7,12],[7,11],[7,10],[7,9],[7,8]],
-    [[13,7],[12,7],[11,7],[10,7],[9,7],[8,7]]
+  var COLORS = ['#dc2626','#2563eb','#16a34a','#eab308'];
+  var LIGHT  = ['#fecaca','#bfdbfe','#bbf7d0','#fef08a'];
+  var NAMES  = ['Red (You)','Blue','Green','Yellow'];
+  var DICE   = ['','⚀','⚁','⚂','⚃','⚄','⚅'];
+
+  document.getElementById('score-display').style.display='none';
+  document.getElementById('best-display').style.display='none';
+  document.getElementById('btn-start').style.display='none';
+  document.getElementById('btn-restart').style.display='';
+  document.getElementById('btn-pause').style.display='none';
+
+  // Board path: 52 cells going clockwise, as [row, col] on 15x15 grid
+  // Red starts going up from (6,1), path goes: up, right across top, down right side, left across bottom, up left side
+  var PATH = [
+    [6,1],[6,2],[6,3],[6,4],[6,5], // Red exit lane (left to center)
+    [5,6],[4,6],[3,6],[2,6],[1,6],[0,6], // Up
+    [0,7],[0,8], // Top-left to top-right
+    [1,8],[2,8],[3,8],[4,8],[5,8], // Down
+    [6,9],[6,10],[6,11],[6,12],[6,13],[6,14], // Right
+    [7,14],[8,14], // Right edge
+    [8,13],[8,12],[8,11],[8,10],[8,9], // Left
+    [9,8],[10,8],[11,8],[12,8],[13,8],[14,8], // Down
+    [14,7],[14,6], // Bottom-right to bottom-left
+    [13,6],[12,6],[11,6],[10,6],[9,6], // Up
+    [8,5],[8,4],[8,3],[8,2],[8,1],[8,0], // Left
+    [7,0],[6,0]  // Left edge back to start area
   ];
-  var startPositions=[0,13,26,39]; // Index into pathCoords for each player's entry
 
-  function init(){
-    players=COLORS.map(function(_,i){return{pieces:[{pos:-1,home:false},{pos:-1,home:false},{pos:-1,home:false},{pos:-1,home:false}],start:startPositions[i]};});
-    turn=0;diceVal=0;rolled=false;gameOver=false;movePhase=false;
-    document.getElementById('ludo-msg').textContent='';
-    updateTurnInfo();draw();
-  }
+  // Home stretch for each player (6 cells leading to center)
+  var HOME_STRETCH = [
+    [[7,1],[7,2],[7,3],[7,4],[7,5],[7,6]],   // Red: left to center
+    [[1,7],[2,7],[3,7],[4,7],[5,7],[6,7]],   // Blue: top to center  
+    [[7,13],[7,12],[7,11],[7,10],[7,9],[7,8]],// Green: right to center
+    [[13,7],[12,7],[11,7],[10,7],[9,7],[8,7]] // Yellow: bottom to center
+  ];
 
-  function updateTurnInfo(){document.getElementById('turn-info').textContent=NAMES[turn]+"'s turn"+(rolled?' — Rolled '+diceVal:'');}
+  var ENTRY = [0, 13, 26, 39];     // Where each player enters the main path
+  var SAFE  = [0, 8, 13, 21, 26, 34, 39, 47]; // Safe spots (stars)
 
-  function roll(){
-    if(rolled||gameOver)return;
-    diceVal=Math.floor(Math.random()*6)+1;rolled=true;movePhase=true;
-    var diceEmojis=['','⚀','⚁','⚂','⚃','⚄','⚅'];
-    document.getElementById('dice').textContent=diceEmojis[diceVal];
-    updateTurnInfo();
+  // Home base positions for pieces (in yard)
+  var YARD = [
+    [[2,2],[2,4],[4,2],[4,4]],       // Red: top-left
+    [[2,10],[2,12],[4,10],[4,12]],    // Blue: top-right — wait, this should be based on color layout
+  ];
+  // Actually let me use standard layout: Red=top-left, Blue=top-right, Green=bottom-right, Yellow=bottom-left
+  // No wait — common Indian ludo: Red=top-left not standard. Let me go with:
+  // Player 0 (Red) = bottom-left, Player 1 (Blue) = top-left, Player 2 (Green) = top-right, Player 3 (Yellow) = bottom-right
+  // But the PATH already starts from position [6,1] which is left side...
+  // Let me just define yard positions matching the corners:
+  // Yard positions: centered in each 6x6 quadrant's inner white area
+  // Each quadrant spans 6 cells. Inner white area is from 0.8 to 5.2 within the quadrant.
+  // Place pieces at ~2 and ~4 positions within quadrant for even spacing.
+  var YARD_POS = [
+    [[2,2],[2,4],[4,2],[4,4]],             // Red: top-left (rows 0-5, cols 0-5)
+    [[2,11],[2,13],[4,11],[4,13]],          // Blue: top-right (rows 0-5, cols 9-14)
+    [[11,11],[11,13],[13,11],[13,13]],      // Green: bottom-right (rows 9-14, cols 9-14)
+    [[11,2],[11,4],[13,2],[13,4]]           // Yellow: bottom-left (rows 9-14, cols 0-5)
+  ];
 
-    // Check if any move is possible
-    var p=players[turn],canMove=false;
-    p.pieces.forEach(function(pc){
-      if(pc.home)return;
-      if(pc.pos===-1&&diceVal===6)canMove=true;
-      else if(pc.pos>=0)canMove=true;
+  var players, turn, diceVal, rolled, gameOver, movePhase, movable, consecutiveSixes, logs;
+
+  function init() {
+    players = [0,1,2,3].map(function(i) {
+      return { pieces: [{pos:-1,homeStretch:-1,home:false},{pos:-1,homeStretch:-1,home:false},{pos:-1,homeStretch:-1,home:false},{pos:-1,homeStretch:-1,home:false}], finished: 0 };
     });
-    if(!canMove){endTurn();return;}
-    if(turn>0)setTimeout(aiTurn,500); // AI
+    turn = 0; diceVal = 0; rolled = false; gameOver = false; movePhase = false; movable = []; consecutiveSixes = 0; logs = [];
+    document.getElementById('ludo-msg').textContent = '';
+    document.getElementById('ludo-log').innerHTML = '';
+    updateUI(); draw();
   }
 
-  function movePiece(pIdx){
-    if(!movePhase||gameOver)return;
-    var p=players[turn],pc=p.pieces[pIdx];
-    if(pc.home)return;
-    if(pc.pos===-1){if(diceVal!==6)return;pc.pos=0;} // Enter board
-    else{pc.pos+=diceVal;if(pc.pos>=52+6){pc.home=true;}} // Move forward
+  function log(msg) { logs.push(msg); var el = document.getElementById('ludo-log'); el.innerHTML += '<div>' + msg + '</div>'; el.scrollTop = el.scrollHeight; }
+
+  function getAbsPos(playerIdx, relPos) {
+    return (relPos + ENTRY[playerIdx]) % 52;
+  }
+
+  function isSafe(absPos) { return SAFE.indexOf(absPos) >= 0; }
+
+  function getPieceCoords(pi, piece) {
+    if (piece.home) return { x: 7 * SQ + SQ/2, y: 7 * SQ + SQ/2 };
+    if (piece.homeStretch >= 0) {
+      var hs = HOME_STRETCH[pi][piece.homeStretch];
+      return { x: hs[1] * SQ + SQ/2, y: hs[0] * SQ + SQ/2 };
+    }
+    if (piece.pos === -1) return null; // In yard
+    var abs = getAbsPos(pi, piece.pos);
+    return { x: PATH[abs][1] * SQ + SQ/2, y: PATH[abs][0] * SQ + SQ/2 };
+  }
+
+  function canMovePiece(pi, pci) {
+    var pc = players[pi].pieces[pci];
+    if (pc.home) return false;
+    if (pc.pos === -1) return diceVal === 6; // Need 6 to enter
+    if (pc.homeStretch >= 0) {
+      var target = pc.homeStretch + diceVal;
+      return target <= 6; // Exact or under to home
+    }
+    // Check if entering home stretch
+    var newPos = pc.pos + diceVal;
+    if (newPos >= 51) {
+      var overflow = newPos - 51;
+      return overflow <= 6;
+    }
+    return true;
+  }
+
+  function movePiece(pi, pci) {
+    if (!movePhase || gameOver) return;
+    var pc = players[pi].pieces[pci];
+    if (!canMovePiece(pi, pci)) return;
+
+    if (pc.pos === -1) {
+      // Enter board
+      pc.pos = 0;
+      pc.homeStretch = -1;
+      log(NAMES[pi] + ' enters a piece');
+      checkCapture(pi, pci);
+    } else if (pc.homeStretch >= 0) {
+      pc.homeStretch += diceVal;
+      if (pc.homeStretch >= 6) { pc.home = true; players[pi].finished++; log(NAMES[pi] + ' piece home! (' + players[pi].finished + '/4)'); }
+    } else {
+      var newPos = pc.pos + diceVal;
+      if (newPos >= 51) {
+        // Enter home stretch
+        pc.homeStretch = newPos - 51;
+        pc.pos = -2; // On home stretch
+        if (pc.homeStretch >= 6) { pc.home = true; players[pi].finished++; log(NAMES[pi] + ' piece home! (' + players[pi].finished + '/4)'); }
+      } else {
+        pc.pos = newPos;
+        checkCapture(pi, pci);
+      }
+    }
+
     // Check win
-    if(p.pieces.every(function(pp){return pp.home;})){gameOver=true;document.getElementById('ludo-msg').textContent=NAMES[turn]+' wins!';document.getElementById('ludo-msg').style.color=COLORS[turn];}
+    if (players[pi].finished >= 4) {
+      gameOver = true;
+      document.getElementById('ludo-msg').textContent = NAMES[pi] + ' wins!';
+      document.getElementById('ludo-msg').style.color = COLORS[pi];
+      log('🏆 ' + NAMES[pi] + ' wins!');
+    }
     endTurn();
   }
 
-  function endTurn(){
-    movePhase=false;rolled=false;
-    if(!gameOver){if(diceVal!==6)turn=(turn+1)%4;updateTurnInfo();}
-    draw();
-    if(!gameOver&&turn>0)setTimeout(roll,800);
-  }
+  function checkCapture(pi, pci) {
+    var pc = players[pi].pieces[pci];
+    if (pc.pos < 0 || pc.homeStretch >= 0) return;
+    var absPos = getAbsPos(pi, pc.pos);
+    if (isSafe(absPos)) return; // Can't capture on safe spots
 
-  function aiTurn(){
-    var p=players[turn];var moved=false;
-    // Try to enter a piece first
-    if(diceVal===6){for(var i=0;i<4;i++){if(p.pieces[i].pos===-1){movePiece(i);return;}}}
-    // Move the furthest piece
-    var best=-1,bestPos=-1;
-    for(var i=0;i<4;i++){if(!p.pieces[i].home&&p.pieces[i].pos>=0&&p.pieces[i].pos>bestPos){bestPos=p.pieces[i].pos;best=i;}}
-    if(best>=0)movePiece(best);
-    else endTurn();
-  }
-
-  function draw(){
-    ctx.fillStyle='#fefce8';ctx.fillRect(0,0,S,S);
-    // Colored corners
-    var corners=[[0,0],[0,9],[9,9],[9,0]];
-    corners.forEach(function(co,i){ctx.fillStyle=COLORS[i]+'33';ctx.fillRect(co[1]*SQ,co[0]*SQ,6*SQ,6*SQ);ctx.strokeStyle=COLORS[i];ctx.lineWidth=2;ctx.strokeRect(co[1]*SQ,co[0]*SQ,6*SQ,6*SQ);});
-    // Center
-    ctx.fillStyle='#e5e7eb';ctx.fillRect(6*SQ,6*SQ,3*SQ,3*SQ);
-    // Path cells
-    pathCoords.forEach(function(p){ctx.strokeStyle='#d1d5db';ctx.strokeRect(p[1]*SQ,p[0]*SQ,SQ,SQ);});
-    homeStretch.forEach(function(hs,pi){hs.forEach(function(p){ctx.fillStyle=COLORS[pi]+'44';ctx.fillRect(p[1]*SQ,p[0]*SQ,SQ,SQ);ctx.strokeStyle=COLORS[pi];ctx.strokeRect(p[1]*SQ,p[0]*SQ,SQ,SQ);});});
-    // Pieces
-    players.forEach(function(pl,pi){
-      var baseX=[2,2,11,11],baseY=[2,11,11,2];
-      pl.pieces.forEach(function(pc,pci){
-        var x,y;
-        if(pc.home){x=7*SQ+SQ/2;y=7*SQ+SQ/2;} // Center
-        else if(pc.pos===-1){x=(baseX[pi]+(pci%2))*SQ+SQ/2;y=(baseY[pi]+Math.floor(pci/2))*SQ+SQ/2;}
-        else{
-          var absPos=(pc.pos+pl.start)%52;
-          if(pc.pos>=52){var hi=pc.pos-52;var hp=homeStretch[pi][Math.min(hi,5)];x=hp[1]*SQ+SQ/2;y=hp[0]*SQ+SQ/2;}
-          else{x=pathCoords[absPos][1]*SQ+SQ/2;y=pathCoords[absPos][0]*SQ+SQ/2;}
+    for (var oi = 0; oi < 4; oi++) {
+      if (oi === pi) continue;
+      for (var opi = 0; opi < 4; opi++) {
+        var opc = players[oi].pieces[opi];
+        if (opc.pos < 0 || opc.home || opc.homeStretch >= 0) continue;
+        if (getAbsPos(oi, opc.pos) === absPos) {
+          opc.pos = -1; opc.homeStretch = -1;
+          log(NAMES[pi] + ' captures ' + NAMES[oi] + "'s piece!");
         }
-        ctx.beginPath();ctx.arc(x,y,SQ*0.35,0,Math.PI*2);ctx.fillStyle=COLORS[pi];ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
-        if(pi===0&&!pc.home){ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(pci+1,x,y);}
+      }
+    }
+  }
+
+  function getMovablePieces(pi) {
+    var list = [];
+    for (var i = 0; i < 4; i++) { if (canMovePiece(pi, i)) list.push(i); }
+    return list;
+  }
+
+  function roll() {
+    if (rolled || gameOver) return;
+    diceVal = Math.floor(Math.random() * 6) + 1;
+    rolled = true; movePhase = true;
+    document.getElementById('dice').textContent = DICE[diceVal];
+
+    if (diceVal === 6) {
+      consecutiveSixes++;
+      if (consecutiveSixes >= 3) {
+        log(NAMES[turn] + ' rolled three 6s — turn forfeit!');
+        consecutiveSixes = 0;
+        movePhase = false; rolled = false;
+        turn = (turn + 1) % 4;
+        updateUI(); draw();
+        if (turn > 0) setTimeout(roll, 800);
+        return;
+      }
+    } else {
+      consecutiveSixes = 0;
+    }
+
+    movable = getMovablePieces(turn);
+    if (movable.length === 0) {
+      log(NAMES[turn] + ' rolled ' + diceVal + ' — no moves');
+      endTurn();
+      return;
+    }
+    if (movable.length === 1 && turn > 0) {
+      // AI auto-move if only one option
+      setTimeout(function() { movePiece(turn, movable[0]); }, 400);
+      return;
+    }
+
+    log(NAMES[turn] + ' rolled ' + diceVal);
+    updateUI(); draw();
+
+    if (turn > 0) setTimeout(aiTurn, 500);
+  }
+
+  function endTurn() {
+    movePhase = false; rolled = false; movable = [];
+    if (!gameOver) {
+      if (diceVal !== 6) { turn = (turn + 1) % 4; consecutiveSixes = 0; }
+      // else: extra turn on 6
+    }
+    updateUI(); draw();
+    if (!gameOver && turn > 0) setTimeout(roll, 700);
+  }
+
+  function aiTurn() {
+    if (movable.length === 0) return;
+    var pi = turn, best = movable[0], bestScore = -999;
+    movable.forEach(function(pci) {
+      var score = 0;
+      var pc = players[pi].pieces[pci];
+      if (pc.pos === -1) { score = 50; } // Entering is good
+      else {
+        var newPos = pc.pos + diceVal;
+        if (newPos >= 51) score = 80; // Entering home stretch is great
+        else {
+          var absPos = getAbsPos(pi, newPos);
+          // Check if we can capture
+          for (var oi = 0; oi < 4; oi++) {
+            if (oi === pi) continue;
+            for (var opi = 0; opi < 4; opi++) {
+              var opc = players[oi].pieces[opi];
+              if (opc.pos >= 0 && !opc.home && opc.homeStretch < 0 && getAbsPos(oi, opc.pos) === absPos && !isSafe(absPos)) score = 100;
+            }
+          }
+          // Prefer moving pieces closer to home
+          score += newPos;
+          // Prefer safe spots
+          if (isSafe(absPos)) score += 20;
+        }
+      }
+      if (pc.homeStretch >= 0) { score = 70 + pc.homeStretch; } // Moving in home stretch
+      if (score > bestScore) { bestScore = score; best = pci; }
+    });
+    movePiece(pi, best);
+  }
+
+  function updateUI() {
+    var ti = document.getElementById('turn-info');
+    ti.textContent = NAMES[turn] + "'s turn";
+    ti.style.background = LIGHT[turn]; ti.style.color = COLORS[turn];
+    ti.style.border = '2px solid ' + COLORS[turn];
+
+    var sc = document.getElementById('ludo-scores');
+    sc.innerHTML = players.map(function(p, i) {
+      return '<div style="display:flex;align-items:center;gap:0.4rem;padding:0.3rem 0;' + (i === turn ? 'font-weight:700;' : 'opacity:0.6;') + '">' +
+        '<span style="width:10px;height:10px;border-radius:50%;background:' + COLORS[i] + ';display:inline-block;"></span>' +
+        NAMES[i] + ' — ' + p.finished + '/4</div>';
+    }).join('');
+  }
+
+  // --- Drawing ---
+  // Which player "owns" each safe spot for coloring
+  var SAFE_COLOR = {0:0, 8:-1, 13:1, 21:-1, 26:2, 34:-1, 39:3, 47:-1}; // -1 = neutral
+
+  function draw() {
+    // Background + border
+    ctx.fillStyle = '#e8e4dc'; ctx.fillRect(0, 0, SIZE, SIZE);
+    ctx.strokeStyle = '#c8c4bc'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(0.5, 0.5, SIZE - 1, SIZE - 1);
+
+    // Translate for padding
+    ctx.save();
+    ctx.translate(PAD, PAD);
+    ctx.fillStyle = '#f5f0e8'; ctx.fillRect(0, 0, BOARD, BOARD);
+    ctx.strokeStyle = '#d1cdc5'; ctx.lineWidth = 1;
+    ctx.strokeRect(0, 0, BOARD, BOARD);
+
+    // Quadrant backgrounds with inner white yard
+    var quads = [[0,0,0],[0,9,1],[9,9,2],[9,0,3]];
+    quads.forEach(function(q) {
+      var x = q[1]*SQ, y = q[0]*SQ, s = 6*SQ;
+      // Single colored area with white center for pieces
+      ctx.fillStyle = LIGHT[q[2]]; ctx.fillRect(x, y, s, s);
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(x + SQ, y + SQ, s - SQ*2, s - SQ*2);
+      // Single border
+      ctx.strokeStyle = COLORS[q[2]]; ctx.lineWidth = 2; ctx.strokeRect(x, y, s, s);
+    });
+
+    // Center home — colored triangles
+    var cx = 7.5*SQ, cy = 7.5*SQ;
+    var tri = [
+      [6*SQ, 6*SQ, 6*SQ, 9*SQ],  // left triangle (Red)
+      [6*SQ, 6*SQ, 9*SQ, 6*SQ],  // top triangle (Blue)
+      [9*SQ, 6*SQ, 9*SQ, 9*SQ],  // right triangle (Green)
+      [6*SQ, 9*SQ, 9*SQ, 9*SQ]   // bottom triangle (Yellow)
+    ];
+    tri.forEach(function(t, i) {
+      ctx.fillStyle = COLORS[i]; ctx.globalAlpha = 0.85;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(t[0], t[1]); ctx.lineTo(t[2], t[3]); ctx.closePath(); ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.strokeRect(6*SQ, 6*SQ, 3*SQ, 3*SQ);
+
+    // Path cells — alternating shade
+    PATH.forEach(function(p, idx) {
+      var x = p[1]*SQ, y = p[0]*SQ;
+      var isEntry = -1;
+      for (var ei = 0; ei < 4; ei++) { if (ENTRY[ei] === idx) isEntry = ei; }
+      var isSafeSpot = SAFE.indexOf(idx) >= 0;
+
+      ctx.fillStyle = '#ffffff';
+
+      // Entry cells get player color
+      if (isEntry >= 0) ctx.fillStyle = COLORS[isEntry] + '30';
+
+      // Safe spots get consistent highlight
+      if (isSafeSpot) {
+        var sc = SAFE_COLOR[idx];
+        ctx.fillStyle = sc >= 0 ? LIGHT[sc] : '#fef3c7'; // Player color or gold for neutral
+      }
+
+      ctx.fillRect(x, y, SQ, SQ);
+      ctx.strokeStyle = '#e0dcd4'; ctx.lineWidth = 0.5; ctx.strokeRect(x, y, SQ, SQ);
+
+      // Star on ALL safe spots — consistent gold color
+      if (isSafeSpot) {
+        var sc2 = SAFE_COLOR[idx];
+        ctx.fillStyle = sc2 >= 0 ? COLORS[sc2] : '#d97706';
+        ctx.font = 'bold ' + Math.round(SQ*0.55) + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('★', x+SQ/2, y+SQ/2);
+      }
+    });
+
+    // Home stretch cells — gradient feel
+    HOME_STRETCH.forEach(function(hs, pi) {
+      hs.forEach(function(p, hi) {
+        var x = p[1]*SQ, y = p[0]*SQ;
+        var alpha = 0.25 + (hi / 6) * 0.4; // Gets more opaque toward center
+        ctx.fillStyle = COLORS[pi]; ctx.globalAlpha = alpha;
+        ctx.fillRect(x, y, SQ, SQ);
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = COLORS[pi] + '88'; ctx.lineWidth = 0.5;
+        ctx.strokeRect(x, y, SQ, SQ);
+        // Arrow toward center on last cell
+        if (hi === 5) {
+          ctx.fillStyle = COLORS[pi]; ctx.font = 'bold ' + Math.round(SQ*0.4) + 'px sans-serif';
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText('▲', x+SQ/2, y+SQ/2);
+        }
       });
     });
+
+    // Yard circles (base positions) — with alternating subtle bg
+    YARD_POS.forEach(function(yp, pi) {
+      yp.forEach(function(pos, yi) {
+        var px = pos[1]*SQ, py = pos[0]*SQ;
+        // Subtle alternating ring
+        ctx.beginPath(); ctx.arc(px, py, SQ*0.5, 0, Math.PI*2);
+        ctx.fillStyle = COLORS[pi] + '15'; ctx.fill();
+        // White inner
+        ctx.beginPath(); ctx.arc(px, py, SQ*0.42, 0, Math.PI*2);
+        ctx.fillStyle = '#fff'; ctx.fill();
+        ctx.strokeStyle = COLORS[pi]; ctx.lineWidth = 2; ctx.stroke();
+      });
+    });
+
+    // Pieces — collect positions to handle stacking
+    var cellPieces = {}; // key: "x,y" -> array of {pi, pci, coords}
+    players.forEach(function(pl, pi) {
+      pl.pieces.forEach(function(pc, pci) {
+        var coords;
+        if (pc.home) { coords = { x: 7.5*SQ + (pci%2-0.5)*SQ*0.5, y: 7.5*SQ + (Math.floor(pci/2)-0.5)*SQ*0.5 }; }
+        else if (pc.pos === -1) { var yp = YARD_POS[pi][pci]; coords = { x: yp[1]*SQ, y: yp[0]*SQ }; }
+        else { coords = getPieceCoords(pi, pc); }
+        if (!coords) return;
+        // Round to cell center for grouping
+        var key = Math.round(coords.x) + ',' + Math.round(coords.y);
+        if (!cellPieces[key]) cellPieces[key] = [];
+        cellPieces[key].push({ pi: pi, pci: pci, x: coords.x, y: coords.y });
+      });
+    });
+
+    // Draw pieces with offset for stacking
+    Object.keys(cellPieces).forEach(function(key) {
+      var group = cellPieces[key];
+      var offsets = group.length === 1 ? [[0,0]] :
+        group.length === 2 ? [[-SQ*0.15, 0],[SQ*0.15, 0]] :
+        group.length === 3 ? [[-SQ*0.15,-SQ*0.1],[SQ*0.15,-SQ*0.1],[0,SQ*0.12]] :
+        [[-SQ*0.13,-SQ*0.1],[SQ*0.13,-SQ*0.1],[-SQ*0.13,SQ*0.1],[SQ*0.13,SQ*0.1]];
+
+      group.forEach(function(p, idx) {
+        var ox = p.x + (offsets[idx] ? offsets[idx][0] : 0);
+        var oy = p.y + (offsets[idx] ? offsets[idx][1] : 0);
+        var r = group.length > 2 ? SQ*0.28 : SQ*0.34;
+        var isMovable = movePhase && turn === 0 && p.pi === 0 && movable.indexOf(p.pci) >= 0;
+
+        // Shadow
+        ctx.save();
+        ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 3; ctx.shadowOffsetY = 1.5;
+        ctx.beginPath(); ctx.arc(ox, oy, r, 0, Math.PI*2);
+        ctx.fillStyle = COLORS[p.pi]; ctx.fill();
+        ctx.restore();
+
+        // White border
+        ctx.beginPath(); ctx.arc(ox, oy, r, 0, Math.PI*2);
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+
+        // Inner circle
+        ctx.beginPath(); ctx.arc(ox, oy, r*0.55, 0, Math.PI*2);
+        ctx.fillStyle = '#fff'; ctx.fill();
+
+        // Number
+        ctx.fillStyle = COLORS[p.pi]; ctx.font = 'bold ' + Math.round(r*0.9) + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(p.pci + 1, ox, oy + 0.5);
+
+        // Movable highlight
+        if (isMovable) {
+          ctx.beginPath(); ctx.arc(ox, oy, r + 4, 0, Math.PI*2);
+          ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.stroke();
+          ctx.beginPath(); ctx.arc(ox, oy, r + 4, 0, Math.PI*2);
+          ctx.strokeStyle = COLORS[p.pi]; ctx.lineWidth = 2;
+          ctx.setLineDash([5, 3]); ctx.stroke(); ctx.setLineDash([]);
+        }
+      });
+    });
+
+    ctx.restore(); // End padding translate
   }
 
-  // Player click on piece
-  c.addEventListener('click',function(e){
-    if(turn!==0||!movePhase)return;
-    var rect=c.getBoundingClientRect(),mx=(e.clientX-rect.left)*(S/rect.width),my=(e.clientY-rect.top)*(S/rect.height);
-    players[0].pieces.forEach(function(pc,i){
-      if(pc.home)return;
-      var x,y;
-      if(pc.pos===-1){x=(2+(i%2))*SQ+SQ/2;y=(2+Math.floor(i/2))*SQ+SQ/2;}
-      else if(pc.pos>=52){var hi=pc.pos-52;var hp=homeStretch[0][Math.min(hi,5)];x=hp[1]*SQ+SQ/2;y=hp[0]*SQ+SQ/2;}
-      else{var absPos=(pc.pos+players[0].start)%52;x=pathCoords[absPos][1]*SQ+SQ/2;y=pathCoords[absPos][0]*SQ+SQ/2;}
-      if(Math.abs(mx-x)<SQ&&Math.abs(my-y)<SQ)movePiece(i);
-    });
+  // Click handler — account for padding
+  c.addEventListener('click', function(e) {
+    if (turn !== 0 || !movePhase || movable.length === 0) return;
+    var rect = c.getBoundingClientRect();
+    var mx = (e.clientX - rect.left) * (SIZE / rect.width) - PAD;
+    var my = (e.clientY - rect.top) * (SIZE / rect.height) - PAD;
+
+    for (var i = 0; i < movable.length; i++) {
+      var pci = movable[i], pc = players[0].pieces[pci], coords;
+      if (pc.pos === -1) { var yp = YARD_POS[0][pci]; coords = { x: yp[1]*SQ, y: yp[0]*SQ }; }
+      else { coords = getPieceCoords(0, pc); }
+      if (coords && Math.abs(mx - coords.x) < SQ && Math.abs(my - coords.y) < SQ) {
+        movePiece(0, pci); return;
+      }
+    }
   });
 
-  document.getElementById('btn-roll').onclick=roll;
-  document.getElementById('btn-restart').onclick=init;
+  document.getElementById('btn-roll').onclick = function() { if (turn === 0) roll(); };
+  document.getElementById('btn-restart').onclick = init;
   init();
 })();
 </script>
+
+<style>
+  @media (max-width: 768px) {
+    #ludo-ui { flex-direction: column !important; align-items: center !important; }
+    #ludo-panel { width: 100% !important; }
+  }
+</style>
