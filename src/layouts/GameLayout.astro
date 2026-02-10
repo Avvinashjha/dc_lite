@@ -29,6 +29,7 @@ const gameJsonLd = {
 <BaseLayout title={`${gameName} - Free Online Game | DailyCoder`} description={description}>
   <Fragment slot="head">
     <meta name="keywords" content={`${gameName}, ${keywords}, free online game, browser game, no download`} />
+    <meta name="robots" content="index, follow" />
     <script type="application/ld+json" set:html={JSON.stringify(gameJsonLd)} />
   </Fragment>
 

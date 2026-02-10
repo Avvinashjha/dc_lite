@@ -11,7 +11,7 @@ const course = getCourse(courseSlug!);
 if (!course) return Astro.redirect('/courses');
 ---
 
-<BaseLayout title={`${course.title} | DevContent`} description={course.description}>
+<BaseLayout title={`${course.title} | DailyCoder`} description={course.description}>
   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
     <a href="/courses" style="color: var(--color-text-light); font-size: 0.875rem;">&larr; All Courses</a>
 

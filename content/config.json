@@ -24,5 +24,13 @@
   "newsletter": {
     "enabled": true,
     "googleScriptUrl": "YOUR_GOOGLE_SCRIPT_URL_HERE"
+  },
+  "seo": {
+    "twitterHandle": "@dailycoder_in",
+    "locale": "en_US"
+  },
+  "analytics": {
+    "googleAnalyticsId": "",
+    "googleSearchConsoleVerification": ""
   }
 }

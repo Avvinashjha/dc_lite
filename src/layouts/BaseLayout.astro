@@ -28,8 +28,12 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).href : new URL('/og-default.svg', Astro.site).href;
+const seo = (config as any).seo || {};
+const analytics = (config as any).analytics || {};
+const twitterHandle = seo.twitterHandle || '@dailycoder_in';
+const locale = seo.locale || 'en_US';
 
-const jsonLd = {
+const jsonLd: Record<string, any> = {
   '@context': 'https://schema.org',
   '@type': type === 'article' ? 'Article' : 'WebSite',
   headline: title,
@@ -38,8 +42,26 @@ const jsonLd = {
   url: canonicalURL.href,
   ...(publishedTime && { datePublished: publishedTime.toISOString() }),
   ...(author && { author: { '@type': 'Person', name: author } }),
-  ...(tags.length > 0 && { keywords: tags.join(', ') })
+  ...(tags.length > 0 && { keywords: tags.join(', ') }),
 };
+
+// Add publisher for articles
+if (type === 'article') {
+  jsonLd.publisher = {
+    '@type': 'Organization',
+    name: config.site.title,
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', Astro.site).href }
+  };
+}
+
+// Add SearchAction for WebSite schema
+if (type === 'website') {
+  jsonLd.potentialAction = {
+    '@type': 'SearchAction',
+    target: `${config.site.url}/blog?q={search_term}`,
+    'query-input': 'required name=search_term'
+  };
+}
 ---
 
 <!DOCTYPE html>
@@ -51,23 +73,55 @@ const jsonLd = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content={config.site.title} />
+    <meta property="og:locale" content={locale} />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+
+    <!-- Twitter -->
     <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Analytics -->
+    {analytics.googleSearchConsoleVerification && (
+      <meta name="google-site-verification" content={analytics.googleSearchConsoleVerification} />
+    )}
+    {analytics.googleAnalyticsId && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.googleAnalyticsId}`}></script>
+    )}
+    {analytics.googleAnalyticsId && (
+      <script is:inline define:vars={{gaId: analytics.googleAnalyticsId}}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId);
+      </script>
+    )}
+
     <slot name="head" />
     <script is:inline>
       const theme = localStorage.getItem('theme') ||
