@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site).href : new URL('/og-default.svg', Astro.site).href;
+const ogImage = image ? new URL(image, Astro.site).href : new URL('/web-app-manifest-512x512.png', Astro.site).href;
 const seo = (config as any).seo || {};
 const analytics = (config as any).analytics || {};
 const twitterHandle = seo.twitterHandle || '@dailycoder_in';
@@ -89,8 +89,8 @@ if (type === 'website') {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content={image ? "1200" : "512"} />
+    <meta property="og:image:height" content={image ? "630" : "512"} />
     <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content={config.site.title} />
     <meta property="og:locale" content={locale} />
