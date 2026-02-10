@@ -558,8 +558,11 @@ import GameLayout from '../../layouts/GameLayout.astro';
 </script>
 
 <style>
+  #chess-ui { max-width: 100%; overflow: hidden; }
+  #chess-ui > div:first-child { max-width: 100%; }
+  #chess-ui canvas { max-width: 100%; height: auto !important; }
   @media (max-width: 768px) {
-    #chess-ui { flex-direction: column !important; align-items: center !important; flex-wrap: wrap !important; }
+    #chess-ui { flex-direction: column !important; align-items: center !important; flex-wrap: wrap !important; padding: 0.5rem !important; gap: 1rem !important; }
     #chess-info { width: 100% !important; }
   }
 </style>

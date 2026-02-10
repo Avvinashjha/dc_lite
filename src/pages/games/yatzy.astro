@@ -77,7 +77,10 @@ import GameLayout from '../../layouts/GameLayout.astro';
     categories.forEach(function(cat,i){
       var scored=scores[i]!==null;var preview=dice[0]?cat.fn(dice):'-';
       var canChoose=!scored&&rollsLeft<3;
-      html+='<tr style="border-bottom:1px solid var(--color-border);'+(canChoose?'cursor:pointer;':'')+(canChoose&&preview>0?'background:rgba(37,99,235,.05);':'')+'"><td style="padding:0.4rem;">'+cat.name+'</td><td style="text-align:center;padding:0.4rem;font-weight:700;'+(scored?'':'color:var(--color-text-light);')+'">'+(scored?scores[i]:'-')+'</td><td style="text-align:center;padding:0.4rem;color:var(--color-primary);font-weight:'+(preview>0?'700':'400')+';">'+(canChoose?'<button class="yz-pick" data-cat="'+i+'" style="background:none;border:1px solid '+(preview>0?'var(--color-primary)':'var(--color-border)');+';border-radius:4px;padding:0.2rem 0.5rem;cursor:pointer;font-size:0.8rem;font-weight:700;color:'+(preview>0?'var(--color-primary)':'var(--color-text-light)')+';">'+preview+'</button>':'')+'</td></tr>';
+      var borderColor=preview>0?'var(--color-primary)':'var(--color-border)';
+      var textColor=preview>0?'var(--color-primary)':'var(--color-text-light)';
+      var fw=preview>0?'700':'400';
+      html+='<tr style="border-bottom:1px solid var(--color-border);'+(canChoose?'cursor:pointer;':'')+(canChoose&&preview>0?'background:rgba(37,99,235,.05);':'')+'"><td style="padding:0.4rem;">'+cat.name+'</td><td style="text-align:center;padding:0.4rem;font-weight:700;'+(scored?'':'color:var(--color-text-light);')+'">'+(scored?scores[i]:'-')+'</td><td style="text-align:center;padding:0.4rem;color:var(--color-primary);font-weight:'+fw+';">'+(canChoose?'<button class="yz-pick" data-cat="'+i+'" style="background:none;border:1px solid '+borderColor+';border-radius:4px;padding:0.2rem 0.5rem;cursor:pointer;font-size:0.8rem;font-weight:700;color:'+textColor+';">'+preview+'</button>':'')+'</td></tr>';
     });
     var total=scores.reduce(function(a,b){return a+(b||0);},0);
     html+='</table>';

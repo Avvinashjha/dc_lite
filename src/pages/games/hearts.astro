@@ -96,7 +96,7 @@ import GameLayout from '../../layouts/GameLayout.astro';
 })();
 </script>
 <style is:global>
-  .hcard{padding:0.4rem 0.5rem;border:1px solid var(--color-border);border-radius:6px;background:var(--color-background);font-size:1rem;font-weight:700;cursor:pointer;transition:all 150ms;min-width:42px;}
+  .hcard{padding:0.3rem 0.4rem;border:1px solid var(--color-border);border-radius:6px;background:var(--color-background);font-size:clamp(0.8rem, 2.5vw, 1rem);font-weight:700;cursor:pointer;transition:all 150ms;min-width:0;}
   .hcard:disabled{opacity:0.4;cursor:default;}
   .hcard--ok:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--color-primary);}
 </style>

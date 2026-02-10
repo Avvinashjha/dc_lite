@@ -102,7 +102,7 @@ import GameLayout from '../../layouts/GameLayout.astro';
 })();
 </script>
 <style is:global>
-  .fk-die{font-size:2.5rem;width:52px;height:52px;border:2px solid var(--color-border);border-radius:8px;background:var(--color-background);cursor:pointer;transition:all 150ms;display:flex;align-items:center;justify-content:center;}
+  .fk-die{font-size:clamp(1.8rem, 6vw, 2.5rem);width:clamp(40px, 12vw, 52px);height:clamp(40px, 12vw, 52px);border:2px solid var(--color-border);border-radius:8px;background:var(--color-background);cursor:pointer;transition:all 150ms;display:flex;align-items:center;justify-content:center;}
   .fk-die:hover{border-color:var(--color-primary);}
   .fk-die--sel{border-color:var(--color-primary);background:rgba(37,99,235,.1);transform:translateY(-4px);}
   .fk-die:disabled{cursor:default;opacity:0.6;}

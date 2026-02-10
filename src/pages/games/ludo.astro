@@ -489,8 +489,11 @@ import GameLayout from '../../layouts/GameLayout.astro';
 </script>
 
 <style>
+  #ludo-ui { max-width: 100%; overflow: hidden; }
+  #ludo-ui > div:first-child { max-width: 100%; }
+  #ludo-ui canvas { max-width: 100%; height: auto !important; }
   @media (max-width: 768px) {
-    #ludo-ui { flex-direction: column !important; align-items: center !important; }
+    #ludo-ui { flex-direction: column !important; align-items: center !important; padding: 0.5rem !important; gap: 1rem !important; }
     #ludo-panel { width: 100% !important; }
   }
 </style>

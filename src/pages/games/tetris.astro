@@ -1,48 +1,197 @@
 ---
 import GameLayout from '../../layouts/GameLayout.astro';
 ---
-<GameLayout gameName="Tetris" description="Classic block-stacking puzzle. Clear lines to score!" instructions="<strong>Left/Right</strong> arrows to move, <strong>Up</strong> to rotate, <strong>Down</strong> to soft drop, <strong>Space</strong> for hard drop. Clear lines to score. Speed increases each level!" keywords="tetris, block game, puzzle game, falling blocks">
-  <canvas id="game" width="300" height="600"></canvas>
+<GameLayout gameName="Tetris" description="Classic block-stacking puzzle. Clear lines to score!" instructions="<strong>Left/Right</strong> arrows to move, <strong>Up</strong> to rotate, <strong>Down</strong> to soft drop, <strong>Space</strong> for hard drop. On mobile use the <strong>buttons below</strong>. Clear lines to score. Speed increases each level!" keywords="tetris, block game, puzzle game, falling blocks">
+  <canvas id="game"></canvas>
+  <div id="touch-controls" style="display:none;margin-top:0.75rem;"></div>
 </GameLayout>
 <script is:inline>
 (function(){
-  var c=document.getElementById('game'),ctx=c.getContext('2d');
-  var W=300,H=600,S=30,COLS=10,ROWS=20;
-  var SHAPES=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[0,1,1],[1,1,0]],[[1,1,0],[0,1,1]]];
-  var COLORS=['#06b6d4','#eab308','#a855f7','#2563eb','#f97316','#22c55e','#ef4444'];
-  var grid,piece,pieceX,pieceY,pieceType,score,level,lines,best,running,interval,gameOver;
-  var BEST_KEY='dc_tetris_best';best=parseInt(localStorage.getItem(BEST_KEY))||0;
-  document.getElementById('best-score').textContent=best;
+  var c = document.getElementById('game'), ctx = c.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var COLS = 10, ROWS = 20, S, W, H;
 
-  function init(){grid=Array.from({length:ROWS},function(){return Array(COLS).fill(0);});score=0;level=1;lines=0;gameOver=false;running=false;newPiece();draw();}
-  function newPiece(){pieceType=Math.floor(Math.random()*7);piece=SHAPES[pieceType].map(function(r){return r.slice();});pieceX=Math.floor((COLS-piece[0].length)/2);pieceY=0;
-    if(!canMove(0,0)){gameOver=true;running=false;clearInterval(interval);document.getElementById('btn-start').style.display='none';document.getElementById('btn-restart').style.display='';document.getElementById('btn-pause').style.display='none';}
+  function resize() {
+    var container = c.parentElement;
+    var maxW = Math.min(container.clientWidth, 320);
+    S = Math.floor(maxW / COLS);
+    W = S * COLS; H = S * ROWS;
+    c.width = W * dpr; c.height = H * dpr;
+    c.style.width = W + 'px'; c.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
-  function canMove(dx,dy,p){p=p||piece;for(var r=0;r<p.length;r++)for(var c=0;c<p[r].length;c++){if(p[r][c]){var nx=pieceX+c+dx,ny=pieceY+r+dy;if(nx<0||nx>=COLS||ny>=ROWS||(ny>=0&&grid[ny][nx]))return false;}}return true;}
-  function lock(){for(var r=0;r<piece.length;r++)for(var c=0;c<piece[r].length;c++){if(piece[r][c]&&pieceY+r>=0)grid[pieceY+r][pieceX+c]=pieceType+1;}clearLines();newPiece();}
-  function clearLines(){var cleared=0;for(var r=ROWS-1;r>=0;r--){if(grid[r].every(function(v){return v>0;})){grid.splice(r,1);grid.unshift(Array(COLS).fill(0));cleared++;r++;}}
-    if(cleared){lines+=cleared;score+=[0,100,300,500,800][cleared]*level;level=Math.floor(lines/10)+1;updateScore();if(running){clearInterval(interval);interval=setInterval(step,Math.max(100,500-level*40));}}}
-  function rotate(){var p=piece[0].map(function(_,i){return piece.map(function(r){return r[i];});}).reverse();if(canMove(0,0,p))piece=p;}
-  function updateScore(){document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem(BEST_KEY,best);document.getElementById('best-score').textContent=best;}}
-  function draw(){
-    ctx.fillStyle='#111827';ctx.fillRect(0,0,W,H);
-    for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){ctx.strokeStyle='#1f2937';ctx.strokeRect(c*S,r*S,S,S);if(grid[r][c]){ctx.fillStyle=COLORS[grid[r][c]-1];ctx.fillRect(c*S+1,r*S+1,S-2,S-2);}}
-    if(piece)for(var r=0;r<piece.length;r++)for(var c=0;c<piece[r].length;c++){if(piece[r][c]){ctx.fillStyle=COLORS[pieceType];ctx.fillRect((pieceX+c)*S+1,(pieceY+r)*S+1,S-2,S-2);}}
-    if(gameOver){ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='bold 24px sans-serif';ctx.textAlign='center';ctx.fillText('Game Over!',W/2,H/2-10);ctx.font='16px sans-serif';ctx.fillText('Score: '+score+' | Level: '+level,W/2,H/2+20);}
+  resize();
+
+  var SHAPES = [[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[0,1,1],[1,1,0]],[[1,1,0],[0,1,1]]];
+  var COLORS = ['#06b6d4','#eab308','#a855f7','#2563eb','#f97316','#22c55e','#ef4444'];
+  var grid, piece, pieceX, pieceY, pieceType, score, level, lines, best, running, interval, gameOver;
+  var BEST_KEY = 'dc_tetris_best';
+  best = parseInt(localStorage.getItem(BEST_KEY)) || 0;
+  document.getElementById('best-score').textContent = best;
+
+  window.addEventListener('resize', function() { resize(); draw(); });
+
+  function init() {
+    grid = Array.from({length:ROWS}, function() { return Array(COLS).fill(0); });
+    score = 0; level = 1; lines = 0; gameOver = false; running = false;
+    resize(); newPiece(); draw();
   }
-  function step(){if(!canMove(0,1)){lock();}else pieceY++;draw();}
-  function start(){if(running)return;running=true;document.getElementById('btn-start').style.display='none';document.getElementById('btn-pause').style.display='';interval=setInterval(step,500);}
-  function restart(){clearInterval(interval);init();start();document.getElementById('btn-restart').style.display='none';}
-  document.getElementById('btn-start').onclick=start;document.getElementById('btn-restart').onclick=restart;
-  document.getElementById('btn-pause').onclick=function(){if(running){clearInterval(interval);running=false;this.textContent='Resume';}else{interval=setInterval(step,Math.max(100,500-level*40));running=true;this.textContent='Pause';}};
-  document.addEventListener('keydown',function(e){if(gameOver)return;
-    if(e.key==='ArrowLeft'&&canMove(-1,0)){pieceX--;draw();}
-    else if(e.key==='ArrowRight'&&canMove(1,0)){pieceX++;draw();}
-    else if(e.key==='ArrowDown'&&canMove(0,1)){pieceY++;draw();}
-    else if(e.key==='ArrowUp'){rotate();draw();}
-    else if(e.key===' '){while(canMove(0,1))pieceY++;lock();draw();}
-    if(!running&&!gameOver)start();
+  function newPiece() {
+    pieceType = Math.floor(Math.random()*7);
+    piece = SHAPES[pieceType].map(function(r) { return r.slice(); });
+    pieceX = Math.floor((COLS - piece[0].length) / 2); pieceY = 0;
+    if (!canMove(0,0)) {
+      gameOver = true; running = false; clearInterval(interval);
+      document.getElementById('btn-start').style.display = 'none';
+      document.getElementById('btn-restart').style.display = '';
+      document.getElementById('btn-pause').style.display = 'none';
+    }
+  }
+  function canMove(dx, dy, p) {
+    p = p || piece;
+    for (var r = 0; r < p.length; r++) for (var cc = 0; cc < p[r].length; cc++) {
+      if (p[r][cc]) {
+        var nx = pieceX + cc + dx, ny = pieceY + r + dy;
+        if (nx < 0 || nx >= COLS || ny >= ROWS || (ny >= 0 && grid[ny][nx])) return false;
+      }
+    }
+    return true;
+  }
+  function lock() {
+    for (var r = 0; r < piece.length; r++) for (var cc = 0; cc < piece[r].length; cc++) {
+      if (piece[r][cc] && pieceY+r >= 0) grid[pieceY+r][pieceX+cc] = pieceType + 1;
+    }
+    clearLines(); newPiece();
+  }
+  function clearLines() {
+    var cleared = 0;
+    for (var r = ROWS-1; r >= 0; r--) {
+      if (grid[r].every(function(v) { return v > 0; })) { grid.splice(r, 1); grid.unshift(Array(COLS).fill(0)); cleared++; r++; }
+    }
+    if (cleared) {
+      lines += cleared; score += [0,100,300,500,800][cleared] * level;
+      level = Math.floor(lines/10) + 1; updateScore();
+      if (running) { clearInterval(interval); interval = setInterval(step, Math.max(100, 500 - level*40)); }
+    }
+  }
+  function rotate() {
+    var p = piece[0].map(function(_, i) { return piece.map(function(r) { return r[i]; }); }).reverse();
+    if (canMove(0, 0, p)) piece = p;
+    // Wall kick: try shifting left/right if rotation fails at edges
+    else if (canMove(-1, 0, p)) { pieceX--; piece = p; }
+    else if (canMove(1, 0, p)) { pieceX++; piece = p; }
+  }
+  function updateScore() {
+    document.getElementById('score').textContent = score;
+    if (score > best) { best = score; localStorage.setItem(BEST_KEY, best); document.getElementById('best-score').textContent = best; }
+  }
+
+  // Ghost piece (drop preview)
+  function getGhostY() {
+    var gy = pieceY;
+    while (true) { var ok = true; for (var r = 0; r < piece.length && ok; r++) for (var cc = 0; cc < piece[r].length && ok; cc++) { if (piece[r][cc]) { var ny = gy+1+r; if (ny >= ROWS || (ny >= 0 && grid[ny][pieceX+cc])) ok = false; } } if (!ok) break; gy++; }
+    return gy;
+  }
+
+  function draw() {
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(0, 0, W, H);
+    // Grid lines
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
+    for (var i = 0; i <= COLS; i++) { ctx.beginPath(); ctx.moveTo(i*S, 0); ctx.lineTo(i*S, H); ctx.stroke(); }
+    for (var i = 0; i <= ROWS; i++) { ctx.beginPath(); ctx.moveTo(0, i*S); ctx.lineTo(W, i*S); ctx.stroke(); }
+    // Placed blocks
+    for (var r = 0; r < ROWS; r++) for (var cc = 0; cc < COLS; cc++) {
+      if (grid[r][cc]) {
+        ctx.fillStyle = COLORS[grid[r][cc]-1];
+        ctx.fillRect(cc*S+1, r*S+1, S-2, S-2);
+        // Highlight edge
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.fillRect(cc*S+1, r*S+1, S-2, 2);
+        ctx.fillRect(cc*S+1, r*S+1, 2, S-2);
+      }
+    }
+    // Ghost piece
+    if (piece && !gameOver) {
+      var gy = getGhostY();
+      for (var r = 0; r < piece.length; r++) for (var cc = 0; cc < piece[r].length; cc++) {
+        if (piece[r][cc]) {
+          ctx.strokeStyle = COLORS[pieceType] + '55'; ctx.lineWidth = 1;
+          ctx.strokeRect((pieceX+cc)*S+2, (gy+r)*S+2, S-4, S-4);
+        }
+      }
+    }
+    // Active piece
+    if (piece) for (var r = 0; r < piece.length; r++) for (var cc = 0; cc < piece[r].length; cc++) {
+      if (piece[r][cc]) {
+        ctx.fillStyle = COLORS[pieceType];
+        ctx.fillRect((pieceX+cc)*S+1, (pieceY+r)*S+1, S-2, S-2);
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fillRect((pieceX+cc)*S+1, (pieceY+r)*S+1, S-2, 2);
+        ctx.fillRect((pieceX+cc)*S+1, (pieceY+r)*S+1, 2, S-2);
+      }
+    }
+    // Level indicator
+    ctx.fillStyle = '#64748b'; ctx.font = Math.max(10, S*0.4) + 'px sans-serif';
+    ctx.textAlign = 'right'; ctx.fillText('Lv.' + level, W - 4, S*0.6);
+    // Game over
+    if (gameOver) {
+      ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff'; ctx.font = 'bold ' + Math.max(18, S*0.9) + 'px sans-serif';
+      ctx.textAlign = 'center'; ctx.fillText('Game Over!', W/2, H/2 - S*0.4);
+      ctx.font = Math.max(13, S*0.55) + 'px sans-serif';
+      ctx.fillText('Score: ' + score + '  Level: ' + level, W/2, H/2 + S*0.6);
+    }
+  }
+
+  function step() { if (!canMove(0,1)) { lock(); } else pieceY++; draw(); }
+  function start() {
+    if (running) return; running = true;
+    document.getElementById('btn-start').style.display = 'none';
+    document.getElementById('btn-pause').style.display = '';
+    interval = setInterval(step, 500);
+  }
+  function restart() { clearInterval(interval); init(); start(); document.getElementById('btn-restart').style.display = 'none'; }
+
+  document.getElementById('btn-start').onclick = start;
+  document.getElementById('btn-restart').onclick = restart;
+  document.getElementById('btn-pause').onclick = function() {
+    if (running) { clearInterval(interval); running = false; this.textContent = 'Resume'; }
+    else { interval = setInterval(step, Math.max(100, 500-level*40)); running = true; this.textContent = 'Pause'; }
+  };
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if (gameOver) return;
+    if (e.key === 'ArrowLeft' && canMove(-1,0)) { pieceX--; draw(); }
+    else if (e.key === 'ArrowRight' && canMove(1,0)) { pieceX++; draw(); }
+    else if (e.key === 'ArrowDown' && canMove(0,1)) { pieceY++; draw(); }
+    else if (e.key === 'ArrowUp') { rotate(); draw(); }
+    else if (e.key === ' ') { while (canMove(0,1)) pieceY++; lock(); draw(); }
+    if (!running && !gameOver) start();
   });
+
+  // Mobile touch controls
+  var isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (isMobile) {
+    var tc = document.getElementById('touch-controls');
+    tc.style.display = 'flex';
+    tc.style.cssText = 'display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;padding:0.5rem;';
+    var btns = [
+      ['◀', function() { if (canMove(-1,0)) { pieceX--; draw(); } }],
+      ['▶', function() { if (canMove(1,0)) { pieceX++; draw(); } }],
+      ['▼', function() { if (canMove(0,1)) { pieceY++; draw(); } }],
+      ['↻', function() { rotate(); draw(); }],
+      ['⏬', function() { while (canMove(0,1)) pieceY++; lock(); draw(); }]
+    ];
+    btns.forEach(function(b) {
+      var btn = document.createElement('button');
+      btn.textContent = b[0];
+      btn.style.cssText = 'width:52px;height:48px;font-size:1.3rem;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text);cursor:pointer;font-weight:700;touch-action:manipulation;';
+      btn.addEventListener('touchstart', function(e) { e.preventDefault(); b[1](); if (!running && !gameOver) start(); });
+      tc.appendChild(btn);
+    });
+  }
+
   init();
 })();
 </script>
