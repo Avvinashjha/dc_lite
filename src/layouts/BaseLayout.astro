@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site).href : new URL('/web-app-manifest-512x512.png', Astro.site).href;
+const ogImage = image ? new URL(image, Astro.site).href : new URL('/og-image.png', Astro.site).href;
 const seo = (config as any).seo || {};
 const analytics = (config as any).analytics || {};
 const twitterHandle = seo.twitterHandle || '@dailycoder_in';
