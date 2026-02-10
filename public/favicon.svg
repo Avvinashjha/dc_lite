@@ -1,8 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-  <rect width="200" height="200" rx="40" fill="#2563eb"/>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="200" height="200" rx="40" fill="#2563eb"></rect>
   <g transform="translate(100,100)">
-    <rect x="-60" y="-60" width="120" height="120" rx="4" transform="rotate(45)" stroke="#ffffff"/>
-    <rect x="-38" y="-38" width="76" height="76" rx="4" transform="rotate(45) translate(20, -20)" stroke="#ffffff"/>
-    <rect x="-16" y="-16" width="32" height="32" rx="2" transform="rotate(45)" stroke="#ffffff"/>
+    <rect x="-60" y="-60" width="120" height="120" rx="4" transform="rotate(45)" stroke="#ffffff"></rect>
+    <rect x="-38" y="-38" width="76" height="76" rx="4" transform="rotate(45) translate(20, -20)" stroke="#ffffff"></rect>
+    <rect x="-16" y="-16" width="32" height="32" rx="2" transform="rotate(45)" stroke="#ffffff"></rect>
   </g>
-</svg>
+</svg></svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
