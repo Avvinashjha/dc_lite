@@ -1,17 +1,27 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import VideoEmbed from '../components/VideoEmbed.astro';
-import Quiz from '../components/Quiz.astro';
-import Exercise from '../components/Exercise.astro';
-import { parseMarkdown } from '../utils/markdown';
-import { extractBlocks } from '../utils/parseBlocks';
-import type { Course, Lesson } from '../types/post';
+import BaseLayout from "./BaseLayout.astro";
+import VideoEmbed from "../components/VideoEmbed.astro";
+import Quiz from "../components/Quiz.astro";
+import Exercise from "../components/Exercise.astro";
+import { parseMarkdown } from "../utils/markdown";
+import { extractBlocks } from "../utils/parseBlocks";
+import type { Course, Lesson } from "../types/post";
 
 interface Props {
   lesson: Lesson;
   course: Course;
-  prevLesson?: { courseSlug: string; moduleSlug: string; slug: string; title: string } | null;
-  nextLesson?: { courseSlug: string; moduleSlug: string; slug: string; title: string } | null;
+  prevLesson?: {
+    courseSlug: string;
+    moduleSlug: string;
+    slug: string;
+    title: string;
+  } | null;
+  nextLesson?: {
+    courseSlug: string;
+    moduleSlug: string;
+    slug: string;
+    title: string;
+  } | null;
 }
 
 const { lesson, course, prevLesson, nextLesson } = Astro.props;
@@ -22,67 +32,113 @@ const htmlParts = parseMarkdown(cleanMarkdown).split(/<!--BLOCK_(\d+)-->/);
 <BaseLayout
   title={`${lesson.title} | ${course.title} | DailyCoder`}
   description={`${lesson.title} - ${course.title}`}
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Courses", href: "/courses" },
+    { label: course.title, href: `/courses/${course.slug}` },
+    { label: lesson.title, href: Astro.url.pathname },
+  ]}
 >
   <div class="lesson-layout">
     <!-- Sidebar -->
     <aside class="lesson-sidebar">
-      <a href={`/courses/${course.slug}`} class="lesson-sidebar__back">&larr; {course.title}</a>
-      {course.resolvedModules.map(mod => (
-        <div class="lesson-sidebar__module">
-          <h4 class="lesson-sidebar__module-title">{mod.title}</h4>
-          <ul class="lesson-sidebar__lessons">
-            {mod.lessons.map(l => (
-              <li>
-                <a
-                  href={`/courses/${course.slug}/${mod.slug}/${l.slug}`}
-                  class={`lesson-sidebar__link ${l.slug === lesson.slug && mod.slug === lesson.moduleSlug ? 'lesson-sidebar__link--active' : ''}`}
-                >
-                  {l.type === 'video' ? '▶' : '📄'} {l.title}
-                  <span class="lesson-sidebar__duration">{l.duration}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <a href={`/courses/${course.slug}`} class="lesson-sidebar__back"
+        >&larr; {course.title}</a
+      >
+      {
+        course.resolvedModules.map((mod) => (
+          <div class="lesson-sidebar__module">
+            <h4 class="lesson-sidebar__module-title">{mod.title}</h4>
+            <ul class="lesson-sidebar__lessons">
+              {mod.lessons.map((l) => (
+                <li>
+                  <a
+                    href={`/courses/${course.slug}/${mod.slug}/${l.slug}`}
+                    class={`lesson-sidebar__link ${l.slug === lesson.slug && mod.slug === lesson.moduleSlug ? "lesson-sidebar__link--active" : ""}`}
+                  >
+                    {l.type === "video" ? "▶" : "📄"} {l.title}
+                    <span class="lesson-sidebar__duration">{l.duration}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </aside>
 
     <!-- Content -->
     <article class="lesson-content">
       <div class="lesson-content__header">
-        <span class="tag" style="text-transform: capitalize;">{lesson.type}</span>
-        <span style="color: var(--color-text-light); font-size: 0.875rem;">{lesson.duration}</span>
+        <span class="tag" style="text-transform: capitalize;"
+          >{lesson.type}</span
+        >
+        <span style="color: var(--color-text-light); font-size: 0.875rem;"
+          >{lesson.duration}</span
+        >
       </div>
 
       <div class="article__content">
-        {htmlParts.map((part, i) => {
-          if (i % 2 === 0) {
-            return <div set:html={part} />;
-          }
-          const blockIdx = parseInt(part);
-          const block = blocks[blockIdx];
-          if (!block) return null;
-          if (block.type === 'video') return <VideoEmbed url={block.url} title={block.title} />;
-          if (block.type === 'quiz') return <Quiz question={block.question} options={block.options} answer={block.answer} explanation={block.explanation} />;
-          if (block.type === 'exercise') return <Exercise title={block.title} description={block.description} starterCode={block.starterCode} />;
-          return null;
-        })}
+        {
+          htmlParts.map((part, i) => {
+            if (i % 2 === 0) {
+              return <div set:html={part} />;
+            }
+            const blockIdx = parseInt(part);
+            const block = blocks[blockIdx];
+            if (!block) return null;
+            if (block.type === "video")
+              return <VideoEmbed url={block.url} title={block.title} />;
+            if (block.type === "quiz")
+              return (
+                <Quiz
+                  question={block.question}
+                  options={block.options}
+                  answer={block.answer}
+                  explanation={block.explanation}
+                />
+              );
+            if (block.type === "exercise")
+              return (
+                <Exercise
+                  title={block.title}
+                  description={block.description}
+                  starterCode={block.starterCode}
+                />
+              );
+            return null;
+          })
+        }
       </div>
 
       <!-- Nav -->
       <div class="lesson-nav">
-        {prevLesson ? (
-          <a href={`/courses/${prevLesson.courseSlug}/${prevLesson.moduleSlug}/${prevLesson.slug}`} class="button button--secondary">
-            &larr; {prevLesson.title}
-          </a>
-        ) : <span />}
-        {nextLesson ? (
-          <a href={`/courses/${nextLesson.courseSlug}/${nextLesson.moduleSlug}/${nextLesson.slug}`} class="button">
-            {nextLesson.title} &rarr;
-          </a>
-        ) : (
-          <a href={`/courses/${course.slug}`} class="button">Back to Course</a>
-        )}
+        {
+          prevLesson ? (
+            <a
+              href={`/courses/${prevLesson.courseSlug}/${prevLesson.moduleSlug}/${prevLesson.slug}`}
+              class="button button--secondary"
+            >
+              &larr; {prevLesson.title}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          nextLesson ? (
+            <a
+              href={`/courses/${nextLesson.courseSlug}/${nextLesson.moduleSlug}/${nextLesson.slug}`}
+              class="button"
+            >
+              {nextLesson.title} &rarr;
+            </a>
+          ) : (
+            <a href={`/courses/${course.slug}`} class="button">
+              Back to Course
+            </a>
+          )
+        }
       </div>
     </article>
   </div>

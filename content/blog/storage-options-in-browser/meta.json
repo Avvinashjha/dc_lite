@@ -1,0 +1,9 @@
+{
+  "title": "Storage Options in Browser",
+  "description": "Discover the different storage options available in the browser and their use cases.",
+  "date": "2026-02-11",
+  "author": "Avinash Jha",
+  "tags": ["browser", "storage", "programming", "javascript", "web development", "local storage", "session storage", "cookies", "indexeddb", "cache api"],
+  "category": "tutorials",
+  "draft": false
+}

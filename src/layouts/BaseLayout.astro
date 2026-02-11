@@ -13,6 +13,7 @@ interface Props {
   publishedTime?: Date;
   author?: string;
   tags?: string[];
+  breadcrumbs?: { label: string; href: string }[];
 }
 
 const config = getSiteConfig();
@@ -23,7 +24,8 @@ const {
   type = 'website',
   publishedTime,
   author = config.site.author,
-  tags = []
+  tags = [],
+  breadcrumbs = []
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -107,6 +109,18 @@ if (type === 'website') {
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((crumb, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crumb.label,
+          item: new URL(crumb.href, Astro.site).href,
+        })),
+      })} />
+    )}
 
     <!-- Analytics -->
     {analytics.googleSearchConsoleVerification && (
