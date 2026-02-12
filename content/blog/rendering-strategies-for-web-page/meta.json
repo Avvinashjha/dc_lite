@@ -1,0 +1,9 @@
+{
+  "title": "Rendering Strategies for Web Pages",
+  "description": "Rendering strategies define how web page's content is generated and delivered to the user. Understanding them is crucial for building fast, scalable, and SEO-friendly web applications.",
+  "date": "2026-02-12",
+  "author": "Avinash Jha",
+  "tags": ["rendering", "web", "performance", "seo", "CSR", "SSR", "SSG", "ISR"],
+  "category": "tutorials",
+  "draft": false
+}
