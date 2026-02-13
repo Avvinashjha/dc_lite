@@ -2,35 +2,47 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PostCard from '../../../components/PostCard.astro';
 import { getBlogPosts, getAllCategories } from '../../../utils/contentLoader';
+import { buildTaxonomy, findTaxonomyEntry, slugifyTaxonomy } from '../../../utils/taxonomy';
 
 export function getStaticPaths() {
-  const categories = getAllCategories();
-  return categories.map(category => ({ params: { category } }));
+  const entries = buildTaxonomy(getAllCategories());
+  const paths = new Set<string>();
+
+  entries.forEach(entry => {
+    paths.add(entry.slug);
+    entry.aliases.forEach(alias => paths.add(alias));
+  });
+
+  return Array.from(paths).map(category => ({ params: { category } }));
 }
 
 const { category } = Astro.params;
 const allPosts = getBlogPosts();
-const allCategories = getAllCategories();
+const categoryEntries = buildTaxonomy(getAllCategories());
+const entry = findTaxonomyEntry(categoryEntries, category || '');
+if (!entry) return Astro.redirect('/blog');
+if (category !== entry.slug) return Astro.redirect(`/blog/category/${entry.slug}`, 301);
+
 const filtered = allPosts
-  .filter(p => p.category === category)
+  .filter(post => slugifyTaxonomy(post.category) === entry.slug)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 ---
 
 <BaseLayout
-  title={`${category} Posts | DailyCoder`}
-  description={`Browse all blog posts in the ${category} category`}
+  title={`${entry.label} Posts | DailyCoder`}
+  description={`Browse all blog posts in the ${entry.label} category`}
 >
   <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-transform: capitalize;">{category} Posts</h1>
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-transform: capitalize;">{entry.label} Posts</h1>
     <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
       {filtered.length} post{filtered.length !== 1 ? 's' : ''} in this category
     </p>
     <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
-      {allCategories.map(cat => (
-        <a href={`/blog/category/${cat}`}
-           class={`tag ${category === cat ? 'tag--active' : ''}`}
+      {categoryEntries.map(cat => (
+        <a href={`/blog/category/${cat.slug}`}
+           class={`tag ${entry.slug === cat.slug ? 'tag--active' : ''}`}
            style="text-transform: capitalize;">
-          {cat}
+          {cat.label}
         </a>
       ))}
     </div>

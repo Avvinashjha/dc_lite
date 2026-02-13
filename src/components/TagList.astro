@@ -1,6 +1,8 @@
 ---
 import { getAllTags } from '../utils/contentLoader';
+import { buildTaxonomy } from '../utils/taxonomy';
 const allTags = getAllTags();
+const tagEntries = buildTaxonomy(allTags);
 
 interface Props { currentTag?: string; }
 const { currentTag } = Astro.props;
@@ -9,10 +11,10 @@ const { currentTag } = Astro.props;
 <div style="margin-bottom: 2rem;">
   <h2 style="margin-bottom: 1rem;">Tags</h2>
   <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-    {allTags.map(tag => (
-      <a href={`/blog/tag/${tag}`}
-         class={`tag ${currentTag === tag ? 'tag--active' : ''}`}>
-        {tag}
+    {tagEntries.map(tag => (
+      <a href={`/blog/tag/${tag.slug}`}
+         class={`tag ${currentTag === tag.slug ? 'tag--active' : ''}`}>
+        {tag.label}
       </a>
     ))}
   </div>
