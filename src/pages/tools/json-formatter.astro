@@ -1,8 +1,14 @@
 ---
-import ToolLayout from '../../layouts/ToolLayout.astro';
+import ToolLayout from "../../layouts/ToolLayout.astro";
+import hljs from "highlight.js";
 ---
 
-<ToolLayout title="JSON Formatter" description="Free online JSON formatter, validator, and minifier. Format JSON with syntax highlighting, validate JSON structure, and minify JSON data. Multi-tab support with auto-save." toolName="JSON Formatter" keywords="json formatter, json beautifier, json validator, json minifier, format json online, pretty print json">
+<ToolLayout
+  title="JSON Formatter"
+  description="Free online JSON formatter, validator, and minifier. Format JSON with syntax highlighting, validate JSON structure, and minify JSON data. Multi-tab support with auto-save."
+  toolName="JSON Formatter"
+  keywords="json formatter, json beautifier, json validator, json minifier, format json online, pretty print json"
+>
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
     <button class="tab-add" id="btn-add-tab" title="New tab">+</button>
@@ -17,14 +23,29 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     <button class="tool-btn" id="btn-save">Save Tab</button>
   </div>
 
-  <div class="tool-panels">
-    <div class="tool-panel">
+  <div id="split-workbench" class="jf-workbench" style="--left-pane: 50%;">
+    <div class="tool-panel jf-pane jf-pane--left">
       <span class="tool-panel__label">Input JSON</span>
-      <textarea id="input" class="tool-textarea" placeholder='{"name": "John", "age": 30}'></textarea>
+      <textarea
+        id="input"
+        class="tool-textarea"
+        placeholder='{"name": "John", "age": 30}'></textarea>
     </div>
-    <div class="tool-panel">
+
+    <div
+      id="pane-splitter"
+      class="jf-splitter"
+      role="separator"
+      aria-label="Resize input and output panes"
+      aria-orientation="vertical"
+      tabindex="0"
+    >
+      <span></span>
+    </div>
+
+    <div class="tool-panel jf-pane jf-pane--right">
       <span class="tool-panel__label">Output</span>
-      <div id="output" class="tool-output"></div>
+      <div id="output" class="tool-output language-json"></div>
     </div>
   </div>
   <div id="status"></div>
@@ -32,38 +53,50 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 
 <script src="/js/store.js" is:inline></script>
 <script is:inline>
-  var TOOL = 'json-formatter';
+  var TOOL = "json-formatter";
   var tabs = [];
   var activeTab = null;
-  var input = document.getElementById('input');
-  var output = document.getElementById('output');
-  var status = document.getElementById('status');
+  var input = document.getElementById("input");
+  var output = document.getElementById("output");
+  var status = document.getElementById("status");
+  var splitter = document.getElementById("pane-splitter");
+  var workbench = document.getElementById("split-workbench");
 
   function setStatus(msg, type) {
-    status.className = type === 'error' ? 'tool-error' : 'tool-success';
+    status.className = type === "error" ? "tool-error" : "tool-success";
     status.textContent = msg;
   }
 
-  function genId() { return 'tab-' + Date.now().toString(36); }
+  function genId() {
+    return "tab-" + Date.now().toString(36);
+  }
 
   // --- Tab rendering ---
   function renderTabs() {
-    var list = document.getElementById('tab-list');
-    list.innerHTML = '';
-    tabs.forEach(function(tab) {
-      var el = document.createElement('div');
-      el.className = 'tab-item' + (tab.id === activeTab ? ' tab-item--active' : '');
-      el.innerHTML = '<span class="tab-item__name">' + (tab.name || 'Untitled') + '</span>' +
-        (tabs.length > 1 ? '<button class="tab-item__close" data-id="' + tab.id + '">&times;</button>' : '');
-      el.addEventListener('click', function(e) {
-        if (e.target.classList.contains('tab-item__close')) return;
+    var list = document.getElementById("tab-list");
+    list.innerHTML = "";
+    tabs.forEach(function (tab) {
+      var el = document.createElement("div");
+      el.className =
+        "tab-item" + (tab.id === activeTab ? " tab-item--active" : "");
+      el.innerHTML =
+        '<span class="tab-item__name">' +
+        (tab.name || "Untitled") +
+        "</span>" +
+        (tabs.length > 1
+          ? '<button class="tab-item__close" data-id="' +
+            tab.id +
+            '">&times;</button>'
+          : "");
+      el.addEventListener("click", function (e) {
+        if (e.target.classList.contains("tab-item__close")) return;
         switchTab(tab.id);
       });
       list.appendChild(el);
     });
     // Close buttons
-    list.querySelectorAll('.tab-item__close').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
+    list.querySelectorAll(".tab-item__close").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
         e.stopPropagation();
         closeTab(btn.dataset.id);
       });
@@ -74,17 +107,21 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     // Save current
     saveCurrentToMemory();
     activeTab = id;
-    var tab = tabs.find(function(t) { return t.id === id; });
+    var tab = tabs.find(function (t) {
+      return t.id === id;
+    });
     if (tab) {
-      input.value = tab.content || '';
-      output.textContent = tab.output || '';
-      status.textContent = '';
+      input.value = tab.content || "";
+      output.textContent = tab.output || "";
+      status.textContent = "";
     }
     renderTabs();
   }
 
   function saveCurrentToMemory() {
-    var tab = tabs.find(function(t) { return t.id === activeTab; });
+    var tab = tabs.find(function (t) {
+      return t.id === activeTab;
+    });
     if (tab) {
       tab.content = input.value;
       tab.output = output.textContent;
@@ -92,14 +129,21 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   }
 
   function addTab(data) {
-    var tab = { id: genId(), name: data && data.name || 'Tab ' + (tabs.length + 1), content: data && data.content || '', output: '' };
+    var tab = {
+      id: genId(),
+      name: (data && data.name) || "Tab " + (tabs.length + 1),
+      content: (data && data.content) || "",
+      output: "",
+    };
     tabs.push(tab);
     switchTab(tab.id);
   }
 
   function closeTab(id) {
     if (tabs.length <= 1) return;
-    tabs = tabs.filter(function(t) { return t.id !== id; });
+    tabs = tabs.filter(function (t) {
+      return t.id !== id;
+    });
     if (activeTab === id) switchTab(tabs[0].id);
     else renderTabs();
     saveToDB();
@@ -111,7 +155,12 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     await DCStore.init();
     await DCStore.clear(TOOL);
     for (var i = 0; i < tabs.length; i++) {
-      await DCStore.set(TOOL, tabs[i].id, { name: tabs[i].name, content: tabs[i].content, order: i, isActive: tabs[i].id === activeTab });
+      await DCStore.set(TOOL, tabs[i].id, {
+        name: tabs[i].name,
+        content: tabs[i].content,
+        order: i,
+        isActive: tabs[i].id === activeTab,
+      });
     }
   }
 
@@ -119,73 +168,276 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     await DCStore.init();
     var items = await DCStore.getAll(TOOL);
     if (items.length === 0) {
-      addTab({ name: 'Tab 1' });
+      addTab({ name: "Tab 1" });
       return;
     }
-    items.sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
-    tabs = items.map(function(item) { return { id: item.id, name: item.name, content: item.content || '', output: '' }; });
-    var active = items.find(function(i) { return i.isActive; });
+    items.sort(function (a, b) {
+      return (a.order || 0) - (b.order || 0);
+    });
+    tabs = items.map(function (item) {
+      return {
+        id: item.id,
+        name: item.name,
+        content: item.content || "",
+        output: "",
+      };
+    });
+    var active = items.find(function (i) {
+      return i.isActive;
+    });
     activeTab = active ? active.id : tabs[0].id;
-    var tab = tabs.find(function(t) { return t.id === activeTab; });
-    input.value = tab ? tab.content : '';
+    var tab = tabs.find(function (t) {
+      return t.id === activeTab;
+    });
+    input.value = tab ? tab.content : "";
     renderTabs();
   }
 
   // --- Actions ---
-  document.getElementById('btn-format').addEventListener('click', function() {
+  document.getElementById("btn-format").addEventListener("click", function () {
     try {
       var parsed = JSON.parse(input.value);
       output.textContent = JSON.stringify(parsed, null, 2);
-      setStatus('Formatted', 'success');
-    } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
+      setStatus("Formatted", "success");
+    } catch (e) {
+      output.textContent = "";
+      setStatus("Invalid JSON: " + e.message, "error");
+    }
   });
 
-  document.getElementById('btn-minify').addEventListener('click', function() {
+  document.getElementById("btn-minify").addEventListener("click", function () {
     try {
       output.textContent = JSON.stringify(JSON.parse(input.value));
-      setStatus('Minified', 'success');
-    } catch(e) { output.textContent = ''; setStatus('Invalid JSON: ' + e.message, 'error'); }
+      setStatus("Minified", "success");
+    } catch (e) {
+      output.textContent = "";
+      setStatus("Invalid JSON: " + e.message, "error");
+    }
   });
 
-  document.getElementById('btn-validate').addEventListener('click', function() {
-    try {
-      JSON.parse(input.value);
-      output.textContent = 'Valid JSON ✓';
-      setStatus('Valid JSON!', 'success');
-    } catch(e) { output.textContent = ''; setStatus('Invalid: ' + e.message, 'error'); }
+  document
+    .getElementById("btn-validate")
+    .addEventListener("click", function () {
+      try {
+        JSON.parse(input.value);
+        output.textContent = "Valid JSON ✓";
+        setStatus("Valid JSON!", "success");
+      } catch (e) {
+        output.textContent = "";
+        setStatus("Invalid: " + e.message, "error");
+      }
+    });
+
+  document.getElementById("btn-copy").addEventListener("click", function () {
+    if (output.textContent) {
+      navigator.clipboard.writeText(output.textContent);
+      setStatus("Copied!", "success");
+    }
   });
 
-  document.getElementById('btn-copy').addEventListener('click', function() {
-    if (output.textContent) { navigator.clipboard.writeText(output.textContent); setStatus('Copied!', 'success'); }
+  document
+    .getElementById("btn-download")
+    .addEventListener("click", function () {
+      if (!output.textContent) return;
+      var blob = new Blob([output.textContent], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download =
+        (tabs.find(function (t) {
+          return t.id === activeTab;
+        }).name || "formatted") + ".json";
+      a.click();
+    });
+
+  document.getElementById("btn-save").addEventListener("click", function () {
+    var tab = tabs.find(function (t) {
+      return t.id === activeTab;
+    });
+    var name = prompt("Tab name:", tab ? tab.name : "");
+    if (name !== null && tab) {
+      tab.name = name;
+      renderTabs();
+      saveToDB();
+      setStatus("Saved!", "success");
+    }
   });
 
-  document.getElementById('btn-download').addEventListener('click', function() {
-    if (!output.textContent) return;
-    var blob = new Blob([output.textContent], { type: 'application/json' });
-    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = (tabs.find(function(t) { return t.id === activeTab; }).name || 'formatted') + '.json';
-    a.click();
-  });
-
-  document.getElementById('btn-save').addEventListener('click', function() {
-    var tab = tabs.find(function(t) { return t.id === activeTab; });
-    var name = prompt('Tab name:', tab ? tab.name : '');
-    if (name !== null && tab) { tab.name = name; renderTabs(); saveToDB(); setStatus('Saved!', 'success'); }
-  });
-
-  document.getElementById('btn-add-tab').addEventListener('click', function() {
-    addTab(); saveToDB();
+  document.getElementById("btn-add-tab").addEventListener("click", function () {
+    addTab();
+    saveToDB();
   });
 
   // Auto-save on input
   var saveTimer;
-  input.addEventListener('input', function() {
+  input.addEventListener("input", function () {
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(function() { saveToDB(); }, 1000);
+    saveTimer = setTimeout(function () {
+      saveToDB();
+    }, 1000);
   });
 
   // Init
+  (function initSplitter() {
+    if (!splitter || !workbench) return;
+
+    // Keyboard support
+    splitter.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      e.preventDefault();
+      var current =
+        Number(
+          (workbench.style.getPropertyValue("--left-pane") || "50").replace(
+            "%",
+            "",
+          ),
+        ) || 50;
+      var step = 2;
+      var newValue = Math.max(
+        20,
+        Math.min(80, current + (e.key === "ArrowLeft" ? -step : step)),
+      );
+      workbench.style.setProperty("--left-pane", newValue + "%");
+    });
+
+    // Drag support
+    splitter.addEventListener("mousedown", function (e) {
+      if (window.matchMedia("(max-width: 980px)").matches) return;
+      e.preventDefault();
+
+      var leftPane = workbench.querySelector(".jf-pane--left");
+      var startX = e.clientX;
+      var startWidth = leftPane.getBoundingClientRect().width;
+      var totalWidth = workbench.getBoundingClientRect().width;
+      var splitterWidth = splitter.offsetWidth || 12;
+
+      workbench.classList.add("jf-workbench--dragging");
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+
+      var currentX = startX;
+      var rafId = null;
+
+      function update() {
+        var delta = currentX - startX;
+        var newWidth = startWidth + delta;
+
+        // Constraints
+        var minW = 300;
+        var maxW = totalWidth - splitterWidth - 320;
+        var clampedWidth = Math.max(minW, Math.min(maxW, newWidth));
+
+        var percent = (clampedWidth / totalWidth) * 100;
+        workbench.style.setProperty("--left-pane", percent + "%");
+        rafId = null;
+      }
+
+      function onMouseMove(moveEvent) {
+        currentX = moveEvent.clientX;
+        if (!rafId) {
+          rafId = requestAnimationFrame(update);
+        }
+      }
+
+      function onMouseUp() {
+        window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("mouseup", onMouseUp);
+        workbench.classList.remove("jf-workbench--dragging");
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    });
+  })();
+
   loadFromDB();
 </script>
 
 <!-- Tab styles are in global.scss -->
+<style>
+  .jf-workbench {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0;
+    min-height: 580px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  .jf-pane {
+    margin: 0;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    box-sizing: border-box;
+  }
+  .jf-pane--left {
+    width: var(--left-pane);
+    min-width: 300px;
+    max-width: calc(100% - 320px);
+    border-right: 1px solid var(--color-border);
+  }
+  .jf-pane--right {
+    flex: 1;
+    min-width: 320px;
+  }
+  .jf-pane .tool-textarea,
+  .jf-pane .tool-output {
+    min-height: 520px;
+    height: calc(100% - 1.4rem);
+    margin: 0;
+  }
+  .jf-splitter {
+    width: 12px;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+    cursor: col-resize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    touch-action: none;
+  }
+  .jf-splitter span {
+    width: 3px;
+    height: 42px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-text-light) 45%, transparent);
+  }
+  .jf-splitter:hover span,
+  .jf-splitter:focus-visible span,
+  .jf-workbench--dragging .jf-splitter span {
+    background: var(--color-primary);
+  }
+  @media (max-width: 980px) {
+    .jf-workbench {
+      display: block;
+      min-height: 0;
+      border: 0;
+      background: transparent;
+    }
+    .jf-pane--left,
+    .jf-pane--right {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 0.75rem;
+    }
+    .jf-pane .tool-textarea,
+    .jf-pane .tool-output {
+      min-height: 320px;
+      max-height: 50vh;
+    }
+    .jf-splitter {
+      display: none;
+    }
+  }
+</style>
