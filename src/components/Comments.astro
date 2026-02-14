@@ -1,0 +1,398 @@
+---
+import { getSiteConfig } from '../utils/contentLoader';
+
+interface Props {
+  postSlug: string;
+  postTitle: string;
+}
+
+const config = getSiteConfig();
+const { postSlug, postTitle } = Astro.props;
+const scriptUrl = (config as any).comments?.googleScriptUrl || '';
+const validScriptUrl = scriptUrl && scriptUrl !== 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+const enabled = (config as any).comments?.enabled && validScriptUrl;
+---
+
+<section class="comments" aria-label="Comments">
+  <div class="comments__head">
+    <h3 class="comments__title">Comments</h3>
+    <!-- <p class="comments__desc">Join the discussion</p> -->
+  </div>
+
+  <div class="comments__list-wrap">
+    <div id="comments-list" class="comments__list"></div>
+  </div>
+
+  {enabled ? (
+    <form id="comment-form" class="comments__form">
+      <div class="comments__input-group">
+        <input id="comment-name" name="name" class="comments__input" placeholder="Name" required />
+        <input id="comment-email" name="email" class="comments__input" type="email" placeholder="Email (optional)" />
+      </div>
+      <textarea id="comment-text" name="comment" class="comments__textarea" placeholder="What are your thoughts?" minlength="3" required></textarea>
+      
+      <!-- Honeypot -->
+      <input type="text" id="comment-hp" name="website" class="comments__hp" tabindex="-1" autocomplete="off" />
+      
+      <div class="comments__footer">
+        <p id="comment-status" class="comments__status"></p>
+        <button id="comment-submit" type="submit" class="comments__btn">Post Comment</button>
+      </div>
+    </form>
+  ) : (
+    <div class="comments__fallback">
+      <p>Comments are disabled.</p>
+    </div>
+  )}
+</section>
+
+{enabled && (
+  <script is:inline define:vars={{ scriptUrl, postSlug, postTitle }}>
+    const commentsListEl = document.getElementById('comments-list');
+    const form = document.getElementById('comment-form');
+    
+    // Utilities
+    const timeAgo = (date) => {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = seconds / 31536000;
+      if (interval > 1) return Math.floor(interval) + " years ago";
+      interval = seconds / 2592000;
+      if (interval > 1) return Math.floor(interval) + " months ago";
+      interval = seconds / 604800; 
+      if (interval > 1) return Math.floor(interval) + " weeks ago";
+      interval = seconds / 86400;
+      if (interval > 1) return Math.floor(interval) + " days ago";
+      interval = seconds / 3600;
+      if (interval > 1) return Math.floor(interval) + "h ago";
+      interval = seconds / 60;
+      if (interval > 1) return Math.floor(interval) + "m ago";
+      return "Just now";
+    };
+
+    const getAvatar = (name) => {
+      const initial = name ? name.charAt(0).toUpperCase() : '?';
+      // Generate a consistent color based on name
+      let hash = 0;
+      for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      // Use HSL for nice pastel colors
+      // Hue: 0-360, Saturation: 60-70%, Lightness: 60-70% for dark mode readability or 40-50% for light?
+      // User has dark mode. Let's start with a safe palette.
+      const hue = Math.abs(hash % 360);
+      return { initial, hue };
+    };
+
+    const escapeHtml = (unsafe) => {
+      return (unsafe || '')
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Renderers
+    const setStatus = (msg, type = 'normal') => {
+      if (!commentsListEl) return;
+      if (type === 'loading') {
+        commentsListEl.innerHTML = '<div class="comments__loading">Loading comments...</div>';
+      } else if (type === 'empty') {
+        commentsListEl.innerHTML = '<div class="comments__empty">No comments yet. Be the first to share your thoughts.</div>';
+      } else if (type === 'error') {
+        commentsListEl.innerHTML = '<div class="comments__error">Unable to load comments.</div>';
+      }
+    };
+
+    const renderComments = (comments) => {
+      commentsListEl.innerHTML = '';
+      if (!comments || comments.length === 0) {
+        setStatus('', 'empty');
+        return;
+      }
+
+      comments.forEach(item => {
+        const { initial, hue } = getAvatar(item.name || 'Anonymous');
+        const dt = item.timestamp ? new Date(item.timestamp) : new Date();
+        const timeString = timeAgo(dt);
+        
+        const card = document.createElement('div');
+        card.className = 'comment-item';
+        
+        // We use inline styles for the dynamic avatar color
+        // Adjust L value based on theme if needed, but 65% is usually safe for contrast with dark text inside
+        const avatarStyle = `background-color: hsl(${hue}, 65%, 85%); color: hsl(${hue}, 80%, 25%);`;
+
+        card.innerHTML = `
+          <div class="comment-item__avatar" style="${avatarStyle}">
+            ${initial}
+          </div>
+          <div class="comment-item__content">
+            <div class="comment-item__header">
+              <span class="comment-item__name">${escapeHtml(item.name || 'Anonymous')}</span>
+              <span class="comment-item__dot">•</span>
+              <span class="comment-item__time">${timeString}</span>
+            </div>
+            <div class="comment-item__body">${escapeHtml(item.comment)}</div>
+          </div>
+        `;
+        
+        commentsListEl.appendChild(card);
+      });
+    };
+
+    // Data Fetching and Form Logic
+    const loadCommentsJsonp = () => {
+      const callbackName = 'dcCommentsCb_' + Math.random().toString(36).slice(2);
+      window[callbackName] = (payload) => {
+        if (payload && payload.status === 'success') renderComments(payload.comments || []);
+        else setStatus('', 'error');
+        try { delete window[callbackName]; } catch(e) {}
+      };
+      const script = document.createElement('script');
+      script.src = `${scriptUrl}?action=listComments&postSlug=${encodeURIComponent(postSlug)}&callback=${encodeURIComponent(callbackName)}`;
+      script.onerror = () => setStatus('', 'error');
+      document.body.appendChild(script);
+    };
+
+    const loadComments = async () => {
+      setStatus('', 'loading');
+      try {
+        const url = `${scriptUrl}?action=listComments&postSlug=${encodeURIComponent(postSlug)}&_t=${Date.now()}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Failed to fetch');
+        const data = await res.json();
+        if (data && data.status === 'success') renderComments(data.comments || []);
+        else throw new Error('Invalid response');
+      } catch (err) {
+        loadCommentsJsonp();
+      }
+    };
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (document.getElementById('comment-hp').value) return;
+        
+        const submitBtn = document.getElementById('comment-submit');
+        const statusEl = document.getElementById('comment-status');
+        const formData = new FormData(form);
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Posting...';
+        statusEl.textContent = '';
+        
+        const data = new URLSearchParams();
+        data.append('action', 'comment');
+        data.append('postSlug', postSlug);
+        data.append('postTitle', postTitle);
+        data.append('name', formData.get('name'));
+        data.append('email', formData.get('email'));
+        data.append('comment', formData.get('comment'));
+        data.append('timestamp', new Date().toISOString());
+
+        try {
+          await fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: data
+          });
+          statusEl.textContent = 'Posted!';
+          statusEl.style.color = 'var(--color-success, #10b981)';
+          form.reset();
+          setTimeout(() => { statusEl.textContent = ''; loadComments(); }, 2000);
+        } catch (err) {
+          statusEl.textContent = 'Error posting comment.';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Post Comment';
+        }
+      });
+    }
+
+    loadComments();
+  </script>
+)}
+
+<style>
+  .comments {
+    margin-top: 4rem;
+    padding-top: 2rem;
+  }
+
+  .comments__head {
+    margin-bottom: 2rem;
+  }
+  
+  .comments__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  /* List */
+  .comments__list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+  }
+  
+  .comments__loading,
+  .comments__empty,
+  .comments__error {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    padding: 1rem 0;
+  }
+
+  /* Comment Item */
+  :global(.comment-item) {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  :global(.comment-item:last-child) {
+    border-bottom: none;
+  }
+  
+  :global(.comment-item__avatar) {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+  
+  :global(.comment-item__content) {
+    flex: 1;
+    min-width: 0;
+    padding-top: 0.25rem; /* Optical alignment with avatar */
+  }
+  
+  :global(.comment-item__header) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.2;
+  }
+  
+  :global(.comment-item__name) {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.95rem;
+  }
+
+  :global(.comment-item__dot) {
+    color: var(--color-text-light);
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+  
+  :global(.comment-item__time) {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+  
+  :global(.comment-item__body) {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    opacity: 0.9;
+  }
+
+  /* Form */
+  .comments__form {
+    margin-top: 2rem;
+    /* Optional: background if you want it separated, removing for cleaner look matching inspiration */
+    /* background: var(--color-surface); */
+    /* padding: 1.5rem; */
+    /* border-radius: var(--radius-lg); */
+  }
+  
+  .comments__input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .comments__input,
+  .comments__textarea {
+    width: 100%;
+    background: var(--color-background); /* or darker surface */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .comments__input:focus,
+  .comments__textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-primary) 10%, transparent);
+  }
+  
+  .comments__textarea {
+    min-height: 120px;
+    resize: vertical;
+    margin-bottom: 1rem;
+  }
+  
+  .comments__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .comments__status {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  
+  .comments__btn {
+    background: var(--color-text);
+    color: var(--color-background);
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  
+  .comments__btn:hover {
+    opacity: 0.9;
+  }
+  
+  .comments__btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .comments__hp {
+    display: none;
+    visibility: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .comments__input-group {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

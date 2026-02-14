@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import { formatDate } from "../utils/formatDate";
 import { calculateReadingTime } from "../utils/readingTime";
 import { slugifyTaxonomy } from "../utils/taxonomy";
+import Comments from "../components/Comments.astro";
 
 interface Props {
   title: string;
@@ -22,6 +23,7 @@ const postUrl = Astro.url.href;
 const encodedUrl = encodeURIComponent(postUrl);
 const encodedTitle = encodeURIComponent(title);
 const categorySlug = slugifyTaxonomy(category);
+const postSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
 ---
 
 <BaseLayout
@@ -123,6 +125,8 @@ const categorySlug = slugifyTaxonomy(category);
           </button>
         </div>
       </div>
+
+      <Comments postSlug={postSlug} postTitle={title} />
 
       <div style="margin-top: 2rem; text-align: center;">
         <a href="/blog" class="back-link">&larr; Back to Blog</a>
