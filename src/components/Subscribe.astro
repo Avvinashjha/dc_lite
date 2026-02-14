@@ -53,11 +53,15 @@ const enabled = (config as any).newsletter?.enabled && scriptUrl && scriptUrl !=
       status.className = 'subscribe__status';
 
       try {
-        const res = await fetch(scriptUrl, {
+        await fetch(scriptUrl, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: 'email=' + encodeURIComponent(email) + '&timestamp=' + encodeURIComponent(new Date().toISOString())
+          body:
+            'action=subscribe' +
+            '&email=' + encodeURIComponent(email) +
+            '&source=' + encodeURIComponent('website') +
+            '&timestamp=' + encodeURIComponent(new Date().toISOString())
         });
 
         // no-cors always returns opaque response, so we assume success
