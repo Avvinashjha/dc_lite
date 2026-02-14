@@ -40,8 +40,8 @@
   --transition-slow: 350ms ease;
   
   // Container
-  --container-max-width: 1200px;
-  --content-max-width: 800px;
+  --container-max-width: 1500px;
+  --content-max-width: 1200px;
 }
 
 // Dark mode
@@ -130,7 +130,6 @@ a {
 code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background-color: var(--color-code-bg);
   padding: 0.2em 0.4em;
   border-radius: var(--radius-sm);
 }
