@@ -20,6 +20,22 @@ export interface SiteConfig {
     youtube?: string;
     instagram?: string;
   };
+  newsletter?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  comments?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  seo?: {
+    twitterHandle?: string;
+    locale?: string;
+  };
+  analytics?: {
+    googleAnalyticsId?: string;
+    googleSearchConsoleVerification?: string;
+  };
 }
 
 // ──── Blog ────
