@@ -1,0 +1,39 @@
+{
+  "title": "DOM Manipulation",
+  "description": "Learn how to build interactive applications using the DOM.",
+  "lessons": [
+    {
+      "slug": "01-selecting-elements",
+      "title": "Selecting DOM Elements",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-modifying-content-and-styles",
+      "title": "Modifying Content & Styles",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-creating-and-removing-elements",
+      "title": "Creating & Removing Elements",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-events-and-event-propagation",
+      "title": "Events & Event Propagation",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "05-forms-and-localstorage",
+      "title": "Forms Handling & LocalStorage",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    }
+  ]
+}

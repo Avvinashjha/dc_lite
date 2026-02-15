@@ -1,0 +1,109 @@
+{
+  "title": "Frontend JavaScript Engineering",
+  "description": "Master frontend JavaScript by deeply understanding the browser environment, DOM, events, Web APIs, performance, and modular architecture using vanilla JavaScript.",
+  "author": "Avvinash Jha",
+  "level": "advanced",
+  "duration": "40 hours",
+  "image": "/images/courses/frontend-javascript.jpg",
+  "tags": ["javascript", "frontend", "browser", "dom", "web-apis"],
+  "prerequisites": [
+    "Solid understanding of JavaScript fundamentals",
+    "Functions, scope, closures",
+    "Objects, prototypes, classes",
+    "Basic async (Promises & async/await)"
+  ],
+  "learningObjectives": [
+    "Understand how JavaScript runs inside the browser",
+    "Master the DOM and efficient manipulation techniques",
+    "Deeply understand the browser event system",
+    "Master the event loop in a frontend context",
+    "Work confidently with Web APIs and browser storage",
+    "Optimize UI performance using best practices",
+    "Architect modular frontend applications using ES Modules",
+    "Build production-ready frontend systems without frameworks"
+  ],
+  "coreTopics": [
+    "Browser Runtime & Event Loop",
+    "DOM & Rendering",
+    "Event System",
+    "Timers & Async in Browser",
+    "Fetch & Network Layer",
+    "Web APIs",
+    "Browser Storage",
+    "UI Performance",
+    "State Management",
+    "ES Modules in Browser",
+    "Frontend Architecture",
+    "Capstone Projects"
+  ],
+  "outcomes": [
+    "Confidently build complex UI systems using vanilla JavaScript",
+    "Debug browser-related performance issues",
+    "Design scalable frontend architecture without relying on frameworks",
+    "Understand how frameworks work under the hood",
+    "Write clean, modular, maintainable frontend code"
+  ],
+  "modules": [
+    {
+      "slug": "01_browser_runtime_and_event_loop",
+      "title": "Browser Runtime & Event Loop"
+    },
+    {
+      "slug": "02_dom_fundamentals",
+      "title": "DOM Fundamentals"
+    },
+    {
+      "slug": "03_dom_manipulation_and_performance",
+      "title": "DOM Manipulation & Performance"
+    },
+    {
+      "slug": "04_event_system_deep_dive",
+      "title": "Event System Deep Dive"
+    },
+    {
+      "slug": "05_timers_and_async_in_browser",
+      "title": "Timers & Async in the Browser"
+    },
+    {
+      "slug": "06_fetch_and_network_layer",
+      "title": "Fetch API & Network Layer"
+    },
+    {
+      "slug": "07_browser_storage_options",
+      "title": "Browser Storage Options"
+    },
+    {
+      "slug": "08_modern_browser_apis",
+      "title": "Modern Browser APIs"
+    },
+    {
+      "slug": "09_ui_performance_patterns",
+      "title": "UI Performance Patterns"
+    },
+    {
+      "slug": "10_state_management_in_vanilla_js",
+      "title": "State Management in Vanilla JavaScript"
+    },
+    {
+      "slug": "11_es_modules_in_browser",
+      "title": "ES Modules in the Browser"
+    },
+    {
+      "slug": "12_error_handling_in_browser",
+      "title": "Error Handling in the Browser"
+    },
+    {
+      "slug": "13_frontend_architecture_patterns",
+      "title": "Frontend Architecture & Design Patterns"
+    },
+    {
+      "slug": "14_frontend_system_problems",
+      "title": "Frontend System Problems"
+    },
+    {
+      "slug": "15_capstone_projects",
+      "title": "Capstone Projects"
+    }
+  ],
+  "draft": false
+}
