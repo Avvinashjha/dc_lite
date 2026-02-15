@@ -1,0 +1,68 @@
+{
+  "title": "Arrays Mastery",
+  "description": "Master arrays, iteration methods, and real-world transformation patterns.",
+  "lessons": [
+    {
+      "slug": "01-creating-and-modifying-arrays",
+      "title": "Creating, Indexing & Modifying Arrays",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "02-sparse-arrays",
+      "title": "Sparse Arrays & Empty Slots",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-mutating-methods",
+      "title": "Mutating Array Methods",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "04-non-mutating-methods",
+      "title": "map, filter, reduce & More",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "35 min"
+    },
+    {
+      "slug": "05-sorting-arrays",
+      "title": "Sorting Arrays (Compare Functions & Pitfalls)",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "06-array-iteration-patterns",
+      "title": "Transformation, Filtering & Accumulation Patterns",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "07-array-destructuring-and-spread",
+      "title": "Destructuring & Spread Operator",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "08-array-like-and-iterables",
+      "title": "Array-Like Objects & Iterables",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-multidimensional-and-copying",
+      "title": "Multidimensional Arrays & Copying Behavior",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "10-array-performance",
+      "title": "Array Performance & Best Practices",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

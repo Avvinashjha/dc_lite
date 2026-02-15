@@ -1,0 +1,49 @@
+{
+  "title": "Loops & Iteration",
+  "description": "Learn how to repeat tasks, control execution flow, and iterate efficiently over data.",
+  "lessons": [
+    {
+      "slug": "01-for-loop",
+      "title": "For Loop (Patterns & Scope)",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "02-while-and-do-while",
+      "title": "While & Do While Loop",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-loop-control-statements",
+      "title": "Break & Continue",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-for-of-and-for-in",
+      "title": "for...of & for...in",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-nested-and-infinite-loops",
+      "title": "Nested & Infinite Loops",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-loop-labels",
+      "title": "Loop Labels (Advanced)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-iteration-patterns",
+      "title": "Common Iteration Patterns & Best Practices",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

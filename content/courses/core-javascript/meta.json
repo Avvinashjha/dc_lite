@@ -1,0 +1,100 @@
+{
+  "id": "core-javascript",
+  "title": "Core JavaScript",
+  "slug": "core-javascript",
+  "description": "Learn JavaScript from scratch with hands-on projects and real-world examples. Master the language from fundamentals to advanced concepts including async programming, architecture, and system-level thinking.",
+  "author": "Avvinash Jha",
+  "level": "Beginner to Advanced",
+  "duration": "12+ hours",
+  "image": "/images/courses/javascript.jpg",
+  "category": "Programming",
+  "language": "JavaScript",
+  "tags": ["javascript", "frontend", "programming", "web-development"],
+  "prerequisites": [
+    "Basic computer literacy",
+    "Understanding of how websites work (optional but helpful)",
+    "No prior JavaScript knowledge required"
+  ],
+  "learningObjectives": [
+    "Understand how JavaScript works under the hood",
+    "Master variables, memory, and data types",
+    "Gain deep knowledge of functions, scope, and closures",
+    "Understand prototypes, classes, and inheritance",
+    "Master the 'this' keyword in all contexts",
+    "Understand the runtime, event loop, and asynchronous behavior",
+    "Work confidently with Promises and async/await",
+    "Handle and debug errors effectively",
+    "Structure scalable applications using ES Modules",
+    "Apply design patterns in real-world scenarios",
+    "Solve advanced JavaScript conceptual problems",
+    "Build complete JavaScript-based projects"
+  ],
+  "coreTopics": [
+    "JavaScript Foundations",
+    "Memory & Execution Model",
+    "Data Types & Operators",
+    "Control Flow & Iteration",
+    "Functions & Closures",
+    "Objects & Prototypes",
+    "Classes & Inheritance",
+    "The 'this' Keyword",
+    "Runtime & Event Loop",
+    "Asynchronous JavaScript",
+    "Error Handling",
+    "ES Modules",
+    "Design Patterns",
+    "System-Level Problems",
+    "Capstone Projects"
+  ],
+  "outcomes": [
+    "Write clean and maintainable JavaScript code",
+    "Debug complex runtime and async issues",
+    "Understand how frameworks work internally",
+    "Architect modular JavaScript applications",
+    "Prepare confidently for technical interviews",
+    "Build production-ready JavaScript systems"
+  ],
+  "modules": [
+    {
+      "slug": "01_js_introcuction_and_foundation",
+      "title": "Introduction & JavaScript Foundations"
+    },
+    { "slug": "02_js_variables_and_memory", "title": "Variables & Memory" },
+    { "slug": "03_js_datatypes_deep_dives", "title": "Data Types Deep Dive" },
+    { "slug": "04_js_operators", "title": "Operators" },
+    { "slug": "05_js_control_flow", "title": "Control Flow" },
+    { "slug": "06_js_loops_and_iteration", "title": "Loops & Iteration" },
+    { "slug": "07_js_arrays", "title": "Arrays Mastery" },
+    { "slug": "08_js_strings", "title": "Strings Deep Dive" },
+    { "slug": "09_js_functions", "title": "Functions Complete Mastery" },
+    { "slug": "10_js_objects", "title": "Objects Deep Dive" },
+    {
+      "slug": "11_js_prototype_and_inheritance",
+      "title": "Prototype and Inheritance"
+    },
+    { "slug": "12_js_modern_classes", "title": "Modern Classes" },
+    { "slug": "13_js_this_keyword", "title": "Mastering the 'this' Keyword" },
+    { "slug": "14_js_runtime_and_event_loop", "title": "Runtime & Event Loop" },
+    {
+      "slug": "15_js_timers_callback_asynchrony",
+      "title": "Timers, Callbacks & Asynchrony"
+    },
+    {
+      "slug": "16_js_promise_and_modern_async",
+      "title": "Promise and Modern Async JavaScript"
+    },
+    { "slug": "17_js_error_handling", "title": "Error Handling & Debugging" },
+    {
+      "slug": "18_js_es_module_and_code_architecture",
+      "title": "ES Module and Code Architecture"
+    },
+    { "slug": "19_js_design_patterns", "title": "JavaScript Design Patterns" },
+    { "slug": "20_js_problems", "title": "JavaScript Problems" },
+    { "slug": "21_js_projects", "title": "JavaScript Projects" }
+  ],
+  "projectBased": true,
+  "includesCapstone": true,
+  "assessmentIncluded": true,
+  "certificateEligible": true,
+  "draft": false
+}

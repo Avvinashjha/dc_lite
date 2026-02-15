@@ -1,0 +1,62 @@
+{
+  "title": "JavaScript Data Types",
+  "description": "Master primitive and reference data types, coercion rules, and comparison behavior.",
+  "lessons": [
+    {
+      "slug": "01-primitive-types",
+      "title": "Primitive Data Types (All 7 Types)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-reference-types-overview",
+      "title": "Reference Types Overview",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-typeof-and-type-checking",
+      "title": "Type Checking (typeof, instanceof, Array.isArray)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-nan-and-infinity",
+      "title": "NaN, Infinity & Number Edge Cases",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-type-coercion",
+      "title": "Type Coercion (Implicit & Explicit)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "06-truthy-and-falsy",
+      "title": "Truthy & Falsy Values",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-equality-operators",
+      "title": "== vs === (Comparison Pitfalls)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "20 min"
+    },
+    {
+      "slug": "08-number-and-string-conversion-methods",
+      "title": "Number(), parseInt(), parseFloat(), String()",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-short-circuit-evaluation",
+      "title": "Short Circuit Evaluation (&&, ||, ??)",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "title": "Functions Complete Mastery",
+  "description": "Understand functions deeply including execution context, scope, closures, and advanced patterns.",
+  "lessons": [
+    {
+      "slug": "01-function-basics",
+      "title": "Function Declaration vs Expression",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-function-parameters",
+      "title": "Function Parameters Deep Dive (Default, Rest, Arguments)",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-execution-context-and-hoisting",
+      "title": "Execution Context & Hoisting",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "04-scope-and-lexical-environment",
+      "title": "Scope Chain & Lexical Scope",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "05-closures",
+      "title": "Closures Explained Deeply",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "06-this-keyword",
+      "title": "Understanding the 'this' Keyword",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "07-call-apply-bind",
+      "title": "call(), apply(), bind()",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "08-arrow-functions",
+      "title": "Arrow Functions (Deep Behavior Differences)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "09-iife",
+      "title": "Immediately Invoked Function Expressions (IIFE)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "10-higher-order-functions",
+      "title": "Higher Order Functions",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "11-callbacks",
+      "title": "Callbacks",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "12-recursion",
+      "title": "Recursion",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "13-currying",
+      "title": "Currying",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "14-pure-vs-impure-functions",
+      "title": "Pure vs Impure Functions",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "15-functions-as-constructors-preview",
+      "title": "Functions as Constructors (Preview)",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

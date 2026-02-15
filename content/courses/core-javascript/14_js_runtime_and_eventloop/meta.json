@@ -1,0 +1,48 @@
+{
+  "title": "JavaScript Runtime & Event Loop",
+  "description": "Understand how JavaScript executes code using the call stack, Web APIs, and task queues.",
+  "lessons": [
+    {
+      "slug": "01-single-threaded-nature",
+      "title": "Single-Threaded Nature of JavaScript",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-call-stack",
+      "title": "Call Stack & Execution Model",
+      "type": "video",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-web-apis-and-browser-runtime",
+      "title": "Web APIs & The JavaScript Runtime",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-task-queue",
+      "title": "Task Queue (Macrotasks)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-microtask-queue",
+      "title": "Microtask Queue (Promises)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-the-event-loop",
+      "title": "The Event Loop (Step-by-Step Execution)",
+      "type": "video",
+      "duration": "35 min"
+    },
+    {
+      "slug": "07-execution-order-challenges",
+      "title": "Execution Order Challenges & Debugging",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

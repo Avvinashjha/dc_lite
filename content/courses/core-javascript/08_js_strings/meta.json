@@ -1,0 +1,63 @@
+{
+  "title": "Strings Deep Dive",
+  "description": "Master string manipulation, validation, iteration, and real-world text processing.",
+  "lessons": [
+    {
+      "slug": "01-creating-strings-and-template-literals",
+      "title": "Creating Strings & Template Literals",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-string-methods-part-1",
+      "title": "Core String Methods",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "03-string-methods-part-2",
+      "title": "Advanced String Methods & Differences",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "04-string-immutability-and-iteration",
+      "title": "String Immutability & Iteration",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-unicode-and-encoding",
+      "title": "Unicode & Character Encoding (UTF-16 Overview)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-string-comparison-and-locale",
+      "title": "String Comparison & localeCompare",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-string-validation-and-regex-basics",
+      "title": "String Validation & Regex Basics",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "08-string-algorithm-patterns",
+      "title": "Common String Problem Patterns",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "09-string-performance",
+      "title": "String Performance & Best Practices",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

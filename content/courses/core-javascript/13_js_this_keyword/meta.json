@@ -1,0 +1,52 @@
+{
+  "title": "Mastering the 'this' Keyword",
+  "description": "Deep understanding of how 'this' is bound in every scenario.",
+  "lessons": [
+    {
+      "slug": "01-binding-rules",
+      "title": "How 'this' is Determined (The 4 Binding Rules)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "02-default-and-implicit-binding",
+      "title": "Default & Implicit Binding",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-explicit-binding",
+      "title": "Explicit Binding: call(), apply(), bind()",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "04-new-binding",
+      "title": "The 'new' Binding Rule",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-arrow-functions",
+      "title": "Arrow Functions & Lexical 'this'",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "06-this-in-classes",
+      "title": "'this' in Classes & Constructors",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-common-mistakes",
+      "title": "Common 'this' Mistakes & Interview Scenarios",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

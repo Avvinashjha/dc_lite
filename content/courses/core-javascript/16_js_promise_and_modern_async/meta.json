@@ -1,0 +1,48 @@
+{
+  "title": "Promises & Modern Asynchronous Patterns",
+  "description": "Master Promises, async/await, and concurrency patterns.",
+  "lessons": [
+    {
+      "slug": "01-creating-promises",
+      "title": "Creating Promises (States & Executor)",
+      "type": "video",
+      "duration": "35 min"
+    },
+    {
+      "slug": "02-promise-chaining",
+      "title": "Promise Chaining & Flow Control",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-promise-microtasks",
+      "title": "Promises & The Microtask Queue",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-async-await",
+      "title": "Async / Await",
+      "type": "video",
+      "duration": "25 min"
+    },
+    {
+      "slug": "05-error-handling",
+      "title": "Error Handling in Async Code",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-promise-utilities",
+      "title": "Promise.all, race, any, allSettled",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-concurrency-patterns",
+      "title": "Concurrency Patterns & Pooling",
+      "type": "text",
+      "duration": "25 min"
+    }
+  ]
+}

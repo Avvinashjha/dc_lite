@@ -1,0 +1,31 @@
+{
+  "title": "Capstone Projects",
+  "description": "System-level integration projects using only concepts covered in the course.",
+  "lessons": [
+    {
+      "slug": "task-manager",
+      "title": "Modular Task Manager",
+      "difficulty": "Intermediate"
+    },
+    {
+      "slug": "fetch-client",
+      "title": "Custom Fetch Client with Middleware & Concurrency Control",
+      "difficulty": "Advanced"
+    },
+    {
+      "slug": "event-chat-simulation",
+      "title": "Event-Driven Chat Simulation (Observer-Based)",
+      "difficulty": "Advanced"
+    },
+    {
+      "slug": "middleware-server-simulation",
+      "title": "Mini Middleware Server (Execution Engine)",
+      "difficulty": "Advanced+"
+    },
+    {
+      "slug": "plugin-logger-system",
+      "title": "Plugin-Based Logger System",
+      "difficulty": "Advanced+"
+    }
+  ]
+}

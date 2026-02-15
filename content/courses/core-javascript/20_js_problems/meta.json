@@ -1,0 +1,54 @@
+{
+  "title": "Advanced JavaScript Problems & System Exercises",
+  "description": "Concept-heavy implementation challenges covering lazy execution, concurrency control, memoization, and architectural systems.",
+  "lessons": [
+    {
+      "slug": "01-lazy-chain",
+      "title": "Implement Lazy Chain",
+      "type": "video",
+      "duration": "40 min"
+    },
+    {
+      "slug": "02-memoization",
+      "title": "Implement Memoization (Advanced)",
+      "type": "video",
+      "duration": "35 min"
+    },
+    {
+      "slug": "03-promise-pool",
+      "title": "Implement Promise Pool (Concurrency Control)",
+      "type": "video",
+      "duration": "40 min"
+    },
+    {
+      "slug": "04-debounce-throttle",
+      "title": "Implement Debounce & Throttle",
+      "type": "video",
+      "duration": "35 min"
+    },
+    {
+      "slug": "05-event-emitter",
+      "title": "Build an EventEmitter",
+      "type": "video",
+      "duration": "40 min"
+    },
+    {
+      "slug": "06-deep-clone",
+      "title": "Implement Deep Clone (Circular Safe)",
+      "type": "video",
+      "duration": "40 min"
+    },
+    {
+      "slug": "07-implement-promise",
+      "title": "Implement Promise from Scratch",
+      "type": "video",
+      "duration": "60 min"
+    },
+    {
+      "slug": "08-middleware-engine",
+      "title": "Build a Mini Middleware Engine",
+      "type": "video",
+      "duration": "45 min"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Timers & Callback-Based Asynchrony",
+  "description": "Understand how asynchronous behavior is built using timers and callbacks.",
+  "lessons": [
+    {
+      "slug": "01-settimeout",
+      "title": "setTimeout Deep Dive",
+      "type": "video",
+      "duration": "25 min"
+    },
+    {
+      "slug": "02-setinterval",
+      "title": "setInterval & Clearing Timers",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-callback-pattern",
+      "title": "Callback Pattern",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-callback-hell",
+      "title": "Callback Hell & Its Limitations",
+      "type": "video",
+      "duration": "25 min"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Control Flow",
+  "description": "Control program execution using conditional logic and branching patterns.",
+  "lessons": [
+    {
+      "slug": "01-if-else",
+      "title": "if, else & else if",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-nested-conditions",
+      "title": "Nested Conditions & Complex Logical Expressions",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-truthy-in-control-flow",
+      "title": "Using Truthy & Falsy in Conditions",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-switch-case",
+      "title": "Switch Case (Strict Matching & Fallthrough)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-early-return-pattern",
+      "title": "Early Return Pattern (Cleaner Logic)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-short-circuit-control-flow",
+      "title": "Short-Circuiting for Conditional Execution",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

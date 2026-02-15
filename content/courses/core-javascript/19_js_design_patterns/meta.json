@@ -1,0 +1,84 @@
+{
+  "title": "JavaScript Design Patterns & Architecture",
+  "description": "Deep dive into creational, structural, behavioral patterns and architectural strategies in JavaScript.",
+  "lessons": [
+    {
+      "slug": "01-what-are-design-patterns",
+      "title": "What Are Design Patterns & Why They Matter",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-factory-pattern",
+      "title": "Factory Pattern",
+      "type": "video",
+      "duration": "30 min"
+    },
+    {
+      "slug": "03-constructor-pattern",
+      "title": "Constructor Pattern vs Factory",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-singleton-pattern",
+      "title": "Singleton Pattern & Module-Based Singletons",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "05-module-pattern",
+      "title": "Module Pattern (IIFE & Closures)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-adapter-pattern",
+      "title": "Adapter Pattern",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-decorator-pattern",
+      "title": "Decorator Pattern",
+      "type": "video",
+      "duration": "30 min"
+    },
+    {
+      "slug": "08-observer-pattern",
+      "title": "Observer Pattern (Pub/Sub)",
+      "type": "video",
+      "duration": "35 min"
+    },
+    {
+      "slug": "09-strategy-pattern",
+      "title": "Strategy Pattern",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "10-middleware-pattern",
+      "title": "Middleware Pattern",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "11-dependency-injection",
+      "title": "Dependency Injection & Inversion of Control",
+      "type": "text",
+      "duration": "30 min"
+    },
+    {
+      "slug": "12-mvc-and-architecture",
+      "title": "MVC & Layered Architecture in JavaScript",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "13-anti-patterns",
+      "title": "Common JavaScript Anti-Patterns",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "title": "Error Handling & Debugging",
+  "description": "Deep understanding of error types, propagation, async handling, and debugging strategies.",
+  "lessons": [
+    {
+      "slug": "01-error-types",
+      "title": "Built-in Error Types",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-error-object",
+      "title": "The Error Object (name, message, stack)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-try-catch-finally",
+      "title": "try, catch & finally",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-throw-and-custom-errors",
+      "title": "Throw & Custom Error Classes",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-error-propagation",
+      "title": "Error Propagation & Stack Unwinding",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-async-error-handling",
+      "title": "Error Handling in Promises & Async/Await",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "30 min"
+    },
+    {
+      "slug": "07-global-error-handling",
+      "title": "Global Error Handling & Unhandled Rejections",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-debugging-tools",
+      "title": "Debugging with DevTools & Breakpoints",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "09-error-best-practices",
+      "title": "Error Handling Best Practices",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

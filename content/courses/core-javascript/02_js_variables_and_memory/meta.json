@@ -1,0 +1,56 @@
+{
+  "title": "Variables & Memory",
+  "description": "Learn how JavaScript stores data, how scope works, and how memory behaves internally.",
+  "lessons": [
+    {
+      "slug": "01-var-let-const",
+      "title": "var vs let vs const",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "02-variable-naming-conventions",
+      "title": "Variable Naming & Best Practices",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-scope-types",
+      "title": "Global, Function & Block Scope",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-hoisting-and-tdz",
+      "title": "Hoisting & Temporal Dead Zone",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min"
+    },
+    {
+      "slug": "05-primitive-vs-reference",
+      "title": "Primitive vs Reference Types",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-mutability-vs-immutability",
+      "title": "Mutability vs Immutability",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-shallow-vs-deep-copy",
+      "title": "Shallow Copy vs Deep Copy",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "08-memory-and-garbage-collection",
+      "title": "Stack, Heap & Garbage Collection",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

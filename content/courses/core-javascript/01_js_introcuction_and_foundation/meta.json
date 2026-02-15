@@ -1,0 +1,63 @@
+{
+  "title": "Introduction & JavaScript Foundations",
+  "description": "Understand what JavaScript is, how it works internally, and how to start writing and debugging code.",
+  "lessons": [
+    {
+      "slug": "01-what-is-javascript",
+      "title": "What is JavaScript?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-ecmascript-and-versions",
+      "title": "ECMAScript & JavaScript Versions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-javascript-engine",
+      "title": "JavaScript Engine & V8 Overview",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-how-javascript-executes",
+      "title": "How JavaScript Executes (Call Stack & Memory Overview)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-browser-vs-node-runtime",
+      "title": "Browser vs Node.js Runtime",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-setup-environment",
+      "title": "Setting Up Development Environment",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-strict-mode",
+      "title": "Strict Mode",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-code-structure-and-best-practices",
+      "title": "Code Structure & Best Practices",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-debugging-basics",
+      "title": "Debugging with Console & DevTools",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "20 min"
+    }
+  ]
+}

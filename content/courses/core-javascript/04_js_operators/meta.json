@@ -1,0 +1,54 @@
+{
+  "title": "Operators in JavaScript",
+  "description": "Learn all JavaScript operators, their precedence, and tricky behaviors.",
+  "lessons": [
+    {
+      "slug": "01-arithmetic-and-assignment",
+      "title": "Arithmetic & Assignment Operators",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "02-comparison-operators",
+      "title": "Comparison Operators",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-logical-operators",
+      "title": "Logical Operators (&, ||, !)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-nullish-and-optional-chaining",
+      "title": "Nullish Coalescing (??) & Optional Chaining (?.)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-ternary-and-precedence",
+      "title": "Ternary Operator & Operator Precedence",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-unary-operators",
+      "title": "Unary Operators (typeof, delete, unary +)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-bitwise-operators-overview",
+      "title": "Bitwise Operators (Overview)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-type-coercion-in-operators",
+      "title": "Tricky Operator Cases Explained",
+      "type": "text",
+      "duration": "30 min"
+    }
+  ]
+}

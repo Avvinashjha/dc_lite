@@ -1,0 +1,36 @@
+{
+  "title": "Prototypes & Inheritance",
+  "description": "Understand how JavaScript objects inherit behavior through prototypes.",
+  "lessons": [
+    {
+      "slug": "01-prototype-recap",
+      "title": "Prototype Recap & Internal [[Prototype]]",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-constructor-functions",
+      "title": "Constructor Functions (Instance vs Prototype)",
+      "type": "video",
+      "duration": "35 min"
+    },
+    {
+      "slug": "03-prototype-chain-deep-dive",
+      "title": "Prototype Chain Lookup Mechanism",
+      "type": "video",
+      "duration": "30 min"
+    },
+    {
+      "slug": "04-object-create",
+      "title": "Inheritance with Object.create()",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-manual-inheritance-pattern",
+      "title": "Manual Prototypal Inheritance Pattern",
+      "type": "text",
+      "duration": "25 min"
+    }
+  ]
+}

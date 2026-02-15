@@ -1,0 +1,72 @@
+{
+  "title": "ES Modules & Code Architecture",
+  "description": "Deep understanding of JavaScript modules, execution model, live bindings, circular dependencies, and real-world architecture.",
+  "lessons": [
+    {
+      "slug": "01-why-modules",
+      "title": "Why Modules? The Global Scope Problem",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-esm-basics",
+      "title": "Basic export & import Syntax",
+      "type": "video",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-named-vs-default",
+      "title": "Named vs Default Exports — When & Why",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-module-scope",
+      "title": "Module Scope, Strict Mode & Top-Level Behavior",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-module-execution-model",
+      "title": "Module Loading, Linking & Evaluation (Execution Model)",
+      "type": "video",
+      "duration": "30 min"
+    },
+    {
+      "slug": "06-live-bindings",
+      "title": "Live Bindings vs Copied Values",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-circular-dependencies",
+      "title": "Circular Dependencies & Execution Order Pitfalls",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "08-dynamic-import",
+      "title": "Dynamic import() & Lazy Loading",
+      "type": "video",
+      "duration": "25 min"
+    },
+    {
+      "slug": "09-esm-in-browser",
+      "title": "Using ES Modules in the Browser",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "10-commonjs-vs-esm",
+      "title": "CommonJS vs ES Modules (Node.js Deep Dive)",
+      "type": "video",
+      "duration": "30 min"
+    },
+    {
+      "slug": "11-reexports",
+      "title": "Re-exports, Barrel Files & Project Structure",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

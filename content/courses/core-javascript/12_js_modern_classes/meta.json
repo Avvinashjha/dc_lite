@@ -1,0 +1,42 @@
+{
+  "title": "Modern Classes in JavaScript",
+  "description": "Learn ES6 class syntax and how it builds on prototypes.",
+  "lessons": [
+    {
+      "slug": "01-intro-to-classes",
+      "title": "Why Classes? (Syntactic Sugar Explained)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-class-syntax-and-constructor",
+      "title": "Class Syntax & Constructor",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "03-class-vs-constructor-function",
+      "title": "Classes vs Constructor Functions",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-static-methods",
+      "title": "Static Methods",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-private-fields",
+      "title": "Private Fields & Encapsulation",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-class-inheritance",
+      "title": "Inheritance with extends & super",
+      "type": "video",
+      "duration": "30 min"
+    }
+  ]
+}

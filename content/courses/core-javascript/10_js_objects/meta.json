@@ -1,0 +1,66 @@
+{
+  "title": "Objects Deep Dive",
+  "description": "Understand object behavior, memory model, property control, and prototype fundamentals.",
+  "lessons": [
+    {
+      "slug": "01-object-creation-and-access",
+      "title": "Object Creation, Property Access & Computed Keys",
+      "type": "text",
+      "duration": "25 min"
+    },
+    {
+      "slug": "02-object-references",
+      "title": "Objects by Reference (Memory Behavior)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-object-methods",
+      "title": "Methods Inside Objects (Patterns & Pitfalls)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "25 min",
+      "topics": [
+        "Methods Inside Objects (Patterns & Pitfalls)",
+        "Object.groupby... , native methods"
+      ]
+    },
+    {
+      "slug": "04-destructuring-and-spread",
+      "title": "Destructuring & Spread in Objects",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-object-utilities",
+      "title": "Object.keys, values, entries & Cloning",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-property-descriptors",
+      "title": "Property Descriptors (Writable, Enumerable, Configurable)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-getters-and-setters",
+      "title": "Getters & Setters",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "08-object-freeze-seal",
+      "title": "Object.freeze, seal & preventExtensions",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-prototype-basics",
+      "title": "Prototype & Prototype Chain (Foundation)",
+      "type": "video",
+      "videoUrl": "YOUR_VIDEO_LINK",
+      "duration": "35 min"
+    }
+  ]
+}
