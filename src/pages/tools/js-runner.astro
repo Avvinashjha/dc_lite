@@ -1,0 +1,176 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import CodeEditor from '../../components/CodeEditor.astro';
+
+const defaultCode = `function sum(a, b) {
+  return a + b;
+}
+
+console.log('Ready to run');`;
+---
+
+<ToolLayout
+  title="JavaScript Runner"
+  description="Simple in-browser JavaScript editor to write and run functions safely in a sandboxed iframe."
+  toolName="JavaScript Runner"
+  keywords="javascript runner, javascript editor, run javascript online, js playground, javascript function tester"
+>
+  <div class="tool-panel" style="margin-bottom: 1rem;">
+    <span class="tool-panel__label">JavaScript Code</span>
+    <CodeEditor id="js-runner-editor" minHeight={280} />
+  </div>
+
+  <div class="tool-actions">
+    <button id="run-btn" class="tool-btn tool-btn--primary">Run</button>
+    <button id="sample-btn" class="tool-btn">Load Sample</button>
+    <button id="clear-btn" class="tool-btn">Clear Output</button>
+  </div>
+
+  <div class="tool-panel">
+    <span class="tool-panel__label">Output</span>
+    <pre id="output" class="tool-output"></pre>
+  </div>
+
+  <iframe
+    id="sandbox-frame"
+    title="JavaScript sandbox"
+    sandbox="allow-scripts"
+    style="width: 0; height: 0; border: 0; position: absolute; opacity: 0; pointer-events: none;"
+  ></iframe>
+</ToolLayout>
+
+<script>
+  import { createCodeEditor } from '../../utils/codeEditor';
+
+  const defaultCode = `function sum(a, b) {
+  return a + b;
+}
+
+console.log('Ready to run');`;
+
+  const editor = createCodeEditor({
+    rootId: 'js-runner-editor',
+    doc: defaultCode,
+    language: 'javascript',
+    lineWrapping: true,
+    onModEnter: function() { runCode(); },
+  });
+
+  // --- Existing logic (adapted) ---
+  const runBtn = document.getElementById('run-btn');
+  const sampleBtn = document.getElementById('sample-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const outputEl = document.getElementById('output');
+  const frameEl = document.getElementById('sandbox-frame');
+  let activeRunId = 0;
+  let receivedMessageForRun = false;
+  let runTimeout = null;
+
+  function safeString(value) {
+    if (typeof value === 'string') return value;
+    try { return JSON.stringify(value, null, 2); }
+    catch (e) { return String(value); }
+  }
+
+  function appendOutput(prefix, value) {
+    const line = '[' + prefix + '] ' + safeString(value);
+    outputEl.textContent += (outputEl.textContent ? '\n' : '') + line;
+    outputEl.scrollTop = outputEl.scrollHeight;
+  }
+
+  function runCode() {
+    const userCode = editor.getValue();
+    activeRunId += 1;
+    receivedMessageForRun = false;
+
+    if (runTimeout) clearTimeout(runTimeout);
+    runTimeout = setTimeout(function() {
+      if (!receivedMessageForRun) {
+        appendOutput('ERROR', 'Execution did not start. Please try again.');
+      }
+    }, 1200);
+
+    appendOutput('INFO', 'Running...');
+
+    const srcdoc = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      "var SOURCE = 'dc-js-runner';",
+      'var RUN_ID = ' + activeRunId + ';',
+      'function emit(type, payload){',
+      "  parent.postMessage({ source: SOURCE, runId: RUN_ID, type: type, payload: payload }, '*');",
+      '}',
+      'function serialize(value){',
+      '  if (value instanceof Error) return value.stack || value.message;',
+      '  if (typeof value === "string") return value;',
+      '  try { return JSON.stringify(value); } catch (e) { return String(value); }',
+      '}',
+      'var baseConsole = window.console;',
+      'window.console = {',
+      '  log: function(){ emit("log", Array.prototype.slice.call(arguments).map(serialize)); },',
+      '  warn: function(){ emit("warn", Array.prototype.slice.call(arguments).map(serialize)); },',
+      '  error: function(){ emit("error", Array.prototype.slice.call(arguments).map(serialize)); },',
+      '  info: function(){ emit("info", Array.prototype.slice.call(arguments).map(serialize)); },',
+      '  debug: function(){ emit("debug", Array.prototype.slice.call(arguments).map(serialize)); },',
+      '};',
+      'window.onerror = function(message, source, lineno, colno, error){',
+      '  emit("runtime-error", [serialize(error || message), "line " + lineno + ":" + colno]);',
+      '};',
+      'window.onunhandledrejection = function(event){',
+      '  emit("runtime-error", [serialize(event.reason || "Unhandled Promise Rejection")]);',
+      '};',
+      'try {',
+      '  var code = ' + JSON.stringify(userCode) + ';',
+      '  (0, eval)(code);',
+      '  emit("result", ["Execution finished"]);',
+      '} catch (error) {',
+      '  emit("runtime-error", [serialize(error)]);',
+      '} finally {',
+      '  window.console = baseConsole;',
+      '}',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+
+    frameEl.srcdoc = srcdoc;
+  }
+
+  window.addEventListener('message', function(event) {
+    const data = event.data;
+    if (!data || data.source !== 'dc-js-runner') return;
+    if (data.runId !== activeRunId) return;
+    receivedMessageForRun = true;
+
+    if (data.type === 'runtime-error') {
+      if (runTimeout) clearTimeout(runTimeout);
+      appendOutput('ERROR', (data.payload || []).join(' | '));
+      return;
+    }
+
+    const prefix = (data.type || 'log').toUpperCase();
+    appendOutput(prefix, (data.payload || []).join(' '));
+    if (data.type === 'result' && runTimeout) clearTimeout(runTimeout);
+  });
+
+  sampleBtn.addEventListener('click', function() {
+    const sampleCode = [
+      'function fibonacci(n) {',
+      '  if (n <= 1) return n;',
+      '  return fibonacci(n - 1) + fibonacci(n - 2);',
+      '}',
+      '',
+      'console.log("Computing fib(8)");'
+    ].join('\n');
+
+    editor.setValue(sampleCode);
+    appendOutput('INFO', 'Sample loaded.');
+  });
+
+  clearBtn.addEventListener('click', function() {
+    outputEl.textContent = '';
+  });
+
+  runBtn.addEventListener('click', runCode);
+
+  appendOutput('INFO', 'Tip: Press Ctrl/Cmd + Enter to run.');
+</script>
