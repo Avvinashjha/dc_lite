@@ -1,6 +1,6 @@
 ---
 import ToolLayout from "../../layouts/ToolLayout.astro";
-import hljs from "highlight.js";
+import CodeEditor from "../../components/CodeEditor.astro";
 ---
 
 <ToolLayout
@@ -45,22 +45,38 @@ import hljs from "highlight.js";
 
     <div class="tool-panel jf-pane jf-pane--right">
       <span class="tool-panel__label">Output</span>
-      <div id="output" class="tool-output language-json"></div>
+      <CodeEditor id="json-formatter-output" minHeight={250} fill={true} />
     </div>
   </div>
   <div id="status"></div>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>
-<script is:inline>
+<script>
+  import { createCodeEditor } from "../../utils/codeEditor";
+
   var TOOL = "json-formatter";
   var tabs = [];
   var activeTab = null;
   var input = document.getElementById("input");
-  var output = document.getElementById("output");
   var status = document.getElementById("status");
   var splitter = document.getElementById("pane-splitter");
   var workbench = document.getElementById("split-workbench");
+  var outputEditor = createCodeEditor({
+    rootId: "json-formatter-output",
+    doc: "",
+    language: "json",
+    readOnly: true,
+    lineWrapping: true,
+  });
+
+  function getOutput() {
+    return outputEditor.getValue();
+  }
+
+  function setOutput(value) {
+    outputEditor.setValue(value || "");
+  }
 
   function setStatus(msg, type) {
     status.className = type === "error" ? "tool-error" : "tool-success";
@@ -112,7 +128,7 @@ import hljs from "highlight.js";
     });
     if (tab) {
       input.value = tab.content || "";
-      output.textContent = tab.output || "";
+      setOutput(tab.output || "");
       status.textContent = "";
     }
     renderTabs();
@@ -124,7 +140,7 @@ import hljs from "highlight.js";
     });
     if (tab) {
       tab.content = input.value;
-      tab.output = output.textContent;
+      tab.output = getOutput();
     }
   }
 
@@ -179,7 +195,7 @@ import hljs from "highlight.js";
         id: item.id,
         name: item.name,
         content: item.content || "",
-        output: "",
+      output: "",
       };
     });
     var active = items.find(function (i) {
@@ -197,20 +213,20 @@ import hljs from "highlight.js";
   document.getElementById("btn-format").addEventListener("click", function () {
     try {
       var parsed = JSON.parse(input.value);
-      output.textContent = JSON.stringify(parsed, null, 2);
+      setOutput(JSON.stringify(parsed, null, 2));
       setStatus("Formatted", "success");
     } catch (e) {
-      output.textContent = "";
+      setOutput("");
       setStatus("Invalid JSON: " + e.message, "error");
     }
   });
 
   document.getElementById("btn-minify").addEventListener("click", function () {
     try {
-      output.textContent = JSON.stringify(JSON.parse(input.value));
+      setOutput(JSON.stringify(JSON.parse(input.value)));
       setStatus("Minified", "success");
     } catch (e) {
-      output.textContent = "";
+      setOutput("");
       setStatus("Invalid JSON: " + e.message, "error");
     }
   });
@@ -220,17 +236,18 @@ import hljs from "highlight.js";
     .addEventListener("click", function () {
       try {
         JSON.parse(input.value);
-        output.textContent = "Valid JSON ✓";
+        setOutput("Valid JSON ✓");
         setStatus("Valid JSON!", "success");
       } catch (e) {
-        output.textContent = "";
+        setOutput("");
         setStatus("Invalid: " + e.message, "error");
       }
     });
 
   document.getElementById("btn-copy").addEventListener("click", function () {
-    if (output.textContent) {
-      navigator.clipboard.writeText(output.textContent);
+    var currentOutput = getOutput();
+    if (currentOutput) {
+      navigator.clipboard.writeText(currentOutput);
       setStatus("Copied!", "success");
     }
   });
@@ -238,8 +255,9 @@ import hljs from "highlight.js";
   document
     .getElementById("btn-download")
     .addEventListener("click", function () {
-      if (!output.textContent) return;
-      var blob = new Blob([output.textContent], { type: "application/json" });
+      var currentOutput = getOutput();
+      if (!currentOutput) return;
+      var blob = new Blob([currentOutput], { type: "application/json" });
       var a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download =
@@ -363,6 +381,7 @@ import hljs from "highlight.js";
   .jf-workbench {
     margin-top: 1rem;
     display: flex;
+    align-items: stretch;
     gap: 0;
     min-height: 580px;
     border: 1px solid var(--color-border);
@@ -375,6 +394,7 @@ import hljs from "highlight.js";
     gap: 0.5rem;
     padding: 0.8rem;
     box-sizing: border-box;
+    min-height: 0;
   }
   .jf-pane--left {
     width: var(--left-pane);
@@ -385,12 +405,23 @@ import hljs from "highlight.js";
   .jf-pane--right {
     flex: 1;
     min-width: 320px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-content: stretch;
   }
   .jf-pane .tool-textarea,
   .jf-pane .tool-output {
     min-height: 520px;
     height: calc(100% - 1.4rem);
     margin: 0;
+  }
+  .jf-pane .dc-editor {
+    min-height: 520px;
+    margin: 0;
+  }
+  .jf-pane--right .dc-editor {
+    height: 100%;
+    min-height: 0;
   }
   .jf-splitter {
     width: 12px;
@@ -433,6 +464,10 @@ import hljs from "highlight.js";
     }
     .jf-pane .tool-textarea,
     .jf-pane .tool-output {
+      min-height: 320px;
+      max-height: 50vh;
+    }
+    .jf-pane .dc-editor {
       min-height: 320px;
       max-height: 50vh;
     }
