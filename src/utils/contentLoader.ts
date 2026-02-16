@@ -5,6 +5,7 @@ import type {
   SiteConfig, BlogIndex, PostMeta, Post,
   CoursesIndex, CourseMeta, ModuleMeta, CourseModule, Course, Lesson,
   DocsIndex, DocProjectMeta, DocProject, DocPage,
+  ProblemIndex, ProblemItem,
 } from '../types/post';
 
 const CONTENT_DIR = path.resolve(process.cwd(), 'content');
@@ -192,4 +193,29 @@ export function getDocPage(projectSlug: string, pageSlug: string): DocPage | nul
   const project = getDocProject(projectSlug);
   if (!project) return null;
   return project.pages.find(p => p.slug === pageSlug) || null;
+}
+
+// ──── Problems ────
+
+export function getProblemsIndex(): ProblemIndex {
+  return readJson<ProblemIndex>(path.join(CONTENT_DIR, 'problems', '_index.json'));
+}
+
+export function getProblems(): ProblemItem[] {
+  const filePath = path.join(CONTENT_DIR, 'problems', 'problems.json');
+  if (!fs.existsSync(filePath)) return [];
+  return readJson<ProblemItem[]>(filePath);
+}
+
+export function getProblem(slug: string): ProblemItem | null {
+  const problems = getProblems();
+  return problems.find(problem => problem.slug === slug) || null;
+}
+
+export function getProblemTopics(): string[] {
+  return [...new Set(getProblems().flatMap(problem => problem.topics || []))].sort();
+}
+
+export function getProblemDifficulties(): string[] {
+  return [...new Set(getProblems().map(problem => problem.difficulty))].sort();
 }

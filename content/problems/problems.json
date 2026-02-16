@@ -1,0 +1,5542 @@
+[
+  {
+    "id": "problem-0001",
+    "slug": "find-the-duplicate-number",
+    "title": "Find the Duplicate Number",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Find%20the%20Duplicate%20Number",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0002",
+    "slug": "sort-colors",
+    "title": "Sort Colors",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sort%20Colors",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0003",
+    "slug": "majority-element",
+    "title": "Majority Element",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Majority%20Element",
+    "remarks": "Boyer-Moore Voting Algorithm",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0004",
+    "slug": "remove-duplicates-from-sorted-array",
+    "title": "Remove Duplicates from Sorted Array",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Remove%20Duplicates%20from%20Sorted%20Array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0005",
+    "slug": "set-matrix-zeroes",
+    "title": "Set Matrix Zeroes",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Set%20Matrix%20Zeroes",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0006",
+    "slug": "move-zeroes",
+    "title": "Move Zeroes",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Move%20Zeroes",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0007",
+    "slug": "best-time-to-buy-and-sell-stock",
+    "title": "Best Time to Buy and Sell Stock",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Best%20Time%20to%20Buy%20and%20Sell%20Stock",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0008",
+    "slug": "chocolate-distribution-problem",
+    "title": "Chocolate Distribution Problem",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Chocolate%20Distribution%20Problem",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0009",
+    "slug": "two-sum",
+    "title": "Two Sum",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Two%20Sum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0010",
+    "slug": "best-time-to-buy-and-sell-stock-ii",
+    "title": "Best Time to Buy and Sell Stock II",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Best%20Time%20to%20Buy%20and%20Sell%20Stock%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0011",
+    "slug": "merge-sorted-array",
+    "title": "Merge Sorted Array",
+    "difficulty": "Easy",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Merge%20Sorted%20Array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0012",
+    "slug": "subarray-sum-equals-k",
+    "title": "Subarray Sum Equals K",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Subarray%20Sum%20Equals%20K",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0013",
+    "slug": "subarray-sums-divisible-by-k",
+    "title": "Subarray Sums Divisible by K",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Subarray%20Sums%20Divisible%20by%20K",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0014",
+    "slug": "find-all-duplicates-in-an-array",
+    "title": "Find All Duplicates in an Array",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Find%20All%20Duplicates%20in%20an%20Array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0015",
+    "slug": "container-with-most-water",
+    "title": "Container With Most Water",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Container%20With%20Most%20Water",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0016",
+    "slug": "3sum",
+    "title": "3Sum",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=3Sum",
+    "remarks": "Two Pointer",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0017",
+    "slug": "3sum-closest",
+    "title": "3Sum Closest",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=3Sum%20Closest",
+    "remarks": "Two Pointer",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0018",
+    "slug": "4sum",
+    "title": "4Sum",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=4Sum",
+    "remarks": "Two Pointer",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0019",
+    "slug": "maximum-points-you-can-obtain-from-cards",
+    "title": "Maximum Points You Can Obtain from Cards",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Points%20You%20Can%20Obtain%20from%20Cards",
+    "remarks": "sliding window",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0020",
+    "slug": "spiral-matrix",
+    "title": "Spiral Matrix",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Spiral%20Matrix",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0021",
+    "slug": "word-search",
+    "title": "Word Search",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Word%20Search",
+    "remarks": "Good Question DFS and Back Tracking",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0022",
+    "slug": "jump-game",
+    "title": "Jump Game",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Jump%20Game",
+    "remarks": "Greedy/ Do it again",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0023",
+    "slug": "print-all-combinations-set-2",
+    "title": "Print all combinations | Set-2",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20combinations%20%7C%20Set-2",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0024",
+    "slug": "game-of-life",
+    "title": "Game of Life",
+    "difficulty": "Medium",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Game%20of%20Life",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0025",
+    "slug": "reverse-pairs",
+    "title": "Reverse Pairs",
+    "difficulty": "Hard",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reverse%20Pairs",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0026",
+    "slug": "insert-delete-getrandom-o-1-duplicates-allowed",
+    "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+    "difficulty": "Hard",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Insert%20Delete%20GetRandom%20O(1)%20-%20Duplicates%20allowed",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0027",
+    "slug": "largest-rectangle-in-histogram",
+    "title": "Largest Rectangle in Histogram",
+    "difficulty": "Hard",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Largest%20Rectangle%20in%20Histogram",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0028",
+    "slug": "max-value-of-equation",
+    "title": "Max Value of Equation",
+    "difficulty": "Hard",
+    "topic": "Array",
+    "topics": [
+      "Array"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Max%20Value%20of%20Equation",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0029",
+    "slug": "valid-parentheses",
+    "title": "Valid Parentheses",
+    "difficulty": "Easy",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Valid%20Parentheses",
+    "remarks": "Stack",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0030",
+    "slug": "print-all-the-duplicate-characters-in-a-string",
+    "title": "Print all the duplicate characters in a string",
+    "difficulty": "Easy",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20the%20duplicate%20characters%20in%20a%20string",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0031",
+    "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+    "title": "Find the Index of the First Occurrence in a String",
+    "difficulty": "Easy",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Find%20the%20Index%20of%20the%20First%20Occurrence%20in%20a%20String",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0032",
+    "slug": "longest-common-prefix",
+    "title": "Longest Common Prefix",
+    "difficulty": "Easy",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Longest%20Common%20Prefix",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0033",
+    "slug": "valid-palindrome-ii",
+    "title": "Valid Palindrome II",
+    "difficulty": "Easy",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Valid%20Palindrome%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0034",
+    "slug": "integer-to-roman",
+    "title": "Integer to Roman",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Integer%20to%20Roman",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0035",
+    "slug": "generate-parentheses",
+    "title": "Generate Parentheses",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Generate%20Parentheses",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0036",
+    "slug": "simplify-path",
+    "title": "Simplify Path",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Simplify%20Path",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0037",
+    "slug": "smallest-window-containing-all-characters-of-another-string-practice",
+    "title": "Smallest window containing all characters of another string | Practice",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Smallest%20window%20containing%20all%20characters%20of%20another%20string%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0038",
+    "slug": "reverse-words-in-a-string",
+    "title": "Reverse Words in a String",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reverse%20Words%20in%20a%20String",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0039",
+    "slug": "rabin-karp-algorithm-for-pattern-searching",
+    "title": "Rabin-Karp Algorithm for Pattern Searching",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Rabin-Karp%20Algorithm%20for%20Pattern%20Searching",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0040",
+    "slug": "group-anagrams",
+    "title": "Group Anagrams",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Group%20Anagrams",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0041",
+    "slug": "word-wrap-practice",
+    "title": "Word Wrap | Practice",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Word%20Wrap%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0042",
+    "slug": "basic-calculator-ii",
+    "title": "Basic Calculator II",
+    "difficulty": "Medium",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Basic%20Calculator%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0043",
+    "slug": "valid-number",
+    "title": "Valid Number",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Valid%20Number",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0044",
+    "slug": "integer-to-english-words",
+    "title": "Integer to English Words",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Integer%20to%20English%20Words",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0045",
+    "slug": "minimum-window-substring",
+    "title": "Minimum Window Substring",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Window%20Substring",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0046",
+    "slug": "text-justification",
+    "title": "Text Justification",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Text%20Justification",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0047",
+    "slug": "boyer-moore-algorithm-for-pattern-searching",
+    "title": "Boyer Moore Algorithm for Pattern Searching",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Boyer%20Moore%20Algorithm%20for%20Pattern%20Searching",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0048",
+    "slug": "distinct-subsequences",
+    "title": "Distinct Subsequences",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Distinct%20Subsequences",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0049",
+    "slug": "maximum-size-rectangle-binary-sub-matrix-with-all-1s",
+    "title": "Maximum size rectangle binary sub-matrix with all 1s",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Maximum%20size%20rectangle%20binary%20sub-matrix%20with%20all%201s",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0050",
+    "slug": "number-of-islands",
+    "title": "Number of Islands",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Number%20of%20Islands",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0051",
+    "slug": "given-a-matrix-of-o-and-x-replace-o-with-x-if-surrounded-by-x",
+    "title": "Given a matrix of ‘O’ and ‘X’, replace ‘O’ with ‘X’ if surrounded by ‘X’",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Given%20a%20matrix%20of%20%E2%80%98O%E2%80%99%20and%20%E2%80%98X%E2%80%99%2C%20replace%20%E2%80%98O%E2%80%99%20with%20%E2%80%98X%E2%80%99%20if%20surrounded%20by%20%E2%80%98X%E2%80%99",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0052",
+    "slug": "spiral-matrix-2",
+    "title": "Spiral Matrix",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Spiral%20Matrix",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0053",
+    "slug": "rotate-image",
+    "title": "Rotate Image",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Rotate%20Image",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0054",
+    "slug": "minimum-moves-to-equal-array-elements",
+    "title": "Minimum Moves to Equal Array Elements",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Moves%20to%20Equal%20Array%20Elements",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0055",
+    "slug": "add-binary",
+    "title": "Add Binary",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Add%20Binary",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0056",
+    "slug": "maximum-product-of-three-numbers",
+    "title": "Maximum Product of Three Numbers",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Product%20of%20Three%20Numbers",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0057",
+    "slug": "excel-sheet-column-title",
+    "title": "Excel Sheet Column Title",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Excel%20Sheet%20Column%20Title",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0058",
+    "slug": "happy-number",
+    "title": "Happy Number",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Happy%20Number",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0059",
+    "slug": "palindrome-number",
+    "title": "Palindrome Number",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Palindrome%20Number",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0060",
+    "slug": "missing-number",
+    "title": "Missing Number",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Missing%20Number",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0061",
+    "slug": "reverse-integer",
+    "title": "Reverse Integer",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reverse%20Integer",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0062",
+    "slug": "power-of-two",
+    "title": "Power of Two",
+    "difficulty": "Easy",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Power%20of%20Two",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0063",
+    "slug": "max-points-on-a-line",
+    "title": "Max Points on a Line",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Max%20Points%20on%20a%20Line",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0064",
+    "slug": "valid-square",
+    "title": "Valid Square",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Valid%20Square",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0065",
+    "slug": "the-kth-factor-of-n",
+    "title": "The kth Factor of n",
+    "difficulty": "Medium",
+    "topic": "Matrix",
+    "topics": [
+      "Matrix"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=The%20kth%20Factor%20of%20n",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0066",
+    "slug": "permute-two-arrays-such-that-sum-of-every-pair-is-greater-or-equal-to-k",
+    "title": "Permute two arrays such that sum of every pair is greater or equal to K",
+    "difficulty": "Easy",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Permute%20two%20arrays%20such%20that%20sum%20of%20every%20pair%20is%20greater%20or%20equal%20to%20K",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0067",
+    "slug": "ceiling-in-a-sorted-array",
+    "title": "Ceiling in a sorted array",
+    "difficulty": "Easy",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Ceiling%20in%20a%20sorted%20array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0068",
+    "slug": "pair-with-the-given-difference",
+    "title": "Pair with the given difference",
+    "difficulty": "Easy",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Pair%20with%20the%20given%20difference",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0069",
+    "slug": "permute-two-arrays-such-that-sum-of-every-pair-is-greater-or-equal-to-k-2",
+    "title": "Permute two arrays such that sum of every pair is greater or equal to K",
+    "difficulty": "Easy",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Permute%20two%20arrays%20such%20that%20sum%20of%20every%20pair%20is%20greater%20or%20equal%20to%20K",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0070",
+    "slug": "check-if-reversing-a-sub-array-make-the-array-sorted",
+    "title": "Check if reversing a sub array make the array sorted",
+    "difficulty": "Medium",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Check%20if%20reversing%20a%20sub%20array%20make%20the%20array%20sorted",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0071",
+    "slug": "radix-sort-data-structures-and-algorithms-tutorials",
+    "title": "Radix Sort – Data Structures and Algorithms Tutorials",
+    "difficulty": "Medium",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Radix%20Sort%20%E2%80%93%20Data%20Structures%20and%20Algorithms%20Tutorials",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0072",
+    "slug": "product-of-array-except-self",
+    "title": "Product of Array Except Self",
+    "difficulty": "Medium",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Product%20of%20Array%20Except%20Self",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0073",
+    "slug": "make-all-array-elements-equal-with-minimum-cost",
+    "title": "Make all array elements equal with minimum cost",
+    "difficulty": "Medium",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Make%20all%20array%20elements%20equal%20with%20minimum%20cost",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0074",
+    "slug": "find-peak-element",
+    "title": "Find Peak Element",
+    "difficulty": "Medium",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Find%20Peak%20Element",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0075",
+    "slug": "allocate-minimum-pages-practice",
+    "title": "Allocate Minimum Pages | Practice",
+    "difficulty": "Hard",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Allocate%20Minimum%20Pages%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0076",
+    "slug": "minimum-swaps-to-sort-an-array",
+    "title": "Minimum swaps to sort an array",
+    "difficulty": "Hard",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Minimum%20swaps%20to%20sort%20an%20array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0077",
+    "slug": "spoj-com-problem-aggrcow",
+    "title": "SPOJ.com - Problem AGGRCOW",
+    "difficulty": "Hard",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "Other",
+    "externalUrl": "",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0078",
+    "slug": "search-in-rotated-sorted-array",
+    "title": "Search in Rotated Sorted Array",
+    "difficulty": "Hard",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Search%20in%20Rotated%20Sorted%20Array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0079",
+    "slug": "count-of-smaller-numbers-after-self",
+    "title": "Count of Smaller Numbers After Self",
+    "difficulty": "Hard",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Count%20of%20Smaller%20Numbers%20After%20Self",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0080",
+    "slug": "split-array-largest-sum",
+    "title": "Split Array Largest Sum",
+    "difficulty": "Hard",
+    "topic": "Sorting&Searching",
+    "topics": [
+      "Sorting&Searching"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Split%20Array%20Largest%20Sum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0081",
+    "slug": "middle-of-the-linked-list",
+    "title": "Middle of the Linked List",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Middle%20of%20the%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0082",
+    "slug": "linked-list-cycle",
+    "title": "Linked List Cycle",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Linked%20List%20Cycle",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0083",
+    "slug": "convert-binary-number-in-a-linked-list-to-integer",
+    "title": "Convert Binary Number in a Linked List to Integer",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Convert%20Binary%20Number%20in%20a%20Linked%20List%20to%20Integer",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0084",
+    "slug": "remove-duplicates-from-sorted-list",
+    "title": "Remove Duplicates from Sorted List",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Remove%20Duplicates%20from%20Sorted%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0085",
+    "slug": "sort-a-linked-list-of-0s-1s-and-2s",
+    "title": "Sort a linked list of 0s, 1s and 2s",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Sort%20a%20linked%20list%20of%200s%2C%201s%20and%202s",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0086",
+    "slug": "remove-linked-list-elements",
+    "title": "Remove Linked List Elements",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Remove%20Linked%20List%20Elements",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0087",
+    "slug": "merge-two-sorted-lists",
+    "title": "Merge Two Sorted Lists",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Merge%20Two%20Sorted%20Lists",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0088",
+    "slug": "multiply-two-numbers-represented-by-linked-lists",
+    "title": "Multiply two numbers represented by Linked Lists",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Multiply%20two%20numbers%20represented%20by%20Linked%20Lists",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0089",
+    "slug": "intersection-of-two-linked-lists",
+    "title": "Intersection of Two Linked Lists",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Intersection%20of%20Two%20Linked%20Lists",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0090",
+    "slug": "given-only-a-pointer-reference-to-a-node-to-be-deleted-in-a-singly-linked-list-how-do-you-delete-it",
+    "title": "Given only a pointer/reference to a node to be deleted in a singly linked list, how do you delete it?",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Given%20only%20a%20pointer%2Freference%20to%20a%20node%20to%20be%20deleted%20in%20a%20singly%20linked%20list%2C%20how%20do%20you%20delete%20it%3F",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0091",
+    "slug": "palindrome-linked-list",
+    "title": "Palindrome Linked List",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Palindrome%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0092",
+    "slug": "reverse-linked-list",
+    "title": "Reverse Linked List",
+    "difficulty": "Easy",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reverse%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0093",
+    "slug": "add-two-numbers",
+    "title": "Add Two Numbers",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Add%20Two%20Numbers",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0094",
+    "slug": "copy-list-with-random-pointer",
+    "title": "Copy List with Random Pointer",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Copy%20List%20with%20Random%20Pointer",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0095",
+    "slug": "add-two-numbers-ii",
+    "title": "Add Two Numbers II",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Add%20Two%20Numbers%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0096",
+    "slug": "reverse-linked-list-ii",
+    "title": "Reverse Linked List II",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reverse%20Linked%20List%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0097",
+    "slug": "reorder-list",
+    "title": "Reorder List",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reorder%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0098",
+    "slug": "remove-nth-node-from-end-of-list",
+    "title": "Remove Nth Node From End of List",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Remove%20Nth%20Node%20From%20End%20of%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0099",
+    "slug": "flatten-a-multilevel-doubly-linked-list",
+    "title": "Flatten a Multilevel Doubly Linked List",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Flatten%20a%20Multilevel%20Doubly%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0100",
+    "slug": "partition-list",
+    "title": "Partition List",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Partition%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0101",
+    "slug": "remove-duplicates-from-sorted-list-ii",
+    "title": "Remove Duplicates from Sorted List II",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Remove%20Duplicates%20from%20Sorted%20List%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0102",
+    "slug": "rearrange-a-linked-list-in-zig-zag-fashion",
+    "title": "Rearrange a Linked List in Zig-Zag fashion",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20Linked%20List%20in%20Zig-Zag%20fashion",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0103",
+    "slug": "sort-list",
+    "title": "Sort List",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sort%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0104",
+    "slug": "segregate-even-and-odd-nodes-in-a-linked-list",
+    "title": "Segregate even and odd nodes in a Linked List",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Segregate%20even%20and%20odd%20nodes%20in%20a%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0105",
+    "slug": "rearrange-a-given-linked-list-in-place",
+    "title": "Rearrange a given linked list in-place",
+    "difficulty": "Medium",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20given%20linked%20list%20in-place",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0106",
+    "slug": "merge-k-sorted-lists",
+    "title": "Merge k Sorted Lists",
+    "difficulty": "Hard",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Merge%20k%20Sorted%20Lists",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0107",
+    "slug": "reverse-nodes-in-k-group",
+    "title": "Reverse Nodes in k-Group",
+    "difficulty": "Hard",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Reverse%20Nodes%20in%20k-Group",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0108",
+    "slug": "merge-sort-for-linked-lists",
+    "title": "Merge Sort for Linked Lists",
+    "difficulty": "Hard",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Merge%20Sort%20for%20Linked%20Lists",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0109",
+    "slug": "flattening-a-linked-list",
+    "title": "Flattening a Linked List",
+    "difficulty": "Hard",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Flattening%20a%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0110",
+    "slug": "subtract-two-numbers-represented-as-linked-lists",
+    "title": "Subtract Two Numbers represented as Linked Lists",
+    "difficulty": "Hard",
+    "topic": "Linked-List",
+    "topics": [
+      "Linked-List"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Subtract%20Two%20Numbers%20represented%20as%20Linked%20Lists",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0111",
+    "slug": "implement-queue-using-stacks",
+    "title": "Implement Queue using Stacks",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Implement%20Queue%20using%20Stacks",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0112",
+    "slug": "backspace-string-compare",
+    "title": "Backspace String Compare",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Backspace%20String%20Compare",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0113",
+    "slug": "implement-stack-using-queues",
+    "title": "Implement Stack using Queues",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Implement%20Stack%20using%20Queues",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0114",
+    "slug": "implement-stack-and-queue-using-deque",
+    "title": "Implement Stack and Queue using Deque",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Implement%20Stack%20and%20Queue%20using%20Deque",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0115",
+    "slug": "next-greater-element-i",
+    "title": "Next Greater Element I",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Next%20Greater%20Element%20I",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0116",
+    "slug": "evaluation-of-postfix-expression",
+    "title": "Evaluation of Postfix Expression",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Evaluation%20of%20Postfix%20Expression",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0117",
+    "slug": "implement-two-stacks-in-an-array",
+    "title": "Implement two Stacks in an Array",
+    "difficulty": "Easy",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Implement%20two%20Stacks%20in%20an%20Array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0118",
+    "slug": "letter-combinations-of-a-phone-number",
+    "title": "Letter Combinations of a Phone Number",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Letter%20Combinations%20of%20a%20Phone%20Number",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0119",
+    "slug": "minimum-cost-tree-from-leaf-values",
+    "title": "Minimum Cost Tree From Leaf Values",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Cost%20Tree%20From%20Leaf%20Values",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0120",
+    "slug": "daily-temperatures",
+    "title": "Daily Temperatures",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Daily%20Temperatures",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0121",
+    "slug": "distance-of-nearest-cell-having-1-practice",
+    "title": "Distance of nearest cell having 1 | Practice",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Distance%20of%20nearest%20cell%20having%201%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0122",
+    "slug": "online-stock-span",
+    "title": "Online Stock Span",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Online%20Stock%20Span",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0123",
+    "slug": "rotten-oranges-practice",
+    "title": "Rotten Oranges | Practice",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Rotten%20Oranges%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0124",
+    "slug": "sum-of-subarray-minimums",
+    "title": "Sum of Subarray Minimums",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sum%20of%20Subarray%20Minimums",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0125",
+    "slug": "evaluate-reverse-polish-notation",
+    "title": "Evaluate Reverse Polish Notation",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Evaluate%20Reverse%20Polish%20Notation",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0126",
+    "slug": "gas-station-practice",
+    "title": "Gas Station | Practice",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Gas%20Station%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0127",
+    "slug": "https-leetcode-com-problems-implement-stack-using-queues",
+    "title": "https://leetcode.com/problems/implement-stack-using-queues",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=https%3A%2F%2Fleetcode.com%2Fproblems%2Fimplement-stack-using-queues",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0128",
+    "slug": "flatten-nested-list-iterator",
+    "title": "Flatten Nested List Iterator",
+    "difficulty": "Medium",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Flatten%20Nested%20List%20Iterator",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0129",
+    "slug": "maximum-of-minimums-of-every-window-size-in-a-given-array",
+    "title": "Maximum of minimums of every window size in a given array",
+    "difficulty": "Hard",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Maximum%20of%20minimums%20of%20every%20window%20size%20in%20a%20given%20array",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0130",
+    "slug": "lru-cache-complete-tutorial",
+    "title": "LRU Cache – Complete Tutorial",
+    "difficulty": "Hard",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=LRU%20Cache%20%E2%80%93%20Complete%20Tutorial",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0131",
+    "slug": "the-celebrity-problem",
+    "title": "The Celebrity Problem",
+    "difficulty": "Hard",
+    "topic": "Stack&Queue",
+    "topics": [
+      "Stack&Queue"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=The%20Celebrity%20Problem",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0132",
+    "slug": "diameter-of-binary-tree",
+    "title": "Diameter of Binary Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Diameter%20of%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0133",
+    "slug": "invert-binary-tree",
+    "title": "Invert Binary Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Invert%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0134",
+    "slug": "subtree-of-another-tree",
+    "title": "Subtree of Another Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Subtree%20of%20Another%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0135",
+    "slug": "range-sum-of-bst",
+    "title": "Range Sum of BST",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Range%20Sum%20of%20BST",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0136",
+    "slug": "symmetric-tree",
+    "title": "Symmetric Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Symmetric%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0137",
+    "slug": "convert-sorted-array-to-binary-search-tree",
+    "title": "Convert Sorted Array to Binary Search Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0138",
+    "slug": "merge-two-binary-trees",
+    "title": "Merge Two Binary Trees",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Merge%20Two%20Binary%20Trees",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0139",
+    "slug": "maximum-depth-of-binary-tree",
+    "title": "Maximum Depth of Binary Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Depth%20of%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0140",
+    "slug": "binary-tree-paths",
+    "title": "Binary Tree Paths",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Tree%20Paths",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0141",
+    "slug": "same-tree",
+    "title": "Same Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Same%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0142",
+    "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+    "title": "Lowest Common Ancestor of a Binary Search Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0143",
+    "slug": "path-sum",
+    "title": "Path Sum",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Path%20Sum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0144",
+    "slug": "minimum-absolute-difference-in-bst",
+    "title": "Minimum Absolute Difference in BST",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Absolute%20Difference%20in%20BST",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0145",
+    "slug": "sum-of-left-leaves",
+    "title": "Sum of Left Leaves",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sum%20of%20Left%20Leaves",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0146",
+    "slug": "balanced-binary-tree",
+    "title": "Balanced Binary Tree",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Balanced%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0147",
+    "slug": "predecessor-and-successor-practice",
+    "title": "Predecessor and Successor | Practice",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Predecessor%20and%20Successor%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0148",
+    "slug": "https-leetcode-com-problems-binary-tree-inorder-traversal",
+    "title": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=https%3A%2F%2Fleetcode.com%2Fproblems%2Fbinary-tree-inorder-traversal%2F",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0149",
+    "slug": "bst-with-dead-end-practice",
+    "title": "BST with Dead End | Practice",
+    "difficulty": "Easy",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=BST%20with%20Dead%20End%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0150",
+    "slug": "binary-search-tree-iterator",
+    "title": "Binary Search Tree Iterator",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Search%20Tree%20Iterator",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0151",
+    "slug": "lowest-common-ancestor-of-a-binary-tree",
+    "title": "Lowest Common Ancestor of a Binary Tree",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0152",
+    "slug": "unique-binary-search-trees-ii",
+    "title": "Unique Binary Search Trees II",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Unique%20Binary%20Search%20Trees%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0153",
+    "slug": "all-nodes-distance-k-in-binary-tree",
+    "title": "All Nodes Distance K in Binary Tree",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=All%20Nodes%20Distance%20K%20in%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0154",
+    "slug": "validate-binary-search-tree",
+    "title": "Validate Binary Search Tree",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Validate%20Binary%20Search%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0155",
+    "slug": "binary-tree-right-side-view",
+    "title": "Binary Tree Right Side View",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Tree%20Right%20Side%20View",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0156",
+    "slug": "redundant-connection",
+    "title": "Redundant Connection",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Redundant%20Connection",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0157",
+    "slug": "binary-tree-level-order-traversal",
+    "title": "Binary Tree Level Order Traversal",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Tree%20Level%20Order%20Traversal",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0158",
+    "slug": "path-sum-iii",
+    "title": "Path Sum III",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Path%20Sum%20III",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0159",
+    "slug": "construct-binary-tree-from-preorder-and-postorder-traversal",
+    "title": "Construct Binary Tree from Preorder and Postorder Traversal",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Construct%20Binary%20Tree%20from%20Preorder%20and%20Postorder%20Traversal",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0160",
+    "slug": "unique-binary-search-trees",
+    "title": "Unique Binary Search Trees",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Unique%20Binary%20Search%20Trees",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0161",
+    "slug": "recover-binary-search-tree",
+    "title": "Recover Binary Search Tree",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Recover%20Binary%20Search%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0162",
+    "slug": "populating-next-right-pointers-in-each-node",
+    "title": "Populating Next Right Pointers in Each Node",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Populating%20Next%20Right%20Pointers%20in%20Each%20Node",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0163",
+    "slug": "flatten-binary-tree-to-linked-list",
+    "title": "Flatten Binary Tree to Linked List",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Flatten%20Binary%20Tree%20to%20Linked%20List",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0164",
+    "slug": "maximum-width-of-binary-tree",
+    "title": "Maximum Width of Binary Tree",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Width%20of%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0165",
+    "slug": "min-distance-between-two-given-nodes-of-a-binary-tree-practice",
+    "title": "Min distance between two given nodes of a Binary Tree | Practice",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Min%20distance%20between%20two%20given%20nodes%20of%20a%20Binary%20Tree%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0166",
+    "slug": "kth-smallest-element-in-a-bst",
+    "title": "Kth Smallest Element in a BST",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Kth%20Smallest%20Element%20in%20a%20BST",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0167",
+    "slug": "binary-tree-zigzag-level-order-traversal",
+    "title": "Binary Tree Zigzag Level Order Traversal",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Tree%20Zigzag%20Level%20Order%20Traversal",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0168",
+    "slug": "count-bst-nodes-that-lie-in-a-given-range-practice",
+    "title": "Count BST nodes that lie in a given range | Practice",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Count%20BST%20nodes%20that%20lie%20in%20a%20given%20range%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0169",
+    "slug": "preorder-to-bst-practice",
+    "title": "Preorder to BST | Practice",
+    "difficulty": "Medium",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Preorder%20to%20BST%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0170",
+    "slug": "https-practice-geeksforgeeks-org-problems-binary-tree-to-dll-1",
+    "title": "https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=https%3A%2F%2Fpractice.geeksforgeeks.org%2Fproblems%2Fbinary-tree-to-dll%2F1",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0171",
+    "slug": "binary-tree-maximum-path-sum",
+    "title": "Binary Tree Maximum Path Sum",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Tree%20Maximum%20Path%20Sum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0172",
+    "slug": "sum-of-distances-in-tree",
+    "title": "Sum of Distances in Tree",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sum%20of%20Distances%20in%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0173",
+    "slug": "binary-tree-cameras",
+    "title": "Binary Tree Cameras",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Binary%20Tree%20Cameras",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0174",
+    "slug": "vertical-order-traversal-of-a-binary-tree",
+    "title": "Vertical Order Traversal of a Binary Tree",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Vertical%20Order%20Traversal%20of%20a%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0175",
+    "slug": "print-all-k-sum-paths-in-a-binary-tree",
+    "title": "Print all k-sum paths in a binary tree",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20k-sum%20paths%20in%20a%20binary%20tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0176",
+    "slug": "serialize-and-deserialize-binary-tree",
+    "title": "Serialize and Deserialize Binary Tree",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Serialize%20and%20Deserialize%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0177",
+    "slug": "find-median-of-bst",
+    "title": "Find median of BST",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20median%20of%20BST",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0178",
+    "slug": "largest-bst-in-a-binary-tree",
+    "title": "Largest BST in a Binary Tree",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Largest%20BST%20in%20a%20Binary%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0179",
+    "slug": "construct-bst-from-preorder-traversal",
+    "title": "Construct BST from Preorder Traversal",
+    "difficulty": "Hard",
+    "topic": "Tree",
+    "topics": [
+      "Tree"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Construct%20BST%20from%20Preorder%20Traversal",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0180",
+    "slug": "bfs-of-graph-practice",
+    "title": "BFS of graph | Practice",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=BFS%20of%20graph%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0181",
+    "slug": "depth-first-search-or-dfs-for-a-graph",
+    "title": "Depth First Search or DFS for a Graph",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Depth%20First%20Search%20or%20DFS%20for%20a%20Graph",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0182",
+    "slug": "number-of-islands-2",
+    "title": "Number of Islands",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Number%20of%20Islands",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0183",
+    "slug": "flood-fill",
+    "title": "Flood Fill",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Flood%20Fill",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0184",
+    "slug": "rat-in-a-maze-problem-i-practice",
+    "title": "Rat in a Maze Problem - I | Practice",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Rat%20in%20a%20Maze%20Problem%20-%20I%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0185",
+    "slug": "undirected-graph-cycle-practice",
+    "title": "Undirected Graph Cycle | Practice",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Undirected%20Graph%20Cycle%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0186",
+    "slug": "detect-cycle-in-a-directed-graph",
+    "title": "Detect Cycle in a Directed Graph",
+    "difficulty": "Easy",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Detect%20Cycle%20in%20a%20Directed%20Graph",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0187",
+    "slug": "steps-by-knight-practice",
+    "title": "Steps by Knight | Practice",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Steps%20by%20Knight%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0188",
+    "slug": "decode-string",
+    "title": "Decode String",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Decode%20String",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0189",
+    "slug": "shortest-bridge",
+    "title": "Shortest Bridge",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Shortest%20Bridge",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0190",
+    "slug": "number-of-operations-to-make-network-connected",
+    "title": "Number of Operations to Make Network Connected",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Number%20of%20Operations%20to%20Make%20Network%20Connected",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0191",
+    "slug": "find-eventual-safe-states",
+    "title": "Find Eventual Safe States",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Find%20Eventual%20Safe%20States",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0192",
+    "slug": "strongly-connected-practice",
+    "title": "Strongly Connected | Practice",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Strongly%20Connected%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0193",
+    "slug": "time-needed-to-inform-all-employees",
+    "title": "Time Needed to Inform All Employees",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Time%20Needed%20to%20Inform%20All%20Employees",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0194",
+    "slug": "introduction-to-graph-coloring",
+    "title": "Introduction to Graph Coloring",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Introduction%20to%20Graph%20Coloring",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0195",
+    "slug": "most-stones-removed-with-same-row-or-column",
+    "title": "Most Stones Removed with Same Row or Column",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Most%20Stones%20Removed%20with%20Same%20Row%20or%20Column",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0196",
+    "slug": "as-far-from-land-as-possible",
+    "title": "As Far from Land as Possible",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=As%20Far%20from%20Land%20as%20Possible",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0197",
+    "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+    "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "DONE",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0198",
+    "slug": "check-if-it-is-possible-to-finish-all-task-from-given-dependencies-course-schedule-i",
+    "title": "Check if it is possible to finish all task from given dependencies (Course Schedule I)",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Check%20if%20it%20is%20possible%20to%20finish%20all%20task%20from%20given%20dependencies%20(Course%20Schedule%20I)",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0199",
+    "slug": "prim-s-algorithm-for-minimum-spanning-tree-mst",
+    "title": "Prim’s Algorithm for Minimum Spanning Tree (MST)",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Prim%E2%80%99s%20Algorithm%20for%20Minimum%20Spanning%20Tree%20(MST)",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0200",
+    "slug": "floyd-warshall-practice",
+    "title": "Floyd Warshall | Practice",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Floyd%20Warshall%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0201",
+    "slug": "evaluate-division",
+    "title": "Evaluate Division",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Evaluate%20Division",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0202",
+    "slug": "snakes-and-ladders",
+    "title": "Snakes and Ladders",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Snakes%20and%20Ladders",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0203",
+    "slug": "topological-sort-practice",
+    "title": "Topological sort | Practice",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Topological%20sort%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0204",
+    "slug": "cheapest-flights-within-k-stops",
+    "title": "Cheapest Flights Within K Stops",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Cheapest%20Flights%20Within%20K%20Stops",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0205",
+    "slug": "detect-a-negative-cycle-in-a-graph-bellman-ford",
+    "title": "Detect a negative cycle in a Graph | (Bellman Ford)",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Detect%20a%20negative%20cycle%20in%20a%20Graph%20%7C%20(Bellman%20Ford)",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0206",
+    "slug": "check-whether-a-given-graph-is-bipartite-or-not",
+    "title": "Check whether a given graph is Bipartite or not",
+    "difficulty": "Medium",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Check%20whether%20a%20given%20graph%20is%20Bipartite%20or%20not",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0207",
+    "slug": "longest-increasing-path-in-a-matrix",
+    "title": "Longest Increasing Path in a Matrix",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Longest%20Increasing%20Path%20in%20a%20Matrix",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0208",
+    "slug": "making-a-large-island",
+    "title": "Making A Large Island",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Making%20A%20Large%20Island",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0209",
+    "slug": "remove-boxes",
+    "title": "Remove Boxes",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Remove%20Boxes",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0210",
+    "slug": "critical-connections-in-a-network",
+    "title": "Critical Connections in a Network",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Critical%20Connections%20in%20a%20Network",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0211",
+    "slug": "alien-dictionary",
+    "title": "alien-dictionary",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "Other",
+    "externalUrl": "",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0212",
+    "slug": "water-jug-problem-using-bfs",
+    "title": "Water Jug problem using BFS",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Water%20Jug%20problem%20using%20BFS",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0213",
+    "slug": "travelling-salesman-problem-using-dynamic-programming",
+    "title": "Travelling Salesman Problem using Dynamic Programming",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Travelling%20Salesman%20Problem%20using%20Dynamic%20Programming",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0214",
+    "slug": "total-number-of-spanning-trees-in-a-graph",
+    "title": "Total number of Spanning Trees in a Graph",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Total%20number%20of%20Spanning%20Trees%20in%20a%20Graph",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0215",
+    "slug": "word-ladder",
+    "title": "Word Ladder",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Word%20Ladder",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0216",
+    "slug": "minimize-cash-flow-among-a-given-set-of-friends-who-have-borrowed-money-from-each-other",
+    "title": "Minimize Cash Flow among a given set of friends who have borrowed money from each other",
+    "difficulty": "Hard",
+    "topic": "Graph",
+    "topics": [
+      "Graph"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Minimize%20Cash%20Flow%20among%20a%20given%20set%20of%20friends%20who%20have%20borrowed%20money%20from%20each%20other",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0217",
+    "slug": "design-add-and-search-words-data-structure",
+    "title": "Design Add and Search Words Data Structure",
+    "difficulty": "Medium",
+    "topic": "Tries",
+    "topics": [
+      "Tries"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Design%20Add%20and%20Search%20Words%20Data%20Structure",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0218",
+    "slug": "word-break-problem-trie-solution",
+    "title": "Word Break Problem | (Trie solution)",
+    "difficulty": "Medium",
+    "topic": "Tries",
+    "topics": [
+      "Tries"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Word%20Break%20Problem%20%7C%20(Trie%20solution)",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0219",
+    "slug": "trie-data-structure",
+    "title": "Trie Data Structure",
+    "difficulty": "Medium",
+    "topic": "Tries",
+    "topics": [
+      "Tries"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Trie%20Data%20Structure",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0220",
+    "slug": "print-anagrams-together-practice",
+    "title": "Print Anagrams Together | Practice",
+    "difficulty": "Medium",
+    "topic": "Tries",
+    "topics": [
+      "Tries"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20Anagrams%20Together%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0221",
+    "slug": "palindrome-pairs",
+    "title": "Palindrome Pairs",
+    "difficulty": "Hard",
+    "topic": "Tries",
+    "topics": [
+      "Tries"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Palindrome%20Pairs",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0222",
+    "slug": "phone-directory",
+    "title": "phone-directory",
+    "difficulty": "Hard",
+    "topic": "Tries",
+    "topics": [
+      "Tries"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "Other",
+    "externalUrl": "",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0223",
+    "slug": "minimum-number-of-refueling-stops",
+    "title": "Minimum Number of Refueling Stops",
+    "difficulty": "Hard",
+    "topic": "Heap",
+    "topics": [
+      "Heap"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Number%20of%20Refueling%20Stops",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0224",
+    "slug": "minimum-cost-to-hire-k-workers",
+    "title": "Minimum Cost to Hire K Workers",
+    "difficulty": "Hard",
+    "topic": "Heap",
+    "topics": [
+      "Heap"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Cost%20to%20Hire%20K%20Workers",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0225",
+    "slug": "swim-in-rising-water",
+    "title": "Swim in Rising Water",
+    "difficulty": "Hard",
+    "topic": "Heap",
+    "topics": [
+      "Heap"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Swim%20in%20Rising%20Water",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0226",
+    "slug": "sliding-window-maximum",
+    "title": "Sliding Window Maximum",
+    "difficulty": "Hard",
+    "topic": "Heap",
+    "topics": [
+      "Heap"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sliding%20Window%20Maximum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0227",
+    "slug": "climbing-stairs",
+    "title": "Climbing Stairs",
+    "difficulty": "Easy",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Climbing%20Stairs",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0228",
+    "slug": "maximum-product-subarray",
+    "title": "Maximum Product Subarray",
+    "difficulty": "Easy",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Product%20Subarray",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0229",
+    "slug": "ones-and-zeroes",
+    "title": "Ones and Zeroes",
+    "difficulty": "Easy",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Ones%20and%20Zeroes",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0230",
+    "slug": "counting-bits",
+    "title": "Counting Bits",
+    "difficulty": "Easy",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Counting%20Bits",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0231",
+    "slug": "knight-dialer",
+    "title": "Knight Dialer",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Knight%20Dialer",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0232",
+    "slug": "maximize-the-cut-segments-practice",
+    "title": "Maximize The Cut Segments | Practice",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Maximize%20The%20Cut%20Segments%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0233",
+    "slug": "unique-paths",
+    "title": "Unique Paths",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Unique%20Paths",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0234",
+    "slug": "minimum-path-sum",
+    "title": "Minimum Path Sum",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Path%20Sum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0235",
+    "slug": "coin-change",
+    "title": "Coin Change",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Coin%20Change",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0236",
+    "slug": "decode-ways",
+    "title": "Decode Ways",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Decode%20Ways",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0237",
+    "slug": "maximum-length-of-repeated-subarray",
+    "title": "Maximum Length of Repeated Subarray",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Length%20of%20Repeated%20Subarray",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0238",
+    "slug": "longest-increasing-subsequence",
+    "title": "Longest Increasing Subsequence",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Longest%20Increasing%20Subsequence",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0239",
+    "slug": "longest-common-substring-practice",
+    "title": "Longest Common Substring | Practice",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Longest%20Common%20Substring%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0240",
+    "slug": "count-square-submatrices-with-all-ones",
+    "title": "Count Square Submatrices with All Ones",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Count%20Square%20Submatrices%20with%20All%20Ones",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0241",
+    "slug": "maximal-square",
+    "title": "Maximal Square",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximal%20Square",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0242",
+    "slug": "mobile-numeric-keypad-practice",
+    "title": "Mobile numeric keypad | Practice",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Mobile%20numeric%20keypad%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0243",
+    "slug": "weighted-job-scheduling",
+    "title": "Weighted Job Scheduling",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Weighted%20Job%20Scheduling",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0244",
+    "slug": "delete-and-earn",
+    "title": "Delete and Earn",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Delete%20and%20Earn",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0245",
+    "slug": "range-sum-query-2d-immutable",
+    "title": "Range Sum Query 2D - Immutable",
+    "difficulty": "Medium",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Range%20Sum%20Query%202D%20-%20Immutable",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0246",
+    "slug": "optimal-binary-search-tree",
+    "title": "Optimal Binary Search Tree",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Optimal%20Binary%20Search%20Tree",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0247",
+    "slug": "frog-jump",
+    "title": "Frog Jump",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Frog%20Jump",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0248",
+    "slug": "best-time-to-buy-and-sell-stock-iv",
+    "title": "Best Time to Buy and Sell Stock IV",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Best%20Time%20to%20Buy%20and%20Sell%20Stock%20IV",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0249",
+    "slug": "minimum-insertion-steps-to-make-a-string-palindrome",
+    "title": "Minimum Insertion Steps to Make a String Palindrome",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Insertion%20Steps%20to%20Make%20a%20String%20Palindrome",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0250",
+    "slug": "largest-area-rectangular-sub-matrix-with-equal-number-of-1-s-and-0-s",
+    "title": "Largest area rectangular sub-matrix with equal number of 1’s and 0’s",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Largest%20area%20rectangular%20sub-matrix%20with%20equal%20number%20of%201%E2%80%99s%20and%200%E2%80%99s",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0251",
+    "slug": "trapping-rain-water",
+    "title": "Trapping Rain Water",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Trapping%20Rain%20Water",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0252",
+    "slug": "minimum-cost-to-merge-stones",
+    "title": "Minimum Cost to Merge Stones",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Minimum%20Cost%20to%20Merge%20Stones",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0253",
+    "slug": "count-different-palindromic-subsequences",
+    "title": "Count Different Palindromic Subsequences",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Count%20Different%20Palindromic%20Subsequences",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0254",
+    "slug": "maximal-rectangle",
+    "title": "Maximal Rectangle",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximal%20Rectangle",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0255",
+    "slug": "burst-balloons",
+    "title": "Burst Balloons",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Burst%20Balloons",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0256",
+    "slug": "super-egg-drop",
+    "title": "Super Egg Drop",
+    "difficulty": "Hard",
+    "topic": "Dynamic-Programming",
+    "topics": [
+      "Dynamic-Programming"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Super%20Egg%20Drop",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0257",
+    "slug": "sort-colors-2",
+    "title": "Sort Colors",
+    "difficulty": "Medium",
+    "topic": "Two-Pointer",
+    "topics": [
+      "Two-Pointer"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sort%20Colors",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0258",
+    "slug": "longest-repeating-character-replacement",
+    "title": "Longest Repeating Character Replacement",
+    "difficulty": "Medium",
+    "topic": "Two-Pointer",
+    "topics": [
+      "Two-Pointer"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Longest%20Repeating%20Character%20Replacement",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0259",
+    "slug": "maximum-number-of-visible-points",
+    "title": "Maximum Number of Visible Points",
+    "difficulty": "Medium",
+    "topic": "Two-Pointer",
+    "topics": [
+      "Two-Pointer"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Maximum%20Number%20of%20Visible%20Points",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0260",
+    "slug": "combination-sum-ii",
+    "title": "Combination Sum II",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Combination%20Sum%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0261",
+    "slug": "https-practice-geeksforgeeks-org-problems-subset-sum-problem2014-1",
+    "title": "https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=https%3A%2F%2Fpractice.geeksforgeeks.org%2Fproblems%2Fsubset-sum-problem2014%2F1",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0262",
+    "slug": "combinations",
+    "title": "Combinations",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Combinations",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0263",
+    "slug": "subsets-ii",
+    "title": "Subsets II",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Subsets%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0264",
+    "slug": "m-coloring-problem-practice",
+    "title": "M-Coloring Problem | Practice",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=M-Coloring%20Problem%20%7C%20Practice",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0265",
+    "slug": "beautiful-arrangement",
+    "title": "Beautiful Arrangement",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Beautiful%20Arrangement",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0266",
+    "slug": "palindrome-partitioning",
+    "title": "Palindrome Partitioning",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Palindrome%20Partitioning",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0267",
+    "slug": "permutations-ii",
+    "title": "Permutations II",
+    "difficulty": "Medium",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Permutations%20II",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0268",
+    "slug": "https-leetcode-com-problems-word-search-ii",
+    "title": "https://leetcode.com/problems/word-search-ii/",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=https%3A%2F%2Fleetcode.com%2Fproblems%2Fword-search-ii%2F",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0269",
+    "slug": "sudoku-solver",
+    "title": "Sudoku Solver",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Sudoku%20Solver",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0270",
+    "slug": "n-queens",
+    "title": "N-Queens",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=N-Queens",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0271",
+    "slug": "unique-paths-iii",
+    "title": "Unique Paths III",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problemset/?search=Unique%20Paths%20III",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0272",
+    "slug": "find-maximum-number-possible-by-doing-at-most-k-swaps",
+    "title": "Find Maximum number possible by doing at-most K swaps",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20Maximum%20number%20possible%20by%20doing%20at-most%20K%20swaps",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0273",
+    "slug": "partition-of-a-set-into-k-subsets-with-equal-sum",
+    "title": "Partition of a set into K subsets with equal sum",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Partition%20of%20a%20set%20into%20K%20subsets%20with%20equal%20sum",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0274",
+    "slug": "tug-of-war",
+    "title": "Tug of War",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Tug%20of%20War",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0275",
+    "slug": "find-paths-from-corner-cell-to-middle-cell-in-maze",
+    "title": "Find paths from corner cell to middle cell in maze",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20paths%20from%20corner%20cell%20to%20middle%20cell%20in%20maze",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0276",
+    "slug": "solving-cryptarithmetic-puzzles",
+    "title": "Solving Cryptarithmetic Puzzles",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Solving%20Cryptarithmetic%20Puzzles",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  },
+  {
+    "id": "problem-0277",
+    "slug": "print-all-palindromic-partitions-of-a-string-using-bit-manipulation",
+    "title": "Print all Palindromic Partitions of a String using Bit Manipulation",
+    "difficulty": "Hard",
+    "topic": "Backtracking",
+    "topics": [
+      "Backtracking"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "GeeksforGeeks",
+    "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20Palindromic%20Partitions%20of%20a%20String%20using%20Bit%20Manipulation",
+    "remarks": "",
+    "description": "",
+    "sampleInput": "",
+    "sampleOutput": "",
+    "testCases": [],
+    "solution": ""
+  }
+]
