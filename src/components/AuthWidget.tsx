@@ -131,9 +131,8 @@ export default function AuthWidget() {
                 {isProfileMenuOpen && (
                     <div style={{
                         position: 'absolute',
-                        top: '120%',
+                        top: '150%',
                         right: 0,
-                        backgroundColor: 'var(--color-bg, #1a1a1a)',
                         color: 'var(--color-text, #fff)',
                         border: '1px solid var(--color-border, #333)',
                         borderRadius: '12px',
