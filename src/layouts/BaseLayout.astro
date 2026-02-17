@@ -3,6 +3,7 @@ import '../styles/global.scss';
 import '../styles/components.scss';
 import Logo from '../components/Logo.astro';
 import Icons from '../components/Icons.astro';
+import AuthWidget from '../components/AuthWidget';
 import { getSiteConfig } from '../utils/contentLoader';
 
 interface Props {
@@ -169,6 +170,7 @@ if (type === 'website') {
                 <Icons name="moon" size={18} />
               </span>
             </button>
+            <AuthWidget client:load />
           </nav>
 
           <!-- Mobile controls -->
@@ -194,6 +196,9 @@ if (type === 'website') {
           {config.navigation.map(item => (
             <a href={item.path} class="header__mobile-link">{item.label}</a>
           ))}
+          <div style="margin-top: 1rem; display: flex; justify-content: center;">
+             <AuthWidget client:load />
+          </div>
         </div>
       </nav>
     </header>

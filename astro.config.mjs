@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import preact from '@astrojs/preact';
 
 /**
  * @param {string} value
@@ -42,6 +43,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.includes('/404') && isCanonicalTaxonomyPath(page),
     }),
+    preact(),
   ],
   markdown: {
     shikiConfig: {
