@@ -1,0 +1,9 @@
+{
+  "title": "Why Vite Is Used by Almost Every Node Project",
+  "description": "Understand why Vite became the default frontend build tool: the problems it solves, how it works, how it compares to alternatives, and how to configure it for real projects.",
+  "date": "2026-02-17",
+  "author": "Avinash Jha",
+  "tags": ["vite", "javascript", "nodejs", "bundling", "frontend"],
+  "category": "tutorials",
+  "draft": false
+}
