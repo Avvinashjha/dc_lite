@@ -1,0 +1,9 @@
+{
+  "title": "Playwright: The Complete Guide to Modern End-to-End Testing",
+  "description": "Learn what Playwright is, why teams use it, how it compares with other E2E tools, and how to scale tests with parallel execution.",
+  "date": "2026-02-19",
+  "author": "Avinash Jha",
+  "tags": ["playwright", "testing", "e2e", "automation"],
+  "category": "tutorials",
+  "draft": false
+}
