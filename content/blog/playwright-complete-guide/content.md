@@ -76,8 +76,8 @@ Typical structure looks like this:
 ```text
 ├── playwright.config.js
 ├── tests/
-│   ├── flux_home.spec.js
-│   └── flux_flow_pipeline.spec.js
+│   ├── dailycoder_home.spec.js
+│   └── dailycoder_pipeline.spec.js
 ├── test-results/
 └── playwright-report/
 ```
@@ -90,7 +90,7 @@ Create a file ending with `.spec.js` in `tests/`.
 import { test, expect } from '@playwright/test';
 
 test('home page title is visible', async ({ page }) => {
-  await page.goto('https://flux.internal.reports.mn/');
+  await page.goto('https://dailycoder.in/');
   await page.waitForSelector('.homedashboard__wrapper', { timeout: 10000 });
   await expect(page).toHaveTitle('Home');
 });
@@ -119,9 +119,9 @@ You can inject cookies per test context:
 test.beforeEach(async ({ context }) => {
   await context.addCookies([
     {
-      name: 'fluxAuth',
+      name: 'dailyCoderAuth',
       value: 'adfssadf',
-      domain: '.reports.mn',
+      domain: '.dailycoder.in',
       path: '/',
     },
   ]);
@@ -140,7 +140,7 @@ export default {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: '.auth/flux.json',
+        storageState: '.auth/dailycoder.json',
       },
     },
   ],
@@ -185,7 +185,7 @@ npx playwright test --project=chromium
 To run a specific file and line:
 
 ```bash
-npx playwright test tests/flux_home.spec.js:16
+npx playwright test tests/dailycoder_home.spec.js:16
 ```
 
 ### Best Practices for Stable Playwright Tests
