@@ -1,0 +1,9 @@
+{
+  "title": "What Is MCP, How It Works, and How to Build Your Own MCP Server",
+  "description": "A practical guide to the Model Context Protocol (MCP): what it is, why it matters, how MCP architecture works, and how to create your own MCP server with TypeScript.",
+  "date": "2026-02-26",
+  "author": "Avinash Jha",
+  "tags": ["mcp", "ai", "llm", "tools", "protocols"],
+  "category": "tutorials",
+  "draft": false
+}
