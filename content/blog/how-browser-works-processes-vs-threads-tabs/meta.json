@@ -1,0 +1,9 @@
+{
+  "title": "How Browsers Work: Processes, Threads, and Why Tabs Are Isolated",
+  "description": "Understand how a browser works internally, what processes and threads are, and why modern browsers usually isolate tabs in separate processes.",
+  "date": "2026-02-27",
+  "author": "Avinash Jha",
+  "tags": ["browser", "process", "thread", "tabs", "web", "architecture"],
+  "category": "web development",
+  "draft": false
+}
