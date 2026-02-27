@@ -7,12 +7,30 @@
     "logo": "/images/logo.svg"
   },
   "navigation": [
-    { "label": "Blog", "path": "/blog" },
-    { "label": "Courses", "path": "/courses" },
-    { "label": "Docs", "path": "/docs" },
-    { "label": "Tools", "path": "/tools" },
-    { "label": "Games", "path": "/games" },
-    { "label": "About", "path": "/about" }
+    {
+      "label": "Blog",
+      "path": "/blog"
+    },
+    {
+      "label": "Courses",
+      "path": "/courses"
+    },
+    {
+      "label": "Docs",
+      "path": "/docs"
+    },
+    {
+      "label": "Tools",
+      "path": "/tools"
+    },
+    {
+      "label": "Games",
+      "path": "/games"
+    },
+    {
+      "label": "About",
+      "path": "/about"
+    }
   ],
   "socialLinks": {
     "twitter": "https://x.com/dailycoder_in",
@@ -35,6 +53,7 @@
   },
   "analytics": {
     "googleAnalyticsId": "G-S6R7PYT45L",
-    "googleSearchConsoleVerification": ""
+    "googleSearchConsoleVerification": "",
+    "googleAdSenseId": "ca-pub-1081311524559030"
   }
 }

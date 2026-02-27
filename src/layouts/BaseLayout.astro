@@ -138,6 +138,11 @@ if (type === 'website') {
       </script>
     )}
 
+    <!-- Google AdSense -->
+    {analytics.googleAdSenseId && (
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${analytics.googleAdSenseId}`} crossorigin="anonymous"></script>
+    )}
+
     <slot name="head" />
     <script is:inline>
       const theme = localStorage.getItem('theme') ||

@@ -109,7 +109,7 @@ A simple implementation flow looks like this:
 6. Enable semantic retrieval for user queries
 7. Add an interface for testing and iteration
 
-In the demo setup summarized above, the stack was:
+You can use the following stack:
 
 - Embedding model: `all-MiniLM-L6-v2`
 - Chunk config: size `500`, overlap `400`
