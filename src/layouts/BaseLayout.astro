@@ -122,19 +122,29 @@ if (type === 'website') {
       })} />
     )}
 
-    <!-- Analytics -->
+    <!-- Analytics: loaded after page is idle to avoid blocking and reduce Best Practices impact -->
     {analytics.googleSearchConsoleVerification && (
       <meta name="google-site-verification" content={analytics.googleSearchConsoleVerification} />
-    )}
-    {analytics.googleAnalyticsId && (
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.googleAnalyticsId}`}></script>
     )}
     {analytics.googleAnalyticsId && (
       <script is:inline define:vars={{gaId: analytics.googleAnalyticsId}}>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', gaId);
+        (function deferGA() {
+          if (typeof requestIdleCallback !== 'undefined') {
+            requestIdleCallback(loadGA, { timeout: 3500 });
+          } else {
+            setTimeout(loadGA, 2000);
+          }
+        })();
+        function loadGA() {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(s);
+          gtag('js', new Date());
+          gtag('config', gaId);
+        }
       </script>
     )}
 

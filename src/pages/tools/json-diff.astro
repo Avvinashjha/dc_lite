@@ -163,8 +163,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
         stats.innerHTML = '<span class="jd-stat jd-stat--add">+' + result.adds + ' added</span><span class="jd-stat jd-stat--rem">-' + result.rems + ' removed</span><span class="jd-stat jd-stat--same">' + result.same + ' unchanged</span>';
         out.innerHTML = buildHtml(result.left, result.right);
         var ls = out.querySelector('.jd-side--left'), rs = out.querySelector('.jd-side--right'), s = false;
-        ls.addEventListener('scroll', function() { if (!s) { s = true; rs.scrollTop = ls.scrollTop; s = false; } });
-        rs.addEventListener('scroll', function() { if (!s) { s = true; ls.scrollTop = rs.scrollTop; s = false; } });
+        ls.addEventListener('scroll', function() { if (!s) { s = true; rs.scrollTop = ls.scrollTop; s = false; } }, { passive: true });
+        rs.addEventListener('scroll', function() { if (!s) { s = true; ls.scrollTop = rs.scrollTop; s = false; } }, { passive: true });
       }
       saveToDB();
     } catch(e) { status.className = 'tool-error'; status.textContent = 'Invalid JSON: ' + e.message; out.innerHTML = ''; stats.style.display = 'none'; }
