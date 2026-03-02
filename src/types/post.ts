@@ -163,3 +163,34 @@ export interface DocProject extends DocProjectMeta {
   slug: string;
   pages: DocPage[];
 }
+
+// ──── Problems ────
+export interface ProblemIndex {
+  title: string;
+  description: string;
+}
+
+export interface ProblemTestCase {
+  input: string;
+  output: string;
+  explanation?: string;
+}
+
+export interface ProblemItem {
+  id: string;
+  slug: string;
+  title: string;
+  difficulty: string;
+  topic: string;
+  topics: string[];
+  status: string;
+  confidence: number;
+  platform: string;
+  externalUrl: string;
+  remarks?: string;
+  description: string;
+  sampleInput: string;
+  sampleOutput: string;
+  testCases: ProblemTestCase[];
+  solution: string;
+}

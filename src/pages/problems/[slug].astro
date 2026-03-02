@@ -1,0 +1,428 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Comments from '../../components/Comments.astro';
+import CodeEditor from '../../components/CodeEditor.astro';
+import { getProblems, getProblem } from '../../utils/contentLoader';
+import { parseMarkdown } from '../../utils/markdown';
+
+export function getStaticPaths() {
+  return getProblems().map(problem => ({ params: { slug: problem.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Problem slug is required');
+
+const problem = getProblem(slug);
+if (!problem) return Astro.redirect('/problems');
+
+const descriptionHtml = problem.description
+  ? parseMarkdown(problem.description)
+  : '<p>Description will be added soon.</p>';
+const solutionHtml = problem.solution
+  ? parseMarkdown(problem.solution)
+  : '<p>Solution will be added soon.</p>';
+---
+
+<BaseLayout title={`${problem.title} | Problems | DailyCoder`} description={problem.description || `${problem.title} coding problem`}>
+  <div class="container" style="padding-top: 2.5rem; padding-bottom: 3rem;" id="problem-page-root" data-problem-slug={problem.slug} data-sample-input={problem.sampleInput || ''}>
+    <a href="/problems" class="back-link">&larr; Back to Problems</a>
+    <header class="problem-header">
+      <h1 class="problem-title">{problem.title}</h1>
+      <div class="problem-meta">
+        <span class={`badge badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+        <span class="badge badge--neutral">{problem.topic}</span>
+        <span class="badge badge--neutral">{problem.platform}</span>
+      </div>
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.8rem;">
+        <a href={problem.externalUrl} target="_blank" rel="noopener" class="button">Solve on {problem.platform}</a>
+        <span class="problem-status">Status: {problem.status}</span>
+        <span class="problem-status" id="local-progress-state">Not solved • 0 attempts</span>
+        <button class="button button--secondary" id="toggle-problem-solved">Mark Solved</button>
+      </div>
+    </header>
+
+    <nav class="tab-nav" id="problem-tabs">
+      <button class="tab-nav__btn tab-nav__btn--active" data-tab="description">Description</button>
+      <button class="tab-nav__btn" data-tab="testcases">Testcases</button>
+      <button class="tab-nav__btn" data-tab="tryjs">Try JS</button>
+      <button class="tab-nav__btn" data-tab="notes">Notes</button>
+      <button class="tab-nav__btn" data-tab="comments">Comments</button>
+      <button class="tab-nav__btn" data-tab="discussion">Discussion</button>
+      <button class="tab-nav__btn" data-tab="solution">Solution</button>
+    </nav>
+
+    <section class="tab-pane tab-pane--active" data-pane="description">
+      <div class="article__content" set:html={descriptionHtml} />
+      {problem.remarks && <p><strong>Remark:</strong> {problem.remarks}</p>}
+    </section>
+
+    <section class="tab-pane" data-pane="testcases">
+      <h3>Sample Input</h3>
+      <pre class="tool-output" style="min-height:120px;">{problem.sampleInput || 'Sample input will be added soon.'}</pre>
+      <h3 style="margin-top:1rem;">Sample Output</h3>
+      <pre class="tool-output" style="min-height:120px;">{problem.sampleOutput || 'Sample output will be added soon.'}</pre>
+      <h3 style="margin-top:1rem;">Test Cases</h3>
+      {
+        problem.testCases.length > 0 ? (
+          <div>
+            {problem.testCases.map((testCase, idx) => (
+              <div class="test-card">
+                <p><strong>Case {idx + 1}</strong></p>
+                <p><strong>Input:</strong></p>
+                <pre class="tool-output" style="min-height:90px;">{testCase.input}</pre>
+                <p><strong>Output:</strong></p>
+                <pre class="tool-output" style="min-height:90px;">{testCase.output}</pre>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No testcases added yet.</p>
+        )
+      }
+    </section>
+
+    <section class="tab-pane" data-pane="tryjs">
+      <p style="color:var(--color-text-light); margin-bottom:0.8rem;">
+        JS-only runner for now. Implement a `solve(input)` function and use `console.log` for debug output.
+      </p>
+      <CodeEditor id="problem-js-editor" minHeight={300} />
+      <div class="tool-actions">
+        <button id="run-js" class="tool-btn tool-btn--primary">Run Code</button>
+        <button id="reset-js" class="tool-btn">Reset Template</button>
+        <button id="clear-js-output" class="tool-btn">Clear Output</button>
+      </div>
+      <pre id="js-output" class="tool-output" style="min-height:220px;"></pre>
+      <iframe
+        id="problem-js-frame"
+        title="Problem JavaScript sandbox"
+        sandbox="allow-scripts"
+        style="width:0;height:0;border:0;position:absolute;opacity:0;pointer-events:none;"
+      ></iframe>
+    </section>
+
+    <section class="tab-pane" data-pane="notes">
+      <p style="color:var(--color-text-light); margin-bottom:0.7rem;">Private notes saved in this browser.</p>
+      <textarea id="problem-note" class="tool-textarea" style="min-height:320px;" placeholder="Write your notes for this problem..."></textarea>
+      <div class="tool-actions">
+        <button id="save-note" class="tool-btn tool-btn--primary">Save Note</button>
+        <button id="clear-note" class="tool-btn">Clear Note</button>
+      </div>
+      <p id="note-status" style="font-size:0.85rem; color:var(--color-text-light);"></p>
+    </section>
+
+    <section class="tab-pane" data-pane="comments">
+      <Comments postSlug={`problem-${problem.slug}`} postTitle={problem.title} />
+    </section>
+
+    <section class="tab-pane" data-pane="discussion">
+      <p style="color:var(--color-text-light); margin-bottom:0.7rem;">Start a thread for approaches, optimizations, and edge cases.</p>
+      <div class="tool-panel" style="margin-bottom:1rem;">
+        <label class="tool-panel__label">Name</label>
+        <input id="discussion-name" class="tool-input" placeholder="Your name" />
+      </div>
+      <div class="tool-panel" style="margin-bottom:1rem;">
+        <label class="tool-panel__label">Message</label>
+        <textarea id="discussion-message" class="tool-textarea" style="min-height:140px;" placeholder="Share your thought process..."></textarea>
+      </div>
+      <div class="tool-actions">
+        <button id="discussion-post" class="tool-btn tool-btn--primary">Post</button>
+      </div>
+      <div id="discussion-list"></div>
+    </section>
+
+    <section class="tab-pane" data-pane="solution">
+      <div class="article__content" set:html={solutionHtml} />
+    </section>
+  </div>
+</BaseLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script>
+  import { createCodeEditor } from '../../utils/codeEditor';
+
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-nav__btn'));
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.tab-pane'));
+  var rootEl = document.getElementById('problem-page-root');
+  var slug = rootEl ? (rootEl.dataset.problemSlug || '') : '';
+  var sampleInput = rootEl ? (rootEl.dataset.sampleInput || '') : '';
+
+  function activateTab(tabName) {
+    tabBtns.forEach(function(btn) {
+      btn.classList.toggle('tab-nav__btn--active', btn.dataset.tab === tabName);
+    });
+    panes.forEach(function(pane) {
+      pane.classList.toggle('tab-pane--active', pane.dataset.pane === tabName);
+    });
+  }
+
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { activateTab(btn.dataset.tab); });
+  });
+
+  var template = [
+    '/**',
+    ' * @param {string} input',
+    ' * @returns {string|number}',
+    ' */',
+    'function solve(input) {',
+    '  // Write your solution here',
+    '  return input;',
+    '}',
+    '',
+    'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`') + '`));'
+  ].join('\n');
+
+  var codeEditor = createCodeEditor({
+    rootId: 'problem-js-editor',
+    doc: template,
+    language: 'javascript',
+    lineWrapping: true,
+    onModEnter: function() { runCode(); },
+  });
+
+  var runBtn = document.getElementById('run-js');
+  var resetBtn = document.getElementById('reset-js');
+  var clearBtn = document.getElementById('clear-js-output');
+  var outputEl = document.getElementById('js-output');
+  var frameEl = document.getElementById('problem-js-frame');
+  var localProgressStateEl = document.getElementById('local-progress-state');
+  var toggleSolvedBtn = document.getElementById('toggle-problem-solved');
+  var progressTool = 'problem-progress';
+  var progressRow = { solved: false, attempts: 0, attemptsByDay: {} };
+  var runId = 0;
+
+  function appendOutput(prefix, msg) {
+    outputEl.textContent += (outputEl.textContent ? '\n' : '') + '[' + prefix + '] ' + msg;
+    outputEl.scrollTop = outputEl.scrollHeight;
+  }
+
+  function runCode() {
+    runId += 1;
+    var currentRunId = runId;
+    recordAttempt();
+    appendOutput('INFO', 'Running...');
+    var code = codeEditor.getValue();
+    var srcdoc = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      "var SOURCE='problem-js';",
+      'var RUN_ID=' + currentRunId + ';',
+      'function emit(type,payload){ parent.postMessage({source:SOURCE,runId:RUN_ID,type:type,payload:payload},"*"); }',
+      'function stringify(v){ if (typeof v === "string") return v; try { return JSON.stringify(v); } catch(e){ return String(v); } }',
+      'var base = window.console;',
+      'window.console={',
+      'log:function(){ emit("log", Array.prototype.slice.call(arguments).map(stringify)); },',
+      'error:function(){ emit("error", Array.prototype.slice.call(arguments).map(stringify)); },',
+      'warn:function(){ emit("warn", Array.prototype.slice.call(arguments).map(stringify)); }',
+      '};',
+      'try {',
+      '  var code=' + JSON.stringify(code) + ';',
+      '  (0,eval)(code);',
+      '  emit("result", ["Execution finished"]);',
+      '} catch (e) {',
+      '  emit("runtime-error", [e && (e.stack || e.message) ? (e.stack || e.message) : String(e)]);',
+      '} finally {',
+      '  window.console = base;',
+      '}',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+    frameEl.srcdoc = srcdoc;
+  }
+
+  window.addEventListener('message', function(event) {
+    var data = event.data;
+    if (!data || data.source !== 'problem-js' || data.runId !== runId) return;
+    var type = data.type || 'log';
+    var payload = (data.payload || []).join(' ');
+    if (type === 'runtime-error') {
+      appendOutput('ERROR', payload);
+      return;
+    }
+    appendOutput(type.toUpperCase(), payload);
+  });
+
+  runBtn.addEventListener('click', runCode);
+  resetBtn.addEventListener('click', function() { codeEditor.setValue(template); });
+  clearBtn.addEventListener('click', function() { outputEl.textContent = ''; });
+
+  function renderProgress() {
+    var attempts = Number(progressRow.attempts || 0);
+    localProgressStateEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' • ' + attempts + ' ' + (attempts === 1 ? 'attempt' : 'attempts');
+    toggleSolvedBtn.textContent = progressRow.solved ? 'Mark Unsolved' : 'Mark Solved';
+  }
+
+  async function saveProgress() {
+    await DCStore.set(progressTool, slug, {
+      solved: !!progressRow.solved,
+      solvedAt: progressRow.solved ? (progressRow.solvedAt || Date.now()) : null,
+      attempts: Number(progressRow.attempts || 0),
+      lastAttemptAt: progressRow.lastAttemptAt || null,
+      attemptsByDay: progressRow.attemptsByDay || {},
+    });
+    renderProgress();
+  }
+
+  async function loadProgress() {
+    await DCStore.init();
+    var row = await DCStore.get(progressTool, slug);
+    if (row) {
+      progressRow = {
+        solved: !!row.solved,
+        solvedAt: row.solvedAt || null,
+        attempts: Number(row.attempts || 0),
+        lastAttemptAt: row.lastAttemptAt || null,
+        attemptsByDay: row.attemptsByDay || {},
+      };
+    }
+    renderProgress();
+  }
+
+  function recordAttempt() {
+    var today = new Date().toISOString().slice(0, 10);
+    if (!progressRow.attemptsByDay) progressRow.attemptsByDay = {};
+    progressRow.attempts = Number(progressRow.attempts || 0) + 1;
+    progressRow.lastAttemptAt = Date.now();
+    progressRow.attemptsByDay[today] = Number(progressRow.attemptsByDay[today] || 0) + 1;
+    saveProgress();
+  }
+
+  toggleSolvedBtn.addEventListener('click', function() {
+    progressRow.solved = !progressRow.solved;
+    if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
+    if (!progressRow.solved) progressRow.solvedAt = null;
+    saveProgress();
+  });
+
+  var noteKey = 'problem-note-' + slug;
+  var noteEl = document.getElementById('problem-note');
+  var noteStatusEl = document.getElementById('note-status');
+  noteEl.value = localStorage.getItem(noteKey) || '';
+  document.getElementById('save-note').addEventListener('click', function() {
+    localStorage.setItem(noteKey, noteEl.value || '');
+    noteStatusEl.textContent = 'Saved';
+  });
+  document.getElementById('clear-note').addEventListener('click', function() {
+    noteEl.value = '';
+    localStorage.removeItem(noteKey);
+    noteStatusEl.textContent = 'Cleared';
+  });
+
+  var discussionKey = 'problem-discussion-' + slug;
+  var discussionListEl = document.getElementById('discussion-list');
+  var discussionNameEl = document.getElementById('discussion-name');
+  var discussionMsgEl = document.getElementById('discussion-message');
+
+  function loadThreads() {
+    var raw = localStorage.getItem(discussionKey);
+    var rows = raw ? JSON.parse(raw) : [];
+    if (!rows.length) {
+      discussionListEl.innerHTML = '<p style="color:var(--color-text-light);">No discussion yet.</p>';
+      return;
+    }
+    discussionListEl.innerHTML = rows.map(function(row) {
+      return '<article class="discussion-item">' +
+        '<p class="discussion-item__meta"><strong>' + (row.name || 'Anonymous') + '</strong> • ' + new Date(row.ts).toLocaleString() + '</p>' +
+        '<p class="discussion-item__text">' + (row.message || '') + '</p>' +
+      '</article>';
+    }).join('');
+  }
+
+  document.getElementById('discussion-post').addEventListener('click', function() {
+    var name = (discussionNameEl.value || '').trim() || 'Anonymous';
+    var message = (discussionMsgEl.value || '').trim();
+    if (!message) return;
+    var raw = localStorage.getItem(discussionKey);
+    var rows = raw ? JSON.parse(raw) : [];
+    rows.unshift({ name: name, message: message, ts: Date.now() });
+    localStorage.setItem(discussionKey, JSON.stringify(rows.slice(0, 100)));
+    discussionMsgEl.value = '';
+    loadThreads();
+  });
+
+  loadProgress();
+  loadThreads();
+</script>
+
+<style>
+  .back-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .problem-header {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+  }
+  .problem-title { margin: 0 0 0.5rem; }
+  .problem-meta { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    font-size: 0.73rem;
+    font-weight: 700;
+    padding: 0.16rem 0.5rem;
+    border-radius: 999px;
+  }
+  .badge--easy { background: rgba(34,197,94,.16); color: #16a34a; }
+  .badge--medium { background: rgba(245,158,11,.18); color: #d97706; }
+  .badge--hard { background: rgba(239,68,68,.17); color: #dc2626; }
+  .badge--neutral { background: var(--color-code-bg); color: var(--color-text-light); }
+  .problem-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+  }
+  .tab-nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .tab-nav__btn {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .tab-nav__btn--active {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+  .tab-pane {
+    display: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    background: var(--color-surface);
+  }
+  .tab-pane--active { display: block; }
+  .test-card {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+  }
+  .discussion-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.8rem;
+    margin-top: 0.7rem;
+    background: var(--color-background);
+  }
+  .discussion-item__meta {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+  .discussion-item__text { margin: 0; white-space: pre-wrap; }
+</style>

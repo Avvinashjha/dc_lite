@@ -73,7 +73,7 @@ const postSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
 
       {
         image && (
-          <img src={image} alt={title} class="article__image" loading="eager" />
+          <img src={image} alt={title} class="article__image" width={1200} height={630} loading="eager" decoding="async" />
         )
       }
 
