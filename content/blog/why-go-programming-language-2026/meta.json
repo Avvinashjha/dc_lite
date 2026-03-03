@@ -1,6 +1,6 @@
 {
   "title": "Why Go Is the Programming Language to Learn in 2026",
-  "description": "Why Go (Golang) is the language to learn in 2026: features, applications, real-world use cases, and where it shines—from cloud and DevOps to backends and CLIs.",
+  "description": "Why Go (Golang) is the language to learn in 2026: features, applications, real-world use cases, and where it shines\u2014from cloud and DevOps to backends and CLIs.",
   "date": "2026-03-02",
   "author": "Avinash Jha",
   "tags": [
@@ -12,5 +12,6 @@
     "programming"
   ],
   "category": "tutorials",
-  "draft": false
+  "draft": false,
+  "image": "/blog/why-go-programming-language-2026/hero.svg"
 }

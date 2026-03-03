@@ -3,7 +3,14 @@
   "description": "LLMs can speed up coding, but they can also weaken learning. This guide explains how to stay disciplined, use AI without dependency, and build real technical depth.",
   "date": "2026-02-18",
   "author": "Avinash Jha",
-  "tags": ["llm", "learning", "developer-productivity", "ai", "career"],
+  "tags": [
+    "llm",
+    "learning",
+    "developer-productivity",
+    "ai",
+    "career"
+  ],
   "category": "tutorials",
-  "draft": false
+  "draft": false,
+  "image": "/blog/how-to-learn-new-tech-in-the-era-of-llms/hero.svg"
 }

@@ -1,0 +1,17 @@
+{
+  "title": "Introduction to HTMX: What It Is, How It Works, and When to Use It",
+  "description": "Learn what HTMX is, how it works, where to use it, its key features, and example use cases for building dynamic UIs with minimal JavaScript.",
+  "date": "2026-03-02",
+  "author": "Avinash Jha",
+  "tags": [
+    "htmx",
+    "frontend",
+    "javascript",
+    "web development",
+    "ajax",
+    "html"
+  ],
+  "category": "tutorials",
+  "draft": false,
+  "image": "/blog/introduction-to-htmx/hero.svg"
+}

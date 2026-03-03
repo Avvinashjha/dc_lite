@@ -3,7 +3,14 @@
   "description": "A practical guide to Retrieval-Augmented Generation (RAG): what it is, why it matters, how retrieval-augmentation-generation works, and how to build a simple RAG app with chunking, embeddings, Chroma DB, and Flask.",
   "date": "2026-02-24",
   "author": "Avinash Jha",
-  "tags": ["rag", "ai", "llm", "vector-database", "semantic-search"],
+  "tags": [
+    "rag",
+    "ai",
+    "llm",
+    "vector-database",
+    "semantic-search"
+  ],
   "category": "tutorials",
-  "draft": false
+  "draft": false,
+  "image": "/blog/what-is-rag-and-why-it-matters/hero.svg"
 }
