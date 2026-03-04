@@ -1,18 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getProblems, getProblemTopics, getProblemDifficulties, getProblemsIndex } from '../../utils/contentLoader';
+import { getProblems, getProblemTopics, getProblemDifficulties, getProblemsIndex, getProblemSets } from '../../utils/contentLoader';
 import { slugifyTaxonomy } from '../../utils/taxonomy';
 
 const pageMeta = getProblemsIndex();
 const problems = getProblems();
 const topics = getProblemTopics();
 const difficulties = getProblemDifficulties();
+const problemSets = getProblemSets();
 const liteProblems = problems.map((problem) => ({
   slug: problem.slug,
   title: problem.title,
   topic: problem.topic,
   difficulty: problem.difficulty,
   confidence: Number(problem.confidence || 0),
+  problemSet: problem.problemSet || '',
 }));
 ---
 
@@ -37,6 +39,12 @@ const liteProblems = problems.map((problem) => ({
     <section class="problems-pane problems-pane--active" data-pane="list">
       <div class="problem-filters">
         <input id="problem-search" class="tool-input" placeholder="Search by title or topic..." />
+        <select id="problem-set" class="tool-input">
+          <option value="all">All Sets</option>
+          {problemSets.map((setId) => (
+            <option value={setId}>{setId === 'top-300-leetcode' ? 'Top 300 LeetCode' : setId}</option>
+          ))}
+        </select>
         <select id="problem-topic" class="tool-input">
           <option value="all">All Topics</option>
           {topics.map((topic) => <option value={slugifyTaxonomy(topic)}>{topic}</option>)}
@@ -45,6 +53,10 @@ const liteProblems = problems.map((problem) => ({
           <option value="all">All Difficulty</option>
           {difficulties.map((difficulty) => <option value={difficulty.toLowerCase()}>{difficulty}</option>)}
         </select>
+        <label class="problem-filter-favorites">
+          <input type="checkbox" id="filter-favorites" class="tool-input" />
+          <span>Favorites only</span>
+        </label>
       </div>
 
       <p id="problem-count" class="problem-count">{problems.length} problems</p>
@@ -58,8 +70,12 @@ const liteProblems = problems.map((problem) => ({
             data-topic={slugifyTaxonomy(problem.topic)}
             data-difficulty={problem.difficulty.toLowerCase()}
             data-confidence={problem.confidence}
+            data-problem-set={problem.problemSet || ''}
           >
             <div class="problem-card__head">
+              <button type="button" class="problem-card__favorite" data-favorite-btn={problem.slug} title="Toggle favorite" aria-label="Toggle favorite">
+                <span class="problem-card__favorite-icon" data-favorite-icon-for={problem.slug}>☆</span>
+              </button>
               <span class={`badge badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
               <span class="badge badge--neutral">{problem.topic}</span>
               <span class="badge badge--status" data-status-for={problem.slug}>Not Solved</span>
@@ -136,15 +152,19 @@ const liteProblems = problems.map((problem) => ({
 <script src="/js/store.js" is:inline></script>
 <script>
   var TOOL = 'problem-progress';
+  var FAVORITES_TOOL = 'problem-favorites';
   var problemsData = JSON.parse(document.getElementById('problems-data').textContent || '[]');
   var bySlug = {};
   problemsData.forEach(function(problem) { bySlug[problem.slug] = problem; });
+  var favoriteSet = new Set();
 
   var tabButtons = Array.prototype.slice.call(document.querySelectorAll('.problems-tabs__btn'));
   var panes = Array.prototype.slice.call(document.querySelectorAll('.problems-pane'));
   var searchEl = document.getElementById('problem-search');
+  var problemSetEl = document.getElementById('problem-set');
   var topicEl = document.getElementById('problem-topic');
   var difficultyEl = document.getElementById('problem-difficulty');
+  var filterFavoritesEl = document.getElementById('filter-favorites');
   var countEl = document.getElementById('problem-count');
   var cards = Array.prototype.slice.call(document.querySelectorAll('.problem-card'));
   var progressMap = {};
@@ -183,24 +203,39 @@ const liteProblems = problems.map((problem) => ({
     card.classList.toggle('problem-card--solved', !!row.solved);
   }
 
+  function renderCardFavorite(slug) {
+    var iconEl = document.querySelector('[data-favorite-icon-for="' + slug + '"]');
+    if (iconEl) iconEl.textContent = favoriteSet.has(slug) ? '★' : '☆';
+  }
+
+  function renderAllCardsFavorites() {
+    cards.forEach(function(card) { renderCardFavorite(card.dataset.slug); });
+  }
+
   function renderAllCardsState() {
     cards.forEach(function(card) { renderCardState(card.dataset.slug); });
   }
 
   function applyFilters() {
     var search = (searchEl.value || '').trim().toLowerCase();
+    var problemSet = problemSetEl ? problemSetEl.value : 'all';
     var topic = topicEl.value;
     var difficulty = difficultyEl.value;
+    var favoritesOnly = filterFavoritesEl && filterFavoritesEl.checked;
     var visible = 0;
 
     cards.forEach(function(card) {
+      var slug = card.dataset.slug || '';
       var title = card.dataset.title || '';
       var cardTopic = card.dataset.topic || '';
       var cardDifficulty = card.dataset.difficulty || '';
+      var cardSet = card.dataset.problemSet || '';
       var matchesSearch = !search || title.indexOf(search) !== -1 || cardTopic.indexOf(search) !== -1;
+      var matchesSet = problemSet === 'all' || cardSet === problemSet;
       var matchesTopic = topic === 'all' || cardTopic === topic;
       var matchesDifficulty = difficulty === 'all' || cardDifficulty === difficulty;
-      var show = matchesSearch && matchesTopic && matchesDifficulty;
+      var matchesFavorites = !favoritesOnly || favoriteSet.has(slug);
+      var show = matchesSearch && matchesSet && matchesTopic && matchesDifficulty && matchesFavorites;
       card.style.display = show ? '' : 'none';
       if (show) visible += 1;
     });
@@ -221,6 +256,13 @@ const liteProblems = problems.map((problem) => ({
         attemptsByDay: row.attemptsByDay || {},
       };
     });
+  }
+
+  async function loadFavorites() {
+    await DCStore.init();
+    var rows = await DCStore.getAll(FAVORITES_TOOL);
+    favoriteSet.clear();
+    rows.forEach(function(row) { favoriteSet.add(row.id); });
   }
 
   async function setSolved(slug, solved) {
@@ -384,14 +426,38 @@ const liteProblems = problems.map((problem) => ({
     }).join('');
   }
 
+  function bindFavoriteButtons() {
+    document.querySelectorAll('[data-favorite-btn]').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        var slug = btn.dataset.favoriteBtn;
+        var isFav = favoriteSet.has(slug);
+        await DCStore.init();
+        if (isFav) {
+          favoriteSet.delete(slug);
+          await DCStore.remove(FAVORITES_TOOL, slug);
+        } else {
+          favoriteSet.add(slug);
+          await DCStore.set(FAVORITES_TOOL, slug, { slug: slug, addedAt: Date.now() });
+        }
+        renderCardFavorite(slug);
+        applyFilters();
+      });
+    });
+  }
+
   searchEl.addEventListener('input', applyFilters);
+  if (problemSetEl) problemSetEl.addEventListener('change', applyFilters);
   topicEl.addEventListener('change', applyFilters);
   difficultyEl.addEventListener('change', applyFilters);
+  if (filterFavoritesEl) filterFavoritesEl.addEventListener('change', applyFilters);
 
   (async function init() {
     await loadProgress();
+    await loadFavorites();
     renderAllCardsState();
+    renderAllCardsFavorites();
     bindSolvedButtons();
+    bindFavoriteButtons();
     applyFilters();
     renderStats();
   })();
@@ -465,9 +531,19 @@ const liteProblems = problems.map((problem) => ({
   .problem-filters {
     display: grid;
     gap: 0.6rem;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
     margin-bottom: 0.5rem;
+    align-items: center;
   }
+  .problem-filter-favorites {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+  }
+  .problem-filter-favorites input { width: auto; height: auto; }
   .problem-filters .tool-input {
     width: 100%;
     height: 44px;
@@ -537,7 +613,19 @@ const liteProblems = problems.map((problem) => ({
     border-color: rgba(34,197,94,.5);
     background: linear-gradient(180deg, color-mix(in oklab, var(--color-surface) 84%, #22c55e 16%), var(--color-surface));
   }
-  .problem-card__head { display:flex; gap:.42rem; flex-wrap:wrap; }
+  .problem-card__head { display:flex; gap:.42rem; flex-wrap:wrap; align-items: center; }
+  .problem-card__favorite {
+    display: inline-flex;
+    padding: 0.2rem;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  .problem-card__favorite:hover { color: #eab308; }
+  .problem-card__favorite .problem-card__favorite-icon { color: inherit; }
   .problem-card__title { margin: 0; font-size: 1.06rem; line-height: 1.35; }
   .problem-card__title a { color: var(--color-text); text-decoration: none; }
   .problem-card__title a:hover { color: var(--color-primary); }

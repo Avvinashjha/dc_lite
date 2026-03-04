@@ -213,9 +213,17 @@ export function getProblem(slug: string): ProblemItem | null {
 }
 
 export function getProblemTopics(): string[] {
-  return [...new Set(getProblems().flatMap(problem => problem.topics || []))].sort();
+  return [...new Set(getProblems().flatMap(problem => problem.topics?.length ? problem.topics : [problem.topic]))].sort();
 }
 
 export function getProblemDifficulties(): string[] {
   return [...new Set(getProblems().map(problem => problem.difficulty))].sort();
+}
+
+export function getProblemSets(): string[] {
+  return [...new Set(getProblems().map(p => p.problemSet).filter(Boolean) as string[])].sort();
+}
+
+export function getProblemsBySet(setId: string): ProblemItem[] {
+  return getProblems().filter(p => p.problemSet === setId);
 }

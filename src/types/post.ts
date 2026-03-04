@@ -174,6 +174,9 @@ export interface ProblemTestCase {
   input: string;
   output: string;
   explanation?: string;
+  /** When set, runner calls functionName(...args) and compares to expected */
+  args?: unknown[];
+  expected?: unknown;
 }
 
 export interface ProblemItem {
@@ -193,4 +196,14 @@ export interface ProblemItem {
   sampleOutput: string;
   testCases: ProblemTestCase[];
   solution: string;
+  /** e.g. "top-300-leetcode"; used for set filter on list */
+  problemSet?: string;
+  /** Used by runner to call user's function; e.g. "twoSum" */
+  functionName?: string;
+  /** Initial code in editor; e.g. "function twoSum(nums, target) { ... }" */
+  templateCode?: string;
+  /** Problem constraints (e.g. range of n, allowed values) */
+  constraints?: string | string[];
+  /** Follow-up questions or variations */
+  followUps?: string | string[];
 }

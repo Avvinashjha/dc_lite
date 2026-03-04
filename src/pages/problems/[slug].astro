@@ -21,117 +21,177 @@ const descriptionHtml = problem.description
 const solutionHtml = problem.solution
   ? parseMarkdown(problem.solution)
   : '<p>Solution will be added soon.</p>';
+
+const runnerConfig = {
+  functionName: problem.functionName || null,
+  templateCode: problem.templateCode || null,
+  sampleInput: problem.sampleInput || '',
+  testCases: (problem.testCases || []).map((tc: { input?: string; output?: string; args?: unknown[]; expected?: unknown }) => ({
+    input: tc.input,
+    output: tc.output,
+    args: tc.args,
+    expected: tc.expected,
+  })),
+};
 ---
 
 <BaseLayout title={`${problem.title} | Problems | DailyCoder`} description={problem.description || `${problem.title} coding problem`}>
+  <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig)} />
   <div class="container" style="padding-top: 2.5rem; padding-bottom: 3rem;" id="problem-page-root" data-problem-slug={problem.slug} data-sample-input={problem.sampleInput || ''}>
     <a href="/problems" class="back-link">&larr; Back to Problems</a>
     <header class="problem-header">
-      <h1 class="problem-title">{problem.title}</h1>
-      <div class="problem-meta">
-        <span class={`badge badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
-        <span class="badge badge--neutral">{problem.topic}</span>
-        <span class="badge badge--neutral">{problem.platform}</span>
+      <div class="problem-header__left">
+        <h1 class="problem-title">{problem.title}</h1>
+        <div class="problem-meta">
+          <span class={`badge badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+          <span class="badge badge--neutral">{problem.topic}</span>
+          <span class="badge badge--neutral">{problem.platform}</span>
+        </div>
       </div>
-      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.8rem;">
+      <div class="problem-header__right">
+        <button type="button" id="problem-favorite-btn" class="problem-favorite-btn" title="Toggle favorite" aria-label="Toggle favorite">
+          <span class="problem-favorite-btn__icon" aria-hidden="true">☆</span>
+        </button>
         <a href={problem.externalUrl} target="_blank" rel="noopener" class="button">Solve on {problem.platform}</a>
-        <span class="problem-status">Status: {problem.status}</span>
         <span class="problem-status" id="local-progress-state">Not solved • 0 attempts</span>
         <button class="button button--secondary" id="toggle-problem-solved">Mark Solved</button>
       </div>
     </header>
 
+    <div class="problem-main-row">
+      <aside class="problem-content-panel">
+        <div class="article__content" set:html={descriptionHtml} />
+        {problem.remarks && <p class="problem-remarks"><strong>Remark:</strong> {problem.remarks}</p>}
+        <div class="problem-topic-tags">
+          {(problem.topics?.length ? problem.topics : [problem.topic]).map((t) => (
+            <span class="badge badge--neutral">{t}</span>
+          ))}
+        </div>
+        <section class="problem-section">
+          <h4 class="problem-section__title">Sample Input</h4>
+          <pre class="problem-pre">{problem.sampleInput || '—'}</pre>
+        </section>
+        <section class="problem-section">
+          <h4 class="problem-section__title">Sample Output</h4>
+          <pre class="problem-pre">{problem.sampleOutput || '—'}</pre>
+        </section>
+        {problem.constraints != null && (Array.isArray(problem.constraints) ? problem.constraints.length > 0 : String(problem.constraints).trim() !== '') && (
+          <section class="problem-section">
+            <h4 class="problem-section__title">Constraints</h4>
+            {Array.isArray(problem.constraints) ? (
+              <ul class="problem-list">
+                {problem.constraints.map((c) => <li>{c}</li>)}
+              </ul>
+            ) : (
+              <div class="article__content" set:html={parseMarkdown(problem.constraints as string)} />
+            )}
+          </section>
+        )}
+        {problem.followUps != null && (Array.isArray(problem.followUps) ? problem.followUps.length > 0 : String(problem.followUps).trim() !== '') && (
+          <section class="problem-section">
+            <h4 class="problem-section__title">Follow-up</h4>
+            {Array.isArray(problem.followUps) ? (
+              <ul class="problem-list">
+                {problem.followUps.map((f) => <li>{f}</li>)}
+              </ul>
+            ) : (
+              <div class="article__content" set:html={parseMarkdown(problem.followUps as string)} />
+            )}
+          </section>
+        )}
+        <section class="problem-section">
+          <h4 class="problem-section__title">Test Cases</h4>
+          {problem.testCases.length > 0 ? (
+            <div class="problem-test-cases">
+              {problem.testCases.map((testCase, idx) => (
+                <div class="test-card">
+                  <p><strong>Case {idx + 1}</strong></p>
+                  {'args' in testCase && testCase.args !== undefined ? (
+                    <>
+                      <p><strong>Args:</strong></p>
+                      <pre class="problem-pre problem-pre--small">{JSON.stringify(testCase.args)}</pre>
+                      <p><strong>Expected:</strong></p>
+                      <pre class="problem-pre problem-pre--small">{JSON.stringify(testCase.expected)}</pre>
+                    </>
+                  ) : (
+                    <>
+                      <p><strong>Input:</strong></p>
+                      <pre class="problem-pre problem-pre--small">{testCase.input ?? ''}</pre>
+                      <p><strong>Output:</strong></p>
+                      <pre class="problem-pre problem-pre--small">{testCase.output ?? ''}</pre>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p class="problem-muted">No test cases yet.</p>
+          )}
+        </section>
+      </aside>
+      <aside class="problem-editor-panel">
+        <p class="problem-editor-hint">Implement the function below. Use Run Sample or Run Tests.</p>
+        <CodeEditor id="problem-js-editor" minHeight={320} />
+        <div class="tool-actions">
+          <button id="run-js" class="tool-btn tool-btn--primary">Run Sample</button>
+          <button id="run-tests" class="tool-btn tool-btn--primary">Run Tests</button>
+          <button id="reset-js" class="tool-btn">Reset Template</button>
+          <button id="clear-js-output" class="tool-btn">Clear Output</button>
+        </div>
+        <div id="test-results" class="test-results" style="display:none;"></div>
+        <pre id="js-output" class="tool-output problem-output"></pre>
+        <iframe
+          id="problem-js-frame"
+          title="Problem JavaScript sandbox"
+          sandbox="allow-scripts"
+          style="width:0;height:0;border:0;position:absolute;opacity:0;pointer-events:none;"
+        />
+      </aside>
+    </div>
+
     <nav class="tab-nav" id="problem-tabs">
-      <button class="tab-nav__btn tab-nav__btn--active" data-tab="description">Description</button>
-      <button class="tab-nav__btn" data-tab="testcases">Testcases</button>
-      <button class="tab-nav__btn" data-tab="tryjs">Try JS</button>
-      <button class="tab-nav__btn" data-tab="notes">Notes</button>
-      <button class="tab-nav__btn" data-tab="comments">Comments</button>
+      <button class="tab-nav__btn tab-nav__btn--active" data-tab="solution">Solution</button>
       <button class="tab-nav__btn" data-tab="discussion">Discussion</button>
-      <button class="tab-nav__btn" data-tab="solution">Solution</button>
+      <button class="tab-nav__btn" data-tab="comments">Comments</button>
+      <button class="tab-nav__btn" data-tab="notes">Notes</button>
     </nav>
 
-    <section class="tab-pane tab-pane--active" data-pane="description">
-      <div class="article__content" set:html={descriptionHtml} />
-      {problem.remarks && <p><strong>Remark:</strong> {problem.remarks}</p>}
+    <section class="problem-secondary-pane tab-pane tab-pane--active" data-pane="solution">
+      <h3 class="problem-secondary-pane__title">Solution</h3>
+      <div class="article__content" set:html={solutionHtml} />
     </section>
-
-    <section class="tab-pane" data-pane="testcases">
-      <h3>Sample Input</h3>
-      <pre class="tool-output" style="min-height:120px;">{problem.sampleInput || 'Sample input will be added soon.'}</pre>
-      <h3 style="margin-top:1rem;">Sample Output</h3>
-      <pre class="tool-output" style="min-height:120px;">{problem.sampleOutput || 'Sample output will be added soon.'}</pre>
-      <h3 style="margin-top:1rem;">Test Cases</h3>
-      {
-        problem.testCases.length > 0 ? (
-          <div>
-            {problem.testCases.map((testCase, idx) => (
-              <div class="test-card">
-                <p><strong>Case {idx + 1}</strong></p>
-                <p><strong>Input:</strong></p>
-                <pre class="tool-output" style="min-height:90px;">{testCase.input}</pre>
-                <p><strong>Output:</strong></p>
-                <pre class="tool-output" style="min-height:90px;">{testCase.output}</pre>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No testcases added yet.</p>
-        )
-      }
-    </section>
-
-    <section class="tab-pane" data-pane="tryjs">
-      <p style="color:var(--color-text-light); margin-bottom:0.8rem;">
-        JS-only runner for now. Implement a `solve(input)` function and use `console.log` for debug output.
-      </p>
-      <CodeEditor id="problem-js-editor" minHeight={300} />
-      <div class="tool-actions">
-        <button id="run-js" class="tool-btn tool-btn--primary">Run Code</button>
-        <button id="reset-js" class="tool-btn">Reset Template</button>
-        <button id="clear-js-output" class="tool-btn">Clear Output</button>
+    <section class="problem-secondary-pane tab-pane" data-pane="discussion">
+      <h3 class="problem-secondary-pane__title">Discussion</h3>
+      <div class="problem-discussion-form">
+        <div class="problem-form-group">
+          <label class="problem-form-label" for="discussion-name">Name</label>
+          <input id="discussion-name" class="problem-form-input" type="text" placeholder="Your name" autocomplete="name" />
+        </div>
+        <div class="problem-form-group">
+          <label class="problem-form-label" for="discussion-message">Message</label>
+          <textarea id="discussion-message" class="problem-form-textarea" rows="4" placeholder="Share your approach or ask a question..."></textarea>
+        </div>
+        <div class="problem-form-actions">
+          <button type="button" id="discussion-post" class="problem-form-btn problem-form-btn--primary">Post</button>
+        </div>
       </div>
-      <pre id="js-output" class="tool-output" style="min-height:220px;"></pre>
-      <iframe
-        id="problem-js-frame"
-        title="Problem JavaScript sandbox"
-        sandbox="allow-scripts"
-        style="width:0;height:0;border:0;position:absolute;opacity:0;pointer-events:none;"
-      ></iframe>
+      <div id="discussion-list" class="problem-discussion-list"></div>
     </section>
-
-    <section class="tab-pane" data-pane="notes">
-      <p style="color:var(--color-text-light); margin-bottom:0.7rem;">Private notes saved in this browser.</p>
-      <textarea id="problem-note" class="tool-textarea" style="min-height:320px;" placeholder="Write your notes for this problem..."></textarea>
-      <div class="tool-actions">
-        <button id="save-note" class="tool-btn tool-btn--primary">Save Note</button>
-        <button id="clear-note" class="tool-btn">Clear Note</button>
-      </div>
-      <p id="note-status" style="font-size:0.85rem; color:var(--color-text-light);"></p>
-    </section>
-
-    <section class="tab-pane" data-pane="comments">
+    <section class="problem-secondary-pane tab-pane" data-pane="comments">
+      <h3 class="problem-secondary-pane__title">Comments</h3>
       <Comments postSlug={`problem-${problem.slug}`} postTitle={problem.title} />
     </section>
-
-    <section class="tab-pane" data-pane="discussion">
-      <p style="color:var(--color-text-light); margin-bottom:0.7rem;">Start a thread for approaches, optimizations, and edge cases.</p>
-      <div class="tool-panel" style="margin-bottom:1rem;">
-        <label class="tool-panel__label">Name</label>
-        <input id="discussion-name" class="tool-input" placeholder="Your name" />
+    <section class="problem-secondary-pane tab-pane" data-pane="notes">
+      <h3 class="problem-secondary-pane__title">Notes</h3>
+      <p class="problem-notes-hint">Saved in this browser only. Private to you.</p>
+      <div class="problem-notes-form">
+        <textarea id="problem-note" class="problem-form-textarea problem-form-textarea--notes" rows="10" placeholder="Your notes for this problem..."></textarea>
+        <div class="problem-form-actions">
+          <button type="button" id="save-note" class="problem-form-btn problem-form-btn--primary">Save Note</button>
+          <button type="button" id="clear-note" class="problem-form-btn">Clear Note</button>
+          <span id="note-status" class="problem-note-status" aria-live="polite"></span>
+        </div>
       </div>
-      <div class="tool-panel" style="margin-bottom:1rem;">
-        <label class="tool-panel__label">Message</label>
-        <textarea id="discussion-message" class="tool-textarea" style="min-height:140px;" placeholder="Share your thought process..."></textarea>
-      </div>
-      <div class="tool-actions">
-        <button id="discussion-post" class="tool-btn tool-btn--primary">Post</button>
-      </div>
-      <div id="discussion-list"></div>
-    </section>
-
-    <section class="tab-pane" data-pane="solution">
-      <div class="article__content" set:html={solutionHtml} />
     </section>
   </div>
 </BaseLayout>
@@ -140,11 +200,15 @@ const solutionHtml = problem.solution
 <script>
   import { createCodeEditor } from '../../utils/codeEditor';
 
-  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-nav__btn'));
-  var panes = Array.prototype.slice.call(document.querySelectorAll('.tab-pane'));
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('#problem-tabs .tab-nav__btn'));
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.problem-secondary-pane'));
   var rootEl = document.getElementById('problem-page-root');
   var slug = rootEl ? (rootEl.dataset.problemSlug || '') : '';
-  var sampleInput = rootEl ? (rootEl.dataset.sampleInput || '') : '';
+  var configEl = document.getElementById('problem-runner-config');
+  var runnerConfig = configEl && configEl.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
+  var sampleInput = runnerConfig.sampleInput || (rootEl ? rootEl.dataset.sampleInput || '' : '');
+  var testCases = runnerConfig.testCases || [];
+  var functionName = runnerConfig.functionName || null;
 
   function activateTab(tabName) {
     tabBtns.forEach(function(btn) {
@@ -154,12 +218,13 @@ const solutionHtml = problem.solution
       pane.classList.toggle('tab-pane--active', pane.dataset.pane === tabName);
     });
   }
+  if (tabBtns.length && panes.length) {
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() { activateTab(btn.dataset.tab); });
+    });
+  }
 
-  tabBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() { activateTab(btn.dataset.tab); });
-  });
-
-  var template = [
+  var defaultTemplate = [
     '/**',
     ' * @param {string} input',
     ' * @returns {string|number}',
@@ -169,8 +234,9 @@ const solutionHtml = problem.solution
     '  return input;',
     '}',
     '',
-    'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`') + '`));'
+    'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`').replace(/\\/g, '\\\\') + '`));'
   ].join('\n');
+  var template = runnerConfig.templateCode || defaultTemplate;
 
   var codeEditor = createCodeEditor({
     rootId: 'problem-js-editor',
@@ -181,9 +247,11 @@ const solutionHtml = problem.solution
   });
 
   var runBtn = document.getElementById('run-js');
+  var runTestsBtn = document.getElementById('run-tests');
   var resetBtn = document.getElementById('reset-js');
   var clearBtn = document.getElementById('clear-js-output');
   var outputEl = document.getElementById('js-output');
+  var testResultsEl = document.getElementById('test-results');
   var frameEl = document.getElementById('problem-js-frame');
   var localProgressStateEl = document.getElementById('local-progress-state');
   var toggleSolvedBtn = document.getElementById('toggle-problem-solved');
@@ -200,6 +268,7 @@ const solutionHtml = problem.solution
     runId += 1;
     var currentRunId = runId;
     recordAttempt();
+    if (testResultsEl) testResultsEl.style.display = 'none';
     appendOutput('INFO', 'Running...');
     var code = codeEditor.getValue();
     var srcdoc = [
@@ -242,9 +311,109 @@ const solutionHtml = problem.solution
     appendOutput(type.toUpperCase(), payload);
   });
 
+  function normalizeResult(v) {
+    if (v === null || v === undefined) return String(v);
+    if (typeof v === 'object') return JSON.stringify(v);
+    return String(v).trim();
+  }
+  function runTests() {
+    if (!testCases.length) {
+      appendOutput('INFO', 'No test cases defined for this problem.');
+      return;
+    }
+    recordAttempt();
+    if (testResultsEl) { testResultsEl.style.display = 'block'; testResultsEl.innerHTML = '<p>Running tests...</p>'; }
+    var code = codeEditor.getValue();
+    var harness = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      'var code=' + JSON.stringify(code) + ';',
+      'try { (0,eval)(code); } catch (e) {',
+      '  parent.postMessage({ type: "test-error", error: (e && (e.message || e.stack)) || String(e) }, "*");',
+      '  return;',
+      '}',
+      'window.addEventListener("message", function(ev) {',
+      '  var d = ev.data;',
+      '  if (d.type !== "invoke") return;',
+      '  var id = d.id, mode = d.mode, name = d.name, args = d.args, input = d.input;',
+      '  try {',
+      '    var r;',
+      '    if (mode === "solve") r = typeof solve !== "undefined" ? solve(input) : undefined;',
+      '    else r = typeof window[name] === "function" ? window[name].apply(null, args) : undefined;',
+      '    ev.source.postMessage({ type: "result", id: id, result: r }, ev.origin);',
+      '  } catch (err) {',
+      '    ev.source.postMessage({ type: "result", id: id, error: (err && err.message) || String(err) }, ev.origin);',
+      '  }',
+      '});',
+      'parent.postMessage({ type: "test-ready" }, "*");',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+    frameEl.srcdoc = harness;
+    var results = {};
+    var expectCount = testCases.length;
+    function onTestMessage(ev) {
+      var d = ev.data;
+      if (d.type === 'test-error') {
+        testResultsEl.innerHTML = '<p class="test-results__error">Error: ' + (d.error || '').replace(/</g, '&lt;') + '</p>';
+        window.removeEventListener('message', onTestMessage);
+        return;
+      }
+      if (d.type === 'test-ready') {
+        for (var i = 0; i < testCases.length; i++) {
+          var tc = testCases[i];
+          var msg = { type: 'invoke', id: i };
+          if (tc.args != null && tc.expected !== undefined && functionName) {
+            msg.mode = 'function';
+            msg.name = functionName;
+            msg.args = tc.args;
+          } else {
+            msg.mode = 'solve';
+            msg.input = tc.input != null ? tc.input : '';
+          }
+          frameEl.contentWindow.postMessage(msg, '*');
+        }
+        return;
+      }
+      if (d.type === 'result') {
+        results[d.id] = d;
+        var count = Object.keys(results).length;
+        if (count === expectCount) {
+          window.removeEventListener('message', onTestMessage);
+          var passed = 0;
+          var html = '<div class="test-results__summary"></div><ul class="test-results__list">';
+          for (var j = 0; j < testCases.length; j++) {
+            var tc = testCases[j];
+            var res = results[j];
+            var ok = false;
+            var detail = '';
+            if (res && res.error) {
+              detail = 'Error: ' + res.error;
+            } else if (tc.args != null && tc.expected !== undefined) {
+              var got = res && res.result !== undefined ? res.result : undefined;
+              ok = JSON.stringify(got) === JSON.stringify(tc.expected);
+              if (!ok) detail = 'Expected ' + JSON.stringify(tc.expected) + ', got ' + JSON.stringify(got);
+            } else {
+              var expectedStr = (tc.output != null ? tc.output : '').trim();
+              var gotStr = res && res.result !== undefined ? normalizeResult(res.result) : '';
+              ok = gotStr === expectedStr;
+              if (!ok) detail = 'Expected ' + expectedStr + ', got ' + gotStr;
+            }
+            if (ok) passed++;
+            html += '<li class="test-results__item test-results__item--' + (ok ? 'pass' : 'fail') + '">Case ' + (j + 1) + ': ' + (ok ? 'Pass' : 'Fail') + (detail ? ' — ' + detail.replace(/</g, '&lt;') : '') + '</li>';
+          }
+          html += '</ul>';
+          testResultsEl.innerHTML = html;
+          testResultsEl.querySelector('.test-results__summary').textContent = passed + '/' + testCases.length + ' passed';
+        }
+      }
+    }
+    window.addEventListener('message', onTestMessage);
+  }
   runBtn.addEventListener('click', runCode);
+  runTestsBtn.addEventListener('click', runTests);
   resetBtn.addEventListener('click', function() { codeEditor.setValue(template); });
-  clearBtn.addEventListener('click', function() { outputEl.textContent = ''; });
+  clearBtn.addEventListener('click', function() { outputEl.textContent = ''; if (testResultsEl) testResultsEl.style.display = 'none'; });
 
   function renderProgress() {
     var attempts = Number(progressRow.attempts || 0);
@@ -298,14 +467,19 @@ const solutionHtml = problem.solution
   var noteEl = document.getElementById('problem-note');
   var noteStatusEl = document.getElementById('note-status');
   noteEl.value = localStorage.getItem(noteKey) || '';
+  function setNoteStatus(msg) {
+    if (noteStatusEl) noteStatusEl.textContent = msg;
+    clearTimeout(window._noteStatusTimer);
+    window._noteStatusTimer = setTimeout(function() { if (noteStatusEl) noteStatusEl.textContent = ''; }, 2000);
+  }
   document.getElementById('save-note').addEventListener('click', function() {
     localStorage.setItem(noteKey, noteEl.value || '');
-    noteStatusEl.textContent = 'Saved';
+    setNoteStatus('Saved');
   });
   document.getElementById('clear-note').addEventListener('click', function() {
     noteEl.value = '';
     localStorage.removeItem(noteKey);
-    noteStatusEl.textContent = 'Cleared';
+    setNoteStatus('Cleared');
   });
 
   var discussionKey = 'problem-discussion-' + slug;
@@ -313,22 +487,32 @@ const solutionHtml = problem.solution
   var discussionNameEl = document.getElementById('discussion-name');
   var discussionMsgEl = document.getElementById('discussion-message');
 
+  function escapeHtml(s) {
+    if (s == null) return '';
+    var str = String(s);
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
   function loadThreads() {
+    if (!discussionListEl) return;
     var raw = localStorage.getItem(discussionKey);
     var rows = raw ? JSON.parse(raw) : [];
     if (!rows.length) {
-      discussionListEl.innerHTML = '<p style="color:var(--color-text-light);">No discussion yet.</p>';
+      discussionListEl.innerHTML = '<p class="problem-discussion-empty">No discussion yet.</p>';
       return;
     }
     discussionListEl.innerHTML = rows.map(function(row) {
+      var name = escapeHtml(row.name || 'Anonymous');
+      var msg = escapeHtml(row.message || '');
+      var time = new Date(row.ts).toLocaleString();
       return '<article class="discussion-item">' +
-        '<p class="discussion-item__meta"><strong>' + (row.name || 'Anonymous') + '</strong> • ' + new Date(row.ts).toLocaleString() + '</p>' +
-        '<p class="discussion-item__text">' + (row.message || '') + '</p>' +
+        '<p class="discussion-item__meta"><strong>' + name + '</strong> · ' + escapeHtml(time) + '</p>' +
+        '<p class="discussion-item__text">' + msg + '</p>' +
       '</article>';
     }).join('');
   }
 
   document.getElementById('discussion-post').addEventListener('click', function() {
+    if (!discussionNameEl || !discussionMsgEl) return;
     var name = (discussionNameEl.value || '').trim() || 'Anonymous';
     var message = (discussionMsgEl.value || '').trim();
     if (!message) return;
@@ -339,6 +523,30 @@ const solutionHtml = problem.solution
     discussionMsgEl.value = '';
     loadThreads();
   });
+
+  var FAVORITES_TOOL = 'problem-favorites';
+  var favoriteBtn = document.getElementById('problem-favorite-btn');
+  var favoriteIcon = favoriteBtn ? favoriteBtn.querySelector('.problem-favorite-btn__icon') : null;
+  var isFavorite = false;
+  function renderFavorite() {
+    if (!favoriteIcon) return;
+    favoriteIcon.textContent = isFavorite ? '★' : '☆';
+    favoriteBtn.setAttribute('aria-pressed', isFavorite ? 'true' : 'false');
+  }
+  async function loadFavorite() {
+    await DCStore.init();
+    var row = await DCStore.get(FAVORITES_TOOL, slug);
+    isFavorite = !!row;
+    renderFavorite();
+  }
+  favoriteBtn.addEventListener('click', async function() {
+    await DCStore.init();
+    isFavorite = !isFavorite;
+    if (isFavorite) await DCStore.set(FAVORITES_TOOL, slug, { slug: slug, addedAt: Date.now() });
+    else await DCStore.remove(FAVORITES_TOOL, slug);
+    renderFavorite();
+  });
+  loadFavorite();
 
   loadProgress();
   loadThreads();
@@ -352,12 +560,118 @@ const solutionHtml = problem.solution
     margin-bottom: 1rem;
   }
   .problem-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 1rem;
   }
-  .problem-title { margin: 0 0 0.5rem; }
+  .problem-header__left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .problem-title { margin: 0; }
   .problem-meta { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+  .problem-header__right {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .problem-main-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
+  }
+  .problem-content-panel {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    background: var(--color-surface);
+    overflow-y: auto;
+    max-height: min(75vh, 720px);
+  }
+  .problem-editor-panel {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    background: var(--color-surface);
+  }
+  .problem-topic-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.75rem 0;
+  }
+  .problem-remarks { margin: 0.5rem 0; font-size: 0.9rem; }
+  .problem-section {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .problem-section__title {
+    margin: 0 0 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .problem-pre {
+    margin: 0;
+    padding: 0.6rem 0.75rem;
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  .problem-pre--small { min-height: 2.5rem; }
+  .problem-list {
+    margin: 0.35rem 0 0;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+  }
+  .problem-list li { margin: 0.2rem 0; }
+  .problem-test-cases { margin-top: 0.5rem; }
+  .problem-muted {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+  .problem-editor-hint {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+  .problem-output {
+    min-height: 160px;
+    margin-top: 0.75rem;
+  }
+  .problem-secondary-pane {
+    display: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    background: var(--color-surface);
+  }
+  .problem-secondary-pane.tab-pane--active { display: block; }
+  .problem-secondary-pane__title {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 900px) {
+    .problem-main-row {
+      grid-template-columns: 1fr;
+    }
+  }
   .badge {
     display: inline-block;
     font-size: 0.73rem;
@@ -424,5 +738,149 @@ const solutionHtml = problem.solution
     font-size: 0.8rem;
     color: var(--color-text-light);
   }
-  .discussion-item__text { margin: 0; white-space: pre-wrap; }
+  .discussion-item__text { margin: 0; white-space: pre-wrap; word-break: break-word; }
+  .problem-discussion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .problem-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .problem-form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    letter-spacing: 0.02em;
+  }
+  .problem-form-input {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+  .problem-form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
+  .problem-form-textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 100px;
+  }
+  .problem-form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  }
+  .problem-form-textarea--notes { min-height: 200px; }
+  .problem-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .problem-form-btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .problem-form-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .problem-form-btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+  .problem-form-btn--primary:hover {
+    background: var(--color-primary);
+    opacity: 0.9;
+  }
+  .problem-discussion-list { margin-top: 0.5rem; }
+  .problem-discussion-empty {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+  .problem-notes-hint {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+  .problem-notes-form { display: flex; flex-direction: column; gap: 0.75rem; }
+  .problem-note-status {
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+  }
+  .test-results {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+  }
+  .test-results__summary {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .test-results__list {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: none;
+  }
+  .test-results__item {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+  }
+  .test-results__item--pass { color: #16a34a; }
+  .test-results__item--fail { color: #dc2626; }
+  .test-results__error {
+    margin: 0;
+    color: #dc2626;
+    font-size: 0.9rem;
+  }
+  .problem-favorite-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  .problem-favorite-btn:hover {
+    color: #eab308;
+    border-color: #eab308;
+  }
+  .problem-favorite-btn[aria-pressed="true"] .problem-favorite-btn__icon {
+    color: #eab308;
+  }
 </style>
