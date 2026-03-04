@@ -1,18 +1,55 @@
-<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="640" height="360" rx="32" fill="url(#paint0_linear)"/>
-  <rect width="640" height="360" rx="32" fill="url(#paint1_radial)" fill-opacity="0.4"/>
-  <path d="M640 0C640 198.823 478.823 360 280 360C81.1775 360 -80 198.823 -80 0H640Z" fill="white" fill-opacity="0.03"/>
-  <circle cx="580" cy="60" r="120" fill="white" fill-opacity="0.05"/>
-  <circle cx="60" cy="300" r="80" fill="white" fill-opacity="0.03"/>
-  <text x="320" y="121.80000000000001" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="800" letter-spacing="-0.02em">How HTML, CSS and</text><text x="320" y="179.4" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="800" letter-spacing="-0.02em">JS works together</text><text x="320" y="225.4" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="400">Learn how HTML, CSS and JS works together to create a</text><text x="320" y="249.4" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="400">web page.</text>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="paint0_linear" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#881337"/>
-      <stop offset="1" stop-color="#f43f5e"/>
+    <linearGradient id="bg_grad" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="1" stop-color="#0f172a"/>
     </linearGradient>
-    <radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 180) rotate(90) scale(180 320)">
-      <stop stop-color="white" stop-opacity="0.1"/>
-      <stop offset="1" stop-color="white" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="blur">
+        <feGaussianBlur stdDeviation="100" />
+    </filter>
   </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg_grad)"/>
+  
+  <!-- Subtle Glowing Corners -->
+  <circle cx="1100" cy="50" r="300" fill="#10b981" fill-opacity="0.15" filter="url(#blur)"/>
+  <circle cx="50" cy="580" r="250" fill="#059669" fill-opacity="0.12" filter="url(#blur)"/>
+
+  <!-- Border Card (Glass effect) -->
+  <rect x="50" y="50" width="1100" height="530" rx="48" fill="white" fill-opacity="0.02" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+  
+  <!-- Main Content Wrapper -->
+  <foreignObject x="100" y="90" width="1000" height="450">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; flex-direction: column; justify-content: flex-start; gap: 24px; font-family: 'Inter', system-ui, -apple-system, sans-serif;">
+        
+        <!-- Large Title -->
+        <div style="color: #ffffff; font-size: 64px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin: 0; padding: 0;">
+            How HTML, CSS and JS works together
+        </div>
+
+        <!-- Tight Divider -->
+        <div style="width: 100px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #10b981 0%, #059669 100%);"></div>
+
+        <!-- Content Section (Key Concepts + Tags) -->
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+            <!-- Key Concepts -->
+            <div>
+                <div style="color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px;">Key Concepts &amp; Summary</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px 14px;">
+                    <div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">The Role of HTML, CSS, and JavaScript</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">How the Browser Interprets the Code</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">What Happens in the Background</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">The Role of the Compiler/Interpreter</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Summary of the Workflow</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Key Takeaways</div>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                <div style="color: #059669; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#programming</div><div style="color: #059669; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#javascript</div><div style="color: #059669; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#web-development</div><div style="color: #059669; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#html</div><div style="color: #059669; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#css</div>
+            </div>
+        </div>
+    </div>
+  </foreignObject>
+
+  <!-- Branded Footer -->
+  <text x="1100" y="550" text-anchor="end" fill="white" fill-opacity="0.3" font-family="system-ui, sans-serif" font-size="24" font-weight="800" letter-spacing="0.05em">dailycoder.in</text>
+
 </svg>
