@@ -1,0 +1,17 @@
+{
+  "title": "Introduction to Vinext: Next.js on Vite, Built by Cloudflare",
+  "description": "What is Vinext, why it exists, who built it, how to get started, and how to migrate from Next.js. A drop-in replacement with 4x faster builds and 57% smaller bundles.",
+  "date": "2026-03-02",
+  "author": "Avinash Jha",
+  "tags": [
+    "vinext",
+    "nextjs",
+    "vite",
+    "cloudflare",
+    "react",
+    "frontend"
+  ],
+  "category": "tutorials",
+  "draft": false,
+  "image": "/blog/introduction-to-vinext/hero.svg"
+}
