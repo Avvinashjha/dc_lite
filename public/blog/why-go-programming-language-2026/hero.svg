@@ -9,39 +9,24 @@
     </filter>
   </defs>
 
-  <!-- Background -->
   <rect width="1200" height="630" fill="url(#bg_grad)"/>
   
-  <!-- Subtle Glowing Corners -->
   <circle cx="1100" cy="50" r="300" fill="#8b5cf6" fill-opacity="0.15" filter="url(#blur)"/>
   <circle cx="50" cy="580" r="250" fill="#7c3aed" fill-opacity="0.12" filter="url(#blur)"/>
 
-  <!-- Border Card (Glass effect) -->
   <rect x="50" y="50" width="1100" height="530" rx="48" fill="white" fill-opacity="0.02" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
   
-  <!-- Main Content Wrapper -->
   <foreignObject x="100" y="90" width="1000" height="450">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; flex-direction: column; justify-content: flex-start; gap: 24px; font-family: 'Inter', system-ui, -apple-system, sans-serif;">
-        
-        <!-- Large Title -->
-        <div style="color: #ffffff; font-size: 54px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin: 0; padding: 0;">
-            Why Go Is the Programming Language to Learn in 2026
-        </div>
-
-        <!-- Tight Divider -->
+    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; flex-direction: column; justify-content: flex-start; gap: 24px; font-family: 'Inter', system-ui, sans-serif;">
+        <div style="color: #ffffff; font-size: 54px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em;">Why Go Is the Programming Language to Learn in 2026</div>
         <div style="width: 100px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);"></div>
-
-        <!-- Content Section (Key Concepts + Tags) -->
         <div style="display: flex; flex-direction: column; gap: 32px;">
-            <!-- Key Concepts -->
             <div>
                 <div style="color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px;">Key Concepts &amp; Summary</div>
                 <div style="display: flex; flex-wrap: wrap; gap: 12px 14px;">
-                    <div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Why Go in 2026?</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Core Features of Go</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Simplicity and Readability</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Concurrency with Goroutines and Channels</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Fast Compilation and Single Binary</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Strong Standard Library</div>
+                    <div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">Why Go in 2026?</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">Core Features of Go</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">Simplicity and Readability</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">Concurrency with Goroutines and Channels</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">Fast Compilation and Single Binary</div><div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">Strong Standard Library</div>
                 </div>
             </div>
-
-            <!-- Tags -->
             <div style="display: flex; flex-wrap: wrap; gap: 12px;">
                 <div style="color: #7c3aed; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#go</div><div style="color: #7c3aed; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#golang</div><div style="color: #7c3aed; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#backend</div><div style="color: #7c3aed; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#devops</div><div style="color: #7c3aed; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#cloud</div>
             </div>
@@ -49,7 +34,5 @@
     </div>
   </foreignObject>
 
-  <!-- Branded Footer -->
   <text x="1100" y="550" text-anchor="end" fill="white" fill-opacity="0.3" font-family="system-ui, sans-serif" font-size="24" font-weight="800" letter-spacing="0.05em">dailycoder.in</text>
-
 </svg>

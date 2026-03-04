@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import html
 from pathlib import Path
 
 # Configuration: Paths relative to the project root
@@ -47,6 +48,11 @@ def generate_svg(title, tags, points, color_start, color_end):
     """
     Generates a 1200x630 premium SVG with dynamic font scaling and a clean layout.
     """
+    # Escape special characters for XML/SVG safety
+    title_esc = html.escape(title)
+    tags_esc = [html.escape(t) for t in tags]
+    points_esc = [html.escape(p) for p in points]
+
     # Dynamic font size based on title length
     font_size = 76
     if len(title) > 30: font_size = 64
@@ -74,17 +80,17 @@ def generate_svg(title, tags, points, color_start, color_end):
   
   <foreignObject x="100" y="90" width="1000" height="450">
     <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; flex-direction: column; justify-content: flex-start; gap: 24px; font-family: 'Inter', system-ui, sans-serif;">
-        <div style="color: #ffffff; font-size: {font_size}px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em;">{title}</div>
+        <div style="color: #ffffff; font-size: {font_size}px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em;">{title_esc}</div>
         <div style="width: 100px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, {color_start} 0%, {color_end} 100%);"></div>
         <div style="display: flex; flex-direction: column; gap: 32px;">
             <div>
                 <div style="color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px;">Key Concepts &amp; Summary</div>
                 <div style="display: flex; flex-wrap: wrap; gap: 12px 14px;">
-                    {"".join([f'<div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">{p}</div>' for p in points])}
+                    {"".join([f'<div style="background: rgba(255,255,255,0.06); padding: 10px 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 15px; font-weight: 600; color: #fff;">{p}</div>' for p in points_esc])}
                 </div>
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-                {"".join([f'<div style="color: {color_end}; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#{t.lower().replace(" ", "-")}</div>' for t in tags[:5]])}
+                {"".join([f'<div style="color: {color_end}; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9;">#{t.lower().replace(" ", "-")}</div>' for t in tags_esc[:5]])}
             </div>
         </div>
     </div>
@@ -109,9 +115,9 @@ def main():
         if not meta_path.exists() or not content_path.exists():
             continue
             
-        with open(meta_path, 'r') as f:
+        with open(meta_path, 'r', encoding='utf-8') as f:
             meta = json.load(f)
-        with open(content_path, 'r') as f:
+        with open(content_path, 'r', encoding='utf-8') as f:
             content = f.read()
             
         title = meta.get("title", slug)
@@ -126,7 +132,7 @@ def main():
         
         svg_content = generate_svg(title, tags, points, color_start, color_end)
         
-        with open(hero_path, 'w') as f:
+        with open(hero_path, 'w', encoding='utf-8') as f:
             f.write(svg_content)
         print(f"Generated: {hero_path}")
 
