@@ -13,11 +13,24 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/find-the-duplicate-number/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array of integers `nums` containing `n + 1` integers where each integer is in the range `[1, n]` inclusive. There is only one repeated number in `nums`, return this repeated number. You must solve the problem without modifying the array `nums` and uses only constant extra space.",
+    "sampleInput": "nums = [1,3,4,2,2]",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            3,
+            4,
+            2,
+            2
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "Use Floyd's Tortoise and Hare (Cycle Detection) algorithm to find the duplicate number in O(n) time and O(1) space.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -34,11 +47,32 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/sort-colors/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array `nums` with `n` objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue. We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.",
+    "sampleInput": "nums = [2,0,2,1,1,0]",
+    "sampleOutput": "[0,0,1,1,2,2]",
+    "testCases": [
+      {
+        "args": [
+          [
+            2,
+            0,
+            2,
+            1,
+            1,
+            0
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          1,
+          1,
+          2,
+          2
+        ]
+      }
+    ],
+    "solution": "Use the Dutch National Flag algorithm with three pointers (low, mid, high) to sort the array in a single pass.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -55,11 +89,22 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/majority-element/",
     "remarks": "Boyer-Moore Voting Algorithm",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array `nums` of size `n`, return the majority element. The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.",
+    "sampleInput": "nums = [3,2,3]",
+    "sampleOutput": "3",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            2,
+            3
+          ]
+        ],
+        "expected": 3
+      }
+    ],
+    "solution": "Use the Boyer-Moore Voting Algorithm to find the majority element in O(n) time and O(1) space.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -76,11 +121,22 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in `nums`.",
+    "sampleInput": "nums = [1,1,2]",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            1,
+            2
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "Use two pointers: one to track the current unique element and another to iterate through the array. Update the unique element pointer whenever a new value is encountered.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -97,11 +153,50 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/set-matrix-zeroes/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an `m x n` integer matrix `matrix`, if an element is 0, set its entire row and column to 0's. You must do it in-place.",
+    "sampleInput": "matrix = [[1,1,1],[1,0,1],[1,1,1]]",
+    "sampleOutput": "[[1,0,1],[0,0,0],[1,0,1]]",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "solution": "Use the first row and first column to keep track of rows and columns that need to be zeroed out. Use a separate variable to track if the first row or first column itself needs to be zeroed.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -118,11 +213,30 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/move-zeroes/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums`, move all 0's to the end of it while maintaining the relative order of the non-zero elements. You must do this in-place without making a copy of the array.",
+    "sampleInput": "nums = [0,1,0,3,12]",
+    "sampleOutput": "[1,3,12,0,0]",
+    "testCases": [
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            3,
+            12
+          ]
+        ],
+        "expected": [
+          1,
+          3,
+          12,
+          0,
+          0
+        ]
+      }
+    ],
+    "solution": "Use two pointers. One pointer (slow) tracks the position to place the next non-zero element. The other (fast) iterates through the array. Move non-zero elements to the slow pointer's position and increment it. Finally, fill the rest of the array with zeroes.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -139,11 +253,25 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.",
+    "sampleInput": "prices = [7,1,5,3,6,4]",
+    "sampleOutput": "5",
+    "testCases": [
+      {
+        "args": [
+          [
+            7,
+            1,
+            5,
+            3,
+            6,
+            4
+          ]
+        ],
+        "expected": 5
+      }
+    ],
+    "solution": "Maintain the minimum price seen so far and the maximum profit found by subtracting the minimum price from the current price as you iterate through the array.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -160,11 +288,29 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Chocolate%20Distribution%20Problem",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array `A[]` of positive integers of size `N`, where each value represents the number of chocolates in a packet. There are `M` students, the task is to distribute chocolate packets such that: 1. Each student gets exactly one packet. 2. The difference between maximum number of chocolates given to a student and minimum number of chocolates given to a student is minimum.",
+    "sampleInput": "N = 8, M = 5, A = [3, 4, 1, 9, 56, 7, 9, 12]",
+    "sampleOutput": "6",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            4,
+            1,
+            9,
+            56,
+            7,
+            9,
+            12
+          ],
+          8,
+          5
+        ],
+        "expected": 6
+      }
+    ],
+    "solution": "Sort the array. The problem reduces to finding a subarray of size `M` such that the difference between the last and first element of the subarray is minimized.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -258,11 +404,25 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given an integer array `prices` where `prices[i]` is the price of a given stock on the `ith` day. On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. Find and return the maximum profit you can achieve.",
+    "sampleInput": "prices = [7,1,5,3,6,4]",
+    "sampleOutput": "7",
+    "testCases": [
+      {
+        "args": [
+          [
+            7,
+            1,
+            5,
+            3,
+            6,
+            4
+          ]
+        ],
+        "expected": 7
+      }
+    ],
+    "solution": "Iterate through the prices. Whenever the price of the current day is greater than the price of the previous day, add the difference to your total profit. This effectively captures every profitable segment.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -279,11 +439,39 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/merge-sorted-array/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given two integer arrays `nums1` and `nums2`, sorted in non-decreasing order, and two integers `m` and `n`, representing the number of elements in `nums1` and `nums2` respectively. Merge `nums1` and `nums2` into a single array sorted in non-decreasing order in-place within `nums1`.",
+    "sampleInput": "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3",
+    "sampleOutput": "[1,2,2,3,5,6]",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0
+          ],
+          3,
+          [
+            2,
+            5,
+            6
+          ],
+          3
+        ],
+        "expected": [
+          1,
+          2,
+          2,
+          3,
+          5,
+          6
+        ]
+      }
+    ],
+    "solution": "Use three pointers starting from the end of the arrays (`m-1`, `n-1`, and `m+n-1`) to fill `nums1` from the back. This avoids overwriting elements in `nums1` that still need to be processed.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -300,11 +488,23 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/subarray-sum-equals-k/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array of integers `nums` and an integer `k`, return the total number of subarrays whose sum equals to `k`. A subarray is a contiguous non-empty sequence of elements within an array.",
+    "sampleInput": "nums = [1,1,1], k = 2",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            1,
+            1
+          ],
+          2
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "Use a hash map to store the prefix sums encountered so far and their frequencies. As you iterate through the array, calculate the current prefix sum and check if `current_sum - k` is in the map. If it is, add its frequency to the total count.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -321,11 +521,26 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/subarray-sums-divisible-by-k/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums` and an integer `k`, return the number of non-empty subarrays that have a sum divisible by `k`.",
+    "sampleInput": "nums = [4,5,0,-2,-3,1], k = 5",
+    "sampleOutput": "7",
+    "testCases": [
+      {
+        "args": [
+          [
+            4,
+            5,
+            0,
+            -2,
+            -3,
+            1
+          ],
+          5
+        ],
+        "expected": 7
+      }
+    ],
+    "solution": "Maintain a hash map of remainders of the prefix sums when divided by `k`. Use the property that if two prefix sums have the same remainder when divided by `k`, then the subarray between them is divisible by `k`. Be sure to handle negative remainders.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -342,11 +557,30 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/find-all-duplicates-in-an-array/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums` of length `n` where all the integers of `nums` are in the range `[1, n]` and each integer appears at most twice, return an array of all the integers that appears twice. You must write an algorithm that runs in O(n) time and uses only constant extra space.",
+    "sampleInput": "nums = [4,3,2,7,8,2,3,1]",
+    "sampleOutput": "[2,3]",
+    "testCases": [
+      {
+        "args": [
+          [
+            4,
+            3,
+            2,
+            7,
+            8,
+            2,
+            3,
+            1
+          ]
+        ],
+        "expected": [
+          2,
+          3
+        ]
+      }
+    ],
+    "solution": "Since all elements are between 1 and `n`, treat the values as indices. For each number `x`, go to index `|x|-1` and multiply the element there by -1. If an element at an index is already negative, the current number `|x|` has been seen before and is a duplicate.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -363,11 +597,28 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/container-with-most-water/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given an integer array `height` of length `n`. There are `n` vertical lines drawn such that the two endpoints of the `ith` line are `(i, 0)` and `(i, height[i])`. Find two lines that together with the x-axis form a container, such that the container contains the most water. Return the maximum amount of water a container can store.",
+    "sampleInput": "height = [1,8,6,2,5,4,8,3,7]",
+    "sampleOutput": "49",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            8,
+            6,
+            2,
+            5,
+            4,
+            8,
+            3,
+            7
+          ]
+        ],
+        "expected": 49
+      }
+    ],
+    "solution": "Use two pointers, one at the beginning and one at the end of the array. Calculate the volume of water (distance between pointers * minimum height of the two lines). Move the pointer that points to the shorter line inward.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -384,11 +635,36 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/3sum/",
     "remarks": "Two Pointer",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums`, return all the triplets `[nums[i], nums[j], nums[k]]` such that `i != j`, `i != k`, and `j != k`, and `nums[i] + nums[j] + nums[k] == 0`. Notice that the solution set must not contain duplicate triplets.",
+    "sampleInput": "nums = [-1,0,1,2,-1,-4]",
+    "sampleOutput": "[[-1,-1,2],[-1,0,1]]",
+    "testCases": [
+      {
+        "args": [
+          [
+            -1,
+            0,
+            1,
+            2,
+            -1,
+            -4
+          ]
+        ],
+        "expected": [
+          [
+            -1,
+            -1,
+            2
+          ],
+          [
+            -1,
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "solution": "Sort the array. Iterate through each element (let's call it current). Use two pointers (left and right) to find pairs that sum to `-current`. Skip duplicate values to avoid duplicate triplets.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -405,11 +681,24 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/3sum-closest/",
     "remarks": "Two Pointer",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums` of length `n` and an integer `target`, find three integers in `nums` such that the sum is closest to `target`. Return the sum of the three integers. You may assume that each input would have exactly one solution.",
+    "sampleInput": "nums = [-1,2,1,-4], target = 1",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          [
+            -1,
+            2,
+            1,
+            -4
+          ],
+          1
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "Sort the array and use a two-pointer approach similar to 3Sum. For each element, use two pointers to find a pair such that the sum of the three elements is close to the target. Keep track of the sum that has the minimum absolute difference from the target.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -426,11 +715,45 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/4sum/",
     "remarks": "Two Pointer",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array `nums` of `n` integers, return an array of all the unique quadruplets `[nums[a], nums[b], nums[c], nums[d]]` such that `0 <= a, b, c, d < n`, `a, b, c, and d` are distinct, and `nums[a] + nums[b] + nums[c] + nums[d] == target`.",
+    "sampleInput": "nums = [1,0,-1,0,-2,2], target = 0",
+    "sampleOutput": "[[-2,-1,1,2],[-2,0,0,2],[-1,0,1,1]]",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            0,
+            -1,
+            0,
+            -2,
+            2
+          ],
+          0
+        ],
+        "expected": [
+          [
+            -2,
+            -1,
+            1,
+            2
+          ],
+          [
+            -2,
+            0,
+            0,
+            2
+          ],
+          [
+            -1,
+            0,
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "solution": "Sort the array. Use two nested loops to fix the first two numbers and then use the two-pointer approach to find the remaining two numbers. Be careful to skip duplicate values for all four positions to avoid duplicate quadruplets.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -447,11 +770,27 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/",
     "remarks": "sliding window",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "There are several cards arranged in a row, and each card has an associated number of points. In one step, you can take one card from the beginning or from the end of the row. You have to take exactly `k` cards. Your score is the sum of the points of the cards you have taken. Return the maximum score you can obtain.",
+    "sampleInput": "cardPoints = [1,2,3,4,5,6,1], k = 3",
+    "sampleOutput": "12",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            1
+          ],
+          3
+        ],
+        "expected": 12
+      }
+    ],
+    "solution": "Taking `k` cards from the ends is equivalent to leaving a contiguous subarray of size `n-k` in the middle. To maximize the points from the `k` cards, minimize the sum of the `n-k` cards in the middle using a sliding window.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -468,11 +807,44 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/spiral-matrix/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an `m x n` matrix, return all elements of the matrix in spiral order.",
+    "sampleInput": "matrix = [[1,2,3],[4,5,6],[7,8,9]]",
+    "sampleOutput": "[1,2,3,6,9,8,7,4,5]",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          6,
+          9,
+          8,
+          7,
+          4,
+          5
+        ]
+      }
+    ],
+    "solution": "Maintain four boundaries: top, bottom, left, and right. Traverse from left to right on the top row, top to bottom on the right column, right to left on the bottom row, and bottom to top on the left column. Update the boundaries after each traversal and check if you've finished.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -489,11 +861,38 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/word-search/",
     "remarks": "Good Question DFS and Back Tracking",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid. The word can be constructed from letters of sequentially adjacent cells, where horizontal or vertical neighbors are adjacent. The same letter cell may not be used more than once.",
+    "sampleInput": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "S",
+              "F",
+              "C",
+              "S"
+            ],
+            [
+              "A",
+              "D",
+              "E",
+              "E"
+            ]
+          ],
+          "ABCCED"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Iterate through each cell in the grid. If a cell matches the first character of the word, perform a DFS to find the remaining characters. Use a temporary placeholder to mark the cell as visited and backtrack in the recursion.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -510,11 +909,24 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/jump-game/",
     "remarks": "Greedy/ Do it again",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position. Return `true` if you can reach the last index, or `false` otherwise.",
+    "sampleInput": "nums = [2,3,1,1,4]",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          [
+            2,
+            3,
+            1,
+            1,
+            4
+          ]
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Iterate through the array while maintaining the maximum index you can reach. If you encounter an index that is further than your current maximum reach, you can't proceed. Update your maximum reach at each step as `max(maxReach, i + nums[i])`.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -531,11 +943,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20combinations%20%7C%20Set-2",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Given an array of size `n`, generate and print all possible combinations of `r` elements in the array.",
+    "sampleInput": "arr = [1, 2, 3, 4], r = 2",
+    "sampleOutput": "[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]",
     "testCases": [],
-    "solution": "",
+    "solution": "Use recursion to explore all possible combinations. At each step, you can either pick the current element or skip it. Maintain a buffer to store the current combination and an index to track how many elements have been picked.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -552,11 +964,60 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/game-of-life/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "The board is made up of an `m x n` grid of cells, where each cell is either alive (1) or dead (0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the rules of Conway's Game of Life. Given the current state of the board, return the next state.",
+    "sampleInput": "board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+    "sampleOutput": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    ],
+    "solution": "To update the board in-place, use extra states to encode state transitions. For example, use `2` to represent a cell that was alive but is now dead, and `3` to represent a cell that was dead but is now alive. This allows you to compute the next state without losing the current state of neighbors.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -573,11 +1034,24 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/reverse-pairs/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums`, return the number of reverse pairs in the array. A reverse pair is a pair `(i, j)` where `0 <= i < j < nums.length` and `nums[i] > 2 * nums[j]`.",
+    "sampleInput": "nums = [1,3,2,3,1]",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            3,
+            2,
+            3,
+            1
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "This problem can be solved using a modified merge sort algorithm. During the merging process, for each element in the left half, count how many elements in the right half satisfy the condition `nums[i] > 2 * nums[j]`. This approach achieves O(n log n) time complexity.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -594,11 +1068,11 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/insert-delete-getrandom-o-1-duplicates-allowed/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Implement a data structure that supports `insert`, `remove`, and `getRandom` operations in average O(1) time, allowing duplicates.",
+    "sampleInput": "[\"RandomizedCollection\", \"insert\", \"insert\", \"insert\", \"getRandom\", \"remove\", \"getRandom\"]",
+    "sampleOutput": "[null, true, false, true, 1, true, 1]",
     "testCases": [],
-    "solution": "",
+    "solution": "Use a list to store elements for O(1) random access and a hash map that maps each value to a set of its indices in the list. To remove an element in O(1), swap it with the last element in the list, update the hash map with the new index of the swapped element, and then remove the last element.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -615,11 +1089,25 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array of integers `heights` representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.",
+    "sampleInput": "heights = [2,1,5,6,2,3]",
+    "sampleOutput": "10",
+    "testCases": [
+      {
+        "args": [
+          [
+            2,
+            1,
+            5,
+            6,
+            2,
+            3
+          ]
+        ],
+        "expected": 10
+      }
+    ],
+    "solution": "Use a monotonic stack to store indices of the bars in increasing order of height. When a bar with a height less than the bar at the top of the stack is encountered, pop the stack and calculate the area of the rectangle using the popped bar's height as the minimum height.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -636,11 +1124,36 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/max-value-of-equation/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given an array `points` containing the coordinates of points on a 2D plane, sorted by the x-values, and an integer `k`. Return the maximum value of the equation `yi + yj + |xi - xj|` where `|xi - xj| <= k` and `1 <= i < j <= points.length`.",
+    "sampleInput": "points = [[1,3],[2,0],[5,10],[6,-10]], k = 1",
+    "sampleOutput": "4",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              6,
+              -10
+            ]
+          ],
+          1
+        ],
+        "expected": 4
+      }
+    ],
+    "solution": "Maximize `(yi - xi) + (yj + xj)`. Since the points are sorted by `x`, use a sliding window with a deque to maintain the maximum `yi - xi` for points within the `x-range` of `k`.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -657,11 +1170,18 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/valid-parentheses/",
     "remarks": "Stack",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given a string `s` containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. Brackets must close in the correct order and with matching types.",
+    "sampleInput": "s = \"()[]{}\"",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          "()[]{}"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Use a stack to keep track of opening brackets. For each closing bracket, check if it matches the top of the stack and pop. If the stack is empty at the end, the string is valid.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -678,11 +1198,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20the%20duplicate%20characters%20in%20a%20string",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Given a string, find and print all duplicate characters and their counts.",
+    "sampleInput": "s = \"test string\"",
+    "sampleOutput": "t: 3, s: 2",
     "testCases": [],
-    "solution": "",
+    "solution": "Use an array or hash map to count occurrences of each character in the string. Then iterate through the counts and print character-count pairs for characters occurring more than once.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -699,11 +1219,19 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given two strings `needle` and `haystack`, return the index of the first occurrence of `needle` in `haystack`, or -1 if `needle` is not part of `haystack`.",
+    "sampleInput": "haystack = \"sadbutsad\", needle = \"sad\"",
+    "sampleOutput": "0",
+    "testCases": [
+      {
+        "args": [
+          "sadbutsad",
+          "sad"
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "Use a simple loop to check substrings of `haystack` that match `needle`. For larger datasets, Knuth-Morris-Pratt (KMP) or Rabin-Karp can provide more efficient comparisons.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -720,11 +1248,22 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/longest-common-prefix/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string.",
+    "sampleInput": "strs = [\"flower\",\"flow\",\"flight\"]",
+    "sampleOutput": "\"fl\"",
+    "testCases": [
+      {
+        "args": [
+          [
+            "flower",
+            "flow",
+            "flight"
+          ]
+        ],
+        "expected": "fl"
+      }
+    ],
+    "solution": "Start with the first string as the prefix. For each subsequent string, keep reducing the prefix until it is a prefix of the current string. If the prefix becomes empty, return \"\".",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -741,11 +1280,18 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/valid-palindrome-ii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given a string `s`, return `true` if the `s` can be a palindrome after deleting at most one character from it.",
+    "sampleInput": "s = \"abca\"",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          "abca"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Use two pointers starting from the ends of the string. If the characters don't match, check if the remaining string after skipping either character is a palindrome.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -762,11 +1308,18 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/integer-to-roman/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer, convert it to a Roman numeral. Roman numerals are represented by seven symbols: I, V, X, L, C, D and M.",
+    "sampleInput": "num = 3",
+    "sampleOutput": "\"III\"",
+    "testCases": [
+      {
+        "args": [
+          3
+        ],
+        "expected": "III"
+      }
+    ],
+    "solution": "Define an array of Roman numeral symbols and their corresponding values in descending order. Subtract values from the number and append the corresponding symbols to the result until the number becomes zero.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -783,11 +1336,24 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/generate-parentheses/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given `n` pairs of parentheses, write a function to generate all combinations of well-formed parentheses.",
+    "sampleInput": "n = 3",
+    "sampleOutput": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+    "testCases": [
+      {
+        "args": [
+          3
+        ],
+        "expected": [
+          "((()))",
+          "(()())",
+          "(())()",
+          "()(())",
+          "()()()"
+        ]
+      }
+    ],
+    "solution": "Use backtracking to generate strings of parentheses. Keep track of the number of open and closed parentheses used. Add an open parenthesis if the count is less than `n`, and a closed parenthesis if its count is less than the count of open parentheses.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -804,11 +1370,18 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/simplify-path/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an absolute path for a Unix-style file system, convert it to the simplified canonical path.",
+    "sampleInput": "path = \"/home/\"",
+    "sampleOutput": "\"/home\"",
+    "testCases": [
+      {
+        "args": [
+          "/home/"
+        ],
+        "expected": "/home"
+      }
+    ],
+    "solution": "Split the path by slashes and use a stack to process the components. Ignore empty or single-dot components, and pop from the stack for double-dot components. Concatenate the remaining components with slashes to form the canonical path.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -828,12 +1401,6 @@
     "description": "",
     "sampleInput": "",
     "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
-    "problemSet": "top-300-leetcode"
-  },
-  {
-    "id": "problem-0038",
     "slug": "reverse-words-in-a-string",
     "title": "Reverse Words in a String",
     "difficulty": "Medium",
@@ -846,38 +1413,24 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/reverse-words-in-a-string/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
-    "problemSet": "top-300-leetcode"
-  },
-  {
-    "id": "problem-0039",
-    "slug": "rabin-karp-algorithm-for-pattern-searching",
-    "title": "Rabin-Karp Algorithm for Pattern Searching",
-    "difficulty": "Medium",
-    "topic": "String",
-    "topics": [
-      "String"
+    "description": "Given an input string `s`, reverse the order of the words. Return a string of the words in reverse order concatenated by a single space.",
+    "sampleInput": "s = \"the sky is blue\"",
+    "sampleOutput": "\"blue is sky the\"",
+    "testCases": [
+      {
+        "args": [
+          "the sky is blue"
+        ],
+        "expected": "blue is sky the"
+      }
     ],
-    "status": "DONE",
-    "confidence": 0,
-    "platform": "GeeksforGeeks",
-    "externalUrl": "https://www.geeksforgeeks.org/?s=Rabin-Karp%20Algorithm%20for%20Pattern%20Searching",
-    "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "solution": "Trim the string and split it by whitespace into words. Reverse the list of words and join them with a single space to produce the final result.",
     "problemSet": "top-300-leetcode"
   },
   {
-    "id": "problem-0040",
-    "slug": "group-anagrams",
-    "title": "Group Anagrams",
+    "id": "problem-0038",
+    "slug": "basic-calculator-ii",
+    "title": "Basic Calculator II",
     "difficulty": "Medium",
     "topic": "String",
     "topics": [
@@ -886,34 +1439,105 @@
     "status": "DONE",
     "confidence": 0,
     "platform": "LeetCode",
-    "externalUrl": "https://leetcode.com/problems/group-anagrams/",
+    "externalUrl": "https://leetcode.com/problems/basic-calculator-ii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Evaluate an expression string containing non-negative integers and operators (+, -, *, /).",
+    "sampleInput": "s = \"3+2*2\"",
+    "sampleOutput": "7",
+    "testCases": [
+      {
+        "args": [
+          "3+2*2"
+        ],
+        "expected": 7
+      }
+    ],
+    "solution": "Use a stack to process numbers. Iterate through the string, parsing numbers and keeping track of the previous operator. For '*' and '/', update the top of the stack by evaluating the operation. For '+' and '-', push the number (or its negation) onto the stack. Finally, sum the elements in the stack.",
+    "problemSet": "top-300-leetcode"
+  },
+  {
+    "id": "problem-0039",
+    "slug": "valid-number",
+    "title": "Valid Number",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problems/valid-number/",
+    "remarks": "",
+    "description": "Determine if a Given string is a valid number according to a strict set of rules including integers, decimals, and scientific notation.",
+    "sampleInput": "s = \"0\"",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          "0"
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Use a series of flags (seenDigit, seenDot, seenE) to track the components of the number as you iterate through the string. Enforce rules about the placement and frequency of signs, dots, and exponents.",
+    "problemSet": "top-300-leetcode"
+  },
+  {
+    "id": "problem-0040",
+    "slug": "longest-happy-prefix",
+    "title": "Longest Happy Prefix",
+    "difficulty": "Hard",
+    "topic": "String",
+    "topics": [
+      "String"
+    ],
+    "status": "TODO",
+    "confidence": 0,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problems/longest-happy-prefix/",
+    "remarks": "",
+    "description": "Return the longest prefix of a string `s` that is also its suffix (excluding the string itself).",
+    "sampleInput": "s = \"level\"",
+    "sampleOutput": "\"l\"",
+    "testCases": [
+      {
+        "args": [
+          "level"
+        ],
+        "expected": "l"
+      }
+    ],
+    "solution": "This problem can be solved by computing the LPS (Longest Prefix Suffix) array used in the KMP string matching algorithm. The value at the last position of the LPS array represents the length of the longest happy prefix.",
     "problemSet": "top-300-leetcode"
   },
   {
     "id": "problem-0041",
-    "slug": "word-wrap-practice",
-    "title": "Word Wrap | Practice",
-    "difficulty": "Medium",
+    "slug": "minimum-window-substring",
+    "title": "Minimum Window Substring",
+    "difficulty": "Hard",
     "topic": "String",
     "topics": [
       "String"
     ],
     "status": "DONE",
-    "confidence": 0,
-    "platform": "GeeksforGeeks",
-    "externalUrl": "https://www.geeksforgeeks.org/?s=Word%20Wrap%20%7C%20Practice",
+    "confidence": 1,
+    "platform": "LeetCode",
+    "externalUrl": "https://leetcode.com/problems/minimum-window-substring/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Find the smallest contiguous substring of `s` that contains all characters from `t`.",
+    "sampleInput": "s = \"ADOBECODEBANC\", t = \"ABC\"",
+    "sampleOutput": "\"BANC\"",
+    "testCases": [
+      {
+        "args": [
+          "ADOBECODEBANC",
+          "ABC"
+        ],
+        "expected": "BANC"
+      }
+    ],
+    "solution": "Use a sliding window with two pointers. Expand the right pointer until all required characters are in the window. Then contract the left pointer as much as possible while maintaining all required characters. Track the minimum valid window found during this process.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5466,11 +6090,19 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/longest-repeating-character-replacement/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given a string `s` and an integer `k`. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most `k` times. Return the length of the longest substring containing the same letter you can get after performing the above operations.",
+    "sampleInput": "s = \"ABAB\", k = 2",
+    "sampleOutput": "4",
+    "testCases": [
+      {
+        "args": [
+          "ABAB",
+          2
+        ],
+        "expected": 4
+      }
+    ],
+    "solution": "Use a sliding window approach. Maintain a count of characters in the current window. If (window size - most frequent character count) > k, shrink the window from the left.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5487,17 +6119,17 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/maximum-number-of-visible-points/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "You are given an array `points`, an integer `angle`, and your `location`. You want to find the maximum number of points you can see from your location within a field of view specified by `angle`.",
+    "sampleInput": "points = [[2,1],[2,2],[3,3]], angle = 90, location = [1,1]",
+    "sampleOutput": "3",
     "testCases": [],
-    "solution": "",
+    "solution": "Translate all points to be relative to the location. Convert them to polar coordinates (angles). Sort the angles. Use a sliding window to find the maximum number of angles within the given range (angle).",
     "problemSet": "top-300-leetcode"
   },
   {
     "id": "problem-0260",
-    "slug": "combination-sum-ii",
-    "title": "Combination Sum II",
+    "slug": "k-th-symbol-in-grammar",
+    "title": "K-th Symbol in Grammar",
     "difficulty": "Medium",
     "topic": "Backtracking",
     "topics": [
@@ -5506,19 +6138,27 @@
     "status": "TODO",
     "confidence": 0,
     "platform": "LeetCode",
-    "externalUrl": "https://leetcode.com/problems/combination-sum-ii/",
+    "externalUrl": "https://leetcode.com/problems/k-th-symbol-in-grammar/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "We build a table of n rows (1-indexed). We start with 0 in the 1st row. In every subsequent row, we look at the previous row and replace each occurrence of 0 with 01, and each occurrence of 1 with 10. Given integers n and k, return the kth (1-indexed) symbol in the nth row.",
+    "sampleInput": "n = 2, k = 1",
+    "sampleOutput": "0",
+    "testCases": [
+      {
+        "args": [
+          2,
+          1
+        ],
+        "expected": 0
+      }
+    ],
+    "solution": "The problem has a recursive structure. The first half of row n is the same as row n-1, and the second half is the complement of row n-1. If k is in the first half, it is the same as k in row n-1. If k is in the second half, it is the complement of k-halfsize in row n-1.",
     "problemSet": "top-300-leetcode"
   },
   {
     "id": "problem-0261",
-    "slug": "https-practice-geeksforgeeks-org-problems-subset-sum-problem2014-1",
-    "title": "https://practice.geeksforgeeks.org/problems/subset-sum-problem2014/1",
+    "slug": "subset-sum-problem",
+    "title": "Subset Sum Problem",
     "difficulty": "Medium",
     "topic": "Backtracking",
     "topics": [
@@ -5527,13 +6167,28 @@
     "status": "TODO",
     "confidence": 0,
     "platform": "GeeksforGeeks",
-    "externalUrl": "https://www.geeksforgeeks.org/?s=https%3A%2F%2Fpractice.geeksforgeeks.org%2Fproblems%2Fsubset-sum-problem2014%2F1",
+    "externalUrl": "https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an array of non-negative integers and a value `sum`, determine if there is a subset of the given set with sum equal to given `sum`.",
+    "sampleInput": "nums = [3, 34, 4, 12, 5, 2], sum = 9",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            34,
+            4,
+            12,
+            5,
+            2
+          ],
+          9
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Use backtracking to explore all possible subsets. For each element, either include it in the subset or exclude it. If the sum matches the target, return true. Optimization: Use dynamic programming for better performance.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5550,11 +6205,44 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/combinations/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given two integers n and k, return all possible combinations of k numbers chosen from the range [1, n]. You may return the answer in any order.",
+    "sampleInput": "n = 4, k = 2",
+    "sampleOutput": "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]",
+    "testCases": [
+      {
+        "args": [
+          4,
+          2
+        ],
+        "expected": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      }
+    ],
+    "solution": "Use backtracking to pick k numbers from the range [1, n]. At each step, pick a number and recurse with the remaining range and k-1.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5571,11 +6259,43 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/subsets-ii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array `nums` that may contain duplicates, return all possible subsets. The solution set must not contain duplicate subsets. Return the solution in any order.",
+    "sampleInput": "nums = [1,2,2]",
+    "sampleOutput": "[[],[1],[1,2],[1,2,2],[2],[2,2]]",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            2
+          ]
+        ],
+        "expected": [
+          [],
+          [
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      }
+    ],
+    "solution": "Sort the input array. Use backtracking to generate subsets. To avoid duplicates, skip elements that are the same as the previous element at the same recursion level.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5592,11 +6312,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=M-Coloring%20Problem%20%7C%20Practice",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Given an undirected graph and a number `M`. The task is to color the given graph with at most `M` colors such that no two adjacent vertices of the graph are colored with same color.",
+    "sampleInput": "N = 4, M = 3, E = 5",
+    "sampleOutput": "1 (True)",
     "testCases": [],
-    "solution": "",
+    "solution": "Use backtracking to assign colors to vertices one by one. For each vertex, try all M colors and check if the assignment is valid (no adjacent vertex has the same color).",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5613,11 +6333,18 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/beautiful-arrangement/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Suppose you have n integers from 1 to n. We define a beautiful arrangement as an array that is constructed by these n integers such that for every i (1 <= i <= n), either details[i] % i == 0 or i % details[i] == 0. Given an integer n, return the number of the beautiful arrangements that you can construct.",
+    "sampleInput": "n = 2",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          2
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "Use backtracking to place numbers from 1 to n in positions 1 to n. At each step, check the divisibility condition before placing a number.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5634,11 +6361,28 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/palindrome-partitioning/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given a string `s`, partition `s` such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of `s`.",
+    "sampleInput": "s = \"aab\"",
+    "sampleOutput": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]",
+    "testCases": [
+      {
+        "args": [
+          "aab"
+        ],
+        "expected": [
+          [
+            "a",
+            "a",
+            "b"
+          ],
+          [
+            "aa",
+            "b"
+          ]
+        ]
+      }
+    ],
+    "solution": "Use backtracking to explore all possible partitions. For each prefix, if it's a palindrome, recursively partition the remaining string.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5655,17 +6399,44 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/permutations-ii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given a collection of numbers, `nums`, that might contain duplicates, return all possible unique permutations in any order.",
+    "sampleInput": "nums = [1,1,2]",
+    "sampleOutput": "[[1,1,2],[1,2,1],[2,1,1]]",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "solution": "Use a frequency map of numbers to handle duplicates. Backtrack by choosing numbers from the map and decrementing their count.",
     "problemSet": "top-300-leetcode"
   },
   {
     "id": "problem-0268",
-    "slug": "https-leetcode-com-problems-word-search-ii",
-    "title": "https://leetcode.com/problems/word-search-ii/",
+    "slug": "word-search-ii",
+    "title": "Word Search II",
     "difficulty": "Hard",
     "topic": "Backtracking",
     "topics": [
@@ -5674,13 +6445,54 @@
     "status": "TODO",
     "confidence": 0,
     "platform": "LeetCode",
-    "externalUrl": "https://leetcode.com/problems/https-leetcode-com-problems-word-search-ii/",
+    "externalUrl": "https://leetcode.com/problems/word-search-ii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an `m x n` board of characters and a list of strings `words`, return all words on the board. Each word must be constructed from letters of sequentially adjacent cells, where horizontal or vertical neighbors are adjacent. The same letter cell may not be used more than once in a word.",
+    "sampleInput": "board = [[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]], words = [\"oath\",\"pea\",\"eat\",\"rain\"]",
+    "sampleOutput": "[\"eat\",\"oath\"]",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              "o",
+              "a",
+              "a",
+              "n"
+            ],
+            [
+              "e",
+              "t",
+              "a",
+              "e"
+            ],
+            [
+              "i",
+              "h",
+              "k",
+              "r"
+            ],
+            [
+              "i",
+              "f",
+              "l",
+              "v"
+            ]
+          ],
+          [
+            "oath",
+            "pea",
+            "eat",
+            "rain"
+          ]
+        ],
+        "expected": [
+          "eat",
+          "oath"
+        ]
+      }
+    ],
+    "solution": "Use a Trie to store the words. Perform DFS on each cell of the board, traversing the Trie simultaneously to find words.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5697,11 +6509,11 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/sudoku-solver/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Write a program to solve a Sudoku puzzle by filling the empty cells. A sudoku solution must satisfy all of the following rules: Each of the digits 1-9 must occur exactly once in each row, column, and each of the 9 3x3 sub-boxes of the grid.",
+    "sampleInput": "board = [[\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"],[\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"],[\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"],[\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"],[\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"],[\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"],[\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"],[\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"],[\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"]]",
+    "sampleOutput": "Solved Sudoku Board",
     "testCases": [],
-    "solution": "",
+    "solution": "Use backtracking to fill empty cells one by one. For each cell, try digits 1-9 and check if they are valid according to Sudoku rules. If a valid digit is found, recurse to the next cell. If no digit leads to a solution, backtrack.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5718,11 +6530,31 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/n-queens/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "The n-queens puzzle is the problem of placing n queens on an `n x n` chessboard such that no two queens attack each other. Given an integer `n`, return all distinct solutions to the n-queens puzzle.",
+    "sampleInput": "n = 4",
+    "sampleOutput": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]",
+    "testCases": [
+      {
+        "args": [
+          4
+        ],
+        "expected": [
+          [
+            ".Q..",
+            "...Q",
+            "Q...",
+            "..Q."
+          ],
+          [
+            "..Q.",
+            "Q...",
+            "...Q",
+            ".Q.."
+          ]
+        ]
+      }
+    ],
+    "solution": "Use backtracking to place queens row by row. Check for validity (column, diagonals) before placing each queen.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5739,11 +6571,37 @@
     "platform": "LeetCode",
     "externalUrl": "https://leetcode.com/problems/unique-paths-iii/",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "You are given an `m x n` integer array `grid` where `grid[i][j]` could be: `1` representing the starting square, `2` representing the ending square, `0` representing empty squares we can walk over, and `-1` representing obstacles. Return the number of 4-directional walks from the start to end that walk over every non-obstacle square exactly once.",
+    "sampleInput": "grid = [[1,0,0,0],[0,0,0,0],[0,0,2,-1]]",
+    "sampleOutput": "2",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              -1
+            ]
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "solution": "Count total non-obstacle squares. Start DFS from the starting square, tracking visited squares. If we reach the ending square and have visited all non-obstacle squares, increment the count.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5760,11 +6618,19 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20Maximum%20number%20possible%20by%20doing%20at-most%20K%20swaps",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given a number in the form of a string and an integer `K`, find the maximum number that can be generated by swapping two digits at-most `K` times.",
+    "sampleInput": "K = 4, str = \"1234567\"",
+    "sampleOutput": "\"7654321\"",
+    "testCases": [
+      {
+        "args": [
+          4,
+          "1234567"
+        ],
+        "expected": "7654321"
+      }
+    ],
+    "solution": "Use backtracking to swap the current digit with every other digit to its right that is larger. Decrement K and recurse. Keep track of the maximum number found.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5781,11 +6647,27 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Partition%20of%20a%20set%20into%20K%20subsets%20with%20equal%20sum",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
-    "testCases": [],
-    "solution": "",
+    "description": "Given an integer array and an integer k, return true if it is possible to divide this array into k non-empty subsets whose sums are all equal.",
+    "sampleInput": "nums = [4, 3, 2, 3, 5, 2, 1], k = 4",
+    "sampleOutput": "true",
+    "testCases": [
+      {
+        "args": [
+          [
+            4,
+            3,
+            2,
+            3,
+            5,
+            2,
+            1
+          ],
+          4
+        ],
+        "expected": true
+      }
+    ],
+    "solution": "Use backtracking to try and put each element into one of the k subsets. If the sum of any subset exceeds the target sum (total sum / k), prune the search.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5802,11 +6684,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Tug%20of%20War",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Given a set of n integers, divide the set in two subsets of n/2 sizes each such that the difference of the sum of two subsets is as minimum as possible. If n is even, then sizes of both subsets must be n/2. If n is odd, then one subset should be (n-1)/2 and other should be (n+1)/2.",
+    "sampleInput": "[3, 4, 5, -3, 100, 1, 89, 54, 23, 20]",
+    "sampleOutput": "Subsets with minimum difference",
     "testCases": [],
-    "solution": "",
+    "solution": "Every element has two choices: either it belongs to the first subset or the second subset. Use backtracking to explore all combinations and keep track of the minimum difference.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5823,11 +6705,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20paths%20from%20corner%20cell%20to%20middle%20cell%20in%20maze",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Given a square maze, find all possible paths from each corner cell to the middle cell. We can move exactly `mat[i][j]` steps from cell `(i, j)` in 4 directions: North, South, East, and West.",
+    "sampleInput": "maze = [[3, 5, 4, 4, 7, 3, 4, 6, 3], [6, 7, 5, 6, 6, 2, 0, 3, 1], [3, 3, 4, 6, 1, 2, 4, 6, 5], [2, 4, 5, 6, 8, 5, 6, 5, 1], [2, 3, 2, 4, 0, 4, 2, 6, 2], [6, 5, 3, 2, 4, 3, 2, 6, 1], [1, 3, 5, 7, 8, 3, 2, 4, 3], [6, 1, 1, 0, 1, 2, 1, 0, 7], [1, 3, 2, 2, 1, 0, 8, 5, 1]]",
+    "sampleOutput": "[(0,0) -> (0,3) -> (0,7) -> (6,7) -> (6,3) -> (3,3) -> (3,5) -> (6,5) -> (6,2) -> (2,2) -> (2,6) -> (4,6) -> (4,4)]",
     "testCases": [],
-    "solution": "",
+    "solution": "Start from each corner and use BFS or DFS with backtracking to find if the middle cell can be reached. Keep track of visited cells in the current path.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5844,11 +6726,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Solving%20Cryptarithmetic%20Puzzles",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Cryptarithmetic puzzles are mathematical puzzles in which the digits are replaced by letters or symbols. For example, SEND + MORE = MONEY. Each letter represents a unique digit from 0-9. The first letter of a word cannot be 0.",
+    "sampleInput": "SEND + MORE = MONEY",
+    "sampleOutput": "S=9, E=5, N=6, D=7, M=1, O=0, R=8, Y=2",
     "testCases": [],
-    "solution": "",
+    "solution": "Assign digits to unique letters and check if the equation holds. Use backtracking to try all possible digit assignments.",
     "problemSet": "top-300-leetcode"
   },
   {
@@ -5865,11 +6747,11 @@
     "platform": "GeeksforGeeks",
     "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20Palindromic%20Partitions%20of%20a%20String%20using%20Bit%20Manipulation",
     "remarks": "",
-    "description": "",
-    "sampleInput": "",
-    "sampleOutput": "",
+    "description": "Given a string, print all possible palindromic partitions of the given string. A partition is palindromic if all substrings in the partition are palindromes.",
+    "sampleInput": "nitin",
+    "sampleOutput": "[[\"n\", \"i\", \"t\", \"i\", \"n\"], [\"n\", \"iti\", \"n\"], [\"nitin\"]]",
     "testCases": [],
-    "solution": "",
+    "solution": "Use backtracking to find all possible partitions and check if each substring is a palindrome. Alternatively, use bit manipulation to generate all possible partitions.",
     "problemSet": "top-300-leetcode"
   }
 ]
