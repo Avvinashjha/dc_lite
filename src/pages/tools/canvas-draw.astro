@@ -55,6 +55,20 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       <button class="cd-tool" data-tool="connector" title="Connector (L)">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19L19 5"/><path d="M15 5h4v4"/></svg>
       </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="pen" title="Pen (P)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="M15 5l4 4"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="highlight" title="Highlighter (H)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2l4 4-9.5 9.5-4-4z"/><path d="M8.5 15.5L2 22h6l.5-.5"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="eraser" title="Eraser (E)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20H7L3 16l10-10 8 8-4 4z"/><path d="M6 12l8 8"/></svg>
+      </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="sticky" title="Sticky Note (N)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5z"/><path d="M14 3v6h6"/></svg>
+      </button>
     </div>
 
     <!-- SVG canvas -->
@@ -64,59 +78,62 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
           <pattern id="cd-grid-pat" width="20" height="20" patternUnits="userSpaceOnUse">
             <circle cx="10" cy="10" r="0.8" class="cd-grid-dot"/>
           </pattern>
-          <!-- Arrow markers (userSpaceOnUse = fixed size regardless of stroke-width) -->
-          <marker id="cd-m-arrow" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="0 0, 12 4, 0 8" class="cd-arrow-fill"/>
+          <!-- Arrow markers (strokeWidth units = scale with stroke-width) -->
+          <marker id="cd-m-arrow" markerWidth="6" markerHeight="4" refX="5.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 0, 6 2, 0 4" class="cd-arrow-fill"/>
           </marker>
-          <marker id="cd-m-arrow-rev" markerWidth="12" markerHeight="8" refX="1" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="12 0, 0 4, 12 8" class="cd-arrow-fill"/>
+          <marker id="cd-m-arrow-rev" markerWidth="6" markerHeight="4" refX="0.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="6 0, 0 2, 6 4" class="cd-arrow-fill"/>
           </marker>
-          <marker id="cd-m-open" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-            <polyline points="0 0, 12 4, 0 8" fill="none" stroke="var(--color-text-light)" stroke-width="1.5"/>
+          <marker id="cd-m-open" markerWidth="6" markerHeight="4" refX="5.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polyline points="0 0, 6 2, 0 4" fill="none" stroke="var(--color-text-light)" stroke-width="0.6"/>
           </marker>
-          <marker id="cd-m-open-rev" markerWidth="12" markerHeight="8" refX="1" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-            <polyline points="12 0, 0 4, 12 8" fill="none" stroke="var(--color-text-light)" stroke-width="1.5"/>
+          <marker id="cd-m-open-rev" markerWidth="6" markerHeight="4" refX="0.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polyline points="6 0, 0 2, 6 4" fill="none" stroke="var(--color-text-light)" stroke-width="0.6"/>
           </marker>
-          <marker id="cd-m-diamond" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="0 5, 7 0, 14 5, 7 10" fill="#fff" stroke="var(--color-text-light)" stroke-width="1"/>
+          <marker id="cd-m-diamond" markerWidth="7" markerHeight="5" refX="6.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
           </marker>
-          <marker id="cd-m-diamond-rev" markerWidth="14" markerHeight="10" refX="1" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="0 5, 7 0, 14 5, 7 10" fill="#fff" stroke="var(--color-text-light)" stroke-width="1"/>
+          <marker id="cd-m-diamond-rev" markerWidth="7" markerHeight="5" refX="0.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
           </marker>
-          <marker id="cd-m-diamond-fill" markerWidth="14" markerHeight="10" refX="13" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="0 5, 7 0, 14 5, 7 10" class="cd-arrow-fill"/>
+          <marker id="cd-m-diamond-fill" markerWidth="7" markerHeight="5" refX="6.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" class="cd-arrow-fill"/>
           </marker>
-          <marker id="cd-m-diamond-fill-rev" markerWidth="14" markerHeight="10" refX="1" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="0 5, 7 0, 14 5, 7 10" class="cd-arrow-fill"/>
+          <marker id="cd-m-diamond-fill-rev" markerWidth="7" markerHeight="5" refX="0.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" class="cd-arrow-fill"/>
           </marker>
-          <marker id="cd-m-crow" markerWidth="14" markerHeight="12" refX="13" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-            <line x1="14" y1="0" x2="0" y2="6" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
-            <line x1="14" y1="12" x2="0" y2="6" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
-            <line x1="14" y1="6" x2="0" y2="6" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
+          <marker id="cd-m-crow" markerWidth="7" markerHeight="6" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="7" y1="0" x2="0" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="7" y1="6" x2="0" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="7" y1="3" x2="0" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
           </marker>
-          <marker id="cd-m-crow-rev" markerWidth="14" markerHeight="12" refX="1" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-            <line x1="0" y1="0" x2="14" y2="6" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
-            <line x1="0" y1="12" x2="14" y2="6" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
-            <line x1="0" y1="6" x2="14" y2="6" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
+          <marker id="cd-m-crow-rev" markerWidth="7" markerHeight="6" refX="0.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="0" y1="0" x2="7" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="0" y1="6" x2="7" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="0" y1="3" x2="7" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
           </marker>
-          <marker id="cd-m-bar" markerWidth="6" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-            <line x1="3" y1="0" x2="3" y2="12" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
+          <marker id="cd-m-bar" markerWidth="3" markerHeight="6" refX="1.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="1.5" y1="0" x2="1.5" y2="6" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
           </marker>
-          <marker id="cd-m-bar-rev" markerWidth="6" markerHeight="12" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse">
-            <line x1="3" y1="0" x2="3" y2="12" stroke="var(--color-text-light)" stroke-width="1.5" fill="none"/>
+          <marker id="cd-m-bar-rev" markerWidth="3" markerHeight="6" refX="1.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="1.5" y1="0" x2="1.5" y2="6" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
           </marker>
-          <marker id="cd-m-dot" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <circle cx="5" cy="5" r="4" class="cd-arrow-fill"/>
+          <marker id="cd-m-dot" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" class="cd-arrow-fill"/>
           </marker>
-          <marker id="cd-m-dot-rev" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <circle cx="5" cy="5" r="4" class="cd-arrow-fill"/>
+          <marker id="cd-m-dot-rev" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" class="cd-arrow-fill"/>
           </marker>
-          <marker id="cd-m-circle" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <circle cx="5" cy="5" r="4" fill="#fff" stroke="var(--color-text-light)" stroke-width="1"/>
+          <marker id="cd-m-circle" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
           </marker>
-          <marker id="cd-m-circle-rev" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="userSpaceOnUse">
-            <circle cx="5" cy="5" r="4" fill="#fff" stroke="var(--color-text-light)" stroke-width="1"/>
+          <marker id="cd-m-circle-rev" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
           </marker>
+          <filter id="cd-shadow" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+          </filter>
         </defs>
         <rect id="cd-grid-bg" width="10000" height="10000" x="-5000" y="-5000" fill="url(#cd-grid-pat)" class="cd-grid-rect"/>
         <g id="cd-connectors-layer"></g>
@@ -127,6 +144,13 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
         <button class="cd-zoom-btn" id="cd-zoom-out" title="Zoom out">−</button>
         <span class="cd-zoom-level" id="cd-zoom-info">100%</span>
         <button class="cd-zoom-btn" id="cd-zoom-in" title="Zoom in">+</button>
+        <button class="cd-zoom-btn cd-zoom-sep" id="cd-fit-screen" title="Fit to screen">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>
+        </button>
+        <button class="cd-zoom-btn" id="cd-snap-grid" title="Snap to grid">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
+        </button>
+        <button class="cd-zoom-btn" id="cd-help-btn" title="Shortcuts (?)">?</button>
       </div>
     </div>
 
@@ -138,10 +162,34 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       <div class="cd-props__form" id="cd-props-form" style="display:none;">
         <div class="cd-prop">
           <label class="cd-prop__label" for="cd-fill">Fill</label>
+          <div class="cd-palette" id="cd-fill-palette">
+            <span class="cd-swatch" data-color="#ffffff" style="background:#ffffff;"></span>
+            <span class="cd-swatch" data-color="#1f2937" style="background:#1f2937;"></span>
+            <span class="cd-swatch" data-color="#ef4444" style="background:#ef4444;"></span>
+            <span class="cd-swatch" data-color="#f97316" style="background:#f97316;"></span>
+            <span class="cd-swatch" data-color="#eab308" style="background:#eab308;"></span>
+            <span class="cd-swatch" data-color="#22c55e" style="background:#22c55e;"></span>
+            <span class="cd-swatch" data-color="#3b82f6" style="background:#3b82f6;"></span>
+            <span class="cd-swatch" data-color="#8b5cf6" style="background:#8b5cf6;"></span>
+            <span class="cd-swatch" data-color="#ec4899" style="background:#ec4899;"></span>
+            <span class="cd-swatch" data-color="#6b7280" style="background:#6b7280;"></span>
+          </div>
           <input type="color" id="cd-fill" value="#ffffff"/>
         </div>
         <div class="cd-prop">
           <label class="cd-prop__label" for="cd-stroke">Stroke</label>
+          <div class="cd-palette" id="cd-stroke-palette">
+            <span class="cd-swatch" data-color="#1f2937" style="background:#1f2937;"></span>
+            <span class="cd-swatch" data-color="#000000" style="background:#000000;"></span>
+            <span class="cd-swatch" data-color="#ef4444" style="background:#ef4444;"></span>
+            <span class="cd-swatch" data-color="#f97316" style="background:#f97316;"></span>
+            <span class="cd-swatch" data-color="#eab308" style="background:#eab308;"></span>
+            <span class="cd-swatch" data-color="#22c55e" style="background:#22c55e;"></span>
+            <span class="cd-swatch" data-color="#3b82f6" style="background:#3b82f6;"></span>
+            <span class="cd-swatch" data-color="#8b5cf6" style="background:#8b5cf6;"></span>
+            <span class="cd-swatch" data-color="#ec4899" style="background:#ec4899;"></span>
+            <span class="cd-swatch" data-color="#6b7280" style="background:#6b7280;"></span>
+          </div>
           <input type="color" id="cd-stroke" value="#374151"/>
         </div>
         <div class="cd-prop">
@@ -181,6 +229,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
           <select id="cd-conn-style" class="cd-select">
             <option value="straight">Straight</option>
             <option value="elbow">Elbow</option>
+            <option value="curved">Curved</option>
           </select>
         </div>
         <div class="cd-prop">
@@ -245,6 +294,52 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       </div>
       <button class="tool-btn tool-btn--primary" id="cd-table-ok" style="width:100%;">Create Table</button>
       <button class="tool-btn" id="cd-table-cancel" style="margin-top:0.4rem;width:100%;">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="cd-modal-overlay" id="cd-shortcuts-help" style="display:none;">
+    <div class="cd-modal cd-help-modal">
+      <h3 style="margin-bottom:1rem;">Keyboard Shortcuts</h3>
+      <div class="cd-help-grid">
+        <div class="cd-help-col">
+          <h4>Tools</h4>
+          <div class="cd-help-row"><kbd>V</kbd> Select</div>
+          <div class="cd-help-row"><kbd>R</kbd> Rectangle</div>
+          <div class="cd-help-row"><kbd>C</kbd> Circle</div>
+          <div class="cd-help-row"><kbd>D</kbd> Diamond</div>
+          <div class="cd-help-row"><kbd>T</kbd> Text</div>
+          <div class="cd-help-row"><kbd>L</kbd> Connector</div>
+          <div class="cd-help-row"><kbd>P</kbd> Pen</div>
+          <div class="cd-help-row"><kbd>H</kbd> Highlighter</div>
+          <div class="cd-help-row"><kbd>E</kbd> Eraser</div>
+          <div class="cd-help-row"><kbd>N</kbd> Sticky Note</div>
+        </div>
+        <div class="cd-help-col">
+          <h4>Actions</h4>
+          <div class="cd-help-row"><kbd>Ctrl+Z</kbd> Undo</div>
+          <div class="cd-help-row"><kbd>Ctrl+Shift+Z</kbd> Redo</div>
+          <div class="cd-help-row"><kbd>Ctrl+C</kbd> Copy</div>
+          <div class="cd-help-row"><kbd>Ctrl+V</kbd> Paste</div>
+          <div class="cd-help-row"><kbd>Ctrl+D</kbd> Duplicate</div>
+          <div class="cd-help-row"><kbd>Ctrl+A</kbd> Select All</div>
+          <div class="cd-help-row"><kbd>Ctrl+S</kbd> Save</div>
+          <div class="cd-help-row"><kbd>Ctrl+E</kbd> Export</div>
+          <div class="cd-help-row"><kbd>Del</kbd> Delete</div>
+          <div class="cd-help-row"><kbd>Esc</kbd> Cancel</div>
+        </div>
+        <div class="cd-help-col">
+          <h4>Navigation</h4>
+          <div class="cd-help-row"><kbd>Space</kbd>+Drag Pan</div>
+          <div class="cd-help-row"><kbd>Scroll</kbd> Pan</div>
+          <div class="cd-help-row"><kbd>Pinch</kbd> Zoom</div>
+          <div class="cd-help-row"><kbd>Ctrl+]</kbd> Bring Front</div>
+          <div class="cd-help-row"><kbd>Ctrl+[</kbd> Send Back</div>
+          <div class="cd-help-row"><kbd>Cmd/Ctrl</kbd>+Draw Square/Circle</div>
+          <div class="cd-help-row"><kbd>?</kbd> This help</div>
+        </div>
+      </div>
+      <button class="tool-btn" id="cd-help-close" style="margin-top:1rem;width:100%;">Close</button>
     </div>
   </div>
 
@@ -398,6 +493,10 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   .cd-anchor-hint { fill: var(--color-primary, #2563eb); opacity: 0.6; cursor: crosshair; }
   .cd-conn-temp { stroke: var(--color-primary, #2563eb); stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
   .cd-conn-selected { outline: none; }
+  .cd-wp-handle { cursor: move; }
+  .cd-wp-mid { cursor: pointer; opacity: 0.35; transition: opacity 0.15s; }
+  .cd-wp-mid:hover { opacity: 1 !important; }
+  .cd-wp-endpoint { pointer-events: none; }
 
   .cd-shape-text {
     font-family: var(--font-sans); pointer-events: none; user-select: none;
@@ -410,8 +509,10 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     position: absolute; border: 2px solid var(--color-primary);
     background: var(--cd-canvas-bg, #f8f9fa); color: var(--color-text);
     font-family: var(--font-sans);
-    text-align: center; resize: none; outline: none; overflow: hidden;
-    z-index: 10; padding: 2px; border-radius: 2px;
+    text-align: center; resize: none; outline: none;
+    overflow-y: auto; overflow-x: hidden;
+    word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;
+    z-index: 10; padding: 4px; border-radius: 2px; box-sizing: border-box;
   }
 
   .cd-tool:focus-visible, .cd-tab:focus-visible, .cd-tabs__add:focus-visible {
@@ -420,11 +521,43 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   .cd-tabs__list::-webkit-scrollbar { height: 3px; }
   .cd-tabs__list::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
 
+  .cd-canvas-wrap[data-mode="pen"],
+  .cd-canvas-wrap[data-mode="highlight"],
+  .cd-canvas-wrap[data-mode="eraser"] { cursor: crosshair; }
+
+  .cd-palette {
+    display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 4px;
+  }
+  .cd-swatch {
+    width: 16px; height: 16px; border-radius: 50%; cursor: pointer;
+    border: 1.5px solid var(--color-border); transition: transform 100ms;
+    flex-shrink: 0;
+  }
+  .cd-swatch:hover { transform: scale(1.25); border-color: var(--color-text); }
+
+  .cd-zoom-sep { border-left: 1px solid var(--color-border); }
+  #cd-snap-grid.cd-snap-active { background: var(--color-primary); color: #fff; }
+  #cd-help-btn { font-size: 0.72rem; font-weight: 700; }
+
+  .cd-help-modal { min-width: 560px; max-width: 90vw; }
+  .cd-help-grid { display: flex; gap: 1.5rem; }
+  .cd-help-col { flex: 1; min-width: 0; }
+  .cd-help-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-light); margin-bottom: 0.5rem; }
+  .cd-help-row { font-size: 0.78rem; color: var(--color-text); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+  .cd-help-row kbd {
+    display: inline-block; padding: 0.1rem 0.35rem; border-radius: 3px;
+    background: var(--color-code-bg); border: 1px solid var(--color-border);
+    font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.4;
+    min-width: 20px; text-align: center; white-space: nowrap; flex-shrink: 0;
+  }
+
   @media (max-width: 768px) {
     .cd-workspace { height: calc(100vh - 160px); flex-direction: column; }
     .cd-toolbar { flex-direction: row; width: 100%; border-right: none; border-bottom: 1px solid var(--color-border); overflow-x: auto; }
     .cd-tool-sep { width: 1px; height: auto; margin: 0.25rem 0.15rem; }
     .cd-props { width: 100%; border-left: none; border-top: 1px solid var(--color-border); max-height: 180px; }
     .cd-canvas-wrap { min-height: 50vh; }
+    .cd-help-modal { min-width: auto; }
+    .cd-help-grid { flex-direction: column; gap: 0.75rem; }
   }
 </style>
