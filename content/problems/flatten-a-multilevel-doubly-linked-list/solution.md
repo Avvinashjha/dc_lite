@@ -1,19 +1,23 @@
-## DFS/Stack
+## Approach: Iterative with Stack
 
-Process child lists before continuing with next pointer.
+Traverse the list. When a node has a child, push its next onto a stack, then splice the child list in as the new next. When reaching a node with no next and the stack is non-empty, pop and continue from there.
 
 ```javascript
-function flatten(head) {
+function flattenAMultilevelDoublyLinkedList(head) {
+  if (!head) return null;
   let curr = head;
+  const stack = [];
   while (curr) {
     if (curr.child) {
-      let childTail = curr.child;
-      while (childTail.next) childTail = childTail.next;
-      childTail.next = curr.next;
-      if (curr.next) curr.next.prev = childTail;
+      if (curr.next) stack.push(curr.next);
       curr.next = curr.child;
-      curr.child.prev = curr;
+      curr.next.prev = curr;
       curr.child = null;
+    }
+    if (!curr.next && stack.length) {
+      const next = stack.pop();
+      curr.next = next;
+      next.prev = curr;
     }
     curr = curr.next;
   }
@@ -21,4 +25,6 @@ function flatten(head) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(1)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(n) for the stack

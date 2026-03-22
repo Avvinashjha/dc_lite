@@ -13,6 +13,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
     <div id="board" style="display:inline-grid;grid-template-columns:repeat(9,1fr);gap:0;border:2px solid var(--color-text);"></div>
     <div id="msg" style="margin-top:1rem;font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Sudoku</h2>
+    <p>
+      Sudoku is a logic puzzle that requires no math — just pattern recognition and deduction. Every row,
+      column, and 3x3 box must contain the digits 1 through 9 exactly once. The puzzle starts with some
+      cells filled in, and your job is to figure out the rest.
+    </p>
+    <p>
+      Sudoku puzzles have exactly one valid solution. The fewer starting clues, the harder the puzzle.
+      Easy puzzles typically have 35-40 clues, while hard puzzles might have only 22-27. This version
+      generates valid puzzles with adjustable difficulty.
+    </p>
+  </section>
 </GameLayout>
 <style is:global>
   .su-cell{width:clamp(28px, 8vw, 40px);height:clamp(28px, 8vw, 40px);display:flex;align-items:center;justify-content:center;font-size:clamp(0.8rem, 2.5vw, 1.1rem);font-weight:600;cursor:pointer;border:1px solid var(--color-border);background:var(--color-background);color:var(--color-text);transition:background 100ms;}

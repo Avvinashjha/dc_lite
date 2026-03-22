@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0051",
-  "title": "Given a matrix of ‘O’ and ‘X’, replace ‘O’ with ‘X’ if surrounded by ‘X’",
+  "title": "Given a matrix of \u2018O\u2019 and \u2018X\u2019, replace \u2018O\u2019 with \u2018X\u2019 if surrounded by \u2018X\u2019",
   "difficulty": "Medium",
   "topic": "Matrix",
   "topics": [
@@ -12,7 +12,64 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Given%20a%20matrix%20of%20%E2%80%98O%E2%80%99%20and%20%E2%80%98X%E2%80%99%2C%20replace%20%E2%80%98O%E2%80%99%20with%20%E2%80%98X%E2%80%99%20if%20surrounded%20by%20%E2%80%98X%E2%80%99",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "X",
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "X",
+            "X"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "O",
+          "X",
+          "X"
+        ]
+      ]
+    }
+  ],
   "functionName": "givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX",
   "templateCode": "/**\n * @param {string[][]} board\n * @return {void}\n */\nfunction solve(board) {\n  // Capture surrounded regions\n}",
   "constraints": [

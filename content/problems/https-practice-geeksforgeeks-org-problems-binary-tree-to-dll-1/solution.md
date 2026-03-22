@@ -1,7 +1,9 @@
-## Inorder DFS
+## Approach: Inorder Traversal with Prev Pointer
+
+Perform an inorder traversal. Maintain a `prev` pointer. For each visited node, set its left to prev and prev's right to the current node. The first node visited becomes the head.
 
 ```javascript
-function bToDLL(root) {
+function binaryTreeToDll(root) {
   let prev = null, head = null;
   function inorder(node) {
     if (!node) return;
@@ -16,4 +18,6 @@ function bToDLL(root) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(h)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(h) where h is tree height

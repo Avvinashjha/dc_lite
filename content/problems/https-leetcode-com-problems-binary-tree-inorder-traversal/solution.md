@@ -1,7 +1,9 @@
-## Iterative with Stack
+## Approach: Iterative with Stack
+
+Use a stack to simulate the recursive inorder traversal. Push all left children onto the stack, then pop, record the value, and move to the right child. Repeat until both stack and current pointer are exhausted.
 
 ```javascript
-function inorderTraversal(root) {
+function binaryTreeInorderTraversal(root) {
   const result = [], stack = [];
   let curr = root;
   while (curr || stack.length) {
@@ -14,4 +16,6 @@ function inorderTraversal(root) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(n)

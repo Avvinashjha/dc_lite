@@ -11,7 +11,53 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximal-rectangle/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "1",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "0",
+            "0",
+            "1",
+            "0"
+          ]
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          [
+            "0"
+          ]
+        ]
+      ],
+      "expected": 0
+    }
+  ],
   "functionName": "maximalRectangle",
   "templateCode": "/**\n * @param {string[][]} matrix\n * @return {number}\n */\nfunction maximalRectangle(matrix) {\n  // Largest rectangle of 1s\n}",
   "constraints": [

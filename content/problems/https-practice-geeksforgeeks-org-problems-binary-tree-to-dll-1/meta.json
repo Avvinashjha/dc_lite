@@ -15,5 +15,8 @@
   "testCases": [],
   "functionName": "binaryTreeToDll",
   "templateCode": "/**\n * @param {TreeNode} root\n * @return {TreeNode}\n */\nfunction bToDLL(root) {\n  // Convert binary tree to DLL\n}",
-  "constraints": []
+  "constraints": [
+    "1 <= Number of nodes <= 10^5",
+    "-10^5 <= Node.val <= 10^5"
+  ]
 }

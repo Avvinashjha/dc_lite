@@ -1,1 +1,17 @@
-Use two pointers. One pointer (slow) tracks the position to place the next non-zero element. The other (fast) iterates through the array. Move non-zero elements to the slow pointer's position and increment it. Finally, fill the rest of the array with zeroes.
+Use two pointers. A slow pointer tracks the position for the next non-zero element, while a fast pointer scans through the array. Swap non-zero elements forward to maintain relative order.
+
+```javascript
+function moveZeroes(nums) {
+  let slow = 0;
+
+  for (let fast = 0; fast < nums.length; fast++) {
+    if (nums[fast] !== 0) {
+      [nums[slow], nums[fast]] = [nums[fast], nums[slow]];
+      slow++;
+    }
+  }
+}
+```
+
+**Time:** O(n)
+**Space:** O(1)

@@ -1,18 +1,22 @@
-## Histogram per Row
+## Approach: Histogram per Row + Stack
 
-Build histogram heights row by row, apply largest rectangle in histogram.
+Build a heights array where `heights[j]` is the number of consecutive 1s above (inclusive) for each row. Apply the largest-rectangle-in-histogram algorithm using a monotonic stack for each row.
 
 ```javascript
-function maxRectangle(matrix) {
-  const m = matrix.length, n = matrix[0].length, h = Array(n).fill(0);
+function maximumSizeRectangleBinarySubMatrixWithAll1s(matrix) {
+  if (!matrix.length) return 0;
+  const n = matrix[0].length;
+  const heights = new Array(n).fill(0);
   let max = 0;
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) h[j] = matrix[i][j] ? h[j]+1 : 0;
-    const stack = [];
+  for (const row of matrix) {
+    for (let j = 0; j < n; j++) heights[j] = row[j] === 1 ? heights[j] + 1 : 0;
+    const stack = [-1];
     for (let j = 0; j <= n; j++) {
-      while (stack.length && (j===n || h[j] < h[stack[stack.length-1]])) {
-        const height = h[stack.pop()], w = stack.length ? j-stack[stack.length-1]-1 : j;
-        max = Math.max(max, height*w);
+      const h = j === n ? 0 : heights[j];
+      while (stack.length > 1 && heights[stack[stack.length-1]] > h) {
+        const height = heights[stack.pop()];
+        const width = j - stack[stack.length-1] - 1;
+        max = Math.max(max, height * width);
       }
       stack.push(j);
     }
@@ -21,4 +25,6 @@ function maxRectangle(matrix) {
 }
 ```
 
-**Time:** O(mn) | **Space:** O(n)
+**Time Complexity:** O(m × n)
+
+**Space Complexity:** O(n)

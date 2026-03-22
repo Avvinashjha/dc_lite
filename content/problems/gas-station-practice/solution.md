@@ -1,15 +1,20 @@
-## Greedy
+## Approach: Greedy
+
+If total gas >= total cost, a solution exists. Track the current tank as you traverse. Whenever the tank goes negative, the start must be after the current station. Reset start to the next station and reset current tank.
 
 ```javascript
-function canCompleteCircuit(gas, cost) {
-  let total = 0, tank = 0, start = 0;
+function gasStation(gas, cost) {
+  let totalTank = 0, currTank = 0, start = 0;
   for (let i = 0; i < gas.length; i++) {
     const diff = gas[i] - cost[i];
-    total += diff; tank += diff;
-    if (tank < 0) { start = i + 1; tank = 0; }
+    totalTank += diff;
+    currTank += diff;
+    if (currTank < 0) { start = i + 1; currTank = 0; }
   }
-  return total >= 0 ? start : -1;
+  return totalTank >= 0 ? start : -1;
 }
 ```
 
-**Time:** O(n) | **Space:** O(1)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(1)

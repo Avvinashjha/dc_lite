@@ -1,16 +1,21 @@
-## DP
+## Approach: DP (Unbounded Knapsack Variant)
+
+`dp[i]` stores the maximum number of segments for rod length `i`. For each length, try cutting with x, y, or z. If the remaining length has a valid solution, update dp[i].
 
 ```javascript
-function maximizeCuts(n, x, y, z) {
-  const dp = Array(n+1).fill(-1);
+function maximizeTheCutSegments(n, x, y, z) {
+  const dp = new Array(n + 1).fill(-1);
   dp[0] = 0;
   for (let i = 1; i <= n; i++) {
-    for (const len of [x, y, z]) {
-      if (i >= len && dp[i-len] !== -1) dp[i] = Math.max(dp[i], dp[i-len]+1);
+    for (const cut of [x, y, z]) {
+      if (i >= cut && dp[i - cut] !== -1)
+        dp[i] = Math.max(dp[i], dp[i - cut] + 1);
     }
   }
   return Math.max(dp[n], 0);
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(n)

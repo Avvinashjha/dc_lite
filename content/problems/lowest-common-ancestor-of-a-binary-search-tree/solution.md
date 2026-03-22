@@ -1,15 +1,18 @@
-## BST Property
+## Approach: BST Property
 
-If both values < root, go left. If both > root, go right. Otherwise, root is LCA.
+If both p and q are smaller than root, LCA is in the left subtree. If both are larger, LCA is in the right subtree. Otherwise, the current root is the LCA (the split point).
 
 ```javascript
-function lowestCommonAncestor(root, p, q) {
+function lowestCommonAncestorOfABinarySearchTree(root, p, q) {
   while (root) {
-    if (p.val < root.val && q.val < root.val) root = root.left;
-    else if (p.val > root.val && q.val > root.val) root = root.right;
-    else return root;
+    if (p < root.val && q < root.val) root = root.left;
+    else if (p > root.val && q > root.val) root = root.right;
+    else return root.val;
   }
+  return -1;
 }
 ```
 
-**Time:** O(h) | **Space:** O(1)
+**Time Complexity:** O(H) where H is tree height
+
+**Space Complexity:** O(1)

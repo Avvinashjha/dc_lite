@@ -1,9 +1,9 @@
-## Sort and Check Two Cases
+## Approach: Sort and Compare
 
-Max is either the product of 3 largest or 2 smallest (negative) × largest.
+Sort the array. The maximum product is either from the three largest numbers, or from the two smallest (most negative) numbers multiplied by the largest. Compare both candidates.
 
 ```javascript
-function maximumProduct(nums) {
+function maximumProductOfThreeNumbers(nums) {
   nums.sort((a, b) => a - b);
   const n = nums.length;
   return Math.max(
@@ -13,4 +13,6 @@ function maximumProduct(nums) {
 }
 ```
 
-**Time:** O(n log n) | **Space:** O(1)
+**Time Complexity:** O(n log n)
+
+**Space Complexity:** O(1)

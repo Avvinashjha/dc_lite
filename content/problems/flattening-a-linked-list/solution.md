@@ -1,20 +1,29 @@
-## Merge Sort Style
+## Approach: Merge from Right to Left
 
-Merge lists from right to left.
+Start from the rightmost two lists and merge them into a sorted list using the bottom pointer. Continue merging the result with the next list to the left until all lists are merged into one sorted bottom list.
 
 ```javascript
-function flattenList(root) {
-  if (!root || !root.right) return root;
-  root.right = flattenList(root.right);
-  root = merge(root, root.right);
-  return root;
-}
-function merge(a, b) {
-  if (!a) return b;
-  if (!b) return a;
-  if (a.val < b.val) { a.down = merge(a.down, b); return a; }
-  else { b.down = merge(a, b.down); return b; }
+function flatteningALinkedList(root) {
+  function merge(a, b) {
+    const dummy = { bottom: null };
+    let curr = dummy;
+    while (a && b) {
+      if (a.data <= b.data) { curr.bottom = a; a = a.bottom; }
+      else { curr.bottom = b; b = b.bottom; }
+      curr = curr.bottom;
+    }
+    curr.bottom = a || b;
+    return dummy.bottom;
+  }
+  if (!root) return null;
+  let result = root;
+  while (result.next) {
+    result = merge(result, result.next);
+  }
+  return result;
 }
 ```
 
-**Time:** O(n) | **Space:** O(1)
+**Time Complexity:** O(n*m) where n is number of main nodes and m is average bottom list length
+
+**Space Complexity:** O(1)

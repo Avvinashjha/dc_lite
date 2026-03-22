@@ -21,6 +21,14 @@ export function getStaticPaths() {
 const { difficulty } = Astro.params;
 const { label, problems } = Astro.props;
 
+const difficultyDescriptions: Record<string, string> = {
+  'easy': 'Easy problems are the best place to start. They cover fundamental concepts — basic loops, hash maps, simple recursion — and help you build confidence with pattern recognition. If you can solve these comfortably, you have a solid foundation to tackle harder challenges.',
+  'medium': 'Medium problems are where interview preparation gets real. They require combining multiple techniques — DFS with memoization, binary search with two pointers, or graph traversal with dynamic programming. Most coding interviews focus heavily on this difficulty level.',
+  'hard': 'Hard problems push your problem-solving skills to the limit. They often require creative insights, advanced data structures (segment trees, tries, union-find), or combining multiple algorithmic techniques. Don\'t be discouraged if these take time — working through them builds deep understanding.',
+};
+
+const difficultyIntro = difficultyDescriptions[difficulty || ''] || '';
+
 const description = `Practice ${problems.length} ${label} difficulty coding problems with in-browser JavaScript runner.`;
 
 const breadcrumbs = [
@@ -67,7 +75,7 @@ const jsonLd = {
     </nav>
 
     <h1 class="taxonomy-page__title">{label} Problems</h1>
-    <p class="taxonomy-page__desc">{description}</p>
+    {difficultyIntro && <p class="taxonomy-page__intro">{difficultyIntro}</p>}
     <p class="taxonomy-page__count">{problems.length} problems</p>
 
     <table class="problem-table">

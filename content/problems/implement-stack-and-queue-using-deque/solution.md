@@ -1,18 +1,32 @@
-## Deque Wrapper
+## Approach: Deque Operations Mapping
+
+For stack: push maps to addBack, pop maps to removeBack. For queue: enqueue maps to addBack, dequeue maps to removeFront. The deque naturally supports both patterns.
 
 ```javascript
-class Deque {
-  constructor() { this.items = []; }
-  pushFront(x) { this.items.unshift(x); }
-  pushBack(x) { this.items.push(x); }
-  popFront() { return this.items.shift(); }
-  popBack() { return this.items.pop(); }
-  peekFront() { return this.items[0]; }
-  peekBack() { return this.items[this.items.length - 1]; }
-  isEmpty() { return this.items.length === 0; }
+function implementStackAndQueueUsingDeque() {
+  return {
+    stack: (() => {
+      const d = [];
+      return {
+        push(x) { d.push(x); },
+        pop() { return d.pop(); },
+        peek() { return d[d.length - 1]; },
+        empty() { return d.length === 0; }
+      };
+    })(),
+    queue: (() => {
+      const d = [];
+      return {
+        enqueue(x) { d.push(x); },
+        dequeue() { return d.shift(); },
+        peek() { return d[0]; },
+        empty() { return d.length === 0; }
+      };
+    })()
+  };
 }
-// Stack: pushBack + popBack
-// Queue: pushBack + popFront
 ```
 
-**Time:** O(1) for all operations (with linked list) | **Space:** O(n)
+**Time Complexity:** O(1) for stack operations, O(n) for queue dequeue
+
+**Space Complexity:** O(n)

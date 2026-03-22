@@ -12,7 +12,38 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": 0
+    }
+  ],
   "functionName": "maximumDepthOfBinaryTree",
   "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction maxDepth(root) {\n  // Maximum depth of binary tree\n}",
   "constraints": [

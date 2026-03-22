@@ -1,3 +1,7 @@
-Convert a binary tree to a doubly linked list in-place. The left pointer should act as previous and right pointer as next. The DLL should follow inorder traversal order.
+Given a binary tree, convert it to a doubly linked list (DLL) in-place. The left pointer of the tree node should act as the previous pointer of the DLL, and the right pointer should act as the next pointer. The DLL nodes should follow the inorder traversal order of the binary tree. Return the head of the DLL.
 
-**Example:** tree = [10,12,15,25,30,36] → DLL: 25↔12↔30↔10↔36↔15
+**Example:**
+```
+Input: tree = [10,12,15,25,30,36]
+Output: 25 <-> 12 <-> 30 <-> 10 <-> 36 <-> 15
+```

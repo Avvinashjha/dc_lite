@@ -1,24 +1,28 @@
-## BFS with Position Tracking
+## Approach: BFS with Position Indexing
+
+Assign a position index to each node: root is 0, left child is 2*pos, right is 2*pos+1. Width at each level is rightmost - leftmost + 1. Use BigInt to avoid overflow for deep trees.
 
 ```javascript
-function widthOfBinaryTree(root) {
+function maximumWidthOfBinaryTree(root) {
   if (!root) return 0;
   let maxWidth = 0;
-  const q = [[root, 0n]];
-  while (q.length) {
-    const size = q.length, first = q[0][1];
+  const queue = [[root, 0n]];
+  while (queue.length) {
+    const size = queue.length;
+    const first = queue[0][1];
     let last = first;
     for (let i = 0; i < size; i++) {
-      const [node, pos] = q.shift();
+      const [node, pos] = queue.shift();
       last = pos;
-      if (node.left) q.push([node.left, 2n*pos]);
-      if (node.right) q.push([node.right, 2n*pos+1n]);
+      if (node.left) queue.push([node.left, 2n * pos]);
+      if (node.right) queue.push([node.right, 2n * pos + 1n]);
     }
-    const width = Number(last - first + 1n);
-    maxWidth = Math.max(maxWidth, width);
+    maxWidth = Math.max(maxWidth, Number(last - first + 1n));
   }
   return maxWidth;
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(n)

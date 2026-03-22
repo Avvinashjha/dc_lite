@@ -10,7 +10,48 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/flatten-nested-list-iterator/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          2,
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          [
+            4,
+            [
+              6
+            ]
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        4,
+        6
+      ]
+    }
+  ],
   "functionName": "flattenNestedListIterator",
   "templateCode": "/**\n * @param {Array} nestedList\n */\nfunction NestedIterator(nestedList) {}\nNestedIterator.prototype.hasNext = function() {};\nNestedIterator.prototype.next = function() {};",
   "constraints": [

@@ -12,7 +12,40 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          5,
+          3,
+          4,
+          null,
+          6
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2,
+        null,
+        3,
+        null,
+        4,
+        null,
+        5,
+        null,
+        6
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
   "functionName": "flattenBinaryTreeToLinkedList",
   "templateCode": "/**\n * @param {TreeNode} root\n * @return {void}\n */\nfunction flatten(root) {\n  // Flatten to linked list in-place\n}",
   "constraints": [

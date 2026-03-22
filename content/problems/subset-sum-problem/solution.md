@@ -1,1 +1,21 @@
-Use backtracking to explore all possible subsets. For each element, either include it in the subset or exclude it. If the sum matches the target, return true. Optimization: Use dynamic programming for better performance.
+## Approach: Dynamic Programming
+
+Build a boolean DP table where `dp[j]` indicates whether a subset summing to `j` is achievable. For each number in the array, iterate backwards through the table to avoid using the same element twice.
+
+```javascript
+function isSubsetSum(arr, sum) {
+  const dp = new Array(sum + 1).fill(false);
+  dp[0] = true;
+
+  for (const num of arr) {
+    for (let j = sum; j >= num; j--) {
+      if (dp[j - num]) dp[j] = true;
+    }
+  }
+  return dp[sum];
+}
+```
+
+**Time Complexity:** O(n × sum)
+
+**Space Complexity:** O(sum)

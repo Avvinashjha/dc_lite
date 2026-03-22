@@ -12,7 +12,48 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9,
+          null,
+          null,
+          3,
+          5
+        ],
+        2,
+        8
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9,
+          null,
+          null,
+          3,
+          5
+        ],
+        2,
+        4
+      ],
+      "expected": 2
+    }
+  ],
   "functionName": "lowestCommonAncestorOfABinarySearchTree",
   "templateCode": "/**\n * @param {TreeNode} root\n * @param {TreeNode} p\n * @param {TreeNode} q\n * @return {TreeNode}\n */\nfunction lowestCommonAncestor(root, p, q) {\n  // LCA in BST\n}",
   "constraints": [

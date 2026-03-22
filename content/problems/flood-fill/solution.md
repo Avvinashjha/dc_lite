@@ -1,4 +1,6 @@
-## DFS
+## Approach: DFS
+
+Start from the source pixel and recursively fill all 4-directional neighbors that share the same original color. Skip if the new color equals the original color to avoid infinite loops.
 
 ```javascript
 function floodFill(image, sr, sc, color) {
@@ -15,4 +17,6 @@ function floodFill(image, sr, sc, color) {
 }
 ```
 
-**Time:** O(mn) | **Space:** O(mn)
+**Time Complexity:** O(m × n)
+
+**Space Complexity:** O(m × n) for recursion stack

@@ -9,6 +9,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
     <div id="fk-actions" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;"></div>
     <div id="fk-msg" style="font-weight:700;font-size:1rem;min-height:1.5rem;"></div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Farkle</h2>
+    <p>
+      Farkle is a push-your-luck dice game that's been played for generations. Roll six dice, set aside scoring
+      combinations, and decide whether to bank your points or roll again. But if you roll and nothing scores,
+      you "Farkle" — and lose everything you accumulated that turn.
+    </p>
+    <p>
+      Scoring combinations include ones (100 points each), fives (50 points each), three-of-a-kind, straights,
+      and more. The tension between greed and caution is what makes Farkle so addictive. First player to reach
+      the target score wins.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

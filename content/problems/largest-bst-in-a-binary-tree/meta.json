@@ -12,7 +12,22 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Largest%20BST%20in%20a%20Binary%20Tree",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          5,
+          15,
+          1,
+          8,
+          null,
+          7
+        ]
+      ],
+      "expected": 3
+    }
+  ],
   "functionName": "largestBstInABinaryTree",
   "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction largestBST(root) {\n  // Size of largest BST subtree\n}",
   "constraints": [

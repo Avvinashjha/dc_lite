@@ -27,6 +27,32 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       <div id="preview" class="md-preview"></div>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>Writing Markdown</h2>
+    <p>
+      Markdown is a lightweight markup language that lets you write formatted text with plain characters.
+      Headers start with <code>#</code>, bold text uses <code>**asterisks**</code>, and links look like
+      <code>[text](url)</code>. It's the standard for README files, documentation, blog posts, and technical writing.
+    </p>
+
+    <h3>What This Tool Does</h3>
+    <p>
+      Type or paste Markdown on the left and see the rendered HTML on the right — updated in real time.
+      When you're happy with the result, export as PDF, HTML, or download the raw <code>.md</code> file.
+      Multiple tabs let you work on several documents at once.
+    </p>
+
+    <h3>Markdown Cheat Sheet</h3>
+    <ul>
+      <li><code># Heading 1</code>, <code>## Heading 2</code>, <code>### Heading 3</code></li>
+      <li><code>**bold**</code> and <code>*italic*</code></li>
+      <li><code>- item</code> for unordered lists, <code>1. item</code> for ordered lists</li>
+      <li><code>[link text](https://example.com)</code> for links</li>
+      <li><code>![alt](image-url)</code> for images</li>
+      <li>Triple backticks for code blocks with syntax highlighting</li>
+    </ul>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>

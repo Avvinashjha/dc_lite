@@ -12,7 +12,63 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Introduction%20to%20Graph%20Coloring",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ]
+        ],
+        3
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        2
+      ],
+      "expected": false
+    }
+  ],
   "functionName": "introductionToGraphColoring",
   "templateCode": "/**\n * @param {number} V\n * @param {number[][]} adj\n * @param {number} M\n * @return {boolean}\n */\nfunction graphColoring(V, adj, M) {\n  // Can graph be colored with M colors?\n}",
   "constraints": [

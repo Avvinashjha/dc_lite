@@ -1,23 +1,32 @@
-## Stack-based approach
+## Approach: Stack-based with Next/Prev Smaller
 
-Use next/prev smaller elements to determine each element's window.
+For each element, compute the range where it is the minimum using next-smaller and prev-smaller stacks. That element is the answer for a window of that range length. Fill remaining positions from right to left.
 
 ```javascript
-function maxOfMin(arr) {
-  const n = arr.length, left = Array(n).fill(-1), right = Array(n).fill(n), stack = [];
+function maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr) {
+  const n = arr.length;
+  const left = new Array(n), right = new Array(n), stack = [];
   for (let i = 0; i < n; i++) {
-    while (stack.length && arr[stack[stack.length-1]] >= arr[i]) right[stack.pop()] = i;
-    if (stack.length) left[i] = stack[stack.length-1];
+    while (stack.length && arr[stack[stack.length-1]] >= arr[i]) stack.pop();
+    left[i] = stack.length ? stack[stack.length-1] : -1;
     stack.push(i);
   }
-  const ans = Array(n+1).fill(0);
-  for (let i = 0; i < n; i++) {
-    const w = right[i] - left[i] - 1;
-    ans[w] = Math.max(ans[w], arr[i]);
+  stack.length = 0;
+  for (let i = n-1; i >= 0; i--) {
+    while (stack.length && arr[stack[stack.length-1]] >= arr[i]) stack.pop();
+    right[i] = stack.length ? stack[stack.length-1] : n;
+    stack.push(i);
   }
-  for (let i = n-1; i >= 1; i--) ans[i] = Math.max(ans[i], ans[i+1]);
-  return ans.slice(1);
+  const result = new Array(n + 1).fill(0);
+  for (let i = 0; i < n; i++) {
+    const len = right[i] - left[i] - 1;
+    result[len] = Math.max(result[len], arr[i]);
+  }
+  for (let i = n-1; i >= 1; i--) result[i] = Math.max(result[i], result[i+1]);
+  return result.slice(1);
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(n)

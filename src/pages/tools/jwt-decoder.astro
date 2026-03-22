@@ -29,6 +29,35 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       <p style="font-size: 0.85rem; color: var(--color-text-light);">Signature verification requires the secret key (not done client-side).</p>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>What Is a JWT?</h2>
+    <p>
+      A JSON Web Token (JWT) is a compact, URL-safe token used to pass claims between two parties.
+      You'll encounter them constantly in web development — they're the standard for authentication in
+      modern APIs. When you log into a site and get a bearer token, that's usually a JWT.
+    </p>
+
+    <h3>JWT Structure</h3>
+    <p>
+      A JWT has three parts separated by dots: <code>header.payload.signature</code>. The header specifies
+      the algorithm (like HS256 or RS256). The payload contains the claims — user ID, roles, expiration time.
+      The signature ensures the token hasn't been tampered with.
+    </p>
+
+    <h3>What This Tool Shows You</h3>
+    <ul>
+      <li><strong>Header</strong> — The signing algorithm and token type</li>
+      <li><strong>Payload</strong> — All claims, decoded and formatted</li>
+      <li><strong>Expiration status</strong> — Whether the token is still valid or has expired</li>
+      <li><strong>Timestamps</strong> — <code>iat</code>, <code>exp</code>, and <code>nbf</code> converted to readable dates</li>
+    </ul>
+
+    <p>
+      Note: This tool only <em>decodes</em> JWTs — it doesn't verify signatures. The header and payload of
+      a JWT are just base64-encoded JSON, so anyone can read them. The signature is what provides security.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>

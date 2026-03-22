@@ -1,9 +1,9 @@
-## Two Pointer
+## Approach: Two Pointers
 
-Traverse both lists; when one ends, redirect to the other's head.
+Use two pointers, one starting at each head. When a pointer reaches the end of its list, redirect it to the head of the other list. Both pointers travel the same total distance, so they will meet at the intersection node, or both reach null if there is no intersection.
 
 ```javascript
-function getIntersectionNode(headA, headB) {
+function intersectionOfTwoLinkedLists(headA, headB) {
   let a = headA, b = headB;
   while (a !== b) {
     a = a ? a.next : headB;
@@ -13,4 +13,6 @@ function getIntersectionNode(headA, headB) {
 }
 ```
 
-**Time:** O(m + n) | **Space:** O(1)
+**Time Complexity:** O(m + n)
+
+**Space Complexity:** O(1)

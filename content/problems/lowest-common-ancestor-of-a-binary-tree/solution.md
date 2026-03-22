@@ -1,13 +1,21 @@
-## Recursive DFS
+## Approach: Recursive DFS
+
+If the current node is null or matches p or q, return it. Recurse into left and right subtrees. If both return non-null, the current node is the LCA (p and q are in different subtrees). Otherwise, return whichever side is non-null.
 
 ```javascript
-function lowestCommonAncestor(root, p, q) {
-  if (!root || root === p || root === q) return root;
-  const left = lowestCommonAncestor(root.left, p, q);
-  const right = lowestCommonAncestor(root.right, p, q);
-  if (left && right) return root;
-  return left || right;
+function lowestCommonAncestorOfABinaryTree(root, p, q) {
+  function dfs(node) {
+    if (!node || node.val === p || node.val === q) return node;
+    const left = dfs(node.left);
+    const right = dfs(node.right);
+    if (left && right) return node;
+    return left || right;
+  }
+  const result = dfs(root);
+  return result ? result.val : -1;
 }
 ```
 
-**Time:** O(n) | **Space:** O(h)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(h)

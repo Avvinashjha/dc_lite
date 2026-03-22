@@ -1,21 +1,22 @@
-## DP
+## Approach: Dynamic Programming
 
-dp[i][j] = side length of largest square ending at (i,j).
+`dp[i][j]` represents the side length of the largest square whose bottom-right corner is at `(i,j)`. If `matrix[i][j]` is '1', `dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1`. The answer is the maximum dp value squared.
 
 ```javascript
 function maximalSquare(matrix) {
   const m = matrix.length, n = matrix[0].length;
-  const dp = Array.from({length: m}, () => Array(n).fill(0));
+  const dp = Array.from({length: m + 1}, () => Array(n + 1).fill(0));
   let max = 0;
-  for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++) {
-      if (matrix[i][j] === '1') {
-        dp[i][j] = i > 0 && j > 0 ? Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1 : 1;
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      if (matrix[i-1][j-1] === "1") {
+        dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1;
         max = Math.max(max, dp[i][j]);
       }
-    }
   return max * max;
 }
 ```
 
-**Time:** O(mn) | **Space:** O(mn)
+**Time Complexity:** O(m × n)
+
+**Space Complexity:** O(m × n)

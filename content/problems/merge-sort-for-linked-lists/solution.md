@@ -1,19 +1,21 @@
-## Split + Merge
+## Approach: Recursive Merge Sort
+
+Split the array in half, recursively sort both halves, then merge them using two pointers. This mirrors the linked list approach where you split with slow/fast pointers and merge sorted sublists.
 
 ```javascript
-function sortList(head) {
-  if (!head || !head.next) return head;
-  let slow = head, fast = head.next;
-  while (fast && fast.next) { slow = slow.next; fast = fast.next.next; }
-  const mid = slow.next; slow.next = null;
-  return merge(sortList(head), sortList(mid));
-}
-function merge(a, b) {
-  const dummy = {next: null}; let t = dummy;
-  while (a && b) { if (a.val <= b.val) { t.next = a; a = a.next; } else { t.next = b; b = b.next; } t = t.next; }
-  t.next = a || b;
-  return dummy.next;
+function mergeSortForLinkedLists(arr) {
+  if (arr.length <= 1) return arr;
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSortForLinkedLists(arr.slice(0, mid));
+  const right = mergeSortForLinkedLists(arr.slice(mid));
+  const result = [];
+  let i = 0, j = 0;
+  while (i < left.length && j < right.length)
+    result.push(left[i] <= right[j] ? left[i++] : right[j++]);
+  return result.concat(left.slice(i), right.slice(j));
 }
 ```
 
-**Time:** O(n log n) | **Space:** O(log n)
+**Time Complexity:** O(n log n)
+
+**Space Complexity:** O(n)

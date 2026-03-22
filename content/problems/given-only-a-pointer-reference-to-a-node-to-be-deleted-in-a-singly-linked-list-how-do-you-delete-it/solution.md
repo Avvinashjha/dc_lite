@@ -1,12 +1,14 @@
-## Copy Next Node
+## Approach: Copy and Skip
 
-Copy the next node's value and skip it.
+Since we cannot access the previous node, we copy the value of the next node into the current node, then point the current node's next pointer to skip the next node. This effectively deletes the given node from the list.
 
 ```javascript
-function deleteNode(node) {
+function givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt(node) {
   node.val = node.next.val;
   node.next = node.next.next;
 }
 ```
 
-**Time:** O(1) | **Space:** O(1)
+**Time Complexity:** O(1)
+
+**Space Complexity:** O(1)

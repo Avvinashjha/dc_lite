@@ -13,5 +13,9 @@
   "testCases": [],
   "functionName": "implementStackUsingQueues",
   "templateCode": "function MyStack() {}\nMyStack.prototype.push = function(x) {};\nMyStack.prototype.pop = function() {};\nMyStack.prototype.top = function() {};\nMyStack.prototype.empty = function() {};",
-  "constraints": []
+  "constraints": [
+    "1 <= x <= 9",
+    "At most 100 calls to push, pop, top, empty",
+    "All pop and top calls are valid"
+  ]
 }

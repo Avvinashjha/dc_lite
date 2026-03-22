@@ -1,19 +1,24 @@
-## Morris-Style Rewiring
+## Approach: Morris-like Traversal
+
+For each node with a left child, find the rightmost node of the left subtree. Connect that rightmost node to the current right child. Then move the entire left subtree to the right side and set left to null. Advance to the next right node.
 
 ```javascript
-function flatten(root) {
+function flattenBinaryTreeToLinkedList(root) {
   let curr = root;
   while (curr) {
     if (curr.left) {
-      let pred = curr.left;
-      while (pred.right) pred = pred.right;
-      pred.right = curr.right;
+      let prev = curr.left;
+      while (prev.right) prev = prev.right;
+      prev.right = curr.right;
       curr.right = curr.left;
       curr.left = null;
     }
     curr = curr.right;
   }
+  return root;
 }
 ```
 
-**Time:** O(n) | **Space:** O(1)
+**Time Complexity:** O(n)
+
+**Space Complexity:** O(1)

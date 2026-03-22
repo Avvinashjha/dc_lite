@@ -345,6 +345,28 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 
   <!-- Hidden file input for import -->
   <input type="file" id="cd-import-file" accept=".json" style="display:none;"/>
+
+  <section slot="about" class="tool-about">
+    <h2>Drawing Diagrams in the Browser</h2>
+    <p>
+      Sometimes you need a quick diagram — a flowchart for a pull request, a wireframe for a feature idea,
+      or a system architecture sketch for documentation. This canvas tool lets you drag and drop shapes,
+      connect them with arrows, and export the result as an image.
+    </p>
+
+    <h3>What You Can Build</h3>
+    <ul>
+      <li><strong>Flowcharts</strong> — Map out decision logic, user flows, or process steps</li>
+      <li><strong>Wireframes</strong> — Quick UI sketches with rectangles, text, and connectors</li>
+      <li><strong>Architecture diagrams</strong> — Show how services, databases, and APIs connect</li>
+      <li><strong>Mind maps</strong> — Brainstorm and organize ideas visually</li>
+    </ul>
+
+    <p>
+      Your drawings are saved to the browser so they persist between visits. You can also export and import
+      diagrams as JSON files to share with teammates or back up your work.
+    </p>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>

@@ -3,6 +3,19 @@ import GameLayout from '../../layouts/GameLayout.astro';
 ---
 <GameLayout gameName="Cricket" description="Hit sixes and fours in this simple batting game!" instructions="Click or press <strong>Space</strong> when the ball is in the hitting zone. Time your shot perfectly for a six! Miss and you're out." keywords="cricket game, batting game, hit six, cricket browser game">
   <canvas id="game" width="400" height="400"></canvas>
+
+  <section slot="about" class="game-about">
+    <h2>About Cricket</h2>
+    <p>
+      A simplified batting game where timing is everything. The ball is bowled toward you and you need to
+      click or press space at exactly the right moment. Perfect timing sends the ball flying for a six,
+      while mistimed shots result in lower scores or getting out.
+    </p>
+    <p>
+      It's a casual take on cricket's batting mechanics — no field placement or bowling strategy, just
+      pure batting reflexes. See how many runs you can rack up before getting bowled out.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

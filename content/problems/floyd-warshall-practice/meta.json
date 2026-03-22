@@ -12,7 +12,64 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Floyd%20Warshall%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            3,
+            10000,
+            5
+          ],
+          [
+            2,
+            0,
+            10000,
+            4
+          ],
+          [
+            10000,
+            1,
+            0,
+            10000
+          ],
+          [
+            10000,
+            10000,
+            2,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          3,
+          7,
+          5
+        ],
+        [
+          2,
+          0,
+          6,
+          4
+        ],
+        [
+          3,
+          1,
+          0,
+          5
+        ],
+        [
+          5,
+          3,
+          2,
+          0
+        ]
+      ]
+    }
+  ],
   "functionName": "floydWarshall",
   "templateCode": "/**\n * @param {number[][]} dist\n * @return {number[][]}\n */\nfunction floydWarshall(dist) {\n  // All-pairs shortest paths\n}",
   "constraints": [

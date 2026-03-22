@@ -1,24 +1,27 @@
-## Hash Map + Doubly Linked List
+## Approach: HashMap + Ordered Map
+
+Use a Map which maintains insertion order in JavaScript. On get/put, delete and re-insert the key to move it to the end (most recent). On capacity overflow, delete the first key (least recent).
 
 ```javascript
-class LRUCache {
-  constructor(capacity) {
-    this.cap = capacity;
-    this.map = new Map();
-  }
-  get(key) {
-    if (!this.map.has(key)) return -1;
-    const val = this.map.get(key);
-    this.map.delete(key);
-    this.map.set(key, val);
-    return val;
-  }
-  put(key, value) {
-    this.map.delete(key);
-    this.map.set(key, value);
-    if (this.map.size > this.cap) this.map.delete(this.map.keys().next().value);
-  }
+function lruCacheCompleteTutorial(capacity) {
+  const cache = new Map();
+  return {
+    get(key) {
+      if (!cache.has(key)) return -1;
+      const val = cache.get(key);
+      cache.delete(key);
+      cache.set(key, val);
+      return val;
+    },
+    put(key, value) {
+      cache.delete(key);
+      cache.set(key, value);
+      if (cache.size > capacity) cache.delete(cache.keys().next().value);
+    }
+  };
 }
 ```
 
-**Time:** O(1) for both operations | **Space:** O(capacity)
+**Time Complexity:** O(1) per operation
+
+**Space Complexity:** O(capacity)

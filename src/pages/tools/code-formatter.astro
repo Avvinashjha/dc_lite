@@ -47,6 +47,29 @@ import CodeEditor from "../../components/CodeEditor.astro";
   </div>
 
   <div id="status"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>Why Format Code?</h2>
+    <p>
+      Consistent formatting makes code easier to read, review, and maintain. But different projects use different
+      styles — tabs vs. spaces, semicolons vs. no semicolons, single quotes vs. double quotes. This tool
+      lets you format (or minify) code in multiple languages with syntax-highlighted preview, all in the browser.
+    </p>
+
+    <h3>Supported Languages</h3>
+    <p>
+      JavaScript, TypeScript, JSON, HTML, CSS, and more. Select a language, paste your code, and hit Format.
+      The side-by-side CodeMirror preview shows the result with proper syntax highlighting so you can
+      verify it looks right before copying.
+    </p>
+
+    <h3>Minification</h3>
+    <p>
+      Need to shrink your code for production? The minify option strips whitespace and shortens where possible.
+      It's not a full bundler — for that you'd use Webpack or esbuild — but it's handy for quick one-off
+      minification of a config file or snippet.
+    </p>
+  </section>
 </ToolLayout>
 
 <script>

@@ -37,6 +37,31 @@ console.log('Ready to run');`;
     sandbox="allow-scripts"
     style="width: 0; height: 0; border: 0; position: absolute; opacity: 0; pointer-events: none;"
   ></iframe>
+
+  <section slot="about" class="tool-about">
+    <h2>A Safe Place to Run JavaScript</h2>
+    <p>
+      Sometimes you just need to test a quick idea — a utility function, a sorting algorithm, or some
+      string manipulation. Opening DevTools works, but the console is cramped and you lose your code on refresh.
+      This runner gives you a proper editor with syntax highlighting and runs your code in a sandboxed iframe,
+      so it can't affect the page.
+    </p>
+
+    <h3>What You Can Do</h3>
+    <ul>
+      <li>Write and test functions with <code>console.log</code> output</li>
+      <li>Prototype algorithms before putting them in your project</li>
+      <li>Debug tricky logic with quick experiments</li>
+      <li>Share code snippets — your code stays in the editor between visits</li>
+    </ul>
+
+    <h3>How It Works</h3>
+    <p>
+      Your code runs inside a sandboxed <code>&lt;iframe&gt;</code> with its own execution context.
+      Console output is captured and displayed in the output panel. If your code throws, you'll see the
+      error with a stack trace. The sandbox prevents your code from accessing the parent page.
+    </p>
+  </section>
 </ToolLayout>
 
 <script>

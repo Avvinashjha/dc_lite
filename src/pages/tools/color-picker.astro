@@ -119,6 +119,30 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   </div>
 
   <div id="status" style="margin-top:0.75rem;"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>Picking Colors for the Web</h2>
+    <p>
+      Choosing the right colors is one of the trickiest parts of web design. This tool gives you a visual
+      picker for solid colors and gradients, with real-time conversion between HEX, RGB, and HSL.
+      Build a palette, save it, and export everything as CSS custom properties or SASS variables — ready
+      to drop into your stylesheet.
+    </p>
+
+    <h3>Working with Color Formats</h3>
+    <ul>
+      <li><strong>HEX</strong> (<code>#3b82f6</code>) — The most common format in CSS. Six hex digits representing red, green, blue</li>
+      <li><strong>RGB</strong> (<code>rgb(59, 130, 246)</code>) — Useful when you need to control opacity with <code>rgba()</code></li>
+      <li><strong>HSL</strong> (<code>hsl(217, 91%, 60%)</code>) — Easier to reason about: hue is the color, saturation is intensity, lightness is brightness</li>
+    </ul>
+
+    <h3>Gradient Builder</h3>
+    <p>
+      CSS gradients let you blend between two or more colors. The gradient tab lets you visually build
+      linear or radial gradients, adjust stops, and copy the CSS. If you need a specific color conversion,
+      check the <a href="/tools/color-converter">Color Converter</a>.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>
