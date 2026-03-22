@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/problems.scss';
+import { getProblems, getProblemTopics } from '../../../utils/contentLoader';
+import { slugifyTaxonomy, buildTaxonomy, findTaxonomyEntry } from '../../../utils/taxonomy';
+
+export function getStaticPaths() {
+  const problems = getProblems();
+  const allTopics = problems.flatMap(p => p.topics?.length ? p.topics : [p.topic]);
+  const taxonomy = buildTaxonomy(allTopics);
+
+  return taxonomy.map(entry => {
+    const topicProblems = problems.filter(p => {
+      const topics = p.topics?.length ? p.topics : [p.topic];
+      return topics.some(t => slugifyTaxonomy(t) === entry.slug);
+    });
+    return {
+      params: { topic: entry.slug },
+      props: { label: entry.label, problems: topicProblems },
+    };
+  });
+}
+
+const { topic } = Astro.params;
+const { label, problems } = Astro.props;
+
+const description = `Practice ${problems.length} ${label} coding problems. Solve with in-browser JavaScript runner.`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Problems', href: '/problems' },
+  { label: label, href: `/problems/topic/${topic}` },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${label} Problems`,
+  description,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: problems.length,
+    itemListElement: problems.map((p: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `/problems/${p.slug}`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${label} Problems | DailyCoder`}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  tags={[label, 'coding problems', 'practice']}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="container taxonomy-page">
+    <nav class="problem-breadcrumbs" style="background:transparent;border:none;padding:0 0 0.75rem;">
+      <a href="/">Home</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href="/problems">Problems</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <span class="problem-breadcrumbs__current">{label}</span>
+    </nav>
+
+    <h1 class="taxonomy-page__title">{label} Problems</h1>
+    <p class="taxonomy-page__desc">{description}</p>
+    <p class="taxonomy-page__count">{problems.length} problems</p>
+
+    <table class="problem-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th class="problem-table__difficulty">Difficulty</th>
+          <th class="problem-table__platform">Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        {problems.map((p: any) => (
+          <tr>
+            <td class="problem-table__title">
+              <a href={`/problems/${p.slug}`}>{p.title}</a>
+            </td>
+            <td class="problem-table__difficulty">
+              <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+            </td>
+            <td class="problem-table__platform">{p.platform}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <!-- Related topics -->
+    <div class="problem-section" style="margin-top:var(--spacing-xl);">
+      <div class="problem-section__heading">Browse by Topic</div>
+      <div class="problems-topic-chips" style="margin-top:0.5rem;">
+        {getProblemTopics().map(t => (
+          <a
+            href={`/problems/topic/${slugifyTaxonomy(t)}`}
+            class={`problems-topic-chips__chip ${slugifyTaxonomy(t) === topic ? 'problems-topic-chips__chip--active' : ''}`}
+            style="text-decoration:none;"
+          >{t}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

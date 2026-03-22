@@ -1,0 +1,1 @@
+Define an array of Roman numeral symbols and their corresponding values in descending order. Subtract values from the number and append the corresponding symbols to the result until the number becomes zero.

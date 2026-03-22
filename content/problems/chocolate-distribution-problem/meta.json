@@ -1,0 +1,42 @@
+{
+  "draft": false,
+  "id": "problem-0008",
+  "title": "Chocolate Distribution Problem",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Chocolate%20Distribution%20Problem",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "N = 8, M = 5, A = [3, 4, 1, 9, 56, 7, 9, 12]",
+  "sampleOutput": "6",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          4,
+          1,
+          9,
+          56,
+          7,
+          9,
+          12
+        ],
+        8,
+        5
+      ],
+      "expected": 6
+    }
+  ],
+  "functionName": "chocolateDistributionProblem",
+  "templateCode": "/**\n * @param {number} N\n * @param {number} M\n * @param {number[]} A\n * @return {any}\n */\nfunction chocolateDistributionProblem(N, M, A) {\n  // Write your solution here\n}\n\n// Sample: console.log(chocolateDistributionProblem(8, 5, [3, 4, 1, 9, 56, 7, 9, 12]));",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= A[i] <= 10^9",
+    "1 <= M <= N"
+  ]
+}

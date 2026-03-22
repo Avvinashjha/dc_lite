@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0257",
+  "title": "Sort Colors",
+  "difficulty": "Medium",
+  "topic": "Two-Pointer",
+  "topics": [
+    "Two Pointer"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/sort-colors-2/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "sortColors",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction sortColors(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^3",
+    "0 <= arr[i] <= 2"
+  ]
+}

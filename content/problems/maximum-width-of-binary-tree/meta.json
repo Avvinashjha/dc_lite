@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0164",
+  "title": "Maximum Width of Binary Tree",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximum-width-of-binary-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "maximumWidthOfBinaryTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction widthOfBinaryTree(root) {\n  // Maximum width of binary tree\n}",
+  "constraints": [
+    "1 <= number of nodes <= 3000",
+    "-100 <= Node.val <= 100"
+  ]
+}

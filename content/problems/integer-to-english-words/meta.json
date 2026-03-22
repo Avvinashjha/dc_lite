@@ -1,0 +1,33 @@
+{
+  "draft": false,
+  "id": "problem-0044",
+  "title": "Integer to English Words",
+  "difficulty": "Hard",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/integer-to-english-words/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        123
+      ],
+      "expected": "One Hundred Twenty Three"
+    },
+    {
+      "args": [
+        0
+      ],
+      "expected": "Zero"
+    }
+  ],
+  "functionName": "integerToEnglishWords",
+  "templateCode": "/**\n * @param {number} num\n * @return {string}\n */\nfunction numberToWords(num) {\n  // Convert integer to English words\n}",
+  "constraints": [
+    "0 <= num <= 2^31 - 1"
+  ]
+}

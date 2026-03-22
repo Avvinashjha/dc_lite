@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0214",
+  "title": "Total number of Spanning Trees in a Graph",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Total%20number%20of%20Spanning%20Trees%20in%20a%20Graph",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "totalNumberOfSpanningTreesInAGraph",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction totalNumberOfSpanningTreesInAGraph(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= V <= 10",
+    "0 <= E <= V*(V-1)/2"
+  ]
+}

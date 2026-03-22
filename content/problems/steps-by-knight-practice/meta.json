@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0187",
+  "title": "Steps by Knight | Practice",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Steps%20by%20Knight%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "stepsByKnight",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction stepsByKnight(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 1000"
+  ]
+}

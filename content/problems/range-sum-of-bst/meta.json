@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0135",
+  "title": "Range Sum of BST",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/range-sum-of-bst/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "rangeSumOfBst",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} low\n * @param {number} high\n * @return {number}\n */\nfunction rangeSumBST(root, low, high) {\n  // Sum of BST values in range\n}",
+  "constraints": [
+    "1 <= number of nodes <= 2 * 10^4",
+    "1 <= Node.val <= 10^5",
+    "1 <= low <= high <= 10^5"
+  ]
+}

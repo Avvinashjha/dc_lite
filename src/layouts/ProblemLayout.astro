@@ -1,0 +1,215 @@
+---
+import '../styles/global.scss';
+import '../styles/components.scss';
+import '../styles/problems.scss';
+import Logo from '../components/Logo.astro';
+import Icons from '../components/Icons.astro';
+import { getSiteConfig } from '../utils/contentLoader';
+
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbs?: { label: string; href: string }[];
+  tags?: string[];
+}
+
+const config = getSiteConfig();
+const { title, description, breadcrumbs = [], tags = [] } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site).href;
+const seo = (config as any).seo || {};
+const analytics = (config as any).analytics || {};
+const twitterHandle = seo.twitterHandle || '@dailycoder_in';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2563eb" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={config.site.title} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    {breadcrumbs.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((crumb, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crumb.label,
+          item: new URL(crumb.href, Astro.site).href,
+        })),
+      })} />
+    )}
+
+    <slot name="head" />
+
+    {analytics.googleSearchConsoleVerification && (
+      <meta name="google-site-verification" content={analytics.googleSearchConsoleVerification} />
+    )}
+    {analytics.googleAnalyticsId && (
+      <script is:inline define:vars={{gaId: analytics.googleAnalyticsId}}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        (function deferGA() {
+          if (typeof requestIdleCallback !== 'undefined') {
+            requestIdleCallback(loadGA, { timeout: 3500 });
+          } else {
+            setTimeout(loadGA, 2000);
+          }
+        })();
+        function loadGA() {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(s);
+          gtag('js', new Date());
+          gtag('config', gaId);
+        }
+      </script>
+    )}
+
+    <script is:inline>
+      const theme = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      const rm = localStorage.getItem('readingMode') === 'true';
+      if (rm) document.documentElement.setAttribute('data-reading-mode', 'true');
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <a href="/" class="header__logo">
+            <Logo size={28} color="var(--color-primary)" />
+            <span>{config.site.title}</span>
+          </a>
+          <nav class="header__nav header__nav--desktop">
+            {config.navigation.map(item => (
+              <a href={item.path}>{item.label}</a>
+            ))}
+            <button id="reading-mode-toggle" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
+              <Icons name="book" size={18} />
+            </button>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+              <span id="theme-icon" class="theme-toggle__icon">
+                <Icons name="moon" size={18} />
+              </span>
+            </button>
+          </nav>
+          <div class="header__mobile-controls">
+            <button id="reading-mode-toggle-mobile" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
+              <Icons name="book" size={18} />
+            </button>
+            <button id="theme-toggle-mobile" class="theme-toggle" aria-label="Toggle theme">
+              <span id="theme-icon-mobile" class="theme-toggle__icon">
+                <Icons name="moon" size={18} />
+              </span>
+            </button>
+            <button id="mobile-menu-btn" class="theme-toggle" aria-label="Open menu">
+              <Icons name="menu" size={20} />
+            </button>
+          </div>
+        </div>
+      </div>
+      <nav id="mobile-nav" class="header__mobile-nav">
+        <div class="header__mobile-nav-inner">
+          {config.navigation.map(item => (
+            <a href={item.path} class="header__mobile-link">{item.label}</a>
+          ))}
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="/" class="footer__logo">
+              <Logo size={24} color="var(--color-primary)" />
+              <span>{config.site.title}</span>
+            </a>
+            <p class="footer__tagline">{config.site.description}</p>
+            <div class="footer__social">
+              {config.socialLinks.github && (
+                <a href={config.socialLinks.github} target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+                  <Icons name="github" size={18} />
+                </a>
+              )}
+              {config.socialLinks.twitter && (
+                <a href={config.socialLinks.twitter} target="_blank" rel="noopener" aria-label="Twitter" title="Twitter">
+                  <Icons name="twitter" size={18} />
+                </a>
+              )}
+              {config.socialLinks.linkedin && (
+                <a href={config.socialLinks.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+                  <Icons name="linkedin" size={18} />
+                </a>
+              )}
+              {config.socialLinks.youtube && (
+                <a href={config.socialLinks.youtube} target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+                  <Icons name="youtube" size={18} />
+                </a>
+              )}
+              {config.socialLinks.instagram && (
+                <a href={config.socialLinks.instagram} target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+                  <Icons name="instagram" size={18} />
+                </a>
+              )}
+              <a href="/rss.xml" target="_blank" rel="noopener" aria-label="RSS Feed" title="RSS Feed">
+                <Icons name="rss" size={16} />
+              </a>
+            </div>
+          </div>
+
+          <div class="footer__links">
+            <h4>Content</h4>
+            <a href="/blog">Blog</a>
+            <a href="/problems">Problems</a>
+            <a href="/rss.xml" target="_blank" rel="noopener">RSS Feed</a>
+          </div>
+
+          <div class="footer__links">
+            <h4>Site</h4>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy">Privacy Policy</a>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p>&copy; {new Date().getFullYear()} {config.site.title}. Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/base-ui.js" is:inline></script>
+  </body>
+</html>

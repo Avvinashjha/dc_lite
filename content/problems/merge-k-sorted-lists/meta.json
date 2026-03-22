@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0106",
+  "title": "Merge k Sorted Lists",
+  "difficulty": "Hard",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/merge-k-sorted-lists/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "mergeKSortedLists",
+  "templateCode": "/**\n * @param {ListNode[]} lists\n * @return {ListNode}\n */\nfunction mergeKLists(lists) {\n  // Merge k sorted linked lists\n}",
+  "constraints": [
+    "0 <= k <= 10^4",
+    "0 <= lists[i].length <= 500",
+    "-10^4 <= lists[i][j] <= 10^4"
+  ]
+}

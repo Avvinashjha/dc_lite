@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0236",
+  "title": "Decode Ways",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/decode-ways/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "12"
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "226"
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        "06"
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "decodeWays",
+  "templateCode": "/**\n * @param {string} s\n * @return {number}\n */\nfunction numDecodings(s) {\n  // Count decoding ways\n}",
+  "constraints": [
+    "1 <= s.length <= 100",
+    "s contains only digits and may contain leading zeros"
+  ]
+}

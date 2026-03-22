@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0136",
+  "title": "Symmetric Tree",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/symmetric-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "symmetricTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nfunction isSymmetric(root) {\n  // Check if tree is symmetric\n}",
+  "constraints": [
+    "1 <= number of nodes <= 1000",
+    "-100 <= Node.val <= 100"
+  ]
+}

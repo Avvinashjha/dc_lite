@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0061",
+  "title": "Reverse Integer",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reverse-integer/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        123
+      ],
+      "expected": 321
+    },
+    {
+      "args": [
+        -123
+      ],
+      "expected": -321
+    },
+    {
+      "args": [
+        120
+      ],
+      "expected": 21
+    }
+  ],
+  "functionName": "reverseInteger",
+  "templateCode": "/**\n * @param {number} x\n * @return {number}\n */\nfunction reverse(x) {\n  // Reverse digits of integer\n}\n\n// Sample: console.log(reverse(123));",
+  "constraints": [
+    "-2^31 <= x <= 2^31 - 1"
+  ]
+}

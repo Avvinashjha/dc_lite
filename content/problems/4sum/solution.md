@@ -1,0 +1,1 @@
+Sort the array. Use two nested loops to fix the first two numbers and then use the two-pointer approach to find the remaining two numbers. Be careful to skip duplicate values for all four positions to avoid duplicate quadruplets.

@@ -1,0 +1,1 @@
+The problem has a recursive structure. The first half of row n is the same as row n-1, and the second half is the complement of row n-1. If k is in the first half, it is the same as k in row n-1. If k is in the second half, it is the complement of k-halfsize in row n-1.

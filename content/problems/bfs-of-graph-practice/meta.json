@@ -1,0 +1,47 @@
+{
+  "draft": false,
+  "id": "problem-0180",
+  "title": "BFS of graph | Practice",
+  "difficulty": "Easy",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=BFS%20of%20graph%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "functionName": "bfsOfGraph",
+  "templateCode": "/**\n * @param {number[][]} adj\n * @return {number[]}\n */\nfunction bfsOfGraph(adj) {\n  // BFS traversal from node 0\n}",
+  "constraints": [
+    "1 <= V, E <= 10^4"
+  ]
+}

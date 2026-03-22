@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0111",
+  "title": "Implement Queue using Stacks",
+  "difficulty": "Easy",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/implement-queue-using-stacks/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "implementQueueUsingStacks",
+  "templateCode": "function MyQueue() {\n  // Initialize queue using stacks\n}\nMyQueue.prototype.push = function(x) {};\nMyQueue.prototype.pop = function() {};\nMyQueue.prototype.peek = function() {};\nMyQueue.prototype.empty = function() {};",
+  "constraints": [
+    "1 <= x <= 9",
+    "At most 100 calls to push, pop, peek, empty"
+  ]
+}

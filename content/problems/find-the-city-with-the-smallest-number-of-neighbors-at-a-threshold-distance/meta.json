@@ -1,0 +1,53 @@
+{
+  "draft": false,
+  "id": "problem-0197",
+  "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        4,
+        [
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            2,
+            3,
+            1
+          ]
+        ],
+        4
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "findTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance",
+  "templateCode": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @param {number} distanceThreshold\n * @return {number}\n */\nfunction findTheCity(n, edges, distanceThreshold) {\n  // City with fewest reachable neighbors\n}",
+  "constraints": [
+    "2 <= n <= 100",
+    "1 <= edges.length <= n*(n-1)/2",
+    "0 <= distanceThreshold <= 10^4"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0049",
+  "title": "Maximum size rectangle binary sub-matrix with all 1s",
+  "difficulty": "Medium",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Maximum%20size%20rectangle%20binary%20sub-matrix%20with%20all%201s",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "maximumSizeRectangleBinarySubMatrixWithAll1s",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction maximumSizeRectangleBinarySubMatrixWithAll1s(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= R, C <= 1000",
+    "matrix[i][j] is 0 or 1"
+  ]
+}

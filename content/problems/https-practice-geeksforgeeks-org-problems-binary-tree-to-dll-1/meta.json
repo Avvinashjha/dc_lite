@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0170",
+  "title": "https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=https%3A%2F%2Fpractice.geeksforgeeks.org%2Fproblems%2Fbinary-tree-to-dll%2F1",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreeToDll",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {TreeNode}\n */\nfunction bToDLL(root) {\n  // Convert binary tree to DLL\n}",
+  "constraints": []
+}

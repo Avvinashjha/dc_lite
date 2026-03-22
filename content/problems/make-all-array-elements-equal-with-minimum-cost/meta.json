@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0073",
+  "title": "Make all array elements equal with minimum cost",
+  "difficulty": "Medium",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Make%20all%20array%20elements%20equal%20with%20minimum%20cost",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          100,
+          101
+        ]
+      ],
+      "expected": 100
+    }
+  ],
+  "functionName": "makeAllArrayElementsEqualWithMinimumCost",
+  "templateCode": "/**\n * @param {number[]} arr\n * @return {number}\n */\nfunction minCost(arr) {\n  // Min cost to equalize array\n}",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= A[i] <= 10^5"
+  ]
+}

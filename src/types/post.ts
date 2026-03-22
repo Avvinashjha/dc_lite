@@ -171,39 +171,41 @@ export interface ProblemIndex {
 }
 
 export interface ProblemTestCase {
-  input: string;
-  output: string;
+  input?: string;
+  output?: string;
   explanation?: string;
   /** When set, runner calls functionName(...args) and compares to expected */
   args?: unknown[];
   expected?: unknown;
 }
 
-export interface ProblemItem {
+/** Metadata stored in meta.json (no markdown content) */
+export interface ProblemMeta {
   id: string;
-  slug: string;
   title: string;
   difficulty: string;
   topic: string;
   topics: string[];
-  status: string;
-  confidence: number;
   platform: string;
   externalUrl: string;
-  remarks?: string;
-  description: string;
   sampleInput: string;
   sampleOutput: string;
   testCases: ProblemTestCase[];
-  solution: string;
-  /** e.g. "top-300-leetcode"; used for set filter on list */
   problemSet?: string;
-  /** Used by runner to call user's function; e.g. "twoSum" */
   functionName?: string;
-  /** Initial code in editor; e.g. "function twoSum(nums, target) { ... }" */
   templateCode?: string;
-  /** Problem constraints (e.g. range of n, allowed values) */
   constraints?: string | string[];
-  /** Follow-up questions or variations */
   followUps?: string | string[];
+  draft?: boolean;
+}
+
+/** Lightweight problem used for list pages (no markdown parsing) */
+export interface ProblemListItem extends ProblemMeta {
+  slug: string;
+}
+
+/** Full problem with parsed HTML content for detail page */
+export interface ProblemItem extends ProblemListItem {
+  descriptionHtml: string;
+  solutionHtml: string;
 }

@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0217",
+  "title": "Design Add and Search Words Data Structure",
+  "difficulty": "Medium",
+  "topic": "Tries",
+  "topics": [
+    "Tries"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "designAddAndSearchWordsDataStructure",
+  "templateCode": "function WordDictionary() {\n  // Initialize data structure\n}\nWordDictionary.prototype.addWord = function(word) {};\nWordDictionary.prototype.search = function(word) {};",
+  "constraints": [
+    "1 <= word.length <= 25",
+    "word consists of lowercase letters or .",
+    "At most 10^4 calls to addWord and search"
+  ]
+}

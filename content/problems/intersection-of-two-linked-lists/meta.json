@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0089",
+  "title": "Intersection of Two Linked Lists",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "intersectionOfTwoLinkedLists",
+  "templateCode": "/**\n * @param {ListNode} headA\n * @param {ListNode} headB\n * @return {ListNode}\n */\nfunction getIntersectionNode(headA, headB) {\n  // Find intersection node\n}",
+  "constraints": [
+    "m + n nodes total",
+    "1 <= Node.val <= 10^5",
+    "0 <= skipA <= m, 0 <= skipB <= n"
+  ]
+}

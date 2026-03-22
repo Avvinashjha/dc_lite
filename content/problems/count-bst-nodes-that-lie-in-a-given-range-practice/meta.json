@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0168",
+  "title": "Count BST nodes that lie in a given range | Practice",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Count%20BST%20nodes%20that%20lie%20in%20a%20given%20range%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "countBstNodesThatLieInAGivenRange",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} l\n * @param {number} h\n * @return {number}\n */\nfunction countInRange(root, l, h) {\n  // Count BST nodes in range [l, h]\n}",
+  "constraints": [
+    "1 <= N <= 10^4",
+    "1 <= l <= h <= 10^5"
+  ]
+}

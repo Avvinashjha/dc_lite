@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0194",
+  "title": "Introduction to Graph Coloring",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Introduction%20to%20Graph%20Coloring",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "introductionToGraphColoring",
+  "templateCode": "/**\n * @param {number} V\n * @param {number[][]} adj\n * @param {number} M\n * @return {boolean}\n */\nfunction graphColoring(V, adj, M) {\n  // Can graph be colored with M colors?\n}",
+  "constraints": [
+    "1 <= V <= 50",
+    "0 <= E <= V*(V-1)/2",
+    "1 <= M (colors) <= V"
+  ]
+}

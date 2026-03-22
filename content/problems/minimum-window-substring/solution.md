@@ -1,0 +1,1 @@
+Use a sliding window with two pointers. Expand the right pointer until all required characters are in the window. Then contract the left pointer as much as possible while maintaining all required characters. Track the minimum valid window found during this process.

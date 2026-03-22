@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0227",
+  "title": "Climbing Stairs",
+  "difficulty": "Easy",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/climbing-stairs/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        3
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        5
+      ],
+      "expected": 8
+    }
+  ],
+  "functionName": "climbingStairs",
+  "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction climbStairs(n) {\n  // Count distinct ways to climb n stairs\n}\n\n// Sample: console.log(climbStairs(3));",
+  "constraints": [
+    "1 <= n <= 45"
+  ]
+}

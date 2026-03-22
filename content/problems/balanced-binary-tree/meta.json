@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0146",
+  "title": "Balanced Binary Tree",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/balanced-binary-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "balancedBinaryTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nfunction isBalanced(root) {\n  // Check if binary tree is height-balanced\n}",
+  "constraints": [
+    "0 <= number of nodes <= 5000",
+    "-10^4 <= Node.val <= 10^4"
+  ]
+}

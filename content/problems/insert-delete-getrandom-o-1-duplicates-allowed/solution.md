@@ -1,0 +1,1 @@
+Use a list to store elements for O(1) random access and a hash map that maps each value to a set of its indices in the list. To remove an element in O(1), swap it with the last element in the list, update the hash map with the new index of the swapped element, and then remove the last element.

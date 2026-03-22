@@ -1,0 +1,1 @@
+Maintain a hash map of remainders of the prefix sums when divided by `k`. Use the property that if two prefix sums have the same remainder when divided by `k`, then the subarray between them is divisible by `k`. Be sure to handle negative remainders.

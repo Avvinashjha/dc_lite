@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0088",
+  "title": "Multiply two numbers represented by Linked Lists",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Multiply%20two%20numbers%20represented%20by%20Linked%20Lists",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "multiplyTwoNumbersRepresentedByLinkedLists",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction multiplyTwoNumbersRepresentedByLinkedLists(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 to 100 nodes per list",
+    "0 <= Node.val <= 9"
+  ]
+}

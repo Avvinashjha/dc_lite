@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0167",
+  "title": "Binary Tree Zigzag Level Order Traversal",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreeZigzagLevelOrderTraversal",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nfunction zigzagLevelOrder(root) {\n  // Zigzag level order traversal\n}",
+  "constraints": [
+    "0 <= number of nodes <= 2000",
+    "-100 <= Node.val <= 100"
+  ]
+}

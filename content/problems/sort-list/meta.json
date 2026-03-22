@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0103",
+  "title": "Sort List",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/sort-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "sortList",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction sortList(head) {\n  // Sort linked list\n}",
+  "constraints": [
+    "0 to 5 * 10^4 nodes",
+    "-10^5 <= Node.val <= 10^5"
+  ]
+}

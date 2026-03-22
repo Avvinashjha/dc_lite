@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0212",
+  "title": "Water Jug problem using BFS",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Water%20Jug%20problem%20using%20BFS",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "waterJugProblemUsingBfs",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction waterJugProblemUsingBfs(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= x, y <= 10^6",
+    "0 <= target <= 10^6"
+  ]
+}

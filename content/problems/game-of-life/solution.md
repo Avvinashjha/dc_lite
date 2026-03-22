@@ -1,0 +1,1 @@
+To update the board in-place, use extra states to encode state transitions. For example, use `2` to represent a cell that was alive but is now dead, and `3` to represent a cell that was dead but is now alive. This allows you to compute the next state without losing the current state of neighbors.

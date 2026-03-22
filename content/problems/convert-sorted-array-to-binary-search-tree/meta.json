@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0137",
+  "title": "Convert Sorted Array to Binary Search Tree",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "convertSortedArrayToBinarySearchTree",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {TreeNode}\n */\nfunction sortedArrayToBST(nums) {\n  // Convert sorted array to balanced BST\n}",
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "-10^4 <= nums[i] <= 10^4",
+    "nums is sorted in strictly increasing order"
+  ]
+}

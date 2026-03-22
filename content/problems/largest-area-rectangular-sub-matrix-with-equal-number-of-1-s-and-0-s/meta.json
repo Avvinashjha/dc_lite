@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0250",
+  "title": "Largest area rectangular sub-matrix with equal number of 1’s and 0’s",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Largest%20area%20rectangular%20sub-matrix%20with%20equal%20number%20of%201%E2%80%99s%20and%200%E2%80%99s",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "largestAreaRectangularSubMatrixWithEqualNumberOf1SAnd0S",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction largestAreaRectangularSubMatrixWithEqualNumberOf1SAnd0S(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= R, C <= 50"
+  ]
+}

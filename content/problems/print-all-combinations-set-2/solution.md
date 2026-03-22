@@ -1,0 +1,1 @@
+Use recursion to explore all possible combinations. At each step, you can either pick the current element or skip it. Maintain a buffer to store the current combination and an index to track how many elements have been picked.

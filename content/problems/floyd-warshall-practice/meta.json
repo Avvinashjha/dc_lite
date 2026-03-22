@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0200",
+  "title": "Floyd Warshall | Practice",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Floyd%20Warshall%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "floydWarshall",
+  "templateCode": "/**\n * @param {number[][]} dist\n * @return {number[][]}\n */\nfunction floydWarshall(dist) {\n  // All-pairs shortest paths\n}",
+  "constraints": [
+    "1 <= V <= 100",
+    "1 <= matrix[i][j] <= 10^3 or -1"
+  ]
+}

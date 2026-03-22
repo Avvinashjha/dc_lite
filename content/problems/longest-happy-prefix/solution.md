@@ -1,0 +1,1 @@
+This problem can be solved by computing the LPS (Longest Prefix Suffix) array used in the KMP string matching algorithm. The value at the last position of the LPS array represents the length of the longest happy prefix.

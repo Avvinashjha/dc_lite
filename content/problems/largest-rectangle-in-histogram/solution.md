@@ -1,0 +1,1 @@
+Use a monotonic stack to store indices of the bars in increasing order of height. When a bar with a height less than the bar at the top of the stack is encountered, pop the stack and calculate the area of the rectangle using the popped bar's height as the minimum height.

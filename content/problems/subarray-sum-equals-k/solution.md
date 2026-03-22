@@ -1,0 +1,1 @@
+Use a hash map to store the prefix sums encountered so far and their frequencies. As you iterate through the array, calculate the current prefix sum and check if `current_sum - k` is in the map. If it is, add its frequency to the total count.

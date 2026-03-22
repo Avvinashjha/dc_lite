@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0108",
+  "title": "Merge Sort for Linked Lists",
+  "difficulty": "Hard",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Merge%20Sort%20for%20Linked%20Lists",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "mergeSortForLinkedLists",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction sortList(head) {\n  // Merge sort linked list\n}",
+  "constraints": [
+    "0 <= number of nodes <= 5 * 10^4",
+    "-10^5 <= Node.val <= 10^5"
+  ]
+}

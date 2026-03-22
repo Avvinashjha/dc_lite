@@ -1,0 +1,33 @@
+{
+  "draft": false,
+  "id": "problem-0231",
+  "title": "Knight Dialer",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/knight-dialer/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        1
+      ],
+      "expected": 10
+    },
+    {
+      "args": [
+        2
+      ],
+      "expected": 20
+    }
+  ],
+  "functionName": "knightDialer",
+  "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction knightDialer(n) {\n  // Count distinct numbers of length n\n}",
+  "constraints": [
+    "1 <= n <= 5000"
+  ]
+}

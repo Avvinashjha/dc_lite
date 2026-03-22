@@ -1,0 +1,45 @@
+{
+  "draft": false,
+  "id": "problem-0055",
+  "title": "Add Binary",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/add-binary/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "11",
+        "1"
+      ],
+      "expected": "100"
+    },
+    {
+      "args": [
+        "1010",
+        "1011"
+      ],
+      "expected": "10101"
+    },
+    {
+      "args": [
+        "0",
+        "0"
+      ],
+      "expected": "0"
+    }
+  ],
+  "functionName": "addBinary",
+  "templateCode": "/**\n * @param {string} a\n * @param {string} b\n * @return {string}\n */\nfunction addBinary(a, b) {\n  // Return sum of two binary strings\n}\n\n// Sample: console.log(addBinary(\"11\", \"1\"));",
+  "constraints": [
+    "1 <= a.length, b.length <= 10^4",
+    "a and b consist only of 0 or 1",
+    "No leading zeros except 0 itself"
+  ]
+}

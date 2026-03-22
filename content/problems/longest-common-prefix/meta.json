@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0032",
+  "title": "Longest Common Prefix",
+  "difficulty": "Easy",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/longest-common-prefix/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "strs = [\"flower\",\"flow\",\"flight\"]",
+  "sampleOutput": "\"fl\"",
+  "testCases": [
+    {
+      "args": [
+        [
+          "flower",
+          "flow",
+          "flight"
+        ]
+      ],
+      "expected": "fl"
+    }
+  ],
+  "functionName": "longestCommonPrefix",
+  "templateCode": "/**\n * @param {number[]} strs\n * @return {any}\n */\nfunction longestCommonPrefix(strs) {\n  // Write your solution here\n}\n\n// Sample: console.log(longestCommonPrefix([\"flower\",\"flow\",\"flight\"]));",
+  "constraints": [
+    "1 <= strs.length <= 200",
+    "0 <= strs[i].length <= 200",
+    "strs[i] consists of lowercase English letters"
+  ]
+}

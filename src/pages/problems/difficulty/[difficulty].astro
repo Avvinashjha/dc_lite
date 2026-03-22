@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/problems.scss';
+import { getProblems, getProblemDifficulties } from '../../../utils/contentLoader';
+import { slugifyTaxonomy } from '../../../utils/taxonomy';
+
+export function getStaticPaths() {
+  const problems = getProblems();
+  const difficulties = getProblemDifficulties();
+
+  return difficulties.map(diff => {
+    const slug = diff.toLowerCase();
+    const filtered = problems.filter(p => p.difficulty.toLowerCase() === slug);
+    return {
+      params: { difficulty: slug },
+      props: { label: diff, problems: filtered },
+    };
+  });
+}
+
+const { difficulty } = Astro.params;
+const { label, problems } = Astro.props;
+
+const description = `Practice ${problems.length} ${label} difficulty coding problems with in-browser JavaScript runner.`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Problems', href: '/problems' },
+  { label: label, href: `/problems/difficulty/${difficulty}` },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${label} Problems`,
+  description,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: problems.length,
+    itemListElement: problems.map((p: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `/problems/${p.slug}`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${label} Problems | DailyCoder`}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  tags={[label, 'coding problems']}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="container taxonomy-page">
+    <nav class="problem-breadcrumbs" style="background:transparent;border:none;padding:0 0 0.75rem;">
+      <a href="/">Home</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href="/problems">Problems</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <span class="problem-breadcrumbs__current">{label}</span>
+    </nav>
+
+    <h1 class="taxonomy-page__title">{label} Problems</h1>
+    <p class="taxonomy-page__desc">{description}</p>
+    <p class="taxonomy-page__count">{problems.length} problems</p>
+
+    <table class="problem-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th class="problem-table__topic">Topic</th>
+          <th class="problem-table__platform">Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        {problems.map((p: any) => (
+          <tr>
+            <td class="problem-table__title">
+              <a href={`/problems/${p.slug}`}>{p.title}</a>
+            </td>
+            <td class="problem-table__topic">
+              <a href={`/problems/topic/${slugifyTaxonomy(p.topic)}`} class="p-badge p-badge--neutral" style="text-decoration:none;font-size:0.68rem;">{p.topic}</a>
+            </td>
+            <td class="problem-table__platform">{p.platform}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <!-- Difficulty nav -->
+    <div class="problem-section" style="margin-top:var(--spacing-xl);">
+      <div class="problem-section__heading">Browse by Difficulty</div>
+      <div style="display:flex;gap:0.4rem;margin-top:0.5rem;">
+        {getProblemDifficulties().map(d => (
+          <a
+            href={`/problems/difficulty/${d.toLowerCase()}`}
+            class={`p-badge p-badge--${d.toLowerCase()} ${d.toLowerCase() === difficulty ? '' : ''}`}
+            style="text-decoration:none;font-size:0.78rem;padding:0.25rem 0.65rem;"
+          >{d}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

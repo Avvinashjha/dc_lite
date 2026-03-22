@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0152",
+  "title": "Unique Binary Search Trees II",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/unique-binary-search-trees-ii/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "uniqueBinarySearchTreesIi",
+  "templateCode": "/**\n * @param {number} n\n * @return {TreeNode[]}\n */\nfunction generateTrees(n) {\n  // Generate all unique BSTs\n}",
+  "constraints": [
+    "1 <= n <= 8"
+  ]
+}

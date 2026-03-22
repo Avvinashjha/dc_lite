@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0047",
+  "title": "Boyer Moore Algorithm for Pattern Searching",
+  "difficulty": "Hard",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Boyer%20Moore%20Algorithm%20for%20Pattern%20Searching",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "ABAAABCD",
+        "ABC"
+      ],
+      "expected": [
+        4
+      ]
+    }
+  ],
+  "functionName": "boyerMooreAlgorithmForPatternSearching",
+  "templateCode": "/**\n * @param {string} text\n * @param {string} pattern\n * @return {number[]}\n */\nfunction boyerMoore(text, pattern) {\n  // Find all occurrences of pattern in text\n}",
+  "constraints": [
+    "1 <= text.length <= 10^5",
+    "1 <= pattern.length <= text.length"
+  ]
+}

@@ -1,0 +1,1 @@
+Use a stack to process numbers. Iterate through the string, parsing numbers and keeping track of the previous operator. For '*' and '/', update the top of the stack by evaluating the operation. For '+' and '-', push the number (or its negation) onto the stack. Finally, sum the elements in the stack.

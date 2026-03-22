@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0175",
+  "title": "Print all k-sum paths in a binary tree",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20k-sum%20paths%20in%20a%20binary%20tree",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "printAllKSumPathsInABinaryTree",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction printAllKSumPathsInABinaryTree(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^4",
+    "-10^4 <= Node.val <= 10^4"
+  ]
+}

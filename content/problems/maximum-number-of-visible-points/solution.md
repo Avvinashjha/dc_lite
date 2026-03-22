@@ -1,0 +1,1 @@
+Translate all points to be relative to the location. Convert them to polar coordinates (angles). Sort the angles. Use a sliding window to find the maximum number of angles within the given range (angle).

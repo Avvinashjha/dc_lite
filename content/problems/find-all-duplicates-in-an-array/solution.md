@@ -1,0 +1,1 @@
+Since all elements are between 1 and `n`, treat the values as indices. For each number `x`, go to index `|x|-1` and multiply the element there by -1. If an element at an index is already negative, the current number `|x|` has been seen before and is a duplicate.

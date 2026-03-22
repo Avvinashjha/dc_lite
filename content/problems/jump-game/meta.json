@@ -1,0 +1,36 @@
+{
+  "draft": false,
+  "id": "problem-0022",
+  "title": "Jump Game",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/jump-game/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [2,3,1,1,4]",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          3,
+          1,
+          1,
+          4
+        ]
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "jumpGame",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction jumpGame(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(jumpGame([2,3,1,1,4]));",
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "0 <= nums[i] <= 10^5"
+  ]
+}

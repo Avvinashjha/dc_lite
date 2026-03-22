@@ -1,0 +1,1 @@
+Split the path by slashes and use a stack to process the components. Ignore empty or single-dot components, and pop from the stack for double-dot components. Concatenate the remaining components with slashes to form the canonical path.

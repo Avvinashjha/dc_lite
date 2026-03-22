@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0277",
+  "title": "Print all Palindromic Partitions of a String using Bit Manipulation",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20Palindromic%20Partitions%20of%20a%20String%20using%20Bit%20Manipulation",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nitin",
+  "sampleOutput": "[[\"n\", \"i\", \"t\", \"i\", \"n\"], [\"n\", \"iti\", \"n\"], [\"nitin\"]]",
+  "testCases": [],
+  "functionName": "printAllPalindromicPartitionsOfAStringUsingBitManipulation",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction printAllPalindromicPartitionsOfAStringUsingBitManipulation(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= s.length <= 15"
+  ]
+}

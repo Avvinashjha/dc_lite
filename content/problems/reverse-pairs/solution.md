@@ -1,0 +1,1 @@
+This problem can be solved using a modified merge sort algorithm. During the merging process, for each element in the left half, count how many elements in the right half satisfy the condition `nums[i] > 2 * nums[j]`. This approach achieves O(n log n) time complexity.

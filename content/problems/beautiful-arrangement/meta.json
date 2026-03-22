@@ -1,0 +1,29 @@
+{
+  "draft": false,
+  "id": "problem-0265",
+  "title": "Beautiful Arrangement",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/beautiful-arrangement/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "n = 2",
+  "sampleOutput": "2",
+  "testCases": [
+    {
+      "args": [
+        2
+      ],
+      "expected": 2
+    }
+  ],
+  "functionName": "beautifulArrangement",
+  "templateCode": "/**\n * @param {number} n\n * @return {any}\n */\nfunction beautifulArrangement(n) {\n  // Write your solution here\n}\n\n// Sample: console.log(beautifulArrangement(2));",
+  "constraints": [
+    "1 <= n <= 15"
+  ]
+}

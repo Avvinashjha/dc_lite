@@ -1,0 +1,1 @@
+Sort the array and use a two-pointer approach similar to 3Sum. For each element, use two pointers to find a pair such that the sum of the three elements is close to the target. Keep track of the sum that has the minimum absolute difference from the target.

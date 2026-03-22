@@ -1,0 +1,1 @@
+Use two pointers. One pointer (slow) tracks the position to place the next non-zero element. The other (fast) iterates through the array. Move non-zero elements to the slow pointer's position and increment it. Finally, fill the rest of the array with zeroes.

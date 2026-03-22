@@ -1,0 +1,37 @@
+{
+  "draft": false,
+  "id": "problem-0027",
+  "title": "Largest Rectangle in Histogram",
+  "difficulty": "Hard",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "heights = [2,1,5,6,2,3]",
+  "sampleOutput": "10",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          1,
+          5,
+          6,
+          2,
+          3
+        ]
+      ],
+      "expected": 10
+    }
+  ],
+  "functionName": "largestRectangleInHistogram",
+  "templateCode": "/**\n * @param {number[]} heights\n * @return {any}\n */\nfunction largestRectangleInHistogram(heights) {\n  // Write your solution here\n}\n\n// Sample: console.log(largestRectangleInHistogram([2,1,5,6,2,3]));",
+  "constraints": [
+    "1 <= heights.length <= 10^5",
+    "0 <= heights[i] <= 10^4"
+  ]
+}

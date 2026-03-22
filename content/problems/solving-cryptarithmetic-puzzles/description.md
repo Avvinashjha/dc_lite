@@ -1,0 +1,1 @@
+Cryptarithmetic puzzles are mathematical puzzles in which the digits are replaced by letters or symbols. For example, SEND + MORE = MONEY. Each letter represents a unique digit from 0-9. The first letter of a word cannot be 0.

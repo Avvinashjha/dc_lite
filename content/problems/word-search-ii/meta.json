@@ -1,0 +1,65 @@
+{
+  "draft": false,
+  "id": "problem-0268",
+  "title": "Word Search II",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/word-search-ii/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "board = [[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]], words = [\"oath\",\"pea\",\"eat\",\"rain\"]",
+  "sampleOutput": "[\"eat\",\"oath\"]",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "o",
+            "a",
+            "a",
+            "n"
+          ],
+          [
+            "e",
+            "t",
+            "a",
+            "e"
+          ],
+          [
+            "i",
+            "h",
+            "k",
+            "r"
+          ],
+          [
+            "i",
+            "f",
+            "l",
+            "v"
+          ]
+        ],
+        [
+          "oath",
+          "pea",
+          "eat",
+          "rain"
+        ]
+      ],
+      "expected": [
+        "eat",
+        "oath"
+      ]
+    }
+  ],
+  "functionName": "wordSearchIi",
+  "templateCode": "/**\n * @param {number[][]} board\n * @param {number[]} words\n * @return {any}\n */\nfunction wordSearchIi(board, words) {\n  // Write your solution here\n}\n\n// Sample: console.log(wordSearchIi([[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]], [\"oath\",\"pea\",\"eat\",\"rain\"]));",
+  "constraints": [
+    "1 <= m, n <= 12",
+    "1 <= words.length <= 3 * 10^4",
+    "1 <= words[i].length <= 10"
+  ]
+}

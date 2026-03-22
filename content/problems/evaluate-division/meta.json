@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0201",
+  "title": "Evaluate Division",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/evaluate-division/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "evaluateDivision",
+  "templateCode": "/**\n * @param {string[][]} equations\n * @param {number[]} values\n * @param {string[][]} queries\n * @return {number[]}\n */\nfunction calcEquation(equations, values, queries) {\n  // Evaluate division queries\n}",
+  "constraints": [
+    "1 <= equations.length <= 20",
+    "1 <= queries.length <= 20",
+    "values[i] > 0"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0059",
+  "title": "Palindrome Number",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/palindrome-number/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        121
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        -121
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        10
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "palindromeNumber",
+  "templateCode": "/**\n * @param {number} x\n * @return {boolean}\n */\nfunction isPalindrome(x) {\n  // Check if integer is palindrome\n}\n\n// Sample: console.log(isPalindrome(121));",
+  "constraints": [
+    "-2^31 <= x <= 2^31 - 1"
+  ]
+}

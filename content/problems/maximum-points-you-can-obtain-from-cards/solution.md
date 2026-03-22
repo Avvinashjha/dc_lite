@@ -1,0 +1,1 @@
+Taking `k` cards from the ends is equivalent to leaving a contiguous subarray of size `n-k` in the middle. To maximize the points from the `k` cards, minimize the sum of the `n-k` cards in the middle using a sliding window.

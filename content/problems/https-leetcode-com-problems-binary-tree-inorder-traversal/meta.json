@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0148",
+  "title": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/https-leetcode-com-problems-binary-tree-inorder-traversal/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreeInorderTraversal",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nfunction inorderTraversal(root) {\n  // Inorder traversal of binary tree\n}",
+  "constraints": []
+}

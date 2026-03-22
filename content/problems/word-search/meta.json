@@ -1,0 +1,51 @@
+{
+  "draft": false,
+  "id": "problem-0021",
+  "title": "Word Search",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/word-search/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "A",
+            "B",
+            "C",
+            "E"
+          ],
+          [
+            "S",
+            "F",
+            "C",
+            "S"
+          ],
+          [
+            "A",
+            "D",
+            "E",
+            "E"
+          ]
+        ],
+        "ABCCED"
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "wordSearch",
+  "templateCode": "/**\n * @param {number[][]} board\n * @param {string} word\n * @return {any}\n */\nfunction wordSearch(board, word) {\n  // Write your solution here\n}\n\n// Sample: console.log(wordSearch([[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], \"ABCCED\"));",
+  "constraints": [
+    "1 <= m, n <= 6",
+    "1 <= word.length <= 15",
+    "board and word consist of lowercase and uppercase English letters"
+  ]
+}

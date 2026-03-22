@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0076",
+  "title": "Minimum swaps to sort an array",
+  "difficulty": "Hard",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Minimum%20swaps%20to%20sort%20an%20array",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumSwapsToSortAnArray",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumSwapsToSortAnArray(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= arr[i] <= 10^6"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0144",
+  "title": "Minimum Absolute Difference in BST",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-absolute-difference-in-bst/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumAbsoluteDifferenceInBst",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction getMinimumDifference(root) {\n  // Min absolute difference in BST\n}",
+  "constraints": [
+    "2 <= number of nodes <= 10^4",
+    "0 <= Node.val <= 10^5"
+  ]
+}

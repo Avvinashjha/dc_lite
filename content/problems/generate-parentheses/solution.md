@@ -1,0 +1,1 @@
+Use backtracking to generate strings of parentheses. Keep track of the number of open and closed parentheses used. Add an open parenthesis if the count is less than `n`, and a closed parenthesis if its count is less than the count of open parentheses.

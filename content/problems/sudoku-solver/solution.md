@@ -1,0 +1,1 @@
+Use backtracking to fill empty cells one by one. For each cell, try digits 1-9 and check if they are valid according to Sudoku rules. If a valid digit is found, recurse to the next cell. If no digit leads to a solution, backtrack.

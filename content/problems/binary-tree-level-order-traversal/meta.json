@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0157",
+  "title": "Binary Tree Level Order Traversal",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreeLevelOrderTraversal",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nfunction levelOrder(root) {\n  // Level order traversal\n}",
+  "constraints": [
+    "0 <= number of nodes <= 2000",
+    "-1000 <= Node.val <= 1000"
+  ]
+}

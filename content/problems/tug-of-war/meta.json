@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0274",
+  "title": "Tug of War",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Tug%20of%20War",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "[3, 4, 5, -3, 100, 1, 89, 54, 23, 20]",
+  "sampleOutput": "Subsets with minimum difference",
+  "testCases": [],
+  "functionName": "tugOfWar",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction tugOfWar(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= n <= 20",
+    "-10^6 <= arr[i] <= 10^6"
+  ]
+}

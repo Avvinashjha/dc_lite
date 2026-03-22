@@ -1,0 +1,42 @@
+{
+  "draft": false,
+  "id": "problem-0270",
+  "title": "N-Queens",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/n-queens/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "n = 4",
+  "sampleOutput": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]",
+  "testCases": [
+    {
+      "args": [
+        4
+      ],
+      "expected": [
+        [
+          ".Q..",
+          "...Q",
+          "Q...",
+          "..Q."
+        ],
+        [
+          "..Q.",
+          "Q...",
+          "...Q",
+          ".Q.."
+        ]
+      ]
+    }
+  ],
+  "functionName": "nQueens",
+  "templateCode": "/**\n * @param {number} n\n * @return {any}\n */\nfunction nQueens(n) {\n  // Write your solution here\n}\n\n// Sample: console.log(nQueens(4));",
+  "constraints": [
+    "1 <= n <= 9"
+  ]
+}

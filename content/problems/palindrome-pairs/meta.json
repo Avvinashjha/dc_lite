@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0221",
+  "title": "Palindrome Pairs",
+  "difficulty": "Hard",
+  "topic": "Tries",
+  "topics": [
+    "Tries"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/palindrome-pairs/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "palindromePairs",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction palindromePairs(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= words.length <= 5000",
+    "0 <= words[i].length <= 300",
+    "words[i] consists of lowercase English letters"
+  ]
+}

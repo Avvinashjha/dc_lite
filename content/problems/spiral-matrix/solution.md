@@ -1,0 +1,1 @@
+Maintain four boundaries: top, bottom, left, and right. Traverse from left to right on the top row, top to bottom on the right column, right to left on the bottom row, and bottom to top on the left column. Update the boundaries after each traversal and check if you've finished.

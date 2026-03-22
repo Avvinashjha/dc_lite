@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0252",
+  "title": "Minimum Cost to Merge Stones",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-cost-to-merge-stones/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumCostToMergeStones",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumCostToMergeStones(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= stones.length <= 30",
+    "1 <= stones[i] <= 100",
+    "2 <= k <= 30"
+  ]
+}

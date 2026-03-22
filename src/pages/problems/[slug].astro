@@ -1,12 +1,14 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProblemLayout from '../../layouts/ProblemLayout.astro';
+import ProblemDescription from '../../components/ProblemDescription.astro';
+import ProblemEditor from '../../components/ProblemEditor.astro';
+import ProblemSolution from '../../components/ProblemSolution.astro';
+import ProblemDiscussion from '../../components/ProblemDiscussion.astro';
 import Comments from '../../components/Comments.astro';
-import CodeEditor from '../../components/CodeEditor.astro';
 import { getProblems, getProblem } from '../../utils/contentLoader';
-import { parseMarkdown } from '../../utils/markdown';
 
 export function getStaticPaths() {
-  return getProblems().map(problem => ({ params: { slug: problem.slug } }));
+  return getProblems().map(p => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -15,12 +17,7 @@ if (!slug) throw new Error('Problem slug is required');
 const problem = getProblem(slug);
 if (!problem) return Astro.redirect('/problems');
 
-const descriptionHtml = problem.description
-  ? parseMarkdown(problem.description)
-  : '<p>Description will be added soon.</p>';
-const solutionHtml = problem.solution
-  ? parseMarkdown(problem.solution)
-  : '<p>Solution will be added soon.</p>';
+const topics = problem.topics?.length ? problem.topics : [problem.topic];
 
 const runnerConfig = {
   functionName: problem.functionName || null,
@@ -33,198 +30,143 @@ const runnerConfig = {
     expected: tc.expected,
   })),
 };
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Problems', href: '/problems' },
+  { label: problem.topic, href: `/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}` },
+  { label: problem.title, href: `/problems/${slug}` },
+];
+
+const pageDescription = `${problem.title} - ${problem.difficulty} ${problem.topic} coding problem. Practice with in-browser JavaScript runner.`;
+
+const problemJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: problem.title,
+  description: pageDescription,
+  educationalLevel: problem.difficulty,
+  keywords: topics.join(', '),
+  url: Astro.url.href,
+  author: { '@type': 'Organization', name: 'DailyCoder' },
+};
 ---
 
-<BaseLayout title={`${problem.title} | Problems | DailyCoder`} description={problem.description || `${problem.title} coding problem`}>
+<ProblemLayout
+  title={`${problem.title} | Problems | DailyCoder`}
+  description={pageDescription}
+  breadcrumbs={breadcrumbs}
+  tags={topics}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(problemJsonLd)} />
+  </Fragment>
+
   <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig)} />
-  <div class="container" style="padding-top: 2.5rem; padding-bottom: 3rem;" id="problem-page-root" data-problem-slug={problem.slug} data-sample-input={problem.sampleInput || ''}>
-    <a href="/problems" class="back-link">&larr; Back to Problems</a>
-    <header class="problem-header">
-      <div class="problem-header__left">
-        <h1 class="problem-title">{problem.title}</h1>
-        <div class="problem-meta">
-          <span class={`badge badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
-          <span class="badge badge--neutral">{problem.topic}</span>
-          <span class="badge badge--neutral">{problem.platform}</span>
-        </div>
-      </div>
-      <div class="problem-header__right">
-        <button type="button" id="problem-favorite-btn" class="problem-favorite-btn" title="Toggle favorite" aria-label="Toggle favorite">
-          <span class="problem-favorite-btn__icon" aria-hidden="true">☆</span>
-        </button>
-        <a href={problem.externalUrl} target="_blank" rel="noopener" class="button">Solve on {problem.platform}</a>
-        <span class="problem-status" id="local-progress-state">Not solved • 0 attempts</span>
-        <button class="button button--secondary" id="toggle-problem-solved">Mark Solved</button>
-      </div>
-    </header>
 
-    <div class="problem-main-row">
-      <aside class="problem-content-panel">
-        <div class="article__content" set:html={descriptionHtml} />
-        {problem.remarks && <p class="problem-remarks"><strong>Remark:</strong> {problem.remarks}</p>}
-        <div class="problem-topic-tags">
-          {(problem.topics?.length ? problem.topics : [problem.topic]).map((t) => (
-            <span class="badge badge--neutral">{t}</span>
-          ))}
-        </div>
-        <section class="problem-section">
-          <h4 class="problem-section__title">Sample Input</h4>
-          <pre class="problem-pre">{problem.sampleInput || '—'}</pre>
-        </section>
-        <section class="problem-section">
-          <h4 class="problem-section__title">Sample Output</h4>
-          <pre class="problem-pre">{problem.sampleOutput || '—'}</pre>
-        </section>
-        {problem.constraints != null && (Array.isArray(problem.constraints) ? problem.constraints.length > 0 : String(problem.constraints).trim() !== '') && (
-          <section class="problem-section">
-            <h4 class="problem-section__title">Constraints</h4>
-            {Array.isArray(problem.constraints) ? (
-              <ul class="problem-list">
-                {problem.constraints.map((c) => <li>{c}</li>)}
-              </ul>
-            ) : (
-              <div class="article__content" set:html={parseMarkdown(problem.constraints as string)} />
-            )}
-          </section>
-        )}
-        {problem.followUps != null && (Array.isArray(problem.followUps) ? problem.followUps.length > 0 : String(problem.followUps).trim() !== '') && (
-          <section class="problem-section">
-            <h4 class="problem-section__title">Follow-up</h4>
-            {Array.isArray(problem.followUps) ? (
-              <ul class="problem-list">
-                {problem.followUps.map((f) => <li>{f}</li>)}
-              </ul>
-            ) : (
-              <div class="article__content" set:html={parseMarkdown(problem.followUps as string)} />
-            )}
-          </section>
-        )}
-        <section class="problem-section">
-          <h4 class="problem-section__title">Test Cases</h4>
-          {problem.testCases.length > 0 ? (
-            <div class="problem-test-cases">
-              {problem.testCases.map((testCase, idx) => (
-                <div class="test-card">
-                  <p><strong>Case {idx + 1}</strong></p>
-                  {'args' in testCase && testCase.args !== undefined ? (
-                    <>
-                      <p><strong>Args:</strong></p>
-                      <pre class="problem-pre problem-pre--small">{JSON.stringify(testCase.args)}</pre>
-                      <p><strong>Expected:</strong></p>
-                      <pre class="problem-pre problem-pre--small">{JSON.stringify(testCase.expected)}</pre>
-                    </>
-                  ) : (
-                    <>
-                      <p><strong>Input:</strong></p>
-                      <pre class="problem-pre problem-pre--small">{testCase.input ?? ''}</pre>
-                      <p><strong>Output:</strong></p>
-                      <pre class="problem-pre problem-pre--small">{testCase.output ?? ''}</pre>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p class="problem-muted">No test cases yet.</p>
-          )}
-        </section>
-      </aside>
-      <aside class="problem-editor-panel">
-        <p class="problem-editor-hint">Implement the function below. Use Run Sample or Run Tests.</p>
-        <CodeEditor id="problem-js-editor" minHeight={320} />
-        <div class="tool-actions">
-          <button id="run-js" class="tool-btn tool-btn--primary">Run Sample</button>
-          <button id="run-tests" class="tool-btn tool-btn--primary">Run Tests</button>
-          <button id="reset-js" class="tool-btn">Reset Template</button>
-          <button id="clear-js-output" class="tool-btn">Clear Output</button>
-        </div>
-        <div id="test-results" class="test-results" style="display:none;"></div>
-        <pre id="js-output" class="tool-output problem-output"></pre>
-        <iframe
-          id="problem-js-frame"
-          title="Problem JavaScript sandbox"
-          sandbox="allow-scripts"
-          style="width:0;height:0;border:0;position:absolute;opacity:0;pointer-events:none;"
-        />
-      </aside>
-    </div>
-
-    <nav class="tab-nav" id="problem-tabs">
-      <button class="tab-nav__btn tab-nav__btn--active" data-tab="solution">Solution</button>
-      <button class="tab-nav__btn" data-tab="discussion">Discussion</button>
-      <button class="tab-nav__btn" data-tab="comments">Comments</button>
-      <button class="tab-nav__btn" data-tab="notes">Notes</button>
+  <div class="problem-ide" id="problem-page-root" data-problem-slug={problem.slug} data-sample-input={problem.sampleInput || ''}>
+    <!-- Breadcrumbs -->
+    <nav class="problem-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href="/problems">Problems</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href={`/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}`}>{problem.topic}</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <span class="problem-breadcrumbs__current">{problem.title}</span>
     </nav>
 
-    <section class="problem-secondary-pane tab-pane tab-pane--active" data-pane="solution">
-      <h3 class="problem-secondary-pane__title">Solution</h3>
-      <div class="article__content" set:html={solutionHtml} />
-    </section>
-    <section class="problem-secondary-pane tab-pane" data-pane="discussion">
-      <h3 class="problem-secondary-pane__title">Discussion</h3>
-      <div class="problem-discussion-form">
-        <div class="problem-form-group">
-          <label class="problem-form-label" for="discussion-name">Name</label>
-          <input id="discussion-name" class="problem-form-input" type="text" placeholder="Your name" autocomplete="name" />
+    <!-- Toolbar -->
+    <div class="problem-toolbar">
+      <span class="problem-toolbar__title">{problem.title}</span>
+      <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+      <span id="local-progress-state" class="p-badge p-badge--neutral">0 attempts</span>
+      <div class="problem-toolbar__actions">
+        <button type="button" id="problem-favorite-btn" class="p-btn p-btn--icon p-btn--fav" title="Toggle favorite" aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
+        <button type="button" id="toggle-problem-solved" class="p-btn">Mark Solved</button>
+        {problem.externalUrl && (
+          <a href={problem.externalUrl} target="_blank" rel="noopener" class="p-btn">{problem.platform} &#8599;</a>
+        )}
+      </div>
+    </div>
+
+    <!-- Split pane -->
+    <div class="problem-split">
+      <!-- Left: Description / Solution / Discussion -->
+      <div class="problem-left">
+        <div class="problem-tabs" id="left-tabs">
+          <button class="problem-tabs__btn problem-tabs__btn--active" data-tab="description" type="button">Description</button>
+          <button class="problem-tabs__btn" data-tab="solution" type="button">Solution</button>
+          <button class="problem-tabs__btn" data-tab="discussion" type="button">Discussion</button>
+          <button class="problem-tabs__btn" data-tab="notes" type="button">Notes</button>
         </div>
-        <div class="problem-form-group">
-          <label class="problem-form-label" for="discussion-message">Message</label>
-          <textarea id="discussion-message" class="problem-form-textarea" rows="4" placeholder="Share your approach or ask a question..."></textarea>
-        </div>
-        <div class="problem-form-actions">
-          <button type="button" id="discussion-post" class="problem-form-btn problem-form-btn--primary">Post</button>
+        <div class="problem-tab-content">
+          <div class="problem-tab-pane problem-tab-pane--active" data-pane="description">
+            <ProblemDescription problem={problem} />
+          </div>
+          <div class="problem-tab-pane" data-pane="solution">
+            <ProblemSolution html={problem.solutionHtml} />
+          </div>
+          <div class="problem-tab-pane" data-pane="discussion">
+            <ProblemDiscussion slug={slug} />
+          </div>
+          <div class="problem-tab-pane" data-pane="notes">
+            <p class="problem-notes__hint">Saved in this browser only. Private to you.</p>
+            <textarea id="problem-note" class="problem-discussion__textarea" rows="12" placeholder="Your notes for this problem..."></textarea>
+            <div style="display:flex;gap:0.4rem;margin-top:0.5rem;align-items:center;">
+              <button type="button" id="save-note" class="p-btn p-btn--primary">Save</button>
+              <button type="button" id="clear-note" class="p-btn">Clear</button>
+              <span id="note-status" class="problem-notes__status" aria-live="polite"></span>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="discussion-list" class="problem-discussion-list"></div>
-    </section>
-    <section class="problem-secondary-pane tab-pane" data-pane="comments">
-      <h3 class="problem-secondary-pane__title">Comments</h3>
-      <Comments postSlug={`problem-${problem.slug}`} postTitle={problem.title} />
-    </section>
-    <section class="problem-secondary-pane tab-pane" data-pane="notes">
-      <h3 class="problem-secondary-pane__title">Notes</h3>
-      <p class="problem-notes-hint">Saved in this browser only. Private to you.</p>
-      <div class="problem-notes-form">
-        <textarea id="problem-note" class="problem-form-textarea problem-form-textarea--notes" rows="10" placeholder="Your notes for this problem..."></textarea>
-        <div class="problem-form-actions">
-          <button type="button" id="save-note" class="problem-form-btn problem-form-btn--primary">Save Note</button>
-          <button type="button" id="clear-note" class="problem-form-btn">Clear Note</button>
-          <span id="note-status" class="problem-note-status" aria-live="polite"></span>
-        </div>
+
+      <!-- Right: Editor + Output -->
+      <div class="problem-right">
+        <ProblemEditor />
       </div>
-    </section>
+    </div>
   </div>
-</BaseLayout>
+</ProblemLayout>
 
 <script src="/js/store.js" is:inline></script>
 <script>
   import { createCodeEditor } from '../../utils/codeEditor';
 
-  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('#problem-tabs .tab-nav__btn'));
-  var panes = Array.prototype.slice.call(document.querySelectorAll('.problem-secondary-pane'));
-  var rootEl = document.getElementById('problem-page-root');
-  var slug = rootEl ? (rootEl.dataset.problemSlug || '') : '';
-  var configEl = document.getElementById('problem-runner-config');
-  var runnerConfig = configEl && configEl.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
-  var sampleInput = runnerConfig.sampleInput || (rootEl ? rootEl.dataset.sampleInput || '' : '');
-  var testCases = runnerConfig.testCases || [];
-  var functionName = runnerConfig.functionName || null;
+  // ── Tab switching (left panel) ──
+  const leftTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#left-tabs .problem-tabs__btn'));
+  const leftPanes = Array.from(document.querySelectorAll<HTMLElement>('.problem-tab-content .problem-tab-pane'));
 
-  function activateTab(tabName) {
-    tabBtns.forEach(function(btn) {
-      btn.classList.toggle('tab-nav__btn--active', btn.dataset.tab === tabName);
-    });
-    panes.forEach(function(pane) {
-      pane.classList.toggle('tab-pane--active', pane.dataset.pane === tabName);
-    });
+  function switchLeftTab(name: string) {
+    leftTabs.forEach(b => b.classList.toggle('problem-tabs__btn--active', b.dataset.tab === name));
+    leftPanes.forEach(p => p.classList.toggle('problem-tab-pane--active', p.dataset.pane === name));
   }
-  if (tabBtns.length && panes.length) {
-    tabBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() { activateTab(btn.dataset.tab); });
-    });
-  }
+  leftTabs.forEach(b => b.addEventListener('click', () => switchLeftTab(b.dataset.tab!)));
 
-  var defaultTemplate = [
+  // ── Output tab switching ──
+  const outBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.problem-output-tabs__btn'));
+  const consolePaneEl = document.getElementById('output-console')!;
+  const testsPaneEl = document.getElementById('output-tests')!;
+
+  function switchOutputTab(name: string) {
+    outBtns.forEach(b => b.classList.toggle('problem-output-tabs__btn--active', b.dataset.outTab === name));
+    consolePaneEl.style.display = name === 'console' ? '' : 'none';
+    testsPaneEl.style.display = name === 'tests' ? '' : 'none';
+  }
+  outBtns.forEach(b => b.addEventListener('click', () => switchOutputTab(b.dataset.outTab!)));
+
+  // ── Runner config ──
+  const rootEl = document.getElementById('problem-page-root')!;
+  const slug = rootEl.dataset.problemSlug || '';
+  const configEl = document.getElementById('problem-runner-config');
+  const runnerConfig = configEl?.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
+  const sampleInput = runnerConfig.sampleInput || rootEl.dataset.sampleInput || '';
+  const testCases = runnerConfig.testCases || [];
+  const functionName = runnerConfig.functionName || null;
+
+  // ── Code editor ──
+  const defaultTemplate = [
     '/**',
     ' * @param {string} input',
     ' * @returns {string|number}',
@@ -236,42 +178,43 @@ const runnerConfig = {
     '',
     'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`').replace(/\\/g, '\\\\') + '`));'
   ].join('\n');
-  var template = runnerConfig.templateCode || defaultTemplate;
+  const template = runnerConfig.templateCode || defaultTemplate;
 
-  var codeEditor = createCodeEditor({
+  const codeEditor = createCodeEditor({
     rootId: 'problem-js-editor',
     doc: template,
     language: 'javascript',
     lineWrapping: true,
-    onModEnter: function() { runCode(); },
+    onModEnter: () => runCode(),
   });
 
-  var runBtn = document.getElementById('run-js');
-  var runTestsBtn = document.getElementById('run-tests');
-  var resetBtn = document.getElementById('reset-js');
-  var clearBtn = document.getElementById('clear-js-output');
-  var outputEl = document.getElementById('js-output');
-  var testResultsEl = document.getElementById('test-results');
-  var frameEl = document.getElementById('problem-js-frame');
-  var localProgressStateEl = document.getElementById('local-progress-state');
-  var toggleSolvedBtn = document.getElementById('toggle-problem-solved');
-  var progressTool = 'problem-progress';
-  var progressRow = { solved: false, attempts: 0, attemptsByDay: {} };
-  var runId = 0;
+  // ── DOM refs ──
+  const runBtn = document.getElementById('run-js')!;
+  const runTestsBtn = document.getElementById('run-tests')!;
+  const resetBtn = document.getElementById('reset-js')!;
+  const consoleEl = document.getElementById('output-console')!;
+  const testsEl = document.getElementById('output-tests')!;
+  const frameEl = document.getElementById('problem-js-frame') as HTMLIFrameElement;
+  const localProgressEl = document.getElementById('local-progress-state')!;
+  const toggleSolvedBtn = document.getElementById('toggle-problem-solved')!;
 
-  function appendOutput(prefix, msg) {
-    outputEl.textContent += (outputEl.textContent ? '\n' : '') + '[' + prefix + '] ' + msg;
-    outputEl.scrollTop = outputEl.scrollHeight;
+  let progressRow = { solved: false, attempts: 0, solvedAt: null as number | null, lastAttemptAt: null as number | null, attemptsByDay: {} as Record<string, number> };
+  let runId = 0;
+
+  function appendConsole(prefix: string, msg: string) {
+    consoleEl.textContent += (consoleEl.textContent ? '\n' : '') + `[${prefix}] ${msg}`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
   }
 
+  // ── Run code ──
   function runCode() {
     runId += 1;
-    var currentRunId = runId;
+    const currentRunId = runId;
     recordAttempt();
-    if (testResultsEl) testResultsEl.style.display = 'none';
-    appendOutput('INFO', 'Running...');
-    var code = codeEditor.getValue();
-    var srcdoc = [
+    switchOutputTab('console');
+    appendConsole('INFO', 'Running...');
+    const code = codeEditor.getValue();
+    const srcdoc = [
       '<!doctype html><html><body><script>',
       '(function(){',
       "var SOURCE='problem-js';",
@@ -299,32 +242,35 @@ const runnerConfig = {
     frameEl.srcdoc = srcdoc;
   }
 
-  window.addEventListener('message', function(event) {
-    var data = event.data;
+  window.addEventListener('message', (event) => {
+    const data = event.data;
     if (!data || data.source !== 'problem-js' || data.runId !== runId) return;
-    var type = data.type || 'log';
-    var payload = (data.payload || []).join(' ');
+    const type = data.type || 'log';
+    const payload = (data.payload || []).join(' ');
     if (type === 'runtime-error') {
-      appendOutput('ERROR', payload);
+      appendConsole('ERROR', payload);
       return;
     }
-    appendOutput(type.toUpperCase(), payload);
+    appendConsole(type.toUpperCase(), payload);
   });
 
-  function normalizeResult(v) {
+  // ── Run tests ──
+  function normalizeResult(v: any): string {
     if (v === null || v === undefined) return String(v);
     if (typeof v === 'object') return JSON.stringify(v);
     return String(v).trim();
   }
+
   function runTests() {
     if (!testCases.length) {
-      appendOutput('INFO', 'No test cases defined for this problem.');
+      appendConsole('INFO', 'No test cases defined for this problem.');
       return;
     }
     recordAttempt();
-    if (testResultsEl) { testResultsEl.style.display = 'block'; testResultsEl.innerHTML = '<p>Running tests...</p>'; }
-    var code = codeEditor.getValue();
-    var harness = [
+    switchOutputTab('tests');
+    testsEl.innerHTML = '<p style="font-size:0.8rem;">Running tests...</p>';
+    const code = codeEditor.getValue();
+    const harness = [
       '<!doctype html><html><body><script>',
       '(function(){',
       'var code=' + JSON.stringify(code) + ';',
@@ -350,19 +296,21 @@ const runnerConfig = {
       '<' + '/script></body></html>'
     ].join('');
     frameEl.srcdoc = harness;
-    var results = {};
-    var expectCount = testCases.length;
-    function onTestMessage(ev) {
-      var d = ev.data;
+
+    const results: Record<number, any> = {};
+    const expectCount = testCases.length;
+
+    function onTestMessage(ev: MessageEvent) {
+      const d = ev.data;
       if (d.type === 'test-error') {
-        testResultsEl.innerHTML = '<p class="test-results__error">Error: ' + (d.error || '').replace(/</g, '&lt;') + '</p>';
+        testsEl.innerHTML = `<p class="test-results__error">Error: ${(d.error || '').replace(/</g, '&lt;')}</p>`;
         window.removeEventListener('message', onTestMessage);
         return;
       }
       if (d.type === 'test-ready') {
-        for (var i = 0; i < testCases.length; i++) {
-          var tc = testCases[i];
-          var msg = { type: 'invoke', id: i };
+        for (let i = 0; i < testCases.length; i++) {
+          const tc = testCases[i];
+          const msg: any = { type: 'invoke', id: i };
           if (tc.args != null && tc.expected !== undefined && functionName) {
             msg.mode = 'function';
             msg.name = functionName;
@@ -371,70 +319,73 @@ const runnerConfig = {
             msg.mode = 'solve';
             msg.input = tc.input != null ? tc.input : '';
           }
-          frameEl.contentWindow.postMessage(msg, '*');
+          frameEl.contentWindow!.postMessage(msg, '*');
         }
         return;
       }
       if (d.type === 'result') {
         results[d.id] = d;
-        var count = Object.keys(results).length;
-        if (count === expectCount) {
+        if (Object.keys(results).length === expectCount) {
           window.removeEventListener('message', onTestMessage);
-          var passed = 0;
-          var html = '<div class="test-results__summary"></div><ul class="test-results__list">';
-          for (var j = 0; j < testCases.length; j++) {
-            var tc = testCases[j];
-            var res = results[j];
-            var ok = false;
-            var detail = '';
-            if (res && res.error) {
+          let passed = 0;
+          let html = '<div class="test-results__summary"></div><ul class="test-results__list">';
+          for (let j = 0; j < testCases.length; j++) {
+            const tc = testCases[j];
+            const res = results[j];
+            let ok = false;
+            let detail = '';
+            if (res?.error) {
               detail = 'Error: ' + res.error;
             } else if (tc.args != null && tc.expected !== undefined) {
-              var got = res && res.result !== undefined ? res.result : undefined;
+              const got = res?.result;
               ok = JSON.stringify(got) === JSON.stringify(tc.expected);
-              if (!ok) detail = 'Expected ' + JSON.stringify(tc.expected) + ', got ' + JSON.stringify(got);
+              if (!ok) detail = `Expected ${JSON.stringify(tc.expected)}, got ${JSON.stringify(got)}`;
             } else {
-              var expectedStr = (tc.output != null ? tc.output : '').trim();
-              var gotStr = res && res.result !== undefined ? normalizeResult(res.result) : '';
+              const expectedStr = (tc.output ?? '').trim();
+              const gotStr = res?.result !== undefined ? normalizeResult(res.result) : '';
               ok = gotStr === expectedStr;
-              if (!ok) detail = 'Expected ' + expectedStr + ', got ' + gotStr;
+              if (!ok) detail = `Expected ${expectedStr}, got ${gotStr}`;
             }
             if (ok) passed++;
-            html += '<li class="test-results__item test-results__item--' + (ok ? 'pass' : 'fail') + '">Case ' + (j + 1) + ': ' + (ok ? 'Pass' : 'Fail') + (detail ? ' — ' + detail.replace(/</g, '&lt;') : '') + '</li>';
+            html += `<li class="test-results__item test-results__item--${ok ? 'pass' : 'fail'}">Case ${j + 1}: ${ok ? 'Pass' : 'Fail'}${detail ? ' \u2014 ' + detail.replace(/</g, '&lt;') : ''}</li>`;
           }
           html += '</ul>';
-          testResultsEl.innerHTML = html;
-          testResultsEl.querySelector('.test-results__summary').textContent = passed + '/' + testCases.length + ' passed';
+          testsEl.innerHTML = html;
+          const summaryEl = testsEl.querySelector('.test-results__summary');
+          if (summaryEl) summaryEl.textContent = `${passed}/${testCases.length} passed`;
         }
       }
     }
     window.addEventListener('message', onTestMessage);
   }
+
   runBtn.addEventListener('click', runCode);
   runTestsBtn.addEventListener('click', runTests);
-  resetBtn.addEventListener('click', function() { codeEditor.setValue(template); });
-  clearBtn.addEventListener('click', function() { outputEl.textContent = ''; if (testResultsEl) testResultsEl.style.display = 'none'; });
+  resetBtn.addEventListener('click', () => { codeEditor.setValue(template); });
+
+  // ── Progress tracking ──
+  const PROGRESS_TOOL = 'problem-progress';
 
   function renderProgress() {
-    var attempts = Number(progressRow.attempts || 0);
-    localProgressStateEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' • ' + attempts + ' ' + (attempts === 1 ? 'attempt' : 'attempts');
+    const a = Number(progressRow.attempts || 0);
+    localProgressEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' \u00B7 ' + a + (a === 1 ? ' attempt' : ' attempts');
     toggleSolvedBtn.textContent = progressRow.solved ? 'Mark Unsolved' : 'Mark Solved';
   }
 
   async function saveProgress() {
-    await DCStore.set(progressTool, slug, {
+    await (window as any).DCStore.set(PROGRESS_TOOL, slug, {
       solved: !!progressRow.solved,
       solvedAt: progressRow.solved ? (progressRow.solvedAt || Date.now()) : null,
       attempts: Number(progressRow.attempts || 0),
-      lastAttemptAt: progressRow.lastAttemptAt || null,
-      attemptsByDay: progressRow.attemptsByDay || {},
+      lastAttemptAt: progressRow.lastAttemptAt,
+      attemptsByDay: progressRow.attemptsByDay,
     });
     renderProgress();
   }
 
   async function loadProgress() {
-    await DCStore.init();
-    var row = await DCStore.get(progressTool, slug);
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(PROGRESS_TOOL, slug);
     if (row) {
       progressRow = {
         solved: !!row.solved,
@@ -448,439 +399,107 @@ const runnerConfig = {
   }
 
   function recordAttempt() {
-    var today = new Date().toISOString().slice(0, 10);
-    if (!progressRow.attemptsByDay) progressRow.attemptsByDay = {};
+    const today = new Date().toISOString().slice(0, 10);
     progressRow.attempts = Number(progressRow.attempts || 0) + 1;
     progressRow.lastAttemptAt = Date.now();
+    if (!progressRow.attemptsByDay) progressRow.attemptsByDay = {};
     progressRow.attemptsByDay[today] = Number(progressRow.attemptsByDay[today] || 0) + 1;
     saveProgress();
   }
 
-  toggleSolvedBtn.addEventListener('click', function() {
+  toggleSolvedBtn.addEventListener('click', () => {
     progressRow.solved = !progressRow.solved;
     if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
     if (!progressRow.solved) progressRow.solvedAt = null;
     saveProgress();
   });
 
-  var noteKey = 'problem-note-' + slug;
-  var noteEl = document.getElementById('problem-note');
-  var noteStatusEl = document.getElementById('note-status');
+  // ── Notes ──
+  const noteKey = 'problem-note-' + slug;
+  const noteEl = document.getElementById('problem-note') as HTMLTextAreaElement;
+  const noteStatusEl = document.getElementById('note-status')!;
   noteEl.value = localStorage.getItem(noteKey) || '';
-  function setNoteStatus(msg) {
-    if (noteStatusEl) noteStatusEl.textContent = msg;
-    clearTimeout(window._noteStatusTimer);
-    window._noteStatusTimer = setTimeout(function() { if (noteStatusEl) noteStatusEl.textContent = ''; }, 2000);
+
+  let noteTimer: ReturnType<typeof setTimeout>;
+  function setNoteStatus(msg: string) {
+    noteStatusEl.textContent = msg;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => { noteStatusEl.textContent = ''; }, 2000);
   }
-  document.getElementById('save-note').addEventListener('click', function() {
+  document.getElementById('save-note')!.addEventListener('click', () => {
     localStorage.setItem(noteKey, noteEl.value || '');
     setNoteStatus('Saved');
   });
-  document.getElementById('clear-note').addEventListener('click', function() {
+  document.getElementById('clear-note')!.addEventListener('click', () => {
     noteEl.value = '';
     localStorage.removeItem(noteKey);
     setNoteStatus('Cleared');
   });
 
-  var discussionKey = 'problem-discussion-' + slug;
-  var discussionListEl = document.getElementById('discussion-list');
-  var discussionNameEl = document.getElementById('discussion-name');
-  var discussionMsgEl = document.getElementById('discussion-message');
+  // ── Discussion ──
+  const discussionKey = 'problem-discussion-' + slug;
+  const discussionListEl = document.getElementById('discussion-list')!;
+  const discussionNameEl = document.getElementById('discussion-name') as HTMLInputElement;
+  const discussionMsgEl = document.getElementById('discussion-message') as HTMLTextAreaElement;
 
-  function escapeHtml(s) {
-    if (s == null) return '';
-    var str = String(s);
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  function escapeHtml(s: string) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+
   function loadThreads() {
-    if (!discussionListEl) return;
-    var raw = localStorage.getItem(discussionKey);
-    var rows = raw ? JSON.parse(raw) : [];
+    const raw = localStorage.getItem(discussionKey);
+    const rows = raw ? JSON.parse(raw) : [];
     if (!rows.length) {
-      discussionListEl.innerHTML = '<p class="problem-discussion-empty">No discussion yet.</p>';
+      discussionListEl.innerHTML = '<p class="problem-discussion__empty">No discussion yet. Be the first to share your approach.</p>';
       return;
     }
-    discussionListEl.innerHTML = rows.map(function(row) {
-      var name = escapeHtml(row.name || 'Anonymous');
-      var msg = escapeHtml(row.message || '');
-      var time = new Date(row.ts).toLocaleString();
-      return '<article class="discussion-item">' +
-        '<p class="discussion-item__meta"><strong>' + name + '</strong> · ' + escapeHtml(time) + '</p>' +
-        '<p class="discussion-item__text">' + msg + '</p>' +
-      '</article>';
+    discussionListEl.innerHTML = rows.map((row: any) => {
+      const name = escapeHtml(row.name || 'Anonymous');
+      const msg = escapeHtml(row.message || '');
+      const time = new Date(row.ts).toLocaleString();
+      return `<article class="problem-discussion__item"><p class="problem-discussion__item-meta"><strong>${name}</strong> \u00B7 ${escapeHtml(time)}</p><p class="problem-discussion__item-text">${msg}</p></article>`;
     }).join('');
   }
 
-  document.getElementById('discussion-post').addEventListener('click', function() {
-    if (!discussionNameEl || !discussionMsgEl) return;
-    var name = (discussionNameEl.value || '').trim() || 'Anonymous';
-    var message = (discussionMsgEl.value || '').trim();
+  document.getElementById('discussion-post')!.addEventListener('click', () => {
+    const name = (discussionNameEl.value || '').trim() || 'Anonymous';
+    const message = (discussionMsgEl.value || '').trim();
     if (!message) return;
-    var raw = localStorage.getItem(discussionKey);
-    var rows = raw ? JSON.parse(raw) : [];
-    rows.unshift({ name: name, message: message, ts: Date.now() });
+    const raw = localStorage.getItem(discussionKey);
+    const rows = raw ? JSON.parse(raw) : [];
+    rows.unshift({ name, message, ts: Date.now(), userId: 'anonymous' });
     localStorage.setItem(discussionKey, JSON.stringify(rows.slice(0, 100)));
     discussionMsgEl.value = '';
     loadThreads();
   });
 
-  var FAVORITES_TOOL = 'problem-favorites';
-  var favoriteBtn = document.getElementById('problem-favorite-btn');
-  var favoriteIcon = favoriteBtn ? favoriteBtn.querySelector('.problem-favorite-btn__icon') : null;
-  var isFavorite = false;
+  // ── Favorites ──
+  const FAVORITES_TOOL = 'problem-favorites';
+  const favBtn = document.getElementById('problem-favorite-btn')!;
+  let isFavorite = false;
+
   function renderFavorite() {
-    if (!favoriteIcon) return;
-    favoriteIcon.textContent = isFavorite ? '★' : '☆';
-    favoriteBtn.setAttribute('aria-pressed', isFavorite ? 'true' : 'false');
+    favBtn.innerHTML = isFavorite ? '&#9733;' : '&#9734;';
+    favBtn.setAttribute('aria-pressed', String(isFavorite));
   }
+
   async function loadFavorite() {
-    await DCStore.init();
-    var row = await DCStore.get(FAVORITES_TOOL, slug);
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(FAVORITES_TOOL, slug);
     isFavorite = !!row;
     renderFavorite();
   }
-  favoriteBtn.addEventListener('click', async function() {
-    await DCStore.init();
+
+  favBtn.addEventListener('click', async () => {
+    await (window as any).DCStore.init();
     isFavorite = !isFavorite;
-    if (isFavorite) await DCStore.set(FAVORITES_TOOL, slug, { slug: slug, addedAt: Date.now() });
-    else await DCStore.remove(FAVORITES_TOOL, slug);
+    if (isFavorite) await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+    else await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
     renderFavorite();
   });
-  loadFavorite();
 
+  // ── Init ──
+  loadFavorite();
   loadProgress();
   loadThreads();
 </script>
-
-<style>
-  .back-link {
-    color: var(--color-text-light);
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-  .problem-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem 1.5rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 1rem;
-  }
-  .problem-header__left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .problem-title { margin: 0; }
-  .problem-meta { display: flex; gap: 0.45rem; flex-wrap: wrap; }
-  .problem-header__right {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .problem-main-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-    align-items: start;
-  }
-  .problem-content-panel {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    background: var(--color-surface);
-    overflow-y: auto;
-    max-height: min(75vh, 720px);
-  }
-  .problem-editor-panel {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    background: var(--color-surface);
-  }
-  .problem-topic-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 0.75rem 0;
-  }
-  .problem-remarks { margin: 0.5rem 0; font-size: 0.9rem; }
-  .problem-section {
-    margin-top: 1rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--color-border);
-  }
-  .problem-section__title {
-    margin: 0 0 0.4rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .problem-pre {
-    margin: 0;
-    padding: 0.6rem 0.75rem;
-    background: var(--color-code-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: 0.85rem;
-    overflow-x: auto;
-    white-space: pre-wrap;
-  }
-  .problem-pre--small { min-height: 2.5rem; }
-  .problem-list {
-    margin: 0.35rem 0 0;
-    padding-left: 1.25rem;
-    font-size: 0.9rem;
-  }
-  .problem-list li { margin: 0.2rem 0; }
-  .problem-test-cases { margin-top: 0.5rem; }
-  .problem-muted {
-    margin: 0.25rem 0 0;
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-  }
-  .problem-editor-hint {
-    margin: 0 0 0.6rem;
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-  }
-  .problem-output {
-    min-height: 160px;
-    margin-top: 0.75rem;
-  }
-  .problem-secondary-pane {
-    display: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 1rem 1.25rem;
-    background: var(--color-surface);
-  }
-  .problem-secondary-pane.tab-pane--active { display: block; }
-  .problem-secondary-pane__title {
-    margin: 0 0 0.75rem;
-    font-size: 1.1rem;
-  }
-  @media (max-width: 900px) {
-    .problem-main-row {
-      grid-template-columns: 1fr;
-    }
-  }
-  .badge {
-    display: inline-block;
-    font-size: 0.73rem;
-    font-weight: 700;
-    padding: 0.16rem 0.5rem;
-    border-radius: 999px;
-  }
-  .badge--easy { background: rgba(34,197,94,.16); color: #16a34a; }
-  .badge--medium { background: rgba(245,158,11,.18); color: #d97706; }
-  .badge--hard { background: rgba(239,68,68,.17); color: #dc2626; }
-  .badge--neutral { background: var(--color-code-bg); color: var(--color-text-light); }
-  .problem-status {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 0.6rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: 0.85rem;
-  }
-  .tab-nav {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-  .tab-nav__btn {
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    color: var(--color-text);
-    border-radius: 999px;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.82rem;
-    cursor: pointer;
-  }
-  .tab-nav__btn--active {
-    background: var(--color-primary);
-    color: #fff;
-    border-color: var(--color-primary);
-  }
-  .tab-pane {
-    display: none;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    background: var(--color-surface);
-  }
-  .tab-pane--active { display: block; }
-  .test-card {
-    margin-top: 0.8rem;
-    padding: 0.8rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-background);
-  }
-  .discussion-item {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 0.8rem;
-    margin-top: 0.7rem;
-    background: var(--color-background);
-  }
-  .discussion-item__meta {
-    margin: 0 0 0.25rem;
-    font-size: 0.8rem;
-    color: var(--color-text-light);
-  }
-  .discussion-item__text { margin: 0; white-space: pre-wrap; word-break: break-word; }
-  .problem-discussion-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-  }
-  .problem-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-  .problem-form-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-text-light);
-    letter-spacing: 0.02em;
-  }
-  .problem-form-input {
-    width: 100%;
-    padding: 0.55rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-size: 0.9rem;
-  }
-  .problem-form-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
-  }
-  .problem-form-textarea {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    resize: vertical;
-    min-height: 100px;
-  }
-  .problem-form-textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
-  }
-  .problem-form-textarea--notes { min-height: 200px; }
-  .problem-form-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .problem-form-btn {
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .problem-form-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-  .problem-form-btn--primary {
-    background: var(--color-primary);
-    color: #fff;
-    border-color: var(--color-primary);
-  }
-  .problem-form-btn--primary:hover {
-    background: var(--color-primary);
-    opacity: 0.9;
-  }
-  .problem-discussion-list { margin-top: 0.5rem; }
-  .problem-discussion-empty {
-    margin: 0;
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-  }
-  .problem-notes-hint {
-    margin: 0 0 0.5rem;
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-  }
-  .problem-notes-form { display: flex; flex-direction: column; gap: 0.75rem; }
-  .problem-note-status {
-    margin-left: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-  }
-  .test-results {
-    margin-top: 0.75rem;
-    padding: 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-background);
-  }
-  .test-results__summary {
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  .test-results__list {
-    margin: 0;
-    padding-left: 1.25rem;
-    list-style: none;
-  }
-  .test-results__item {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-  }
-  .test-results__item--pass { color: #16a34a; }
-  .test-results__item--fail { color: #dc2626; }
-  .test-results__error {
-    margin: 0;
-    color: #dc2626;
-    font-size: 0.9rem;
-  }
-  .problem-favorite-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text-light);
-    cursor: pointer;
-    font-size: 1.25rem;
-    line-height: 1;
-  }
-  .problem-favorite-btn:hover {
-    color: #eab308;
-    border-color: #eab308;
-  }
-  .problem-favorite-btn[aria-pressed="true"] .problem-favorite-btn__icon {
-    color: #eab308;
-  }
-</style>

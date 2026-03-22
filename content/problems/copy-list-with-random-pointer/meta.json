@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0094",
+  "title": "Copy List with Random Pointer",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "copyListWithRandomPointer",
+  "templateCode": "/**\n * @param {Node} head\n * @return {Node}\n */\nfunction copyRandomList(head) {\n  // Deep copy linked list with random pointers\n}",
+  "constraints": [
+    "0 <= n <= 1000",
+    "-10^4 <= Node.val <= 10^4",
+    "random is null or points to a node in the list"
+  ]
+}

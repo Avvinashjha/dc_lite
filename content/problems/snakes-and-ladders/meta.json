@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0202",
+  "title": "Snakes and Ladders",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/snakes-and-ladders/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "snakesAndLadders",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction snakesAndLadders(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "n == board.length == board[i].length",
+    "2 <= n <= 20",
+    "-1 <= board[i][j] <= n^2"
+  ]
+}

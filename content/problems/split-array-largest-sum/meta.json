@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0080",
+  "title": "Split Array Largest Sum",
+  "difficulty": "Hard",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/split-array-largest-sum/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          7,
+          2,
+          5,
+          10,
+          8
+        ],
+        2
+      ],
+      "expected": 18
+    }
+  ],
+  "functionName": "splitArrayLargestSum",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nfunction splitArray(nums, k) {\n  // Minimize largest subarray sum\n}",
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "0 <= nums[i] <= 10^6",
+    "1 <= k <= min(50, nums.length)"
+  ]
+}

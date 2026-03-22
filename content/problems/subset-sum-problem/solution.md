@@ -1,0 +1,1 @@
+Use backtracking to explore all possible subsets. For each element, either include it in the subset or exclude it. If the sum matches the target, return true. Optimization: Use dynamic programming for better performance.

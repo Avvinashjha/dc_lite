@@ -1,0 +1,1 @@
+Iterate through each cell in the grid. If a cell matches the first character of the word, perform a DFS to find the remaining characters. Use a temporary placeholder to mark the cell as visited and backtrack in the recursion.

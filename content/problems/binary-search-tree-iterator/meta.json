@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0150",
+  "title": "Binary Search Tree Iterator",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-search-tree-iterator/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binarySearchTreeIterator",
+  "templateCode": "/**\n * @param {TreeNode} root\n */\nfunction BSTIterator(root) {\n  // Initialize BST iterator\n}\nBSTIterator.prototype.next = function() {};\nBSTIterator.prototype.hasNext = function() {};",
+  "constraints": [
+    "1 <= number of nodes <= 10^5",
+    "0 <= Node.val <= 10^6",
+    "At most 10^5 calls to next() and hasNext()"
+  ]
+}

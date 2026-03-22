@@ -1,0 +1,43 @@
+{
+  "draft": false,
+  "id": "problem-0065",
+  "title": "The kth Factor of n",
+  "difficulty": "Medium",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/the-kth-factor-of-n/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        12,
+        3
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        7,
+        2
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        4,
+        4
+      ],
+      "expected": -1
+    }
+  ],
+  "functionName": "theKthFactorOfN",
+  "templateCode": "/**\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nfunction kthFactor(n, k) {\n  // kth factor of n\n}\n\n// Sample: console.log(kthFactor(12, 3));",
+  "constraints": [
+    "1 <= k <= n <= 1000"
+  ]
+}

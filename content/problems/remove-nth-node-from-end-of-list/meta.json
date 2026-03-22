@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0098",
+  "title": "Remove Nth Node From End of List",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "removeNthNodeFromEndOfList",
+  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} n\n * @return {ListNode}\n */\nfunction removeNthFromEnd(head, n) {\n  // Remove nth node from end\n}",
+  "constraints": [
+    "1 <= sz <= 30",
+    "0 <= Node.val <= 100",
+    "1 <= n <= sz"
+  ]
+}

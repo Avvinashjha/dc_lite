@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0166",
+  "title": "Kth Smallest Element in a BST",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "kthSmallestElementInABst",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} k\n * @return {number}\n */\nfunction kthSmallest(root, k) {\n  // kth smallest element in BST\n}",
+  "constraints": [
+    "1 <= k <= n <= 10^4",
+    "0 <= Node.val <= 10^4"
+  ]
+}

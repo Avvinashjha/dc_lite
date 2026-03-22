@@ -1,0 +1,1 @@
+Iterate through the prices. Whenever the price of the current day is greater than the price of the previous day, add the difference to your total profit. This effectively captures every profitable segment.

@@ -1,0 +1,42 @@
+{
+  "draft": false,
+  "id": "problem-0112",
+  "title": "Backspace String Compare",
+  "difficulty": "Easy",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/backspace-string-compare/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "ab#c",
+        "ad#c"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "ab##",
+        "c#d#"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "a#c",
+        "b"
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "backspaceStringCompare",
+  "templateCode": "/**\n * @param {string} s\n * @param {string} t\n * @return {boolean}\n */\nfunction backspaceCompare(s, t) {\n  // Compare strings with backspace processing\n}\n\n// Sample: console.log(backspaceCompare(\"ab#c\", \"ad#c\"));",
+  "constraints": [
+    "1 <= s.length, t.length <= 200",
+    "s and t contain lowercase letters and #"
+  ]
+}

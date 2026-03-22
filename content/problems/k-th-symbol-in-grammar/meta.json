@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0260",
+  "title": "K-th Symbol in Grammar",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/k-th-symbol-in-grammar/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "n = 2, k = 1",
+  "sampleOutput": "0",
+  "testCases": [
+    {
+      "args": [
+        2,
+        1
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "kThSymbolInGrammar",
+  "templateCode": "/**\n * @param {number} n\n * @param {number} k\n * @return {any}\n */\nfunction kThSymbolInGrammar(n, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(kThSymbolInGrammar(2, 1));",
+  "constraints": [
+    "1 <= n <= 30",
+    "1 <= k <= 2^(n-1)"
+  ]
+}

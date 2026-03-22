@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0218",
+  "title": "Word Break Problem | (Trie solution)",
+  "difficulty": "Medium",
+  "topic": "Tries",
+  "topics": [
+    "Tries"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Word%20Break%20Problem%20%7C%20(Trie%20solution)",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "wordBreakProblemTrieSolution",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction wordBreakProblemTrieSolution(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= s.length <= 300",
+    "1 <= wordDict.length <= 1000",
+    "1 <= wordDict[i].length <= 20"
+  ]
+}

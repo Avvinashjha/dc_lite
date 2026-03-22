@@ -1,0 +1,1 @@
+Iterate through the array while maintaining the maximum index you can reach. If you encounter an index that is further than your current maximum reach, you can't proceed. Update your maximum reach at each step as `max(maxReach, i + nums[i])`.

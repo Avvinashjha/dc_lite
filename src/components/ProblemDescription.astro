@@ -1,0 +1,81 @@
+---
+import type { ProblemItem } from '../types/post';
+
+interface Props {
+  problem: ProblemItem;
+}
+
+const { problem } = Astro.props;
+const topics = problem.topics?.length ? problem.topics : [problem.topic];
+const constraints = problem.constraints
+  ? (Array.isArray(problem.constraints) ? problem.constraints : [problem.constraints])
+  : [];
+const followUps = problem.followUps
+  ? (Array.isArray(problem.followUps) ? problem.followUps : [problem.followUps])
+  : [];
+---
+
+<div class="problem-desc">
+  <div class="problem-desc__header">
+    <h1 class="problem-desc__title">{problem.title}</h1>
+    <div class="problem-desc__meta">
+      <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+      {topics.map(t => <span class="p-badge p-badge--neutral">{t}</span>)}
+      <span class="p-badge p-badge--neutral">{problem.platform}</span>
+    </div>
+  </div>
+
+  <div class="problem-desc__body" set:html={problem.descriptionHtml} />
+
+  <div class="problem-example">
+    <div class="problem-example__label">Sample Input</div>
+    <div class="problem-example__content">{problem.sampleInput || '\u2014'}</div>
+  </div>
+  <div class="problem-example">
+    <div class="problem-example__label">Sample Output</div>
+    <div class="problem-example__content">{problem.sampleOutput || '\u2014'}</div>
+  </div>
+
+  {constraints.length > 0 && (
+    <div class="problem-section">
+      <div class="problem-section__heading">Constraints</div>
+      <ul class="problem-constraints">
+        {constraints.map(c => <li>{c}</li>)}
+      </ul>
+    </div>
+  )}
+
+  {followUps.length > 0 && (
+    <div class="problem-section">
+      <div class="problem-section__heading">Follow-up</div>
+      <ul class="problem-constraints">
+        {followUps.map(f => <li>{f}</li>)}
+      </ul>
+    </div>
+  )}
+
+  {problem.testCases.length > 0 && (
+    <div class="problem-section">
+      <div class="problem-section__heading">Test Cases</div>
+      {problem.testCases.map((tc, idx) => (
+        <div class="problem-example" style="margin-top:0.5rem;">
+          <div class="problem-example__label">Case {idx + 1}</div>
+          <div class="problem-example__content">{
+            tc.args !== undefined
+              ? `Args: ${JSON.stringify(tc.args)}\nExpected: ${JSON.stringify(tc.expected)}`
+              : `Input: ${tc.input ?? ''}\nOutput: ${tc.output ?? ''}`
+          }</div>
+        </div>
+      ))}
+    </div>
+  )}
+
+  <div class="problem-section">
+    <div class="problem-section__heading">Topics</div>
+    <div class="problem-topics">
+      {topics.map(t => (
+        <a href={`/problems/topic/${t.toLowerCase().replace(/\s+/g, '-')}`} class="p-badge p-badge--neutral" style="text-decoration:none;">{t}</a>
+      ))}
+    </div>
+  </div>
+</div>

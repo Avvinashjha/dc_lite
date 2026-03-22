@@ -1,0 +1,11 @@
+---
+interface Props {
+  html: string;
+}
+
+const { html } = Astro.props;
+---
+
+<div class="problem-desc">
+  <div class="problem-desc__body" set:html={html} />
+</div>

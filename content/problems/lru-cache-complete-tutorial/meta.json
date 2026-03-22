@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0130",
+  "title": "LRU Cache – Complete Tutorial",
+  "difficulty": "Hard",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=LRU%20Cache%20%E2%80%93%20Complete%20Tutorial",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "lruCacheCompleteTutorial",
+  "templateCode": "/**\n * @param {number} capacity\n */\nfunction LRUCache(capacity) {}\nLRUCache.prototype.get = function(key) {};\nLRUCache.prototype.put = function(key, value) {};",
+  "constraints": [
+    "1 <= capacity <= 3000",
+    "0 <= key <= 10^4",
+    "0 <= value <= 10^5",
+    "At most 2 * 10^5 calls"
+  ]
+}

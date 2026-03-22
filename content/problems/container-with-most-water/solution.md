@@ -1,0 +1,1 @@
+Use two pointers, one at the beginning and one at the end of the array. Calculate the volume of water (distance between pointers * minimum height of the two lines). Move the pointer that points to the shorter line inward.

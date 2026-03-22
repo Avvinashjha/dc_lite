@@ -1,0 +1,1 @@
+Use a series of flags (seenDigit, seenDot, seenE) to track the components of the number as you iterate through the string. Enforce rules about the placement and frequency of signs, dots, and exponents.

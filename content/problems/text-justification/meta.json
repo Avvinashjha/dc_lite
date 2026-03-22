@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0046",
+  "title": "Text Justification",
+  "difficulty": "Hard",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/text-justification/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "textJustification",
+  "templateCode": "/**\n * @param {string[]} words\n * @param {number} maxWidth\n * @return {string[]}\n */\nfunction fullJustify(words, maxWidth) {\n  // Text justification\n}",
+  "constraints": [
+    "1 <= words.length <= 300",
+    "1 <= words[i].length <= 20",
+    "1 <= maxWidth <= 100"
+  ]
+}
