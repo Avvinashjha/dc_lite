@@ -119,10 +119,10 @@ const listJsonLd = {
             <tr>
               <th class="problem-table__status">&#10004;</th>
               <th class="problem-table__fav"></th>
-              <th>Title</th>
-              <th class="problem-table__topic">Topic</th>
-              <th class="problem-table__difficulty">Difficulty</th>
-              <th class="problem-table__platform">Platform</th>
+              <th class="problem-table__sortable" data-sort="title">Title <span class="sort-icon"></span></th>
+              <th class="problem-table__topic problem-table__sortable" data-sort="topic">Topic <span class="sort-icon"></span></th>
+              <th class="problem-table__difficulty problem-table__sortable" data-sort="difficulty">Difficulty <span class="sort-icon"></span></th>
+              <th class="problem-table__platform problem-table__sortable" data-sort="platform">Platform <span class="sort-icon"></span></th>
             </tr>
           </thead>
           <tbody id="table-body">
@@ -330,6 +330,63 @@ const listJsonLd = {
   topicSelect.addEventListener('change', applyFilters);
   difficultyEl.addEventListener('change', applyFilters);
   favCheckEl.addEventListener('change', applyFilters);
+
+  // ── Column sorting ──
+  var DIFF_ORDER: Record<string, number> = { easy: 1, medium: 2, hard: 3 };
+  var currentSort = { key: '', dir: 0 }; // dir: 0=none, 1=asc, -1=desc
+  var tableBody = document.getElementById('table-body')!;
+  var sortHeaders = Array.from(document.querySelectorAll<HTMLElement>('.problem-table__sortable'));
+
+  function sortTable(key: string) {
+    if (currentSort.key === key) {
+      currentSort.dir = currentSort.dir === 1 ? -1 : currentSort.dir === -1 ? 0 : 1;
+    } else {
+      currentSort = { key, dir: 1 };
+    }
+
+    sortHeaders.forEach(th => {
+      var icon = th.querySelector('.sort-icon')!;
+      if (th.dataset.sort === key) {
+        icon.textContent = currentSort.dir === 1 ? ' ▲' : currentSort.dir === -1 ? ' ▼' : '';
+        th.classList.toggle('problem-table__sortable--active', currentSort.dir !== 0);
+      } else {
+        icon.textContent = '';
+        th.classList.remove('problem-table__sortable--active');
+      }
+    });
+
+    if (currentSort.dir === 0) {
+      problemsData.forEach((p: any, i: number) => {
+        var row = tableRows.find(r => r.dataset.slug === p.slug);
+        if (row) tableBody.appendChild(row);
+      });
+      return;
+    }
+
+    var sorted = [...tableRows].sort((a, b) => {
+      var va: string | number, vb: string | number;
+      if (key === 'difficulty') {
+        va = DIFF_ORDER[a.dataset.difficulty!] || 0;
+        vb = DIFF_ORDER[b.dataset.difficulty!] || 0;
+      } else if (key === 'title') {
+        va = a.dataset.title || '';
+        vb = b.dataset.title || '';
+      } else if (key === 'topic') {
+        va = a.dataset.topic || '';
+        vb = b.dataset.topic || '';
+      } else {
+        va = a.querySelector('.problem-table__platform')?.textContent?.toLowerCase() || '';
+        vb = b.querySelector('.problem-table__platform')?.textContent?.toLowerCase() || '';
+      }
+      if (va < vb) return -1 * currentSort.dir;
+      if (va > vb) return 1 * currentSort.dir;
+      return 0;
+    });
+
+    sorted.forEach(row => tableBody.appendChild(row));
+  }
+
+  sortHeaders.forEach(th => th.addEventListener('click', () => sortTable(th.dataset.sort!)));
 
   // ── Progress ──
   async function loadProgress() {
