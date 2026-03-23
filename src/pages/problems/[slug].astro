@@ -1,0 +1,505 @@
+---
+import ProblemLayout from '../../layouts/ProblemLayout.astro';
+import ProblemDescription from '../../components/ProblemDescription.astro';
+import ProblemEditor from '../../components/ProblemEditor.astro';
+import ProblemSolution from '../../components/ProblemSolution.astro';
+import ProblemDiscussion from '../../components/ProblemDiscussion.astro';
+import Comments from '../../components/Comments.astro';
+import { getProblems, getProblem } from '../../utils/contentLoader';
+
+export function getStaticPaths() {
+  return getProblems().map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Problem slug is required');
+
+const problem = getProblem(slug);
+if (!problem) return Astro.redirect('/problems');
+
+const topics = problem.topics?.length ? problem.topics : [problem.topic];
+
+const runnerConfig = {
+  functionName: problem.functionName || null,
+  templateCode: problem.templateCode || null,
+  sampleInput: problem.sampleInput || '',
+  testCases: (problem.testCases || []).map((tc: { input?: string; output?: string; args?: unknown[]; expected?: unknown }) => ({
+    input: tc.input,
+    output: tc.output,
+    args: tc.args,
+    expected: tc.expected,
+  })),
+};
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Problems', href: '/problems' },
+  { label: problem.topic, href: `/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}` },
+  { label: problem.title, href: `/problems/${slug}` },
+];
+
+const pageDescription = `${problem.title} - ${problem.difficulty} ${problem.topic} coding problem. Practice with in-browser JavaScript runner.`;
+
+const problemJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: problem.title,
+  description: pageDescription,
+  educationalLevel: problem.difficulty,
+  keywords: topics.join(', '),
+  url: Astro.url.href,
+  author: { '@type': 'Organization', name: 'DailyCoder' },
+};
+---
+
+<ProblemLayout
+  title={`${problem.title} | Problems | DailyCoder`}
+  description={pageDescription}
+  breadcrumbs={breadcrumbs}
+  tags={topics}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(problemJsonLd)} />
+  </Fragment>
+
+  <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig)} />
+
+  <div class="problem-ide" id="problem-page-root" data-problem-slug={problem.slug} data-sample-input={problem.sampleInput || ''}>
+    <!-- Breadcrumbs -->
+    <nav class="problem-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href="/problems">Problems</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href={`/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}`}>{problem.topic}</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <span class="problem-breadcrumbs__current">{problem.title}</span>
+    </nav>
+
+    <!-- Toolbar -->
+    <div class="problem-toolbar">
+      <span class="problem-toolbar__title">{problem.title}</span>
+      <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+      <span id="local-progress-state" class="p-badge p-badge--neutral">0 attempts</span>
+      <div class="problem-toolbar__actions">
+        <button type="button" id="problem-favorite-btn" class="p-btn p-btn--icon p-btn--fav" title="Toggle favorite" aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
+        <button type="button" id="toggle-problem-solved" class="p-btn">Mark Solved</button>
+        {problem.externalUrl && (
+          <a href={problem.externalUrl} target="_blank" rel="noopener" class="p-btn">{problem.platform} &#8599;</a>
+        )}
+      </div>
+    </div>
+
+    <!-- Split pane -->
+    <div class="problem-split">
+      <!-- Left: Description / Solution / Discussion -->
+      <div class="problem-left">
+        <div class="problem-tabs" id="left-tabs">
+          <button class="problem-tabs__btn problem-tabs__btn--active" data-tab="description" type="button">Description</button>
+          <button class="problem-tabs__btn" data-tab="solution" type="button">Solution</button>
+          <button class="problem-tabs__btn" data-tab="discussion" type="button">Discussion</button>
+          <button class="problem-tabs__btn" data-tab="notes" type="button">Notes</button>
+        </div>
+        <div class="problem-tab-content">
+          <div class="problem-tab-pane problem-tab-pane--active" data-pane="description">
+            <ProblemDescription problem={problem} />
+          </div>
+          <div class="problem-tab-pane" data-pane="solution">
+            <ProblemSolution html={problem.solutionHtml} />
+          </div>
+          <div class="problem-tab-pane" data-pane="discussion">
+            <ProblemDiscussion slug={slug} />
+          </div>
+          <div class="problem-tab-pane" data-pane="notes">
+            <p class="problem-notes__hint">Saved in this browser only. Private to you.</p>
+            <textarea id="problem-note" class="problem-discussion__textarea" rows="12" placeholder="Your notes for this problem..."></textarea>
+            <div style="display:flex;gap:0.4rem;margin-top:0.5rem;align-items:center;">
+              <button type="button" id="save-note" class="p-btn p-btn--primary">Save</button>
+              <button type="button" id="clear-note" class="p-btn">Clear</button>
+              <span id="note-status" class="problem-notes__status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Editor + Output -->
+      <div class="problem-right">
+        <ProblemEditor />
+      </div>
+    </div>
+  </div>
+</ProblemLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script>
+  import { createCodeEditor } from '../../utils/codeEditor';
+
+  // ── Tab switching (left panel) ──
+  const leftTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#left-tabs .problem-tabs__btn'));
+  const leftPanes = Array.from(document.querySelectorAll<HTMLElement>('.problem-tab-content .problem-tab-pane'));
+
+  function switchLeftTab(name: string) {
+    leftTabs.forEach(b => b.classList.toggle('problem-tabs__btn--active', b.dataset.tab === name));
+    leftPanes.forEach(p => p.classList.toggle('problem-tab-pane--active', p.dataset.pane === name));
+  }
+  leftTabs.forEach(b => b.addEventListener('click', () => switchLeftTab(b.dataset.tab!)));
+
+  // ── Output tab switching ──
+  const outBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.problem-output-tabs__btn'));
+  const consolePaneEl = document.getElementById('output-console')!;
+  const testsPaneEl = document.getElementById('output-tests')!;
+
+  function switchOutputTab(name: string) {
+    outBtns.forEach(b => b.classList.toggle('problem-output-tabs__btn--active', b.dataset.outTab === name));
+    consolePaneEl.style.display = name === 'console' ? '' : 'none';
+    testsPaneEl.style.display = name === 'tests' ? '' : 'none';
+  }
+  outBtns.forEach(b => b.addEventListener('click', () => switchOutputTab(b.dataset.outTab!)));
+
+  // ── Runner config ──
+  const rootEl = document.getElementById('problem-page-root')!;
+  const slug = rootEl.dataset.problemSlug || '';
+  const configEl = document.getElementById('problem-runner-config');
+  const runnerConfig = configEl?.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
+  const sampleInput = runnerConfig.sampleInput || rootEl.dataset.sampleInput || '';
+  const testCases = runnerConfig.testCases || [];
+  const functionName = runnerConfig.functionName || null;
+
+  // ── Code editor ──
+  const defaultTemplate = [
+    '/**',
+    ' * @param {string} input',
+    ' * @returns {string|number}',
+    ' */',
+    'function solve(input) {',
+    '  // Write your solution here',
+    '  return input;',
+    '}',
+    '',
+    'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`').replace(/\\/g, '\\\\') + '`));'
+  ].join('\n');
+  const template = runnerConfig.templateCode || defaultTemplate;
+
+  const codeEditor = createCodeEditor({
+    rootId: 'problem-js-editor',
+    doc: template,
+    language: 'javascript',
+    lineWrapping: true,
+    onModEnter: () => runCode(),
+  });
+
+  // ── DOM refs ──
+  const runBtn = document.getElementById('run-js')!;
+  const runTestsBtn = document.getElementById('run-tests')!;
+  const resetBtn = document.getElementById('reset-js')!;
+  const consoleEl = document.getElementById('output-console')!;
+  const testsEl = document.getElementById('output-tests')!;
+  const frameEl = document.getElementById('problem-js-frame') as HTMLIFrameElement;
+  const localProgressEl = document.getElementById('local-progress-state')!;
+  const toggleSolvedBtn = document.getElementById('toggle-problem-solved')!;
+
+  let progressRow = { solved: false, attempts: 0, solvedAt: null as number | null, lastAttemptAt: null as number | null, attemptsByDay: {} as Record<string, number> };
+  let runId = 0;
+
+  function appendConsole(prefix: string, msg: string) {
+    consoleEl.textContent += (consoleEl.textContent ? '\n' : '') + `[${prefix}] ${msg}`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
+  }
+
+  // ── Run code ──
+  function runCode() {
+    runId += 1;
+    const currentRunId = runId;
+    recordAttempt();
+    switchOutputTab('console');
+    appendConsole('INFO', 'Running...');
+    const code = codeEditor.getValue();
+    const srcdoc = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      "var SOURCE='problem-js';",
+      'var RUN_ID=' + currentRunId + ';',
+      'function emit(type,payload){ parent.postMessage({source:SOURCE,runId:RUN_ID,type:type,payload:payload},"*"); }',
+      'function stringify(v){ if (typeof v === "string") return v; try { return JSON.stringify(v); } catch(e){ return String(v); } }',
+      'var base = window.console;',
+      'window.console={',
+      'log:function(){ emit("log", Array.prototype.slice.call(arguments).map(stringify)); },',
+      'error:function(){ emit("error", Array.prototype.slice.call(arguments).map(stringify)); },',
+      'warn:function(){ emit("warn", Array.prototype.slice.call(arguments).map(stringify)); }',
+      '};',
+      'try {',
+      '  var code=' + JSON.stringify(code) + ';',
+      '  (0,eval)(code);',
+      '  emit("result", ["Execution finished"]);',
+      '} catch (e) {',
+      '  emit("runtime-error", [e && (e.stack || e.message) ? (e.stack || e.message) : String(e)]);',
+      '} finally {',
+      '  window.console = base;',
+      '}',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+    frameEl.srcdoc = srcdoc;
+  }
+
+  window.addEventListener('message', (event) => {
+    const data = event.data;
+    if (!data || data.source !== 'problem-js' || data.runId !== runId) return;
+    const type = data.type || 'log';
+    const payload = (data.payload || []).join(' ');
+    if (type === 'runtime-error') {
+      appendConsole('ERROR', payload);
+      return;
+    }
+    appendConsole(type.toUpperCase(), payload);
+  });
+
+  // ── Run tests ──
+  function normalizeResult(v: any): string {
+    if (v === null || v === undefined) return String(v);
+    if (typeof v === 'object') return JSON.stringify(v);
+    return String(v).trim();
+  }
+
+  function runTests() {
+    if (!testCases.length) {
+      appendConsole('INFO', 'No test cases defined for this problem.');
+      return;
+    }
+    recordAttempt();
+    switchOutputTab('tests');
+    testsEl.innerHTML = '<p style="font-size:0.8rem;">Running tests...</p>';
+    const code = codeEditor.getValue();
+    const harness = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      'var code=' + JSON.stringify(code) + ';',
+      'try { (0,eval)(code); } catch (e) {',
+      '  parent.postMessage({ type: "test-error", error: (e && (e.message || e.stack)) || String(e) }, "*");',
+      '  return;',
+      '}',
+      'window.addEventListener("message", function(ev) {',
+      '  var d = ev.data;',
+      '  if (d.type !== "invoke") return;',
+      '  var id = d.id, mode = d.mode, name = d.name, args = d.args, input = d.input;',
+      '  try {',
+      '    var r;',
+      '    if (mode === "solve") r = typeof solve !== "undefined" ? solve(input) : undefined;',
+      '    else r = typeof window[name] === "function" ? window[name].apply(null, args) : undefined;',
+      '    ev.source.postMessage({ type: "result", id: id, result: r }, ev.origin);',
+      '  } catch (err) {',
+      '    ev.source.postMessage({ type: "result", id: id, error: (err && err.message) || String(err) }, ev.origin);',
+      '  }',
+      '});',
+      'parent.postMessage({ type: "test-ready" }, "*");',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+    frameEl.srcdoc = harness;
+
+    const results: Record<number, any> = {};
+    const expectCount = testCases.length;
+
+    function onTestMessage(ev: MessageEvent) {
+      const d = ev.data;
+      if (d.type === 'test-error') {
+        testsEl.innerHTML = `<p class="test-results__error">Error: ${(d.error || '').replace(/</g, '&lt;')}</p>`;
+        window.removeEventListener('message', onTestMessage);
+        return;
+      }
+      if (d.type === 'test-ready') {
+        for (let i = 0; i < testCases.length; i++) {
+          const tc = testCases[i];
+          const msg: any = { type: 'invoke', id: i };
+          if (tc.args != null && tc.expected !== undefined && functionName) {
+            msg.mode = 'function';
+            msg.name = functionName;
+            msg.args = tc.args;
+          } else {
+            msg.mode = 'solve';
+            msg.input = tc.input != null ? tc.input : '';
+          }
+          frameEl.contentWindow!.postMessage(msg, '*');
+        }
+        return;
+      }
+      if (d.type === 'result') {
+        results[d.id] = d;
+        if (Object.keys(results).length === expectCount) {
+          window.removeEventListener('message', onTestMessage);
+          let passed = 0;
+          let html = '<div class="test-results__summary"></div><ul class="test-results__list">';
+          for (let j = 0; j < testCases.length; j++) {
+            const tc = testCases[j];
+            const res = results[j];
+            let ok = false;
+            let detail = '';
+            if (res?.error) {
+              detail = 'Error: ' + res.error;
+            } else if (tc.args != null && tc.expected !== undefined) {
+              const got = res?.result;
+              ok = JSON.stringify(got) === JSON.stringify(tc.expected);
+              if (!ok) detail = `Expected ${JSON.stringify(tc.expected)}, got ${JSON.stringify(got)}`;
+            } else {
+              const expectedStr = (tc.output ?? '').trim();
+              const gotStr = res?.result !== undefined ? normalizeResult(res.result) : '';
+              ok = gotStr === expectedStr;
+              if (!ok) detail = `Expected ${expectedStr}, got ${gotStr}`;
+            }
+            if (ok) passed++;
+            html += `<li class="test-results__item test-results__item--${ok ? 'pass' : 'fail'}">Case ${j + 1}: ${ok ? 'Pass' : 'Fail'}${detail ? ' \u2014 ' + detail.replace(/</g, '&lt;') : ''}</li>`;
+          }
+          html += '</ul>';
+          testsEl.innerHTML = html;
+          const summaryEl = testsEl.querySelector('.test-results__summary');
+          if (summaryEl) summaryEl.textContent = `${passed}/${testCases.length} passed`;
+        }
+      }
+    }
+    window.addEventListener('message', onTestMessage);
+  }
+
+  runBtn.addEventListener('click', runCode);
+  runTestsBtn.addEventListener('click', runTests);
+  resetBtn.addEventListener('click', () => { codeEditor.setValue(template); });
+
+  // ── Progress tracking ──
+  const PROGRESS_TOOL = 'problem-progress';
+
+  function renderProgress() {
+    const a = Number(progressRow.attempts || 0);
+    localProgressEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' \u00B7 ' + a + (a === 1 ? ' attempt' : ' attempts');
+    toggleSolvedBtn.textContent = progressRow.solved ? 'Mark Unsolved' : 'Mark Solved';
+  }
+
+  async function saveProgress() {
+    await (window as any).DCStore.set(PROGRESS_TOOL, slug, {
+      solved: !!progressRow.solved,
+      solvedAt: progressRow.solved ? (progressRow.solvedAt || Date.now()) : null,
+      attempts: Number(progressRow.attempts || 0),
+      lastAttemptAt: progressRow.lastAttemptAt,
+      attemptsByDay: progressRow.attemptsByDay,
+    });
+    renderProgress();
+  }
+
+  async function loadProgress() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(PROGRESS_TOOL, slug);
+    if (row) {
+      progressRow = {
+        solved: !!row.solved,
+        solvedAt: row.solvedAt || null,
+        attempts: Number(row.attempts || 0),
+        lastAttemptAt: row.lastAttemptAt || null,
+        attemptsByDay: row.attemptsByDay || {},
+      };
+    }
+    renderProgress();
+  }
+
+  function recordAttempt() {
+    const today = new Date().toISOString().slice(0, 10);
+    progressRow.attempts = Number(progressRow.attempts || 0) + 1;
+    progressRow.lastAttemptAt = Date.now();
+    if (!progressRow.attemptsByDay) progressRow.attemptsByDay = {};
+    progressRow.attemptsByDay[today] = Number(progressRow.attemptsByDay[today] || 0) + 1;
+    saveProgress();
+  }
+
+  toggleSolvedBtn.addEventListener('click', () => {
+    progressRow.solved = !progressRow.solved;
+    if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
+    if (!progressRow.solved) progressRow.solvedAt = null;
+    saveProgress();
+  });
+
+  // ── Notes ──
+  const noteKey = 'problem-note-' + slug;
+  const noteEl = document.getElementById('problem-note') as HTMLTextAreaElement;
+  const noteStatusEl = document.getElementById('note-status')!;
+  noteEl.value = localStorage.getItem(noteKey) || '';
+
+  let noteTimer: ReturnType<typeof setTimeout>;
+  function setNoteStatus(msg: string) {
+    noteStatusEl.textContent = msg;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => { noteStatusEl.textContent = ''; }, 2000);
+  }
+  document.getElementById('save-note')!.addEventListener('click', () => {
+    localStorage.setItem(noteKey, noteEl.value || '');
+    setNoteStatus('Saved');
+  });
+  document.getElementById('clear-note')!.addEventListener('click', () => {
+    noteEl.value = '';
+    localStorage.removeItem(noteKey);
+    setNoteStatus('Cleared');
+  });
+
+  // ── Discussion ──
+  const discussionKey = 'problem-discussion-' + slug;
+  const discussionListEl = document.getElementById('discussion-list')!;
+  const discussionNameEl = document.getElementById('discussion-name') as HTMLInputElement;
+  const discussionMsgEl = document.getElementById('discussion-message') as HTMLTextAreaElement;
+
+  function escapeHtml(s: string) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function loadThreads() {
+    const raw = localStorage.getItem(discussionKey);
+    const rows = raw ? JSON.parse(raw) : [];
+    if (!rows.length) {
+      discussionListEl.innerHTML = '<p class="problem-discussion__empty">No discussion yet. Be the first to share your approach.</p>';
+      return;
+    }
+    discussionListEl.innerHTML = rows.map((row: any) => {
+      const name = escapeHtml(row.name || 'Anonymous');
+      const msg = escapeHtml(row.message || '');
+      const time = new Date(row.ts).toLocaleString();
+      return `<article class="problem-discussion__item"><p class="problem-discussion__item-meta"><strong>${name}</strong> \u00B7 ${escapeHtml(time)}</p><p class="problem-discussion__item-text">${msg}</p></article>`;
+    }).join('');
+  }
+
+  document.getElementById('discussion-post')!.addEventListener('click', () => {
+    const name = (discussionNameEl.value || '').trim() || 'Anonymous';
+    const message = (discussionMsgEl.value || '').trim();
+    if (!message) return;
+    const raw = localStorage.getItem(discussionKey);
+    const rows = raw ? JSON.parse(raw) : [];
+    rows.unshift({ name, message, ts: Date.now(), userId: 'anonymous' });
+    localStorage.setItem(discussionKey, JSON.stringify(rows.slice(0, 100)));
+    discussionMsgEl.value = '';
+    loadThreads();
+  });
+
+  // ── Favorites ──
+  const FAVORITES_TOOL = 'problem-favorites';
+  const favBtn = document.getElementById('problem-favorite-btn')!;
+  let isFavorite = false;
+
+  function renderFavorite() {
+    favBtn.innerHTML = isFavorite ? '&#9733;' : '&#9734;';
+    favBtn.setAttribute('aria-pressed', String(isFavorite));
+  }
+
+  async function loadFavorite() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(FAVORITES_TOOL, slug);
+    isFavorite = !!row;
+    renderFavorite();
+  }
+
+  favBtn.addEventListener('click', async () => {
+    await (window as any).DCStore.init();
+    isFavorite = !isFavorite;
+    if (isFavorite) await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+    else await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+    renderFavorite();
+  });
+
+  // ── Init ──
+  loadFavorite();
+  loadProgress();
+  loadThreads();
+</script>

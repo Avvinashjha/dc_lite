@@ -1,0 +1,2693 @@
+[
+  {
+    "slug": "reverse-integer",
+    "description": "## Reverse Integer\n\nGiven a signed 32-bit integer `x`, return `x` with its digits reversed. If reversing causes the result to overflow outside the 32-bit signed integer range `[-2^31, 2^31 - 1]`, return `0`.\n\n**Example 1:**\n- Input: `x = 123`\n- Output: `321`\n\n**Example 2:**\n- Input: `x = -123`\n- Output: `-321`",
+    "solution": "## Approach: Digit Extraction\n\nExtract digits using modulo 10, build the reversed number. Before each multiplication, check if the result would overflow the 32-bit signed integer range.\n\n```javascript\nfunction reverseInteger(x) {\n  let result = 0;\n  while (x !== 0) {\n    const digit = x % 10;\n    x = Math.trunc(x / 10);\n    if (result > 2147483647 / 10 || result < -2147483648 / 10) return 0;\n    result = result * 10 + digit;\n  }\n  return result;\n}\n```\n\n**Time Complexity:** O(log x) — number of digits\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          123
+        ],
+        "expected": 321
+      },
+      {
+        "args": [
+          -123
+        ],
+        "expected": -321
+      },
+      {
+        "args": [
+          120
+        ],
+        "expected": 21
+      }
+    ],
+    "constraints": [
+      "-2^31 <= x <= 2^31 - 1"
+    ],
+    "templateCode": "/**\n * @param {number} x\n * @return {number}\n */\nfunction reverseInteger(x) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "reverse-linked-list",
+    "description": "## Reverse Linked List\n\nGiven the head of a singly linked list, reverse the list and return the reversed list. The list is represented as an array of values.\n\n**Example 1:**\n- Input: `head = [1,2,3,4,5]`\n- Output: `[5,4,3,2,1]`\n\n**Example 2:**\n- Input: `head = [1,2]`\n- Output: `[2,1]`",
+    "solution": "## Approach: Iterative Pointer Reversal\n\nUse three pointers — `prev`, `curr`, and `next`. At each step, reverse the current node's pointer to point to the previous node, then advance all pointers.\n\n```javascript\nfunction reverseLinkedList(head) {\n  let prev = null, curr = 0;\n  while (curr < head.length) {\n    prev = head[head.length - 1 - curr];\n    curr++;\n  }\n  return head.reverse();\n}\n```\n\nPointer-based approach (conceptual):\n```javascript\nfunction reverseLinkedList(head) {\n  let prev = null, curr = head;\n  while (curr) {\n    const next = curr.next;\n    curr.next = prev;\n    prev = curr;\n    curr = next;\n  }\n  return prev;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "expected": [
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": [
+          1
+        ]
+      }
+    ],
+    "constraints": [
+      "0 <= list length <= 5000",
+      "-5000 <= Node.val <= 5000"
+    ],
+    "templateCode": "/**\n * @param {number[]} head - linked list as array\n * @return {number[]}\n */\nfunction reverseLinkedList(head) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "reverse-linked-list-ii",
+    "description": "## Reverse Linked List II\n\nGiven the head of a singly linked list and two integers `left` and `right` where `left <= right`, reverse the nodes from position `left` to position `right` (1-indexed), and return the modified list.\n\n**Example 1:**\n- Input: `head = [1,2,3,4,5], left = 2, right = 4`\n- Output: `[1,4,3,2,5]`\n\n**Example 2:**\n- Input: `head = [5], left = 1, right = 1`\n- Output: `[5]`",
+    "solution": "## Approach: One-Pass Reversal\n\nTraverse to position `left - 1`, then reverse the sublist from `left` to `right` in place. Reconnect the reversed portion with the rest of the list.\n\n```javascript\nfunction reverseLinkedListIi(head, left, right) {\n  const arr = [...head];\n  const sub = arr.splice(left - 1, right - left + 1);\n  sub.reverse();\n  arr.splice(left - 1, 0, ...sub);\n  return arr;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1) for pointer-based, O(n) for array approach",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          2,
+          4
+        ],
+        "expected": [
+          1,
+          4,
+          3,
+          2,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            5
+          ],
+          1,
+          1
+        ],
+        "expected": [
+          5
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= list length <= 500",
+      "-500 <= Node.val <= 500",
+      "1 <= left <= right <= n"
+    ],
+    "templateCode": "/**\n * @param {number[]} head\n * @param {number} left\n * @param {number} right\n * @return {number[]}\n */\nfunction reverseLinkedListIi(head, left, right) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "reverse-nodes-in-k-group",
+    "description": "## Reverse Nodes in k-Group\n\nGiven the head of a linked list, reverse the nodes of the list `k` at a time and return the modified list. If the number of remaining nodes is less than `k`, leave them as-is.\n\n**Example 1:**\n- Input: `head = [1,2,3,4,5], k = 2`\n- Output: `[2,1,4,3,5]`\n\n**Example 2:**\n- Input: `head = [1,2,3,4,5], k = 3`\n- Output: `[3,2,1,4,5]`",
+    "solution": "## Approach: Group Reversal\n\nProcess the list in chunks of size `k`. For each complete group, reverse the elements. If a group has fewer than `k` elements, keep the original order.\n\n```javascript\nfunction reverseNodesInKGroup(head, k) {\n  const result = [];\n  for (let i = 0; i < head.length; i += k) {\n    const group = head.slice(i, i + k);\n    if (group.length === k) group.reverse();\n    result.push(...group);\n  }\n  return result;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1) for pointer-based, O(n) for array approach",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          2
+        ],
+        "expected": [
+          2,
+          1,
+          4,
+          3,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          3
+        ],
+        "expected": [
+          3,
+          2,
+          1,
+          4,
+          5
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= k <= n <= 5000",
+      "-1000 <= Node.val <= 1000"
+    ],
+    "templateCode": "/**\n * @param {number[]} head\n * @param {number} k\n * @return {number[]}\n */\nfunction reverseNodesInKGroup(head, k) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "reverse-pairs",
+    "constraints": [
+      "1 <= nums.length <= 5 * 10^4",
+      "-2^31 <= nums[i] <= 2^31 - 1"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction reversePairs(nums) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "reverse-words-in-a-string",
+    "constraints": [
+      "1 <= s.length <= 10^4",
+      "s contains English letters, digits, and spaces",
+      "At least one word in s"
+    ],
+    "templateCode": "/**\n * @param {string} s\n * @return {string}\n */\nfunction reverseWordsInAString(s) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "rotate-image",
+    "description": "## Rotate Image\n\nGiven an `n x n` 2D matrix representing an image, rotate the image by 90 degrees clockwise. You must rotate the matrix in-place.\n\n**Example 1:**\n- Input: `matrix = [[1,2,3],[4,5,6],[7,8,9]]`\n- Output: `[[7,4,1],[8,5,2],[9,6,3]]`\n\n**Example 2:**\n- Input: `matrix = [[1,2],[3,4]]`\n- Output: `[[3,1],[4,2]]`",
+    "solution": "## Approach: Transpose + Reverse Rows\n\nFirst transpose the matrix (swap `matrix[i][j]` with `matrix[j][i]`), then reverse each row. This achieves a 90-degree clockwise rotation in-place.\n\n```javascript\nfunction rotateImage(matrix) {\n  const n = matrix.length;\n  for (let i = 0; i < n; i++) {\n    for (let j = i + 1; j < n; j++) {\n      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];\n    }\n  }\n  for (const row of matrix) row.reverse();\n  return matrix;\n}\n```\n\n**Time Complexity:** O(n²)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            7,
+            4,
+            1
+          ],
+          [
+            8,
+            5,
+            2
+          ],
+          [
+            9,
+            6,
+            3
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            2
+          ]
+        ]
+      }
+    ],
+    "constraints": [
+      "n == matrix.length == matrix[i].length",
+      "1 <= n <= 20",
+      "-1000 <= matrix[i][j] <= 1000"
+    ],
+    "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number[][]}\n */\nfunction rotateImage(matrix) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "rotten-oranges-practice",
+    "description": "## Rotten Oranges\n\nGiven a grid where `0` = empty, `1` = fresh orange, `2` = rotten orange, every minute each rotten orange rots adjacent (4-directional) fresh oranges. Return the minimum minutes until no fresh orange remains, or `-1` if impossible.\n\n**Example 1:**\n- Input: `grid = [[2,1,1],[1,1,0],[0,1,1]]`\n- Output: `4`\n\n**Example 2:**\n- Input: `grid = [[0,2]]`\n- Output: `0`",
+    "solution": "## Approach: Multi-Source BFS\n\nAdd all rotten oranges to a queue. BFS level by level — each level represents one minute. Track fresh orange count and decrement as they rot.\n\n```javascript\nfunction rottenOranges(grid) {\n  const m = grid.length, n = grid[0].length;\n  const queue = [];\n  let fresh = 0;\n  for (let i = 0; i < m; i++)\n    for (let j = 0; j < n; j++) {\n      if (grid[i][j] === 2) queue.push([i, j]);\n      if (grid[i][j] === 1) fresh++;\n    }\n  if (fresh === 0) return 0;\n  const dirs = [[0,1],[0,-1],[1,0],[-1,0]];\n  let minutes = 0;\n  while (queue.length) {\n    const size = queue.length;\n    for (let q = 0; q < size; q++) {\n      const [r, c] = queue.shift();\n      for (const [dr, dc] of dirs) {\n        const nr = r + dr, nc = c + dc;\n        if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] === 1) {\n          grid[nr][nc] = 2;\n          fresh--;\n          queue.push([nr, nc]);\n        }\n      }\n    }\n    minutes++;\n  }\n  return fresh === 0 ? minutes - 1 : -1;\n}\n```\n\n**Time Complexity:** O(m × n)\n**Space Complexity:** O(m × n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              2,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ]
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              2
+            ]
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= m, n <= 10",
+      "grid[i][j] is 0, 1, or 2"
+    ],
+    "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction rottenOranges(grid) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "same-tree",
+    "description": "## Same Tree\n\nGiven the roots of two binary trees `p` and `q` (as level-order arrays with `null` for missing nodes), determine if they are structurally identical with the same node values.\n\n**Example 1:**\n- Input: `p = [1,2,3], q = [1,2,3]`\n- Output: `true`\n\n**Example 2:**\n- Input: `p = [1,2], q = [1,null,2]`\n- Output: `false`",
+    "solution": "## Approach: Recursive Comparison\n\nCompare both trees node by node. Two trees are the same if roots match and left/right subtrees are identical. Uses level-order array comparison for simplicity.\n\n```javascript\nfunction sameTree(p, q) {\n  const maxLen = Math.max(p.length, q.length);\n  for (let i = 0; i < maxLen; i++) {\n    const pVal = i < p.length ? p[i] : null;\n    const qVal = i < q.length ? q[i] : null;\n    if (pVal !== qVal) return false;\n  }\n  return true;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1) for array comparison, O(h) for recursive tree approach",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            null,
+            2
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "0 <= number of nodes <= 100",
+      "-10^4 <= Node.val <= 10^4"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} p\n * @param {(number|null)[]} q\n * @return {boolean}\n */\nfunction sameTree(p, q) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "search-in-rotated-sorted-array",
+    "description": "## Search in Rotated Sorted Array\n\nGiven an integer array `nums` sorted in ascending order then rotated at an unknown pivot, and a `target` value, return the index of `target` in `nums`, or `-1` if not found. You must achieve O(log n) runtime.\n\n**Example 1:**\n- Input: `nums = [4,5,6,7,0,1,2], target = 0`\n- Output: `4`\n\n**Example 2:**\n- Input: `nums = [4,5,6,7,0,1,2], target = 3`\n- Output: `-1`",
+    "solution": "## Approach: Modified Binary Search\n\nAt each step, one half of the array is always sorted. Determine which half is sorted, then check if the target lies within that sorted range to decide which half to search.\n\n```javascript\nfunction searchInRotatedSortedArray(nums, target) {\n  let lo = 0, hi = nums.length - 1;\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    if (nums[mid] === target) return mid;\n    if (nums[lo] <= nums[mid]) {\n      if (nums[lo] <= target && target < nums[mid]) hi = mid - 1;\n      else lo = mid + 1;\n    } else {\n      if (nums[mid] < target && target <= nums[hi]) lo = mid + 1;\n      else hi = mid - 1;\n    }\n  }\n  return -1;\n}\n```\n\n**Time Complexity:** O(log n)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2
+          ],
+          0
+        ],
+        "expected": 4
+      },
+      {
+        "args": [
+          [
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2
+          ],
+          3
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          1
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= nums.length <= 5000",
+      "-10^4 <= nums[i] <= 10^4",
+      "All values in nums are unique"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nfunction searchInRotatedSortedArray(nums, target) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "segregate-even-and-odd-nodes-in-a-linked-list",
+    "description": "## Segregate Even and Odd Nodes in a Linked List\n\nGiven a linked list (as an array), rearrange it so that all even-valued nodes appear before all odd-valued nodes. Maintain the relative order within even and odd groups.\n\n**Example 1:**\n- Input: `head = [17,15,8,12,10,5,4,1,7,6]`\n- Output: `[8,12,10,4,6,17,15,5,1,7]`\n\n**Example 2:**\n- Input: `head = [1,3,2,4]`\n- Output: `[2,4,1,3]`",
+    "solution": "## Approach: Two-List Partition\n\nTraverse the list, appending even-valued nodes to one list and odd-valued nodes to another. Concatenate the even list followed by the odd list.\n\n```javascript\nfunction segregateEvenAndOddNodesInALinkedList(head) {\n  const even = [], odd = [];\n  for (const val of head) {\n    if (val % 2 === 0) even.push(val);\n    else odd.push(val);\n  }\n  return [...even, ...odd];\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            17,
+            15,
+            8,
+            12,
+            10,
+            5,
+            4,
+            1,
+            7,
+            6
+          ]
+        ],
+        "expected": [
+          8,
+          12,
+          10,
+          4,
+          6,
+          17,
+          15,
+          5,
+          1,
+          7
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            3,
+            2,
+            4
+          ]
+        ],
+        "expected": [
+          2,
+          4,
+          1,
+          3
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= list length <= 10^4",
+      "-10^5 <= Node.val <= 10^5"
+    ],
+    "templateCode": "/**\n * @param {number[]} head\n * @return {number[]}\n */\nfunction segregateEvenAndOddNodesInALinkedList(head) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "serialize-and-deserialize-binary-tree",
+    "description": "## Serialize and Deserialize Binary Tree\n\nDesign an algorithm to serialize a binary tree to a string and deserialize that string back to the original tree. The tree is given as a level-order array (with `null` for missing nodes). The roundtrip must reproduce the original tree.\n\n**Example 1:**\n- Input: `root = [1,2,3,null,null,4,5]`\n- Output: `[1,2,3,null,null,4,5]`\n\n**Example 2:**\n- Input: `root = []`\n- Output: `[]`",
+    "solution": "## Approach: Level-Order BFS\n\nSerialize using BFS, writing each node's value (or `null`) in level order. Deserialize by reading values and reconstructing the tree level by level using a queue.\n\n```javascript\nfunction serializeAndDeserializeBinaryTree(root) {\n  if (!root.length) return [];\n  const serialized = root.map(v => v === null ? 'null' : String(v)).join(',');\n  const vals = serialized.split(',');\n  if (vals[0] === 'null') return [];\n  const result = [];\n  for (const v of vals) {\n    result.push(v === 'null' ? null : Number(v));\n  }\n  while (result.length && result[result.length - 1] === null) result.pop();\n  return result;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            null,
+            null,
+            4,
+            5
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          null,
+          null,
+          4,
+          5
+        ]
+      },
+      {
+        "args": [
+          []
+        ],
+        "expected": []
+      }
+    ],
+    "constraints": [
+      "0 <= number of nodes <= 10^4",
+      "-1000 <= Node.val <= 1000"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} root - tree as level-order array\n * @return {(number|null)[]} deserialized tree\n */\nfunction serializeAndDeserializeBinaryTree(root) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "set-matrix-zeroes",
+    "constraints": [
+      "m == matrix.length, n == matrix[0].length",
+      "1 <= m, n <= 200",
+      "-2^31 <= matrix[i][j] <= 2^31 - 1"
+    ],
+    "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number[][]}\n */\nfunction setMatrixZeroes(matrix) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "shortest-bridge",
+    "description": "## Shortest Bridge\n\nGiven an `n x n` binary matrix `grid` with exactly two islands (connected components of 1s), return the smallest number of 0s you must flip to connect the two islands.\n\n**Example 1:**\n- Input: `grid = [[0,1],[1,0]]`\n- Output: `1`\n\n**Example 2:**\n- Input: `grid = [[0,1,0],[0,0,0],[0,0,1]]`\n- Output: `2`",
+    "solution": "## Approach: DFS + BFS\n\nUse DFS to find and mark all cells of the first island. Then BFS outward from that island, counting levels until reaching the second island.\n\n```javascript\nfunction shortestBridge(grid) {\n  const n = grid.length, dirs = [[0,1],[0,-1],[1,0],[-1,0]];\n  const queue = [];\n  let found = false;\n  function dfs(r, c) {\n    if (r < 0 || r >= n || c < 0 || c >= n || grid[r][c] !== 1) return;\n    grid[r][c] = 2;\n    queue.push([r, c]);\n    for (const [dr, dc] of dirs) dfs(r + dr, c + dc);\n  }\n  for (let i = 0; i < n && !found; i++)\n    for (let j = 0; j < n && !found; j++)\n      if (grid[i][j] === 1) { dfs(i, j); found = true; }\n  let steps = 0;\n  while (queue.length) {\n    const size = queue.length;\n    for (let q = 0; q < size; q++) {\n      const [r, c] = queue.shift();\n      for (const [dr, dc] of dirs) {\n        const nr = r + dr, nc = c + dc;\n        if (nr >= 0 && nr < n && nc >= 0 && nc < n) {\n          if (grid[nr][nc] === 1) return steps;\n          if (grid[nr][nc] === 0) { grid[nr][nc] = 2; queue.push([nr, nc]); }\n        }\n      }\n    }\n    steps++;\n  }\n  return -1;\n}\n```\n\n**Time Complexity:** O(n²)\n**Space Complexity:** O(n²)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "constraints": [
+      "n == grid.length == grid[i].length",
+      "2 <= n <= 100",
+      "grid[i][j] is 0 or 1",
+      "Exactly two islands exist"
+    ],
+    "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction shortestBridge(grid) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "simplify-path",
+    "constraints": [
+      "1 <= path.length <= 3000",
+      "path consists of '/', '.', English letters, and digits"
+    ],
+    "templateCode": "/**\n * @param {string} path\n * @return {string}\n */\nfunction simplifyPath(path) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sliding-window-maximum",
+    "description": "## Sliding Window Maximum\n\nGiven an array `nums` and a sliding window of size `k`, return an array of the maximum value in each window as it moves from left to right.\n\n**Example 1:**\n- Input: `nums = [1,3,-1,-3,5,3,6,7], k = 3`\n- Output: `[3,3,5,5,6,7]`\n\n**Example 2:**\n- Input: `nums = [1], k = 1`\n- Output: `[1]`",
+    "solution": "## Approach: Monotonic Deque\n\nMaintain a deque of indices in decreasing order of their values. Remove indices outside the window from the front. Remove smaller elements from the back before adding a new element.\n\n```javascript\nfunction slidingWindowMaximum(nums, k) {\n  const result = [], deque = [];\n  for (let i = 0; i < nums.length; i++) {\n    while (deque.length && deque[0] <= i - k) deque.shift();\n    while (deque.length && nums[deque[deque.length - 1]] <= nums[i]) deque.pop();\n    deque.push(i);\n    if (i >= k - 1) result.push(nums[deque[0]]);\n  }\n  return result;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(k)",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            3,
+            -1,
+            -3,
+            5,
+            3,
+            6,
+            7
+          ],
+          3
+        ],
+        "expected": [
+          3,
+          3,
+          5,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "args": [
+          [
+            1
+          ],
+          1
+        ],
+        "expected": [
+          1
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= nums.length <= 10^5",
+      "-10^4 <= nums[i] <= 10^4",
+      "1 <= k <= nums.length"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nfunction slidingWindowMaximum(nums, k) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "snakes-and-ladders",
+    "description": "## Snakes and Ladders\n\nGiven an `n x n` Boustrophedon board where `board[i][j] = -1` means no snake/ladder and a positive value means move to that cell, return the minimum number of dice rolls to reach square `n*n` from square `1`. Return `-1` if unreachable.\n\n**Example 1:**\n- Input: `board = [[-1,-1],[-1,-1]]` (2×2)\n- Output: `1`\n\n**Example 2:**\n- Input: `board = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]`\n- Output: `2`",
+    "solution": "## Approach: BFS\n\nModel the board as a graph. BFS from square 1, trying dice rolls 1-6. Convert square numbers to board coordinates using Boustrophedon indexing. Track visited squares.\n\n```javascript\nfunction snakesAndLadders(board) {\n  const n = board.length;\n  const getCoords = (s) => {\n    const r = Math.floor((s - 1) / n);\n    const c = (s - 1) % n;\n    return [n - 1 - r, r % 2 === 0 ? c : n - 1 - c];\n  };\n  const visited = new Set([1]);\n  const queue = [[1, 0]];\n  while (queue.length) {\n    const [curr, moves] = queue.shift();\n    for (let d = 1; d <= 6; d++) {\n      let next = curr + d;\n      if (next > n * n) continue;\n      const [r, c] = getCoords(next);\n      if (board[r][c] !== -1) next = board[r][c];\n      if (next === n * n) return moves + 1;\n      if (!visited.has(next)) { visited.add(next); queue.push([next, moves + 1]); }\n    }\n  }\n  return -1;\n}\n```\n\n**Time Complexity:** O(n²)\n**Space Complexity:** O(n²)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            [
+              -1,
+              -1,
+              -1
+            ],
+            [
+              -1,
+              -1,
+              -1
+            ],
+            [
+              -1,
+              -1,
+              -1
+            ]
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "constraints": [
+      "n == board.length == board[i].length",
+      "2 <= n <= 20",
+      "board[i][j] is -1 or in [1, n²]"
+    ],
+    "templateCode": "/**\n * @param {number[][]} board\n * @return {number}\n */\nfunction snakesAndLadders(board) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "solving-cryptarithmetic-puzzles",
+    "testCases": [
+      {
+        "args": [
+          "SEND",
+          "MORE",
+          "MONEY"
+        ],
+        "expected": {
+          "S": 9,
+          "E": 5,
+          "N": 6,
+          "D": 7,
+          "M": 1,
+          "O": 0,
+          "R": 8,
+          "Y": 2
+        }
+      }
+    ],
+    "constraints": [
+      "Each letter maps to a unique digit (0-9)",
+      "Leading letters cannot be 0",
+      "3 <= total unique letters <= 10"
+    ],
+    "templateCode": "/**\n * @param {string} word1\n * @param {string} word2\n * @param {string} result\n * @return {Object} letter-to-digit mapping\n */\nfunction solvingCryptarithmeticPuzzles(word1, word2, result) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sort-a-linked-list-of-0s-1s-and-2s",
+    "description": "## Sort a Linked List of 0s, 1s and 2s\n\nGiven a linked list (as array) containing only 0s, 1s, and 2s, sort it in non-decreasing order.\n\n**Example 1:**\n- Input: `head = [1,2,0,1,2,0,1]`\n- Output: `[0,0,1,1,1,2,2]`\n\n**Example 2:**\n- Input: `head = [2,2,1,0,0]`\n- Output: `[0,0,1,2,2]`",
+    "solution": "## Approach: Count and Overwrite\n\nCount occurrences of 0, 1, and 2, then overwrite the list with the counted values in order. This is a variation of the Dutch National Flag approach.\n\n```javascript\nfunction sortALinkedListOf0s1sAnd2s(head) {\n  let c0 = 0, c1 = 0, c2 = 0;\n  for (const v of head) {\n    if (v === 0) c0++;\n    else if (v === 1) c1++;\n    else c2++;\n  }\n  return [...Array(c0).fill(0), ...Array(c1).fill(1), ...Array(c2).fill(2)];\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1) for in-place overwrite",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            0,
+            1,
+            2,
+            0,
+            1
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            2,
+            2,
+            1,
+            0,
+            0
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          1,
+          2,
+          2
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= list length <= 10^4",
+      "Node.val is 0, 1, or 2"
+    ],
+    "templateCode": "/**\n * @param {number[]} head\n * @return {number[]}\n */\nfunction sortALinkedListOf0s1sAnd2s(head) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sort-colors",
+    "constraints": [
+      "1 <= nums.length <= 300",
+      "nums[i] is 0, 1, or 2"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nfunction sortColors(nums) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sort-colors-2",
+    "description": "## Sort Colors (Two-Pointer)\n\nGiven an array `nums` with `n` objects colored red (0), white (1), or blue (2), sort them in-place so objects of the same color are adjacent in order 0, 1, 2. Use a one-pass algorithm with constant extra space.\n\n**Example 1:**\n- Input: `nums = [2,0,2,1,1,0]`\n- Output: `[0,0,1,1,2,2]`\n\n**Example 2:**\n- Input: `nums = [2,0,1]`\n- Output: `[0,1,2]`",
+    "solution": "## Approach: Dutch National Flag (Three Pointers)\n\nUse three pointers: `lo` for 0s boundary, `hi` for 2s boundary, and `mid` for current element. Swap 0s to `lo`, 2s to `hi`, and skip 1s.\n\n```javascript\nfunction sortColors(nums) {\n  let lo = 0, mid = 0, hi = nums.length - 1;\n  while (mid <= hi) {\n    if (nums[mid] === 0) {\n      [nums[lo], nums[mid]] = [nums[mid], nums[lo]];\n      lo++; mid++;\n    } else if (nums[mid] === 2) {\n      [nums[mid], nums[hi]] = [nums[hi], nums[mid]];\n      hi--;\n    } else {\n      mid++;\n    }\n  }\n  return nums;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            2,
+            0,
+            2,
+            1,
+            1,
+            0
+          ]
+        ],
+        "expected": [
+          0,
+          0,
+          1,
+          1,
+          2,
+          2
+        ]
+      },
+      {
+        "args": [
+          [
+            2,
+            0,
+            1
+          ]
+        ],
+        "expected": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= nums.length <= 300",
+      "nums[i] is 0, 1, or 2"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nfunction sortColors(nums) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sort-list",
+    "description": "## Sort List\n\nGiven the head of a linked list (as array), sort it in ascending order using O(n log n) time and O(1) extra space.\n\n**Example 1:**\n- Input: `head = [4,2,1,3]`\n- Output: `[1,2,3,4]`\n\n**Example 2:**\n- Input: `head = [-1,5,3,4,0]`\n- Output: `[-1,0,3,4,5]`",
+    "solution": "## Approach: Merge Sort\n\nRecursively split the list into halves using slow/fast pointers, sort each half, then merge them. Merge sort naturally fits linked lists due to efficient splitting.\n\n```javascript\nfunction sortList(head) {\n  if (head.length <= 1) return head;\n  const mid = Math.floor(head.length / 2);\n  const left = sortList(head.slice(0, mid));\n  const right = sortList(head.slice(mid));\n  const result = [];\n  let i = 0, j = 0;\n  while (i < left.length && j < right.length) {\n    if (left[i] <= right[j]) result.push(left[i++]);\n    else result.push(right[j++]);\n  }\n  return result.concat(left.slice(i), right.slice(j));\n}\n```\n\n**Time Complexity:** O(n log n)\n**Space Complexity:** O(log n) recursion stack",
+    "testCases": [
+      {
+        "args": [
+          [
+            4,
+            2,
+            1,
+            3
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "args": [
+          [
+            -1,
+            5,
+            3,
+            4,
+            0
+          ]
+        ],
+        "expected": [
+          -1,
+          0,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "constraints": [
+      "0 <= list length <= 5 * 10^4",
+      "-10^5 <= Node.val <= 10^5"
+    ],
+    "templateCode": "/**\n * @param {number[]} head\n * @return {number[]}\n */\nfunction sortList(head) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "spiral-matrix",
+    "constraints": [
+      "m == matrix.length, n == matrix[0].length",
+      "1 <= m, n <= 10",
+      "-100 <= matrix[i][j] <= 100"
+    ],
+    "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number[]}\n */\nfunction spiralMatrix(matrix) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "spiral-matrix-2",
+    "description": "## Spiral Matrix\n\nGiven an `m x n` matrix, return all elements in spiral order (right → down → left → up, repeating inward).\n\n**Example 1:**\n- Input: `matrix = [[1,2,3],[4,5,6],[7,8,9]]`\n- Output: `[1,2,3,6,9,8,7,4,5]`\n\n**Example 2:**\n- Input: `matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]`\n- Output: `[1,2,3,4,8,12,11,10,9,5,6,7]`",
+    "solution": "## Approach: Boundary Tracking\n\nMaintain four boundaries (top, bottom, left, right). Traverse in spiral order and shrink the relevant boundary after each direction pass.\n\n```javascript\nfunction spiralMatrix(matrix) {\n  const result = [];\n  let top = 0, bottom = matrix.length - 1;\n  let left = 0, right = matrix[0].length - 1;\n  while (top <= bottom && left <= right) {\n    for (let i = left; i <= right; i++) result.push(matrix[top][i]);\n    top++;\n    for (let i = top; i <= bottom; i++) result.push(matrix[i][right]);\n    right--;\n    if (top <= bottom) {\n      for (let i = right; i >= left; i--) result.push(matrix[bottom][i]);\n      bottom--;\n    }\n    if (left <= right) {\n      for (let i = bottom; i >= top; i--) result.push(matrix[i][left]);\n      left++;\n    }\n  }\n  return result;\n}\n```\n\n**Time Complexity:** O(m × n)\n**Space Complexity:** O(1) excluding output",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          6,
+          9,
+          8,
+          7,
+          4,
+          5
+        ]
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              5,
+              6,
+              7,
+              8
+            ],
+            [
+              9,
+              10,
+              11,
+              12
+            ]
+          ]
+        ],
+        "expected": [
+          1,
+          2,
+          3,
+          4,
+          8,
+          12,
+          11,
+          10,
+          9,
+          5,
+          6,
+          7
+        ]
+      }
+    ],
+    "constraints": [
+      "m == matrix.length, n == matrix[0].length",
+      "1 <= m, n <= 10",
+      "-100 <= matrix[i][j] <= 100"
+    ],
+    "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number[]}\n */\nfunction spiralMatrix(matrix) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "split-array-largest-sum",
+    "description": "## Split Array Largest Sum\n\nGiven an integer array `nums` and an integer `k`, split `nums` into `k` non-empty contiguous subarrays such that the largest sum among them is minimized. Return that minimized largest sum.\n\n**Example 1:**\n- Input: `nums = [7,2,5,10,8], k = 2`\n- Output: `18`\n\n**Example 2:**\n- Input: `nums = [1,2,3,4,5], k = 2`\n- Output: `9`",
+    "solution": "## Approach: Binary Search on Answer\n\nBinary search on the possible answer range `[max(nums), sum(nums)]`. For each candidate max sum, greedily check if we can split the array into at most `k` subarrays.\n\n```javascript\nfunction splitArrayLargestSum(nums, k) {\n  let lo = Math.max(...nums), hi = nums.reduce((a, b) => a + b, 0);\n  while (lo < hi) {\n    const mid = (lo + hi) >> 1;\n    let count = 1, sum = 0;\n    for (const n of nums) {\n      if (sum + n > mid) { count++; sum = 0; }\n      sum += n;\n    }\n    if (count <= k) hi = mid;\n    else lo = mid + 1;\n  }\n  return lo;\n}\n```\n\n**Time Complexity:** O(n × log(sum))\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            7,
+            2,
+            5,
+            10,
+            8
+          ],
+          2
+        ],
+        "expected": 18
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          2
+        ],
+        "expected": 9
+      }
+    ],
+    "constraints": [
+      "1 <= nums.length <= 1000",
+      "0 <= nums[i] <= 10^6",
+      "1 <= k <= min(50, nums.length)"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nfunction splitArrayLargestSum(nums, k) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "spoj-com-problem-aggrcow",
+    "description": "## Aggressive Cows\n\nGiven `n` stall positions and `c` cows, place cows in stalls to maximize the minimum distance between any two cows. Return that maximum minimum distance.\n\n**Example 1:**\n- Input: `stalls = [1,2,4,8,9], cows = 3`\n- Output: `3` (place at 1, 4, 8)\n\n**Example 2:**\n- Input: `stalls = [1,2,3], cows = 2`\n- Output: `2` (place at 1, 3)",
+    "solution": "## Approach: Binary Search on Distance\n\nSort stalls. Binary search on the minimum distance. For each candidate distance, greedily place cows left to right and check if all cows can be placed.\n\n```javascript\nfunction spojComProblemAggrcow(stalls, cows) {\n  stalls.sort((a, b) => a - b);\n  let lo = 1, hi = stalls[stalls.length - 1] - stalls[0];\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    let count = 1, last = stalls[0];\n    for (let i = 1; i < stalls.length; i++) {\n      if (stalls[i] - last >= mid) { count++; last = stalls[i]; }\n    }\n    if (count >= cows) lo = mid + 1;\n    else hi = mid - 1;\n  }\n  return hi;\n}\n```\n\n**Time Complexity:** O(n log(max_dist))\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            4,
+            8,
+            9
+          ],
+          3
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3
+          ],
+          2
+        ],
+        "expected": 2
+      }
+    ],
+    "constraints": [
+      "2 <= n <= 10^5",
+      "2 <= c <= n",
+      "0 <= stall positions <= 10^9"
+    ],
+    "templateCode": "/**\n * @param {number[]} stalls\n * @param {number} cows\n * @return {number}\n */\nfunction spojComProblemAggrcow(stalls, cows) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "steps-by-knight-practice",
+    "description": "## Steps by Knight\n\nGiven an `N x N` chessboard, a knight at position `source` and a target position `target`, find the minimum number of moves for the knight to reach the target.\n\n**Example 1:**\n- Input: `n = 6, source = [4,5], target = [1,1]`\n- Output: `3`\n\n**Example 2:**\n- Input: `n = 8, source = [1,1], target = [2,3]`\n- Output: `1`",
+    "solution": "## Approach: BFS\n\nPerform BFS from the source position. At each step, explore all 8 possible knight moves. Track visited cells to avoid revisiting.\n\n```javascript\nfunction stepsByKnight(n, source, target) {\n  if (source[0] === target[0] && source[1] === target[1]) return 0;\n  const moves = [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]];\n  const visited = new Set([source.toString()]);\n  const queue = [[source[0], source[1], 0]];\n  while (queue.length) {\n    const [r, c, steps] = queue.shift();\n    for (const [dr, dc] of moves) {\n      const nr = r + dr, nc = c + dc;\n      if (nr === target[0] && nc === target[1]) return steps + 1;\n      const key = nr + ',' + nc;\n      if (nr >= 1 && nr <= n && nc >= 1 && nc <= n && !visited.has(key)) {\n        visited.add(key);\n        queue.push([nr, nc, steps + 1]);\n      }\n    }\n  }\n  return -1;\n}\n```\n\n**Time Complexity:** O(N²)\n**Space Complexity:** O(N²)",
+    "testCases": [
+      {
+        "args": [
+          8,
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          8,
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= N <= 1000",
+      "1 <= source, target positions <= N"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @param {number[]} source\n * @param {number[]} target\n * @return {number}\n */\nfunction stepsByKnight(n, source, target) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "strongly-connected-practice",
+    "description": "## Strongly Connected Components\n\nGiven a directed graph with `V` vertices and a list of edges, determine if the graph is strongly connected (every vertex is reachable from every other vertex). Return `1` if strongly connected, else `0`.\n\n**Example 1:**\n- Input: `V = 3, edges = [[0,1],[1,2],[2,0]]`\n- Output: `1`\n\n**Example 2:**\n- Input: `V = 3, edges = [[0,1],[1,2]]`\n- Output: `0`",
+    "solution": "## Approach: Kosaraju's Algorithm\n\nDo DFS to get finish-order stack, transpose the graph, then DFS on transposed graph in reverse finish order. If the second DFS visits all nodes from the first start, the graph is strongly connected.\n\n```javascript\nfunction stronglyConnected(v, edges) {\n  const adj = Array.from({length: v}, () => []);\n  const radj = Array.from({length: v}, () => []);\n  for (const [u, w] of edges) { adj[u].push(w); radj[w].push(u); }\n  const visited = new Array(v).fill(false);\n  const stack = [];\n  function dfs1(u) {\n    visited[u] = true;\n    for (const w of adj[u]) if (!visited[w]) dfs1(w);\n    stack.push(u);\n  }\n  for (let i = 0; i < v; i++) if (!visited[i]) dfs1(i);\n  visited.fill(false);\n  function dfs2(u) {\n    visited[u] = true;\n    for (const w of radj[u]) if (!visited[w]) dfs2(w);\n  }\n  dfs2(stack[stack.length - 1]);\n  return visited.every(Boolean) ? 1 : 0;\n}\n```\n\n**Time Complexity:** O(V + E)\n**Space Complexity:** O(V + E)",
+    "testCases": [
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= V <= 5000",
+      "0 <= E <= V*(V-1)",
+      "0 <= u, v < V"
+    ],
+    "templateCode": "/**\n * @param {number} v\n * @param {number[][]} edges\n * @return {number}\n */\nfunction stronglyConnected(v, edges) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "subarray-sum-equals-k",
+    "constraints": [
+      "1 <= nums.length <= 2 * 10^4",
+      "-1000 <= nums[i] <= 1000",
+      "-10^7 <= k <= 10^7"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nfunction subarraySumEqualsK(nums, k) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "subarray-sums-divisible-by-k",
+    "constraints": [
+      "1 <= nums.length <= 3 * 10^4",
+      "-10^4 <= nums[i] <= 10^4",
+      "2 <= k <= 10^4"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nfunction subarraySumsDivisibleByK(nums, k) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "subset-sum-problem",
+    "constraints": [
+      "1 <= n <= 100",
+      "1 <= nums[i] <= 10^4",
+      "1 <= sum <= 10^5"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @param {number} sum\n * @return {boolean}\n */\nfunction subsetSumProblem(nums, sum) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "subsets-ii",
+    "constraints": [
+      "1 <= nums.length <= 10",
+      "-10 <= nums[i] <= 10"
+    ],
+    "templateCode": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nfunction subsetsIi(nums) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "subtract-two-numbers-represented-as-linked-lists",
+    "description": "## Subtract Two Numbers Represented as Linked Lists\n\nGiven two linked lists (as arrays) representing non-negative numbers (most significant digit first), subtract the smaller from the larger and return the result as a list. Assume the first list represents the larger number.\n\n**Example 1:**\n- Input: `l1 = [1,0,0], l2 = [1]`\n- Output: `[9,9]` (100 - 1 = 99)\n\n**Example 2:**\n- Input: `l1 = [5,0], l2 = [1,2]`\n- Output: `[3,8]` (50 - 12 = 38)",
+    "solution": "## Approach: Subtract with Borrow\n\nPad the shorter list with leading zeros. Subtract digit by digit from right to left, propagating borrows. Remove leading zeros from the result.\n\n```javascript\nfunction subtractTwoNumbersRepresentedAsLinkedLists(l1, l2) {\n  while (l2.length < l1.length) l2.unshift(0);\n  let borrow = 0;\n  const result = [];\n  for (let i = l1.length - 1; i >= 0; i--) {\n    let diff = l1[i] - l2[i] - borrow;\n    if (diff < 0) { diff += 10; borrow = 1; }\n    else borrow = 0;\n    result.unshift(diff);\n  }\n  while (result.length > 1 && result[0] === 0) result.shift();\n  return result;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1
+          ]
+        ],
+        "expected": [
+          9,
+          9
+        ]
+      },
+      {
+        "args": [
+          [
+            5,
+            0
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected": [
+          3,
+          8
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= list length <= 10^4",
+      "0 <= digit <= 9",
+      "First list represents the larger or equal number"
+    ],
+    "templateCode": "/**\n * @param {number[]} l1\n * @param {number[]} l2\n * @return {number[]}\n */\nfunction subtractTwoNumbersRepresentedAsLinkedLists(l1, l2) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "subtree-of-another-tree",
+    "description": "## Subtree of Another Tree\n\nGiven the roots of two binary trees `root` and `subRoot` (as level-order arrays), determine if `subRoot` is a subtree of `root`. A subtree consists of a node and all its descendants.\n\n**Example 1:**\n- Input: `root = [3,4,5,1,2], subRoot = [4,1,2]`\n- Output: `true`\n\n**Example 2:**\n- Input: `root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]`\n- Output: `false`",
+    "solution": "## Approach: Serialization Comparison\n\nSerialize both trees to strings and check if the subRoot's serialization appears as a substring. Alternatively, recursively check each node in root as potential match.\n\n```javascript\nfunction subtreeOfAnotherTree(root, subRoot) {\n  const serialize = (arr) => ',' + arr.map(v => v === null ? '#' : v).join(',') + ',';\n  return serialize(root).includes(serialize(subRoot));\n}\n```\n\n**Time Complexity:** O(m × n) for recursive, O(m + n) for serialization\n**Space Complexity:** O(m + n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            4,
+            5,
+            1,
+            2
+          ],
+          [
+            4,
+            1,
+            2
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            3,
+            4,
+            5,
+            1,
+            2,
+            null,
+            null,
+            null,
+            null,
+            0
+          ],
+          [
+            4,
+            1,
+            2
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "1 <= number of nodes <= 2000",
+      "-10^4 <= Node.val <= 10^4"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} root\n * @param {(number|null)[]} subRoot\n * @return {boolean}\n */\nfunction subtreeOfAnotherTree(root, subRoot) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sudoku-solver",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              "5",
+              "3",
+              ".",
+              ".",
+              "7",
+              ".",
+              ".",
+              ".",
+              "."
+            ],
+            [
+              "6",
+              ".",
+              ".",
+              "1",
+              "9",
+              "5",
+              ".",
+              ".",
+              "."
+            ],
+            [
+              ".",
+              "9",
+              "8",
+              ".",
+              ".",
+              ".",
+              ".",
+              "6",
+              "."
+            ],
+            [
+              "8",
+              ".",
+              ".",
+              ".",
+              "6",
+              ".",
+              ".",
+              ".",
+              "3"
+            ],
+            [
+              "4",
+              ".",
+              ".",
+              "8",
+              ".",
+              "3",
+              ".",
+              ".",
+              "1"
+            ],
+            [
+              "7",
+              ".",
+              ".",
+              ".",
+              "2",
+              ".",
+              ".",
+              ".",
+              "6"
+            ],
+            [
+              ".",
+              "6",
+              ".",
+              ".",
+              ".",
+              ".",
+              "2",
+              "8",
+              "."
+            ],
+            [
+              ".",
+              ".",
+              ".",
+              "4",
+              "1",
+              "9",
+              ".",
+              ".",
+              "5"
+            ],
+            [
+              ".",
+              ".",
+              ".",
+              ".",
+              "8",
+              ".",
+              ".",
+              "7",
+              "9"
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            "5",
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "9",
+            "1",
+            "2"
+          ],
+          [
+            "6",
+            "7",
+            "2",
+            "1",
+            "9",
+            "5",
+            "3",
+            "4",
+            "8"
+          ],
+          [
+            "1",
+            "9",
+            "8",
+            "3",
+            "4",
+            "2",
+            "5",
+            "6",
+            "7"
+          ],
+          [
+            "8",
+            "5",
+            "9",
+            "7",
+            "6",
+            "1",
+            "4",
+            "2",
+            "3"
+          ],
+          [
+            "4",
+            "2",
+            "6",
+            "8",
+            "5",
+            "3",
+            "7",
+            "9",
+            "1"
+          ],
+          [
+            "7",
+            "1",
+            "3",
+            "9",
+            "2",
+            "4",
+            "8",
+            "5",
+            "6"
+          ],
+          [
+            "9",
+            "6",
+            "1",
+            "5",
+            "3",
+            "7",
+            "2",
+            "8",
+            "4"
+          ],
+          [
+            "2",
+            "8",
+            "7",
+            "4",
+            "1",
+            "9",
+            "6",
+            "3",
+            "5"
+          ],
+          [
+            "3",
+            "4",
+            "5",
+            "2",
+            "8",
+            "6",
+            "1",
+            "7",
+            "9"
+          ]
+        ]
+      }
+    ],
+    "constraints": [
+      "board.length == 9",
+      "board[i].length == 9",
+      "board[i][j] is a digit or '.'",
+      "Input board has exactly one solution"
+    ],
+    "templateCode": "/**\n * @param {string[][]} board\n * @return {string[][]}\n */\nfunction sudokuSolver(board) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sum-of-distances-in-tree",
+    "description": "## Sum of Distances in Tree\n\nGiven a tree with `n` nodes (0 to n-1) and `n-1` edges, return an array `result` where `result[i]` is the sum of distances from node `i` to all other nodes.\n\n**Example 1:**\n- Input: `n = 6, edges = [[0,1],[0,2],[2,3],[2,4],[2,5]]`\n- Output: `[8,12,6,10,10,10]`\n\n**Example 2:**\n- Input: `n = 1, edges = []`\n- Output: `[0]`",
+    "solution": "## Approach: Rerooting DP\n\nTwo DFS passes: first computes subtree sizes and distance sum for root. Second pass reroots to each child using the relation: `ans[child] = ans[parent] - count[child] + (n - count[child])`.\n\n```javascript\nfunction sumOfDistancesInTree(n, edges) {\n  const adj = Array.from({length: n}, () => []);\n  for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u); }\n  const count = new Array(n).fill(1);\n  const ans = new Array(n).fill(0);\n  function dfs1(u, parent) {\n    for (const v of adj[u]) {\n      if (v === parent) continue;\n      dfs1(v, u);\n      count[u] += count[v];\n      ans[u] += ans[v] + count[v];\n    }\n  }\n  function dfs2(u, parent) {\n    for (const v of adj[u]) {\n      if (v === parent) continue;\n      ans[v] = ans[u] - count[v] + (n - count[v]);\n      dfs2(v, u);\n    }\n  }\n  dfs1(0, -1);\n  dfs2(0, -1);\n  return ans;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          6,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ]
+          ]
+        ],
+        "expected": [
+          8,
+          12,
+          6,
+          10,
+          10,
+          10
+        ]
+      },
+      {
+        "args": [
+          1,
+          []
+        ],
+        "expected": [
+          0
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 3 * 10^4",
+      "edges.length == n - 1",
+      "0 <= u, v < n"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number[]}\n */\nfunction sumOfDistancesInTree(n, edges) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sum-of-left-leaves",
+    "description": "## Sum of Left Leaves\n\nGiven the root of a binary tree (as level-order array), return the sum of all left leaves.\n\n**Example 1:**\n- Input: `root = [3,9,20,null,null,15,7]`\n- Output: `24` (left leaves are 9 and 15)\n\n**Example 2:**\n- Input: `root = [1]`\n- Output: `0`",
+    "solution": "## Approach: DFS with Left-Child Tracking\n\nTraverse the tree. When visiting a left child that is a leaf (no children), add its value to the sum. Use array index math: for node at index `i`, left child is at `2i+1`.\n\n```javascript\nfunction sumOfLeftLeaves(root) {\n  let sum = 0;\n  function dfs(i, isLeft) {\n    if (i >= root.length || root[i] === null) return;\n    const leftIdx = 2 * i + 1, rightIdx = 2 * i + 2;\n    const hasLeft = leftIdx < root.length && root[leftIdx] !== null;\n    const hasRight = rightIdx < root.length && root[rightIdx] !== null;\n    if (isLeft && !hasLeft && !hasRight) sum += root[i];\n    dfs(leftIdx, true);\n    dfs(rightIdx, false);\n  }\n  dfs(0, false);\n  return sum;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(h) recursion stack",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            9,
+            20,
+            null,
+            null,
+            15,
+            7
+          ]
+        ],
+        "expected": 24
+      },
+      {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= number of nodes <= 1000",
+      "-1000 <= Node.val <= 1000"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} root\n * @return {number}\n */\nfunction sumOfLeftLeaves(root) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "sum-of-subarray-minimums",
+    "description": "## Sum of Subarray Minimums\n\nGiven an integer array `arr`, find the sum of `min(b)` for every contiguous subarray `b` of `arr`. Return the result modulo `10^9 + 7`.\n\n**Example 1:**\n- Input: `arr = [3,1,2,4]`\n- Output: `17` (subarrays: [3],[1],[2],[4],[3,1],[1,2],[2,4],[3,1,2],[1,2,4],[3,1,2,4])\n\n**Example 2:**\n- Input: `arr = [11,81,94,43,3]`\n- Output: `444`",
+    "solution": "## Approach: Monotonic Stack\n\nFor each element, find how many subarrays it's the minimum of using previous-less-element and next-less-element distances via a monotonic stack.\n\n```javascript\nfunction sumOfSubarrayMinimums(arr) {\n  const MOD = 1e9 + 7, n = arr.length;\n  const left = new Array(n), right = new Array(n);\n  const stack = [];\n  for (let i = 0; i < n; i++) {\n    while (stack.length && arr[stack[stack.length - 1]] >= arr[i]) stack.pop();\n    left[i] = stack.length ? i - stack[stack.length - 1] : i + 1;\n    stack.push(i);\n  }\n  stack.length = 0;\n  for (let i = n - 1; i >= 0; i--) {\n    while (stack.length && arr[stack[stack.length - 1]] > arr[i]) stack.pop();\n    right[i] = stack.length ? stack[stack.length - 1] - i : n - i;\n    stack.push(i);\n  }\n  let result = 0;\n  for (let i = 0; i < n; i++)\n    result = (result + arr[i] * left[i] * right[i]) % MOD;\n  return result;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            1,
+            2,
+            4
+          ]
+        ],
+        "expected": 17
+      },
+      {
+        "args": [
+          [
+            11,
+            81,
+            94,
+            43,
+            3
+          ]
+        ],
+        "expected": 444
+      }
+    ],
+    "constraints": [
+      "1 <= arr.length <= 3 * 10^4",
+      "1 <= arr[i] <= 3 * 10^4"
+    ],
+    "templateCode": "/**\n * @param {number[]} arr\n * @return {number}\n */\nfunction sumOfSubarrayMinimums(arr) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "super-egg-drop",
+    "description": "## Super Egg Drop\n\nGiven `k` eggs and `n` floors, find the minimum number of moves to determine the critical floor (the highest floor from which an egg can be dropped without breaking).\n\n**Example 1:**\n- Input: `k = 1, n = 2`\n- Output: `2`\n\n**Example 2:**\n- Input: `k = 2, n = 6`\n- Output: `3`",
+    "solution": "## Approach: DP on Moves\n\nInstead of asking \"min moves for n floors\", ask \"max floors checkable with m moves and k eggs\". `dp[i] = dp[i] + dp[i-1] + 1` — if egg breaks (check below) plus if it survives (check above) plus current floor.\n\n```javascript\nfunction superEggDrop(k, n) {\n  const dp = new Array(k + 1).fill(0);\n  let m = 0;\n  while (dp[k] < n) {\n    m++;\n    for (let i = k; i >= 1; i--) {\n      dp[i] = dp[i] + dp[i - 1] + 1;\n    }\n  }\n  return m;\n}\n```\n\n**Time Complexity:** O(k × log n)\n**Space Complexity:** O(k)",
+    "testCases": [
+      {
+        "args": [
+          1,
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "args": [
+          2,
+          6
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          3,
+          14
+        ],
+        "expected": 4
+      }
+    ],
+    "constraints": [
+      "1 <= k <= 100",
+      "1 <= n <= 10^4"
+    ],
+    "templateCode": "/**\n * @param {number} k\n * @param {number} n\n * @return {number}\n */\nfunction superEggDrop(k, n) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "swim-in-rising-water",
+    "description": "## Swim in Rising Water\n\nGiven an `n x n` grid where `grid[i][j]` is the elevation at time `grid[i][j]`, you can swim to adjacent cells when the water level reaches the elevation. Starting at `(0,0)` at time `t = grid[0][0]`, find the minimum time to reach `(n-1, n-1)`.\n\n**Example 1:**\n- Input: `grid = [[0,2],[1,3]]`\n- Output: `3`\n\n**Example 2:**\n- Input: `grid = [[0,1,2,3,4],[24,23,22,21,5],[12,13,14,15,16],[11,17,18,19,20],[10,9,8,7,6]]`\n- Output: `16`",
+    "solution": "## Approach: Binary Search + BFS\n\nBinary search on time `t`. For each `t`, BFS/DFS to check if a path exists from `(0,0)` to `(n-1,n-1)` using only cells with elevation `<= t`.\n\n```javascript\nfunction swimInRisingWater(grid) {\n  const n = grid.length;\n  const canReach = (t) => {\n    if (grid[0][0] > t) return false;\n    const visited = Array.from({length: n}, () => new Array(n).fill(false));\n    const queue = [[0, 0]];\n    visited[0][0] = true;\n    const dirs = [[0,1],[0,-1],[1,0],[-1,0]];\n    while (queue.length) {\n      const [r, c] = queue.shift();\n      if (r === n-1 && c === n-1) return true;\n      for (const [dr, dc] of dirs) {\n        const nr = r+dr, nc = c+dc;\n        if (nr>=0 && nr<n && nc>=0 && nc<n && !visited[nr][nc] && grid[nr][nc]<=t) {\n          visited[nr][nc] = true;\n          queue.push([nr, nc]);\n        }\n      }\n    }\n    return false;\n  };\n  let lo = grid[0][0], hi = n * n - 1;\n  while (lo < hi) {\n    const mid = (lo + hi) >> 1;\n    if (canReach(mid)) hi = mid;\n    else lo = mid + 1;\n  }\n  return lo;\n}\n```\n\n**Time Complexity:** O(n² log(n²))\n**Space Complexity:** O(n²)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            [
+              24,
+              23,
+              22,
+              21,
+              5
+            ],
+            [
+              12,
+              13,
+              14,
+              15,
+              16
+            ],
+            [
+              11,
+              17,
+              18,
+              19,
+              20
+            ],
+            [
+              10,
+              9,
+              8,
+              7,
+              6
+            ]
+          ]
+        ],
+        "expected": 16
+      }
+    ],
+    "constraints": [
+      "n == grid.length == grid[i].length",
+      "1 <= n <= 50",
+      "0 <= grid[i][j] < n²",
+      "All values in grid are unique"
+    ],
+    "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction swimInRisingWater(grid) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "symmetric-tree",
+    "description": "## Symmetric Tree\n\nGiven the root of a binary tree (as level-order array), check if it is a mirror of itself (symmetric around its center).\n\n**Example 1:**\n- Input: `root = [1,2,2,3,4,4,3]`\n- Output: `true`\n\n**Example 2:**\n- Input: `root = [1,2,2,null,3,null,3]`\n- Output: `false`",
+    "solution": "## Approach: Recursive Mirror Check\n\nCompare left and right subtrees. Two subtrees are mirrors if their roots are equal and each subtree's left matches the other's right. Use index-based comparison on the level-order array.\n\n```javascript\nfunction symmetricTree(root) {\n  if (!root.length) return true;\n  function isMirror(i, j) {\n    const a = i < root.length ? root[i] : null;\n    const b = j < root.length ? root[j] : null;\n    if (a === null && b === null) return true;\n    if (a === null || b === null || a !== b) return false;\n    return isMirror(2*i+1, 2*j+2) && isMirror(2*i+2, 2*j+1);\n  }\n  return isMirror(1, 2);\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(h) recursion stack",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            2,
+            3,
+            4,
+            4,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            2,
+            null,
+            3,
+            null,
+            3
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "1 <= number of nodes <= 1000",
+      "-100 <= Node.val <= 100"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} root\n * @return {boolean}\n */\nfunction symmetricTree(root) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "text-justification",
+    "description": "## Text Justification\n\nGiven an array of words and a `maxWidth`, format the text such that each line has exactly `maxWidth` characters and is fully justified (left and right). Distribute extra spaces as evenly as possible. The last line should be left-justified.\n\n**Example:**\n- Input: `words = [\"This\",\"is\",\"an\",\"example\"], maxWidth = 16`\n- Output: `[\"This    is    an\",\"example         \"]`",
+    "solution": "## Approach: Greedy Line Packing\n\nGreedily pack words per line. Distribute spaces evenly, giving extra spaces to leftmost gaps. Last line is left-justified with trailing spaces.\n\n```javascript\nfunction textJustification(words, maxWidth) {\n  const result = [];\n  let i = 0;\n  while (i < words.length) {\n    let j = i, lineLen = 0;\n    while (j < words.length && lineLen + words[j].length + (j - i) <= maxWidth) {\n      lineLen += words[j].length;\n      j++;\n    }\n    const gaps = j - i - 1;\n    let line = '';\n    if (j === words.length || gaps === 0) {\n      line = words.slice(i, j).join(' ');\n      line += ' '.repeat(maxWidth - line.length);\n    } else {\n      const totalSpaces = maxWidth - lineLen;\n      const sp = Math.floor(totalSpaces / gaps);\n      const extra = totalSpaces % gaps;\n      for (let k = i; k < j; k++) {\n        line += words[k];\n        if (k < j - 1) line += ' '.repeat(sp + (k - i < extra ? 1 : 0));\n      }\n    }\n    result.push(line);\n    i = j;\n  }\n  return result;\n}\n```\n\n**Time Complexity:** O(n) where n = total characters\n**Space Complexity:** O(1) per line",
+    "testCases": [
+      {
+        "args": [
+          [
+            "This",
+            "is",
+            "an",
+            "example",
+            "of",
+            "text",
+            "justification."
+          ],
+          16
+        ],
+        "expected": [
+          "This    is    an",
+          "example  of text",
+          "justification.  "
+        ]
+      },
+      {
+        "args": [
+          [
+            "What",
+            "must",
+            "be",
+            "acknowledgment",
+            "shall",
+            "be"
+          ],
+          16
+        ],
+        "expected": [
+          "What   must   be",
+          "acknowledgment  ",
+          "shall be        "
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= words.length <= 300",
+      "1 <= words[i].length <= 20",
+      "1 <= maxWidth <= 100",
+      "words[i].length <= maxWidth"
+    ],
+    "templateCode": "/**\n * @param {string[]} words\n * @param {number} maxWidth\n * @return {string[]}\n */\nfunction textJustification(words, maxWidth) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "the-celebrity-problem",
+    "description": "## The Celebrity Problem\n\nGiven `n` people at a party represented by an `n x n` matrix where `matrix[i][j] = 1` means person `i` knows person `j`. A celebrity is someone known by everyone but doesn't know anyone. Return the celebrity's index or `-1`.\n\n**Example 1:**\n- Input: `matrix = [[0,1,0],[0,0,0],[0,1,0]]`\n- Output: `1`\n\n**Example 2:**\n- Input: `matrix = [[0,1],[1,0]]`\n- Output: `-1`",
+    "solution": "## Approach: Two-Pointer Elimination\n\nStart with candidate 0. For each person, if candidate knows them, that person becomes the new candidate. After one pass, verify the candidate is known by all and knows nobody.\n\n```javascript\nfunction theCelebrityProblem(matrix) {\n  const n = matrix.length;\n  let candidate = 0;\n  for (let i = 1; i < n; i++) {\n    if (matrix[candidate][i] === 1) candidate = i;\n  }\n  for (let i = 0; i < n; i++) {\n    if (i === candidate) continue;\n    if (matrix[candidate][i] === 1 || matrix[i][candidate] === 0) return -1;\n  }\n  return candidate;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "expected": -1
+      }
+    ],
+    "constraints": [
+      "2 <= n <= 1000",
+      "matrix[i][j] is 0 or 1",
+      "matrix[i][i] == 0"
+    ],
+    "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nfunction theCelebrityProblem(matrix) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "the-kth-factor-of-n",
+    "description": "## The kth Factor of n\n\nGiven two integers `n` and `k`, return the `k`th factor of `n` in ascending order. If `n` has fewer than `k` factors, return `-1`.\n\n**Example 1:**\n- Input: `n = 12, k = 3`\n- Output: `3` (factors: 1, 2, 3, 4, 6, 12)\n\n**Example 2:**\n- Input: `n = 4, k = 4`\n- Output: `-1` (factors: 1, 2, 4 — only 3)",
+    "solution": "## Approach: Iterate Divisors\n\nIterate from 1 to `n`, collecting factors. Return the `k`th one found, or `-1` if fewer than `k` factors exist. Optimized: iterate to `sqrt(n)` and collect pairs.\n\n```javascript\nfunction theKthFactorOfN(n, k) {\n  let count = 0;\n  for (let i = 1; i <= n; i++) {\n    if (n % i === 0) {\n      count++;\n      if (count === k) return i;\n    }\n  }\n  return -1;\n}\n```\n\n**Time Complexity:** O(n), or O(√n) with optimization\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          12,
+          3
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          4,
+          4
+        ],
+        "expected": -1
+      },
+      {
+        "args": [
+          1,
+          1
+        ],
+        "expected": 1
+      }
+    ],
+    "constraints": [
+      "1 <= k <= n <= 1000"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @param {number} k\n * @return {number}\n */\nfunction theKthFactorOfN(n, k) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "time-needed-to-inform-all-employees",
+    "description": "## Time Needed to Inform All Employees\n\nA company has `n` employees with IDs 0 to n-1. The head is `headID`. Each employee has a manager (`manager[i]`), and each manager needs `informTime[i]` minutes to inform direct reports. Return the total time to inform all employees.\n\n**Example 1:**\n- Input: `n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]`\n- Output: `1`\n\n**Example 2:**\n- Input: `n = 1, headID = 0, manager = [-1], informTime = [0]`\n- Output: `0`",
+    "solution": "## Approach: DFS on Tree\n\nBuild a tree from manager array. DFS from the head, computing the maximum time along any path from root to leaf.\n\n```javascript\nfunction timeNeededToInformAllEmployees(n, headID, manager, informTime) {\n  const children = Array.from({length: n}, () => []);\n  for (let i = 0; i < n; i++) {\n    if (manager[i] !== -1) children[manager[i]].push(i);\n  }\n  function dfs(node) {\n    let maxTime = 0;\n    for (const child of children[node]) {\n      maxTime = Math.max(maxTime, dfs(child));\n    }\n    return informTime[node] + maxTime;\n  }\n  return dfs(headID);\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          6,
+          2,
+          [
+            2,
+            2,
+            -1,
+            2,
+            2,
+            2
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          1,
+          0,
+          [
+            -1
+          ],
+          [
+            0
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 10^5",
+      "0 <= headID < n",
+      "manager[headID] == -1",
+      "0 <= informTime[i] <= 1000"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @param {number} headID\n * @param {number[]} manager\n * @param {number[]} informTime\n * @return {number}\n */\nfunction timeNeededToInformAllEmployees(n, headID, manager, informTime) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "topological-sort-practice",
+    "description": "## Topological Sort\n\nGiven a directed acyclic graph (DAG) with `V` vertices and edges, return a valid topological ordering of the vertices.\n\n**Example 1:**\n- Input: `V = 4, edges = [[3,0],[1,0],[2,0]]`\n- Output: `[1,2,3,0]` (any valid topological order)\n\n**Example 2:**\n- Input: `V = 3, edges = [[0,1],[1,2]]`\n- Output: `[0,1,2]`",
+    "solution": "## Approach: Kahn's Algorithm (BFS)\n\nCompute in-degrees for all vertices. Add zero-in-degree vertices to a queue. Process the queue, decrementing in-degrees of neighbors and adding new zero-in-degree vertices.\n\n```javascript\nfunction topologicalSort(v, edges) {\n  const adj = Array.from({length: v}, () => []);\n  const indeg = new Array(v).fill(0);\n  for (const [u, w] of edges) { adj[u].push(w); indeg[w]++; }\n  const queue = [];\n  for (let i = 0; i < v; i++) if (indeg[i] === 0) queue.push(i);\n  const result = [];\n  while (queue.length) {\n    const u = queue.shift();\n    result.push(u);\n    for (const w of adj[u]) {\n      indeg[w]--;\n      if (indeg[w] === 0) queue.push(w);\n    }\n  }\n  return result;\n}\n```\n\n**Time Complexity:** O(V + E)\n**Space Complexity:** O(V + E)",
+    "testCases": [
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "constraints": [
+      "2 <= V <= 10^4",
+      "1 <= E <= V*(V-1)/2",
+      "Graph is a DAG"
+    ],
+    "templateCode": "/**\n * @param {number} v\n * @param {number[][]} edges\n * @return {number[]}\n */\nfunction topologicalSort(v, edges) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "total-number-of-spanning-trees-in-a-graph",
+    "description": "## Total Number of Spanning Trees in a Graph\n\nGiven an undirected graph with `n` vertices and a list of edges, compute the total number of spanning trees using Kirchhoff's Matrix Tree Theorem.\n\n**Example 1:**\n- Input: `n = 3, edges = [[0,1],[1,2],[0,2]]` (K₃)\n- Output: `3`\n\n**Example 2:**\n- Input: `n = 4, edges = [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]]` (K₄)\n- Output: `16`",
+    "solution": "## Approach: Kirchhoff's Theorem\n\nBuild the Laplacian matrix `L = D - A` (degree minus adjacency). Delete any one row and column to get the cofactor matrix. The determinant of this cofactor matrix equals the number of spanning trees.\n\n```javascript\nfunction totalNumberOfSpanningTreesInAGraph(n, edges) {\n  const L = Array.from({length: n}, () => new Array(n).fill(0));\n  for (const [u, v] of edges) {\n    L[u][u]++; L[v][v]++;\n    L[u][v]--; L[v][u]--;\n  }\n  const sz = n - 1;\n  const M = Array.from({length: sz}, (_, i) =>\n    Array.from({length: sz}, (_, j) => L[i][j])\n  );\n  let det = 1;\n  for (let col = 0; col < sz; col++) {\n    let pivot = -1;\n    for (let row = col; row < sz; row++) if (M[row][col] !== 0) { pivot = row; break; }\n    if (pivot === -1) return 0;\n    if (pivot !== col) { [M[col], M[pivot]] = [M[pivot], M[col]]; det *= -1; }\n    det *= M[col][col];\n    for (let row = col + 1; row < sz; row++) {\n      const f = M[row][col] / M[col][col];\n      for (let j = col; j < sz; j++) M[row][j] -= f * M[col][j];\n    }\n  }\n  return Math.round(det);\n}\n```\n\n**Time Complexity:** O(V³)\n**Space Complexity:** O(V²)",
+    "testCases": [
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              0,
+              2
+            ]
+          ]
+        ],
+        "expected": 3
+      },
+      {
+        "args": [
+          4,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        ],
+        "expected": 16
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 100",
+      "0 <= edges.length <= n*(n-1)/2",
+      "Graph is connected"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @param {number[][]} edges\n * @return {number}\n */\nfunction totalNumberOfSpanningTreesInAGraph(n, edges) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "trapping-rain-water",
+    "description": "## Trapping Rain Water\n\nGiven `n` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water can be trapped after raining.\n\n**Example 1:**\n- Input: `height = [0,1,0,2,1,0,1,3,2,1,2,1]`\n- Output: `6`\n\n**Example 2:**\n- Input: `height = [4,2,0,3,2,5]`\n- Output: `9`",
+    "solution": "## Approach: Two Pointers\n\nUse left and right pointers converging inward. Track the maximum height seen from each side. Water at each position is determined by the minimum of the two max heights minus current height.\n\n```javascript\nfunction trappingRainWater(height) {\n  let left = 0, right = height.length - 1;\n  let leftMax = 0, rightMax = 0, water = 0;\n  while (left < right) {\n    if (height[left] < height[right]) {\n      leftMax = Math.max(leftMax, height[left]);\n      water += leftMax - height[left];\n      left++;\n    } else {\n      rightMax = Math.max(rightMax, height[right]);\n      water += rightMax - height[right];\n      right--;\n    }\n  }\n  return water;\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            0,
+            1,
+            0,
+            2,
+            1,
+            0,
+            1,
+            3,
+            2,
+            1,
+            2,
+            1
+          ]
+        ],
+        "expected": 6
+      },
+      {
+        "args": [
+          [
+            4,
+            2,
+            0,
+            3,
+            2,
+            5
+          ]
+        ],
+        "expected": 9
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 2 * 10^4",
+      "0 <= height[i] <= 10^5"
+    ],
+    "templateCode": "/**\n * @param {number[]} height\n * @return {number}\n */\nfunction trappingRainWater(height) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "travelling-salesman-problem-using-dynamic-programming",
+    "description": "## Travelling Salesman Problem (DP)\n\nGiven a distance matrix `dist` of `n` cities, find the minimum cost to visit all cities exactly once and return to the starting city (city 0).\n\n**Example 1:**\n- Input: `dist = [[0,10,15,20],[10,0,35,25],[15,35,0,30],[20,25,30,0]]`\n- Output: `80` (path: 0→1→3→2→0)\n\n**Example 2:**\n- Input: `dist = [[0,20,42,25],[20,0,30,34],[42,30,0,10],[25,34,10,0]]`\n- Output: `85`",
+    "solution": "## Approach: Bitmask DP (Held-Karp)\n\nUse DP with bitmask to track visited cities. `dp[mask][i]` = min cost to reach city `i` having visited the set of cities in `mask`. Iterate over all subsets and transitions.\n\n```javascript\nfunction travellingSalesmanProblemUsingDynamicProgramming(dist) {\n  const n = dist.length, ALL = (1 << n) - 1;\n  const dp = Array.from({length: 1 << n}, () => new Array(n).fill(Infinity));\n  dp[1][0] = 0;\n  for (let mask = 1; mask <= ALL; mask++) {\n    for (let u = 0; u < n; u++) {\n      if (!(mask & (1 << u)) || dp[mask][u] === Infinity) continue;\n      for (let v = 0; v < n; v++) {\n        if (mask & (1 << v)) continue;\n        const next = mask | (1 << v);\n        dp[next][v] = Math.min(dp[next][v], dp[mask][u] + dist[u][v]);\n      }\n    }\n  }\n  let ans = Infinity;\n  for (let u = 1; u < n; u++) ans = Math.min(ans, dp[ALL][u] + dist[u][0]);\n  return ans;\n}\n```\n\n**Time Complexity:** O(2ⁿ × n²)\n**Space Complexity:** O(2ⁿ × n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              0,
+              10,
+              15,
+              20
+            ],
+            [
+              10,
+              0,
+              35,
+              25
+            ],
+            [
+              15,
+              35,
+              0,
+              30
+            ],
+            [
+              20,
+              25,
+              30,
+              0
+            ]
+          ]
+        ],
+        "expected": 80
+      }
+    ],
+    "constraints": [
+      "2 <= n <= 20",
+      "0 <= dist[i][j] <= 10^4",
+      "dist[i][i] == 0"
+    ],
+    "templateCode": "/**\n * @param {number[][]} dist\n * @return {number}\n */\nfunction travellingSalesmanProblemUsingDynamicProgramming(dist) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "trie-data-structure",
+    "description": "## Trie Data Structure\n\nImplement a Trie (prefix tree) that supports: `insert(word)` — inserts a word, `search(word)` — returns `true` if word exists, `startsWith(prefix)` — returns `true` if any word starts with prefix.\n\n**Example:**\n- insert(\"apple\"), search(\"apple\") → `true`\n- search(\"app\") → `false`, startsWith(\"app\") → `true`",
+    "solution": "## Approach: Node-Based Trie\n\nEach node has a map of children and an `isEnd` flag. Insert by traversing/creating nodes. Search checks `isEnd` at the last character. StartsWith only needs to reach the last character.\n\n```javascript\nfunction trieDataStructure(operations, args) {\n  const root = {};\n  const insert = (word) => {\n    let node = root;\n    for (const ch of word) { if (!node[ch]) node[ch] = {}; node = node[ch]; }\n    node.end = true;\n  };\n  const search = (word) => {\n    let node = root;\n    for (const ch of word) { if (!node[ch]) return false; node = node[ch]; }\n    return !!node.end;\n  };\n  const startsWith = (prefix) => {\n    let node = root;\n    for (const ch of prefix) { if (!node[ch]) return false; node = node[ch]; }\n    return true;\n  };\n  const fns = { insert, search, startsWith };\n  return operations.map((op, i) => {\n    if (op === 'Trie') return null;\n    return fns[op](...args[i]) ?? null;\n  });\n}\n```\n\n**Time Complexity:** O(m) per operation, m = word length\n**Space Complexity:** O(total characters inserted)",
+    "testCases": [
+      {
+        "args": [
+          [
+            "Trie",
+            "insert",
+            "search",
+            "search",
+            "startsWith"
+          ],
+          [
+            [],
+            [
+              "apple"
+            ],
+            [
+              "apple"
+            ],
+            [
+              "app"
+            ],
+            [
+              "app"
+            ]
+          ]
+        ],
+        "expected": [
+          null,
+          null,
+          true,
+          false,
+          true
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= word.length, prefix.length <= 2000",
+      "Words consist of lowercase English letters",
+      "At most 3 * 10^4 operations"
+    ],
+    "templateCode": "/**\n * @param {string[]} operations\n * @param {any[][]} args\n * @return {(boolean|null)[]}\n */\nfunction trieDataStructure(operations, args) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "tug-of-war",
+    "testCases": [
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": 0
+      },
+      {
+        "args": [
+          [
+            3,
+            4,
+            5,
+            -3,
+            100,
+            1,
+            89,
+            54,
+            23,
+            20
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 20",
+      "-10^6 <= arr[i] <= 10^6"
+    ],
+    "templateCode": "/**\n * @param {number[]} arr\n * @return {number} minimum difference between two subsets\n */\nfunction tugOfWar(arr) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "undirected-graph-cycle-practice",
+    "description": "## Undirected Graph Cycle Detection\n\nGiven an undirected graph with `V` vertices and a list of edges, determine if the graph contains a cycle. Return `1` if a cycle exists, else `0`.\n\n**Example 1:**\n- Input: `V = 4, edges = [[0,1],[1,2],[2,3],[3,0]]`\n- Output: `1`\n\n**Example 2:**\n- Input: `V = 3, edges = [[0,1],[1,2]]`\n- Output: `0`",
+    "solution": "## Approach: DFS with Parent Tracking\n\nDFS through the graph. If we encounter a visited node that isn't the current node's parent, a cycle exists.\n\n```javascript\nfunction undirectedGraphCycle(v, edges) {\n  const adj = Array.from({length: v}, () => []);\n  for (const [u, w] of edges) { adj[u].push(w); adj[w].push(u); }\n  const visited = new Array(v).fill(false);\n  function dfs(node, parent) {\n    visited[node] = true;\n    for (const nb of adj[node]) {\n      if (!visited[nb]) { if (dfs(nb, node)) return true; }\n      else if (nb !== parent) return true;\n    }\n    return false;\n  }\n  for (let i = 0; i < v; i++) {\n    if (!visited[i] && dfs(i, -1)) return 1;\n  }\n  return 0;\n}\n```\n\n**Time Complexity:** O(V + E)\n**Space Complexity:** O(V + E)",
+    "testCases": [
+      {
+        "args": [
+          4,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          3,
+          [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= V <= 10^5",
+      "0 <= E <= V*(V-1)/2"
+    ],
+    "templateCode": "/**\n * @param {number} v\n * @param {number[][]} edges\n * @return {number}\n */\nfunction undirectedGraphCycle(v, edges) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "unique-binary-search-trees",
+    "description": "## Unique Binary Search Trees\n\nGiven an integer `n`, return the number of structurally unique BSTs that store values 1 to `n`.\n\n**Example 1:**\n- Input: `n = 3`\n- Output: `5`\n\n**Example 2:**\n- Input: `n = 1`\n- Output: `1`",
+    "solution": "## Approach: Catalan Number DP\n\nThe count of unique BSTs for `n` is the nth Catalan number. For each root `i`, left subtree has `i-1` nodes and right has `n-i`. Use DP: `dp[n] = sum(dp[i-1] * dp[n-i])` for i=1..n.\n\n```javascript\nfunction uniqueBinarySearchTrees(n) {\n  const dp = new Array(n + 1).fill(0);\n  dp[0] = 1;\n  dp[1] = 1;\n  for (let i = 2; i <= n; i++) {\n    for (let j = 1; j <= i; j++) {\n      dp[i] += dp[j - 1] * dp[i - j];\n    }\n  }\n  return dp[n];\n}\n```\n\n**Time Complexity:** O(n²)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          3
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          1
+        ],
+        "expected": 1
+      },
+      {
+        "args": [
+          4
+        ],
+        "expected": 14
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 19"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction uniqueBinarySearchTrees(n) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "unique-binary-search-trees-ii",
+    "description": "## Unique Binary Search Trees II\n\nGiven an integer `n`, generate all structurally unique BSTs that store values 1 to `n`. Return them as arrays of level-order representations.\n\n**Example 1:**\n- Input: `n = 1`\n- Output: `[[1]]`\n\n**Example 2:**\n- Input: `n = 3`\n- Output: 5 unique BSTs",
+    "solution": "## Approach: Recursive Generation\n\nFor each value `i` as root, recursively generate all left subtrees (1..i-1) and right subtrees (i+1..n). Combine each left-right pair with root `i`.\n\n```javascript\nfunction uniqueBinarySearchTreesIi(n) {\n  function generate(lo, hi) {\n    if (lo > hi) return [null];\n    const trees = [];\n    for (let i = lo; i <= hi; i++) {\n      for (const left of generate(lo, i - 1)) {\n        for (const right of generate(i + 1, hi)) {\n          trees.push({ val: i, left, right });\n        }\n      }\n    }\n    return trees;\n  }\n  const toArray = (node) => {\n    if (!node) return [];\n    const result = [], queue = [node];\n    while (queue.length) {\n      const n = queue.shift();\n      if (n) { result.push(n.val); queue.push(n.left, n.right); }\n      else result.push(null);\n    }\n    while (result[result.length - 1] === null) result.pop();\n    return result;\n  };\n  return generate(1, n).map(toArray);\n}\n```\n\n**Time Complexity:** O(n × Catalan(n))\n**Space Complexity:** O(n × Catalan(n))",
+    "testCases": [
+      {
+        "args": [
+          1
+        ],
+        "expected": [
+          [
+            1
+          ]
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 8"
+    ],
+    "templateCode": "/**\n * @param {number} n\n * @return {(number|null)[][]}\n */\nfunction uniqueBinarySearchTreesIi(n) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "unique-paths",
+    "description": "## Unique Paths\n\nA robot starts at the top-left corner of an `m x n` grid and can only move right or down. Return the number of unique paths to the bottom-right corner.\n\n**Example 1:**\n- Input: `m = 3, n = 7`\n- Output: `28`\n\n**Example 2:**\n- Input: `m = 3, n = 2`\n- Output: `3`",
+    "solution": "## Approach: Dynamic Programming\n\nCreate a 1D DP array of size `n`. Each cell accumulates paths from left and above. `dp[j] += dp[j-1]` for each row.\n\n```javascript\nfunction uniquePaths(m, n) {\n  const dp = new Array(n).fill(1);\n  for (let i = 1; i < m; i++) {\n    for (let j = 1; j < n; j++) {\n      dp[j] += dp[j - 1];\n    }\n  }\n  return dp[n - 1];\n}\n```\n\n**Time Complexity:** O(m × n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          3,
+          7
+        ],
+        "expected": 28
+      },
+      {
+        "args": [
+          3,
+          2
+        ],
+        "expected": 3
+      }
+    ],
+    "constraints": [
+      "1 <= m, n <= 100"
+    ],
+    "templateCode": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nfunction uniquePaths(m, n) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "unique-paths-iii",
+    "constraints": [
+      "1 <= grid.length, grid[i].length <= 20",
+      "1 <= grid.length * grid[i].length <= 20",
+      "grid[i][j] is -1, 0, 1, or 2"
+    ],
+    "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction uniquePathsIii(grid) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "valid-number",
+    "constraints": [
+      "1 <= s.length <= 20",
+      "s consists of '+', '-', '.', 'e', 'E', and digits"
+    ],
+    "templateCode": "/**\n * @param {string} s\n * @return {boolean}\n */\nfunction validNumber(s) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "valid-palindrome-ii",
+    "constraints": [
+      "1 <= s.length <= 5 * 10^5",
+      "s consists of lowercase English letters"
+    ],
+    "templateCode": "/**\n * @param {string} s\n * @return {boolean}\n */\nfunction validPalindromeIi(s) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "valid-parentheses",
+    "constraints": [
+      "1 <= s.length <= 10^4",
+      "s consists of '()[]{}' only"
+    ],
+    "templateCode": "/**\n * @param {string} s\n * @return {boolean}\n */\nfunction validParentheses(s) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "valid-square",
+    "description": "## Valid Square\n\nGiven coordinates of four points in 2D space, return `true` if the four points form a valid square. A valid square has four equal sides and two equal diagonals, all with positive length.\n\n**Example 1:**\n- Input: `p1=[0,0], p2=[1,1], p3=[1,0], p4=[0,1]`\n- Output: `true`\n\n**Example 2:**\n- Input: `p1=[0,0], p2=[0,0], p3=[0,0], p4=[0,0]`\n- Output: `false`",
+    "solution": "## Approach: Distance Checking\n\nCompute all 6 pairwise distances. A valid square has exactly 4 equal side lengths and 2 equal diagonal lengths, with sides > 0 and diagonals > sides.\n\n```javascript\nfunction validSquare(p1, p2, p3, p4) {\n  const dist = (a, b) => (a[0]-b[0])**2 + (a[1]-b[1])**2;\n  const dists = [\n    dist(p1,p2), dist(p1,p3), dist(p1,p4),\n    dist(p2,p3), dist(p2,p4), dist(p3,p4)\n  ].sort((a,b) => a-b);\n  return dists[0] > 0 &&\n    dists[0] === dists[1] && dists[1] === dists[2] && dists[2] === dists[3] &&\n    dists[4] === dists[5];\n}\n```\n\n**Time Complexity:** O(1)\n**Space Complexity:** O(1)",
+    "testCases": [
+      {
+        "args": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "-10^4 <= xi, yi <= 10^4"
+    ],
+    "templateCode": "/**\n * @param {number[]} p1\n * @param {number[]} p2\n * @param {number[]} p3\n * @param {number[]} p4\n * @return {boolean}\n */\nfunction validSquare(p1, p2, p3, p4) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "validate-binary-search-tree",
+    "description": "## Validate Binary Search Tree\n\nGiven the root of a binary tree (as level-order array), determine if it is a valid BST. A valid BST has left subtree values strictly less than the node and right subtree values strictly greater.\n\n**Example 1:**\n- Input: `root = [2,1,3]`\n- Output: `true`\n\n**Example 2:**\n- Input: `root = [5,1,4,null,null,3,6]`\n- Output: `false`",
+    "solution": "## Approach: Range Validation\n\nRecursively validate each node stays within `(min, max)` bounds. Left children narrow the max, right children narrow the min. Build tree from array using index math.\n\n```javascript\nfunction validateBinarySearchTree(root) {\n  function validate(idx, min, max) {\n    if (idx >= root.length || root[idx] === null) return true;\n    const val = root[idx];\n    if (val <= min || val >= max) return false;\n    return validate(2*idx+1, min, val) && validate(2*idx+2, val, max);\n  }\n  return validate(0, -Infinity, Infinity);\n}\n```\n\n**Time Complexity:** O(n)\n**Space Complexity:** O(h) recursion stack",
+    "testCases": [
+      {
+        "args": [
+          [
+            2,
+            1,
+            3
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          [
+            5,
+            1,
+            4,
+            null,
+            null,
+            3,
+            6
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "1 <= number of nodes <= 10^4",
+      "-2^31 <= Node.val <= 2^31 - 1"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} root\n * @return {boolean}\n */\nfunction validateBinarySearchTree(root) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "vertical-order-traversal-of-a-binary-tree",
+    "description": "## Vertical Order Traversal of a Binary Tree\n\nGiven the root of a binary tree (as level-order array), return its vertical order traversal. Nodes are sorted by column (left to right), then by row (top to bottom), then by value.\n\n**Example 1:**\n- Input: `root = [3,9,20,null,null,15,7]`\n- Output: `[[9],[3,15],[20],[7]]`\n\n**Example 2:**\n- Input: `root = [1,2,3,4,5,6,7]`\n- Output: `[[4],[2],[1,5,6],[3],[7]]`",
+    "solution": "## Approach: BFS with Column Tracking\n\nBFS through the tree, tracking each node's (column, row, value). Group by column, sort within groups by row then value.\n\n```javascript\nfunction verticalOrderTraversalOfABinaryTree(root) {\n  if (!root.length) return [];\n  const map = new Map();\n  const queue = [[0, 0, 0]];\n  while (queue.length) {\n    const [idx, col, row] = queue.shift();\n    if (idx >= root.length || root[idx] === null) continue;\n    if (!map.has(col)) map.set(col, []);\n    map.set(col, [...map.get(col), [row, root[idx]]]);\n    queue.push([2*idx+1, col-1, row+1]);\n    queue.push([2*idx+2, col+1, row+1]);\n  }\n  return [...map.keys()].sort((a,b) => a-b)\n    .map(col => map.get(col).sort((a,b) => a[0]-b[0] || a[1]-b[1]).map(v => v[1]));\n}\n```\n\n**Time Complexity:** O(n log n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            3,
+            9,
+            20,
+            null,
+            null,
+            15,
+            7
+          ]
+        ],
+        "expected": [
+          [
+            9
+          ],
+          [
+            3,
+            15
+          ],
+          [
+            20
+          ],
+          [
+            7
+          ]
+        ]
+      },
+      {
+        "args": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        ],
+        "expected": [
+          [
+            4
+          ],
+          [
+            2
+          ],
+          [
+            1,
+            5,
+            6
+          ],
+          [
+            3
+          ],
+          [
+            7
+          ]
+        ]
+      }
+    ],
+    "constraints": [
+      "1 <= number of nodes <= 1000",
+      "0 <= Node.val <= 1000"
+    ],
+    "templateCode": "/**\n * @param {(number|null)[]} root\n * @return {number[][]}\n */\nfunction verticalOrderTraversalOfABinaryTree(root) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "water-jug-problem-using-bfs",
+    "description": "## Water Jug Problem (BFS)\n\nGiven two jugs with capacities `m` and `n` liters, determine if you can measure exactly `d` liters. Operations: fill a jug, empty a jug, pour from one to another. Return `true` if possible.\n\n**Example 1:**\n- Input: `m = 3, n = 5, d = 4`\n- Output: `true`\n\n**Example 2:**\n- Input: `m = 2, n = 6, d = 5`\n- Output: `false`",
+    "solution": "## Approach: BFS on States\n\nExplore all possible states `(a, b)` where `a` = water in jug 1, `b` = water in jug 2. BFS from `(0,0)`, applying all 6 operations. Check if any state has `a == d` or `b == d` or `a + b == d`.\n\n```javascript\nfunction waterJugProblemUsingBfs(m, n, d) {\n  if (d > m + n) return false;\n  const visited = new Set(['0,0']);\n  const queue = [[0, 0]];\n  while (queue.length) {\n    const [a, b] = queue.shift();\n    if (a === d || b === d || a + b === d) return true;\n    const states = [\n      [m, b], [a, n], [0, b], [a, 0],\n      [Math.max(0, a-(n-b)), Math.min(n, b+a)],\n      [Math.min(m, a+b), Math.max(0, b-(m-a))]\n    ];\n    for (const [na, nb] of states) {\n      const key = na + ',' + nb;\n      if (!visited.has(key)) { visited.add(key); queue.push([na, nb]); }\n    }\n  }\n  return false;\n}\n```\n\n**Time Complexity:** O(m × n)\n**Space Complexity:** O(m × n)",
+    "testCases": [
+      {
+        "args": [
+          3,
+          5,
+          4
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          2,
+          6,
+          5
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "1 <= m, n <= 10^6",
+      "0 <= d <= 10^6"
+    ],
+    "templateCode": "/**\n * @param {number} m\n * @param {number} n\n * @param {number} d\n * @return {boolean}\n */\nfunction waterJugProblemUsingBfs(m, n, d) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "weighted-job-scheduling",
+    "description": "## Weighted Job Scheduling\n\nGiven `n` jobs where each job has a start time, end time, and profit, find the maximum profit obtainable by scheduling non-overlapping jobs.\n\n**Example 1:**\n- Input: `jobs = [[1,2,50],[3,5,20],[6,19,100],[2,100,200]]`\n- Output: `250` (jobs [1,2,50] + [2,100,200])\n\n**Example 2:**\n- Input: `jobs = [[1,3,50],[2,4,10],[3,5,40],[3,6,70]]`\n- Output: `120`",
+    "solution": "## Approach: Sort + DP + Binary Search\n\nSort jobs by end time. For each job, either skip it or take it (adding its profit to the best non-overlapping result). Use binary search to find the latest non-overlapping job.\n\n```javascript\nfunction weightedJobScheduling(jobs) {\n  jobs.sort((a, b) => a[1] - b[1]);\n  const n = jobs.length;\n  const dp = new Array(n).fill(0);\n  dp[0] = jobs[0][2];\n  for (let i = 1; i < n; i++) {\n    let incl = jobs[i][2];\n    let lo = 0, hi = i - 1, last = -1;\n    while (lo <= hi) {\n      const mid = (lo + hi) >> 1;\n      if (jobs[mid][1] <= jobs[i][0]) { last = mid; lo = mid + 1; }\n      else hi = mid - 1;\n    }\n    if (last !== -1) incl += dp[last];\n    dp[i] = Math.max(dp[i - 1], incl);\n  }\n  return dp[n - 1];\n}\n```\n\n**Time Complexity:** O(n log n)\n**Space Complexity:** O(n)",
+    "testCases": [
+      {
+        "args": [
+          [
+            [
+              1,
+              2,
+              50
+            ],
+            [
+              3,
+              5,
+              20
+            ],
+            [
+              6,
+              19,
+              100
+            ],
+            [
+              2,
+              100,
+              200
+            ]
+          ]
+        ],
+        "expected": 250
+      },
+      {
+        "args": [
+          [
+            [
+              1,
+              3,
+              50
+            ],
+            [
+              2,
+              4,
+              10
+            ],
+            [
+              3,
+              5,
+              40
+            ],
+            [
+              3,
+              6,
+              70
+            ]
+          ]
+        ],
+        "expected": 120
+      }
+    ],
+    "constraints": [
+      "1 <= n <= 10^4",
+      "1 <= start < end <= 10^5",
+      "1 <= profit <= 10^4"
+    ],
+    "templateCode": "/**\n * @param {number[][]} jobs - [[start, end, profit], ...]\n * @return {number}\n */\nfunction weightedJobScheduling(jobs) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "word-break-problem-trie-solution",
+    "description": "## Word Break Problem (Trie Solution)\n\nGiven a string `s` and a dictionary of words `wordDict`, determine if `s` can be segmented into a space-separated sequence of one or more dictionary words.\n\n**Example 1:**\n- Input: `s = \"leetcode\", wordDict = [\"leet\",\"code\"]`\n- Output: `true`\n\n**Example 2:**\n- Input: `s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]`\n- Output: `false`",
+    "solution": "## Approach: Trie + DP\n\nBuild a trie from the dictionary. Use DP where `dp[i]` means `s[0..i-1]` is breakable. For each position, traverse the trie to find matching words and check if the position before the match is breakable.\n\n```javascript\nfunction wordBreakProblemTrieSolution(s, wordDict) {\n  const root = {};\n  for (const word of wordDict) {\n    let node = root;\n    for (const ch of word) { if (!node[ch]) node[ch] = {}; node = node[ch]; }\n    node.end = true;\n  }\n  const n = s.length;\n  const dp = new Array(n + 1).fill(false);\n  dp[0] = true;\n  for (let i = 0; i < n; i++) {\n    if (!dp[i]) continue;\n    let node = root;\n    for (let j = i; j < n; j++) {\n      if (!node[s[j]]) break;\n      node = node[s[j]];\n      if (node.end) dp[j + 1] = true;\n    }\n  }\n  return dp[n];\n}\n```\n\n**Time Complexity:** O(n²) where n = s.length\n**Space Complexity:** O(m) for trie, m = total dictionary characters",
+    "testCases": [
+      {
+        "args": [
+          "leetcode",
+          [
+            "leet",
+            "code"
+          ]
+        ],
+        "expected": true
+      },
+      {
+        "args": [
+          "catsandog",
+          [
+            "cats",
+            "dog",
+            "sand",
+            "and",
+            "cat"
+          ]
+        ],
+        "expected": false
+      }
+    ],
+    "constraints": [
+      "1 <= s.length <= 300",
+      "1 <= wordDict.length <= 1000",
+      "1 <= wordDict[i].length <= 20"
+    ],
+    "templateCode": "/**\n * @param {string} s\n * @param {string[]} wordDict\n * @return {boolean}\n */\nfunction wordBreakProblemTrieSolution(s, wordDict) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "word-ladder",
+    "description": "## Word Ladder\n\nGiven `beginWord`, `endWord`, and a `wordList`, find the length of the shortest transformation sequence from `beginWord` to `endWord`, changing one letter at a time. Each intermediate word must be in `wordList`. Return `0` if no sequence exists.\n\n**Example 1:**\n- Input: `beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]`\n- Output: `5` (hit→hot→dot→dog→cog)\n\n**Example 2:**\n- Input: `beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]`\n- Output: `0`",
+    "solution": "## Approach: BFS\n\nBFS from `beginWord`. At each level, try changing each character to a-z. If the new word is in the word set, add it to the queue and remove from the set to avoid revisiting.\n\n```javascript\nfunction wordLadder(beginWord, endWord, wordList) {\n  const wordSet = new Set(wordList);\n  if (!wordSet.has(endWord)) return 0;\n  const queue = [[beginWord, 1]];\n  const visited = new Set([beginWord]);\n  while (queue.length) {\n    const [word, level] = queue.shift();\n    for (let i = 0; i < word.length; i++) {\n      for (let c = 97; c <= 122; c++) {\n        const nw = word.slice(0,i) + String.fromCharCode(c) + word.slice(i+1);\n        if (nw === endWord) return level + 1;\n        if (wordSet.has(nw) && !visited.has(nw)) {\n          visited.add(nw);\n          queue.push([nw, level + 1]);\n        }\n      }\n    }\n  }\n  return 0;\n}\n```\n\n**Time Complexity:** O(M² × N), M = word length, N = word list size\n**Space Complexity:** O(M × N)",
+    "testCases": [
+      {
+        "args": [
+          "hit",
+          "cog",
+          [
+            "hot",
+            "dot",
+            "dog",
+            "lot",
+            "log",
+            "cog"
+          ]
+        ],
+        "expected": 5
+      },
+      {
+        "args": [
+          "hit",
+          "cog",
+          [
+            "hot",
+            "dot",
+            "dog",
+            "lot",
+            "log"
+          ]
+        ],
+        "expected": 0
+      }
+    ],
+    "constraints": [
+      "1 <= beginWord.length <= 10",
+      "endWord.length == beginWord.length",
+      "1 <= wordList.length <= 5000",
+      "All words have same length"
+    ],
+    "templateCode": "/**\n * @param {string} beginWord\n * @param {string} endWord\n * @param {string[]} wordList\n * @return {number}\n */\nfunction wordLadder(beginWord, endWord, wordList) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "word-search",
+    "constraints": [
+      "m == board.length, n == board[i].length",
+      "1 <= m, n <= 6",
+      "1 <= word.length <= 15",
+      "board and word consist of uppercase/lowercase English letters"
+    ],
+    "templateCode": "/**\n * @param {string[][]} board\n * @param {string} word\n * @return {boolean}\n */\nfunction wordSearch(board, word) {\n  // Your code here\n}"
+  },
+  {
+    "slug": "word-search-ii",
+    "constraints": [
+      "m == board.length, n == board[i].length",
+      "1 <= m, n <= 12",
+      "1 <= words.length <= 3 * 10^4",
+      "1 <= words[i].length <= 10"
+    ],
+    "templateCode": "/**\n * @param {string[][]} board\n * @param {string[]} words\n * @return {string[]}\n */\nfunction wordSearchIi(board, words) {\n  // Your code here\n}"
+  }
+]

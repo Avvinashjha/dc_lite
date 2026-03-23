@@ -58,6 +58,30 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       </div>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>About QR Codes</h2>
+    <p>
+      QR codes encode data in a two-dimensional barcode that any smartphone camera can scan. They're used
+      for everything — linking to websites, sharing WiFi credentials, encoding contact info, and mobile payments.
+    </p>
+
+    <h3>What You Can Encode</h3>
+    <ul>
+      <li><strong>URLs</strong> — Link to any webpage. The scanner opens it directly in the browser</li>
+      <li><strong>WiFi</strong> — Encode network name, password, and encryption type. Scan to connect instantly — no typing</li>
+      <li><strong>Email</strong> — Pre-fill the recipient, subject, and body of an email</li>
+      <li><strong>Phone</strong> — Encode a phone number for one-tap calling</li>
+      <li><strong>Plain text</strong> — Any arbitrary text up to about 4,000 characters</li>
+    </ul>
+
+    <h3>Tips for Better QR Codes</h3>
+    <p>
+      Keep the encoded data short — longer data means a denser pattern that's harder to scan from a distance.
+      For URLs, use a short link if the original is very long. Always test your QR code with an actual
+      phone camera before printing or sharing it.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>

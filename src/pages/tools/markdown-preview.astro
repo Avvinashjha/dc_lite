@@ -27,6 +27,32 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       <div id="preview" class="md-preview"></div>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>Writing Markdown</h2>
+    <p>
+      Markdown is a lightweight markup language that lets you write formatted text with plain characters.
+      Headers start with <code>#</code>, bold text uses <code>**asterisks**</code>, and links look like
+      <code>[text](url)</code>. It's the standard for README files, documentation, blog posts, and technical writing.
+    </p>
+
+    <h3>What This Tool Does</h3>
+    <p>
+      Type or paste Markdown on the left and see the rendered HTML on the right — updated in real time.
+      When you're happy with the result, export as PDF, HTML, or download the raw <code>.md</code> file.
+      Multiple tabs let you work on several documents at once.
+    </p>
+
+    <h3>Markdown Cheat Sheet</h3>
+    <ul>
+      <li><code># Heading 1</code>, <code>## Heading 2</code>, <code>### Heading 3</code></li>
+      <li><code>**bold**</code> and <code>*italic*</code></li>
+      <li><code>- item</code> for unordered lists, <code>1. item</code> for ordered lists</li>
+      <li><code>[link text](https://example.com)</code> for links</li>
+      <li><code>![alt](image-url)</code> for images</li>
+      <li>Triple backticks for code blocks with syntax highlighting</li>
+    </ul>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>
@@ -37,6 +63,14 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   var preview = document.getElementById('preview');
 
   function genId() { return 'md-' + Date.now().toString(36); }
+
+  // Allow only safe URLs to prevent XSS (javascript:, data:, etc.)
+  function safeUrl(url) {
+    if (!url || typeof url !== 'string') return '#';
+    var u = url.trim();
+    if (/^(https?:|mailto:|#|\/|\.)/i.test(u)) return u;
+    return '#';
+  }
 
   // --- Markdown parser ---
   function parseMd(md) {
@@ -61,8 +95,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>')
-      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(_, alt, src) { return '<img src="' + safeUrl(src) + '" alt="' + (alt || '').replace(/"/g, '&quot;') + '" />'; })
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, text, href) { return '<a href="' + safeUrl(href) + '">' + text + '</a>'; })
       .replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>')
       .replace(/^---$/gm, '<hr />')
       .replace(/\n\n/g, '</p><p>')
@@ -158,10 +192,12 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   });
 
   document.getElementById('btn-pdf').addEventListener('click', function() {
-    var win = window.open('', '_blank');
-    win.document.write('<!DOCTYPE html><html><head><title>Markdown PDF</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:800px;margin:2rem auto;padding:0 1.5rem;color:#1f2937;line-height:1.7;}h1,h2,h3,h4{margin-top:1.5em;margin-bottom:0.5em;}pre{background:#f3f4f6;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.85rem;}code{font-family:SFMono-Regular,Menlo,monospace;font-size:0.85em;background:#f3f4f6;padding:0.15em 0.3em;border-radius:3px;}pre code{background:none;padding:0;}blockquote{border-left:3px solid #2563eb;padding-left:1rem;color:#6b7280;font-style:italic;margin:1rem 0;}table{border-collapse:collapse;width:100%;margin:1rem 0;}th,td{border:1px solid #e5e7eb;padding:0.5rem 0.75rem;text-align:left;}th{background:#f9fafb;font-weight:600;}img{max-width:100%;}hr{border:none;border-top:1px solid #e5e7eb;margin:1.5rem 0;}@media print{body{margin:0;padding:1rem;}}</style></head><body>' + preview.innerHTML + '</body></html>');
-    win.document.close();
-    setTimeout(function() { win.print(); }, 300);
+    var html = '<!DOCTYPE html><html><head><title>Markdown PDF</title><meta charset="utf-8"><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;max-width:800px;margin:2rem auto;padding:0 1.5rem;color:#1f2937;line-height:1.7;}h1,h2,h3,h4{margin-top:1.5em;margin-bottom:0.5em;}pre{background:#f3f4f6;padding:1rem;border-radius:6px;overflow-x:auto;font-size:0.85rem;}code{font-family:SFMono-Regular,Menlo,monospace;font-size:0.85em;background:#f3f4f6;padding:0.15em 0.3em;border-radius:3px;}pre code{background:none;padding:0;}blockquote{border-left:3px solid #2563eb;padding-left:1rem;color:#6b7280;font-style:italic;margin:1rem 0;}table{border-collapse:collapse;width:100%;margin:1rem 0;}th,td{border:1px solid #e5e7eb;padding:0.5rem 0.75rem;text-align:left;}th{background:#f9fafb;font-weight:600;}img{max-width:100%;}hr{border:none;border-top:1px solid #e5e7eb;margin:1.5rem 0;}@media print{body{margin:0;padding:1rem;}}</style></head><body>' + preview.innerHTML + '</body></html>';
+    var blob = new Blob([html], { type: 'text/html' });
+    var url = URL.createObjectURL(blob);
+    var win = window.open(url, '_blank');
+    if (win) setTimeout(function() { win.print(); URL.revokeObjectURL(url); }, 300);
+    else URL.revokeObjectURL(url);
   });
 
   document.getElementById('btn-download-html').addEventListener('click', function() {

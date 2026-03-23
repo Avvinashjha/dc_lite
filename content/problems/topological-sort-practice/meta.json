@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0203",
+  "title": "Topological sort | Practice",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Topological%20sort%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "topologicalSort",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction topologicalSort(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "2 <= V <= 10^4",
+    "1 <= E <= V*(V-1)/2"
+  ]
+}

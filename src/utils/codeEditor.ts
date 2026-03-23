@@ -20,6 +20,7 @@ interface CodeEditorHandle {
   view: EditorView;
   getValue: () => string;
   setValue: (value: string) => void;
+  setLanguage: (language: EditorLanguage) => void;
   destroy: () => void;
 }
 
@@ -143,9 +144,10 @@ export function createCodeEditor(options: CreateCodeEditorOptions): CodeEditorHa
   }
 
   const themeCompartment = new Compartment();
+  const languageCompartment = new Compartment();
   const extensions: any[] = [
     themeCompartment.of(themeExtension()),
-    languageExtension(options.language || 'text'),
+    languageCompartment.of(languageExtension(options.language || 'text')),
   ];
 
   if (options.lineWrapping) {
@@ -203,6 +205,11 @@ export function createCodeEditor(options: CreateCodeEditorOptions): CodeEditorHa
           to: view.state.doc.length,
           insert: value,
         },
+      });
+    },
+    setLanguage: (language: EditorLanguage) => {
+      view.dispatch({
+        effects: languageCompartment.reconfigure(languageExtension(language)),
       });
     },
     destroy: () => {

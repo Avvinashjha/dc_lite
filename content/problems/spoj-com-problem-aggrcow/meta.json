@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0077",
+  "title": "SPOJ.com - Problem AGGRCOW",
+  "difficulty": "Hard",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "Other",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "spojComProblemAggrcow",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction spojComProblemAggrcow(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "2 <= N <= 10^5",
+    "0 <= positions[i] <= 10^9",
+    "2 <= C <= N"
+  ]
+}

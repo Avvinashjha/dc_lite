@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0117",
+  "title": "Implement two Stacks in an Array",
+  "difficulty": "Easy",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Implement%20two%20Stacks%20in%20an%20Array",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "implementTwoStacksInAnArray",
+  "templateCode": "function TwoStacks(n) {\n  // Initialize two stacks in one array\n}\nTwoStacks.prototype.push1 = function(x) {};\nTwoStacks.prototype.push2 = function(x) {};\nTwoStacks.prototype.pop1 = function() {};\nTwoStacks.prototype.pop2 = function() {};",
+  "constraints": [
+    "1 <= N <= 100"
+  ]
+}

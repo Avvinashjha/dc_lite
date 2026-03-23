@@ -1,0 +1,82 @@
+{
+  "draft": false,
+  "id": "problem-0264",
+  "title": "M-Coloring Problem | Practice",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=M-Coloring%20Problem%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "N = 4, M = 3, E = 5",
+  "sampleOutput": "1 (True)",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ]
+        ],
+        3,
+        4
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        2,
+        3
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "mColoringProblem",
+  "templateCode": "/**\n * @param {number} N\n * @param {number} M\n * @param {number} E\n * @return {any}\n */\nfunction mColoringProblem(N, M, E) {\n  // Write your solution here\n}\n\n// Sample: console.log(mColoringProblem(4, 3, 5));",
+  "constraints": [
+    "1 <= V <= 20",
+    "1 <= E <= V*(V-1)/2",
+    "1 <= M <= V"
+  ]
+}

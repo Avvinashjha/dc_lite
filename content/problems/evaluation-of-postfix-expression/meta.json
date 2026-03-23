@@ -1,0 +1,26 @@
+{
+  "draft": false,
+  "id": "problem-0116",
+  "title": "Evaluation of Postfix Expression",
+  "difficulty": "Easy",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Evaluation%20of%20Postfix%20Expression",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "231*+9-"
+      ],
+      "expected": -4
+    }
+  ],
+  "functionName": "evaluationOfPostfixExpression",
+  "templateCode": "/**\n * @param {string} exp\n * @return {number}\n */\nfunction evaluatePostfix(exp) {\n  // Evaluate postfix expression\n}",
+  "constraints": [
+    "1 <= length of expression <= 100"
+  ]
+}

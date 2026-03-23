@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0140",
+  "title": "Binary Tree Paths",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-tree-paths/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreePaths",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {string[]}\n */\nfunction binaryTreePaths(root) {\n  // Return all root-to-leaf paths\n}",
+  "constraints": [
+    "1 <= number of nodes <= 100",
+    "-100 <= Node.val <= 100"
+  ]
+}

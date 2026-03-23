@@ -3,7 +3,12 @@
   "description": "Discover essential TypeScript best practices that will make your code more maintainable, type-safe, and enjoyable to work with.",
   "date": "2026-02-05",
   "author": "Avinash Jha",
-  "tags": ["typescript", "javascript", "programming"],
+  "tags": [
+    "typescript",
+    "javascript",
+    "programming"
+  ],
   "category": "tutorials",
-  "draft": false
+  "draft": false,
+  "image": "/blog/typescript-best-practices/hero.svg"
 }

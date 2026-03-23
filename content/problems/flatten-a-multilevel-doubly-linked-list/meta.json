@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0099",
+  "title": "Flatten a Multilevel Doubly Linked List",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "flattenAMultilevelDoublyLinkedList",
+  "templateCode": "/**\n * @param {Node} head\n * @return {Node}\n */\nfunction flatten(head) {\n  // Flatten multilevel doubly linked list\n}",
+  "constraints": [
+    "0 <= number of nodes <= 1000",
+    "1 <= Node.val <= 10^5"
+  ]
+}

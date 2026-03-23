@@ -1,0 +1,585 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout
+  title="Canvas Draw"
+  description="Draw flowcharts, diagrams, and wireframes right in your browser. Drag shapes, connect them with arrows, and export as SVG or PNG."
+  toolName="Canvas Draw"
+  keywords="canvas draw, flow maker, diagram tool, flowchart, wireframe, draw.io alternative, svg editor, er diagram"
+>
+  <!-- Project tab bar -->
+  <div class="cd-tabs">
+    <div class="cd-tabs__list" id="cd-tab-list"></div>
+    <button class="cd-tabs__add" id="cd-add-project" title="New project">+</button>
+    <div class="cd-tabs__right">
+      <button class="tool-btn" id="cd-import-btn" title="Import JSON">Import</button>
+      <button class="tool-btn" id="cd-export-btn" title="Export drawing">Export</button>
+    </div>
+  </div>
+
+  <!-- Main workspace -->
+  <div class="cd-workspace">
+    <!-- Toolbar -->
+    <div class="cd-toolbar" id="cd-toolbar">
+      <button class="cd-tool cd-tool--active" data-tool="select" title="Select (V)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l7 18 3-7 7-3z"/></svg>
+      </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="rect" title="Rectangle (R)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="roundedRect" title="Rounded Rectangle">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="4"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="circle" title="Circle (C)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="9" ry="8"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="diamond" title="Diamond (D)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 22,12 12,22 2,12"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="triangle" title="Triangle">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,3 22,21 2,21"/></svg>
+      </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="card" title="Card">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="table" title="Table">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="text" title="Text (T)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h12M12 4v16"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="connector" title="Connector (L)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19L19 5"/><path d="M15 5h4v4"/></svg>
+      </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="pen" title="Pen (P)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><path d="M15 5l4 4"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="highlight" title="Highlighter (H)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2l4 4-9.5 9.5-4-4z"/><path d="M8.5 15.5L2 22h6l.5-.5"/></svg>
+      </button>
+      <button class="cd-tool" data-tool="eraser" title="Eraser (E)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20H7L3 16l10-10 8 8-4 4z"/><path d="M6 12l8 8"/></svg>
+      </button>
+      <div class="cd-tool-sep"></div>
+      <button class="cd-tool" data-tool="sticky" title="Sticky Note (N)">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5z"/><path d="M14 3v6h6"/></svg>
+      </button>
+    </div>
+
+    <!-- SVG canvas -->
+    <div class="cd-canvas-wrap" id="cd-canvas-wrap">
+      <svg id="cd-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <defs>
+          <pattern id="cd-grid-pat" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="0.8" class="cd-grid-dot"/>
+          </pattern>
+          <!-- Arrow markers (strokeWidth units = scale with stroke-width) -->
+          <marker id="cd-m-arrow" markerWidth="6" markerHeight="4" refX="5.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 0, 6 2, 0 4" class="cd-arrow-fill"/>
+          </marker>
+          <marker id="cd-m-arrow-rev" markerWidth="6" markerHeight="4" refX="0.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="6 0, 0 2, 6 4" class="cd-arrow-fill"/>
+          </marker>
+          <marker id="cd-m-open" markerWidth="6" markerHeight="4" refX="5.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polyline points="0 0, 6 2, 0 4" fill="none" stroke="var(--color-text-light)" stroke-width="0.6"/>
+          </marker>
+          <marker id="cd-m-open-rev" markerWidth="6" markerHeight="4" refX="0.5" refY="2" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polyline points="6 0, 0 2, 6 4" fill="none" stroke="var(--color-text-light)" stroke-width="0.6"/>
+          </marker>
+          <marker id="cd-m-diamond" markerWidth="7" markerHeight="5" refX="6.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
+          </marker>
+          <marker id="cd-m-diamond-rev" markerWidth="7" markerHeight="5" refX="0.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
+          </marker>
+          <marker id="cd-m-diamond-fill" markerWidth="7" markerHeight="5" refX="6.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" class="cd-arrow-fill"/>
+          </marker>
+          <marker id="cd-m-diamond-fill-rev" markerWidth="7" markerHeight="5" refX="0.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <polygon points="0 2.5, 3.5 0, 7 2.5, 3.5 5" class="cd-arrow-fill"/>
+          </marker>
+          <marker id="cd-m-crow" markerWidth="7" markerHeight="6" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="7" y1="0" x2="0" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="7" y1="6" x2="0" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="7" y1="3" x2="0" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+          </marker>
+          <marker id="cd-m-crow-rev" markerWidth="7" markerHeight="6" refX="0.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="0" y1="0" x2="7" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="0" y1="6" x2="7" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+            <line x1="0" y1="3" x2="7" y2="3" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+          </marker>
+          <marker id="cd-m-bar" markerWidth="3" markerHeight="6" refX="1.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="1.5" y1="0" x2="1.5" y2="6" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+          </marker>
+          <marker id="cd-m-bar-rev" markerWidth="3" markerHeight="6" refX="1.5" refY="3" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <line x1="1.5" y1="0" x2="1.5" y2="6" stroke="var(--color-text-light)" stroke-width="0.6" fill="none"/>
+          </marker>
+          <marker id="cd-m-dot" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" class="cd-arrow-fill"/>
+          </marker>
+          <marker id="cd-m-dot-rev" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" class="cd-arrow-fill"/>
+          </marker>
+          <marker id="cd-m-circle" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
+          </marker>
+          <marker id="cd-m-circle-rev" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto" markerUnits="strokeWidth" overflow="visible">
+            <circle cx="2.5" cy="2.5" r="2" fill="#fff" stroke="var(--color-text-light)" stroke-width="0.4"/>
+          </marker>
+          <filter id="cd-shadow" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+          </filter>
+        </defs>
+        <rect id="cd-grid-bg" width="10000" height="10000" x="-5000" y="-5000" fill="url(#cd-grid-pat)" class="cd-grid-rect"/>
+        <g id="cd-connectors-layer"></g>
+        <g id="cd-shapes-layer"></g>
+        <g id="cd-ui-layer"></g>
+      </svg>
+      <div class="cd-zoom-bar">
+        <button class="cd-zoom-btn" id="cd-zoom-out" title="Zoom out">−</button>
+        <span class="cd-zoom-level" id="cd-zoom-info">100%</span>
+        <button class="cd-zoom-btn" id="cd-zoom-in" title="Zoom in">+</button>
+        <button class="cd-zoom-btn cd-zoom-sep" id="cd-fit-screen" title="Fit to screen">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>
+        </button>
+        <button class="cd-zoom-btn" id="cd-snap-grid" title="Snap to grid">
+          <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>
+        </button>
+        <button class="cd-zoom-btn" id="cd-help-btn" title="Shortcuts (?)">?</button>
+      </div>
+    </div>
+
+    <!-- Properties panel -->
+    <div class="cd-props" id="cd-props">
+      <div class="cd-props__empty" id="cd-props-empty">Select a shape<br/>to edit properties</div>
+
+      <!-- Shape properties -->
+      <div class="cd-props__form" id="cd-props-form" style="display:none;">
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-fill">Fill</label>
+          <div class="cd-palette" id="cd-fill-palette">
+            <span class="cd-swatch" data-color="#ffffff" style="background:#ffffff;"></span>
+            <span class="cd-swatch" data-color="#1f2937" style="background:#1f2937;"></span>
+            <span class="cd-swatch" data-color="#ef4444" style="background:#ef4444;"></span>
+            <span class="cd-swatch" data-color="#f97316" style="background:#f97316;"></span>
+            <span class="cd-swatch" data-color="#eab308" style="background:#eab308;"></span>
+            <span class="cd-swatch" data-color="#22c55e" style="background:#22c55e;"></span>
+            <span class="cd-swatch" data-color="#3b82f6" style="background:#3b82f6;"></span>
+            <span class="cd-swatch" data-color="#8b5cf6" style="background:#8b5cf6;"></span>
+            <span class="cd-swatch" data-color="#ec4899" style="background:#ec4899;"></span>
+            <span class="cd-swatch" data-color="#6b7280" style="background:#6b7280;"></span>
+          </div>
+          <input type="color" id="cd-fill" value="#ffffff"/>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-stroke">Stroke</label>
+          <div class="cd-palette" id="cd-stroke-palette">
+            <span class="cd-swatch" data-color="#1f2937" style="background:#1f2937;"></span>
+            <span class="cd-swatch" data-color="#000000" style="background:#000000;"></span>
+            <span class="cd-swatch" data-color="#ef4444" style="background:#ef4444;"></span>
+            <span class="cd-swatch" data-color="#f97316" style="background:#f97316;"></span>
+            <span class="cd-swatch" data-color="#eab308" style="background:#eab308;"></span>
+            <span class="cd-swatch" data-color="#22c55e" style="background:#22c55e;"></span>
+            <span class="cd-swatch" data-color="#3b82f6" style="background:#3b82f6;"></span>
+            <span class="cd-swatch" data-color="#8b5cf6" style="background:#8b5cf6;"></span>
+            <span class="cd-swatch" data-color="#ec4899" style="background:#ec4899;"></span>
+            <span class="cd-swatch" data-color="#6b7280" style="background:#6b7280;"></span>
+          </div>
+          <input type="color" id="cd-stroke" value="#374151"/>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-stroke-w">Width</label>
+          <input type="range" id="cd-stroke-w" min="1" max="8" value="2"/>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-font-sz">Font</label>
+          <input type="number" id="cd-font-sz" min="8" max="72" value="14" style="width:60px;"/>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-opacity">Opacity</label>
+          <input type="range" id="cd-opacity" min="0" max="100" value="100"/>
+        </div>
+        <div class="cd-prop-actions">
+          <button class="tool-btn" id="cd-dup-btn">Duplicate</button>
+          <button class="tool-btn cd-delete-btn" id="cd-del-btn">Delete</button>
+        </div>
+        <div class="cd-prop-actions" style="margin-top:0.4rem;">
+          <button class="tool-btn" id="cd-front-btn">Bring Front</button>
+          <button class="tool-btn" id="cd-back-btn">Send Back</button>
+        </div>
+      </div>
+
+      <!-- Connector properties -->
+      <div class="cd-props__conn" id="cd-conn-form" style="display:none;">
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-conn-stroke">Stroke</label>
+          <input type="color" id="cd-conn-stroke" value="#374151"/>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-conn-sw">Width</label>
+          <input type="range" id="cd-conn-sw" min="1" max="8" value="2"/>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-conn-style">Style</label>
+          <select id="cd-conn-style" class="cd-select">
+            <option value="straight">Straight</option>
+            <option value="elbow">Elbow</option>
+            <option value="curved">Curved</option>
+          </select>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-conn-start">Start</label>
+          <select id="cd-conn-start" class="cd-select">
+            <option value="none">None</option>
+            <option value="arrow">Arrow ▶</option>
+            <option value="open">Open Arrow ❯</option>
+            <option value="dot">Dot ●</option>
+            <option value="circle">Circle ○</option>
+            <option value="diamond">Diamond ◇</option>
+            <option value="diamond-fill">Diamond ◆</option>
+            <option value="crow">Crow's Foot ⊳</option>
+            <option value="bar">Bar (One) |</option>
+          </select>
+        </div>
+        <div class="cd-prop">
+          <label class="cd-prop__label" for="cd-conn-end">End</label>
+          <select id="cd-conn-end" class="cd-select">
+            <option value="none">None</option>
+            <option value="arrow" selected>Arrow ▶</option>
+            <option value="open">Open Arrow ❯</option>
+            <option value="dot">Dot ●</option>
+            <option value="circle">Circle ○</option>
+            <option value="diamond">Diamond ◇</option>
+            <option value="diamond-fill">Diamond ◆</option>
+            <option value="crow">Crow's Foot ⊳</option>
+            <option value="bar">Bar (One) |</option>
+          </select>
+        </div>
+        <div class="cd-prop-actions">
+          <button class="tool-btn cd-delete-btn" id="cd-conn-del-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export modal -->
+  <div class="cd-modal-overlay" id="cd-modal" style="display:none;">
+    <div class="cd-modal">
+      <h3 style="margin-bottom:1rem;">Export Drawing</h3>
+      <div class="cd-modal__btns">
+        <button class="tool-btn tool-btn--primary" data-export="svg">Download SVG</button>
+        <button class="tool-btn tool-btn--primary" data-export="png">Download PNG</button>
+        <button class="tool-btn tool-btn--primary" data-export="json">Download JSON</button>
+      </div>
+      <button class="tool-btn" id="cd-modal-close" style="margin-top:0.75rem;width:100%;">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Table dialog -->
+  <div class="cd-modal-overlay" id="cd-table-modal" style="display:none;">
+    <div class="cd-modal">
+      <h3 style="margin-bottom:1rem;">Insert Table</h3>
+      <div class="cd-prop" style="margin-bottom:0.5rem;">
+        <label class="cd-prop__label" for="cd-table-rows">Rows</label>
+        <input type="number" id="cd-table-rows" value="3" min="1" max="20" class="cd-select" style="width:100%;"/>
+      </div>
+      <div class="cd-prop" style="margin-bottom:0.75rem;">
+        <label class="cd-prop__label" for="cd-table-cols">Columns</label>
+        <input type="number" id="cd-table-cols" value="3" min="1" max="10" class="cd-select" style="width:100%;"/>
+      </div>
+      <button class="tool-btn tool-btn--primary" id="cd-table-ok" style="width:100%;">Create Table</button>
+      <button class="tool-btn" id="cd-table-cancel" style="margin-top:0.4rem;width:100%;">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="cd-modal-overlay" id="cd-shortcuts-help" style="display:none;">
+    <div class="cd-modal cd-help-modal">
+      <h3 style="margin-bottom:1rem;">Keyboard Shortcuts</h3>
+      <div class="cd-help-grid">
+        <div class="cd-help-col">
+          <h4>Tools</h4>
+          <div class="cd-help-row"><kbd>V</kbd> Select</div>
+          <div class="cd-help-row"><kbd>R</kbd> Rectangle</div>
+          <div class="cd-help-row"><kbd>C</kbd> Circle</div>
+          <div class="cd-help-row"><kbd>D</kbd> Diamond</div>
+          <div class="cd-help-row"><kbd>T</kbd> Text</div>
+          <div class="cd-help-row"><kbd>L</kbd> Connector</div>
+          <div class="cd-help-row"><kbd>P</kbd> Pen</div>
+          <div class="cd-help-row"><kbd>H</kbd> Highlighter</div>
+          <div class="cd-help-row"><kbd>E</kbd> Eraser</div>
+          <div class="cd-help-row"><kbd>N</kbd> Sticky Note</div>
+        </div>
+        <div class="cd-help-col">
+          <h4>Actions</h4>
+          <div class="cd-help-row"><kbd>Ctrl+Z</kbd> Undo</div>
+          <div class="cd-help-row"><kbd>Ctrl+Shift+Z</kbd> Redo</div>
+          <div class="cd-help-row"><kbd>Ctrl+C</kbd> Copy</div>
+          <div class="cd-help-row"><kbd>Ctrl+V</kbd> Paste</div>
+          <div class="cd-help-row"><kbd>Ctrl+D</kbd> Duplicate</div>
+          <div class="cd-help-row"><kbd>Ctrl+A</kbd> Select All</div>
+          <div class="cd-help-row"><kbd>Ctrl+S</kbd> Save</div>
+          <div class="cd-help-row"><kbd>Ctrl+E</kbd> Export</div>
+          <div class="cd-help-row"><kbd>Del</kbd> Delete</div>
+          <div class="cd-help-row"><kbd>Esc</kbd> Cancel</div>
+        </div>
+        <div class="cd-help-col">
+          <h4>Navigation</h4>
+          <div class="cd-help-row"><kbd>Space</kbd>+Drag Pan</div>
+          <div class="cd-help-row"><kbd>Scroll</kbd> Pan</div>
+          <div class="cd-help-row"><kbd>Pinch</kbd> Zoom</div>
+          <div class="cd-help-row"><kbd>Ctrl+]</kbd> Bring Front</div>
+          <div class="cd-help-row"><kbd>Ctrl+[</kbd> Send Back</div>
+          <div class="cd-help-row"><kbd>Cmd/Ctrl</kbd>+Draw Square/Circle</div>
+          <div class="cd-help-row"><kbd>?</kbd> This help</div>
+        </div>
+      </div>
+      <button class="tool-btn" id="cd-help-close" style="margin-top:1rem;width:100%;">Close</button>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="cd-import-file" accept=".json" style="display:none;"/>
+
+  <section slot="about" class="tool-about">
+    <h2>Drawing Diagrams in the Browser</h2>
+    <p>
+      Sometimes you need a quick diagram — a flowchart for a pull request, a wireframe for a feature idea,
+      or a system architecture sketch for documentation. This canvas tool lets you drag and drop shapes,
+      connect them with arrows, and export the result as an image.
+    </p>
+
+    <h3>What You Can Build</h3>
+    <ul>
+      <li><strong>Flowcharts</strong> — Map out decision logic, user flows, or process steps</li>
+      <li><strong>Wireframes</strong> — Quick UI sketches with rectangles, text, and connectors</li>
+      <li><strong>Architecture diagrams</strong> — Show how services, databases, and APIs connect</li>
+      <li><strong>Mind maps</strong> — Brainstorm and organize ideas visually</li>
+    </ul>
+
+    <p>
+      Your drawings are saved to the browser so they persist between visits. You can also export and import
+      diagrams as JSON files to share with teammates or back up your work.
+    </p>
+  </section>
+</ToolLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script src="/js/canvas-draw.js" is:inline></script>
+
+<style is:global>
+  .cd-tabs {
+    display: flex; align-items: center; gap: 0.25rem;
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    background: var(--color-surface); padding: 0.25rem 0.5rem; margin-bottom: 0.5rem;
+    overflow-x: auto;
+  }
+  .cd-tabs__list { display: flex; gap: 0.2rem; flex: 1; min-width: 0; overflow-x: auto; }
+  .cd-tab {
+    display: flex; align-items: center; gap: 0.3rem;
+    padding: 0.3rem 0.6rem; border-radius: var(--radius-sm);
+    background: transparent; border: 1px solid transparent;
+    font-size: 0.78rem; cursor: pointer; white-space: nowrap;
+    color: var(--color-text-light); transition: all 120ms;
+  }
+  .cd-tab:hover { background: var(--color-code-bg); color: var(--color-text); }
+  .cd-tab--active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .cd-tab__close {
+    display: inline-flex; width: 14px; height: 14px; align-items: center; justify-content: center;
+    border: none; background: transparent; color: inherit; cursor: pointer;
+    border-radius: 50%; font-size: 10px; line-height: 1; opacity: 0.6;
+  }
+  .cd-tab__close:hover { opacity: 1; background: rgba(0,0,0,0.15); }
+  .cd-tabs__add {
+    width: 26px; height: 26px; border-radius: var(--radius-sm);
+    border: 1px dashed var(--color-border); background: transparent;
+    font-size: 1rem; color: var(--color-text-light); cursor: pointer; flex-shrink: 0;
+  }
+  .cd-tabs__add:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .cd-tabs__right { display: flex; gap: 0.3rem; margin-left: auto; flex-shrink: 0; }
+  .cd-tabs__right .tool-btn { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+
+  .cd-workspace {
+    display: flex; gap: 0;
+    border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    overflow: hidden; height: calc(100vh - 150px);
+    background: var(--color-surface);
+  }
+
+  .cd-toolbar {
+    display: flex; flex-direction: column; gap: 0.2rem;
+    padding: 0.4rem; border-right: 1px solid var(--color-border);
+    background: var(--color-surface); flex-shrink: 0; width: 44px;
+  }
+  .cd-tool {
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid transparent; border-radius: var(--radius-sm);
+    background: transparent; color: var(--color-text); cursor: pointer; transition: all 120ms;
+  }
+  .cd-tool:hover { background: var(--color-code-bg); border-color: var(--color-border); }
+  .cd-tool--active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .cd-tool-sep { height: 1px; background: var(--color-border); margin: 0.2rem 0.25rem; }
+
+  .cd-canvas-wrap {
+    flex: 1; position: relative; overflow: hidden; cursor: crosshair;
+    background: var(--cd-canvas-bg, #f8f9fa);
+  }
+  [data-theme="dark"] .cd-canvas-wrap { --cd-canvas-bg: #1a1d2e; }
+  .cd-canvas-wrap[data-mode="select"] { cursor: default; }
+  .cd-canvas-wrap[data-mode="pan"] { cursor: grab; }
+  .cd-canvas-wrap[data-mode="panning"] { cursor: grabbing; }
+  #cd-svg { display: block; width: 100%; height: 100%; }
+  .cd-grid-dot { fill: var(--color-border); }
+  .cd-grid-rect { pointer-events: all; }
+  .cd-arrow-fill { fill: var(--color-text-light); }
+  [data-theme="dark"] .cd-arrow-fill { fill: #9ca3af; }
+  .cd-zoom-bar {
+    position: absolute; bottom: 8px; right: 8px;
+    display: flex; align-items: center; gap: 0;
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm); overflow: hidden; opacity: 0.9;
+    z-index: 5;
+  }
+  .cd-zoom-bar:hover { opacity: 1; }
+  .cd-zoom-btn {
+    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    border: none; background: transparent; color: var(--color-text);
+    font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 0;
+  }
+  .cd-zoom-btn:hover { background: var(--color-code-bg); }
+  .cd-zoom-btn:active { background: var(--color-border); }
+  .cd-zoom-level {
+    font-size: 0.7rem; color: var(--color-text-light); min-width: 36px;
+    text-align: center; user-select: none; padding: 0 2px;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .cd-props {
+    width: 180px; flex-shrink: 0; padding: 0.75rem;
+    border-left: 1px solid var(--color-border);
+    background: var(--color-surface); overflow-y: auto;
+  }
+  .cd-props__empty {
+    font-size: 0.8rem; color: var(--color-text-light);
+    text-align: center; padding-top: 2rem; line-height: 1.5;
+  }
+  .cd-prop { margin-bottom: 0.6rem; }
+  .cd-prop__label {
+    display: block; font-size: 0.7rem; font-weight: 600;
+    color: var(--color-text-light); text-transform: uppercase;
+    letter-spacing: 0.03em; margin-bottom: 0.2rem;
+  }
+  .cd-prop input[type="color"] {
+    width: 100%; height: 30px; border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm); cursor: pointer; background: none; padding: 2px;
+  }
+  .cd-prop input[type="range"] { width: 100%; }
+  .cd-prop input[type="number"] {
+    padding: 0.3rem 0.4rem; border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm); background: var(--color-surface);
+    color: var(--color-text); font-size: 0.8rem;
+  }
+  .cd-select {
+    width: 100%; padding: 0.3rem 0.4rem; border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm); background: var(--color-surface);
+    color: var(--color-text); font-size: 0.78rem;
+  }
+  .cd-prop-actions { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.75rem; }
+  .cd-prop-actions .tool-btn { width: 100%; font-size: 0.75rem; padding: 0.35rem; }
+  .cd-delete-btn { color: #ef4444 !important; border-color: #ef4444 !important; }
+  .cd-delete-btn:hover { background: #ef4444 !important; color: #fff !important; }
+
+  .cd-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+  }
+  .cd-modal {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: 1.5rem; min-width: 280px;
+    box-shadow: var(--shadow-lg);
+  }
+  .cd-modal h3 { font-size: 1rem; }
+  .cd-modal__btns { display: flex; flex-direction: column; gap: 0.4rem; }
+  .cd-modal__btns .tool-btn { width: 100%; }
+
+  .cd-sel-outline { fill: none; stroke: var(--color-primary, #2563eb); stroke-width: 1.5; stroke-dasharray: 5 3; pointer-events: none; }
+  .cd-handle { fill: #fff; stroke: var(--color-primary, #2563eb); stroke-width: 1.5; cursor: pointer; }
+  [data-theme="dark"] .cd-handle { fill: #374151; }
+  .cd-marquee { fill: rgba(37,99,235,0.08); stroke: var(--color-primary, #2563eb); stroke-width: 1; stroke-dasharray: 4 3; }
+  .cd-anchor-hint { fill: var(--color-primary, #2563eb); opacity: 0.6; cursor: crosshair; }
+  .cd-conn-temp { stroke: var(--color-primary, #2563eb); stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+  .cd-conn-selected { outline: none; }
+  .cd-wp-handle { cursor: move; }
+  .cd-wp-mid { cursor: pointer; opacity: 0.35; transition: opacity 0.15s; }
+  .cd-wp-mid:hover { opacity: 1 !important; }
+  .cd-wp-endpoint { pointer-events: none; }
+
+  .cd-shape-text {
+    font-family: var(--font-sans); pointer-events: none; user-select: none;
+  }
+  .cd-card-sep { pointer-events: none; }
+  .cd-table-line { pointer-events: none; }
+  .cd-table-header { pointer-events: none; }
+
+  .cd-text-editor {
+    position: absolute; border: 2px solid var(--color-primary);
+    background: var(--cd-canvas-bg, #f8f9fa); color: var(--color-text);
+    font-family: var(--font-sans);
+    text-align: center; resize: none; outline: none;
+    overflow-y: auto; overflow-x: hidden;
+    word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;
+    z-index: 10; padding: 4px; border-radius: 2px; box-sizing: border-box;
+  }
+
+  .cd-tool:focus-visible, .cd-tab:focus-visible, .cd-tabs__add:focus-visible {
+    outline: 2px solid var(--color-primary); outline-offset: 1px;
+  }
+  .cd-tabs__list::-webkit-scrollbar { height: 3px; }
+  .cd-tabs__list::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+
+  .cd-canvas-wrap[data-mode="pen"],
+  .cd-canvas-wrap[data-mode="highlight"],
+  .cd-canvas-wrap[data-mode="eraser"] { cursor: crosshair; }
+
+  .cd-palette {
+    display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 4px;
+  }
+  .cd-swatch {
+    width: 16px; height: 16px; border-radius: 50%; cursor: pointer;
+    border: 1.5px solid var(--color-border); transition: transform 100ms;
+    flex-shrink: 0;
+  }
+  .cd-swatch:hover { transform: scale(1.25); border-color: var(--color-text); }
+
+  .cd-zoom-sep { border-left: 1px solid var(--color-border); }
+  #cd-snap-grid.cd-snap-active { background: var(--color-primary); color: #fff; }
+  #cd-help-btn { font-size: 0.72rem; font-weight: 700; }
+
+  .cd-help-modal { min-width: 560px; max-width: 90vw; }
+  .cd-help-grid { display: flex; gap: 1.5rem; }
+  .cd-help-col { flex: 1; min-width: 0; }
+  .cd-help-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-light); margin-bottom: 0.5rem; }
+  .cd-help-row { font-size: 0.78rem; color: var(--color-text); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+  .cd-help-row kbd {
+    display: inline-block; padding: 0.1rem 0.35rem; border-radius: 3px;
+    background: var(--color-code-bg); border: 1px solid var(--color-border);
+    font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.4;
+    min-width: 20px; text-align: center; white-space: nowrap; flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .cd-workspace { height: calc(100vh - 160px); flex-direction: column; }
+    .cd-toolbar { flex-direction: row; width: 100%; border-right: none; border-bottom: 1px solid var(--color-border); overflow-x: auto; }
+    .cd-tool-sep { width: 1px; height: auto; margin: 0.25rem 0.15rem; }
+    .cd-props { width: 100%; border-left: none; border-top: 1px solid var(--color-border); max-height: 180px; }
+    .cd-canvas-wrap { min-height: 50vh; }
+    .cd-help-modal { min-width: auto; }
+    .cd-help-grid { flex-direction: column; gap: 0.75rem; }
+  }
+</style>

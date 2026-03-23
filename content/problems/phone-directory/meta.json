@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0222",
+  "title": "phone-directory",
+  "difficulty": "Hard",
+  "topic": "Tries",
+  "topics": [
+    "Tries"
+  ],
+  "platform": "Other",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "phoneDirectory",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction phoneDirectory(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 20",
+    "1 <= query.length <= 20"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0013",
+  "title": "Subarray Sums Divisible by K",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/subarray-sums-divisible-by-k/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [4,5,0,-2,-3,1], k = 5",
+  "sampleOutput": "7",
+  "testCases": [
+    {
+      "args": [
+        [
+          4,
+          5,
+          0,
+          -2,
+          -3,
+          1
+        ],
+        5
+      ],
+      "expected": 7
+    }
+  ],
+  "functionName": "subarraySumsDivisibleByK",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {any}\n */\nfunction subarraySumsDivisibleByK(nums, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(subarraySumsDivisibleByK([4,5,0,-2,-3,1], 5));",
+  "constraints": [
+    "1 <= nums.length <= 3 * 10^4",
+    "-10^4 <= nums[i] <= 10^4",
+    "2 <= k <= 10^4"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0086",
+  "title": "Remove Linked List Elements",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/remove-linked-list-elements/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "removeLinkedListElements",
+  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} val\n * @return {ListNode}\n */\nfunction removeElements(head, val) {\n  // Remove all nodes with given value\n}",
+  "constraints": [
+    "0 to 10^4 nodes",
+    "1 <= Node.val <= 50",
+    "0 <= val <= 50"
+  ]
+}

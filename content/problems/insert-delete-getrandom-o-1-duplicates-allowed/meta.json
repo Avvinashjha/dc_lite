@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0026",
+  "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+  "difficulty": "Hard",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/insert-delete-getrandom-o-1-duplicates-allowed/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "[\"RandomizedCollection\", \"insert\", \"insert\", \"insert\", \"getRandom\", \"remove\", \"getRandom\"]",
+  "sampleOutput": "[null, true, false, true, 1, true, 1]",
+  "testCases": [],
+  "functionName": "insertDeleteGetrandomO1DuplicatesAllowed",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction insertDeleteGetrandomO1DuplicatesAllowed(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "-2^31 <= val <= 2^31 - 1",
+    "At most 2 * 10^5 calls"
+  ]
+}

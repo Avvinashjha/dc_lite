@@ -1,0 +1,44 @@
+{
+  "draft": false,
+  "id": "problem-0230",
+  "title": "Counting Bits",
+  "difficulty": "Easy",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/counting-bits/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        5
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2
+      ]
+    }
+  ],
+  "functionName": "countingBits",
+  "templateCode": "/**\n * @param {number} n\n * @return {number[]}\n */\nfunction countBits(n) {\n  // Return array of bit counts 0..n\n}\n\n// Sample: console.log(countBits(5));",
+  "constraints": [
+    "0 <= n <= 10^5"
+  ]
+}

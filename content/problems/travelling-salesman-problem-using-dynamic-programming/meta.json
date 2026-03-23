@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0213",
+  "title": "Travelling Salesman Problem using Dynamic Programming",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Travelling%20Salesman%20Problem%20using%20Dynamic%20Programming",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "travellingSalesmanProblemUsingDynamicProgramming",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction travellingSalesmanProblemUsingDynamicProgramming(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 20",
+    "1 <= cost[i][j] <= 10^4"
+  ]
+}

@@ -26,6 +26,28 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   </div>
 
   <div id="world-clocks" style="margin-top: 2rem;"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>Working with Time Zones</h2>
+    <p>
+      If you work with distributed teams, schedule meetings across continents, or build apps for global users,
+      you deal with time zones constantly. This tool shows the current time in multiple zones simultaneously
+      and converts any time between them.
+    </p>
+
+    <h3>Common Scenarios</h3>
+    <ul>
+      <li><strong>Meeting scheduling</strong> — Find a time that works for people in New York, London, and Tokyo</li>
+      <li><strong>Deploy planning</strong> — Schedule maintenance windows during off-peak hours for your users' regions</li>
+      <li><strong>Log analysis</strong> — Convert server log timestamps (usually UTC) to your local time</li>
+      <li><strong>API debugging</strong> — Verify that date fields in API responses match expected time zones</li>
+    </ul>
+
+    <p>
+      The world clocks update in real time. Need to convert Unix timestamps instead? Use the
+      <a href="/tools/timestamp">Timestamp Converter</a>.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>

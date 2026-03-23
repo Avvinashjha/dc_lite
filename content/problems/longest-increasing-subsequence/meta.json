@@ -1,0 +1,50 @@
+{
+  "draft": false,
+  "id": "problem-0238",
+  "title": "Longest Increasing Subsequence",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/longest-increasing-subsequence/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          9,
+          2,
+          5,
+          3,
+          7,
+          101,
+          18
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          0,
+          3,
+          2,
+          3
+        ]
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "longestIncreasingSubsequence",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction lengthOfLIS(nums) {\n  // Length of longest increasing subsequence\n}",
+  "constraints": [
+    "1 <= nums.length <= 2500",
+    "-10^4 <= nums[i] <= 10^4"
+  ]
+}

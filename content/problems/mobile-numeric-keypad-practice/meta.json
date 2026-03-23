@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0242",
+  "title": "Mobile numeric keypad | Practice",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Mobile%20numeric%20keypad%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "mobileNumericKeypad",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction mobileNumericKeypad(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 25"
+  ]
+}

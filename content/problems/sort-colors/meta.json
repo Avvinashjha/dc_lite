@@ -1,0 +1,44 @@
+{
+  "draft": false,
+  "id": "problem-0002",
+  "title": "Sort Colors",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/sort-colors/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [2,0,2,1,1,0]",
+  "sampleOutput": "[0,0,1,1,2,2]",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          0,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ]
+    }
+  ],
+  "functionName": "sortColors",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction sortColors(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(sortColors([2,0,2,1,1,0]));",
+  "constraints": [
+    "1 <= nums.length <= 300",
+    "nums[i] is 0, 1, or 2"
+  ]
+}

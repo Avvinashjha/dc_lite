@@ -30,6 +30,31 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   <div id="status" style="margin-top: 1rem;"></div>
   <div id="diff-stats" style="display:none; margin-top: 0.75rem;"></div>
   <div id="diff-output" style="margin-top: 1rem;"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>Comparing JSON Objects</h2>
+    <p>
+      When an API response changes or a config file gets updated, spotting the differences manually is painful.
+      This tool compares two JSON objects and highlights exactly what was added, removed, or changed — much like
+      a <code>git diff</code> but specifically for structured data.
+    </p>
+    <p>
+      Unlike plain text diff, JSON diff understands structure. It knows that <code>{'{"a":1,"b":2}'}</code> and
+      <code>{'{"b":2,"a":1}'}</code> are equivalent, and it won't flag reordered keys as changes.
+    </p>
+
+    <h3>Common Use Cases</h3>
+    <ul>
+      <li><strong>API versioning</strong> — Compare responses between API versions to spot breaking changes</li>
+      <li><strong>Config auditing</strong> — See what changed between two versions of a config file</li>
+      <li><strong>Data debugging</strong> — When your app produces unexpected output, compare against expected data</li>
+    </ul>
+
+    <p>
+      Need to format a single JSON file first? Use the <a href="/tools/json-formatter">JSON Formatter</a>.
+      For comparing plain text or code, try the <a href="/tools/diff-checker">Diff Checker</a>.
+    </p>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>
@@ -163,8 +188,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
         stats.innerHTML = '<span class="jd-stat jd-stat--add">+' + result.adds + ' added</span><span class="jd-stat jd-stat--rem">-' + result.rems + ' removed</span><span class="jd-stat jd-stat--same">' + result.same + ' unchanged</span>';
         out.innerHTML = buildHtml(result.left, result.right);
         var ls = out.querySelector('.jd-side--left'), rs = out.querySelector('.jd-side--right'), s = false;
-        ls.addEventListener('scroll', function() { if (!s) { s = true; rs.scrollTop = ls.scrollTop; s = false; } });
-        rs.addEventListener('scroll', function() { if (!s) { s = true; ls.scrollTop = rs.scrollTop; s = false; } });
+        ls.addEventListener('scroll', function() { if (!s) { s = true; rs.scrollTop = ls.scrollTop; s = false; } }, { passive: true });
+        rs.addEventListener('scroll', function() { if (!s) { s = true; ls.scrollTop = rs.scrollTop; s = false; } }, { passive: true });
       }
       saveToDB();
     } catch(e) { status.className = 'tool-error'; status.textContent = 'Invalid JSON: ' + e.message; out.innerHTML = ''; stats.style.display = 'none'; }

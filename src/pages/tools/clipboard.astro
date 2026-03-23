@@ -16,6 +16,27 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   </div>
 
   <div id="clip-list"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>A Better Clipboard</h2>
+    <p>
+      Your system clipboard holds one thing at a time. Copy something new and the old content is gone.
+      This clipboard manager saves every snippet you add, lets you organize them with tags, and keeps
+      everything in your browser's local storage — persistent across sessions.
+    </p>
+
+    <h3>What It's Good For</h3>
+    <ul>
+      <li><strong>Code snippets</strong> — Save frequently used code blocks, SQL queries, or shell commands</li>
+      <li><strong>Environment variables</strong> — Keep connection strings, API keys (for development), and config values handy</li>
+      <li><strong>Templates</strong> — Store boilerplate text like email templates, commit message formats, or PR descriptions</li>
+      <li><strong>Quick notes</strong> — Jot down temporary information you need across browser tabs</li>
+    </ul>
+
+    <p>
+      Everything stays local to your browser. Nothing is uploaded or synced to any server.
+    </p>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>

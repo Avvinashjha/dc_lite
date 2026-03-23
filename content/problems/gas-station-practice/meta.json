@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0126",
+  "title": "Gas Station | Practice",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Gas%20Station%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          3,
+          4,
+          5,
+          1,
+          2
+        ]
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "gasStation",
+  "templateCode": "/**\n * @param {number[]} gas\n * @param {number[]} cost\n * @return {number}\n */\nfunction canCompleteCircuit(gas, cost) {\n  // Starting station for circular tour\n}",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "0 <= gas[i], cost[i] <= 10^4"
+  ]
+}

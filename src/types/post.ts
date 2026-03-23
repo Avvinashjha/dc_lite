@@ -163,3 +163,49 @@ export interface DocProject extends DocProjectMeta {
   slug: string;
   pages: DocPage[];
 }
+
+// ──── Problems ────
+export interface ProblemIndex {
+  title: string;
+  description: string;
+}
+
+export interface ProblemTestCase {
+  input?: string;
+  output?: string;
+  explanation?: string;
+  /** When set, runner calls functionName(...args) and compares to expected */
+  args?: unknown[];
+  expected?: unknown;
+}
+
+/** Metadata stored in meta.json (no markdown content) */
+export interface ProblemMeta {
+  id: string;
+  title: string;
+  difficulty: string;
+  topic: string;
+  topics: string[];
+  platform: string;
+  externalUrl: string;
+  sampleInput: string;
+  sampleOutput: string;
+  testCases: ProblemTestCase[];
+  problemSet?: string;
+  functionName?: string;
+  templateCode?: string;
+  constraints?: string | string[];
+  followUps?: string | string[];
+  draft?: boolean;
+}
+
+/** Lightweight problem used for list pages (no markdown parsing) */
+export interface ProblemListItem extends ProblemMeta {
+  slug: string;
+}
+
+/** Full problem with parsed HTML content for detail page */
+export interface ProblemItem extends ProblemListItem {
+  descriptionHtml: string;
+  solutionHtml: string;
+}

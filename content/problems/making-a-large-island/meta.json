@@ -1,0 +1,38 @@
+{
+  "draft": false,
+  "id": "problem-0208",
+  "title": "Making A Large Island",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/making-a-large-island/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "makingALargeIsland",
+  "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction largestIsland(grid) {\n  // Largest island after flipping one 0\n}",
+  "constraints": [
+    "1 <= n <= 500",
+    "grid[i][j] is 0 or 1"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0040",
+  "title": "Longest Happy Prefix",
+  "difficulty": "Hard",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/longest-happy-prefix/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"level\"",
+  "sampleOutput": "\"l\"",
+  "testCases": [
+    {
+      "args": [
+        "level"
+      ],
+      "expected": "l"
+    }
+  ],
+  "functionName": "longestHappyPrefix",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction longestHappyPrefix(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(longestHappyPrefix(\"level\"));",
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s contains only lowercase English letters"
+  ]
+}

@@ -11,6 +11,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
     <div id="yz-scorecard"></div>
     <div id="yz-total" style="text-align:center;margin-top:1rem;font-size:1.25rem;font-weight:700;"></div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Yatzy</h2>
+    <p>
+      Yatzy (also known as Yahtzee) is a dice game where you roll five dice up to three times per turn,
+      trying to fill categories on a scorecard. Categories range from simple ones (sum of all 1s, 2s, etc.)
+      to combinations like full house, large straight, and the coveted Yatzy — five of a kind for 50 points.
+    </p>
+    <p>
+      The strategy is in deciding which dice to keep between rolls and which categories to fill when.
+      Sometimes you need to take a zero in one category to set up a better score elsewhere. Every game
+      has 13 rounds, one for each category on the card.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

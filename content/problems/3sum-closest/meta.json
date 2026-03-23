@@ -1,0 +1,37 @@
+{
+  "draft": false,
+  "id": "problem-0017",
+  "title": "3Sum Closest",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/3sum-closest/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [-1,2,1,-4], target = 1",
+  "sampleOutput": "2",
+  "testCases": [
+    {
+      "args": [
+        [
+          -1,
+          2,
+          1,
+          -4
+        ],
+        1
+      ],
+      "expected": 2
+    }
+  ],
+  "functionName": "threeSumClosest",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {any}\n */\nfunction threeSumClosest(nums, target) {\n  // Write your solution here\n}\n\n// Sample: console.log(threeSumClosest([-1,2,1,-4], 1));",
+  "constraints": [
+    "3 <= nums.length <= 500",
+    "-1000 <= nums[i] <= 1000",
+    "-10^4 <= target <= 10^4"
+  ]
+}

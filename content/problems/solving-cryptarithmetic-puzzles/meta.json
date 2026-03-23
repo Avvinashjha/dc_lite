@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0276",
+  "title": "Solving Cryptarithmetic Puzzles",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Solving%20Cryptarithmetic%20Puzzles",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "SEND + MORE = MONEY",
+  "sampleOutput": "S=9, E=5, N=6, D=7, M=1, O=0, R=8, Y=2",
+  "testCases": [],
+  "functionName": "solvingCryptarithmeticPuzzles",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction solvingCryptarithmeticPuzzles(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "Each word has at most 10 unique characters",
+    "Total unique characters <= 10"
+  ]
+}

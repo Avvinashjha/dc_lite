@@ -1,0 +1,45 @@
+{
+  "draft": false,
+  "id": "problem-0207",
+  "title": "Longest Increasing Path in a Matrix",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            9,
+            9,
+            4
+          ],
+          [
+            6,
+            6,
+            8
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "longestIncreasingPathInAMatrix",
+  "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nfunction longestIncreasingPath(matrix) {\n  // Longest increasing path in matrix\n}",
+  "constraints": [
+    "1 <= m, n <= 200",
+    "0 <= matrix[i][j] <= 2^31 - 1"
+  ]
+}

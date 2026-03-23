@@ -1,0 +1,60 @@
+{
+  "draft": false,
+  "id": "problem-0060",
+  "title": "Missing Number",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/missing-number/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          0,
+          1
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          9,
+          6,
+          4,
+          2,
+          3,
+          5,
+          7,
+          0,
+          1
+        ]
+      ],
+      "expected": 8
+    }
+  ],
+  "functionName": "missingNumber",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction missingNumber(nums) {\n  // Find the missing number in [0, n]\n}\n\n// Sample: console.log(missingNumber([3,0,1]));",
+  "constraints": [
+    "n == nums.length",
+    "1 <= n <= 10^4",
+    "0 <= nums[i] <= n",
+    "All numbers are unique"
+  ]
+}

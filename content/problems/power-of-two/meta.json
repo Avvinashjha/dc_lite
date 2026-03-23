@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0062",
+  "title": "Power of Two",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/power-of-two/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        1
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        16
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        3
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "powerOfTwo",
+  "templateCode": "/**\n * @param {number} n\n * @return {boolean}\n */\nfunction isPowerOfTwo(n) {\n  // Check if n is a power of two\n}\n\n// Sample: console.log(isPowerOfTwo(16));",
+  "constraints": [
+    "-2^31 <= n <= 2^31 - 1"
+  ]
+}

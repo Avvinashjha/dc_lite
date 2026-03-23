@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0258",
+  "title": "Longest Repeating Character Replacement",
+  "difficulty": "Medium",
+  "topic": "Two-Pointer",
+  "topics": [
+    "Two Pointer"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"ABAB\", k = 2",
+  "sampleOutput": "4",
+  "testCases": [
+    {
+      "args": [
+        "ABAB",
+        2
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "longestRepeatingCharacterReplacement",
+  "templateCode": "/**\n * @param {string} s\n * @param {number} k\n * @return {any}\n */\nfunction longestRepeatingCharacterReplacement(s, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(longestRepeatingCharacterReplacement(\"ABAB\", 2));",
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s consists of uppercase English letters",
+    "0 <= k <= s.length"
+  ]
+}

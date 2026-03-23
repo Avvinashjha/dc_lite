@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0272",
+  "title": "Find Maximum number possible by doing at-most K swaps",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20Maximum%20number%20possible%20by%20doing%20at-most%20K%20swaps",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "K = 4, str = \"1234567\"",
+  "sampleOutput": "\"7654321\"",
+  "testCases": [
+    {
+      "args": [
+        4,
+        "1234567"
+      ],
+      "expected": "7654321"
+    }
+  ],
+  "functionName": "findMaximumNumberPossibleByDoingAtMostKSwaps",
+  "templateCode": "/**\n * @param {number} K\n * @param {string} str\n * @return {any}\n */\nfunction findMaximumNumberPossibleByDoingAtMostKSwaps(K, str) {\n  // Write your solution here\n}\n\n// Sample: console.log(findMaximumNumberPossibleByDoingAtMostKSwaps(4, \"1234567\"));",
+  "constraints": [
+    "1 <= K <= 10",
+    "1 <= str.length <= 30"
+  ]
+}

@@ -8,10 +8,8 @@
   },
   "navigation": [
     { "label": "Blog", "path": "/blog" },
-    { "label": "Courses", "path": "/courses" },
-    { "label": "Docs", "path": "/docs" },
+    { "label": "Problems", "path": "/problems" },
     { "label": "Tools", "path": "/tools" },
-    { "label": "Games", "path": "/games" },
     { "label": "About", "path": "/about" }
   ],
   "socialLinks": {
@@ -35,6 +33,7 @@
   },
   "analytics": {
     "googleAnalyticsId": "G-S6R7PYT45L",
-    "googleSearchConsoleVerification": ""
+    "googleSearchConsoleVerification": "",
+    "googleAdSenseId": "ca-pub-1081311524559030"
   }
 }

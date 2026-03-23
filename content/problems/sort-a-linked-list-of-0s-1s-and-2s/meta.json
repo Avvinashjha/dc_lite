@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0085",
+  "title": "Sort a linked list of 0s, 1s and 2s",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Sort%20a%20linked%20list%20of%200s%2C%201s%20and%202s",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "sortALinkedListOf0s1sAnd2s",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction sortALinkedListOf0s1sAnd2s(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^3",
+    "0 <= Node.val <= 2"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "draft": false,
+  "id": "problem-0195",
+  "title": "Most Stones Removed with Same Row or Column",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "mostStonesRemovedWithSameRowOrColumn",
+  "templateCode": "/**\n * @param {number[][]} stones\n * @return {number}\n */\nfunction removeStones(stones) {\n  // Max stones removable\n}",
+  "constraints": [
+    "1 <= stones.length <= 1000",
+    "0 <= xi, yi <= 10^4"
+  ]
+}

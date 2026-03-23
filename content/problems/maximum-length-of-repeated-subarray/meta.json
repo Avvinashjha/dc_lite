@@ -1,0 +1,41 @@
+{
+  "draft": false,
+  "id": "problem-0237",
+  "title": "Maximum Length of Repeated Subarray",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximum-length-of-repeated-subarray/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          2,
+          1
+        ],
+        [
+          3,
+          2,
+          1,
+          4,
+          7
+        ]
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "maximumLengthOfRepeatedSubarray",
+  "templateCode": "/**\n * @param {number[]} nums1\n * @param {number[]} nums2\n * @return {number}\n */\nfunction findLength(nums1, nums2) {\n  // Max length of repeated subarray\n}",
+  "constraints": [
+    "1 <= nums1.length, nums2.length <= 1000",
+    "0 <= nums1[i], nums2[i] <= 100"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "draft": false,
+  "id": "problem-0193",
+  "title": "Time Needed to Inform All Employees",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/time-needed-to-inform-all-employees/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        6,
+        2,
+        [
+          2,
+          2,
+          -1,
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 1
+    }
+  ],
+  "functionName": "timeNeededToInformAllEmployees",
+  "templateCode": "/**\n * @param {number} n\n * @param {number} headID\n * @param {number[]} manager\n * @param {number[]} informTime\n * @return {number}\n */\nfunction numOfMinutes(n, headID, manager, informTime) {\n  // Time to inform all employees\n}",
+  "constraints": [
+    "1 <= n <= 10^5",
+    "0 <= manager[i] < n",
+    "0 <= informTime[i] <= 1000"
+  ]
+}

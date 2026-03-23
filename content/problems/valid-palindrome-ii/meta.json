@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0033",
+  "title": "Valid Palindrome II",
+  "difficulty": "Easy",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/valid-palindrome-ii/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"abca\"",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        "abca"
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "validPalindromeIi",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction validPalindromeIi(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(validPalindromeIi(\"abca\"));",
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s consists of lowercase English letters"
+  ]
+}

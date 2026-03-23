@@ -1,0 +1,52 @@
+{
+  "draft": false,
+  "id": "problem-0235",
+  "title": "Coin Change",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/coin-change/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          5
+        ],
+        11
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        3
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        0
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "coinChange",
+  "templateCode": "/**\n * @param {number[]} coins\n * @param {number} amount\n * @return {number}\n */\nfunction coinChange(coins, amount) {\n  // Minimum coins to make amount\n}\n\n// Sample: console.log(coinChange([1,2,5], 11));",
+  "constraints": [
+    "1 <= coins.length <= 12",
+    "1 <= coins[i] <= 2^31 - 1",
+    "0 <= amount <= 10^4"
+  ]
+}

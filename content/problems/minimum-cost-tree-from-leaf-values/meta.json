@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0119",
+  "title": "Minimum Cost Tree From Leaf Values",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumCostTreeFromLeafValues",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumCostTreeFromLeafValues(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "2 <= arr.length <= 40",
+    "1 <= arr[i] <= 15"
+  ]
+}

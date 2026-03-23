@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0105",
+  "title": "Rearrange a given linked list in-place",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20given%20linked%20list%20in-place",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "rearrangeAGivenLinkedListInPlace",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction rearrangeAGivenLinkedListInPlace(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 to 5 * 10^4 nodes",
+    "1 <= Node.val <= 1000"
+  ]
+}

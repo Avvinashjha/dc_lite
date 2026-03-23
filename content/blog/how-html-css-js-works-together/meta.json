@@ -3,7 +3,16 @@
   "description": "Learn how HTML, CSS and JS works together to create a web page.",
   "date": "2026-02-13",
   "author": "Avinash Jha",
-  "tags": ["programming", "javascript", "web development", "html", "css", "js", "browser"],
+  "tags": [
+    "programming",
+    "javascript",
+    "web development",
+    "html",
+    "css",
+    "js",
+    "browser"
+  ],
   "category": "blog",
-  "draft": false
+  "draft": false,
+  "image": "/blog/how-html-css-js-works-together/hero.svg"
 }

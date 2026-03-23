@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0052",
+  "title": "Spiral Matrix",
+  "difficulty": "Medium",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/spiral-matrix-2/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "spiralMatrix",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction spiralMatrix(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= m, n <= 10",
+    "-100 <= matrix[i][j] <= 100"
+  ]
+}

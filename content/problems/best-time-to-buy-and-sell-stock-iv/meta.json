@@ -1,0 +1,48 @@
+{
+  "draft": false,
+  "id": "problem-0248",
+  "title": "Best Time to Buy and Sell Stock IV",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        2,
+        [
+          2,
+          4,
+          1
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        2,
+        [
+          3,
+          2,
+          6,
+          5,
+          0,
+          3
+        ]
+      ],
+      "expected": 7
+    }
+  ],
+  "functionName": "bestTimeToBuyAndSellStockIv",
+  "templateCode": "/**\n * @param {number} k\n * @param {number[]} prices\n * @return {number}\n */\nfunction maxProfit(k, prices) {\n  // Max profit with at most k transactions\n}",
+  "constraints": [
+    "1 <= k <= 100",
+    "1 <= prices.length <= 1000",
+    "0 <= prices[i] <= 1000"
+  ]
+}

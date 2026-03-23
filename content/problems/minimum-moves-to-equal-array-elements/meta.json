@@ -1,0 +1,33 @@
+{
+  "draft": false,
+  "id": "problem-0054",
+  "title": "Minimum Moves to Equal Array Elements",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-moves-to-equal-array-elements/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "minimumMovesToEqualArrayElements",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction minMoves(nums) {\n  // Minimum moves to equalize array\n}",
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "-10^9 <= nums[i] <= 10^9"
+  ]
+}

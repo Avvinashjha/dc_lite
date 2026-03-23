@@ -1,0 +1,47 @@
+{
+  "draft": false,
+  "id": "problem-0074",
+  "title": "Find Peak Element",
+  "difficulty": "Medium",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/find-peak-element/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          1,
+          3,
+          5,
+          6,
+          4
+        ]
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "findPeakElement",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction findPeakElement(nums) {\n  // Find index of a peak element\n}",
+  "constraints": [
+    "1 <= nums.length <= 1000",
+    "-2^31 <= nums[i] <= 2^31 - 1",
+    "nums[i] != nums[i+1] for all valid i"
+  ]
+}

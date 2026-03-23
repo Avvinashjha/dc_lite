@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0132",
+  "title": "Diameter of Binary Tree",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/diameter-of-binary-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "diameterOfBinaryTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction diameterOfBinaryTree(root) {\n  // Find diameter of binary tree\n}",
+  "constraints": [
+    "1 <= number of nodes <= 10^4",
+    "-100 <= Node.val <= 100"
+  ]
+}

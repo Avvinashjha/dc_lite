@@ -1,0 +1,54 @@
+{
+  "draft": false,
+  "id": "problem-0191",
+  "title": "Find Eventual Safe States",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/find-eventual-safe-states/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            5
+          ],
+          [
+            0
+          ],
+          [
+            5
+          ],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        2,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "functionName": "findEventualSafeStates",
+  "templateCode": "/**\n * @param {number[][]} graph\n * @return {number[]}\n */\nfunction eventualSafeNodes(graph) {\n  // Find all eventually safe nodes\n}",
+  "constraints": [
+    "1 <= n <= 10^4",
+    "0 <= graph[i].length <= n"
+  ]
+}

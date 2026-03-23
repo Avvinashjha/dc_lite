@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0096",
+  "title": "Reverse Linked List II",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reverse-linked-list-ii/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "reverseLinkedListIi",
+  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} left\n * @param {number} right\n * @return {ListNode}\n */\nfunction reverseBetween(head, left, right) {\n  // Reverse sublist from left to right\n}",
+  "constraints": [
+    "1 <= n <= 500",
+    "-500 <= Node.val <= 500",
+    "1 <= left <= right <= n"
+  ]
+}

@@ -1,0 +1,1 @@
+You are given an `m x n` integer array `grid` where `grid[i][j]` could be: `1` representing the starting square, `2` representing the ending square, `0` representing empty squares we can walk over, and `-1` representing obstacles. Return the number of 4-directional walks from the start to end that walk over every non-obstacle square exactly once.

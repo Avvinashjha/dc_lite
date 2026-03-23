@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0154",
+  "title": "Validate Binary Search Tree",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/validate-binary-search-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "validateBinarySearchTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nfunction isValidBST(root) {\n  // Validate binary search tree\n}",
+  "constraints": [
+    "1 <= number of nodes <= 10^4",
+    "-2^31 <= Node.val <= 2^31 - 1"
+  ]
+}

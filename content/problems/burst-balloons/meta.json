@@ -1,0 +1,42 @@
+{
+  "draft": false,
+  "id": "problem-0255",
+  "title": "Burst Balloons",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/burst-balloons/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          1,
+          5,
+          8
+        ]
+      ],
+      "expected": 167
+    },
+    {
+      "args": [
+        [
+          1,
+          5
+        ]
+      ],
+      "expected": 10
+    }
+  ],
+  "functionName": "burstBalloons",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction maxCoins(nums) {\n  // Maximum coins from bursting balloons\n}",
+  "constraints": [
+    "1 <= nums.length <= 300",
+    "0 <= nums[i] <= 100"
+  ]
+}

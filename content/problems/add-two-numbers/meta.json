@@ -1,0 +1,54 @@
+{
+  "draft": false,
+  "id": "problem-0093",
+  "title": "Add Two Numbers",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/add-two-numbers/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          4,
+          3
+        ],
+        [
+          5,
+          6,
+          4
+        ]
+      ],
+      "expected": [
+        7,
+        0,
+        8
+      ]
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    }
+  ],
+  "functionName": "addTwoNumbers",
+  "templateCode": "/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nfunction addTwoNumbers(l1, l2) {\n  // Add two numbers represented as linked lists\n}",
+  "constraints": [
+    "Each linked list has 1 to 100 nodes",
+    "0 <= Node.val <= 9",
+    "Numbers do not have leading zeros"
+  ]
+}

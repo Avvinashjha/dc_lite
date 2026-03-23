@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0030",
+  "title": "Print all the duplicate characters in a string",
+  "difficulty": "Easy",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20the%20duplicate%20characters%20in%20a%20string",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"test string\"",
+  "sampleOutput": "t: 3, s: 2",
+  "testCases": [],
+  "functionName": "printAllTheDuplicateCharactersInAString",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction printAllTheDuplicateCharactersInAString(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(printAllTheDuplicateCharactersInAString(\"test string\"));",
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s consists of printable ASCII characters"
+  ]
+}

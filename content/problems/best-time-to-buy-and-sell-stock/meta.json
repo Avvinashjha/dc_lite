@@ -1,0 +1,37 @@
+{
+  "draft": false,
+  "id": "problem-0007",
+  "title": "Best Time to Buy and Sell Stock",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "prices = [7,1,5,3,6,4]",
+  "sampleOutput": "5",
+  "testCases": [
+    {
+      "args": [
+        [
+          7,
+          1,
+          5,
+          3,
+          6,
+          4
+        ]
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "bestTimeToBuyAndSellStock",
+  "templateCode": "/**\n * @param {number[]} prices\n * @return {any}\n */\nfunction bestTimeToBuyAndSellStock(prices) {\n  // Write your solution here\n}\n\n// Sample: console.log(bestTimeToBuyAndSellStock([7,1,5,3,6,4]));",
+  "constraints": [
+    "1 <= prices.length <= 10^5",
+    "0 <= prices[i] <= 10^4"
+  ]
+}

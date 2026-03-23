@@ -30,6 +30,28 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   <div id="status" style="margin-top: 1rem;"></div>
   <div id="diff-stats" style="display:none; margin-top: 0.75rem;"></div>
   <div id="diff-output" style="margin-top: 1rem;"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>How Text Diff Works</h2>
+    <p>
+      Diff algorithms compare two pieces of text line by line and identify what's been added, removed, or changed.
+      It's the same idea behind <code>git diff</code>, but you don't need a repo — just paste any two texts.
+    </p>
+
+    <h3>Practical Uses</h3>
+    <ul>
+      <li><strong>Code review</strong> — Compare before-and-after versions of a function when you don't have git handy</li>
+      <li><strong>Document comparison</strong> — Spot changes between two drafts of a document or email</li>
+      <li><strong>Configuration changes</strong> — See what was modified in server configs, environment files, or deploy scripts</li>
+      <li><strong>Debugging</strong> — Compare expected vs. actual output to pinpoint where your code diverges</li>
+    </ul>
+
+    <p>
+      The diff is rendered with green and red highlighting — green for additions, red for deletions —
+      just like you'd see in a pull request. For structured JSON comparison, try the
+      <a href="/tools/json-diff">JSON Diff</a> tool which understands key ordering.
+    </p>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>
@@ -162,8 +184,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       stats.innerHTML = '<span class="jd-stat jd-stat--add">+' + result.adds + ' added</span><span class="jd-stat jd-stat--rem">-' + result.rems + ' removed</span><span class="jd-stat jd-stat--same">' + result.same + ' unchanged</span>';
       out.innerHTML = buildHtml(result.left, result.right);
       var ls = out.querySelector('.jd-side--left'), rs = out.querySelector('.jd-side--right'), s = false;
-      ls.addEventListener('scroll', function() { if (!s) { s = true; rs.scrollTop = ls.scrollTop; s = false; } });
-      rs.addEventListener('scroll', function() { if (!s) { s = true; ls.scrollTop = rs.scrollTop; s = false; } });
+      ls.addEventListener('scroll', function() { if (!s) { s = true; rs.scrollTop = ls.scrollTop; s = false; } }, { passive: true });
+      rs.addEventListener('scroll', function() { if (!s) { s = true; ls.scrollTop = rs.scrollTop; s = false; } }, { passive: true });
     }
     saveToDB();
   });

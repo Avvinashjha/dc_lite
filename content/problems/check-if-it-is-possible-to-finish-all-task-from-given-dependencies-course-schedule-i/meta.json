@@ -1,0 +1,51 @@
+{
+  "draft": false,
+  "id": "problem-0198",
+  "title": "Check if it is possible to finish all task from given dependencies (Course Schedule I)",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Check%20if%20it%20is%20possible%20to%20finish%20all%20task%20from%20given%20dependencies%20(Course%20Schedule%20I)",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        2,
+        [
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        2,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "checkIfItIsPossibleToFinishAllTaskFromGivenDependenciesCourseScheduleI",
+  "templateCode": "/**\n * @param {number} numCourses\n * @param {number[][]} prerequisites\n * @return {boolean}\n */\nfunction canFinish(numCourses, prerequisites) {\n  // Check if all courses can be finished\n}",
+  "constraints": [
+    "1 <= numCourses <= 2000",
+    "0 <= prerequisites.length <= 5000"
+  ]
+}

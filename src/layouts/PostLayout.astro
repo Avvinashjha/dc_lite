@@ -73,7 +73,9 @@ const postSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
 
       {
         image && (
-          <img src={image} alt={title} class="article__image" loading="eager" />
+          <div class="article__image-wrap">
+            <img src={image} alt={title} class="article__image" width={1200} height={630} loading="eager" decoding="async" />
+          </div>
         )
       }
 
@@ -136,6 +138,22 @@ const postSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
 </BaseLayout>
 
 <style>
+  .article__image-wrap {
+    border-radius: var(--radius-md, 0.5rem);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+  }
+  .article__image {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
   .back-link {
     display: inline-block;
     color: var(--color-text-light);

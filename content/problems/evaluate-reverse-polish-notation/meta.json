@@ -1,0 +1,45 @@
+{
+  "draft": false,
+  "id": "problem-0125",
+  "title": "Evaluate Reverse Polish Notation",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          "2",
+          "1",
+          "+",
+          "3",
+          "*"
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          "4",
+          "13",
+          "5",
+          "/",
+          "+"
+        ]
+      ],
+      "expected": 6
+    }
+  ],
+  "functionName": "evaluateReversePolishNotation",
+  "templateCode": "/**\n * @param {string[]} tokens\n * @return {number}\n */\nfunction evalRPN(tokens) {\n  // Evaluate Reverse Polish Notation\n}",
+  "constraints": [
+    "1 <= tokens.length <= 10^4",
+    "tokens[i] is an operator or integer in [-200, 200]"
+  ]
+}

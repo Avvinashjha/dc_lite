@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0162",
+  "title": "Populating Next Right Pointers in Each Node",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "populatingNextRightPointersInEachNode",
+  "templateCode": "/**\n * @param {Node} root\n * @return {Node}\n */\nfunction connect(root) {\n  // Connect next right pointers\n}",
+  "constraints": [
+    "0 <= number of nodes <= 2^12 - 1",
+    "-1000 <= Node.val <= 1000"
+  ]
+}

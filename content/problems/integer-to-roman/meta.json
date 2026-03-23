@@ -1,0 +1,29 @@
+{
+  "draft": false,
+  "id": "problem-0034",
+  "title": "Integer to Roman",
+  "difficulty": "Medium",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/integer-to-roman/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "num = 3",
+  "sampleOutput": "\"III\"",
+  "testCases": [
+    {
+      "args": [
+        3
+      ],
+      "expected": "III"
+    }
+  ],
+  "functionName": "integerToRoman",
+  "templateCode": "/**\n * @param {number} num\n * @return {any}\n */\nfunction integerToRoman(num) {\n  // Write your solution here\n}\n\n// Sample: console.log(integerToRoman(3));",
+  "constraints": [
+    "1 <= num <= 3999"
+  ]
+}

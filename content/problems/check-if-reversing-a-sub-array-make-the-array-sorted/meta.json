@@ -1,0 +1,43 @@
+{
+  "draft": false,
+  "id": "problem-0070",
+  "title": "Check if reversing a sub array make the array sorted",
+  "difficulty": "Medium",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Check%20if%20reversing%20a%20sub%20array%20make%20the%20array%20sorted",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          5,
+          4,
+          3
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "checkIfReversingASubArrayMakeTheArraySorted",
+  "templateCode": "/**\n * @param {number[]} arr\n * @return {boolean}\n */\nfunction canSortByReversing(arr) {\n  // Check if array can be sorted by reversing one subarray\n}",
+  "constraints": [
+    "1 <= N <= 10^5"
+  ]
+}

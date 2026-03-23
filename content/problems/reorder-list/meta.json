@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0097",
+  "title": "Reorder List",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reorder-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "reorderList",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {void}\n */\nfunction reorderList(head) {\n  // Reorder linked list\n}",
+  "constraints": [
+    "1 to 5 * 10^4 nodes",
+    "1 <= Node.val <= 1000"
+  ]
+}

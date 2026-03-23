@@ -1,0 +1,29 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<div class="problem-discussion" data-discussion-slug={slug}>
+  <div class="problem-discussion__form">
+    <input
+      id="discussion-name"
+      class="problem-discussion__input"
+      type="text"
+      placeholder="Your name"
+      autocomplete="name"
+    />
+    <textarea
+      id="discussion-message"
+      class="problem-discussion__textarea"
+      rows="3"
+      placeholder="Share your approach or ask a question..."
+    ></textarea>
+    <div class="problem-discussion__actions">
+      <button type="button" id="discussion-post" class="p-btn p-btn--primary">Post</button>
+    </div>
+  </div>
+  <div id="discussion-list"></div>
+</div>

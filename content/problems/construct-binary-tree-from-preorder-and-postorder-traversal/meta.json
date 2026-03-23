@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0159",
+  "title": "Construct Binary Tree from Preorder and Postorder Traversal",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "constructBinaryTreeFromPreorderAndPostorderTraversal",
+  "templateCode": "/**\n * @param {number[]} preorder\n * @param {number[]} postorder\n * @return {TreeNode}\n */\nfunction constructFromPrePost(preorder, postorder) {\n  // Reconstruct tree from preorder and postorder\n}",
+  "constraints": [
+    "1 <= preorder.length <= 30",
+    "preorder and postorder are permutations of 1..n"
+  ]
+}

@@ -49,6 +49,34 @@ import CodeEditor from "../../components/CodeEditor.astro";
     </div>
   </div>
   <div id="status"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>What Does a JSON Formatter Do?</h2>
+    <p>
+      JSON (JavaScript Object Notation) is everywhere — API responses, config files, database exports, package manifests.
+      But raw JSON from an API or a minified file is nearly impossible to read. A formatter takes that dense blob of text
+      and adds proper indentation and line breaks so you can actually see the structure.
+    </p>
+    <p>
+      This tool parses your JSON, checks that it's valid, and outputs a neatly indented version. If something's wrong
+      — a missing comma, an extra bracket, an unquoted key — you'll get a clear error pointing to the problem.
+    </p>
+
+    <h3>When You'd Use This</h3>
+    <ul>
+      <li><strong>Debugging API responses</strong> — Paste the raw response and see nested objects clearly</li>
+      <li><strong>Editing config files</strong> — Format <code>package.json</code>, <code>tsconfig.json</code>, or any config before making changes</li>
+      <li><strong>Validating data</strong> — Quickly check if a JSON string is well-formed before sending it somewhere</li>
+      <li><strong>Minifying for production</strong> — Strip whitespace to reduce payload size</li>
+    </ul>
+
+    <h3>Tips</h3>
+    <p>
+      Use multiple tabs to compare different JSON payloads side by side. Your tabs auto-save to the browser,
+      so they'll still be there when you come back. If you need to compare two JSON objects structurally,
+      try our <a href="/tools/json-diff">JSON Diff</a> tool instead.
+    </p>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>

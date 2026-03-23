@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/problems.scss';
+import { getProblems, getProblemTopics } from '../../../utils/contentLoader';
+import { slugifyTaxonomy, buildTaxonomy, findTaxonomyEntry } from '../../../utils/taxonomy';
+
+export function getStaticPaths() {
+  const problems = getProblems();
+  const allTopics = problems.flatMap(p => p.topics?.length ? p.topics : [p.topic]);
+  const taxonomy = buildTaxonomy(allTopics);
+
+  return taxonomy.map(entry => {
+    const topicProblems = problems.filter(p => {
+      const topics = p.topics?.length ? p.topics : [p.topic];
+      return topics.some(t => slugifyTaxonomy(t) === entry.slug);
+    });
+    return {
+      params: { topic: entry.slug },
+      props: { label: entry.label, problems: topicProblems },
+    };
+  });
+}
+
+const { topic } = Astro.params;
+const { label, problems } = Astro.props;
+
+const topicDescriptions: Record<string, string> = {
+  'array': 'Arrays are the most fundamental data structure in programming. These problems cover traversal, manipulation, subarray patterns, sliding windows, and prefix sums — techniques that show up in almost every coding interview.',
+  'dfs': 'Depth-first search explores as far as possible along each branch before backtracking. These problems use DFS on trees, graphs, and matrices — from simple traversals to complex path-finding and cycle detection.',
+  'bfs': 'Breadth-first search explores nodes level by level, making it ideal for shortest-path problems in unweighted graphs. Practice BFS on trees, grids, and word transformation puzzles.',
+  'tree': 'Tree problems test your ability to think recursively. From basic traversals (inorder, preorder, postorder) to more advanced operations like serialization, lowest common ancestor, and path sums.',
+  'binary-tree': 'Binary trees are trees where each node has at most two children. These problems cover traversals, construction from arrays, balancing checks, and level-order operations.',
+  'graph': 'Graph problems involve vertices and edges — modeling networks, dependencies, and relationships. Practice topological sort, shortest paths, connected components, and graph coloring.',
+  'dynamic-programming': 'Dynamic programming breaks complex problems into overlapping subproblems and caches their results. These problems cover classic patterns: knapsack, longest subsequence, grid paths, and interval scheduling.',
+  'memoization': 'Memoization is the top-down approach to dynamic programming — solve subproblems recursively and cache results. These problems help you identify when a recursive solution has overlapping subproblems worth caching.',
+  'linked-list': 'Linked list problems test pointer manipulation skills. Practice reversal, cycle detection (Floyd\'s algorithm), merging sorted lists, and the fast-slow pointer technique.',
+  'two-pointers': 'The two-pointer technique uses two indices moving through data to solve problems in linear time. Common patterns: converging pointers, fast-slow pointers, and sliding windows on sorted arrays.',
+  'two-pointer': 'The two-pointer technique uses two indices moving through data to solve problems in linear time. Common patterns: converging pointers, fast-slow pointers, and sliding windows on sorted arrays.',
+  'stack-and-queue': 'Stacks (LIFO) and queues (FIFO) are essential for parsing, scheduling, and monotonic patterns. Practice balanced parentheses, next-greater-element, and BFS implementations.',
+  'hash-table': 'Hash tables provide O(1) average lookup, making them the go-to for frequency counting, duplicate detection, and two-sum style problems. These problems train you to think in terms of key-value mappings.',
+  'backtracking': 'Backtracking explores all possible solutions by building candidates incrementally and abandoning those that fail constraints. Classic problems include N-Queens, Sudoku solver, and permutation generation.',
+  'recursion': 'Recursion solves problems by breaking them into smaller instances of the same problem. These challenges build your ability to define base cases, trust the recursive leap, and handle return values.',
+  'matrix': 'Matrix problems involve 2D grids — traversals, rotations, spiral orders, and path-finding. Many combine with DFS/BFS for island counting, flood fill, and shortest path in a grid.',
+  'string': 'String problems cover pattern matching, parsing, and manipulation. Practice substring search, anagram detection, palindrome checks, and string transformation algorithms.',
+  'sorting-and-searching': 'Sorting and searching are the backbone of algorithm design. Practice merge sort, quicksort, binary search variations, and problems that reduce to clever search strategies.',
+  'tries': 'A trie (prefix tree) stores strings character by character, enabling fast prefix lookups. Used in autocomplete, spell checkers, and word search problems.',
+  'heap': 'Heaps (priority queues) efficiently track the min or max element. Essential for problems involving K-th largest element, merge K sorted lists, and scheduling.',
+  'priority-queue': 'Priority queues maintain elements in sorted order by priority, giving O(log n) insertion and extraction. These problems involve task scheduling, event simulation, and top-K queries.',
+  'sorting': 'Sorting problems go beyond knowing the algorithms — they test when to sort, what to sort by, and how to use sorted order as a tool for solving other problems.',
+};
+
+const topicIntro = topicDescriptions[topic || ''] || `Practice ${label} coding problems with detailed solutions and an in-browser JavaScript runner. Each problem includes examples, constraints, and a working code editor.`;
+
+const description = `Practice ${problems.length} ${label} coding problems. Solve with in-browser JavaScript runner.`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Problems', href: '/problems' },
+  { label: label, href: `/problems/topic/${topic}` },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${label} Problems`,
+  description,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: problems.length,
+    itemListElement: problems.map((p: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `/problems/${p.slug}`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${label} Problems | DailyCoder`}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  tags={[label, 'coding problems', 'practice']}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="container taxonomy-page">
+    <nav class="problem-breadcrumbs" style="background:transparent;border:none;padding:0 0 0.75rem;">
+      <a href="/">Home</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href="/problems">Problems</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <span class="problem-breadcrumbs__current">{label}</span>
+    </nav>
+
+    <h1 class="taxonomy-page__title">{label} Problems</h1>
+    <p class="taxonomy-page__intro">{topicIntro}</p>
+    <p class="taxonomy-page__count">{problems.length} problems</p>
+
+    <table class="problem-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th class="problem-table__difficulty">Difficulty</th>
+          <th class="problem-table__platform">Platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        {problems.map((p: any) => (
+          <tr>
+            <td class="problem-table__title">
+              <a href={`/problems/${p.slug}`}>{p.title}</a>
+            </td>
+            <td class="problem-table__difficulty">
+              <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+            </td>
+            <td class="problem-table__platform">{p.platform}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <!-- Related topics -->
+    <div class="problem-section" style="margin-top:var(--spacing-xl);">
+      <div class="problem-section__heading">Browse by Topic</div>
+      <div class="problems-topic-chips" style="margin-top:0.5rem;">
+        {getProblemTopics().map(t => (
+          <a
+            href={`/problems/topic/${slugifyTaxonomy(t)}`}
+            class={`problems-topic-chips__chip ${slugifyTaxonomy(t) === topic ? 'problems-topic-chips__chip--active' : ''}`}
+            style="text-decoration:none;"
+          >{t}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

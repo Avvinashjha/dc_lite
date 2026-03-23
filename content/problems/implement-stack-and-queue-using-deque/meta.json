@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0114",
+  "title": "Implement Stack and Queue using Deque",
+  "difficulty": "Easy",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Implement%20Stack%20and%20Queue%20using%20Deque",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "implementStackAndQueueUsingDeque",
+  "templateCode": "function Deque() {\n  // Initialize deque\n}\nDeque.prototype.pushFront = function(x) {};\nDeque.prototype.pushBack = function(x) {};\nDeque.prototype.popFront = function() {};\nDeque.prototype.popBack = function() {};",
+  "constraints": [
+    "1 <= N <= 100",
+    "1 <= value <= 10^5"
+  ]
+}

@@ -1,0 +1,577 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/problems.scss';
+import { getProblems, getProblemTopics, getProblemDifficulties, getProblemsIndex, getProblemSets } from '../../utils/contentLoader';
+import { slugifyTaxonomy } from '../../utils/taxonomy';
+
+const pageMeta = getProblemsIndex();
+const problems = getProblems();
+const topics = getProblemTopics();
+const difficulties = getProblemDifficulties();
+const problemSets = getProblemSets();
+const topTopics = topics.slice(0, 15);
+
+const liteProblems = problems.map(p => ({
+  slug: p.slug,
+  title: p.title,
+  topic: p.topic,
+  topics: p.topics,
+  difficulty: p.difficulty,
+  problemSet: p.problemSet || '',
+  platform: p.platform,
+}));
+
+const listJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: pageMeta.title,
+  description: pageMeta.description,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: problems.length,
+    itemListElement: problems.slice(0, 50).map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `/problems/${p.slug}`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${pageMeta.title} | DailyCoder`}
+  description={pageMeta.description}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Problems', href: '/problems' },
+  ]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(listJsonLd)} />
+  </Fragment>
+
+  <div class="container problems-page">
+    <!-- Hero -->
+    <section class="problems-hero">
+      <p class="problems-hero__eyebrow">Practice Arena</p>
+      <h1 class="problems-hero__title">{pageMeta.title}</h1>
+      <p class="problems-hero__desc">{pageMeta.description}</p>
+    </section>
+
+    <!-- Progress bar -->
+    <div class="problems-progress" id="progress-bar">
+      <span class="problems-progress__text" id="progress-text">0 / {problems.length} solved</span>
+      <div class="problems-progress__bar">
+        <div class="problems-progress__fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Topic chips -->
+    <div class="problems-topic-chips" id="topic-chips">
+      <button class="problems-topic-chips__chip problems-topic-chips__chip--active" data-chip="all" type="button">All</button>
+      {topTopics.map(t => (
+        <button class="problems-topic-chips__chip" data-chip={slugifyTaxonomy(t)} type="button">{t}</button>
+      ))}
+    </div>
+
+    <!-- Tabs: Problems / Stats -->
+    <nav style="display:flex;gap:0;margin-bottom:0.75rem;">
+      <button class="problem-tabs__btn problem-tabs__btn--active" data-main-tab="list" id="main-tab-list" type="button" style="padding:0.5rem 0.85rem;font-size:0.8rem;font-weight:600;border:none;background:transparent;color:var(--color-text-light);cursor:pointer;border-bottom:2px solid var(--color-primary);color:var(--color-primary);">Problems</button>
+      <button class="problem-tabs__btn" data-main-tab="stats" id="main-tab-stats" type="button" style="padding:0.5rem 0.85rem;font-size:0.8rem;font-weight:600;border:none;background:transparent;color:var(--color-text-light);cursor:pointer;border-bottom:2px solid transparent;">Stats</button>
+    </nav>
+
+    <!-- Problems pane -->
+    <section id="pane-list">
+      <!-- Filters -->
+      <div class="problems-filters">
+        <input id="problem-search" class="problems-filters__input" placeholder="Search by title or topic..." />
+        <select id="problem-set" class="problems-filters__select">
+          <option value="all">All Sets</option>
+          {problemSets.map(s => (
+            <option value={s}>{s === 'top-300-leetcode' ? 'Top 300 LeetCode' : s}</option>
+          ))}
+        </select>
+        <select id="problem-topic" class="problems-filters__select">
+          <option value="all">All Topics</option>
+          {topics.map(t => <option value={slugifyTaxonomy(t)}>{t}</option>)}
+        </select>
+        <select id="problem-difficulty" class="problems-filters__select">
+          <option value="all">All Difficulty</option>
+          {difficulties.map(d => <option value={d.toLowerCase()}>{d}</option>)}
+        </select>
+        <label class="problems-filters__label">
+          <input type="checkbox" id="filter-favorites" />
+          <span>Favorites</span>
+        </label>
+        <div class="problems-view-toggle" id="view-toggle">
+          <button class="problems-view-toggle__btn problems-view-toggle__btn--active" data-view="table" type="button" title="Table view">&#9776;</button>
+          <button class="problems-view-toggle__btn" data-view="grid" type="button" title="Card view">&#9638;</button>
+        </div>
+      </div>
+
+      <p id="problem-count" style="margin:0 0 0.6rem;color:var(--color-text-light);font-size:0.82rem;">{problems.length} problems</p>
+
+      <!-- Table view -->
+      <div id="view-table">
+        <table class="problem-table">
+          <thead>
+            <tr>
+              <th class="problem-table__status">&#10004;</th>
+              <th class="problem-table__fav"></th>
+              <th class="problem-table__sortable" data-sort="title">Title <span class="sort-icon"></span></th>
+              <th class="problem-table__topic problem-table__sortable" data-sort="topic">Topic <span class="sort-icon"></span></th>
+              <th class="problem-table__difficulty problem-table__sortable" data-sort="difficulty">Difficulty <span class="sort-icon"></span></th>
+              <th class="problem-table__platform problem-table__sortable" data-sort="platform">Platform <span class="sort-icon"></span></th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            {problems.map(p => (
+              <tr
+                data-slug={p.slug}
+                data-title={p.title.toLowerCase()}
+                data-topic={slugifyTaxonomy(p.topic)}
+                data-difficulty={p.difficulty.toLowerCase()}
+                data-problem-set={p.problemSet || ''}
+              >
+                <td class="problem-table__status" data-status-for={p.slug}>&#9711;</td>
+                <td class="problem-table__fav">
+                  <button data-favorite-btn={p.slug} aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
+                </td>
+                <td class="problem-table__title">
+                  <a href={`/problems/${p.slug}`}>{p.title}</a>
+                </td>
+                <td class="problem-table__topic">
+                  <a href={`/problems/topic/${slugifyTaxonomy(p.topic)}`} class="p-badge p-badge--neutral" style="text-decoration:none;font-size:0.68rem;">{p.topic}</a>
+                </td>
+                <td class="problem-table__difficulty">
+                  <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+                </td>
+                <td class="problem-table__platform">{p.platform}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Grid view (hidden by default) -->
+      <div id="view-grid" class="problem-grid" style="display:none;">
+        {problems.map(p => (
+          <article
+            class="problem-card"
+            data-slug={p.slug}
+            data-title={p.title.toLowerCase()}
+            data-topic={slugifyTaxonomy(p.topic)}
+            data-difficulty={p.difficulty.toLowerCase()}
+            data-problem-set={p.problemSet || ''}
+          >
+            <div class="problem-card__head">
+              <button data-favorite-btn-card={p.slug} style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--color-text-light);padding:0;" aria-label="Toggle favorite">
+                <span data-favorite-icon-for={p.slug}>&#9734;</span>
+              </button>
+              <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
+              <span class="p-badge p-badge--neutral">{p.topic}</span>
+              <span class="p-badge p-badge--neutral" data-card-status-for={p.slug}>Not Solved</span>
+            </div>
+            <h3 class="problem-card__title">
+              <a href={`/problems/${p.slug}`}>{p.title}</a>
+            </h3>
+            <div class="problem-card__meta">
+              <span>{p.platform}</span>
+              <span>&middot;</span>
+              <span data-card-attempts-for={p.slug}>0 attempts</span>
+            </div>
+            <div class="problem-card__actions">
+              <a class="p-btn" href={`/problems/${p.slug}`}>Open</a>
+              <button class="p-btn p-btn--ghost problem-solved-btn" data-solved-btn={p.slug} type="button">Mark Solved</button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Stats pane (hidden by default) -->
+    <section id="pane-stats" style="display:none;">
+      <div class="problems-stats">
+        <article class="stat-card">
+          <p class="stat-card__label">Solved</p>
+          <p class="stat-card__value" id="stat-solved">0</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-card__label">Total Attempts</p>
+          <p class="stat-card__value" id="stat-attempts">0</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-card__label">Active Days</p>
+          <p class="stat-card__value" id="stat-days">0</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-card__label">Avg Confidence</p>
+          <p class="stat-card__value" id="stat-confidence">0%</p>
+        </article>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--spacing-md);margin-top:var(--spacing-md);">
+        <article class="stat-card">
+          <p class="stat-card__label">Daily Activity</p>
+          <div id="chart-daily" style="height:180px;display:grid;grid-template-columns:repeat(21,minmax(0,1fr));align-items:end;gap:3px;margin-top:0.5rem;"></div>
+        </article>
+        <article class="stat-card">
+          <p class="stat-card__label">Topic-wise Solved</p>
+          <div id="chart-topic-solved" style="margin-top:0.5rem;"></div>
+        </article>
+        <article class="stat-card">
+          <p class="stat-card__label">Most Attempted</p>
+          <div id="attempts-table" style="margin-top:0.5rem;"></div>
+        </article>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script id="problems-data" type="application/json" set:html={JSON.stringify(liteProblems)} />
+<script src="/js/store.js" is:inline></script>
+<script>
+  var TOOL = 'problem-progress';
+  var FAVORITES_TOOL = 'problem-favorites';
+  var problemsData = JSON.parse(document.getElementById('problems-data')!.textContent || '[]');
+  var bySlug: Record<string, any> = {};
+  problemsData.forEach(function(p: any) { bySlug[p.slug] = p; });
+  var favoriteSet = new Set<string>();
+  var progressMap: Record<string, any> = {};
+
+  // ── Main tabs ──
+  var mainTabList = document.getElementById('main-tab-list')!;
+  var mainTabStats = document.getElementById('main-tab-stats')!;
+  var paneList = document.getElementById('pane-list')!;
+  var paneStats = document.getElementById('pane-stats')!;
+
+  function switchMainTab(tab: string) {
+    const isList = tab === 'list';
+    paneList.style.display = isList ? '' : 'none';
+    paneStats.style.display = isList ? 'none' : '';
+    mainTabList.style.borderBottomColor = isList ? 'var(--color-primary)' : 'transparent';
+    mainTabList.style.color = isList ? 'var(--color-primary)' : 'var(--color-text-light)';
+    mainTabStats.style.borderBottomColor = isList ? 'transparent' : 'var(--color-primary)';
+    mainTabStats.style.color = isList ? 'var(--color-text-light)' : 'var(--color-primary)';
+    if (tab === 'stats') renderStats();
+  }
+  mainTabList.addEventListener('click', () => switchMainTab('list'));
+  mainTabStats.addEventListener('click', () => switchMainTab('stats'));
+
+  // ── View toggle ──
+  var viewTableEl = document.getElementById('view-table')!;
+  var viewGridEl = document.getElementById('view-grid')!;
+  var viewBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('#view-toggle .problems-view-toggle__btn'));
+
+  function switchView(view: string) {
+    viewTableEl.style.display = view === 'table' ? '' : 'none';
+    viewGridEl.style.display = view === 'grid' ? '' : 'none';
+    viewBtns.forEach(b => b.classList.toggle('problems-view-toggle__btn--active', b.dataset.view === view));
+  }
+  viewBtns.forEach(b => b.addEventListener('click', () => switchView(b.dataset.view!)));
+
+  // ── Topic chips ──
+  var topicChips = Array.from(document.querySelectorAll<HTMLButtonElement>('#topic-chips .problems-topic-chips__chip'));
+  var topicSelect = document.getElementById('problem-topic') as HTMLSelectElement;
+
+  topicChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      topicChips.forEach(c => c.classList.remove('problems-topic-chips__chip--active'));
+      chip.classList.add('problems-topic-chips__chip--active');
+      topicSelect.value = chip.dataset.chip!;
+      applyFilters();
+    });
+  });
+
+  // ── Filters ──
+  var searchEl = document.getElementById('problem-search') as HTMLInputElement;
+  var setEl = document.getElementById('problem-set') as HTMLSelectElement;
+  var difficultyEl = document.getElementById('problem-difficulty') as HTMLSelectElement;
+  var favCheckEl = document.getElementById('filter-favorites') as HTMLInputElement;
+  var countEl = document.getElementById('problem-count')!;
+
+  var tableRows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#table-body tr'));
+  var gridCards = Array.from(document.querySelectorAll<HTMLElement>('#view-grid .problem-card'));
+
+  function applyFilters() {
+    var search = (searchEl.value || '').trim().toLowerCase();
+    var set = setEl ? setEl.value : 'all';
+    var topic = topicSelect.value;
+    var difficulty = difficultyEl.value;
+    var favOnly = favCheckEl.checked;
+    var visible = 0;
+
+    function matchItem(slug: string, title: string, itemTopic: string, itemDiff: string, itemSet: string): boolean {
+      if (search && title.indexOf(search) === -1 && itemTopic.indexOf(search) === -1) return false;
+      if (set !== 'all' && itemSet !== set) return false;
+      if (topic !== 'all' && itemTopic !== topic) return false;
+      if (difficulty !== 'all' && itemDiff !== difficulty) return false;
+      if (favOnly && !favoriteSet.has(slug)) return false;
+      return true;
+    }
+
+    tableRows.forEach(row => {
+      const show = matchItem(row.dataset.slug!, row.dataset.title!, row.dataset.topic!, row.dataset.difficulty!, row.dataset.problemSet!);
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    gridCards.forEach(card => {
+      const show = matchItem(card.dataset.slug!, card.dataset.title!, card.dataset.topic!, card.dataset.difficulty!, card.dataset.problemSet!);
+      card.style.display = show ? '' : 'none';
+    });
+
+    countEl.textContent = visible + ' problem' + (visible === 1 ? '' : 's');
+  }
+
+  searchEl.addEventListener('input', applyFilters);
+  if (setEl) setEl.addEventListener('change', applyFilters);
+  topicSelect.addEventListener('change', applyFilters);
+  difficultyEl.addEventListener('change', applyFilters);
+  favCheckEl.addEventListener('change', applyFilters);
+
+  // ── Column sorting ──
+  var DIFF_ORDER: Record<string, number> = { easy: 1, medium: 2, hard: 3 };
+  var currentSort = { key: '', dir: 0 }; // dir: 0=none, 1=asc, -1=desc
+  var tableBody = document.getElementById('table-body')!;
+  var sortHeaders = Array.from(document.querySelectorAll<HTMLElement>('.problem-table__sortable'));
+
+  function sortTable(key: string) {
+    if (currentSort.key === key) {
+      currentSort.dir = currentSort.dir === 1 ? -1 : currentSort.dir === -1 ? 0 : 1;
+    } else {
+      currentSort = { key, dir: 1 };
+    }
+
+    sortHeaders.forEach(th => {
+      var icon = th.querySelector('.sort-icon')!;
+      if (th.dataset.sort === key) {
+        icon.textContent = currentSort.dir === 1 ? ' ▲' : currentSort.dir === -1 ? ' ▼' : '';
+        th.classList.toggle('problem-table__sortable--active', currentSort.dir !== 0);
+      } else {
+        icon.textContent = '';
+        th.classList.remove('problem-table__sortable--active');
+      }
+    });
+
+    if (currentSort.dir === 0) {
+      problemsData.forEach((p: any, i: number) => {
+        var row = tableRows.find(r => r.dataset.slug === p.slug);
+        if (row) tableBody.appendChild(row);
+      });
+      return;
+    }
+
+    var sorted = [...tableRows].sort((a, b) => {
+      var va: string | number, vb: string | number;
+      if (key === 'difficulty') {
+        va = DIFF_ORDER[a.dataset.difficulty!] || 0;
+        vb = DIFF_ORDER[b.dataset.difficulty!] || 0;
+      } else if (key === 'title') {
+        va = a.dataset.title || '';
+        vb = b.dataset.title || '';
+      } else if (key === 'topic') {
+        va = a.dataset.topic || '';
+        vb = b.dataset.topic || '';
+      } else {
+        va = a.querySelector('.problem-table__platform')?.textContent?.toLowerCase() || '';
+        vb = b.querySelector('.problem-table__platform')?.textContent?.toLowerCase() || '';
+      }
+      if (va < vb) return -1 * currentSort.dir;
+      if (va > vb) return 1 * currentSort.dir;
+      return 0;
+    });
+
+    sorted.forEach(row => tableBody.appendChild(row));
+  }
+
+  sortHeaders.forEach(th => th.addEventListener('click', () => sortTable(th.dataset.sort!)));
+
+  // ── Progress ──
+  async function loadProgress() {
+    await (window as any).DCStore.init();
+    var rows = await (window as any).DCStore.getAll(TOOL);
+    progressMap = {};
+    rows.forEach(function(row: any) {
+      progressMap[row.id] = {
+        solved: !!row.solved,
+        attempts: Number(row.attempts || 0),
+        attemptsByDay: row.attemptsByDay || {},
+      };
+    });
+  }
+
+  async function loadFavorites() {
+    await (window as any).DCStore.init();
+    var rows = await (window as any).DCStore.getAll(FAVORITES_TOOL);
+    favoriteSet.clear();
+    rows.forEach(function(row: any) { favoriteSet.add(row.id); });
+  }
+
+  function renderTableState(slug: string) {
+    var row = progressMap[slug] || { solved: false };
+    var statusEl = document.querySelector(`[data-status-for="${slug}"]`);
+    if (statusEl) statusEl.innerHTML = row.solved ? '&#10003;' : '&#9711;';
+    if (statusEl) (statusEl as HTMLElement).style.color = row.solved ? '#16a34a' : '';
+  }
+
+  function renderCardState(slug: string) {
+    var row = progressMap[slug] || { solved: false, attempts: 0 };
+    var statusEl = document.querySelector(`[data-card-status-for="${slug}"]`);
+    if (statusEl) statusEl.textContent = row.solved ? 'Solved' : 'Not Solved';
+    var attEl = document.querySelector(`[data-card-attempts-for="${slug}"]`);
+    if (attEl) attEl.textContent = (row.attempts || 0) + ' attempts';
+    var btn = document.querySelector(`[data-solved-btn="${slug}"]`);
+    if (btn) btn.textContent = row.solved ? 'Mark Unsolved' : 'Mark Solved';
+  }
+
+  function renderFavoriteIcon(slug: string) {
+    var iconEl = document.querySelector(`[data-favorite-icon-for="${slug}"]`);
+    if (iconEl) iconEl.innerHTML = favoriteSet.has(slug) ? '&#9733;' : '&#9734;';
+    var tblBtn = document.querySelector<HTMLButtonElement>(`#table-body [data-favorite-btn="${slug}"]`);
+    if (tblBtn) {
+      tblBtn.innerHTML = favoriteSet.has(slug) ? '&#9733;' : '&#9734;';
+      tblBtn.setAttribute('aria-pressed', String(favoriteSet.has(slug)));
+      tblBtn.style.color = favoriteSet.has(slug) ? '#eab308' : '';
+    }
+  }
+
+  function renderAllStates() {
+    tableRows.forEach(row => { renderTableState(row.dataset.slug!); renderFavoriteIcon(row.dataset.slug!); });
+    gridCards.forEach(card => { renderCardState(card.dataset.slug!); renderFavoriteIcon(card.dataset.slug!); });
+  }
+
+  function updateProgress() {
+    var solved = Object.values(progressMap).filter((r: any) => r.solved).length;
+    var pct = problemsData.length ? Math.round((solved / problemsData.length) * 100) : 0;
+    document.getElementById('progress-text')!.textContent = solved + ' / ' + problemsData.length + ' solved';
+    (document.getElementById('progress-fill')! as HTMLElement).style.width = pct + '%';
+  }
+
+  // ── Bind favorites & solved ──
+  function bindFavorites() {
+    document.querySelectorAll<HTMLButtonElement>('[data-favorite-btn]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        var slug = btn.dataset.favoriteBtn!;
+        await (window as any).DCStore.init();
+        if (favoriteSet.has(slug)) {
+          favoriteSet.delete(slug);
+          await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+        } else {
+          favoriteSet.add(slug);
+          await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+        }
+        renderFavoriteIcon(slug);
+        applyFilters();
+      });
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-favorite-btn-card]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        var slug = btn.dataset.favoriteBtnCard!;
+        await (window as any).DCStore.init();
+        if (favoriteSet.has(slug)) {
+          favoriteSet.delete(slug);
+          await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+        } else {
+          favoriteSet.add(slug);
+          await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+        }
+        renderFavoriteIcon(slug);
+        applyFilters();
+      });
+    });
+  }
+
+  function bindSolvedButtons() {
+    document.querySelectorAll<HTMLButtonElement>('.problem-solved-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        var slug = btn.dataset.solvedBtn!;
+        var row = progressMap[slug] || { solved: false, attempts: 0, attemptsByDay: {} };
+        var next = {
+          solved: !row.solved,
+          solvedAt: !row.solved ? Date.now() : null,
+          attempts: row.attempts || 0,
+          attemptsByDay: row.attemptsByDay || {},
+        };
+        progressMap[slug] = next;
+        await (window as any).DCStore.set(TOOL, slug, next);
+        renderTableState(slug);
+        renderCardState(slug);
+        updateProgress();
+      });
+    });
+  }
+
+  // ── Stats ──
+  function renderStats() {
+    var solvedCount = 0;
+    var totalAttempts = 0;
+    var attemptsByDay: Record<string, number> = {};
+    var topicSolved: Record<string, number> = {};
+    var attemptsByProblem: { slug: string; title: string; attempts: number }[] = [];
+
+    Object.keys(bySlug).forEach(slug => {
+      var p = bySlug[slug];
+      var row = progressMap[slug] || { solved: false, attempts: 0, attemptsByDay: {} };
+      var topic = p.topic || 'Other';
+      if (!topicSolved[topic]) topicSolved[topic] = 0;
+      if (row.solved) { solvedCount++; topicSolved[topic]++; }
+      var att = Number(row.attempts || 0);
+      totalAttempts += att;
+      if (att > 0) attemptsByProblem.push({ slug, title: p.title, attempts: att });
+      var perDay = row.attemptsByDay || {};
+      Object.keys(perDay).forEach(day => { attemptsByDay[day] = (attemptsByDay[day] || 0) + perDay[day]; });
+    });
+
+    document.getElementById('stat-solved')!.textContent = String(solvedCount);
+    document.getElementById('stat-attempts')!.textContent = String(totalAttempts);
+    var activeDays = Object.keys(attemptsByDay).filter(d => attemptsByDay[d] > 0).length;
+    document.getElementById('stat-days')!.textContent = String(activeDays);
+    document.getElementById('stat-confidence')!.textContent = problemsData.length ? Math.round((solvedCount / problemsData.length) * 100) + '%' : '0%';
+
+    // Daily chart
+    var dayLabels: string[] = [];
+    for (var i = 20; i >= 0; i--) {
+      var d = new Date(); d.setDate(d.getDate() - i);
+      dayLabels.push(d.toISOString().slice(0, 10));
+    }
+    var dayData = dayLabels.map(d => attemptsByDay[d] || 0);
+    var maxDay = Math.max(...dayData, 1);
+    var dailyEl = document.getElementById('chart-daily')!;
+    dailyEl.innerHTML = dayData.map((count, idx) => {
+      var h = Math.max(6, Math.round((count / maxDay) * 92));
+      return '<div style="height:100%;display:flex;flex-direction:column;justify-content:end;gap:2px;" title="' + dayLabels[idx].slice(5) + ': ' + count + '"><span style="width:100%;background:linear-gradient(180deg,#3b82f6,#1d4ed8);border-radius:3px 3px 0 0;min-height:3px;height:' + h + '%;"></span><span style="font-size:.55rem;color:var(--color-text-light);text-align:center;">' + (idx % 3 === 0 ? dayLabels[idx].slice(5) : '') + '</span></div>';
+    }).join('');
+
+    // Topic solved
+    var solvedEntries = Object.entries(topicSolved).sort((a, b) => b[1] - a[1]).slice(0, 10);
+    var solvedMax = Math.max(...solvedEntries.map(e => e[1]), 1);
+    var topicEl = document.getElementById('chart-topic-solved')!;
+    topicEl.innerHTML = solvedEntries.length
+      ? solvedEntries.map(([topic, count]) => {
+          var w = Math.max(3, Math.round((count / solvedMax) * 100));
+          return '<div style="display:grid;grid-template-columns:90px 1fr 35px;gap:.4rem;align-items:center;font-size:.78rem;margin-bottom:.25rem;"><span style="color:var(--color-text-light);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + topic + '</span><span style="background:var(--color-code-bg);border-radius:999px;height:7px;overflow:hidden;border:1px solid var(--color-border);"><span style="display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#22c55e,#16a34a);width:' + w + '%;"></span></span><span style="text-align:right;font-weight:700;">' + count + '</span></div>';
+        }).join('')
+      : '<p style="color:var(--color-text-light);font-size:.85rem;">No solved data yet.</p>';
+
+    // Most attempted
+    attemptsByProblem.sort((a, b) => b.attempts - a.attempts);
+    var tableEl = document.getElementById('attempts-table')!;
+    var topAtt = attemptsByProblem.slice(0, 8);
+    tableEl.innerHTML = topAtt.length
+      ? topAtt.map((row, idx) => '<div style="display:grid;grid-template-columns:30px 1fr 40px;gap:.4rem;align-items:center;font-size:.8rem;padding:.3rem 0;border-bottom:1px solid var(--color-border);"><span style="font-weight:800;color:var(--color-primary);">#' + (idx + 1) + '</span><a href="/problems/' + row.slug + '" style="color:var(--color-text);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + row.title + '</a><span style="text-align:right;font-weight:700;color:var(--color-text-light);">' + row.attempts + '</span></div>').join('')
+      : '<p style="color:var(--color-text-light);font-size:.85rem;">No attempts yet.</p>';
+  }
+
+  // ── Init ──
+  (async function init() {
+    await loadProgress();
+    await loadFavorites();
+    renderAllStates();
+    bindFavorites();
+    bindSolvedButtons();
+    updateProgress();
+    applyFilters();
+  })();
+</script>

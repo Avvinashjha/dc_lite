@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0173",
+  "title": "Binary Tree Cameras",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-tree-cameras/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreeCameras",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction minCameraCover(root) {\n  // Minimum cameras to monitor all nodes\n}",
+  "constraints": [
+    "1 <= number of nodes <= 1000",
+    "Node.val == 0"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "draft": false,
+  "id": "problem-0012",
+  "title": "Subarray Sum Equals K",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/subarray-sum-equals-k/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,1,1], k = 2",
+  "sampleOutput": "2",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ],
+        2
+      ],
+      "expected": 2
+    }
+  ],
+  "functionName": "subarraySumEqualsK",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {any}\n */\nfunction subarraySumEqualsK(nums, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(subarraySumEqualsK([1,1,1], 2));",
+  "constraints": [
+    "1 <= nums.length <= 2 * 10^4",
+    "-1000 <= nums[i] <= 1000",
+    "-10^7 <= k <= 10^7"
+  ]
+}

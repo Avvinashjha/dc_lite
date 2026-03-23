@@ -1,0 +1,64 @@
+{
+  "draft": false,
+  "id": "problem-0183",
+  "title": "Flood Fill",
+  "difficulty": "Easy",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/flood-fill/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        1,
+        1,
+        2
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "functionName": "floodFill",
+  "templateCode": "/**\n * @param {number[][]} image\n * @param {number} sr\n * @param {number} sc\n * @param {number} color\n * @return {number[][]}\n */\nfunction floodFill(image, sr, sc, color) {\n  // Flood fill from (sr, sc)\n}",
+  "constraints": [
+    "1 <= m, n <= 50",
+    "0 <= image[i][j], color < 2^16"
+  ]
+}

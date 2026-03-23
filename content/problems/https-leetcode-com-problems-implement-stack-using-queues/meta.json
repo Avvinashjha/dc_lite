@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0127",
+  "title": "https://leetcode.com/problems/implement-stack-using-queues",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/https-leetcode-com-problems-implement-stack-using-queues/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "implementStackUsingQueues",
+  "templateCode": "function MyStack() {}\nMyStack.prototype.push = function(x) {};\nMyStack.prototype.pop = function() {};\nMyStack.prototype.top = function() {};\nMyStack.prototype.empty = function() {};",
+  "constraints": [
+    "1 <= x <= 9",
+    "At most 100 calls to push, pop, top, empty",
+    "All pop and top calls are valid"
+  ]
+}

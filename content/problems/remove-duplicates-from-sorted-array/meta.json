@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0004",
+  "title": "Remove Duplicates from Sorted Array",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,1,2]",
+  "sampleOutput": "2",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": 2
+    }
+  ],
+  "functionName": "removeDuplicatesFromSortedArray",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction removeDuplicatesFromSortedArray(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(removeDuplicatesFromSortedArray([1,1,2]));",
+  "constraints": [
+    "1 <= nums.length <= 3 * 10^4",
+    "-100 <= nums[i] <= 100",
+    "nums is sorted in non-decreasing order"
+  ]
+}

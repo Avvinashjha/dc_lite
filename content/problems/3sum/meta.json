@@ -1,0 +1,63 @@
+{
+  "draft": false,
+  "id": "problem-0016",
+  "title": "3Sum",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers",
+    "Sorting"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/3sum/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [-1,0,1,2,-1,-4]",
+  "sampleOutput": "[[-1,-1,2],[-1,0,1]]",
+  "constraints": [
+    "3 <= nums.length <= 3000",
+    "-10^5 <= nums[i] <= 10^5"
+  ],
+  "functionName": "threeSum",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nfunction threeSum(nums) {\n  // Return all unique triplets that sum to zero\n  return [];\n}\n\n// Sample: console.log(threeSum([-1,0,1,2,-1,-4]));",
+  "testCases": [
+    {
+      "args": [
+        [
+          -1,
+          0,
+          1,
+          2,
+          -1,
+          -4
+        ]
+      ],
+      "expected": [
+        [
+          -1,
+          -1,
+          2
+        ],
+        [
+          -1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": []
+    }
+  ]
+}

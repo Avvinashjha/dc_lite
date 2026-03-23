@@ -5,6 +5,7 @@ import type {
   SiteConfig, BlogIndex, PostMeta, Post,
   CoursesIndex, CourseMeta, ModuleMeta, CourseModule, Course, Lesson,
   DocsIndex, DocProjectMeta, DocProject, DocPage,
+  ProblemIndex, ProblemMeta, ProblemListItem, ProblemItem,
 } from '../types/post';
 
 const CONTENT_DIR = path.resolve(process.cwd(), 'content');
@@ -192,4 +193,71 @@ export function getDocPage(projectSlug: string, pageSlug: string): DocPage | nul
   const project = getDocProject(projectSlug);
   if (!project) return null;
   return project.pages.find(p => p.slug === pageSlug) || null;
+}
+
+// ──── Problems ────
+
+export function getProblemsIndex(): ProblemIndex {
+  return readJson<ProblemIndex>(path.join(CONTENT_DIR, 'problems', '_index.json'));
+}
+
+export function getProblems(): ProblemListItem[] {
+  const problemsDir = path.join(CONTENT_DIR, 'problems');
+  const slugs = getDirs(problemsDir);
+
+  return slugs.map(slug => {
+    const metaPath = path.join(problemsDir, slug, 'meta.json');
+    if (!fs.existsSync(metaPath)) return null;
+    const meta = readJson<ProblemMeta>(metaPath);
+    if (meta.draft) return null;
+    return { ...meta, slug } as ProblemListItem;
+  }).filter(Boolean) as ProblemListItem[];
+}
+
+export function getProblem(slug: string): ProblemItem | null {
+  const problemsDir = path.join(CONTENT_DIR, 'problems');
+  const metaPath = path.join(problemsDir, slug, 'meta.json');
+  if (!fs.existsSync(metaPath)) return null;
+
+  const meta = readJson<ProblemMeta>(metaPath);
+  const descPath = path.join(problemsDir, slug, 'description.md');
+  const solPath = path.join(problemsDir, slug, 'solution.md');
+
+  const descriptionHtml = fs.existsSync(descPath)
+    ? parseMarkdown(readMd(descPath))
+    : '<p>Description coming soon.</p>';
+  const solutionHtml = fs.existsSync(solPath)
+    ? parseMarkdown(readMd(solPath))
+    : '<p>Solution coming soon.</p>';
+
+  return { ...meta, slug, descriptionHtml, solutionHtml };
+}
+
+export function getProblemTopics(): string[] {
+  return [...new Set(getProblems().flatMap(p => p.topics?.length ? p.topics : [p.topic]))].sort();
+}
+
+export function getProblemDifficulties(): string[] {
+  return [...new Set(getProblems().map(p => p.difficulty))].sort();
+}
+
+export function getProblemSets(): string[] {
+  return [...new Set(getProblems().map(p => p.problemSet).filter(Boolean) as string[])].sort();
+}
+
+export function getProblemsByTopic(topic: string): ProblemListItem[] {
+  const t = topic.toLowerCase();
+  return getProblems().filter(p => {
+    const topics = p.topics?.length ? p.topics : [p.topic];
+    return topics.some(tp => tp.toLowerCase() === t);
+  });
+}
+
+export function getProblemsByDifficulty(difficulty: string): ProblemListItem[] {
+  const d = difficulty.toLowerCase();
+  return getProblems().filter(p => p.difficulty.toLowerCase() === d);
+}
+
+export function getProblemsBySet(setId: string): ProblemListItem[] {
+  return getProblems().filter(p => p.problemSet === setId);
 }

@@ -38,6 +38,27 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       </div>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>Color Format Conversion</h2>
+    <p>
+      Web colors come in several formats and you'll often need to convert between them. Your designer
+      sends a HEX code, the animation library wants RGB, and your CSS variables use HSL. This tool does
+      instant bidirectional conversion between all three.
+    </p>
+
+    <h3>When to Use Each Format</h3>
+    <ul>
+      <li><strong>HEX</strong> — Best for CSS shorthand. Quick to copy, widely understood. <code>#ff6b35</code></li>
+      <li><strong>RGB</strong> — Use when you need alpha transparency (<code>rgba</code>) or when working with JavaScript canvas operations</li>
+      <li><strong>HSL</strong> — Best for generating color variations. Change the lightness value to get lighter or darker shades of the same hue</li>
+    </ul>
+
+    <p>
+      For a full visual picker with gradient support and palette management, check the
+      <a href="/tools/color-picker">Color Picker &amp; Palette</a> tool.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>
