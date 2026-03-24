@@ -3,6 +3,8 @@ import '../styles/global.scss';
 import '../styles/components.scss';
 import Logo from '../components/Logo.astro';
 import Icons from '../components/Icons.astro';
+import AuthWidget from '../components/AuthWidget';
+import LoginModal from '../components/LoginModal';
 import { getSiteConfig } from '../utils/contentLoader';
 
 interface Props {
@@ -17,6 +19,8 @@ interface Props {
 }
 
 const config = getSiteConfig();
+const syncConfig = (config as any).sync || {};
+const syncScriptUrl = syncConfig.enabled ? (syncConfig.googleScriptUrl || '') : '';
 const {
   title,
   description,
@@ -184,6 +188,7 @@ if (type === 'website') {
                 <Icons name="moon" size={18} />
               </span>
             </button>
+            <AuthWidget client:load />
           </nav>
 
           <!-- Mobile controls -->
@@ -209,6 +214,9 @@ if (type === 'website') {
           {config.navigation.map(item => (
             <a href={item.path} class="header__mobile-link">{item.label}</a>
           ))}
+          <div style="margin-top: 1rem; display: flex; justify-content: center;">
+             <AuthWidget client:load />
+          </div>
         </div>
       </nav>
     </header>
@@ -279,6 +287,13 @@ if (type === 'website') {
       </div>
     </footer>
 
+    <LoginModal client:load />
+    <script src="/js/auth-gate.js" is:inline></script>
+    <script src="/js/sync.js" is:inline></script>
+    <script is:inline define:vars={{ syncScriptUrl }}>
+      window.__dcSyncScriptUrl = syncScriptUrl || '';
+    </script>
+    <script src="/js/sync-init.js" is:inline></script>
     <script src="/js/base-ui.js" is:inline></script>
   </body>
 </html>

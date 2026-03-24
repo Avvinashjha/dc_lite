@@ -450,55 +450,65 @@ const listJsonLd = {
   }
 
   // ── Bind favorites & solved ──
+  async function toggleFavorite(slug: string) {
+    await (window as any).DCStore.init();
+    if (favoriteSet.has(slug)) {
+      favoriteSet.delete(slug);
+      await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+    } else {
+      favoriteSet.add(slug);
+      await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+    }
+    renderFavoriteIcon(slug);
+    applyFilters();
+  }
+
   function bindFavorites() {
     document.querySelectorAll<HTMLButtonElement>('[data-favorite-btn]').forEach(btn => {
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', () => {
         var slug = btn.dataset.favoriteBtn!;
-        await (window as any).DCStore.init();
-        if (favoriteSet.has(slug)) {
-          favoriteSet.delete(slug);
-          await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+        if ((window as any).requireAuth) {
+          (window as any).requireAuth('Sign in to bookmark problems', () => toggleFavorite(slug));
         } else {
-          favoriteSet.add(slug);
-          await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+          toggleFavorite(slug);
         }
-        renderFavoriteIcon(slug);
-        applyFilters();
       });
     });
     document.querySelectorAll<HTMLButtonElement>('[data-favorite-btn-card]').forEach(btn => {
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', () => {
         var slug = btn.dataset.favoriteBtnCard!;
-        await (window as any).DCStore.init();
-        if (favoriteSet.has(slug)) {
-          favoriteSet.delete(slug);
-          await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+        if ((window as any).requireAuth) {
+          (window as any).requireAuth('Sign in to bookmark problems', () => toggleFavorite(slug));
         } else {
-          favoriteSet.add(slug);
-          await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+          toggleFavorite(slug);
         }
-        renderFavoriteIcon(slug);
-        applyFilters();
       });
     });
   }
 
   function bindSolvedButtons() {
     document.querySelectorAll<HTMLButtonElement>('.problem-solved-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', () => {
         var slug = btn.dataset.solvedBtn!;
-        var row = progressMap[slug] || { solved: false, attempts: 0, attemptsByDay: {} };
-        var next = {
-          solved: !row.solved,
-          solvedAt: !row.solved ? Date.now() : null,
-          attempts: row.attempts || 0,
-          attemptsByDay: row.attemptsByDay || {},
+        const doToggle = async () => {
+          var row = progressMap[slug] || { solved: false, attempts: 0, attemptsByDay: {} };
+          var next = {
+            solved: !row.solved,
+            solvedAt: !row.solved ? Date.now() : null,
+            attempts: row.attempts || 0,
+            attemptsByDay: row.attemptsByDay || {},
+          };
+          progressMap[slug] = next;
+          await (window as any).DCStore.set(TOOL, slug, next);
+          renderTableState(slug);
+          renderCardState(slug);
+          updateProgress();
         };
-        progressMap[slug] = next;
-        await (window as any).DCStore.set(TOOL, slug, next);
-        renderTableState(slug);
-        renderCardState(slug);
-        updateProgress();
+        if ((window as any).requireAuth) {
+          (window as any).requireAuth('Sign in to track your progress', doToggle);
+        } else {
+          doToggle();
+        }
       });
     });
   }

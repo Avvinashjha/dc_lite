@@ -47,7 +47,12 @@ var DCStore = (function() {
     set: function(tool, id, data) {
       return open().then(function() {
         var item = Object.assign({}, data, { tool: tool, id: id, updatedAt: Date.now() });
-        return promisify(tx('readwrite').put(item));
+        return promisify(tx('readwrite').put(item)).then(function(result) {
+          if (typeof DCSyncService !== 'undefined' && DCSyncService.isActive() && DCSyncService.isSyncedTool(tool)) {
+            DCSyncService.push(tool, id, item);
+          }
+          return result;
+        });
       });
     },
 
@@ -66,7 +71,12 @@ var DCStore = (function() {
 
     remove: function(tool, id) {
       return open().then(function() {
-        return promisify(tx('readwrite').delete([tool, id]));
+        return promisify(tx('readwrite').delete([tool, id])).then(function(result) {
+          if (typeof DCSyncService !== 'undefined' && DCSyncService.isActive() && DCSyncService.isSyncedTool(tool)) {
+            DCSyncService.push(tool, id, { _deleted: true });
+          }
+          return result;
+        });
       });
     },
 

@@ -4,6 +4,8 @@ import '../styles/components.scss';
 import '../styles/problems.scss';
 import Logo from '../components/Logo.astro';
 import Icons from '../components/Icons.astro';
+import AuthWidget from '../components/AuthWidget';
+import LoginModal from '../components/LoginModal';
 import { getSiteConfig } from '../utils/contentLoader';
 
 interface Props {
@@ -14,6 +16,8 @@ interface Props {
 }
 
 const config = getSiteConfig();
+const syncConfig = (config as any).sync || {};
+const syncScriptUrl = syncConfig.enabled ? (syncConfig.googleScriptUrl || '') : '';
 const { title, description, breadcrumbs = [], tags = [] } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -119,6 +123,7 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
                 <Icons name="moon" size={18} />
               </span>
             </button>
+            <AuthWidget client:load />
           </nav>
           <div class="header__mobile-controls">
             <button id="reading-mode-toggle-mobile" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
@@ -210,6 +215,13 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
       </div>
     </footer>
 
+    <LoginModal client:load />
+    <script src="/js/auth-gate.js" is:inline></script>
+    <script src="/js/sync.js" is:inline></script>
+    <script is:inline define:vars={{ syncScriptUrl }}>
+      window.__dcSyncScriptUrl = syncScriptUrl || '';
+    </script>
+    <script src="/js/sync-init.js" is:inline></script>
     <script src="/js/base-ui.js" is:inline></script>
   </body>
 </html>

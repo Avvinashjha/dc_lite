@@ -25,10 +25,6 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
 
   {enabled ? (
     <form id="comment-form" class="comments__form">
-      <div class="comments__input-group">
-        <input id="comment-name" name="name" class="comments__input" placeholder="Name" required />
-        <input id="comment-email" name="email" class="comments__input" type="email" placeholder="Email (optional)" />
-      </div>
       <textarea id="comment-text" name="comment" class="comments__textarea" placeholder="What are your thoughts?" minlength="3" required></textarea>
       
       <!-- Honeypot -->
@@ -170,26 +166,27 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
     };
 
     if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+      async function submitComment() {
         if (document.getElementById('comment-hp').value) return;
-        
+
         const submitBtn = document.getElementById('comment-submit');
         const statusEl = document.getElementById('comment-status');
-        const formData = new FormData(form);
-        
+        const commentText = document.getElementById('comment-text');
+
         submitBtn.disabled = true;
         submitBtn.textContent = 'Posting...';
         statusEl.textContent = '';
-        
+
+        const user = window.getCurrentUser ? window.getCurrentUser() : null;
         const data = new URLSearchParams();
         data.append('action', 'comment');
         data.append('postSlug', postSlug);
         data.append('postTitle', postTitle);
-        data.append('name', formData.get('name'));
-        data.append('email', formData.get('email'));
-        data.append('comment', formData.get('comment'));
+        data.append('name', user?.displayName || 'Anonymous');
+        data.append('email', user?.email || '');
+        data.append('comment', commentText.value);
         data.append('timestamp', new Date().toISOString());
+        if (user) data.append('uid', user.uid);
 
         try {
           await fetch(scriptUrl, {
@@ -207,6 +204,15 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Post Comment';
+        }
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (typeof window.requireAuth === 'function') {
+          window.requireAuth('Sign in to post a comment', () => { submitComment(); });
+        } else {
+          submitComment();
         }
       });
     }
@@ -321,14 +327,6 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
     /* border-radius: var(--radius-lg); */
   }
   
-  .comments__input-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .comments__input,
   .comments__textarea {
     width: 100%;
     background: var(--color-background); /* or darker surface */
@@ -340,7 +338,6 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
     transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
   
-  .comments__input:focus,
   .comments__textarea:focus {
     outline: none;
     border-color: var(--color-primary);
@@ -390,9 +387,4 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
     visibility: hidden;
   }
 
-  @media (max-width: 640px) {
-    .comments__input-group {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>
