@@ -408,17 +408,39 @@ const problemJsonLd = {
   }
 
   toggleSolvedBtn.addEventListener('click', () => {
-    progressRow.solved = !progressRow.solved;
-    if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
-    if (!progressRow.solved) progressRow.solvedAt = null;
-    saveProgress();
+    const doToggle = () => {
+      progressRow.solved = !progressRow.solved;
+      if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
+      if (!progressRow.solved) progressRow.solvedAt = null;
+      saveProgress();
+    };
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to track your progress', doToggle);
+    } else {
+      doToggle();
+    }
   });
 
-  // ── Notes ──
-  const noteKey = 'problem-note-' + slug;
+  // ── Notes (synced via IndexedDB → Google Sheets) ──
+  const NOTES_TOOL = 'problem-notes';
   const noteEl = document.getElementById('problem-note') as HTMLTextAreaElement;
   const noteStatusEl = document.getElementById('note-status')!;
-  noteEl.value = localStorage.getItem(noteKey) || '';
+
+  async function loadNote() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(NOTES_TOOL, slug);
+    if (row && row.content) {
+      noteEl.value = row.content;
+    } else {
+      // Migrate from old localStorage key if present
+      const legacy = localStorage.getItem('problem-note-' + slug);
+      if (legacy) {
+        noteEl.value = legacy;
+        await (window as any).DCStore.set(NOTES_TOOL, slug, { content: legacy });
+        localStorage.removeItem('problem-note-' + slug);
+      }
+    }
+  }
 
   let noteTimer: ReturnType<typeof setTimeout>;
   function setNoteStatus(msg: string) {
@@ -426,29 +448,28 @@ const problemJsonLd = {
     clearTimeout(noteTimer);
     noteTimer = setTimeout(() => { noteStatusEl.textContent = ''; }, 2000);
   }
-  document.getElementById('save-note')!.addEventListener('click', () => {
-    localStorage.setItem(noteKey, noteEl.value || '');
+  document.getElementById('save-note')!.addEventListener('click', async () => {
+    await (window as any).DCStore.init();
+    await (window as any).DCStore.set(NOTES_TOOL, slug, { content: noteEl.value || '' });
     setNoteStatus('Saved');
   });
-  document.getElementById('clear-note')!.addEventListener('click', () => {
+  document.getElementById('clear-note')!.addEventListener('click', async () => {
     noteEl.value = '';
-    localStorage.removeItem(noteKey);
+    await (window as any).DCStore.init();
+    await (window as any).DCStore.remove(NOTES_TOOL, slug);
     setNoteStatus('Cleared');
   });
 
-  // ── Discussion ──
-  const discussionKey = 'problem-discussion-' + slug;
+  // ── Discussion (server-backed via Apps Script) ──
+  const DISCUSSION_TOOL = 'problem-discussion';
   const discussionListEl = document.getElementById('discussion-list')!;
-  const discussionNameEl = document.getElementById('discussion-name') as HTMLInputElement;
   const discussionMsgEl = document.getElementById('discussion-message') as HTMLTextAreaElement;
 
   function escapeHtml(s: string) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function loadThreads() {
-    const raw = localStorage.getItem(discussionKey);
-    const rows = raw ? JSON.parse(raw) : [];
+  function renderDiscussionList(rows: any[]) {
     if (!rows.length) {
       discussionListEl.innerHTML = '<p class="problem-discussion__empty">No discussion yet. Be the first to share your approach.</p>';
       return;
@@ -456,21 +477,96 @@ const problemJsonLd = {
     discussionListEl.innerHTML = rows.map((row: any) => {
       const name = escapeHtml(row.name || 'Anonymous');
       const msg = escapeHtml(row.message || '');
-      const time = new Date(row.ts).toLocaleString();
+      const time = new Date(row.ts || row.timestamp).toLocaleString();
       return `<article class="problem-discussion__item"><p class="problem-discussion__item-meta"><strong>${name}</strong> \u00B7 ${escapeHtml(time)}</p><p class="problem-discussion__item-text">${msg}</p></article>`;
     }).join('');
   }
 
+  async function loadDiscussion() {
+    // Show cached data immediately
+    await (window as any).DCStore.init();
+    const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
+    if (cached && cached.posts) renderDiscussionList(cached.posts);
+
+    // Migrate from old localStorage if present
+    const legacyKey = 'problem-discussion-' + slug;
+    const legacy = localStorage.getItem(legacyKey);
+    if (legacy) {
+      try {
+        const legacyPosts = JSON.parse(legacy);
+        if (legacyPosts.length && (!cached || !cached.posts || !cached.posts.length)) {
+          renderDiscussionList(legacyPosts);
+          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: legacyPosts });
+        }
+      } catch (_) {}
+      localStorage.removeItem(legacyKey);
+    }
+
+    // Fetch from server
+    if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
+      try {
+        const syncUrl = (window as any).DCSyncService._getScriptUrl ? (window as any).DCSyncService._getScriptUrl() : null;
+        if (!syncUrl) return;
+        const res = await fetch(syncUrl + '?action=getDiscussion&slug=' + encodeURIComponent(slug));
+        const data = await res.json();
+        if (data.status === 'success' && data.posts) {
+          renderDiscussionList(data.posts);
+          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: data.posts });
+        }
+      } catch (err) {
+        console.warn('[Discussion] Server fetch failed:', err);
+      }
+    }
+  }
+
   document.getElementById('discussion-post')!.addEventListener('click', () => {
-    const name = (discussionNameEl.value || '').trim() || 'Anonymous';
-    const message = (discussionMsgEl.value || '').trim();
-    if (!message) return;
-    const raw = localStorage.getItem(discussionKey);
-    const rows = raw ? JSON.parse(raw) : [];
-    rows.unshift({ name, message, ts: Date.now(), userId: 'anonymous' });
-    localStorage.setItem(discussionKey, JSON.stringify(rows.slice(0, 100)));
-    discussionMsgEl.value = '';
-    loadThreads();
+    const doPost = async () => {
+      const user = (window as any).getCurrentUser ? (window as any).getCurrentUser() : null;
+      const name = user?.displayName || 'Anonymous';
+      const message = (discussionMsgEl.value || '').trim();
+      if (!message) return;
+
+      const post = { name, message, ts: Date.now(), uid: user?.uid || '' };
+
+      // Update local cache immediately
+      await (window as any).DCStore.init();
+      const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
+      const posts = (cached && cached.posts) ? cached.posts : [];
+      posts.unshift(post);
+      await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: posts.slice(0, 200) });
+      renderDiscussionList(posts);
+      discussionMsgEl.value = '';
+
+      // Push to server (fire-and-forget, same pattern as comments)
+      const syncUrl = (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService._getScriptUrl)
+        ? (window as any).DCSyncService._getScriptUrl() : null;
+      if (syncUrl && window.getFirebaseIdToken) {
+        window.getFirebaseIdToken().then(function (token) {
+          var payload = JSON.stringify({
+            action: 'postDiscussion',
+            slug: slug,
+            name: name,
+            message: message,
+            uid: user?.uid || '',
+            idToken: token || '',
+            timestamp: new Date(post.ts).toISOString()
+          });
+          fetch(syncUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: payload
+          }).catch(function (err) {
+            console.warn('[Discussion] Server push failed:', err);
+          });
+        });
+      }
+    };
+
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to join the discussion', doPost);
+    } else {
+      doPost();
+    }
   });
 
   // ── Favorites ──
@@ -490,16 +586,24 @@ const problemJsonLd = {
     renderFavorite();
   }
 
-  favBtn.addEventListener('click', async () => {
-    await (window as any).DCStore.init();
-    isFavorite = !isFavorite;
-    if (isFavorite) await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
-    else await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
-    renderFavorite();
+  favBtn.addEventListener('click', () => {
+    const doToggleFav = async () => {
+      await (window as any).DCStore.init();
+      isFavorite = !isFavorite;
+      if (isFavorite) await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+      else await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+      renderFavorite();
+    };
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to bookmark problems', doToggleFav);
+    } else {
+      doToggleFav();
+    }
   });
 
   // ── Init ──
   loadFavorite();
   loadProgress();
-  loadThreads();
+  loadNote();
+  loadDiscussion();
 </script>
