@@ -9,12 +9,16 @@
 var DCSyncService = (function () {
   var SYNCED_TOOLS = ['problem-progress', 'problem-favorites', 'problem-notes', 'course-enrollment'];
   var DEBOUNCE_MS = 3000;
+  var MAX_RETRIES = 5;
+  var BASE_RETRY_MS = 2000;
 
   var scriptUrl = null;
   var userId = null;
   var syncQueue = [];
   var debounceTimer = null;
   var isSyncing = false;
+  var retryCount = 0;
+  var retryTimer = null;
 
   function getIdToken() {
     if (typeof window.getFirebaseIdToken === 'function') {
@@ -34,8 +38,11 @@ var DCSyncService = (function () {
   function stop() {
     userId = null;
     syncQueue = [];
+    retryCount = 0;
     if (debounceTimer) clearTimeout(debounceTimer);
+    if (retryTimer) clearTimeout(retryTimer);
     debounceTimer = null;
+    retryTimer = null;
   }
 
   function isActive() {
@@ -162,10 +169,21 @@ var DCSyncService = (function () {
       if (data.status !== 'success') {
         console.warn('[DCSyncService] Push response:', data);
       }
+      retryCount = 0;
     })
     .catch(function (err) {
       console.warn('[DCSyncService] Push failed:', err);
-      syncQueue = items.concat(syncQueue);
+      if (retryCount < MAX_RETRIES) {
+        syncQueue = items.concat(syncQueue);
+        retryCount++;
+        var delay = Math.min(BASE_RETRY_MS * Math.pow(2, retryCount - 1), 60000);
+        console.warn('[DCSyncService] Retry ' + retryCount + '/' + MAX_RETRIES + ' in ' + delay + 'ms');
+        if (retryTimer) clearTimeout(retryTimer);
+        retryTimer = setTimeout(flush, delay);
+      } else {
+        console.error('[DCSyncService] Max retries reached, dropping ' + items.length + ' items');
+        retryCount = 0;
+      }
     });
   }
 

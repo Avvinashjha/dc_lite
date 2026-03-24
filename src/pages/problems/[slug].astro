@@ -540,24 +540,25 @@ const problemJsonLd = {
       // Push to server (fire-and-forget, same pattern as comments)
       const syncUrl = (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService._getScriptUrl)
         ? (window as any).DCSyncService._getScriptUrl() : null;
-      if (syncUrl) {
-        try {
-          const data = new URLSearchParams();
-          data.append('action', 'postDiscussion');
-          data.append('slug', slug);
-          data.append('name', name);
-          data.append('message', message);
-          data.append('uid', user?.uid || '');
-          data.append('timestamp', new Date(post.ts).toISOString());
+      if (syncUrl && window.getFirebaseIdToken) {
+        window.getFirebaseIdToken().then(function (token) {
+          var payload = JSON.stringify({
+            action: 'postDiscussion',
+            slug: slug,
+            name: name,
+            message: message,
+            uid: user?.uid || '',
+            idToken: token || '',
+            timestamp: new Date(post.ts).toISOString()
+          });
           fetch(syncUrl, {
             method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: data
+            headers: { 'Content-Type': 'text/plain' },
+            body: payload
+          }).catch(function (err) {
+            console.warn('[Discussion] Server push failed:', err);
           });
-        } catch (err) {
-          console.warn('[Discussion] Server push failed:', err);
-        }
+        });
       }
     };
 

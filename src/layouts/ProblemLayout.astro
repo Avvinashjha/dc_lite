@@ -219,20 +219,9 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
     <script src="/js/auth-gate.js" is:inline></script>
     <script src="/js/sync.js" is:inline></script>
     <script is:inline define:vars={{ syncScriptUrl }}>
-      if (syncScriptUrl) {
-        window.addEventListener('dc:authchange', function (e) {
-          var user = e.detail && e.detail.user;
-          if (user && typeof DCSyncService !== 'undefined') {
-            DCSyncService.init(user.uid, syncScriptUrl);
-          } else if (!user && typeof DCSyncService !== 'undefined') {
-            DCSyncService.stop();
-          }
-        });
-        if (window.__dcAuthUser && typeof DCSyncService !== 'undefined') {
-          DCSyncService.init(window.__dcAuthUser.uid, syncScriptUrl);
-        }
-      }
+      window.__dcSyncScriptUrl = syncScriptUrl || '';
     </script>
+    <script src="/js/sync-init.js" is:inline></script>
     <script src="/js/base-ui.js" is:inline></script>
   </body>
 </html>

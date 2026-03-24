@@ -106,13 +106,8 @@ function doGet(e) {
 
   // ── Get user progress (auth required) ──
   if (action === 'getProgress') {
-    var uid = getAuthUid(e, {}) || e.parameter.uid;
-    if (!uid) return jsonResponse({ status: 'error', message: 'Missing uid or invalid token' });
-
-    var tokenUid = getAuthUid(e, {});
-    if (tokenUid && tokenUid !== uid) {
-      return jsonResponse({ status: 'error', message: 'Token uid mismatch' });
-    }
+    var uid = getAuthUid(e, {});
+    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
 
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('user_progress');
     if (!sheet) return jsonResponse({ status: 'success', items: [] });
@@ -136,13 +131,8 @@ function doGet(e) {
 
   // ── Get user enrollments (auth required) ──
   if (action === 'getEnrollments') {
-    var uid = getAuthUid(e, {}) || e.parameter.uid;
-    if (!uid) return jsonResponse({ status: 'error', message: 'Missing uid or invalid token' });
-
-    var tokenUid = getAuthUid(e, {});
-    if (tokenUid && tokenUid !== uid) {
-      return jsonResponse({ status: 'error', message: 'Token uid mismatch' });
-    }
+    var uid = getAuthUid(e, {});
+    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
 
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('user_enrollments');
     if (!sheet) return jsonResponse({ status: 'success', enrollments: [] });
@@ -254,14 +244,10 @@ function doPost(e) {
 
   // ── Save user progress (batch, auth required) ──
   if (action === 'saveProgress') {
-    var verifiedUid = getAuthUid(e, params);
-    var uid = verifiedUid || params.uid;
+    var uid = getAuthUid(e, params);
     var items = params.items || [];
 
-    if (!uid) return jsonResponse({ status: 'error', message: 'Missing uid' });
-    if (verifiedUid && verifiedUid !== params.uid) {
-      return jsonResponse({ status: 'error', message: 'Token uid mismatch' });
-    }
+    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
 
     var sheet = getOrCreateSheet('user_progress', ['uid', 'type', 'slug', 'data', 'updatedAt', 'createdAt']);
 
@@ -294,16 +280,11 @@ function doPost(e) {
 
   // ── Save course enrollment (auth required) ──
   if (action === 'saveEnrollment') {
-    var verifiedUid = getAuthUid(e, params);
-    var uid = verifiedUid || params.uid;
+    var uid = getAuthUid(e, params);
     var courseSlug = params.courseSlug;
 
-    if (!uid || !courseSlug) {
-      return jsonResponse({ status: 'error', message: 'Missing uid or courseSlug' });
-    }
-    if (verifiedUid && verifiedUid !== params.uid) {
-      return jsonResponse({ status: 'error', message: 'Token uid mismatch' });
-    }
+    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
+    if (!courseSlug) return jsonResponse({ status: 'error', message: 'Missing courseSlug' });
 
     var sheet = getOrCreateSheet('user_enrollments', [
       'uid', 'courseSlug', 'enrolledAt', 'lastLesson', 'lastLessonAt', 'updatedAt', 'createdAt'
@@ -338,14 +319,14 @@ function doPost(e) {
     return jsonResponse({ status: 'success' });
   }
 
-  // ── Post to problem discussion (auth verified if token provided) ──
+  // ── Post to problem discussion (auth required) ──
   if (action === 'postDiscussion') {
-    var verifiedUid = getAuthUid(e, params);
+    var uid = getAuthUid(e, params);
+    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
 
     var slug = params.slug || '';
     var name = params.name || 'Anonymous';
     var message = params.message || '';
-    var uid = verifiedUid || params.uid || '';
     var timestamp = params.timestamp || new Date().toISOString();
 
     if (!slug || !message) {

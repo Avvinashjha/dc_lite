@@ -4,7 +4,7 @@ import { useStore } from '@nanostores/preact';
 import { showLoginModal, loginReason, closeLoginModal } from '../store/authModalStore';
 import { userStore } from '../store/userStore';
 import { auth, googleProvider, githubProvider } from '../lib/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, type AuthProvider } from 'firebase/auth';
 
 export default function LoginModal() {
     const isOpen = useStore(showLoginModal);
@@ -34,10 +34,10 @@ export default function LoginModal() {
 
     if (!isOpen) return null;
 
-    const handleLogin = async (provider: any) => {
+    const handleLogin = async (provider: AuthProvider) => {
         try {
             await signInWithPopup(auth, provider);
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Login failed:', error);
         }
     };
