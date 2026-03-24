@@ -32,6 +32,7 @@ For newsletter subscriptions.
 |--------|------|-------|--------|-----------|
 | Header | id   | email | source | timestamp |
 
+
 ### Tab: `comments`
 
 For blog and problem page comments.
