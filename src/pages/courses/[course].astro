@@ -25,6 +25,10 @@ if (!course) return Astro.redirect('/courses');
       <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">{course.title}</h1>
       <p style="font-size: 1.25rem; color: var(--color-text-light); max-width: 700px;">{course.description}</p>
       <p style="margin-top: 0.5rem; color: var(--color-text-light); font-size: 0.875rem;">By {course.author}</p>
+      <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center;">
+        <button id="enroll-btn" class="button button--primary" data-course-slug={course.slug} type="button">Enroll in Course</button>
+        <span id="enroll-status" style="font-size: 0.85rem; color: var(--color-text-light);"></span>
+      </div>
     </div>
 
     <div class="course-modules">
@@ -49,6 +53,59 @@ if (!course) return Astro.redirect('/courses');
     </div>
   </div>
 </BaseLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script>
+  const ENROLL_TOOL = 'course-enrollment';
+  const enrollBtn = document.getElementById('enroll-btn') as HTMLButtonElement;
+  const enrollStatus = document.getElementById('enroll-status')!;
+  const courseSlug = enrollBtn.dataset.courseSlug || '';
+  let enrolled = false;
+
+  async function loadEnrollment() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(ENROLL_TOOL, courseSlug);
+    if (row && row.enrolledAt) {
+      enrolled = true;
+      enrollBtn.textContent = 'Continue Learning';
+      enrollBtn.classList.remove('button--primary');
+      enrollBtn.classList.add('button--outline');
+      enrollStatus.textContent = 'Enrolled';
+    }
+  }
+
+  async function doEnroll() {
+    if (enrolled) {
+      // Already enrolled - go to first lesson
+      const firstLesson = document.querySelector('.course-lesson') as HTMLAnchorElement | null;
+      if (firstLesson) window.location.href = firstLesson.href;
+      return;
+    }
+    await (window as any).DCStore.init();
+    const data = { enrolledAt: Date.now(), lastLesson: '', lastLessonAt: null, updatedAt: Date.now() };
+    await (window as any).DCStore.set(ENROLL_TOOL, courseSlug, data);
+
+    if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
+      (window as any).DCSyncService.pushEnrollment(courseSlug, data);
+    }
+
+    enrolled = true;
+    enrollBtn.textContent = 'Continue Learning';
+    enrollBtn.classList.remove('button--primary');
+    enrollBtn.classList.add('button--outline');
+    enrollStatus.textContent = 'Enrolled!';
+  }
+
+  enrollBtn.addEventListener('click', () => {
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to enroll in this course', doEnroll);
+    } else {
+      doEnroll();
+    }
+  });
+
+  loadEnrollment();
+</script>
 
 <style>
   .course-modules {

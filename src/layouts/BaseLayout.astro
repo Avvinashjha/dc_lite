@@ -4,6 +4,7 @@ import '../styles/components.scss';
 import Logo from '../components/Logo.astro';
 import Icons from '../components/Icons.astro';
 import AuthWidget from '../components/AuthWidget';
+import LoginModal from '../components/LoginModal';
 import { getSiteConfig } from '../utils/contentLoader';
 
 interface Props {
@@ -18,6 +19,8 @@ interface Props {
 }
 
 const config = getSiteConfig();
+const syncConfig = (config as any).sync || {};
+const syncScriptUrl = syncConfig.enabled ? (syncConfig.googleScriptUrl || '') : '';
 const {
   title,
   description,
@@ -284,6 +287,24 @@ if (type === 'website') {
       </div>
     </footer>
 
+    <LoginModal client:load />
+    <script src="/js/auth-gate.js" is:inline></script>
+    <script src="/js/sync.js" is:inline></script>
+    <script is:inline define:vars={{ syncScriptUrl }}>
+      if (syncScriptUrl) {
+        window.addEventListener('dc:authchange', function (e) {
+          var user = e.detail && e.detail.user;
+          if (user && typeof DCSyncService !== 'undefined') {
+            DCSyncService.init(user.uid, syncScriptUrl);
+          } else if (!user && typeof DCSyncService !== 'undefined') {
+            DCSyncService.stop();
+          }
+        });
+        if (window.__dcAuthUser && typeof DCSyncService !== 'undefined') {
+          DCSyncService.init(window.__dcAuthUser.uid, syncScriptUrl);
+        }
+      }
+    </script>
     <script src="/js/base-ui.js" is:inline></script>
   </body>
 </html>

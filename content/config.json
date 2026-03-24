@@ -21,11 +21,15 @@
   },
   "newsletter": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwDjghAqnP6ftqKY0yW7nyxjY6yUHpCoT5OjP_e82K0gaVlzI4GIOX45ppOQYjs1VlPUA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbza0YpAphcfqm8zSc1ExgHwLZxz_lTJh6wOsQ2rQoNytLgXpPmJSPFJkxmvqxvISg7R/exec"
   },
   "comments": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwDjghAqnP6ftqKY0yW7nyxjY6yUHpCoT5OjP_e82K0gaVlzI4GIOX45ppOQYjs1VlPUA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbza0YpAphcfqm8zSc1ExgHwLZxz_lTJh6wOsQ2rQoNytLgXpPmJSPFJkxmvqxvISg7R/exec"
+  },
+  "sync": {
+    "enabled": true,
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbza0YpAphcfqm8zSc1ExgHwLZxz_lTJh6wOsQ2rQoNytLgXpPmJSPFJkxmvqxvISg7R/exec"
   },
   "seo": {
     "twitterHandle": "@dailycoder_in",
