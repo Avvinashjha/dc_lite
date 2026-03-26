@@ -1,0 +1,665 @@
+// Daily Challenge — compact, elegant layout (width matches blog / .content)
+.daily-page {
+  --daily-radius: 12px;
+  --daily-radius-lg: 16px;
+  --daily-gap: 0.75rem;
+  --daily-gap-sm: 0.5rem;
+  padding: 1rem 0 2rem;
+  max-width: var(--content-max-width);
+  width: 100%;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .daily-page {
+    padding: 1.25rem 0 2.5rem;
+  }
+}
+
+.daily-shell {
+  border: 1px solid var(--color-border);
+  border-radius: var(--daily-radius-lg);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--color-primary) 8%, var(--color-bg)) 0%,
+    var(--color-bg) 45%,
+    var(--color-code-bg) 100%
+  );
+  padding: 1rem 1.125rem;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-border) 80%, transparent),
+    0 12px 40px -12px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.daily-shell h1 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.daily-shell > p:first-of-type {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.daily-shell__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.daily-shell__hint {
+  margin: 0.6rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-light);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.daily-shell--detail {
+  padding: 0.75rem 1rem;
+}
+
+.daily-shell__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1.25rem;
+}
+
+.daily-shell__titles {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.daily-shell__titles .daily-shell__eyebrow {
+  margin-bottom: 0.25rem;
+}
+
+.daily-shell__titles h1 {
+  margin-top: 0;
+}
+
+.daily-shell__titles .daily-hero-meta {
+  margin-top: 0.4rem;
+}
+
+.daily-shell__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 0.75rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .daily-shell__top {
+    align-items: stretch;
+  }
+
+  .daily-shell__cta {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+
+  .daily-shell__cta .daily-btn--primary {
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.daily-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--daily-gap-sm);
+  margin-top: 0.5rem;
+}
+
+.daily-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-code-bg) 70%, var(--color-bg));
+  color: var(--color-text-light);
+}
+
+.daily-pill--topic {
+  border-color: color-mix(in srgb, var(--color-primary) 25%, var(--color-border));
+  color: var(--color-text);
+}
+
+.daily-pill--easy {
+  border-color: color-mix(in srgb, #22c55e 35%, var(--color-border));
+  color: #15803d;
+}
+
+.daily-pill--medium {
+  border-color: color-mix(in srgb, #eab308 40%, var(--color-border));
+  color: #a16207;
+}
+
+.daily-pill--hard {
+  border-color: color-mix(in srgb, #ef4444 35%, var(--color-border));
+  color: #b91c1c;
+}
+
+// Segmented tabs — space-efficient
+.daily-tabs {
+  margin-top: var(--daily-gap);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--daily-radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-code-bg);
+}
+
+.daily-tabs__btn {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-light);
+  border-radius: calc(var(--daily-radius) - 4px);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.daily-tabs__btn:hover {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-bg) 60%, transparent);
+}
+
+.daily-tabs__btn--active {
+  color: var(--color-text);
+  background: var(--color-bg);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--color-text) 12%, transparent);
+}
+
+.daily-pane {
+  display: none;
+  margin-top: var(--daily-gap);
+}
+
+.daily-pane--active {
+  display: block;
+}
+
+.daily-pane__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--daily-gap);
+  margin-bottom: var(--daily-gap-sm);
+}
+
+.daily-pane__header h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.daily-pane__count {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  font-variant-numeric: tabular-nums;
+}
+
+// Hero card
+.daily-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--daily-radius-lg);
+  background: var(--color-bg);
+  padding: 1rem 1.125rem;
+}
+
+.daily-card--hero {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-primary) 5%, var(--color-bg)) 0%,
+    var(--color-bg) 100%
+  );
+}
+
+.daily-card--hero h2 {
+  margin: 0.25rem 0 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.daily-card__label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+.daily-card__problem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daily-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--daily-gap-sm);
+  margin-top: 0.875rem;
+}
+
+.daily-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--daily-radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+.daily-btn:active {
+  transform: scale(0.98);
+}
+
+.daily-btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary) 40%, transparent);
+}
+
+.daily-btn--primary:hover {
+  filter: brightness(1.06);
+}
+
+.daily-btn--secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.daily-btn--secondary:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-bg));
+}
+
+.daily-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.daily-link:hover {
+  border-bottom-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+}
+
+.daily-link::after {
+  content: '\2192';
+  font-size: 0.85em;
+  opacity: 0.65;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.daily-link:hover::after {
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+// Past list — compact rows, clear status
+.daily-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--daily-radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.daily-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.12s ease;
+}
+
+.daily-list li:last-child {
+  border-bottom: none;
+}
+
+@media (hover: hover) {
+  .daily-list li:hover {
+    background: color-mix(in srgb, var(--color-primary) 4%, var(--color-bg));
+  }
+}
+
+.daily-list__date {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.daily-list__title {
+  display: block;
+  margin: 0.15rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.35;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.daily-list__title:hover {
+  color: var(--color-primary);
+}
+
+.daily-list__meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  line-height: 1.35;
+}
+
+.daily-list__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+@media (max-width: 560px) {
+  .daily-list li {
+    grid-template-columns: 1fr;
+  }
+  .daily-list__actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+// Status pills (replaces generic badges for clarity)
+.daily-status {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-code-bg);
+  color: var(--color-text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.daily-status--pending {
+  border-style: dashed;
+  opacity: 0.95;
+}
+
+.daily-status--solved {
+  border-color: color-mix(in srgb, #22c55e 45%, var(--color-border));
+  background: color-mix(in srgb, #22c55e 10%, var(--color-bg));
+  color: #166534;
+}
+
+.daily-status--backfill {
+  border-color: color-mix(in srgb, #eab308 50%, var(--color-border));
+  background: color-mix(in srgb, #eab308 12%, var(--color-bg));
+  color: #854d0e;
+}
+
+.daily-status--warn {
+  border-color: color-mix(in srgb, #f97316 45%, var(--color-border));
+  background: color-mix(in srgb, #f97316 10%, var(--color-bg));
+  color: #c2410c;
+}
+
+// Stats grid
+.daily-detail > .daily-stats-grid {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.daily-stats-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+}
+
+@media (min-width: 520px) {
+  .daily-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.daily-metric {
+  border: 1px solid var(--color-border);
+  border-radius: var(--daily-radius);
+  background: var(--color-bg);
+  padding: 0.7rem 0.85rem;
+  min-height: 3.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.daily-metric__label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-light);
+}
+
+.daily-metric__value {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.daily-metric__value--sm {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.daily-stats-note {
+  margin: 0.65rem 0 0;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--daily-radius);
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-light);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+// Detail content blocks
+.daily-content-card {
+  margin-top: var(--daily-gap);
+  border: 1px solid var(--color-border);
+  border-radius: var(--daily-radius-lg);
+  background: var(--color-bg);
+  padding: 0.875rem 1rem;
+}
+
+.daily-content-card .problem-desc--embedded .problem-desc__body {
+  margin-top: 0;
+}
+
+/* Markdown opens with # Problem — keep it a section title, not a second page h1 */
+.daily-content-card--problem .problem-desc--embedded .problem-desc__body > h1:first-child {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 0.65rem;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  text-transform: none;
+}
+
+.daily-content-card > h2,
+.daily-content-card__head h2 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.daily-content-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--daily-gap-sm);
+  margin-bottom: 0.35rem;
+}
+
+.daily-unlock-btn {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.65rem;
+}
+
+.daily-nav-row {
+  margin-top: var(--daily-gap);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--daily-gap-sm);
+}
+
+.daily-nav-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.daily-nav-link:hover {
+  border-bottom-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+}
+
+.daily-nav-link--prev::before {
+  content: '\2190';
+  margin-right: 0.35rem;
+  opacity: 0.75;
+}
+
+.daily-nav-link--next::after {
+  content: '\2192';
+  margin-left: 0.35rem;
+  opacity: 0.75;
+}
+
+.daily-rss {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--daily-gap);
+  padding: 0.75rem 1rem;
+  border-radius: var(--daily-radius-lg);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-bg));
+}
+
+.daily-rss__text {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.daily-rss__sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+}
+
+// Solution figures on detail page
+.daily-visual {
+  margin: 0.65rem 0 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--daily-radius);
+  background: var(--color-code-bg);
+}
+
+.daily-visual figcaption {
+  font-weight: 650;
+  font-size: 0.8125rem;
+  margin-bottom: 0.4rem;
+}
+
+.daily-visual img {
+  max-width: 100%;
+  height: auto;
+  border-radius: calc(var(--daily-radius) - 2px);
+}

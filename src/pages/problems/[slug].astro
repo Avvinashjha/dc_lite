@@ -39,6 +39,7 @@ const breadcrumbs = [
 ];
 
 const pageDescription = `${problem.title} - ${problem.difficulty} ${problem.topic} coding problem. Practice with in-browser JavaScript runner.`;
+const isDailyProblem = problem.problemSet === 'daily' && !!problem.publishedAt;
 
 const problemJsonLd = {
   '@context': 'https://schema.org',
@@ -64,7 +65,14 @@ const problemJsonLd = {
 
   <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig)} />
 
-  <div class="problem-ide" id="problem-page-root" data-problem-slug={problem.slug} data-sample-input={problem.sampleInput || ''}>
+  <div
+    class="problem-ide"
+    id="problem-page-root"
+    data-problem-slug={problem.slug}
+    data-sample-input={problem.sampleInput || ''}
+    data-problem-set={problem.problemSet || ''}
+    data-published-at={problem.publishedAt || ''}
+  >
     <!-- Breadcrumbs -->
     <nav class="problem-breadcrumbs" aria-label="Breadcrumb">
       <a href="/">Home</a>
@@ -105,7 +113,14 @@ const problemJsonLd = {
             <ProblemDescription problem={problem} />
           </div>
           <div class="problem-tab-pane" data-pane="solution">
-            <ProblemSolution html={problem.solutionHtml} />
+            <div id="solution-locked-banner" class="problem-example" style="display:none;">
+              <div class="problem-example__label">Locked Solution</div>
+              <div class="problem-example__content">Opening solution applies a one-time 0.5 consistency penalty for this daily challenge.</div>
+              <button type="button" id="unlock-solution-inline" class="p-btn p-btn--ghost" style="margin-top:0.5rem;">Unlock Solution</button>
+            </div>
+            <div id="solution-pane-content">
+              <ProblemSolution html={problem.solutionHtml} />
+            </div>
           </div>
           <div class="problem-tab-pane" data-pane="discussion">
             <ProblemDiscussion slug={slug} />
@@ -159,6 +174,9 @@ const problemJsonLd = {
   // ── Runner config ──
   const rootEl = document.getElementById('problem-page-root')!;
   const slug = rootEl.dataset.problemSlug || '';
+  const problemSet = rootEl.dataset.problemSet || '';
+  const publishedAt = rootEl.dataset.publishedAt || '';
+  const isDaily = problemSet === 'daily' && !!publishedAt;
   const configEl = document.getElementById('problem-runner-config');
   const runnerConfig = configEl?.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
   const sampleInput = runnerConfig.sampleInput || rootEl.dataset.sampleInput || '';
@@ -197,8 +215,19 @@ const problemJsonLd = {
   const frameEl = document.getElementById('problem-js-frame') as HTMLIFrameElement;
   const localProgressEl = document.getElementById('local-progress-state')!;
   const toggleSolvedBtn = document.getElementById('toggle-problem-solved')!;
+  const solutionLockedBanner = document.getElementById('solution-locked-banner') as HTMLElement | null;
+  const unlockSolutionInlineBtn = document.getElementById('unlock-solution-inline') as HTMLButtonElement | null;
+  const solutionPaneContent = document.getElementById('solution-pane-content') as HTMLElement | null;
 
-  let progressRow = { solved: false, attempts: 0, solvedAt: null as number | null, lastAttemptAt: null as number | null, attemptsByDay: {} as Record<string, number> };
+  let progressRow = {
+    solved: false,
+    attempts: 0,
+    solvedAt: null as number | null,
+    lastAttemptAt: null as number | null,
+    attemptsByDay: {} as Record<string, number>,
+    solutionUnlockedAt: null as number | null,
+    solutionUnlockPenaltyApplied: false,
+  };
   let runId = 0;
 
   function appendConsole(prefix: string, msg: string) {
@@ -240,6 +269,9 @@ const problemJsonLd = {
       '<' + '/script></body></html>'
     ].join('');
     frameEl.srcdoc = srcdoc;
+    if (isDaily && (window as any).DCTrack) {
+      (window as any).DCTrack('run_daily_code', { problem_slug: slug });
+    }
   }
 
   window.addEventListener('message', (event) => {
@@ -357,6 +389,9 @@ const problemJsonLd = {
       }
     }
     window.addEventListener('message', onTestMessage);
+    if (isDaily && (window as any).DCTrack) {
+      (window as any).DCTrack('run_daily_tests', { problem_slug: slug });
+    }
   }
 
   runBtn.addEventListener('click', runCode);
@@ -370,6 +405,11 @@ const problemJsonLd = {
     const a = Number(progressRow.attempts || 0);
     localProgressEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' \u00B7 ' + a + (a === 1 ? ' attempt' : ' attempts');
     toggleSolvedBtn.textContent = progressRow.solved ? 'Mark Unsolved' : 'Mark Solved';
+    if (isDaily && solutionLockedBanner && solutionPaneContent) {
+      const unlocked = !!progressRow.solutionUnlockedAt;
+      solutionLockedBanner.style.display = unlocked ? 'none' : '';
+      solutionPaneContent.style.display = unlocked ? '' : 'none';
+    }
   }
 
   async function saveProgress() {
@@ -379,6 +419,8 @@ const problemJsonLd = {
       attempts: Number(progressRow.attempts || 0),
       lastAttemptAt: progressRow.lastAttemptAt,
       attemptsByDay: progressRow.attemptsByDay,
+      solutionUnlockedAt: progressRow.solutionUnlockedAt || null,
+      solutionUnlockPenaltyApplied: !!progressRow.solutionUnlockPenaltyApplied,
     });
     renderProgress();
   }
@@ -393,6 +435,8 @@ const problemJsonLd = {
         attempts: Number(row.attempts || 0),
         lastAttemptAt: row.lastAttemptAt || null,
         attemptsByDay: row.attemptsByDay || {},
+        solutionUnlockedAt: row.solutionUnlockedAt || null,
+        solutionUnlockPenaltyApplied: !!row.solutionUnlockPenaltyApplied,
       };
     }
     renderProgress();
@@ -413,6 +457,12 @@ const problemJsonLd = {
       if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
       if (!progressRow.solved) progressRow.solvedAt = null;
       saveProgress();
+      if (isDaily && progressRow.solved && (window as any).DCTrack) {
+        (window as any).DCTrack('solve_daily_problem', {
+          problem_slug: slug,
+          published_at: publishedAt,
+        });
+      }
     };
     if ((window as any).requireAuth) {
       (window as any).requireAuth('Sign in to track your progress', doToggle);
@@ -420,6 +470,28 @@ const problemJsonLd = {
       doToggle();
     }
   });
+
+  if (unlockSolutionInlineBtn) {
+    unlockSolutionInlineBtn.addEventListener('click', () => {
+      const doUnlock = async () => {
+        if (progressRow.solutionUnlockedAt) return;
+        progressRow.solutionUnlockedAt = Date.now();
+        progressRow.solutionUnlockPenaltyApplied = true;
+        await saveProgress();
+        if ((window as any).DCTrack) {
+          (window as any).DCTrack('daily_solution_unlock', {
+            problem_slug: slug,
+            penalty: 0.5,
+          });
+        }
+      };
+      if ((window as any).requireAuth) {
+        (window as any).requireAuth('Sign in to unlock solution', doUnlock);
+      } else {
+        doUnlock();
+      }
+    });
+  }
 
   // ── Notes (synced via IndexedDB → Google Sheets) ──
   const NOTES_TOOL = 'problem-notes';
@@ -606,4 +678,10 @@ const problemJsonLd = {
   loadProgress();
   loadNote();
   loadDiscussion();
+  if (isDaily && (window as any).DCTrack) {
+    (window as any).DCTrack('view_daily_problem_editor', {
+      problem_slug: slug,
+      published_at: publishedAt,
+    });
+  }
 </script>

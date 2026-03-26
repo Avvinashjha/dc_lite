@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 240" role="img" aria-label="Number of islands grid">
+  <rect width="620" height="240" fill="#111827"/>
+  <text x="20" y="30" fill="#e5e7eb" font-family="Arial" font-size="18">Number of Islands: connected components in grid</text>
+  <g transform="translate(40,50)">
+    <rect x="0" y="0" width="80" height="34" fill="#16a34a"/><rect x="82" y="0" width="80" height="34" fill="#16a34a"/><rect x="164" y="0" width="80" height="34" fill="#1f2937"/><rect x="246" y="0" width="80" height="34" fill="#1f2937"/>
+    <rect x="0" y="36" width="80" height="34" fill="#16a34a"/><rect x="82" y="36" width="80" height="34" fill="#1f2937"/><rect x="164" y="36" width="80" height="34" fill="#1f2937"/><rect x="246" y="36" width="80" height="34" fill="#16a34a"/>
+    <rect x="0" y="72" width="80" height="34" fill="#1f2937"/><rect x="82" y="72" width="80" height="34" fill="#1f2937"/><rect x="164" y="72" width="80" height="34" fill="#16a34a"/><rect x="246" y="72" width="80" height="34" fill="#16a34a"/>
+    <rect x="0" y="108" width="80" height="34" fill="#16a34a"/><rect x="82" y="108" width="80" height="34" fill="#1f2937"/><rect x="164" y="108" width="80" height="34" fill="#1f2937"/><rect x="246" y="108" width="80" height="34" fill="#1f2937"/>
+  </g>
+  <text x="400" y="96" fill="#bbf7d0" font-family="Arial" font-size="16">Green cells = land</text>
+  <text x="400" y="126" fill="#f9fafb" font-family="Arial" font-size="16">Gray cells = water</text>
+  <text x="400" y="156" fill="#93c5fd" font-family="Arial" font-size="16">DFS/BFS marks one island</text>
+  <text x="400" y="186" fill="#93c5fd" font-family="Arial" font-size="16">Count components</text>
+</svg>

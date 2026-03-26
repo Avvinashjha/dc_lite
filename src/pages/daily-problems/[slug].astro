@@ -1,0 +1,11 @@
+---
+import { getDailyProblems } from '../../utils/contentLoader';
+
+export function getStaticPaths() {
+  return getDailyProblems().map((problem) => ({ params: { slug: problem.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/daily/problem');
+return Astro.redirect(`/daily/problem/${slug}`);
+---

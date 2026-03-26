@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProblemDescription from '../../../components/ProblemDescription.astro';
+import ProblemSolution from '../../../components/ProblemSolution.astro';
+import '../../../styles/problems.scss';
+import '../../../styles/daily-problems.scss';
+import { getDailyProblems, getProblem } from '../../../utils/contentLoader';
+
+export function getStaticPaths() {
+  return getDailyProblems().map((problem) => ({ params: { slug: problem.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Daily problem slug is required');
+
+const problem = getProblem(slug);
+if (!problem || problem.problemSet !== 'daily') return Astro.redirect('/daily/problem');
+
+const todayKey = new Date().toISOString().slice(0, 10);
+const publishDay = String(problem.publishedAt || '').slice(0, 10);
+if (!publishDay || publishDay > todayKey) return Astro.redirect('/daily/problem');
+
+const topics = problem.topics?.length ? problem.topics : [problem.topic];
+const allDaily = getDailyProblems();
+const idx = allDaily.findIndex((item) => item.slug === problem.slug);
+const prev = idx >= 0 && idx + 1 < allDaily.length ? allDaily[idx + 1] : null;
+const next = idx > 0 ? allDaily[idx - 1] : null;
+const solutionVisuals = Array.isArray(problem.solutionVisuals) ? problem.solutionVisuals : [];
+
+function dailyDifficultyClass(difficulty: string): string {
+  const d = difficulty.toLowerCase();
+  return d === 'easy' || d === 'medium' || d === 'hard' ? d : 'topic';
+}
+
+const pageDescription = `${problem.title} daily coding challenge. Solve and track streaks with consistency scoring.`;
+
+const problemJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${problem.title} (Daily Problem)`,
+  description: pageDescription,
+  educationalLevel: problem.difficulty,
+  keywords: topics.join(', '),
+  url: Astro.url.href,
+  author: { '@type': 'Organization', name: 'DailyCoder' },
+  datePublished: `${publishDay}T00:00:00.000Z`,
+};
+
+const liteDaily = allDaily.map((item) => ({
+  slug: item.slug,
+  title: item.title,
+  publishedAt: item.publishedAt || '',
+}));
+---
+
+<BaseLayout
+  title={`${problem.title} | Daily Challenge | DailyCoder`}
+  description={pageDescription}
+  tags={topics}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Daily Challenge', href: '/daily/problem' },
+    { label: problem.title, href: `/daily/problem/${problem.slug}` },
+  ]}
+>
+  <Fragment slot="head">
+    <link rel="alternate" type="application/rss+xml" title="Daily Challenge RSS" href="/daily/problem/rss.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(problemJsonLd)} />
+  </Fragment>
+
+  <section class="container daily-page daily-detail" data-daily-slug={problem.slug} data-published-at={publishDay}>
+    <header class="daily-shell daily-shell--detail">
+      <div class="daily-shell__top">
+        <div class="daily-shell__titles">
+          <p class="daily-shell__eyebrow">Daily · {publishDay}</p>
+          <h1>{problem.title}</h1>
+          <div class="daily-hero-meta">
+            <span class="daily-pill daily-pill--topic">{problem.topic}</span>
+            <span class={`daily-pill daily-pill--${dailyDifficultyClass(problem.difficulty)}`}>{problem.difficulty}</span>
+            {problem.platform && <span class="daily-pill">{problem.platform}</span>}
+          </div>
+        </div>
+        <div class="daily-shell__cta">
+          <a class="daily-btn daily-btn--primary" href={`/problems/${problem.slug}`}>Solve in editor</a>
+          <a class="daily-link" href="/daily/problem">All dailies</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="daily-stats-grid">
+      <article class="daily-metric">
+        <p class="daily-metric__label">Attempts</p>
+        <p class="daily-metric__value" id="detail-attempts">0</p>
+      </article>
+      <article class="daily-metric">
+        <p class="daily-metric__label">Status</p>
+        <p class="daily-metric__value daily-metric__value--sm" id="detail-status">To do</p>
+      </article>
+      <article class="daily-metric">
+        <p class="daily-metric__label">Streak</p>
+        <p class="daily-metric__value" id="detail-current-streak">0</p>
+      </article>
+      <article class="daily-metric">
+        <p class="daily-metric__label">Consistency</p>
+        <p class="daily-metric__value" id="detail-consistency">0.0</p>
+      </article>
+    </section>
+
+    <article class="daily-content-card daily-content-card--problem">
+      <ProblemDescription problem={problem} embedded />
+    </article>
+
+    <article class="daily-content-card">
+      <div class="daily-content-card__head">
+        <h2>Solution</h2>
+        <button class="daily-btn daily-btn--secondary daily-unlock-btn" id="unlock-solution-btn" type="button">Unlock (−0.5)</button>
+      </div>
+      <p id="solution-lock-hint" class="daily-shell__hint" style="margin:0 0 0.65rem;border:none;padding:0;">Locked until you unlock. One-time consistency penalty.</p>
+      <div id="solution-content" style="display:none;">
+        <ProblemSolution html={problem.solutionHtml} />
+        {solutionVisuals.length > 0 && (
+          <div class="problem-section">
+            <div class="problem-section__heading">Diagrams</div>
+            {solutionVisuals.map((visual) => (
+              <figure class="daily-visual">
+                {visual.title && <figcaption>{visual.title}</figcaption>}
+                {visual.imageUrl && <img src={visual.imageUrl} alt={visual.caption || visual.title || 'Solution visual'} loading="lazy" />}
+                {visual.svg && <div set:html={visual.svg} />}
+                {visual.caption && <p class="daily-shell__hint" style="margin:0.4rem 0 0;border:none;padding:0;">{visual.caption}</p>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+
+    <section class="daily-nav-row">
+      <a class="daily-nav-link daily-nav-link--prev" href={prev ? `/daily/problem/${prev.slug}` : '/daily/problem'}>{prev ? 'Previous' : 'All dailies'}</a>
+      <a class="daily-nav-link daily-nav-link--next" href={next ? `/daily/problem/${next.slug}` : '/daily/problem'}>{next ? 'Next' : 'Hub'}</a>
+    </section>
+  </section>
+</BaseLayout>
+
+<script id="daily-all-data" type="application/json" set:html={JSON.stringify(liteDaily)} />
+<script src="/js/store.js" is:inline></script>
+<script>
+  import { buildDailyStats } from '../../../utils/dailyStats';
+
+  const root = document.querySelector('.daily-detail') as HTMLElement | null;
+  const slug = root?.dataset.dailySlug || '';
+  const publishDay = root?.dataset.publishedAt || '';
+  const allDaily = JSON.parse(document.getElementById('daily-all-data')?.textContent || '[]');
+  const PROGRESS_TOOL = 'problem-progress';
+  const unlockBtn = document.getElementById('unlock-solution-btn') as HTMLButtonElement;
+  const solutionContent = document.getElementById('solution-content') as HTMLElement;
+  const lockHint = document.getElementById('solution-lock-hint') as HTMLElement;
+
+  function toDayKey(date: Date): string {
+    return date.toISOString().slice(0, 10);
+  }
+
+  function isBackfill(row: any): boolean {
+    if (!row?.solvedAt) return false;
+    return toDayKey(new Date(row.solvedAt)) > publishDay;
+  }
+
+  function renderDetail(progressMap: Record<string, any>, stats: any) {
+    const row = progressMap[slug] || { solved: false, attempts: 0 };
+    (document.getElementById('detail-attempts') as HTMLElement).textContent = String(row.attempts || 0);
+    const statusEl = document.getElementById('detail-status') as HTMLElement;
+    if (!row.solved) {
+      statusEl.textContent = row.solutionUnlockPenaltyApplied ? 'To do · hint seen' : 'To do';
+    } else {
+      statusEl.textContent = isBackfill(row) ? 'Done · backfill' : 'Done';
+    }
+    (document.getElementById('detail-current-streak') as HTMLElement).textContent = String(stats.currentStreak || 0);
+    (document.getElementById('detail-consistency') as HTMLElement).textContent = String(stats.consistencyPoints || 0);
+
+    const unlocked = !!row.solutionUnlockedAt;
+    solutionContent.style.display = unlocked ? '' : 'none';
+    unlockBtn.style.display = unlocked ? 'none' : '';
+    lockHint.style.display = unlocked ? 'none' : '';
+  }
+
+  async function init() {
+    await (window as any).DCStore.init();
+    const rows = await (window as any).DCStore.getAll(PROGRESS_TOOL);
+    const progressMap: Record<string, any> = {};
+    rows.forEach((row: any) => {
+      progressMap[row.id] = {
+        solved: !!row.solved,
+        solvedAt: row.solvedAt || null,
+        attempts: Number(row.attempts || 0),
+        attemptsByDay: row.attemptsByDay || {},
+        solutionUnlockedAt: row.solutionUnlockedAt || null,
+        solutionUnlockPenaltyApplied: !!row.solutionUnlockPenaltyApplied,
+      };
+    });
+
+    unlockBtn.addEventListener('click', async () => {
+      const row = progressMap[slug] || { solved: false, attempts: 0, attemptsByDay: {} };
+      if (row.solutionUnlockedAt) return;
+      row.solutionUnlockedAt = Date.now();
+      row.solutionUnlockPenaltyApplied = true;
+      progressMap[slug] = row;
+      await (window as any).DCStore.set(PROGRESS_TOOL, slug, row);
+      const statsNext = buildDailyStats(allDaily, progressMap, new Date());
+      renderDetail(progressMap, statsNext);
+      if ((window as any).DCTrack) {
+        (window as any).DCTrack('daily_solution_unlock', { problem_slug: slug, penalty: 0.5 });
+      }
+    });
+
+    const stats = buildDailyStats(allDaily, progressMap, new Date());
+    renderDetail(progressMap, stats);
+    if ((window as any).DCTrack) {
+      (window as any).DCTrack('view_daily_problem', { problem_slug: slug, published_at: publishDay });
+    }
+  }
+
+  init();
+</script>

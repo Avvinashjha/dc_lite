@@ -1,0 +1,45 @@
+{
+  "id": "daily-2026-03-25-tree-level-order",
+  "title": "Binary Tree Level Order Trace",
+  "publishedAt": "2026-03-25",
+  "difficulty": "Medium",
+  "topic": "Binary Tree",
+  "topics": ["Binary Tree", "BFS"],
+  "platform": "DailyCoder",
+  "externalUrl": "",
+  "sampleInput": "root = [3, 9, 20, null, null, 15, 7]",
+  "sampleOutput": "[[3], [9, 20], [15, 7]]",
+  "inputFormat": "Root of a binary tree.",
+  "outputFormat": "Array of arrays where each array stores one level from left to right.",
+  "examples": [
+    {
+      "input": "root = [3, 9, 20, null, null, 15, 7]",
+      "output": "[[3], [9, 20], [15, 7]]"
+    }
+  ],
+  "constraints": [
+    "The number of nodes is in range [0, 2000].",
+    "-1000 <= Node.val <= 1000"
+  ],
+  "visuals": [
+    {
+      "title": "Level-by-level view",
+      "caption": "Each queue cycle consumes one level.",
+      "imageUrl": "/daily-assets/tree-level-order.svg"
+    }
+  ],
+  "solutionVisuals": [
+    {
+      "title": "BFS queue progression",
+      "caption": "Queue size determines current level width.",
+      "imageUrl": "/daily-assets/tree-level-order.svg"
+    }
+  ],
+  "testCases": [
+    { "input": "[3,9,20,null,null,15,7]", "output": "[[3],[9,20],[15,7]]" },
+    { "input": "[1]", "output": "[[1]]" }
+  ],
+  "problemSet": "daily",
+  "dailyTrack": "dsa",
+  "templateCode": "/**\n * TreeNode { val, left, right }\n * @param {TreeNode|null} root\n * @returns {number[][]}\n */\nfunction solve(root) {\n  return [];\n}"
+}

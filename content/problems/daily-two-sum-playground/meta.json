@@ -1,0 +1,53 @@
+{
+  "id": "daily-2026-03-26-two-sum-playground",
+  "title": "Two Sum Playground",
+  "publishedAt": "2026-03-26",
+  "difficulty": "Easy",
+  "topic": "Arrays",
+  "topics": ["Arrays", "Hash Map"],
+  "platform": "DailyCoder",
+  "externalUrl": "",
+  "sampleInput": "nums = [2, 7, 11, 15], target = 9",
+  "sampleOutput": "[0, 1]",
+  "inputFormat": "A list of integers and a target integer.",
+  "outputFormat": "Two indices i and j such that nums[i] + nums[j] = target.",
+  "examples": [
+    {
+      "input": "nums = [2, 7, 11, 15], target = 9",
+      "output": "[0, 1]",
+      "explanation": "nums[0] + nums[1] = 9"
+    },
+    {
+      "input": "nums = [3, 2, 4], target = 6",
+      "output": "[1, 2]"
+    }
+  ],
+  "constraints": [
+    "2 <= nums.length <= 10^5",
+    "-10^9 <= nums[i], target <= 10^9",
+    "Exactly one valid answer exists."
+  ],
+  "visuals": [
+    {
+      "title": "Hash Map Idea",
+      "caption": "Store seen values and look up complement in O(1).",
+      "imageUrl": "/daily-assets/two-sum-map.svg"
+    }
+  ],
+  "solutionVisuals": [
+    {
+      "title": "Complement Lookup Flow",
+      "caption": "Each number checks if target - num exists in map.",
+      "imageUrl": "/daily-assets/two-sum-map.svg"
+    }
+  ],
+  "testCases": [
+    { "args": [[2, 7, 11, 15], 9], "expected": [0, 1] },
+    { "args": [[3, 2, 4], 6], "expected": [1, 2] },
+    { "args": [[3, 3], 6], "expected": [0, 1] }
+  ],
+  "problemSet": "daily",
+  "dailyTrack": "dsa",
+  "functionName": "twoSum",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @returns {number[]}\n */\nfunction twoSum(nums, target) {\n  // return [i, j]\n  return [];\n}"
+}

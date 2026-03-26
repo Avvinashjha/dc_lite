@@ -9,6 +9,7 @@
   "navigation": [
     { "label": "Blog", "path": "/blog" },
     { "label": "Problems", "path": "/problems" },
+    { "label": "Daily", "path": "/daily/problem" },
     { "label": "Tools", "path": "/tools" },
     { "label": "About", "path": "/about" }
   ],

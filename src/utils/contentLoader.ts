@@ -28,6 +28,28 @@ function getDirs(dirPath: string): string[] {
     .map(d => d.name);
 }
 
+function toDayKey(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+function normalizeDayKey(value?: string): string | null {
+  if (!value) return null;
+  const key = value.trim().slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(key) ? key : null;
+}
+
+function normalizeProblemMeta(meta: ProblemMeta): ProblemMeta {
+  return {
+    ...meta,
+    topics: Array.isArray(meta.topics) && meta.topics.length ? meta.topics : [meta.topic].filter(Boolean),
+    examples: Array.isArray(meta.examples) ? meta.examples : [],
+    constraints: Array.isArray(meta.constraints) ? meta.constraints : (meta.constraints ? [meta.constraints] : []),
+    visuals: Array.isArray(meta.visuals) ? meta.visuals : [],
+    solutionVisuals: Array.isArray(meta.solutionVisuals) ? meta.solutionVisuals : [],
+    dailyTrack: meta.dailyTrack || (meta.problemSet === 'daily' ? 'dsa' : undefined),
+  };
+}
+
 // ──── Site Config ────
 
 export function getSiteConfig(): SiteConfig {
@@ -208,7 +230,7 @@ export function getProblems(): ProblemListItem[] {
   return slugs.map(slug => {
     const metaPath = path.join(problemsDir, slug, 'meta.json');
     if (!fs.existsSync(metaPath)) return null;
-    const meta = readJson<ProblemMeta>(metaPath);
+    const meta = normalizeProblemMeta(readJson<ProblemMeta>(metaPath));
     if (meta.draft) return null;
     return { ...meta, slug } as ProblemListItem;
   }).filter(Boolean) as ProblemListItem[];
@@ -219,7 +241,7 @@ export function getProblem(slug: string): ProblemItem | null {
   const metaPath = path.join(problemsDir, slug, 'meta.json');
   if (!fs.existsSync(metaPath)) return null;
 
-  const meta = readJson<ProblemMeta>(metaPath);
+  const meta = normalizeProblemMeta(readJson<ProblemMeta>(metaPath));
   const descPath = path.join(problemsDir, slug, 'description.md');
   const solPath = path.join(problemsDir, slug, 'solution.md');
 
@@ -260,4 +282,34 @@ export function getProblemsByDifficulty(difficulty: string): ProblemListItem[] {
 
 export function getProblemsBySet(setId: string): ProblemListItem[] {
   return getProblems().filter(p => p.problemSet === setId);
+}
+
+export function getDailyProblems(today = new Date()): ProblemListItem[] {
+  const todayKey = toDayKey(today);
+  return getProblems()
+    .filter((problem) => {
+      if (problem.problemSet !== 'daily') return false;
+      const publishDay = normalizeDayKey(problem.publishedAt);
+      if (!publishDay) return false;
+      return publishDay <= todayKey;
+    })
+    .sort((a, b) => {
+      const aKey = normalizeDayKey(a.publishedAt) || '';
+      const bKey = normalizeDayKey(b.publishedAt) || '';
+      return bKey.localeCompare(aKey) || a.title.localeCompare(b.title);
+    });
+}
+
+export function getPastDailyProblems(today = new Date()): ProblemListItem[] {
+  const todayKey = toDayKey(today);
+  return getDailyProblems(today)
+    .filter((problem) => (normalizeDayKey(problem.publishedAt) || '') < todayKey);
+}
+
+export function getTodaysProblem(today = new Date()): ProblemListItem | null {
+  const todayKey = toDayKey(today);
+  const items = getDailyProblems(today).filter(
+    (problem) => normalizeDayKey(problem.publishedAt) === todayKey
+  );
+  return items.length ? items[0] : null;
 }

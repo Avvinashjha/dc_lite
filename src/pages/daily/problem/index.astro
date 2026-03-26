@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/daily-problems.scss';
+import { getDailyProblems, getTodaysProblem, getPastDailyProblems } from '../../../utils/contentLoader';
+
+const dailyProblems = getDailyProblems();
+const todaysProblem = getTodaysProblem();
+const pastProblems = getPastDailyProblems();
+const latestPast = pastProblems.slice(0, 40);
+
+const liteDaily = dailyProblems.map((problem) => ({
+  slug: problem.slug,
+  title: problem.title,
+  topic: problem.topic,
+  difficulty: problem.difficulty,
+  publishedAt: problem.publishedAt || '',
+}));
+
+function dailyDifficultyClass(difficulty: string): string {
+  const d = difficulty.toLowerCase();
+  return d === 'easy' || d === 'medium' || d === 'hard' ? d : 'topic';
+}
+
+const pageTitle = 'Daily Challenge';
+const pageDescription = 'Daily coding practice with streaks, backfill credit, and progress tracking.';
+
+const listJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: pageTitle,
+  description: pageDescription,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: dailyProblems.length,
+    itemListElement: dailyProblems.slice(0, 30).map((problem, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: problem.title,
+      url: `/daily/problem/${problem.slug}`,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${pageTitle} | DailyCoder`}
+  description={pageDescription}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Daily Challenge', href: '/daily/problem' },
+  ]}
+>
+  <Fragment slot="head">
+    <link rel="alternate" type="application/rss+xml" title="Daily Challenge RSS" href="/daily/problem/rss.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(listJsonLd)} />
+  </Fragment>
+
+  <section class="container daily-page">
+    <header class="daily-shell">
+      <p class="daily-shell__eyebrow">Daily Challenge Arena</p>
+      <h1>{pageTitle}</h1>
+      <p>{pageDescription}</p>
+      <p class="daily-shell__hint">
+        Full credit on the publish day. Past days: +0.5 consistency (no streak). Unlocking solution: −0.5 once.
+      </p>
+    </header>
+
+    <nav class="daily-tabs" aria-label="Daily challenge tabs">
+      <button class="daily-tabs__btn daily-tabs__btn--active" data-tab-btn="today" type="button">Problem of the Day</button>
+      <button class="daily-tabs__btn" data-tab-btn="past" type="button">Past Problems</button>
+      <button class="daily-tabs__btn" data-tab-btn="stats" type="button">Stats</button>
+    </nav>
+
+    <section class="daily-pane daily-pane--active" data-tab-pane="today">
+      <article class="daily-card daily-card--hero">
+        {todaysProblem ? (
+          <div class="daily-card__problem">
+            <div class="daily-card__content">
+              <p class="daily-card__label">Today · {todaysProblem.publishedAt}</p>
+              <h2>{todaysProblem.title}</h2>
+              <div class="daily-hero-meta">
+                <span class="daily-pill daily-pill--topic">{todaysProblem.topic}</span>
+                <span class={`daily-pill daily-pill--${dailyDifficultyClass(todaysProblem.difficulty)}`}>{todaysProblem.difficulty}</span>
+              </div>
+            </div>
+            <div class="daily-card__actions">
+              <a class="daily-btn daily-btn--primary" href={`/daily/problem/${todaysProblem.slug}`}>Read problem</a>
+              <a class="daily-btn daily-btn--secondary" href={`/problems/${todaysProblem.slug}`}>Open editor</a>
+            </div>
+          </div>
+        ) : (
+          <>
+            <p class="daily-card__label">Today</p>
+            <h2>No problem for this date</h2>
+            <p class="daily-shell__hint" style="margin:0.35rem 0 0;border:none;padding:0;">Pick something from the archive to stay in rhythm.</p>
+            <div class="daily-card__actions">
+              <button class="daily-btn daily-btn--primary" data-switch-tab="past" type="button">Past problems</button>
+            </div>
+          </>
+        )}
+      </article>
+    </section>
+
+    <section class="daily-pane" data-tab-pane="past">
+      <div class="daily-pane__header">
+        <h2>Past</h2>
+        <p class="daily-pane__count">{latestPast.length} published</p>
+      </div>
+      <ul class="daily-list">
+        {latestPast.map((problem) => (
+          <li>
+            <div class="daily-list__main">
+              <p class="daily-list__date">{problem.publishedAt}</p>
+              <a class="daily-list__title" href={`/daily/problem/${problem.slug}`}>{problem.title}</a>
+              <p class="daily-list__meta">{problem.topic} · {problem.difficulty}</p>
+            </div>
+            <div class="daily-list__actions">
+              <span class="daily-status daily-status--pending" data-solved-chip={problem.slug}>To do</span>
+              <a class="daily-link" href={`/daily/problem/${problem.slug}`}>View</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="daily-pane" data-tab-pane="stats">
+      <div class="daily-stats-grid">
+        <article class="daily-metric">
+          <p class="daily-metric__label">Streak</p>
+          <p class="daily-metric__value" id="stat-current-streak">0</p>
+        </article>
+        <article class="daily-metric">
+          <p class="daily-metric__label">Best streak</p>
+          <p class="daily-metric__value" id="stat-longest-streak">0</p>
+        </article>
+        <article class="daily-metric">
+          <p class="daily-metric__label">Consistency</p>
+          <p class="daily-metric__value" id="stat-consistency">0.0</p>
+        </article>
+        <article class="daily-metric">
+          <p class="daily-metric__label">Solved</p>
+          <p class="daily-metric__value" id="stat-solve-rate">0%</p>
+        </article>
+      </div>
+      <p class="daily-stats-note">Consistency blends on-time solves, backfills (+0.5), and solution unlocks (−0.5). Sign in to sync.</p>
+    </section>
+
+    <footer class="daily-rss">
+      <div>
+        <p class="daily-rss__text">RSS feed</p>
+        <span class="daily-rss__sub">New items when a daily publishes</span>
+      </div>
+      <a class="daily-btn daily-btn--secondary" href="/daily/problem/rss.xml" target="_blank" rel="noopener">Subscribe</a>
+    </footer>
+  </section>
+</BaseLayout>
+
+<script id="daily-problems-data" type="application/json" set:html={JSON.stringify(liteDaily)} />
+<script src="/js/store.js" is:inline></script>
+<script>
+  import { buildDailyStats } from '../../../utils/dailyStats';
+
+  const PROGRESS_TOOL = 'problem-progress';
+  const dailyData = JSON.parse(document.getElementById('daily-problems-data')?.textContent || '[]');
+  const bySlug = Object.fromEntries(dailyData.map((item: any) => [item.slug, item]));
+
+  function toDayKey(date: Date): string {
+    return date.toISOString().slice(0, 10);
+  }
+
+  function setStatusChip(el: HTMLElement, text: string, variant: 'pending' | 'solved' | 'backfill' | 'warn') {
+    el.textContent = text;
+    el.className = 'daily-status daily-status--' + variant;
+    el.setAttribute('title', text);
+  }
+
+  function renderSolvedState(progressMap: Record<string, any>) {
+    dailyData.forEach((item: any) => {
+      const row = progressMap[item.slug] || {};
+      const chip = document.querySelector(`[data-solved-chip="${item.slug}"]`) as HTMLElement | null;
+      if (!chip) return;
+      if (!row.solved) {
+        setStatusChip(chip, 'To do', 'pending');
+        return;
+      }
+      const publishDay = String(item.publishedAt || '').slice(0, 10);
+      const solvedDay = row.solvedAt ? toDayKey(new Date(row.solvedAt)) : '';
+      const usedSolution = !!row.solutionUnlockPenaltyApplied;
+      if (publishDay && solvedDay && solvedDay > publishDay) {
+        setStatusChip(chip, usedSolution ? 'Backfill · hint used' : 'Backfill +0.5', usedSolution ? 'warn' : 'backfill');
+      } else {
+        setStatusChip(chip, usedSolution ? 'Done · −0.5 hint' : 'Done', usedSolution ? 'warn' : 'solved');
+      }
+    });
+  }
+
+  function renderStats(stats: any) {
+    (document.getElementById('stat-current-streak') as HTMLElement).textContent = String(stats.currentStreak || 0);
+    (document.getElementById('stat-longest-streak') as HTMLElement).textContent = String(stats.longestStreak || 0);
+    (document.getElementById('stat-consistency') as HTMLElement).textContent = String(stats.consistencyPoints || 0);
+    (document.getElementById('stat-solve-rate') as HTMLElement).textContent = `${stats.solveRate || 0}%`;
+  }
+
+  function initTabs() {
+    const btns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-tab-btn]'));
+    const panes = Array.from(document.querySelectorAll<HTMLElement>('[data-tab-pane]'));
+    const switchTo = (name: string) => {
+      btns.forEach((btn) => btn.classList.toggle('daily-tabs__btn--active', btn.dataset.tabBtn === name));
+      panes.forEach((pane) => pane.classList.toggle('daily-pane--active', pane.dataset.tabPane === name));
+    };
+    btns.forEach((btn) => btn.addEventListener('click', () => switchTo(btn.dataset.tabBtn || 'today')));
+    document.querySelectorAll<HTMLElement>('[data-switch-tab]').forEach((el) => {
+      el.addEventListener('click', () => switchTo(el.dataset.switchTab || 'today'));
+    });
+  }
+
+  async function init() {
+    initTabs();
+    await (window as any).DCStore.init();
+    const rows = await (window as any).DCStore.getAll(PROGRESS_TOOL);
+    const progressMap: Record<string, any> = {};
+    rows.forEach((row: any) => {
+      if (!bySlug[row.id]) return;
+      progressMap[row.id] = {
+        solved: !!row.solved,
+        solvedAt: row.solvedAt || null,
+        attempts: Number(row.attempts || 0),
+        attemptsByDay: row.attemptsByDay || {},
+        solutionUnlockedAt: row.solutionUnlockedAt || null,
+        solutionUnlockPenaltyApplied: !!row.solutionUnlockPenaltyApplied,
+      };
+    });
+    const stats = buildDailyStats(dailyData, progressMap, new Date());
+    renderSolvedState(progressMap);
+    renderStats(stats);
+    if ((window as any).DCTrack) {
+      (window as any).DCTrack('view_daily_problem_archive', {
+        daily_count: dailyData.length,
+        current_streak: stats.currentStreak,
+        consistency_points: stats.consistencyPoints,
+      });
+    }
+  }
+
+  init();
+</script>
