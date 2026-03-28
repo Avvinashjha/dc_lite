@@ -5,7 +5,7 @@ import ProblemEditor from '../../components/ProblemEditor.astro';
 import ProblemSolution from '../../components/ProblemSolution.astro';
 import ProblemDiscussion from '../../components/ProblemDiscussion.astro';
 import Comments from '../../components/Comments.astro';
-import { getProblems, getProblem } from '../../utils/contentLoader';
+import { getProblems, getProblem, problemSlugHasPotdSchedule, getLatestPotdScheduleDateForSlug } from '../../utils/contentLoader';
 
 export function getStaticPaths() {
   return getProblems().map(p => ({ params: { slug: p.slug } }));
@@ -39,7 +39,8 @@ const breadcrumbs = [
 ];
 
 const pageDescription = `${problem.title} - ${problem.difficulty} ${problem.topic} coding problem. Practice with in-browser JavaScript runner.`;
-const isDailyProblem = problem.problemSet === 'daily' && !!problem.publishedAt;
+const isPotdCatalog = problemSlugHasPotdSchedule(slug);
+const potdScheduleDate = getLatestPotdScheduleDateForSlug(slug) || '';
 
 const problemJsonLd = {
   '@context': 'https://schema.org',
@@ -72,6 +73,8 @@ const problemJsonLd = {
     data-sample-input={problem.sampleInput || ''}
     data-problem-set={problem.problemSet || ''}
     data-published-at={problem.publishedAt || ''}
+    data-is-potd-scheduled={isPotdCatalog ? 'true' : 'false'}
+    data-potd-schedule-date={potdScheduleDate}
   >
     <!-- Breadcrumbs -->
     <nav class="problem-breadcrumbs" aria-label="Breadcrumb">
@@ -90,6 +93,9 @@ const problemJsonLd = {
       <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
       <span id="local-progress-state" class="p-badge p-badge--neutral">0 attempts</span>
       <div class="problem-toolbar__actions">
+        {isPotdCatalog && (
+          <a href="/#daily-challenge" class="p-btn" title="Daily challenge on home">Daily</a>
+        )}
         <button type="button" id="problem-favorite-btn" class="p-btn p-btn--icon p-btn--fav" title="Toggle favorite" aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
         <button type="button" id="toggle-problem-solved" class="p-btn">Mark Solved</button>
         {problem.externalUrl && (
@@ -174,9 +180,8 @@ const problemJsonLd = {
   // ── Runner config ──
   const rootEl = document.getElementById('problem-page-root')!;
   const slug = rootEl.dataset.problemSlug || '';
-  const problemSet = rootEl.dataset.problemSet || '';
-  const publishedAt = rootEl.dataset.publishedAt || '';
-  const isDaily = problemSet === 'daily' && !!publishedAt;
+  const potdScheduleDate = rootEl.dataset.potdScheduleDate || '';
+  const isPotdScheduled = rootEl.dataset.isPotdScheduled === 'true';
   const configEl = document.getElementById('problem-runner-config');
   const runnerConfig = configEl?.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
   const sampleInput = runnerConfig.sampleInput || rootEl.dataset.sampleInput || '';
@@ -269,7 +274,7 @@ const problemJsonLd = {
       '<' + '/script></body></html>'
     ].join('');
     frameEl.srcdoc = srcdoc;
-    if (isDaily && (window as any).DCTrack) {
+    if (isPotdScheduled && (window as any).DCTrack) {
       (window as any).DCTrack('run_daily_code', { problem_slug: slug });
     }
   }
@@ -389,7 +394,7 @@ const problemJsonLd = {
       }
     }
     window.addEventListener('message', onTestMessage);
-    if (isDaily && (window as any).DCTrack) {
+    if (isPotdScheduled && (window as any).DCTrack) {
       (window as any).DCTrack('run_daily_tests', { problem_slug: slug });
     }
   }
@@ -405,7 +410,7 @@ const problemJsonLd = {
     const a = Number(progressRow.attempts || 0);
     localProgressEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' \u00B7 ' + a + (a === 1 ? ' attempt' : ' attempts');
     toggleSolvedBtn.textContent = progressRow.solved ? 'Mark Unsolved' : 'Mark Solved';
-    if (isDaily && solutionLockedBanner && solutionPaneContent) {
+    if (isPotdScheduled && solutionLockedBanner && solutionPaneContent) {
       const unlocked = !!progressRow.solutionUnlockedAt;
       solutionLockedBanner.style.display = unlocked ? 'none' : '';
       solutionPaneContent.style.display = unlocked ? '' : 'none';
@@ -457,10 +462,10 @@ const problemJsonLd = {
       if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
       if (!progressRow.solved) progressRow.solvedAt = null;
       saveProgress();
-      if (isDaily && progressRow.solved && (window as any).DCTrack) {
+      if (isPotdScheduled && progressRow.solved && (window as any).DCTrack) {
         (window as any).DCTrack('solve_daily_problem', {
           problem_slug: slug,
-          published_at: publishedAt,
+          published_at: potdScheduleDate,
         });
       }
     };
@@ -678,10 +683,10 @@ const problemJsonLd = {
   loadProgress();
   loadNote();
   loadDiscussion();
-  if (isDaily && (window as any).DCTrack) {
+  if (isPotdScheduled && (window as any).DCTrack) {
     (window as any).DCTrack('view_daily_problem_editor', {
       problem_slug: slug,
-      published_at: publishedAt,
+      published_at: potdScheduleDate,
     });
   }
 </script>

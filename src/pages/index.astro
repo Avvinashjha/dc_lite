@@ -1,48 +1,240 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PostCard from "../components/PostCard.astro";
-import Subscribe from "../components/Subscribe.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import Subscribe from '../components/Subscribe.astro';
 import {
   getBlogPostsSorted,
   getCourses,
-  getDocProjects,
-} from "../utils/contentLoader";
+  getTodaysProblem,
+  getPastDailyProblems,
+  getDailyScheduleFullLite,
+  getProblem,
+} from '../utils/contentLoader';
+import '../styles/problems.scss';
 
 const recentPosts = getBlogPostsSorted().slice(0, 3);
+const firstPost = recentPosts[0];
 const courses = getCourses();
-const docProjects = getDocProjects();
+
+
+const todaysProblem = getTodaysProblem();
+const recentPotd = getPastDailyProblems().slice(0, 5);
+const scheduleFullLite = getDailyScheduleFullLite();
+const potdFull = todaysProblem ? getProblem(todaysProblem.slug) : null;
+
+function textExcerpt(html: string, max = 200): string {
+  if (!html) return '';
+  const t = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  return t.length > max ? t.slice(0, max).trimEnd() + '…' : t;
+}
+
+const potdExcerpt = potdFull ? textExcerpt(potdFull.descriptionHtml) : '';
+
+function diffClass(d: string) {
+  const x = d.toLowerCase();
+  return x === 'easy' || x === 'medium' || x === 'hard' ? x : 'neutral';
+}
+
+const potdHref = todaysProblem ? `/problems/${todaysProblem.slug}` : '/problems';
+
+const pageKeywords = [
+  'daily coding challenge',
+  'leetcode problems',
+  'in-browser javascript editor',
+  'developer tools',
+  'coding tutorials',
+  ...(todaysProblem ? [todaysProblem.title, todaysProblem.topic] : []),
+].join(', ');
+
+const jsonLdPotd = todaysProblem
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'LearningResource',
+      name: `Daily Challenge: ${todaysProblem.title}`,
+      description: `Solve ${todaysProblem.title} — a ${todaysProblem.difficulty} ${todaysProblem.topic} problem — in the browser with an integrated editor.`,
+      educationalLevel: todaysProblem.difficulty,
+      learningResourceType: 'Coding Problem',
+      url: `https://dailycoder.in/problems/${todaysProblem.slug}`,
+      datePublished: todaysProblem.publishedAt || undefined,
+    }
+  : null;
 ---
 
 <BaseLayout
-  title="DailyCoder - Free Developer Tools, Tutorials, Courses & Games"
-  description="Free online developer tools, coding tutorials, interactive courses, and browser games. JSON formatter, chess, regex tester and more. No signup required."
+  title="DailyCoder — Daily Coding Problems, Dev Tools & Tutorials"
+  description="Solve today's coding challenge in-browser, read engineering deep-dives, take interactive courses, and use free developer tools. No signup needed."
+  tags={pageKeywords.split(', ')}
 >
-  <!-- Hero -->
-  <div class="hero">
-    <div class="container">
-      <h1 class="hero__title">Learn. Build. Ship.</h1>
-      <p class="hero__description">
-        In-depth blog posts, hands-on courses, free developer tools, and
-        comprehensive documentation for modern web development.
-      </p>
-      <div
-        style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"
-      >
-        <a href="/blog" class="button">Read the Blog</a>
-        <a href="/tools" class="button button--secondary">Explore Dev Tools</a>
+  <Fragment slot="head">
+    {jsonLdPotd && <script type="application/ld+json" set:html={JSON.stringify(jsonLdPotd)} />}
+    <link rel="alternate" type="application/rss+xml" title="Daily Challenge RSS" href="/daily/problem/rss.xml" />
+  </Fragment>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="hp-hero" aria-label="Site introduction">
+    <div class="container hp-hero__inner">
+      <div class="hp-hero__text">
+        <h1 class="hp-hero__title">
+          Learn. Build.<br /><span class="hp-hero__accent">Ship Daily.</span>
+        </h1>
+        <p class="hp-hero__sub">
+          A daily coding problem in your browser, engineering deep-dives, hands-on courses,
+          and 14+ free dev tools — all in one place.
+        </p>
+        <div class="hp-hero__ctas">
+          <a href={potdHref} class="button">
+            {todaysProblem ? "Solve today's problem" : 'Browse problems'}
+          </a>
+          <a href={firstPost ? `/blog/${firstPost.slug}` : '/blog'} class="button button--secondary">
+            Latest post
+          </a>
+        </div>
+        <div class="hp-hero__feature-pills">
+          <a href="/problems" class="hp-pill">300+ Problems</a>
+          <a href="/courses" class="hp-pill">Courses</a>
+          <a href="/tools" class="hp-pill">14 Free Tools</a>
+          <a href="/docs" class="hp-pill">Tech Guides</a>
+        </div>
+      </div>
+      <div class="hp-hero__card" aria-hidden="true">
+        <div class="hp-hero__card-header">
+          <span class="hp-hero__card-dot hp-hero__card-dot--red"></span>
+          <span class="hp-hero__card-dot hp-hero__card-dot--yellow"></span>
+          <span class="hp-hero__card-dot hp-hero__card-dot--green"></span>
+          <span class="hp-hero__card-filename">solution.js</span>
+        </div>
+        <pre class="hp-hero__code"><code><span class="hp-c-keyword">function</span> <span class="hp-c-fn">isValid</span>(s) {'{'}
+  <span class="hp-c-keyword">const</span> map = {'{'}
+    <span class="hp-c-str">&#39;)&#39;</span>: <span class="hp-c-str">&#39;(&#39;</span>,
+    <span class="hp-c-str">&#39;]&#39;</span>: <span class="hp-c-str">&#39;[&#39;</span>,
+    <span class="hp-c-str">&#39;&#125;&#39;</span>: <span class="hp-c-str">&#39;{'{'}&#39;</span>
+  {'}'};
+  <span class="hp-c-keyword">const</span> stack = [];
+  <span class="hp-c-keyword">for</span> (<span class="hp-c-keyword">const</span> c <span class="hp-c-keyword">of</span> s) {'{'}
+    <span class="hp-c-keyword">if</span> (map[c]) stack.pop() === map[c]
+      || <span class="hp-c-keyword">return false</span>;
+    <span class="hp-c-keyword">else</span> stack.push(c);
+  {'}'}
+  <span class="hp-c-keyword">return</span> !stack.length;
+{'}'}</code></pre>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Recent Blog Posts -->
-  <section class="container section">
-    <div class="section__header">
-      <h2>Recent Posts</h2>
-      <a href="/blog">View all &rarr;</a>
+  <!-- ── PROBLEM OF THE DAY ───────────────────────────── -->
+  <section id="daily-challenge" class="hp-section container" aria-labelledby="potd-heading">
+    <div class="hp-potd">
+      <div class="hp-potd__aside">
+        <p class="hp-eyebrow">Problem of the day</p>
+        {todaysProblem && (
+          <p class="hp-potd__date">{todaysProblem.publishedAt}</p>
+        )}
+        <div class="hp-potd__stats" aria-label="Your daily progress">
+          <div class="hp-stat"><span class="hp-stat__val" id="hp-streak">—</span><span class="hp-stat__lbl">Streak</span></div>
+          <div class="hp-stat"><span class="hp-stat__val" id="hp-solved">—</span><span class="hp-stat__lbl">Solved</span></div>
+          <div class="hp-stat"><span class="hp-stat__val" id="hp-best">—</span><span class="hp-stat__lbl">Best</span></div>
+        </div>
+        <p class="hp-potd__stats-note">Sign in to sync progress across devices.</p>
+        {recentPotd.length > 0 && (
+          <div class="hp-potd__recents">
+            <p class="hp-potd__recents-label">Recent picks</p>
+            <ul>
+              {recentPotd.map((p) => (
+                <li>
+                  <a href={`/problems/${p.slug}`}>{p.title}</a>
+                  <span>{p.publishedAt}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div class="hp-potd__main">
+        {todaysProblem ? (
+          <>
+            <div class="hp-potd__badges">
+              <span class="p-badge p-badge--neutral">{todaysProblem.topic}</span>
+              <span class={`p-badge p-badge--${diffClass(todaysProblem.difficulty)}`}>{todaysProblem.difficulty}</span>
+              {todaysProblem.platform && <span class="p-badge p-badge--neutral">{todaysProblem.platform}</span>}
+            </div>
+            <h2 id="potd-heading" class="hp-potd__title">{todaysProblem.title}</h2>
+            {potdExcerpt && <p class="hp-potd__excerpt">{potdExcerpt}</p>}
+            {(todaysProblem.sampleInput || todaysProblem.sampleOutput) && (
+              <div class="hp-potd__io">
+                {todaysProblem.sampleInput && (
+                  <div class="hp-potd__io-block">
+                    <div class="hp-potd__io-label">Input</div>
+                    <pre class="hp-potd__io-body">{todaysProblem.sampleInput}</pre>
+                  </div>
+                )}
+                {todaysProblem.sampleOutput && (
+                  <div class="hp-potd__io-block">
+                    <div class="hp-potd__io-label">Output</div>
+                    <pre class="hp-potd__io-body">{todaysProblem.sampleOutput}</pre>
+                  </div>
+                )}
+              </div>
+            )}
+            <div class="hp-potd__actions">
+              <a class="button" href={potdHref}>Solve in editor</a>
+              <a class="hp-text-link" href="/problems">All problems →</a>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 id="potd-heading" class="hp-potd__title">No problem scheduled today</h2>
+            <p class="hp-potd__excerpt">Browse the full catalog and practise at your own pace.</p>
+            <a class="button" href="/problems">Open problem list</a>
+          </>
+        )}
+      </div>
     </div>
-    <div class="grid grid--3">
-      {
-        recentPosts.map((post) => (
+  </section>
+
+  <!-- ── FEATURES STRIP ───────────────────────────────── -->
+  <section class="hp-features-wrap" aria-label="Platform features">
+    <div class="container hp-features">
+      <a href="/problems" class="hp-feat">
+        <span class="hp-feat__icon">⚡</span>
+        <div>
+          <h3>Problems</h3>
+          <p>300+ curated problems with an in-browser JS runner, test cases, and progress sync.</p>
+        </div>
+      </a>
+      <a href="/blog" class="hp-feat">
+        <span class="hp-feat__icon">✍️</span>
+        <div>
+          <h3>Blog</h3>
+          <p>Engineering deep-dives, architecture patterns, and practical career tips.</p>
+        </div>
+      </a>
+      <a href="/courses" class="hp-feat">
+        <span class="hp-feat__icon">🎓</span>
+        <div>
+          <h3>Courses</h3>
+          <p>Hands-on interactive courses with lesson tracking and progress saved locally.</p>
+        </div>
+      </a>
+      <a href="/tools" class="hp-feat">
+        <span class="hp-feat__icon">🔧</span>
+        <div>
+          <h3>Tools</h3>
+          <p>14 free, private, client-side developer tools. JSON, diff, regex, JWT and more.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── BLOG POSTS ────────────────────────────────────── -->
+  {recentPosts.length > 0 && (
+    <section class="hp-section container" aria-labelledby="blog-heading">
+      <div class="hp-section__hd">
+        <h2 id="blog-heading">From the blog</h2>
+        <a href="/blog" class="hp-text-link">View all →</a>
+      </div>
+      <div class="grid grid--3">
+        {recentPosts.map((post) => (
           <PostCard
             title={post.title}
             description={post.description}
@@ -53,221 +245,674 @@ const docProjects = getDocProjects();
             image={post.image}
             content={post.content}
           />
-        ))
-      }
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ── COURSES ───────────────────────────────────────── -->
+  {courses.length > 0 && (
+    <section class="hp-section container" aria-labelledby="courses-heading">
+      <div class="hp-section__hd">
+        <h2 id="courses-heading">Courses</h2>
+        <a href="/courses" class="hp-text-link">View all →</a>
+      </div>
+      <div class="hp-course-list">
+        {courses.slice(0, 4).map((course) => (
+          <a href={`/courses/${course.slug}`} class="hp-course-row">
+            <div class="hp-course-row__body">
+              <span class="hp-course-row__title">{course.title}</span>
+              <span class="hp-course-row__meta">{course.level} · {course.totalLessons} lessons · {course.duration}</span>
+            </div>
+            <span class="hp-course-row__arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ── TOOLS ─────────────────────────────────────────── -->
+  <section class="hp-section container" aria-labelledby="tools-heading">
+    <div class="hp-section__hd">
+      <h2 id="tools-heading">Developer tools</h2>
+      <a href="/tools" class="hp-text-link">All 14 tools →</a>
+    </div>
+    <p class="hp-tools-sub">Private & free — no data leaves your browser.</p>
+    <div class="hp-tools">
+      <a href="/tools/code-formatter" class="hp-tool"><span>&lt;/&gt;</span>Code Formatter</a>
+      <a href="/tools/json-formatter" class="hp-tool"><span>&#123;&#125;</span>JSON Formatter</a>
+      <a href="/tools/diff-checker" class="hp-tool"><span>±</span>Diff Checker</a>
+      <a href="/tools/regex-tester" class="hp-tool"><span>.*</span>Regex Tester</a>
+      <a href="/tools/color-picker" class="hp-tool"><span>◑</span>Color Picker</a>
+      <a href="/tools/jwt-decoder" class="hp-tool"><span>🔑</span>JWT Decoder</a>
+      <a href="/tools/qr-generator" class="hp-tool"><span>▣</span>QR Generator</a>
+      <a href="/tools/markdown-preview" class="hp-tool"><span>MD</span>Markdown Preview</a>
     </div>
   </section>
 
-  <!-- Courses -->
-  {
-    courses.length > 0 && (
-      <section class="container section">
-        <div class="section__header">
-          <h2>Courses</h2>
-          <a href="/courses">View all &rarr;</a>
-        </div>
-        <div class="grid grid--2">
-          {courses.map((course) => (
-            <a
-              href={`/courses/${course.slug}`}
-              class={`post-card ${courses.length === 1 ? "post-card--wide" : ""}`}
-            >
-              <div class="post-card__meta">
-                <span>{course.level}</span>
-                <span>&bull;</span>
-                <span>{course.duration}</span>
-                <span>&bull;</span>
-                <span>{course.totalLessons} lessons</span>
-              </div>
-              <h3 class="post-card__title">{course.title}</h3>
-              <p class="post-card__description">{course.description}</p>
-              <div class="post-card__tags">
-                {course.tags.slice(0, 3).map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  <!-- Docs -->
-  {
-    docProjects.length > 0 && (
-      <section class="container section">
-        <div class="section__header">
-          <h2>Documentation</h2>
-          <a href="/docs">View all &rarr;</a>
-        </div>
-        <div class="grid grid--2">
-          {docProjects.map((project) => (
-            <a
-              href={`/docs/${project.slug}/${project.sidebar[0]?.slug || ""}`}
-              class="post-card"
-            >
-              <h3 class="post-card__title">{project.title}</h3>
-              <p class="post-card__description">{project.description}</p>
-              <div class="post-card__meta">
-                <span>v{project.version}</span>
-                <span>&bull;</span>
-                <span>{project.sidebar.length} pages</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    )
-  }
-
-  <!-- Popular Tools -->
-  <section class="container section">
-    <div class="section__header">
-      <h2>Developer Tools</h2>
-      <a href="/tools">View all 14 tools &rarr;</a>
-    </div>
-    <p
-      style="color: var(--color-text-light); margin-top: -1.5rem; margin-bottom: 1.5rem;"
-    >
-      Free, private, client-side tools. No data leaves your browser.
-    </p>
-    <div class="tools-showcase">
-      <a href="/tools/code-formatter" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">&lt;/&gt;</span>
-        <h3>Code Formatter</h3>
-        <p>Format & preview code</p>
-      </a>
-      <a href="/tools/json-formatter" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">&#123; &#125;</span>
-        <h3>JSON Formatter</h3>
-        <p>Format, validate, minify</p>
-      </a>
-      <a href="/tools/diff-checker" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">±</span>
-        <h3>Diff Checker</h3>
-        <p>Side-by-side comparison</p>
-      </a>
-      <a href="/tools/regex-tester" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">.*</span>
-        <h3>Regex Tester</h3>
-        <p>Live match highlighting</p>
-      </a>
-      <a href="/tools/color-picker" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">🖌</span>
-        <h3>Color Picker</h3>
-        <p>Palettes & CSS export</p>
-      </a>
-      <a href="/tools/jwt-decoder" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">🔑</span>
-        <h3>JWT Decoder</h3>
-        <p>Decode & inspect tokens</p>
-      </a>
-      <a href="/tools/qr-generator" class="tool-showcase-card">
-        <span class="tool-showcase-card__icon">▣</span>
-        <h3>QR Generator</h3>
-        <p>URLs, WiFi, email, phone</p>
-      </a>
-    </div>
-  </section>
-
-  <!-- Subscribe -->
-  <section style="background: var(--color-surface); padding: 4rem 0;">
+  <!-- ── SUBSCRIBE ─────────────────────────────────────── -->
+  <section class="hp-subscribe">
     <div class="container">
       <Subscribe />
     </div>
   </section>
 </BaseLayout>
 
+<script id="home-daily-schedule" type="application/json" set:html={JSON.stringify(scheduleFullLite)} />
+<script src="/js/store.js" is:inline></script>
+<script>
+  import { buildDailyStats } from '../utils/dailyStats';
+
+  const PROGRESS_TOOL = 'problem-progress';
+  const schedule: any[] = JSON.parse(document.getElementById('home-daily-schedule')?.textContent || '[]');
+
+  function toDayKey(d: Date) { return d.toISOString().slice(0, 10); }
+
+  async function init() {
+    const now = new Date();
+    const todayKey = toDayKey(now);
+    const dailyData = schedule.filter((r) => (r.publishedAt || '').slice(0, 10) <= todayKey);
+    const bySlug = Object.fromEntries(dailyData.map((r: any) => [r.slug, r]));
+
+    await (window as any).DCStore.init();
+    const rows = await (window as any).DCStore.getAll(PROGRESS_TOOL);
+    const progressMap: Record<string, any> = {};
+    rows.forEach((row: any) => {
+      if (!bySlug[row.id]) return;
+      progressMap[row.id] = {
+        solved: !!row.solved,
+        solvedAt: row.solvedAt || null,
+        attempts: Number(row.attempts || 0),
+        attemptsByDay: row.attemptsByDay || {},
+        solutionUnlockedAt: row.solutionUnlockedAt || null,
+        solutionUnlockPenaltyApplied: !!row.solutionUnlockPenaltyApplied,
+      };
+    });
+
+    const stats = buildDailyStats(dailyData, progressMap, now);
+
+    const set = (id: string, val: string) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
+    set('hp-streak', String(stats.currentStreak));
+    set('hp-solved', String(stats.totalSolved));
+    set('hp-best', String(stats.longestStreak));
+  }
+
+  init();
+</script>
+
 <style>
-  .section {
-    padding: 4rem 0;
-  }
-  .section--surface {
-    background: var(--color-surface);
-  }
-  .section__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-  .section__header h2 {
-    font-size: 2rem;
-    margin-bottom: 0;
-  }
-  .section__header a {
-    color: var(--color-primary);
-    font-weight: 600;
-  }
+/* ── Hero ─────────────────────────────────────────────── */
+.hp-hero {
+  padding: 4rem 0 2.5rem;
+  background: radial-gradient(ellipse 80% 55% at 50% -10%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent);
+}
 
-  .tools-showcase {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-  }
-  .tool-showcase-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.25rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    text-decoration: none;
-    color: inherit;
-    transition: all 200ms;
-  }
-  .tool-showcase-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-primary);
-    text-decoration: none;
-    color: inherit;
-  }
-  .tool-showcase-card * {
-    text-decoration: none;
-  }
-  .tool-showcase-card__icon {
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: var(--font-mono);
-    background: var(--color-code-bg);
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-md);
-    margin-bottom: 0.75rem;
-  }
-  .tool-showcase-card h3 {
-    font-size: 0.9rem;
-    margin-bottom: 0.2rem;
-    color: var(--color-text);
-  }
-  .tool-showcase-card p {
-    font-size: 0.78rem;
-    color: var(--color-text-light);
-    margin: 0;
-  }
-  .post-card--wide {
-    grid-column: 1 / -1;
-  }
+.hp-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 460px);
+  gap: 2.5rem 3rem;
+  align-items: center;
+}
 
-  @media (max-width: 768px) {
-    .tools-showcase {
-      grid-template-columns: repeat(2, 1fr);
-    }
+@media (max-width: 900px) {
+  .hp-hero__inner {
+    grid-template-columns: 1fr;
   }
-  @media (max-width: 480px) {
-    .tools-showcase {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.5rem;
-    }
-    .tool-showcase-card {
-      padding: 1rem 0.75rem;
-    }
+  .hp-hero__card {
+    display: none;
   }
+}
+
+.hp-hero__title {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+}
+
+.hp-hero__accent {
+  color: var(--color-primary);
+}
+
+.hp-hero__sub {
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  line-height: 1.65;
+  max-width: 38rem;
+  margin: 0 0 1.5rem;
+}
+
+.hp-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.35rem;
+}
+
+.hp-hero__feature-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.hp-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.hp-pill:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* Code card */
+.hp-hero__card {
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: #0f172a;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.5);
+}
+
+.hp-hero__card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.85rem;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+}
+
+.hp-hero__card-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.hp-hero__card-dot--red    { background: #ef4444; }
+.hp-hero__card-dot--yellow { background: #f59e0b; }
+.hp-hero__card-dot--green  { background: #22c55e; }
+
+.hp-hero__card-filename {
+  margin-left: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.hp-hero__code {
+  margin: 0;
+  padding: 1.1rem 1.25rem;
+  background: #0f172a;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  white-space: pre;
+  overflow-x: auto;
+  color: #e2e8f0;
+  border-radius: 0;
+}
+
+/* syntax colours */
+.hp-c-keyword { color: #c084fc; }
+.hp-c-fn      { color: #93c5fd; }
+.hp-c-str     { color: #86efac; }
+
+/* ── Sections ─────────────────────────────────────────── */
+.hp-section {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+}
+
+.hp-section__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  gap: 0.75rem;
+}
+
+.hp-section__hd h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hp-text-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── POTD ─────────────────────────────────────────────── */
+.hp-potd {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .hp-potd {
+    grid-template-columns: 1fr;
+  }
+  .hp-potd__aside {
+    border-right: none !important;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+.hp-potd__aside {
+  border-right: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hp-eyebrow {
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+}
+
+.hp-potd__date {
+  margin: -0.25rem 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-potd__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.hp-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4rem 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  gap: 0.1rem;
+}
+
+.hp-stat__val {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-stat__lbl {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.hp-potd__stats-note {
+  margin: 0;
+  font-size: 0.68rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+}
+
+.hp-potd__recents {
+  margin-top: 0.25rem;
+}
+
+.hp-potd__recents-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-light);
+}
+
+.hp-potd__recents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.hp-potd__recents li {
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+  padding: 0.3rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.hp-potd__recents li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.hp-potd__recents a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hp-potd__recents span {
+  font-size: 0.65rem;
+  color: var(--color-text-light);
+}
+
+.hp-potd__main {
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .hp-potd__main {
+    padding: 1.25rem;
+  }
+}
+
+.hp-potd__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.hp-potd__title {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.hp-potd__excerpt {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+.hp-potd__io {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+@media (max-width: 560px) {
+  .hp-potd__io {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hp-potd__io-block {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hp-potd__io-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.28rem 0.6rem;
+  background: var(--color-code-bg);
+  color: var(--color-text-light);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hp-potd__io-body {
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  background: var(--color-background);
+  color: var(--color-text);
+  border-radius: 0;
+}
+
+.hp-potd__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* ── Features strip ──────────────────────────────────── */
+.hp-features-wrap {
+  margin-top: 2.5rem;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 2rem 0;
+}
+
+.hp-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+@media (max-width: 900px) {
+  .hp-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hp-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hp-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-right: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.hp-feat:last-child {
+  border-right: none;
+}
+
+@media (max-width: 900px) {
+  .hp-feat:nth-child(2) { border-right: none; }
+  .hp-feat:nth-child(3) { border-right: 1px solid var(--color-border); border-top: 1px solid var(--color-border); }
+  .hp-feat:nth-child(4) { border-right: none; border-top: 1px solid var(--color-border); }
+}
+
+.hp-feat:hover {
+  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
+  text-decoration: none;
+}
+
+.hp-feat__icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.hp-feat h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.hp-feat p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  line-height: 1.45;
+}
+
+/* ── Courses ─────────────────────────────────────────── */
+.hp-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.hp-course-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: background 0.15s;
+}
+
+.hp-course-row:first-child {
+  border-top: none;
+}
+
+.hp-course-row:hover {
+  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
+  text-decoration: none;
+}
+
+.hp-course-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.hp-course-row__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+.hp-course-row__meta {
+  font-size: 0.72rem;
+  color: var(--color-text-light);
+}
+
+.hp-course-row__arrow {
+  color: var(--color-text-light);
+  font-size: 0.88rem;
+  flex-shrink: 0;
+}
+
+/* ── Tools ──────────────────────────────────────────── */
+.hp-tools-sub {
+  margin: -0.6rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.hp-tools {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+@media (max-width: 900px) {
+  .hp-tools { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .hp-tools { grid-template-columns: repeat(2, 1fr); }
+}
+
+.hp-tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 1rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.hp-tool span {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-code-bg);
+}
+
+.hp-tool:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 16px -6px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+/* ── Subscribe ──────────────────────────────────────── */
+.hp-subscribe {
+  margin-top: 3rem;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 3.5rem 0;
+}
+
+/* ── Global section padding ─────────────────────────── */
+.hp-section + .hp-section {
+  padding-top: 2.5rem;
+}
 </style>

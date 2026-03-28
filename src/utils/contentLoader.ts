@@ -46,7 +46,7 @@ function normalizeProblemMeta(meta: ProblemMeta): ProblemMeta {
     constraints: Array.isArray(meta.constraints) ? meta.constraints : (meta.constraints ? [meta.constraints] : []),
     visuals: Array.isArray(meta.visuals) ? meta.visuals : [],
     solutionVisuals: Array.isArray(meta.solutionVisuals) ? meta.solutionVisuals : [],
-    dailyTrack: meta.dailyTrack || (meta.problemSet === 'daily' ? 'dsa' : undefined),
+    dailyTrack: meta.dailyTrack,
   };
 }
 
@@ -284,32 +284,150 @@ export function getProblemsBySet(setId: string): ProblemListItem[] {
   return getProblems().filter(p => p.problemSet === setId);
 }
 
+// ─── Daily schedule (catalog POTD) ───
+
+export interface DailyScheduleEntry {
+  date: string;
+  slug: string;
+}
+
+export interface DailyScheduleFile {
+  entries: DailyScheduleEntry[];
+}
+
+let _validatedScheduleEntries: DailyScheduleEntry[] | null = null;
+
+function loadValidatedScheduleEntries(): DailyScheduleEntry[] {
+  if (_validatedScheduleEntries) return _validatedScheduleEntries;
+  const schedulePath = path.join(CONTENT_DIR, 'daily-schedule.json');
+  if (!fs.existsSync(schedulePath)) {
+    _validatedScheduleEntries = [];
+    return _validatedScheduleEntries;
+  }
+  const file = readJson<DailyScheduleFile>(schedulePath);
+  const entries = Array.isArray(file.entries) ? file.entries : [];
+  const seenDates = new Set<string>();
+  const sorted = [...entries].sort((a, b) => a.date.localeCompare(b.date));
+  const catalogSlugs = new Set(getProblems().map((p) => p.slug));
+
+  for (const e of sorted) {
+    const dk = normalizeDayKey(e.date);
+    if (!dk) throw new Error(`daily-schedule.json: invalid date "${e.date}"`);
+    if (seenDates.has(dk)) throw new Error(`daily-schedule.json: duplicate date "${dk}"`);
+    seenDates.add(dk);
+    if (!e.slug || typeof e.slug !== 'string') throw new Error(`daily-schedule.json: missing slug for ${dk}`);
+    if (!catalogSlugs.has(e.slug)) {
+      throw new Error(`daily-schedule.json: unknown slug "${e.slug}" on ${dk} (not in problems catalog)`);
+    }
+  }
+
+  _validatedScheduleEntries = sorted;
+  return _validatedScheduleEntries;
+}
+
+/** Raw schedule rows (sorted by date ascending). Validates slugs against catalog at first call. */
+export function getDailyScheduleEntries(): DailyScheduleEntry[] {
+  return loadValidatedScheduleEntries();
+}
+
+/** Unique slugs that appear anywhere on the schedule (for editor POTD UX). */
+export function getAllPotdScheduledSlugs(): string[] {
+  const seen = new Set<string>();
+  for (const e of loadValidatedScheduleEntries()) {
+    seen.add(e.slug);
+  }
+  return [...seen];
+}
+
+export function problemSlugHasPotdSchedule(slug: string): boolean {
+  return loadValidatedScheduleEntries().some((e) => e.slug === slug);
+}
+
+/** Latest calendar date this slug appears on the POTD schedule (for analytics / display). */
+export function getLatestPotdScheduleDateForSlug(slug: string): string | null {
+  const dates = loadValidatedScheduleEntries()
+    .filter((e) => e.slug === slug)
+    .map((e) => normalizeDayKey(e.date))
+    .filter(Boolean) as string[];
+  if (!dates.length) return null;
+  return dates.sort().slice(-1)[0] ?? null;
+}
+
+function withScheduleDate(problem: ProblemListItem, scheduleDate: string): ProblemListItem {
+  const dk = normalizeDayKey(scheduleDate)!;
+  return {
+    ...problem,
+    publishedAt: dk,
+    dailyTrack: problem.dailyTrack || 'dsa',
+  };
+}
+
+/**
+ * Problems that have been POTD through `today` (schedule date ≤ today), newest schedule date first.
+ * Each item has `publishedAt` set to the schedule row date (for streak / consistency scoring).
+ */
 export function getDailyProblems(today = new Date()): ProblemListItem[] {
   const todayKey = toDayKey(today);
-  return getProblems()
-    .filter((problem) => {
-      if (problem.problemSet !== 'daily') return false;
-      const publishDay = normalizeDayKey(problem.publishedAt);
-      if (!publishDay) return false;
-      return publishDay <= todayKey;
-    })
-    .sort((a, b) => {
-      const aKey = normalizeDayKey(a.publishedAt) || '';
-      const bKey = normalizeDayKey(b.publishedAt) || '';
-      return bKey.localeCompare(aKey) || a.title.localeCompare(b.title);
-    });
+  const bySlug = new Map(getProblems().map((p) => [p.slug, p]));
+  const out: ProblemListItem[] = [];
+  for (const { date, slug } of loadValidatedScheduleEntries()) {
+    const dk = normalizeDayKey(date)!;
+    if (dk > todayKey) continue;
+    const p = bySlug.get(slug);
+    if (!p) continue;
+    out.push(withScheduleDate(p, date));
+  }
+  return out.sort((a, b) => {
+    const aKey = normalizeDayKey(a.publishedAt) || '';
+    const bKey = normalizeDayKey(b.publishedAt) || '';
+    return bKey.localeCompare(aKey) || a.title.localeCompare(b.title);
+  });
 }
 
 export function getPastDailyProblems(today = new Date()): ProblemListItem[] {
   const todayKey = toDayKey(today);
-  return getDailyProblems(today)
-    .filter((problem) => (normalizeDayKey(problem.publishedAt) || '') < todayKey);
+  return getDailyProblems(today).filter(
+    (problem) => (normalizeDayKey(problem.publishedAt) || '') < todayKey
+  );
 }
 
 export function getTodaysProblem(today = new Date()): ProblemListItem | null {
   const todayKey = toDayKey(today);
-  const items = getDailyProblems(today).filter(
-    (problem) => normalizeDayKey(problem.publishedAt) === todayKey
-  );
-  return items.length ? items[0] : null;
+  const bySlug = new Map(getProblems().map((p) => [p.slug, p]));
+  for (const { date, slug } of loadValidatedScheduleEntries()) {
+    if (normalizeDayKey(date) !== todayKey) continue;
+    const p = bySlug.get(slug);
+    return p ? withScheduleDate(p, date) : null;
+  }
+  return null;
+}
+
+export interface DailyScheduleLiteRow {
+  slug: string;
+  title: string;
+  topic: string;
+  difficulty: string;
+  publishedAt: string;
+  heroImageUrl?: string;
+}
+
+/** Full schedule JSON for client-side “effective today” (includes future-dated rows). */
+export function getDailyScheduleFullLite(): DailyScheduleLiteRow[] {
+  const bySlug = new Map(getProblems().map((p) => [p.slug, p]));
+  const out: DailyScheduleLiteRow[] = [];
+  for (const { date, slug } of loadValidatedScheduleEntries()) {
+    const p = bySlug.get(slug);
+    if (!p) continue;
+    const dk = normalizeDayKey(date)!;
+    const wp = withScheduleDate(p, date);
+    out.push({
+      slug: wp.slug,
+      title: wp.title,
+      topic: wp.topic,
+      difficulty: wp.difficulty,
+      publishedAt: dk,
+      heroImageUrl: wp.visuals?.[0]?.imageUrl,
+    });
+  }
+  return out.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }

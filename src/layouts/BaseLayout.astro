@@ -178,7 +178,15 @@ if (type === 'website') {
           <!-- Desktop nav -->
           <nav class="header__nav header__nav--desktop">
             {config.navigation.map(item => (
-              <a href={item.path}>{item.label}</a>
+              <a
+                href={item.path}
+                class:list={[
+                  Astro.url.pathname === item.path ||
+                  (item.path !== '/' && Astro.url.pathname.startsWith(item.path))
+                    ? 'header__nav-active'
+                    : ''
+                ]}
+              >{item.label}</a>
             ))}
             <button id="reading-mode-toggle" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
               <Icons name="book" size={18} />
@@ -212,7 +220,16 @@ if (type === 'website') {
       <nav id="mobile-nav" class="header__mobile-nav">
         <div class="header__mobile-nav-inner">
           {config.navigation.map(item => (
-            <a href={item.path} class="header__mobile-link">{item.label}</a>
+            <a
+              href={item.path}
+              class:list={[
+                'header__mobile-link',
+                (Astro.url.pathname === item.path ||
+                  (item.path !== '/' && Astro.url.pathname.startsWith(item.path)))
+                  ? 'header__mobile-link--active'
+                  : ''
+              ]}
+            >{item.label}</a>
           ))}
           <div style="margin-top: 1rem; display: flex; justify-content: center;">
              <AuthWidget client:load />
@@ -272,7 +289,8 @@ if (type === 'website') {
           <div class="footer__links">
             <h4>Content</h4>
             <a href="/blog">Blog</a>
-            <a href="/daily/problem">Daily Problems</a>
+            <a href="/problems">Problems</a>
+            <a href="/#daily-challenge">Daily challenge</a>
             <a href="/rss.xml" target="_blank" rel="noopener">RSS Feed</a>
             <a href="/daily/problem/rss.xml" target="_blank" rel="noopener">Daily Problems RSS</a>
           </div>

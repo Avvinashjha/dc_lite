@@ -8,13 +8,13 @@ export function GET(context) {
 
   return rss({
     title: 'DailyCoder Daily Challenge',
-    description: 'A daily coding challenge feed with archive access.',
+    description: 'Problem of the day from the catalog—open in the in-browser editor.',
     site: context.site,
     items: items.map((problem) => ({
-      title: `Daily Challenge: ${problem.title}`,
+      title: `Daily: ${problem.title}`,
       description: `${problem.difficulty} · ${problem.topic} · ${problem.platform}`,
-      link: `/daily/problem/${problem.slug}/`,
-      pubDate: new Date(problem.publishedAt || new Date().toISOString().slice(0, 10)),
+      link: `/problems/${problem.slug}/`,
+      pubDate: new Date((problem.publishedAt || '') + 'T12:00:00.000Z'),
       categories: [problem.difficulty, problem.topic, problem.dailyTrack || 'dsa', ...(problem.topics || [])],
     })),
     customData: '<language>en-us</language>',
