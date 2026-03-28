@@ -1,0 +1,11 @@
+---
+import { getAllPotdScheduledSlugs } from '../../utils/contentLoader';
+
+export function getStaticPaths() {
+  return getAllPotdScheduledSlugs().map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/');
+return Astro.redirect(`/problems/${slug}`);
+---

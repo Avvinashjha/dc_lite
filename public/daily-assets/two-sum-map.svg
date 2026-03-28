@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 220" role="img" aria-label="Two Sum hash map flow">
+  <rect x="0" y="0" width="620" height="220" fill="#0f172a"/>
+  <text x="24" y="34" fill="#e2e8f0" font-size="18" font-family="Arial">Two Sum: hash map lookup flow</text>
+  <rect x="24" y="58" width="572" height="44" rx="8" fill="#1e293b"/>
+  <text x="36" y="86" fill="#cbd5e1" font-size="16" font-family="Arial">nums = [2, 7, 11, 15], target = 9</text>
+  <rect x="24" y="118" width="170" height="78" rx="8" fill="#1e3a8a"/>
+  <text x="36" y="142" fill="#bfdbfe" font-size="14" font-family="Arial">Index 0, num 2</text>
+  <text x="36" y="162" fill="#bfdbfe" font-size="14" font-family="Arial">Need 7</text>
+  <rect x="226" y="118" width="170" height="78" rx="8" fill="#14532d"/>
+  <text x="238" y="142" fill="#bbf7d0" font-size="14" font-family="Arial">Index 1, num 7</text>
+  <text x="238" y="162" fill="#bbf7d0" font-size="14" font-family="Arial">Need 2</text>
+  <rect x="428" y="118" width="168" height="78" rx="8" fill="#7f1d1d"/>
+  <text x="440" y="142" fill="#fecaca" font-size="14" font-family="Arial">Map has 2 at idx 0</text>
+  <text x="440" y="162" fill="#fecaca" font-size="14" font-family="Arial">Answer [0, 1]</text>
+  <path d="M194 156 L226 156" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M396 156 L428 156" stroke="#94a3b8" stroke-width="2"/>
+</svg>
