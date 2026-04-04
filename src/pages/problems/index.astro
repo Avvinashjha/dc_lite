@@ -1,7 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/problems.scss';
-import { getProblems, getProblemTopics, getProblemDifficulties, getProblemsIndex, getProblemSets } from '../../utils/contentLoader';
+import {
+  getProblems,
+  getProblemTopics,
+  getProblemDifficulties,
+  getProblemsIndex,
+  getProblemSets,
+  getAllPotdScheduledSlugs,
+  getTodaysProblem,
+  getPastDailyProblems,
+} from '../../utils/contentLoader';
 import { slugifyTaxonomy } from '../../utils/taxonomy';
 
 const pageMeta = getProblemsIndex();
@@ -10,6 +19,9 @@ const topics = getProblemTopics();
 const difficulties = getProblemDifficulties();
 const problemSets = getProblemSets();
 const topTopics = topics.slice(0, 15);
+const potdSlugSet = new Set(getAllPotdScheduledSlugs());
+const todaysPotd = getTodaysProblem();
+const recentPotdPicks = getPastDailyProblems().slice(0, 8);
 
 const liteProblems = problems.map(p => ({
   slug: p.slug,
@@ -67,6 +79,30 @@ const listJsonLd = {
       </div>
     </div>
 
+    {(todaysPotd || recentPotdPicks.length > 0) && (
+      <section class="problems-potd-strip" aria-label="Daily challenge">
+        <div class="problems-potd-strip__head">
+          <h2 class="problems-potd-strip__title">Daily challenge</h2>
+          <a class="problems-potd-strip__link" href="/#daily-challenge">Home hub →</a>
+        </div>
+        <div class="problems-potd-strip__row">
+          {todaysPotd && (
+            <a class="problems-potd-card problems-potd-card--today" href={`/problems/${todaysPotd.slug}`}>
+              <span class="problems-potd-card__eyebrow">Today · {todaysPotd.publishedAt}</span>
+              <span class="problems-potd-card__name">{todaysPotd.title}</span>
+              <span class="problems-potd-card__meta">{todaysPotd.topic} · {todaysPotd.difficulty}</span>
+            </a>
+          )}
+          {recentPotdPicks.map((p) => (
+            <a class="problems-potd-card" href={`/problems/${p.slug}`}>
+              <span class="problems-potd-card__eyebrow">{p.publishedAt}</span>
+              <span class="problems-potd-card__name">{p.title}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     <!-- Topic chips -->
     <div class="problems-topic-chips" id="topic-chips">
       <button class="problems-topic-chips__chip problems-topic-chips__chip--active" data-chip="all" type="button">All</button>
@@ -104,6 +140,10 @@ const listJsonLd = {
           <input type="checkbox" id="filter-favorites" />
           <span>Favorites</span>
         </label>
+        <label class="problems-filters__label">
+          <input type="checkbox" id="filter-daily-picks" />
+          <span>Daily picks</span>
+        </label>
         <div class="problems-view-toggle" id="view-toggle">
           <button class="problems-view-toggle__btn problems-view-toggle__btn--active" data-view="table" type="button" title="Table view">&#9776;</button>
           <button class="problems-view-toggle__btn" data-view="grid" type="button" title="Card view">&#9638;</button>
@@ -133,6 +173,7 @@ const listJsonLd = {
                 data-topic={slugifyTaxonomy(p.topic)}
                 data-difficulty={p.difficulty.toLowerCase()}
                 data-problem-set={p.problemSet || ''}
+                data-daily-pick={potdSlugSet.has(p.slug) ? 'true' : 'false'}
               >
                 <td class="problem-table__status" data-status-for={p.slug}>&#9711;</td>
                 <td class="problem-table__fav">
@@ -140,6 +181,11 @@ const listJsonLd = {
                 </td>
                 <td class="problem-table__title">
                   <a href={`/problems/${p.slug}`}>{p.title}</a>
+                  {potdSlugSet.has(p.slug) && (
+                    <span class="problems-table-potd-badge" title="Appears on the daily schedule">
+                      Daily
+                    </span>
+                  )}
                 </td>
                 <td class="problem-table__topic">
                   <a href={`/problems/topic/${slugifyTaxonomy(p.topic)}`} class="p-badge p-badge--neutral" style="text-decoration:none;font-size:0.68rem;">{p.topic}</a>
@@ -164,6 +210,7 @@ const listJsonLd = {
             data-topic={slugifyTaxonomy(p.topic)}
             data-difficulty={p.difficulty.toLowerCase()}
             data-problem-set={p.problemSet || ''}
+            data-daily-pick={potdSlugSet.has(p.slug) ? 'true' : 'false'}
           >
             <div class="problem-card__head">
               <button data-favorite-btn-card={p.slug} style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--color-text-light);padding:0;" aria-label="Toggle favorite">
@@ -289,6 +336,7 @@ const listJsonLd = {
   var setEl = document.getElementById('problem-set') as HTMLSelectElement;
   var difficultyEl = document.getElementById('problem-difficulty') as HTMLSelectElement;
   var favCheckEl = document.getElementById('filter-favorites') as HTMLInputElement;
+  var dailyPicksEl = document.getElementById('filter-daily-picks') as HTMLInputElement;
   var countEl = document.getElementById('problem-count')!;
 
   var tableRows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#table-body tr'));
@@ -300,25 +348,50 @@ const listJsonLd = {
     var topic = topicSelect.value;
     var difficulty = difficultyEl.value;
     var favOnly = favCheckEl.checked;
+    var dailyOnly = dailyPicksEl && dailyPicksEl.checked;
     var visible = 0;
 
-    function matchItem(slug: string, title: string, itemTopic: string, itemDiff: string, itemSet: string): boolean {
+    function matchItem(
+      slug: string,
+      title: string,
+      itemTopic: string,
+      itemDiff: string,
+      itemSet: string,
+      isDailyPick: boolean
+    ): boolean {
       if (search && title.indexOf(search) === -1 && itemTopic.indexOf(search) === -1) return false;
       if (set !== 'all' && itemSet !== set) return false;
       if (topic !== 'all' && itemTopic !== topic) return false;
       if (difficulty !== 'all' && itemDiff !== difficulty) return false;
       if (favOnly && !favoriteSet.has(slug)) return false;
+      if (dailyOnly && !isDailyPick) return false;
       return true;
     }
 
     tableRows.forEach(row => {
-      const show = matchItem(row.dataset.slug!, row.dataset.title!, row.dataset.topic!, row.dataset.difficulty!, row.dataset.problemSet!);
+      const dailyPick = row.dataset.dailyPick === 'true';
+      const show = matchItem(
+        row.dataset.slug!,
+        row.dataset.title!,
+        row.dataset.topic!,
+        row.dataset.difficulty!,
+        row.dataset.problemSet!,
+        dailyPick
+      );
       row.style.display = show ? '' : 'none';
       if (show) visible++;
     });
 
     gridCards.forEach(card => {
-      const show = matchItem(card.dataset.slug!, card.dataset.title!, card.dataset.topic!, card.dataset.difficulty!, card.dataset.problemSet!);
+      const dailyPick = card.dataset.dailyPick === 'true';
+      const show = matchItem(
+        card.dataset.slug!,
+        card.dataset.title!,
+        card.dataset.topic!,
+        card.dataset.difficulty!,
+        card.dataset.problemSet!,
+        dailyPick
+      );
       card.style.display = show ? '' : 'none';
     });
 
@@ -330,6 +403,7 @@ const listJsonLd = {
   topicSelect.addEventListener('change', applyFilters);
   difficultyEl.addEventListener('change', applyFilters);
   favCheckEl.addEventListener('change', applyFilters);
+  if (dailyPicksEl) dailyPicksEl.addEventListener('change', applyFilters);
 
   // ── Column sorting ──
   var DIFF_ORDER: Record<string, number> = { easy: 1, medium: 2, hard: 3 };

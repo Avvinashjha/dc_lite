@@ -3,9 +3,11 @@ import type { ProblemItem } from '../types/post';
 
 interface Props {
   problem: ProblemItem;
+  /** Omit title/meta row when the parent page already shows them (e.g. daily detail). */
+  embedded?: boolean;
 }
 
-const { problem } = Astro.props;
+const { problem, embedded = false } = Astro.props;
 const topics = problem.topics?.length ? problem.topics : [problem.topic];
 const constraints = problem.constraints
   ? (Array.isArray(problem.constraints) ? problem.constraints : [problem.constraints])
@@ -13,17 +15,21 @@ const constraints = problem.constraints
 const followUps = problem.followUps
   ? (Array.isArray(problem.followUps) ? problem.followUps : [problem.followUps])
   : [];
+const examples = Array.isArray(problem.examples) ? problem.examples : [];
+const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
 ---
 
-<div class="problem-desc">
-  <div class="problem-desc__header">
-    <h1 class="problem-desc__title">{problem.title}</h1>
-    <div class="problem-desc__meta">
-      <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
-      {topics.map(t => <span class="p-badge p-badge--neutral">{t}</span>)}
-      <span class="p-badge p-badge--neutral">{problem.platform}</span>
+<div class:list={['problem-desc', embedded && 'problem-desc--embedded']}>
+  {!embedded && (
+    <div class="problem-desc__header">
+      <h1 class="problem-desc__title">{problem.title}</h1>
+      <div class="problem-desc__meta">
+        <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+        {topics.map(t => <span class="p-badge p-badge--neutral">{t}</span>)}
+        <span class="p-badge p-badge--neutral">{problem.platform}</span>
+      </div>
     </div>
-  </div>
+  )}
 
   <div class="problem-desc__body" set:html={problem.descriptionHtml} />
 
@@ -35,6 +41,45 @@ const followUps = problem.followUps
     <div class="problem-example__label">Sample Output</div>
     <div class="problem-example__content">{problem.sampleOutput || '\u2014'}</div>
   </div>
+
+  {problem.inputFormat && (
+    <div class="problem-example">
+      <div class="problem-example__label">Input Format</div>
+      <div class="problem-example__content">{problem.inputFormat}</div>
+    </div>
+  )}
+  {problem.outputFormat && (
+    <div class="problem-example">
+      <div class="problem-example__label">Output Format</div>
+      <div class="problem-example__content">{problem.outputFormat}</div>
+    </div>
+  )}
+
+  {examples.length > 0 && (
+    <div class="problem-section">
+      <div class="problem-section__heading">Examples</div>
+      {examples.map((ex, idx) => (
+        <div class="problem-example" style="margin-top:0.5rem;">
+          <div class="problem-example__label">Example {idx + 1}</div>
+          <div class="problem-example__content">{`Input: ${ex.input}\nOutput: ${ex.output}${ex.explanation ? `\nExplanation: ${ex.explanation}` : ''}`}</div>
+        </div>
+      ))}
+    </div>
+  )}
+
+  {visuals.length > 0 && (
+    <div class="problem-section">
+      <div class="problem-section__heading">Visual Aid</div>
+      {visuals.map((visual) => (
+        <figure style="margin:0.75rem 0;padding:0.75rem;border:1px solid var(--color-border);border-radius:10px;background:var(--color-code-bg);">
+          {visual.title && <figcaption style="font-weight:700;margin-bottom:0.45rem;">{visual.title}</figcaption>}
+          {visual.imageUrl && <img src={visual.imageUrl} alt={visual.caption || visual.title || 'Problem visual'} loading="lazy" />}
+          {visual.svg && <div set:html={visual.svg} />}
+          {visual.caption && <p style="margin:0.4rem 0 0;color:var(--color-text-light);font-size:0.82rem;">{visual.caption}</p>}
+        </figure>
+      ))}
+    </div>
+  )}
 
   {constraints.length > 0 && (
     <div class="problem-section">

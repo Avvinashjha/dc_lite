@@ -191,6 +191,9 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
               <a href="/rss.xml" target="_blank" rel="noopener" aria-label="RSS Feed" title="RSS Feed">
                 <Icons name="rss" size={16} />
               </a>
+              <a href="/daily/problem/rss.xml" target="_blank" rel="noopener" aria-label="Daily Problems RSS Feed" title="Daily Problems RSS Feed">
+                <Icons name="rss" size={16} />
+              </a>
             </div>
           </div>
 
@@ -199,6 +202,8 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
             <a href="/blog">Blog</a>
             <a href="/problems">Problems</a>
             <a href="/rss.xml" target="_blank" rel="noopener">RSS Feed</a>
+            <a href="/#daily-challenge">Daily challenge</a>
+            <a href="/daily/problem/rss.xml" target="_blank" rel="noopener">Daily Problems RSS</a>
           </div>
 
           <div class="footer__links">
@@ -221,6 +226,7 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
     <script is:inline define:vars={{ syncScriptUrl }}>
       window.__dcSyncScriptUrl = syncScriptUrl || '';
     </script>
+    <script src="/js/analytics.js" is:inline></script>
     <script src="/js/sync-init.js" is:inline></script>
     <script src="/js/base-ui.js" is:inline></script>
   </body>
