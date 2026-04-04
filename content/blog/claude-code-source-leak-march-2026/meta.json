@@ -1,0 +1,18 @@
+{
+  "title": "When the Map Became the Product: The Claude Code Source Leak",
+  "description": "What happened when Anthropic shipped Claude Code 2.1.88 with a source map on npm, the impact on security and competition, how Anthropic responded, and what forks and clean-room rewrites mean legally.",
+  "date": "2026-04-04",
+  "author": "Avinash Jha",
+  "tags": [
+    "claude-code",
+    "anthropic",
+    "ai",
+    "security",
+    "npm",
+    "copyright",
+    "developer-tools"
+  ],
+  "category": "blog",
+  "draft": false,
+  "image": "/blog/claude-code-source-leak-march-2026/hero.svg"
+}
