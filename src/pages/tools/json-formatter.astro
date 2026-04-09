@@ -5,9 +5,9 @@ import CodeEditor from "../../components/CodeEditor.astro";
 
 <ToolLayout
   title="JSON Formatter"
-  description="Free online JSON formatter, validator, and minifier. Format JSON with syntax highlighting, validate JSON structure, and minify JSON data. Multi-tab support with auto-save."
+  description="Free online JSON formatter, validator, minifier, and parser. Format JSON with syntax highlighting, parse input into prettified JSON, validate, and minify. Multi-tab support with auto-save."
   toolName="JSON Formatter"
-  keywords="json formatter, json beautifier, json validator, json minifier, format json online, pretty print json"
+  keywords="json formatter, json beautifier, json validator, json minifier, json parser, parse json online, format json online, pretty print json"
 >
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
@@ -17,6 +17,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-format">Format</button>
     <button class="tool-btn" id="btn-minify">Minify</button>
+    <button class="tool-btn" id="btn-parse">Parse</button>
     <button class="tool-btn" id="btn-validate">Validate</button>
     <button class="tool-btn" id="btn-copy">Copy Output</button>
     <button class="tool-btn" id="btn-download">Download</button>
@@ -58,8 +59,9 @@ import CodeEditor from "../../components/CodeEditor.astro";
       and adds proper indentation and line breaks so you can actually see the structure.
     </p>
     <p>
-      This tool parses your JSON, checks that it's valid, and outputs a neatly indented version. If something's wrong
-      — a missing comma, an extra bracket, an unquoted key — you'll get a clear error pointing to the problem.
+      This tool parses your JSON, checks that it's valid, and outputs standard prettified JSON (indentation and quoted keys).
+      <strong>Format</strong> and <strong>Parse</strong> both rebuild the value from parsed data so the output is clean, valid JSON.
+      If something's wrong — a missing comma, an extra bracket, an unquoted key — you'll get a clear error pointing to the problem.
     </p>
 
     <h3>When You'd Use This</h3>
@@ -97,6 +99,33 @@ import CodeEditor from "../../components/CodeEditor.astro";
     readOnly: true,
     lineWrapping: true,
   });
+
+  var MAX_JSON_STRING_UNWRAP = 12;
+
+  function looksLikeJsonDocument(s) {
+    s = s.trim();
+    if (s.length < 2) return false;
+    var a = s[0];
+    var b = s[s.length - 1];
+    return (a === "{" && b === "}") || (a === "[" && b === "]");
+  }
+
+  /** Parse input; if the value is a JSON string containing JSON, unwrap until object/array or limit. */
+  function parseJsonInput(text) {
+    var value = JSON.parse(text.trim());
+    var n = 0;
+    while (typeof value === "string" && n < MAX_JSON_STRING_UNWRAP) {
+      var inner = value.trim();
+      if (!looksLikeJsonDocument(inner)) break;
+      try {
+        value = JSON.parse(inner);
+        n++;
+      } catch (e) {
+        break;
+      }
+    }
+    return value;
+  }
 
   function getOutput() {
     return outputEditor.getValue();
@@ -240,7 +269,8 @@ import CodeEditor from "../../components/CodeEditor.astro";
   // --- Actions ---
   document.getElementById("btn-format").addEventListener("click", function () {
     try {
-      var parsed = JSON.parse(input.value);
+      var parsed = parseJsonInput(input.value);
+      outputEditor.setLanguage("json");
       setOutput(JSON.stringify(parsed, null, 2));
       setStatus("Formatted", "success");
     } catch (e) {
@@ -251,8 +281,21 @@ import CodeEditor from "../../components/CodeEditor.astro";
 
   document.getElementById("btn-minify").addEventListener("click", function () {
     try {
-      setOutput(JSON.stringify(JSON.parse(input.value)));
+      outputEditor.setLanguage("json");
+      setOutput(JSON.stringify(parseJsonInput(input.value)));
       setStatus("Minified", "success");
+    } catch (e) {
+      setOutput("");
+      setStatus("Invalid JSON: " + e.message, "error");
+    }
+  });
+
+  document.getElementById("btn-parse").addEventListener("click", function () {
+    try {
+      var parsed = parseJsonInput(input.value);
+      outputEditor.setLanguage("json");
+      setOutput(JSON.stringify(parsed, null, 2));
+      setStatus("Parsed", "success");
     } catch (e) {
       setOutput("");
       setStatus("Invalid JSON: " + e.message, "error");
@@ -263,7 +306,8 @@ import CodeEditor from "../../components/CodeEditor.astro";
     .getElementById("btn-validate")
     .addEventListener("click", function () {
       try {
-        JSON.parse(input.value);
+        parseJsonInput(input.value);
+        outputEditor.setLanguage("text");
         setOutput("Valid JSON ✓");
         setStatus("Valid JSON!", "success");
       } catch (e) {
