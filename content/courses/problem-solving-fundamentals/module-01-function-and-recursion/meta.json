@@ -1,0 +1,60 @@
+{
+  "title": "Functions & Recursion",
+  "description": "Master JavaScript functions and recursion from the ground up. Learn scope, closures, higher-order functions, the call stack, and recursive problem solving with hands-on examples, quizzes, and practice problems.",
+  "lessons": [
+    {
+      "slug": "01-intro-to-functions",
+      "title": "Introduction to Functions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-parameters-return-and-scope",
+      "title": "Parameters, Return Values, and Scope",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-function-expressions-arrows-and-closures",
+      "title": "Function Expressions, Arrows, and Closures",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-higher-order-functions",
+      "title": "Higher-Order Functions",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-intro-to-recursion",
+      "title": "Introduction to Recursion",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-the-call-stack-and-tracing",
+      "title": "The Call Stack and Tracing Recursion",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-recursion-patterns",
+      "title": "Recursion Patterns: Linear, Multiple, and Tail",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "08-recursion-with-arrays-and-strings",
+      "title": "Recursion with Arrays and Strings",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-complexity-memoization-and-practice",
+      "title": "Complexity, Memoization, and Practice",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

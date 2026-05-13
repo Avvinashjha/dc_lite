@@ -3,38 +3,34 @@
   "id": "problem-0062",
   "title": "Power of Two",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math",
+    "Recursion",
+    "Bit Manipulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/power-of-two/",
   "problemSet": "top-300-leetcode",
-  "testCases": [
-    {
-      "args": [
-        1
-      ],
-      "expected": true
-    },
-    {
-      "args": [
-        16
-      ],
-      "expected": true
-    },
-    {
-      "args": [
-        3
-      ],
-      "expected": false
-    }
-  ],
-  "functionName": "powerOfTwo",
-  "templateCode": "/**\n * @param {number} n\n * @return {boolean}\n */\nfunction isPowerOfTwo(n) {\n  // Check if n is a power of two\n}\n\n// Sample: console.log(isPowerOfTwo(16));",
+  "sampleInput": "n = 16",
+  "sampleOutput": "true",
   "constraints": [
     "-2^31 <= n <= 2^31 - 1"
+  ],
+  "followUps": [
+    "Solve it recursively: base case n === 1 (true); recurse on n / 2 when n is even; return false otherwise.",
+    "Solve it in O(1) using bit manipulation: `n > 0 && (n & (n - 1)) === 0`.",
+    "Can you generalize to `isPowerOf(k, n)` for any base k >= 2?"
+  ],
+  "functionName": "isPowerOfTwo",
+  "templateCode": "/**\n * @param {number} n\n * @return {boolean}\n */\nfunction isPowerOfTwo(n) {\n  // Return true if n is a power of two (2^0, 2^1, 2^2, ...), else false.\n}\n\n// Sample: console.log(isPowerOfTwo(16));\n",
+  "testCases": [
+    { "args": [1], "expected": true },
+    { "args": [2], "expected": true },
+    { "args": [16], "expected": true },
+    { "args": [1024], "expected": true },
+    { "args": [3], "expected": false },
+    { "args": [0], "expected": false },
+    { "args": [-16], "expected": false }
   ]
 }

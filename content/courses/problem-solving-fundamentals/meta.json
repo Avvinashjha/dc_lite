@@ -1,0 +1,20 @@
+{
+  "title": "Problem Solving Fundamentals",
+  "description": "Build rock-solid problem-solving skills in JavaScript. Learn functions, recursion, data structures, and algorithms step-by-step with clear diagrams, quizzes, and curated practice problems.",
+  "author": "DailyCoder",
+  "level": "beginner",
+  "duration": "31 hours",
+  "image": "/images/courses/problem-solving.jpg",
+  "tags": ["javascript", "dsa", "algorithms", "recursion", "problem-solving"],
+  "modules": [
+    { "slug": "module-01-function-and-recursion", "title": "Functions & Recursion" },
+    { "slug": "module-02-array-string", "title": "Arrays & Strings" },
+    { "slug": "module-03-map-set", "title": "Map & Set" },
+    { "slug": "module-04-searching", "title": "Searching" },
+    { "slug": "module-05-sorting", "title": "Sorting" },
+    { "slug": "module-06-stack", "title": "Stack" },
+    { "slug": "module-07-queue", "title": "Queue" },
+    { "slug": "module-08-linked-list", "title": "Linked List" }
+  ],
+  "draft": false
+}

@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0283",
+  "title": "Valid Anagram",
+  "difficulty": "Easy",
+  "topic": "Hash Table",
+  "topics": [
+    "Hash Table",
+    "String",
+    "Sorting"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/valid-anagram/",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "s = \"anagram\", t = \"nagaram\"",
+  "sampleOutput": "true",
+  "constraints": [
+    "1 <= s.length, t.length <= 5 * 10^4",
+    "s and t consist of lowercase English letters."
+  ],
+  "followUps": [
+    "Solve with a frequency object in O(n) time and O(1) space if the alphabet is fixed (26 letters).",
+    "Solve by sorting both strings — what is the time complexity?",
+    "What if the inputs are Unicode?"
+  ],
+  "functionName": "isAnagram",
+  "templateCode": "/**\n * @param {string} s\n * @param {string} t\n * @return {boolean}\n */\nfunction isAnagram(s, t) {\n  // Return true if t is an anagram of s (same characters, same counts).\n}\n\n// Sample: console.log(isAnagram(\"anagram\", \"nagaram\")); // true\n",
+  "testCases": [
+    { "args": ["anagram", "nagaram"], "expected": true },
+    { "args": ["rat", "car"], "expected": false },
+    { "args": ["a", "a"], "expected": true },
+    { "args": ["ab", "ba"], "expected": true },
+    { "args": ["ac", "bb"], "expected": false }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "title": "Searching",
+  "description": "Master search algorithms one concept at a time: linear search, binary search templates, lower and upper bounds, rotated arrays, peak finding, binary search on the answer, and 2D matrix searching. Every lesson gives the algorithm, a full JavaScript implementation, and focused practice.",
+  "lessons": [
+    {
+      "slug": "01-linear-search",
+      "title": "Linear Search",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-binary-search-intuition",
+      "title": "Binary Search: Intuition and the Halving Invariant",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "03-binary-search-closed-template",
+      "title": "Binary Search: Closed-Interval Template",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-binary-search-half-open-and-recursive",
+      "title": "Binary Search: Half-Open Template and Recursive Variant",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-lower-bound",
+      "title": "Lower Bound (First Index with nums[i] >= target)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-upper-bound-and-count",
+      "title": "Upper Bound and Counting Occurrences",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-search-insert-position",
+      "title": "Search Insert Position",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-first-and-last-occurrence",
+      "title": "First and Last Occurrence of a Target",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-floor-and-ceiling",
+      "title": "Floor and Ceiling in a Sorted Array",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "10-find-minimum-in-rotated-sorted-array",
+      "title": "Find Minimum in Rotated Sorted Array",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "11-search-in-rotated-sorted-array",
+      "title": "Search in Rotated Sorted Array",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "12-search-in-rotated-sorted-array-ii",
+      "title": "Search in Rotated Sorted Array II (With Duplicates)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "13-find-peak-element",
+      "title": "Find Peak Element",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "14-binary-search-on-answer-intro",
+      "title": "Binary Search on the Answer: Pattern and First Bad Version",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "15-binary-search-on-answer-koko",
+      "title": "Binary Search on the Answer: Koko Eating Bananas",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "16-search-2d-matrix-i",
+      "title": "Search a 2D Matrix (Row-Major Binary Search)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "17-search-2d-matrix-ii",
+      "title": "Search a 2D Matrix II (Staircase Walk)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "18-other-searches-awareness",
+      "title": "Other Searches: Exponential, Interpolation, Ternary (Awareness)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "19-complexity-and-practice",
+      "title": "Complexity, Pitfalls, and Practice Ladder",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

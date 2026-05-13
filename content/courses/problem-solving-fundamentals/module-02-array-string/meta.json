@@ -1,0 +1,60 @@
+{
+  "title": "Arrays & Strings",
+  "description": "Master JavaScript arrays and strings for problem solving: indexing and iteration, hash maps and frequency counting, two-pointer and sliding-window techniques, prefix sums, and a gentle intro to 2D grids — with quizzes, diagrams, and hands-on practice problems.",
+  "lessons": [
+    {
+      "slug": "01-arrays-in-javascript",
+      "title": "Arrays in JavaScript",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-strings-in-javascript",
+      "title": "Strings in JavaScript",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-iteration-and-indexing",
+      "title": "Iteration, Indexing, and Off-by-One Errors",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-hash-maps-and-frequency",
+      "title": "Hash Maps and Frequency Counting",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-two-pointers-opposite-ends",
+      "title": "Two Pointers: Opposite Ends",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-two-pointers-same-direction",
+      "title": "Two Pointers: Same Direction",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-sliding-window",
+      "title": "Sliding Window",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-prefix-sums-and-subarrays",
+      "title": "Prefix Sums and Subarrays",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-2d-arrays-and-practice",
+      "title": "2D Arrays, Complexity, and Practice",
+      "type": "text",
+      "duration": "25 min"
+    }
+  ]
+}

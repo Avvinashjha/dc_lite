@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0282",
+  "title": "Tower of Hanoi",
+  "difficulty": "Medium",
+  "topic": "Recursion",
+  "topics": [
+    "Recursion",
+    "Divide and Conquer",
+    "Math"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "n = 3",
+  "sampleOutput": "7",
+  "constraints": [
+    "1 <= n <= 20"
+  ],
+  "followUps": [
+    "Prove by induction that moving n disks requires exactly 2^n - 1 moves.",
+    "Instead of returning a count, return the sequence of moves as an array of [from, to] tuples.",
+    "Try an iterative formulation — surprisingly, it exists and relates to binary counting."
+  ],
+  "functionName": "towerOfHanoi",
+  "templateCode": "/**\n * Move n disks from peg `from` to peg `to` using `aux` as auxiliary,\n * following the standard rules:\n *   - Move one disk at a time.\n *   - Never place a larger disk on top of a smaller one.\n *\n * Return the total number of moves required (do NOT print anything here,\n * the runner compares return values).\n *\n * @param {number} n    Number of disks.\n * @param {string} from Source peg name (e.g. 'A').\n * @param {string} to   Destination peg name (e.g. 'C').\n * @param {string} aux  Auxiliary peg name (e.g. 'B').\n * @return {number}     Total number of moves.\n */\nfunction towerOfHanoi(n, from = 'A', to = 'C', aux = 'B') {\n  // Base case: n === 1 -> move one disk, return 1.\n  // Recursive case: move n-1 from 'from' to 'aux',\n  //                 move disk n from 'from' to 'to',\n  //                 move n-1 from 'aux' to 'to'.\n}\n\n// Sample: console.log(towerOfHanoi(3)); // 7\n",
+  "testCases": [
+    { "args": [1], "expected": 1 },
+    { "args": [2], "expected": 3 },
+    { "args": [3], "expected": 7 },
+    { "args": [4], "expected": 15 },
+    { "args": [5], "expected": 31 },
+    { "args": [10], "expected": 1023 }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "draft": false,
+  "id": "problem-0286",
+  "title": "Group Anagrams",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Hash Table",
+    "String",
+    "Sorting"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/group-anagrams/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+  "sampleOutput": "[[\"bat\"],[\"ate\",\"eat\",\"tea\"],[\"nat\",\"tan\"]]",
+  "constraints": [
+    "1 <= strs.length <= 10^4",
+    "0 <= strs[i].length <= 100",
+    "strs[i] consists of lowercase English letters."
+  ],
+  "followUps": [
+    "Can you use character counts as keys instead of sorting each string?",
+    "What is the total time if you sort each word of length L and there are n words?",
+    "Our tests expect groups sorted by signature and words sorted inside each group — match that order for the runner."
+  ],
+  "functionName": "groupAnagrams",
+  "templateCode": "/**\n * Group strings that are anagrams of each other.\n * Tests expect: groups ordered by sorted signature; words inside each group sorted.\n *\n * @param {string[]} strs\n * @return {string[][]}\n */\nfunction groupAnagrams(strs) {\n  // signature = [...w].sort().join(\"\")\n  // Map signature -> list of words, then build result with sorted keys and sorted inner arrays.\n  return [];\n}\n\n// Sample: groupAnagrams([\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"])\n",
+  "testCases": [
+    {
+      "args": [["a"]],
+      "expected": [["a"]]
+    },
+    {
+      "args": [[""]],
+      "expected": [[""]]
+    },
+    {
+      "args": [["eat", "tea", "tan", "ate", "nat", "bat"]],
+      "expected": [["bat"], ["ate", "eat", "tea"], ["nat", "tan"]]
+    },
+    {
+      "args": [["eat", "tea"]],
+      "expected": [["eat", "tea"]]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "draft": false,
+  "id": "problem-0284",
+  "title": "Longest Substring Without Repeating Characters",
+  "difficulty": "Medium",
+  "topic": "Sliding Window",
+  "topics": [
+    "Sliding Window",
+    "Hash Table",
+    "String",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "s = \"abcabcbb\"",
+  "sampleOutput": "3",
+  "constraints": [
+    "0 <= s.length <= 5 * 10^4",
+    "s consists of English letters, digits, symbols and spaces."
+  ],
+  "followUps": [
+    "Can you solve it in O(n) with each character visited a constant number of times?",
+    "Try the variant: at most k distinct characters.",
+    "Compare with expanding window only vs shrinking with a queue."
+  ],
+  "functionName": "lengthOfLongestSubstring",
+  "templateCode": "/**\n * @param {string} s\n * @return {number}\n */\nfunction lengthOfLongestSubstring(s) {\n  // Length of the longest substring with no repeated characters.\n}\n\n// Sample: console.log(lengthOfLongestSubstring(\"abcabcbb\")); // 3\n",
+  "testCases": [
+    { "args": ["abcabcbb"], "expected": 3 },
+    { "args": ["bbbbb"], "expected": 1 },
+    { "args": ["pwwkew"], "expected": 3 },
+    { "args": [""], "expected": 0 },
+    { "args": [" "], "expected": 1 },
+    { "args": ["dvdf"], "expected": 3 },
+    { "args": ["abcdefghijklmnopqrstuvwxyz"], "expected": 26 }
+  ]
+}

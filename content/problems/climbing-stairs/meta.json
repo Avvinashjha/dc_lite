@@ -6,34 +6,32 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Recursion",
+    "Memoization",
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/climbing-stairs/",
   "problemSet": "top-300-leetcode",
-  "testCases": [
-    {
-      "args": [
-        2
-      ],
-      "expected": 2
-    },
-    {
-      "args": [
-        3
-      ],
-      "expected": 3
-    },
-    {
-      "args": [
-        5
-      ],
-      "expected": 8
-    }
-  ],
-  "functionName": "climbingStairs",
-  "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction climbStairs(n) {\n  // Count distinct ways to climb n stairs\n}\n\n// Sample: console.log(climbStairs(3));",
+  "sampleInput": "n = 3",
+  "sampleOutput": "3",
   "constraints": [
     "1 <= n <= 45"
+  ],
+  "followUps": [
+    "First, write a pure recursive solution using f(n) = f(n-1) + f(n-2). Observe how slow it becomes around n = 35.",
+    "Add memoization with a Map. How does the runtime change?",
+    "Rewrite it iteratively with O(1) space by keeping only the last two values.",
+    "What if you can take 1, 2, or 3 steps at a time?"
+  ],
+  "functionName": "climbStairs",
+  "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction climbStairs(n) {\n  // Return the number of distinct ways to climb n stairs, taking 1 or 2 steps at a time.\n}\n\n// Sample: console.log(climbStairs(3)); // 3\n",
+  "testCases": [
+    { "args": [1], "expected": 1 },
+    { "args": [2], "expected": 2 },
+    { "args": [3], "expected": 3 },
+    { "args": [5], "expected": 8 },
+    { "args": [10], "expected": 89 },
+    { "args": [20], "expected": 10946 }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0279",
+  "title": "Pow(x, n)",
+  "difficulty": "Medium",
+  "topic": "Recursion",
+  "topics": [
+    "Recursion",
+    "Math",
+    "Divide and Conquer"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/powx-n/",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "x = 2.0, n = 10",
+  "sampleOutput": "1024.0",
+  "constraints": [
+    "-100.0 < x < 100.0",
+    "-2^31 <= n <= 2^31 - 1",
+    "Either x is not 0 or n > 0",
+    "The answer fits in a double"
+  ],
+  "followUps": [
+    "Write the naive O(n) loop first, then a recursive O(log n) version using pow(x, n) = pow(x, n/2) * pow(x, n/2).",
+    "Carefully handle negative n: pow(x, -n) = 1 / pow(x, n). Beware the edge case n = -2^31.",
+    "Can you write an iterative O(log n) version using the binary representation of n?"
+  ],
+  "functionName": "myPow",
+  "templateCode": "/**\n * Compute x raised to the integer power n.\n *\n * @param {number} x\n * @param {number} n\n * @return {number}\n */\nfunction myPow(x, n) {\n  // Your solution here.\n}\n\n// Sample: console.log(myPow(2, 10)); // 1024\n",
+  "testCases": [
+    { "args": [2, 10], "expected": 1024 },
+    { "args": [2, 0], "expected": 1 },
+    { "args": [2, 1], "expected": 2 },
+    { "args": [2, -2], "expected": 0.25 },
+    { "args": [3, 4], "expected": 81 },
+    { "args": [5, 3], "expected": 125 },
+    { "args": [1, 1000000], "expected": 1 },
+    { "args": [-2, 3], "expected": -8 }
+  ]
+}

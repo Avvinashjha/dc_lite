@@ -1,0 +1,96 @@
+{
+  "title": "Queue",
+  "description": "Master the queue and its relatives one concept at a time: FIFO basics, three implementations (naive array, circular buffer, linked list), the double-ended queue, the BFS pattern on trees and grids (including multi-source BFS), the monotonic-deque trick that cracks sliding window maximum, and data-stream patterns with fixed-size windows.",
+  "lessons": [
+    {
+      "slug": "01-what-is-a-queue",
+      "title": "What Is a Queue? The FIFO Model",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-array-backed-queue",
+      "title": "Array-Backed Queue (and Why Naive is O(n))",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-circular-queue",
+      "title": "Circular Queue (Ring Buffer)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-linked-list-backed-queue",
+      "title": "Linked-List-Backed Queue",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-deque-introduction",
+      "title": "The Deque (Double-Ended Queue)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-bfs-with-queue",
+      "title": "The BFS Pattern with a Queue",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "07-tree-level-order-traversal",
+      "title": "Binary Tree Level-Order Traversal",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "08-grid-bfs",
+      "title": "Grid BFS (Shortest Path on a Grid)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "09-multi-source-bfs",
+      "title": "Multi-Source BFS (Rotting Oranges Pattern)",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "10-monotonic-deque-intro",
+      "title": "The Monotonic Deque Pattern",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "11-sliding-window-maximum",
+      "title": "Sliding Window Maximum",
+      "type": "text",
+      "duration": "22 min"
+    },
+    {
+      "slug": "12-moving-average-from-data-stream",
+      "title": "Moving Average from Data Stream",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "13-number-of-recent-calls",
+      "title": "Number of Recent Calls (Time-Window Queue)",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "14-priority-queue-awareness",
+      "title": "Priority Queue (Awareness — Heaps Come Later)",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "15-complexity-and-practice",
+      "title": "Complexity, Pitfalls, and Practice Ladder",
+      "type": "text",
+      "duration": "18 min"
+    }
+  ]
+}

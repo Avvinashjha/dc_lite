@@ -1,0 +1,33 @@
+{
+  "draft": false,
+  "id": "problem-0287",
+  "title": "Binary Search",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Binary Search"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-search/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [-1,0,3,5,9,12], target = 9",
+  "sampleOutput": "4",
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "-10^4 < nums[i], target < 10^4",
+    "All nums are unique and sorted in ascending order."
+  ],
+  "followUps": [
+    "Implement with recursion and O(log n) stack space.",
+    "Compare lower_bound style vs inclusive hi loop — which do you prefer?"
+  ],
+  "functionName": "search",
+  "templateCode": "/**\n * @param {number[]} nums sorted ascending, unique\n * @param {number} target\n * @return {number} index of target, or -1\n */\nfunction search(nums, target) {\n  // Classic binary search\n}\n\n// console.log(search([-1,0,3,5,9,12], 9)); // 4\n",
+  "testCases": [
+    { "args": [[-1, 0, 3, 5, 9, 12], 9], "expected": 4 },
+    { "args": [[-1, 0, 3, 5, 9, 12], 2], "expected": -1 },
+    { "args": [[5], 5], "expected": 0 },
+    { "args": [[5], -5], "expected": -1 }
+  ]
+}

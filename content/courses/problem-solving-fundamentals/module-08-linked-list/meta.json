@@ -1,0 +1,138 @@
+{
+  "title": "Linked List",
+  "description": "Master linked lists one concept at a time. Learn nodes and pointers, all core operations, the dummy-head trick, doubly linked lists, the slow/fast pointer pattern for middle and cycle detection, three flavors of reversal (iterative, recursive, in k-groups), merging and merge sort on lists, and FAANG classics like palindrome check, intersection, add two numbers, and deep-copying a list with random pointers.",
+  "lessons": [
+    {
+      "slug": "01-intro-to-linked-lists",
+      "title": "Introduction to Linked Lists",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "02-traversal-length-search",
+      "title": "Traversal, Length, and Search",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "03-insertion-operations",
+      "title": "Insertion (Head, Tail, Middle)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-deletion-operations",
+      "title": "Deletion (Head, Value, Position)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-dummy-head-pattern",
+      "title": "The Dummy-Head (Sentinel) Pattern",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-doubly-linked-list",
+      "title": "Doubly Linked List",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "07-slow-and-fast-pointer-pattern",
+      "title": "The Slow and Fast Pointer Pattern",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-middle-of-linked-list",
+      "title": "Middle of the Linked List",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-detect-cycle-floyd",
+      "title": "Detect a Cycle (Floyd's Tortoise and Hare)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "10-find-cycle-start",
+      "title": "Find the Start of a Cycle",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "11-remove-nth-from-end",
+      "title": "Remove Nth Node from End",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "12-reverse-iterative",
+      "title": "Reverse a Linked List (Iterative)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "13-reverse-recursive",
+      "title": "Reverse a Linked List (Recursive)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "14-reverse-between",
+      "title": "Reverse a Sublist Between Positions",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "15-reverse-in-k-group",
+      "title": "Reverse Nodes in K-Group",
+      "type": "text",
+      "duration": "22 min"
+    },
+    {
+      "slug": "16-merge-two-sorted-lists",
+      "title": "Merge Two Sorted Lists",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "17-merge-sort-on-linked-list",
+      "title": "Merge Sort on a Linked List",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "18-palindrome-linked-list",
+      "title": "Palindrome Linked List",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "19-intersection-of-two-lists",
+      "title": "Intersection of Two Linked Lists",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "20-add-two-numbers",
+      "title": "Add Two Numbers",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "21-copy-list-with-random-pointer",
+      "title": "Copy List with Random Pointer",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "22-complexity-and-practice",
+      "title": "Complexity, Pitfalls, and Practice Ladder",
+      "type": "text",
+      "duration": "18 min"
+    }
+  ]
+}

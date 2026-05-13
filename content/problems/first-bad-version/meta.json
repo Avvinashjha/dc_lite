@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0289",
+  "title": "First Bad Version",
+  "difficulty": "Easy",
+  "topic": "Binary Search",
+  "topics": [
+    "Binary Search",
+    "Interactive"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/first-bad-version/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "n = 5, firstBad = 4",
+  "sampleOutput": "4",
+  "constraints": [
+    "1 <= firstBad <= n <= 2^31 - 1"
+  ],
+  "followUps": [
+    "On LeetCode, isBadVersion is provided by the platform — here we pass `firstBad` as the second argument so tests can simulate it.",
+    "Why is this binary search on the answer with a monotone predicate?"
+  ],
+  "functionName": "firstBadVersion",
+  "templateCode": "/**\n * Find the first bad version in 1..n.\n * On LeetCode, isBadVersion is global. Here: versions >= firstBad are bad.\n *\n * @param {number} n\n * @param {number} firstBad  First bad version (for testing only — simulate isBadVersion)\n * @return {number}\n */\nfunction firstBadVersion(n, firstBad) {\n  const isBadVersion = v => v >= firstBad;\n  // Binary search smallest v in [1,n] with isBadVersion(v)\n}\n\n// console.log(firstBadVersion(5, 4)); // 4\n",
+  "testCases": [
+    { "args": [5, 4], "expected": 4 },
+    { "args": [1, 1], "expected": 1 },
+    { "args": [10, 7], "expected": 7 },
+    { "args": [2126753390, 1702766718], "expected": 1702766718 }
+  ]
+}

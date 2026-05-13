@@ -1,0 +1,108 @@
+{
+  "title": "Sorting",
+  "description": "Understand every interview-relevant sorting algorithm one at a time: bubble, selection, insertion, the merge operation, merge sort, quicksort and its partitioning, the Dutch National Flag, heaps and heap sort, counting sort, JavaScript comparator pitfalls, and how to choose the right sort for the job.",
+  "lessons": [
+    {
+      "slug": "01-why-sort-and-stability",
+      "title": "Why Sort? Stability and the Comparison Model",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "02-bubble-sort",
+      "title": "Bubble Sort",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "03-selection-sort",
+      "title": "Selection Sort",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "04-insertion-sort",
+      "title": "Insertion Sort",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-merge-two-sorted-ranges",
+      "title": "The Merge Operation (Two Sorted Ranges)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-merge-sort",
+      "title": "Merge Sort",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-quicksort-lomuto-partition",
+      "title": "Quicksort: Lomuto Partition",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "08-quicksort-recursive",
+      "title": "Quicksort: Full Recursive Algorithm",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-quicksort-randomized-and-worst-case",
+      "title": "Quicksort: Randomized Pivot and Worst-Case Behavior",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "10-dutch-national-flag",
+      "title": "3-Way Partition: The Dutch National Flag",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "11-heaps-structure-and-heapify",
+      "title": "Heaps: Array Layout, Parent-Child Math, and Sift-Down",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "12-heap-sort",
+      "title": "Heap Sort",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "13-counting-sort",
+      "title": "Counting Sort (Bounded Integer Keys)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "14-javascript-sort-and-comparators",
+      "title": "JavaScript sort() and Comparator Pitfalls",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "15-sort-then-solve",
+      "title": "Sort Then Solve: Pattern and Examples",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "16-other-sorts-awareness",
+      "title": "Other Sorts: Radix and Bucket (Awareness)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "17-complexity-and-practice",
+      "title": "Choosing a Sort, Complexity, and Practice Ladder",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

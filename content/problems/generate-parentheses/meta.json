@@ -3,33 +3,39 @@
   "id": "problem-0035",
   "title": "Generate Parentheses",
   "difficulty": "Medium",
-  "topic": "String",
+  "topic": "Recursion",
   "topics": [
+    "Recursion",
+    "Backtracking",
     "String",
-    "Hash Table"
+    "Dynamic Programming"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/generate-parentheses/",
   "problemSet": "top-300-leetcode",
   "sampleInput": "n = 3",
   "sampleOutput": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
-  "testCases": [
-    {
-      "args": [
-        3
-      ],
-      "expected": [
-        "((()))",
-        "(()())",
-        "(())()",
-        "()(())",
-        "()()()"
-      ]
-    }
-  ],
-  "functionName": "generateParentheses",
-  "templateCode": "/**\n * @param {number} n\n * @return {any}\n */\nfunction generateParentheses(n) {\n  // Write your solution here\n}\n\n// Sample: console.log(generateParentheses(3));",
   "constraints": [
     "1 <= n <= 8"
+  ],
+  "followUps": [
+    "Derive the count of valid strings for n = 1..5. Do you recognize the Catalan numbers (1, 2, 5, 14, 42, ...)?",
+    "Can you enumerate by building strings of length 2n and filtering invalid ones? Compare its time complexity to the backtracking version."
+  ],
+  "functionName": "generateParentheses",
+  "templateCode": "/**\n * @param {number} n\n * @return {string[]}\n */\nfunction generateParentheses(n) {\n  // Return all distinct well-formed parentheses strings built from n pairs.\n}\n\n// Sample: console.log(generateParentheses(3));\n",
+  "testCases": [
+    {
+      "args": [1],
+      "expected": ["()"]
+    },
+    {
+      "args": [2],
+      "expected": ["(())", "()()"]
+    },
+    {
+      "args": [3],
+      "expected": ["((()))", "(()())", "(())()", "()(())", "()()()"]
+    }
   ]
 }

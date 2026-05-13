@@ -1,0 +1,61 @@
+{
+  "draft": false,
+  "id": "problem-0290",
+  "title": "Search a 2D Matrix",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Binary Search",
+    "Matrix"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/search-a-2d-matrix/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3",
+  "sampleOutput": "true",
+  "constraints": [
+    "m == matrix.length",
+    "n == matrix[i].length",
+    "1 <= m, n <= 100",
+    "-10^4 <= matrix[i][j], target <= 10^4"
+  ],
+  "followUps": [
+    "Solve in O(log(m*n)) by binary searching the flattened logical index.",
+    "Compare with the O(m+n) staircase method when only rows and columns are sorted (different problem)."
+  ],
+  "functionName": "searchMatrix",
+  "templateCode": "/**\n * Each row sorted. First integer of each row > last integer of previous row.\n * Treat as one sorted array in row-major order.\n *\n * @param {number[][]} matrix\n * @param {number} target\n * @return {boolean}\n */\nfunction searchMatrix(matrix, target) {\n  // Binary search on index 0 .. m*n-1\n}\n\n// console.log(searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3)); // true\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          [1, 3, 5, 7],
+          [10, 11, 16, 20],
+          [23, 30, 34, 60]
+        ],
+        3
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [1, 3, 5, 7],
+          [10, 11, 16, 20],
+          [23, 30, 34, 60]
+        ],
+        13
+      ],
+      "expected": false
+    },
+    {
+      "args": [[[1]], 1],
+      "expected": true
+    },
+    {
+      "args": [[[1, 3]], 3],
+      "expected": true
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "draft": false,
+  "id": "problem-0285",
+  "title": "Contains Duplicate",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Hash Table",
+    "Sorting"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/contains-duplicate/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,2,3,1]",
+  "sampleOutput": "true",
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "-10^9 <= nums[i] <= 10^9"
+  ],
+  "followUps": [
+    "Solve in O(n) time with a Set.",
+    "How does sorting first and scanning adjacent pairs compare?",
+    "What if you must use O(1) extra space and cannot sort the input?"
+  ],
+  "functionName": "containsDuplicate",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {boolean}\n */\nfunction containsDuplicate(nums) {\n  // Return true if any value appears at least twice.\n}\n\n// Sample: console.log(containsDuplicate([1,2,3,1])); // true\n",
+  "testCases": [
+    { "args": [[1, 2, 3, 1]], "expected": true },
+    { "args": [[1, 2, 3, 4]], "expected": false },
+    { "args": [[1, 1, 1, 3, 3, 4, 3, 2, 4, 2]], "expected": true },
+    { "args": [[1]], "expected": false }
+  ]
+}

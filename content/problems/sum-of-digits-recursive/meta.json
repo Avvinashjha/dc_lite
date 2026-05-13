@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0280",
+  "title": "Sum of Digits (Recursive)",
+  "difficulty": "Easy",
+  "topic": "Recursion",
+  "topics": [
+    "Recursion",
+    "Math"
+  ],
+  "platform": "DailyCoder",
+  "externalUrl": "",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "n = 1234",
+  "sampleOutput": "10",
+  "constraints": [
+    "0 <= n <= 10^9"
+  ],
+  "followUps": [
+    "Write an iterative version using a while loop.",
+    "Extend it to `digitalRoot(n)`: repeatedly apply sumOfDigits until a single digit remains. Example: 9875 -> 29 -> 11 -> 2.",
+    "Can you implement digitalRoot in O(1) without recursion, using the property n % 9?"
+  ],
+  "functionName": "sumOfDigits",
+  "templateCode": "/**\n * Recursively sum the decimal digits of a non-negative integer n.\n *\n * @param {number} n\n * @return {number}\n */\nfunction sumOfDigits(n) {\n  // Base case: n < 10 -> return n\n  // Recursive case: last digit (n % 10) + sumOfDigits(Math.floor(n / 10))\n}\n\n// Sample: console.log(sumOfDigits(1234)); // 10\n",
+  "testCases": [
+    { "args": [0], "expected": 0 },
+    { "args": [7], "expected": 7 },
+    { "args": [10], "expected": 1 },
+    { "args": [99], "expected": 18 },
+    { "args": [1234], "expected": 10 },
+    { "args": [99999], "expected": 45 },
+    { "args": [1000000000], "expected": 1 }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "draft": false,
+  "id": "problem-0278",
+  "title": "Fibonacci Number",
+  "difficulty": "Easy",
+  "topic": "Recursion",
+  "topics": [
+    "Recursion",
+    "Math",
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/fibonacci-number/",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "n = 4",
+  "sampleOutput": "3",
+  "constraints": [
+    "0 <= n <= 30"
+  ],
+  "followUps": [
+    "Submit three versions in order: naive recursion, memoized recursion, iterative O(1) space. Compare the running time for n = 30.",
+    "Can you compute F(n) in O(log n) using fast matrix exponentiation?",
+    "How does the space cost change between memoization and the iterative O(1) version?"
+  ],
+  "functionName": "fib",
+  "templateCode": "/**\n * Compute the nth Fibonacci number.\n *   F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2) for n >= 2.\n *\n * @param {number} n\n * @return {number}\n */\nfunction fib(n) {\n  // Your solution here.\n}\n\n// Sample: console.log(fib(4)); // 3\n",
+  "testCases": [
+    { "args": [0], "expected": 0 },
+    { "args": [1], "expected": 1 },
+    { "args": [2], "expected": 1 },
+    { "args": [4], "expected": 3 },
+    { "args": [10], "expected": 55 },
+    { "args": [20], "expected": 6765 },
+    { "args": [30], "expected": 832040 }
+  ]
+}

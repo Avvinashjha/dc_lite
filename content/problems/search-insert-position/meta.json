@@ -1,0 +1,33 @@
+{
+  "draft": false,
+  "id": "problem-0288",
+  "title": "Search Insert Position",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Binary Search"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/search-insert-position/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,3,5,6], target = 5",
+  "sampleOutput": "2",
+  "constraints": [
+    "1 <= nums.length <= 10^4",
+    "-10^4 <= nums[i], target <= 10^4",
+    "nums is sorted in ascending order with distinct values."
+  ],
+  "followUps": [
+    "This is lower_bound — first index i with nums[i] >= target.",
+    "What changes if duplicates are allowed?"
+  ],
+  "functionName": "searchInsert",
+  "templateCode": "/**\n * @param {number[]} nums sorted ascending\n * @param {number} target\n * @return {number} index where target should be inserted\n */\nfunction searchInsert(nums, target) {\n  // Lower bound template: half-open [0, n)\n}\n\n// console.log(searchInsert([1,3,5,6], 5)); // 2\n",
+  "testCases": [
+    { "args": [[1, 3, 5, 6], 5], "expected": 2 },
+    { "args": [[1, 3, 5, 6], 2], "expected": 1 },
+    { "args": [[1, 3, 5, 6], 7], "expected": 4 },
+    { "args": [[1], 0], "expected": 0 }
+  ]
+}

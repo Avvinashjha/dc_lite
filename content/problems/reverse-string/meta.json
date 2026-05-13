@@ -1,0 +1,51 @@
+{
+  "draft": false,
+  "id": "problem-0281",
+  "title": "Reverse String",
+  "difficulty": "Easy",
+  "topic": "Two Pointers",
+  "topics": [
+    "Two Pointers",
+    "Recursion",
+    "String",
+    "Array"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reverse-string/",
+  "problemSet": "recursion-warmups",
+  "sampleInput": "s = [\"h\",\"e\",\"l\",\"l\",\"o\"]",
+  "sampleOutput": "[\"o\",\"l\",\"l\",\"e\",\"h\"]",
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s[i] is a printable ASCII character."
+  ],
+  "followUps": [
+    "Solve it in-place with two pointers in O(n) time and O(1) extra space.",
+    "Solve it recursively by swapping s[left] with s[right] and recursing on left+1, right-1. What is the stack space?",
+    "Compare with the approach `s.slice().reverse()`. Why is that not allowed by the in-place requirement?"
+  ],
+  "functionName": "reverseString",
+  "templateCode": "/**\n * Reverse the string in-place. Return the same array reference after reversal.\n *\n * @param {string[]} s  Array of single characters.\n * @return {string[]}\n */\nfunction reverseString(s) {\n  // Do not allocate a new array. Mutate s in place and return it.\n}\n\n// Sample:\n// const s = ['h','e','l','l','o'];\n// console.log(reverseString(s)); // ['o','l','l','e','h']\n",
+  "testCases": [
+    {
+      "args": [["h", "e", "l", "l", "o"]],
+      "expected": ["o", "l", "l", "e", "h"]
+    },
+    {
+      "args": [["H", "a", "n", "n", "a", "h"]],
+      "expected": ["h", "a", "n", "n", "a", "H"]
+    },
+    {
+      "args": [["a"]],
+      "expected": ["a"]
+    },
+    {
+      "args": [["a", "b"]],
+      "expected": ["b", "a"]
+    },
+    {
+      "args": [["r", "e", "c", "u", "r", "s", "i", "o", "n"]],
+      "expected": ["n", "o", "i", "s", "r", "u", "c", "e", "r"]
+    }
+  ]
+}

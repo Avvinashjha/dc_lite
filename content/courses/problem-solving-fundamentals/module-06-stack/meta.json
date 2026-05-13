@@ -1,0 +1,108 @@
+{
+  "title": "Stack",
+  "description": "Master the stack — one of the two most-tested interview data structures. Learn the LIFO model, two ways to implement it, classic stack problems (valid parentheses, min-stack, RPN), the monotonic-stack pattern (next greater, daily temperatures, largest rectangle, trapping rain water), and pattern-heavy favorites like decode string and asteroid collision.",
+  "lessons": [
+    {
+      "slug": "01-what-is-a-stack",
+      "title": "What Is a Stack? The LIFO Model",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-array-backed-stack",
+      "title": "Array-Backed Stack Implementation",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "03-linked-list-backed-stack",
+      "title": "Linked-List-Backed Stack Implementation",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-queue-from-two-stacks",
+      "title": "Queue from Two Stacks (Amortized Analysis)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-stack-from-queues-awareness",
+      "title": "Stack from Queues (Awareness)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-valid-parentheses",
+      "title": "Valid Parentheses",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-min-stack",
+      "title": "Min Stack (O(1) getMin)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-evaluate-reverse-polish-notation",
+      "title": "Evaluate Reverse Polish Notation",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-monotonic-stack-intro",
+      "title": "The Monotonic Stack Pattern",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "10-next-greater-element",
+      "title": "Next Greater Element",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "11-daily-temperatures",
+      "title": "Daily Temperatures",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "12-largest-rectangle-in-histogram",
+      "title": "Largest Rectangle in Histogram",
+      "type": "text",
+      "duration": "22 min"
+    },
+    {
+      "slug": "13-trapping-rain-water-stack",
+      "title": "Trapping Rain Water (Stack Approach)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "14-asteroid-collision",
+      "title": "Asteroid Collision",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "15-decode-string",
+      "title": "Decode String (Nested Structure Pattern)",
+      "type": "text",
+      "duration": "18 min"
+    },
+    {
+      "slug": "16-other-stack-uses-awareness",
+      "title": "Other Stack Uses: Call Stack, Undo/Redo, Infix-to-Postfix (Awareness)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "17-complexity-and-practice",
+      "title": "Complexity, Pitfalls, and Practice Ladder",
+      "type": "text",
+      "duration": "18 min"
+    }
+  ]
+}

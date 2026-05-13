@@ -1,0 +1,60 @@
+{
+  "title": "Map & Set",
+  "description": "Use JavaScript Map and Set like a pro: choose the right structure, count frequencies, track indices, group data, perform set operations on arrays, and apply caching patterns — with quizzes, diagrams, and curated practice problems.",
+  "lessons": [
+    {
+      "slug": "01-map-vs-object",
+      "title": "Map vs Object",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-set-basics-and-deduplication",
+      "title": "Set Basics and Deduplication",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-counting-with-map",
+      "title": "Counting with Map",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-map-for-indices-and-lookup",
+      "title": "Map for Indices and Lookup",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-grouping-patterns",
+      "title": "Grouping Patterns",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-set-operations-for-arrays",
+      "title": "Set Operations for Arrays",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-iteration-order-and-key-equality",
+      "title": "Iteration Order and Key Equality",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-memoization-and-caches",
+      "title": "Memoization and Caches",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-complexity-and-practice",
+      "title": "Complexity and Practice",
+      "type": "text",
+      "duration": "25 min"
+    }
+  ]
+}
