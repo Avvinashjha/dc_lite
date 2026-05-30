@@ -2,9 +2,19 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="QR Code Generator" description="Free online QR code generator. Create QR codes for URLs, WiFi networks, email, and phone numbers. Download as PNG." toolName="QR Code Generator" keywords="qr code generator, qr generator, create qr code, wifi qr code, qr code maker online">
-  <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start;">
-    <div>
+<ToolLayout
+  title="QR Code Generator"
+  description="Free online QR code generator. Create QR codes for URLs, WiFi networks, email, and phone numbers. Download as PNG."
+  toolName="QR Code Generator"
+  keywords="qr code generator, qr generator, create qr code, wifi qr code, qr code maker online"
+  faqs={[
+    { q: "What can I create QR codes for?", a: "URLs, WiFi network credentials, email addresses, and phone numbers." },
+    { q: "Can I download the QR code?", a: "Yes, you can download the generated QR code as a PNG image." },
+    { q: "Is the data private?", a: "Yes. QR codes are generated in your browser; your input never leaves your device." },
+  ]}
+>
+  <div class="qr-layout">
+    <div class="qr-form">
       <div class="cp-field" style="margin-bottom: 1rem;">
         <span class="tool-panel__label">Type</span>
         <select id="qr-type" class="tool-input">
@@ -52,8 +62,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       </div>
     </div>
 
-    <div style="text-align: center;">
-      <div id="qr-output" style="background: white; padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: inline-block;">
+    <div class="qr-preview">
+      <div id="qr-output" class="qr-output">
         <canvas id="qr-canvas" width="300" height="300"></canvas>
       </div>
     </div>
@@ -165,10 +175,37 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 </script>
 
 <style>
+  .qr-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: start;
+  }
+  .qr-form { min-width: 0; }
+  .qr-preview {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 1rem;
+  }
+  .qr-output {
+    background: #fff;
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    max-width: 100%;
+  }
+  .qr-output canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
   @media (max-width: 768px) {
-    div[style*="grid-template-columns: 1fr 300px"] {
-      display: flex !important;
-      flex-direction: column-reverse;
+    .qr-layout { grid-template-columns: 1fr; }
+    .qr-preview {
+      order: -1;
+      position: static;
+      justify-content: flex-start;
     }
   }
 </style>

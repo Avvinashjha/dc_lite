@@ -1,18 +1,38 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { getSiteConfig } from '../utils/contentLoader';
+import { getRelatedTools, getPostsForTool } from '../utils/related';
+import RelatedTools from '../components/RelatedTools.astro';
+import RelatedReading from '../components/RelatedReading.astro';
 import '../styles/tools.scss';
+
+interface Faq {
+  q: string;
+  a: string;
+}
 
 interface Props {
   title: string;
   description: string;
   toolName: string;
   keywords?: string;
+  faqs?: Faq[];
 }
 
 const config = getSiteConfig();
-const { title, description, toolName, keywords = '' } = Astro.props;
+const { title, description, toolName, keywords = '', faqs = [] } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const hasAbout = Astro.slots.has('about');
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '');
+const relatedTools = getRelatedTools(currentPath, 4);
+const relatedPosts = getPostsForTool({ name: toolName, desc: description }, 3);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Tools', href: '/tools' },
+  { label: toolName, href: currentPath || '/tools' },
+];
 
 const toolJsonLd = {
   '@context': 'https://schema.org',
@@ -26,13 +46,26 @@ const toolJsonLd = {
   author: { '@type': 'Organization', name: config.site.title, url: config.site.url },
   browserRequirements: 'Requires JavaScript',
 };
+
+const faqJsonLd = faqs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    }
+  : null;
 ---
 
-<BaseLayout title={`${toolName} - Free Online Tool | DailyCoder`} description={description}>
+<BaseLayout title={`${toolName} - Free Online Tool | DailyCoder`} description={description} breadcrumbs={breadcrumbs}>
   <Fragment slot="head">
     <meta name="keywords" content={`${toolName}, ${keywords}, free online tool, developer tool, no signup, client-side`} />
     <meta name="robots" content="index, follow" />
     <script type="application/ld+json" set:html={JSON.stringify(toolJsonLd)} />
+    {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
   </Fragment>
 
   <div class="tool-page">
@@ -47,9 +80,65 @@ const toolJsonLd = {
         </span>
       </nav>
       <slot />
-      <slot name="about" />
+
+      {(hasAbout || faqs.length > 0 || relatedTools.length > 0) && (
+        <section class="tool-guide" aria-label={`Guide and FAQs for ${toolName}`}>
+          {hasAbout && (
+            <details class="acc acc--about">
+              <summary class="acc__head">
+                <svg class="acc__lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                <span class="acc__q">About {toolName}</span>
+                <svg class="acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="acc__panel">
+                <div class="acc__panel-inner">
+                  <slot name="about" />
+                </div>
+              </div>
+            </details>
+          )}
+
+          {faqs.length > 0 && (
+            <div class="tool-guide__faq">
+              <h2 class="tool-guide__heading">Frequently asked questions</h2>
+              <div class="acc-group" data-acc-group>
+                {faqs.map((f) => (
+                  <details class="acc">
+                    <summary class="acc__head">
+                      <span class="acc__q">{f.q}</span>
+                      <svg class="acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </summary>
+                    <div class="acc__panel">
+                      <div class="acc__panel-inner">
+                        <p>{f.a}</p>
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <RelatedTools tools={relatedTools} />
+          <RelatedReading posts={relatedPosts} heading="From the blog" />
+        </section>
+      )}
     </div>
   </div>
+
+  <script is:inline>
+    document.querySelectorAll('[data-acc-group]').forEach(function (group) {
+      var items = group.querySelectorAll('details.acc');
+      items.forEach(function (d) {
+        d.addEventListener('toggle', function () {
+          if (!d.open) return;
+          items.forEach(function (other) {
+            if (other !== d) other.open = false;
+          });
+        });
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style is:global>
@@ -96,47 +185,119 @@ const toolJsonLd = {
     margin-left: auto;
     flex-shrink: 0;
   }
-  .tool-about {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
+  /* ── Tool guide: About + FAQ accordion (separated from the tool) ── */
+  .tool-guide {
+    margin: 3rem auto 0.5rem;
+    padding-top: 1.75rem;
     border-top: 1px solid var(--color-border);
   }
+  .tool-guide__heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 1.75rem 0 0.85rem;
+  }
+  .acc {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    margin-bottom: 0.55rem;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .acc:hover {
+    border-color: color-mix(in oklab, var(--color-primary) 28%, var(--color-border));
+  }
+  .acc[open] {
+    border-color: color-mix(in oklab, var(--color-primary) 42%, var(--color-border));
+    box-shadow: var(--shadow-sm);
+  }
+  .acc__head {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.05rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--color-text);
+  }
+  .acc__head::-webkit-details-marker { display: none; }
+  .acc__head:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-lg);
+  }
+  .acc__q { flex: 1; min-width: 0; }
+  .acc__lead {
+    width: 18px; height: 18px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  .acc__chev {
+    width: 18px; height: 18px;
+    color: var(--color-text-light);
+    flex-shrink: 0;
+    transition: transform 220ms ease;
+  }
+  .acc[open] .acc__chev { transform: rotate(180deg); }
+  .acc__panel-inner {
+    padding: 0 1.05rem 1.05rem;
+    animation: accReveal 240ms ease;
+  }
+  .acc--about .acc__panel-inner { padding-bottom: 1.25rem; }
+  .acc__panel-inner > p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+    margin: 0;
+  }
+  @keyframes accReveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* About content is slotted by each tool; it now lives inside the accordion */
+  .tool-about { margin: 0; padding: 0; border: 0; }
+  .tool-about > :first-child { margin-top: 0; }
   .tool-about h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem;
   }
   .tool-about h3 {
-    font-size: 1.05rem;
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    margin: 1.1rem 0 0.4rem;
   }
   .tool-about p {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.7;
     color: var(--color-text-light);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.7rem;
   }
   .tool-about ul {
-    margin: 0.5rem 0 1rem 1.2rem;
-    font-size: 0.92rem;
+    margin: 0.4rem 0 0.9rem 1.2rem;
+    font-size: 0.9rem;
     line-height: 1.7;
     color: var(--color-text-light);
   }
-  .tool-about li {
-    margin-bottom: 0.3rem;
-  }
+  .tool-about li { margin-bottom: 0.3rem; }
   .tool-about code {
     font-size: 0.82rem;
     background: var(--color-code-bg);
     padding: 0.1rem 0.35rem;
     border-radius: 3px;
   }
-  .tool-about a {
-    color: var(--color-primary);
+  .tool-about a { color: var(--color-primary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .acc__panel-inner { animation: none; }
+    .acc__chev { transition: none; }
   }
   @media (max-width: 768px) {
     .tool-container { padding: 0.5rem 1rem 0.75rem; }
     .tool-crumb h1 { font-size: 0.78rem !important; }
+    .tool-guide { margin-top: 2.25rem; }
   }
 </style>
 

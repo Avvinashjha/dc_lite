@@ -9,12 +9,17 @@ import {
   getPastDailyProblems,
   getDailyScheduleFullLite,
   getProblem,
+  getProblems,
 } from '../utils/contentLoader';
+import { TOOLS_COUNT } from '../data/tools';
 import '../styles/problems.scss';
 
 const recentPosts = getBlogPostsSorted().slice(0, 3);
 const firstPost = recentPosts[0];
 const courses = getCourses();
+
+const toolsCount = TOOLS_COUNT;
+const problemCount = getProblems().length;
 
 
 const todaysProblem = getTodaysProblem();
@@ -67,7 +72,6 @@ const jsonLdPotd = todaysProblem
 >
   <Fragment slot="head">
     {jsonLdPotd && <script type="application/ld+json" set:html={JSON.stringify(jsonLdPotd)} />}
-    <link rel="alternate" type="application/rss+xml" title="Daily Challenge RSS" href="/daily/problem/rss.xml" />
   </Fragment>
 
   <!-- ── HERO ─────────────────────────────────────────── -->
@@ -79,7 +83,7 @@ const jsonLdPotd = todaysProblem
         </h1>
         <p class="hp-hero__sub">
           A daily coding problem in your browser, engineering deep-dives, hands-on courses,
-          and 14+ free dev tools — all in one place.
+          and {toolsCount} free dev tools — all in one place.
         </p>
         <div class="hp-hero__ctas">
           <a href={potdHref} class="button">
@@ -90,9 +94,9 @@ const jsonLdPotd = todaysProblem
           </a>
         </div>
         <div class="hp-hero__feature-pills">
-          <a href="/problems" class="hp-pill">300+ Problems</a>
+          <a href="/problems" class="hp-pill">{problemCount} Problems</a>
           <a href="/courses" class="hp-pill">Courses</a>
-          <a href="/tools" class="hp-pill">14 Free Tools</a>
+          <a href="/tools" class="hp-pill">{toolsCount} Free Tools</a>
           <a href="/docs" class="hp-pill">Tech Guides</a>
         </div>
       </div>
@@ -199,7 +203,7 @@ const jsonLdPotd = todaysProblem
         <span class="hp-feat__icon">⚡</span>
         <div>
           <h3>Problems</h3>
-          <p>300+ curated problems with an in-browser JS runner, test cases, and progress sync.</p>
+          <p>{problemCount} curated problems with an in-browser JS runner, test cases, and progress sync.</p>
         </div>
       </a>
       <a href="/blog" class="hp-feat">
@@ -220,7 +224,7 @@ const jsonLdPotd = todaysProblem
         <span class="hp-feat__icon">🔧</span>
         <div>
           <h3>Tools</h3>
-          <p>14 free, private, client-side developer tools. JSON, diff, regex, JWT and more.</p>
+          <p>{toolsCount} free, private, client-side developer tools. JSON, diff, regex, JWT and more.</p>
         </div>
       </a>
     </div>
@@ -275,7 +279,7 @@ const jsonLdPotd = todaysProblem
   <section class="hp-section container" aria-labelledby="tools-heading">
     <div class="hp-section__hd">
       <h2 id="tools-heading">Developer tools</h2>
-      <a href="/tools" class="hp-text-link">All 14 tools →</a>
+      <a href="/tools" class="hp-text-link">All {toolsCount} tools →</a>
     </div>
     <p class="hp-tools-sub">Private & free — no data leaves your browser.</p>
     <div class="hp-tools">

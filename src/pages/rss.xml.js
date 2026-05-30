@@ -5,7 +5,7 @@ export function GET(context) {
   const posts = getBlogPostsSorted();
 
   return rss({
-    title: 'DevContent',
+    title: 'DailyCoder',
     description: 'Blog, courses, and documentation for modern web development.',
     site: context.site,
     items: posts.map(post => ({

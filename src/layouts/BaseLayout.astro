@@ -6,6 +6,7 @@ import Icons from '../components/Icons.astro';
 import AuthWidget from '../components/AuthWidget';
 import LoginModal from '../components/LoginModal';
 import { getSiteConfig } from '../utils/contentLoader';
+import { ogImageForPath } from '../utils/og';
 
 interface Props {
   title: string;
@@ -33,7 +34,9 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site).href : new URL('/og-image.png', Astro.site).href;
+const ogImage = image
+  ? new URL(image, Astro.site).href
+  : new URL(ogImageForPath(Astro.url.pathname), Astro.site).href;
 const seo = (config as any).seo || {};
 const analytics = (config as any).analytics || {};
 const twitterHandle = seo.twitterHandle || '@dailycoder_in';
@@ -89,21 +92,25 @@ if (type === 'website') {
     {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Feed discovery -->
+    <link rel="alternate" type="application/rss+xml" title={`${config.site.title} Blog`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${config.site.title} Daily Problems`} href="/daily/problem/rss.xml" />
+
     <!-- Open Graph -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content={image ? "1200" : "512"} />
-    <meta property="og:image:height" content={image ? "630" : "512"} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content={config.site.title} />
     <meta property="og:locale" content={locale} />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
 
     <!-- Twitter -->
-    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={twitterHandle} />
     <meta name="twitter:creator" content={twitterHandle} />
     <meta name="twitter:url" content={canonicalURL} />
@@ -129,6 +136,9 @@ if (type === 'website') {
     <!-- Analytics: loaded after page is idle to avoid blocking and reduce Best Practices impact -->
     {analytics.googleSearchConsoleVerification && (
       <meta name="google-site-verification" content={analytics.googleSearchConsoleVerification} />
+    )}
+    {analytics.bingVerification && (
+      <meta name="msvalidate.01" content={analytics.bingVerification} />
     )}
     {analytics.googleAnalyticsId && (
       <script is:inline define:vars={{gaId: analytics.googleAnalyticsId}}>

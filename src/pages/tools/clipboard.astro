@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Clipboard Manager" description="Save, organize, and quickly access your clipboard snippets." toolName="Clipboard Manager">
+<ToolLayout
+  title="Clipboard Manager"
+  description="Save, organize, and quickly access your clipboard snippets."
+  toolName="Clipboard Manager"
+  keywords="clipboard manager, clipboard history, save snippets, snippet manager online"
+  faqs={[
+    { q: "Where are my snippets stored?", a: "Snippets are saved locally in your browser, not on any server." },
+    { q: "Can I search my saved snippets?", a: "Yes, you can save, search, and organize clipboard snippets quickly." },
+    { q: "Will my snippets persist?", a: "Yes, they're stored in your browser so they remain available across sessions on the same device." },
+  ]}
+>
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-paste">Paste from Clipboard</button>
     <button class="tool-btn" id="btn-add-manual">Add Manually</button>

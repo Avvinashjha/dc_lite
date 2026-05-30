@@ -14,6 +14,11 @@ console.log('Ready to run');`;
   description="Simple in-browser JavaScript editor to write and run functions safely in a sandboxed iframe."
   toolName="JavaScript Runner"
   keywords="javascript runner, javascript editor, run javascript online, js playground, javascript function tester"
+  faqs={[
+    { q: "Is it safe to run code here?", a: "Code runs in your own browser sandbox, not on a server, so it only has access to your local browser environment." },
+    { q: "Can I test functions with inputs?", a: "Yes — write a function and execute it to see the output immediately." },
+    { q: "Are my scripts saved?", a: "Your work is stored locally in your browser so it's still there when you return." },
+  ]}
 >
   <div class="tool-panel" style="margin-bottom: 1rem;">
     <span class="tool-panel__label">JavaScript Code</span>

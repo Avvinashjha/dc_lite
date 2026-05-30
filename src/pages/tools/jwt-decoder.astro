@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="JWT Decoder" description="Free online JWT decoder. Decode JSON Web Tokens instantly — view header, payload, expiration status. No data sent to server." toolName="JWT Decoder" keywords="jwt decoder, decode jwt, json web token decoder, jwt parser, jwt token decoder online">
+<ToolLayout
+  title="JWT Decoder"
+  description="Free online JWT decoder. Decode JSON Web Tokens instantly — view header, payload, expiration status. No data sent to server."
+  toolName="JWT Decoder"
+  keywords="jwt decoder, decode jwt, json web token decoder, jwt parser, jwt token decoder online"
+  faqs={[
+    { q: "Does this JWT decoder verify the signature?", a: "It decodes and displays the header and payload and shows expiration status, but it does not verify the signature — decoding never requires the secret key." },
+    { q: "Is it safe to paste a real token?", a: "Yes. Decoding happens entirely in your browser and the token is never sent to a server. Still, treat production tokens carefully." },
+    { q: "What do the header and payload show?", a: "The header describes the signing algorithm and token type, while the payload contains the claims such as subject, issued-at, and expiry." },
+  ]}
+>
   <div class="tool-panel" style="margin-bottom: 1rem;">
     <span class="tool-panel__label">Paste JWT Token</span>
     <textarea id="input" class="tool-textarea" style="min-height: 100px;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"></textarea>

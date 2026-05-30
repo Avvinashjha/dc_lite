@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Timezone Converter" description="Convert time between timezones instantly." toolName="Timezone Converter">
+<ToolLayout
+  title="Timezone Converter"
+  description="Convert time between timezones instantly."
+  toolName="Timezone Converter"
+  keywords="timezone converter, time zone converter, world clock, convert time between timezones"
+  faqs={[
+    { q: "Can I compare multiple timezones?", a: "Yes, convert a time between zones and view world clocks side by side." },
+    { q: "Does it handle daylight saving time?", a: "It uses your browser's timezone database, which accounts for DST rules." },
+    { q: "Is my data private?", a: "Yes. All conversion happens locally in your browser." },
+  ]}
+>
   <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; margin-bottom: 2rem;">
     <span class="tool-panel__label">Your Local Time</span>
     <div id="local-time" style="font-size: 1.75rem; font-weight: 700; font-family: var(--font-mono); margin: 0.5rem 0;"></div>

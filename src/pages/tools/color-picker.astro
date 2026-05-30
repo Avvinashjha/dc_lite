@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Color Picker & Palette" description="Free online color picker with gradient builder. Save color palettes and export as CSS or SASS variables. HEX, RGB, HSL converter." toolName="Color Picker & Palette" keywords="color picker, color palette, gradient generator, css color, hex to rgb, color converter, sass variables">
+<ToolLayout
+  title="Color Picker & Palette"
+  description="Free online color picker with gradient builder. Save color palettes and export as CSS or SASS variables. HEX, RGB, HSL converter."
+  toolName="Color Picker & Palette"
+  keywords="color picker, color palette, gradient generator, css color, hex to rgb, color converter, sass variables"
+  faqs={[
+    { q: "Can I export my palette as CSS?", a: "Yes. You can export saved colors and gradients as CSS custom properties or SASS variables." },
+    { q: "What color formats are supported?", a: "You can work with HEX, RGB, and HSL and convert between them instantly." },
+    { q: "Are my saved palettes stored privately?", a: "Yes. Palettes are saved locally in your browser, not on any server." },
+  ]}
+>
 
   <!-- Tabs -->
   <div class="cp-tabs">

@@ -1,0 +1,77 @@
+---
+import type { Post } from '../types/post';
+
+interface Props {
+  posts: Post[];
+  heading?: string;
+}
+
+const { posts, heading = 'Related reading' } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <section class="rel">
+    <h2 class="rel__heading">{heading}</h2>
+    <div class="rel__grid">
+      {posts.map((p) => (
+        <a href={`/blog/${p.slug}`} class="rel__card">
+          <span class="rel__cat">{p.category}</span>
+          <span class="rel__title">{p.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .rel {
+    margin-top: 1.75rem;
+  }
+  .rel__heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.85rem;
+  }
+  .rel__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.6rem;
+  }
+  .rel__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.85rem 0.95rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .rel__card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    color: inherit;
+  }
+  .rel__cat {
+    align-self: flex-start;
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-primary);
+    background: color-mix(in oklab, var(--color-primary) 12%, transparent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+  }
+  .rel__title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text);
+  }
+</style>

@@ -4,6 +4,8 @@ import { formatDate } from "../utils/formatDate";
 import { calculateReadingTime } from "../utils/readingTime";
 import { slugifyTaxonomy } from "../utils/taxonomy";
 import Comments from "../components/Comments.astro";
+import RelatedTools from "../components/RelatedTools.astro";
+import { getToolsForPost } from "../utils/related";
 
 interface Props {
   title: string;
@@ -24,6 +26,7 @@ const encodedUrl = encodeURIComponent(postUrl);
 const encodedTitle = encodeURIComponent(title);
 const categorySlug = slugifyTaxonomy(category);
 const postSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
+const relatedTools = getToolsForPost({ title, tags, category }, 3);
 ---
 
 <BaseLayout
@@ -81,6 +84,10 @@ const postSlug = Astro.url.pathname.replace(/^\/blog\//, '').replace(/\/$/, '');
 
       <div class="article__content">
         <slot />
+      </div>
+
+      <div class="article__related">
+        <RelatedTools tools={relatedTools} heading="Tools you might find useful" />
       </div>
 
       <!-- Share -->

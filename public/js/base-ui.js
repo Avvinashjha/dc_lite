@@ -83,7 +83,35 @@
     });
   }
 
+  function setupCodeCopy() {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('.cb__copy');
+      if (!btn) return;
+
+      var cb = btn.closest('.cb');
+      if (!cb) return;
+
+      var codeEl = cb.querySelector('.cb__code code');
+      if (!codeEl) return;
+
+      var text = codeEl.textContent || '';
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+
+      navigator.clipboard.writeText(text).then(function () {
+        var label = btn.querySelector('.cb__copy-label');
+        var original = label ? label.textContent : '';
+        if (label) label.textContent = 'Copied';
+        btn.classList.add('cb__copy--done');
+        setTimeout(function () {
+          if (label) label.textContent = original || 'Copy';
+          btn.classList.remove('cb__copy--done');
+        }, 1600);
+      });
+    });
+  }
+
   setupTheme();
   setupMobileMenu();
   setupReadingMode();
+  setupCodeCopy();
 })();

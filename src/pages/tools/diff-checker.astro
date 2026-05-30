@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Diff Checker" description="Free online text diff checker. Compare two texts side-by-side with git-style highlighting. See additions, deletions, and changes line by line." toolName="Diff Checker" keywords="diff checker, text diff, compare text, text comparison, code diff, online diff tool">
+<ToolLayout
+  title="Diff Checker"
+  description="Free online text diff checker. Compare two texts side-by-side with git-style highlighting. See additions, deletions, and changes line by line."
+  toolName="Diff Checker"
+  keywords="diff checker, text diff, compare text, text comparison, code diff, online diff tool"
+  faqs={[
+    { q: "Does the diff checker send my text anywhere?", a: "No. Both texts are compared locally in your browser, so you can safely diff private code or documents." },
+    { q: "What kind of diff does it show?", a: "It highlights additions, deletions, and changes line by line, similar to a git diff." },
+    { q: "Can I compare code?", a: "Yes — paste any two text or code snippets and the tool highlights the differences between them." },
+  ]}
+>
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
     <button class="tab-add" id="btn-add-tab" title="New diff pair">+</button>

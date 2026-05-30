@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="CSV ↔ JSON Converter" description="Convert between CSV and JSON formats — with multiple tabs." toolName="CSV ↔ JSON Converter">
+<ToolLayout
+  title="CSV ↔ JSON Converter"
+  description="Convert between CSV and JSON formats — with multiple tabs."
+  toolName="CSV ↔ JSON Converter"
+  keywords="csv to json, json to csv, csv json converter, convert csv online"
+  faqs={[
+    { q: "Which direction can it convert?", a: "Both ways — turn CSV into a JSON array of objects, or flatten JSON back into CSV rows." },
+    { q: "Is my data private?", a: "Yes. Conversion runs entirely in your browser; nothing is uploaded." },
+    { q: "How are CSV headers handled?", a: "The first row is treated as the column names, which become the keys in each JSON object." },
+  ]}
+>
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
     <button class="tab-add" id="btn-add-tab" title="New conversion">+</button>

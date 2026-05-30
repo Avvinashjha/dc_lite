@@ -8,6 +8,11 @@ import CodeEditor from "../../components/CodeEditor.astro";
   description="Free online JSON formatter, validator, minifier, and parser. Format JSON with syntax highlighting, parse input into prettified JSON, validate, and minify. Multi-tab support with auto-save."
   toolName="JSON Formatter"
   keywords="json formatter, json beautifier, json validator, json minifier, json parser, parse json online, format json online, pretty print json"
+  faqs={[
+    { q: "Is this JSON formatter safe to use with sensitive data?", a: "Yes. Everything runs locally in your browser — your JSON is never uploaded to any server, so you can safely paste API responses or config files." },
+    { q: "What's the difference between Format and Minify?", a: "Format adds indentation and line breaks so JSON is easy to read, while Minify strips all whitespace to produce the smallest valid JSON for production." },
+    { q: "Why does it say my JSON is invalid?", a: "The parser reports the first syntax error it finds — usually a missing comma, an extra trailing comma, unquoted keys, or single quotes instead of double quotes." },
+  ]}
 >
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>

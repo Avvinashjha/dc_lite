@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Markdown Preview" description="Write markdown and see a live rendered preview — with multiple tabs." toolName="Markdown Preview">
+<ToolLayout
+  title="Markdown Preview"
+  description="Write markdown and see a live rendered preview — with multiple tabs."
+  toolName="Markdown Preview"
+  keywords="markdown preview, markdown editor, markdown to html, live markdown preview, markdown to pdf"
+  faqs={[
+    { q: "Does it support live preview?", a: "Yes. As you type markdown, the rendered HTML preview updates in real time." },
+    { q: "Can I export to PDF?", a: "Yes, you can export your rendered markdown to a PDF." },
+    { q: "Is my content private?", a: "Yes. Rendering happens in your browser and nothing is uploaded." },
+  ]}
+>
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
     <button class="tab-add" id="btn-add-tab" title="New document">+</button>
