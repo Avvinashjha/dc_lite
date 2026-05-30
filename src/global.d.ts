@@ -25,6 +25,7 @@ declare global {
   interface Window {
     __dcAuthUser: User | null;
     __dcSyncScriptUrl: string;
+    __dcQuizApiUrl: string;
     __dcOpenLoginModal: (reason?: string) => void;
     __dcCloseLoginModal: () => void;
     requireAuth: (reason: string, callback: (user: User) => void) => void;

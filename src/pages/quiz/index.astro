@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/quiz.scss';
+import QuizBrowser from '../../components/QuizBrowser';
+import { getQuizIndex, getQuizListItems, getQuizCategories } from '../../utils/quizLoader';
+import { getSiteConfig } from '../../utils/contentLoader';
+
+const pageMeta = getQuizIndex();
+const curated = getQuizListItems();
+const categories = getQuizCategories();
+
+const config = getSiteConfig();
+const quizApiUrl = config.quiz?.enabled ? (config.quiz.googleScriptUrl || '') : '';
+
+const listJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: pageMeta.title,
+  description: pageMeta.description,
+  url: new URL('/quiz', Astro.site).href,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: curated.length,
+    itemListElement: curated.map((q, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: q.title,
+      url: new URL(`/quiz/${q.slug}`, Astro.site).href,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={`${pageMeta.title} | DailyCoder`}
+  description={pageMeta.description}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Quiz', href: '/quiz' },
+  ]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(listJsonLd)} />
+  </Fragment>
+
+  <div class="container quiz-page">
+    <section class="quiz-hero">
+      <p class="quiz-hero__eyebrow">Knowledge Arena</p>
+      <h1 class="quiz-hero__title">{pageMeta.title}</h1>
+      <p class="quiz-hero__desc">{pageMeta.description}</p>
+      <div class="quiz-hero__actions">
+        <a class="quiz-btn quiz-btn--primary" href="/quiz/create">Create a quiz</a>
+      </div>
+    </section>
+
+    <QuizBrowser client:load curated={curated} categories={categories} />
+  </div>
+
+  <script set:html={`window.__dcQuizApiUrl = ${JSON.stringify(quizApiUrl)};`} is:inline />
+  <script src="/js/store.js" is:inline></script>
+</BaseLayout>

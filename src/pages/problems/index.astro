@@ -45,7 +45,7 @@ const listJsonLd = {
       '@type': 'ListItem',
       position: i + 1,
       name: p.title,
-      url: `/problems/${p.slug}`,
+      url: new URL(`/problems/${p.slug}`, Astro.site).href,
     })),
   },
 };

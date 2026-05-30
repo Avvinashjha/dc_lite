@@ -30,6 +30,15 @@ Practice problems with an in-browser editor, test cases, and progress tracking.
 - [All Problems](https://dailycoder.in/problems): Curated coding problems across many topics and difficulties.
 - [Problem of the Day](https://dailycoder.in/daily/problem): A new daily coding challenge with streak tracking.
 
+## Quizzes
+Interactive, client-side quizzes on web development topics. Play in practice mode (no signup) or sign in to compete on ranked leaderboards. Anyone can also create and share community quizzes.
+
+- [All Quizzes](https://dailycoder.in/quiz): Browse curated and community quizzes by category, difficulty, and ranking.
+- [JavaScript Fundamentals](https://dailycoder.in/quiz/javascript-fundamentals): Core JavaScript concepts — types, scope, equality, hoisting, and the event loop.
+- [CSS Flexbox & Grid](https://dailycoder.in/quiz/css-flexbox-and-grid): Modern CSS layout with Flexbox and Grid.
+- [HTTP & Web Basics](https://dailycoder.in/quiz/http-and-web-basics): HTTP methods, status codes, headers, caching, and web security.
+- [Create a Quiz](https://dailycoder.in/quiz/create): Build and share your own quiz.
+
 ## Blog
 Engineering deep-dives, architecture patterns, and practical career tips.
 

@@ -1,6 +1,7 @@
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { getBlogPosts, getProblems, getSiteConfig } from './contentLoader';
+import { getQuizzes } from './quizLoader';
 import { ALL_TOOLS } from '../data/tools';
 
 export interface OgEntry {
@@ -65,6 +66,15 @@ export function getOgEntries(): OgEntry[] {
       title: problem.title,
       description: `A ${problem.difficulty} ${topic} coding problem you can solve in the browser with an integrated editor and test cases.`,
       tag: `${problem.difficulty} · ${topic}`,
+    });
+  }
+
+  for (const quiz of getQuizzes()) {
+    entries.push({
+      slug: `quiz/${quiz.slug}`,
+      title: quiz.title,
+      description: quiz.description || `A ${quiz.difficulty} ${quiz.category} quiz with ${quiz.questions.length} questions.`,
+      tag: `${quiz.difficulty} · ${quiz.category} Quiz`,
     });
   }
 

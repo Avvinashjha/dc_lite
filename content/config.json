@@ -9,6 +9,7 @@
   "navigation": [
     { "label": "Blog", "path": "/blog" },
     { "label": "Problems", "path": "/problems" },
+    { "label": "Quiz", "path": "/quiz" },
     { "label": "Tools", "path": "/tools" },
     { "label": "About", "path": "/about" }
   ],
@@ -30,6 +31,10 @@
   "sync": {
     "enabled": true,
     "googleScriptUrl": "https://script.google.com/macros/s/AKfycbzvmQUNi5cWdbal5ydcUYLZd8coPK2J2BKs9fy6vX68gA3D5c0Ci0xqycFEilGXg2G6bw/exec"
+  },
+  "quiz": {
+    "enabled": true,
+    "googleScriptUrl": ""
   },
   "seo": {
     "twitterHandle": "@dailycoder_in",

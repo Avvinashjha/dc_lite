@@ -1,0 +1,125 @@
+{
+  "id": "http-and-web-basics",
+  "title": "HTTP & Web Basics",
+  "description": "How the web works under the hood: HTTP methods, status codes, headers, caching, and security fundamentals.",
+  "category": "Web",
+  "difficulty": "medium",
+  "tags": ["http", "web", "networking", "backend"],
+  "author": "DailyCoder",
+  "ranked": true,
+  "timeLimitSec": 360,
+  "source": "curated",
+  "publishedAt": "2026-05-10",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which HTTP status code indicates that a resource was permanently moved to a new URL?",
+      "options": [
+        { "id": "a", "text": "302" },
+        { "id": "b", "text": "301" },
+        { "id": "c", "text": "307" },
+        { "id": "d", "text": "404" }
+      ],
+      "correct": ["b"],
+      "explanation": "301 Moved Permanently signals a permanent redirect (good for SEO). 302/307 are temporary redirects.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "Which HTTP methods are considered idempotent? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "GET" },
+        { "id": "b", "text": "PUT" },
+        { "id": "c", "text": "DELETE" },
+        { "id": "d", "text": "POST" }
+      ],
+      "correct": ["a", "b", "c"],
+      "explanation": "GET, PUT, and DELETE are idempotent: repeating the request has the same effect as making it once. POST is not idempotent — it typically creates a new resource each time.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "boolean",
+      "prompt": "HTTPS encrypts the request URL path and query string from network eavesdroppers.",
+      "options": [
+        { "id": "true", "text": "True" },
+        { "id": "false", "text": "False" }
+      ],
+      "correct": ["true"],
+      "explanation": "With HTTPS (TLS), the entire HTTP request — including path, query string, headers, and body — is encrypted. Only the destination hostname (via SNI) and IP are visible.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the purpose of the `Cache-Control: no-store` directive?",
+      "options": [
+        { "id": "a", "text": "Cache the response but revalidate every time" },
+        { "id": "b", "text": "Never store any part of the response in any cache" },
+        { "id": "c", "text": "Store the response for a maximum of one hour" },
+        { "id": "d", "text": "Store the response only in shared (CDN) caches" }
+      ],
+      "correct": ["b"],
+      "explanation": "`no-store` forbids caching the response anywhere. `no-cache` (a common confusion) allows storage but requires revalidation before reuse.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which status code family (4xx) represents client errors?",
+      "options": [
+        { "id": "a", "text": "1xx — Informational" },
+        { "id": "b", "text": "3xx — Redirection" },
+        { "id": "c", "text": "4xx — Client error" },
+        { "id": "d", "text": "5xx — Server error" }
+      ],
+      "correct": ["c"],
+      "explanation": "4xx codes (e.g. 400, 401, 403, 404) indicate the request was faulty or unauthorized. 5xx codes indicate the server failed to fulfill a valid request.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which HTTP header is used by the browser to send stored cookies back to the server?",
+      "options": [
+        { "id": "a", "text": "Set-Cookie" },
+        { "id": "b", "text": "Cookie" },
+        { "id": "c", "text": "Authorization" },
+        { "id": "d", "text": "X-Cookie" }
+      ],
+      "correct": ["b"],
+      "explanation": "The server sets cookies with the `Set-Cookie` response header; the browser sends them back on subsequent requests using the `Cookie` request header.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which mechanisms help mitigate Cross-Site Scripting (XSS)? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "Content-Security-Policy (CSP) headers" },
+        { "id": "b", "text": "Escaping/encoding user-generated content" },
+        { "id": "c", "text": "Using HttpOnly cookies" },
+        { "id": "d", "text": "Disabling HTTPS" }
+      ],
+      "correct": ["a", "b", "c"],
+      "explanation": "CSP restricts which scripts can run, output encoding prevents injected markup from executing, and HttpOnly cookies cannot be read by JavaScript (limiting the damage of an XSS). Disabling HTTPS does not help and harms security.",
+      "points": 3
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does a 304 Not Modified response tell the browser?",
+      "options": [
+        { "id": "a", "text": "The resource was deleted" },
+        { "id": "b", "text": "Use your cached copy; it hasn't changed" },
+        { "id": "c", "text": "The server is overloaded" },
+        { "id": "d", "text": "Authentication is required" }
+      ],
+      "correct": ["b"],
+      "explanation": "304 is returned during conditional requests (using ETag/If-None-Match or If-Modified-Since) to tell the client its cached representation is still valid, saving bandwidth.",
+      "points": 2
+    }
+  ]
+}

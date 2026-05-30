@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/quiz.scss';
+import QuizCommunityLoader from '../../components/QuizCommunityLoader';
+import { getSiteConfig } from '../../utils/contentLoader';
+
+const config = getSiteConfig();
+const quizApiUrl = config.quiz?.enabled ? (config.quiz.googleScriptUrl || '') : '';
+
+const description = 'Play a community-created quiz on DailyCoder.';
+---
+
+<BaseLayout
+  title="Play Quiz | DailyCoder"
+  description={description}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Quiz', href: '/quiz' },
+  ]}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+  </Fragment>
+
+  <div class="container quiz-page quiz-page--play">
+    <QuizCommunityLoader client:load />
+  </div>
+
+  <script set:html={`window.__dcQuizApiUrl = ${JSON.stringify(quizApiUrl)};`} is:inline />
+  <script src="/js/store.js" is:inline></script>
+</BaseLayout>

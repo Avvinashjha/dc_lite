@@ -135,7 +135,10 @@
     font-size: 0.9rem;
     line-height: 1.7;
 
-    pre {
+    // Standalone <pre> not part of a .cb figure (rare; raw HTML in descriptions).
+    // The site-wide `.cb` code blocks style themselves and must NOT be overridden here.
+    > pre,
+    p > pre {
       margin: 0.6rem 0;
       padding: 0.6rem 0.75rem;
       background: var(--color-code-bg);
@@ -147,13 +150,8 @@
       white-space: pre-wrap;
     }
 
-    pre:has(code.hljs) {
-      background: #1e293b;
-      border-color: #334155;
-      color: #e2e8f0;
-    }
-
-    code {
+    // Inline code only (markdown backticks). Excludes highlighted code inside .cb.
+    :not(pre) > code {
       font-size: 0.85em;
       background: var(--color-code-bg);
       color: inherit;
@@ -161,9 +159,9 @@
       border-radius: var(--radius-sm);
     }
 
-    pre code {
-      background: none;
-      padding: 0;
+    // Keep the shared .cb figure flush within the narrow description column.
+    .cb {
+      margin: 0.75rem 0;
     }
   }
 }
@@ -261,6 +259,40 @@
     border: none;
     border-radius: 0;
   }
+}
+
+// Fallback editor (plain textarea) shown only if CodeMirror fails to load.
+.problem-editor-fallback {
+  &__note {
+    margin: 0;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    background: var(--color-code-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__area {
+    flex: 1;
+    width: 100%;
+    min-height: 200px;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 0.6rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    background: var(--color-surface);
+    color: var(--color-text);
+    tab-size: 2;
+  }
+}
+
+.dc-editor__mount:has(.problem-editor-fallback__area) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .problem-output-area {
@@ -379,6 +411,13 @@
   &:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   &--primary {

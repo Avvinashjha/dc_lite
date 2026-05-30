@@ -7,6 +7,7 @@ import Icons from '../components/Icons.astro';
 import AuthWidget from '../components/AuthWidget';
 import LoginModal from '../components/LoginModal';
 import { getSiteConfig } from '../utils/contentLoader';
+import { ogImageForPath } from '../utils/og';
 
 interface Props {
   title: string;
@@ -21,10 +22,11 @@ const syncScriptUrl = syncConfig.enabled ? (syncConfig.googleScriptUrl || '') : 
 const { title, description, breadcrumbs = [], tags = [] } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og-image.png', Astro.site).href;
+const ogImage = new URL(ogImageForPath(Astro.url.pathname), Astro.site).href;
 const seo = (config as any).seo || {};
 const analytics = (config as any).analytics || {};
 const twitterHandle = seo.twitterHandle || '@dailycoder_in';
+const locale = seo.locale || 'en_US';
 ---
 
 <!DOCTYPE html>
@@ -39,21 +41,35 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#2563eb" />
     <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
     {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Feed discovery -->
+    <link rel="alternate" type="application/rss+xml" title={`${config.site.title} Blog`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${config.site.title} Daily Problems`} href="/daily/problem/rss.xml" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:site_name" content={config.site.title} />
+    <meta property="og:locale" content={locale} />
 
-    <meta name="twitter:card" content="summary" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     {breadcrumbs.length > 0 && (
       <script type="application/ld+json" set:html={JSON.stringify({
@@ -72,6 +88,9 @@ const twitterHandle = seo.twitterHandle || '@dailycoder_in';
 
     {analytics.googleSearchConsoleVerification && (
       <meta name="google-site-verification" content={analytics.googleSearchConsoleVerification} />
+    )}
+    {analytics.bingVerification && (
+      <meta name="msvalidate.01" content={analytics.bingVerification} />
     )}
     {analytics.googleAnalyticsId && (
       <script is:inline define:vars={{gaId: analytics.googleAnalyticsId}}>

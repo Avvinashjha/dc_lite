@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import Subscribe from '../components/Subscribe.astro';
@@ -11,17 +13,48 @@ import {
   getProblem,
   getProblems,
 } from '../utils/contentLoader';
-import { TOOLS_COUNT } from '../data/tools';
-import '../styles/problems.scss';
+import { TOOLS_COUNT, ALL_TOOLS } from '../data/tools';
 
+// ── Dynamic content ──────────────────────────────────────
 const recentPosts = getBlogPostsSorted().slice(0, 3);
 const firstPost = recentPosts[0];
 const courses = getCourses();
+const allProblems = getProblems();
 
 const toolsCount = TOOLS_COUNT;
-const problemCount = getProblems().length;
+const problemCount = allProblems.length;
+const articleCount = getBlogPostsSorted().length;
+const courseCount = courses.length;
+const featuredTools = ALL_TOOLS.slice(0, 8);
 
+// Quiz + games counts are derived from disk so they stay live as the
+// quiz module lands. Defensive: a half-written file should never break the build.
+function countQuizzes(): number {
+  try {
+    const dir = path.resolve(process.cwd(), 'content', 'quiz');
+    if (!fs.existsSync(dir)) return 0;
+    return fs
+      .readdirSync(dir, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && fs.existsSync(path.join(dir, d.name, 'quiz.json'))).length;
+  } catch {
+    return 0;
+  }
+}
 
+function countGames(): number {
+  try {
+    const dir = path.resolve(process.cwd(), 'src', 'pages', 'games');
+    if (!fs.existsSync(dir)) return 0;
+    return fs.readdirSync(dir).filter((f) => f.endsWith('.astro') && f !== 'index.astro').length;
+  } catch {
+    return 0;
+  }
+}
+
+const quizCount = countQuizzes();
+const gamesCount = countGames();
+
+// ── Problem of the day ───────────────────────────────────
 const todaysProblem = getTodaysProblem();
 const recentPotd = getPastDailyProblems().slice(0, 5);
 const scheduleFullLite = getDailyScheduleFullLite();
@@ -42,12 +75,77 @@ function diffClass(d: string) {
 
 const potdHref = todaysProblem ? `/problems/${todaysProblem.slug}` : '/problems';
 
+// ── Stats strip ──────────────────────────────────────────
+const stats = [
+  { value: toolsCount, label: 'Dev Tools', href: '/tools' },
+  { value: problemCount, label: 'Problems', href: '/problems' },
+  { value: articleCount, label: 'Articles', href: '/blog' },
+  { value: quizCount, label: 'Quizzes', href: '/quiz' },
+  { value: courseCount, label: 'Courses', href: '/courses' },
+  { value: gamesCount, label: 'Games', href: '/games' },
+].filter((s) => s.value > 0);
+
+// ── Feature grid ─────────────────────────────────────────
+const features = [
+  {
+    icon: '🔧',
+    title: 'Developer Tools',
+    href: '/tools',
+    desc: `${toolsCount} private, client-side tools. Nothing you paste ever leaves your browser.`,
+    highlights: ['JSON Formatter', 'Diff Checker', 'Regex Tester', 'JWT Decoder'],
+    accent: 'tools',
+  },
+  {
+    icon: '⚡',
+    title: 'Coding Problems',
+    href: '/problems',
+    desc: `${problemCount} LeetCode-style problems with a built-in JavaScript editor, test cases & instant feedback.`,
+    highlights: ['In-browser editor', 'Daily challenge', 'Progress sync'],
+    accent: 'problems',
+  },
+  {
+    icon: '🧠',
+    title: 'Quizzes',
+    href: '/quiz',
+    desc: 'Test your knowledge with interactive quizzes. Practice freely or compete on ranked leaderboards.',
+    highlights: ['JavaScript', 'CSS', 'HTTP & Web'],
+    accent: 'quiz',
+    isNew: true,
+  },
+  {
+    icon: '✍️',
+    title: 'Blog & Articles',
+    href: '/blog',
+    desc: 'Engineering deep-dives, architecture patterns, and practical career advice for working developers.',
+    highlights: ['Deep-dives', 'Patterns', 'Career tips'],
+    accent: 'blog',
+  },
+  {
+    icon: '🎓',
+    title: 'Courses',
+    href: '/courses',
+    desc: 'Hands-on, interactive courses with lesson tracking and progress saved right on your device.',
+    highlights: ['Self-paced', 'Lesson tracking', 'Free forever'],
+    accent: 'courses',
+  },
+  {
+    icon: '🎮',
+    title: 'Games',
+    href: '/games',
+    desc: 'Take a break with free browser games — no download, no signup, instant play.',
+    highlights: ['Snake', 'Tetris', 'Sudoku', 'Chess'],
+    accent: 'games',
+  },
+];
+
+// ── SEO ──────────────────────────────────────────────────
 const pageKeywords = [
-  'daily coding challenge',
-  'leetcode problems',
+  'free developer tools',
+  'coding problems',
   'in-browser javascript editor',
-  'developer tools',
-  'coding tutorials',
+  'programming quizzes',
+  'coding courses',
+  'daily coding challenge',
   ...(todaysProblem ? [todaysProblem.title, todaysProblem.topic] : []),
 ].join(', ');
 
@@ -66,8 +164,8 @@ const jsonLdPotd = todaysProblem
 ---
 
 <BaseLayout
-  title="DailyCoder — Daily Coding Problems, Dev Tools & Tutorials"
-  description="Solve today's coding challenge in-browser, read engineering deep-dives, take interactive courses, and use free developer tools. No signup needed."
+  title="DailyCoder — Free Dev Tools, Coding Problems, Quizzes & Courses"
+  description="Free tools, problems, courses, quizzes & games for coders. Solve daily challenges in-browser, read engineering deep-dives, and use private dev tools. No signup needed."
   tags={pageKeywords.split(', ')}
 >
   <Fragment slot="head">
@@ -78,28 +176,29 @@ const jsonLdPotd = todaysProblem
   <section class="hp-hero" aria-label="Site introduction">
     <div class="container hp-hero__inner">
       <div class="hp-hero__text">
+        <p class="hp-hero__eyebrow">Free · No signup · Runs in your browser</p>
         <h1 class="hp-hero__title">
-          Learn. Build.<br /><span class="hp-hero__accent">Ship Daily.</span>
+          Everything you need to<br /><span class="hp-hero__accent">level up as a coder.</span>
         </h1>
         <p class="hp-hero__sub">
-          A daily coding problem in your browser, engineering deep-dives, hands-on courses,
-          and {toolsCount} free dev tools — all in one place.
+          Free developer tools, {problemCount} coding problems, hands-on courses, quizzes and
+          games — all running right in your browser. No tracking, no limits.
         </p>
         <div class="hp-hero__ctas">
-          <a href={potdHref} class="button">
-            {todaysProblem ? "Solve today's problem" : 'Browse problems'}
-          </a>
-          <a href={firstPost ? `/blog/${firstPost.slug}` : '/blog'} class="button button--secondary">
-            Latest post
+          <a href="/tools" class="button">Explore {toolsCount} tools</a>
+          <a href={potdHref} class="button button--secondary">
+            {todaysProblem ? "Solve today's problem" : 'Solve problems'}
           </a>
         </div>
-        <div class="hp-hero__feature-pills">
+        <div class="hp-hero__pills" aria-label="Browse sections">
           <a href="/problems" class="hp-pill">{problemCount} Problems</a>
+          <a href="/quiz" class="hp-pill">Quizzes</a>
           <a href="/courses" class="hp-pill">Courses</a>
-          <a href="/tools" class="hp-pill">{toolsCount} Free Tools</a>
-          <a href="/docs" class="hp-pill">Tech Guides</a>
+          <a href="/games" class="hp-pill">{gamesCount} Games</a>
+          <a href="/blog" class="hp-pill">Articles</a>
         </div>
       </div>
+
       <div class="hp-hero__card" aria-hidden="true">
         <div class="hp-hero__card-header">
           <span class="hp-hero__card-dot hp-hero__card-dot--red"></span>
@@ -108,16 +207,12 @@ const jsonLdPotd = todaysProblem
           <span class="hp-hero__card-filename">solution.js</span>
         </div>
         <pre class="hp-hero__code"><code><span class="hp-c-keyword">function</span> <span class="hp-c-fn">isValid</span>(s) {'{'}
-  <span class="hp-c-keyword">const</span> map = {'{'}
-    <span class="hp-c-str">&#39;)&#39;</span>: <span class="hp-c-str">&#39;(&#39;</span>,
-    <span class="hp-c-str">&#39;]&#39;</span>: <span class="hp-c-str">&#39;[&#39;</span>,
-    <span class="hp-c-str">&#39;&#125;&#39;</span>: <span class="hp-c-str">&#39;{'{'}&#39;</span>
-  {'}'};
+  <span class="hp-c-keyword">const</span> map = {'{'} <span class="hp-c-str">&#39;)&#39;</span>: <span class="hp-c-str">&#39;(&#39;</span>, <span class="hp-c-str">&#39;]&#39;</span>: <span class="hp-c-str">&#39;[&#39;</span>, <span class="hp-c-str">&#39;&#125;&#39;</span>: <span class="hp-c-str">&#39;{'{'}&#39;</span> {'}'};
   <span class="hp-c-keyword">const</span> stack = [];
   <span class="hp-c-keyword">for</span> (<span class="hp-c-keyword">const</span> c <span class="hp-c-keyword">of</span> s) {'{'}
-    <span class="hp-c-keyword">if</span> (map[c]) stack.pop() === map[c]
-      || <span class="hp-c-keyword">return false</span>;
-    <span class="hp-c-keyword">else</span> stack.push(c);
+    <span class="hp-c-keyword">if</span> (map[c]) {'{'}
+      <span class="hp-c-keyword">if</span> (stack.pop() !== map[c]) <span class="hp-c-keyword">return</span> <span class="hp-c-keyword">false</span>;
+    {'}'} <span class="hp-c-keyword">else</span> stack.push(c);
   {'}'}
   <span class="hp-c-keyword">return</span> !stack.length;
 {'}'}</code></pre>
@@ -125,14 +220,59 @@ const jsonLdPotd = todaysProblem
     </div>
   </section>
 
+  <!-- ── STATS STRIP ──────────────────────────────────── -->
+  <section class="hp-stats-wrap" aria-label="What's on DailyCoder">
+    <div class="container hp-stats">
+      {stats.map((s) => (
+        <a href={s.href} class="hp-stat-tile">
+          <span class="hp-stat-tile__val">{s.value}</span>
+          <span class="hp-stat-tile__lbl">{s.label}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── FEATURE GRID ─────────────────────────────────── -->
+  <section class="hp-section container" aria-labelledby="explore-heading">
+    <div class="hp-section__hd">
+      <div>
+        <h2 id="explore-heading">Explore the platform</h2>
+        <p class="hp-section__sub">Six free toolkits to learn, build and ship — pick where you want to start.</p>
+      </div>
+    </div>
+    <div class="hp-feature-grid">
+      {features.map((f) => (
+        <a href={f.href} class={`hp-card hp-card--${f.accent}`}>
+          <div class="hp-card__top">
+            <span class="hp-card__icon" aria-hidden="true">{f.icon}</span>
+            {f.isNew && <span class="hp-card__new">New</span>}
+          </div>
+          <h3 class="hp-card__title">{f.title}</h3>
+          <p class="hp-card__desc">{f.desc}</p>
+          <div class="hp-card__chips">
+            {f.highlights.map((h) => (
+              <span class="hp-card__chip">{h}</span>
+            ))}
+          </div>
+          <span class="hp-card__link">Explore <span aria-hidden="true">→</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
   <!-- ── PROBLEM OF THE DAY ───────────────────────────── -->
   <section id="daily-challenge" class="hp-section container" aria-labelledby="potd-heading">
+    <div class="hp-section__hd">
+      <div>
+        <h2 id="potd-heading-top" class="hp-section__title-row"><span class="hp-section__dot"></span>Problem of the day</h2>
+        <p class="hp-section__sub">A fresh, hand-picked challenge to solve in the browser every day.</p>
+      </div>
+      <a href="/problems" class="hp-text-link">All problems →</a>
+    </div>
     <div class="hp-potd">
       <div class="hp-potd__aside">
-        <p class="hp-eyebrow">Problem of the day</p>
-        {todaysProblem && (
-          <p class="hp-potd__date">{todaysProblem.publishedAt}</p>
-        )}
+        <p class="hp-eyebrow">Your progress</p>
+        {todaysProblem && <p class="hp-potd__date">{todaysProblem.publishedAt}</p>}
         <div class="hp-potd__stats" aria-label="Your daily progress">
           <div class="hp-stat"><span class="hp-stat__val" id="hp-streak">—</span><span class="hp-stat__lbl">Streak</span></div>
           <div class="hp-stat"><span class="hp-stat__val" id="hp-solved">—</span><span class="hp-stat__lbl">Solved</span></div>
@@ -158,11 +298,11 @@ const jsonLdPotd = todaysProblem
         {todaysProblem ? (
           <>
             <div class="hp-potd__badges">
-              <span class="p-badge p-badge--neutral">{todaysProblem.topic}</span>
-              <span class={`p-badge p-badge--${diffClass(todaysProblem.difficulty)}`}>{todaysProblem.difficulty}</span>
-              {todaysProblem.platform && <span class="p-badge p-badge--neutral">{todaysProblem.platform}</span>}
+              <span class="hp-badge hp-badge--neutral">{todaysProblem.topic}</span>
+              <span class={`hp-badge hp-badge--${diffClass(todaysProblem.difficulty)}`}>{todaysProblem.difficulty}</span>
+              {todaysProblem.platform && <span class="hp-badge hp-badge--neutral">{todaysProblem.platform}</span>}
             </div>
-            <h2 id="potd-heading" class="hp-potd__title">{todaysProblem.title}</h2>
+            <h3 id="potd-heading" class="hp-potd__title">{todaysProblem.title}</h3>
             {potdExcerpt && <p class="hp-potd__excerpt">{potdExcerpt}</p>}
             {(todaysProblem.sampleInput || todaysProblem.sampleOutput) && (
               <div class="hp-potd__io">
@@ -182,13 +322,13 @@ const jsonLdPotd = todaysProblem
             )}
             <div class="hp-potd__actions">
               <a class="button" href={potdHref}>Solve in editor</a>
-              <a class="hp-text-link" href="/problems">All problems →</a>
+              <a class="hp-text-link" href="/problems">Browse all problems →</a>
             </div>
           </>
         ) : (
           <>
-            <h2 id="potd-heading" class="hp-potd__title">No problem scheduled today</h2>
-            <p class="hp-potd__excerpt">Browse the full catalog and practise at your own pace.</p>
+            <h3 id="potd-heading" class="hp-potd__title">Practise at your own pace</h3>
+            <p class="hp-potd__excerpt">No challenge is scheduled right now — browse the full catalog and solve anything in the in-browser editor.</p>
             <a class="button" href="/problems">Open problem list</a>
           </>
         )}
@@ -196,37 +336,22 @@ const jsonLdPotd = todaysProblem
     </div>
   </section>
 
-  <!-- ── FEATURES STRIP ───────────────────────────────── -->
-  <section class="hp-features-wrap" aria-label="Platform features">
-    <div class="container hp-features">
-      <a href="/problems" class="hp-feat">
-        <span class="hp-feat__icon">⚡</span>
-        <div>
-          <h3>Problems</h3>
-          <p>{problemCount} curated problems with an in-browser JS runner, test cases, and progress sync.</p>
-        </div>
-      </a>
-      <a href="/blog" class="hp-feat">
-        <span class="hp-feat__icon">✍️</span>
-        <div>
-          <h3>Blog</h3>
-          <p>Engineering deep-dives, architecture patterns, and practical career tips.</p>
-        </div>
-      </a>
-      <a href="/courses" class="hp-feat">
-        <span class="hp-feat__icon">🎓</span>
-        <div>
-          <h3>Courses</h3>
-          <p>Hands-on interactive courses with lesson tracking and progress saved locally.</p>
-        </div>
-      </a>
-      <a href="/tools" class="hp-feat">
-        <span class="hp-feat__icon">🔧</span>
-        <div>
-          <h3>Tools</h3>
-          <p>{toolsCount} free, private, client-side developer tools. JSON, diff, regex, JWT and more.</p>
-        </div>
-      </a>
+  <!-- ── FEATURED TOOLS ───────────────────────────────── -->
+  <section class="hp-section container" aria-labelledby="tools-heading">
+    <div class="hp-section__hd">
+      <div>
+        <h2 id="tools-heading">Popular developer tools</h2>
+        <p class="hp-section__sub">Private &amp; free — your data never leaves your browser.</p>
+      </div>
+      <a href="/tools" class="hp-text-link">All {toolsCount} tools →</a>
+    </div>
+    <div class="hp-tools">
+      {featuredTools.map((t) => (
+        <a href={t.href} class="hp-tool">
+          <span class="hp-tool__icon">{t.icon}</span>
+          <span class="hp-tool__name">{t.name}</span>
+        </a>
+      ))}
     </div>
   </section>
 
@@ -234,7 +359,10 @@ const jsonLdPotd = todaysProblem
   {recentPosts.length > 0 && (
     <section class="hp-section container" aria-labelledby="blog-heading">
       <div class="hp-section__hd">
-        <h2 id="blog-heading">From the blog</h2>
+        <div>
+          <h2 id="blog-heading">From the blog</h2>
+          <p class="hp-section__sub">Engineering deep-dives and practical guides.</p>
+        </div>
         <a href="/blog" class="hp-text-link">View all →</a>
       </div>
       <div class="grid grid--3">
@@ -258,7 +386,10 @@ const jsonLdPotd = todaysProblem
   {courses.length > 0 && (
     <section class="hp-section container" aria-labelledby="courses-heading">
       <div class="hp-section__hd">
-        <h2 id="courses-heading">Courses</h2>
+        <div>
+          <h2 id="courses-heading">Courses</h2>
+          <p class="hp-section__sub">Self-paced, hands-on, and free.</p>
+        </div>
         <a href="/courses" class="hp-text-link">View all →</a>
       </div>
       <div class="hp-course-list">
@@ -268,31 +399,12 @@ const jsonLdPotd = todaysProblem
               <span class="hp-course-row__title">{course.title}</span>
               <span class="hp-course-row__meta">{course.level} · {course.totalLessons} lessons · {course.duration}</span>
             </div>
-            <span class="hp-course-row__arrow">→</span>
+            <span class="hp-course-row__arrow" aria-hidden="true">→</span>
           </a>
         ))}
       </div>
     </section>
   )}
-
-  <!-- ── TOOLS ─────────────────────────────────────────── -->
-  <section class="hp-section container" aria-labelledby="tools-heading">
-    <div class="hp-section__hd">
-      <h2 id="tools-heading">Developer tools</h2>
-      <a href="/tools" class="hp-text-link">All {toolsCount} tools →</a>
-    </div>
-    <p class="hp-tools-sub">Private & free — no data leaves your browser.</p>
-    <div class="hp-tools">
-      <a href="/tools/code-formatter" class="hp-tool"><span>&lt;/&gt;</span>Code Formatter</a>
-      <a href="/tools/json-formatter" class="hp-tool"><span>&#123;&#125;</span>JSON Formatter</a>
-      <a href="/tools/diff-checker" class="hp-tool"><span>±</span>Diff Checker</a>
-      <a href="/tools/regex-tester" class="hp-tool"><span>.*</span>Regex Tester</a>
-      <a href="/tools/color-picker" class="hp-tool"><span>◑</span>Color Picker</a>
-      <a href="/tools/jwt-decoder" class="hp-tool"><span>🔑</span>JWT Decoder</a>
-      <a href="/tools/qr-generator" class="hp-tool"><span>▣</span>QR Generator</a>
-      <a href="/tools/markdown-preview" class="hp-tool"><span>MD</span>Markdown Preview</a>
-    </div>
-  </section>
 
   <!-- ── SUBSCRIBE ─────────────────────────────────────── -->
   <section class="hp-subscribe">
@@ -350,54 +462,68 @@ const jsonLdPotd = todaysProblem
 <style>
 /* ── Hero ─────────────────────────────────────────────── */
 .hp-hero {
-  padding: 4rem 0 2.5rem;
-  background: radial-gradient(ellipse 80% 55% at 50% -10%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent);
+  padding: 4rem 0 3rem;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% -10%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent),
+    radial-gradient(ellipse 60% 50% at 0% 10%, color-mix(in srgb, var(--color-primary) 7%, transparent), transparent);
 }
 
 .hp-hero__inner {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 460px);
-  gap: 2.5rem 3rem;
+  grid-template-columns: 1fr minmax(0, 480px);
+  gap: 2.5rem 3.5rem;
   align-items: center;
 }
 
-@media (max-width: 900px) {
-  .hp-hero__inner {
-    grid-template-columns: 1fr;
-  }
-  .hp-hero__card {
-    display: none;
-  }
+@media (max-width: 920px) {
+  .hp-hero__inner { grid-template-columns: 1fr; }
+  .hp-hero__card { display: none; }
+}
+
+.hp-hero__eyebrow {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-text-light);
 }
 
 .hp-hero__title {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.25rem, 5.5vw, 3.6rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
-  margin: 0 0 1rem;
+  margin: 0 0 1.1rem;
 }
 
 .hp-hero__accent {
-  color: var(--color-primary);
+  background: linear-gradient(120deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 55%, #22d3ee));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hp-hero__sub {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--color-text-light);
   line-height: 1.65;
   max-width: 38rem;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.6rem;
 }
 
 .hp-hero__ctas {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin-bottom: 1.35rem;
+  margin-bottom: 1.4rem;
 }
 
-.hp-hero__feature-pills {
+.hp-hero__pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
@@ -406,30 +532,31 @@ const jsonLdPotd = todaysProblem
 .hp-pill {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.65rem;
+  padding: 0.25rem 0.7rem;
   border-radius: 999px;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: var(--color-text-light);
   text-decoration: none;
-  transition: border-color 0.15s, color 0.15s;
+  transition: border-color 0.15s, color 0.15s, transform 0.15s;
 }
 
 .hp-pill:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   text-decoration: none;
+  transform: translateY(-1px);
 }
 
 /* Code card */
 .hp-hero__card {
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--color-border);
   background: #0f172a;
   overflow: hidden;
-  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.5);
+  box-shadow: 0 28px 70px -24px rgba(0, 0, 0, 0.55);
 }
 
 .hp-hero__card-header {
@@ -441,12 +568,7 @@ const jsonLdPotd = todaysProblem
   border-bottom: 1px solid #334155;
 }
 
-.hp-hero__card-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-}
-
+.hp-hero__card-dot { width: 11px; height: 11px; border-radius: 50%; }
 .hp-hero__card-dot--red    { background: #ef4444; }
 .hp-hero__card-dot--yellow { background: #f59e0b; }
 .hp-hero__card-dot--green  { background: #22c55e; }
@@ -463,37 +585,115 @@ const jsonLdPotd = todaysProblem
   padding: 1.1rem 1.25rem;
   background: #0f172a;
   font-size: 0.82rem;
-  line-height: 1.7;
+  line-height: 1.75;
   white-space: pre;
   overflow-x: auto;
   color: #e2e8f0;
   border-radius: 0;
 }
 
-/* syntax colours */
 .hp-c-keyword { color: #c084fc; }
 .hp-c-fn      { color: #93c5fd; }
 .hp-c-str     { color: #86efac; }
 
+/* ── Stats strip ──────────────────────────────────────── */
+.hp-stats-wrap {
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 1.5rem 0;
+}
+
+.hp-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 760px) {
+  .hp-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 420px) {
+  .hp-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+.hp-stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.6rem 0.4rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.hp-stat-tile:hover {
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.hp-stat-tile__val {
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-stat-tile__lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+}
+
 /* ── Sections ─────────────────────────────────────────── */
 .hp-section {
-  padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  padding-top: 3.25rem;
+  padding-bottom: 0.5rem;
 }
 
 .hp-section__hd {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.4rem;
   gap: 0.75rem;
 }
 
 .hp-section__hd h2 {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+.hp-section__sub {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.hp-section__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.hp-section__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #22c55e 22%, transparent);
+  flex-shrink: 0;
 }
 
 .hp-text-link {
@@ -502,21 +702,147 @@ const jsonLdPotd = todaysProblem
   white-space: nowrap;
 }
 
+/* ── Feature grid ─────────────────────────────────────── */
+.hp-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .hp-feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .hp-feature-grid { grid-template-columns: 1fr; }
+}
+
+.hp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+
+.hp-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--hp-accent, var(--color-primary));
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+
+.hp-card:hover {
+  border-color: color-mix(in srgb, var(--hp-accent, var(--color-primary)) 55%, var(--color-border));
+  box-shadow: 0 16px 40px -22px color-mix(in srgb, var(--hp-accent, var(--color-primary)) 60%, transparent);
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.hp-card:hover::before { opacity: 1; }
+
+.hp-card--tools    { --hp-accent: #2563eb; }
+.hp-card--problems { --hp-accent: #f59e0b; }
+.hp-card--quiz     { --hp-accent: #8b5cf6; }
+.hp-card--blog     { --hp-accent: #ec4899; }
+.hp-card--courses  { --hp-accent: #10b981; }
+.hp-card--games    { --hp-accent: #06b6d4; }
+
+.hp-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hp-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  font-size: 1.5rem;
+  background: color-mix(in srgb, var(--hp-accent, var(--color-primary)) 14%, transparent);
+}
+
+.hp-card__new {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--hp-accent, var(--color-primary));
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.hp-card__title {
+  margin: 0.25rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.hp-card__desc {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--color-text-light);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.hp-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.hp-card__chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.hp-card__link {
+  margin-top: 0.35rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--hp-accent, var(--color-primary));
+}
+
+.hp-card:hover .hp-card__link span {
+  margin-left: 0.2rem;
+}
+
 /* ── POTD ─────────────────────────────────────────────── */
 .hp-potd {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 2rem;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   background: var(--color-surface);
   overflow: hidden;
 }
 
 @media (max-width: 768px) {
-  .hp-potd {
-    grid-template-columns: 1fr;
-  }
+  .hp-potd { grid-template-columns: 1fr; }
   .hp-potd__aside {
     border-right: none !important;
     border-bottom: 1px solid var(--color-border);
@@ -526,7 +852,7 @@ const jsonLdPotd = todaysProblem
 .hp-potd__aside {
   border-right: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -559,7 +885,7 @@ const jsonLdPotd = todaysProblem
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.4rem 0.25rem;
+  padding: 0.45rem 0.25rem;
   border-radius: 8px;
   border: 1px solid var(--color-border);
   background: var(--color-background);
@@ -567,7 +893,7 @@ const jsonLdPotd = todaysProblem
 }
 
 .hp-stat__val {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -588,9 +914,7 @@ const jsonLdPotd = todaysProblem
   line-height: 1.4;
 }
 
-.hp-potd__recents {
-  margin-top: 0.25rem;
-}
+.hp-potd__recents { margin-top: 0.25rem; }
 
 .hp-potd__recents-label {
   margin: 0 0 0.4rem;
@@ -619,45 +943,42 @@ const jsonLdPotd = todaysProblem
   gap: 0.05rem;
 }
 
-.hp-potd__recents li:first-child {
-  border-top: none;
-  padding-top: 0;
-}
+.hp-potd__recents li:first-child { border-top: none; padding-top: 0; }
 
-.hp-potd__recents a {
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.hp-potd__recents span {
-  font-size: 0.65rem;
-  color: var(--color-text-light);
-}
+.hp-potd__recents a { font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
+.hp-potd__recents span { font-size: 0.65rem; color: var(--color-text-light); }
 
 .hp-potd__main {
-  padding: 1.5rem 1.5rem 1.5rem 0;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   min-width: 0;
 }
 
-@media (max-width: 768px) {
-  .hp-potd__main {
-    padding: 1.25rem;
-  }
+.hp-potd__badges { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+/* local badge styles (independent of shared problems.scss) */
+.hp-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  color: var(--color-text-light);
 }
 
-.hp-potd__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
+.hp-badge--easy   { color: #16a34a; border-color: color-mix(in srgb, #16a34a 40%, transparent); background: color-mix(in srgb, #16a34a 10%, transparent); }
+.hp-badge--medium { color: #d97706; border-color: color-mix(in srgb, #d97706 40%, transparent); background: color-mix(in srgb, #d97706 10%, transparent); }
+.hp-badge--hard   { color: #dc2626; border-color: color-mix(in srgb, #dc2626 40%, transparent); background: color-mix(in srgb, #dc2626 10%, transparent); }
 
 .hp-potd__title {
   margin: 0;
-  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-size: clamp(1.4rem, 3vw, 1.7rem);
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.15;
@@ -677,9 +998,7 @@ const jsonLdPotd = todaysProblem
 }
 
 @media (max-width: 560px) {
-  .hp-potd__io {
-    grid-template-columns: 1fr;
-  }
+  .hp-potd__io { grid-template-columns: 1fr; }
 }
 
 .hp-potd__io-block {
@@ -719,76 +1038,54 @@ const jsonLdPotd = todaysProblem
   margin-top: 0.25rem;
 }
 
-/* ── Features strip ──────────────────────────────────── */
-.hp-features-wrap {
-  margin-top: 2.5rem;
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  padding: 2rem 0;
-}
-
-.hp-features {
+/* ── Featured tools ──────────────────────────────────── */
+.hp-tools {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0;
+  gap: 0.65rem;
 }
 
-@media (max-width: 900px) {
-  .hp-features {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+@media (max-width: 900px) { .hp-tools { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .hp-tools { grid-template-columns: repeat(2, 1fr); } }
 
-@media (max-width: 480px) {
-  .hp-features {
-    grid-template-columns: 1fr;
-  }
-}
-
-.hp-feat {
+.hp-tool {
   display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
-  border-right: 1px solid var(--color-border);
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
   text-decoration: none;
-  color: inherit;
-  transition: background 0.15s;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 
-.hp-feat:last-child {
-  border-right: none;
-}
-
-@media (max-width: 900px) {
-  .hp-feat:nth-child(2) { border-right: none; }
-  .hp-feat:nth-child(3) { border-right: 1px solid var(--color-border); border-top: 1px solid var(--color-border); }
-  .hp-feat:nth-child(4) { border-right: none; border-top: 1px solid var(--color-border); }
-}
-
-.hp-feat:hover {
-  background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
-  text-decoration: none;
-}
-
-.hp-feat__icon {
-  font-size: 1.35rem;
+.hp-tool__icon {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
-  margin-top: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-code-bg);
 }
 
-.hp-feat h3 {
-  margin: 0 0 0.2rem;
-  font-size: 0.92rem;
-  font-weight: 700;
+.hp-tool__name {
+  line-height: 1.25;
 }
 
-.hp-feat p {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--color-text-light);
-  line-height: 1.45;
+.hp-tool:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 16px -6px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--color-text);
 }
 
 /* ── Courses ─────────────────────────────────────────── */
@@ -806,7 +1103,7 @@ const jsonLdPotd = todaysProblem
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.8rem 1rem;
+  padding: 0.85rem 1rem;
   text-decoration: none;
   color: inherit;
   border-top: 1px solid var(--color-border);
@@ -814,9 +1111,7 @@ const jsonLdPotd = todaysProblem
   transition: background 0.15s;
 }
 
-.hp-course-row:first-child {
-  border-top: none;
-}
+.hp-course-row:first-child { border-top: none; }
 
 .hp-course-row:hover {
   background: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface));
@@ -831,7 +1126,7 @@ const jsonLdPotd = todaysProblem
 }
 
 .hp-course-row__title {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   line-height: 1.3;
   color: var(--color-text);
@@ -848,75 +1143,11 @@ const jsonLdPotd = todaysProblem
   flex-shrink: 0;
 }
 
-/* ── Tools ──────────────────────────────────────────── */
-.hp-tools-sub {
-  margin: -0.6rem 0 1rem;
-  font-size: 0.85rem;
-  color: var(--color-text-light);
-}
-
-.hp-tools {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.6rem;
-}
-
-@media (max-width: 900px) {
-  .hp-tools { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 560px) {
-  .hp-tools { grid-template-columns: repeat(2, 1fr); }
-}
-
-.hp-tool {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 1rem 0.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  text-decoration: none;
-  color: var(--color-text);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-align: center;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-}
-
-.hp-tool span {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  background: var(--color-code-bg);
-}
-
-.hp-tool:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 4px 16px -6px color-mix(in srgb, var(--color-primary) 30%, transparent);
-  transform: translateY(-2px);
-  text-decoration: none;
-  color: var(--color-text);
-}
-
 /* ── Subscribe ──────────────────────────────────────── */
 .hp-subscribe {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   background: var(--color-surface);
   border-top: 1px solid var(--color-border);
   padding: 3.5rem 0;
-}
-
-/* ── Global section padding ─────────────────────────── */
-.hp-section + .hp-section {
-  padding-top: 2.5rem;
 }
 </style>

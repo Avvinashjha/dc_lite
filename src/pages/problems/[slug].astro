@@ -6,6 +6,7 @@ import ProblemSolution from '../../components/ProblemSolution.astro';
 import ProblemDiscussion from '../../components/ProblemDiscussion.astro';
 import Comments from '../../components/Comments.astro';
 import { getProblems, getProblem, problemSlugHasPotdSchedule, getLatestPotdScheduleDateForSlug } from '../../utils/contentLoader';
+import { ogImageForPath } from '../../utils/og';
 
 export function getStaticPaths() {
   return getProblems().map(p => ({ params: { slug: p.slug } }));
@@ -42,15 +43,25 @@ const pageDescription = `${problem.title} - ${problem.difficulty} ${problem.topi
 const isPotdCatalog = problemSlugHasPotdSchedule(slug);
 const potdScheduleDate = getLatestPotdScheduleDateForSlug(slug) || '';
 
+const problemImage = new URL(ogImageForPath(Astro.url.pathname), Astro.site).href;
+const publishedDate = problem.publishedAt ? new Date(problem.publishedAt) : null;
+const datePublishedIso = publishedDate && !isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
 const problemJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: problem.title,
   description: pageDescription,
+  image: problemImage,
   educationalLevel: problem.difficulty,
   keywords: topics.join(', '),
   url: Astro.url.href,
   author: { '@type': 'Organization', name: 'DailyCoder' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'DailyCoder',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', Astro.site).href },
+  },
+  ...(datePublishedIso && { datePublished: datePublishedIso }),
 };
 ---
 
@@ -153,8 +164,6 @@ const problemJsonLd = {
 
 <script src="/js/store.js" is:inline></script>
 <script>
-  import { createCodeEditor } from '../../utils/codeEditor';
-
   // ── Tab switching (left panel) ──
   const leftTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#left-tabs .problem-tabs__btn'));
   const leftPanes = Array.from(document.querySelectorAll<HTMLElement>('.problem-tab-content .problem-tab-pane'));
@@ -203,13 +212,54 @@ const problemJsonLd = {
   ].join('\n');
   const template = runnerConfig.templateCode || defaultTemplate;
 
-  const codeEditor = createCodeEditor({
-    rootId: 'problem-js-editor',
-    doc: template,
-    language: 'javascript',
-    lineWrapping: true,
-    onModEnter: () => runCode(),
-  });
+  // The editor is created via a dynamic import so a failure to load CodeMirror
+  // (e.g. a transient network/bundling hiccup) degrades gracefully instead of
+  // throwing and taking down the rest of the page (tabs, notes, progress…).
+  let codeEditor: { getValue: () => string; setValue: (v: string) => void } | null = null;
+  // A plain <textarea> fallback so users can still write & run code if CodeMirror fails.
+  let fallbackArea: HTMLTextAreaElement | null = null;
+
+  function getCode(): string {
+    if (codeEditor) return codeEditor.getValue();
+    if (fallbackArea) return fallbackArea.value;
+    return template;
+  }
+  function setCode(value: string) {
+    if (codeEditor) codeEditor.setValue(value);
+    else if (fallbackArea) fallbackArea.value = value;
+  }
+
+  function mountFallbackEditor(message: string) {
+    const root = document.getElementById('problem-js-editor');
+    const mount = root?.querySelector('.dc-editor__mount');
+    if (!mount) return;
+    mount.innerHTML = '';
+    const note = document.createElement('p');
+    note.className = 'problem-editor-fallback__note';
+    note.textContent = message;
+    fallbackArea = document.createElement('textarea');
+    fallbackArea.className = 'problem-editor-fallback__area';
+    fallbackArea.spellcheck = false;
+    fallbackArea.value = template;
+    mount.appendChild(note);
+    mount.appendChild(fallbackArea);
+  }
+
+  (async () => {
+    try {
+      const { createCodeEditor } = await import('../../utils/codeEditor');
+      codeEditor = createCodeEditor({
+        rootId: 'problem-js-editor',
+        doc: template,
+        language: 'javascript',
+        lineWrapping: true,
+        onModEnter: () => runCode(),
+      });
+    } catch (err) {
+      console.error('[Problem] Code editor failed to load, using plain textarea fallback.', err);
+      mountFallbackEditor('Rich editor unavailable — using a basic text area. Your code still runs.');
+    }
+  })();
 
   // ── DOM refs ──
   const runBtn = document.getElementById('run-js')!;
@@ -247,7 +297,7 @@ const problemJsonLd = {
     recordAttempt();
     switchOutputTab('console');
     appendConsole('INFO', 'Running...');
-    const code = codeEditor.getValue();
+    const code = getCode();
     const srcdoc = [
       '<!doctype html><html><body><script>',
       '(function(){',
@@ -306,7 +356,7 @@ const problemJsonLd = {
     recordAttempt();
     switchOutputTab('tests');
     testsEl.innerHTML = '<p style="font-size:0.8rem;">Running tests...</p>';
-    const code = codeEditor.getValue();
+    const code = getCode();
     const harness = [
       '<!doctype html><html><body><script>',
       '(function(){',
@@ -401,7 +451,13 @@ const problemJsonLd = {
 
   runBtn.addEventListener('click', runCode);
   runTestsBtn.addEventListener('click', runTests);
-  resetBtn.addEventListener('click', () => { codeEditor.setValue(template); });
+  resetBtn.addEventListener('click', () => { setCode(template); });
+
+  // Gracefully reflect when a problem ships without runnable test cases.
+  if (!testCases.length) {
+    runTestsBtn.setAttribute('disabled', 'true');
+    runTestsBtn.title = 'No test cases are defined for this problem yet.';
+  }
 
   // ── Progress tracking ──
   const PROGRESS_TOOL = 'problem-progress';

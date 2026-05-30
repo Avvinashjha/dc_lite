@@ -1,0 +1,125 @@
+{
+  "id": "javascript-fundamentals",
+  "title": "JavaScript Fundamentals",
+  "description": "Core JavaScript concepts every developer should know: types, scope, equality, hoisting, and the event loop.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "fundamentals", "frontend"],
+  "author": "DailyCoder",
+  "ranked": true,
+  "timeLimitSec": 300,
+  "source": "curated",
+  "publishedAt": "2026-05-01",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does the `typeof null` expression evaluate to in JavaScript?",
+      "options": [
+        { "id": "a", "text": "\"null\"" },
+        { "id": "b", "text": "\"object\"" },
+        { "id": "c", "text": "\"undefined\"" },
+        { "id": "d", "text": "\"number\"" }
+      ],
+      "correct": ["b"],
+      "explanation": "`typeof null` returns \"object\". This is a long-standing bug from the first version of JavaScript that has been kept for backward compatibility.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "boolean",
+      "prompt": "The `===` operator checks both value and type without performing type coercion.",
+      "options": [
+        { "id": "true", "text": "True" },
+        { "id": "false", "text": "False" }
+      ],
+      "correct": ["true"],
+      "explanation": "Strict equality (`===`) compares value and type and never coerces operands, whereas loose equality (`==`) coerces types before comparing.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which value is NOT falsy in JavaScript?",
+      "options": [
+        { "id": "a", "text": "0" },
+        { "id": "b", "text": "\"\" (empty string)" },
+        { "id": "c", "text": "\"0\" (string zero)" },
+        { "id": "d", "text": "NaN" }
+      ],
+      "correct": ["c"],
+      "explanation": "The string \"0\" is a non-empty string, so it is truthy. The falsy values are: false, 0, -0, 0n, \"\", null, undefined, and NaN.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "Which of the following declare a block-scoped variable? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "let" },
+        { "id": "b", "text": "const" },
+        { "id": "c", "text": "var" },
+        { "id": "d", "text": "function" }
+      ],
+      "correct": ["a", "b"],
+      "explanation": "`let` and `const` are block-scoped. `var` is function-scoped, and `function` declarations are function/hoisted-scoped.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What will `console.log(1 + \"2\" + 3)` print?",
+      "options": [
+        { "id": "a", "text": "6" },
+        { "id": "b", "text": "\"123\"" },
+        { "id": "c", "text": "\"15\"" },
+        { "id": "d", "text": "NaN" }
+      ],
+      "correct": ["b"],
+      "explanation": "The + operator is left-associative. `1 + \"2\"` coerces 1 to a string giving \"12\", then \"12\" + 3 gives \"123\".",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which statement about `let` and the temporal dead zone (TDZ) is correct?",
+      "options": [
+        { "id": "a", "text": "let declarations are not hoisted at all" },
+        { "id": "b", "text": "let declarations are hoisted but cannot be accessed before initialization" },
+        { "id": "c", "text": "let variables default to undefined before assignment" },
+        { "id": "d", "text": "TDZ only applies to const, not let" }
+      ],
+      "correct": ["b"],
+      "explanation": "`let` and `const` are hoisted to the top of their block, but accessing them before the declaration throws a ReferenceError — this window is the temporal dead zone.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which of these run as microtasks (before the next render / macrotask)? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "Promise.then callbacks" },
+        { "id": "b", "text": "queueMicrotask callbacks" },
+        { "id": "c", "text": "setTimeout callbacks" },
+        { "id": "d", "text": "setInterval callbacks" }
+      ],
+      "correct": ["a", "b"],
+      "explanation": "Promise reactions and queueMicrotask run on the microtask queue, which is drained completely after each macrotask. setTimeout/setInterval schedule macrotasks.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is the result of `[1, 2, 3].map(parseInt)`?",
+      "options": [
+        { "id": "a", "text": "[1, 2, 3]" },
+        { "id": "b", "text": "[1, NaN, NaN]" },
+        { "id": "c", "text": "[1, 2, NaN]" },
+        { "id": "d", "text": "[NaN, NaN, NaN]" }
+      ],
+      "correct": ["b"],
+      "explanation": "map passes (value, index) to parseInt(string, radix). So it calls parseInt(1,0)=1, parseInt(2,1)=NaN (radix 1 is invalid), parseInt(3,2)=NaN (3 is not valid in base 2).",
+      "points": 2
+    }
+  ]
+}

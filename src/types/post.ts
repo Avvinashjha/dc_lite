@@ -28,6 +28,14 @@ export interface SiteConfig {
     enabled?: boolean;
     googleScriptUrl?: string;
   };
+  sync?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  quiz?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
   seo?: {
     twitterHandle?: string;
     locale?: string;

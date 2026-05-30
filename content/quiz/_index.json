@@ -1,0 +1,5 @@
+{
+  "title": "Quizzes",
+  "description": "Test your web development knowledge with interactive quizzes on JavaScript, CSS, HTTP, and more. Play in practice mode or compete on ranked leaderboards.",
+  "featured": ["javascript-fundamentals", "css-flexbox-and-grid", "http-and-web-basics"]
+}
