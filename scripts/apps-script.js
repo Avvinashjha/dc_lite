@@ -10,6 +10,7 @@
  *   - User progress sync (problem-progress, problem-favorites, problem-notes)
  *   - Course enrollment sync
  *   - Problem discussion (shared, server-backed)
+ *   - Quiz: community quizzes + ranked leaderboards
  *
  * Sheet tabs used:
  *   - subscribers          (newsletter)
@@ -17,6 +18,8 @@
  *   - user_progress        (problem progress + favorites + notes)
  *   - user_enrollments     (course enrollment + lesson tracking)
  *   - problem_discussions   (shared problem discussions)
+ *   - community_quizzes    (slug, title, category, difficulty, author, uid, quizJson, createdAt)
+ *   - quiz_scores          (quizSlug, uid, displayName, score, maxScore, timeSec, completedAt, createdAt)
  */
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -71,6 +74,16 @@ function getAuthUid(e, params) {
   if (!token) return null;
   var verified = verifyFirebaseToken(token);
   return verified ? verified.uid : null;
+}
+
+// Slugify matching the client (lowercase, non-alphanumerics → dashes).
+function slugify(value) {
+  return String(value || '')
+    .toLowerCase().trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-');
 }
 
 // ─── GET handler ───────────────────────────────────────────────────────────
@@ -180,6 +193,63 @@ function doGet(e) {
     var result = { status: 'success', posts: posts };
     if (callback) return jsonpResponse(result, callback);
     return jsonResponse(result);
+  }
+
+  // ── QUIZ: list community quizzes ──
+  if (action === 'listCommunityQuizzes') {
+    var cqSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('community_quizzes');
+    var quizzes = [];
+    if (cqSheet) {
+      var cqData = cqSheet.getDataRange().getValues();
+      for (var i = 1; i < cqData.length; i++) {
+        var quizJson = cqData[i][6];
+        if (!quizJson) continue;
+        try {
+          quizzes.push(JSON.parse(quizJson));
+        } catch (ex) { /* skip malformed row */ }
+      }
+    }
+    var qResult = { status: 'success', quizzes: quizzes };
+    if (callback) return jsonpResponse(qResult, callback);
+    return jsonResponse(qResult);
+  }
+
+  // ── QUIZ: leaderboard (best score per user, fastest time as tiebreaker) ──
+  if (action === 'getLeaderboard') {
+    var quizSlug = e.parameter.quizSlug || '';
+    var limit = parseInt(e.parameter.limit, 10) || 20;
+    if (!quizSlug) return jsonResponse({ status: 'error', message: 'Missing quizSlug' });
+
+    var lbSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('quiz_scores');
+    var scores = [];
+    if (lbSheet) {
+      var lbData = lbSheet.getDataRange().getValues();
+      var best = {};
+      for (var j = 1; j < lbData.length; j++) {
+        if (lbData[j][0] !== quizSlug) continue;
+        var lbUid = lbData[j][1];
+        var entry = {
+          uid: lbUid,
+          displayName: lbData[j][2],
+          score: Number(lbData[j][3]) || 0,
+          maxScore: Number(lbData[j][4]) || 0,
+          timeSec: Number(lbData[j][5]) || 0,
+          completedAt: lbData[j][6]
+        };
+        var prev = best[lbUid];
+        if (!prev || entry.score > prev.score ||
+            (entry.score === prev.score && entry.timeSec < prev.timeSec)) {
+          best[lbUid] = entry;
+        }
+      }
+      scores = Object.keys(best).map(function (k) { return best[k]; });
+    }
+    scores.sort(function (a, b) {
+      return b.score - a.score || a.timeSec - b.timeSec;
+    });
+    var lbResult = { status: 'success', scores: scores.slice(0, limit) };
+    if (callback) return jsonpResponse(lbResult, callback);
+    return jsonResponse(lbResult);
   }
 
   return jsonResponse({ status: 'error', message: 'Unknown action' });
@@ -339,6 +409,71 @@ function doPost(e) {
 
     var ts = new Date(timestamp).getTime() || Date.now();
     sheet.appendRow([slug, name, message, uid, ts, timestamp]);
+
+    return jsonResponse({ status: 'success' });
+  }
+
+  // ── QUIZ: create a community quiz (auth required) ──
+  if (action === 'createQuiz') {
+    var cqUid = getAuthUid(e, params);
+    if (!cqUid) return jsonResponse({ status: 'error', message: 'Authentication required' });
+
+    var quiz = params.quiz;
+    if (!quiz || !quiz.title || !Array.isArray(quiz.questions) || !quiz.questions.length) {
+      return jsonResponse({ status: 'error', message: 'Invalid quiz' });
+    }
+
+    var cqSheet = getOrCreateSheet('community_quizzes',
+      ['slug', 'title', 'category', 'difficulty', 'author', 'uid', 'quizJson', 'createdAt']);
+
+    // Ensure a unique slug.
+    var baseSlug = slugify(quiz.slug || quiz.title) || ('quiz-' + Date.now());
+    var cqExisting = cqSheet.getDataRange().getValues();
+    var used = {};
+    for (var i = 1; i < cqExisting.length; i++) used[cqExisting[i][0]] = true;
+    var newSlug = baseSlug, n = 2;
+    while (used[newSlug]) { newSlug = baseSlug + '-' + n; n++; }
+
+    // Force trusted server-side fields.
+    quiz.slug = newSlug;
+    quiz.id = newSlug;
+    quiz.source = 'community';
+    quiz.ranked = false;
+
+    cqSheet.appendRow([
+      newSlug,
+      quiz.title,
+      quiz.category || 'General',
+      quiz.difficulty || 'easy',
+      quiz.author || 'Anonymous',
+      cqUid,
+      JSON.stringify(quiz),
+      new Date().toISOString()
+    ]);
+
+    return jsonResponse({ status: 'success', slug: newSlug });
+  }
+
+  // ── QUIZ: submit a ranked score (auth required) ──
+  if (action === 'submitScore') {
+    var ssUid = getAuthUid(e, params);
+    if (!ssUid) return jsonResponse({ status: 'error', message: 'Authentication required' });
+
+    if (!params.quizSlug) return jsonResponse({ status: 'error', message: 'Missing quizSlug' });
+
+    var ssSheet = getOrCreateSheet('quiz_scores',
+      ['quizSlug', 'uid', 'displayName', 'score', 'maxScore', 'timeSec', 'completedAt', 'createdAt']);
+
+    ssSheet.appendRow([
+      params.quizSlug,
+      ssUid,
+      params.displayName || 'Anonymous',
+      Number(params.score) || 0,
+      Number(params.maxScore) || 0,
+      Number(params.timeSec) || 0,
+      params.completedAt || new Date().toISOString(),
+      new Date().toISOString()
+    ]);
 
     return jsonResponse({ status: 'success' });
   }
