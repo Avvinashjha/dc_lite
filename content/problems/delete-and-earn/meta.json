@@ -1,0 +1,45 @@
+{
+  "draft": false,
+  "id": "problem-0244",
+  "title": "Delete and Earn",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/delete-and-earn/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          4,
+          2
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          3,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": 9
+    }
+  ],
+  "functionName": "deleteAndEarn",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction deleteAndEarn(nums) {\n  // Maximum points from delete and earn\n}",
+  "constraints": [
+    "1 <= nums.length <= 2 * 10^4",
+    "1 <= nums[i] <= 10^4"
+  ]
+}

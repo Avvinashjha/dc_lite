@@ -1,20 +1,39 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { getSiteConfig } from '../utils/contentLoader';
+import { getRelatedTools, getPostsForTool } from '../utils/related';
+import RelatedTools from '../components/RelatedTools.astro';
+import RelatedReading from '../components/RelatedReading.astro';
 import '../styles/tools.scss';
+
+interface Faq {
+  q: string;
+  a: string;
+}
 
 interface Props {
   title: string;
   description: string;
   toolName: string;
   keywords?: string;
+  faqs?: Faq[];
 }
 
 const config = getSiteConfig();
-const { title, description, toolName, keywords = '' } = Astro.props;
+const { title, description, toolName, keywords = '', faqs = [] } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const hasAbout = Astro.slots.has('about');
 
-// SEO structured data for each tool
+const currentPath = Astro.url.pathname.replace(/\/+$/, '');
+const relatedTools = getRelatedTools(currentPath, 4);
+const relatedPosts = getPostsForTool({ name: toolName, desc: description }, 3);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Tools', href: '/tools' },
+  { label: toolName, href: currentPath || '/tools' },
+];
+
 const toolJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
@@ -27,46 +46,259 @@ const toolJsonLd = {
   author: { '@type': 'Organization', name: config.site.title, url: config.site.url },
   browserRequirements: 'Requires JavaScript',
 };
+
+const faqJsonLd = faqs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    }
+  : null;
 ---
 
-<BaseLayout title={`${toolName} - Free Online Tool | DailyCoder`} description={description}>
+<BaseLayout title={`${toolName} - Free Online Tool | DailyCoder`} description={description} breadcrumbs={breadcrumbs}>
   <Fragment slot="head">
     <meta name="keywords" content={`${toolName}, ${keywords}, free online tool, developer tool, no signup, client-side`} />
     <meta name="robots" content="index, follow" />
     <script type="application/ld+json" set:html={JSON.stringify(toolJsonLd)} />
+    {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
   </Fragment>
 
   <div class="tool-page">
-    <div class="container">
-      <a href="/tools" class="tool-back">&larr; All Tools</a>
-      <h1 class="tool-title">{toolName}</h1>
-      <p class="tool-desc">{description}</p>
-      <p class="tool-privacy">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:-1px;margin-right:3px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Your data never leaves your browser. 100% client-side.
-      </p>
-      <div class="tool-body">
-        <slot />
-      </div>
+    <div class="tool-container">
+      <nav class="tool-crumb">
+        <a href="/tools">All Tools</a>
+        <span class="tool-crumb__sep">/</span>
+        <h1>{toolName}</h1>
+        <span class="tool-crumb__badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Client-side &middot; Secure
+        </span>
+      </nav>
+      <slot />
+
+      {(hasAbout || faqs.length > 0 || relatedTools.length > 0) && (
+        <section class="tool-guide" aria-label={`Guide and FAQs for ${toolName}`}>
+          {hasAbout && (
+            <details class="acc acc--about">
+              <summary class="acc__head">
+                <svg class="acc__lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                <span class="acc__q">About {toolName}</span>
+                <svg class="acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="acc__panel">
+                <div class="acc__panel-inner">
+                  <slot name="about" />
+                </div>
+              </div>
+            </details>
+          )}
+
+          {faqs.length > 0 && (
+            <div class="tool-guide__faq">
+              <h2 class="tool-guide__heading">Frequently asked questions</h2>
+              <div class="acc-group" data-acc-group>
+                {faqs.map((f) => (
+                  <details class="acc">
+                    <summary class="acc__head">
+                      <span class="acc__q">{f.q}</span>
+                      <svg class="acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </summary>
+                    <div class="acc__panel">
+                      <div class="acc__panel-inner">
+                        <p>{f.a}</p>
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <RelatedTools tools={relatedTools} />
+          <RelatedReading posts={relatedPosts} heading="From the blog" />
+        </section>
+      )}
     </div>
   </div>
+
+  <script is:inline>
+    document.querySelectorAll('[data-acc-group]').forEach(function (group) {
+      var items = group.querySelectorAll('details.acc');
+      items.forEach(function (d) {
+        d.addEventListener('toggle', function () {
+          if (!d.open) return;
+          items.forEach(function (other) {
+            if (other !== d) other.open = false;
+          });
+        });
+      });
+    });
+  </script>
 </BaseLayout>
 
-<style>
-  .tool-page { padding: 2rem 0 4rem; }
-  .tool-back {
-    display: inline-block; color: var(--color-text-light); font-size: 0.85rem;
-    margin-bottom: 1rem; text-decoration: none;
+<style is:global>
+  .tool-page { padding: 0; }
+  .tool-container {
+    max-width: var(--tool-max-width, 100%);
+    margin: 0 auto;
+    padding: 0.5rem 1.5rem 1rem;
   }
-  .tool-back:hover { color: var(--color-primary); text-decoration: none; }
-  .tool-title { font-size: 2rem; margin-bottom: 0.5rem; }
-  .tool-desc { color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem; }
-  .tool-privacy {
-    font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7;
-    margin-bottom: 2rem;
+  .tool-crumb {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+    line-height: 1;
   }
-  .tool-body { width: 100%; }
-  @media (max-width: 768px) { .tool-title { font-size: 1.5rem; } }
+  .tool-crumb a {
+    color: var(--color-text-light);
+    font-size: 0.78rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .tool-crumb a:hover { color: var(--color-primary); }
+  .tool-crumb__sep {
+    color: var(--color-border);
+    font-size: 0.78rem;
+    user-select: none;
+  }
+  .tool-crumb h1 {
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap;
+    line-height: 1 !important;
+    display: inline !important;
+  }
+  .tool-crumb__badge {
+    font-size: 0.65rem;
+    color: var(--color-text-light);
+    opacity: 0.6;
+    white-space: nowrap;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  /* ── Tool guide: About + FAQ accordion (separated from the tool) ── */
+  .tool-guide {
+    margin: 3rem auto 0.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .tool-guide__heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 1.75rem 0 0.85rem;
+  }
+  .acc {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    margin-bottom: 0.55rem;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+  .acc:hover {
+    border-color: color-mix(in oklab, var(--color-primary) 28%, var(--color-border));
+  }
+  .acc[open] {
+    border-color: color-mix(in oklab, var(--color-primary) 42%, var(--color-border));
+    box-shadow: var(--shadow-sm);
+  }
+  .acc__head {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.05rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--color-text);
+  }
+  .acc__head::-webkit-details-marker { display: none; }
+  .acc__head:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-lg);
+  }
+  .acc__q { flex: 1; min-width: 0; }
+  .acc__lead {
+    width: 18px; height: 18px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  .acc__chev {
+    width: 18px; height: 18px;
+    color: var(--color-text-light);
+    flex-shrink: 0;
+    transition: transform 220ms ease;
+  }
+  .acc[open] .acc__chev { transform: rotate(180deg); }
+  .acc__panel-inner {
+    padding: 0 1.05rem 1.05rem;
+    animation: accReveal 240ms ease;
+  }
+  .acc--about .acc__panel-inner { padding-bottom: 1.25rem; }
+  .acc__panel-inner > p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+    margin: 0;
+  }
+  @keyframes accReveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* About content is slotted by each tool; it now lives inside the accordion */
+  .tool-about { margin: 0; padding: 0; border: 0; }
+  .tool-about > :first-child { margin-top: 0; }
+  .tool-about h2 {
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+  .tool-about h3 {
+    font-size: 0.95rem;
+    margin: 1.1rem 0 0.4rem;
+  }
+  .tool-about p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+    margin-bottom: 0.7rem;
+  }
+  .tool-about ul {
+    margin: 0.4rem 0 0.9rem 1.2rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-light);
+  }
+  .tool-about li { margin-bottom: 0.3rem; }
+  .tool-about code {
+    font-size: 0.82rem;
+    background: var(--color-code-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+  }
+  .tool-about a { color: var(--color-primary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .acc__panel-inner { animation: none; }
+    .acc__chev { transition: none; }
+  }
+  @media (max-width: 768px) {
+    .tool-container { padding: 0.5rem 1rem 0.75rem; }
+    .tool-crumb h1 { font-size: 0.78rem !important; }
+    .tool-guide { margin-top: 2.25rem; }
+  }
 </style>
 
 <style is:global>

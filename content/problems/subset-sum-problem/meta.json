@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0261",
+  "title": "Subset Sum Problem",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [3, 34, 4, 12, 5, 2], sum = 9",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          34,
+          4,
+          12,
+          5,
+          2
+        ],
+        9
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "subsetSumProblem",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} sum\n * @return {any}\n */\nfunction subsetSumProblem(nums, sum) {\n  // Write your solution here\n}\n\n// Sample: console.log(subsetSumProblem([3, 34, 4, 12, 5, 2], 9));",
+  "constraints": [
+    "1 <= N <= 100",
+    "1 <= arr[i] <= 10^4",
+    "1 <= sum <= 10^5"
+  ]
+}

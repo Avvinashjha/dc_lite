@@ -57,10 +57,12 @@ const gameJsonLd = {
         <button class="game-btn" id="btn-pause" style="display:none;">Pause</button>
       </div>
 
-      <details class="game-instructions">
+      <details class="game-instructions" open>
         <summary>How to Play</summary>
         <p set:html={instructions} />
       </details>
+
+      <slot name="about" />
     </div>
   </div>
 </BaseLayout>
@@ -129,5 +131,12 @@ const gameJsonLd = {
   .game-instructions { margin-top: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
   .game-instructions summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--color-text); }
   .game-instructions p { padding: 0 1rem 1rem; font-size: 0.85rem; color: var(--color-text-light); line-height: 1.6; }
+  .game-about {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .game-about h2 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .game-about p { font-size: 0.9rem; line-height: 1.7; color: var(--color-text-light); margin-bottom: 0.6rem; }
   @media (max-width: 640px) { .game-title { font-size: 1.4rem; } .game-header { flex-direction: column; } }
 </style>

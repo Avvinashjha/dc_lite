@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0199",
+  "title": "Prim’s Algorithm for Minimum Spanning Tree (MST)",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Prim%E2%80%99s%20Algorithm%20for%20Minimum%20Spanning%20Tree%20(MST)",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "primSAlgorithmForMinimumSpanningTreeMst",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction primSAlgorithmForMinimumSpanningTreeMst(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "2 <= V <= 1000",
+    "1 <= E <= V*(V-1)/2",
+    "1 <= weight <= 10^5"
+  ]
+}

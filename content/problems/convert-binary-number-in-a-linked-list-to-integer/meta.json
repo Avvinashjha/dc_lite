@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0083",
+  "title": "Convert Binary Number in a Linked List to Integer",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "convertBinaryNumberInALinkedListToInteger",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {number}\n */\nfunction getDecimalValue(head) {\n  // Convert binary linked list to integer\n}",
+  "constraints": [
+    "1 to 30 nodes",
+    "Node.val is 0 or 1"
+  ]
+}

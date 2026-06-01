@@ -107,6 +107,21 @@ npm run validate     # Validate all content
 - **Styling**: `src/styles/global.scss` (CSS variables, typography)
 - **Layouts**: `src/layouts/` (BaseLayout, PostLayout, LessonLayout, DocLayout)
 
+## Comments + Newsletter (Google Sheets)
+
+This project supports:
+- Blog comment submissions
+- Email subscriptions
+- Update broadcasts to subscribers
+
+Use setup instructions in:
+- `scripts/google-sheet-setup.js`
+
+Then set your web app URL in:
+- `content/config.json`
+  - `newsletter.googleScriptUrl`
+  - `comments.googleScriptUrl`
+
 ---
 
 Built with [Astro](https://astro.build)

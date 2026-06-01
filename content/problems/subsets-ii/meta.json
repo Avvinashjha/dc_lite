@@ -1,0 +1,55 @@
+{
+  "draft": false,
+  "id": "problem-0263",
+  "title": "Subsets II",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/subsets-ii/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,2,2]",
+  "sampleOutput": "[[],[1],[1,2],[1,2,2],[2],[2,2]]",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        [],
+        [
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    }
+  ],
+  "functionName": "subsetsIi",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction subsetsIi(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(subsetsIi([1,2,2]));",
+  "constraints": [
+    "1 <= nums.length <= 10",
+    "-10 <= nums[i] <= 10"
+  ]
+}

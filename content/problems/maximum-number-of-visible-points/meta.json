@@ -1,0 +1,67 @@
+{
+  "draft": false,
+  "id": "problem-0259",
+  "title": "Maximum Number of Visible Points",
+  "difficulty": "Medium",
+  "topic": "Two-Pointer",
+  "topics": [
+    "Two Pointer"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximum-number-of-visible-points/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "points = [[2,1],[2,2],[3,3]], angle = 90, location = [1,1]",
+  "sampleOutput": "3",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        90,
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        13,
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1
+    }
+  ],
+  "functionName": "maximumNumberOfVisiblePoints",
+  "templateCode": "/**\n * @param {number[][]} points\n * @param {number} angle\n * @param {number[]} location\n * @return {any}\n */\nfunction maximumNumberOfVisiblePoints(points, angle, location) {\n  // Write your solution here\n}\n\n// Sample: console.log(maximumNumberOfVisiblePoints([[2,1],[2,2],[3,3]], 90, [1,1]));",
+  "constraints": [
+    "1 <= points.length <= 10^5",
+    "1 <= angle <= 360"
+  ]
+}

@@ -25,6 +25,19 @@ import GameLayout from '../../layouts/GameLayout.astro';
       <div id="move-history" style="font-family:var(--font-mono);font-size:0.75rem;max-height:200px;overflow-y:auto;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.5rem;"></div>
     </div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Chess</h2>
+    <p>
+      Chess is a two-player strategy game with origins going back over 1,500 years. Each side commands 16
+      pieces with unique movement rules, and the goal is to checkmate the opponent's king. This browser
+      version implements the full ruleset — castling, en passant, pawn promotion, and check/checkmate detection.
+    </p>
+    <p>
+      You play as White against a computer opponent. The AI evaluates positions using minimax with basic
+      heuristics, making it a good opponent for casual play and practice.
+    </p>
+  </section>
 </GameLayout>
 
 <script is:inline>

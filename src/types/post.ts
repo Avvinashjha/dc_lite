@@ -20,6 +20,30 @@ export interface SiteConfig {
     youtube?: string;
     instagram?: string;
   };
+  newsletter?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  comments?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  sync?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  quiz?: {
+    enabled?: boolean;
+    googleScriptUrl?: string;
+  };
+  seo?: {
+    twitterHandle?: string;
+    locale?: string;
+  };
+  analytics?: {
+    googleAnalyticsId?: string;
+    googleSearchConsoleVerification?: string;
+  };
 }
 
 // ──── Blog ────
@@ -146,4 +170,71 @@ export interface DocPage {
 export interface DocProject extends DocProjectMeta {
   slug: string;
   pages: DocPage[];
+}
+
+// ──── Problems ────
+export interface ProblemIndex {
+  title: string;
+  description: string;
+}
+
+export interface ProblemTestCase {
+  input?: string;
+  output?: string;
+  explanation?: string;
+  /** When set, runner calls functionName(...args) and compares to expected */
+  args?: unknown[];
+  expected?: unknown;
+}
+
+export interface ProblemExample {
+  input: string;
+  output: string;
+  explanation?: string;
+}
+
+export interface ProblemVisual {
+  title?: string;
+  caption?: string;
+  svg?: string;
+  imageUrl?: string;
+}
+
+/** Metadata stored in meta.json (no markdown content) */
+export interface ProblemMeta {
+  id: string;
+  title: string;
+  /** ISO date (YYYY-MM-DD) used for daily scheduling and RSS ordering */
+  publishedAt?: string;
+  difficulty: string;
+  topic: string;
+  topics: string[];
+  platform: string;
+  externalUrl: string;
+  sampleInput: string;
+  sampleOutput: string;
+  inputFormat?: string;
+  outputFormat?: string;
+  examples?: ProblemExample[];
+  testCases: ProblemTestCase[];
+  problemSet?: string;
+  dailyTrack?: string;
+  visuals?: ProblemVisual[];
+  solutionVisuals?: ProblemVisual[];
+  functionName?: string;
+  templateCode?: string;
+  constraints?: string | string[];
+  followUps?: string | string[];
+  draft?: boolean;
+}
+
+/** Lightweight problem used for list pages (no markdown parsing) */
+export interface ProblemListItem extends ProblemMeta {
+  slug: string;
+}
+
+/** Full problem with parsed HTML content for detail page */
+export interface ProblemItem extends ProblemListItem {
+  descriptionHtml: string;
+  solutionHtml: string;
 }

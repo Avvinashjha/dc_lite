@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0107",
+  "title": "Reverse Nodes in k-Group",
+  "difficulty": "Hard",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "reverseNodesInKGroup",
+  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode}\n */\nfunction reverseKGroup(head, k) {\n  // Reverse nodes in k-groups\n}",
+  "constraints": [
+    "1 <= n <= 5000",
+    "0 <= Node.val <= 1000",
+    "1 <= k <= n"
+  ]
+}

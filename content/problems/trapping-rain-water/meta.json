@@ -1,0 +1,54 @@
+{
+  "draft": false,
+  "id": "problem-0251",
+  "title": "Trapping Rain Water",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/trapping-rain-water/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1,
+          0,
+          1,
+          3,
+          2,
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          4,
+          2,
+          0,
+          3,
+          2,
+          5
+        ]
+      ],
+      "expected": 9
+    }
+  ],
+  "functionName": "trappingRainWater",
+  "templateCode": "/**\n * @param {number[]} height\n * @return {number}\n */\nfunction trap(height) {\n  // Compute trapped rainwater\n}\n\n// Sample: console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]));",
+  "constraints": [
+    "1 <= n <= 2 * 10^4",
+    "0 <= height[i] <= 10^5"
+  ]
+}

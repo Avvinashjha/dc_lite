@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0177",
+  "title": "Find median of BST",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20median%20of%20BST",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "findMedianOfBst",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction findMedian(root) {\n  // Find median of BST\n}",
+  "constraints": [
+    "1 <= N <= 10^4"
+  ]
+}

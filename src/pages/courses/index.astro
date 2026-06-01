@@ -13,13 +13,14 @@ const courses = getCourses();
 
     <div class="grid grid--2">
       {courses.map(course => (
-        <a href={`/courses/${course.slug}`} class="post-card">
+        <a href={`/courses/${course.slug}`} class="post-card" data-course-card={course.slug}>
           <div class="post-card__meta">
             <span style="text-transform: capitalize;">{course.level}</span>
             <span>&bull;</span>
             <span>{course.duration}</span>
             <span>&bull;</span>
             <span>{course.totalLessons} lessons</span>
+            <span class="enrollment-badge" data-enroll-badge={course.slug} style="display:none;background:var(--color-primary);color:#fff;padding:0.1rem 0.5rem;border-radius:var(--radius-md);font-size:0.7rem;font-weight:700;">Enrolled</span>
           </div>
           <h3 class="post-card__title">{course.title}</h3>
           <p class="post-card__description">{course.description}</p>
@@ -31,3 +32,21 @@ const courses = getCourses();
     </div>
   </div>
 </BaseLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script>
+  const ENROLL_TOOL = 'course-enrollment';
+
+  async function showEnrollmentBadges() {
+    await (window as any).DCStore.init();
+    const rows = await (window as any).DCStore.getAll(ENROLL_TOOL);
+    rows.forEach((row: any) => {
+      if (row.enrolledAt) {
+        const badge = document.querySelector(`[data-enroll-badge="${row.id}"]`) as HTMLElement | null;
+        if (badge) badge.style.display = '';
+      }
+    });
+  }
+
+  showEnrollmentBadges();
+</script>

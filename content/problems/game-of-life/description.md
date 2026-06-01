@@ -1,0 +1,1 @@
+The board is made up of an `m x n` grid of cells, where each cell is either alive (1) or dead (0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the rules of Conway's Game of Life. Given the current state of the board, return the next state.

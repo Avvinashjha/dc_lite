@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="ocd-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#27272a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="12" fill="url(#ocd-bg)"/>
+  <text x="320" y="130" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="48" font-weight="700">OpenCode</text>
+  <text x="320" y="175" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="system-ui,sans-serif" font-size="20">The open source AI coding agent</text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="120" y="205" width="400" height="44" rx="8" fill="rgba(255,255,255,0.1)"/>
+  <text x="320" y="233" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="14">100K+ stars | 2.5M monthly devs | Free models included</text>
+  <text x="320" y="295" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif" font-size="13">Terminal | Desktop | IDE | Claude | GPT | Gemini | Local</text>
+</svg>

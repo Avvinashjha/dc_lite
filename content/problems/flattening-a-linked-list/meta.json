@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0109",
+  "title": "Flattening a Linked List",
+  "difficulty": "Hard",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Flattening%20a%20Linked%20List",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "flatteningALinkedList",
+  "templateCode": "/**\n * @param {Node} root\n * @return {Node}\n */\nfunction flattenList(root) {\n  // Flatten sorted linked list\n}",
+  "constraints": [
+    "0 <= N <= 50",
+    "1 <= Node.val <= 10^3"
+  ]
+}

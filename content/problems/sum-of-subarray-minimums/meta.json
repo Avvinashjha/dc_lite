@@ -1,0 +1,32 @@
+{
+  "draft": false,
+  "id": "problem-0124",
+  "title": "Sum of Subarray Minimums",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/sum-of-subarray-minimums/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          1,
+          2,
+          4
+        ]
+      ],
+      "expected": 17
+    }
+  ],
+  "functionName": "sumOfSubarrayMinimums",
+  "templateCode": "/**\n * @param {number[]} arr\n * @return {number}\n */\nfunction sumSubarrayMins(arr) {\n  // Sum of subarray minimums\n}",
+  "constraints": [
+    "1 <= arr.length <= 3 * 10^4",
+    "1 <= arr[i] <= 3 * 10^4"
+  ]
+}

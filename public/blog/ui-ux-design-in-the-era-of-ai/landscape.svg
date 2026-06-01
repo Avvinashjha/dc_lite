@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" fill="none" aria-hidden="true">
+  <title>AI design tool landscape</title>
+  <rect x="20" y="15" width="90" height="45" rx="6" fill="#4285f4" fill-opacity="0.3" stroke="#4285f4"/>
+  <text x="65" y="40" text-anchor="middle" fill="#4285f4" font-family="system-ui,sans-serif" font-size="10">Stitch</text>
+  <text x="65" y="53" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="8">Google</text>
+  <rect x="120" y="15" width="90" height="45" rx="6" fill="#a855f7" fill-opacity="0.3" stroke="#a855f7"/>
+  <text x="165" y="40" text-anchor="middle" fill="#a855f7" font-family="system-ui,sans-serif" font-size="10">Lovable</text>
+  <text x="165" y="53" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="8">Chat to app</text>
+  <rect x="220" y="15" width="90" height="45" rx="6" fill="#0d9488" fill-opacity="0.3" stroke="#0d9488"/>
+  <text x="265" y="40" text-anchor="middle" fill="#0d9488" font-family="system-ui,sans-serif" font-size="10">Figma Make</text>
+  <text x="265" y="53" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="8">Prompt to code</text>
+  <rect x="320" y="15" width="90" height="45" rx="6" fill="#64748b" fill-opacity="0.3" stroke="#64748b"/>
+  <text x="365" y="40" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">Figma Sites</text>
+  <text x="365" y="53" text-anchor="middle" fill="#475569" font-family="system-ui,sans-serif" font-size="8">Publish sites</text>
+  <text x="210" y="85" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">Text prompt | Image | Voice | Sketch to UI</text>
+</svg>

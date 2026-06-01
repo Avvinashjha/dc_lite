@@ -1,0 +1,35 @@
+{
+  "draft": false,
+  "id": "problem-0035",
+  "title": "Generate Parentheses",
+  "difficulty": "Medium",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/generate-parentheses/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "n = 3",
+  "sampleOutput": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+  "testCases": [
+    {
+      "args": [
+        3
+      ],
+      "expected": [
+        "((()))",
+        "(()())",
+        "(())()",
+        "()(())",
+        "()()()"
+      ]
+    }
+  ],
+  "functionName": "generateParentheses",
+  "templateCode": "/**\n * @param {number} n\n * @return {any}\n */\nfunction generateParentheses(n) {\n  // Write your solution here\n}\n\n// Sample: console.log(generateParentheses(3));",
+  "constraints": [
+    "1 <= n <= 8"
+  ]
+}

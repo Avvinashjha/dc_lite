@@ -1,0 +1,37 @@
+{
+  "draft": false,
+  "id": "problem-0079",
+  "title": "Count of Smaller Numbers After Self",
+  "difficulty": "Hard",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          5,
+          2,
+          6,
+          1
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "functionName": "countOfSmallerNumbersAfterSelf",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nfunction countSmaller(nums) {\n  // Count smaller elements to the right\n}",
+  "constraints": [
+    "1 <= nums.length <= 10^5",
+    "-10^4 <= nums[i] <= 10^4"
+  ]
+}

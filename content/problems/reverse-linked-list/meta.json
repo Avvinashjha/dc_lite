@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0092",
+  "title": "Reverse Linked List",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reverse-linked-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        5,
+        4,
+        3,
+        2,
+        1
+      ]
+    }
+  ],
+  "functionName": "reverseLinkedList",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction reverseList(head) {\n  // Reverse linked list\n}",
+  "constraints": [
+    "0 to 5000 nodes",
+    "-5000 <= Node.val <= 5000"
+  ]
+}

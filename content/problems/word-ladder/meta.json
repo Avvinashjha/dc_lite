@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0215",
+  "title": "Word Ladder",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/word-ladder/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log",
+          "cog"
+        ]
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "wordLadder",
+  "templateCode": "/**\n * @param {string} beginWord\n * @param {string} endWord\n * @param {string[]} wordList\n * @return {number}\n */\nfunction ladderLength(beginWord, endWord, wordList) {\n  // Shortest transformation sequence length\n}",
+  "constraints": [
+    "1 <= beginWord.length <= 10",
+    "endWord.length == beginWord.length",
+    "1 <= wordList.length <= 5000"
+  ]
+}

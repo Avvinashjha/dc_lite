@@ -1,0 +1,43 @@
+{
+  "draft": false,
+  "id": "problem-0064",
+  "title": "Valid Square",
+  "difficulty": "Medium",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/valid-square/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "validSquare",
+  "templateCode": "/**\n * @param {number[]} p1\n * @param {number[]} p2\n * @param {number[]} p3\n * @param {number[]} p4\n * @return {boolean}\n */\nfunction validSquare(p1, p2, p3, p4) {\n  // Check if 4 points form a valid square\n}",
+  "constraints": [
+    "Coordinates are integers in range [-10^4, 10^4]"
+  ]
+}

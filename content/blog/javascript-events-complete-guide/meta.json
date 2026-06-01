@@ -1,0 +1,17 @@
+{
+  "title": "JavaScript Events: A Complete Guide",
+  "description": "A deep dive into JavaScript events, covering the event lifecycle, capturing, bubbling, delegation, custom events, event control methods, and performance best practices.",
+  "date": "2026-05-30",
+  "author": "Avinash Jha",
+  "tags": [
+    "javascript",
+    "events",
+    "dom",
+    "web development",
+    "programming",
+    "frontend"
+  ],
+  "category": "web development",
+  "draft": false,
+  "image": "/blog/javascript-events-complete-guide/hero.svg"
+}

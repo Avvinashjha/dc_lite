@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0037",
+  "title": "Reverse Words in a String",
+  "difficulty": "Medium",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/reverse-words-in-a-string/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"the sky is blue\"",
+  "sampleOutput": "\"blue is sky the\"",
+  "testCases": [
+    {
+      "args": [
+        "the sky is blue"
+      ],
+      "expected": "blue is sky the"
+    }
+  ],
+  "functionName": "reverseWordsInAString",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction reverseWordsInAString(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(reverseWordsInAString(\"the sky is blue\"));",
+  "constraints": [
+    "1 <= s.length <= 10^4",
+    "s contains English letters, digits, and spaces"
+  ]
+}

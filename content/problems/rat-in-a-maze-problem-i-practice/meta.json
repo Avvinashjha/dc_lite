@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0184",
+  "title": "Rat in a Maze Problem - I | Practice",
+  "difficulty": "Easy",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Rat%20in%20a%20Maze%20Problem%20-%20I%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "ratInAMazeProblemI",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction ratInAMazeProblemI(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "2 <= N <= 5",
+    "0 <= maze[i][j] <= 1"
+  ]
+}

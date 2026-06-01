@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0138",
+  "title": "Merge Two Binary Trees",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/merge-two-binary-trees/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "mergeTwoBinaryTrees",
+  "templateCode": "/**\n * @param {TreeNode} t1\n * @param {TreeNode} t2\n * @return {TreeNode}\n */\nfunction mergeTrees(t1, t2) {\n  // Merge two binary trees\n}",
+  "constraints": [
+    "0 <= number of nodes <= 2000",
+    "-10^4 <= Node.val <= 10^4"
+  ]
+}

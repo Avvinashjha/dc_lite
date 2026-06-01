@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0246",
+  "title": "Optimal Binary Search Tree",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Optimal%20Binary%20Search%20Tree",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "optimalBinarySearchTree",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction optimalBinarySearchTree(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= n <= 50",
+    "keys are sorted"
+  ]
+}

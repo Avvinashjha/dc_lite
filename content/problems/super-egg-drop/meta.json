@@ -1,0 +1,36 @@
+{
+  "draft": false,
+  "id": "problem-0256",
+  "title": "Super Egg Drop",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/super-egg-drop/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        2,
+        6
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        1,
+        2
+      ],
+      "expected": 2
+    }
+  ],
+  "functionName": "superEggDrop",
+  "templateCode": "/**\n * @param {number} k\n * @param {number} n\n * @return {number}\n */\nfunction superEggDrop(k, n) {\n  // Min moves to find critical floor\n}",
+  "constraints": [
+    "1 <= k <= 100",
+    "1 <= n <= 10^4"
+  ]
+}

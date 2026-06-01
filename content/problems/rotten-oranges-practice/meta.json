@@ -1,0 +1,43 @@
+{
+  "draft": false,
+  "id": "problem-0123",
+  "title": "Rotten Oranges | Practice",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Rotten%20Oranges%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            2,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "rottenOranges",
+  "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction orangesRotting(grid) {\n  // Minutes to rot all oranges\n}",
+  "constraints": [
+    "1 <= m, n <= 500",
+    "0 <= grid[i][j] <= 2"
+  ]
+}

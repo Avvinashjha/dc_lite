@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0069",
+  "title": "Permute two arrays such that sum of every pair is greater or equal to K",
+  "difficulty": "Easy",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Permute%20two%20arrays%20such%20that%20sum%20of%20every%20pair%20is%20greater%20or%20equal%20to%20K",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "permuteTwoArraysSuchThatSumOfEveryPairIsGreaterOrEqualToK",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction permuteTwoArraysSuchThatSumOfEveryPairIsGreaterOrEqualToK(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= A[i], B[i] <= 10^6"
+  ]
+}

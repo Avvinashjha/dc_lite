@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0205",
+  "title": "Detect a negative cycle in a Graph | (Bellman Ford)",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Detect%20a%20negative%20cycle%20in%20a%20Graph%20%7C%20(Bellman%20Ford)",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "detectANegativeCycleInAGraphBellmanFord",
+  "templateCode": "/**\n * @param {number} V\n * @param {number[][]} edges\n * @return {boolean}\n */\nfunction hasNegativeCycle(V, edges) {\n  // Detect negative cycle using Bellman-Ford\n}",
+  "constraints": [
+    "1 <= V <= 100",
+    "1 <= E <= V*(V-1)",
+    "-10^3 <= weight <= 10^3"
+  ]
+}

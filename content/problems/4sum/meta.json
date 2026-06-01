@@ -1,0 +1,58 @@
+{
+  "draft": false,
+  "id": "problem-0018",
+  "title": "4Sum",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/4sum/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,0,-1,0,-2,2], target = 0",
+  "sampleOutput": "[[-2,-1,1,2],[-2,0,0,2],[-1,0,1,1]]",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          0,
+          -1,
+          0,
+          -2,
+          2
+        ],
+        0
+      ],
+      "expected": [
+        [
+          -2,
+          -1,
+          1,
+          2
+        ],
+        [
+          -2,
+          0,
+          0,
+          2
+        ],
+        [
+          -1,
+          0,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "functionName": "fourSum",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {any}\n */\nfunction fourSum(nums, target) {\n  // Write your solution here\n}\n\n// Sample: console.log(fourSum([1,0,-1,0,-2,2], 0));",
+  "constraints": [
+    "1 <= nums.length <= 200",
+    "-10^9 <= nums[i] <= 10^9",
+    "-10^9 <= target <= 10^9"
+  ]
+}

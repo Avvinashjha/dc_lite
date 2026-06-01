@@ -3,6 +3,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
 ---
 <GameLayout gameName="Dino Runner" description="Jump and duck in this endless runner — inspired by Chrome's offline game!" instructions="Press <strong>Space</strong> or <strong>tap</strong> to jump. Press <strong>Down arrow</strong> or <strong>swipe down</strong> to duck. Avoid cacti and birds!" keywords="dino game, endless runner, chrome dino, jump game, offline game">
   <canvas id="game" width="600" height="200"></canvas>
+
+  <section slot="about" class="game-about">
+    <h2>About Dino Runner</h2>
+    <p>
+      Inspired by Chrome's hidden offline dinosaur game, this endless runner challenges you to jump over
+      cacti and duck under flying obstacles for as long as possible. The game gradually speeds up, testing
+      your reflexes and timing.
+    </p>
+    <p>
+      The original Chrome game was created by Sebastien Gabriel in 2014 as an easter egg for when you
+      lose internet connection. It's since become one of the most-played browser games ever. This version
+      works online, with touch support for mobile and your best score saved between sessions.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

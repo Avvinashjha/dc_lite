@@ -1,0 +1,67 @@
+{
+  "draft": false,
+  "id": "problem-0254",
+  "title": "Maximal Rectangle",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximal-rectangle/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "1",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "0",
+            "0",
+            "1",
+            "0"
+          ]
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          [
+            "0"
+          ]
+        ]
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "maximalRectangle",
+  "templateCode": "/**\n * @param {string[][]} matrix\n * @return {number}\n */\nfunction maximalRectangle(matrix) {\n  // Largest rectangle of 1s\n}",
+  "constraints": [
+    "1 <= rows, cols <= 200",
+    "matrix[i][j] is '0' or '1'"
+  ]
+}

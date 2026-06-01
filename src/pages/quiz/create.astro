@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/quiz.scss';
+import QuizBuilder from '../../components/QuizBuilder';
+import { getSiteConfig } from '../../utils/contentLoader';
+
+const config = getSiteConfig();
+const quizApiUrl = config.quiz?.enabled ? (config.quiz.googleScriptUrl || '') : '';
+
+const description = 'Build your own interactive quiz: add questions, choose single, multiple, or true/false types, set correct answers and explanations, then publish it to the community or export it as JSON.';
+---
+
+<BaseLayout
+  title="Create a Quiz | DailyCoder"
+  description={description}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Quiz', href: '/quiz' },
+    { label: 'Create', href: '/quiz/create' },
+  ]}
+>
+  <div class="container quiz-page quiz-page--create">
+    <nav class="quiz-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="quiz-breadcrumbs__sep">/</span>
+      <a href="/quiz">Quiz</a>
+      <span class="quiz-breadcrumbs__sep">/</span>
+      <span class="quiz-breadcrumbs__current">Create</span>
+    </nav>
+
+    <header class="quiz-detail__head">
+      <h1 class="quiz-detail__title">Create a quiz</h1>
+      <p class="quiz-detail__desc">{description}</p>
+    </header>
+
+    <QuizBuilder client:load />
+  </div>
+
+  <script set:html={`window.__dcQuizApiUrl = ${JSON.stringify(quizApiUrl)};`} is:inline />
+  <script src="/js/store.js" is:inline></script>
+</BaseLayout>

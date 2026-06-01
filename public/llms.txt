@@ -1,0 +1,59 @@
+# DailyCoder
+
+> DailyCoder (https://dailycoder.in) is a free platform for software developers. It offers a daily coding problem you can solve in the browser, 16 privacy-first developer tools that run entirely client-side, engineering deep-dive articles, and hands-on interactive courses. No signup is required to use the tools or read content.
+
+Everything runs in the browser. The developer tools never send your data to a server, and most content is freely accessible. The site is built with Astro and hosted as a static site.
+
+## Developer Tools
+Free, client-side tools at https://dailycoder.in/tools
+
+- [JSON Formatter](https://dailycoder.in/tools/json-formatter): Format, validate, and minify JSON with multi-tab support.
+- [JSON Diff](https://dailycoder.in/tools/json-diff): Compare two JSON objects side-by-side.
+- [CSV to JSON](https://dailycoder.in/tools/csv-json): Convert between CSV and JSON formats.
+- [Code Formatter & Preview](https://dailycoder.in/tools/code-formatter): Format or minify code with a side-by-side preview.
+- [JavaScript Runner](https://dailycoder.in/tools/js-runner): Write and execute JavaScript in a browser sandbox.
+- [Diff Checker](https://dailycoder.in/tools/diff-checker): Compare texts with git-style highlighting.
+- [Regex Tester](https://dailycoder.in/tools/regex-tester): Test regular expressions with live matching.
+- [Markdown Preview](https://dailycoder.in/tools/markdown-preview): Write markdown with live preview and PDF export.
+- [Color Picker](https://dailycoder.in/tools/color-picker): Pick colors and gradients, save palettes, export CSS/SASS.
+- [Color Converter](https://dailycoder.in/tools/color-converter): Convert between HEX, RGB, and HSL.
+- [QR Generator](https://dailycoder.in/tools/qr-generator): Generate QR codes for URLs, WiFi, email, and phone.
+- [Canvas Draw](https://dailycoder.in/tools/canvas-draw): Draw flowcharts, diagrams, and wireframes.
+- [JWT Decoder](https://dailycoder.in/tools/jwt-decoder): Decode and inspect JSON Web Tokens.
+- [Timestamp Converter](https://dailycoder.in/tools/timestamp): Convert Unix timestamps to human-readable dates.
+- [Timezone Converter](https://dailycoder.in/tools/timezone): Convert time between timezones with world clocks.
+- [Clipboard Manager](https://dailycoder.in/tools/clipboard): Save, search, and organize clipboard snippets.
+
+## Coding Problems
+Practice problems with an in-browser editor, test cases, and progress tracking.
+
+- [All Problems](https://dailycoder.in/problems): Curated coding problems across many topics and difficulties.
+- [Problem of the Day](https://dailycoder.in/daily/problem): A new daily coding challenge with streak tracking.
+
+## Quizzes
+Interactive, client-side quizzes on web development topics. Play in practice mode (no signup) or sign in to compete on ranked leaderboards. Anyone can also create and share community quizzes.
+
+- [All Quizzes](https://dailycoder.in/quiz): Browse curated and community quizzes by category, difficulty, and ranking.
+- [JavaScript Fundamentals](https://dailycoder.in/quiz/javascript-fundamentals): Core JavaScript concepts — types, scope, equality, hoisting, and the event loop.
+- [CSS Flexbox & Grid](https://dailycoder.in/quiz/css-flexbox-and-grid): Modern CSS layout with Flexbox and Grid.
+- [HTTP & Web Basics](https://dailycoder.in/quiz/http-and-web-basics): HTTP methods, status codes, headers, caching, and web security.
+- [Create a Quiz](https://dailycoder.in/quiz/create): Build and share your own quiz.
+
+## Blog
+Engineering deep-dives, architecture patterns, and practical career tips.
+
+- [Blog](https://dailycoder.in/blog): All articles.
+- [Blog RSS Feed](https://dailycoder.in/rss.xml)
+- [Daily Problems RSS Feed](https://dailycoder.in/daily/problem/rss.xml)
+
+## Courses
+Hands-on interactive courses with lesson tracking.
+
+- [Courses](https://dailycoder.in/courses): All interactive courses.
+
+## Documentation
+- [Tech Guides](https://dailycoder.in/docs): Reference documentation and guides.
+
+## About
+- [About](https://dailycoder.in/about): What DailyCoder is and who builds it.
+- [Contact](https://dailycoder.in/contact): Get in touch.

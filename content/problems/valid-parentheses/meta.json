@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0029",
+  "title": "Valid Parentheses",
+  "difficulty": "Easy",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/valid-parentheses/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"()[]{}\"",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        "()[]{}"
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "validParentheses",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction validParentheses(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(validParentheses(\"()[]{}\"));",
+  "constraints": [
+    "1 <= s.length <= 10^4",
+    "s consists of '()[]{}' only"
+  ]
+}

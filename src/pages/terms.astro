@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSiteConfig } from '../utils/contentLoader';
+const config = getSiteConfig();
+---
+
+<BaseLayout title={`Terms of Service | ${config.site.title}`} description="Terms of service for DailyCoder — rules, usage guidelines, and legal information.">
+  <div class="container content" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">Terms of Service</h1>
+    <p style="color: var(--color-text-light); margin-bottom: 2rem;">Last updated: March 2026</p>
+    
+    <div class="article__content">
+      <h2>Welcome</h2>
+      <p>
+        By using {config.site.title} (<a href={config.site.url}>{config.site.url}</a>), you agree to these terms.
+        They're straightforward — we want everyone to have a good experience here.
+      </p>
+
+      <h2>What We Offer</h2>
+      <p>
+        {config.site.title} provides coding problems, tutorials, developer tools, and browser-based games
+        — all free to use. Our tools run entirely in your browser; we don't process your data on any server.
+      </p>
+
+      <h2>Your Use of the Site</h2>
+      <p>You're welcome to use {config.site.title} for learning, practice, and personal projects. Please don't:</p>
+      <ul>
+        <li>Scrape or bulk-download content for redistribution</li>
+        <li>Attempt to disrupt the site or interfere with other users</li>
+        <li>Use the site for anything illegal or harmful</li>
+        <li>Misrepresent your identity or affiliation with {config.site.title}</li>
+      </ul>
+
+      <h2>Content and Intellectual Property</h2>
+      <p>
+        All original content on {config.site.title} — articles, tutorials, tool interfaces, and game implementations —
+        is owned by {config.site.title} and its contributors. Problem statements may reference well-known coding problems
+        from platforms like LeetCode, HackerRank, and GeeksforGeeks; credit is given where applicable.
+      </p>
+      <p>
+        You're free to use the code solutions and techniques you learn here in your own projects. Just don't copy
+        entire articles or pages and republish them as your own.
+      </p>
+
+      <h2>User-Generated Content</h2>
+      <p>
+        If you post discussions, comments, or notes on the site, you retain ownership of your content. By posting,
+        you grant us a license to display it on {config.site.title}. We may remove content that's offensive,
+        spammy, or violates these terms.
+      </p>
+
+      <h2>Developer Tools</h2>
+      <p>
+        Our developer tools (JSON formatter, regex tester, diff checker, etc.) are provided as-is. They process
+        everything locally in your browser — nothing is sent to our servers. While we do our best to keep them
+        accurate and reliable, we can't guarantee they'll be bug-free. Don't rely on them as your only validation
+        step for production code.
+      </p>
+
+      <h2>No Warranty</h2>
+      <p>
+        {config.site.title} is provided "as is" without warranties of any kind. We work hard to keep content accurate
+        and the site running smoothly, but we can't promise it'll always be available or error-free.
+        Use the information and tools at your own discretion.
+      </p>
+
+      <h2>Limitation of Liability</h2>
+      <p>
+        {config.site.title} and its contributors aren't liable for any damages arising from your use of the site.
+        This includes (but isn't limited to) lost data, incorrect solutions, or downtime.
+      </p>
+
+      <h2>Third-Party Links</h2>
+      <p>
+        We link to external sites like LeetCode, GitHub, and MDN for reference. We don't control those sites
+        and aren't responsible for their content or practices.
+      </p>
+
+      <h2>Changes to These Terms</h2>
+      <p>
+        We may update these terms occasionally. If we make significant changes, we'll update the date at the top
+        of this page. Continued use of the site after changes means you accept the updated terms.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms? Reach out via our <a href="/contact">contact page</a>
+        or email us at <a href="mailto:dailycoder.in@gmail.com">dailycoder.in@gmail.com</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

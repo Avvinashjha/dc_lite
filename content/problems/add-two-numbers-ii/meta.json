@@ -1,0 +1,43 @@
+{
+  "draft": false,
+  "id": "problem-0095",
+  "title": "Add Two Numbers II",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/add-two-numbers-ii/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          7,
+          2,
+          4,
+          3
+        ],
+        [
+          5,
+          6,
+          4
+        ]
+      ],
+      "expected": [
+        7,
+        8,
+        0,
+        7
+      ]
+    }
+  ],
+  "functionName": "addTwoNumbersIi",
+  "templateCode": "/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nfunction addTwoNumbersII(l1, l2) {\n  // Add two numbers (MSB first)\n}",
+  "constraints": [
+    "1 to 100 nodes per list",
+    "0 <= Node.val <= 9",
+    "Numbers have no leading zeros"
+  ]
+}

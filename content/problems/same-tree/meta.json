@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0141",
+  "title": "Same Tree",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/same-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "sameTree",
+  "templateCode": "/**\n * @param {TreeNode} p\n * @param {TreeNode} q\n * @return {boolean}\n */\nfunction isSameTree(p, q) {\n  // Check if two trees are identical\n}",
+  "constraints": [
+    "0 <= number of nodes <= 100",
+    "-10^4 <= Node.val <= 10^4"
+  ]
+}

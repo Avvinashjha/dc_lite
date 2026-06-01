@@ -3,6 +3,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
 ---
 <GameLayout gameName="Solitaire" description="Classic Klondike solitaire card game." instructions="Click cards to select, click destination to move. Build <strong>foundations</strong> (top right) from Ace to King by suit. Build <strong>tableau</strong> columns in descending, alternating colors. Click the <strong>stock</strong> (top left) to draw cards." keywords="solitaire, klondike, card game, patience">
   <canvas id="game" width="630" height="460"></canvas>
+
+  <section slot="about" class="game-about">
+    <h2>About Solitaire</h2>
+    <p>
+      Klondike Solitaire is the card game that shipped with every copy of Windows since 1990, making it
+      one of the most-played games in history. Deal seven tableau columns, build them down in alternating
+      colors, and move completed suits to the foundations from Ace to King.
+    </p>
+    <p>
+      Not every deal is winnable — roughly 80% of Klondike games have a solution. The skill is in choosing
+      which moves to make and which cards to uncover first. This version runs entirely on canvas with
+      smooth card animations.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

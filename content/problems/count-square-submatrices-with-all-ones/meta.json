@@ -1,0 +1,47 @@
+{
+  "draft": false,
+  "id": "problem-0240",
+  "title": "Count Square Submatrices with All Ones",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/count-square-submatrices-with-all-ones/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 15
+    }
+  ],
+  "functionName": "countSquareSubmatricesWithAllOnes",
+  "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nfunction countSquares(matrix) {\n  // Count square submatrices with all 1s\n}",
+  "constraints": [
+    "1 <= m, n <= 300",
+    "matrix[i][j] is 0 or 1"
+  ]
+}

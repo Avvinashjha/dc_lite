@@ -1,0 +1,1 @@
+Given a set of n integers, divide the set in two subsets of n/2 sizes each such that the difference of the sum of two subsets is as minimum as possible. If n is even, then sizes of both subsets must be n/2. If n is odd, then one subset should be (n-1)/2 and other should be (n+1)/2.

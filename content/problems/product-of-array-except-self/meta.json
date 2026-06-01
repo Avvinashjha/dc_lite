@@ -1,0 +1,38 @@
+{
+  "draft": false,
+  "id": "problem-0072",
+  "title": "Product of Array Except Self",
+  "difficulty": "Medium",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Product%20of%20Array%20Except%20Self",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        24,
+        12,
+        8,
+        6
+      ]
+    }
+  ],
+  "functionName": "productOfArrayExceptSelf",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nfunction productExceptSelf(nums) {\n  // Product of array except self\n}",
+  "constraints": [
+    "2 <= nums.length <= 10^5",
+    "-30 <= nums[i] <= 30",
+    "Guaranteed product of any prefix/suffix fits in 32-bit integer"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0102",
+  "title": "Rearrange a Linked List in Zig-Zag fashion",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20Linked%20List%20in%20Zig-Zag%20fashion",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "rearrangeALinkedListInZigZagFashion",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction rearrangeALinkedListInZigZagFashion(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^4"
+  ]
+}

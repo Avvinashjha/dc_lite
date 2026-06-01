@@ -1,0 +1,34 @@
+{
+  "draft": false,
+  "id": "problem-0075",
+  "title": "Allocate Minimum Pages | Practice",
+  "difficulty": "Hard",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Allocate%20Minimum%20Pages%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          12,
+          34,
+          67,
+          90
+        ],
+        2
+      ],
+      "expected": 113
+    }
+  ],
+  "functionName": "allocateMinimumPages",
+  "templateCode": "/**\n * @param {number[]} arr\n * @param {number} m\n * @return {number}\n */\nfunction allocateMinimumPages(arr, m) {\n  // Minimize the maximum pages assigned\n}",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= A[i] <= 10^6",
+    "1 <= M <= N"
+  ]
+}

@@ -27,6 +27,8 @@ interface Props {
 const { lesson, course, prevLesson, nextLesson } = Astro.props;
 const { cleanMarkdown, blocks } = extractBlocks(lesson.content);
 const htmlParts = parseMarkdown(cleanMarkdown).split(/<!--BLOCK_(\d+)-->/);
+const lessonCourseSlug = course.slug;
+const lessonSlug = lesson.slug;
 ---
 
 <BaseLayout
@@ -143,6 +145,25 @@ const htmlParts = parseMarkdown(cleanMarkdown).split(/<!--BLOCK_(\d+)-->/);
     </article>
   </div>
 </BaseLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script is:inline define:vars={{ lessonCourseSlug, lessonSlug }}>
+  (async function trackLesson() {
+    if (typeof DCStore === 'undefined') return;
+    var ENROLL_TOOL = 'course-enrollment';
+    await DCStore.init();
+    var row = await DCStore.get(ENROLL_TOOL, lessonCourseSlug);
+    if (row && row.enrolledAt) {
+      row.lastLesson = lessonSlug;
+      row.lastLessonAt = Date.now();
+      row.updatedAt = Date.now();
+      await DCStore.set(ENROLL_TOOL, lessonCourseSlug, row);
+      if (typeof DCSyncService !== 'undefined' && DCSyncService.isActive()) {
+        DCSyncService.pushEnrollment(lessonCourseSlug, row);
+      }
+    }
+  })();
+</script>
 
 <style>
   .lesson-layout {

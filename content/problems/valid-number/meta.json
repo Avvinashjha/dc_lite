@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0039",
+  "title": "Valid Number",
+  "difficulty": "Hard",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/valid-number/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"0\"",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        "0"
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "validNumber",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction validNumber(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(validNumber(\"0\"));",
+  "constraints": [
+    "1 <= s.length <= 20",
+    "s consists of relevant characters"
+  ]
+}

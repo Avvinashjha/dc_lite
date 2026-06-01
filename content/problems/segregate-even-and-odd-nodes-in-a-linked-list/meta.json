@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0104",
+  "title": "Segregate even and odd nodes in a Linked List",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Segregate%20even%20and%20odd%20nodes%20in%20a%20Linked%20List",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "segregateEvenAndOddNodesInALinkedList",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction segregateEvenAndOddNodesInALinkedList(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^4"
+  ]
+}

@@ -9,6 +9,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
     <div id="sp-hand" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;"></div>
     <div id="sp-msg" style="text-align:center;margin-top:1rem;font-weight:700;min-height:1.5rem;"></div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Spades</h2>
+    <p>
+      Spades is a partnership trick-taking game where spades are always trump. Before each round, you bid
+      how many tricks you expect to win. Meet your bid and you score points; miss it and you lose. The
+      team that reaches the target score first wins.
+    </p>
+    <p>
+      The bidding phase is where the real strategy lives — you need to accurately assess your hand's strength.
+      Overbidding is risky, but underbidding (sandbagging) accumulates penalty bags. This version pairs
+      you with a computer partner against two AI opponents.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

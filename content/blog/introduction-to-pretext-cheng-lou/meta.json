@@ -1,0 +1,18 @@
+{
+  "title": "An Introduction to Pretext and Why Dynamic Text Is Still Hard",
+  "description": "Meet Cheng Lou, the engineer behind Pretext: a DOM-free text layout library for Canvas, SVG, and AI-era UIs. Why measuring fluid text breaks the web platform, and where to try official demos.",
+  "date": "2026-04-04",
+  "author": "Avinash Jha",
+  "tags": [
+    "pretext",
+    "typography",
+    "canvas",
+    "javascript",
+    "layout",
+    "cheng-lou",
+    "react"
+  ],
+  "category": "blog",
+  "draft": false,
+  "image": "/blog/introduction-to-pretext-cheng-lou/hero.svg"
+}

@@ -1,0 +1,1 @@
+Suppose you have n integers from 1 to n. We define a beautiful arrangement as an array that is constructed by these n integers such that for every i (1 <= i <= n), either details[i] % i == 0 or i % details[i] == 0. Given an integer n, return the number of the beautiful arrangements that you can construct.

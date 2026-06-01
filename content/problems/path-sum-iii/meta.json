@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0158",
+  "title": "Path Sum III",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/path-sum-iii/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "pathSumIii",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} targetSum\n * @return {number}\n */\nfunction pathSum(root, targetSum) {\n  // Count paths summing to target\n}",
+  "constraints": [
+    "0 <= number of nodes <= 1000",
+    "-10^9 <= Node.val <= 10^9",
+    "-1000 <= targetSum <= 1000"
+  ]
+}

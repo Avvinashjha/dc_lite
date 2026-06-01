@@ -1,0 +1,42 @@
+{
+  "draft": false,
+  "id": "problem-0063",
+  "title": "Max Points on a Line",
+  "difficulty": "Medium",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/max-points-on-a-line/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "maxPointsOnALine",
+  "templateCode": "/**\n * @param {number[][]} points\n * @return {number}\n */\nfunction maxPoints(points) {\n  // Max points on a line\n}",
+  "constraints": [
+    "1 <= points.length <= 300",
+    "-10^4 <= xi, yi <= 10^4"
+  ]
+}

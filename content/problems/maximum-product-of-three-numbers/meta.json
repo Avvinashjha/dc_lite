@@ -1,0 +1,46 @@
+{
+  "draft": false,
+  "id": "problem-0056",
+  "title": "Maximum Product of Three Numbers",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximum-product-of-three-numbers/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 24
+    },
+    {
+      "args": [
+        [
+          -4,
+          -3,
+          -2,
+          1,
+          60
+        ]
+      ],
+      "expected": 720
+    }
+  ],
+  "functionName": "maximumProductOfThreeNumbers",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction maximumProduct(nums) {\n  // Maximum product of three numbers\n}",
+  "constraints": [
+    "3 <= nums.length <= 10^4",
+    "-1000 <= nums[i] <= 1000"
+  ]
+}

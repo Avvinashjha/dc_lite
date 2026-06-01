@@ -1,0 +1,50 @@
+{
+  "draft": false,
+  "id": "problem-0267",
+  "title": "Permutations II",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/permutations-ii/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [1,1,2]",
+  "sampleOutput": "[[1,1,2],[1,2,1],[2,1,1]]",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "functionName": "permutationsIi",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction permutationsIi(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(permutationsIi([1,1,2]));",
+  "constraints": [
+    "1 <= nums.length <= 8",
+    "-10 <= nums[i] <= 10"
+  ]
+}

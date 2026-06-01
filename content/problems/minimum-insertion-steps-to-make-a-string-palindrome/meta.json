@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0249",
+  "title": "Minimum Insertion Steps to Make a String Palindrome",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumInsertionStepsToMakeAStringPalindrome",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumInsertionStepsToMakeAStringPalindrome(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= s.length <= 500",
+    "s consists of lowercase English letters"
+  ]
+}

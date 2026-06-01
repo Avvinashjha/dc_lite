@@ -3,6 +3,19 @@ import GameLayout from '../../layouts/GameLayout.astro';
 ---
 <GameLayout gameName="Car Dodge" description="Dodge oncoming traffic and collect coins in this fast-paced racing game!" instructions="Use <strong>Left/Right</strong> arrow keys or <strong>swipe</strong> to move your car. Dodge red cars, collect yellow coins. Speed increases over time!" keywords="car game, dodge game, racing game, car dodge">
   <canvas id="game" width="300" height="500"></canvas>
+
+  <section slot="about" class="game-about">
+    <h2>About Car Dodge</h2>
+    <p>
+      A fast-paced lane-based game where you weave between oncoming traffic and grab coins. The speed
+      ramps up as your score increases, demanding quicker reactions. Simple controls — just left and right —
+      but the increasing pace makes it genuinely challenging.
+    </p>
+    <p>
+      Works with arrow keys on desktop and swipe gestures on mobile. Your high score is saved locally
+      so you can challenge yourself to beat it.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

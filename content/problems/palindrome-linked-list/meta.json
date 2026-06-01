@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0091",
+  "title": "Palindrome Linked List",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/palindrome-linked-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "palindromeLinkedList",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {boolean}\n */\nfunction isPalindrome(head) {\n  // Check if linked list is palindrome\n}",
+  "constraints": [
+    "1 to 10^5 nodes",
+    "0 <= Node.val <= 9"
+  ]
+}

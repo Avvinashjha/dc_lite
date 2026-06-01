@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0015",
+  "title": "Container With Most Water",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/container-with-most-water/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "height = [1,8,6,2,5,4,8,3,7]",
+  "sampleOutput": "49",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          8,
+          6,
+          2,
+          5,
+          4,
+          8,
+          3,
+          7
+        ]
+      ],
+      "expected": 49
+    }
+  ],
+  "functionName": "containerWithMostWater",
+  "templateCode": "/**\n * @param {number[]} height\n * @return {any}\n */\nfunction containerWithMostWater(height) {\n  // Write your solution here\n}\n\n// Sample: console.log(containerWithMostWater([1,8,6,2,5,4,8,3,7]));",
+  "constraints": [
+    "2 <= height.length <= 10^5",
+    "0 <= height[i] <= 10^4"
+  ]
+}

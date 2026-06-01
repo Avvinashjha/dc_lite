@@ -1,0 +1,28 @@
+{
+  "draft": false,
+  "id": "problem-0239",
+  "title": "Longest Common Substring | Practice",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Longest%20Common%20Substring%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "ABCDGH",
+        "ACDGHR"
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "longestCommonSubstring",
+  "templateCode": "/**\n * @param {string} s1\n * @param {string} s2\n * @return {number}\n */\nfunction longestCommonSubstring(s1, s2) {\n  // Length of longest common substring\n}",
+  "constraints": [
+    "1 <= |S1|, |S2| <= 500"
+  ]
+}

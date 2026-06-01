@@ -1,47 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const categories = [
-  {
-    name: 'JSON Tools',
-    icon: '{ }',
-    tools: [
-      { name: 'JSON Formatter', desc: 'Format, validate, minify with multi-tab support', href: '/tools/json-formatter', icon: '{ }' },
-      { name: 'JSON Diff', desc: 'Compare JSON objects side-by-side with saved tabs', href: '/tools/json-diff', icon: '⇄' },
-      { name: 'CSV ↔ JSON', desc: 'Convert between CSV and JSON formats', href: '/tools/csv-json', icon: '↹' },
-    ]
-  },
-  {
-    name: 'Code & Text',
-    icon: '</>',
-    tools: [
-      { name: 'Diff Checker', desc: 'Compare texts side-by-side with git-style highlighting', href: '/tools/diff-checker', icon: '±' },
-      { name: 'Regex Tester', desc: 'Test regular expressions with live matching', href: '/tools/regex-tester', icon: '.*' },
-      { name: 'Markdown Preview', desc: 'Write markdown with live preview and PDF export', href: '/tools/markdown-preview', icon: 'MD' },
-    ]
-  },
-  {
-    name: 'Design',
-    icon: '🎨',
-    tools: [
-      { name: 'Color Picker', desc: 'Pick colors, gradients, save palettes, export CSS/SASS', href: '/tools/color-picker', icon: '🖌' },
-      { name: 'Color Converter', desc: 'Convert between HEX, RGB, and HSL', href: '/tools/color-converter', icon: '🎨' },
-      { name: 'QR Generator', desc: 'Generate QR codes for URLs, WiFi, email, phone', href: '/tools/qr-generator', icon: '▣' },
-    ]
-  },
-  {
-    name: 'Developer Utilities',
-    icon: '🔧',
-    tools: [
-      { name: 'JWT Decoder', desc: 'Decode and inspect JSON Web Tokens', href: '/tools/jwt-decoder', icon: '🔑' },
-      { name: 'Timestamp', desc: 'Convert Unix timestamps and timezone converter', href: '/tools/timestamp', icon: '⏱' },
-      { name: 'Timezone', desc: 'Convert time between timezones with world clocks', href: '/tools/timezone', icon: '🌐' },
-      { name: 'Clipboard Manager', desc: 'Save, search, and organize clipboard snippets', href: '/tools/clipboard', icon: '📋' },
-    ]
-  }
-];
-
-const allTools = categories.flatMap(c => c.tools.map(t => ({ ...t, category: c.name })));
+import { TOOL_CATEGORIES as categories, ALL_TOOLS as allTools } from '../../data/tools';
 ---
 
 <BaseLayout title="Developer Tools | DailyCoder" description="Free online developer tools — JSON formatter, regex tester, JWT decoder, and more. All client-side, no data leaves your browser.">

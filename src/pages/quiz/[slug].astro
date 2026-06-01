@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/quiz.scss';
+import QuizPlayer from '../../components/QuizPlayer';
+import { getQuizzes, getQuiz } from '../../utils/quizLoader';
+import { getSiteConfig } from '../../utils/contentLoader';
+
+export function getStaticPaths() {
+  return getQuizzes().map(q => ({ params: { slug: q.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Quiz slug is required');
+
+const quiz = getQuiz(slug);
+if (!quiz) return Astro.redirect('/quiz');
+
+const config = getSiteConfig();
+const quizApiUrl = config.quiz?.enabled ? (config.quiz.googleScriptUrl || '') : '';
+
+const pageDescription = quiz.description ||
+  `A ${quiz.difficulty} ${quiz.category} quiz with ${quiz.questions.length} questions. Play in the browser.`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Quiz', href: '/quiz' },
+  { label: quiz.title, href: `/quiz/${slug}` },
+];
+
+const canonical = new URL(`/quiz/${slug}`, Astro.site).href;
+const publishedIso = quiz.publishedAt ? new Date(quiz.publishedAt) : null;
+const datePublishedIso = publishedIso && !isNaN(publishedIso.getTime()) ? publishedIso.toISOString() : null;
+
+// schema.org Quiz + LearningResource
+const quizJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['Quiz', 'LearningResource'],
+  name: quiz.title,
+  description: pageDescription,
+  url: canonical,
+  educationalLevel: quiz.difficulty,
+  learningResourceType: 'Quiz',
+  about: quiz.category,
+  keywords: (quiz.tags || []).join(', '),
+  numberOfQuestions: quiz.questions.length,
+  author: { '@type': 'Organization', name: quiz.author || 'DailyCoder' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'DailyCoder',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', Astro.site).href },
+  },
+  hasPart: quiz.questions.map(q => ({
+    '@type': 'Question',
+    eduQuestionType: q.type === 'multiple' ? 'Multiple choice' : q.type === 'boolean' ? 'True/False' : 'Single choice',
+    text: q.prompt,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: q.options.filter(o => q.correct.includes(o.id)).map(o => o.text).join('; '),
+    },
+    suggestedAnswer: q.options.map(o => ({ '@type': 'Answer', text: o.text })),
+  })),
+  ...(datePublishedIso && { datePublished: datePublishedIso }),
+};
+---
+
+<BaseLayout
+  title={`${quiz.title} | Quiz | DailyCoder`}
+  description={pageDescription}
+  breadcrumbs={breadcrumbs}
+  tags={quiz.tags}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(quizJsonLd)} />
+  </Fragment>
+
+  <div class="container quiz-page quiz-page--play">
+    <nav class="quiz-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="quiz-breadcrumbs__sep">/</span>
+      <a href="/quiz">Quiz</a>
+      <span class="quiz-breadcrumbs__sep">/</span>
+      <span class="quiz-breadcrumbs__current">{quiz.title}</span>
+    </nav>
+
+    <header class="quiz-detail__head">
+      <h1 class="quiz-detail__title">{quiz.title}</h1>
+      <p class="quiz-detail__desc">{pageDescription}</p>
+    </header>
+
+    <QuizPlayer client:load quiz={quiz} />
+  </div>
+
+  <script set:html={`window.__dcQuizApiUrl = ${JSON.stringify(quizApiUrl)};`} is:inline />
+  <script src="/js/store.js" is:inline></script>
+</BaseLayout>

@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0245",
+  "title": "Range Sum Query 2D - Immutable",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/range-sum-query-2d-immutable/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "rangeSumQuery2dImmutable",
+  "templateCode": "/**\n * @param {number[][]} matrix\n */\nfunction NumMatrix(matrix) {}\nNumMatrix.prototype.sumRegion = function(r1, c1, r2, c2) {};",
+  "constraints": [
+    "1 <= m, n <= 200",
+    "-10^4 <= matrix[i][j] <= 10^4",
+    "At most 10^4 calls to sumRegion"
+  ]
+}

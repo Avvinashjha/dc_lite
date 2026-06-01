@@ -1,0 +1,64 @@
+{
+  "draft": false,
+  "id": "problem-0151",
+  "title": "Lowest Common Ancestor of a Binary Tree",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          5,
+          1,
+          6,
+          2,
+          0,
+          8,
+          null,
+          null,
+          7,
+          4
+        ],
+        5,
+        1
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          3,
+          5,
+          1,
+          6,
+          2,
+          0,
+          8,
+          null,
+          null,
+          7,
+          4
+        ],
+        5,
+        4
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "lowestCommonAncestorOfABinaryTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {TreeNode} p\n * @param {TreeNode} q\n * @return {TreeNode}\n */\nfunction lowestCommonAncestor(root, p, q) {\n  // LCA in binary tree\n}",
+  "constraints": [
+    "2 <= number of nodes <= 10^5",
+    "-10^9 <= Node.val <= 10^9",
+    "All values are unique"
+  ]
+}

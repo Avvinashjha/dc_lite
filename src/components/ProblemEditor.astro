@@ -1,0 +1,37 @@
+---
+import CodeEditor from './CodeEditor.astro';
+
+interface Props {
+  id?: string;
+}
+
+const { id = 'problem-js-editor' } = Astro.props;
+---
+
+<div class="problem-editor-area">
+  <div class="problem-editor-toolbar">
+    <span style="font-size:0.78rem;font-weight:600;color:var(--color-text-light);">JavaScript</span>
+    <div class="spacer"></div>
+    <button id="run-js" class="p-btn p-btn--primary" type="button">Run Sample</button>
+    <button id="run-tests" class="p-btn p-btn--primary" type="button">Run Tests</button>
+    <button id="reset-js" class="p-btn" type="button">Reset</button>
+  </div>
+  <div class="problem-editor-mount">
+    <CodeEditor id={id} minHeight={200} fill={true} />
+  </div>
+  <div class="problem-output-area">
+    <div class="problem-output-tabs">
+      <button class="problem-output-tabs__btn problem-output-tabs__btn--active" data-out-tab="console" type="button">Console</button>
+      <button class="problem-output-tabs__btn" data-out-tab="tests" type="button">Test Results</button>
+    </div>
+    <div class="problem-output-content" id="output-console" data-out-pane="console"></div>
+    <div class="problem-output-content" id="output-tests" data-out-pane="tests" style="display:none;"></div>
+  </div>
+</div>
+
+<iframe
+  id="problem-js-frame"
+  title="JavaScript sandbox"
+  sandbox="allow-scripts"
+  style="width:0;height:0;border:0;position:absolute;opacity:0;pointer-events:none;"
+/>

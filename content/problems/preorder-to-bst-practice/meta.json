@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0169",
+  "title": "Preorder to BST | Practice",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Preorder%20to%20BST%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "preorderToBst",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction preorderToBst(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^3",
+    "1 <= pre[i] <= 10^4"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0223",
+  "title": "Minimum Number of Refueling Stops",
+  "difficulty": "Hard",
+  "topic": "Heap",
+  "topics": [
+    "Heap",
+    "Priority Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumNumberOfRefuelingStops",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumNumberOfRefuelingStops(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= target <= 10^9",
+    "0 <= startFuel <= 10^9",
+    "0 <= stations.length <= 500"
+  ]
+}

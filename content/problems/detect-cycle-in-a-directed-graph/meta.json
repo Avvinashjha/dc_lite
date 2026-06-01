@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0186",
+  "title": "Detect Cycle in a Directed Graph",
+  "difficulty": "Easy",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Detect%20Cycle%20in%20a%20Directed%20Graph",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "detectCycleInADirectedGraph",
+  "templateCode": "/**\n * @param {number} V\n * @param {number[][]} adj\n * @return {boolean}\n */\nfunction hasCycle(V, adj) {\n  // Detect cycle in directed graph\n}",
+  "constraints": [
+    "1 <= V <= 10^4",
+    "0 <= E <= 10^4"
+  ]
+}

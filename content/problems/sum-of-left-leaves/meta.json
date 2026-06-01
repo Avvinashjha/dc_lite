@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0145",
+  "title": "Sum of Left Leaves",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/sum-of-left-leaves/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "sumOfLeftLeaves",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction sumOfLeftLeaves(root) {\n  // Sum of all left leaves\n}",
+  "constraints": [
+    "1 <= number of nodes <= 1000",
+    "-1000 <= Node.val <= 1000"
+  ]
+}

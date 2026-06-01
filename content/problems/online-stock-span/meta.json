@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0122",
+  "title": "Online Stock Span",
+  "difficulty": "Medium",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/online-stock-span/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "onlineStockSpan",
+  "templateCode": "function StockSpanner() {}\nStockSpanner.prototype.next = function(price) {\n  // Return stock span\n};",
+  "constraints": [
+    "1 <= price <= 10^5",
+    "At most 10^4 calls to next"
+  ]
+}

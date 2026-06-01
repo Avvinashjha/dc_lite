@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0031",
+  "title": "Find the Index of the First Occurrence in a String",
+  "difficulty": "Easy",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "haystack = \"sadbutsad\", needle = \"sad\"",
+  "sampleOutput": "0",
+  "testCases": [
+    {
+      "args": [
+        "sadbutsad",
+        "sad"
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "findTheIndexOfTheFirstOccurrenceInAString",
+  "templateCode": "/**\n * @param {string} haystack\n * @param {string} needle\n * @return {any}\n */\nfunction findTheIndexOfTheFirstOccurrenceInAString(haystack, needle) {\n  // Write your solution here\n}\n\n// Sample: console.log(findTheIndexOfTheFirstOccurrenceInAString(\"sadbutsad\", \"sad\"));",
+  "constraints": [
+    "1 <= haystack.length, needle.length <= 10^4",
+    "haystack and needle consist of lowercase English letters"
+  ]
+}

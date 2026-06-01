@@ -1,0 +1,17 @@
+{
+  "title": "Introduction to OpenClaw: The AI That Actually Does Things",
+  "description": "What is OpenClaw, how to use it, what it can do, precautions to take, how it helps, and applications. A self-hosted AI assistant that runs on your machine and executes real tasks.",
+  "date": "2026-03-05",
+  "author": "Avinash Jha",
+  "tags": [
+    "openclaw",
+    "ai",
+    "automation",
+    "assistant",
+    "open-source",
+    "chat"
+  ],
+  "category": "tutorials",
+  "draft": false,
+  "image": "/blog/introduction-to-openclaw/hero.svg"
+}

@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Unix Timestamp Converter" description="Convert between Unix timestamps and human-readable dates." toolName="Timestamp Converter">
+<ToolLayout
+  title="Unix Timestamp Converter"
+  description="Convert between Unix timestamps and human-readable dates."
+  toolName="Timestamp Converter"
+  keywords="unix timestamp converter, epoch converter, timestamp to date, date to timestamp"
+  faqs={[
+    { q: "What timestamp formats does it support?", a: "It converts Unix timestamps (seconds) to and from human-readable dates." },
+    { q: "Does it show the current timestamp?", a: "Yes, the current Unix timestamp updates live on the page." },
+    { q: "Is it timezone aware?", a: "It shows both local and UTC interpretations so you can convert across timezones." },
+  ]}
+>
   <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; margin-bottom: 2rem;">
     <span class="tool-panel__label">Current Unix Timestamp</span>
     <div id="live-ts" style="font-size: 2rem; font-weight: 700; font-family: var(--font-mono); margin: 0.5rem 0;"></div>
@@ -23,6 +33,30 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       <div id="date-result" style="margin-top: 0.75rem; padding: 0.75rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.85rem; display: none;"></div>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>Understanding Unix Timestamps</h2>
+    <p>
+      A Unix timestamp is the number of seconds since January 1, 1970 (UTC). It's how most systems store
+      time internally — databases, APIs, log files, and JWT tokens all use timestamps. The problem is
+      that <code>1711108800</code> doesn't mean anything to a human at a glance.
+    </p>
+
+    <h3>What This Tool Does</h3>
+    <ul>
+      <li>Convert a Unix timestamp (seconds or milliseconds) to a human-readable date and time</li>
+      <li>Convert a date and time back to a Unix timestamp</li>
+      <li>See the current time as a live-updating timestamp</li>
+    </ul>
+
+    <h3>Seconds vs. Milliseconds</h3>
+    <p>
+      Classic Unix timestamps are in seconds. JavaScript's <code>Date.now()</code> returns milliseconds
+      (13 digits instead of 10). This tool handles both — if your timestamp has 13 digits, it's treated
+      as milliseconds automatically. For time zone conversions, use the
+      <a href="/tools/timezone">Timezone Converter</a>.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>

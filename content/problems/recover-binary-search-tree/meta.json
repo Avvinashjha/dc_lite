@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0161",
+  "title": "Recover Binary Search Tree",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/recover-binary-search-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "recoverBinarySearchTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {void}\n */\nfunction recoverTree(root) {\n  // Recover BST with two swapped nodes\n}",
+  "constraints": [
+    "2 <= number of nodes <= 1000",
+    "-2^31 <= Node.val <= 2^31 - 1"
+  ]
+}

@@ -2,9 +2,19 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="QR Code Generator" description="Free online QR code generator. Create QR codes for URLs, WiFi networks, email, and phone numbers. Download as PNG." toolName="QR Code Generator" keywords="qr code generator, qr generator, create qr code, wifi qr code, qr code maker online">
-  <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start;">
-    <div>
+<ToolLayout
+  title="QR Code Generator"
+  description="Free online QR code generator. Create QR codes for URLs, WiFi networks, email, and phone numbers. Download as PNG."
+  toolName="QR Code Generator"
+  keywords="qr code generator, qr generator, create qr code, wifi qr code, qr code maker online"
+  faqs={[
+    { q: "What can I create QR codes for?", a: "URLs, WiFi network credentials, email addresses, and phone numbers." },
+    { q: "Can I download the QR code?", a: "Yes, you can download the generated QR code as a PNG image." },
+    { q: "Is the data private?", a: "Yes. QR codes are generated in your browser; your input never leaves your device." },
+  ]}
+>
+  <div class="qr-layout">
+    <div class="qr-form">
       <div class="cp-field" style="margin-bottom: 1rem;">
         <span class="tool-panel__label">Type</span>
         <select id="qr-type" class="tool-input">
@@ -52,12 +62,36 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       </div>
     </div>
 
-    <div style="text-align: center;">
-      <div id="qr-output" style="background: white; padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: inline-block;">
+    <div class="qr-preview">
+      <div id="qr-output" class="qr-output">
         <canvas id="qr-canvas" width="300" height="300"></canvas>
       </div>
     </div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>About QR Codes</h2>
+    <p>
+      QR codes encode data in a two-dimensional barcode that any smartphone camera can scan. They're used
+      for everything — linking to websites, sharing WiFi credentials, encoding contact info, and mobile payments.
+    </p>
+
+    <h3>What You Can Encode</h3>
+    <ul>
+      <li><strong>URLs</strong> — Link to any webpage. The scanner opens it directly in the browser</li>
+      <li><strong>WiFi</strong> — Encode network name, password, and encryption type. Scan to connect instantly — no typing</li>
+      <li><strong>Email</strong> — Pre-fill the recipient, subject, and body of an email</li>
+      <li><strong>Phone</strong> — Encode a phone number for one-tap calling</li>
+      <li><strong>Plain text</strong> — Any arbitrary text up to about 4,000 characters</li>
+    </ul>
+
+    <h3>Tips for Better QR Codes</h3>
+    <p>
+      Keep the encoded data short — longer data means a denser pattern that's harder to scan from a distance.
+      For URLs, use a short link if the original is very long. Always test your QR code with an actual
+      phone camera before printing or sharing it.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>
@@ -141,10 +175,37 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 </script>
 
 <style>
+  .qr-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: start;
+  }
+  .qr-form { min-width: 0; }
+  .qr-preview {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 1rem;
+  }
+  .qr-output {
+    background: #fff;
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    max-width: 100%;
+  }
+  .qr-output canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
   @media (max-width: 768px) {
-    div[style*="grid-template-columns: 1fr 300px"] {
-      display: flex !important;
-      flex-direction: column-reverse;
+    .qr-layout { grid-template-columns: 1fr; }
+    .qr-preview {
+      order: -1;
+      position: static;
+      justify-content: flex-start;
     }
   }
 </style>

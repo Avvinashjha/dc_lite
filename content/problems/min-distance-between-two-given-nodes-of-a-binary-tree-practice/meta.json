@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0165",
+  "title": "Min distance between two given nodes of a Binary Tree | Practice",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Min%20distance%20between%20two%20given%20nodes%20of%20a%20Binary%20Tree%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minDistanceBetweenTwoGivenNodesOfABinaryTree",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minDistanceBetweenTwoGivenNodesOfABinaryTree(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^4",
+    "1 <= a, b <= N"
+  ]
+}

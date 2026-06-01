@@ -1,0 +1,36 @@
+{
+  "draft": false,
+  "id": "problem-0188",
+  "title": "Decode String",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/decode-string/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "3[a]2[bc]"
+      ],
+      "expected": "aaabcbc"
+    },
+    {
+      "args": [
+        "3[a2[c]]"
+      ],
+      "expected": "accaccacc"
+    }
+  ],
+  "functionName": "decodeString",
+  "templateCode": "/**\n * @param {string} s\n * @return {string}\n */\nfunction decodeString(s) {\n  // Decode the encoded string\n}\n\n// Sample: console.log(decodeString(\"3[a2[c]]\"));",
+  "constraints": [
+    "1 <= s.length <= 30",
+    "s consists of lowercase letters, digits, [ and ]",
+    "All integers in s are in range [1, 300]"
+  ]
+}

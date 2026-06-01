@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0100",
+  "title": "Partition List",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/partition-list/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "partitionList",
+  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} x\n * @return {ListNode}\n */\nfunction partition(head, x) {\n  // Partition list around x\n}",
+  "constraints": [
+    "0 to 200 nodes",
+    "-100 <= Node.val <= 100",
+    "-200 <= x <= 200"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "id": "css-flexbox-and-grid",
+  "title": "CSS Flexbox & Grid",
+  "description": "Master modern CSS layout with Flexbox and Grid: axes, alignment, sizing, and when to reach for each.",
+  "category": "CSS",
+  "difficulty": "medium",
+  "tags": ["css", "flexbox", "grid", "layout"],
+  "author": "DailyCoder",
+  "ranked": true,
+  "timeLimitSec": 360,
+  "source": "curated",
+  "publishedAt": "2026-05-05",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "In a flex container with `flex-direction: row`, which property aligns items along the main (horizontal) axis?",
+      "options": [
+        { "id": "a", "text": "align-items" },
+        { "id": "b", "text": "justify-content" },
+        { "id": "c", "text": "align-content" },
+        { "id": "d", "text": "place-items" }
+      ],
+      "correct": ["b"],
+      "explanation": "`justify-content` aligns items along the main axis. `align-items` aligns along the cross axis. With row direction, the main axis is horizontal.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does the shorthand `flex: 1` expand to?",
+      "options": [
+        { "id": "a", "text": "flex-grow: 1; flex-shrink: 0; flex-basis: auto" },
+        { "id": "b", "text": "flex-grow: 1; flex-shrink: 1; flex-basis: 0%" },
+        { "id": "c", "text": "flex-grow: 1; flex-shrink: 1; flex-basis: auto" },
+        { "id": "d", "text": "flex-grow: 0; flex-shrink: 1; flex-basis: 100%" }
+      ],
+      "correct": ["b"],
+      "explanation": "`flex: 1` is shorthand for `flex: 1 1 0%`, meaning grow, shrink, and a zero basis so space is distributed purely by the grow factor.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "boolean",
+      "prompt": "CSS Grid is a two-dimensional layout system, while Flexbox is primarily one-dimensional.",
+      "options": [
+        { "id": "true", "text": "True" },
+        { "id": "false", "text": "False" }
+      ],
+      "correct": ["true"],
+      "explanation": "Grid lays out content in rows AND columns simultaneously (2D). Flexbox handles a single axis at a time (1D), though it can wrap.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which Grid value creates as many equal columns as fit, each at least 200px, expanding to fill space?",
+      "options": [
+        { "id": "a", "text": "repeat(auto-fill, 200px)" },
+        { "id": "b", "text": "repeat(auto-fit, minmax(200px, 1fr))" },
+        { "id": "c", "text": "repeat(3, minmax(200px, auto))" },
+        { "id": "d", "text": "minmax(200px, 1fr)" }
+      ],
+      "correct": ["b"],
+      "explanation": "`repeat(auto-fit, minmax(200px, 1fr))` is the classic responsive grid: columns are at least 200px, and auto-fit collapses empty tracks so existing columns stretch to fill.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "multiple",
+      "prompt": "Which properties can be used to align a single flex item differently from its siblings? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "align-self" },
+        { "id": "b", "text": "order" },
+        { "id": "c", "text": "margin: auto" },
+        { "id": "d", "text": "justify-self" }
+      ],
+      "correct": ["a", "c"],
+      "explanation": "`align-self` overrides cross-axis alignment per item, and `margin: auto` absorbs free space (e.g. pushing an item to one side). `justify-self` has no effect in Flexbox; `order` changes position, not alignment.",
+      "points": 2
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "In Grid, what does the `fr` unit represent?",
+      "options": [
+        { "id": "a", "text": "A fixed number of pixels" },
+        { "id": "b", "text": "A fraction of the remaining free space in the container" },
+        { "id": "c", "text": "A percentage of the viewport width" },
+        { "id": "d", "text": "The font-relative size like rem" }
+      ],
+      "correct": ["b"],
+      "explanation": "The `fr` (fraction) unit distributes the leftover space in the grid container after fixed-size tracks and gaps are accounted for.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which property defines the space between Grid rows and columns (the modern standard property)?",
+      "options": [
+        { "id": "a", "text": "grid-gap" },
+        { "id": "b", "text": "gap" },
+        { "id": "c", "text": "spacing" },
+        { "id": "d", "text": "margin" }
+      ],
+      "correct": ["b"],
+      "explanation": "`gap` (formerly `grid-gap`) sets the gutters between tracks. `gap` is now also supported in Flexbox.",
+      "points": 1
+    }
+  ]
+}

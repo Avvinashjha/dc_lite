@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0101",
+  "title": "Remove Duplicates from Sorted List II",
+  "difficulty": "Medium",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "removeDuplicatesFromSortedListIi",
+  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction deleteDuplicates(head) {\n  // Remove all nodes with duplicates\n}",
+  "constraints": [
+    "0 to 300 nodes",
+    "-100 <= Node.val <= 100",
+    "List is sorted"
+  ]
+}

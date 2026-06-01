@@ -1,0 +1,72 @@
+{
+  "draft": false,
+  "id": "problem-0009",
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/two-sum/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [2,7,11,15], target = 9",
+  "sampleOutput": "[0,1]",
+  "constraints": [
+    "2 <= nums.length <= 10^4",
+    "-10^9 <= nums[i] <= 10^9",
+    "-10^9 <= target <= 10^9",
+    "Only one valid answer exists."
+  ],
+  "followUps": [
+    "What if the input array is sorted? (Can you do it in O(1) space?)",
+    "What if you need to return the values instead of indices?"
+  ],
+  "functionName": "twoSum",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nfunction twoSum(nums, target) {\n  // Return indices of two numbers that add up to target.\n  return [];\n}\n\n// Run with sample: console.log(twoSum([2,7,11,15], 9));",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          7,
+          11,
+          15
+        ],
+        9
+      ],
+      "expected": [
+        0,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          4
+        ],
+        6
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          3
+        ],
+        6
+      ],
+      "expected": [
+        0,
+        1
+      ]
+    }
+  ]
+}

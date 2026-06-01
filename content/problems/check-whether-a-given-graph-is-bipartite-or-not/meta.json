@@ -1,0 +1,71 @@
+{
+  "draft": false,
+  "id": "problem-0206",
+  "title": "Check whether a given graph is Bipartite or not",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Check%20whether%20a%20given%20graph%20is%20Bipartite%20or%20not",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "checkWhetherAGivenGraphIsBipartiteOrNot",
+  "templateCode": "/**\n * @param {number[][]} graph\n * @return {boolean}\n */\nfunction isBipartite(graph) {\n  // Check if graph is bipartite\n}",
+  "constraints": [
+    "1 <= V <= 200",
+    "0 <= E <= V*(V-1)/2"
+  ]
+}

@@ -8,10 +8,9 @@
   },
   "navigation": [
     { "label": "Blog", "path": "/blog" },
-    { "label": "Courses", "path": "/courses" },
-    { "label": "Docs", "path": "/docs" },
+    { "label": "Problems", "path": "/problems" },
+    { "label": "Quiz", "path": "/quiz" },
     { "label": "Tools", "path": "/tools" },
-    { "label": "Games", "path": "/games" },
     { "label": "About", "path": "/about" }
   ],
   "socialLinks": {
@@ -23,7 +22,19 @@
   },
   "newsletter": {
     "enabled": true,
-    "googleScriptUrl": "YOUR_GOOGLE_SCRIPT_URL_HERE"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+  },
+  "comments": {
+    "enabled": true,
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+  },
+  "sync": {
+    "enabled": true,
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+  },
+  "quiz": {
+    "enabled": true,
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
   },
   "seo": {
     "twitterHandle": "@dailycoder_in",
@@ -31,6 +42,8 @@
   },
   "analytics": {
     "googleAnalyticsId": "G-S6R7PYT45L",
-    "googleSearchConsoleVerification": ""
+    "googleSearchConsoleVerification": "",
+    "bingVerification": "",
+    "googleAdSenseId": "ca-pub-1081311524559030"
   }
 }

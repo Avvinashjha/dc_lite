@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="pt-bg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#134e4a"/>
+    </linearGradient>
+    <linearGradient id="pt-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="12" fill="url(#pt-bg)"/>
+  <!-- Copy: left -->
+  <text x="48" y="96" fill="#f0fdfa" font-family="system-ui,Segoe UI,sans-serif" font-size="34" font-weight="700">Pretext</text>
+  <text x="48" y="128" fill="rgba(255,255,255,0.85)" font-family="system-ui,Segoe UI,sans-serif" font-size="15">Measure multiline text without DOM reflow</text>
+  <text x="48" y="156" fill="rgba(94,234,212,0.85)" font-family="ui-monospace,Courier New,monospace" font-size="13">prepare() then layout() by Cheng Lou</text>
+  <!-- Canvas + wrapped lines mock (dimension scale sits in card gutter only) -->
+  <g transform="translate(352, 56)">
+    <rect x="0" y="0" width="248" height="200" rx="10" fill="rgba(15,23,42,0.85)" stroke="rgba(94,234,212,0.35)" stroke-width="2"/>
+    <text x="124" y="28" text-anchor="middle" fill="rgba(148,163,184,0.95)" font-family="ui-monospace,Courier New,monospace" font-size="10">canvas.measureText + cached widths</text>
+    <!-- Wrapped line bars (right of scale) -->
+    <rect x="52" y="48" width="176" height="6" rx="3" fill="url(#pt-line)" opacity="0.65"/>
+    <rect x="52" y="66" width="138" height="6" rx="3" fill="url(#pt-line)" opacity="0.5"/>
+    <rect x="52" y="84" width="162" height="6" rx="3" fill="url(#pt-line)" opacity="0.55"/>
+    <rect x="52" y="102" width="110" height="6" rx="3" fill="url(#pt-line)" opacity="0.45"/>
+    <rect x="52" y="120" width="152" height="6" rx="3" fill="url(#pt-line)" opacity="0.5"/>
+    <!-- Vertical dimension bracket aligned to text block -->
+    <path d="M40 48 V 126" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M34 48 H42 M34 126 H42" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- Label: centered on bracket, in gutter between card edge and bars -->
+    <g transform="translate(20, 87)">
+      <text transform="rotate(-90)" text-anchor="middle" dominant-baseline="middle" fill="#cbd5e1" font-family="ui-monospace,Courier New,monospace" font-size="8" x="0" y="0">height</text>
+    </g>
+  </g>
+  <!-- benefit pills -->
+  <rect x="30" y="188" width="315" height="32" rx="8" fill="rgba(94,234,212,0.12)" stroke="rgba(94,234,212,0.25)"/>
+  <text x="188" y="209" text-anchor="middle" fill="rgba(240,253,250,0.9)" font-family="system-ui,sans-serif" font-size="12">Virtual lists, chat, Canvas, no getBoundingClientRect()</text>
+  <rect x="48" y="268" width="544" height="40" rx="8" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="320" y="293" text-anchor="middle" fill="rgba(226,232,240,0.75)" font-family="system-ui,sans-serif" font-size="12">Demo: chenglou.me/pretext | Package: @chenglou/pretext</text>
+</svg>

@@ -17,6 +17,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
       <div id="ludo-log" style="font-size:0.7rem;color:var(--color-text-light);max-height:150px;overflow-y:auto;margin-top:0.75rem;font-family:var(--font-mono);"></div>
     </div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Ludo</h2>
+    <p>
+      Ludo is a classic board game derived from the ancient Indian game Pachisi. It's a race game for 2-4
+      players where you roll a die and try to move all four of your pieces from start to home before your
+      opponents do. Landing on an opponent's piece sends them back to the start.
+    </p>
+    <p>
+      Despite the dice element, Ludo involves real decisions — which piece to move, when to play safe on
+      starred squares, and when to go aggressive. This version lets you play against computer opponents
+      with colored pieces on a traditional cross-shaped board.
+    </p>
+  </section>
 </GameLayout>
 
 <script is:inline>

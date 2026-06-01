@@ -1,0 +1,52 @@
+{
+  "draft": false,
+  "id": "problem-0210",
+  "title": "Critical Connections in a Network",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/critical-connections-in-a-network/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        4,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          3
+        ]
+      ]
+    }
+  ],
+  "functionName": "criticalConnectionsInANetwork",
+  "templateCode": "/**\n * @param {number} n\n * @param {number[][]} connections\n * @return {number[][]}\n */\nfunction criticalConnections(n, connections) {\n  // Find all bridges in the network\n}",
+  "constraints": [
+    "2 <= n <= 10^5",
+    "n - 1 <= connections.length <= 10^5"
+  ]
+}

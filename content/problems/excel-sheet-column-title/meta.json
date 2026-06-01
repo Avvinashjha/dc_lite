@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0057",
+  "title": "Excel Sheet Column Title",
+  "difficulty": "Easy",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/excel-sheet-column-title/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        1
+      ],
+      "expected": "A"
+    },
+    {
+      "args": [
+        28
+      ],
+      "expected": "AB"
+    },
+    {
+      "args": [
+        701
+      ],
+      "expected": "ZY"
+    }
+  ],
+  "functionName": "excelSheetColumnTitle",
+  "templateCode": "/**\n * @param {number} columnNumber\n * @return {string}\n */\nfunction convertToTitle(columnNumber) {\n  // Convert number to Excel column title\n}\n\n// Sample: console.log(convertToTitle(28));",
+  "constraints": [
+    "1 <= columnNumber <= 2^31 - 1"
+  ]
+}

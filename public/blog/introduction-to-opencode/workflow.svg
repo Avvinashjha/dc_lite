@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none" aria-hidden="true">
+  <title>OpenCode Plan Build Verify workflow</title>
+  <rect x="20" y="20" width="100" height="40" rx="6" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6"/>
+  <text x="70" y="45" text-anchor="middle" fill="#3b82f6" font-family="system-ui,sans-serif" font-size="11">Plan</text>
+  <text x="70" y="58" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="9">read-only</text>
+  <path stroke="#64748b" stroke-width="2" d="M120 40h35" marker-end="url(#ocd-arr)"/>
+  <defs><marker id="ocd-arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4V0z" fill="#64748b"/></marker></defs>
+  <rect x="155" y="20" width="100" height="40" rx="6" fill="#22c55e" fill-opacity="0.3" stroke="#22c55e"/>
+  <text x="205" y="45" text-anchor="middle" fill="#22c55e" font-family="system-ui,sans-serif" font-size="11">Build</text>
+  <text x="205" y="58" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="9">make changes</text>
+  <path stroke="#64748b" stroke-width="2" d="M255 40h35" marker-end="url(#ocd-arr2)"/>
+  <defs><marker id="ocd-arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4V0z" fill="#64748b"/></marker></defs>
+  <rect x="290" y="20" width="90" height="40" rx="6" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b"/>
+  <text x="335" y="45" text-anchor="middle" fill="#f59e0b" font-family="system-ui,sans-serif" font-size="11">Verify</text>
+  <text x="335" y="58" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="9">run tests</text>
+  <text x="200" y="75" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">Validate before execution</text>
+</svg>

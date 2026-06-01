@@ -1,0 +1,44 @@
+{
+  "draft": false,
+  "id": "problem-0211",
+  "title": "alien-dictionary",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "Other",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          "wrt",
+          "wrf",
+          "er",
+          "ett",
+          "rftt"
+        ]
+      ],
+      "expected": "wertf"
+    },
+    {
+      "args": [
+        [
+          "z",
+          "x"
+        ]
+      ],
+      "expected": "zx"
+    }
+  ],
+  "functionName": "alienDictionary",
+  "templateCode": "/**\n * @param {string[]} words\n * @return {string}\n */\nfunction alienDictionary(words) {\n  // Derive character order from sorted alien words\n}",
+  "constraints": [
+    "1 <= words.length <= 100",
+    "1 <= words[i].length <= 100",
+    "words[i] consists of lowercase English letters"
+  ]
+}

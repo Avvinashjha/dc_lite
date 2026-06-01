@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="stitch-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4285f4"/>
+      <stop offset="100%" stop-color="#1a73e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="12" fill="url(#stitch-bg)"/>
+  <text x="320" y="130" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="52" font-weight="700">Stitch</text>
+  <text x="320" y="180" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="system-ui,sans-serif" font-size="20">Design with AI | Google Labs</text>
+  <rect x="170" y="210" width="300" height="44" rx="8" fill="rgba(255,255,255,0.2)"/>
+  <text x="320" y="238" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="14">Vibe design | Voice Canvas | Text to UI | Free</text>
+  <text x="320" y="295" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="system-ui,sans-serif" font-size="13">stitch.withgoogle.com</text>
+</svg>

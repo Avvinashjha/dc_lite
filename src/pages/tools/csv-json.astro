@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="CSV ↔ JSON Converter" description="Convert between CSV and JSON formats — with multiple tabs." toolName="CSV ↔ JSON Converter">
+<ToolLayout
+  title="CSV ↔ JSON Converter"
+  description="Convert between CSV and JSON formats — with multiple tabs."
+  toolName="CSV ↔ JSON Converter"
+  keywords="csv to json, json to csv, csv json converter, convert csv online"
+  faqs={[
+    { q: "Which direction can it convert?", a: "Both ways — turn CSV into a JSON array of objects, or flatten JSON back into CSV rows." },
+    { q: "Is my data private?", a: "Yes. Conversion runs entirely in your browser; nothing is uploaded." },
+    { q: "How are CSV headers handled?", a: "The first row is treated as the column names, which become the keys in each JSON object." },
+  ]}
+>
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
     <button class="tab-add" id="btn-add-tab" title="New conversion">+</button>
@@ -28,6 +38,32 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     </div>
   </div>
   <div id="status"></div>
+
+  <section slot="about" class="tool-about">
+    <h2>Converting Between CSV and JSON</h2>
+    <p>
+      CSV and JSON are the two most common data interchange formats, but they're used in very different contexts.
+      Spreadsheets and databases export CSV. APIs and web apps speak JSON. This tool bridges the gap
+      so you don't have to write a throwaway script every time you need to convert between them.
+    </p>
+
+    <h3>CSV to JSON</h3>
+    <p>
+      Paste your CSV data and the tool converts each row into a JSON object, using the header row as keys.
+      Handy when you need to seed a database from a spreadsheet export, or when you want to transform
+      tabular data for a frontend component.
+    </p>
+
+    <h3>JSON to CSV</h3>
+    <p>
+      Going the other direction — flatten an array of JSON objects into comma-separated rows. Useful for
+      getting API data into Excel or Google Sheets, or for generating reports from JSON exports.
+    </p>
+
+    <p>
+      Everything runs in your browser. Your data stays on your machine — nothing gets uploaded.
+    </p>
+  </section>
 </ToolLayout>
 
 <script src="/js/store.js" is:inline></script>

@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0209",
+  "title": "Remove Boxes",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/remove-boxes/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "removeBoxes",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction removeBoxes(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= boxes.length <= 100",
+    "1 <= boxes[i] <= 100"
+  ]
+}

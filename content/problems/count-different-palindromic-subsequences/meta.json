@@ -1,0 +1,28 @@
+{
+  "draft": false,
+  "id": "problem-0253",
+  "title": "Count Different Palindromic Subsequences",
+  "difficulty": "Hard",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/count-different-palindromic-subsequences/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        "bccb"
+      ],
+      "expected": 6
+    }
+  ],
+  "functionName": "countDifferentPalindromicSubsequences",
+  "templateCode": "/**\n * @param {string} s\n * @return {number}\n */\nfunction countPalindromicSubsequences(s) {\n  // Count unique palindromic subsequences\n}",
+  "constraints": [
+    "1 <= s.length <= 1000",
+    "s contains only a, b, c, d"
+  ]
+}

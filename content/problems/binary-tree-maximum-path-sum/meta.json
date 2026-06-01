@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0171",
+  "title": "Binary Tree Maximum Path Sum",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "binaryTreeMaximumPathSum",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction maxPathSum(root) {\n  // Find maximum path sum in binary tree\n}",
+  "constraints": [
+    "1 <= number of nodes <= 3 * 10^4",
+    "-1000 <= Node.val <= 1000"
+  ]
+}

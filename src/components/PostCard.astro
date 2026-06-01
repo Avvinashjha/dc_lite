@@ -1,6 +1,7 @@
 ---
-import { formatDateShort } from '../utils/formatDate';
-import { calculateReadingTime } from '../utils/readingTime';
+import { Image } from "astro:assets";
+import { formatDateShort } from "../utils/formatDate";
+import { calculateReadingTime } from "../utils/readingTime";
 
 interface Props {
   title: string;
@@ -13,20 +14,25 @@ interface Props {
   content: string;
 }
 
-const { title, description, date, slug, tags, category, image, content } = Astro.props;
+const { title, description, date, slug, tags, category, image, content } =
+  Astro.props;
 const readingTime = calculateReadingTime(content);
 ---
 
 <a href={`/blog/${slug}`} class="post-card">
-  {image && (
-    <img
-      src={image}
-      alt={title}
-      class="post-card__image"
-      loading="lazy"
-    />
-  )}
-  
+  {
+    image && (
+      <Image
+        src={image}
+        alt={title}
+        width={600}
+        height={315}
+        class="post-card__image"
+        loading="lazy"
+      />
+    )
+  }
+
   <div class="post-card__meta">
     <time datetime={date.toISOString()}>{formatDateShort(date)}</time>
     <span>•</span>
@@ -34,14 +40,12 @@ const readingTime = calculateReadingTime(content);
     <span>•</span>
     <span>{category}</span>
   </div>
-  
+
   <h3 class="post-card__title">{title}</h3>
-  
+
   <p class="post-card__description">{description}</p>
-  
+
   <div class="post-card__tags">
-    {tags.slice(0, 3).map(tag => (
-      <span class="tag">{tag}</span>
-    ))}
+    {tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
   </div>
 </a>

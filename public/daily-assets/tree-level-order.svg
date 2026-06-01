@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 260" role="img" aria-label="Binary tree level order traversal">
+  <rect x="0" y="0" width="620" height="260" fill="#0b1220"/>
+  <text x="22" y="32" fill="#e2e8f0" font-size="18" font-family="Arial">Binary Tree Level Order Traversal</text>
+  <circle cx="310" cy="70" r="20" fill="#1d4ed8"/><text x="304" y="76" fill="#dbeafe" font-size="14" font-family="Arial">3</text>
+  <circle cx="210" cy="130" r="20" fill="#0f766e"/><text x="204" y="136" fill="#ccfbf1" font-size="14" font-family="Arial">9</text>
+  <circle cx="410" cy="130" r="20" fill="#0f766e"/><text x="400" y="136" fill="#ccfbf1" font-size="14" font-family="Arial">20</text>
+  <circle cx="360" cy="196" r="20" fill="#be123c"/><text x="352" y="202" fill="#ffe4e6" font-size="14" font-family="Arial">15</text>
+  <circle cx="460" cy="196" r="20" fill="#be123c"/><text x="452" y="202" fill="#ffe4e6" font-size="14" font-family="Arial">7</text>
+  <line x1="292" y1="84" x2="226" y2="116" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="328" y1="84" x2="394" y2="116" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="398" y1="144" x2="372" y2="178" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="422" y1="144" x2="446" y2="178" stroke="#94a3b8" stroke-width="2"/>
+  <text x="22" y="238" fill="#cbd5e1" font-size="14" font-family="Arial">Output levels: [[3], [9, 20], [15, 7]]</text>
+</svg>

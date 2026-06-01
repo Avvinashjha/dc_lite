@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0174",
+  "title": "Vertical Order Traversal of a Binary Tree",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "verticalOrderTraversalOfABinaryTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nfunction verticalTraversal(root) {\n  // Vertical order traversal\n}",
+  "constraints": [
+    "1 <= number of nodes <= 1000",
+    "0 <= Node.val <= 1000"
+  ]
+}

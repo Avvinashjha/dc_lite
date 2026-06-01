@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0216",
+  "title": "Minimize Cash Flow among a given set of friends who have borrowed money from each other",
+  "difficulty": "Hard",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Minimize%20Cash%20Flow%20among%20a%20given%20set%20of%20friends%20who%20have%20borrowed%20money%20from%20each%20other",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimizeCashFlowAmongAGivenSetOfFriendsWhoHaveBorrowedMoneyFromEachOther",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimizeCashFlowAmongAGivenSetOfFriendsWhoHaveBorrowedMoneyFromEachOther(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 50",
+    "0 <= amount[i][j] <= 10^4"
+  ]
+}

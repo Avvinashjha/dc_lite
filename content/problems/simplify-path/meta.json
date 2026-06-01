@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0036",
+  "title": "Simplify Path",
+  "difficulty": "Medium",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/simplify-path/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "path = \"/home/\"",
+  "sampleOutput": "\"/home\"",
+  "testCases": [
+    {
+      "args": [
+        "/home/"
+      ],
+      "expected": "/home"
+    }
+  ],
+  "functionName": "simplifyPath",
+  "templateCode": "/**\n * @param {string} path\n * @return {any}\n */\nfunction simplifyPath(path) {\n  // Write your solution here\n}\n\n// Sample: console.log(simplifyPath(\"/home/\"));",
+  "constraints": [
+    "1 <= path.length <= 3000",
+    "path consists of English letters, digits, period, slash, or underscore"
+  ]
+}

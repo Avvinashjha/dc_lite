@@ -1,0 +1,56 @@
+{
+  "draft": false,
+  "id": "problem-0020",
+  "title": "Spiral Matrix",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/spiral-matrix/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "matrix = [[1,2,3],[4,5,6],[7,8,9]]",
+  "sampleOutput": "[1,2,3,6,9,8,7,4,5]",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        8,
+        7,
+        4,
+        5
+      ]
+    }
+  ],
+  "functionName": "spiralMatrix",
+  "templateCode": "/**\n * @param {number[][]} matrix\n * @return {any}\n */\nfunction spiralMatrix(matrix) {\n  // Write your solution here\n}\n\n// Sample: console.log(spiralMatrix([[1,2,3],[4,5,6],[7,8,9]]));",
+  "constraints": [
+    "1 <= m, n <= 10",
+    "-100 <= matrix[i][j] <= 100"
+  ]
+}

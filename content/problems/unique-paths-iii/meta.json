@@ -1,0 +1,49 @@
+{
+  "draft": false,
+  "id": "problem-0271",
+  "title": "Unique Paths III",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/unique-paths-iii/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "grid = [[1,0,0,0],[0,0,0,0],[0,0,2,-1]]",
+  "sampleOutput": "2",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            -1
+          ]
+        ]
+      ],
+      "expected": 2
+    }
+  ],
+  "functionName": "uniquePathsIii",
+  "templateCode": "/**\n * @param {number[][]} grid\n * @return {any}\n */\nfunction uniquePathsIii(grid) {\n  // Write your solution here\n}\n\n// Sample: console.log(uniquePathsIii([[1,0,0,0],[0,0,0,0],[0,0,2,-1]]));",
+  "constraints": [
+    "1 <= m, n <= 20",
+    "m * n <= 20"
+  ]
+}

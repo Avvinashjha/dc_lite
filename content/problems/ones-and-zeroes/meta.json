@@ -1,0 +1,37 @@
+{
+  "draft": false,
+  "id": "problem-0229",
+  "title": "Ones and Zeroes",
+  "difficulty": "Easy",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/ones-and-zeroes/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          "10",
+          "0001",
+          "111001",
+          "1",
+          "0"
+        ],
+        5,
+        3
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "onesAndZeroes",
+  "templateCode": "/**\n * @param {string[]} strs\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nfunction findMaxForm(strs, m, n) {\n  // Max strings within m zeros and n ones\n}",
+  "constraints": [
+    "1 <= strs.length <= 600",
+    "1 <= strs[i].length <= 100",
+    "1 <= m, n <= 100"
+  ]
+}

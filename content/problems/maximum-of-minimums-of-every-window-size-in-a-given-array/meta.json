@@ -1,0 +1,42 @@
+{
+  "draft": false,
+  "id": "problem-0129",
+  "title": "Maximum of minimums of every window size in a given array",
+  "difficulty": "Hard",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Maximum%20of%20minimums%20of%20every%20window%20size%20in%20a%20given%20array",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          20,
+          30,
+          50,
+          10,
+          70,
+          30
+        ]
+      ],
+      "expected": [
+        70,
+        30,
+        20,
+        10,
+        10,
+        10,
+        10
+      ]
+    }
+  ],
+  "functionName": "maximumOfMinimumsOfEveryWindowSizeInAGivenArray",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction maximumOfMinimumsOfEveryWindowSizeInAGivenArray(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^5"
+  ]
+}

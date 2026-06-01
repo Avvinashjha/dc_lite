@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0149",
+  "title": "BST with Dead End | Practice",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=BST%20with%20Dead%20End%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "bstWithDeadEnd",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nfunction isDeadEnd(root) {\n  // Check if BST has a dead end\n}",
+  "constraints": [
+    "1 <= N <= 10^4",
+    "1 <= Node.val <= 10^4"
+  ]
+}

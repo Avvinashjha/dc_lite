@@ -3,6 +3,19 @@ import GameLayout from '../../layouts/GameLayout.astro';
 ---
 <GameLayout gameName="Snake" description="Classic snake game — eat food, grow longer, don't hit yourself!" instructions="Use <strong>arrow keys</strong> or <strong>swipe</strong> on mobile to move the snake. Eat the red food to grow. Don't hit the walls or yourself!" keywords="snake game, classic snake, browser snake">
   <canvas id="game"></canvas>
+
+  <section slot="about" class="game-about">
+    <h2>About Snake</h2>
+    <p>
+      Snake is one of the earliest arcade games, dating back to the late 1970s. It became a cultural icon when
+      Nokia pre-installed it on their phones in 1998. The rules are dead simple — move, eat, grow, don't crash —
+      but the challenge scales beautifully as your snake gets longer and the available space shrinks.
+    </p>
+    <p>
+      This version uses a 20x20 grid with smooth rendering on an HTML5 canvas. Your high score is saved locally,
+      so you can keep trying to beat it. Works with keyboard or touch swipes.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

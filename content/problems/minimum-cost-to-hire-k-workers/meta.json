@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0224",
+  "title": "Minimum Cost to Hire K Workers",
+  "difficulty": "Hard",
+  "topic": "Heap",
+  "topics": [
+    "Heap",
+    "Priority Queue"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/minimum-cost-to-hire-k-workers/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "minimumCostToHireKWorkers",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumCostToHireKWorkers(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= k <= workers <= 10^4",
+    "1 <= quality[i], wage[i] <= 10^4"
+  ]
+}

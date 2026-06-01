@@ -1,0 +1,31 @@
+{
+  "draft": false,
+  "id": "problem-0232",
+  "title": "Maximize The Cut Segments | Practice",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Maximize%20The%20Cut%20Segments%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        4,
+        2,
+        1,
+        1
+      ],
+      "expected": 4
+    }
+  ],
+  "functionName": "maximizeTheCutSegments",
+  "templateCode": "/**\n * @param {number} n\n * @param {number} x\n * @param {number} y\n * @param {number} z\n * @return {number}\n */\nfunction maximizeCuts(n, x, y, z) {\n  // Maximize cut segments\n}",
+  "constraints": [
+    "1 <= N <= 10^4",
+    "1 <= x, y, z <= N"
+  ]
+}

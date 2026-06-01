@@ -1,0 +1,46 @@
+{
+  "draft": false,
+  "id": "problem-0156",
+  "title": "Redundant Connection",
+  "difficulty": "Medium",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/redundant-connection/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        2,
+        3
+      ]
+    }
+  ],
+  "functionName": "redundantConnection",
+  "templateCode": "/**\n * @param {number[][]} edges\n * @return {number[]}\n */\nfunction findRedundantConnection(edges) {\n  // Find the redundant edge\n}",
+  "constraints": [
+    "n == edges.length",
+    "3 <= n <= 1000",
+    "1 <= edges[i][0] < edges[i][1] <= n"
+  ]
+}

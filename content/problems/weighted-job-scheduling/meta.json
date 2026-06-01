@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0243",
+  "title": "Weighted Job Scheduling",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Weighted%20Job%20Scheduling",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "weightedJobScheduling",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction weightedJobScheduling(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= start[i] < end[i] <= 10^9",
+    "1 <= profit[i] <= 10^4"
+  ]
+}

@@ -4,6 +4,19 @@ import GameLayout from '../../layouts/GameLayout.astro';
 <GameLayout gameName="Tetris" description="Classic block-stacking puzzle. Clear lines to score!" instructions="<strong>Left/Right</strong> arrows to move, <strong>Up</strong> to rotate, <strong>Down</strong> to soft drop, <strong>Space</strong> for hard drop. On mobile use the <strong>buttons below</strong>. Clear lines to score. Speed increases each level!" keywords="tetris, block game, puzzle game, falling blocks">
   <canvas id="game"></canvas>
   <div id="touch-controls" style="display:none;margin-top:0.75rem;"></div>
+
+  <section slot="about" class="game-about">
+    <h2>About Tetris</h2>
+    <p>
+      Created by Alexey Pajitnov in 1985, Tetris is arguably the most iconic puzzle game ever made. The goal is
+      simple: fit falling blocks together to complete horizontal lines. Completed lines disappear and earn points.
+      It sounds easy until the speed picks up and you're making split-second decisions about rotation and placement.
+    </p>
+    <p>
+      This browser version features all seven standard tetrominoes (I, O, T, S, Z, J, L), hard drop, level
+      progression, and responsive touch controls for mobile play.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

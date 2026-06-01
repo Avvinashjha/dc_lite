@@ -1,0 +1,72 @@
+{
+  "draft": false,
+  "id": "problem-0241",
+  "title": "Maximal Square",
+  "difficulty": "Medium",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximal-square/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "1",
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "0",
+            "0",
+            "1",
+            "0"
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ]
+      ],
+      "expected": 1
+    }
+  ],
+  "functionName": "maximalSquare",
+  "templateCode": "/**\n * @param {string[][]} matrix\n * @return {number}\n */\nfunction maximalSquare(matrix) {\n  // Largest square of 1s - return area\n}",
+  "constraints": [
+    "1 <= m, n <= 300",
+    "matrix[i][j] is '0' or '1'"
+  ]
+}

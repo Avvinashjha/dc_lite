@@ -1,0 +1,748 @@
+---
+import ProblemLayout from '../../layouts/ProblemLayout.astro';
+import ProblemDescription from '../../components/ProblemDescription.astro';
+import ProblemEditor from '../../components/ProblemEditor.astro';
+import ProblemSolution from '../../components/ProblemSolution.astro';
+import ProblemDiscussion from '../../components/ProblemDiscussion.astro';
+import Comments from '../../components/Comments.astro';
+import { getProblems, getProblem, problemSlugHasPotdSchedule, getLatestPotdScheduleDateForSlug } from '../../utils/contentLoader';
+import { ogImageForPath } from '../../utils/og';
+
+export function getStaticPaths() {
+  return getProblems().map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Problem slug is required');
+
+const problem = getProblem(slug);
+if (!problem) return Astro.redirect('/problems');
+
+const topics = problem.topics?.length ? problem.topics : [problem.topic];
+
+const runnerConfig = {
+  functionName: problem.functionName || null,
+  templateCode: problem.templateCode || null,
+  sampleInput: problem.sampleInput || '',
+  testCases: (problem.testCases || []).map((tc: { input?: string; output?: string; args?: unknown[]; expected?: unknown }) => ({
+    input: tc.input,
+    output: tc.output,
+    args: tc.args,
+    expected: tc.expected,
+  })),
+};
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Problems', href: '/problems' },
+  { label: problem.topic, href: `/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}` },
+  { label: problem.title, href: `/problems/${slug}` },
+];
+
+const pageDescription = `${problem.title} - ${problem.difficulty} ${problem.topic} coding problem. Practice with in-browser JavaScript runner.`;
+const isPotdCatalog = problemSlugHasPotdSchedule(slug);
+const potdScheduleDate = getLatestPotdScheduleDateForSlug(slug) || '';
+
+const problemImage = new URL(ogImageForPath(Astro.url.pathname), Astro.site).href;
+const publishedDate = problem.publishedAt ? new Date(problem.publishedAt) : null;
+const datePublishedIso = publishedDate && !isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
+const problemJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: problem.title,
+  description: pageDescription,
+  image: problemImage,
+  educationalLevel: problem.difficulty,
+  keywords: topics.join(', '),
+  url: Astro.url.href,
+  author: { '@type': 'Organization', name: 'DailyCoder' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'DailyCoder',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', Astro.site).href },
+  },
+  ...(datePublishedIso && { datePublished: datePublishedIso }),
+};
+---
+
+<ProblemLayout
+  title={`${problem.title} | Problems | DailyCoder`}
+  description={pageDescription}
+  breadcrumbs={breadcrumbs}
+  tags={topics}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(problemJsonLd)} />
+  </Fragment>
+
+  <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig)} />
+
+  <div
+    class="problem-ide"
+    id="problem-page-root"
+    data-problem-slug={problem.slug}
+    data-sample-input={problem.sampleInput || ''}
+    data-problem-set={problem.problemSet || ''}
+    data-published-at={problem.publishedAt || ''}
+    data-is-potd-scheduled={isPotdCatalog ? 'true' : 'false'}
+    data-potd-schedule-date={potdScheduleDate}
+  >
+    <!-- Breadcrumbs -->
+    <nav class="problem-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href="/problems">Problems</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <a href={`/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}`}>{problem.topic}</a>
+      <span class="problem-breadcrumbs__sep">/</span>
+      <span class="problem-breadcrumbs__current">{problem.title}</span>
+    </nav>
+
+    <!-- Toolbar -->
+    <div class="problem-toolbar">
+      <span class="problem-toolbar__title">{problem.title}</span>
+      <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
+      <span id="local-progress-state" class="p-badge p-badge--neutral">0 attempts</span>
+      <div class="problem-toolbar__actions">
+        {isPotdCatalog && (
+          <a href="/#daily-challenge" class="p-btn" title="Daily challenge on home">Daily</a>
+        )}
+        <button type="button" id="problem-favorite-btn" class="p-btn p-btn--icon p-btn--fav" title="Toggle favorite" aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
+        <button type="button" id="toggle-problem-solved" class="p-btn">Mark Solved</button>
+        {problem.externalUrl && (
+          <a href={problem.externalUrl} target="_blank" rel="noopener" class="p-btn">{problem.platform} &#8599;</a>
+        )}
+      </div>
+    </div>
+
+    <!-- Split pane -->
+    <div class="problem-split">
+      <!-- Left: Description / Solution / Discussion -->
+      <div class="problem-left">
+        <div class="problem-tabs" id="left-tabs">
+          <button class="problem-tabs__btn problem-tabs__btn--active" data-tab="description" type="button">Description</button>
+          <button class="problem-tabs__btn" data-tab="solution" type="button">Solution</button>
+          <button class="problem-tabs__btn" data-tab="discussion" type="button">Discussion</button>
+          <button class="problem-tabs__btn" data-tab="notes" type="button">Notes</button>
+        </div>
+        <div class="problem-tab-content">
+          <div class="problem-tab-pane problem-tab-pane--active" data-pane="description">
+            <ProblemDescription problem={problem} />
+          </div>
+          <div class="problem-tab-pane" data-pane="solution">
+            <div id="solution-locked-banner" class="problem-example" style="display:none;">
+              <div class="problem-example__label">Locked Solution</div>
+              <div class="problem-example__content">Opening solution applies a one-time 0.5 consistency penalty for this daily challenge.</div>
+              <button type="button" id="unlock-solution-inline" class="p-btn p-btn--ghost" style="margin-top:0.5rem;">Unlock Solution</button>
+            </div>
+            <div id="solution-pane-content">
+              <ProblemSolution html={problem.solutionHtml} />
+            </div>
+          </div>
+          <div class="problem-tab-pane" data-pane="discussion">
+            <ProblemDiscussion slug={slug} />
+          </div>
+          <div class="problem-tab-pane" data-pane="notes">
+            <p class="problem-notes__hint">Saved in this browser only. Private to you.</p>
+            <textarea id="problem-note" class="problem-discussion__textarea" rows="12" placeholder="Your notes for this problem..."></textarea>
+            <div style="display:flex;gap:0.4rem;margin-top:0.5rem;align-items:center;">
+              <button type="button" id="save-note" class="p-btn p-btn--primary">Save</button>
+              <button type="button" id="clear-note" class="p-btn">Clear</button>
+              <span id="note-status" class="problem-notes__status" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Editor + Output -->
+      <div class="problem-right">
+        <ProblemEditor />
+      </div>
+    </div>
+  </div>
+</ProblemLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script>
+  // ── Tab switching (left panel) ──
+  const leftTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#left-tabs .problem-tabs__btn'));
+  const leftPanes = Array.from(document.querySelectorAll<HTMLElement>('.problem-tab-content .problem-tab-pane'));
+
+  function switchLeftTab(name: string) {
+    leftTabs.forEach(b => b.classList.toggle('problem-tabs__btn--active', b.dataset.tab === name));
+    leftPanes.forEach(p => p.classList.toggle('problem-tab-pane--active', p.dataset.pane === name));
+  }
+  leftTabs.forEach(b => b.addEventListener('click', () => switchLeftTab(b.dataset.tab!)));
+
+  // ── Output tab switching ──
+  const outBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.problem-output-tabs__btn'));
+  const consolePaneEl = document.getElementById('output-console')!;
+  const testsPaneEl = document.getElementById('output-tests')!;
+
+  function switchOutputTab(name: string) {
+    outBtns.forEach(b => b.classList.toggle('problem-output-tabs__btn--active', b.dataset.outTab === name));
+    consolePaneEl.style.display = name === 'console' ? '' : 'none';
+    testsPaneEl.style.display = name === 'tests' ? '' : 'none';
+  }
+  outBtns.forEach(b => b.addEventListener('click', () => switchOutputTab(b.dataset.outTab!)));
+
+  // ── Runner config ──
+  const rootEl = document.getElementById('problem-page-root')!;
+  const slug = rootEl.dataset.problemSlug || '';
+  const potdScheduleDate = rootEl.dataset.potdScheduleDate || '';
+  const isPotdScheduled = rootEl.dataset.isPotdScheduled === 'true';
+  const configEl = document.getElementById('problem-runner-config');
+  const runnerConfig = configEl?.textContent ? JSON.parse(configEl.textContent) : { functionName: null, templateCode: null, sampleInput: '', testCases: [] };
+  const sampleInput = runnerConfig.sampleInput || rootEl.dataset.sampleInput || '';
+  const testCases = runnerConfig.testCases || [];
+  const functionName = runnerConfig.functionName || null;
+
+  // ── Code editor ──
+  const defaultTemplate = [
+    '/**',
+    ' * @param {string} input',
+    ' * @returns {string|number}',
+    ' */',
+    'function solve(input) {',
+    '  // Write your solution here',
+    '  return input;',
+    '}',
+    '',
+    'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`').replace(/\\/g, '\\\\') + '`));'
+  ].join('\n');
+  const template = runnerConfig.templateCode || defaultTemplate;
+
+  // The editor is created via a dynamic import so a failure to load CodeMirror
+  // (e.g. a transient network/bundling hiccup) degrades gracefully instead of
+  // throwing and taking down the rest of the page (tabs, notes, progress…).
+  let codeEditor: { getValue: () => string; setValue: (v: string) => void } | null = null;
+  // A plain <textarea> fallback so users can still write & run code if CodeMirror fails.
+  let fallbackArea: HTMLTextAreaElement | null = null;
+
+  function getCode(): string {
+    if (codeEditor) return codeEditor.getValue();
+    if (fallbackArea) return fallbackArea.value;
+    return template;
+  }
+  function setCode(value: string) {
+    if (codeEditor) codeEditor.setValue(value);
+    else if (fallbackArea) fallbackArea.value = value;
+  }
+
+  function mountFallbackEditor(message: string) {
+    const root = document.getElementById('problem-js-editor');
+    const mount = root?.querySelector('.dc-editor__mount');
+    if (!mount) return;
+    mount.innerHTML = '';
+    const note = document.createElement('p');
+    note.className = 'problem-editor-fallback__note';
+    note.textContent = message;
+    fallbackArea = document.createElement('textarea');
+    fallbackArea.className = 'problem-editor-fallback__area';
+    fallbackArea.spellcheck = false;
+    fallbackArea.value = template;
+    mount.appendChild(note);
+    mount.appendChild(fallbackArea);
+  }
+
+  (async () => {
+    try {
+      const { createCodeEditor } = await import('../../utils/codeEditor');
+      codeEditor = createCodeEditor({
+        rootId: 'problem-js-editor',
+        doc: template,
+        language: 'javascript',
+        lineWrapping: true,
+        onModEnter: () => runCode(),
+      });
+    } catch (err) {
+      console.error('[Problem] Code editor failed to load, using plain textarea fallback.', err);
+      mountFallbackEditor('Rich editor unavailable — using a basic text area. Your code still runs.');
+    }
+  })();
+
+  // ── DOM refs ──
+  const runBtn = document.getElementById('run-js')!;
+  const runTestsBtn = document.getElementById('run-tests')!;
+  const resetBtn = document.getElementById('reset-js')!;
+  const consoleEl = document.getElementById('output-console')!;
+  const testsEl = document.getElementById('output-tests')!;
+  const frameEl = document.getElementById('problem-js-frame') as HTMLIFrameElement;
+  const localProgressEl = document.getElementById('local-progress-state')!;
+  const toggleSolvedBtn = document.getElementById('toggle-problem-solved')!;
+  const solutionLockedBanner = document.getElementById('solution-locked-banner') as HTMLElement | null;
+  const unlockSolutionInlineBtn = document.getElementById('unlock-solution-inline') as HTMLButtonElement | null;
+  const solutionPaneContent = document.getElementById('solution-pane-content') as HTMLElement | null;
+
+  let progressRow = {
+    solved: false,
+    attempts: 0,
+    solvedAt: null as number | null,
+    lastAttemptAt: null as number | null,
+    attemptsByDay: {} as Record<string, number>,
+    solutionUnlockedAt: null as number | null,
+    solutionUnlockPenaltyApplied: false,
+  };
+  let runId = 0;
+
+  function appendConsole(prefix: string, msg: string) {
+    consoleEl.textContent += (consoleEl.textContent ? '\n' : '') + `[${prefix}] ${msg}`;
+    consoleEl.scrollTop = consoleEl.scrollHeight;
+  }
+
+  // ── Run code ──
+  function runCode() {
+    runId += 1;
+    const currentRunId = runId;
+    recordAttempt();
+    switchOutputTab('console');
+    appendConsole('INFO', 'Running...');
+    const code = getCode();
+    const srcdoc = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      "var SOURCE='problem-js';",
+      'var RUN_ID=' + currentRunId + ';',
+      'function emit(type,payload){ parent.postMessage({source:SOURCE,runId:RUN_ID,type:type,payload:payload},"*"); }',
+      'function stringify(v){ if (typeof v === "string") return v; try { return JSON.stringify(v); } catch(e){ return String(v); } }',
+      'var base = window.console;',
+      'window.console={',
+      'log:function(){ emit("log", Array.prototype.slice.call(arguments).map(stringify)); },',
+      'error:function(){ emit("error", Array.prototype.slice.call(arguments).map(stringify)); },',
+      'warn:function(){ emit("warn", Array.prototype.slice.call(arguments).map(stringify)); }',
+      '};',
+      'try {',
+      '  var code=' + JSON.stringify(code) + ';',
+      '  (0,eval)(code);',
+      '  emit("result", ["Execution finished"]);',
+      '} catch (e) {',
+      '  emit("runtime-error", [e && (e.stack || e.message) ? (e.stack || e.message) : String(e)]);',
+      '} finally {',
+      '  window.console = base;',
+      '}',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+    frameEl.srcdoc = srcdoc;
+    if (isPotdScheduled && (window as any).DCTrack) {
+      (window as any).DCTrack('run_daily_code', { problem_slug: slug });
+    }
+  }
+
+  window.addEventListener('message', (event) => {
+    const data = event.data;
+    if (!data || data.source !== 'problem-js' || data.runId !== runId) return;
+    const type = data.type || 'log';
+    const payload = (data.payload || []).join(' ');
+    if (type === 'runtime-error') {
+      appendConsole('ERROR', payload);
+      return;
+    }
+    appendConsole(type.toUpperCase(), payload);
+  });
+
+  // ── Run tests ──
+  function normalizeResult(v: any): string {
+    if (v === null || v === undefined) return String(v);
+    if (typeof v === 'object') return JSON.stringify(v);
+    return String(v).trim();
+  }
+
+  function runTests() {
+    if (!testCases.length) {
+      appendConsole('INFO', 'No test cases defined for this problem.');
+      return;
+    }
+    recordAttempt();
+    switchOutputTab('tests');
+    testsEl.innerHTML = '<p style="font-size:0.8rem;">Running tests...</p>';
+    const code = getCode();
+    const harness = [
+      '<!doctype html><html><body><script>',
+      '(function(){',
+      'var code=' + JSON.stringify(code) + ';',
+      'try { (0,eval)(code); } catch (e) {',
+      '  parent.postMessage({ type: "test-error", error: (e && (e.message || e.stack)) || String(e) }, "*");',
+      '  return;',
+      '}',
+      'window.addEventListener("message", function(ev) {',
+      '  var d = ev.data;',
+      '  if (d.type !== "invoke") return;',
+      '  var id = d.id, mode = d.mode, name = d.name, args = d.args, input = d.input;',
+      '  try {',
+      '    var r;',
+      '    if (mode === "solve") r = typeof solve !== "undefined" ? solve(input) : undefined;',
+      '    else r = typeof window[name] === "function" ? window[name].apply(null, args) : undefined;',
+      '    ev.source.postMessage({ type: "result", id: id, result: r }, ev.origin);',
+      '  } catch (err) {',
+      '    ev.source.postMessage({ type: "result", id: id, error: (err && err.message) || String(err) }, ev.origin);',
+      '  }',
+      '});',
+      'parent.postMessage({ type: "test-ready" }, "*");',
+      '})();',
+      '<' + '/script></body></html>'
+    ].join('');
+    frameEl.srcdoc = harness;
+
+    const results: Record<number, any> = {};
+    const expectCount = testCases.length;
+
+    function onTestMessage(ev: MessageEvent) {
+      const d = ev.data;
+      if (d.type === 'test-error') {
+        testsEl.innerHTML = `<p class="test-results__error">Error: ${(d.error || '').replace(/</g, '&lt;')}</p>`;
+        window.removeEventListener('message', onTestMessage);
+        return;
+      }
+      if (d.type === 'test-ready') {
+        for (let i = 0; i < testCases.length; i++) {
+          const tc = testCases[i];
+          const msg: any = { type: 'invoke', id: i };
+          if (tc.args != null && tc.expected !== undefined && functionName) {
+            msg.mode = 'function';
+            msg.name = functionName;
+            msg.args = tc.args;
+          } else {
+            msg.mode = 'solve';
+            msg.input = tc.input != null ? tc.input : '';
+          }
+          frameEl.contentWindow!.postMessage(msg, '*');
+        }
+        return;
+      }
+      if (d.type === 'result') {
+        results[d.id] = d;
+        if (Object.keys(results).length === expectCount) {
+          window.removeEventListener('message', onTestMessage);
+          let passed = 0;
+          let html = '<div class="test-results__summary"></div><ul class="test-results__list">';
+          for (let j = 0; j < testCases.length; j++) {
+            const tc = testCases[j];
+            const res = results[j];
+            let ok = false;
+            let detail = '';
+            if (res?.error) {
+              detail = 'Error: ' + res.error;
+            } else if (tc.args != null && tc.expected !== undefined) {
+              const got = res?.result;
+              ok = JSON.stringify(got) === JSON.stringify(tc.expected);
+              if (!ok) detail = `Expected ${JSON.stringify(tc.expected)}, got ${JSON.stringify(got)}`;
+            } else {
+              const expectedStr = (tc.output ?? '').trim();
+              const gotStr = res?.result !== undefined ? normalizeResult(res.result) : '';
+              ok = gotStr === expectedStr;
+              if (!ok) detail = `Expected ${expectedStr}, got ${gotStr}`;
+            }
+            if (ok) passed++;
+            html += `<li class="test-results__item test-results__item--${ok ? 'pass' : 'fail'}">Case ${j + 1}: ${ok ? 'Pass' : 'Fail'}${detail ? ' \u2014 ' + detail.replace(/</g, '&lt;') : ''}</li>`;
+          }
+          html += '</ul>';
+          testsEl.innerHTML = html;
+          const summaryEl = testsEl.querySelector('.test-results__summary');
+          if (summaryEl) summaryEl.textContent = `${passed}/${testCases.length} passed`;
+        }
+      }
+    }
+    window.addEventListener('message', onTestMessage);
+    if (isPotdScheduled && (window as any).DCTrack) {
+      (window as any).DCTrack('run_daily_tests', { problem_slug: slug });
+    }
+  }
+
+  runBtn.addEventListener('click', runCode);
+  runTestsBtn.addEventListener('click', runTests);
+  resetBtn.addEventListener('click', () => { setCode(template); });
+
+  // Gracefully reflect when a problem ships without runnable test cases.
+  if (!testCases.length) {
+    runTestsBtn.setAttribute('disabled', 'true');
+    runTestsBtn.title = 'No test cases are defined for this problem yet.';
+  }
+
+  // ── Progress tracking ──
+  const PROGRESS_TOOL = 'problem-progress';
+
+  function renderProgress() {
+    const a = Number(progressRow.attempts || 0);
+    localProgressEl.textContent = (progressRow.solved ? 'Solved' : 'Not solved') + ' \u00B7 ' + a + (a === 1 ? ' attempt' : ' attempts');
+    toggleSolvedBtn.textContent = progressRow.solved ? 'Mark Unsolved' : 'Mark Solved';
+    if (isPotdScheduled && solutionLockedBanner && solutionPaneContent) {
+      const unlocked = !!progressRow.solutionUnlockedAt;
+      solutionLockedBanner.style.display = unlocked ? 'none' : '';
+      solutionPaneContent.style.display = unlocked ? '' : 'none';
+    }
+  }
+
+  async function saveProgress() {
+    await (window as any).DCStore.set(PROGRESS_TOOL, slug, {
+      solved: !!progressRow.solved,
+      solvedAt: progressRow.solved ? (progressRow.solvedAt || Date.now()) : null,
+      attempts: Number(progressRow.attempts || 0),
+      lastAttemptAt: progressRow.lastAttemptAt,
+      attemptsByDay: progressRow.attemptsByDay,
+      solutionUnlockedAt: progressRow.solutionUnlockedAt || null,
+      solutionUnlockPenaltyApplied: !!progressRow.solutionUnlockPenaltyApplied,
+    });
+    renderProgress();
+  }
+
+  async function loadProgress() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(PROGRESS_TOOL, slug);
+    if (row) {
+      progressRow = {
+        solved: !!row.solved,
+        solvedAt: row.solvedAt || null,
+        attempts: Number(row.attempts || 0),
+        lastAttemptAt: row.lastAttemptAt || null,
+        attemptsByDay: row.attemptsByDay || {},
+        solutionUnlockedAt: row.solutionUnlockedAt || null,
+        solutionUnlockPenaltyApplied: !!row.solutionUnlockPenaltyApplied,
+      };
+    }
+    renderProgress();
+  }
+
+  function recordAttempt() {
+    const today = new Date().toISOString().slice(0, 10);
+    progressRow.attempts = Number(progressRow.attempts || 0) + 1;
+    progressRow.lastAttemptAt = Date.now();
+    if (!progressRow.attemptsByDay) progressRow.attemptsByDay = {};
+    progressRow.attemptsByDay[today] = Number(progressRow.attemptsByDay[today] || 0) + 1;
+    saveProgress();
+  }
+
+  toggleSolvedBtn.addEventListener('click', () => {
+    const doToggle = () => {
+      progressRow.solved = !progressRow.solved;
+      if (progressRow.solved && !progressRow.solvedAt) progressRow.solvedAt = Date.now();
+      if (!progressRow.solved) progressRow.solvedAt = null;
+      saveProgress();
+      if (isPotdScheduled && progressRow.solved && (window as any).DCTrack) {
+        (window as any).DCTrack('solve_daily_problem', {
+          problem_slug: slug,
+          published_at: potdScheduleDate,
+        });
+      }
+    };
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to track your progress', doToggle);
+    } else {
+      doToggle();
+    }
+  });
+
+  if (unlockSolutionInlineBtn) {
+    unlockSolutionInlineBtn.addEventListener('click', () => {
+      const doUnlock = async () => {
+        if (progressRow.solutionUnlockedAt) return;
+        progressRow.solutionUnlockedAt = Date.now();
+        progressRow.solutionUnlockPenaltyApplied = true;
+        await saveProgress();
+        if ((window as any).DCTrack) {
+          (window as any).DCTrack('daily_solution_unlock', {
+            problem_slug: slug,
+            penalty: 0.5,
+          });
+        }
+      };
+      if ((window as any).requireAuth) {
+        (window as any).requireAuth('Sign in to unlock solution', doUnlock);
+      } else {
+        doUnlock();
+      }
+    });
+  }
+
+  // ── Notes (synced via IndexedDB → Google Sheets) ──
+  const NOTES_TOOL = 'problem-notes';
+  const noteEl = document.getElementById('problem-note') as HTMLTextAreaElement;
+  const noteStatusEl = document.getElementById('note-status')!;
+
+  async function loadNote() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(NOTES_TOOL, slug);
+    if (row && row.content) {
+      noteEl.value = row.content;
+    } else {
+      // Migrate from old localStorage key if present
+      const legacy = localStorage.getItem('problem-note-' + slug);
+      if (legacy) {
+        noteEl.value = legacy;
+        await (window as any).DCStore.set(NOTES_TOOL, slug, { content: legacy });
+        localStorage.removeItem('problem-note-' + slug);
+      }
+    }
+  }
+
+  let noteTimer: ReturnType<typeof setTimeout>;
+  function setNoteStatus(msg: string) {
+    noteStatusEl.textContent = msg;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(() => { noteStatusEl.textContent = ''; }, 2000);
+  }
+  document.getElementById('save-note')!.addEventListener('click', async () => {
+    await (window as any).DCStore.init();
+    await (window as any).DCStore.set(NOTES_TOOL, slug, { content: noteEl.value || '' });
+    setNoteStatus('Saved');
+  });
+  document.getElementById('clear-note')!.addEventListener('click', async () => {
+    noteEl.value = '';
+    await (window as any).DCStore.init();
+    await (window as any).DCStore.remove(NOTES_TOOL, slug);
+    setNoteStatus('Cleared');
+  });
+
+  // ── Discussion (server-backed via Apps Script) ──
+  const DISCUSSION_TOOL = 'problem-discussion';
+  const discussionListEl = document.getElementById('discussion-list')!;
+  const discussionMsgEl = document.getElementById('discussion-message') as HTMLTextAreaElement;
+
+  function escapeHtml(s: string) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderDiscussionList(rows: any[]) {
+    if (!rows.length) {
+      discussionListEl.innerHTML = '<p class="problem-discussion__empty">No discussion yet. Be the first to share your approach.</p>';
+      return;
+    }
+    discussionListEl.innerHTML = rows.map((row: any) => {
+      const name = escapeHtml(row.name || 'Anonymous');
+      const msg = escapeHtml(row.message || '');
+      const time = new Date(row.ts || row.timestamp).toLocaleString();
+      return `<article class="problem-discussion__item"><p class="problem-discussion__item-meta"><strong>${name}</strong> \u00B7 ${escapeHtml(time)}</p><p class="problem-discussion__item-text">${msg}</p></article>`;
+    }).join('');
+  }
+
+  async function loadDiscussion() {
+    // Show cached data immediately
+    await (window as any).DCStore.init();
+    const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
+    if (cached && cached.posts) renderDiscussionList(cached.posts);
+
+    // Migrate from old localStorage if present
+    const legacyKey = 'problem-discussion-' + slug;
+    const legacy = localStorage.getItem(legacyKey);
+    if (legacy) {
+      try {
+        const legacyPosts = JSON.parse(legacy);
+        if (legacyPosts.length && (!cached || !cached.posts || !cached.posts.length)) {
+          renderDiscussionList(legacyPosts);
+          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: legacyPosts });
+        }
+      } catch (_) {}
+      localStorage.removeItem(legacyKey);
+    }
+
+    // Fetch from server
+    if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
+      try {
+        const syncUrl = (window as any).DCSyncService._getScriptUrl ? (window as any).DCSyncService._getScriptUrl() : null;
+        if (!syncUrl) return;
+        const res = await fetch(syncUrl + '?action=getDiscussion&slug=' + encodeURIComponent(slug));
+        const data = await res.json();
+        if (data.status === 'success' && data.posts) {
+          renderDiscussionList(data.posts);
+          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: data.posts });
+        }
+      } catch (err) {
+        console.warn('[Discussion] Server fetch failed:', err);
+      }
+    }
+  }
+
+  document.getElementById('discussion-post')!.addEventListener('click', () => {
+    const doPost = async () => {
+      const user = (window as any).getCurrentUser ? (window as any).getCurrentUser() : null;
+      const name = user?.displayName || 'Anonymous';
+      const message = (discussionMsgEl.value || '').trim();
+      if (!message) return;
+
+      const post = { name, message, ts: Date.now(), uid: user?.uid || '' };
+
+      // Update local cache immediately
+      await (window as any).DCStore.init();
+      const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
+      const posts = (cached && cached.posts) ? cached.posts : [];
+      posts.unshift(post);
+      await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: posts.slice(0, 200) });
+      renderDiscussionList(posts);
+      discussionMsgEl.value = '';
+
+      // Push to server (fire-and-forget, same pattern as comments)
+      const syncUrl = (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService._getScriptUrl)
+        ? (window as any).DCSyncService._getScriptUrl() : null;
+      if (syncUrl && window.getFirebaseIdToken) {
+        window.getFirebaseIdToken().then(function (token) {
+          var payload = JSON.stringify({
+            action: 'postDiscussion',
+            slug: slug,
+            name: name,
+            message: message,
+            uid: user?.uid || '',
+            idToken: token || '',
+            timestamp: new Date(post.ts).toISOString()
+          });
+          fetch(syncUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: payload
+          }).catch(function (err) {
+            console.warn('[Discussion] Server push failed:', err);
+          });
+        });
+      }
+    };
+
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to join the discussion', doPost);
+    } else {
+      doPost();
+    }
+  });
+
+  // ── Favorites ──
+  const FAVORITES_TOOL = 'problem-favorites';
+  const favBtn = document.getElementById('problem-favorite-btn')!;
+  let isFavorite = false;
+
+  function renderFavorite() {
+    favBtn.innerHTML = isFavorite ? '&#9733;' : '&#9734;';
+    favBtn.setAttribute('aria-pressed', String(isFavorite));
+  }
+
+  async function loadFavorite() {
+    await (window as any).DCStore.init();
+    const row = await (window as any).DCStore.get(FAVORITES_TOOL, slug);
+    isFavorite = !!row;
+    renderFavorite();
+  }
+
+  favBtn.addEventListener('click', () => {
+    const doToggleFav = async () => {
+      await (window as any).DCStore.init();
+      isFavorite = !isFavorite;
+      if (isFavorite) await (window as any).DCStore.set(FAVORITES_TOOL, slug, { slug, addedAt: Date.now() });
+      else await (window as any).DCStore.remove(FAVORITES_TOOL, slug);
+      renderFavorite();
+    };
+    if ((window as any).requireAuth) {
+      (window as any).requireAuth('Sign in to bookmark problems', doToggleFav);
+    } else {
+      doToggleFav();
+    }
+  });
+
+  // ── Init ──
+  loadFavorite();
+  loadProgress();
+  loadNote();
+  loadDiscussion();
+  if (isPotdScheduled && (window as any).DCTrack) {
+    (window as any).DCTrack('view_daily_problem_editor', {
+      problem_slug: slug,
+      published_at: potdScheduleDate,
+    });
+  }
+</script>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="vxt-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6821f"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="12" fill="url(#vxt-bg)"/>
+  <text x="320" y="130" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="52" font-weight="700">Vinext</text>
+  <text x="320" y="180" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="system-ui,sans-serif" font-size="18">Next.js API on Vite | Cloudflare</text>
+  <rect x="170" y="210" width="300" height="50" rx="8" fill="rgba(255,255,255,0.2)"/>
+  <text x="320" y="242" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="14">4x faster builds | 57% smaller bundles</text>
+  <text x="320" y="300" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="system-ui,sans-serif" font-size="13">Drop-in replacement | vinext dev | vinext deploy</text>
+</svg>

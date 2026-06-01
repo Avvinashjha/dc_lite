@@ -1,0 +1,40 @@
+{
+  "draft": false,
+  "id": "problem-0266",
+  "title": "Palindrome Partitioning",
+  "difficulty": "Medium",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/palindrome-partitioning/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"aab\"",
+  "sampleOutput": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]",
+  "testCases": [
+    {
+      "args": [
+        "aab"
+      ],
+      "expected": [
+        [
+          "a",
+          "a",
+          "b"
+        ],
+        [
+          "aa",
+          "b"
+        ]
+      ]
+    }
+  ],
+  "functionName": "palindromePartitioning",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction palindromePartitioning(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(palindromePartitioning(\"aab\"));",
+  "constraints": [
+    "1 <= s.length <= 16",
+    "s consists of lowercase English letters"
+  ]
+}

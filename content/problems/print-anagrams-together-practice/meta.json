@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0220",
+  "title": "Print Anagrams Together | Practice",
+  "difficulty": "Medium",
+  "topic": "Tries",
+  "topics": [
+    "Tries"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20Anagrams%20Together%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "printAnagramsTogether",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction printAnagramsTogether(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 100",
+    "1 <= |words[i]| <= 10"
+  ]
+}

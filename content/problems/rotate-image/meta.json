@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0053",
+  "title": "Rotate Image",
+  "difficulty": "Medium",
+  "topic": "Matrix",
+  "topics": [
+    "Matrix",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/rotate-image/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "rotateImage",
+  "templateCode": "/**\n * @param {number[][]} matrix\n * @return {void}\n */\nfunction rotate(matrix) {\n  // Rotate matrix 90 degrees clockwise\n}",
+  "constraints": [
+    "n == matrix.length == matrix[i].length",
+    "1 <= n <= 20",
+    "-1000 <= matrix[i][j] <= 1000"
+  ]
+}

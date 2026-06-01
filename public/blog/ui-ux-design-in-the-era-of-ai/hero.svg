@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="ux-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="12" fill="url(#ux-bg)"/>
+  <text x="320" y="110" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="40" font-weight="700">UI/UX Design</text>
+  <text x="320" y="155" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="40" font-weight="700">in the Era of AI</text>
+  <rect x="150" y="185" width="340" height="44" rx="8" fill="rgba(255,255,255,0.2)"/>
+  <text x="320" y="213" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="14">Stitch | Lovable | Figma Make | Vibe Design</text>
+  <text x="320" y="280" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="system-ui,sans-serif" font-size="14">How AI changes design tools and the designer role</text>
+</svg>

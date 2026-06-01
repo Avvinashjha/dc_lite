@@ -1,0 +1,34 @@
+{
+  "draft": false,
+  "id": "problem-0003",
+  "title": "Majority Element",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/majority-element/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [3,2,3]",
+  "sampleOutput": "3",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          2,
+          3
+        ]
+      ],
+      "expected": 3
+    }
+  ],
+  "functionName": "majorityElement",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction majorityElement(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(majorityElement([3,2,3]));",
+  "constraints": [
+    "1 <= nums.length <= 5 * 10^4",
+    "-10^9 <= nums[i] <= 10^9"
+  ]
+}

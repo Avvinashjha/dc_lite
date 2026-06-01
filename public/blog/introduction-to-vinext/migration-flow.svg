@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 90" fill="none" aria-hidden="true">
+  <title>Next.js to Vinext migration</title>
+  <rect x="20" y="20" width="90" height="50" rx="6" fill="#000" stroke="#333"/>
+  <text x="65" y="50" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="11">Next.js</text>
+  <path stroke="#f6821f" stroke-width="2" d="M110 45h40" marker-end="url(#vxt-arr)"/>
+  <defs><marker id="vxt-arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4V0z" fill="#f6821f"/></marker></defs>
+  <rect x="150" y="20" width="120" height="50" rx="6" fill="#f6821f" stroke="#e65100"/>
+  <text x="210" y="45" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="11">npx vinext init</text>
+  <text x="210" y="60" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="system-ui,sans-serif" font-size="9">or npm install vinext</text>
+  <path stroke="#f6821f" stroke-width="2" d="M270 45h40" marker-end="url(#vxt-arr2)"/>
+  <defs><marker id="vxt-arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0l8 4-8 4V0z" fill="#f6821f"/></marker></defs>
+  <rect x="310" y="20" width="90" height="50" rx="6" fill="#6469ff" stroke="#4f46e5"/>
+  <text x="355" y="50" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="11">Vinext</text>
+  <text x="355" y="65" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="system-ui,sans-serif" font-size="9">Vite + Workers</text>
+  <text x="210" y="85" text-anchor="middle" fill="#64748b" font-family="system-ui,sans-serif" font-size="10">app/, pages/, next.config.js work as-is</text>
+</svg>

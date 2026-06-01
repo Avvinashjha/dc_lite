@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0110",
+  "title": "Subtract Two Numbers represented as Linked Lists",
+  "difficulty": "Hard",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Subtract%20Two%20Numbers%20represented%20as%20Linked%20Lists",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "subtractTwoNumbersRepresentedAsLinkedLists",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction subtractTwoNumbersRepresentedAsLinkedLists(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 to 10^4 nodes per list"
+  ]
+}

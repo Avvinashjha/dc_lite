@@ -1,0 +1,72 @@
+{
+  "draft": false,
+  "id": "problem-0024",
+  "title": "Game of Life",
+  "difficulty": "Medium",
+  "topic": "Array",
+  "topics": [
+    "Array",
+    "Two Pointers"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/game-of-life/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+  "sampleOutput": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    }
+  ],
+  "functionName": "gameOfLife",
+  "templateCode": "/**\n * @param {number[][]} board\n * @return {any}\n */\nfunction gameOfLife(board) {\n  // Write your solution here\n}\n\n// Sample: console.log(gameOfLife([[0,1,0],[0,0,1],[1,1,1],[0,0,0]]));",
+  "constraints": [
+    "1 <= m, n <= 25",
+    "board[i][j] is 0 or 1"
+  ]
+}

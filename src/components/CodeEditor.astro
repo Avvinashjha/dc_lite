@@ -1,0 +1,67 @@
+---
+interface Props {
+  id: string;
+  minHeight?: number;
+  className?: string;
+  fill?: boolean;
+}
+
+const { id, minHeight = 250, className = '', fill = false } = Astro.props;
+---
+
+<div id={id} class={`dc-editor ${fill ? 'dc-editor--fill' : ''} ${className}`} style={`--dc-editor-min-height: ${minHeight}px;`}>
+  <div class="dc-editor__mount"></div>
+</div>
+
+<style is:global>
+  .dc-editor {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    min-height: var(--dc-editor-min-height);
+    background: var(--color-surface);
+    transition: border-color 150ms ease, box-shadow 150ms ease, background 250ms ease;
+  }
+  .dc-editor:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+  .dc-editor .dc-editor__mount {
+    min-height: var(--dc-editor-min-height);
+  }
+  .dc-editor .cm-editor {
+    min-height: var(--dc-editor-min-height);
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+  }
+  .dc-editor .cm-editor.cm-focused {
+    outline: none;
+  }
+  .dc-editor .cm-scroller {
+    overflow: auto;
+    min-height: var(--dc-editor-min-height);
+    max-height: 700px;
+  }
+  .dc-editor.dc-editor--fill {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+  }
+  .dc-editor.dc-editor--fill .dc-editor__mount,
+  .dc-editor.dc-editor--fill .cm-editor,
+  .dc-editor.dc-editor--fill .cm-scroller {
+    min-height: 0;
+    height: 100%;
+  }
+  .dc-editor.dc-editor--fill .cm-scroller {
+    max-height: none;
+  }
+  @media (max-width: 768px) {
+    .dc-editor,
+    .dc-editor .dc-editor__mount,
+    .dc-editor .cm-editor,
+    .dc-editor .cm-scroller {
+      min-height: 200px;
+    }
+  }
+</style>

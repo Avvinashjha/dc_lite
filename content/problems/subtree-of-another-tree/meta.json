@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0134",
+  "title": "Subtree of Another Tree",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/subtree-of-another-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "subtreeOfAnotherTree",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {TreeNode} subRoot\n * @return {boolean}\n */\nfunction isSubtree(root, subRoot) {\n  // Check if subRoot is subtree of root\n}",
+  "constraints": [
+    "1 <= number of nodes <= 2000",
+    "-10^4 <= Node.val <= 10^4"
+  ]
+}

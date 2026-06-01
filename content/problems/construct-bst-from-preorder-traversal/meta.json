@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "id": "problem-0179",
+  "title": "Construct BST from Preorder Traversal",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Construct%20BST%20from%20Preorder%20Traversal",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "constructBstFromPreorderTraversal",
+  "templateCode": "/**\n * @param {number[]} preorder\n * @return {TreeNode}\n */\nfunction bstFromPreorder(preorder) {\n  // Build BST from preorder traversal\n}",
+  "constraints": [
+    "1 <= preorder.length <= 100",
+    "1 <= preorder[i] <= 10^8",
+    "All values are unique"
+  ]
+}

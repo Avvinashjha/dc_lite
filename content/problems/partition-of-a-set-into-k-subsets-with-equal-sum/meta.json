@@ -1,0 +1,39 @@
+{
+  "draft": false,
+  "id": "problem-0273",
+  "title": "Partition of a set into K subsets with equal sum",
+  "difficulty": "Hard",
+  "topic": "Backtracking",
+  "topics": [
+    "Backtracking",
+    "Recursion"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Partition%20of%20a%20set%20into%20K%20subsets%20with%20equal%20sum",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "nums = [4, 3, 2, 3, 5, 2, 1], k = 4",
+  "sampleOutput": "true",
+  "testCases": [
+    {
+      "args": [
+        [
+          4,
+          3,
+          2,
+          3,
+          5,
+          2,
+          1
+        ],
+        4
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "partitionOfASetIntoKSubsetsWithEqualSum",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {any}\n */\nfunction partitionOfASetIntoKSubsetsWithEqualSum(nums, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(partitionOfASetIntoKSubsetsWithEqualSum([4, 3, 2, 3, 5, 2, 1], 4));",
+  "constraints": [
+    "1 <= k <= nums.length <= 16",
+    "1 <= nums[i] <= 10^4"
+  ]
+}

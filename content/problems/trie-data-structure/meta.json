@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0219",
+  "title": "Trie Data Structure",
+  "difficulty": "Medium",
+  "topic": "Tries",
+  "topics": [
+    "Tries"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Trie%20Data%20Structure",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "trieDataStructure",
+  "templateCode": "function Trie() {}\nTrie.prototype.insert = function(word) {};\nTrie.prototype.search = function(word) {};\nTrie.prototype.startsWith = function(prefix) {};",
+  "constraints": [
+    "1 <= word.length <= 2000",
+    "word consists of lowercase English letters",
+    "At most 3 * 10^4 calls"
+  ]
+}

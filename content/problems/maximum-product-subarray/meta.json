@@ -1,0 +1,43 @@
+{
+  "draft": false,
+  "id": "problem-0228",
+  "title": "Maximum Product Subarray",
+  "difficulty": "Easy",
+  "topic": "Dynamic-Programming",
+  "topics": [
+    "Dynamic Programming",
+    "Memoization"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/maximum-product-subarray/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          3,
+          -2,
+          4
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          -2,
+          0,
+          -1
+        ]
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "maximumProductSubarray",
+  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction maxProduct(nums) {\n  // Maximum product subarray\n}",
+  "constraints": [
+    "1 <= nums.length <= 2 * 10^4",
+    "-10 <= nums[i] <= 10"
+  ]
+}

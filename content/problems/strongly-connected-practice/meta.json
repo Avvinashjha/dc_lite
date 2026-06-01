@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0192",
+  "title": "Strongly Connected | Practice",
+  "difficulty": "Medium",
+  "topic": "Graph",
+  "topics": [
+    "Graph",
+    "BFS",
+    "DFS"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Strongly%20Connected%20%7C%20Practice",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "stronglyConnected",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction stronglyConnected(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= V <= 5000",
+    "0 <= E <= V*(V-1)"
+  ]
+}

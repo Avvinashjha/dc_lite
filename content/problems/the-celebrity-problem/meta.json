@@ -1,0 +1,19 @@
+{
+  "draft": false,
+  "id": "problem-0131",
+  "title": "The Celebrity Problem",
+  "difficulty": "Hard",
+  "topic": "Stack&Queue",
+  "topics": [
+    "Stack&Queue"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=The%20Celebrity%20Problem",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "theCelebrityProblem",
+  "templateCode": "/**\n * @param {number} n\n * @param {function} knows\n * @return {number}\n */\nfunction findCelebrity(n, knows) {\n  // Find celebrity in party\n}",
+  "constraints": [
+    "2 <= n <= 500"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "id": "problem-0068",
+  "title": "Pair with the given difference",
+  "difficulty": "Easy",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Pair%20with%20the%20given%20difference",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "pairWithTheGivenDifference",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction pairWithTheGivenDifference(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= N <= 10^5",
+    "1 <= arr[i] <= 10^5"
+  ]
+}

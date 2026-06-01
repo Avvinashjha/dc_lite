@@ -1,0 +1,21 @@
+{
+  "draft": false,
+  "id": "problem-0090",
+  "title": "Given only a pointer/reference to a node to be deleted in a singly linked list, how do you delete it?",
+  "difficulty": "Easy",
+  "topic": "Linked-List",
+  "topics": [
+    "Linked List"
+  ],
+  "platform": "GeeksforGeeks",
+  "externalUrl": "https://www.geeksforgeeks.org/?s=Given%20only%20a%20pointer%2Freference%20to%20a%20node%20to%20be%20deleted%20in%20a%20singly%20linked%20list%2C%20how%20do%20you%20delete%20it%3F",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt",
+  "templateCode": "/**\n * @param {ListNode} node\n * @return {void}\n */\nfunction deleteNode(node) {\n  // Delete node without head access\n}",
+  "constraints": [
+    "2 <= number of nodes <= 1000",
+    "-1000 <= Node.val <= 1000",
+    "The given node is not the tail"
+  ]
+}

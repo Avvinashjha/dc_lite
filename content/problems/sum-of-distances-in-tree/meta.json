@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0172",
+  "title": "Sum of Distances in Tree",
+  "difficulty": "Hard",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/sum-of-distances-in-tree/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "sumOfDistancesInTree",
+  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction sumOfDistancesInTree(input) {\n  // Write your solution here\n}\n",
+  "constraints": [
+    "1 <= n <= 3 * 10^4",
+    "edges.length == n - 1"
+  ]
+}

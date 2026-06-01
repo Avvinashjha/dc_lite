@@ -1,0 +1,52 @@
+{
+  "draft": false,
+  "id": "problem-0078",
+  "title": "Search in Rotated Sorted Array",
+  "difficulty": "Hard",
+  "topic": "Sorting&Searching",
+  "topics": [
+    "Sorting&Searching"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [
+    {
+      "args": [
+        [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2
+        ],
+        0
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2
+        ],
+        3
+      ],
+      "expected": -1
+    }
+  ],
+  "functionName": "searchInRotatedSortedArray",
+  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nfunction search(nums, target) {\n  // Search in rotated sorted array\n}",
+  "constraints": [
+    "1 <= nums.length <= 5000",
+    "-10^4 <= nums[i] <= 10^4",
+    "All values are unique"
+  ]
+}

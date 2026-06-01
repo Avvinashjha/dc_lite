@@ -2,7 +2,17 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 ---
 
-<ToolLayout title="Regex Tester" description="Free online regex tester with live matching, group capture, and highlighted results. Test JavaScript regular expressions in real-time." toolName="Regex Tester" keywords="regex tester, regex test, regular expression tester, regex online, test regex, regex matcher">
+<ToolLayout
+  title="Regex Tester"
+  description="Free online regex tester with live matching, group capture, and highlighted results. Test JavaScript regular expressions in real-time."
+  toolName="Regex Tester"
+  keywords="regex tester, regex test, regular expression tester, regex online, test regex, regex matcher"
+  faqs={[
+    { q: "Which regex flavor does this support?", a: "It uses the JavaScript (ECMAScript) regular expression engine — the same one that runs in browsers and Node.js." },
+    { q: "How do I use capture groups?", a: "Wrap part of your pattern in parentheses, and matched groups are listed for each match so you can see exactly what each group captured." },
+    { q: "Is my test data private?", a: "Yes. Matching happens entirely in your browser and nothing you type is sent anywhere." },
+  ]}
+>
   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem;">
     <span class="tool-panel__label" style="margin: 0;">Pattern</span>
     <span style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--color-text-light);">/</span>
@@ -27,6 +37,38 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     <span class="tool-panel__label">Highlighted Text</span>
     <div id="highlighted" style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); font-size: 0.9rem; line-height: 1.8; word-break: break-word;"></div>
   </div>
+
+  <section slot="about" class="tool-about">
+    <h2>Getting Started with Regular Expressions</h2>
+    <p>
+      Regular expressions (regex) are patterns that match text. They're incredibly powerful for searching, validating,
+      and transforming strings — but the syntax can be cryptic. This tester lets you build and debug patterns
+      with instant visual feedback: matches highlight in real time as you type.
+    </p>
+
+    <h3>Quick Reference</h3>
+    <ul>
+      <li><code>.</code> — matches any single character</li>
+      <li><code>\d</code> — matches a digit (0-9)</li>
+      <li><code>\w</code> — matches a word character (letter, digit, or underscore)</li>
+      <li><code>[abc]</code> — matches any one of a, b, or c</li>
+      <li><code>a+</code> — matches one or more "a" characters</li>
+      <li><code>^</code> and <code>$</code> — match the start and end of a line</li>
+      <li><code>(group)</code> — captures a group you can reference later</li>
+    </ul>
+
+    <h3>Common Patterns</h3>
+    <p>
+      Email: <code>{'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}'}</code><br/>
+      URL: <code>{'https?://[^\\s]+'}</code><br/>
+      Phone (US): <code>{'\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}'}</code>
+    </p>
+
+    <p>
+      This tester uses JavaScript's regex engine. If you're targeting Python or Go, the syntax is mostly
+      the same but there are differences in lookaheads and named groups.
+    </p>
+  </section>
 </ToolLayout>
 
 <script is:inline>

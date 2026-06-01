@@ -1,0 +1,30 @@
+{
+  "draft": false,
+  "id": "problem-0038",
+  "title": "Basic Calculator II",
+  "difficulty": "Medium",
+  "topic": "String",
+  "topics": [
+    "String",
+    "Hash Table"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/basic-calculator-ii/",
+  "problemSet": "top-300-leetcode",
+  "sampleInput": "s = \"3+2*2\"",
+  "sampleOutput": "7",
+  "testCases": [
+    {
+      "args": [
+        "3+2*2"
+      ],
+      "expected": 7
+    }
+  ],
+  "functionName": "basicCalculatorIi",
+  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction basicCalculatorIi(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(basicCalculatorIi(\"3+2*2\"));",
+  "constraints": [
+    "1 <= s.length <= 3 * 10^5",
+    "s contains digits, +, -, *, / and spaces"
+  ]
+}

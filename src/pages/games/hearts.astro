@@ -9,6 +9,20 @@ import GameLayout from '../../layouts/GameLayout.astro';
     <div id="hg-hand" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;"></div>
     <div id="hg-msg" style="text-align:center;margin-top:1rem;font-weight:700;font-size:1.1rem;min-height:1.5rem;"></div>
   </div>
+
+  <section slot="about" class="game-about">
+    <h2>About Hearts</h2>
+    <p>
+      Hearts is a trick-taking card game for four players where the goal is to avoid taking penalty cards.
+      Each heart is worth 1 point and the Queen of Spades is worth 13. The player with the fewest points
+      at the end wins. But there's a twist — if you manage to take <em>all</em> the penalty cards
+      ("shooting the moon"), everyone else gets 26 points instead.
+    </p>
+    <p>
+      Strategy involves careful card counting, knowing when to dump high hearts, and deciding whether to
+      risk shooting the moon. This version has you playing against three computer opponents.
+    </p>
+  </section>
 </GameLayout>
 <script is:inline>
 (function(){

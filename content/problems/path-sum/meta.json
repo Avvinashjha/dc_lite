@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "id": "problem-0143",
+  "title": "Path Sum",
+  "difficulty": "Easy",
+  "topic": "Tree",
+  "topics": [
+    "Tree",
+    "Binary Tree",
+    "DFS"
+  ],
+  "platform": "LeetCode",
+  "externalUrl": "https://leetcode.com/problems/path-sum/",
+  "problemSet": "top-300-leetcode",
+  "testCases": [],
+  "functionName": "pathSum",
+  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} targetSum\n * @return {boolean}\n */\nfunction hasPathSum(root, targetSum) {\n  // Check if root-to-leaf path sums to target\n}",
+  "constraints": [
+    "0 <= number of nodes <= 5000",
+    "-1000 <= Node.val, targetSum <= 1000"
+  ]
+}
