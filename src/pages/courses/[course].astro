@@ -9,6 +9,23 @@ export function getStaticPaths() {
 const { course: courseSlug } = Astro.params;
 const course = getCourse(courseSlug!);
 if (!course) return Astro.redirect('/courses');
+
+const courseStructure = {
+  slug: course.slug,
+  modules: course.resolvedModules.map(m => ({
+    slug: m.slug,
+    title: m.title,
+    lessons: m.lessons.map(l => ({ slug: l.slug, type: l.type })),
+  })),
+};
+
+const interviewRounds = course.certification?.interviewRounds ?? 3;
+
+function lessonIcon(type: string): string {
+  if (type === 'video') return '▶';
+  if (type === 'quiz') return '📝';
+  return '📄';
+}
 ---
 
 <BaseLayout title={`${course.title} | DailyCoder`} description={course.description}>
@@ -29,20 +46,42 @@ if (!course) return Astro.redirect('/courses');
         <button id="enroll-btn" class="button button--primary" data-course-slug={course.slug} type="button">Enroll in Course</button>
         <span id="enroll-status" style="font-size: 0.85rem; color: var(--color-text-light);"></span>
       </div>
+
+      <div class="course-progress" data-course-progress hidden>
+        <div class="course-progress__track">
+          <span class="course-progress__fill" style="width: 0%"></span>
+        </div>
+        <span class="course-progress__label">0% complete</span>
+      </div>
+    </div>
+
+    <div class="course-cert-cta" data-cert-cta hidden>
+      <div>
+        <strong>🎓 You've completed every module!</strong>
+        <p>Book your {interviewRounds} interview rounds to earn your certificate.</p>
+      </div>
+      <a href={`/courses/${course.slug}/certificate`} class="button button--primary">View certificate</a>
     </div>
 
     <div class="course-modules">
       {course.resolvedModules.map((mod, modIdx) => (
-        <div class="course-module">
+        <div class="course-module" data-module-index={modIdx} data-module-slug={mod.slug}>
           <h2 class="course-module__title">
             <span class="course-module__number">Module {modIdx + 1}</span>
             {mod.title}
+            <span class="course-module__badge" data-module-badge hidden>Completed ✓</span>
+            <span class="course-module__lock" data-module-lock hidden>🔒 Locked</span>
           </h2>
           <p style="color: var(--color-text-light); margin-bottom: 1rem;">{mod.description}</p>
           <div class="course-module__lessons">
             {mod.lessons.map(lesson => (
-              <a href={`/courses/${course.slug}/${mod.slug}/${lesson.slug}`} class="course-lesson">
-                <span class="course-lesson__icon">{lesson.type === 'video' ? '▶' : '📄'}</span>
+              <a
+                href={`/courses/${course.slug}/${mod.slug}/${lesson.slug}`}
+                class="course-lesson"
+                data-lesson-key={`${mod.slug}/${lesson.slug}`}
+              >
+                <span class="course-lesson__check" data-lesson-check hidden>✓</span>
+                <span class="course-lesson__icon">{lessonIcon(lesson.type)}</span>
                 <span class="course-lesson__title">{lesson.title}</span>
                 <span class="course-lesson__duration">{lesson.duration}</span>
               </a>
@@ -55,16 +94,60 @@ if (!course) return Astro.redirect('/courses');
 </BaseLayout>
 
 <script src="/js/store.js" is:inline></script>
+<script src="/js/course-progress.js" is:inline></script>
+<script is:inline define:vars={{ courseStructure }}>
+  window.__dcCourseStructure = courseStructure;
+</script>
 <script>
   const ENROLL_TOOL = 'course-enrollment';
   const enrollBtn = document.getElementById('enroll-btn') as HTMLButtonElement;
   const enrollStatus = document.getElementById('enroll-status')!;
   const courseSlug = enrollBtn.dataset.courseSlug || '';
+  const structure = (window as any).__dcCourseStructure;
+  const CP = (window as any).DCCourseProgress;
+  const store = (window as any).DCStore;
   let enrolled = false;
 
+  function renderProgress(row: any) {
+    const safe = row || { completedLessons: [], quizScores: {} };
+
+    document.querySelectorAll('[data-lesson-key]').forEach((a) => {
+      const k = a.getAttribute('data-lesson-key');
+      const done = safe.completedLessons.indexOf(k) !== -1;
+      const check = a.querySelector('[data-lesson-check]') as HTMLElement | null;
+      if (check) check.hidden = !done;
+      a.classList.toggle('course-lesson--done', done);
+    });
+
+    document.querySelectorAll('[data-module-index]').forEach((el) => {
+      const idx = parseInt(el.getAttribute('data-module-index') || '0', 10);
+      const complete = CP.moduleComplete(structure, safe, idx);
+      const unlocked = CP.moduleUnlocked(structure, safe, idx);
+      const badge = el.querySelector('[data-module-badge]') as HTMLElement | null;
+      const lock = el.querySelector('[data-module-lock]') as HTMLElement | null;
+      if (badge) badge.hidden = !complete;
+      if (lock) lock.hidden = unlocked;
+      el.classList.toggle('course-module--locked', !unlocked);
+      el.querySelectorAll('[data-lesson-key]').forEach((a) => {
+        (a as HTMLElement).classList.toggle('course-lesson--locked', !unlocked);
+      });
+    });
+
+    const c = CP.counts(structure, safe);
+    const wrap = document.querySelector('[data-course-progress]') as HTMLElement | null;
+    const fill = document.querySelector('.course-progress__fill') as HTMLElement | null;
+    const label = document.querySelector('.course-progress__label');
+    if (fill) fill.style.width = c.percent + '%';
+    if (label) label.textContent = c.percent + '% complete';
+    if (wrap && enrolled) wrap.hidden = false;
+
+    const cta = document.querySelector('[data-cert-cta]') as HTMLElement | null;
+    if (cta) cta.hidden = !CP.courseComplete(structure, safe);
+  }
+
   async function loadEnrollment() {
-    await (window as any).DCStore.init();
-    const row = await (window as any).DCStore.get(ENROLL_TOOL, courseSlug);
+    await store.init();
+    const row = await CP.getRow(courseSlug);
     if (row && row.enrolledAt) {
       enrolled = true;
       enrollBtn.textContent = 'Continue Learning';
@@ -72,18 +155,30 @@ if (!course) return Astro.redirect('/courses');
       enrollBtn.classList.add('button--outline');
       enrollStatus.textContent = 'Enrolled';
     }
+    renderProgress(row);
   }
 
   async function doEnroll() {
     if (enrolled) {
-      // Already enrolled - go to first lesson
-      const firstLesson = document.querySelector('.course-lesson') as HTMLAnchorElement | null;
+      const firstLesson = document.querySelector(
+        '.course-lesson:not(.course-lesson--locked)'
+      ) as HTMLAnchorElement | null;
       if (firstLesson) window.location.href = firstLesson.href;
       return;
     }
-    await (window as any).DCStore.init();
-    const data = { enrolledAt: Date.now(), lastLesson: '', lastLessonAt: null, updatedAt: Date.now() };
-    await (window as any).DCStore.set(ENROLL_TOOL, courseSlug, data);
+    await store.init();
+    const existing = await CP.getRow(courseSlug);
+    const data = existing || {
+      enrolledAt: 0,
+      lastLesson: '',
+      lastLessonAt: null,
+      completedLessons: [],
+      quizScores: {},
+      updatedAt: 0,
+    };
+    data.enrolledAt = data.enrolledAt || Date.now();
+    data.updatedAt = Date.now();
+    await store.set(ENROLL_TOOL, courseSlug, data);
 
     if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
       (window as any).DCSyncService.pushEnrollment(courseSlug, data);
@@ -94,6 +189,7 @@ if (!course) return Astro.redirect('/courses');
     enrollBtn.classList.remove('button--primary');
     enrollBtn.classList.add('button--outline');
     enrollStatus.textContent = 'Enrolled!';
+    renderProgress(data);
   }
 
   enrollBtn.addEventListener('click', () => {
@@ -102,6 +198,20 @@ if (!course) return Astro.redirect('/courses');
     } else {
       doEnroll();
     }
+  });
+
+  // Block navigation into locked modules.
+  document.querySelectorAll('[data-lesson-key]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      if ((a as HTMLElement).classList.contains('course-lesson--locked')) {
+        e.preventDefault();
+        enrollStatus.textContent = 'Complete the previous module to unlock this lesson.';
+      }
+    });
+  });
+
+  window.addEventListener('dc:authchange', () => {
+    setTimeout(loadEnrollment, 1800);
   });
 
   loadEnrollment();
@@ -169,6 +279,84 @@ if (!course) return Astro.redirect('/courses');
     color: var(--color-text-light);
     white-space: nowrap;
     flex-shrink: 0;
+  }
+  .course-lesson__check {
+    color: var(--color-success, #16a34a);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .course-lesson--locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Progress bar */
+  .course-progress {
+    margin-top: 1.25rem;
+    max-width: 320px;
+  }
+  .course-progress__track {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-border);
+    overflow: hidden;
+  }
+  .course-progress__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--color-primary);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .course-progress__label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+  }
+
+  /* Module badge / lock */
+  .course-module__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .course-module__badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-success, #16a34a);
+    background: color-mix(in srgb, var(--color-success, #16a34a) 12%, transparent);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-md);
+  }
+  .course-module__lock {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+  }
+  .course-module--locked {
+    opacity: 0.75;
+  }
+
+  /* Certificate CTA */
+  .course-cert-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  }
+  .course-cert-cta p {
+    margin: 0.25rem 0 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
   }
 
   @media (min-width: 769px) {

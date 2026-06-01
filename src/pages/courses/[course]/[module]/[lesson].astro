@@ -1,6 +1,7 @@
 ---
 import LessonLayout from '../../../../layouts/LessonLayout.astro';
-import { getCourses, getCourse, getLesson } from '../../../../utils/contentLoader';
+import { getCourses, getCourse, getLesson, getSiteConfig } from '../../../../utils/contentLoader';
+import { getQuiz } from '../../../../utils/quizLoader';
 import type { Lesson } from '../../../../types/post';
 
 export function getStaticPaths() {
@@ -38,6 +39,18 @@ course.resolvedModules.forEach(mod => {
 const currentIdx = allLessons.findIndex(l => l.slug === lessonSlug && l.moduleSlug === moduleSlug);
 const prevLesson = currentIdx > 0 ? allLessons[currentIdx - 1] : null;
 const nextLesson = currentIdx < allLessons.length - 1 ? allLessons[currentIdx + 1] : null;
+
+// For quiz lessons, resolve the referenced standalone quiz.
+const quiz = lesson.type === 'quiz' && lesson.quizSlug ? getQuiz(lesson.quizSlug) : null;
+const config = getSiteConfig();
+const quizApiUrl = config.quiz?.enabled ? (config.quiz.googleScriptUrl || '') : '';
 ---
 
-<LessonLayout lesson={lesson} course={course} prevLesson={prevLesson} nextLesson={nextLesson} />
+<LessonLayout
+  lesson={lesson}
+  course={course}
+  prevLesson={prevLesson}
+  nextLesson={nextLesson}
+  quiz={quiz}
+  quizApiUrl={quizApiUrl}
+/>

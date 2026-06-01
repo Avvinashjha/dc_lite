@@ -20,6 +20,8 @@
  *   - problem_discussions   (shared problem discussions)
  *   - community_quizzes    (slug, title, category, difficulty, author, uid, quizJson, createdAt)
  *   - quiz_scores          (quizSlug, uid, displayName, score, maxScore, timeSec, completedAt, createdAt)
+ *   - course_certifications (uid, courseSlug, displayName, round1, round2, round3, certified, certifiedAt, certId, notes)
+ *                          ── admin-managed: you fill rows manually after interviewing a student
  */
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -74,6 +76,13 @@ function getAuthUid(e, params) {
   if (!token) return null;
   var verified = verifyFirebaseToken(token);
   return verified ? verified.uid : null;
+}
+
+// Interpret a spreadsheet cell as a boolean (handles TRUE/true/1/yes/pass).
+function isTruthyCell(v) {
+  if (v === true) return true;
+  var s = String(v).trim().toLowerCase();
+  return s === 'true' || s === '1' || s === 'yes' || s === 'y' || s === 'pass' || s === 'passed';
 }
 
 // Slugify matching the client (lowercase, non-alphanumerics → dashes).
@@ -250,6 +259,67 @@ function doGet(e) {
     var lbResult = { status: 'success', scores: scores.slice(0, limit) };
     if (callback) return jsonpResponse(lbResult, callback);
     return jsonResponse(lbResult);
+  }
+
+  // ── Get course certification status (auth required; user reads only their own) ──
+  if (action === 'getCertification') {
+    var certUid = getAuthUid(e, {});
+    if (!certUid) return jsonResponse({ status: 'error', message: 'Authentication required' });
+
+    var certCourseSlug = e.parameter.courseSlug || '';
+    if (!certCourseSlug) return jsonResponse({ status: 'error', message: 'Missing courseSlug' });
+
+    var certSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('course_certifications');
+    if (!certSheet) return jsonResponse({ status: 'success', certification: null });
+
+    var certData = certSheet.getDataRange().getValues();
+    for (var ci = 1; ci < certData.length; ci++) {
+      if (certData[ci][0] === certUid && certData[ci][1] === certCourseSlug) {
+        return jsonResponse({
+          status: 'success',
+          certification: {
+            courseSlug: certData[ci][1],
+            displayName: certData[ci][2],
+            round1: certData[ci][3],
+            round2: certData[ci][4],
+            round3: certData[ci][5],
+            certified: certData[ci][6],
+            certifiedAt: certData[ci][7],
+            certId: certData[ci][8]
+          }
+        });
+      }
+    }
+    return jsonResponse({ status: 'success', certification: null });
+  }
+
+  // ── Verify a certificate by its public ID (public, read-only) ──
+  if (action === 'verifyCertificate') {
+    var certIdParam = e.parameter.certId || '';
+    if (!certIdParam) return jsonResponse({ status: 'error', message: 'Missing certId' });
+
+    var vSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('course_certifications');
+    var vResult = { status: 'success', valid: false };
+    if (vSheet) {
+      var vData = vSheet.getDataRange().getValues();
+      for (var vi = 1; vi < vData.length; vi++) {
+        if (String(vData[vi][8]) === String(certIdParam) && isTruthyCell(vData[vi][6])) {
+          vResult = {
+            status: 'success',
+            valid: true,
+            certificate: {
+              displayName: vData[vi][2],
+              courseSlug: vData[vi][1],
+              certifiedAt: vData[vi][7],
+              certId: vData[vi][8]
+            }
+          };
+          break;
+        }
+      }
+    }
+    if (callback) return jsonpResponse(vResult, callback);
+    return jsonResponse(vResult);
   }
 
   return jsonResponse({ status: 'error', message: 'Unknown action' });

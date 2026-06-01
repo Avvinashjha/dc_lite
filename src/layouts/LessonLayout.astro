@@ -3,9 +3,12 @@ import BaseLayout from "./BaseLayout.astro";
 import VideoEmbed from "../components/VideoEmbed.astro";
 import Quiz from "../components/Quiz.astro";
 import Exercise from "../components/Exercise.astro";
+import QuizPlayer from "../components/QuizPlayer";
 import { parseMarkdown } from "../utils/markdown";
 import { extractBlocks } from "../utils/parseBlocks";
 import type { Course, Lesson } from "../types/post";
+import type { Quiz as QuizType } from "../types/quiz";
+import "../styles/quiz.scss";
 
 interface Props {
   lesson: Lesson;
@@ -22,13 +25,42 @@ interface Props {
     slug: string;
     title: string;
   } | null;
+  quiz?: QuizType | null;
+  quizApiUrl?: string;
 }
 
-const { lesson, course, prevLesson, nextLesson } = Astro.props;
+const {
+  lesson,
+  course,
+  prevLesson,
+  nextLesson,
+  quiz = null,
+  quizApiUrl = "",
+} = Astro.props;
 const { cleanMarkdown, blocks } = extractBlocks(lesson.content);
 const htmlParts = parseMarkdown(cleanMarkdown).split(/<!--BLOCK_(\d+)-->/);
 const lessonCourseSlug = course.slug;
 const lessonSlug = lesson.slug;
+const lessonModuleSlug = lesson.moduleSlug;
+const isQuizLesson = lesson.type === "quiz";
+const passingScore = lesson.passingScore ?? 70;
+const quizSlug = quiz?.slug ?? "";
+
+// Ordered structure consumed by DCCourseProgress for completion + gating.
+const courseStructure = {
+  slug: course.slug,
+  modules: course.resolvedModules.map((m) => ({
+    slug: m.slug,
+    title: m.title,
+    lessons: m.lessons.map((l) => ({ slug: l.slug, type: l.type })),
+  })),
+};
+
+function lessonIcon(type: string): string {
+  if (type === "video") return "▶";
+  if (type === "quiz") return "📝";
+  return "📄";
+}
 ---
 
 <BaseLayout
@@ -47,18 +79,40 @@ const lessonSlug = lesson.slug;
       <a href={`/courses/${course.slug}`} class="lesson-sidebar__back"
         >&larr; {course.title}</a
       >
+
+      <div class="lesson-progress" data-course-progress>
+        <div class="lesson-progress__track">
+          <span class="lesson-progress__fill" style="width: 0%"></span>
+        </div>
+        <span class="lesson-progress__label">0% complete</span>
+      </div>
+
       {
-        course.resolvedModules.map((mod) => (
-          <div class="lesson-sidebar__module">
-            <h4 class="lesson-sidebar__module-title">{mod.title}</h4>
+        course.resolvedModules.map((mod, modIdx) => (
+          <div
+            class="lesson-sidebar__module"
+            data-module-index={modIdx}
+            data-module-slug={mod.slug}
+          >
+            <h4 class="lesson-sidebar__module-title">
+              <span class="lesson-sidebar__lock" data-module-lock hidden>
+                🔒
+              </span>
+              <span>{mod.title}</span>
+            </h4>
             <ul class="lesson-sidebar__lessons">
               {mod.lessons.map((l) => (
                 <li>
                   <a
                     href={`/courses/${course.slug}/${mod.slug}/${l.slug}`}
+                    data-lesson-key={`${mod.slug}/${l.slug}`}
                     class={`lesson-sidebar__link ${l.slug === lesson.slug && mod.slug === lesson.moduleSlug ? "lesson-sidebar__link--active" : ""}`}
                   >
-                    {l.type === "video" ? "▶" : "📄"} {l.title}
+                    <span class="lesson-sidebar__check" data-lesson-check hidden>
+                      ✓
+                    </span>
+                    <span class="lesson-sidebar__icon">{lessonIcon(l.type)}</span>
+                    <span class="lesson-sidebar__text">{l.title}</span>
                     <span class="lesson-sidebar__duration">{l.duration}</span>
                   </a>
                 </li>
@@ -78,90 +132,267 @@ const lessonSlug = lesson.slug;
         <span style="color: var(--color-text-light); font-size: 0.875rem;"
           >{lesson.duration}</span
         >
+        <span class="lesson-complete-badge" data-lesson-complete-badge hidden
+          >✓ Completed</span
+        >
       </div>
 
-      <div class="article__content">
-        {
-          htmlParts.map((part, i) => {
-            if (i % 2 === 0) {
-              return <div set:html={part} />;
-            }
-            const blockIdx = parseInt(part);
-            const block = blocks[blockIdx];
-            if (!block) return null;
-            if (block.type === "video")
-              return <VideoEmbed url={block.url} title={block.title} />;
-            if (block.type === "quiz")
-              return (
-                <Quiz
-                  question={block.question}
-                  options={block.options}
-                  answer={block.answer}
-                  explanation={block.explanation}
-                />
-              );
-            if (block.type === "exercise")
-              return (
-                <Exercise
-                  title={block.title}
-                  description={block.description}
-                  starterCode={block.starterCode}
-                />
-              );
-            return null;
-          })
-        }
+      <!-- Locked-module gate (revealed client-side when prerequisites are unmet) -->
+      <div class="lesson-gate" data-lesson-gate hidden>
+        <div class="lesson-gate__icon">🔒</div>
+        <h2 class="lesson-gate__title">This lesson is locked</h2>
+        <p class="lesson-gate__text">
+          Finish the previous module to unlock <strong>{lesson.title}</strong>.
+        </p>
+        <a href={`/courses/${course.slug}`} class="button button--primary"
+          >Back to course overview</a
+        >
       </div>
 
-      <!-- Nav -->
-      <div class="lesson-nav">
+      <div class="lesson-body" data-lesson-body>
+        <div class="article__content">
+          {
+            htmlParts.map((part, i) => {
+              if (i % 2 === 0) {
+                return <div set:html={part} />;
+              }
+              const blockIdx = parseInt(part);
+              const block = blocks[blockIdx];
+              if (!block) return null;
+              if (block.type === "video")
+                return <VideoEmbed url={block.url} title={block.title} />;
+              if (block.type === "quiz")
+                return (
+                  <Quiz
+                    question={block.question}
+                    options={block.options}
+                    answer={block.answer}
+                    explanation={block.explanation}
+                  />
+                );
+              if (block.type === "exercise")
+                return (
+                  <Exercise
+                    title={block.title}
+                    description={block.description}
+                    starterCode={block.starterCode}
+                  />
+                );
+              return null;
+            })
+          }
+        </div>
+
         {
-          prevLesson ? (
-            <a
-              href={`/courses/${prevLesson.courseSlug}/${prevLesson.moduleSlug}/${prevLesson.slug}`}
-              class="button button--secondary"
-            >
-              &larr; {prevLesson.title}
-            </a>
-          ) : (
-            <span />
+          isQuizLesson && quiz && (
+            <div class="lesson-quiz">
+              <p class="lesson-quiz__note">
+                Score <strong>{passingScore}%</strong> or higher on this quiz to
+                complete the lesson.
+              </p>
+              <QuizPlayer client:load quiz={quiz} />
+            </div>
           )
         }
         {
-          nextLesson ? (
-            <a
-              href={`/courses/${nextLesson.courseSlug}/${nextLesson.moduleSlug}/${nextLesson.slug}`}
-              class="button"
-            >
-              {nextLesson.title} &rarr;
-            </a>
-          ) : (
-            <a href={`/courses/${course.slug}`} class="button">
-              Back to Course
-            </a>
+          isQuizLesson && !quiz && (
+            <p class="lesson-quiz__missing">
+              This quiz is not available yet. Please check back soon.
+            </p>
           )
         }
+
+        {
+          !isQuizLesson && (
+            <div class="lesson-complete" data-lesson-complete-zone>
+              <button
+                type="button"
+                class="button button--primary"
+                data-mark-complete
+              >
+                Mark as complete
+              </button>
+              <button
+                type="button"
+                class="button button--outline"
+                data-mark-incomplete
+                hidden
+              >
+                ✓ Completed — Undo
+              </button>
+            </div>
+          )
+        }
+
+        <!-- Nav -->
+        <div class="lesson-nav">
+          {
+            prevLesson ? (
+              <a
+                href={`/courses/${prevLesson.courseSlug}/${prevLesson.moduleSlug}/${prevLesson.slug}`}
+                class="button button--secondary"
+              >
+                &larr; {prevLesson.title}
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            nextLesson ? (
+              <a
+                href={`/courses/${nextLesson.courseSlug}/${nextLesson.moduleSlug}/${nextLesson.slug}`}
+                class="button"
+              >
+                {nextLesson.title} &rarr;
+              </a>
+            ) : (
+              <a href={`/courses/${course.slug}`} class="button">
+                Back to Course
+              </a>
+            )
+          }
+        </div>
       </div>
     </article>
   </div>
 </BaseLayout>
 
+{
+  isQuizLesson && quiz && (
+    <script set:html={`window.__dcQuizApiUrl = ${JSON.stringify(quizApiUrl)};`} is:inline />
+  )
+}
 <script src="/js/store.js" is:inline></script>
-<script is:inline define:vars={{ lessonCourseSlug, lessonSlug }}>
-  (async function trackLesson() {
-    if (typeof DCStore === 'undefined') return;
-    var ENROLL_TOOL = 'course-enrollment';
-    await DCStore.init();
-    var row = await DCStore.get(ENROLL_TOOL, lessonCourseSlug);
-    if (row && row.enrolledAt) {
-      row.lastLesson = lessonSlug;
-      row.lastLessonAt = Date.now();
-      row.updatedAt = Date.now();
-      await DCStore.set(ENROLL_TOOL, lessonCourseSlug, row);
-      if (typeof DCSyncService !== 'undefined' && DCSyncService.isActive()) {
-        DCSyncService.pushEnrollment(lessonCourseSlug, row);
+<script src="/js/course-progress.js" is:inline></script>
+<script
+  is:inline
+  define:vars={{
+    structure: courseStructure,
+    lessonCourseSlug,
+    lessonModuleSlug,
+    lessonSlug,
+    isQuizLesson,
+    passingScore,
+    quizSlug,
+  }}
+>
+  (function () {
+    if (typeof DCStore === "undefined" || typeof DCCourseProgress === "undefined") return;
+    var CP = DCCourseProgress;
+
+    var modIndex = -1;
+    for (var i = 0; i < structure.modules.length; i++) {
+      if (structure.modules[i].slug === lessonModuleSlug) {
+        modIndex = i;
+        break;
       }
     }
+
+    function renderSidebar(row) {
+      document.querySelectorAll("[data-lesson-key]").forEach(function (a) {
+        var k = a.getAttribute("data-lesson-key");
+        var done = row.completedLessons.indexOf(k) !== -1;
+        var check = a.querySelector("[data-lesson-check]");
+        if (check) check.hidden = !done;
+        a.classList.toggle("lesson-sidebar__link--done", done);
+      });
+
+      document.querySelectorAll("[data-module-index]").forEach(function (el) {
+        var idx = parseInt(el.getAttribute("data-module-index"), 10);
+        var unlocked = CP.moduleUnlocked(structure, row, idx);
+        var lock = el.querySelector("[data-module-lock]");
+        if (lock) lock.hidden = unlocked;
+        el.classList.toggle("lesson-sidebar__module--locked", !unlocked);
+        el.querySelectorAll("[data-lesson-key]").forEach(function (a) {
+          a.classList.toggle("lesson-sidebar__link--locked", !unlocked);
+        });
+      });
+
+      var c = CP.counts(structure, row);
+      var fill = document.querySelector(".lesson-progress__fill");
+      var label = document.querySelector(".lesson-progress__label");
+      if (fill) fill.style.width = c.percent + "%";
+      if (label) label.textContent = c.percent + "% complete";
+    }
+
+    function setCompletedUI(done) {
+      var badge = document.querySelector("[data-lesson-complete-badge]");
+      if (badge) badge.hidden = !done;
+      var markBtn = document.querySelector("[data-mark-complete]");
+      var undoBtn = document.querySelector("[data-mark-incomplete]");
+      if (markBtn) markBtn.hidden = done;
+      if (undoBtn) undoBtn.hidden = !done;
+    }
+
+    function applyGate(row) {
+      var locked = modIndex > 0 && !CP.moduleUnlocked(structure, row, modIndex);
+      var gate = document.querySelector("[data-lesson-gate]");
+      var body = document.querySelector("[data-lesson-body]");
+      if (gate) gate.hidden = !locked;
+      if (body) body.hidden = locked;
+      return locked;
+    }
+
+    function refresh() {
+      return CP.getRow(lessonCourseSlug).then(function (row) {
+        var safe = row || { completedLessons: [], quizScores: {} };
+        renderSidebar(safe);
+        applyGate(safe);
+        if (!isQuizLesson) {
+          setCompletedUI(CP.isLessonComplete(safe, lessonModuleSlug, lessonSlug));
+        }
+        return safe;
+      });
+    }
+
+    // Preserve existing "resume" behaviour: record last visited lesson when enrolled.
+    function trackLastLesson() {
+      return CP.getRow(lessonCourseSlug).then(function (row) {
+        if (!row || !row.enrolledAt) return;
+        row.lastLesson = lessonSlug;
+        row.lastLessonAt = Date.now();
+        row.updatedAt = Date.now();
+        return DCStore.set("course-enrollment", lessonCourseSlug, row).then(function () {
+          if (typeof DCSyncService !== "undefined" && DCSyncService.isActive()) {
+            DCSyncService.pushEnrollment(lessonCourseSlug, row);
+          }
+        });
+      });
+    }
+
+    var markBtn = document.querySelector("[data-mark-complete]");
+    if (markBtn) {
+      markBtn.addEventListener("click", function () {
+        CP.markLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+      });
+    }
+    var undoBtn = document.querySelector("[data-mark-incomplete]");
+    if (undoBtn) {
+      undoBtn.addEventListener("click", function () {
+        CP.unmarkLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+      });
+    }
+
+    if (isQuizLesson) {
+      window.addEventListener("dc:quizcompleted", function (ev) {
+        if (!ev.detail || ev.detail.slug !== quizSlug) return;
+        CP.recordQuizScore(
+          lessonCourseSlug,
+          lessonModuleSlug,
+          lessonSlug,
+          ev.detail.percent,
+          passingScore
+        ).then(refresh);
+      });
+    }
+
+    // Re-render once cross-device progress merges in after sign-in.
+    window.addEventListener("dc:authchange", function () {
+      setTimeout(refresh, 1800);
+    });
+
+    DCStore.init().then(trackLastLesson).then(refresh);
   })();
 </script>
 
@@ -265,6 +496,122 @@ const lessonSlug = lesson.slug;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  /* Progress bar */
+  .lesson-progress {
+    margin-bottom: var(--spacing-lg);
+  }
+  .lesson-progress__track {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-border);
+    overflow: hidden;
+  }
+  .lesson-progress__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--color-primary);
+    border-radius: 999px;
+    transition: width var(--transition-base, 0.25s) ease;
+  }
+  .lesson-progress__label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+  }
+
+  /* Sidebar links: icon / text / check / lock */
+  .lesson-sidebar__icon {
+    flex-shrink: 0;
+  }
+  .lesson-sidebar__text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lesson-sidebar__check {
+    flex-shrink: 0;
+    color: var(--color-success, #16a34a);
+    font-weight: 700;
+  }
+  .lesson-sidebar__link--active .lesson-sidebar__check {
+    color: #fff;
+  }
+  .lesson-sidebar__link--done:not(.lesson-sidebar__link--active) {
+    color: var(--color-text-light);
+  }
+  .lesson-sidebar__module-title {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .lesson-sidebar__lock {
+    font-size: 0.7rem;
+  }
+  .lesson-sidebar__module--locked .lesson-sidebar__module-title {
+    color: var(--color-text-light);
+  }
+  .lesson-sidebar__link--locked {
+    opacity: 0.5;
+  }
+
+  /* Completion controls */
+  .lesson-complete {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px dashed var(--color-border);
+  }
+  .lesson-complete-badge {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-success, #16a34a);
+    background: color-mix(in srgb, var(--color-success, #16a34a) 12%, transparent);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-md);
+  }
+  .lesson-content__header {
+    justify-content: flex-start;
+  }
+
+  /* Quiz lesson */
+  .lesson-quiz {
+    margin-top: var(--spacing-xl);
+  }
+  .lesson-quiz__note {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+  }
+  .lesson-quiz__missing {
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
+  /* Locked-module gate */
+  .lesson-gate {
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .lesson-gate__icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+  .lesson-gate__title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+  }
+  .lesson-gate__text {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
   }
 
   /* Mobile: hide sidebar, show toggle */

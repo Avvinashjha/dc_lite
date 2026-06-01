@@ -66,6 +66,21 @@ export default function QuizPlayer({ quiz }: Props) {
       };
       saveAttempt(attempt).catch(() => {});
 
+      // Notify any host context (e.g. a course quiz lesson) of the result so it
+      // can mark the lesson complete. Guarded so standalone quizzes are unaffected.
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('dc:quizcompleted', {
+            detail: {
+              slug: quiz.slug,
+              percent: res.percent,
+              score: res.score,
+              maxScore: res.maxScore,
+            },
+          })
+        );
+      }
+
       // Auto-submit ranked scores when signed in.
       if (quiz.ranked && user) {
         submitRanked(res);

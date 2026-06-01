@@ -85,7 +85,26 @@ For shared problem discussions (visible to all users on a problem page). Key: `s
 - `ts` — Unix timestamp in milliseconds (for sorting)
 - `timestamp` — ISO 8601 string (human-readable)
 
-> **Note:** The Apps Script auto-creates tabs with headers on first write if they don't exist. You can either create them manually (recommended for clarity) or let the script create them.
+### Tab: `course_certifications`
+
+Admin-managed course certificates. After a student completes a course and passes their interview rounds, **you fill this row in manually** — the website never writes to this tab. Compound key: `(uid, courseSlug)`.
+
+| Column | A   | B          | C           | D      | E      | F      | G         | H           | I      | J     |
+|--------|-----|------------|-------------|--------|--------|--------|-----------|-------------|--------|-------|
+| Header | uid | courseSlug | displayName | round1 | round2 | round3 | certified | certifiedAt | certId | notes |
+
+- `uid` — Firebase UID of the student (find it in `user_progress` for their course-enrollment row)
+- `courseSlug` — e.g. `react-fundamentals`
+- `displayName` — name printed on the certificate
+- `round1` / `round2` / `round3` — interview round results; set to `TRUE` once the student passes each round
+- `certified` — set to `TRUE` to issue the certificate (the certificate page only renders when this is truthy)
+- `certifiedAt` — ISO date or any date string (shown as the issue date)
+- `certId` — a unique id you assign (e.g. `DC-REACT-0001`); used for public verification
+- `notes` — optional internal notes
+
+Accepted truthy values for `roundN` / `certified`: `TRUE`, `true`, `1`, `yes`, `pass`, `passed`.
+
+> **Note:** The Apps Script auto-creates tabs with headers on first write if they don't exist. `course_certifications` is read-only from the app, so create it manually (with the header row above).
 
 ---
 
@@ -167,6 +186,8 @@ When you update the Apps Script code:
 | `getProgress`    | `uid`                   | `{ status, items: [{ type, slug, data, updatedAt }] }` |
 | `getEnrollments` | `uid`                   | `{ status, enrollments: [{ courseSlug, enrolledAt, ... }] }` |
 | `getDiscussion`  | `slug`                  | `{ status, posts: [{ name, message, uid, ts, timestamp }] }` |
+| `getCertification` | `uid`, `courseSlug`   | `{ status, certification: { courseSlug, displayName, round1, round2, round3, certified, certifiedAt, certId } \| null }` |
+| `verifyCertificate` | `certId`             | `{ status, valid, certificate?: { displayName, courseSlug, certifiedAt, certId } }` |
 
 All GET actions support JSONP via `&callback=fnName` parameter.
 
@@ -218,6 +239,23 @@ Browser (IndexedDB)          Google Apps Script           Google Sheet
 
 ---
 
+## Granting Course Certificates (Admin)
+
+Course completion (lessons + quizzes) is tracked automatically in the browser and synced to `user_progress`. The **final certificate is granted manually by you** after the student passes their interview rounds. There is no in-app request flow — you control issuance entirely from the sheet.
+
+1. The student finishes every lesson/module. On `/courses/<slug>/certificate` they see "Course complete — now the interviews" with the round checklist all **Pending**.
+2. Schedule and conduct the interview rounds (free, arranged over email).
+3. Open the **`course_certifications`** tab and add (or update) the student's row:
+   - Find their `uid` in the `user_progress` tab (the row where `type` = `course-enrollment` and `slug` = the course slug).
+   - Fill `courseSlug`, `displayName`.
+   - Set `round1`, `round2`, `round3` to `TRUE` as they pass each round (the certificate page reflects this live).
+   - When all rounds pass, set `certified` to `TRUE`, set `certifiedAt` (e.g. `2026-06-01`), and assign a unique `certId` (e.g. `DC-REACT-0001`).
+4. The next time the student loads the certificate page (signed in), it renders their printable certificate.
+
+Anyone can confirm a certificate is genuine by calling `?action=verifyCertificate&certId=<id>`.
+
+---
+
 ## Security Model
 
 The Apps Script URL is embedded in the client-side JavaScript (unavoidable for any static site). Security is enforced **server-side** using Firebase ID token verification:
@@ -239,6 +277,8 @@ The Apps Script URL is embedded in the client-side JavaScript (unavoidable for a
 | `saveEnrollment` | Token verified; uid must match token |
 | `postDiscussion` | Token required; post attributed to verified uid |
 | `comment` | Token verified if provided; uid overridden by token |
+| `getCertification` | Token verified; can only read own certification row |
+| `verifyCertificate` | Public (read-only; only confirms validity + name/course) |
 | `listComments` | Public (read-only, no sensitive data) |
 | `getDiscussion` | Public (read-only, shared content) |
 | `subscribe` | Public (newsletter sign-up) |
