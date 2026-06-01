@@ -16,5 +16,9 @@
       "title": "Components and Props"
     }
   ],
-  "draft": true
+  "certification": {
+    "expertTitle": "React Fundamentals Expert",
+    "interviewRounds": 3
+  },
+  "draft": false
 }
