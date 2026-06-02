@@ -1,0 +1,36 @@
+{
+  "title": "Browser Environment",
+  "description": "Manipulate the DOM and interact with the browser.",
+  "lessons": [
+    {
+      "slug": "01-the-dom",
+      "title": "The DOM",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-selecting-elements",
+      "title": "Selecting Elements",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-creating-elements",
+      "title": "Creating Elements",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-modifying-elements",
+      "title": "Modifying Elements",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-types-of-selectors",
+      "title": "Types of Selectors",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

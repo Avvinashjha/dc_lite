@@ -1,0 +1,36 @@
+{
+  "title": "Error Handling",
+  "description": "Handle and create errors gracefully to build robust applications.",
+  "lessons": [
+    {
+      "slug": "01-try-catch-blocks",
+      "title": "try / catch Blocks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-the-finally-block",
+      "title": "The finally Block",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-throwing-errors",
+      "title": "Throwing Errors",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-error-types",
+      "title": "Error Types",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-custom-errors",
+      "title": "Custom Errors",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

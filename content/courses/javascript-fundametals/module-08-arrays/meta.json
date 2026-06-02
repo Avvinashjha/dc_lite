@@ -1,0 +1,78 @@
+{
+  "title": "Arrays",
+  "description": "Store collections of data and transform them with built-in array methods.",
+  "lessons": [
+    {
+      "slug": "01-array-basics",
+      "title": "Array Basics",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-foreach",
+      "title": "forEach",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-map",
+      "title": "map",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-filter",
+      "title": "filter",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-reduce",
+      "title": "reduce",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-find",
+      "title": "find",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-some-and-every",
+      "title": "some and every",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-sort",
+      "title": "sort",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-reverse",
+      "title": "reverse",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-flat-and-flatmap",
+      "title": "flat and flatMap",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "11-includes",
+      "title": "includes",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "12-entries",
+      "title": "entries",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

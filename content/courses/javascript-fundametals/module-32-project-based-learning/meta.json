@@ -1,0 +1,30 @@
+{
+  "title": "Project Based Learning",
+  "description": "Apply everything you've learned by building a real project.",
+  "lessons": [
+    {
+      "slug": "01-project-overview",
+      "title": "Project Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-planning-your-project",
+      "title": "Planning Your Project",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-building-the-project",
+      "title": "Building the Project",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-deploying-your-project",
+      "title": "Deploying Your Project",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

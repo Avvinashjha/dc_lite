@@ -1,0 +1,30 @@
+{
+  "title": "Metaprogramming",
+  "description": "Inspect and customize language behavior with proxies, reflect, and symbols.",
+  "lessons": [
+    {
+      "slug": "01-proxies",
+      "title": "Proxies",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-reflect",
+      "title": "Reflect",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-symbols",
+      "title": "Symbols",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-iterators",
+      "title": "Iterators ([Symbol.iterator])",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

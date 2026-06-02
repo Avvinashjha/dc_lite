@@ -1,0 +1,42 @@
+{
+  "title": "ES6+ Features",
+  "description": "Write modern JavaScript with arrow functions, destructuring, and more.",
+  "lessons": [
+    {
+      "slug": "01-what-are-es6-features",
+      "title": "What Are ES6+ Features?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-arrow-functions",
+      "title": "Arrow Functions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-template-literals",
+      "title": "Template Literals",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-destructuring",
+      "title": "Destructuring",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-spread-operator",
+      "title": "Spread Operator",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-rest-operator",
+      "title": "Rest Operator",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

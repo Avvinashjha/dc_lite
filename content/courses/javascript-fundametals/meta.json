@@ -1,0 +1,155 @@
+{
+  "title": "JavaScript Fundamentals",
+  "description": "Learn JavaScript from scratch with hands-on projects and real-world examples",
+  "author": "Your Name",
+  "level": "beginner",
+  "duration": "4 hours",
+  "image": "/images/courses/javascript.jpg",
+  "tags": [
+    "javascript",
+    "frontend"
+  ],
+  "modules": [
+    {
+      "slug": "module-01-introduction",
+      "title": "Introduction to JavaScript"
+    },
+    {
+      "slug": "module-02-variables-and-data-types",
+      "title": "Variables and Data Types"
+    },
+    {
+      "slug": "module-03-operators",
+      "title": "Operators"
+    },
+    {
+      "slug": "module-04-control-flow",
+      "title": "Control Flow"
+    },
+    {
+      "slug": "module-05-conditionals",
+      "title": "Conditionals"
+    },
+    {
+      "slug": "module-06-functions",
+      "title": "Functions"
+    },
+    {
+      "slug": "module-07-scope-and-closures",
+      "title": "Scope and Closures"
+    },
+    {
+      "slug": "module-08-arrays",
+      "title": "Arrays"
+    },
+    {
+      "slug": "module-09-objects",
+      "title": "Objects"
+    },
+    {
+      "slug": "module-10-the-this-keyword",
+      "title": "The this Keyword"
+    },
+    {
+      "slug": "module-11-es6-features",
+      "title": "ES6+ Features"
+    },
+    {
+      "slug": "module-12-modules",
+      "title": "Modules"
+    },
+    {
+      "slug": "module-13-classes-and-inheritance",
+      "title": "Classes and Inheritance"
+    },
+    {
+      "slug": "module-14-prototypes-and-inheritance",
+      "title": "Prototypes and Inheritance"
+    },
+    {
+      "slug": "module-15-error-handling",
+      "title": "Error Handling"
+    },
+    {
+      "slug": "module-16-asynchronous-programming",
+      "title": "Asynchronous Programming"
+    },
+    {
+      "slug": "module-17-promises",
+      "title": "Promises"
+    },
+    {
+      "slug": "module-18-the-event-loop",
+      "title": "The Event Loop"
+    },
+    {
+      "slug": "module-19-apis-and-fetch",
+      "title": "APIs and Fetch"
+    },
+    {
+      "slug": "module-20-functional-programming",
+      "title": "Functional Programming"
+    },
+    {
+      "slug": "module-21-advanced-asynchronous-patterns",
+      "title": "Advanced Asynchronous Patterns"
+    },
+    {
+      "slug": "module-22-metaprogramming",
+      "title": "Metaprogramming"
+    },
+    {
+      "slug": "module-23-memory-management",
+      "title": "Memory Management"
+    },
+    {
+      "slug": "module-24-performance-optimization",
+      "title": "Performance Optimization"
+    },
+    {
+      "slug": "module-25-security",
+      "title": "Security"
+    },
+    {
+      "slug": "module-26-design-patterns",
+      "title": "Design Patterns"
+    },
+    {
+      "slug": "module-27-debugging",
+      "title": "Debugging"
+    },
+    {
+      "slug": "module-28-testing",
+      "title": "Testing"
+    },
+    {
+      "slug": "module-29-browser-environment",
+      "title": "Browser Environment"
+    },
+    {
+      "slug": "module-30-events",
+      "title": "Events"
+    },
+    {
+      "slug": "module-31-nodejs-environment",
+      "title": "Node.js Environment"
+    },
+    {
+      "slug": "module-32-project-based-learning",
+      "title": "Project Based Learning"
+    },
+    {
+      "slug": "module-33-interview-questions",
+      "title": "Interview Questions"
+    },
+    {
+      "slug": "module-34-certification",
+      "title": "Certification"
+    }
+  ],
+  "certification": {
+    "expertTitle": "JavaScript Fundamentals Expert",
+    "interviewRounds": 3
+  },
+  "draft": false
+}

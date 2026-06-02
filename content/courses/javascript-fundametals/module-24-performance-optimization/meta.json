@@ -1,0 +1,30 @@
+{
+  "title": "Performance Optimization",
+  "description": "Make your JavaScript faster with proven optimization techniques.",
+  "lessons": [
+    {
+      "slug": "01-memoization",
+      "title": "Memoization",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-lazy-loading",
+      "title": "Lazy Loading",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-debouncing",
+      "title": "Debouncing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-throttling",
+      "title": "Throttling",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

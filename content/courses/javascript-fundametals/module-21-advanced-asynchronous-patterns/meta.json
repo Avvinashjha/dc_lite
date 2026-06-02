@@ -1,0 +1,24 @@
+{
+  "title": "Advanced Asynchronous Patterns",
+  "description": "Explore generators, async iterators, and observables.",
+  "lessons": [
+    {
+      "slug": "01-generators",
+      "title": "Generators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-async-iterators",
+      "title": "Async Iterators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-observables",
+      "title": "Observables (e.g. RxJS)",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "title": "Events",
+  "description": "Handle, propagate, and create browser events with full control.",
+  "lessons": [
+    {
+      "slug": "01-event-driven-programming",
+      "title": "Event-Driven Programming",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-different-events",
+      "title": "Different Types of Events",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-event-handling",
+      "title": "Event Handling",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-add-event-listener",
+      "title": "addEventListener",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-click-and-hover-handlers",
+      "title": "Click and Hover Handlers",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-custom-events",
+      "title": "Custom Events",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-event-bubbling",
+      "title": "Event Bubbling",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-event-capturing",
+      "title": "Event Capturing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-event-delegation",
+      "title": "Event Delegation",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-event-methods",
+      "title": "Event Methods (stopPropagation, stopImmediatePropagation, preventDefault)",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

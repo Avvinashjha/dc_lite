@@ -1,0 +1,36 @@
+{
+  "title": "Control Flow",
+  "description": "Control the execution of your programs with loops and branching statements.",
+  "lessons": [
+    {
+      "slug": "01-if-else",
+      "title": "if / else",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-for-loops",
+      "title": "for Loops",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-while-loops",
+      "title": "while Loops",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-switch-statement",
+      "title": "switch Statement",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-break-and-continue",
+      "title": "break and continue",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

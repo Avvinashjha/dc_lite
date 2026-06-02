@@ -1,0 +1,30 @@
+{
+  "title": "Design Patterns",
+  "description": "Solve common problems with established JavaScript design patterns.",
+  "lessons": [
+    {
+      "slug": "01-module-pattern",
+      "title": "Module Pattern",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-factory-pattern",
+      "title": "Factory Pattern",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-singleton-pattern",
+      "title": "Singleton Pattern",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-observer-pattern",
+      "title": "Observer Pattern",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

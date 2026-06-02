@@ -1,0 +1,36 @@
+{
+  "title": "Asynchronous Programming",
+  "description": "Handle non-blocking operations with callbacks and async/await.",
+  "lessons": [
+    {
+      "slug": "01-synchronous-vs-asynchronous",
+      "title": "Synchronous vs Asynchronous",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-callbacks",
+      "title": "Callbacks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-callback-hell",
+      "title": "Callback Hell",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-async-await",
+      "title": "async / await",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-error-handling-with-catch",
+      "title": "Error Handling with catch",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

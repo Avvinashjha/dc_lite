@@ -1,0 +1,86 @@
+{
+  "title": "Node.js Fundamentals",
+  "description": "Master backend development with Node.js — from the event loop and core modules to Express, databases, caching, TypeScript, and Docker.",
+  "author": "Your Name",
+  "level": "intermediate",
+  "duration": "12 hours",
+  "image": "/images/courses/nodejs.jpg",
+  "tags": [
+    "nodejs",
+    "backend",
+    "javascript",
+    "express",
+    "docker"
+  ],
+  "modules": [
+    {
+      "slug": "module-01-introduction",
+      "title": "Introduction to Node.js"
+    },
+    {
+      "slug": "module-02-event-loop-and-io",
+      "title": "The Event Loop and I/O"
+    },
+    {
+      "slug": "module-03-core-modules",
+      "title": "Core Modules"
+    },
+    {
+      "slug": "module-04-streams",
+      "title": "Streams and Streaming"
+    },
+    {
+      "slug": "module-05-npm-and-packages",
+      "title": "NPM and Package Management"
+    },
+    {
+      "slug": "module-06-express",
+      "title": "Express.js"
+    },
+    {
+      "slug": "module-07-rest-apis",
+      "title": "REST APIs, SSE and Webhooks"
+    },
+    {
+      "slug": "module-08-databases",
+      "title": "Databases with Node.js"
+    },
+    {
+      "slug": "module-09-auth-and-files",
+      "title": "Authentication, Security and File Uploads"
+    },
+    {
+      "slug": "module-10-caching",
+      "title": "Caching"
+    },
+    {
+      "slug": "module-11-typescript",
+      "title": "TypeScript with Node.js"
+    },
+    {
+      "slug": "module-12-docker",
+      "title": "Docker and Deployment"
+    },
+    {
+      "slug": "module-13-design-patterns",
+      "title": "Design Patterns"
+    },
+    {
+      "slug": "module-14-load-balancing-and-scaling",
+      "title": "Load Balancing and Scaling (Nginx)"
+    },
+    {
+      "slug": "module-15-authentication-concepts",
+      "title": "Authentication Concepts"
+    },
+    {
+      "slug": "module-16-api-optimization",
+      "title": "API Optimization Techniques"
+    }
+  ],
+  "certification": {
+    "expertTitle": "Node.js Fundamentals Expert",
+    "interviewRounds": 3
+  },
+  "draft": false
+}

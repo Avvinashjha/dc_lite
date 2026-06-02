@@ -1,0 +1,36 @@
+{
+  "title": "Testing",
+  "description": "Write tests to verify your code with popular testing frameworks.",
+  "lessons": [
+    {
+      "slug": "01-types-of-testing",
+      "title": "Types of Testing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-unit-testing",
+      "title": "Unit Testing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-integration-testing",
+      "title": "Integration Testing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-jest",
+      "title": "Jest",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-mocha",
+      "title": "Mocha",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

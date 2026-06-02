@@ -1,0 +1,36 @@
+{
+  "title": "Load Balancing and Scaling (Nginx)",
+  "description": "Scale Node.js apps to handle real traffic: horizontal scaling, reverse proxies, load balancing with Nginx, and clustering.",
+  "lessons": [
+    {
+      "slug": "01-scaling-horizontal-vs-vertical",
+      "title": "Scaling: Horizontal vs Vertical",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-introduction-to-load-balancing",
+      "title": "Introduction to Load Balancing",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-nginx-as-reverse-proxy",
+      "title": "Nginx as a Reverse Proxy",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-load-balancing-with-nginx",
+      "title": "Load Balancing with Nginx",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-clustering-and-pm2",
+      "title": "Clustering and PM2",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}
