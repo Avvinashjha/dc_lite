@@ -1,0 +1,42 @@
+{
+  "title": "Styling in React",
+  "description": "Learn the core concepts of Styling in React in React.",
+  "lessons": [
+    {
+      "slug": "01-styling-approaches",
+      "title": "Styling Approaches",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-css-modules",
+      "title": "CSS Modules",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-styled-components",
+      "title": "Styled Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-tailwind-css",
+      "title": "Tailwind CSS",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-bootstrap",
+      "title": "Bootstrap with React",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-theming-and-dark-mode",
+      "title": "Theming and Dark Mode",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

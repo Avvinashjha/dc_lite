@@ -1,0 +1,36 @@
+{
+  "title": "Forms and Controlled Components",
+  "description": "Learn the core concepts of Forms and Controlled Components in React.",
+  "lessons": [
+    {
+      "slug": "01-controlled-components",
+      "title": "Controlled Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-uncontrolled-components",
+      "title": "Uncontrolled Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-handling-multiple-inputs",
+      "title": "Handling Multiple Inputs",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-form-validation",
+      "title": "Form Validation",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-form-libraries",
+      "title": "Form Libraries",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

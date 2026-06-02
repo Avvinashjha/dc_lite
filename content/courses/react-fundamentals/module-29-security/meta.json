@@ -1,0 +1,36 @@
+{
+  "title": "Security",
+  "description": "Learn the core concepts of Security in React.",
+  "lessons": [
+    {
+      "slug": "01-common-vulnerabilities",
+      "title": "Common Vulnerabilities",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-preventing-xss",
+      "title": "Preventing XSS",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-csrf-protection",
+      "title": "CSRF Protection",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-secure-authentication",
+      "title": "Secure Authentication",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-dependency-security",
+      "title": "Dependency Security",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

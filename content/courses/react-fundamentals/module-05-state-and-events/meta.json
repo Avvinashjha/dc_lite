@@ -1,0 +1,42 @@
+{
+  "title": "State and Event Handling",
+  "description": "Learn the core concepts of State and Event Handling in React.",
+  "lessons": [
+    {
+      "slug": "01-understanding-state",
+      "title": "Understanding State",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-usestate-hook",
+      "title": "The useState Hook",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-handling-events",
+      "title": "Handling Events",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-updating-state",
+      "title": "Updating State Correctly",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-state-and-rerenders",
+      "title": "State and Re-renders",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-lifting-state-up",
+      "title": "Lifting State Up",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

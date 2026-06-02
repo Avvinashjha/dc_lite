@@ -1,0 +1,42 @@
+{
+  "title": "Performance Optimization",
+  "description": "Learn the core concepts of Performance Optimization in React.",
+  "lessons": [
+    {
+      "slug": "01-how-react-renders",
+      "title": "How React Renders",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-react-memo",
+      "title": "React.memo",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-usememo-and-usecallback",
+      "title": "useMemo and useCallback",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-code-splitting",
+      "title": "Code Splitting and Lazy Loading",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-list-virtualization",
+      "title": "List Virtualization",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-profiling",
+      "title": "Profiling with DevTools",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "TypeScript with React",
+  "description": "Learn the core concepts of TypeScript with React in React.",
+  "lessons": [
+    {
+      "slug": "01-why-typescript",
+      "title": "Why TypeScript with React",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-typing-props",
+      "title": "Typing Props",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-typing-state-and-hooks",
+      "title": "Typing State and Hooks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-typing-events",
+      "title": "Typing Events",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-generics-in-components",
+      "title": "Generics in Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-typing-context",
+      "title": "Typing Context",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

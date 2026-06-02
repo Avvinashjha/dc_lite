@@ -57,10 +57,17 @@ const courseStructure = {
 };
 
 function lessonIcon(type: string): string {
-  if (type === "video") return "▶";
-  if (type === "quiz") return "📝";
-  return "📄";
+  if (type === "video") {
+    return `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor" stroke="none"/></svg>`;
+  }
+  if (type === "quiz") {
+    return `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.2a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1.1.9-1.1 1.7"/><circle cx="12" cy="16.4" r="0.6" fill="currentColor" stroke="none"/></svg>`;
+  }
+  return `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="7" x2="19" y2="7"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="5" y1="17" x2="13" y2="17"/></svg>`;
 }
+
+const checkSvg = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>`;
+const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`;
 ---
 
 <BaseLayout
@@ -73,58 +80,93 @@ function lessonIcon(type: string): string {
     { label: lesson.title, href: Astro.url.pathname },
   ]}
 >
-  <div class="lesson-layout">
-    <!-- Sidebar -->
-    <aside class="lesson-sidebar">
-      <a href={`/courses/${course.slug}`} class="lesson-sidebar__back"
-        >&larr; {course.title}</a
-      >
+  <div class="lesson-layout lesson-layout--drawer-open" data-lesson-layout>
+    <!-- Drawer backdrop (mobile) -->
+    <div class="lesson-drawer-backdrop" data-drawer-backdrop></div>
+
+    <!-- Sidebar drawer -->
+    <aside class="lesson-sidebar" data-lesson-sidebar>
+      <div class="lesson-sidebar__head">
+        <a href={`/courses/${course.slug}`} class="lesson-sidebar__back">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+          <span>{course.title}</span>
+        </a>
+        <button
+          type="button"
+          class="lesson-sidebar__close"
+          data-drawer-close
+          aria-label="Close course contents"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
 
       <div class="lesson-progress" data-course-progress>
+        <div class="lesson-progress__meta">
+          <span class="lesson-progress__label">0% complete</span>
+        </div>
         <div class="lesson-progress__track">
           <span class="lesson-progress__fill" style="width: 0%"></span>
         </div>
-        <span class="lesson-progress__label">0% complete</span>
       </div>
 
-      {
-        course.resolvedModules.map((mod, modIdx) => (
-          <div
-            class="lesson-sidebar__module"
-            data-module-index={modIdx}
-            data-module-slug={mod.slug}
-          >
-            <h4 class="lesson-sidebar__module-title">
-              <span class="lesson-sidebar__lock" data-module-lock hidden>
-                🔒
-              </span>
-              <span>{mod.title}</span>
-            </h4>
-            <ul class="lesson-sidebar__lessons">
-              {mod.lessons.map((l) => (
-                <li>
-                  <a
-                    href={`/courses/${course.slug}/${mod.slug}/${l.slug}`}
-                    data-lesson-key={`${mod.slug}/${l.slug}`}
-                    class={`lesson-sidebar__link ${l.slug === lesson.slug && mod.slug === lesson.moduleSlug ? "lesson-sidebar__link--active" : ""}`}
-                  >
-                    <span class="lesson-sidebar__check" data-lesson-check hidden>
-                      ✓
-                    </span>
-                    <span class="lesson-sidebar__icon">{lessonIcon(l.type)}</span>
-                    <span class="lesson-sidebar__text">{l.title}</span>
-                    <span class="lesson-sidebar__duration">{l.duration}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
+      <nav class="lesson-sidebar__nav">
+        {
+          course.resolvedModules.map((mod, modIdx) => (
+            <div
+              class={`lesson-sidebar__module ${mod.slug === lesson.moduleSlug ? "" : "lesson-sidebar__module--collapsed"}`}
+              data-module-index={modIdx}
+              data-module-slug={mod.slug}
+            >
+              <button type="button" class="lesson-sidebar__module-header" data-module-toggle>
+                <span class="lesson-sidebar__chevron" set:html={chevronSvg} />
+                <span class="lesson-sidebar__module-num">{modIdx + 1}</span>
+                <span class="lesson-sidebar__module-title">{mod.title}</span>
+                <span class="lesson-sidebar__lock" data-module-lock hidden>
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                </span>
+                <span class="lesson-sidebar__module-count">{mod.lessons.length}</span>
+              </button>
+              <div class="lesson-sidebar__lessons-wrap">
+                <ul class="lesson-sidebar__lessons">
+                  {mod.lessons.map((l) => (
+                    <li>
+                      <a
+                        href={`/courses/${course.slug}/${mod.slug}/${l.slug}`}
+                        data-lesson-key={`${mod.slug}/${l.slug}`}
+                        class={`lesson-sidebar__link ${l.slug === lesson.slug && mod.slug === lesson.moduleSlug ? "lesson-sidebar__link--active" : ""}`}
+                      >
+                        <span class="lesson-sidebar__status">
+                          <span class="lesson-sidebar__check" data-lesson-check hidden set:html={checkSvg} />
+                          <span class="lesson-sidebar__icon" set:html={lessonIcon(l.type)} />
+                        </span>
+                        <span class="lesson-sidebar__text">{l.title}</span>
+                        <span class="lesson-sidebar__duration">{l.duration}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </nav>
     </aside>
 
     <!-- Content -->
     <article class="lesson-content">
+      <div class="lesson-topbar">
+        <button
+          type="button"
+          class="lesson-drawer-toggle"
+          data-drawer-toggle
+          aria-label="Toggle course contents"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          <span>Contents</span>
+        </button>
+      </div>
+
       <div class="lesson-content__header">
         <span class="tag" style="text-transform: capitalize;"
           >{lesson.type}</span
@@ -396,84 +438,406 @@ function lessonIcon(type: string): string {
   })();
 </script>
 
+<script is:inline>
+  (function () {
+    var layout = document.querySelector("[data-lesson-layout]");
+    if (!layout) return;
+    var desktopMq = window.matchMedia("(min-width: 1024px)");
+
+    function openDrawer() {
+      layout.classList.add("lesson-layout--drawer-open");
+    }
+    function closeDrawer() {
+      layout.classList.remove("lesson-layout--drawer-open");
+    }
+    function toggleDrawer() {
+      layout.classList.toggle("lesson-layout--drawer-open");
+    }
+
+    // Default state: open on desktop, closed on smaller screens.
+    if (desktopMq.matches) openDrawer();
+    else closeDrawer();
+
+    document.querySelectorAll("[data-drawer-toggle]").forEach(function (b) {
+      b.addEventListener("click", toggleDrawer);
+    });
+    document.querySelectorAll("[data-drawer-close]").forEach(function (b) {
+      b.addEventListener("click", closeDrawer);
+    });
+    var backdrop = layout.querySelector("[data-drawer-backdrop]");
+    if (backdrop) backdrop.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !desktopMq.matches) closeDrawer();
+    });
+
+    // Close the drawer after picking a lesson on small screens.
+    layout.querySelectorAll(".lesson-sidebar__link").forEach(function (a) {
+      a.addEventListener("click", function () {
+        if (!desktopMq.matches) closeDrawer();
+      });
+    });
+
+    // Accordion: collapse/expand a module section.
+    layout.querySelectorAll("[data-module-toggle]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var mod = btn.closest(".lesson-sidebar__module");
+        if (mod) mod.classList.toggle("lesson-sidebar__module--collapsed");
+      });
+    });
+  })();
+</script>
+
 <style>
   .lesson-layout {
-    display: flex;
+    position: relative;
     min-height: calc(100vh - 160px);
     max-width: 100vw;
     overflow-x: hidden;
+    transition: padding-left var(--transition-base);
   }
+
+  /* ---------- Drawer ---------- */
   .lesson-sidebar {
-    width: 280px;
-    flex-shrink: 0;
+    position: fixed;
+    top: 52px;
+    left: 0;
+    bottom: 0;
+    width: 312px;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
     background: var(--color-surface);
     border-right: 1px solid var(--color-border);
-    padding: var(--spacing-lg);
-    overflow-y: auto;
-    position: sticky;
-    top: 52px;
-    height: calc(100vh - 52px);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    overflow: hidden;
+  }
+  .lesson-layout--drawer-open .lesson-sidebar {
+    transform: translateX(0);
+  }
+
+  .lesson-drawer-backdrop {
+    position: fixed;
+    inset: 52px 0 0 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-base), visibility var(--transition-base);
+    z-index: 55;
+  }
+  .lesson-layout--drawer-open .lesson-drawer-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Drawer header */
+  .lesson-sidebar__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
   }
   .lesson-sidebar__back {
-    display: block;
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-text-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-text);
     font-size: 0.85rem;
+    font-weight: 600;
+    min-width: 0;
+    line-height: 1.2;
+  }
+  .lesson-sidebar__back span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lesson-sidebar__back svg {
+    flex-shrink: 0;
+    color: var(--color-text-light);
+    transition: transform var(--transition-fast);
   }
   .lesson-sidebar__back:hover {
     color: var(--color-primary);
     text-decoration: none;
   }
+  .lesson-sidebar__back:hover svg {
+    transform: translateX(-2px);
+    color: var(--color-primary);
+  }
+  .lesson-sidebar__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+  .lesson-sidebar__close:hover {
+    background: color-mix(in oklab, var(--color-text) 8%, transparent);
+    color: var(--color-text);
+  }
+
+  .lesson-sidebar__nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-xl);
+  }
+
+  /* ---------- Progress ---------- */
+  .lesson-progress {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .lesson-progress__meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.45rem;
+  }
+  .lesson-progress__label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    letter-spacing: 0.02em;
+  }
+  .lesson-progress__track {
+    height: 6px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-text) 10%, transparent);
+    overflow: hidden;
+  }
+  .lesson-progress__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-primary), color-mix(in oklab, var(--color-primary) 55%, #22d3ee));
+    transition: width var(--transition-slow) ease;
+  }
+
+  /* ---------- Module accordion ---------- */
   .lesson-sidebar__module {
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 0.25rem;
+  }
+  .lesson-sidebar__module-header {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+    padding: 0.6rem 0.65rem;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+  .lesson-sidebar__module-header:hover {
+    background: color-mix(in oklab, var(--color-text) 5%, transparent);
+  }
+  .lesson-sidebar__chevron {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: var(--color-text-light);
+    transform: rotate(90deg);
+    transition: transform var(--transition-fast);
+  }
+  .lesson-sidebar__module--collapsed .lesson-sidebar__chevron {
+    transform: rotate(0deg);
+  }
+  .lesson-sidebar__module-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: color-mix(in oklab, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
   }
   .lesson-sidebar__module-title {
-    font-size: 0.75rem;
-    text-transform: uppercase;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lesson-sidebar__lock {
+    display: inline-flex;
+    flex-shrink: 0;
     color: var(--color-text-light);
-    letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+  }
+  .lesson-sidebar__module-count {
+    flex-shrink: 0;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    background: color-mix(in oklab, var(--color-text) 7%, transparent);
+    padding: 0.05rem 0.45rem;
+    border-radius: 999px;
+  }
+  .lesson-sidebar__module--locked .lesson-sidebar__module-num {
+    background: color-mix(in oklab, var(--color-text) 7%, transparent);
+    color: var(--color-text-light);
+  }
+
+  /* Collapsible body */
+  .lesson-sidebar__lessons-wrap {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows var(--transition-base);
+  }
+  .lesson-sidebar__module--collapsed .lesson-sidebar__lessons-wrap {
+    grid-template-rows: 0fr;
   }
   .lesson-sidebar__lessons {
     list-style: none;
-    padding: 0;
+    padding: 0.15rem 0 0.35rem;
     margin: 0;
+    min-height: 0;
+    overflow: hidden;
   }
+  .lesson-sidebar__lessons li {
+    position: relative;
+    margin-bottom: 1px;
+  }
+
+  /* ---------- Lesson links ---------- */
   .lesson-sidebar__link {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.6rem;
+    gap: 0.55rem;
+    padding: 0.5rem 0.65rem 0.5rem 0.5rem;
+    margin-left: 1.05rem;
     border-radius: var(--radius-md);
     font-size: 0.8rem;
     color: var(--color-text);
     text-decoration: none;
-    transition: all var(--transition-fast);
+    transition: background var(--transition-fast), color var(--transition-fast);
   }
   .lesson-sidebar__link:hover {
-    background: var(--color-code-bg);
+    background: color-mix(in oklab, var(--color-text) 6%, transparent);
     text-decoration: none;
   }
   .lesson-sidebar__link--active {
-    background: var(--color-primary);
-    color: white;
+    background: color-mix(in oklab, var(--color-primary) 14%, transparent);
+    color: var(--color-primary);
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--color-primary);
   }
   .lesson-sidebar__link--active:hover {
-    background: var(--color-primary-dark);
+    background: color-mix(in oklab, var(--color-primary) 18%, transparent);
+  }
+
+  /* Status indicator (icon swaps to check when done) */
+  .lesson-sidebar__status {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-light);
+    background: var(--color-background);
+  }
+  .lesson-sidebar__link--active .lesson-sidebar__status {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .lesson-sidebar__icon {
+    display: inline-flex;
+  }
+  .lesson-sidebar__check {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .lesson-sidebar__link--done .lesson-sidebar__status {
+    background: var(--color-success, #16a34a);
+    border-color: var(--color-success, #16a34a);
+    color: #fff;
+  }
+  .lesson-sidebar__link--done .lesson-sidebar__icon {
+    display: none;
+  }
+  .lesson-sidebar__link--done[class] .lesson-sidebar__check {
+    display: inline-flex;
+  }
+  .lesson-sidebar__link--done:not(.lesson-sidebar__link--active) {
+    color: var(--color-text-light);
+  }
+  .lesson-sidebar__text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .lesson-sidebar__duration {
     margin-left: auto;
-    font-size: 0.7rem;
-    opacity: 0.7;
+    flex-shrink: 0;
+    font-size: 0.68rem;
+    color: var(--color-text-light);
     white-space: nowrap;
   }
+  .lesson-sidebar__link--locked {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* ---------- Content ---------- */
   .lesson-content {
-    flex: 1;
-    padding: var(--spacing-2xl);
-    max-width: var(--content-max-width);
+    padding: var(--spacing-xl) var(--spacing-2xl) var(--spacing-2xl);
+    max-width: 860px;
     margin: 0 auto;
     min-width: 0;
     overflow-x: hidden;
+  }
+  .lesson-topbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+  .lesson-drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  }
+  .lesson-drawer-toggle:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
   }
   .lesson-content__header {
     display: flex;
@@ -498,66 +862,14 @@ function lessonIcon(type: string): string {
     white-space: nowrap;
   }
 
-  /* Progress bar */
-  .lesson-progress {
-    margin-bottom: var(--spacing-lg);
-  }
-  .lesson-progress__track {
-    height: 6px;
-    border-radius: 999px;
-    background: var(--color-border);
-    overflow: hidden;
-  }
-  .lesson-progress__fill {
-    display: block;
-    height: 100%;
-    width: 0;
-    background: var(--color-primary);
-    border-radius: 999px;
-    transition: width var(--transition-base, 0.25s) ease;
-  }
-  .lesson-progress__label {
-    display: block;
-    margin-top: 0.35rem;
-    font-size: 0.7rem;
-    color: var(--color-text-light);
-  }
-
-  /* Sidebar links: icon / text / check / lock */
-  .lesson-sidebar__icon {
-    flex-shrink: 0;
-  }
-  .lesson-sidebar__text {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .lesson-sidebar__check {
-    flex-shrink: 0;
-    color: var(--color-success, #16a34a);
-    font-weight: 700;
-  }
-  .lesson-sidebar__link--active .lesson-sidebar__check {
-    color: #fff;
-  }
-  .lesson-sidebar__link--done:not(.lesson-sidebar__link--active) {
-    color: var(--color-text-light);
-  }
-  .lesson-sidebar__module-title {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-  .lesson-sidebar__lock {
-    font-size: 0.7rem;
-  }
-  .lesson-sidebar__module--locked .lesson-sidebar__module-title {
-    color: var(--color-text-light);
-  }
-  .lesson-sidebar__link--locked {
-    opacity: 0.5;
+  /* Desktop: drawer docks open, pushing content aside */
+  @media (min-width: 1024px) {
+    .lesson-layout--drawer-open {
+      padding-left: 312px;
+    }
+    .lesson-layout--drawer-open .lesson-drawer-backdrop {
+      display: none;
+    }
   }
 
   /* Completion controls */
@@ -614,26 +926,19 @@ function lessonIcon(type: string): string {
     margin-bottom: var(--spacing-lg);
   }
 
-  /* Mobile: hide sidebar, show toggle */
-  @media (max-width: 900px) {
-    .lesson-layout {
-      flex-direction: column;
-    }
-    .lesson-sidebar {
-      width: 100%;
-      position: static;
-      height: auto;
-      border-right: none;
-      border-bottom: 1px solid var(--color-border);
-      padding: var(--spacing-md) var(--spacing-lg);
-      max-height: 50vh;
-      overflow-y: auto;
-    }
+  /* Tablet / mobile: drawer overlays content */
+  @media (max-width: 1023px) {
     .lesson-content {
       padding: var(--spacing-lg);
       width: 100%;
       max-width: 100%;
       overflow-x: hidden;
+    }
+  }
+  @media (max-width: 640px) {
+    .lesson-sidebar {
+      width: 86vw;
+      max-width: 340px;
     }
     .lesson-nav {
       flex-direction: column;
@@ -642,6 +947,16 @@ function lessonIcon(type: string): string {
     .lesson-nav .button {
       max-width: 100%;
       text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lesson-sidebar,
+    .lesson-layout,
+    .lesson-sidebar__lessons-wrap,
+    .lesson-drawer-backdrop,
+    .lesson-progress__fill {
+      transition: none;
     }
   }
 </style>

@@ -1,0 +1,48 @@
+{
+  "title": "Routing with React Router",
+  "description": "Learn the core concepts of Routing with React Router in React.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-routing",
+      "title": "Introduction to Routing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-setting-up-routes",
+      "title": "Setting Up Routes",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-navigation-and-links",
+      "title": "Navigation and Links",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-route-parameters",
+      "title": "Route Parameters",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-nested-routes",
+      "title": "Nested Routes",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-programmatic-navigation",
+      "title": "Programmatic Navigation",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-protected-routes",
+      "title": "Protected Routes",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

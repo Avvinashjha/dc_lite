@@ -1,0 +1,42 @@
+{
+  "title": "Accessibility",
+  "description": "Learn the core concepts of Accessibility in React.",
+  "lessons": [
+    {
+      "slug": "01-why-accessibility-matters",
+      "title": "Why Accessibility Matters",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-semantic-html",
+      "title": "Semantic HTML",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-aria-attributes",
+      "title": "ARIA Attributes",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-keyboard-navigation",
+      "title": "Keyboard Navigation",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-accessible-forms",
+      "title": "Accessible Forms",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-testing-accessibility",
+      "title": "Testing Accessibility",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

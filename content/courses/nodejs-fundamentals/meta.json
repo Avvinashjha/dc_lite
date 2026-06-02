@@ -1,7 +1,7 @@
 {
   "title": "Node.js Fundamentals",
   "description": "Master backend development with Node.js — from the event loop and core modules to Express, databases, caching, TypeScript, and Docker.",
-  "author": "Your Name",
+  "author": "Avinash Jha",
   "level": "intermediate",
   "duration": "12 hours",
   "image": "/images/courses/nodejs.jpg",

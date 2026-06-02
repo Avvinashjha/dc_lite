@@ -1,0 +1,30 @@
+{
+  "title": "Project Based Learning",
+  "description": "Learn the core concepts of Project Based Learning in React.",
+  "lessons": [
+    {
+      "slug": "01-todo-app",
+      "title": "Building a Todo App",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-weather-dashboard",
+      "title": "Weather Dashboard",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-ecommerce-cart",
+      "title": "E-Commerce Cart",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-full-stack-app",
+      "title": "Full-Stack App",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

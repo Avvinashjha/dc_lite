@@ -1,0 +1,18 @@
+{
+  "title": "Certification",
+  "description": "Learn the core concepts of Certification in React.",
+  "lessons": [
+    {
+      "slug": "01-certification-overview",
+      "title": "Certification Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-final-assessment",
+      "title": "Final Assessment",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "React Internals and Fiber",
+  "description": "Learn the core concepts of React Internals and Fiber in React.",
+  "lessons": [
+    {
+      "slug": "01-react-architecture",
+      "title": "React Architecture",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-the-fiber-reconciler",
+      "title": "The Fiber Reconciler",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-render-and-commit-phases",
+      "title": "Render and Commit Phases",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-concurrent-rendering",
+      "title": "Concurrent Rendering",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-batching-and-scheduling",
+      "title": "Batching and Scheduling",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}
