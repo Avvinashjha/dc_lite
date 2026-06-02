@@ -1,0 +1,36 @@
+{
+  "title": "Interview Questions",
+  "description": "Learn the core concepts of Interview Questions in React.",
+  "lessons": [
+    {
+      "slug": "01-core-concept-questions",
+      "title": "Core Concept Questions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-hooks-questions",
+      "title": "Hooks Questions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-performance-questions",
+      "title": "Performance Questions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-coding-challenges",
+      "title": "Coding Challenges",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-system-design-questions",
+      "title": "System Design Questions",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

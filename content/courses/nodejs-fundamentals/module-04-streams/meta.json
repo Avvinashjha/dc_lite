@@ -1,0 +1,30 @@
+{
+  "title": "Streams and Streaming",
+  "description": "Process data piece by piece with streams: readable, writable, pipes, and real-world streaming.",
+  "lessons": [
+    {
+      "slug": "01-what-are-streams",
+      "title": "What are Streams?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-readable-and-writable-streams",
+      "title": "Readable and Writable Streams",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-pipes-and-chaining",
+      "title": "Pipes and Chaining",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-streaming-in-practice",
+      "title": "Streaming in Practice",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

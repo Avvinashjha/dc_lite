@@ -1,0 +1,42 @@
+{
+  "title": "Tooling and Build Systems",
+  "description": "Learn the core concepts of Tooling and Build Systems in React.",
+  "lessons": [
+    {
+      "slug": "01-build-tools-overview",
+      "title": "Build Tools Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-vite",
+      "title": "Vite",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-webpack",
+      "title": "Webpack",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-babel",
+      "title": "Babel",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-eslint-and-prettier",
+      "title": "ESLint and Prettier",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-environment-variables",
+      "title": "Environment Variables",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

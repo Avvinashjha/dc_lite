@@ -1,0 +1,42 @@
+{
+  "title": "System Design for React Apps",
+  "description": "Learn the core concepts of System Design for React Apps in React.",
+  "lessons": [
+    {
+      "slug": "01-frontend-system-design",
+      "title": "Frontend System Design",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-component-design-at-scale",
+      "title": "Component Design at Scale",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-state-management-at-scale",
+      "title": "State Management at Scale",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-performance-at-scale",
+      "title": "Performance at Scale",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-micro-frontends",
+      "title": "Micro Frontends",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-building-a-design-system",
+      "title": "Building a Design System",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

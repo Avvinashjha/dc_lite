@@ -1,0 +1,48 @@
+{
+  "title": "State Management",
+  "description": "Learn the core concepts of State Management in React.",
+  "lessons": [
+    {
+      "slug": "01-state-management-overview",
+      "title": "State Management Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-context-vs-redux",
+      "title": "Context vs Redux",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-redux-fundamentals",
+      "title": "Redux Fundamentals",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-redux-toolkit",
+      "title": "Redux Toolkit",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-zustand",
+      "title": "Zustand",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-recoil-and-jotai",
+      "title": "Recoil and Jotai",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-choosing-a-solution",
+      "title": "Choosing a Solution",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

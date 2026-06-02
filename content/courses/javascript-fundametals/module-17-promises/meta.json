@@ -1,0 +1,36 @@
+{
+  "title": "Promises",
+  "description": "Manage asynchronous results with promises and chaining.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-promises",
+      "title": "Introduction to Promises",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-creating-a-promise",
+      "title": "Creating a Promise",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-then-catch-finally",
+      "title": "then, catch, and finally",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-promise-chaining",
+      "title": "Promise Chaining",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-promise-combinators",
+      "title": "Promise.all, race, allSettled, and any",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

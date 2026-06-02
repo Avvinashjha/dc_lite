@@ -1,0 +1,30 @@
+{
+  "title": "The Event Loop and I/O",
+  "description": "Learn how Node.js stays fast with a single thread: async vs sync, the event loop phases, and non-blocking I/O.",
+  "lessons": [
+    {
+      "slug": "01-synchronous-vs-asynchronous",
+      "title": "Synchronous vs Asynchronous",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-the-event-loop",
+      "title": "The Event Loop Explained",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-blocking-vs-non-blocking-io",
+      "title": "Blocking vs Non-blocking I/O",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-timers-and-phases",
+      "title": "Timers, nextTick and setImmediate",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

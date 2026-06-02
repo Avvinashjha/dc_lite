@@ -1,0 +1,30 @@
+{
+  "title": "Debugging",
+  "description": "Find and fix bugs efficiently using developer tools and techniques.",
+  "lessons": [
+    {
+      "slug": "01-console-methods",
+      "title": "Console Methods",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-browser-devtools",
+      "title": "Browser DevTools",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-breakpoints-and-stepping",
+      "title": "Breakpoints and Stepping",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-debugging-common-errors",
+      "title": "Debugging Common Errors",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

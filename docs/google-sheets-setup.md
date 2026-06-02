@@ -117,6 +117,16 @@ Accepted truthy values for `roundN` / `certified`: `TRUE`, `true`, `1`, `yes`, `
 5. Paste it into the Apps Script editor.
 6. Click **Save** (Ctrl+S / Cmd+S).
 
+### (Recommended) Create all tabs at once
+
+Instead of creating tabs by hand, you can create every tab (with headers) in one step:
+
+1. In the Apps Script editor's function dropdown (top toolbar), select **`setupSheets`**.
+2. Click **Run** and authorize if prompted.
+3. All tabs — including `course_certifications`, `quiz_scores`, and `community_quizzes` — are created with their header rows. Re-running is safe; existing tabs are left untouched.
+
+> Most tabs are also auto-created on first write. The exceptions are read-only tabs the app never writes to — notably **`course_certifications`** — so running `setupSheets` (or creating it manually) is required before you can issue certificates.
+
 ---
 
 ## Step 4: Deploy as Web App

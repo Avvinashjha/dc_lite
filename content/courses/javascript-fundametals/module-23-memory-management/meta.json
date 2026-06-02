@@ -1,0 +1,24 @@
+{
+  "title": "Memory Management",
+  "description": "Understand garbage collection and avoid memory leaks.",
+  "lessons": [
+    {
+      "slug": "01-garbage-collection",
+      "title": "Garbage Collection",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-avoiding-memory-leaks",
+      "title": "Avoiding Memory Leaks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-weak-references",
+      "title": "Weak References (WeakMap)",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "Context API",
+  "description": "Learn the core concepts of Context API in React.",
+  "lessons": [
+    {
+      "slug": "01-prop-drilling",
+      "title": "The Prop Drilling Problem",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-creating-context",
+      "title": "Creating Context",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-provider-and-consumer",
+      "title": "Provider and Consumer",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-usecontext-hook",
+      "title": "Using useContext",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-context-best-practices",
+      "title": "Context Best Practices",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

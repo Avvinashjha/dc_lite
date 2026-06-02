@@ -1,0 +1,36 @@
+{
+  "title": "The Event Loop",
+  "description": "Understand how the JavaScript engine schedules and runs your code.",
+  "lessons": [
+    {
+      "slug": "01-javascript-engine-and-runtime",
+      "title": "JavaScript Engine and Runtime",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-the-call-stack",
+      "title": "The Call Stack",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-microtasks",
+      "title": "Microtasks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-macrotasks",
+      "title": "Macrotasks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-concurrency-model",
+      "title": "Concurrency Model",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

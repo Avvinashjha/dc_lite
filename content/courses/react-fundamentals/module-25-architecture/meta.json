@@ -1,0 +1,42 @@
+{
+  "title": "Architecture and Design Patterns",
+  "description": "Learn the core concepts of Architecture and Design Patterns in React.",
+  "lessons": [
+    {
+      "slug": "01-project-structure",
+      "title": "Project Structure",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-feature-based-architecture",
+      "title": "Feature-Based Architecture",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-separation-of-concerns",
+      "title": "Separation of Concerns",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-common-design-patterns",
+      "title": "Common Design Patterns",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-scalable-state-architecture",
+      "title": "Scalable State Architecture",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-error-boundaries",
+      "title": "Error Boundaries",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

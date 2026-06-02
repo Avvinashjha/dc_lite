@@ -1,11 +1,15 @@
 {
   "title": "React Fundamentals",
   "description": "Learn React from scratch with hands-on projects and real-world examples",
-  "author": "Your Name",
+  "author": "Avinash Jha",
   "level": "beginner",
   "duration": "4 hours",
   "image": "/images/courses/react.jpg",
-  "tags": ["react", "javascript", "frontend"],
+  "tags": [
+    "react",
+    "javascript",
+    "frontend"
+  ],
   "modules": [
     {
       "slug": "module-01-introduction",
@@ -14,6 +18,130 @@
     {
       "slug": "module-02-components",
       "title": "Components and Props"
+    },
+    {
+      "slug": "module-03-jsx",
+      "title": "JSX Deep Dive"
+    },
+    {
+      "slug": "module-04-rendering",
+      "title": "Rendering and the Virtual DOM"
+    },
+    {
+      "slug": "module-05-state-and-events",
+      "title": "State and Event Handling"
+    },
+    {
+      "slug": "module-06-forms",
+      "title": "Forms and Controlled Components"
+    },
+    {
+      "slug": "module-07-hooks",
+      "title": "React Hooks"
+    },
+    {
+      "slug": "module-08-custom-hooks",
+      "title": "Custom Hooks"
+    },
+    {
+      "slug": "module-09-effects-and-lifecycle",
+      "title": "Effects and Lifecycle"
+    },
+    {
+      "slug": "module-10-context-api",
+      "title": "Context API"
+    },
+    {
+      "slug": "module-11-refs-and-dom",
+      "title": "Refs and the DOM"
+    },
+    {
+      "slug": "module-12-class-components",
+      "title": "Class Components"
+    },
+    {
+      "slug": "module-13-component-patterns",
+      "title": "Component Patterns"
+    },
+    {
+      "slug": "module-14-performance-optimization",
+      "title": "Performance Optimization"
+    },
+    {
+      "slug": "module-15-react-router",
+      "title": "Routing with React Router"
+    },
+    {
+      "slug": "module-16-state-management",
+      "title": "State Management"
+    },
+    {
+      "slug": "module-17-data-fetching",
+      "title": "Data Fetching"
+    },
+    {
+      "slug": "module-18-styling",
+      "title": "Styling in React"
+    },
+    {
+      "slug": "module-19-typescript",
+      "title": "TypeScript with React"
+    },
+    {
+      "slug": "module-20-testing",
+      "title": "Testing React Applications"
+    },
+    {
+      "slug": "module-21-react-internals",
+      "title": "React Internals and Fiber"
+    },
+    {
+      "slug": "module-22-server-side-rendering",
+      "title": "Server-Side Rendering and Server Components"
+    },
+    {
+      "slug": "module-23-backend-integration",
+      "title": "Backend Integration"
+    },
+    {
+      "slug": "module-24-graphql",
+      "title": "GraphQL with React"
+    },
+    {
+      "slug": "module-25-architecture",
+      "title": "Architecture and Design Patterns"
+    },
+    {
+      "slug": "module-26-tooling",
+      "title": "Tooling and Build Systems"
+    },
+    {
+      "slug": "module-27-system-design",
+      "title": "System Design for React Apps"
+    },
+    {
+      "slug": "module-28-accessibility",
+      "title": "Accessibility"
+    },
+    {
+      "slug": "module-29-security",
+      "title": "Security"
+    },
+    {
+      "slug": "module-30-deployment",
+      "title": "Deployment"
+    },
+    {
+      "slug": "module-31-project-based-learning",
+      "title": "Project Based Learning"
+    },
+    {
+      "slug": "module-32-interview-questions",
+      "title": "Interview Questions"
+    },
+    {
+      "slug": "module-33-certification",
+      "title": "Certification"
     }
   ],
   "certification": {

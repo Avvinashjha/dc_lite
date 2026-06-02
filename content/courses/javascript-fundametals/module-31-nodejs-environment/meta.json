@@ -1,0 +1,36 @@
+{
+  "title": "Node.js Environment",
+  "description": "Run JavaScript outside the browser with Node.js.",
+  "lessons": [
+    {
+      "slug": "01-what-is-nodejs",
+      "title": "What Is Node.js?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-running-javascript-with-node",
+      "title": "Running JavaScript with Node",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-modules-in-node",
+      "title": "Modules in Node (CommonJS vs ESM)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-npm-and-packages",
+      "title": "npm and Packages",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-working-with-the-file-system",
+      "title": "Working with the File System",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

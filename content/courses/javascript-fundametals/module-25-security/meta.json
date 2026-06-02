@@ -1,0 +1,24 @@
+{
+  "title": "Security",
+  "description": "Protect your applications from common web security threats.",
+  "lessons": [
+    {
+      "slug": "01-preventing-xss",
+      "title": "Preventing XSS",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-preventing-csrf",
+      "title": "Preventing CSRF",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-sanitizing-input",
+      "title": "Sanitizing Input",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

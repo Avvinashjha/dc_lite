@@ -1,0 +1,42 @@
+{
+  "title": "Classes and Inheritance",
+  "description": "Use ES6 classes, inheritance, and static members for object-oriented code.",
+  "lessons": [
+    {
+      "slug": "01-class-syntax",
+      "title": "Class Syntax",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-constructors",
+      "title": "Constructors",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-methods",
+      "title": "Methods",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-inheritance-with-extends",
+      "title": "Inheritance with extends",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-static-methods",
+      "title": "Static Methods",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-getters-and-setters",
+      "title": "Getters and Setters",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

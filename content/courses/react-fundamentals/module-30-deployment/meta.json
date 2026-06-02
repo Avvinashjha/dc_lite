@@ -1,0 +1,42 @@
+{
+  "title": "Deployment",
+  "description": "Learn the core concepts of Deployment in React.",
+  "lessons": [
+    {
+      "slug": "01-building-for-production",
+      "title": "Building for Production",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-git-and-version-control",
+      "title": "Git and Version Control",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-dockerizing-react-apps",
+      "title": "Dockerizing React Apps",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-deploying-to-netlify",
+      "title": "Deploying to Netlify",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-deploying-to-vercel",
+      "title": "Deploying to Vercel",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-ci-cd-pipelines",
+      "title": "CI/CD Pipelines",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "title": "Certification",
+  "description": "Complete the final assessment and earn your certificate.",
+  "lessons": [
+    {
+      "slug": "01-final-assessment",
+      "title": "Final Assessment",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-getting-certified",
+      "title": "Getting Certified",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

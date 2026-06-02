@@ -1,0 +1,1 @@
+# Global vs Function Scope

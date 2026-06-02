@@ -1,0 +1,36 @@
+{
+  "title": "Introduction to Node.js",
+  "description": "Understand what Node.js is, why it exists, how to install it, and how to run your first program.",
+  "lessons": [
+    {
+      "slug": "01-what-is-nodejs",
+      "title": "What is Node.js?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-why-nodejs-and-use-cases",
+      "title": "Why Node.js? Use Cases",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-installing-nodejs",
+      "title": "Installing Node.js",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-repl-and-running-scripts",
+      "title": "The REPL and Running Scripts",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-the-module-system",
+      "title": "The Module System (CommonJS vs ESM)",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "title": "Authentication Concepts",
+  "description": "Understand the building blocks of identity and access: encryption vs hashing, sessions vs tokens, JWT, OAuth2, and SSO.",
+  "lessons": [
+    {
+      "slug": "01-encryption-vs-hashing",
+      "title": "Encryption vs Hashing",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-sessions-vs-tokens",
+      "title": "Sessions vs Tokens",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-jwt-deep-dive",
+      "title": "JWT Deep Dive",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-oauth2-and-openid-connect",
+      "title": "OAuth2 and OpenID Connect",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-single-sign-on-sso",
+      "title": "Single Sign-On (SSO)",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

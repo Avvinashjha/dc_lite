@@ -1,0 +1,36 @@
+{
+  "title": "Component Patterns",
+  "description": "Learn the core concepts of Component Patterns in React.",
+  "lessons": [
+    {
+      "slug": "01-composition-vs-inheritance",
+      "title": "Composition vs Inheritance",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-higher-order-components",
+      "title": "Higher-Order Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-render-props",
+      "title": "Render Props",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-compound-components",
+      "title": "Compound Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-container-presentational",
+      "title": "Container and Presentational Components",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

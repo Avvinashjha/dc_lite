@@ -1,0 +1,36 @@
+{
+  "title": "Rendering and the Virtual DOM",
+  "description": "Learn the core concepts of Rendering and the Virtual DOM in React.",
+  "lessons": [
+    {
+      "slug": "01-rendering-elements",
+      "title": "Rendering Elements",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-virtual-dom",
+      "title": "The Virtual DOM",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-reconciliation",
+      "title": "Reconciliation and Diffing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-keys-and-lists",
+      "title": "Keys and Lists",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-conditional-rendering",
+      "title": "Conditional Rendering",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

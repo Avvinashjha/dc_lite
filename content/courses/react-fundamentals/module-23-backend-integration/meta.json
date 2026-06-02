@@ -1,0 +1,42 @@
+{
+  "title": "Backend Integration",
+  "description": "Learn the core concepts of Backend Integration in React.",
+  "lessons": [
+    {
+      "slug": "01-connecting-to-apis",
+      "title": "Connecting to APIs",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-rest-integration",
+      "title": "REST Integration",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-authentication-flows",
+      "title": "Authentication Flows",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-handling-tokens-and-sessions",
+      "title": "Handling Tokens and Sessions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-real-time-with-websockets",
+      "title": "Real-Time with WebSockets",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-file-uploads",
+      "title": "File Uploads",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

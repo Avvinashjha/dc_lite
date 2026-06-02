@@ -95,6 +95,25 @@ function slugify(value) {
     .replace(/-{2,}/g, '-');
 }
 
+/**
+ * One-time setup: creates every tab this backend uses (with headers) if it
+ * doesn't already exist. Run this once from the Apps Script editor
+ * (select `setupSheets` in the function dropdown, then click Run).
+ *
+ * Safe to re-run: existing tabs are left untouched.
+ */
+function setupSheets() {
+  getOrCreateSheet('subscribers', ['id', 'email', 'source', 'timestamp']);
+  getOrCreateSheet('comments', ['id', 'postSlug', 'postTitle', 'name', 'email', 'comment', 'timestamp', 'uid']);
+  getOrCreateSheet('user_progress', ['uid', 'type', 'slug', 'data', 'updatedAt', 'createdAt']);
+  getOrCreateSheet('user_enrollments', ['uid', 'courseSlug', 'enrolledAt', 'lastLesson', 'lastLessonAt', 'updatedAt', 'createdAt']);
+  getOrCreateSheet('problem_discussions', ['slug', 'name', 'message', 'uid', 'ts', 'timestamp']);
+  getOrCreateSheet('community_quizzes', ['slug', 'title', 'category', 'difficulty', 'author', 'uid', 'quizJson', 'createdAt']);
+  getOrCreateSheet('quiz_scores', ['quizSlug', 'uid', 'displayName', 'score', 'maxScore', 'timeSec', 'completedAt', 'createdAt']);
+  getOrCreateSheet('course_certifications', ['uid', 'courseSlug', 'displayName', 'round1', 'round2', 'round3', 'certified', 'certifiedAt', 'certId', 'notes']);
+  return 'Sheets ready';
+}
+
 // ─── GET handler ───────────────────────────────────────────────────────────
 
 function doGet(e) {

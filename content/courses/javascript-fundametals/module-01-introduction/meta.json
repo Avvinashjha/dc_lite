@@ -1,0 +1,42 @@
+{
+  "title": "Introduction to JavaScript",
+  "description": "Understand what JavaScript is, where it runs, and write your first script.",
+  "lessons": [
+    {
+      "slug": "01-what-is-javascript",
+      "title": "What is JavaScript?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-history-of-javascript",
+      "title": "History of JavaScript",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-how-javascript-runs",
+      "title": "How JavaScript Runs",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-setting-up-your-environment",
+      "title": "Setting Up Your Environment",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-your-first-script",
+      "title": "Your First Script",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-javascript-syntax-basics",
+      "title": "JavaScript Syntax Basics",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

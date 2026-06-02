@@ -1,0 +1,24 @@
+{
+  "title": "Databases with Node.js",
+  "description": "Connect Node.js to relational and NoSQL databases: SQLite, MySQL, and MongoDB.",
+  "lessons": [
+    {
+      "slug": "01-sqlite-and-nodejs",
+      "title": "SQLite and Node.js",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-mysql-and-nodejs",
+      "title": "MySQL and Node.js",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-mongodb-and-nodejs",
+      "title": "MongoDB and Node.js",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

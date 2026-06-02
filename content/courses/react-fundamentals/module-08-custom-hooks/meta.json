@@ -1,0 +1,30 @@
+{
+  "title": "Custom Hooks",
+  "description": "Learn the core concepts of Custom Hooks in React.",
+  "lessons": [
+    {
+      "slug": "01-why-custom-hooks",
+      "title": "Why Custom Hooks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-creating-custom-hooks",
+      "title": "Creating Custom Hooks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-reusing-stateful-logic",
+      "title": "Reusing Stateful Logic",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-common-custom-hooks",
+      "title": "Common Custom Hooks",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

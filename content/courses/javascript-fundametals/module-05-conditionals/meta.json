@@ -1,0 +1,36 @@
+{
+  "title": "Conditionals",
+  "description": "Write expressive conditional logic with operators and modern syntax.",
+  "lessons": [
+    {
+      "slug": "01-ternary-operator",
+      "title": "Ternary Operator",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-truthy-and-falsy-values",
+      "title": "Truthy and Falsy Values",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-logical-short-circuiting",
+      "title": "Logical Short-Circuiting",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-nullish-coalescing",
+      "title": "Nullish Coalescing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-optional-chaining",
+      "title": "Optional Chaining",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

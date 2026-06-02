@@ -1,0 +1,36 @@
+{
+  "title": "The this Keyword",
+  "description": "Master how this is determined and how to control execution context.",
+  "lessons": [
+    {
+      "slug": "01-understanding-this",
+      "title": "Understanding this",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-context-binding",
+      "title": "Context Binding",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-bind",
+      "title": "bind()",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-call",
+      "title": "call()",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-apply",
+      "title": "apply()",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

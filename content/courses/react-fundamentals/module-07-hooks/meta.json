@@ -1,0 +1,60 @@
+{
+  "title": "React Hooks",
+  "description": "Learn the core concepts of React Hooks in React.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-hooks",
+      "title": "Introduction to Hooks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-usestate",
+      "title": "useState",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-useeffect",
+      "title": "useEffect",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-usecontext",
+      "title": "useContext",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-useref",
+      "title": "useRef",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-usememo",
+      "title": "useMemo",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-usecallback",
+      "title": "useCallback",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-usereducer",
+      "title": "useReducer",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-rules-of-hooks",
+      "title": "Rules of Hooks",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}
