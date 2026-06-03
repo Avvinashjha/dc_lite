@@ -1,0 +1,222 @@
+{
+  "id": "javascript-introduction-check",
+  "title": "JavaScript Introduction Knowledge Check",
+  "description": "Check your understanding of JavaScript basics, history, runtime behavior, setup, first scripts, and syntax rules.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "introduction", "fundamentals"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-03",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which technologies are mentioned as the three foundational technologies of the World Wide Web?",
+      "options": [
+        { "id": "a", "text": "JavaScript, HTML, and CSS" },
+        { "id": "b", "text": "JavaScript, Python, and SQL" },
+        { "id": "c", "text": "React, Node.js, and MongoDB" },
+        { "id": "d", "text": "HTML, Java, and C++" }
+      ],
+      "correct": ["a"],
+      "explanation": "JavaScript, HTML, and CSS are commonly described as the three foundational technologies of the World Wide Web.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does it mean that JavaScript is dynamically typed?",
+      "options": [
+        { "id": "a", "text": "Variables must always be declared with a fixed type" },
+        { "id": "b", "text": "Variable types are determined at runtime and can change" },
+        { "id": "c", "text": "JavaScript only supports string values" },
+        { "id": "d", "text": "JavaScript code must be compiled manually before running" }
+      ],
+      "correct": ["b"],
+      "explanation": "In JavaScript, you do not declare fixed variable types. A variable can hold different kinds of values as the program runs.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which programming styles does JavaScript support?",
+      "options": [
+        { "id": "a", "text": "Only object-oriented programming" },
+        { "id": "b", "text": "Only functional programming" },
+        { "id": "c", "text": "Imperative, object-oriented, and functional programming" },
+        { "id": "d", "text": "Only declarative programming" }
+      ],
+      "correct": ["c"],
+      "explanation": "JavaScript is multi-paradigm, so it supports imperative, object-oriented, and functional programming styles.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "How can JavaScript handle events and asynchronous work without freezing the application?",
+      "options": [
+        { "id": "a", "text": "By using multiple call stacks for every task" },
+        { "id": "b", "text": "By blocking the browser until each task finishes" },
+        { "id": "c", "text": "By using the Event Loop and browser or runtime APIs" },
+        { "id": "d", "text": "By requiring every function to run on a server" }
+      ],
+      "correct": ["c"],
+      "explanation": "JavaScript has one call stack, but the Event Loop and APIs provided by the browser or runtime allow asynchronous work to be handled efficiently.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does single-threaded mean in the context of JavaScript?",
+      "options": [
+        { "id": "a", "text": "JavaScript can execute only one piece of code on the call stack at a time" },
+        { "id": "b", "text": "JavaScript cannot handle user events" },
+        { "id": "c", "text": "JavaScript cannot make network requests" },
+        { "id": "d", "text": "JavaScript always runs faster than compiled languages" }
+      ],
+      "correct": ["a"],
+      "explanation": "JavaScript is single-threaded because it uses one call stack, so it executes one piece of code at a time while asynchronous work is coordinated through the Event Loop and runtime APIs.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Who created the first prototype of JavaScript in 1995?",
+      "options": [
+        { "id": "a", "text": "Ryan Dahl" },
+        { "id": "b", "text": "Brendan Eich" },
+        { "id": "c", "text": "John Resig" },
+        { "id": "d", "text": "Tim Berners-Lee" }
+      ],
+      "correct": ["b"],
+      "explanation": "Brendan Eich created the first JavaScript prototype at Netscape in May 1995.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is ECMAScript?",
+      "options": [
+        { "id": "a", "text": "A JavaScript framework for building user interfaces" },
+        { "id": "b", "text": "The official standard that JavaScript follows" },
+        { "id": "c", "text": "A browser extension for running JavaScript" },
+        { "id": "d", "text": "The original name of Node.js" }
+      ],
+      "correct": ["b"],
+      "explanation": "ECMAScript is the official language standard. JavaScript is the most widely used implementation of that standard.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What did Node.js make possible for JavaScript developers?",
+      "options": [
+        { "id": "a", "text": "Running JavaScript outside the browser" },
+        { "id": "b", "text": "Writing JavaScript without variables" },
+        { "id": "c", "text": "Replacing HTML and CSS completely" },
+        { "id": "d", "text": "Making JavaScript the same language as Java" }
+      ],
+      "correct": ["a"],
+      "explanation": "Node.js lets JavaScript run outside the browser, which made it useful for servers, command-line tools, build tools, and more.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "multiple",
+      "prompt": "Which tools are part of a typical beginner JavaScript setup? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "A code editor such as VS Code" },
+        { "id": "b", "text": "A modern web browser with Developer Tools" },
+        { "id": "c", "text": "Node.js and npm" },
+        { "id": "d", "text": "A C++ compiler before every script can run" }
+      ],
+      "correct": ["a", "b", "c"],
+      "explanation": "A code editor, browser DevTools, and Node.js/npm form a practical JavaScript setup. You do not need a C++ compiler to run JavaScript.",
+      "points": 2
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which HTML tag is commonly used to connect an external JavaScript file to a webpage?",
+      "options": [
+        { "id": "a", "text": "<javascript src=\"script.js\">" },
+        { "id": "b", "text": "<link href=\"script.js\">" },
+        { "id": "c", "text": "<script src=\"script.js\"></script>" },
+        { "id": "d", "text": "<style src=\"script.js\"></style>" }
+      ],
+      "correct": ["c"],
+      "explanation": "The script tag with a src attribute tells the browser to load and run an external JavaScript file.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does `console.log()` do?",
+      "options": [
+        { "id": "a", "text": "Creates a new HTML file" },
+        { "id": "b", "text": "Prints output to the developer console or terminal" },
+        { "id": "c", "text": "Installs JavaScript packages" },
+        { "id": "d", "text": "Stops JavaScript from running" }
+      ],
+      "correct": ["b"],
+      "explanation": "console.log() prints values to the browser developer console or to the terminal when running with Node.js.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which identifier name is valid in JavaScript?",
+      "options": [
+        { "id": "a", "text": "1stPlace" },
+        { "id": "b", "text": "user-name" },
+        { "id": "c", "text": "let" },
+        { "id": "d", "text": "userName" }
+      ],
+      "correct": ["d"],
+      "explanation": "userName is valid and follows camelCase. Identifiers cannot start with a number, include hyphens, or use reserved keywords like let.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "boolean",
+      "prompt": "JavaScript treats `score` and `Score` as the same variable name.",
+      "options": [
+        { "id": "true", "text": "True" },
+        { "id": "false", "text": "False" }
+      ],
+      "correct": ["false"],
+      "explanation": "JavaScript is case-sensitive, so score and Score are different identifiers.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "multiple",
+      "prompt": "Which of these are JavaScript literals? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "\"Hello\"" },
+        { "id": "b", "text": "42" },
+        { "id": "c", "text": "true" },
+        { "id": "d", "text": "[1, 2, 3]" }
+      ],
+      "correct": ["a", "b", "c", "d"],
+      "explanation": "Strings, numbers, booleans, arrays, and objects can all be written directly as literals in JavaScript code.",
+      "points": 2
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "What is the purpose of comments in JavaScript?",
+      "options": [
+        { "id": "a", "text": "They are executed before the rest of the program" },
+        { "id": "b", "text": "They install missing packages automatically" },
+        { "id": "c", "text": "They leave notes for humans and are ignored by the engine" },
+        { "id": "d", "text": "They convert JavaScript into machine code" }
+      ],
+      "correct": ["c"],
+      "explanation": "Comments are notes for developers. The JavaScript engine ignores them when running the program.",
+      "points": 1
+    }
+  ]
+}
