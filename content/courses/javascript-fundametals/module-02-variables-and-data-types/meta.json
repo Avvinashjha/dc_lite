@@ -67,6 +67,22 @@
       "title": "Type Conversion and Coercion",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "12-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "javascript-variables-types-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "13-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "javascript-variables-types-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

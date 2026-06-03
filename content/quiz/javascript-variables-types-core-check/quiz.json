@@ -1,0 +1,152 @@
+{
+  "id": "javascript-variables-types-core-check",
+  "title": "Variables and Data Types Core Check",
+  "description": "Check your understanding of variable declarations, primitive types, strings, numbers, booleans, and absence values.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "variables", "data-types"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-03",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which variable declaration keyword should be your default choice in modern JavaScript?",
+      "options": [
+        { "id": "a", "text": "var" },
+        { "id": "b", "text": "let" },
+        { "id": "c", "text": "const" },
+        { "id": "d", "text": "function" }
+      ],
+      "correct": ["c"],
+      "explanation": "Use const by default, then switch to let only when reassignment is needed. Avoid var in new code.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which statement about `let` is correct?",
+      "options": [
+        { "id": "a", "text": "It can be redeclared in the same scope" },
+        { "id": "b", "text": "It can be reassigned but not redeclared in the same scope" },
+        { "id": "c", "text": "It is function-scoped like var" },
+        { "id": "d", "text": "It must always hold a string" }
+      ],
+      "correct": ["b"],
+      "explanation": "let allows reassignment, but it prevents redeclaration in the same scope and is block-scoped.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which values are JavaScript primitive types? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "string" },
+        { "id": "b", "text": "number" },
+        { "id": "c", "text": "boolean" },
+        { "id": "d", "text": "object" }
+      ],
+      "correct": ["a", "b", "c"],
+      "explanation": "string, number, and boolean are primitive types. object is a non-primitive reference type.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the result of `typeof \"hello\"`?",
+      "options": [
+        { "id": "a", "text": "\"text\"" },
+        { "id": "b", "text": "\"string\"" },
+        { "id": "c", "text": "\"object\"" },
+        { "id": "d", "text": "\"char\"" }
+      ],
+      "correct": ["b"],
+      "explanation": "The typeof operator returns \"string\" for string values.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which syntax is a template literal?",
+      "options": [
+        { "id": "a", "text": "\"Hello ${name}\"" },
+        { "id": "b", "text": "'Hello ${name}'" },
+        { "id": "c", "text": "`Hello ${name}`" },
+        { "id": "d", "text": "/Hello ${name}/" }
+      ],
+      "correct": ["c"],
+      "explanation": "Template literals use backticks and support interpolation with ${}.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which method removes whitespace from both ends of a string?",
+      "options": [
+        { "id": "a", "text": "trim()" },
+        { "id": "b", "text": "slice()" },
+        { "id": "c", "text": "split()" },
+        { "id": "d", "text": "includes()" }
+      ],
+      "correct": ["a"],
+      "explanation": "trim() returns a new string with whitespace removed from the beginning and end.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which value represents an intentional absence of value?",
+      "options": [
+        { "id": "a", "text": "undefined" },
+        { "id": "b", "text": "null" },
+        { "id": "c", "text": "NaN" },
+        { "id": "d", "text": "0" }
+      ],
+      "correct": ["b"],
+      "explanation": "null is commonly used when a developer intentionally wants to represent no value.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "JavaScript has separate primitive number types for integers and decimals.",
+      "options": [
+        { "id": "true", "text": "True" },
+        { "id": "false", "text": "False" }
+      ],
+      "correct": ["false"],
+      "explanation": "JavaScript uses one main number type for both integers and decimals.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "How should you check whether a value is `NaN`?",
+      "options": [
+        { "id": "a", "text": "value === NaN" },
+        { "id": "b", "text": "value == NaN" },
+        { "id": "c", "text": "Number.isNaN(value)" },
+        { "id": "d", "text": "typeof value === \"NaN\"" }
+      ],
+      "correct": ["c"],
+      "explanation": "NaN is not equal to itself, so use Number.isNaN() to check for it.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "multiple",
+      "prompt": "Which values are falsy in JavaScript? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "0" },
+        { "id": "b", "text": "\"\"" },
+        { "id": "c", "text": "null" },
+        { "id": "d", "text": "\"false\"" }
+      ],
+      "correct": ["a", "b", "c"],
+      "explanation": "0, an empty string, and null are falsy. The string \"false\" is truthy because it is non-empty.",
+      "points": 2
+    }
+  ]
+}
