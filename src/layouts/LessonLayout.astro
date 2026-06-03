@@ -39,6 +39,7 @@ const {
 } = Astro.props;
 const { cleanMarkdown, blocks } = extractBlocks(lesson.content);
 const htmlParts = parseMarkdown(cleanMarkdown).split(/<!--BLOCK_(\d+)-->/);
+const hasMermaid = /```mermaid\b/.test(cleanMarkdown);
 const lessonCourseSlug = course.slug;
 const lessonSlug = lesson.slug;
 const lessonModuleSlug = lesson.moduleSlug;
@@ -307,6 +308,19 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
 }
 <script src="/js/store.js" is:inline></script>
 <script src="/js/course-progress.js" is:inline></script>
+{
+  hasMermaid && (
+    <script type="module" is:inline>
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "dark",
+        securityLevel: "strict",
+      });
+    </script>
+  )
+}
 <script
   is:inline
   define:vars={{
@@ -903,6 +917,16 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
   .lesson-quiz__missing {
     color: var(--color-text-light);
     font-style: italic;
+  }
+
+  /* Mermaid diagrams */
+  .article__content .mermaid {
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: #0f172a;
+    overflow-x: auto;
   }
 
   /* Locked-module gate */

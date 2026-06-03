@@ -25,6 +25,11 @@ marked.use({
     code(token: CodeToken): string {
       const text = token.text;
       const requested = (token.lang || '').trim().split(/\s+/)[0];
+
+      if (requested === 'mermaid') {
+        return `<div class="mermaid">${escapeHtml(text)}</div>`;
+      }
+
       const language = requested && hljs.getLanguage(requested) ? requested : 'plaintext';
       const label = requested || 'text';
 
