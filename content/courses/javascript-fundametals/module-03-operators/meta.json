@@ -31,6 +31,14 @@
       "title": "== vs ===",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "javascript-operators-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

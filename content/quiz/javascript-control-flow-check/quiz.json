@@ -1,0 +1,224 @@
+{
+  "id": "javascript-control-flow-check",
+  "title": "JavaScript Control Flow Knowledge Check",
+  "description": "Check your understanding of branching, loops, switch statements, break, and continue.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "control-flow", "loops", "conditionals"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "When does an `if` block run?",
+      "options": [
+        { "id": "a", "text": "When its condition is truthy" },
+        { "id": "b", "text": "Only when its condition is exactly the string \"true\"" },
+        { "id": "c", "text": "Only after an else block runs" },
+        { "id": "d", "text": "Every time JavaScript sees it" }
+      ],
+      "correct": ["a"],
+      "explanation": "An if block runs when its condition evaluates to a truthy value.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "In an `if...else if...else` chain, how many matching branches run?",
+      "options": [
+        { "id": "a", "text": "All truthy branches" },
+        { "id": "b", "text": "Only the first matching branch" },
+        { "id": "c", "text": "Only the last matching branch" },
+        { "id": "d", "text": "None unless there is no else block" }
+      ],
+      "correct": ["b"],
+      "explanation": "JavaScript checks the chain from top to bottom and runs only the first matching branch.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Why is `if (quantity)` risky when `quantity` can be `0`?",
+      "options": [
+        { "id": "a", "text": "0 is truthy, so it always runs" },
+        { "id": "b", "text": "0 is falsy, so valid zero values may be treated as missing" },
+        { "id": "c", "text": "0 throws a TypeError in if statements" },
+        { "id": "d", "text": "quantity is automatically converted to a string" }
+      ],
+      "correct": ["b"],
+      "explanation": "0 is falsy, so a broad truthy/falsy check can accidentally reject a valid value.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which loop is usually best when you know the exact number of iterations or are using an array index?",
+      "options": [
+        { "id": "a", "text": "for" },
+        { "id": "b", "text": "while" },
+        { "id": "c", "text": "switch" },
+        { "id": "d", "text": "if" }
+      ],
+      "correct": ["a"],
+      "explanation": "A for loop is commonly used for known counts and index-based iteration.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the correct condition for looping over every item in `items` by index?",
+      "options": [
+        { "id": "a", "text": "i <= items.length" },
+        { "id": "b", "text": "i < items.length" },
+        { "id": "c", "text": "i === items.length" },
+        { "id": "d", "text": "i > items.length" }
+      ],
+      "correct": ["b"],
+      "explanation": "Array indexes start at 0 and the last index is length - 1, so use i < items.length.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is an infinite loop?",
+      "options": [
+        { "id": "a", "text": "A loop that runs exactly once" },
+        { "id": "b", "text": "A loop whose condition never becomes false" },
+        { "id": "c", "text": "A loop that uses let" },
+        { "id": "d", "text": "A loop inside a switch statement" }
+      ],
+      "correct": ["b"],
+      "explanation": "An infinite loop keeps running because its stopping condition is never reached.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "When is a `while` loop usually a good choice?",
+      "options": [
+        { "id": "a", "text": "When the number of iterations depends on a changing condition" },
+        { "id": "b", "text": "Only when looping through arrays" },
+        { "id": "c", "text": "Only when there is a switch statement" },
+        { "id": "d", "text": "When the loop must never stop" }
+      ],
+      "correct": ["a"],
+      "explanation": "while loops are useful when the number of iterations is not known ahead of time.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is the key difference between `while` and `do...while`?",
+      "options": [
+        { "id": "a", "text": "do...while always runs at least once" },
+        { "id": "b", "text": "while always runs at least once" },
+        { "id": "c", "text": "do...while cannot use conditions" },
+        { "id": "d", "text": "while can only count upward" }
+      ],
+      "correct": ["a"],
+      "explanation": "do...while checks its condition after the body runs, so it runs at least once.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does `switch` use to match a case?",
+      "options": [
+        { "id": "a", "text": "Loose equality behavior like ==" },
+        { "id": "b", "text": "Strict matching behavior like ===" },
+        { "id": "c", "text": "Truthiness only" },
+        { "id": "d", "text": "Alphabetical order" }
+      ],
+      "correct": ["b"],
+      "explanation": "switch cases match using strict equality-like behavior, so value and type must match.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What happens in a `switch` when a matching case has no `break`?",
+      "options": [
+        { "id": "a", "text": "JavaScript exits the switch automatically" },
+        { "id": "b", "text": "JavaScript may fall through and run the next case" },
+        { "id": "c", "text": "The switch restarts from the top" },
+        { "id": "d", "text": "The default case always runs first" }
+      ],
+      "correct": ["b"],
+      "explanation": "Without break or return, execution falls through into the following case statements.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "When should you prefer `if...else` over `switch`?",
+      "options": [
+        { "id": "a", "text": "When checking ranges or complex conditions" },
+        { "id": "b", "text": "When matching one value against exact strings" },
+        { "id": "c", "text": "When you need a default case" },
+        { "id": "d", "text": "When there are no conditions" }
+      ],
+      "correct": ["a"],
+      "explanation": "if...else is better for ranges, compound conditions, and checks involving multiple variables.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does `break` do inside a loop?",
+      "options": [
+        { "id": "a", "text": "Skips only the current iteration" },
+        { "id": "b", "text": "Stops the loop completely" },
+        { "id": "c", "text": "Restarts the loop" },
+        { "id": "d", "text": "Converts the condition to false permanently" }
+      ],
+      "correct": ["b"],
+      "explanation": "break exits the loop completely and continues with the code after the loop.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does `continue` do inside a loop?",
+      "options": [
+        { "id": "a", "text": "Stops the whole loop" },
+        { "id": "b", "text": "Skips the rest of the current iteration and moves to the next one" },
+        { "id": "c", "text": "Runs the loop backward" },
+        { "id": "d", "text": "Only works inside switch statements" }
+      ],
+      "correct": ["b"],
+      "explanation": "continue skips the rest of the current iteration without stopping the entire loop.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "multiple",
+      "prompt": "Which are good practices for control flow? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "Use curly braces for if blocks" },
+        { "id": "b", "text": "Use strict equality in conditions" },
+        { "id": "c", "text": "Make sure loops move toward a stopping condition" },
+        { "id": "d", "text": "Prefer deeply nested if statements whenever possible" }
+      ],
+      "correct": ["a", "b", "c"],
+      "explanation": "Curly braces, strict equality, and reachable stopping conditions make control flow safer. Deep nesting usually hurts readability.",
+      "points": 2
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "In nested loops, what does a normal unlabeled `break` exit?",
+      "options": [
+        { "id": "a", "text": "Only the nearest loop" },
+        { "id": "b", "text": "All loops in the file" },
+        { "id": "c", "text": "Only the outermost loop" },
+        { "id": "d", "text": "The entire JavaScript program" }
+      ],
+      "correct": ["a"],
+      "explanation": "A normal break exits the nearest enclosing loop. Labels are needed to break out of an outer loop directly.",
+      "points": 1
+    }
+  ]
+}
