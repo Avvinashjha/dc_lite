@@ -1,0 +1,294 @@
+{
+  "id": "javascript-scope-closures-module-check",
+  "title": "Scope and Closures Module Knowledge Check",
+  "description": "A tricky conceptual quiz covering scope, hoisting, closures, closure scope, higher-order functions, callbacks, and returned functions.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "scope", "closures", "hoisting", "higher-order-functions"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst value = \"global\";\n\nfunction showValue() {\n  console.log(value);\n}\n\nfunction run() {\n  const value = \"local\";\n  showValue();\n}\n\nrun();\n```",
+      "options": [
+        { "id": "a", "text": "`global`" },
+        { "id": "b", "text": "`local`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "JavaScript uses lexical scope. `showValue` was written in the global scope, so it uses the global `value`, not the local `value` from where it is called.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nif (true) {\n  const message = \"inside\";\n}\n\nconsole.log(message);\n```",
+      "options": [
+        { "id": "a", "text": "It logs `inside`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It logs `null`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`const` is block-scoped, so `message` only exists inside the `if` block.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nif (true) {\n  var status = \"ready\";\n}\n\nconsole.log(status);\n```",
+      "options": [
+        { "id": "a", "text": "`ready`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`var` is not block-scoped. In this top-level example, `status` is still accessible after the block.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nconst level = \"outer\";\n\n{\n  console.log(level);\n  const level = \"inner\";\n}\n```",
+      "options": [
+        { "id": "a", "text": "It logs `outer`" },
+        { "id": "b", "text": "It logs `inner`" },
+        { "id": "c", "text": "It logs `undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["d"],
+      "explanation": "The inner `const level` shadows the outer one for the whole block, but it is in the temporal dead zone until its declaration line.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction test() {\n  console.log(name);\n  var name = \"Ava\";\n}\n\ntest();\n```",
+      "options": [
+        { "id": "a", "text": "`Ava`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The `var name` declaration is hoisted and initialized to `undefined`; the assignment to `\"Ava\"` happens later.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which statement about hoisting is most accurate?",
+      "options": [
+        { "id": "a", "text": "JavaScript physically moves all declarations to the top of the file" },
+        { "id": "b", "text": "Declarations are prepared before execution, but assignments still happen where written" },
+        { "id": "c", "text": "Only `const` declarations are hoisted" },
+        { "id": "d", "text": "Hoisting makes local variables global" }
+      ],
+      "correct": ["b"],
+      "explanation": "Hoisting describes JavaScript's setup phase for declarations. It does not physically rewrite your code, and assignments are not moved.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nrun();\n\nconst run = function () {\n  console.log(\"running\");\n};\n```",
+      "options": [
+        { "id": "a", "text": "It logs `running`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws only after logging `running`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`run` is a `const` variable in the temporal dead zone until the declaration line. The function assignment has not happened yet.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nrun();\n\nfunction run() {\n  console.log(\"running\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "`running`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Function declarations are fully hoisted within their scope, so `run` can be called before its declaration appears.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction outer() {\n  const secret = \"scope\";\n\n  return function inner() {\n    return secret;\n  };\n}\n\nconst fn = outer();\nconsole.log(fn());\n```",
+      "options": [
+        { "id": "a", "text": "`scope`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError` because `outer` has finished" },
+        { "id": "d", "text": "`inner`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The returned function closes over `secret`, so the variable remains accessible through the closure after `outer` returns.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction createCounter() {\n  let count = 0;\n\n  return {\n    inc() {\n      count++;\n      return count;\n    },\n    read() {\n      return count;\n    },\n  };\n}\n\nconst counter = createCounter();\nconsole.log(counter.inc());\nconsole.log(counter.read());\n```",
+      "options": [
+        { "id": "a", "text": "`1` then `0`" },
+        { "id": "b", "text": "`1` then `1`" },
+        { "id": "c", "text": "`undefined` then `undefined`" },
+        { "id": "d", "text": "It throws because `count` is private" }
+      ],
+      "correct": ["b"],
+      "explanation": "Both returned methods close over the same `count` variable from the same call to `createCounter`.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction createCounter() {\n  let count = 0;\n  return function () {\n    count++;\n    return count;\n  };\n}\n\nconst a = createCounter();\nconst b = createCounter();\n\nconsole.log(a());\nconsole.log(a());\nconsole.log(b());\n```",
+      "options": [
+        { "id": "a", "text": "`1`, `2`, `3`" },
+        { "id": "b", "text": "`1`, `2`, `1`" },
+        { "id": "c", "text": "`0`, `1`, `0`" },
+        { "id": "d", "text": "`undefined`, `undefined`, `undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Each call to `createCounter()` creates a separate closure environment, so `a` and `b` have independent `count` variables.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code log after the timers run?\n```js\nfor (var i = 0; i < 3; i++) {\n  setTimeout(function () {\n    console.log(i);\n  }, 100);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`0`, `1`, `2`" },
+        { "id": "b", "text": "`1`, `2`, `3`" },
+        { "id": "c", "text": "`3`, `3`, `3`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "All callbacks share the same function-scoped `var i`. By the time the timers run, the loop has finished and `i` is `3`.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this code log after the timers run?\n```js\nfor (let i = 0; i < 3; i++) {\n  setTimeout(function () {\n    console.log(i);\n  }, 100);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`0`, `1`, `2`" },
+        { "id": "b", "text": "`3`, `3`, `3`" },
+        { "id": "c", "text": "`undefined`, `undefined`, `undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`let` creates a fresh binding for each loop iteration, so each callback closes over its own `i`.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What is the issue with this privacy pattern?\n```js\nfunction createStore() {\n  const state = { count: 0 };\n\n  return {\n    getState() {\n      return state;\n    },\n  };\n}\n```",
+      "options": [
+        { "id": "a", "text": "Closures cannot remember objects" },
+        { "id": "b", "text": "Returning `state` exposes the same object reference to outside code" },
+        { "id": "c", "text": "`state` becomes `undefined` after `createStore` returns" },
+        { "id": "d", "text": "`const` prevents reading object properties" }
+      ],
+      "correct": ["b"],
+      "explanation": "The variable is private, but returning the object directly exposes the same object reference. Outside code can mutate it.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction makeMultiplier(multiplier) {\n  return function (number) {\n    return number * multiplier;\n  };\n}\n\nconst double = makeMultiplier(2);\nconsole.log(double(7));\n```",
+      "options": [
+        { "id": "a", "text": "`7`" },
+        { "id": "b", "text": "`14`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws because `multiplier` is gone" }
+      ],
+      "correct": ["b"],
+      "explanation": "The returned function remembers `multiplier` as `2`, so `double(7)` returns `14`.",
+      "points": 1
+    },
+    {
+      "id": "q16",
+      "type": "single",
+      "prompt": "What is the difference between `handleClick` and `handleClick()` when passing a callback?",
+      "options": [
+        { "id": "a", "text": "`handleClick` passes the function; `handleClick()` calls it immediately and passes its return value" },
+        { "id": "b", "text": "They are always identical" },
+        { "id": "c", "text": "`handleClick` calls the function; `handleClick()` passes it" },
+        { "id": "d", "text": "Both create a closure automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Without parentheses, you pass the function reference. With parentheses, you execute the function immediately.",
+      "points": 1
+    },
+    {
+      "id": "q17",
+      "type": "single",
+      "prompt": "Which callback likely runs asynchronously?",
+      "options": [
+        { "id": "a", "text": "The callback passed to `setTimeout`" },
+        { "id": "b", "text": "The callback passed to `Array.prototype.map`" },
+        { "id": "c", "text": "The callback passed to `Array.prototype.filter`" },
+        { "id": "d", "text": "The callback passed to `Array.prototype.reduce`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`setTimeout` schedules its callback to run later. Array method callbacks usually run synchronously during the method call.",
+      "points": 1
+    },
+    {
+      "id": "q18",
+      "type": "single",
+      "prompt": "What does this return?\n```js\nconst numbers = [1, 2, 3];\n\nconst result = numbers.filter((number) => {\n  number > 1;\n});\n```",
+      "options": [
+        { "id": "a", "text": "`[2, 3]`" },
+        { "id": "b", "text": "`[1, 2, 3]`" },
+        { "id": "c", "text": "`[]`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["c"],
+      "explanation": "With braces, an arrow function needs an explicit `return`. The callback returns `undefined` each time, so no items pass the filter.",
+      "points": 1
+    },
+    {
+      "id": "q19",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction curriedAdd(a) {\n  return function (b) {\n    return a + b;\n  };\n}\n\nconsole.log(curriedAdd(5)(3));\n```",
+      "options": [
+        { "id": "a", "text": "`5`" },
+        { "id": "b", "text": "`3`" },
+        { "id": "c", "text": "`8`" },
+        { "id": "d", "text": "It logs a function" }
+      ],
+      "correct": ["c"],
+      "explanation": "`curriedAdd(5)` returns a function that remembers `a` as `5`; calling that returned function with `3` returns `8`.",
+      "points": 1
+    },
+    {
+      "id": "q20",
+      "type": "single",
+      "prompt": "Which statement best connects closures and higher-order functions?",
+      "options": [
+        { "id": "a", "text": "Every higher-order function must use `var`" },
+        { "id": "b", "text": "When a higher-order function returns a function, the returned function can close over the outer function's variables" },
+        { "id": "c", "text": "Callbacks cannot form closures" },
+        { "id": "d", "text": "Closures only work inside event listeners" }
+      ],
+      "correct": ["b"],
+      "explanation": "Returned functions often rely on closures to remember configuration, private state, or arguments from the outer function.",
+      "points": 1
+    }
+  ]
+}

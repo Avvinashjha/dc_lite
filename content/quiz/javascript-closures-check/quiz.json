@@ -1,0 +1,224 @@
+{
+  "id": "javascript-closures-check",
+  "title": "JavaScript Closures Knowledge Check",
+  "description": "Test your understanding of closures, closure scope, shared state, private data, shadowing, and loop callback behavior.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "closures", "scope", "lexical-scope"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a closure?",
+      "options": [
+        { "id": "a", "text": "A function that remembers variables from the scope where it was created" },
+        { "id": "b", "text": "A variable that can only store objects" },
+        { "id": "c", "text": "A loop that stops when a function returns" },
+        { "id": "d", "text": "A special kind of `var` declaration" }
+      ],
+      "correct": ["a"],
+      "explanation": "A closure is a function bundled with access to the lexical environment where it was created.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction outer() {\n  const message = \"Hello\";\n\n  return function inner() {\n    return message;\n  };\n}\n\nconst fn = outer();\nconsole.log(fn());\n```",
+      "options": [
+        { "id": "a", "text": "`Hello`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The returned inner function closes over `message`, so it can still read it after `outer()` has finished.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction createCounter() {\n  let count = 0;\n\n  return function () {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\nconsole.log(counter());\nconsole.log(counter());\n```",
+      "options": [
+        { "id": "a", "text": "`1` then `1`" },
+        { "id": "b", "text": "`1` then `2`" },
+        { "id": "c", "text": "`0` then `1`" },
+        { "id": "d", "text": "`undefined` then `undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Both calls use the same preserved `count` variable, so the value increases from `1` to `2`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction createCounter() {\n  let count = 0;\n\n  return function () {\n    count++;\n    return count;\n  };\n}\n\nconst first = createCounter();\nconst second = createCounter();\n\nconsole.log(first());\nconsole.log(first());\nconsole.log(second());\n```",
+      "options": [
+        { "id": "a", "text": "`1`, `2`, `1`" },
+        { "id": "b", "text": "`1`, `2`, `3`" },
+        { "id": "c", "text": "`0`, `1`, `0`" },
+        { "id": "d", "text": "`undefined`, `undefined`, `undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Each call to `createCounter()` creates a separate closure environment. `first` and `second` do not share `count`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What do `increment` and `getCount` share in this code?\n```js\nfunction createCounter() {\n  let count = 0;\n\n  return {\n    increment() {\n      count++;\n      return count;\n    },\n    getCount() {\n      return count;\n    },\n  };\n}\n```",
+      "options": [
+        { "id": "a", "text": "A different `count` variable for each method" },
+        { "id": "b", "text": "The same private `count` variable" },
+        { "id": "c", "text": "Only the global scope" },
+        { "id": "d", "text": "No closure at all" }
+      ],
+      "correct": ["b"],
+      "explanation": "Both methods are created in the same outer function call, so they close over the same `count` variable.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction outer() {\n  let message = \"outer\";\n\n  function inner() {\n    let message = \"inner\";\n    return message;\n  }\n\n  console.log(inner());\n  console.log(message);\n}\n\nouter();\n```",
+      "options": [
+        { "id": "a", "text": "`inner` then `outer`" },
+        { "id": "b", "text": "`outer` then `outer`" },
+        { "id": "c", "text": "`inner` then `inner`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The inner `message` shadows the outer `message`, but it does not change it.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction outer() {\n  let count = 10;\n\n  function inner() {\n    count = 99;\n  }\n\n  inner();\n  console.log(count);\n}\n\nouter();\n```",
+      "options": [
+        { "id": "a", "text": "`10`" },
+        { "id": "b", "text": "`99`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`inner` does not declare a new `count`, so JavaScript finds and updates the outer `count` variable.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log after the timers run?\n```js\nfor (var i = 1; i <= 3; i++) {\n  setTimeout(function () {\n    console.log(i);\n  }, 100);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`1`, `2`, `3`" },
+        { "id": "b", "text": "`0`, `1`, `2`" },
+        { "id": "c", "text": "`4`, `4`, `4`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`var` is function-scoped, so all callbacks share the same `i`. After the loop ends, `i` is `4`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does this code log after the timers run?\n```js\nfor (let i = 1; i <= 3; i++) {\n  setTimeout(function () {\n    console.log(i);\n  }, 100);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`1`, `2`, `3`" },
+        { "id": "b", "text": "`4`, `4`, `4`" },
+        { "id": "c", "text": "`undefined`, `undefined`, `undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`let` creates a fresh binding for each loop iteration, so each callback closes over a different `i`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Why can closures be used for private data?",
+      "options": [
+        { "id": "a", "text": "Because outer variables become global automatically" },
+        { "id": "b", "text": "Because returned functions can access outer variables while outside code cannot access them directly" },
+        { "id": "c", "text": "Because `const` makes every object immutable" },
+        { "id": "d", "text": "Because closures disable reassignment" }
+      ],
+      "correct": ["b"],
+      "explanation": "A closure can expose controlled functions while keeping the actual variables hidden inside the outer function scope.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction makeMultiplier(multiplier) {\n  return function (number) {\n    return number * multiplier;\n  };\n}\n\nconst double = makeMultiplier(2);\nconst triple = makeMultiplier(3);\n\nconsole.log(double(5));\nconsole.log(triple(5));\n```",
+      "options": [
+        { "id": "a", "text": "`10` then `15`" },
+        { "id": "b", "text": "`15` then `15`" },
+        { "id": "c", "text": "`10` then `10`" },
+        { "id": "d", "text": "`undefined` then `undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`double` remembers `multiplier` as `2`, while `triple` remembers `multiplier` as `3`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the best description of this pattern?\n```js\nfunction createFormatter(prefix) {\n  return function (value) {\n    return `${prefix}: ${value}`;\n  };\n}\n```",
+      "options": [
+        { "id": "a", "text": "A function factory using a closure" },
+        { "id": "b", "text": "A block scope error" },
+        { "id": "c", "text": "A `var` hoisting bug" },
+        { "id": "d", "text": "A switch statement" }
+      ],
+      "correct": ["a"],
+      "explanation": "`createFormatter` returns a new function that remembers `prefix`, which makes it a function factory using closure.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst theme = \"dark\";\n\nfunction createWidget(name) {\n  const type = \"calendar\";\n\n  return function render() {\n    return `${name}-${type}-${theme}`;\n  };\n}\n\nconst renderWidget = createWidget(\"main\");\nconsole.log(renderWidget());\n```",
+      "options": [
+        { "id": "a", "text": "`main-calendar-dark`" },
+        { "id": "b", "text": "`undefined-calendar-dark`" },
+        { "id": "c", "text": "`main-undefined-dark`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The returned function can access `name`, `type`, and `theme` through the preserved scope chain.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Why can returning a private array directly be risky?\n```js\nfunction createList() {\n  const items = [];\n\n  return {\n    getItems() {\n      return items;\n    },\n  };\n}\n```",
+      "options": [
+        { "id": "a", "text": "The array disappears immediately" },
+        { "id": "b", "text": "Outside code receives the same array and can mutate it" },
+        { "id": "c", "text": "Closures cannot remember arrays" },
+        { "id": "d", "text": "The function will always return `undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Returning the array directly exposes the same object reference. Returning a copy, such as `[...items]`, better protects private state.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which statement about closures is most accurate?",
+      "options": [
+        { "id": "a", "text": "Closures only work with global variables" },
+        { "id": "b", "text": "Closures preserve access to variables from the lexical scope where the function was created" },
+        { "id": "c", "text": "Closures copy every variable value once and then freeze it" },
+        { "id": "d", "text": "Closures prevent functions from being returned" }
+      ],
+      "correct": ["b"],
+      "explanation": "Closures are based on lexical scope. A function keeps access to variables from the environment where it was created.",
+      "points": 1
+    }
+  ]
+}

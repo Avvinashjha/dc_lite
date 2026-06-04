@@ -1,0 +1,224 @@
+{
+  "id": "javascript-hoisting-tricky-check",
+  "title": "JavaScript Hoisting Tricky Questions",
+  "description": "Test your understanding of tricky hoisting behavior with var, let, const, temporal dead zone, function declarations, and function expressions.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "scope", "hoisting", "tdz"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(score);\nvar score = 10;\n```",
+      "options": [
+        { "id": "a", "text": "`10`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`var` declarations are hoisted and initialized to `undefined`. The assignment to `10` happens later.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nconsole.log(score);\nlet score = 10;\n```",
+      "options": [
+        { "id": "a", "text": "It logs `10`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It logs `null`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`let` is hoisted but not initialized. Accessing it before the declaration line is a temporal dead zone error.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nconsole.log(appName);\nconst appName = \"DailyCoder\";\n```",
+      "options": [
+        { "id": "a", "text": "It logs `DailyCoder`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError` because strings cannot be constants" }
+      ],
+      "correct": ["c"],
+      "explanation": "`const` is also in the temporal dead zone until its declaration line runs.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nsayHi();\n\nfunction sayHi() {\n  console.log(\"Hi\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "`Hi`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Function declarations are fully hoisted, so the function can be called before its declaration appears.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nsayHi();\n\nvar sayHi = function () {\n  console.log(\"Hi\");\n};\n```",
+      "options": [
+        { "id": "a", "text": "It logs `Hi`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["d"],
+      "explanation": "`var sayHi` is hoisted as `undefined`, but the function assignment happens later. Calling `undefined` causes a `TypeError`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nsayHi();\n\nconst sayHi = function () {\n  console.log(\"Hi\");\n};\n```",
+      "options": [
+        { "id": "a", "text": "It logs `Hi`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "The function expression is assigned to a `const`, so `sayHi` cannot be accessed before initialization.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nvar count = 1;\n\nfunction showCount() {\n  console.log(count);\n  var count = 2;\n}\n\nshowCount();\n```",
+      "options": [
+        { "id": "a", "text": "`1`" },
+        { "id": "b", "text": "`2`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "The local `var count` is hoisted inside `showCount` and shadows the global `count`, but its assignment to `2` has not happened yet.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nconst status = \"global\";\n\nif (true) {\n  console.log(status);\n  const status = \"block\";\n}\n```",
+      "options": [
+        { "id": "a", "text": "It logs `global`" },
+        { "id": "b", "text": "It logs `block`" },
+        { "id": "c", "text": "It logs `undefined`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["d"],
+      "explanation": "The block-scoped `status` shadows the global `status`, but it is in the temporal dead zone until its declaration line.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction test() {\n  if (false) {\n    var message = \"Hello\";\n  }\n\n  console.log(message);\n}\n\ntest();\n```",
+      "options": [
+        { "id": "a", "text": "`Hello`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`var message` is hoisted to the function scope even though the `if` body does not run. The assignment never happens, so the value is `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nfunction test() {\n  if (false) {\n    let message = \"Hello\";\n  }\n\n  console.log(message);\n}\n\ntest();\n```",
+      "options": [
+        { "id": "a", "text": "It logs `Hello`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws a `ReferenceError`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`let message` is block-scoped to the `if` block. It does not exist outside that block.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which statement is most accurate?",
+      "options": [
+        { "id": "a", "text": "JavaScript physically moves declarations to the top of your file" },
+        { "id": "b", "text": "Hoisting describes how JavaScript prepares declarations before executing code" },
+        { "id": "c", "text": "Only assignments are hoisted" },
+        { "id": "d", "text": "Hoisting makes all variables global" }
+      ],
+      "correct": ["b"],
+      "explanation": "Hoisting is a mental model for JavaScript's setup phase. The engine prepares declarations before execution; it does not physically rewrite your code.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(typeof missingValue);\nconsole.log(typeof declaredLater);\nlet declaredLater = 10;\n```",
+      "options": [
+        { "id": "a", "text": "`undefined` then `undefined`" },
+        { "id": "b", "text": "`undefined`, then it throws a `ReferenceError`" },
+        { "id": "c", "text": "`object` then `number`" },
+        { "id": "d", "text": "It throws before logging anything" }
+      ],
+      "correct": ["b"],
+      "explanation": "`typeof` on a truly undeclared variable returns `undefined`, but `declaredLater` exists in the TDZ, so `typeof declaredLater` throws a `ReferenceError`.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfor (var i = 0; i < 2; i++) {}\nconsole.log(i);\n```",
+      "options": [
+        { "id": "a", "text": "`0`" },
+        { "id": "b", "text": "`1`" },
+        { "id": "c", "text": "`2`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`var` is not block-scoped, so `i` remains available after the loop. The loop stops when `i` becomes `2`.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nfor (let i = 0; i < 2; i++) {}\nconsole.log(i);\n```",
+      "options": [
+        { "id": "a", "text": "It logs `0`" },
+        { "id": "b", "text": "It logs `1`" },
+        { "id": "c", "text": "It logs `2`" },
+        { "id": "d", "text": "It throws a `ReferenceError`" }
+      ],
+      "correct": ["d"],
+      "explanation": "`let i` is scoped to the loop, so it is not available outside the loop.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction outer() {\n  inner();\n\n  function inner() {\n    console.log(\"inside\");\n  }\n}\n\nouter();\ninner();\n```",
+      "options": [
+        { "id": "a", "text": "`inside` once, then a `ReferenceError`" },
+        { "id": "b", "text": "`inside` twice" },
+        { "id": "c", "text": "`undefined` twice" },
+        { "id": "d", "text": "It throws before logging anything" }
+      ],
+      "correct": ["a"],
+      "explanation": "`inner` is hoisted within `outer`, so the first call works. It is not available outside `outer`, so the second call throws a `ReferenceError`.",
+      "points": 1
+    }
+  ]
+}

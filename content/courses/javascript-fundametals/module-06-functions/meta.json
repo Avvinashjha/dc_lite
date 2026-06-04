@@ -31,6 +31,14 @@
       "title": "Immediately Invoked Function Expressions (IIFE)",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-functions-check",
+      "passingScore": 70
     }
   ]
 }
