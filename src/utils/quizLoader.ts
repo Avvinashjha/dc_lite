@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { Quiz, QuizMeta, QuizListItem, QuizIndex } from '../types/quiz';
+import type { Quiz, QuizMeta, QuizListItem, QuizIndex, Question } from '../types/quiz';
+import { renderQuizRichText } from './markdown';
 
 const CONTENT_DIR = path.resolve(process.cwd(), 'content');
 const QUIZ_DIR = path.join(CONTENT_DIR, 'quiz');
@@ -46,6 +47,23 @@ export function getQuiz(slug: string): Quiz | null {
     ...meta,
     slug,
     source: meta.source || 'curated',
+    questions: (meta.questions || []).map(renderQuestionHtml),
+  };
+}
+
+/**
+ * Pre-render a question's prompt/options/explanation to HTML at build time so
+ * code snippets get the same syntax-highlighted code blocks as lesson markdown.
+ */
+function renderQuestionHtml(q: Question): Question {
+  return {
+    ...q,
+    promptHtml: renderQuizRichText(q.prompt),
+    explanationHtml: q.explanation ? renderQuizRichText(q.explanation) : undefined,
+    options: (q.options || []).map(opt => ({
+      ...opt,
+      textHtml: renderQuizRichText(opt.text),
+    })),
   };
 }
 

@@ -10,6 +10,8 @@ export type QuizSource = 'curated' | 'community';
 export interface QuizOption {
   id: string;
   text: string;
+  /** Pre-rendered HTML (markdown code/formatting). Build-time only; optional. */
+  textHtml?: string;
 }
 
 export interface Question {
@@ -22,6 +24,9 @@ export interface Question {
   explanation?: string;
   /** Points awarded for a fully correct answer. Defaults to 1. */
   points?: number;
+  /** Pre-rendered HTML for prompt/explanation. Build-time only; optional. */
+  promptHtml?: string;
+  explanationHtml?: string;
 }
 
 /** Shape stored in content/quiz/<slug>/quiz.json (no slug field — derived from dir). */
