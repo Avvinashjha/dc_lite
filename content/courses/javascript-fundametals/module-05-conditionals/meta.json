@@ -31,6 +31,14 @@
       "title": "Optional Chaining",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-conditionals-check",
+      "passingScore": 70
     }
   ]
 }

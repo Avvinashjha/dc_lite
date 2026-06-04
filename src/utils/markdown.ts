@@ -73,6 +73,30 @@ export function parseMarkdown(markdown: string): string {
     .replace(/<\/table>/g, '</table></div>');
 }
 
+// Parse a single line of markdown without wrapping it in a <p> (inline only).
+// Fenced code blocks are not handled here — use parseMarkdown for block content.
+export function parseInlineMarkdown(markdown: string): string {
+  if (!markdown) return '';
+  return marked.parseInline(markdown) as string;
+}
+
+/**
+ * Render short rich text used in quizzes (prompts, options, explanations).
+ * Supports inline `code` and fenced ```lang ... ``` blocks, rendered with the
+ * exact same syntax-highlighted `.cb` code-block component as lesson markdown.
+ * A single wrapping paragraph is unwrapped so inline-only strings stay clean.
+ */
+export function renderQuizRichText(text: string): string {
+  if (!text) return '';
+  if (!text.includes('```')) return parseInlineMarkdown(text);
+  const html = parseMarkdown(text).trim();
+  const single = html.match(/^<p>([\s\S]*?)<\/p>$/);
+  if (single && !single[1].includes('<p') && !single[1].includes('<figure')) {
+    return single[1];
+  }
+  return html;
+}
+
 // Extract plain text from markdown (for excerpts)
 export function stripMarkdown(markdown: string): string {
   return markdown

@@ -6,6 +6,8 @@ interface Props {
   explanation: string;
 }
 
+import { renderQuizRichText } from "../utils/markdown";
+
 const { question, options, answer, explanation } = Astro.props;
 const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
 ---
@@ -13,19 +15,19 @@ const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
 <div class="quiz" id={quizId} data-answer={answer}>
   <div class="quiz__header">
     <span class="quiz__badge">Quiz</span>
-    <h4 class="quiz__question">{question}</h4>
+    <h4 class="quiz__question" set:html={renderQuizRichText(question)} />
   </div>
   <div class="quiz__options">
     {options.map((opt, i) => (
       <button class="quiz__option" data-index={i} onclick={`handleQuiz('${quizId}', ${i})`}>
         <span class="quiz__letter">{String.fromCharCode(65 + i)}</span>
-        <span>{opt}</span>
+        <span set:html={renderQuizRichText(opt)} />
       </button>
     ))}
   </div>
   <div class="quiz__result" style="display: none;">
     <p class="quiz__feedback"></p>
-    <p class="quiz__explanation">{explanation}</p>
+    <p class="quiz__explanation" set:html={renderQuizRichText(explanation)} />
   </div>
 </div>
 
