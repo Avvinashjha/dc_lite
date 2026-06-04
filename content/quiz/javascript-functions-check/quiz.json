@@ -1,0 +1,224 @@
+{
+  "id": "javascript-functions-check",
+  "title": "JavaScript Functions Knowledge Check",
+  "description": "Check your understanding of function declarations, expressions, parameters, return values, default parameters, rest parameters, and IIFEs.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "functions", "parameters", "return-values"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the main purpose of a function?",
+      "options": [
+        { "id": "a", "text": "To make every variable global" },
+        { "id": "b", "text": "To wrap reusable logic that can be called when needed" },
+        { "id": "c", "text": "To automatically convert strings into numbers" },
+        { "id": "d", "text": "To stop JavaScript from using objects" }
+      ],
+      "correct": ["b"],
+      "explanation": "A function lets you package reusable logic and call it whenever that behavior is needed.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which syntax is a function declaration?",
+      "options": [
+        { "id": "a", "text": "`const greet = function () {};`" },
+        { "id": "b", "text": "`function greet() {}`" },
+        { "id": "c", "text": "`greet = () => {};`" },
+        { "id": "d", "text": "`new Function(greet)`" }
+      ],
+      "correct": ["b"],
+      "explanation": "A function declaration starts with the `function` keyword followed by the function name.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What happens when this code runs?\n```js\nsayHello();\n\nfunction sayHello() {\n  console.log(\"Hello\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "It logs `Hello`" },
+        { "id": "b", "text": "It logs `undefined`" },
+        { "id": "c", "text": "It throws because declarations cannot be hoisted" },
+        { "id": "d", "text": "It creates a rest parameter" }
+      ],
+      "correct": ["a"],
+      "explanation": "Function declarations are hoisted, so the function can be called before its definition appears in the code.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What happens when this code runs?\n```js\nsayHello();\n\nconst sayHello = function () {\n  console.log(\"Hello\");\n};\n```",
+      "options": [
+        { "id": "a", "text": "It logs `Hello`" },
+        { "id": "b", "text": "It logs `null`" },
+        { "id": "c", "text": "It fails because `sayHello` is used before initialization" },
+        { "id": "d", "text": "It runs twice" }
+      ],
+      "correct": ["c"],
+      "explanation": "A function expression assigned to `const` is not usable before the assignment line runs.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "In this code, what are `a` and `b`?\n```js\nfunction add(a, b) {\n  return a + b;\n}\n\nadd(2, 3);\n```",
+      "options": [
+        { "id": "a", "text": "Arguments" },
+        { "id": "b", "text": "Parameters" },
+        { "id": "c", "text": "Return values" },
+        { "id": "d", "text": "Rest values" }
+      ],
+      "correct": ["b"],
+      "explanation": "`a` and `b` are parameters because they are named placeholders in the function definition.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is returned by this function call?\n```js\nfunction add(a, b) {\n  return a + b;\n}\n\nadd(2, 3);\n```",
+      "options": [
+        { "id": "a", "text": "`2`" },
+        { "id": "b", "text": "`3`" },
+        { "id": "c", "text": "`5`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["c"],
+      "explanation": "The function returns the result of `a + b`, so `add(2, 3)` returns `5`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does a function return if it has no `return` statement?",
+      "options": [
+        { "id": "a", "text": "`null`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`0`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["d"],
+      "explanation": "JavaScript functions return `undefined` by default when no value is explicitly returned.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does the `return` keyword do?",
+      "options": [
+        { "id": "a", "text": "It logs a value and keeps the function running" },
+        { "id": "b", "text": "It sends a value back to the caller and stops the function" },
+        { "id": "c", "text": "It creates a new parameter" },
+        { "id": "d", "text": "It converts a function declaration into an expression" }
+      ],
+      "correct": ["b"],
+      "explanation": "`return` sends a value back to where the function was called and immediately exits the function.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "When is a default parameter used?",
+      "options": [
+        { "id": "a", "text": "When the argument is omitted or `undefined`" },
+        { "id": "b", "text": "Whenever the argument is falsy" },
+        { "id": "c", "text": "Only when the argument is `null`" },
+        { "id": "d", "text": "Only when the argument is `0`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Default parameters apply only when the matching argument is missing or explicitly `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this return?\n```js\nfunction getRole(role = \"viewer\") {\n  return role;\n}\n\ngetRole(null);\n```",
+      "options": [
+        { "id": "a", "text": "`\"viewer\"`" },
+        { "id": "b", "text": "`null`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`false`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`null` is a real value, so it does not trigger the default parameter.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does a rest parameter do?",
+      "options": [
+        { "id": "a", "text": "It stops a function before it returns" },
+        { "id": "b", "text": "It gathers remaining arguments into a real array" },
+        { "id": "c", "text": "It makes all parameters optional by default" },
+        { "id": "d", "text": "It spreads an object into global variables" }
+      ],
+      "correct": ["b"],
+      "explanation": "A rest parameter uses `...name` to collect remaining arguments into an array.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which function uses a rest parameter correctly?",
+      "options": [
+        { "id": "a", "text": "`function sum(...numbers) {}`" },
+        { "id": "b", "text": "`function sum(...numbers, total) {}`" },
+        { "id": "c", "text": "`function sum(...a, ...b) {}`" },
+        { "id": "d", "text": "`function sum(numbers...) {}`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A rest parameter uses `...` before the name, and it must be the final parameter.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "In this code, what is `rest`?\n```js\nfunction show(first, ...rest) {\n  return rest;\n}\n\nshow(\"a\", \"b\", \"c\");\n```",
+      "options": [
+        { "id": "a", "text": "`\"a\"`" },
+        { "id": "b", "text": "`[\"a\", \"b\", \"c\"]`" },
+        { "id": "c", "text": "`[\"b\", \"c\"]`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["c"],
+      "explanation": "The first argument goes into `first`; the remaining arguments are gathered into the `rest` array.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What is an IIFE?",
+      "options": [
+        { "id": "a", "text": "A function expression that runs immediately after it is created" },
+        { "id": "b", "text": "A function that can only be called after a timeout" },
+        { "id": "c", "text": "A rest parameter with no arguments" },
+        { "id": "d", "text": "A default parameter that returns `undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "An IIFE is an Immediately Invoked Function Expression, commonly written as `(function () { ... })();`.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "What is the classic reason for using an IIFE?",
+      "options": [
+        { "id": "a", "text": "To create a private scope and avoid leaking variables globally" },
+        { "id": "b", "text": "To make every function hoisted" },
+        { "id": "c", "text": "To force all arguments to become strings" },
+        { "id": "d", "text": "To replace every module import" }
+      ],
+      "correct": ["a"],
+      "explanation": "IIFEs were commonly used to create private scope, especially before `let`, `const`, and ES modules were common.",
+      "points": 1
+    }
+  ]
+}
