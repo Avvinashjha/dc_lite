@@ -16,13 +16,26 @@
  *   - subscribers          (newsletter)
  *   - comments             (blog/problem comments)
  *   - user_progress        (problem progress + favorites + notes)
- *   - user_enrollments     (course enrollment + lesson tracking)
+ *   - user_enrollments     (legacy course resume index; superseded by course_enrollments)
  *   - problem_discussions   (shared problem discussions)
+ *   - course_enrollments   (slim: uid, courseSlug, status, enrolledAt, completedAt, lastModule, lastLesson, lastLessonAt, updatedAt, createdAt)
+ *   - course_module_progress (per-module: uid, courseSlug, moduleSlug, moduleTitle, status, completedLessons, totalLessons, percent, completedLessonSlugs, timeSpentSec, startedAt, completedAt, updatedAt, createdAt)
+ *   - course_quiz_scores   (course quizzes: uid, courseSlug, moduleSlug, lessonSlug, quizSlug, bestPercent, lastPercent, attempts, passed, passingScore, completedAt, updatedAt, createdAt)
  *   - community_quizzes    (slug, title, category, difficulty, author, uid, quizJson, createdAt)
  *   - quiz_scores          (quizSlug, uid, displayName, score, maxScore, timeSec, completedAt, createdAt)
  *   - course_certifications (uid, courseSlug, displayName, round1, round2, round3, certified, certifiedAt, certId, notes)
  *                          ── admin-managed: you fill rows manually after interviewing a student
  */
+
+// ─── Config ──────────────────────────────────────────────────────────────────
+//
+// Firebase Web config (NOT secret — these ship in the client bundle anyway).
+// Copy these from Firebase Console → Project Settings → General → Your apps,
+// or from your site's PUBLIC_FIREBASE_* env vars. They MUST match the Firebase
+// project your site authenticates against, otherwise token verification fails
+// and every signed-in feature (progress sync, enrollments, quizzes) breaks.
+var FIREBASE_API_KEY = 'AIzaSyCo59zkY1n3GgshBoxUcZCieVwhNVwyhQw';   // PUBLIC_FIREBASE_API_KEY (dailycoder-007)
+var FIREBASE_PROJECT_ID = 'dailycoder-007';                         // PUBLIC_FIREBASE_PROJECT_ID
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -49,18 +62,58 @@ function getOrCreateSheet(name, headers) {
 }
 
 /**
- * Verify a Firebase ID token by calling Google's tokeninfo endpoint.
- * Returns the decoded token payload (with uid, email, etc.) or null if invalid.
+ * Upsert a row into `sheet` keyed by `key`. `keyFn(rowValues)` derives the key
+ * from an existing row. On match, the row is overwritten only when the incoming
+ * `updatedAt` (at column index `updatedAtIdx`, 0-based) is newer-or-equal than
+ * the stored one (last-write-wins); otherwise the stale write is ignored.
+ */
+function upsertRow(sheet, key, keyFn, rowValues, updatedAtIdx) {
+  var existing = sheet.getDataRange().getValues();
+  for (var i = 1; i < existing.length; i++) {
+    if (keyFn(existing[i]) !== key) continue;
+    if (typeof updatedAtIdx === 'number') {
+      var prevUpdated = existing[i][updatedAtIdx] || 0;
+      var nextUpdated = rowValues[updatedAtIdx] || 0;
+      if (nextUpdated < prevUpdated) return; // stale write
+    }
+    sheet.getRange(i + 1, 1, 1, rowValues.length).setValues([rowValues]);
+    return;
+  }
+  sheet.appendRow(rowValues);
+}
+
+/**
+ * Verify a Firebase ID token via the Identity Toolkit `accounts:lookup` API.
+ *
+ * NOTE: Google's `oauth2.googleapis.com/tokeninfo` endpoint does NOT work for
+ * Firebase ID tokens — those are issued by `securetoken.google.com`, not
+ * Google's OAuth IdP, so tokeninfo rejects them. `accounts:lookup` validates
+ * the token against the Firebase project (signature + expiry) and returns the
+ * user record, whose `localId` is the Firebase uid.
+ *
+ * Returns { uid, email, name } on success or null if the token is invalid.
  */
 function verifyFirebaseToken(idToken) {
   if (!idToken) return null;
+  if (!FIREBASE_API_KEY || FIREBASE_API_KEY === 'YOUR_FIREBASE_WEB_API_KEY') {
+    // Misconfigured: fail closed so we never trust an unverified token.
+    return null;
+  }
   try {
-    var url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' + encodeURIComponent(idToken);
-    var res = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+    var url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' +
+      encodeURIComponent(FIREBASE_API_KEY);
+    var res = UrlFetchApp.fetch(url, {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify({ idToken: idToken }),
+      muteHttpExceptions: true
+    });
     if (res.getResponseCode() !== 200) return null;
-    var payload = JSON.parse(res.getContentText());
-    if (!payload.sub) return null;
-    return { uid: payload.sub, email: payload.email || '', name: payload.name || '' };
+    var body = JSON.parse(res.getContentText());
+    var users = body.users || [];
+    if (!users.length || !users[0].localId) return null;
+    var u = users[0];
+    return { uid: u.localId, email: u.email || '', name: u.displayName || '' };
   } catch (ex) {
     return null;
   }
@@ -95,6 +148,25 @@ function slugify(value) {
     .replace(/-{2,}/g, '-');
 }
 
+// ─── Course tracking schema ──────────────────────────────────────────────────
+// Three purpose-built tabs replace the old course usage of user_progress /
+// user_enrollments. Column order here is the source of truth for the upserts in
+// `saveCourseProgress` / reads in `getCourseProgress`.
+var COURSE_ENROLLMENTS_HEADERS = [
+  'uid', 'courseSlug', 'status', 'enrolledAt', 'completedAt',
+  'lastModule', 'lastLesson', 'lastLessonAt', 'updatedAt', 'createdAt'
+];
+var COURSE_MODULE_PROGRESS_HEADERS = [
+  'uid', 'courseSlug', 'moduleSlug', 'moduleTitle', 'status',
+  'completedLessons', 'totalLessons', 'percent', 'completedLessonSlugs',
+  'timeSpentSec', 'startedAt', 'completedAt', 'updatedAt', 'createdAt'
+];
+var COURSE_QUIZ_SCORES_HEADERS = [
+  'uid', 'courseSlug', 'moduleSlug', 'lessonSlug', 'quizSlug',
+  'bestPercent', 'lastPercent', 'attempts', 'passed', 'passingScore',
+  'completedAt', 'updatedAt', 'createdAt'
+];
+
 /**
  * One-time setup: creates every tab this backend uses (with headers) if it
  * doesn't already exist. Run this once from the Apps Script editor
@@ -111,6 +183,9 @@ function setupSheets() {
   getOrCreateSheet('community_quizzes', ['slug', 'title', 'category', 'difficulty', 'author', 'uid', 'quizJson', 'createdAt']);
   getOrCreateSheet('quiz_scores', ['quizSlug', 'uid', 'displayName', 'score', 'maxScore', 'timeSec', 'completedAt', 'createdAt']);
   getOrCreateSheet('course_certifications', ['uid', 'courseSlug', 'displayName', 'round1', 'round2', 'round3', 'certified', 'certifiedAt', 'certId', 'notes']);
+  getOrCreateSheet('course_enrollments', COURSE_ENROLLMENTS_HEADERS);
+  getOrCreateSheet('course_module_progress', COURSE_MODULE_PROGRESS_HEADERS);
+  getOrCreateSheet('course_quiz_scores', COURSE_QUIZ_SCORES_HEADERS);
   return 'Sheets ready';
 }
 
@@ -192,6 +267,95 @@ function doGet(e) {
       }
     }
     return jsonResponse({ status: 'success', enrollments: enrollments });
+  }
+
+  // ── Get structured course progress (auth required; own data only) ──
+  if (action === 'getCourseProgress') {
+    var cpUid = getAuthUid(e, {});
+    if (!cpUid) return jsonResponse({ status: 'error', message: 'Authentication required' });
+
+    var cpCourseSlug = e.parameter.courseSlug || '';
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    // Enrollment (single row per course).
+    var enrollment = null;
+    var enSheet = ss.getSheetByName('course_enrollments');
+    if (enSheet) {
+      var enData = enSheet.getDataRange().getValues();
+      for (var ei = 1; ei < enData.length; ei++) {
+        if (enData[ei][0] !== cpUid) continue;
+        if (cpCourseSlug && enData[ei][1] !== cpCourseSlug) continue;
+        enrollment = {
+          courseSlug: enData[ei][1],
+          status: enData[ei][2],
+          enrolledAt: enData[ei][3],
+          completedAt: enData[ei][4],
+          lastModule: enData[ei][5],
+          lastLesson: enData[ei][6],
+          lastLessonAt: enData[ei][7],
+          updatedAt: enData[ei][8]
+        };
+        if (cpCourseSlug) break;
+      }
+    }
+
+    // Module progress rows.
+    var modules = [];
+    var mpSheet = ss.getSheetByName('course_module_progress');
+    if (mpSheet) {
+      var mpData = mpSheet.getDataRange().getValues();
+      for (var mi = 1; mi < mpData.length; mi++) {
+        if (mpData[mi][0] !== cpUid) continue;
+        if (cpCourseSlug && mpData[mi][1] !== cpCourseSlug) continue;
+        var lessonSlugs = [];
+        try { lessonSlugs = JSON.parse(mpData[mi][8] || '[]'); } catch (exA) { lessonSlugs = []; }
+        modules.push({
+          courseSlug: mpData[mi][1],
+          moduleSlug: mpData[mi][2],
+          moduleTitle: mpData[mi][3],
+          status: mpData[mi][4],
+          completedLessons: Number(mpData[mi][5]) || 0,
+          totalLessons: Number(mpData[mi][6]) || 0,
+          percent: Number(mpData[mi][7]) || 0,
+          completedLessonSlugs: lessonSlugs,
+          timeSpentSec: Number(mpData[mi][9]) || 0,
+          startedAt: mpData[mi][10],
+          completedAt: mpData[mi][11],
+          updatedAt: mpData[mi][12]
+        });
+      }
+    }
+
+    // Course quiz scores.
+    var quizzes = [];
+    var qsSheet = ss.getSheetByName('course_quiz_scores');
+    if (qsSheet) {
+      var qsData = qsSheet.getDataRange().getValues();
+      for (var qi = 1; qi < qsData.length; qi++) {
+        if (qsData[qi][0] !== cpUid) continue;
+        if (cpCourseSlug && qsData[qi][1] !== cpCourseSlug) continue;
+        quizzes.push({
+          courseSlug: qsData[qi][1],
+          moduleSlug: qsData[qi][2],
+          lessonSlug: qsData[qi][3],
+          quizSlug: qsData[qi][4],
+          bestPercent: Number(qsData[qi][5]) || 0,
+          lastPercent: Number(qsData[qi][6]) || 0,
+          attempts: Number(qsData[qi][7]) || 0,
+          passed: isTruthyCell(qsData[qi][8]),
+          passingScore: Number(qsData[qi][9]) || 0,
+          completedAt: qsData[qi][10],
+          updatedAt: qsData[qi][11]
+        });
+      }
+    }
+
+    return jsonResponse({
+      status: 'success',
+      enrollment: enrollment,
+      modules: modules,
+      quizzes: quizzes
+    });
   }
 
   // ── Get problem discussion ──
@@ -473,6 +637,105 @@ function doPost(e) {
         params.updatedAt || Date.now(),
         now
       ]);
+    }
+
+    return jsonResponse({ status: 'success' });
+  }
+
+  // ── Save structured course progress (auth required) ──
+  // Splits one client payload into three tables: course_enrollments (status),
+  // course_module_progress (per-module analytics), course_quiz_scores (course
+  // quizzes). All upserts are last-write-wins on `updatedAt`.
+  if (action === 'saveCourseProgress') {
+    var scpUid = getAuthUid(e, params);
+    if (!scpUid) return jsonResponse({ status: 'error', message: 'Authentication required' });
+
+    var scpCourseSlug = params.courseSlug || '';
+    if (!scpCourseSlug) return jsonResponse({ status: 'error', message: 'Missing courseSlug' });
+
+    var nowIso = new Date().toISOString();
+    var payloadUpdatedAt = params.updatedAt || Date.now();
+
+    // ── 1) course_enrollments (key uid|courseSlug) ──
+    var enSheet = getOrCreateSheet('course_enrollments', COURSE_ENROLLMENTS_HEADERS);
+    upsertRow(
+      enSheet,
+      [scpUid, scpCourseSlug].join('|'),
+      function (r) { return [r[0], r[1]].join('|'); },
+      [
+        scpUid,
+        scpCourseSlug,
+        params.status || 'enrolled',
+        params.enrolledAt || Date.now(),
+        params.completedAt || '',
+        params.lastModule || '',
+        params.lastLesson || '',
+        params.lastLessonAt || '',
+        payloadUpdatedAt,
+        nowIso
+      ],
+      8 // updatedAt column index (0-based) for last-write-wins
+    );
+
+    // ── 2) course_module_progress (key uid|courseSlug|moduleSlug) ──
+    var modules = Array.isArray(params.modules) ? params.modules : [];
+    if (modules.length) {
+      var mpSheet = getOrCreateSheet('course_module_progress', COURSE_MODULE_PROGRESS_HEADERS);
+      modules.forEach(function (m) {
+        if (!m || !m.moduleSlug) return;
+        upsertRow(
+          mpSheet,
+          [scpUid, scpCourseSlug, m.moduleSlug].join('|'),
+          function (r) { return [r[0], r[1], r[2]].join('|'); },
+          [
+            scpUid,
+            scpCourseSlug,
+            m.moduleSlug,
+            m.moduleTitle || '',
+            m.status || 'not_started',
+            Number(m.completedLessons) || 0,
+            Number(m.totalLessons) || 0,
+            Number(m.percent) || 0,
+            JSON.stringify(m.completedLessonSlugs || []),
+            Number(m.timeSpentSec) || 0,
+            m.startedAt || '',
+            m.completedAt || '',
+            m.updatedAt || payloadUpdatedAt,
+            nowIso
+          ],
+          12 // updatedAt column index (0-based)
+        );
+      });
+    }
+
+    // ── 3) course_quiz_scores (key uid|courseSlug|moduleSlug|lessonSlug) ──
+    var quizzes = Array.isArray(params.quizzes) ? params.quizzes : [];
+    if (quizzes.length) {
+      var qsSheet = getOrCreateSheet('course_quiz_scores', COURSE_QUIZ_SCORES_HEADERS);
+      quizzes.forEach(function (q) {
+        if (!q || !q.lessonSlug) return;
+        upsertRow(
+          qsSheet,
+          [scpUid, scpCourseSlug, q.moduleSlug, q.lessonSlug].join('|'),
+          function (r) { return [r[0], r[1], r[2], r[3]].join('|'); },
+          [
+            scpUid,
+            scpCourseSlug,
+            q.moduleSlug || '',
+            q.lessonSlug,
+            q.quizSlug || '',
+            Number(q.bestPercent) || 0,
+            Number(q.lastPercent) || 0,
+            Number(q.attempts) || 0,
+            q.passed ? true : false,
+            Number(q.passingScore) || 0,
+            q.completedAt || '',
+            q.updatedAt || payloadUpdatedAt,
+            nowIso
+          ],
+          11 // updatedAt column index (0-based)
+        );
+      });
     }
 
     return jsonResponse({ status: 'success' });

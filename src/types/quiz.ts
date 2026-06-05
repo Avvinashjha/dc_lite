@@ -47,6 +47,8 @@ export interface QuizMeta {
   /** ISO date string; optional, used for ordering / SEO. */
   publishedAt?: string;
   draft?: boolean;
+  /** When true, hide from the public /quiz browser (course-only quiz). */
+  courseOnly?: boolean;
 }
 
 /** Full quiz with its slug (curated quizzes derive slug from directory name). */

@@ -125,6 +125,23 @@ export function getCourses(): Course[] {
   return slugs.map(slug => getCourse(slug)).filter(Boolean) as Course[];
 }
 
+/**
+ * Set of standalone quiz slugs that are referenced by a course lesson
+ * (`type: "quiz"` + `quizSlug`). These "course quizzes" are excluded from the
+ * public /quiz browser so they only appear inside their course.
+ */
+export function getCourseQuizSlugs(): Set<string> {
+  const slugs = new Set<string>();
+  getCourses().forEach(course => {
+    course.resolvedModules.forEach(mod => {
+      mod.lessons.forEach(lesson => {
+        if (lesson.type === 'quiz' && lesson.quizSlug) slugs.add(lesson.quizSlug);
+      });
+    });
+  });
+  return slugs;
+}
+
 export function getCourse(slug: string): Course | null {
   const courseDir = path.join(CONTENT_DIR, 'courses', slug);
   const metaPath = path.join(courseDir, 'meta.json');

@@ -62,13 +62,49 @@ problem-favorites: {"slug":"two-sum","addedAt":1711234567890}
 problem-notes:     {"content":"Use a hash map for O(n) lookup..."}
 ```
 
-### Tab: `user_enrollments`
+### Tab: `user_enrollments` (legacy)
 
-For course enrollment and lesson tracking. Compound key: `(uid, courseSlug)`.
+Older slim course resume index. Superseded by `course_enrollments` (below) and no longer written by the site; kept only for back-compat. Compound key: `(uid, courseSlug)`.
 
 | Column | A   | B          | C          | D          | E            | F         | G         |
 |--------|-----|------------|------------|------------|--------------|-----------|-----------|
 | Header | uid | courseSlug  | enrolledAt | lastLesson | lastLessonAt | updatedAt | createdAt |
+
+### Tab: `course_enrollments`
+
+Slim "is the user enrolled / has the course been completed" table. One row per `(uid, courseSlug)`. Written by `saveCourseProgress`.
+
+| Column | A   | B          | C      | D          | E           | F          | G          | H            | I         | J         |
+|--------|-----|------------|--------|------------|-------------|------------|------------|--------------|-----------|-----------|
+| Header | uid | courseSlug | status | enrolledAt | completedAt | lastModule | lastLesson | lastLessonAt | updatedAt | createdAt |
+
+- `status` — `enrolled` or `completed` (set to `completed` once every module is done)
+- `lastModule` / `lastLesson` / `lastLessonAt` — resume pointer
+
+### Tab: `course_module_progress`
+
+Per-module progress for analytics (completion %, time spent, status). One row per `(uid, courseSlug, moduleSlug)`. Written by `saveCourseProgress`.
+
+| Column | A   | B          | C          | D           | E      | F                | G            | H       | I                    | J            | K         | L           | M         | N         |
+|--------|-----|------------|------------|-------------|--------|------------------|--------------|---------|----------------------|--------------|-----------|-------------|-----------|-----------|
+| Header | uid | courseSlug | moduleSlug | moduleTitle | status | completedLessons | totalLessons | percent | completedLessonSlugs | timeSpentSec | startedAt | completedAt | updatedAt | createdAt |
+
+- `status` — `not_started` / `in_progress` / `completed`
+- `completedLessons` / `totalLessons` / `percent` — module roll-up
+- `completedLessonSlugs` — JSON array of completed lesson slugs in this module
+- `timeSpentSec` — active reading time across the module's lessons (visibility + idle aware)
+
+### Tab: `course_quiz_scores`
+
+Per-quiz results for course knowledge-checks (kept separate from the ranked public `quiz_scores`). One row per `(uid, courseSlug, moduleSlug, lessonSlug)`. Written by `saveCourseProgress`.
+
+| Column | A   | B          | C          | D          | E        | F           | G           | H        | I            | J           | K           | L         | M         |
+|--------|-----|------------|------------|------------|----------|-------------|-------------|----------|--------------|-------------|-------------|-----------|-----------|
+| Header | uid | courseSlug | moduleSlug | lessonSlug | quizSlug | bestPercent | lastPercent | attempts | passed | passingScore | completedAt | updatedAt | createdAt |
+
+- `bestPercent` / `lastPercent` — best and most-recent score
+- `attempts` — number of times the quiz was taken
+- `passed` — `bestPercent >= passingScore`
 
 ### Tab: `problem_discussions`
 
@@ -194,7 +230,8 @@ When you update the Apps Script code:
 |------------------|-------------------------|--------------------------------------------------|
 | `listComments`   | `postSlug`              | `{ status, comments: [{ name, email, comment, timestamp }] }` |
 | `getProgress`    | `uid`                   | `{ status, items: [{ type, slug, data, updatedAt }] }` |
-| `getEnrollments` | `uid`                   | `{ status, enrollments: [{ courseSlug, enrolledAt, ... }] }` |
+| `getEnrollments` | `uid`                   | `{ status, enrollments: [{ courseSlug, enrolledAt, ... }] }` _(legacy)_ |
+| `getCourseProgress` | `courseSlug` (optional) | `{ status, enrollment, modules: [...], quizzes: [...] }` (own data only) |
 | `getDiscussion`  | `slug`                  | `{ status, posts: [{ name, message, uid, ts, timestamp }] }` |
 | `getCertification` | `uid`, `courseSlug`   | `{ status, certification: { courseSlug, displayName, round1, round2, round3, certified, certifiedAt, certId } \| null }` |
 | `verifyCertificate` | `certId`             | `{ status, valid, certificate?: { displayName, courseSlug, certifiedAt, certId } }` |
@@ -208,7 +245,8 @@ All GET actions support JSONP via `&callback=fnName` parameter.
 | `subscribe`        | `form-urlencoded`    | `action=subscribe&email=...&source=...&timestamp=...`                |
 | `comment`          | `form-urlencoded`    | `action=comment&postSlug=...&name=...&comment=...&timestamp=...`     |
 | `saveProgress`     | `application/json`   | `{ action, uid, items: [{ type, slug, data, updatedAt }] }`         |
-| `saveEnrollment`   | `application/json`   | `{ action, uid, courseSlug, enrolledAt, lastLesson, ... }`           |
+| `saveEnrollment`   | `application/json`   | `{ action, uid, courseSlug, enrolledAt, lastLesson, ... }` _(legacy)_ |
+| `saveCourseProgress` | `text/plain` (JSON) | `{ action, courseSlug, status, enrolledAt, completedAt, lastModule, lastLesson, lastLessonAt, modules: [{ moduleSlug, moduleTitle, status, completedLessons, totalLessons, percent, completedLessonSlugs, timeSpentSec, ... }], quizzes: [{ moduleSlug, lessonSlug, quizSlug, bestPercent, lastPercent, attempts, passed, passingScore, ... }] }` |
 | `postDiscussion`   | `application/json`   | `{ action, slug, name, message, uid, timestamp }`                    |
 
 ---
@@ -285,6 +323,8 @@ The Apps Script URL is embedded in the client-side JavaScript (unavoidable for a
 | `getEnrollments` | Token verified; can only read own data |
 | `saveProgress` | Token verified; uid must match token |
 | `saveEnrollment` | Token verified; uid must match token |
+| `getCourseProgress` | Token verified; can only read own course rows |
+| `saveCourseProgress` | Token verified; rows written under verified uid |
 | `postDiscussion` | Token required; post attributed to verified uid |
 | `comment` | Token verified if provided; uid overridden by token |
 | `getCertification` | Token verified; can only read own certification row |

@@ -12,11 +12,20 @@ without any backend**. The optional Google Apps Script below powers the
 It follows the exact same conventions as the existing site script
 (`scripts/apps-script.js`): action-based dispatch, JSON responses, POST bodies
 sent as `text/plain` (to avoid CORS preflight), and Firebase ID-token
-verification via Google's `tokeninfo` endpoint.
+verification via the Identity Toolkit `accounts:lookup` endpoint (set
+`FIREBASE_API_KEY` in the script; the `tokeninfo` endpoint does **not** work for
+Firebase tokens).
 
 > If the endpoint is **not** configured, the UI degrades gracefully: curated
 > quizzes and local/practice play keep working, and community/leaderboard/create
 > show a friendly "coming soon / not configured" state.
+
+> **Course quizzes are not community quizzes.** Quizzes referenced by a course
+> lesson (`type: "quiz"` + `quizSlug`) are automatically excluded from the public
+> `/quiz` browser (see `getPublicQuizzes()` / `getCourseQuizSlugs()`), and their
+> results are tracked in the `course_quiz_scores` tab via `saveCourseProgress`,
+> not in the ranked `quiz_scores` tab. You can also force-hide a curated quiz
+> with `"courseOnly": true` in its `quiz.json`.
 
 ---
 

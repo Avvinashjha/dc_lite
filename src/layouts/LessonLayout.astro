@@ -53,7 +53,7 @@ const courseStructure = {
   modules: course.resolvedModules.map((m) => ({
     slug: m.slug,
     title: m.title,
-    lessons: m.lessons.map((l) => ({ slug: l.slug, type: l.type })),
+    lessons: m.lessons.map((l) => ({ slug: l.slug, type: l.type, quizSlug: l.quizSlug ?? "" })),
   })),
 };
 
@@ -337,6 +337,10 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
     if (typeof DCStore === "undefined" || typeof DCCourseProgress === "undefined") return;
     var CP = DCCourseProgress;
 
+    // Expose the structure so DCCourseProgress can build the structured sync
+    // payload (course_enrollments / course_module_progress / course_quiz_scores).
+    window.__dcCourseStructure = structure;
+
     var modIndex = -1;
     for (var i = 0; i < structure.modules.length; i++) {
       if (structure.modules[i].slug === lessonModuleSlug) {
@@ -406,15 +410,91 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
     function trackLastLesson() {
       return CP.getRow(lessonCourseSlug).then(function (row) {
         if (!row || !row.enrolledAt) return;
-        row.lastLesson = lessonSlug;
-        row.lastLessonAt = Date.now();
-        row.updatedAt = Date.now();
-        return DCStore.set("course-enrollment", lessonCourseSlug, row).then(function () {
-          if (typeof DCSyncService !== "undefined" && DCSyncService.isActive()) {
-            DCSyncService.pushEnrollment(lessonCourseSlug, row);
-          }
+        return CP.trackLastLesson(lessonCourseSlug, lessonModuleSlug, lessonSlug);
+      });
+    }
+
+    // ── Smart active-time tracking ──────────────────────────────────────────
+    // Count only seconds where the tab is visible and the user is not idle.
+    var IDLE_MS = 60000;        // no interaction for 60s ⇒ paused
+    var FLUSH_MS = 15000;       // persist accumulated time every 15s
+    var pendingSec = 0;         // un-persisted active seconds
+    var lastTick = Date.now();
+    var lastActivity = Date.now();
+
+    function isActiveNow() {
+      return document.visibilityState === "visible" && (Date.now() - lastActivity) < IDLE_MS;
+    }
+    function tick() {
+      var now = Date.now();
+      if (isActiveNow()) pendingSec += (now - lastTick) / 1000;
+      lastTick = now;
+    }
+    function flushTime() {
+      tick();
+      var secs = Math.round(pendingSec);
+      if (secs <= 0) return Promise.resolve();
+      pendingSec -= secs;
+      return CP.addTime(lessonCourseSlug, lessonModuleSlug, lessonSlug, secs);
+    }
+    ["mousemove", "keydown", "scroll", "click", "touchstart"].forEach(function (evt) {
+      window.addEventListener(evt, function () { lastActivity = Date.now(); }, { passive: true });
+    });
+    setInterval(tick, 1000);
+    setInterval(flushTime, FLUSH_MS);
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") flushTime();
+      else { lastTick = Date.now(); lastActivity = Date.now(); }
+    });
+    // Final flush on unload: persist locally and beacon the structured payload
+    // (a normal fetch may be cancelled during page teardown).
+    window.addEventListener("pagehide", function () {
+      tick();
+      var secs = Math.round(pendingSec);
+      if (secs > 0) { pendingSec = 0; CP.addTime(lessonCourseSlug, lessonModuleSlug, lessonSlug, secs); }
+      beaconCourseProgress();
+    });
+
+    function beaconCourseProgress() {
+      if (typeof DCSyncService === "undefined" || !DCSyncService.isActive()) return;
+      if (typeof navigator === "undefined" || !navigator.sendBeacon) return;
+      var url = DCSyncService._getScriptUrl ? DCSyncService._getScriptUrl() : null;
+      if (!url) return;
+      CP.getRow(lessonCourseSlug).then(function (row) {
+        if (!row) return;
+        var payload = CP.buildStructuredPayload(structure, row);
+        var token = (typeof window.getFirebaseIdToken === "function") ? window.getFirebaseIdToken() : Promise.resolve("");
+        Promise.resolve(token).then(function (tok) {
+          var body = JSON.stringify(Object.assign({ action: "saveCourseProgress", idToken: tok || "" }, payload));
+          try { navigator.sendBeacon(url, new Blob([body], { type: "text/plain" })); } catch (e) {}
         });
       });
+    }
+
+    // ── Smart auto-completion for reading lessons ───────────────────────────
+    // Mark a non-quiz lesson complete once the reader has reached the end of the
+    // content AND spent a minimum dwell time on it. The manual button remains.
+    var MIN_DWELL_MS = 30000;
+    var autoCompleteArmed = !isQuizLesson;
+    var lessonStart = Date.now();
+    function maybeAutoComplete() {
+      if (!autoCompleteArmed) return;
+      var body = document.querySelector("[data-lesson-body]");
+      if (!body || body.hidden) return; // gated/locked
+      if ((Date.now() - lessonStart) < MIN_DWELL_MS) return;
+      var rect = body.getBoundingClientRect();
+      var reachedEnd = rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 80;
+      if (!reachedEnd) return;
+      autoCompleteArmed = false;
+      CP.getRow(lessonCourseSlug).then(function (row) {
+        if (row && CP.isLessonComplete(row, lessonModuleSlug, lessonSlug)) return;
+        CP.markLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+      });
+    }
+    if (!isQuizLesson) {
+      window.addEventListener("scroll", maybeAutoComplete, { passive: true });
+      window.addEventListener("resize", maybeAutoComplete, { passive: true });
+      setInterval(maybeAutoComplete, 5000); // also covers short pages / no-scroll
     }
 
     var markBtn = document.querySelector("[data-mark-complete]");
@@ -443,12 +523,19 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
       });
     }
 
-    // Re-render once cross-device progress merges in after sign-in.
+    // Pull structured cross-device progress on sign-in, then re-render.
+    function hydrateAndRefresh() {
+      if (typeof DCSyncService !== "undefined" && DCSyncService.isActive() &&
+          typeof DCSyncService.pullCourseProgress === "function") {
+        return DCSyncService.pullCourseProgress(lessonCourseSlug).then(refresh);
+      }
+      return refresh();
+    }
     window.addEventListener("dc:authchange", function () {
-      setTimeout(refresh, 1800);
+      setTimeout(hydrateAndRefresh, 600);
     });
 
-    DCStore.init().then(trackLastLesson).then(refresh);
+    DCStore.init().then(trackLastLesson).then(hydrateAndRefresh);
   })();
 </script>
 
