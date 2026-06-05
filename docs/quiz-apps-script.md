@@ -13,8 +13,8 @@ It follows the exact same conventions as the existing site script
 (`scripts/apps-script.js`): action-based dispatch, JSON responses, POST bodies
 sent as `text/plain` (to avoid CORS preflight), and Firebase ID-token
 verification via the Identity Toolkit `accounts:lookup` endpoint (set
-`FIREBASE_API_KEY` in the script; the `tokeninfo` endpoint does **not** work for
-Firebase tokens).
+`FIREBASE_API_KEY` as a **Script Property** in the Apps Script editor — not
+hardcoded; the `tokeninfo` endpoint does **not** work for Firebase tokens).
 
 > If the endpoint is **not** configured, the UI degrades gracefully: curated
 > quizzes and local/practice play keep working, and community/leaderboard/create

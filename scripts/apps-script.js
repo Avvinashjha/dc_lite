@@ -29,13 +29,31 @@
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 //
-// Firebase Web config (NOT secret — these ship in the client bundle anyway).
-// Copy these from Firebase Console → Project Settings → General → Your apps,
-// or from your site's PUBLIC_FIREBASE_* env vars. They MUST match the Firebase
-// project your site authenticates against, otherwise token verification fails
-// and every signed-in feature (progress sync, enrollments, quizzes) breaks.
-var FIREBASE_API_KEY = 'AIzaSyCo59zkY1n3GgshBoxUcZCieVwhNVwyhQw';   // PUBLIC_FIREBASE_API_KEY (dailycoder-007)
-var FIREBASE_PROJECT_ID = 'dailycoder-007';                         // PUBLIC_FIREBASE_PROJECT_ID
+// The Firebase Web API key is read from Script Properties so it is NOT stored in
+// this committed file (GitHub secret scanning flags hardcoded google_api_key
+// values, even though Firebase web keys are technically public identifiers).
+//
+// SET IT ONCE in the Apps Script editor:
+//   Project Settings (gear icon) → Script properties → Add script property
+//     name:  FIREBASE_API_KEY     value: <your PUBLIC_FIREBASE_API_KEY>
+//     name:  FIREBASE_PROJECT_ID  value: <your PUBLIC_FIREBASE_PROJECT_ID>
+//
+// The fallback constants below are intentionally blank; leave them blank in git.
+var FIREBASE_API_KEY = '';      // fallback only — prefer the script property
+var FIREBASE_PROJECT_ID = '';   // fallback only — prefer the script property
+
+// Resolve config from Script Properties first, then the constants above.
+function getConfigValue(name, fallback) {
+  try {
+    var v = PropertiesService.getScriptProperties().getProperty(name);
+    if (v) return v;
+  } catch (ex) { /* PropertiesService unavailable in some contexts */ }
+  return fallback || '';
+}
+
+function getFirebaseApiKey() {
+  return getConfigValue('FIREBASE_API_KEY', FIREBASE_API_KEY);
+}
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -95,13 +113,14 @@ function upsertRow(sheet, key, keyFn, rowValues, updatedAtIdx) {
  */
 function verifyFirebaseToken(idToken) {
   if (!idToken) return null;
-  if (!FIREBASE_API_KEY || FIREBASE_API_KEY === 'YOUR_FIREBASE_WEB_API_KEY') {
+  var apiKey = getFirebaseApiKey();
+  if (!apiKey || apiKey === 'YOUR_FIREBASE_WEB_API_KEY') {
     // Misconfigured: fail closed so we never trust an unverified token.
     return null;
   }
   try {
     var url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' +
-      encodeURIComponent(FIREBASE_API_KEY);
+      encodeURIComponent(apiKey);
     var res = UrlFetchApp.fetch(url, {
       method: 'post',
       contentType: 'application/json',
@@ -194,6 +213,27 @@ function setupSheets() {
 function doGet(e) {
   var action = (e.parameter.action || '').trim();
   var callback = e.parameter.callback || '';
+
+  // ── Debug: report what THIS deployment sees (no secrets leaked) ──
+  // Hit `?action=authcheck&idToken=<token>` to confirm the live deployment is
+  // running this code and whether token verification succeeds. Safe to leave in;
+  // it never returns the API key, only whether one is configured.
+  if (action === 'authcheck') {
+    var apiKey = getFirebaseApiKey();
+    var token = e.parameter.idToken || '';
+    var verified = token ? verifyFirebaseToken(token) : null;
+    var acResult = {
+      status: 'success',
+      build: 'course-tracking-v1',
+      verifier: 'identitytoolkit/accounts:lookup',
+      apiKeyConfigured: !!apiKey,
+      tokenProvided: !!token,
+      tokenVerified: !!verified,
+      uid: verified ? verified.uid : null
+    };
+    if (callback) return jsonpResponse(acResult, callback);
+    return jsonResponse(acResult);
+  }
 
   // ── List comments ──
   if (action === 'listComments') {

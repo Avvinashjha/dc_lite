@@ -312,8 +312,20 @@ The Apps Script URL is embedded in the client-side JavaScript (unavoidable for a
 
 1. The client calls `user.getIdToken()` from Firebase Auth to get a short-lived JWT.
 2. This token is sent with every request as `idToken` (query param for GET, JSON field for POST).
-3. The Apps Script calls Google's `oauth2.googleapis.com/tokeninfo` endpoint to verify the token.
-4. The verified `uid` from the token is compared against the claimed `uid` — mismatches are rejected.
+3. The Apps Script verifies it via the Firebase Identity Toolkit `accounts:lookup` endpoint (`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=<FIREBASE_API_KEY>`), which validates signature/expiry against the project and returns the canonical `uid` (`localId`).
+4. The verified `uid` is used for all reads/writes, so a caller can never act as another user.
+
+> ⚠️ Do **not** use `oauth2.googleapis.com/tokeninfo` — it only validates Google OAuth ID tokens and rejects Firebase tokens (issued by `securetoken.google.com`), silently breaking every signed-in feature.
+
+#### Configure the API key (without committing it)
+
+The key is read from **Script Properties**, not hardcoded (GitHub secret scanning flags hardcoded `google_api_key` values). In the Apps Script editor:
+
+1. **Project Settings** (gear icon) → **Script properties** → **Add script property**.
+2. Add `FIREBASE_API_KEY` = your `PUBLIC_FIREBASE_API_KEY`, and `FIREBASE_PROJECT_ID` = your `PUBLIC_FIREBASE_PROJECT_ID`.
+3. **Create a new deployment version** (Deploy → Manage deployments → edit → New version).
+
+To confirm the live deployment is verifying tokens, hit `?action=authcheck&idToken=<token>` — it returns `{ apiKeyConfigured, tokenVerified, uid }` without ever exposing the key.
 
 ### Protection levels
 
