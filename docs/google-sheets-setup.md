@@ -146,12 +146,21 @@ Accepted truthy values for `roundN` / `certified`: `TRUE`, `true`, `1`, `yes`, `
 
 ## Step 3: Set Up the Apps Script
 
-1. In your Google Sheet, go to **Extensions > Apps Script**.
-2. This opens the Apps Script editor tied to your spreadsheet.
-3. Delete any existing code in the `Code.gs` file.
-4. Copy the entire contents of [`scripts/apps-script.js`](../scripts/apps-script.js) from the repository.
-5. Paste it into the Apps Script editor.
-6. Click **Save** (Ctrl+S / Cmd+S).
+The backend lives as **modular sources** under [`scripts/apps-script/src/`](../scripts/apps-script/) and is bundled into a single deployable file. See [`scripts/apps-script/README.md`](../scripts/apps-script/README.md) for the full module layout.
+
+1. Build the deployable bundle locally:
+   ```bash
+   npm run build:gas
+   ```
+   This regenerates `scripts/apps-script/dist/Code.gs` from the modular sources. (Never edit `dist/Code.gs` by hand — edit the files under `src/` and rebuild.)
+2. In your Google Sheet, go to **Extensions > Apps Script**.
+3. This opens the Apps Script editor tied to your spreadsheet.
+4. Delete any existing code in the `Code.gs` file.
+5. Copy the entire contents of the generated [`scripts/apps-script/dist/Code.gs`](../scripts/apps-script/dist/Code.gs).
+6. Paste it into the Apps Script editor.
+7. Click **Save** (Ctrl+S / Cmd+S).
+
+> When you change backend behaviour later, edit the relevant module under `scripts/apps-script/src/`, re-run `npm run build:gas`, paste the updated `dist/Code.gs`, and create a **New version** deployment (Step 4).
 
 ### (Recommended) Create all tabs at once
 
