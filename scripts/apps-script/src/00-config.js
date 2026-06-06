@@ -36,10 +36,21 @@ var Config = (function () {
     return get('FIREBASE_PROJECT_ID', FIREBASE_PROJECT_ID);
   }
 
+  // Diagnostic-only: the NAMES of all script properties (never the values), so a
+  // misnamed/missing FIREBASE_API_KEY can be spotted via ?action=authcheck.
+  function debugPropNames() {
+    try {
+      return PropertiesService.getScriptProperties().getKeys();
+    } catch (ex) {
+      return ['<PropertiesService unavailable: ' + (ex && ex.message ? ex.message : String(ex)) + '>'];
+    }
+  }
+
   return {
     BUILD: BUILD,
     get: get,
     firebaseApiKey: firebaseApiKey,
-    firebaseProjectId: firebaseProjectId
+    firebaseProjectId: firebaseProjectId,
+    debugPropNames: debugPropNames
   };
 })();

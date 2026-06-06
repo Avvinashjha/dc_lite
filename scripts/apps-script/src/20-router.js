@@ -25,6 +25,9 @@ var Debug = (function () {
       tokenProvided: !!token,
       tokenVerified: !!(dbg && dbg.uid),
       uid: dbg ? dbg.uid : null,
+      apiKeyLength: apiKey ? apiKey.length : 0,
+      scriptPropNames: Config.debugPropNames(),
+      projectId: Config.firebaseProjectId(),
       lookupHttpCode: dbg ? dbg.httpCode : null,
       lookupErrorStatus: dbg ? dbg.errorStatus : '',
       lookupErrorMessage: dbg ? dbg.errorMessage : ''
