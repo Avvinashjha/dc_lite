@@ -23,19 +23,19 @@
   },
   "newsletter": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxXx3Rl-po2xVH4c5tZn8aXDCNX7AS2VrleUyxatnuaNTEyZ2mQ0LQ26j14GLGYe76yIA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbyUwUETZZaOOjcD28Q-GjjD4jwV7lqckIOjjlRWrBpcmSX6nE5Bh0wdU-jA3pvo7zrT4w/exec"
   },
   "comments": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxXx3Rl-po2xVH4c5tZn8aXDCNX7AS2VrleUyxatnuaNTEyZ2mQ0LQ26j14GLGYe76yIA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbyUwUETZZaOOjcD28Q-GjjD4jwV7lqckIOjjlRWrBpcmSX6nE5Bh0wdU-jA3pvo7zrT4w/exec"
   },
   "sync": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxXx3Rl-po2xVH4c5tZn8aXDCNX7AS2VrleUyxatnuaNTEyZ2mQ0LQ26j14GLGYe76yIA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbyUwUETZZaOOjcD28Q-GjjD4jwV7lqckIOjjlRWrBpcmSX6nE5Bh0wdU-jA3pvo7zrT4w/exec"
   },
   "quiz": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxXx3Rl-po2xVH4c5tZn8aXDCNX7AS2VrleUyxatnuaNTEyZ2mQ0LQ26j14GLGYe76yIA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbyUwUETZZaOOjcD28Q-GjjD4jwV7lqckIOjjlRWrBpcmSX6nE5Bh0wdU-jA3pvo7zrT4w/exec"
   },
   "seo": {
     "twitterHandle": "@dailycoder_in",
