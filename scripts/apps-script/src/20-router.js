@@ -16,15 +16,18 @@ var Debug = (function () {
   function authcheck(ctx) {
     var apiKey = Config.firebaseApiKey();
     var token = ctx.e.parameter.idToken || '';
-    var verified = token ? Auth.verify(token) : null;
+    var dbg = token ? Auth.lookupDebug(token) : null;
     return Http.reply(ctx, {
       status: 'success',
       build: Config.BUILD,
       verifier: 'identitytoolkit/accounts:lookup',
       apiKeyConfigured: !!apiKey,
       tokenProvided: !!token,
-      tokenVerified: !!verified,
-      uid: verified ? verified.uid : null
+      tokenVerified: !!(dbg && dbg.uid),
+      uid: dbg ? dbg.uid : null,
+      lookupHttpCode: dbg ? dbg.httpCode : null,
+      lookupErrorStatus: dbg ? dbg.errorStatus : '',
+      lookupErrorMessage: dbg ? dbg.errorMessage : ''
     });
   }
 

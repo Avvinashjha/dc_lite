@@ -48,5 +48,46 @@ var Auth = (function () {
     return verified ? verified.uid : null;
   }
 
-  return { verify: verify, uidFrom: uidFrom };
+  /**
+   * Diagnostic-only: surfaces the raw accounts:lookup HTTP status + error so a
+   * failing verification can be diagnosed via `?action=authcheck`. Never returns
+   * the API key. Used by Debug.authcheck only.
+   */
+  function lookupDebug(idToken) {
+    var out = { httpCode: null, errorMessage: '', errorStatus: '', uid: null };
+    if (!idToken) { out.errorMessage = 'no token provided'; return out; }
+    var apiKey = Config.firebaseApiKey();
+    if (!apiKey || apiKey === 'YOUR_FIREBASE_WEB_API_KEY') {
+      out.errorMessage = 'api key not configured';
+      return out;
+    }
+    try {
+      var url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' +
+        encodeURIComponent(apiKey);
+      var res = UrlFetchApp.fetch(url, {
+        method: 'post',
+        contentType: 'application/json',
+        payload: JSON.stringify({ idToken: idToken }),
+        muteHttpExceptions: true
+      });
+      out.httpCode = res.getResponseCode();
+      var body = {};
+      try { body = JSON.parse(res.getContentText()); } catch (exP) { body = {}; }
+      if (out.httpCode === 200) {
+        var users = body.users || [];
+        out.uid = (users.length && users[0].localId) ? users[0].localId : null;
+        if (!out.uid) out.errorMessage = 'lookup returned no user';
+      } else if (body.error) {
+        out.errorStatus = body.error.status || '';
+        out.errorMessage = body.error.message || '';
+      } else {
+        out.errorMessage = 'non-200 with no error body';
+      }
+    } catch (ex) {
+      out.errorMessage = 'fetch threw: ' + (ex && ex.message ? ex.message : String(ex));
+    }
+    return out;
+  }
+
+  return { verify: verify, uidFrom: uidFrom, lookupDebug: lookupDebug };
 })();
