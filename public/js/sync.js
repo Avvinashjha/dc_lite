@@ -7,7 +7,10 @@
  * Depends on: DCStore (public/js/store.js), auth-gate.js globals.
  */
 var DCSyncService = (function () {
-  var SYNCED_TOOLS = ['problem-progress', 'problem-favorites', 'problem-notes', 'course-enrollment'];
+  // Note: 'course-enrollment' is intentionally NOT synced via the generic
+  // user_progress blob anymore — course progress is pushed structured through
+  // pushCourseProgress() into the dedicated course_* tables.
+  var SYNCED_TOOLS = ['problem-progress', 'problem-favorites', 'problem-notes'];
   var DEBOUNCE_MS = 3000;
   var MAX_RETRIES = 5;
   var BASE_RETRY_MS = 2000;
@@ -234,6 +237,67 @@ var DCSyncService = (function () {
       });
   }
 
+  // ── Structured course progress (course_enrollments / course_module_progress /
+  //    course_quiz_scores) ──
+  function pushCourseProgress(payload) {
+    if (!isActive() || !payload || !payload.courseSlug) return Promise.resolve();
+
+    return getIdToken().then(function (token) {
+      var body = JSON.stringify(Object.assign({
+        action: 'saveCourseProgress',
+        uid: userId,
+        idToken: token || ''
+      }, payload));
+
+      return fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: body
+      });
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data && data.status !== 'success') {
+        console.warn('[DCSyncService] Course progress push response:', data);
+      }
+    })
+    .catch(function (err) {
+      console.warn('[DCSyncService] Course progress push failed:', err);
+    });
+  }
+
+  function pullCourseProgress(courseSlug) {
+    if (!userId || !scriptUrl) return Promise.resolve(null);
+
+    return getIdToken().then(function (token) {
+      var url = scriptUrl + '?action=getCourseProgress';
+      if (courseSlug) url += '&courseSlug=' + encodeURIComponent(courseSlug);
+      if (token) url += '&idToken=' + encodeURIComponent(token);
+      return fetch(url);
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data || data.status !== 'success') return null;
+        var server = {
+          enrollment: data.enrollment || null,
+          modules: data.modules || [],
+          quizzes: data.quizzes || []
+        };
+        // Hydrate the local blob when the course-progress helper is available.
+        if (typeof DCCourseProgress !== 'undefined' && courseSlug &&
+            typeof DCCourseProgress.applyServerProgress === 'function') {
+          return DCCourseProgress.applyServerProgress(courseSlug, server).then(function () {
+            return server;
+          });
+        }
+        return server;
+      })
+      .catch(function (err) {
+        console.warn('[DCSyncService] Course progress pull failed:', err);
+        return null;
+      });
+  }
+
   function _getScriptUrl() {
     return scriptUrl;
   }
@@ -248,6 +312,8 @@ var DCSyncService = (function () {
     pullAndMerge: pullAndMerge,
     pushEnrollment: pushEnrollment,
     pullEnrollments: pullEnrollments,
+    pushCourseProgress: pushCourseProgress,
+    pullCourseProgress: pullCourseProgress,
     _getScriptUrl: _getScriptUrl
   };
 })();

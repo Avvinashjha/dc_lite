@@ -339,7 +339,7 @@ const courseJsonLd = {
     await store.set(ENROLL_TOOL, courseSlug, data);
 
     if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
-      (window as any).DCSyncService.pushEnrollment(courseSlug, data);
+      (window as any).DCSyncService.pushCourseProgress(CP.buildStructuredPayload(structure, data));
     }
 
     enrolled = true;
@@ -382,11 +382,19 @@ const courseJsonLd = {
     });
   }
 
+  function hydrateAndLoad() {
+    const sync = (window as any).DCSyncService;
+    if (sync && sync.isActive && sync.isActive() && typeof sync.pullCourseProgress === 'function') {
+      return sync.pullCourseProgress(courseSlug).then(loadEnrollment);
+    }
+    return loadEnrollment();
+  }
+
   window.addEventListener('dc:authchange', () => {
-    setTimeout(loadEnrollment, 1800);
+    setTimeout(hydrateAndLoad, 600);
   });
 
-  loadEnrollment();
+  hydrateAndLoad();
 </script>
 
 <style>
