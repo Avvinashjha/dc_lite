@@ -1,17 +1,26 @@
 /**
  * DCCourseProgress – client-side course completion + gating helpers.
  *
- * Built on top of DCStore (public/js/store.js). Progress is stored on the
- * existing synced `course-enrollment` record (keyed by course slug), so it
- * round-trips to Google Sheets via DCSyncService for free.
+ * The Google Sheet (course_enrollments / course_module_progress /
+ * course_quiz_scores, via DCSyncService) is the SINGLE SOURCE OF TRUTH for
+ * course progress. This module keeps only an in-memory, per-page-session cache
+ * (NOT IndexedDB): it is hydrated from the server on load / sign-in and pushes
+ * every change straight back. Nothing course-related is persisted to
+ * IndexedDB anymore — that previously caused a confusing dual source of truth
+ * (local blob vs. server) that could drift and never reconcile.
  *
- * Record shape (tool: 'course-enrollment', id: courseSlug):
+ * Trade-off: a signed-out user's progress lives only for the current page
+ * session (it is not persisted anywhere), since there is no server identity to
+ * store it against.
+ *
+ * In-memory row shape (keyed by courseSlug):
  *   {
  *     enrolledAt, lastModule, lastLesson, lastLessonAt, updatedAt, completedAt,
  *     completedLessons: ["moduleSlug/lessonSlug", ...],
  *     quizScores: { "moduleSlug/lessonSlug": <bestPercent> },
  *     quizMeta: { "moduleSlug/lessonSlug": { attempts, lastPercent, passingScore } },
- *     timeSpent: { "moduleSlug/lessonSlug": <seconds> }
+ *     timeSpent: { "moduleSlug/lessonSlug": <seconds this session> },
+ *     timeBaseline: { "moduleSlug": <seconds already stored on the server> }
  *   }
  *
  * Course structure is passed in by callers as:
@@ -19,7 +28,13 @@
  * (injected per page as window.__dcCourseStructure).
  */
 var DCCourseProgress = (function () {
-  var TOOL = 'course-enrollment';
+  // In-memory, per-page-session cache: courseSlug -> row. Replaces IndexedDB.
+  var cache = {};
+
+  // Number of structured pushes currently in flight. While > 0, a hydrate must
+  // NOT authoritatively replace the cache: the server may not yet reflect the
+  // un-persisted local write, so replacing would clobber it.
+  var pendingPushes = 0;
 
   function key(moduleSlug, lessonSlug) {
     return moduleSlug + '/' + lessonSlug;
@@ -41,41 +56,51 @@ var DCCourseProgress = (function () {
     return (typeof window !== 'undefined' && window.__dcCourseStructure) || null;
   }
 
-  // Push the structured (3-table) payload to the server, best-effort.
+  // Push the structured (3-table) payload to the server, best-effort. Tracks
+  // the in-flight push so a concurrent hydrate won't clobber this write.
   function syncStructured(courseSlug, row) {
     if (typeof DCSyncService === 'undefined' || !DCSyncService.isActive()) return;
     if (typeof DCSyncService.pushCourseProgress !== 'function') return;
     var struct = structure();
     if (!struct || struct.slug !== courseSlug) return;
-    DCSyncService.pushCourseProgress(buildStructuredPayload(struct, row));
+    pendingPushes++;
+    function settle() { pendingPushes = Math.max(0, pendingPushes - 1); }
+    Promise.resolve(DCSyncService.pushCourseProgress(buildStructuredPayload(struct, row)))
+      .then(settle, settle);
+  }
+
+  // True while a local write is still being synced to the server.
+  function hasPendingPush() {
+    return pendingPushes > 0;
   }
 
   function getRow(courseSlug) {
-    return DCStore.init().then(function () {
-      return DCStore.get(TOOL, courseSlug).then(normalize);
-    });
+    return Promise.resolve(cache[courseSlug] ? normalize(cache[courseSlug]) : null);
+  }
+
+  function freshRow() {
+    return {
+      enrolledAt: Date.now(),
+      lastModule: '',
+      lastLesson: '',
+      lastLessonAt: null,
+      completedAt: null,
+      completedLessons: [],
+      quizScores: {},
+      quizMeta: {},
+      timeSpent: {},
+      timeBaseline: {},
+      updatedAt: Date.now()
+    };
   }
 
   // Get the row, creating an enrollment record if none exists (auto-enroll on
-  // first completion so progress is always persisted).
+  // first completion so progress is always tracked + synced).
   function ensureRow(courseSlug) {
     return getRow(courseSlug).then(function (row) {
       if (row) return row;
-      var fresh = {
-        enrolledAt: Date.now(),
-        lastModule: '',
-        lastLesson: '',
-        lastLessonAt: null,
-        completedAt: null,
-        completedLessons: [],
-        quizScores: {},
-        quizMeta: {},
-        timeSpent: {},
-        updatedAt: Date.now()
-      };
-      return DCStore.set(TOOL, courseSlug, fresh).then(function () {
-        return getRow(courseSlug);
-      });
+      cache[courseSlug] = freshRow();
+      return normalize(cache[courseSlug]);
     });
   }
 
@@ -86,10 +111,17 @@ var DCCourseProgress = (function () {
     if (struct && struct.slug === courseSlug && !row.completedAt && courseComplete(struct, row)) {
       row.completedAt = Date.now();
     }
-    return DCStore.set(TOOL, courseSlug, row).then(function () {
-      // Structured, per-module/quiz sync (course_enrollments / course_module_progress / course_quiz_scores).
-      syncStructured(courseSlug, row);
-      return row;
+    cache[courseSlug] = row;
+    // Structured, per-module/quiz sync (course_enrollments / course_module_progress / course_quiz_scores).
+    syncStructured(courseSlug, row);
+    return Promise.resolve(row);
+  }
+
+  // Explicit enrollment: create the row (if needed), stamp enrolledAt, and push.
+  function enroll(courseSlug) {
+    return ensureRow(courseSlug).then(function (row) {
+      if (!row.enrolledAt) row.enrolledAt = Date.now();
+      return save(courseSlug, row);
     });
   }
 
@@ -268,65 +300,64 @@ var DCCourseProgress = (function () {
     return { total: total, completed: done, percent: total ? Math.round((done / total) * 100) : 0 };
   }
 
-  // Merge server-side structured progress into the local blob (restore on
-  // sign-in / cross-device). Union of completion, best quiz scores, and the
-  // larger of local vs server module time; never destructive.
+  // Rebuild the in-memory row authoritatively from server-side structured
+  // progress (called on load / sign-in). The server is the source of truth, so
+  // this REPLACES the cached row rather than union-merging — no drift, no
+  // confusion. Per-module server time becomes the `timeBaseline`; this-session
+  // `timeSpent` starts empty and is added on top before the next push.
   function applyServerProgress(courseSlug, server) {
     if (!server) return Promise.resolve(null);
-    return getRow(courseSlug).then(function (existing) {
-      var row = normalize(existing) || {
-        enrolledAt: 0, lastModule: '', lastLesson: '', lastLessonAt: null,
-        completedAt: null, completedLessons: [], quizScores: {}, quizMeta: {},
-        timeSpent: {}, timeBaseline: {}, updatedAt: 0
-      };
 
-      var en = server.enrollment;
-      if (en) {
-        if (en.enrolledAt && (!row.enrolledAt || en.enrolledAt < row.enrolledAt)) {
-          row.enrolledAt = en.enrolledAt;
-        }
-        if (!row.enrolledAt) row.enrolledAt = en.enrolledAt || Date.now();
-        if (en.completedAt && !row.completedAt) row.completedAt = en.completedAt;
-        if (en.lastLessonAt && (!row.lastLessonAt || en.lastLessonAt > row.lastLessonAt)) {
-          row.lastModule = en.lastModule || row.lastModule;
-          row.lastLesson = en.lastLesson || row.lastLesson;
-          row.lastLessonAt = en.lastLessonAt;
-        }
-      }
+    // A local write is mid-flight; the server response may predate it. Skip the
+    // authoritative replace so we don't clobber the un-persisted change.
+    if (pendingPushes > 0) return getRow(courseSlug);
 
-      (server.modules || []).forEach(function (m) {
-        (m.completedLessonSlugs || []).forEach(function (lessonSlug) {
-          var k = key(m.moduleSlug, lessonSlug);
-          if (row.completedLessons.indexOf(k) === -1) row.completedLessons.push(k);
-        });
-        // Preserve historical module time as a baseline.
-        var serverTime = Number(m.timeSpentSec) || 0;
-        if (serverTime > (row.timeBaseline[m.moduleSlug] || 0)) {
-          row.timeBaseline[m.moduleSlug] = serverTime;
-        }
+    var row = {
+      enrolledAt: 0, lastModule: '', lastLesson: '', lastLessonAt: null,
+      completedAt: null, completedLessons: [], quizScores: {}, quizMeta: {},
+      timeSpent: {}, timeBaseline: {}, updatedAt: 0
+    };
+
+    var en = server.enrollment;
+    if (en) {
+      row.enrolledAt = en.enrolledAt || 0;
+      row.completedAt = en.completedAt || null;
+      row.lastModule = en.lastModule || '';
+      row.lastLesson = en.lastLesson || '';
+      row.lastLessonAt = en.lastLessonAt || null;
+    }
+
+    (server.modules || []).forEach(function (m) {
+      (m.completedLessonSlugs || []).forEach(function (lessonSlug) {
+        var k = key(m.moduleSlug, lessonSlug);
+        if (row.completedLessons.indexOf(k) === -1) row.completedLessons.push(k);
       });
-
-      (server.quizzes || []).forEach(function (q) {
-        var k = key(q.moduleSlug, q.lessonSlug);
-        var best = Number(q.bestPercent) || 0;
-        if (best > (row.quizScores[k] || 0)) row.quizScores[k] = best;
-        var meta = row.quizMeta[k] || { attempts: 0, lastPercent: 0, passingScore: 70 };
-        meta.attempts = Math.max(meta.attempts || 0, Number(q.attempts) || 0);
-        if (typeof q.lastPercent === 'number') meta.lastPercent = q.lastPercent;
-        if (typeof q.passingScore === 'number') meta.passingScore = q.passingScore;
-        if (q.completedAt && !meta.completedAt) meta.completedAt = q.completedAt;
-        row.quizMeta[k] = meta;
-      });
-
-      row.updatedAt = Date.now();
-      return DCStore.set(TOOL, courseSlug, row).then(function () { return row; });
+      // Historical module time already stored on the server.
+      row.timeBaseline[m.moduleSlug] = Number(m.timeSpentSec) || 0;
     });
+
+    (server.quizzes || []).forEach(function (q) {
+      var k = key(q.moduleSlug, q.lessonSlug);
+      var best = Number(q.bestPercent) || 0;
+      row.quizScores[k] = best;
+      row.quizMeta[k] = {
+        attempts: Number(q.attempts) || 0,
+        lastPercent: typeof q.lastPercent === 'number' ? q.lastPercent : best,
+        passingScore: typeof q.passingScore === 'number' ? q.passingScore : 70,
+        completedAt: q.completedAt || undefined
+      };
+    });
+
+    row.updatedAt = Date.now();
+    cache[courseSlug] = row;
+    return Promise.resolve(normalize(row));
   }
 
   return {
     key: key,
     getRow: getRow,
     ensureRow: ensureRow,
+    enroll: enroll,
     isLessonComplete: isLessonComplete,
     markLessonComplete: markLessonComplete,
     unmarkLessonComplete: unmarkLessonComplete,
@@ -336,6 +367,7 @@ var DCCourseProgress = (function () {
     buildStructuredPayload: buildStructuredPayload,
     applyServerProgress: applyServerProgress,
     syncStructured: syncStructured,
+    hasPendingPush: hasPendingPush,
     moduleComplete: moduleComplete,
     moduleUnlocked: moduleUnlocked,
     courseComplete: courseComplete,

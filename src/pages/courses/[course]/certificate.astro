@@ -126,7 +126,6 @@ const breadcrumbs = [
   const structure = (window as any).__dcCourseStructure;
   const rounds = (window as any).__dcInterviewRounds as number;
   const CP = (window as any).DCCourseProgress;
-  const store = (window as any).DCStore;
 
   function show(state: string) {
     document.querySelectorAll('[data-state]').forEach((el) => {
@@ -207,7 +206,12 @@ const breadcrumbs = [
   }
 
   async function load() {
-    await store.init();
+    // Server is the source of truth: hydrate the in-memory row from the sheet
+    // before judging completion (no IndexedDB).
+    const sync = (window as any).DCSyncService;
+    if (sync && sync.isActive && sync.isActive() && typeof sync.pullCourseProgress === 'function') {
+      try { await sync.pullCourseProgress(courseSlug); } catch (_e) { /* best-effort */ }
+    }
     const row = await CP.getRow(courseSlug);
     const safe = row || { completedLessons: [], quizScores: {} };
     renderProgressLabel(safe);

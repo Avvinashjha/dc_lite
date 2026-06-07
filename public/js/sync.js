@@ -298,6 +298,27 @@ var DCSyncService = (function () {
       });
   }
 
+  // List every course the user is enrolled in (course_enrollments rows), for
+  // the courses index "enrolled" badges. Server-backed; no local store.
+  function pullEnrollmentList() {
+    if (!userId || !scriptUrl) return Promise.resolve([]);
+
+    return getIdToken().then(function (token) {
+      var url = scriptUrl + '?action=getCourseProgress';
+      if (token) url += '&idToken=' + encodeURIComponent(token);
+      return fetch(url);
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data || data.status !== 'success') return [];
+        return data.enrollments || [];
+      })
+      .catch(function (err) {
+        console.warn('[DCSyncService] Enrollment list pull failed:', err);
+        return [];
+      });
+  }
+
   function _getScriptUrl() {
     return scriptUrl;
   }
@@ -314,6 +335,7 @@ var DCSyncService = (function () {
     pullEnrollments: pullEnrollments,
     pushCourseProgress: pushCourseProgress,
     pullCourseProgress: pullCourseProgress,
+    pullEnrollmentList: pullEnrollmentList,
     _getScriptUrl: _getScriptUrl
   };
 })();

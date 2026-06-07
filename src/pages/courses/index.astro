@@ -33,20 +33,27 @@ const courses = getCourses();
   </div>
 </BaseLayout>
 
-<script src="/js/store.js" is:inline></script>
 <script>
-  const ENROLL_TOOL = 'course-enrollment';
-
-  async function showEnrollmentBadges() {
-    await (window as any).DCStore.init();
-    const rows = await (window as any).DCStore.getAll(ENROLL_TOOL);
-    rows.forEach((row: any) => {
-      if (row.enrolledAt) {
-        const badge = document.querySelector(`[data-enroll-badge="${row.id}"]`) as HTMLElement | null;
+  // Enrollment badges come from the server (course_enrollments) — the single
+  // source of truth. No IndexedDB. Requires the user to be signed in + synced.
+  function showEnrollmentBadges() {
+    const sync = (window as any).DCSyncService;
+    if (!sync || !sync.isActive || !sync.isActive() || typeof sync.pullEnrollmentList !== 'function') {
+      return;
+    }
+    sync.pullEnrollmentList().then((rows: any[]) => {
+      (rows || []).forEach((row) => {
+        if (!row || !row.enrolledAt || !row.courseSlug) return;
+        const badge = document.querySelector(
+          `[data-enroll-badge="${row.courseSlug}"]`
+        ) as HTMLElement | null;
         if (badge) badge.style.display = '';
-      }
+      });
     });
   }
 
   showEnrollmentBadges();
+  window.addEventListener('dc:authchange', () => {
+    setTimeout(showEnrollmentBadges, 600);
+  });
 </script>
