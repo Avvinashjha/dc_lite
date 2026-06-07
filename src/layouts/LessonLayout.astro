@@ -334,7 +334,7 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
   }}
 >
   (function () {
-    if (typeof DCStore === "undefined" || typeof DCCourseProgress === "undefined") return;
+    if (typeof DCCourseProgress === "undefined") return;
     var CP = DCCourseProgress;
 
     // Expose the structure so DCCourseProgress can build the structured sync
@@ -348,6 +348,30 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
         break;
       }
     }
+
+    // ── Auth gating ─────────────────────────────────────────────────────────
+    // Course progress is server-backed and per-user, so all progress actions
+    // require a signed-in user. Explicit actions (mark complete, undo, quiz)
+    // prompt sign-in; passive ones (auto-complete, time tracking) silently skip.
+    function isSignedIn() {
+      return (typeof window.isUserSignedIn === "function")
+        ? window.isUserSignedIn()
+        : !!window.__dcAuthUser;
+    }
+    function requireAuthAction(reason, fn) {
+      if (isSignedIn()) { fn(); return; }
+      if (typeof window.requireAuth === "function") {
+        window.requireAuth(reason, function () {
+          // After sign-in, hydrate the user's real server progress FIRST, then
+          // run the action on top of it. This guarantees we never overwrite
+          // existing progress with an empty payload, and the in-flight-push
+          // guard in DCCourseProgress stops the later authchange hydrate from
+          // clobbering this write.
+          hydrateAndRefresh().then(fn);
+        });
+      }
+    }
+    var AUTH_REASON = "Sign in or sign up to track your course progress";
 
     function renderSidebar(row) {
       document.querySelectorAll("[data-lesson-key]").forEach(function (a) {
@@ -406,8 +430,10 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
       });
     }
 
-    // Preserve existing "resume" behaviour: record last visited lesson when enrolled.
+    // Preserve existing "resume" behaviour: record last visited lesson when
+    // enrolled. Requires auth (server-backed); silently skips otherwise.
     function trackLastLesson() {
+      if (!isSignedIn()) return Promise.resolve();
       return CP.getRow(lessonCourseSlug).then(function (row) {
         if (!row || !row.enrolledAt) return;
         return CP.trackLastLesson(lessonCourseSlug, lessonModuleSlug, lessonSlug);
@@ -434,6 +460,7 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
       tick();
       var secs = Math.round(pendingSec);
       if (secs <= 0) return Promise.resolve();
+      if (!isSignedIn()) { pendingSec = 0; return Promise.resolve(); } // no anon tracking
       pendingSec -= secs;
       return CP.addTime(lessonCourseSlug, lessonModuleSlug, lessonSlug, secs);
     }
@@ -449,6 +476,7 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
     // Final flush on unload: persist locally and beacon the structured payload
     // (a normal fetch may be cancelled during page teardown).
     window.addEventListener("pagehide", function () {
+      if (!isSignedIn()) return;
       tick();
       var secs = Math.round(pendingSec);
       if (secs > 0) { pendingSec = 0; CP.addTime(lessonCourseSlug, lessonModuleSlug, lessonSlug, secs); }
@@ -479,6 +507,7 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
     var lessonStart = Date.now();
     function maybeAutoComplete() {
       if (!autoCompleteArmed) return;
+      if (!isSignedIn()) return; // course progress is for signed-in users only
       var body = document.querySelector("[data-lesson-body]");
       if (!body || body.hidden) return; // gated/locked
       if ((Date.now() - lessonStart) < MIN_DWELL_MS) return;
@@ -500,26 +529,32 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
     var markBtn = document.querySelector("[data-mark-complete]");
     if (markBtn) {
       markBtn.addEventListener("click", function () {
-        CP.markLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+        requireAuthAction(AUTH_REASON, function () {
+          CP.markLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+        });
       });
     }
     var undoBtn = document.querySelector("[data-mark-incomplete]");
     if (undoBtn) {
       undoBtn.addEventListener("click", function () {
-        CP.unmarkLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+        requireAuthAction(AUTH_REASON, function () {
+          CP.unmarkLessonComplete(lessonCourseSlug, lessonModuleSlug, lessonSlug).then(refresh);
+        });
       });
     }
 
     if (isQuizLesson) {
       window.addEventListener("dc:quizcompleted", function (ev) {
         if (!ev.detail || ev.detail.slug !== quizSlug) return;
-        CP.recordQuizScore(
-          lessonCourseSlug,
-          lessonModuleSlug,
-          lessonSlug,
-          ev.detail.percent,
-          passingScore
-        ).then(refresh);
+        requireAuthAction(AUTH_REASON, function () {
+          CP.recordQuizScore(
+            lessonCourseSlug,
+            lessonModuleSlug,
+            lessonSlug,
+            ev.detail.percent,
+            passingScore
+          ).then(refresh);
+        });
       });
     }
 
@@ -535,7 +570,10 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
       setTimeout(hydrateAndRefresh, 600);
     });
 
-    DCStore.init().then(trackLastLesson).then(hydrateAndRefresh);
+    // Server is the source of truth: hydrate from it first, then render and
+    // record the resume pointer. (No IndexedDB; progress lives in memory +
+    // the Google Sheet.)
+    hydrateAndRefresh().then(trackLastLesson);
   })();
 </script>
 

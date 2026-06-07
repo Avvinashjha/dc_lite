@@ -13,13 +13,15 @@ var Courses = (function () {
 
     var courseSlug = ctx.e.parameter.courseSlug || '';
 
-    // Enrollment (single row per course).
+    // Enrollment rows for this user. `enrollment` is the row for the requested
+    // course (when courseSlug is given); `enrollments` is the full list (used by
+    // the courses index to show "enrolled" badges without a per-course call).
     var enrollment = null;
+    var enrollments = [];
     var enData = DB.values('course_enrollments');
     for (var ei = 1; ei < enData.length; ei++) {
       if (enData[ei][0] !== uid) continue;
-      if (courseSlug && enData[ei][1] !== courseSlug) continue;
-      enrollment = {
+      var enRow = {
         courseSlug: enData[ei][1],
         status: enData[ei][2],
         enrolledAt: enData[ei][3],
@@ -29,7 +31,13 @@ var Courses = (function () {
         lastLessonAt: enData[ei][7],
         updatedAt: enData[ei][8]
       };
-      if (courseSlug) break;
+      enrollments.push(enRow);
+      if (courseSlug && enData[ei][1] === courseSlug && !enrollment) {
+        enrollment = enRow;
+      }
+    }
+    if (!courseSlug && !enrollment && enrollments.length) {
+      enrollment = enrollments[0];
     }
 
     // Module progress rows.
@@ -80,6 +88,7 @@ var Courses = (function () {
     return Http.json({
       status: 'success',
       enrollment: enrollment,
+      enrollments: enrollments,
       modules: modules,
       quizzes: quizzes
     });

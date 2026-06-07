@@ -245,13 +245,11 @@ const courseJsonLd = {
   window.__dcCourseStructure = courseStructure;
 </script>
 <script>
-  const ENROLL_TOOL = 'course-enrollment';
   const enrollBtn = document.getElementById('enroll-btn') as HTMLButtonElement;
   const enrollStatus = document.getElementById('enroll-status')!;
   const courseSlug = enrollBtn.dataset.courseSlug || '';
   const structure = (window as any).__dcCourseStructure;
   const CP = (window as any).DCCourseProgress;
-  const store = (window as any).DCStore;
   let enrolled = false;
 
   function renderProgress(row: any) {
@@ -303,16 +301,17 @@ const courseJsonLd = {
     if (cta) cta.hidden = !CP.courseComplete(structure, safe);
   }
 
+  function markEnrolledUI(label: string) {
+    enrolled = true;
+    enrollBtn.textContent = 'Continue learning';
+    enrollBtn.classList.remove('button--primary');
+    enrollBtn.classList.add('button--outline');
+    enrollStatus.textContent = label;
+  }
+
   async function loadEnrollment() {
-    await store.init();
     const row = await CP.getRow(courseSlug);
-    if (row && row.enrolledAt) {
-      enrolled = true;
-      enrollBtn.textContent = 'Continue learning';
-      enrollBtn.classList.remove('button--primary');
-      enrollBtn.classList.add('button--outline');
-      enrollStatus.textContent = 'Enrolled';
-    }
+    if (row && row.enrolledAt) markEnrolledUI('Enrolled');
     renderProgress(row);
   }
 
@@ -324,35 +323,30 @@ const courseJsonLd = {
       if (firstLesson) window.location.href = firstLesson.href;
       return;
     }
-    await store.init();
-    const existing = await CP.getRow(courseSlug);
-    const data = existing || {
-      enrolledAt: 0,
-      lastLesson: '',
-      lastLessonAt: null,
-      completedLessons: [],
-      quizScores: {},
-      updatedAt: 0,
-    };
-    data.enrolledAt = data.enrolledAt || Date.now();
-    data.updatedAt = Date.now();
-    await store.set(ENROLL_TOOL, courseSlug, data);
+    // Server is the source of truth: enroll() stamps enrolledAt and pushes the
+    // structured payload (course_enrollments / course_module_progress / course_quiz_scores).
+    const row = await CP.enroll(courseSlug);
+    markEnrolledUI('Enrolled!');
+    renderProgress(row);
+  }
 
-    if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
-      (window as any).DCSyncService.pushCourseProgress(CP.buildStructuredPayload(structure, data));
-    }
-
-    enrolled = true;
-    enrollBtn.textContent = 'Continue learning';
-    enrollBtn.classList.remove('button--primary');
-    enrollBtn.classList.add('button--outline');
-    enrollStatus.textContent = 'Enrolled!';
-    renderProgress(data);
+  function isSignedIn() {
+    return typeof (window as any).isUserSignedIn === 'function'
+      ? (window as any).isUserSignedIn()
+      : !!(window as any).__dcAuthUser;
   }
 
   enrollBtn.addEventListener('click', () => {
+    if (isSignedIn()) {
+      doEnroll();
+      return;
+    }
     if ((window as any).requireAuth) {
-      (window as any).requireAuth('Sign in to enroll in this course', doEnroll);
+      // After sign-in, hydrate the user's real progress before enrolling so a
+      // fresh enroll never overwrites existing server-side module progress.
+      (window as any).requireAuth('Sign in to enroll in this course', () => {
+        hydrateAndLoad().then(doEnroll);
+      });
     } else {
       doEnroll();
     }
