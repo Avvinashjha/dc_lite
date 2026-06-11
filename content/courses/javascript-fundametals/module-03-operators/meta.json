@@ -1,0 +1,44 @@
+{
+  "title": "Operators",
+  "description": "Use arithmetic, logical, bitwise, and comparison operators in JavaScript.",
+  "lessons": [
+    {
+      "slug": "01-arithmetic-operators",
+      "title": "Arithmetic Operators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-logical-operators",
+      "title": "Logical Operators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-bitwise-operators",
+      "title": "Bitwise Operators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-comparison-operators",
+      "title": "Comparison Operators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-equality-vs-strict-equality",
+      "title": "== vs ===",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "javascript-operators-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    }
+  ]
+}

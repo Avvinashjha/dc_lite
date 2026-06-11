@@ -1,0 +1,24 @@
+{
+  "title": "Authentication, Security and File Uploads",
+  "description": "Secure your applications with authentication and best practices, and handle file uploads and storage.",
+  "lessons": [
+    {
+      "slug": "01-authentication-and-security",
+      "title": "Authentication and Security",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-json-web-tokens",
+      "title": "JSON Web Tokens (JWT)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-file-uploads-and-storage",
+      "title": "File Uploads and Storage",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

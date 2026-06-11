@@ -1,0 +1,44 @@
+{
+  "title": "Functions",
+  "description": "Define and use functions, the core building block of JavaScript.",
+  "lessons": [
+    {
+      "slug": "01-declarations-vs-expressions",
+      "title": "Declarations vs Expressions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-parameters-and-return-values",
+      "title": "Parameters and Return Values",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-default-parameters",
+      "title": "Default Parameters",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-rest-parameters",
+      "title": "Rest Parameters",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-immediately-invoked-functions",
+      "title": "Immediately Invoked Function Expressions (IIFE)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-functions-check",
+      "passingScore": 70
+    }
+  ]
+}

@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "new-post": "node scripts/add-post.js",
-    "validate": "node scripts/validate-posts.js"
+    "validate": "node scripts/validate-posts.js",
+    "build:gas": "node scripts/apps-script/build.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^5.1.4",

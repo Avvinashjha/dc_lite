@@ -13,6 +13,14 @@
       "title": "Props vs State",
       "type": "text",
       "duration": "20 min"
+    },
+    {
+      "slug": "03-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-basics-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

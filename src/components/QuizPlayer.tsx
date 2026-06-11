@@ -23,6 +23,68 @@ function formatClock(sec: number): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Build the same `.cb` code-block markup that lesson markdown uses, so quiz code
+// snippets get identical styling and the global copy button works. Runtime
+// fallback only (community quizzes); curated/course quizzes are pre-highlighted
+// at build time. No syntax colors here since highlight.js isn't bundled client-side.
+function codeBlockHtml(code: string, lang: string): string {
+  const body = escapeHtml(code.replace(/^\n+/, '').replace(/\s+$/, ''));
+  const label = escapeHtml(lang || 'text');
+  const lineCount = body.replace(/\n$/, '').split('\n').length;
+  const gutter = Array.from({ length: lineCount }, (_, i) => i + 1).join('\n');
+  return (
+    `<figure class="cb" data-lang="${label}">` +
+    `<figcaption class="cb__bar"><span class="cb__lang">${label}</span>` +
+    `<button type="button" class="cb__copy" aria-label="Copy code">` +
+    `<svg class="cb__copy-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">` +
+    `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>` +
+    `<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>` +
+    `</svg><span class="cb__copy-label">Copy</span></button></figcaption>` +
+    `<div class="cb__main"><pre class="cb__gutter" aria-hidden="true">${gutter}</pre>` +
+    `<pre class="cb__code"><code class="hljs">${body}</code></pre></div>` +
+    `</figure>`
+  );
+}
+
+/**
+ * Render a quiz string that may contain markdown code (inline `code` and
+ * fenced ```lang ... ``` blocks) into safe HTML. Everything is HTML-escaped
+ * first, so community-authored content cannot inject markup.
+ */
+function richHtml(input: string): string {
+  if (!input) return '';
+  const fences: string[] = [];
+
+  // Pull out fenced code blocks before escaping so they render as blocks.
+  let text = input.replace(/```([\w-]*)[ \t]*\n?([\s\S]*?)```/g, (_m, lang: string, code: string) => {
+    fences.push(codeBlockHtml(code, lang));
+    return `\u0000FENCE${fences.length - 1}\u0000`;
+  });
+
+  text = escapeHtml(text);
+
+  // Inline code spans (content is already escaped).
+  text = text.replace(/`([^`]+)`/g, (_m, code: string) => `<code>${code}</code>`);
+
+  text = text.replace(/\n/g, '<br>');
+
+  // Restore fenced blocks.
+  text = text.replace(/\u0000FENCE(\d+)\u0000/g, (_m, i: string) => fences[Number(i)] || '');
+  return text;
+}
+
+// Prefer build-time pre-rendered HTML; fall back to the client renderer.
+function fieldHtml(pre: string | undefined, raw: string): string {
+  return pre || richHtml(raw);
+}
+
 export default function QuizPlayer({ quiz }: Props) {
   const user = useStore(userStore);
   const questions = quiz.questions || [];
@@ -65,6 +127,21 @@ export default function QuizPlayer({ quiz }: Props) {
         completedAt: res.completedAt,
       };
       saveAttempt(attempt).catch(() => {});
+
+      // Notify any host context (e.g. a course quiz lesson) of the result so it
+      // can mark the lesson complete. Guarded so standalone quizzes are unaffected.
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('dc:quizcompleted', {
+            detail: {
+              slug: quiz.slug,
+              percent: res.percent,
+              score: res.score,
+              maxScore: res.maxScore,
+            },
+          })
+        );
+      }
 
       // Auto-submit ranked scores when signed in.
       if (quiz.ranked && user) {
@@ -241,7 +318,7 @@ export default function QuizPlayer({ quiz }: Props) {
           </div>
         </div>
 
-        <h2 class="quiz-question__prompt">{q.prompt}</h2>
+        <div class="quiz-question__prompt" role="heading" aria-level={2} dangerouslySetInnerHTML={{ __html: fieldHtml(q.promptHtml, q.prompt) }} />
         <span class="quiz-question__hint">
           {q.type === 'multiple' ? 'Select all that apply' : q.type === 'boolean' ? 'True or false' : 'Select one'}
         </span>
@@ -259,7 +336,7 @@ export default function QuizPlayer({ quiz }: Props) {
                 <span class={`quiz-option__marker quiz-option__marker--${q.type === 'multiple' ? 'check' : 'radio'}`}>
                   {active ? (q.type === 'multiple' ? '✓' : '●') : ''}
                 </span>
-                <span class="quiz-option__text">{opt.text}</span>
+                <span class="quiz-option__text" dangerouslySetInnerHTML={{ __html: fieldHtml(opt.textHtml, opt.text) }} />
               </button>
             );
           })}
@@ -373,9 +450,10 @@ export default function QuizPlayer({ quiz }: Props) {
               const r = result.perQuestion[i];
               return (
                 <div class={`quiz-review__item quiz-review__item--${r.correct ? 'correct' : 'wrong'}`}>
-                  <p class="quiz-review__q">
-                    <span class="quiz-review__num">{i + 1}.</span> {q.prompt}
-                  </p>
+                  <div class="quiz-review__q">
+                    <span class="quiz-review__num">{i + 1}.</span>
+                    <div class="quiz-review__qtext" dangerouslySetInnerHTML={{ __html: fieldHtml(q.promptHtml, q.prompt) }} />
+                  </div>
                   <ul class="quiz-review__options">
                     {q.options.map(opt => {
                       const isCorrect = r.correctIds.includes(opt.id);
@@ -388,12 +466,14 @@ export default function QuizPlayer({ quiz }: Props) {
                           <span class="quiz-review__opt-icon">
                             {isCorrect ? '✓' : isSelected ? '✕' : ''}
                           </span>
-                          {opt.text}
+                          <span dangerouslySetInnerHTML={{ __html: fieldHtml(opt.textHtml, opt.text) }} />
                         </li>
                       );
                     })}
                   </ul>
-                  {q.explanation && <p class="quiz-review__explain">{q.explanation}</p>}
+                  {q.explanation && (
+                    <div class="quiz-review__explain" dangerouslySetInnerHTML={{ __html: fieldHtml(q.explanationHtml, q.explanation) }} />
+                  )}
                 </div>
               );
             })}

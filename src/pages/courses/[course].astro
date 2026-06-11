@@ -9,178 +9,876 @@ export function getStaticPaths() {
 const { course: courseSlug } = Astro.params;
 const course = getCourse(courseSlug!);
 if (!course) return Astro.redirect('/courses');
+
+const courseStructure = {
+  slug: course.slug,
+  modules: course.resolvedModules.map(m => ({
+    slug: m.slug,
+    title: m.title,
+    lessons: m.lessons.map(l => ({ slug: l.slug, type: l.type })),
+  })),
+};
+
+const interviewRounds = course.certification?.interviewRounds ?? 3;
+const authorInitials = course.author
+  .split(/\s+/)
+  .map(w => w[0])
+  .slice(0, 2)
+  .join('')
+  .toUpperCase();
+
+function typeLabel(type: string): string {
+  if (type === 'video') return 'Video';
+  if (type === 'quiz') return 'Quiz';
+  if (type === 'interactive') return 'Interactive';
+  return 'Reading';
+}
+
+// Inline SVG icons (stroke = currentColor) keep the UI crisp at any size.
+const ICONS: Record<string, string> = {
+  text: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+  video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>',
+  quiz: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  interactive: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+};
+function lessonIconSvg(type: string): string {
+  return ICONS[type] || ICONS.text;
+}
+
+const canonical = new URL(`/courses/${course.slug}`, Astro.site).href;
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Courses', href: '/courses' },
+  { label: course.title, href: `/courses/${course.slug}` },
+];
+
+const courseJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: course.title,
+  description: course.description,
+  url: canonical,
+  inLanguage: 'en',
+  educationalLevel: course.level,
+  keywords: (course.tags || []).join(', '),
+  teaches: course.resolvedModules.map(m => m.title),
+  provider: {
+    '@type': 'Organization',
+    name: 'DailyCoder',
+    sameAs: Astro.site?.origin || 'https://dailycoder.in',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    category: 'Free',
+  },
+  hasCourseInstance: [
+    {
+      '@type': 'CourseInstance',
+      courseMode: 'online',
+      courseWorkload: course.duration,
+    },
+  ],
+};
 ---
 
-<BaseLayout title={`${course.title} | DailyCoder`} description={course.description}>
-  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <a href="/courses" style="color: var(--color-text-light); font-size: 0.875rem;">&larr; All Courses</a>
+<BaseLayout
+  title={`${course.title} | DailyCoder`}
+  description={course.description}
+  breadcrumbs={breadcrumbs}
+  tags={course.tags}
+>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonical} />
+    <script type="application/ld+json" set:html={JSON.stringify(courseJsonLd)} />
+  </Fragment>
 
-    <div style="margin-top: 2rem; margin-bottom: 2rem;">
-      <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
-        <span class="tag" style="text-transform: capitalize;">{course.level}</span>
-        <span style="color: var(--color-text-light);">{course.duration}</span>
-        <span style="color: var(--color-text-light);">{course.totalLessons} lessons</span>
-        <span style="color: var(--color-text-light);">{course.resolvedModules.length} modules</span>
-      </div>
-      <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem;">{course.title}</h1>
-      <p style="font-size: 1.25rem; color: var(--color-text-light); max-width: 700px;">{course.description}</p>
-      <p style="margin-top: 0.5rem; color: var(--color-text-light); font-size: 0.875rem;">By {course.author}</p>
-      <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem; align-items: center;">
-        <button id="enroll-btn" class="button button--primary" data-course-slug={course.slug} type="button">Enroll in Course</button>
-        <span id="enroll-status" style="font-size: 0.85rem; color: var(--color-text-light);"></span>
-      </div>
-    </div>
+  <div class="container course-detail">
+    <nav class="course-detail__crumb" aria-label="Breadcrumb">
+      <a href="/courses">&larr; All courses</a>
+    </nav>
 
-    <div class="course-modules">
-      {course.resolvedModules.map((mod, modIdx) => (
-        <div class="course-module">
-          <h2 class="course-module__title">
-            <span class="course-module__number">Module {modIdx + 1}</span>
-            {mod.title}
-          </h2>
-          <p style="color: var(--color-text-light); margin-bottom: 1rem;">{mod.description}</p>
-          <div class="course-module__lessons">
-            {mod.lessons.map(lesson => (
-              <a href={`/courses/${course.slug}/${mod.slug}/${lesson.slug}`} class="course-lesson">
-                <span class="course-lesson__icon">{lesson.type === 'video' ? '▶' : '📄'}</span>
-                <span class="course-lesson__title">{lesson.title}</span>
-                <span class="course-lesson__duration">{lesson.duration}</span>
-              </a>
-            ))}
+    <!-- Hero -->
+    <header class="course-hero">
+      <div class="course-hero__main">
+        <div class="course-hero__badges">
+          <span class="chip chip--level">{course.level}</span>
+          {course.tags.map(tag => <span class="chip chip--ghost">{tag}</span>)}
+        </div>
+        <h1 class="course-hero__title">{course.title}</h1>
+        <p class="course-hero__desc">{course.description}</p>
+        <div class="course-hero__author">
+          <span class="course-hero__avatar" aria-hidden="true">{authorInitials}</span>
+          <span>By {course.author}</span>
+        </div>
+      </div>
+
+      <aside class="course-hero__card">
+        <ul class="course-stats">
+          <li class="course-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span class="course-stat__num">{course.totalLessons}</span>
+            <span class="course-stat__label">Lessons</span>
+          </li>
+          <li class="course-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            <span class="course-stat__num">{course.resolvedModules.length}</span>
+            <span class="course-stat__label">Modules</span>
+          </li>
+          <li class="course-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="course-stat__num">{course.duration}</span>
+            <span class="course-stat__label">Duration</span>
+          </li>
+          <li class="course-stat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="14"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="10"/></svg>
+            <span class="course-stat__num" style="text-transform: capitalize;">{course.level}</span>
+            <span class="course-stat__label">Level</span>
+          </li>
+        </ul>
+
+        <div class="course-hero__actions">
+          <button id="enroll-btn" class="button button--primary course-hero__enroll" data-course-slug={course.slug} type="button">
+            Enroll &mdash; it's free
+          </button>
+          <span id="enroll-status" class="course-hero__status"></span>
+        </div>
+
+        <div class="course-progress" data-course-progress hidden>
+          <div class="course-progress__head">
+            <span class="course-progress__label">0% complete</span>
+          </div>
+          <div class="course-progress__track">
+            <span class="course-progress__fill" style="width: 0%"></span>
           </div>
         </div>
-      ))}
+      </aside>
+    </header>
+
+    <!-- Certificate CTA (revealed when the whole course is complete) -->
+    <div class="course-cert-cta" data-cert-cta hidden>
+      <div class="course-cert-cta__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div class="course-cert-cta__text">
+        <strong>You've completed every module!</strong>
+        <p>Pass your {interviewRounds} interview rounds to earn your certificate.</p>
+      </div>
+      <a href={`/courses/${course.slug}/certificate`} class="button button--primary">View certificate</a>
     </div>
+
+    <!-- Curriculum -->
+    <section class="course-curriculum" aria-label="Course curriculum">
+      <div class="course-curriculum__head">
+        <h2 class="course-curriculum__title">Curriculum</h2>
+        <div class="course-curriculum__tools">
+          <button type="button" class="course-curriculum__tool" data-expand-all>Expand all</button>
+          <span class="course-curriculum__sep" aria-hidden="true">&middot;</span>
+          <button type="button" class="course-curriculum__tool" data-collapse-all>Collapse all</button>
+        </div>
+      </div>
+
+      <ol class="modules">
+        {course.resolvedModules.map((mod, modIdx) => (
+          <li class="modules__item">
+            <details class="module" data-module-index={modIdx} data-module-slug={mod.slug} open={modIdx === 0}>
+              <summary class="module__summary">
+                <span class="module__num">{modIdx + 1}</span>
+                <span class="module__info">
+                  <span class="module__title">{mod.title}</span>
+                  <span class="module__meta">
+                    {mod.lessons.length} {mod.lessons.length === 1 ? 'lesson' : 'lessons'}
+                  </span>
+                </span>
+                <span class="module__status">
+                  <span class="module__progress" data-module-progress></span>
+                  <span class="module__badge" data-module-badge hidden aria-label="Module completed">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <span class="module__lock" data-module-lock hidden aria-label="Module locked">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </span>
+                </span>
+                <svg class="module__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+
+              {mod.description && <p class="module__desc">{mod.description}</p>}
+
+              <ol class="lessons">
+                {mod.lessons.map(lesson => (
+                  <li class="lessons__item">
+                    <a
+                      href={`/courses/${course.slug}/${mod.slug}/${lesson.slug}`}
+                      class="lesson"
+                      data-lesson-key={`${mod.slug}/${lesson.slug}`}
+                    >
+                      <span class="lesson__status">
+                        <span class="lesson__dot" aria-hidden="true"></span>
+                        <span class="lesson__check" data-lesson-check hidden aria-label="Completed">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                      </span>
+                      <span class="lesson__icon" set:html={lessonIconSvg(lesson.type)} />
+                      <span class="lesson__body">
+                        <span class="lesson__title">{lesson.title}</span>
+                        <span class="lesson__type">{typeLabel(lesson.type)}</span>
+                      </span>
+                      <span class="lesson__duration">{lesson.duration}</span>
+                      <svg class="lesson__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+          </li>
+        ))}
+      </ol>
+    </section>
   </div>
 </BaseLayout>
 
 <script src="/js/store.js" is:inline></script>
+<script src="/js/course-progress.js" is:inline></script>
+<script is:inline define:vars={{ courseStructure }}>
+  window.__dcCourseStructure = courseStructure;
+</script>
 <script>
-  const ENROLL_TOOL = 'course-enrollment';
   const enrollBtn = document.getElementById('enroll-btn') as HTMLButtonElement;
   const enrollStatus = document.getElementById('enroll-status')!;
   const courseSlug = enrollBtn.dataset.courseSlug || '';
+  const structure = (window as any).__dcCourseStructure;
+  const CP = (window as any).DCCourseProgress;
   let enrolled = false;
 
+  function renderProgress(row: any) {
+    const safe = row || { completedLessons: [], quizScores: {} };
+
+    document.querySelectorAll('[data-lesson-key]').forEach((a) => {
+      const k = a.getAttribute('data-lesson-key');
+      const done = safe.completedLessons.indexOf(k) !== -1;
+      const check = a.querySelector('[data-lesson-check]') as HTMLElement | null;
+      if (check) check.hidden = !done;
+      a.classList.toggle('course-lesson--done', done);
+    });
+
+    document.querySelectorAll('[data-module-index]').forEach((el) => {
+      const idx = parseInt(el.getAttribute('data-module-index') || '0', 10);
+      const mod = structure.modules[idx];
+      const complete = CP.moduleComplete(structure, safe, idx);
+      const unlocked = CP.moduleUnlocked(structure, safe, idx);
+
+      let done = 0;
+      mod.lessons.forEach((les: any) => {
+        if (safe.completedLessons.indexOf(mod.slug + '/' + les.slug) !== -1) done++;
+      });
+
+      const badge = el.querySelector('[data-module-badge]') as HTMLElement | null;
+      const lock = el.querySelector('[data-module-lock]') as HTMLElement | null;
+      const prog = el.querySelector('[data-module-progress]') as HTMLElement | null;
+      if (badge) badge.hidden = !complete;
+      if (lock) lock.hidden = unlocked;
+      if (prog) {
+        prog.textContent = done + '/' + mod.lessons.length;
+        prog.hidden = complete || !unlocked || mod.lessons.length === 0;
+      }
+      el.classList.toggle('course-module--locked', !unlocked);
+      el.querySelectorAll('[data-lesson-key]').forEach((a) => {
+        (a as HTMLElement).classList.toggle('course-lesson--locked', !unlocked);
+      });
+    });
+
+    const c = CP.counts(structure, safe);
+    const wrap = document.querySelector('[data-course-progress]') as HTMLElement | null;
+    const fill = document.querySelector('.course-progress__fill') as HTMLElement | null;
+    const label = document.querySelector('.course-progress__label');
+    if (fill) fill.style.width = c.percent + '%';
+    if (label) label.textContent = c.percent + '% complete';
+    if (wrap && enrolled) wrap.hidden = false;
+
+    const cta = document.querySelector('[data-cert-cta]') as HTMLElement | null;
+    if (cta) cta.hidden = !CP.courseComplete(structure, safe);
+  }
+
+  function markEnrolledUI(label: string) {
+    enrolled = true;
+    enrollBtn.textContent = 'Continue learning';
+    enrollBtn.classList.remove('button--primary');
+    enrollBtn.classList.add('button--outline');
+    enrollStatus.textContent = label;
+  }
+
   async function loadEnrollment() {
-    await (window as any).DCStore.init();
-    const row = await (window as any).DCStore.get(ENROLL_TOOL, courseSlug);
-    if (row && row.enrolledAt) {
-      enrolled = true;
-      enrollBtn.textContent = 'Continue Learning';
-      enrollBtn.classList.remove('button--primary');
-      enrollBtn.classList.add('button--outline');
-      enrollStatus.textContent = 'Enrolled';
-    }
+    const row = await CP.getRow(courseSlug);
+    if (row && row.enrolledAt) markEnrolledUI('Enrolled');
+    renderProgress(row);
   }
 
   async function doEnroll() {
     if (enrolled) {
-      // Already enrolled - go to first lesson
-      const firstLesson = document.querySelector('.course-lesson') as HTMLAnchorElement | null;
+      const firstLesson = document.querySelector(
+        '.lesson:not(.course-lesson--locked)'
+      ) as HTMLAnchorElement | null;
       if (firstLesson) window.location.href = firstLesson.href;
       return;
     }
-    await (window as any).DCStore.init();
-    const data = { enrolledAt: Date.now(), lastLesson: '', lastLessonAt: null, updatedAt: Date.now() };
-    await (window as any).DCStore.set(ENROLL_TOOL, courseSlug, data);
+    // Server is the source of truth: enroll() stamps enrolledAt and pushes the
+    // structured payload (course_enrollments / course_module_progress / course_quiz_scores).
+    const row = await CP.enroll(courseSlug);
+    markEnrolledUI('Enrolled!');
+    renderProgress(row);
+  }
 
-    if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
-      (window as any).DCSyncService.pushEnrollment(courseSlug, data);
-    }
-
-    enrolled = true;
-    enrollBtn.textContent = 'Continue Learning';
-    enrollBtn.classList.remove('button--primary');
-    enrollBtn.classList.add('button--outline');
-    enrollStatus.textContent = 'Enrolled!';
+  function isSignedIn() {
+    return typeof (window as any).isUserSignedIn === 'function'
+      ? (window as any).isUserSignedIn()
+      : !!(window as any).__dcAuthUser;
   }
 
   enrollBtn.addEventListener('click', () => {
+    if (isSignedIn()) {
+      doEnroll();
+      return;
+    }
     if ((window as any).requireAuth) {
-      (window as any).requireAuth('Sign in to enroll in this course', doEnroll);
+      // After sign-in, hydrate the user's real progress before enrolling so a
+      // fresh enroll never overwrites existing server-side module progress.
+      (window as any).requireAuth('Sign in to enroll in this course', () => {
+        hydrateAndLoad().then(doEnroll);
+      });
     } else {
       doEnroll();
     }
   });
 
-  loadEnrollment();
+  // Block navigation into locked modules.
+  document.querySelectorAll('[data-lesson-key]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      if ((a as HTMLElement).classList.contains('course-lesson--locked')) {
+        e.preventDefault();
+        enrollStatus.textContent = 'Complete the previous module to unlock this lesson.';
+      }
+    });
+  });
+
+  // Expand / collapse all modules.
+  const expandAll = document.querySelector('[data-expand-all]');
+  const collapseAll = document.querySelector('[data-collapse-all]');
+  if (expandAll) {
+    expandAll.addEventListener('click', () => {
+      document.querySelectorAll('details.module').forEach((d) => ((d as HTMLDetailsElement).open = true));
+    });
+  }
+  if (collapseAll) {
+    collapseAll.addEventListener('click', () => {
+      document.querySelectorAll('details.module').forEach((d) => ((d as HTMLDetailsElement).open = false));
+    });
+  }
+
+  function hydrateAndLoad() {
+    const sync = (window as any).DCSyncService;
+    if (sync && sync.isActive && sync.isActive() && typeof sync.pullCourseProgress === 'function') {
+      return sync.pullCourseProgress(courseSlug).then(loadEnrollment);
+    }
+    return loadEnrollment();
+  }
+
+  window.addEventListener('dc:authchange', () => {
+    setTimeout(hydrateAndLoad, 600);
+  });
+
+  hydrateAndLoad();
 </script>
 
 <style>
-  .course-modules {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  /* Ensure the [hidden] attribute always wins over display rules below. */
+  [hidden] {
+    display: none !important;
   }
-  .course-module {
+
+  .course-detail {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+  .course-detail__crumb a {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+  }
+  .course-detail__crumb a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  /* ── Hero ── */
+  .course-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+  .course-hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .chip {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    line-height: 1;
+  }
+  .chip--level {
+    background: var(--color-primary);
+    color: #fff;
+    text-transform: capitalize;
+  }
+  .chip--ghost {
+    background: var(--color-code-bg, var(--color-surface));
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+  }
+  .course-hero__title {
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .course-hero__desc {
+    font-size: 1.15rem;
+    color: var(--color-text-light);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .course-hero__author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+  }
+  .course-hero__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .course-hero__card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
+    height: fit-content;
   }
-  .course-module__title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
+  .course-stats {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
-  .course-module__number {
-    display: inline-block;
-    background: var(--color-primary);
-    color: white;
-    padding: 0.15rem 0.5rem;
+  .course-stat {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.5rem;
+    align-items: center;
+    padding: 0.65rem 0.75rem;
     border-radius: var(--radius-md);
-    font-size: 0.7rem;
-    font-weight: 700;
-    margin-right: 0.5rem;
-    vertical-align: middle;
+    background: var(--color-bg, var(--color-code-bg));
+    border: 1px solid var(--color-border);
   }
-  .course-module__lessons {
+  .course-stat svg {
+    grid-row: 1 / 3;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-primary);
+  }
+  .course-stat__num {
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.1;
+  }
+  .course-stat__label {
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .course-hero__enroll {
+    width: 100%;
+    justify-content: center;
+  }
+  .course-hero__status {
+    display: block;
+    margin-top: 0.6rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    min-height: 1rem;
+  }
+  .course-progress {
+    margin-top: 1rem;
+  }
+  .course-progress__head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+  .course-progress__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+  }
+  .course-progress__track {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-border);
+    overflow: hidden;
+  }
+  .course-progress__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 60%, #fff));
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── Certificate CTA ── */
+  .course-cert-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  }
+  .course-cert-cta__icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .course-cert-cta__icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .course-cert-cta__text {
+    flex: 1;
+    min-width: 200px;
+  }
+  .course-cert-cta__text p {
+    margin: 0.2rem 0 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+
+  /* ── Curriculum ── */
+  .course-curriculum__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .course-curriculum__title {
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .course-curriculum__tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .course-curriculum__tool {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+  }
+  .course-curriculum__tool:hover {
+    text-decoration: underline;
+  }
+  .course-curriculum__sep {
+    color: var(--color-border);
+  }
+
+  .modules,
+  .lessons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .modules {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .module {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .module[open] {
+    border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+  .module__summary {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .module__summary::-webkit-details-marker {
+    display: none;
+  }
+  .module__summary:hover {
+    background: var(--color-code-bg);
+  }
+  .module__num {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .module__info {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
   }
-  .course-lesson {
+  .module__title {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  .module__meta {
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+  }
+  .module__status {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 0.75rem;
+    flex-shrink: 0;
+  }
+  .module__progress {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    font-variant-numeric: tabular-nums;
+  }
+  .module__badge {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--color-success, #16a34a);
+    color: #fff;
+  }
+  .module__badge svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+  .module__lock {
+    display: inline-flex;
+    color: var(--color-text-light);
+  }
+  .module__lock svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  .module__chevron {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    color: var(--color-text-light);
+    transition: transform var(--transition-fast);
+  }
+  .module[open] .module__chevron {
+    transform: rotate(180deg);
+  }
+  .course-module--locked {
+    opacity: 0.85;
+  }
+  .course-module--locked .module__num {
+    background: var(--color-border);
+    color: var(--color-text-light);
+  }
+
+  .module__desc {
+    margin: 0;
+    padding: 0 1.1rem 0.5rem 4rem;
+    color: var(--color-text-light);
+    font-size: 0.88rem;
+  }
+  .lessons {
+    padding: 0.25rem 0.6rem 0.75rem;
+  }
+  .lesson {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.75rem;
     border-radius: var(--radius-md);
     color: var(--color-text);
     text-decoration: none;
-    transition: all var(--transition-fast);
-    font-size: 0.9rem;
+    transition: background var(--transition-fast);
+    position: relative;
   }
-  .course-lesson:hover {
+  .lesson:hover {
     background: var(--color-code-bg);
     text-decoration: none;
   }
-  .course-lesson__icon {
-    font-size: 0.9rem;
+  .lesson__status {
     flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
   }
-  .course-lesson__title {
+  /* Stack the dot and the check in the same grid cell so they overlap. */
+  .lesson__status > * {
+    grid-area: 1 / 1;
+  }
+  .lesson__dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+  }
+  .lesson__check {
+    display: grid;
+    place-items: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    background: var(--color-success, #16a34a);
+    color: #fff;
+  }
+  .lesson__check svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+  .course-lesson--done .lesson__dot {
+    display: none;
+  }
+  .lesson__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-md);
+    background: var(--color-code-bg);
+    color: var(--color-text-light);
+  }
+  .lesson__icon :global(svg) {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+  .lesson:hover .lesson__icon {
+    color: var(--color-primary);
+  }
+  .lesson__body {
     flex: 1;
-    font-weight: 500;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
   }
-  .course-lesson__duration {
-    font-size: 0.8rem;
+  .lesson__title {
+    font-weight: 500;
+    font-size: 0.92rem;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .lesson__type {
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson__duration {
+    font-size: 0.78rem;
     color: var(--color-text-light);
     white-space: nowrap;
     flex-shrink: 0;
   }
+  .lesson__arrow {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    color: var(--color-text-light);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+  .lesson:hover .lesson__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .course-lesson--done .lesson__title {
+    color: var(--color-text-light);
+  }
+  .course-lesson--locked {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .course-lesson--locked:hover {
+    background: transparent;
+  }
+  .course-lesson--locked .lesson__arrow {
+    display: none;
+  }
 
-  @media (min-width: 769px) {
-    .course-module {
-      padding: var(--spacing-xl);
+  /* ── Desktop layout ── */
+  @media (min-width: 880px) {
+    .course-hero {
+      grid-template-columns: 1.6fr 1fr;
+      align-items: start;
+      gap: 2.5rem;
     }
-    .course-module__title {
-      font-size: 1.5rem;
-    }
-    .course-lesson {
-      padding: 0.75rem 1rem;
-      font-size: 1rem;
+    .course-hero__card {
+      position: sticky;
+      top: 72px;
     }
   }
 </style>

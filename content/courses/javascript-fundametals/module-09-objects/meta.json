@@ -1,0 +1,30 @@
+{
+  "title": "Objects",
+  "description": "Work with key-value data using objects, their methods, and JSON.",
+  "lessons": [
+    {
+      "slug": "01-object-basics",
+      "title": "Object Basics",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-properties-and-methods",
+      "title": "Properties and Methods",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-object-methods",
+      "title": "Object.keys, values, and entries",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-working-with-json",
+      "title": "Working with JSON",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

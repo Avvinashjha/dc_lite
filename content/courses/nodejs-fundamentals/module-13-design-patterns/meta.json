@@ -1,0 +1,36 @@
+{
+  "title": "Design Patterns",
+  "description": "Write maintainable backend code with proven design patterns: creational, structural, behavioral, and Node.js-specific patterns.",
+  "lessons": [
+    {
+      "slug": "01-what-are-design-patterns",
+      "title": "What are Design Patterns?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-creational-patterns",
+      "title": "Creational Patterns (Singleton, Factory)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-structural-patterns",
+      "title": "Structural Patterns (Adapter, Proxy, Decorator)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-behavioral-patterns",
+      "title": "Behavioral Patterns (Observer, Strategy)",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-nodejs-patterns",
+      "title": "Node.js Patterns (Middleware, DI, Repository)",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

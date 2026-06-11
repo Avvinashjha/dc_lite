@@ -1,0 +1,36 @@
+{
+  "title": "Express.js",
+  "description": "Build web servers with Express: routing, middleware, the MVC pattern, and rendering HTML with EJS templates.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-express",
+      "title": "Introduction to Express",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-routing",
+      "title": "Routing",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-what-is-middleware",
+      "title": "What is Middleware?",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-mvc-in-express",
+      "title": "MVC in Express",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-ejs-and-serving-html",
+      "title": "EJS Templates and Serving HTML Pages",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

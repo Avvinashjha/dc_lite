@@ -1,0 +1,30 @@
+{
+  "title": "Prototypes and Inheritance",
+  "description": "Understand JavaScript's prototype chain and prototypal inheritance.",
+  "lessons": [
+    {
+      "slug": "01-prototype-chain",
+      "title": "The Prototype Chain",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-object-create",
+      "title": "Object.create()",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-proto-property",
+      "title": "__proto__",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-prototypal-inheritance",
+      "title": "Prototypal Inheritance",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

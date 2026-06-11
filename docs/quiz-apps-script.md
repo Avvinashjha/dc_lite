@@ -9,26 +9,44 @@ without any backend**. The optional Google Apps Script below powers the
 - **`submitScore`** — record a ranked-quiz score.
 - **`getLeaderboard`** — read top scores for a quiz.
 
-It follows the exact same conventions as the existing site script
-(`scripts/apps-script.js`): action-based dispatch, JSON responses, POST bodies
-sent as `text/plain` (to avoid CORS preflight), and Firebase ID-token
-verification via Google's `tokeninfo` endpoint.
+These quiz actions are part of the **single, unified backend** that powers the
+whole site. The backend is authored as modular sources under
+[`scripts/apps-script/src/`](../scripts/apps-script/) (the quiz handlers live in
+`15-quiz.js`) and bundled into one deployable `dist/Code.gs` — see
+[`scripts/apps-script/README.md`](../scripts/apps-script/README.md). There is no
+separate quiz deployment.
+
+It follows action-based dispatch, JSON responses, POST bodies sent as
+`text/plain` (to avoid CORS preflight), and Firebase ID-token verification via
+the Identity Toolkit `accounts:lookup` endpoint (set `FIREBASE_API_KEY` as a
+**Script Property** in the Apps Script editor — not hardcoded; the `tokeninfo`
+endpoint does **not** work for Firebase tokens).
 
 > If the endpoint is **not** configured, the UI degrades gracefully: curated
 > quizzes and local/practice play keep working, and community/leaderboard/create
 > show a friendly "coming soon / not configured" state.
 
+> **Course quizzes are not community quizzes.** Quizzes referenced by a course
+> lesson (`type: "quiz"` + `quizSlug`) are automatically excluded from the public
+> `/quiz` browser (see `getPublicQuizzes()` / `getCourseQuizSlugs()`), and their
+> results are tracked in the `course_quiz_scores` tab via `saveCourseProgress`,
+> not in the ranked `quiz_scores` tab. You can also force-hide a curated quiz
+> with `"courseOnly": true` in its `quiz.json`.
+
 ---
 
 ## 1. Create the Sheet + script
 
-1. Create a new Google Sheet (or reuse the one backing your existing site script).
-2. **Extensions → Apps Script**.
-3. Paste the code from [section 3](#3-apps-script-code) into a `.gs` file.
-   - You can either add it to your **existing** site Apps Script project (the
-     `doGet`/`doPost` here use different `action` values, so they won't clash —
-     just merge the `if (action === ...)` blocks into your existing handlers), or
-     deploy it as a **separate** project with its own URL.
+The quiz actions ship inside the unified backend, so there is **nothing
+quiz-specific to set up separately**. Follow the main backend setup in
+[`docs/google-sheets-setup.md`](./google-sheets-setup.md):
+
+1. Use the Google Sheet backing your site (reuse the existing one).
+2. Build the bundle: `npm run build:gas`.
+3. **Extensions → Apps Script**, paste `scripts/apps-script/dist/Code.gs`, save.
+4. Set the `FIREBASE_API_KEY` / `FIREBASE_PROJECT_ID` Script Properties.
+5. Run `setupSheets` once to create the `community_quizzes` / `quiz_scores` tabs
+   (they are also auto-created on first write).
 
 ## 2. Deploy as a Web App
 
@@ -57,203 +75,21 @@ on first write.
 
 ## 3. Apps Script code
 
-```javascript
-/**
- * DailyCoder — Quiz backend (community quizzes + leaderboards).
- *
- * Deploy as Web App: Execute as "Me", Access "Anyone".
- * Create a NEW deployment version after each edit.
- *
- * Sheet tabs used:
- *   - community_quizzes   (slug, title, category, difficulty, author, uid, quizJson, createdAt)
- *   - quiz_scores         (quizSlug, uid, displayName, score, maxScore, timeSec, completedAt, createdAt)
- */
+The quiz handlers are **not** a standalone script anymore — they live in the
+unified modular backend at
+[`scripts/apps-script/src/15-quiz.js`](../scripts/apps-script/src/15-quiz.js)
+(`Quiz.listCommunity`, `Quiz.leaderboard`, `Quiz.create`, `Quiz.submitScore`),
+wired into the router's dispatch tables in
+[`scripts/apps-script/src/20-router.js`](../scripts/apps-script/src/20-router.js).
 
-function jsonResponse(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
+Token verification uses the Identity Toolkit `accounts:lookup` endpoint with the
+`FIREBASE_API_KEY` Script Property (shared core in `03-auth.js` / `00-config.js`),
+not the legacy `tokeninfo` endpoint.
 
-function getOrCreateSheet(name, headers) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(name);
-  if (!sheet) {
-    sheet = ss.insertSheet(name);
-    if (headers && headers.length) sheet.appendRow(headers);
-  }
-  return sheet;
-}
-
-/** Verify a Firebase ID token via Google's tokeninfo endpoint. */
-function verifyFirebaseToken(idToken) {
-  if (!idToken) return null;
-  try {
-    var url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' + encodeURIComponent(idToken);
-    var res = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
-    if (res.getResponseCode() !== 200) return null;
-    var payload = JSON.parse(res.getContentText());
-    if (!payload.sub) return null;
-    return { uid: payload.sub, email: payload.email || '', name: payload.name || '' };
-  } catch (ex) {
-    return null;
-  }
-}
-
-function getAuthUid(params) {
-  var token = (params && params.idToken) || '';
-  if (!token) return null;
-  var verified = verifyFirebaseToken(token);
-  return verified ? verified.uid : null;
-}
-
-/** Basic slugify matching the client (lowercase, non-alphanumerics → dashes). */
-function slugify(value) {
-  return String(value || '')
-    .toLowerCase().trim()
-    .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .replace(/-{2,}/g, '-');
-}
-
-// ─── GET ───────────────────────────────────────────────────────────────────
-
-function doGet(e) {
-  var action = (e.parameter.action || '').trim();
-
-  if (action === 'listCommunityQuizzes') {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('community_quizzes');
-    var quizzes = [];
-    if (sheet) {
-      var data = sheet.getDataRange().getValues();
-      for (var i = 1; i < data.length; i++) {
-        var quizJson = data[i][6];
-        if (!quizJson) continue;
-        try {
-          quizzes.push(JSON.parse(quizJson));
-        } catch (ex) { /* skip malformed row */ }
-      }
-    }
-    return jsonResponse({ status: 'success', quizzes: quizzes });
-  }
-
-  if (action === 'getLeaderboard') {
-    var quizSlug = e.parameter.quizSlug || '';
-    var limit = parseInt(e.parameter.limit, 10) || 20;
-    if (!quizSlug) return jsonResponse({ status: 'error', message: 'Missing quizSlug' });
-
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('quiz_scores');
-    var scores = [];
-    if (sheet) {
-      var data = sheet.getDataRange().getValues();
-      // Keep only each user's BEST score for this quiz.
-      var best = {};
-      for (var i = 1; i < data.length; i++) {
-        if (data[i][0] !== quizSlug) continue;
-        var uid = data[i][1];
-        var entry = {
-          uid: uid,
-          displayName: data[i][2],
-          score: Number(data[i][3]) || 0,
-          maxScore: Number(data[i][4]) || 0,
-          timeSec: Number(data[i][5]) || 0,
-          completedAt: data[i][6]
-        };
-        var prev = best[uid];
-        // Higher score wins; ties broken by faster time.
-        if (!prev || entry.score > prev.score ||
-            (entry.score === prev.score && entry.timeSec < prev.timeSec)) {
-          best[uid] = entry;
-        }
-      }
-      scores = Object.keys(best).map(function (k) { return best[k]; });
-    }
-    scores.sort(function (a, b) {
-      return b.score - a.score || a.timeSec - b.timeSec;
-    });
-    return jsonResponse({ status: 'success', scores: scores.slice(0, limit) });
-  }
-
-  return jsonResponse({ status: 'error', message: 'Unknown action' });
-}
-
-// ─── POST ──────────────────────────────────────────────────────────────────
-
-function doPost(e) {
-  var params = {};
-  try {
-    params = JSON.parse(e.postData.contents);
-  } catch (ex) {
-    return jsonResponse({ status: 'error', message: 'Invalid JSON' });
-  }
-  var action = params.action || '';
-
-  if (action === 'createQuiz') {
-    var uid = getAuthUid(params);
-    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
-
-    var quiz = params.quiz;
-    if (!quiz || !quiz.title || !Array.isArray(quiz.questions) || !quiz.questions.length) {
-      return jsonResponse({ status: 'error', message: 'Invalid quiz' });
-    }
-
-    var sheet = getOrCreateSheet('community_quizzes',
-      ['slug', 'title', 'category', 'difficulty', 'author', 'uid', 'quizJson', 'createdAt']);
-
-    // Ensure a unique slug.
-    var baseSlug = slugify(quiz.slug || quiz.title) || ('quiz-' + Date.now());
-    var existing = sheet.getDataRange().getValues();
-    var used = {};
-    for (var i = 1; i < existing.length; i++) used[existing[i][0]] = true;
-    var slug = baseSlug, n = 2;
-    while (used[slug]) { slug = baseSlug + '-' + n; n++; }
-
-    // Force trusted server-side fields.
-    quiz.slug = slug;
-    quiz.id = slug;
-    quiz.source = 'community';
-    quiz.ranked = false;
-
-    sheet.appendRow([
-      slug,
-      quiz.title,
-      quiz.category || 'General',
-      quiz.difficulty || 'easy',
-      quiz.author || 'Anonymous',
-      uid,
-      JSON.stringify(quiz),
-      new Date().toISOString()
-    ]);
-
-    return jsonResponse({ status: 'success', slug: slug });
-  }
-
-  if (action === 'submitScore') {
-    var uid = getAuthUid(params);
-    if (!uid) return jsonResponse({ status: 'error', message: 'Authentication required' });
-
-    if (!params.quizSlug) return jsonResponse({ status: 'error', message: 'Missing quizSlug' });
-
-    var sheet = getOrCreateSheet('quiz_scores',
-      ['quizSlug', 'uid', 'displayName', 'score', 'maxScore', 'timeSec', 'completedAt', 'createdAt']);
-
-    sheet.appendRow([
-      params.quizSlug,
-      uid,
-      params.displayName || 'Anonymous',
-      Number(params.score) || 0,
-      Number(params.maxScore) || 0,
-      Number(params.timeSec) || 0,
-      params.completedAt || new Date().toISOString(),
-      new Date().toISOString()
-    ]);
-
-    return jsonResponse({ status: 'success' });
-  }
-
-  return jsonResponse({ status: 'error', message: 'Unknown action: ' + action });
-}
-```
+To deploy: run `npm run build:gas` and paste the generated
+`scripts/apps-script/dist/Code.gs` — exactly as described in
+[`docs/google-sheets-setup.md`](./google-sheets-setup.md). The quiz actions are
+included automatically; there is no separate quiz deployment to maintain.
 
 ---
 

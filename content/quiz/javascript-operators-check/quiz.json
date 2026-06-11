@@ -1,0 +1,224 @@
+{
+  "id": "javascript-operators-check",
+  "title": "JavaScript Operators Knowledge Check",
+  "description": "Check your understanding of arithmetic, logical, bitwise, comparison, and equality operators.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "operators", "arithmetic", "logical", "comparison"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the result of `10 % 3`?",
+      "options": [
+        { "id": "a", "text": "0" },
+        { "id": "b", "text": "1" },
+        { "id": "c", "text": "3" },
+        { "id": "d", "text": "10" }
+      ],
+      "correct": ["b"],
+      "explanation": "The remainder operator returns what is left after division. 10 divided by 3 leaves a remainder of 1.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the result of `2 + 3 * 4`?",
+      "options": [
+        { "id": "a", "text": "20" },
+        { "id": "b", "text": "14" },
+        { "id": "c", "text": "24" },
+        { "id": "d", "text": "9" }
+      ],
+      "correct": ["b"],
+      "explanation": "Multiplication has higher precedence than addition, so 3 * 4 runs first, then 2 is added.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the result of `\"5\" + 1`?",
+      "options": [
+        { "id": "a", "text": "6" },
+        { "id": "b", "text": "\"51\"" },
+        { "id": "c", "text": "\"6\"" },
+        { "id": "d", "text": "NaN" }
+      ],
+      "correct": ["b"],
+      "explanation": "When + has a string operand, JavaScript performs string concatenation.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "If `let count = 5`, what does `console.log(count++)` print first?",
+      "options": [
+        { "id": "a", "text": "4" },
+        { "id": "b", "text": "5" },
+        { "id": "c", "text": "6" },
+        { "id": "d", "text": "undefined" }
+      ],
+      "correct": ["b"],
+      "explanation": "Postfix increment returns the current value first, then increments the variable.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which expression checks whether `num` is even?",
+      "options": [
+        { "id": "a", "text": "num % 2 === 0" },
+        { "id": "b", "text": "num / 2 === 0" },
+        { "id": "c", "text": "num ** 2 === 0" },
+        { "id": "d", "text": "num + 2 === 0" }
+      ],
+      "correct": ["a"],
+      "explanation": "An even number has a remainder of 0 when divided by 2.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does `&&` return when all operands are truthy?",
+      "options": [
+        { "id": "a", "text": "The first operand" },
+        { "id": "b", "text": "The last operand" },
+        { "id": "c", "text": "Always true" },
+        { "id": "d", "text": "Always false" }
+      ],
+      "correct": ["b"],
+      "explanation": "In JavaScript, && returns the first falsy value it finds, or the last value if all operands are truthy.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the result of `0 || \"Guest\"`?",
+      "options": [
+        { "id": "a", "text": "0" },
+        { "id": "b", "text": "\"Guest\"" },
+        { "id": "c", "text": "true" },
+        { "id": "d", "text": "false" }
+      ],
+      "correct": ["b"],
+      "explanation": "The || operator returns the first truthy value. 0 is falsy, so it returns \"Guest\".",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `!!\"Hello\"` evaluate to?",
+      "options": [
+        { "id": "a", "text": "true" },
+        { "id": "b", "text": "false" },
+        { "id": "c", "text": "\"Hello\"" },
+        { "id": "d", "text": "undefined" }
+      ],
+      "correct": ["a"],
+      "explanation": "A non-empty string is truthy. Double NOT converts it to the boolean true.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which operator is bitwise AND?",
+      "options": [
+        { "id": "a", "text": "&&" },
+        { "id": "b", "text": "&" },
+        { "id": "c", "text": "||" },
+        { "id": "d", "text": "|" }
+      ],
+      "correct": ["b"],
+      "explanation": "& is bitwise AND. && is logical AND.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What happens to decimal parts during most bitwise operations in JavaScript?",
+      "options": [
+        { "id": "a", "text": "They are preserved exactly" },
+        { "id": "b", "text": "They are rounded to the nearest integer" },
+        { "id": "c", "text": "They are removed during 32-bit integer conversion" },
+        { "id": "d", "text": "They become strings" }
+      ],
+      "correct": ["c"],
+      "explanation": "JavaScript converts operands to 32-bit integers before bitwise operations, so decimal parts are removed.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is the result of `\"10\" < \"2\"`?",
+      "options": [
+        { "id": "a", "text": "true" },
+        { "id": "b", "text": "false" },
+        { "id": "c", "text": "NaN" },
+        { "id": "d", "text": "It throws a TypeError" }
+      ],
+      "correct": ["a"],
+      "explanation": "Both values are strings, so JavaScript compares them lexicographically. \"1\" comes before \"2\".",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What happens in a relational comparison with `NaN`, such as `NaN > 1`?",
+      "options": [
+        { "id": "a", "text": "It evaluates to true" },
+        { "id": "b", "text": "It evaluates to false" },
+        { "id": "c", "text": "It evaluates to null" },
+        { "id": "d", "text": "It always throws" }
+      ],
+      "correct": ["b"],
+      "explanation": "Relational comparisons with NaN evaluate to false.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "multiple",
+      "prompt": "Which expressions evaluate to true? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "5 == \"5\"" },
+        { "id": "b", "text": "5 === \"5\"" },
+        { "id": "c", "text": "null == undefined" },
+        { "id": "d", "text": "null === undefined" }
+      ],
+      "correct": ["a", "c"],
+      "explanation": "Loose equality allows coercion and has a special rule for null and undefined. Strict equality checks type too.",
+      "points": 2
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Why is `[1, 2] === [1, 2]` false?",
+      "options": [
+        { "id": "a", "text": "Arrays cannot be compared in JavaScript" },
+        { "id": "b", "text": "The arrays have different lengths" },
+        { "id": "c", "text": "They are different array references in memory" },
+        { "id": "d", "text": "Strict equality always returns false for arrays" }
+      ],
+      "correct": ["c"],
+      "explanation": "Arrays are reference types. Two separate array literals create two different references even if the contents match.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which equality operator should you use by default in modern JavaScript?",
+      "options": [
+        { "id": "a", "text": "==" },
+        { "id": "b", "text": "===" },
+        { "id": "c", "text": "=" },
+        { "id": "d", "text": "<=>" }
+      ],
+      "correct": ["b"],
+      "explanation": "Use strict equality by default because it compares both value and type without hidden coercion.",
+      "points": 1
+    }
+  ]
+}

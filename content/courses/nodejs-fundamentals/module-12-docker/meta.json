@@ -1,0 +1,24 @@
+{
+  "title": "Docker and Deployment",
+  "description": "Containerize your Node.js apps: Docker basics, Docker Compose, and dockerizing a real project.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-docker",
+      "title": "Introduction to Docker",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-docker-compose",
+      "title": "Docker and Docker Compose",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-dockerize-a-node-project",
+      "title": "Dockerize a Node Project",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

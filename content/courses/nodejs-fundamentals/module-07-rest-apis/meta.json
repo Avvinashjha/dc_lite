@@ -1,0 +1,30 @@
+{
+  "title": "REST APIs, SSE and Webhooks",
+  "description": "Design RESTful APIs and add real-time communication with Server-Sent Events and webhooks.",
+  "lessons": [
+    {
+      "slug": "01-what-is-rest",
+      "title": "What is REST?",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-building-crud-endpoints",
+      "title": "Building CRUD Endpoints",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-server-sent-events",
+      "title": "Server-Sent Events (SSE)",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-webhooks",
+      "title": "Webhooks",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { Quiz, QuizMeta, QuizListItem, QuizIndex } from '../types/quiz';
+import type { Quiz, QuizMeta, QuizListItem, QuizIndex, Question } from '../types/quiz';
+import { renderQuizRichText } from './markdown';
+import { getCourseQuizSlugs } from './contentLoader';
 
 const CONTENT_DIR = path.resolve(process.cwd(), 'content');
 const QUIZ_DIR = path.join(CONTENT_DIR, 'quiz');
@@ -46,11 +48,39 @@ export function getQuiz(slug: string): Quiz | null {
     ...meta,
     slug,
     source: meta.source || 'curated',
+    questions: (meta.questions || []).map(renderQuestionHtml),
   };
 }
 
+/**
+ * Pre-render a question's prompt/options/explanation to HTML at build time so
+ * code snippets get the same syntax-highlighted code blocks as lesson markdown.
+ */
+function renderQuestionHtml(q: Question): Question {
+  return {
+    ...q,
+    promptHtml: renderQuizRichText(q.prompt),
+    explanationHtml: q.explanation ? renderQuizRichText(q.explanation) : undefined,
+    options: (q.options || []).map(opt => ({
+      ...opt,
+      textHtml: renderQuizRichText(opt.text),
+    })),
+  };
+}
+
+/**
+ * Quizzes shown in the public /quiz browser: curated quizzes minus any that are
+ * referenced by a course lesson (course quizzes) or explicitly flagged
+ * `courseOnly`. `getQuiz(slug)` is intentionally NOT filtered so course lesson
+ * pages can still resolve their quiz.
+ */
+export function getPublicQuizzes(): Quiz[] {
+  const courseSlugs = getCourseQuizSlugs();
+  return getQuizzes().filter(q => !q.courseOnly && !courseSlugs.has(q.slug));
+}
+
 export function getQuizzesSorted(): Quiz[] {
-  return getQuizzes().sort((a, b) => {
+  return getPublicQuizzes().sort((a, b) => {
     const ad = a.publishedAt || '';
     const bd = b.publishedAt || '';
     return bd.localeCompare(ad) || a.title.localeCompare(b.title);
@@ -83,18 +113,18 @@ export function toListItem(quiz: Quiz): QuizListItem {
 // ──── Registry helpers (mirror data/tools.ts style) ────
 
 export function getQuizCategories(): string[] {
-  return [...new Set(getQuizzes().map(q => q.category))].sort();
+  return [...new Set(getPublicQuizzes().map(q => q.category))].sort();
 }
 
 export function getQuizDifficulties(): string[] {
   const order = ['easy', 'medium', 'hard'];
-  return [...new Set(getQuizzes().map(q => q.difficulty))].sort(
+  return [...new Set(getPublicQuizzes().map(q => q.difficulty))].sort(
     (a, b) => order.indexOf(a) - order.indexOf(b)
   );
 }
 
 export function getQuizTags(): string[] {
-  return [...new Set(getQuizzes().flatMap(q => q.tags || []))].sort();
+  return [...new Set(getPublicQuizzes().flatMap(q => q.tags || []))].sort();
 }
 
-export const QUIZZES_COUNT = getQuizzes().length;
+export const QUIZZES_COUNT = getPublicQuizzes().length;

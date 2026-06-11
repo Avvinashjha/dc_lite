@@ -18,6 +18,9 @@ interface DCSyncServiceAPI {
   pullAndMerge(): Promise<void>;
   pushEnrollment(courseSlug: string, data: Record<string, unknown>): Promise<void>;
   pullEnrollments(): Promise<Record<string, unknown>[]>;
+  pushCourseProgress(payload: Record<string, unknown>): Promise<void>;
+  pullCourseProgress(courseSlug: string): Promise<Record<string, unknown> | null>;
+  pullEnrollmentList(): Promise<Record<string, unknown>[]>;
   _getScriptUrl(): string | null;
 }
 

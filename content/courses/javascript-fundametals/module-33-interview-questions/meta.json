@@ -1,0 +1,30 @@
+{
+  "title": "Interview Questions",
+  "description": "Prepare for JavaScript interviews with common questions and challenges.",
+  "lessons": [
+    {
+      "slug": "01-core-concepts-questions",
+      "title": "Core Concepts Questions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-coding-challenges",
+      "title": "Coding Challenges",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-tricky-questions",
+      "title": "Tricky Questions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-system-design-basics",
+      "title": "System Design Basics",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

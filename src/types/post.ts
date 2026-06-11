@@ -81,9 +81,13 @@ export interface CoursesIndex {
 export interface LessonMeta {
   slug: string;
   title: string;
-  type: 'text' | 'video' | 'interactive';
+  type: 'text' | 'video' | 'interactive' | 'quiz';
   duration: string;
   videoUrl?: string;
+  /** For type: 'quiz' lessons — slug of a standalone quiz in content/quiz/<slug>. */
+  quizSlug?: string;
+  /** Minimum percent required to pass a quiz lesson (defaults to 70). */
+  passingScore?: number;
 }
 
 export interface ModuleMeta {
@@ -97,6 +101,13 @@ export interface CourseModuleRef {
   title: string;
 }
 
+export interface CourseCertification {
+  /** Title awarded on the final certificate, e.g. "React Fundamentals Expert". */
+  expertTitle?: string;
+  /** Number of manual interview rounds required (defaults to 3). */
+  interviewRounds?: number;
+}
+
 export interface CourseMeta {
   title: string;
   description: string;
@@ -106,6 +117,7 @@ export interface CourseMeta {
   image?: string;
   tags: string[];
   modules: CourseModuleRef[];
+  certification?: CourseCertification;
   draft: boolean;
 }
 
@@ -115,6 +127,8 @@ export interface Lesson {
   type: string;
   duration: string;
   videoUrl?: string;
+  quizSlug?: string;
+  passingScore?: number;
   content: string;
   htmlContent: string;
   courseSlug: string;

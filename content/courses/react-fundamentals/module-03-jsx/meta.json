@@ -1,0 +1,42 @@
+{
+  "title": "JSX Deep Dive",
+  "description": "Learn the core concepts of JSX Deep Dive in React.",
+  "lessons": [
+    {
+      "slug": "01-what-is-jsx",
+      "title": "What is JSX?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-jsx-syntax-rules",
+      "title": "JSX Syntax Rules",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-expressions-in-jsx",
+      "title": "Embedding Expressions in JSX",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-jsx-attributes",
+      "title": "Attributes and className",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-children-and-fragments",
+      "title": "Children and Fragments",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-jsx-vs-html",
+      "title": "JSX vs HTML",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Server-Side Rendering and Server Components",
+  "description": "Learn the core concepts of Server-Side Rendering and Server Components in React.",
+  "lessons": [
+    {
+      "slug": "01-csr-vs-ssr",
+      "title": "CSR vs SSR",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-server-side-rendering",
+      "title": "Server-Side Rendering",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-static-site-generation",
+      "title": "Static Site Generation",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-react-server-components",
+      "title": "React Server Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-nextjs-overview",
+      "title": "Next.js Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-hydration",
+      "title": "Hydration",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

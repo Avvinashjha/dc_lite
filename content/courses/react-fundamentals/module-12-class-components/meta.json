@@ -1,0 +1,36 @@
+{
+  "title": "Class Components",
+  "description": "Learn the core concepts of Class Components in React.",
+  "lessons": [
+    {
+      "slug": "01-class-component-syntax",
+      "title": "Class Component Syntax",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-state-in-classes",
+      "title": "State in Class Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-lifecycle-methods",
+      "title": "Lifecycle Methods",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-this-binding",
+      "title": "Binding this",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-class-vs-function-components",
+      "title": "Class vs Function Components",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

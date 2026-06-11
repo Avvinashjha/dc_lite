@@ -1,0 +1,48 @@
+{
+  "title": "Testing React Applications",
+  "description": "Learn the core concepts of Testing React Applications in React.",
+  "lessons": [
+    {
+      "slug": "01-testing-overview",
+      "title": "Testing Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-jest-basics",
+      "title": "Jest Basics",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-react-testing-library",
+      "title": "React Testing Library",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-testing-components",
+      "title": "Testing Components",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-testing-hooks",
+      "title": "Testing Hooks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-mocking",
+      "title": "Mocking and Spies",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-end-to-end-testing",
+      "title": "End-to-End Testing",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

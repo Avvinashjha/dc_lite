@@ -489,8 +489,19 @@
     &--correct { border-left-color: #16a34a; }
     &--wrong { border-left-color: #dc2626; }
   }
-  &__q { font-weight: 600; margin-bottom: 0.5rem; }
-  &__num { color: var(--color-text-light); }
+  &__q {
+    display: flex;
+    gap: 0.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  &__num { color: var(--color-text-light); flex-shrink: 0; }
+  &__qtext {
+    min-width: 0;
+
+    .cb { margin: 0.6rem 0 0; font-weight: 400; }
+    p { margin: 0; }
+  }
 
   &__options { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
   &__opt {
@@ -632,4 +643,30 @@
   gap: 0.6rem;
 
   @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+// ── Code snippets inside questions / options / review ──
+// Code uses the shared `.cb` block + inline `<code>` styling from global.scss,
+// so quizzes match lesson markdown. These rules only fix spacing in context.
+.quiz-question__prompt {
+  font-weight: 700;
+
+  p { margin: 0; }
+  .cb {
+    margin: 0.75rem 0 0;
+    font-weight: 400;
+  }
+}
+
+// A fenced block inside an option should sit on its own line, full width.
+.quiz-option__text {
+  min-width: 0;
+
+  .cb { width: 100%; margin: 0.5rem 0 0; }
+}
+
+.quiz-review__opt .cb { margin: 0.4rem 0 0; }
+.quiz-review__explain {
+  .cb { margin: 0.5rem 0 0; }
+  p:last-child { margin-bottom: 0; }
 }

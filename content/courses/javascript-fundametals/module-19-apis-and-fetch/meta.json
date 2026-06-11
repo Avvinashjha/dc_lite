@@ -1,0 +1,42 @@
+{
+  "title": "APIs and Fetch",
+  "description": "Communicate with REST APIs using fetch and handle CORS.",
+  "lessons": [
+    {
+      "slug": "01-using-fetch",
+      "title": "Using fetch",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-interacting-with-rest-apis",
+      "title": "Interacting with REST APIs",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-handling-json",
+      "title": "Handling JSON",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-what-is-cors",
+      "title": "What Is CORS?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-why-cors-exists",
+      "title": "Why CORS Exists",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-solving-cors-errors",
+      "title": "Solving CORS Errors",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

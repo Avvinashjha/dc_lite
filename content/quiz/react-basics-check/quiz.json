@@ -1,0 +1,82 @@
+{
+  "id": "react-basics-check",
+  "title": "React Basics Knowledge Check",
+  "description": "Check your understanding of React components, JSX, props, and state before moving on.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "components", "props", "jsx"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-01",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does JSX ultimately compile down to?",
+      "options": [
+        { "id": "a", "text": "Plain HTML strings" },
+        { "id": "b", "text": "React.createElement(...) calls" },
+        { "id": "c", "text": "CSS-in-JS objects" },
+        { "id": "d", "text": "Web Components" }
+      ],
+      "correct": ["b"],
+      "explanation": "JSX is syntactic sugar; a compiler (e.g. Babel) transforms it into React.createElement calls that return React elements.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "How do you pass data from a parent component down to a child component?",
+      "options": [
+        { "id": "a", "text": "Through props" },
+        { "id": "b", "text": "Through global variables" },
+        { "id": "c", "text": "By mutating the child directly" },
+        { "id": "d", "text": "You can't pass data to children" }
+      ],
+      "correct": ["a"],
+      "explanation": "Props are the mechanism for passing read-only data from a parent to a child component.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "boolean",
+      "prompt": "Updating a component's state triggers a re-render of that component.",
+      "options": [
+        { "id": "true", "text": "True" },
+        { "id": "false", "text": "False" }
+      ],
+      "correct": ["true"],
+      "explanation": "When state changes via the setter, React schedules a re-render so the UI reflects the new state.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which hook lets a function component hold local state?",
+      "options": [
+        { "id": "a", "text": "useEffect" },
+        { "id": "b", "text": "useContext" },
+        { "id": "c", "text": "useState" },
+        { "id": "d", "text": "useRef" }
+      ],
+      "correct": ["c"],
+      "explanation": "useState returns the current state value and a setter function for updating it.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multiple",
+      "prompt": "Which statements about React components are correct? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "Component names must start with a capital letter" },
+        { "id": "b", "text": "Props are read-only inside the receiving component" },
+        { "id": "c", "text": "A component can return multiple root elements without a wrapper or Fragment" },
+        { "id": "d", "text": "Components can be composed by nesting them in JSX" }
+      ],
+      "correct": ["a", "b", "d"],
+      "explanation": "Component names are capitalized so JSX treats them as components, props are immutable in the child, and components compose by nesting. A component must return a single root (an element or Fragment).",
+      "points": 2
+    }
+  ]
+}

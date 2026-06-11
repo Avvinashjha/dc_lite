@@ -1,0 +1,154 @@
+{
+  "id": "javascript-variables-types-applied-check",
+  "title": "Variables and Data Types Applied Check",
+  "description": "Test your understanding of references, mutation, Symbols, BigInt, and type conversion versus coercion.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "coercion", "objects", "arrays", "bigint"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-03",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does `typeof null` return?",
+      "options": [
+        { "id": "a", "text": "\"null\"" },
+        { "id": "b", "text": "\"undefined\"" },
+        { "id": "c", "text": "\"object\"" },
+        { "id": "d", "text": "\"primitive\"" }
+      ],
+      "correct": ["c"],
+      "explanation": "typeof null returns \"object\" because of a historical JavaScript bug, even though null is a primitive.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the result of `Symbol(\"id\") === Symbol(\"id\")`?",
+      "options": [
+        { "id": "a", "text": "true" },
+        { "id": "b", "text": "false" },
+        { "id": "c", "text": "undefined" },
+        { "id": "d", "text": "It throws a TypeError" }
+      ],
+      "correct": ["b"],
+      "explanation": "Every call to Symbol() creates a new unique symbol, even when the descriptions match.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which expression creates a BigInt?",
+      "options": [
+        { "id": "a", "text": "123b" },
+        { "id": "b", "text": "123n" },
+        { "id": "c", "text": "BigInt(1.5)" },
+        { "id": "d", "text": "new BigInt(123)" }
+      ],
+      "correct": ["b"],
+      "explanation": "Appending n to a whole-number literal creates a BigInt. BigInt cannot represent decimals and is not used with new.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What happens when you run `10n + 5`?",
+      "options": [
+        { "id": "a", "text": "15n" },
+        { "id": "b", "text": "15" },
+        { "id": "c", "text": "NaN" },
+        { "id": "d", "text": "It throws a TypeError" }
+      ],
+      "correct": ["d"],
+      "explanation": "JavaScript does not allow mixing BigInt and number values in arithmetic without explicit conversion.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is printed after this code? `const a = [1, 2]; const b = a; b.push(3); console.log(a.length);`",
+      "options": [
+        { "id": "a", "text": "2" },
+        { "id": "b", "text": "3" },
+        { "id": "c", "text": "undefined" },
+        { "id": "d", "text": "It throws an error because a is const" }
+      ],
+      "correct": ["b"],
+      "explanation": "Arrays are reference types. a and b point to the same array, and const does not prevent mutation.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which creates a shallow copy of an object?",
+      "options": [
+        { "id": "a", "text": "const copy = original;" },
+        { "id": "b", "text": "const copy = { ...original };" },
+        { "id": "c", "text": "const copy = [ ...original ];" },
+        { "id": "d", "text": "const copy = original()" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object spread creates a shallow copy of an object. Assignment only copies the reference.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the result of `\"5\" + 1`?",
+      "options": [
+        { "id": "a", "text": "6" },
+        { "id": "b", "text": "\"51\"" },
+        { "id": "c", "text": "NaN" },
+        { "id": "d", "text": "\"6\"" }
+      ],
+      "correct": ["b"],
+      "explanation": "When + sees a string operand, JavaScript performs string concatenation.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is the result of `\"10\" - 2`?",
+      "options": [
+        { "id": "a", "text": "8" },
+        { "id": "b", "text": "\"102\"" },
+        { "id": "c", "text": "NaN" },
+        { "id": "d", "text": "\"8\"" }
+      ],
+      "correct": ["a"],
+      "explanation": "The subtraction operator only performs math, so JavaScript coerces \"10\" to the number 10.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "multiple",
+      "prompt": "Which comparisons evaluate to true? (Select all that apply.)",
+      "options": [
+        { "id": "a", "text": "5 == \"5\"" },
+        { "id": "b", "text": "5 === \"5\"" },
+        { "id": "c", "text": "null == undefined" },
+        { "id": "d", "text": "null === undefined" }
+      ],
+      "correct": ["a", "c"],
+      "explanation": "Loose equality performs coercion, so 5 == \"5\" and null == undefined are true. Strict equality checks type too.",
+      "points": 2
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which conversion is explicit rather than implicit?",
+      "options": [
+        { "id": "a", "text": "\"5\" + 1" },
+        { "id": "b", "text": "\"10\" - 2" },
+        { "id": "c", "text": "Number(\"42\")" },
+        { "id": "d", "text": "5 == \"5\"" }
+      ],
+      "correct": ["c"],
+      "explanation": "Number(\"42\") is explicit conversion because the developer directly asks JavaScript to convert the value.",
+      "points": 1
+    }
+  ]
+}

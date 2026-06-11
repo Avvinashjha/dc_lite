@@ -1,0 +1,36 @@
+{
+  "title": "Core Modules",
+  "description": "Explore the built-in modules that ship with Node.js: http, fs, path, os, and the EventEmitter.",
+  "lessons": [
+    {
+      "slug": "01-http-module",
+      "title": "The http Module",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-file-system-module",
+      "title": "The File System (fs) Module",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-path-module",
+      "title": "The path Module",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-os-module",
+      "title": "The Operating System (os) Module",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-events-and-eventemitter",
+      "title": "Events and EventEmitter",
+      "type": "text",
+      "duration": "15 min"
+    }
+  ]
+}

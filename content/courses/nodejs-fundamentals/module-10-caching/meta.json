@@ -1,0 +1,18 @@
+{
+  "title": "Caching",
+  "description": "Speed up your apps with caching: in-memory caches and distributed caching with Redis.",
+  "lessons": [
+    {
+      "slug": "01-in-memory-caching",
+      "title": "In-Memory Caching",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-redis-caching",
+      "title": "Caching with Redis",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

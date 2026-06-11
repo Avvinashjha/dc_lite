@@ -1,0 +1,36 @@
+{
+  "title": "API Optimization Techniques",
+  "description": "Make APIs fast and resilient: pagination, caching, rate limiting, compression, and database query optimization.",
+  "lessons": [
+    {
+      "slug": "01-pagination-and-filtering",
+      "title": "Pagination, Filtering and Projection",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-caching-strategies",
+      "title": "API Caching Strategies",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-rate-limiting-and-throttling",
+      "title": "Rate Limiting and Throttling",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-compression-and-payload-optimization",
+      "title": "Compression and Payload Optimization",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "05-database-query-optimization",
+      "title": "Database and Query Optimization",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

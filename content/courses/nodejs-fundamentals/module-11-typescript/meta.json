@@ -1,0 +1,18 @@
+{
+  "title": "TypeScript with Node.js",
+  "description": "Add type safety to your backend: set up a TypeScript project and build Node.js apps with TypeScript.",
+  "lessons": [
+    {
+      "slug": "01-setup-typescript-project",
+      "title": "Setting Up a TypeScript Project",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-typescript-with-nodejs",
+      "title": "Building with TypeScript and Node.js",
+      "type": "text",
+      "duration": "20 min"
+    }
+  ]
+}

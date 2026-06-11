@@ -1,0 +1,42 @@
+{
+  "title": "Data Fetching",
+  "description": "Learn the core concepts of Data Fetching in React.",
+  "lessons": [
+    {
+      "slug": "01-fetching-data",
+      "title": "Fetching Data in React",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-fetch-vs-axios",
+      "title": "Fetch vs Axios",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-loading-and-error-states",
+      "title": "Loading and Error States",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-react-query",
+      "title": "React Query (TanStack Query)",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-swr",
+      "title": "SWR",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-caching-and-revalidation",
+      "title": "Caching and Revalidation",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

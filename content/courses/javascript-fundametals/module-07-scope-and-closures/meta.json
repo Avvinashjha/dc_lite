@@ -1,0 +1,78 @@
+{
+  "title": "Scope and Closures",
+  "description": "Understand scope, hoisting, closures, and higher-order functions.",
+  "lessons": [
+    {
+      "slug": "01-global-vs-function-scope",
+      "title": "Global vs Function Scope",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-block-scope",
+      "title": "Block Scope",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-hoisting",
+      "title": "Hoisting",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-hoisting-knowledge-check",
+      "title": "Hoisting Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-hoisting-tricky-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "05-closures",
+      "title": "Closures",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-closure-scope",
+      "title": "Closure Scope",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-closure-knowledge-check",
+      "title": "Closure Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-closures-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "08-higher-order-functions",
+      "title": "Higher-Order Functions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-functions-as-arguments",
+      "title": "Functions as Arguments",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-functions-as-return-values",
+      "title": "Functions as Return Values",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "11-module-knowledge-check",
+      "title": "Module Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-scope-closures-module-check",
+      "passingScore": 70
+    }
+  ]
+}

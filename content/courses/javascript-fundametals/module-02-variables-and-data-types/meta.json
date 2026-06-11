@@ -1,0 +1,88 @@
+{
+  "title": "Variables and Data Types",
+  "description": "Declare variables and work with JavaScript's primitive and reference types.",
+  "lessons": [
+    {
+      "slug": "01-var-let-const",
+      "title": "var, let, and const",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-differences-between-var-let-const",
+      "title": "Differences Between var, let, and const",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-primitive-types-overview",
+      "title": "Primitive Types Overview",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-strings",
+      "title": "Strings",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-numbers",
+      "title": "Numbers",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-booleans",
+      "title": "Booleans",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-null-and-undefined",
+      "title": "null and undefined",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-symbol",
+      "title": "Symbol",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-bigint",
+      "title": "BigInt",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-objects-and-arrays-basics",
+      "title": "Basic Objects and Arrays",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "11-type-conversion-and-coercion",
+      "title": "Type Conversion and Coercion",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "12-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "javascript-variables-types-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "13-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "javascript-variables-types-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    }
+  ]
+}

@@ -76,6 +76,12 @@
   padding: 0;
 }
 
+// The `hidden` attribute must always win over component display rules
+// (e.g. `.button { display: inline-block }` would otherwise override it).
+[hidden] {
+  display: none !important;
+}
+
 // Base styles
 html {
   font-family: var(--font-sans);

@@ -1,0 +1,30 @@
+{
+  "title": "Functional Programming",
+  "description": "Apply functional programming principles to write predictable code.",
+  "lessons": [
+    {
+      "slug": "01-pure-functions",
+      "title": "Pure Functions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-immutability",
+      "title": "Immutability",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-currying",
+      "title": "Currying",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-function-composition",
+      "title": "Function Composition",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

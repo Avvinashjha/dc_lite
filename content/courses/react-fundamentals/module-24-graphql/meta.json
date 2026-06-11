@@ -1,0 +1,36 @@
+{
+  "title": "GraphQL with React",
+  "description": "Learn the core concepts of GraphQL with React in React.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-graphql",
+      "title": "Introduction to GraphQL",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-queries-and-mutations",
+      "title": "Queries and Mutations",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-apollo-client",
+      "title": "Apollo Client",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-caching-with-apollo",
+      "title": "Caching with Apollo",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-subscriptions",
+      "title": "Subscriptions",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

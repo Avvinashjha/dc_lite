@@ -1,0 +1,42 @@
+{
+  "title": "Effects and Lifecycle",
+  "description": "Learn the core concepts of Effects and Lifecycle in React.",
+  "lessons": [
+    {
+      "slug": "01-component-lifecycle",
+      "title": "Component Lifecycle",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-useeffect-deep-dive",
+      "title": "useEffect Deep Dive",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-dependency-array",
+      "title": "The Dependency Array",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-cleanup-functions",
+      "title": "Cleanup Functions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-data-fetching-with-effects",
+      "title": "Data Fetching with Effects",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-common-effect-pitfalls",
+      "title": "Common Effect Pitfalls",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "id": "javascript-conditionals-check",
+  "title": "JavaScript Conditionals Knowledge Check",
+  "description": "Check your understanding of ternary expressions, truthy and falsy values, short-circuiting, nullish coalescing, and optional chaining.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "conditionals", "truthy-falsy", "short-circuiting"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-04",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the ternary operator best suited for?",
+      "options": [
+        { "id": "a", "text": "Replacing every if...else statement in a program" },
+        { "id": "b", "text": "Choosing between two simple expressions based on a condition" },
+        { "id": "c", "text": "Running a loop until a condition becomes false" },
+        { "id": "d", "text": "Catching errors from failed code" }
+      ],
+      "correct": ["b"],
+      "explanation": "A ternary is best for simple two-way choices, especially when assigning or returning a value.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this expression return?\n```js\nconst result = 10 > 5 ? 'yes' : 'no';\n```",
+      "options": [
+        { "id": "a", "text": "'yes'" },
+        { "id": "b", "text": "'no'" },
+        { "id": "c", "text": "true" },
+        { "id": "d", "text": "undefined" }
+      ],
+      "correct": ["a"],
+      "explanation": "The condition `10 > 5` is true, so the expression after `?` is returned.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which value is falsy in JavaScript?",
+      "options": [
+        { "id": "a", "text": "[]" },
+        { "id": "b", "text": "{}" },
+        { "id": "c", "text": "\"false\"" },
+        { "id": "d", "text": "0" }
+      ],
+      "correct": ["d"],
+      "explanation": "`0` is falsy. Empty arrays, empty objects, and non-empty strings are truthy.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which list contains only falsy values?",
+      "options": [
+        { "id": "a", "text": "`false`, `0`, `''`, `null`, `undefined`, `NaN`" },
+        { "id": "b", "text": "`false`, `'0'`, `[]`, `null`, `undefined`" },
+        { "id": "c", "text": "`0`, `{}`, `''`, `NaN`, `false`" },
+        { "id": "d", "text": "`null`, `undefined`, `'false'`, `0`, `false`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The common falsy values include `false`, `0`, `-0`, `0n`, empty string, `null`, `undefined`, and `NaN`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n\n```js\nconsole.log(Boolean('0'));\n```",
+      "options": [
+        { "id": "a", "text": "true" },
+        { "id": "b", "text": "false" },
+        { "id": "c", "text": "0" },
+        { "id": "d", "text": "undefined" }
+      ],
+      "correct": ["a"],
+      "explanation": "The string `'0'` is non-empty, so it is truthy.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does the `&&` operator return when the first operand is falsy?",
+      "options": [
+        { "id": "a", "text": "Always `true`" },
+        { "id": "b", "text": "Always `false`" },
+        { "id": "c", "text": "The first falsy operand" },
+        { "id": "d", "text": "The second operand" }
+      ],
+      "correct": ["c"],
+      "explanation": "`&&` short-circuits on the first falsy value and returns that actual value.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this expression return?\n\n```js\n'hello' && 42\n```",
+      "options": [
+        { "id": "a", "text": "'hello'" },
+        { "id": "b", "text": "42" },
+        { "id": "c", "text": "true" },
+        { "id": "d", "text": "false" }
+      ],
+      "correct": ["b"],
+      "explanation": "Because `'hello'` is truthy, `&&` evaluates and returns the second operand, `42`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does the `||` operator return?",
+      "options": [
+        { "id": "a", "text": "The first truthy operand, or the last operand if none are truthy" },
+        { "id": "b", "text": "Only a boolean value" },
+        { "id": "c", "text": "The first falsy operand" },
+        { "id": "d", "text": "Only the right-hand operand" }
+      ],
+      "correct": ["a"],
+      "explanation": "`||` returns the first truthy value it finds. If every value is falsy, it returns the last value.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Why can `||` be risky for default values?",
+      "options": [
+        { "id": "a", "text": "It only works with strings" },
+        { "id": "b", "text": "It replaces valid falsy values like `0`, `''`, and `false`" },
+        { "id": "c", "text": "It throws an error when the left side is `null`" },
+        { "id": "d", "text": "It always evaluates both sides" }
+      ],
+      "correct": ["b"],
+      "explanation": "`||` uses truthiness, so valid values such as `0`, an empty string, or `false` can accidentally be replaced.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code produce?\n\n```js\nconst count = 0;\nconst display = count || 10;\n```",
+      "options": [
+        { "id": "a", "text": "0" },
+        { "id": "b", "text": "10" },
+        { "id": "c", "text": "null" },
+        { "id": "d", "text": "undefined" }
+      ],
+      "correct": ["b"],
+      "explanation": "`0` is falsy, so `||` returns the fallback value `10`.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "When does the nullish coalescing operator (`??`) use the right-hand value?",
+      "options": [
+        { "id": "a", "text": "When the left-hand value is any falsy value" },
+        { "id": "b", "text": "Only when the left-hand value is `null` or `undefined`" },
+        { "id": "c", "text": "Only when the left-hand value is an empty string" },
+        { "id": "d", "text": "Only when the left-hand value is `false`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`??` falls back only for `null` and `undefined`, preserving values like `0`, `''`, and `false`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this expression return?\n\n```js\n0 ?? 100\n```",
+      "options": [
+        { "id": "a", "text": "0" },
+        { "id": "b", "text": "100" },
+        { "id": "c", "text": "null" },
+        { "id": "d", "text": "false" }
+      ],
+      "correct": ["a"],
+      "explanation": "`0` is not nullish, so `??` keeps it.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What problem does optional chaining (`?.`) help solve?",
+      "options": [
+        { "id": "a", "text": "It makes every property required" },
+        { "id": "b", "text": "It safely reads nested properties when an earlier value may be `null` or `undefined`" },
+        { "id": "c", "text": "It converts strings to numbers before comparison" },
+        { "id": "d", "text": "It prevents all runtime errors in a program" }
+      ],
+      "correct": ["b"],
+      "explanation": "Optional chaining stops property access and returns `undefined` if the value before `?.` is `null` or `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does this code return if `user.profile` is `undefined`?\n\n```js\nuser.profile?.email\n```",
+      "options": [
+        { "id": "a", "text": "undefined" },
+        { "id": "b", "text": "null" },
+        { "id": "c", "text": "false" },
+        { "id": "d", "text": "It throws an error" }
+      ],
+      "correct": ["a"],
+      "explanation": "Because `profile` is `undefined`, optional chaining stops and returns `undefined` instead of trying to read `.email`.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which expression safely reads a user's city and falls back to `'Unknown'` only when the city is missing?",
+      "options": [
+        { "id": "a", "text": "`user.address.city || 'Unknown'`" },
+        { "id": "b", "text": "`user?.address?.city ?? 'Unknown'`" },
+        { "id": "c", "text": "`user.address.city ? 'Unknown' : user.address.city`" },
+        { "id": "d", "text": "`user ?? address ?? city ?? 'Unknown'`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`user?.address?.city` safely handles missing nested objects, and `??` only falls back when the city is `null` or `undefined`.",
+      "points": 1
+    }
+  ]
+}

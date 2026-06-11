@@ -1,0 +1,36 @@
+{
+  "title": "Refs and the DOM",
+  "description": "Learn the core concepts of Refs and the DOM in React.",
+  "lessons": [
+    {
+      "slug": "01-what-are-refs",
+      "title": "What are Refs?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-useref-hook",
+      "title": "The useRef Hook",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-accessing-dom-elements",
+      "title": "Accessing DOM Elements",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-forwarding-refs",
+      "title": "Forwarding Refs",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-useimperativehandle",
+      "title": "useImperativeHandle",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

@@ -1,0 +1,436 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCourses, getCourse } from '../../../utils/contentLoader';
+
+export function getStaticPaths() {
+  return getCourses().map(c => ({ params: { course: c.slug } }));
+}
+
+const { course: courseSlug } = Astro.params;
+const course = getCourse(courseSlug!);
+if (!course) return Astro.redirect('/courses');
+
+const courseStructure = {
+  slug: course.slug,
+  modules: course.resolvedModules.map(m => ({
+    slug: m.slug,
+    title: m.title,
+    lessons: m.lessons.map(l => ({ slug: l.slug, type: l.type })),
+  })),
+};
+
+const interviewRounds = course.certification?.interviewRounds ?? 3;
+const expertTitle = course.certification?.expertTitle ?? `${course.title} Expert`;
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Courses', href: '/courses' },
+  { label: course.title, href: `/courses/${course.slug}` },
+  { label: 'Certificate', href: `/courses/${course.slug}/certificate` },
+];
+---
+
+<BaseLayout
+  title={`Certificate | ${course.title} | DailyCoder`}
+  description={`Certificate of completion for ${course.title}.`}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container cert-page">
+    <a href={`/courses/${course.slug}`} style="color: var(--color-text-light); font-size: 0.875rem;">&larr; Back to {course.title}</a>
+    <h1 class="cert-page__heading">Certification</h1>
+
+    <!-- Loading -->
+    <div class="cert-state" data-state="loading">
+      <p class="cert-muted">Checking your progress…</p>
+    </div>
+
+    <!-- Not signed in -->
+    <div class="cert-state" data-state="signin" hidden>
+      <div class="cert-panel">
+        <h2>Sign in to view your certificate</h2>
+        <p class="cert-muted">Your progress and certification are tied to your account.</p>
+        <button type="button" class="button button--primary" data-signin-btn>Sign in</button>
+      </div>
+    </div>
+
+    <!-- Course incomplete -->
+    <div class="cert-state" data-state="incomplete" hidden>
+      <div class="cert-panel">
+        <h2>Finish the course first</h2>
+        <p class="cert-muted">
+          Complete every lesson and module to become eligible for the final interview rounds.
+        </p>
+        <div class="cert-progress">
+          <div class="cert-progress__track"><span class="cert-progress__fill" style="width: 0%"></span></div>
+          <span class="cert-progress__label" data-progress-label>0% complete</span>
+        </div>
+        <a href={`/courses/${course.slug}`} class="button button--primary">Continue learning</a>
+      </div>
+    </div>
+
+    <!-- Eligible, interviews pending -->
+    <div class="cert-state" data-state="pending" hidden>
+      <div class="cert-panel">
+        <h2>🎉 Course complete — now the interviews</h2>
+        <p class="cert-muted">
+          You've finished every module. To earn the <strong>{expertTitle}</strong> certificate,
+          pass {interviewRounds} interview rounds with a DailyCoder mentor.
+        </p>
+        <ol class="cert-rounds" data-rounds aria-label="Interview rounds"></ol>
+        <p class="cert-muted cert-contact">
+          Interviews are scheduled manually and are completely free. Reach out to
+          <a href="mailto:hello@dailycoder.in">hello@dailycoder.in</a> to book your rounds.
+        </p>
+      </div>
+    </div>
+
+    <!-- Awarded -->
+    <div class="cert-state" data-state="awarded" hidden>
+      <div class="cert-print">
+        <div class="certificate" data-certificate>
+          <div class="certificate__border">
+            <p class="certificate__kicker">DailyCoder Certificate of Achievement</p>
+            <p class="certificate__intro">This certifies that</p>
+            <p class="certificate__name" data-cert-name>Learner</p>
+            <p class="certificate__intro">has demonstrated mastery and is recognized as a</p>
+            <p class="certificate__title">{expertTitle}</p>
+            <p class="certificate__desc">{course.description}</p>
+            <div class="certificate__footer">
+              <div>
+                <span class="certificate__meta-label">Issued</span>
+                <span data-cert-date>—</span>
+              </div>
+              <div>
+                <span class="certificate__meta-label">Certificate ID</span>
+                <span data-cert-id>—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-actions">
+        <button type="button" class="button button--primary" data-print-btn>Print / Save as PDF</button>
+        <a href={`/courses/${course.slug}`} class="button button--outline">Back to course</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script src="/js/course-progress.js" is:inline></script>
+<script is:inline define:vars={{ courseStructure, interviewRounds }}>
+  window.__dcCourseStructure = courseStructure;
+  window.__dcInterviewRounds = interviewRounds;
+</script>
+<script>
+  const courseSlug = (window as any).__dcCourseStructure.slug as string;
+  const structure = (window as any).__dcCourseStructure;
+  const rounds = (window as any).__dcInterviewRounds as number;
+  const CP = (window as any).DCCourseProgress;
+
+  function show(state: string) {
+    document.querySelectorAll('[data-state]').forEach((el) => {
+      (el as HTMLElement).hidden = el.getAttribute('data-state') !== state;
+    });
+  }
+
+  function currentUser(): any {
+    return (window as any).__dcAuthUser || null;
+  }
+
+  function renderProgressLabel(row: any) {
+    const c = CP.counts(structure, row || { completedLessons: [], quizScores: {} });
+    const fill = document.querySelector('.cert-progress__fill') as HTMLElement | null;
+    const label = document.querySelector('[data-progress-label]');
+    if (fill) fill.style.width = c.percent + '%';
+    if (label) label.textContent = c.percent + '% complete';
+  }
+
+  function isTruthy(v: any): boolean {
+    if (v === true) return true;
+    const s = String(v).trim().toLowerCase();
+    return s === 'true' || s === '1' || s === 'yes' || s === 'y' || s === 'pass' || s === 'passed';
+  }
+
+  function renderRounds(cert: any) {
+    const list = document.querySelector('[data-rounds]');
+    if (!list) return;
+    list.innerHTML = '';
+    for (let i = 1; i <= rounds; i++) {
+      const passed = cert ? isTruthy(cert['round' + i]) : false;
+      const li = document.createElement('li');
+      li.className = 'cert-round ' + (passed ? 'cert-round--passed' : 'cert-round--pending');
+      li.innerHTML =
+        '<span class="cert-round__status">' + (passed ? '✓' : '○') + '</span>' +
+        '<span>Interview round ' + i + '</span>' +
+        '<span class="cert-round__tag">' + (passed ? 'Passed' : 'Pending') + '</span>';
+      list.appendChild(li);
+    }
+  }
+
+  function renderAwarded(cert: any, user: any) {
+    const nameEl = document.querySelector('[data-cert-name]');
+    const dateEl = document.querySelector('[data-cert-date]');
+    const idEl = document.querySelector('[data-cert-id]');
+    const name = (cert && cert.displayName) || (user && user.displayName) || 'Learner';
+    if (nameEl) nameEl.textContent = name;
+    if (dateEl) {
+      const d = cert && cert.certifiedAt ? new Date(cert.certifiedAt) : new Date();
+      dateEl.textContent = isNaN(d.getTime())
+        ? String(cert.certifiedAt)
+        : d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    if (idEl) idEl.textContent = (cert && cert.certId) || '—';
+  }
+
+  async function fetchCertification(user: any) {
+    const url = (window as any).__dcSyncScriptUrl;
+    if (!url) return null;
+    let token = '';
+    if (typeof (window as any).getFirebaseIdToken === 'function') {
+      token = (await (window as any).getFirebaseIdToken()) || '';
+    }
+    const q =
+      url +
+      '?action=getCertification&uid=' +
+      encodeURIComponent(user.uid) +
+      '&courseSlug=' +
+      encodeURIComponent(courseSlug) +
+      (token ? '&idToken=' + encodeURIComponent(token) : '');
+    try {
+      const res = await fetch(q);
+      const data = await res.json();
+      return data && data.certification ? data.certification : null;
+    } catch (_e) {
+      return null;
+    }
+  }
+
+  async function load() {
+    // Server is the source of truth: hydrate the in-memory row from the sheet
+    // before judging completion (no IndexedDB).
+    const sync = (window as any).DCSyncService;
+    if (sync && sync.isActive && sync.isActive() && typeof sync.pullCourseProgress === 'function') {
+      try { await sync.pullCourseProgress(courseSlug); } catch (_e) { /* best-effort */ }
+    }
+    const row = await CP.getRow(courseSlug);
+    const safe = row || { completedLessons: [], quizScores: {} };
+    renderProgressLabel(safe);
+
+    if (!CP.courseComplete(structure, safe)) {
+      show('incomplete');
+      return;
+    }
+
+    const user = currentUser();
+    if (!user) {
+      show('signin');
+      return;
+    }
+
+    const cert = await fetchCertification(user);
+    if (cert && isTruthy(cert.certified)) {
+      renderAwarded(cert, user);
+      show('awarded');
+    } else {
+      renderRounds(cert);
+      show('pending');
+    }
+  }
+
+  const signinBtn = document.querySelector('[data-signin-btn]');
+  if (signinBtn) {
+    signinBtn.addEventListener('click', () => {
+      if ((window as any).requireAuth) {
+        (window as any).requireAuth('Sign in to view your certificate', load);
+      }
+    });
+  }
+
+  const printBtn = document.querySelector('[data-print-btn]');
+  if (printBtn) printBtn.addEventListener('click', () => window.print());
+
+  // Re-check once auth state resolves / changes.
+  window.addEventListener('dc:authchange', () => {
+    setTimeout(load, 600);
+  });
+
+  load();
+</script>
+
+<style>
+  .cert-page {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+  .cert-page__heading {
+    font-size: 2rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .cert-muted {
+    color: var(--color-text-light);
+  }
+  .cert-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    max-width: 640px;
+  }
+  .cert-panel h2 {
+    margin-bottom: 0.5rem;
+  }
+  .cert-panel .button {
+    margin-top: 1rem;
+  }
+  .cert-progress {
+    margin: 1rem 0 1.25rem;
+    max-width: 360px;
+  }
+  .cert-progress__track {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-border);
+    overflow: hidden;
+  }
+  .cert-progress__fill {
+    display: block;
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .cert-progress__label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+  }
+
+  .cert-rounds {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .cert-round {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .cert-round__status {
+    font-weight: 700;
+  }
+  .cert-round--passed {
+    border-color: var(--color-success, #16a34a);
+  }
+  .cert-round--passed .cert-round__status {
+    color: var(--color-success, #16a34a);
+  }
+  .cert-round__tag {
+    margin-left: auto;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-light);
+  }
+  .cert-contact {
+    font-size: 0.85rem;
+  }
+
+  /* Certificate */
+  .cert-print {
+    display: flex;
+    justify-content: center;
+  }
+  .certificate {
+    width: 100%;
+    max-width: 760px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+  }
+  .certificate__border {
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    text-align: center;
+  }
+  .certificate__kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+  }
+  .certificate__intro {
+    color: var(--color-text-light);
+    margin: 0.5rem 0;
+  }
+  .certificate__name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.25rem 0;
+  }
+  .certificate__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0.25rem 0 1rem;
+  }
+  .certificate__desc {
+    color: var(--color-text-light);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    font-size: 0.9rem;
+  }
+  .certificate__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+  }
+  .certificate__footer > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .certificate__meta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.65rem;
+    color: var(--color-text-light);
+  }
+  .cert-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .cert-print,
+    .cert-print * {
+      visibility: visible;
+    }
+    .cert-print {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .certificate {
+      border: none;
+    }
+  }
+</style>

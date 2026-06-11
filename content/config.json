@@ -7,6 +7,7 @@
     "logo": "/images/logo.svg"
   },
   "navigation": [
+    { "label": "Courses", "path": "/courses" },
     { "label": "Blog", "path": "/blog" },
     { "label": "Problems", "path": "/problems" },
     { "label": "Quiz", "path": "/quiz" },
@@ -22,19 +23,19 @@
   },
   "newsletter": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwQbYn5pYbufkQz-nmps2N8mhmZB9q5_0yRv4e6d41wdS8wR4jSahKaE8mnWk0eg72Acg/exec"
   },
   "comments": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwQbYn5pYbufkQz-nmps2N8mhmZB9q5_0yRv4e6d41wdS8wR4jSahKaE8mnWk0eg72Acg/exec"
   },
   "sync": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwQbYn5pYbufkQz-nmps2N8mhmZB9q5_0yRv4e6d41wdS8wR4jSahKaE8mnWk0eg72Acg/exec"
   },
   "quiz": {
     "enabled": true,
-    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbxFBEpLKTUlZEl-iBkVXZUx2P--SnbYUnXqSvOXv2Z8TWxkuXAy9xa065jBnVq8Jd9xeA/exec"
+    "googleScriptUrl": "https://script.google.com/macros/s/AKfycbwQbYn5pYbufkQz-nmps2N8mhmZB9q5_0yRv4e6d41wdS8wR4jSahKaE8mnWk0eg72Acg/exec"
   },
   "seo": {
     "twitterHandle": "@dailycoder_in",

@@ -1,0 +1,30 @@
+{
+  "title": "Modules",
+  "description": "Organize code into reusable modules using import and export.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-modules",
+      "title": "Introduction to Modules",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-import-and-export",
+      "title": "import / export Syntax",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-default-vs-named-exports",
+      "title": "Default vs Named Exports",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-writing-modular-code",
+      "title": "Writing Modular Code",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}

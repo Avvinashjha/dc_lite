@@ -1,0 +1,36 @@
+{
+  "title": "NPM and Package Management",
+  "description": "Manage dependencies with npm: package.json, versioning, scripts, and publishing your own packages.",
+  "lessons": [
+    {
+      "slug": "01-introduction-to-npm",
+      "title": "Introduction to npm",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-package-json",
+      "title": "Understanding package.json",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-dependencies-and-versioning",
+      "title": "Dependencies and Semantic Versioning",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-npm-scripts",
+      "title": "npm Scripts",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-publishing-packages",
+      "title": "Publishing Packages",
+      "type": "text",
+      "duration": "10 min"
+    }
+  ]
+}
