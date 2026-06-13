@@ -30,6 +30,13 @@ var DCSyncService = (function () {
     return Promise.resolve(null);
   }
 
+  function requireIdToken(context) {
+    return getIdToken().then(function (token) {
+      if (token) return token;
+      throw new Error(context + ': missing Firebase ID token');
+    });
+  }
+
   function init(uid, url) {
     userId = uid;
     scriptUrl = url;
@@ -62,14 +69,17 @@ var DCSyncService = (function () {
     if (isSyncing) return Promise.resolve();
     isSyncing = true;
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('getProgress').then(function (token) {
       var url = scriptUrl + '?action=getProgress&uid=' + encodeURIComponent(userId);
-      if (token) url += '&idToken=' + encodeURIComponent(token);
+      url += '&idToken=' + encodeURIComponent(token);
       return fetch(url);
     })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        if (data.status !== 'success' || !data.items) return;
+        if (data.status !== 'success' || !data.items) {
+          console.warn('[DCSyncService] Pull response:', data);
+          return;
+        }
         return mergeRemoteItems(data.items);
       })
       .catch(function (err) {
@@ -153,11 +163,11 @@ var DCSyncService = (function () {
   function pushItems(items) {
     if (!scriptUrl || !userId || !items.length) return Promise.resolve();
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('saveProgress').then(function (token) {
       var payload = JSON.stringify({
         action: 'saveProgress',
         uid: userId,
-        idToken: token || '',
+        idToken: token,
         items: items
       });
 
@@ -171,6 +181,7 @@ var DCSyncService = (function () {
     .then(function (data) {
       if (data.status !== 'success') {
         console.warn('[DCSyncService] Push response:', data);
+        throw new Error(data.message || 'saveProgress failed');
       }
       retryCount = 0;
     })
@@ -194,11 +205,11 @@ var DCSyncService = (function () {
   function pushEnrollment(courseSlug, enrollmentData) {
     if (!isActive()) return Promise.resolve();
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('saveEnrollment').then(function (token) {
       var payload = JSON.stringify({
         action: 'saveEnrollment',
         uid: userId,
-        idToken: token || '',
+        idToken: token,
         courseSlug: courseSlug,
         enrolledAt: enrollmentData.enrolledAt,
         lastLesson: enrollmentData.lastLesson || '',
@@ -213,6 +224,12 @@ var DCSyncService = (function () {
       });
     })
     .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data && data.status !== 'success') {
+        console.warn('[DCSyncService] Enrollment push response:', data);
+        throw new Error(data.message || 'saveEnrollment failed');
+      }
+    })
     .catch(function (err) {
       console.warn('[DCSyncService] Enrollment push failed:', err);
     });
@@ -221,14 +238,17 @@ var DCSyncService = (function () {
   function pullEnrollments() {
     if (!userId || !scriptUrl) return Promise.resolve([]);
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('getEnrollments').then(function (token) {
       var url = scriptUrl + '?action=getEnrollments&uid=' + encodeURIComponent(userId);
-      if (token) url += '&idToken=' + encodeURIComponent(token);
+      url += '&idToken=' + encodeURIComponent(token);
       return fetch(url);
     })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        if (data.status !== 'success') return [];
+        if (data.status !== 'success') {
+          console.warn('[DCSyncService] Enrollment pull response:', data);
+          return [];
+        }
         return data.enrollments || [];
       })
       .catch(function (err) {
@@ -242,11 +262,11 @@ var DCSyncService = (function () {
   function pushCourseProgress(payload) {
     if (!isActive() || !payload || !payload.courseSlug) return Promise.resolve();
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('saveCourseProgress').then(function (token) {
       var body = JSON.stringify(Object.assign({
         action: 'saveCourseProgress',
         uid: userId,
-        idToken: token || ''
+        idToken: token
       }, payload));
 
       return fetch(scriptUrl, {
@@ -259,6 +279,7 @@ var DCSyncService = (function () {
     .then(function (data) {
       if (data && data.status !== 'success') {
         console.warn('[DCSyncService] Course progress push response:', data);
+        throw new Error(data.message || 'saveCourseProgress failed');
       }
     })
     .catch(function (err) {
@@ -269,15 +290,18 @@ var DCSyncService = (function () {
   function pullCourseProgress(courseSlug) {
     if (!userId || !scriptUrl) return Promise.resolve(null);
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('getCourseProgress').then(function (token) {
       var url = scriptUrl + '?action=getCourseProgress';
       if (courseSlug) url += '&courseSlug=' + encodeURIComponent(courseSlug);
-      if (token) url += '&idToken=' + encodeURIComponent(token);
+      url += '&idToken=' + encodeURIComponent(token);
       return fetch(url);
     })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        if (!data || data.status !== 'success') return null;
+        if (!data || data.status !== 'success') {
+          console.warn('[DCSyncService] Course progress pull response:', data);
+          return null;
+        }
         var server = {
           enrollment: data.enrollment || null,
           modules: data.modules || [],
@@ -303,14 +327,17 @@ var DCSyncService = (function () {
   function pullEnrollmentList() {
     if (!userId || !scriptUrl) return Promise.resolve([]);
 
-    return getIdToken().then(function (token) {
+    return requireIdToken('getCourseProgress enrollment list').then(function (token) {
       var url = scriptUrl + '?action=getCourseProgress';
-      if (token) url += '&idToken=' + encodeURIComponent(token);
+      url += '&idToken=' + encodeURIComponent(token);
       return fetch(url);
     })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        if (!data || data.status !== 'success') return [];
+        if (!data || data.status !== 'success') {
+          console.warn('[DCSyncService] Enrollment list pull response:', data);
+          return [];
+        }
         return data.enrollments || [];
       })
       .catch(function (err) {
