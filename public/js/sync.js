@@ -291,7 +291,7 @@ var DCSyncService = (function () {
     if (!userId || !scriptUrl) return Promise.resolve(null);
 
     return requireIdToken('getCourseProgress').then(function (token) {
-      var url = scriptUrl + '?action=getCourseProgress';
+      var url = scriptUrl + '?action=getCourseProgress&uid=' + encodeURIComponent(userId);
       if (courseSlug) url += '&courseSlug=' + encodeURIComponent(courseSlug);
       url += '&idToken=' + encodeURIComponent(token);
       return fetch(url);
@@ -328,7 +328,7 @@ var DCSyncService = (function () {
     if (!userId || !scriptUrl) return Promise.resolve([]);
 
     return requireIdToken('getCourseProgress enrollment list').then(function (token) {
-      var url = scriptUrl + '?action=getCourseProgress';
+      var url = scriptUrl + '?action=getCourseProgress&uid=' + encodeURIComponent(userId);
       url += '&idToken=' + encodeURIComponent(token);
       return fetch(url);
     })

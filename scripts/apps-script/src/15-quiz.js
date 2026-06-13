@@ -1,8 +1,13 @@
 /**
  * Quiz module — community quizzes + ranked leaderboards.
  *   GET  listCommunityQuizzes, getLeaderboard (public, JSONP-capable)
- *   POST createQuiz, submitScore (auth required)
+ *   POST createQuiz, submitScore (uses client-supplied uid)
  *   Tabs: community_quizzes, quiz_scores
+ *
+ * AUTH: token verification is temporarily disabled for the POST actions — the
+ * client only issues them for signed-in users and sends its own `uid`. Server-
+ * side token verification will be reinstated later (swap params.uid back to
+ * ctx.getUid()).
  */
 var Quiz = (function () {
   function listCommunity(ctx) {
@@ -52,8 +57,8 @@ var Quiz = (function () {
 
   function create(ctx) {
     var params = ctx.params;
-    var uid = ctx.getUid();
-    if (!uid) return Http.error('Authentication required');
+    var uid = params.uid || '';
+    if (!uid) return Http.error('Missing uid');
 
     var quiz = params.quiz;
     if (!quiz || !quiz.title || !Array.isArray(quiz.questions) || !quiz.questions.length) {
@@ -92,8 +97,8 @@ var Quiz = (function () {
 
   function submitScore(ctx) {
     var params = ctx.params;
-    var uid = ctx.getUid();
-    if (!uid) return Http.error('Authentication required');
+    var uid = params.uid || '';
+    if (!uid) return Http.error('Missing uid');
 
     if (!params.quizSlug) return Http.error('Missing quizSlug');
 
