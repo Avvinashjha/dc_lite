@@ -493,7 +493,8 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
         var payload = CP.buildStructuredPayload(structure, row);
         var token = (typeof window.getFirebaseIdToken === "function") ? window.getFirebaseIdToken() : Promise.resolve("");
         Promise.resolve(token).then(function (tok) {
-          var body = JSON.stringify(Object.assign({ action: "saveCourseProgress", idToken: tok || "" }, payload));
+          if (!tok) return;
+          var body = JSON.stringify(Object.assign({ action: "saveCourseProgress", idToken: tok }, payload));
           try { navigator.sendBeacon(url, new Blob([body], { type: "text/plain" })); } catch (e) {}
         });
       });
