@@ -1,0 +1,224 @@
+{
+  "id": "javascript-project-based-learning-applied-check",
+  "title": "JavaScript Project-Based Learning Applied Check",
+  "description": "Test your ability to plan project milestones, choose state and data structures, debug common issues, and prepare JavaScript projects for sharing.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "projects", "applied", "state", "testing"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A student wants to build a full social network as their first JavaScript project. What is the best next step?",
+      "options": [
+        { "id": "a", "text": "Define a small version one, such as posting and displaying local messages" },
+        { "id": "b", "text": "Start with authentication, payments, and private messaging all at once" },
+        { "id": "c", "text": "Skip requirements and write random code until it works" },
+        { "id": "d", "text": "Avoid building any user interaction" }
+      ],
+      "correct": ["a"],
+      "explanation": "Large ideas should be reduced to a small, finishable first version with clear behavior.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "You are building a todo app. Which should be part of the first milestone?",
+      "options": [
+        { "id": "a", "text": "Render a hard-coded list of task objects" },
+        { "id": "b", "text": "Add cloud sync, billing, and user profiles" },
+        { "id": "c", "text": "Deploy before any task appears on screen" },
+        { "id": "d", "text": "Write every possible extension before testing the first feature" }
+      ],
+      "correct": ["a"],
+      "explanation": "Rendering hard-coded data is a useful early milestone because it proves the UI can display the chosen data shape.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "An expense tracker needs to delete individual expenses after sorting. Which data choice is most important?",
+      "options": [
+        { "id": "a", "text": "Give each expense a stable `id`" },
+        { "id": "b", "text": "Use only the array index as the permanent identifier" },
+        { "id": "c", "text": "Store expenses only as strings with no structure" },
+        { "id": "d", "text": "Put all expense data inside CSS class names" }
+      ],
+      "correct": ["a"],
+      "explanation": "Stable IDs allow the app to identify the correct item even when sorting changes array positions.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the best structure for calculating an expense total?",
+      "options": [
+        { "id": "a", "text": "Derive the total from the expenses array when rendering or calculating summaries" },
+        { "id": "b", "text": "Manually update a separate total in many unrelated places" },
+        { "id": "c", "text": "Read the total from the text currently shown in the DOM" },
+        { "id": "d", "text": "Store the total in the CSS file" }
+      ],
+      "correct": ["a"],
+      "explanation": "Totals are derived data. Calculating them from source data avoids outdated duplicate state.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A dynamic list has delete buttons added during rendering. Which event strategy can keep the code simpler?",
+      "options": [
+        { "id": "a", "text": "Use event delegation on the list container and inspect the clicked button" },
+        { "id": "b", "text": "Add duplicate listeners every time the list renders" },
+        { "id": "c", "text": "Avoid buttons entirely because dynamic lists cannot handle events" },
+        { "id": "d", "text": "Use `fetch()` for every click even without an API" }
+      ],
+      "correct": ["a"],
+      "explanation": "Event delegation is useful for lists whose child elements are created dynamically.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "An API dashboard sometimes shows an endless loading message after a failed request. What is the best fix pattern?",
+      "options": [
+        { "id": "a", "text": "Clear loading state in a `finally` block and render the error state" },
+        { "id": "b", "text": "Ignore errors because failed requests are impossible" },
+        { "id": "c", "text": "Remove all loading UI" },
+        { "id": "d", "text": "Use `innerHTML` to hide the problem" }
+      ],
+      "correct": ["a"],
+      "explanation": "`finally` runs after success or failure, making it a good place to clear loading state.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A quiz app allows submitting a question without selecting an answer. What should happen first?",
+      "options": [
+        { "id": "a", "text": "Validate the selection and show a message before changing score or moving forward" },
+        { "id": "b", "text": "Increase the score anyway" },
+        { "id": "c", "text": "Delete all questions" },
+        { "id": "d", "text": "Deploy the app immediately" }
+      ],
+      "correct": ["a"],
+      "explanation": "Form and interaction validation should happen before state changes that depend on valid input.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Your project crashes on startup with `Cannot read properties of null (reading 'addEventListener')`. What should you check first?",
+      "options": [
+        { "id": "a", "text": "Whether the selector matches an existing element and the script runs after the element exists" },
+        { "id": "b", "text": "Whether CSS variables are uppercase" },
+        { "id": "c", "text": "Whether `localStorage` has enough colors" },
+        { "id": "d", "text": "Whether all functions are arrow functions" }
+      ],
+      "correct": ["a"],
+      "explanation": "The error usually means the selected DOM element is `null`, often because the selector is wrong or the script runs too early.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "A search box calls an API on every keypress and feels wasteful. What improvement is often appropriate?",
+      "options": [
+        { "id": "a", "text": "Debounce the search so the request waits until typing pauses" },
+        { "id": "b", "text": "Make ten requests for every keypress" },
+        { "id": "c", "text": "Store the API key in the DOM" },
+        { "id": "d", "text": "Replace all JavaScript with comments" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing reduces repeated work for interactions like search input.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "A user can type a task title that is rendered on the page. Which rendering approach is safer?",
+      "options": [
+        { "id": "a", "text": "Set an element's `textContent` to the title" },
+        { "id": "b", "text": "Set `innerHTML` directly from the title" },
+        { "id": "c", "text": "Run the title through `eval()`" },
+        { "id": "d", "text": "Use the title as a script URL" }
+      ],
+      "correct": ["a"],
+      "explanation": "`textContent` treats the value as text instead of parsing it as HTML.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Before sharing a deployed static project, what should you verify?",
+      "options": [
+        { "id": "a", "text": "The deployed page loads, assets work, JavaScript runs, and core features still pass manual checks" },
+        { "id": "b", "text": "Only that it works on your local file path" },
+        { "id": "c", "text": "That private secrets are visible in the browser" },
+        { "id": "d", "text": "That the README describes features that do not exist" }
+      ],
+      "correct": ["a"],
+      "explanation": "Deployment can introduce path, API, and environment issues, so the deployed version must be tested.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "A capstone plan includes this risk: `The current card index may point past the end after filtering.` What is the best response?",
+      "options": [
+        { "id": "a", "text": "Add logic and tests for empty filtered lists and index reset behavior" },
+        { "id": "b", "text": "Ignore it because risks never happen" },
+        { "id": "c", "text": "Remove filtering from the README but keep the broken code" },
+        { "id": "d", "text": "Store the index in CSS" }
+      ],
+      "correct": ["a"],
+      "explanation": "Known risks should become design decisions and test cases.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which manual test belongs in a localStorage project checklist?",
+      "options": [
+        { "id": "a", "text": "Add data, refresh the page, and confirm the data is still present" },
+        { "id": "b", "text": "Only check that the CSS file exists" },
+        { "id": "c", "text": "Never refresh the page" },
+        { "id": "d", "text": "Delete the README before testing" }
+      ],
+      "correct": ["a"],
+      "explanation": "Persistence features should be tested across page reloads.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "You finished version one and have repeated validation code in three event handlers. What is a reasonable next step?",
+      "options": [
+        { "id": "a", "text": "Extract a named validation helper while preserving current behavior" },
+        { "id": "b", "text": "Rewrite the entire project before checking that version one still works" },
+        { "id": "c", "text": "Delete validation because duplicated code means validation is impossible" },
+        { "id": "d", "text": "Add five unrelated features first" }
+      ],
+      "correct": ["a"],
+      "explanation": "After behavior works, extracting meaningful helpers is a useful refactoring step.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which portfolio description is strongest?",
+      "options": [
+        { "id": "a", "text": "Built a quiz app with JavaScript modules, DOM rendering, score calculation, validation, and localStorage best-score persistence" },
+        { "id": "b", "text": "Made a thing" },
+        { "id": "c", "text": "Used JavaScript somehow" },
+        { "id": "d", "text": "Project has many secret features but none are documented" }
+      ],
+      "correct": ["a"],
+      "explanation": "Specific descriptions communicate what the project does and which technical skills it demonstrates.",
+      "points": 1
+    }
+  ]
+}

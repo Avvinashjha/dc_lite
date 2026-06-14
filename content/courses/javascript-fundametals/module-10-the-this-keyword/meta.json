@@ -15,22 +15,44 @@
       "duration": "10 min"
     },
     {
-      "slug": "03-bind",
+      "slug": "03-arrow-functions-and-this",
+      "title": "Arrow Functions and this",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-bind",
       "title": "bind()",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "04-call",
+      "slug": "05-call",
       "title": "call()",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "05-apply",
+      "slug": "06-apply",
       "title": "apply()",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-this-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "08-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-this-applied-check",
+      "passingScore": 70
     }
   ]
 }

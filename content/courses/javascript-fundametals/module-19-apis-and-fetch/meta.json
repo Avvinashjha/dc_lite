@@ -37,6 +37,34 @@
       "title": "Solving CORS Errors",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-request-options-and-error-responses",
+      "title": "Request Options and Error Responses",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-query-params-headers-and-auth",
+      "title": "Query Params, Headers, and Auth",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-apis-fetch-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "10-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-apis-fetch-applied-check",
+      "passingScore": 70
     }
   ]
 }

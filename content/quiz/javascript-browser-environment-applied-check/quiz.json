@@ -1,0 +1,224 @@
+{
+  "id": "javascript-browser-environment-applied-check",
+  "title": "JavaScript Browser Environment Applied Check",
+  "description": "Test your ability to diagnose practical browser JavaScript issues involving DOM selection, element updates, events, script loading, storage, navigation, security boundaries, rendering, compatibility, and DevTools.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "browser", "dom", "events", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the likely problem?\n```html\n<head>\n  <script src=\"app.js\"></script>\n</head>\n<body>\n  <button id=\"save\">Save</button>\n</body>\n```\n```js\nconst button = document.querySelector(\"#save\");\nbutton.addEventListener(\"click\", save);\n```",
+      "options": [
+        { "id": "a", "text": "The script may run before the button exists in the DOM" },
+        { "id": "b", "text": "`querySelector` cannot select IDs" },
+        { "id": "c", "text": "Buttons cannot receive click events" },
+        { "id": "d", "text": "Event listeners only work inside CSS files" }
+      ],
+      "correct": ["a"],
+      "explanation": "A blocking script in the head can run before the body is parsed. Use `defer`, move the script, or wait for `DOMContentLoaded`.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which fix best handles the missing-element possibility?\n```js\nconst status = document.querySelector(\"#status\");\nstatus.textContent = \"Ready\";\n```",
+      "options": [
+        { "id": "a", "text": "Check that `status` exists before using it" },
+        { "id": "b", "text": "Replace `textContent` with `innerHTML`" },
+        { "id": "c", "text": "Use `setTimeout` around every DOM update" },
+        { "id": "d", "text": "Convert `status` to JSON first" }
+      ],
+      "correct": ["a"],
+      "explanation": "`querySelector()` can return `null`, so code should handle that when the element might be absent.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the main security issue here?\n```js\ncomments.innerHTML = userComment;\n```",
+      "options": [
+        { "id": "a", "text": "Untrusted content is parsed as HTML, which can create an XSS risk" },
+        { "id": "b", "text": "`innerHTML` always stores content in localStorage" },
+        { "id": "c", "text": "Comments cannot be displayed in the DOM" },
+        { "id": "d", "text": "The browser will automatically delete the page title" }
+      ],
+      "correct": ["a"],
+      "explanation": "`innerHTML` parses strings as HTML. Use `textContent` for untrusted plain text.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which code correctly stores and reads an object in `localStorage`?",
+      "options": [
+        { "id": "a", "text": "`localStorage.setItem(\"settings\", JSON.stringify(settings)); const settings = JSON.parse(localStorage.getItem(\"settings\"));`" },
+        { "id": "b", "text": "`localStorage.setItem(\"settings\", settings); const settings = localStorage.getObject(\"settings\");`" },
+        { "id": "c", "text": "`localStorage.settings = settings; const settings = localStorage.settings.parse();`" },
+        { "id": "d", "text": "`localStorage.saveJSON(settings); const settings = localStorage.loadJSON();`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Web storage stores strings, so objects should be stringified and parsed with JSON.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Why is this event listener useful for a dynamic task list?\n```js\nlist.addEventListener(\"click\", (event) => {\n  const button = event.target.closest(\"button[data-id]\");\n\n  if (!button) return;\n\n  completeTask(button.dataset.id);\n});\n```",
+      "options": [
+        { "id": "a", "text": "It uses event delegation, so buttons added later can still be handled" },
+        { "id": "b", "text": "It prevents all clicks from bubbling" },
+        { "id": "c", "text": "It stores every task in cookies automatically" },
+        { "id": "d", "text": "It makes `dataset.id` a number automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "A listener on the parent can handle events from current and future child buttons because click events bubble.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is wrong with this listener removal?\n```js\nbutton.addEventListener(\"click\", () => console.log(\"clicked\"));\nbutton.removeEventListener(\"click\", () => console.log(\"clicked\"));\n```",
+      "options": [
+        { "id": "a", "text": "The two arrow functions are different function objects" },
+        { "id": "b", "text": "`removeEventListener` only works with CSS selectors" },
+        { "id": "c", "text": "Click listeners cannot be removed" },
+        { "id": "d", "text": "The console prevents removal" }
+      ],
+      "correct": ["a"],
+      "explanation": "To remove a listener, pass the same function reference that was used when adding it.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which script loading choice is best for two dependent classic scripts that should not block HTML parsing?",
+      "options": [
+        { "id": "a", "text": "Use `defer` on both scripts in dependency order" },
+        { "id": "b", "text": "Use `async` on both scripts" },
+        { "id": "c", "text": "Put both scripts in `localStorage`" },
+        { "id": "d", "text": "Use `type=\"json\"` on both scripts" }
+      ],
+      "correct": ["a"],
+      "explanation": "`defer` avoids blocking parsing and preserves execution order. `async` does not guarantee order.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is the likely issue with this browser API code?\n```js\nawait navigator.clipboard.writeText(\"Copied\");\n```",
+      "options": [
+        { "id": "a", "text": "The Clipboard API may be unavailable or may reject, so feature detection and error handling are needed" },
+        { "id": "b", "text": "`await` cannot be used with browser APIs" },
+        { "id": "c", "text": "`navigator` is a DOM element" },
+        { "id": "d", "text": "Clipboard writes always require `innerHTML` first" }
+      ],
+      "correct": ["a"],
+      "explanation": "Some browser APIs depend on support, permissions, secure context, or user activation. They can fail.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which URL-building code safely handles spaces and special characters in the query value?",
+      "options": [
+        { "id": "a", "text": "`const params = new URLSearchParams({ q: search.value }); const url = `/search?${params}`;`" },
+        { "id": "b", "text": "`const url = \"/search?q=\" + search.value;` is always safe for all input" },
+        { "id": "c", "text": "`const url = JSON.stringify(\"/search?q=\" + search.value);`" },
+        { "id": "d", "text": "`const url = CSS.escape(\"/search?q=\" + search.value);`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`URLSearchParams` safely encodes query parameter values.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is the best reason to avoid this frontend code?\n```js\nconst API_SECRET = \"secret-value\";\n```",
+      "options": [
+        { "id": "a", "text": "Frontend JavaScript is visible to users, so secrets can be exposed" },
+        { "id": "b", "text": "Constants cannot contain strings" },
+        { "id": "c", "text": "Browser code cannot make network requests" },
+        { "id": "d", "text": "Secrets can only be stored in CSS classes" }
+      ],
+      "correct": ["a"],
+      "explanation": "Secrets should not be shipped to the browser. Use a backend for secret-protected operations.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is the likely problem here?\n```js\nfor (const card of cards) {\n  card.style.height = `${card.offsetWidth}px`;\n}\n```",
+      "options": [
+        { "id": "a", "text": "It mixes layout reads and writes repeatedly, which can hurt rendering performance" },
+        { "id": "b", "text": "`offsetWidth` always returns a Promise" },
+        { "id": "c", "text": "Template literals cannot be used with styles" },
+        { "id": "d", "text": "Cards cannot have inline styles" }
+      ],
+      "correct": ["a"],
+      "explanation": "Reading layout and writing styles in a loop can force repeated layout work. Batch reads and writes when performance matters.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "A `fetch()` request appears to fail. Which DevTools panel should you check first to inspect status, headers, response, timing, and CORS messages?",
+      "options": [
+        { "id": "a", "text": "Network" },
+        { "id": "b", "text": "Elements" },
+        { "id": "c", "text": "Rendering Fonts" },
+        { "id": "d", "text": "Animations only" }
+      ],
+      "correct": ["a"],
+      "explanation": "The Network panel shows the browser's HTTP requests and responses, which is essential for debugging fetch issues.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Why can this be an open redirect risk?\n```js\nconst next = new URLSearchParams(location.search).get(\"next\");\nlocation.href = next;\n```",
+      "options": [
+        { "id": "a", "text": "A user-controlled `next` value may send users to an attacker-controlled site" },
+        { "id": "b", "text": "`location.href` cannot navigate" },
+        { "id": "c", "text": "`URLSearchParams` always deletes protocols" },
+        { "id": "d", "text": "Query parameters are never strings" }
+      ],
+      "correct": ["a"],
+      "explanation": "Redirect targets should be validated, commonly by allowing only trusted origins or relative paths.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What should you do before relying on a newer browser API in production code?",
+      "options": [
+        { "id": "a", "text": "Check support with feature detection and provide a fallback or alternate path when needed" },
+        { "id": "b", "text": "Assume all browsers support all APIs equally" },
+        { "id": "c", "text": "Disable JavaScript modules" },
+        { "id": "d", "text": "Store the API name in a cookie" }
+      ],
+      "correct": ["a"],
+      "explanation": "Feature detection and fallback behavior make browser code more reliable across different browser versions.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "What is happening here?\n```js\nconst input = document.querySelector(\"#name\");\ninput.value = \"Mina\";\n\nconsole.log(input.getAttribute(\"value\"));\nconsole.log(input.value);\n```",
+      "options": [
+        { "id": "a", "text": "The attribute may still show the original HTML value, while the property shows the current form value" },
+        { "id": "b", "text": "`input.value` changes the page URL" },
+        { "id": "c", "text": "`getAttribute` always returns a number" },
+        { "id": "d", "text": "Inputs cannot be changed after page load" }
+      ],
+      "correct": ["a"],
+      "explanation": "Attributes and properties are related but not always the same. Use properties like `value` and `checked` for current form state.",
+      "points": 1
+    }
+  ]
+}

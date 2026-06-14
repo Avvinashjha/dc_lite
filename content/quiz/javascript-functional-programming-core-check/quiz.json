@@ -1,0 +1,182 @@
+{
+  "id": "javascript-functional-programming-core-check",
+  "title": "JavaScript Functional Programming Core Check",
+  "description": "Check your understanding of pure functions, side effects, immutability, higher-order functions, array transformations, currying, composition, reduce, and recursion.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "functional-programming", "pure-functions", "immutability"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a pure function?",
+      "options": [
+        { "id": "a", "text": "A function that returns the same output for the same input and has no side effects" },
+        { "id": "b", "text": "A function that always logs to the console" },
+        { "id": "c", "text": "A function that can only be written with arrow syntax" },
+        { "id": "d", "text": "A function that mutates its arguments" }
+      ],
+      "correct": ["a"],
+      "explanation": "Pure functions are predictable: same input, same output, and no side effects.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which is a side effect?",
+      "options": [
+        { "id": "a", "text": "Changing a variable outside the function" },
+        { "id": "b", "text": "Returning a calculated number" },
+        { "id": "c", "text": "Creating a local variable inside a function" },
+        { "id": "d", "text": "Passing an argument to a function" }
+      ],
+      "correct": ["a"],
+      "explanation": "Changing external state is a side effect.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does immutability mean?",
+      "options": [
+        { "id": "a", "text": "Creating updated copies instead of changing existing data directly" },
+        { "id": "b", "text": "Never using objects" },
+        { "id": "c", "text": "Only using `var`" },
+        { "id": "d", "text": "Deleting all arrays after use" }
+      ],
+      "correct": ["a"],
+      "explanation": "Immutable updates keep the original value unchanged and return a new updated value.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Does `const` make an object immutable?",
+      "options": [
+        { "id": "a", "text": "No, it prevents reassignment of the variable, not mutation of object properties" },
+        { "id": "b", "text": "Yes, all properties are deeply frozen" },
+        { "id": "c", "text": "Only for arrays" },
+        { "id": "d", "text": "Only inside classes" }
+      ],
+      "correct": ["a"],
+      "explanation": "`const` protects the binding. Object properties can still be changed unless other measures are used.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is a higher-order function?",
+      "options": [
+        { "id": "a", "text": "A function that accepts a function, returns a function, or both" },
+        { "id": "b", "text": "A function with more than 100 lines" },
+        { "id": "c", "text": "A function that can only run in the browser" },
+        { "id": "d", "text": "A function that must be async" }
+      ],
+      "correct": ["a"],
+      "explanation": "Higher-order functions work with other functions as values.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which array method is best for transforming every item into a new value?",
+      "options": [
+        { "id": "a", "text": "`map()`" },
+        { "id": "b", "text": "`filter()`" },
+        { "id": "c", "text": "`some()`" },
+        { "id": "d", "text": "`forEach()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`map()` transforms every item and returns a new array of the same length.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which array method is best for keeping only items that match a condition?",
+      "options": [
+        { "id": "a", "text": "`filter()`" },
+        { "id": "b", "text": "`map()`" },
+        { "id": "c", "text": "`reduceRightOnly()`" },
+        { "id": "d", "text": "`parse()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`filter()` returns a new array containing only items whose callback returns true.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which array method is best for combining many values into one result?",
+      "options": [
+        { "id": "a", "text": "`reduce()`" },
+        { "id": "b", "text": "`map()`" },
+        { "id": "c", "text": "`find()`" },
+        { "id": "d", "text": "`slice()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`reduce()` combines an array into a single result, such as a total or lookup object.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is currying?",
+      "options": [
+        { "id": "a", "text": "Transforming a multi-argument function into a chain of single-argument functions" },
+        { "id": "b", "text": "Sorting an array without mutating it" },
+        { "id": "c", "text": "Catching Promise errors" },
+        { "id": "d", "text": "Converting JSON into objects" }
+      ],
+      "correct": ["a"],
+      "explanation": "A curried function receives arguments across multiple calls, such as `add(2)(3)`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does function composition do?",
+      "options": [
+        { "id": "a", "text": "Combines functions so the output of one becomes the input of another" },
+        { "id": "b", "text": "Deletes all functions from an object" },
+        { "id": "c", "text": "Makes every function asynchronous" },
+        { "id": "d", "text": "Prevents all errors automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Composition builds larger behavior by connecting small functions.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does a recursive function do?",
+      "options": [
+        { "id": "a", "text": "It calls itself" },
+        { "id": "b", "text": "It can only use `map()`" },
+        { "id": "c", "text": "It never returns a value" },
+        { "id": "d", "text": "It must mutate global state" }
+      ],
+      "correct": ["a"],
+      "explanation": "Recursion means a function calls itself, usually until a base case is reached.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Why does a recursive function need a base case?",
+      "options": [
+        { "id": "a", "text": "To stop the recursion" },
+        { "id": "b", "text": "To force mutation" },
+        { "id": "c", "text": "To make the function impure" },
+        { "id": "d", "text": "To convert objects to JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "Without a base case, recursion may continue until the call stack overflows.",
+      "points": 1
+    }
+  ]
+}

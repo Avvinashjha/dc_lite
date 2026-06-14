@@ -1,30 +1,88 @@
 {
   "title": "Performance Optimization",
-  "description": "Make your JavaScript faster with proven optimization techniques.",
+  "description": "Measure, debug, and improve JavaScript performance in browsers and real applications.",
   "lessons": [
     {
-      "slug": "01-memoization",
-      "title": "Memoization",
+      "slug": "01-measuring-before-optimizing",
+      "title": "Measuring Before Optimizing",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "02-lazy-loading",
-      "title": "Lazy Loading",
+      "slug": "02-browser-performance-model",
+      "title": "Browser Performance Model",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "03-debouncing",
+      "slug": "03-main-thread-and-long-tasks",
+      "title": "Main Thread and Long Tasks",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "04-dom-layout-and-paint",
+      "title": "DOM, Layout, and Paint",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-debouncing",
       "title": "Debouncing",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "04-throttling",
+      "slug": "06-throttling",
       "title": "Throttling",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-memoization-and-caching",
+      "title": "Memoization and Caching",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-lazy-loading-and-dynamic-import",
+      "title": "Lazy Loading and Dynamic Import",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-animation-idle-work-and-workers",
+      "title": "Animation, Idle Work, and Workers",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-network-bundle-and-memory-tradeoffs",
+      "title": "Network, Bundle, and Memory Tradeoffs",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "11-profiling-with-devtools",
+      "title": "Profiling with DevTools",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "12-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-performance-optimization-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "13-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-performance-optimization-applied-check",
+      "passingScore": 70
     }
   ]
 }

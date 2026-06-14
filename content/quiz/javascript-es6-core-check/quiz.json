@@ -1,0 +1,182 @@
+{
+  "id": "javascript-es6-core-check",
+  "title": "JavaScript ES6+ Core Check",
+  "description": "Check your understanding of arrow functions, template literals, destructuring, spread, rest, enhanced object literals, Map, Set, and modern operators.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "es6", "modern-javascript"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does ES6 refer to?",
+      "options": [
+        { "id": "a", "text": "A JavaScript framework" },
+        { "id": "b", "text": "The ECMAScript 2015 language update" },
+        { "id": "c", "text": "A browser-only version of JavaScript" },
+        { "id": "d", "text": "A package manager for JavaScript" }
+      ],
+      "correct": ["b"],
+      "explanation": "ES6 is also called ES2015 and was a major update to the JavaScript language standard.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which arrow function correctly returns the sum of `a` and `b`?",
+      "options": [
+        { "id": "a", "text": "`const add = (a, b) => a + b;`" },
+        { "id": "b", "text": "`const add = (a, b) -> a + b;`" },
+        { "id": "c", "text": "`const add => (a, b) { a + b };`" },
+        { "id": "d", "text": "`const add = arrow(a, b) => a + b;`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Arrow functions use the `=>` syntax. A single expression can be returned implicitly.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is required when an arrow function with a block body should return a value?",
+      "options": [
+        { "id": "a", "text": "A semicolon before the value" },
+        { "id": "b", "text": "An explicit `return` statement" },
+        { "id": "c", "text": "A `yield` keyword" },
+        { "id": "d", "text": "A variable named `result`" }
+      ],
+      "correct": ["b"],
+      "explanation": "When an arrow function uses braces, it needs an explicit `return` to return a value.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which syntax correctly interpolates `name` into a string?",
+      "options": [
+        { "id": "a", "text": "`\"Hello, ${name}!\"`" },
+        { "id": "b", "text": "`'Hello, ${name}!'`" },
+        { "id": "c", "text": "`` `Hello, ${name}!` ``" },
+        { "id": "d", "text": "`\"Hello, {name}!\"`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Template literal interpolation requires backticks and `${}` placeholders.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst colors = [\"red\", \"green\", \"blue\"];\nconst [first, , third] = colors;\nconsole.log(first, third);\n```",
+      "options": [
+        { "id": "a", "text": "`red green`" },
+        { "id": "b", "text": "`red blue`" },
+        { "id": "c", "text": "`green blue`" },
+        { "id": "d", "text": "`undefined blue`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Array destructuring is positional. The empty comma skips the second item.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which destructuring syntax renames the `name` property to `userName`?",
+      "options": [
+        { "id": "a", "text": "`const { userName: name } = user;`" },
+        { "id": "b", "text": "`const { name as userName } = user;`" },
+        { "id": "c", "text": "`const { name: userName } = user;`" },
+        { "id": "d", "text": "`const [name: userName] = user;`" }
+      ],
+      "correct": ["c"],
+      "explanation": "In object destructuring, `name: userName` reads the `name` property into a variable named `userName`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does spread syntax do in `[0, ...numbers, 4]`?",
+      "options": [
+        { "id": "a", "text": "Collects all values into `numbers`" },
+        { "id": "b", "text": "Expands the elements of `numbers` into the new array" },
+        { "id": "c", "text": "Deletes duplicate numbers" },
+        { "id": "d", "text": "Converts `numbers` to an object" }
+      ],
+      "correct": ["b"],
+      "explanation": "Spread expands array elements into another array literal.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does rest syntax do in `function sum(...numbers)`?",
+      "options": [
+        { "id": "a", "text": "Expands an array into separate arguments" },
+        { "id": "b", "text": "Collects remaining arguments into an array" },
+        { "id": "c", "text": "Creates a Set" },
+        { "id": "d", "text": "Stops the function from receiving arguments" }
+      ],
+      "correct": ["b"],
+      "explanation": "A rest parameter collects arguments into a real array.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which enhanced object literal feature is used here?\n```js\nconst name = \"Alice\";\nconst user = { name };\n```",
+      "options": [
+        { "id": "a", "text": "Property shorthand" },
+        { "id": "b", "text": "Optional chaining" },
+        { "id": "c", "text": "Array destructuring" },
+        { "id": "d", "text": "Tagged templates" }
+      ],
+      "correct": ["a"],
+      "explanation": "When the variable name and property name match, property shorthand lets you write `{ name }`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which data structure stores unique values?",
+      "options": [
+        { "id": "a", "text": "`Map`" },
+        { "id": "b", "text": "`Set`" },
+        { "id": "c", "text": "`Promise`" },
+        { "id": "d", "text": "`JSON`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Set` stores unique values and ignores duplicate entries.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which method reads a value from a `Map` by key?",
+      "options": [
+        { "id": "a", "text": "`.get(key)`" },
+        { "id": "b", "text": "`.read(key)`" },
+        { "id": "c", "text": "`.value(key)`" },
+        { "id": "d", "text": "`.find(key)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Map.prototype.get()` reads the value associated with a key.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does nullish coalescing `??` check for?",
+      "options": [
+        { "id": "a", "text": "Any falsy value" },
+        { "id": "b", "text": "Only `null` or `undefined`" },
+        { "id": "c", "text": "Only empty strings" },
+        { "id": "d", "text": "Only `false` and `0`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`??` uses the fallback only when the left side is `null` or `undefined`.",
+      "points": 1
+    }
+  ]
+}

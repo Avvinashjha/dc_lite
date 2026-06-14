@@ -571,6 +571,23 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
       setTimeout(hydrateAndRefresh, 600);
     });
 
+    // Scroll the active lesson (and its module) into view inside the sidebar's
+    // own scroll container, without scrolling the page itself. Exposed on window
+    // so the mobile drawer can re-trigger it when it opens.
+    function scrollActiveIntoView() {
+      var active = document.querySelector(".lesson-sidebar__link--active");
+      var container = document.querySelector(".lesson-sidebar__nav");
+      if (!active || !container) return;
+      var cRect = container.getBoundingClientRect();
+      var aRect = active.getBoundingClientRect();
+      if (aRect.top >= cRect.top && aRect.bottom <= cRect.bottom) return; // already visible
+      var offset =
+        (aRect.top - cRect.top) - (container.clientHeight / 2) + (active.offsetHeight / 2);
+      container.scrollTop += offset;
+    }
+    window.__dcScrollSidebarActive = scrollActiveIntoView;
+    requestAnimationFrame(scrollActiveIntoView);
+
     // Render the lock gate / progress instantly from locally-persisted
     // IndexedDB state so a module is never wrongly locked while the network is
     // pending (and it works offline). Then reconcile with the server in the
@@ -589,12 +606,17 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
 
     function openDrawer() {
       layout.classList.add("lesson-layout--drawer-open");
+      // Bring the active lesson into view once the drawer is visible.
+      if (typeof window.__dcScrollSidebarActive === "function") {
+        requestAnimationFrame(window.__dcScrollSidebarActive);
+      }
     }
     function closeDrawer() {
       layout.classList.remove("lesson-layout--drawer-open");
     }
     function toggleDrawer() {
-      layout.classList.toggle("lesson-layout--drawer-open");
+      if (layout.classList.contains("lesson-layout--drawer-open")) closeDrawer();
+      else openDrawer();
     }
 
     // Default state: open on desktop, closed on smaller screens.

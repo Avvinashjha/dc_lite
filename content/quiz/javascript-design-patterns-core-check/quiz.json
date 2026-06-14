@@ -1,0 +1,411 @@
+{
+  "id": "javascript-design-patterns-core-check",
+  "title": "JavaScript Design Patterns Core Check",
+  "description": "Check your understanding of common JavaScript design patterns, their purposes, tradeoffs, and when to use them.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": [
+    "javascript",
+    "design-patterns",
+    "architecture",
+    "objects"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a design pattern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A reusable solution shape for a common programming problem"
+        },
+        {
+          "id": "b",
+          "text": "A JavaScript syntax rule enforced by the browser"
+        },
+        {
+          "id": "c",
+          "text": "A package that must be installed from npm"
+        },
+        {
+          "id": "d",
+          "text": "A replacement for testing"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A design pattern is a reusable way to think about and solve a common design problem.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is a good reason to use a design pattern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It solves a real problem such as duplication, coupling, or complex object creation"
+        },
+        {
+          "id": "b",
+          "text": "It makes code look more advanced"
+        },
+        {
+          "id": "c",
+          "text": "It removes the need for clear names"
+        },
+        {
+          "id": "d",
+          "text": "It guarantees faster runtime performance"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Patterns are useful when they improve real code structure, not when they add ceremony.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does the module pattern help with?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Grouping related code and exposing a small public API"
+        },
+        {
+          "id": "b",
+          "text": "Making every variable global"
+        },
+        {
+          "id": "c",
+          "text": "Replacing functions with CSS"
+        },
+        {
+          "id": "d",
+          "text": "Forcing all code to be asynchronous"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Modules organize related code and keep unexported details private to the module.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the main purpose of the factory pattern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Centralizing object creation"
+        },
+        {
+          "id": "b",
+          "text": "Listening for DOM events only"
+        },
+        {
+          "id": "c",
+          "text": "Sorting arrays in place"
+        },
+        {
+          "id": "d",
+          "text": "Preventing all network errors"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A factory creates objects in one place, often applying defaults, validation, or implementation selection.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is a major caution with the singleton pattern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It can introduce hidden shared state that is hard to test or debug"
+        },
+        {
+          "id": "b",
+          "text": "It can only be used with arrays"
+        },
+        {
+          "id": "c",
+          "text": "It prevents imports from working"
+        },
+        {
+          "id": "d",
+          "text": "It always creates a new instance"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Singletons are convenient but shared mutable state can make behavior harder to trace.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does the observer pattern allow?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Many listeners can react when a subject changes"
+        },
+        {
+          "id": "b",
+          "text": "One function can only run once"
+        },
+        {
+          "id": "c",
+          "text": "Objects can be frozen automatically"
+        },
+        {
+          "id": "d",
+          "text": "All errors can be ignored safely"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Observers subscribe to a subject and are notified when something happens.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the strategy pattern best for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Choosing between interchangeable algorithms or behaviors"
+        },
+        {
+          "id": "b",
+          "text": "Creating exactly one global object"
+        },
+        {
+          "id": "c",
+          "text": "Converting JSON to a string"
+        },
+        {
+          "id": "d",
+          "text": "Making private variables public"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Strategies let code select one behavior from a family of compatible behaviors.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does an adapter do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Converts one interface or data shape into another expected shape"
+        },
+        {
+          "id": "b",
+          "text": "Runs every command in reverse"
+        },
+        {
+          "id": "c",
+          "text": "Prevents values from being iterated"
+        },
+        {
+          "id": "d",
+          "text": "Makes all functions pure"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Adapters help incompatible interfaces work together by translating between shapes.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is the goal of a facade?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Provide a simpler interface over complex code"
+        },
+        {
+          "id": "b",
+          "text": "Expose every internal helper"
+        },
+        {
+          "id": "c",
+          "text": "Duplicate all object creation"
+        },
+        {
+          "id": "d",
+          "text": "Make an object impossible to import"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A facade hides complex steps behind a clearer public operation.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does a decorator or wrapper usually do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adds behavior around existing code while preserving its interface"
+        },
+        {
+          "id": "b",
+          "text": "Deletes the original function"
+        },
+        {
+          "id": "c",
+          "text": "Makes a loop infinite"
+        },
+        {
+          "id": "d",
+          "text": "Turns objects into strings only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Wrappers commonly add logging, timing, validation, retries, or caching around existing behavior.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "When is the command pattern useful?",
+      "options": [
+        {
+          "id": "a",
+          "text": "When actions need to be stored, queued, logged, retried, or undone"
+        },
+        {
+          "id": "b",
+          "text": "When a value must never be passed as an argument"
+        },
+        {
+          "id": "c",
+          "text": "When there is only one local variable"
+        },
+        {
+          "id": "d",
+          "text": "When code must avoid functions"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Commands represent actions as values, which makes action management possible.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What JavaScript feature is central to the iterator pattern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`Symbol.iterator` and `for...of`"
+        },
+        {
+          "id": "b",
+          "text": "`JSON.stringify()` only"
+        },
+        {
+          "id": "c",
+          "text": "`alert()`"
+        },
+        {
+          "id": "d",
+          "text": "`parseInt()`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "JavaScript uses the iterable protocol, `Symbol.iterator`, iterators, and `for...of` for iteration.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What is dependency injection?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Passing required services into code instead of hard-coding or importing them directly"
+        },
+        {
+          "id": "b",
+          "text": "Adding random dependencies to every function"
+        },
+        {
+          "id": "c",
+          "text": "Replacing all objects with arrays"
+        },
+        {
+          "id": "d",
+          "text": "Preventing tests from using fakes"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Dependency injection makes dependencies visible and easier to replace in tests or different environments.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does composition over inheritance generally recommend?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build behavior by combining focused pieces unless inheritance clearly fits"
+        },
+        {
+          "id": "b",
+          "text": "Never use functions"
+        },
+        {
+          "id": "c",
+          "text": "Always create the deepest possible class hierarchy"
+        },
+        {
+          "id": "d",
+          "text": "Store all behavior in one global object"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Composition often gives JavaScript code flexible combinations of behavior without rigid class trees.",
+      "points": 1
+    }
+  ]
+}

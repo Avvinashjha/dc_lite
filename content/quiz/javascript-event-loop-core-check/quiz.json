@@ -1,0 +1,182 @@
+{
+  "id": "javascript-event-loop-core-check",
+  "title": "JavaScript Event Loop Core Check",
+  "description": "Check your understanding of the JavaScript engine, runtime, call stack, microtasks, macrotasks, rendering, and concurrency model.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "event-loop", "async"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does the JavaScript engine do?",
+      "options": [
+        { "id": "a", "text": "Parses and executes JavaScript code" },
+        { "id": "b", "text": "Provides the DOM API by itself" },
+        { "id": "c", "text": "Stores CSS files only" },
+        { "id": "d", "text": "Turns every callback into a class" }
+      ],
+      "correct": ["a"],
+      "explanation": "The engine parses and executes JavaScript. Runtime environments provide APIs like DOM, timers, and fetch.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which is usually provided by the runtime rather than the core JavaScript language?",
+      "options": [
+        { "id": "a", "text": "`setTimeout`" },
+        { "id": "b", "text": "`const`" },
+        { "id": "c", "text": "`Array.prototype.map`" },
+        { "id": "d", "text": "`class`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Timers like `setTimeout` are provided by the browser or Node runtime.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does the call stack track?",
+      "options": [
+        { "id": "a", "text": "Currently running function calls" },
+        { "id": "b", "text": "Only CSS animations" },
+        { "id": "c", "text": "All files in a module folder" },
+        { "id": "d", "text": "Only rejected promises" }
+      ],
+      "correct": ["a"],
+      "explanation": "The call stack tracks active function calls and unwinds as they finish.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What error can runaway recursion cause?",
+      "options": [
+        { "id": "a", "text": "Maximum call stack size exceeded" },
+        { "id": "b", "text": "Promise fulfilled too early" },
+        { "id": "c", "text": "CSS selector failed" },
+        { "id": "d", "text": "JSON became invalid automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Recursion without a stopping condition can overflow the call stack.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which callback type is commonly a microtask?",
+      "options": [
+        { "id": "a", "text": "Promise `.then()` callback" },
+        { "id": "b", "text": "`setTimeout` callback" },
+        { "id": "c", "text": "`setInterval` callback" },
+        { "id": "d", "text": "A click event task only" }
+      ],
+      "correct": ["a"],
+      "explanation": "Promise callbacks such as `.then`, `.catch`, and `.finally` are microtasks.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which callback type is commonly a macrotask?",
+      "options": [
+        { "id": "a", "text": "`setTimeout` callback" },
+        { "id": "b", "text": "Promise `.then()` callback" },
+        { "id": "c", "text": "`queueMicrotask` callback" },
+        { "id": "d", "text": "A synchronous function call" }
+      ],
+      "correct": ["a"],
+      "explanation": "Timer callbacks are tasks/macrotasks.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "In the simplified event-loop model, what runs first after synchronous code finishes?",
+      "options": [
+        { "id": "a", "text": "Microtasks" },
+        { "id": "b", "text": "Timers before all microtasks" },
+        { "id": "c", "text": "Rendering before every promise callback" },
+        { "id": "d", "text": "Nothing else can run" }
+      ],
+      "correct": ["a"],
+      "explanation": "After the call stack clears, queued microtasks run before the next macrotask.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `setTimeout(fn, 0)` mean?",
+      "options": [
+        { "id": "a", "text": "Schedule `fn` to run later when the event loop can pick it" },
+        { "id": "b", "text": "Run `fn` immediately before the next line" },
+        { "id": "c", "text": "Run `fn` as a microtask" },
+        { "id": "d", "text": "Block the stack for exactly 0ms" }
+      ],
+      "correct": ["a"],
+      "explanation": "`setTimeout(..., 0)` schedules a future task. It does not interrupt current synchronous code.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What can long synchronous work do in the browser?",
+      "options": [
+        { "id": "a", "text": "Block rendering, timers, and user input handling" },
+        { "id": "b", "text": "Make promises stop existing" },
+        { "id": "c", "text": "Force microtasks to run before synchronous code" },
+        { "id": "d", "text": "Automatically move work to a Web Worker" }
+      ],
+      "correct": ["a"],
+      "explanation": "Long tasks keep the main thread busy, delaying rendering and callbacks.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is concurrency?",
+      "options": [
+        { "id": "a", "text": "Managing multiple tasks over time" },
+        { "id": "b", "text": "Always running JavaScript code on many threads at once" },
+        { "id": "c", "text": "Only sorting promises" },
+        { "id": "d", "text": "Blocking every async operation" }
+      ],
+      "correct": ["a"],
+      "explanation": "Concurrency means making progress on multiple tasks over time; it is not the same as parallel JavaScript execution.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is `requestAnimationFrame` useful for?",
+      "options": [
+        { "id": "a", "text": "Scheduling animation-related work before a repaint" },
+        { "id": "b", "text": "Parsing JSON faster" },
+        { "id": "c", "text": "Replacing every Promise" },
+        { "id": "d", "text": "Creating private fields" }
+      ],
+      "correct": ["a"],
+      "explanation": "`requestAnimationFrame` helps align visual updates with the browser rendering cycle.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the simplest prediction model for many event-loop examples?",
+      "options": [
+        { "id": "a", "text": "Stack, then microtasks, then tasks" },
+        { "id": "b", "text": "Tasks, then stack, then microtasks" },
+        { "id": "c", "text": "Timers, then synchronous code, then promises" },
+        { "id": "d", "text": "Rendering, then classes, then JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "For many beginner examples, run synchronous stack code first, then microtasks, then task/macrotask callbacks.",
+      "points": 1
+    }
+  ]
+}

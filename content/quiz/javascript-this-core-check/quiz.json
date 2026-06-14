@@ -1,0 +1,182 @@
+{
+  "id": "javascript-this-core-check",
+  "title": "JavaScript this Core Check",
+  "description": "Check your understanding of how this is determined, method calls, lost context, strict mode, and arrow-function this.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "this", "functions", "objects"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "In most regular function calls, what determines the value of `this`?",
+      "options": [
+        { "id": "a", "text": "Where the function is written" },
+        { "id": "b", "text": "The function's name" },
+        { "id": "c", "text": "How the function is called" },
+        { "id": "d", "text": "The file where the function is defined" }
+      ],
+      "correct": ["c"],
+      "explanation": "`this` is usually determined by the call site: how the function is called.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  sayName() {\n    console.log(this.name);\n  },\n};\n\nuser.sayName();\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`sayName`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The function is called as `user.sayName()`, so `this` is `user`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "In `profile.showName()`, what is `this` inside `showName`?",
+      "options": [
+        { "id": "a", "text": "The object before the dot, `profile`" },
+        { "id": "b", "text": "Always the global object" },
+        { "id": "c", "text": "The function itself" },
+        { "id": "d", "text": "Always `undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "For a method call, `this` is usually the object before the dot.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  sayName() {\n    console.log(this.name);\n  },\n};\n\nconst admin = {\n  name: \"Ava\",\n  sayName: user.sayName,\n};\n\nadmin.sayName();\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`Ava`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`user`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The function is called as `admin.sayName()`, so `this` is `admin`, even though the function came from `user`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What commonly happens when an object method is stored in a variable and then called as a plain function?",
+      "options": [
+        { "id": "a", "text": "It always keeps the original object as `this`" },
+        { "id": "b", "text": "It may lose its original `this` context" },
+        { "id": "c", "text": "It becomes an arrow function automatically" },
+        { "id": "d", "text": "It cannot be called anymore" }
+      ],
+      "correct": ["b"],
+      "explanation": "Assigning a method to a variable copies the function value, not the original method call context.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "In strict mode, what is `this` inside a plain regular function call like `showThis()`?",
+      "options": [
+        { "id": "a", "text": "`undefined`" },
+        { "id": "b", "text": "The function itself" },
+        { "id": "c", "text": "The nearest object literal" },
+        { "id": "d", "text": "Always an empty object" }
+      ],
+      "correct": ["a"],
+      "explanation": "In strict mode, a plain regular function call has `this` set to `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is special about arrow functions and `this`?",
+      "options": [
+        { "id": "a", "text": "Arrow functions always set `this` to the object before the dot" },
+        { "id": "b", "text": "Arrow functions do not have their own `this`; they use lexical `this`" },
+        { "id": "c", "text": "Arrow functions always have `this` as `undefined`" },
+        { "id": "d", "text": "Arrow functions can only be used inside classes" }
+      ],
+      "correct": ["b"],
+      "explanation": "Arrow functions capture `this` from the surrounding scope instead of creating their own.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which object method style is best when the method needs to use `this`?",
+      "options": [
+        { "id": "a", "text": "`greet: () => this.name`" },
+        { "id": "b", "text": "`greet() { return this.name; }`" },
+        { "id": "c", "text": "`greet = this.name`" },
+        { "id": "d", "text": "`greet: this => this.name`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Method shorthand creates a regular method whose `this` is set by the method call.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Why can an arrow function be useful inside a method's callback?",
+      "options": [
+        { "id": "a", "text": "It can inherit the method's surrounding `this`" },
+        { "id": "b", "text": "It makes `this` point to the callback itself" },
+        { "id": "c", "text": "It prevents the callback from running" },
+        { "id": "d", "text": "It automatically calls `bind()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Arrow callbacks are useful when they should use the `this` from the surrounding method.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which tool creates a new function with fixed `this` for later use?",
+      "options": [
+        { "id": "a", "text": "`call()`" },
+        { "id": "b", "text": "`apply()`" },
+        { "id": "c", "text": "`bind()`" },
+        { "id": "d", "text": "`JSON.parse()`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`bind()` returns a new function with a fixed `this` value.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which tool calls a function immediately with a chosen `this` and arguments passed one by one?",
+      "options": [
+        { "id": "a", "text": "`bind()`" },
+        { "id": "b", "text": "`call()`" },
+        { "id": "c", "text": "`apply()`" },
+        { "id": "d", "text": "`toString()`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`call()` invokes the function immediately and accepts arguments one by one after the `this` value.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which tool calls a function immediately with a chosen `this` and arguments passed as an array?",
+      "options": [
+        { "id": "a", "text": "`bind()`" },
+        { "id": "b", "text": "`call()`" },
+        { "id": "c", "text": "`apply()`" },
+        { "id": "d", "text": "`map()`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`apply()` invokes the function immediately and receives the function arguments as an array or array-like value.",
+      "points": 1
+    }
+  ]
+}

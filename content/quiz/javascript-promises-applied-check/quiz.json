@@ -1,0 +1,224 @@
+{
+  "id": "javascript-promises-applied-check",
+  "title": "JavaScript Promises Applied Check",
+  "description": "Test your ability to predict promise timing, settlement, chaining, recovery, combinator behavior, promisifying, and timeout patterns.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "promises", "async", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(\"A\");\n\nPromise.resolve().then(() => {\n  console.log(\"B\");\n});\n\nconsole.log(\"C\");\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`, `B`" },
+        { "id": "c", "text": "`B`, `A`, `C`" },
+        { "id": "d", "text": "`C`, `B`, `A`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Promise `.then()` callbacks run asynchronously after the current synchronous code finishes.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst promise = new Promise((resolve, reject) => {\n  resolve(\"First\");\n  reject(new Error(\"Second\"));\n  resolve(\"Third\");\n});\n\npromise.then((value) => console.log(value));\n```",
+      "options": [
+        { "id": "a", "text": "`First`" },
+        { "id": "b", "text": "`Second`" },
+        { "id": "c", "text": "`Third`" },
+        { "id": "d", "text": "Nothing" }
+      ],
+      "correct": ["a"],
+      "explanation": "Only the first settlement counts. Later resolve/reject calls are ignored.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nPromise.resolve(2)\n  .then((number) => number * 2)\n  .then((number) => console.log(number));\n```",
+      "options": [
+        { "id": "a", "text": "`2`" },
+        { "id": "b", "text": "`4`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`Promise`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The first `.then()` returns `4`, which becomes the value for the next `.then()`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the bug here?\n```js\ngetUser()\n  .then((user) => {\n    getOrders(user.id);\n  })\n  .then((orders) => {\n    console.log(orders);\n  });\n```",
+      "options": [
+        { "id": "a", "text": "`getOrders(user.id)` is not returned, so the next `.then()` receives `undefined`" },
+        { "id": "b", "text": "Promises cannot be chained" },
+        { "id": "c", "text": "`console.log` rejects the Promise" },
+        { "id": "d", "text": "`getUser` must use `new`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Return the Promise from `.then()` so the chain waits and passes the result onward.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nPromise.reject(new Error(\"Failed\"))\n  .catch(() => {\n    return \"Fallback\";\n  })\n  .then((value) => {\n    console.log(value);\n  });\n```",
+      "options": [
+        { "id": "a", "text": "`Failed`" },
+        { "id": "b", "text": "`Fallback`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "Nothing; the chain stops at catch" }
+      ],
+      "correct": ["b"],
+      "explanation": "Returning a value from `.catch()` recovers the chain and passes that value to the next `.then()`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nPromise.resolve(\"Done\")\n  .finally((value) => {\n    console.log(value);\n  })\n  .then((value) => {\n    console.log(value);\n  });\n```",
+      "options": [
+        { "id": "a", "text": "`Done`, then `Done`" },
+        { "id": "b", "text": "`undefined`, then `Done`" },
+        { "id": "c", "text": "`Done`, then `undefined`" },
+        { "id": "d", "text": "`undefined`, then `undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`.finally()` does not receive the fulfilled value, and it passes the original value through.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What happens when one input rejects in `Promise.all([a, b, c])`?",
+      "options": [
+        { "id": "a", "text": "`Promise.all()` rejects" },
+        { "id": "b", "text": "`Promise.all()` fulfills with only successful values" },
+        { "id": "c", "text": "`Promise.all()` waits and returns status objects" },
+        { "id": "d", "text": "The rejection is ignored" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.all()` rejects when any input promise rejects.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which method should you use when partial success is acceptable and you need every result?",
+      "options": [
+        { "id": "a", "text": "`Promise.allSettled()`" },
+        { "id": "b", "text": "`Promise.all()`" },
+        { "id": "c", "text": "`Promise.reject()`" },
+        { "id": "d", "text": "`Promise.final()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.allSettled()` returns an outcome for every promise, whether fulfilled or rejected.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is the main difference between `Promise.race()` and `Promise.any()`?",
+      "options": [
+        { "id": "a", "text": "`race` settles with the first settled promise; `any` fulfills with the first fulfilled promise" },
+        { "id": "b", "text": "`race` waits for all promises; `any` rejects immediately" },
+        { "id": "c", "text": "`race` only handles arrays; `any` only handles objects" },
+        { "id": "d", "text": "There is no difference" }
+      ],
+      "correct": ["a"],
+      "explanation": "`race` reacts to first success or failure. `any` ignores failures unless all promises fail.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does `Promise.any()` reject with if all inputs reject?",
+      "options": [
+        { "id": "a", "text": "`AggregateError`" },
+        { "id": "b", "text": "`TypeError` always" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "The string `all failed`" }
+      ],
+      "correct": ["a"],
+      "explanation": "If every input rejects, `Promise.any()` rejects with an `AggregateError`.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "In an error-first callback, what should a promisified wrapper do when `error` exists?",
+      "options": [
+        { "id": "a", "text": "Call `reject(error)`" },
+        { "id": "b", "text": "Call `resolve(error)`" },
+        { "id": "c", "text": "Ignore it" },
+        { "id": "d", "text": "Return a string immediately from the executor" }
+      ],
+      "correct": ["a"],
+      "explanation": "Errors in callback APIs should reject the Promise, not fulfill it with an error value.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Why is this considered unnecessary?\n```js\nfunction loadData() {\n  return new Promise((resolve, reject) => {\n    fetch(\"/api/data\")\n      .then(resolve)\n      .catch(reject);\n  });\n}\n```",
+      "options": [
+        { "id": "a", "text": "`fetch` already returns a Promise, so it can be returned directly" },
+        { "id": "b", "text": "Promises cannot be returned from functions" },
+        { "id": "c", "text": "The Promise constructor cannot use `reject`" },
+        { "id": "d", "text": "`fetch` must be used only with callbacks" }
+      ],
+      "correct": ["a"],
+      "explanation": "Wrapping an existing Promise is usually the Promise constructor anti-pattern.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does `Promise.race([loadData(), timeout(3000)])` do?",
+      "options": [
+        { "id": "a", "text": "Settles with whichever Promise settles first" },
+        { "id": "b", "text": "Always waits for both promises" },
+        { "id": "c", "text": "Cancels both promises immediately" },
+        { "id": "d", "text": "Only handles fulfilled promises" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.race()` settles with the first input promise that settles, fulfilled or rejected.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which API can cancel a supported `fetch` request?",
+      "options": [
+        { "id": "a", "text": "`AbortController`" },
+        { "id": "b", "text": "`Promise.cancel()`" },
+        { "id": "c", "text": "`JSON.abort()`" },
+        { "id": "d", "text": "`Object.stop()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`AbortController` provides a signal that supported APIs like `fetch` can use for cancellation.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Why should a timeout ID often be cleared in `finally`?",
+      "options": [
+        { "id": "a", "text": "To clean up the timer whether the main operation succeeds or fails" },
+        { "id": "b", "text": "To make promises synchronous" },
+        { "id": "c", "text": "To transform the fulfilled value" },
+        { "id": "d", "text": "To convert a Promise into a callback" }
+      ],
+      "correct": ["a"],
+      "explanation": "`finally` is a good place to clear timeout timers after an operation settles.",
+      "points": 1
+    }
+  ]
+}

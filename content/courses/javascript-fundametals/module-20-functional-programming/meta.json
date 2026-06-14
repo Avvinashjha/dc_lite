@@ -15,16 +15,50 @@
       "duration": "10 min"
     },
     {
-      "slug": "03-currying",
+      "slug": "03-higher-order-functions",
+      "title": "Higher-Order Functions",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "04-declarative-array-transformations",
+      "title": "Declarative Array Transformations",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-currying",
       "title": "Currying",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "04-function-composition",
+      "slug": "06-function-composition",
       "title": "Function Composition",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-reduce-and-recursion",
+      "title": "Reduce and Recursion",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-functional-programming-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-functional-programming-applied-check",
+      "passingScore": 70
     }
   ]
 }

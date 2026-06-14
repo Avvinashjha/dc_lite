@@ -31,6 +31,34 @@
       "title": "Promise.all, race, allSettled, and any",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-promisifying-callbacks",
+      "title": "Promisifying Callbacks",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-timeouts-and-cancellation",
+      "title": "Timeouts and Cancellation",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-promises-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-promises-applied-check",
+      "passingScore": 70
     }
   ]
 }

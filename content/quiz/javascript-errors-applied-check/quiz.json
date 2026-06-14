@@ -1,0 +1,224 @@
+{
+  "id": "javascript-errors-applied-check",
+  "title": "JavaScript Error Handling Applied Check",
+  "description": "Test your ability to predict try/catch/finally behavior, identify error types, design custom errors, and choose practical handling boundaries.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "errors", "try-catch", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\ntry {\n  console.log(\"A\");\n  JSON.parse(\"{ bad json }\");\n  console.log(\"B\");\n} catch (error) {\n  console.log(\"C\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`" },
+        { "id": "c", "text": "`C` only" },
+        { "id": "d", "text": "`A`, `B`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The invalid JSON throws, so execution skips `console.log(\"B\")` and jumps to `catch`.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\ntry {\n  console.log(\"A\");\n  throw new Error(\"Failed\");\n} catch (error) {\n  console.log(\"B\");\n} finally {\n  console.log(\"C\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`" },
+        { "id": "c", "text": "`B`, `C`" },
+        { "id": "d", "text": "`C` only" }
+      ],
+      "correct": ["a"],
+      "explanation": "`try` logs `A`, the error is caught and logs `B`, then `finally` logs `C`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this function return?\n```js\nfunction example() {\n  try {\n    return \"try\";\n  } finally {\n    return \"finally\";\n  }\n}\n\nexample();\n```",
+      "options": [
+        { "id": "a", "text": "`try`" },
+        { "id": "b", "text": "`finally`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It always throws" }
+      ],
+      "correct": ["b"],
+      "explanation": "A `return` inside `finally` overrides the return from `try`, which is why returning from `finally` is usually discouraged.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction test() {\n  throw new Error(\"Failed\");\n  return \"Done\";\n}\n\ntry {\n  console.log(test());\n} catch (error) {\n  console.log(error.message);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`Done`" },
+        { "id": "b", "text": "`Failed`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`Error` only" }
+      ],
+      "correct": ["b"],
+      "explanation": "The `throw` stops execution before the `return`, and the catch block logs the error message.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What kind of error is this most likely to produce?\n```js\nconsole.log(total);\n```",
+      "options": [
+        { "id": "a", "text": "`TypeError`, if `total` was never declared" },
+        { "id": "b", "text": "`ReferenceError`, if `total` was never declared" },
+        { "id": "c", "text": "`SyntaxError`, always" },
+        { "id": "d", "text": "`RangeError`, always" }
+      ],
+      "correct": ["b"],
+      "explanation": "Using a variable name that cannot be found in scope causes a `ReferenceError`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What kind of error is this most likely to produce?\n```js\nconst user = undefined;\nconsole.log(user.name);\n```",
+      "options": [
+        { "id": "a", "text": "`ReferenceError`" },
+        { "id": "b", "text": "`TypeError`" },
+        { "id": "c", "text": "`RangeError`" },
+        { "id": "d", "text": "`AggregateError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`user` exists, but `undefined` cannot be used as an object to read `.name`, so this is a `TypeError`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the problem with this catch block?\n```js\ntry {\n  riskyOperation();\n} catch (error) {\n  // do nothing\n}\n```",
+      "options": [
+        { "id": "a", "text": "It silently hides failures and makes debugging harder" },
+        { "id": "b", "text": "Catch blocks cannot contain comments" },
+        { "id": "c", "text": "Every catch block must return a number" },
+        { "id": "d", "text": "`riskyOperation` will always run twice" }
+      ],
+      "correct": ["a"],
+      "explanation": "Catching and ignoring errors hides bugs. If you catch an error, handle it intentionally.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which custom error implementation is correct?",
+      "options": [
+        { "id": "a", "text": "`class ValidationError extends Error { constructor(message) { super(message); this.name = \"ValidationError\"; } }`" },
+        { "id": "b", "text": "`class ValidationError extends Error { constructor(message) { this.message = message; } }`" },
+        { "id": "c", "text": "`function ValidationError(message) extends Error {}`" },
+        { "id": "d", "text": "`const ValidationError = throw new Error();`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A derived error class should call `super(message)` before using `this`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass ValidationError extends Error {}\n\nconst error = new ValidationError(\"Invalid\");\n\nconsole.log(error instanceof Error);\nconsole.log(error instanceof ValidationError);\n```",
+      "options": [
+        { "id": "a", "text": "`true` then `true`" },
+        { "id": "b", "text": "`true` then `false`" },
+        { "id": "c", "text": "`false` then `true`" },
+        { "id": "d", "text": "`false` then `false`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Because `ValidationError` extends `Error`, instances are both `ValidationError` and `Error` instances.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What should this code usually do for unexpected error types?\n```js\ntry {\n  createUser(data);\n} catch (error) {\n  if (error instanceof ValidationError) {\n    showFormError(error.message);\n  } else {\n    // what here?\n  }\n}\n```",
+      "options": [
+        { "id": "a", "text": "Silently ignore the error" },
+        { "id": "b", "text": "Rethrow the error or handle it at a higher boundary" },
+        { "id": "c", "text": "Convert it to `null` automatically" },
+        { "id": "d", "text": "Always show the stack trace to the user" }
+      ],
+      "correct": ["b"],
+      "explanation": "If the current code only understands validation errors, unexpected errors should not be hidden.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which is the best example of using a fallback safely?",
+      "options": [
+        { "id": "a", "text": "Returning default settings when optional saved settings cannot be parsed" },
+        { "id": "b", "text": "Ignoring all payment errors and pretending payment succeeded" },
+        { "id": "c", "text": "Returning `null` for every bug in the application" },
+        { "id": "d", "text": "Hiding every syntax error from developers" }
+      ],
+      "correct": ["a"],
+      "explanation": "Fallbacks are useful when a safe default is acceptable. They should not hide critical failures.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Does this catch the thrown timer error?\n```js\ntry {\n  setTimeout(() => {\n    throw new Error(\"Timer failed\");\n  }, 1000);\n} catch (error) {\n  console.log(\"Caught\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "Yes, because the timer was created inside `try`" },
+        { "id": "b", "text": "No, because the error happens asynchronously after the `try` block has finished" },
+        { "id": "c", "text": "Yes, but only in Node.js" },
+        { "id": "d", "text": "No, because `throw` is not allowed in callbacks" }
+      ],
+      "correct": ["b"],
+      "explanation": "A normal `try...catch` catches synchronous errors during the `try` execution, not future asynchronous callback errors.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What is a good reason to add context before rethrowing an error?",
+      "options": [
+        { "id": "a", "text": "To make the failure easier to understand at a higher level" },
+        { "id": "b", "text": "To remove the stack trace every time" },
+        { "id": "c", "text": "To turn all errors into strings" },
+        { "id": "d", "text": "To prevent callers from handling it" }
+      ],
+      "correct": ["a"],
+      "explanation": "Adding context like `Could not load config` helps explain what operation failed.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which user-facing behavior is usually best when an internal operation fails?",
+      "options": [
+        { "id": "a", "text": "Show a friendly message and log technical details for developers" },
+        { "id": "b", "text": "Show the full stack trace to every user" },
+        { "id": "c", "text": "Hide the error and pretend everything worked" },
+        { "id": "d", "text": "Throw a string instead of an Error" }
+      ],
+      "correct": ["a"],
+      "explanation": "Users need understandable messages; developers need technical details such as logs and stack traces.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "When is throwing an error usually better than returning `null`?",
+      "options": [
+        { "id": "a", "text": "When a function receives invalid input and cannot complete its responsibility" },
+        { "id": "b", "text": "Whenever an item is simply not found in a search where absence is expected" },
+        { "id": "c", "text": "Every time a boolean is `false`" },
+        { "id": "d", "text": "Only inside `finally` blocks" }
+      ],
+      "correct": ["a"],
+      "explanation": "Throwing is appropriate when a function cannot do its job correctly, especially due to invalid input or broken assumptions.",
+      "points": 1
+    }
+  ]
+}

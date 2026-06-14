@@ -1,0 +1,440 @@
+{
+  "id": "javascript-memory-management-applied-check",
+  "title": "JavaScript Memory Management Applied Check",
+  "description": "Apply JavaScript memory management concepts by identifying leaks, choosing cleanup patterns, using weak collections appropriately, and reasoning about async and large data memory pressure.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": [
+    "javascript",
+    "memory-leaks",
+    "async",
+    "dom",
+    "weakmap"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the main memory issue in this code?\n```js\nconst logs = [];\n\nfunction track(event) {\n  logs.push(event);\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "The global `logs` array can grow forever and retain full event objects"
+        },
+        {
+          "id": "b",
+          "text": "Arrays cannot store events"
+        },
+        {
+          "id": "c",
+          "text": "The function has no return statement, so it cannot use memory"
+        },
+        {
+          "id": "d",
+          "text": "`const` makes the array unreachable"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A long-lived array that grows without limits can retain more and more memory, especially if it stores large event objects.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which change best reduces the leak risk?\n```js\nconst removedCards = [];\n\nfunction removeCard(card) {\n  card.remove();\n  removedCards.push(card);\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Store a small value like `card.id` instead of the DOM node"
+        },
+        {
+          "id": "b",
+          "text": "Call `removeCard()` twice"
+        },
+        {
+          "id": "c",
+          "text": "Rename `removedCards` to `cards`"
+        },
+        {
+          "id": "d",
+          "text": "Wrap `card.remove()` in `String()`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Storing the DOM node keeps it reachable after removal. Storing only an ID avoids retaining the detached node.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What cleanup should this setup return?\n```js\nfunction startClock(element) {\n  const id = setInterval(() => {\n    element.textContent = new Date().toLocaleTimeString();\n  }, 1000);\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "A function that calls `clearInterval(id)`"
+        },
+        {
+          "id": "b",
+          "text": "A function that calls `JSON.stringify(element)`"
+        },
+        {
+          "id": "c",
+          "text": "A function that creates another interval"
+        },
+        {
+          "id": "d",
+          "text": "No cleanup is possible for intervals"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The interval keeps running until it is cleared, and its callback retains `element`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Why might this listener be hard to clean up?\n```js\nbutton.addEventListener(\"click\", () => {\n  saveForm(form);\n});\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "The anonymous function cannot easily be passed later to `removeEventListener()`"
+        },
+        {
+          "id": "b",
+          "text": "Click listeners never use memory"
+        },
+        {
+          "id": "c",
+          "text": "Arrow functions cannot access variables"
+        },
+        {
+          "id": "d",
+          "text": "`saveForm` automatically removes the listener"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "To remove a listener, you need the same function reference that was used when adding it.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What keeps `largeUserList` reachable here?\n```js\nfunction createSearch(users) {\n  return function search(query) {\n    return users.filter((user) => user.name.includes(query));\n  };\n}\n\nconst searchUsers = createSearch(largeUserList);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "The returned `search` function closes over `users`"
+        },
+        {
+          "id": "b",
+          "text": "`filter()` always leaks memory"
+        },
+        {
+          "id": "c",
+          "text": "String methods prevent garbage collection"
+        },
+        {
+          "id": "d",
+          "text": "The array is converted to a primitive"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The returned function retains the outer `users` variable, so the passed list remains reachable while the function is reachable.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which option is best for metadata associated with DOM elements that should not keep removed elements alive?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`WeakMap` keyed by element objects"
+        },
+        {
+          "id": "b",
+          "text": "A module-level `Map` that never deletes entries"
+        },
+        {
+          "id": "c",
+          "text": "A global array of every element ever seen"
+        },
+        {
+          "id": "d",
+          "text": "A string made by joining all element HTML"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A `WeakMap` can associate metadata with object keys without strongly retaining those keys.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is still retained after this code runs?\n```js\nconst metadata = new Map();\nlet user = { id: 1 };\n\nmetadata.set(user, { role: \"admin\" });\nuser = null;\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "The user object is still retained as a key in `metadata`"
+        },
+        {
+          "id": "b",
+          "text": "The user object is guaranteed to be collected immediately"
+        },
+        {
+          "id": "c",
+          "text": "The map deletes the entry automatically"
+        },
+        {
+          "id": "d",
+          "text": "Only the string `admin` is retained"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A regular `Map` strongly references keys, so setting the local variable to `null` is not enough.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which approach handles a fetch that may outlive the current UI?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use `AbortController` and abort during cleanup when possible"
+        },
+        {
+          "id": "b",
+          "text": "Ignore all errors forever"
+        },
+        {
+          "id": "c",
+          "text": "Store every response globally"
+        },
+        {
+          "id": "d",
+          "text": "Use `setInterval()` around the request"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`AbortController` lets supported APIs such as `fetch` cancel work that is no longer needed.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does `Promise.race()` timeout logic not do by itself?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It does not automatically stop the slower underlying operation"
+        },
+        {
+          "id": "b",
+          "text": "It does not settle promises"
+        },
+        {
+          "id": "c",
+          "text": "It cannot reject"
+        },
+        {
+          "id": "d",
+          "text": "It deletes every pending variable"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`Promise.race()` chooses the first settled result, but cancellation requires support from the underlying operation.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "A cache stores API results in a `Map` and memory grows as more IDs are loaded. What is the most practical first improvement?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add an eviction strategy such as a size limit"
+        },
+        {
+          "id": "b",
+          "text": "Make the map global so it is easier to find"
+        },
+        {
+          "id": "c",
+          "text": "Replace every object with a DOM node"
+        },
+        {
+          "id": "d",
+          "text": "Never read from the cache"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A bounded cache keeps performance benefits while preventing unlimited growth.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which debugging workflow is most useful for suspected leaks?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Repeat the action, take heap snapshots before and after cleanup, and inspect retaining paths"
+        },
+        {
+          "id": "b",
+          "text": "Look only at one random number in the console"
+        },
+        {
+          "id": "c",
+          "text": "Assume all memory growth is a leak"
+        },
+        {
+          "id": "d",
+          "text": "Delete unrelated source files"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Memory debugging is evidence-driven: reproduce growth, compare snapshots, and find what retains old objects.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Why can this code create high memory pressure?\n```js\nconst results = await Promise.all(\n  urls.map((url) => fetch(url).then((response) => response.json()))\n);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "It may load all responses into memory at once"
+        },
+        {
+          "id": "b",
+          "text": "`Promise.all()` prevents arrays from being created"
+        },
+        {
+          "id": "c",
+          "text": "`fetch` returns only booleans"
+        },
+        {
+          "id": "d",
+          "text": "JSON responses are never stored in memory"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Running many requests and parsing all JSON results concurrently can hold many large values in memory at the same time.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What should code do when `WeakRef#deref()` returns `undefined`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Treat the object as unavailable and recreate or skip it as appropriate"
+        },
+        {
+          "id": "b",
+          "text": "Assume the object is definitely still alive"
+        },
+        {
+          "id": "c",
+          "text": "Call properties on `undefined`"
+        },
+        {
+          "id": "d",
+          "text": "Disable garbage collection"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A weakly referenced object may have been collected, so code must handle `undefined` safely.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which code shape makes cleanup easiest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A setup function that returns a cleanup function"
+        },
+        {
+          "id": "b",
+          "text": "A setup function that hides all timer IDs"
+        },
+        {
+          "id": "c",
+          "text": "A global array of anonymous callbacks"
+        },
+        {
+          "id": "d",
+          "text": "A listener created without any function reference"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Returning cleanup from setup keeps lifecycle responsibilities explicit and testable.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "A heap snapshot shows a removed element retained by `window -> appState -> selectedCard -> element`. What should you investigate first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Why `appState.selectedCard` still references the removed element"
+        },
+        {
+          "id": "b",
+          "text": "Whether CSS colors are too bright"
+        },
+        {
+          "id": "c",
+          "text": "Whether the element's text is uppercase"
+        },
+        {
+          "id": "d",
+          "text": "Whether `console.log` is installed"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The retaining path points to the reference chain keeping the element alive, so the fix should target that ownership path.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "id": "javascript-promises-core-check",
+  "title": "JavaScript Promises Core Check",
+  "description": "Check your understanding of Promise states, creation, then/catch/finally, chaining, combinators, promisifying callbacks, and timeout patterns.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "promises", "async"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does a Promise represent?",
+      "options": [
+        { "id": "a", "text": "A future result of asynchronous work" },
+        { "id": "b", "text": "Only a synchronous value" },
+        { "id": "c", "text": "A class constructor" },
+        { "id": "d", "text": "A JSON parser" }
+      ],
+      "correct": ["a"],
+      "explanation": "A Promise represents async work that may fulfill or reject later.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which are the main Promise states?",
+      "options": [
+        { "id": "a", "text": "`pending`, `fulfilled`, `rejected`" },
+        { "id": "b", "text": "`open`, `closed`, `done`" },
+        { "id": "c", "text": "`try`, `catch`, `finally`" },
+        { "id": "d", "text": "`sync`, `async`, `awaited`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A Promise starts pending and later settles as fulfilled or rejected.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does `resolve(value)` do inside a Promise executor?",
+      "options": [
+        { "id": "a", "text": "Fulfills the Promise with `value`" },
+        { "id": "b", "text": "Rejects the Promise" },
+        { "id": "c", "text": "Cancels the Promise" },
+        { "id": "d", "text": "Deletes the Promise" }
+      ],
+      "correct": ["a"],
+      "explanation": "`resolve(value)` fulfills the Promise with the provided value.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does `reject(error)` do inside a Promise executor?",
+      "options": [
+        { "id": "a", "text": "Fulfills the Promise" },
+        { "id": "b", "text": "Rejects the Promise with a reason" },
+        { "id": "c", "text": "Runs `.finally()` only" },
+        { "id": "d", "text": "Turns the Promise into an array" }
+      ],
+      "correct": ["b"],
+      "explanation": "`reject(error)` rejects the Promise, usually with an Error object.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which method handles a fulfilled Promise value?",
+      "options": [
+        { "id": "a", "text": "`.then()`" },
+        { "id": "b", "text": "`.catch()` only" },
+        { "id": "c", "text": "`.throw()`" },
+        { "id": "d", "text": "`.await()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`.then()` receives fulfilled values.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which method handles a rejected Promise?",
+      "options": [
+        { "id": "a", "text": "`.catch()`" },
+        { "id": "b", "text": "`.map()`" },
+        { "id": "c", "text": "`.filter()`" },
+        { "id": "d", "text": "`.prototype()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`.catch()` handles promise rejections.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is `.finally()` mainly used for?",
+      "options": [
+        { "id": "a", "text": "Cleanup after fulfillment or rejection" },
+        { "id": "b", "text": "Transforming fulfilled values" },
+        { "id": "c", "text": "Creating private fields" },
+        { "id": "d", "text": "Sorting promise results" }
+      ],
+      "correct": ["a"],
+      "explanation": "`.finally()` is for cleanup that should happen whether the Promise succeeds or fails.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What should you usually do in a `.then()` callback when the next step depends on another Promise?",
+      "options": [
+        { "id": "a", "text": "Return that Promise" },
+        { "id": "b", "text": "Ignore that Promise" },
+        { "id": "c", "text": "Convert it to a string" },
+        { "id": "d", "text": "Throw it away in `.finally()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Returning the Promise makes the chain wait and passes its result to the next `.then()`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which combinator rejects if any input Promise rejects?",
+      "options": [
+        { "id": "a", "text": "`Promise.all()`" },
+        { "id": "b", "text": "`Promise.allSettled()`" },
+        { "id": "c", "text": "`Promise.resolve()`" },
+        { "id": "d", "text": "`Promise.ignore()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.all()` fulfills only if all inputs fulfill and rejects if any input rejects.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which combinator gives you every outcome, including rejections?",
+      "options": [
+        { "id": "a", "text": "`Promise.allSettled()`" },
+        { "id": "b", "text": "`Promise.any()`" },
+        { "id": "c", "text": "`Promise.race()` only" },
+        { "id": "d", "text": "`Promise.reject()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.allSettled()` waits for all inputs and returns fulfilled/rejected outcome objects.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is promisifying?",
+      "options": [
+        { "id": "a", "text": "Converting a callback-based API into a Promise-based API" },
+        { "id": "b", "text": "Turning promises into arrays" },
+        { "id": "c", "text": "Deleting rejected promises" },
+        { "id": "d", "text": "Making code synchronous" }
+      ],
+      "correct": ["a"],
+      "explanation": "Promisifying wraps callback APIs so they can be used with promises or async/await.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Does `Promise.race()` automatically cancel promises that lose the race?",
+      "options": [
+        { "id": "a", "text": "No" },
+        { "id": "b", "text": "Yes, always" },
+        { "id": "c", "text": "Only if the Promise fulfilled" },
+        { "id": "d", "text": "Only for arrays" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.race()` settles with the first settled Promise but does not automatically cancel other operations.",
+      "points": 1
+    }
+  ]
+}

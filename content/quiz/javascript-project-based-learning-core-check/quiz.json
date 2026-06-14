@@ -1,0 +1,182 @@
+{
+  "id": "javascript-project-based-learning-core-check",
+  "title": "JavaScript Project-Based Learning Core Check",
+  "description": "Check your understanding of planning, organizing, building, testing, refactoring, documenting, and deploying JavaScript projects.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "projects", "planning", "debugging", "deployment"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the main purpose of project-based learning?",
+      "options": [
+        { "id": "a", "text": "To combine individual concepts into complete, useful projects" },
+        { "id": "b", "text": "To avoid planning and write code randomly" },
+        { "id": "c", "text": "To replace JavaScript fundamentals with only HTML" },
+        { "id": "d", "text": "To memorize one exact app forever" }
+      ],
+      "correct": ["a"],
+      "explanation": "Project-based learning helps you connect separate skills into complete workflows with real behavior and trade-offs.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which is the best example of a testable requirement?",
+      "options": [
+        { "id": "a", "text": "The user can add a non-empty task and see it in the task list" },
+        { "id": "b", "text": "The app should feel nice" },
+        { "id": "c", "text": "The code should be amazing" },
+        { "id": "d", "text": "The project should have many features" }
+      ],
+      "correct": ["a"],
+      "explanation": "A testable requirement describes specific behavior that can be checked.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What are acceptance criteria?",
+      "options": [
+        { "id": "a", "text": "Specific conditions that define when a feature is done" },
+        { "id": "b", "text": "A list of every feature you might ever add" },
+        { "id": "c", "text": "CSS rules for accepting form input" },
+        { "id": "d", "text": "A replacement for testing" }
+      ],
+      "correct": ["a"],
+      "explanation": "Acceptance criteria describe the observable behavior required for a feature to be considered complete.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Why should a first project version stay small?",
+      "options": [
+        { "id": "a", "text": "A small version is easier to finish, test, and improve" },
+        { "id": "b", "text": "Small projects cannot have bugs" },
+        { "id": "c", "text": "JavaScript cannot support more than one feature" },
+        { "id": "d", "text": "Deployment only works for unfinished projects" }
+      ],
+      "correct": ["a"],
+      "explanation": "A focused version one gives you a realistic finish line and a stable base for extensions.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is a milestone in a project?",
+      "options": [
+        { "id": "a", "text": "A small, complete step that produces visible progress" },
+        { "id": "b", "text": "A comment placed every 100 lines" },
+        { "id": "c", "text": "A random file name" },
+        { "id": "d", "text": "A feature that is never tested" }
+      ],
+      "correct": ["a"],
+      "explanation": "Milestones split a project into manageable, testable deliverables.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "In a browser project, what should usually be the source of truth?",
+      "options": [
+        { "id": "a", "text": "Application state stored in objects and arrays" },
+        { "id": "b", "text": "Only the text currently visible in DOM elements" },
+        { "id": "c", "text": "A random console log" },
+        { "id": "d", "text": "The CSS file" }
+      ],
+      "correct": ["a"],
+      "explanation": "The DOM should display state. The main data should usually live in clear JavaScript objects and arrays.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which flow is common for browser app interactions?",
+      "options": [
+        { "id": "a", "text": "User action -> event handler -> state update -> render UI" },
+        { "id": "b", "text": "CSS -> API -> delete state -> ignore user action" },
+        { "id": "c", "text": "Render once -> never update anything" },
+        { "id": "d", "text": "Console log -> automatic deployment -> form validation" }
+      ],
+      "correct": ["a"],
+      "explanation": "Most interactive browser apps respond to events by updating state and rendering the current state.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Why are stable IDs useful in list-based apps?",
+      "options": [
+        { "id": "a", "text": "They let you update, delete, or identify the correct item even if the array order changes" },
+        { "id": "b", "text": "They make CSS unnecessary" },
+        { "id": "c", "text": "They automatically save data to an API" },
+        { "id": "d", "text": "They prevent all runtime errors" }
+      ],
+      "correct": ["a"],
+      "explanation": "Stable IDs identify items reliably. Array indexes can change after sorting, inserting, or deleting.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What should an API-based project usually show while waiting for data?",
+      "options": [
+        { "id": "a", "text": "A loading state" },
+        { "id": "b", "text": "Only a syntax error" },
+        { "id": "c", "text": "A secret API key" },
+        { "id": "d", "text": "Nothing until the whole project is rewritten" }
+      ],
+      "correct": ["a"],
+      "explanation": "Loading, success, empty, and error states make API projects understandable to users.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "When is refactoring safest?",
+      "options": [
+        { "id": "a", "text": "After the current behavior works and can be checked" },
+        { "id": "b", "text": "Before any behavior exists" },
+        { "id": "c", "text": "Only while the app is broken" },
+        { "id": "d", "text": "Instead of testing" }
+      ],
+      "correct": ["a"],
+      "explanation": "Refactoring should preserve behavior, so it is safer when the existing behavior is already working and testable.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which DOM API is usually safer for inserting user-provided text?",
+      "options": [
+        { "id": "a", "text": "`textContent`" },
+        { "id": "b", "text": "`innerHTML`" },
+        { "id": "c", "text": "`eval()`" },
+        { "id": "d", "text": "`document.write()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`textContent` inserts text instead of parsing the value as HTML.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What should a useful project README include?",
+      "options": [
+        { "id": "a", "text": "A short description, features, setup steps, and notes about how the project works" },
+        { "id": "b", "text": "Only the word README" },
+        { "id": "c", "text": "Private API keys" },
+        { "id": "d", "text": "Unrelated code copied from another project" }
+      ],
+      "correct": ["a"],
+      "explanation": "A README should help someone understand, run, and evaluate the project.",
+      "points": 1
+    }
+  ]
+}
