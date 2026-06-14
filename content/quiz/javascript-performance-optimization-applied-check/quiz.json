@@ -1,0 +1,224 @@
+{
+  "id": "javascript-performance-optimization-applied-check",
+  "title": "JavaScript Performance Optimization Applied Check",
+  "description": "Apply JavaScript performance concepts by choosing optimizations for input handlers, rendering, caching, lazy loading, workers, network cost, and DevTools profiling scenarios.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "performance", "optimization", "profiling", "browser"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A search box filters a large list on every keystroke, and users only need results after they pause typing. Which technique is most appropriate?",
+      "options": [
+        { "id": "a", "text": "Debounce the search handler" },
+        { "id": "b", "text": "Run the search twice per keystroke" },
+        { "id": "c", "text": "Lazy load the input element" },
+        { "id": "d", "text": "Replace `const` with `var`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing waits for typing to pause before running the search, reducing unnecessary work.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A scroll progress bar should update while the user scrolls, but not on every scroll event. Which option is best?",
+      "options": [
+        { "id": "a", "text": "Throttle the update or schedule it with `requestAnimationFrame()`" },
+        { "id": "b", "text": "Debounce it for 5 seconds" },
+        { "id": "c", "text": "Move the DOM update into JSON" },
+        { "id": "d", "text": "Disable scrolling" }
+      ],
+      "correct": ["a"],
+      "explanation": "Throttling or `requestAnimationFrame()` keeps visual feedback regular without running on every event.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the main problem with this code?\n```js\nfor (const box of boxes) {\n  box.style.width = \"200px\";\n  console.log(box.offsetHeight);\n}\n```",
+      "options": [
+        { "id": "a", "text": "It mixes DOM writes and layout reads repeatedly, which can cause layout thrashing" },
+        { "id": "b", "text": "It uses a `for...of` loop, which never works with DOM elements" },
+        { "id": "c", "text": "`offsetHeight` always changes text content" },
+        { "id": "d", "text": "Width can only be set with `setTimeout()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Writing layout-affecting styles and then reading layout values in a loop can force repeated layout calculations.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "You need to add 1,000 list items to the DOM. Which approach usually reduces repeated live DOM work?",
+      "options": [
+        { "id": "a", "text": "Build the nodes in a `DocumentFragment`, then append the fragment" },
+        { "id": "b", "text": "Call `alert()` after every item" },
+        { "id": "c", "text": "Append and remove each item three times" },
+        { "id": "d", "text": "Store every item in `window.name`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A `DocumentFragment` lets you build many nodes before inserting them into the live DOM once.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which function is a good candidate for memoization?",
+      "options": [
+        { "id": "a", "text": "An expensive pure function called repeatedly with the same arguments" },
+        { "id": "b", "text": "A function that returns `Math.random()`" },
+        { "id": "c", "text": "A cheap function called once" },
+        { "id": "d", "text": "A function that must always fetch fresh server data" }
+      ],
+      "correct": ["a"],
+      "explanation": "Memoization works best when the result is stable for the same inputs and recalculation is expensive.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is the most important risk in this cache?\n```js\nconst cache = new Map();\n\nfunction remember(key, value) {\n  cache.set(key, value);\n}\n```",
+      "options": [
+        { "id": "a", "text": "The cache can grow forever and increase memory usage" },
+        { "id": "b", "text": "`Map` cannot store strings" },
+        { "id": "c", "text": "`set()` immediately deletes values" },
+        { "id": "d", "text": "Caches always make code slower" }
+      ],
+      "correct": ["a"],
+      "explanation": "A `Map` keeps strong references. Without limits or invalidation, cache memory can grow indefinitely.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A large admin-only editor is included in the initial JavaScript bundle, but most users never open it. What is a practical optimization?",
+      "options": [
+        { "id": "a", "text": "Load the editor with dynamic `import()` only when needed" },
+        { "id": "b", "text": "Run the editor code on every page load twice" },
+        { "id": "c", "text": "Move the editor into a global variable named `fast`" },
+        { "id": "d", "text": "Replace all functions with strings" }
+      ],
+      "correct": ["a"],
+      "explanation": "Dynamic import can defer rarely used code, reducing initial bundle work.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What should you add when lazy loading an important UI panel?",
+      "options": [
+        { "id": "a", "text": "Loading and error states" },
+        { "id": "b", "text": "An infinite synchronous loop" },
+        { "id": "c", "text": "A hidden alert in every module" },
+        { "id": "d", "text": "A rule that prevents retries" }
+      ],
+      "correct": ["a"],
+      "explanation": "Lazy-loaded code can take time or fail, so the UI should handle waiting and errors clearly.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "A JavaScript animation repeatedly changes an element's `left` style and causes choppy movement. Which change is often better?",
+      "options": [
+        { "id": "a", "text": "Animate with `transform` inside `requestAnimationFrame()`" },
+        { "id": "b", "text": "Animate by changing `innerHTML` every millisecond" },
+        { "id": "c", "text": "Use `JSON.parse()` before every frame" },
+        { "id": "d", "text": "Store positions in cookies only" }
+      ],
+      "correct": ["a"],
+      "explanation": "`transform` is often cheaper for animation than layout-affecting properties, and `requestAnimationFrame()` aligns updates with painting.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "A CPU-heavy file parser freezes the UI for several seconds. Which optimization may keep the main thread responsive?",
+      "options": [
+        { "id": "a", "text": "Move the parsing work to a Web Worker" },
+        { "id": "b", "text": "Run the parser from a click handler twice" },
+        { "id": "c", "text": "Put the file contents in CSS" },
+        { "id": "d", "text": "Use `localStorage.clear()` before parsing" }
+      ],
+      "correct": ["a"],
+      "explanation": "A Web Worker can run CPU-heavy JavaScript on a background thread so the main thread can stay responsive.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which work is a reasonable use of `requestIdleCallback()`?",
+      "options": [
+        { "id": "a", "text": "Optional low-priority preloading after important work is done" },
+        { "id": "b", "text": "Critical form submission that must happen immediately" },
+        { "id": "c", "text": "Changing every animation frame" },
+        { "id": "d", "text": "Blocking user input until idle time appears" }
+      ],
+      "correct": ["a"],
+      "explanation": "`requestIdleCallback()` is for low-priority work that can wait and should not block important interactions.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "An API response returns 5 MB of data, but the page only displays names and IDs. What should you consider first?",
+      "options": [
+        { "id": "a", "text": "Request only the fields or page of data needed if the API supports it" },
+        { "id": "b", "text": "Parse the response three times" },
+        { "id": "c", "text": "Store the entire response in every DOM node" },
+        { "id": "d", "text": "Add more unused fields" }
+      ],
+      "correct": ["a"],
+      "explanation": "Reducing response size can improve network transfer and parsing time.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "A route loads a large amount of unused JavaScript. Which DevTools feature can help reveal unused code?",
+      "options": [
+        { "id": "a", "text": "Coverage" },
+        { "id": "b", "text": "The color picker only" },
+        { "id": "c", "text": "The font preview only" },
+        { "id": "d", "text": "The DOM breadcrumb only" }
+      ],
+      "correct": ["a"],
+      "explanation": "Coverage tools show unused JavaScript and CSS for the current page or interaction.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "A page gets slower over time after navigating between screens. Which issue should you investigate?",
+      "options": [
+        { "id": "a", "text": "Memory leaks such as retained DOM nodes, timers, listeners, or growing caches" },
+        { "id": "b", "text": "Whether all variables are named with one letter" },
+        { "id": "c", "text": "Whether comments contain periods" },
+        { "id": "d", "text": "Whether the page has enough blank lines" }
+      ],
+      "correct": ["a"],
+      "explanation": "Growing memory usage can cause slowdowns and garbage collection pauses over time.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "After making a performance change, what should you do next?",
+      "options": [
+        { "id": "a", "text": "Measure again and compare with the original problem" },
+        { "id": "b", "text": "Assume it worked because the code looks clever" },
+        { "id": "c", "text": "Make ten unrelated changes before testing" },
+        { "id": "d", "text": "Delete the reproduction steps" }
+      ],
+      "correct": ["a"],
+      "explanation": "Performance work should be verified by measuring before and after focused changes.",
+      "points": 1
+    }
+  ]
+}

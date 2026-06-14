@@ -1,0 +1,182 @@
+{
+  "id": "javascript-debugging-core-check",
+  "title": "JavaScript Debugging Core Check",
+  "description": "Check your understanding of console methods, DevTools, breakpoints, stack traces, async debugging, network debugging, DOM events, and performance basics.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "debugging", "devtools", "errors", "async"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Why is it useful to label console output?",
+      "options": [
+        { "id": "a", "text": "Labels make it clear which value or code path produced the output" },
+        { "id": "b", "text": "Labels make JavaScript execute faster" },
+        { "id": "c", "text": "Labels automatically fix TypeErrors" },
+        { "id": "d", "text": "Labels are required for `console.log()` to work" }
+      ],
+      "correct": ["a"],
+      "explanation": "Clear labels make console output easier to identify, especially when several values are logged.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which console method is best for displaying an array of similar objects in rows and columns?",
+      "options": [
+        { "id": "a", "text": "`console.table()`" },
+        { "id": "b", "text": "`console.trace()`" },
+        { "id": "c", "text": "`console.countReset()`" },
+        { "id": "d", "text": "`console.clearObject()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`console.table()` displays tabular data, such as arrays of objects, in a readable table.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which DevTools panel is most useful for inspecting request URLs, status codes, headers, payloads, and responses?",
+      "options": [
+        { "id": "a", "text": "Network" },
+        { "id": "b", "text": "Elements" },
+        { "id": "c", "text": "Animations" },
+        { "id": "d", "text": "Rendering only" }
+      ],
+      "correct": ["a"],
+      "explanation": "The Network panel shows requests and responses made by the page.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does a breakpoint do?",
+      "options": [
+        { "id": "a", "text": "Pauses JavaScript execution so you can inspect current state" },
+        { "id": "b", "text": "Deletes the current function" },
+        { "id": "c", "text": "Prevents all errors permanently" },
+        { "id": "d", "text": "Converts synchronous code into async code" }
+      ],
+      "correct": ["a"],
+      "explanation": "Breakpoints pause execution at a selected line, allowing you to inspect variables, scope, `this`, and the call stack.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "When should you use Step into instead of Step over?",
+      "options": [
+        { "id": "a", "text": "When the bug may be inside the function being called" },
+        { "id": "b", "text": "When you want to skip all remaining code" },
+        { "id": "c", "text": "Only when debugging CSS" },
+        { "id": "d", "text": "When you want to remove a breakpoint" }
+      ],
+      "correct": ["a"],
+      "explanation": "Step into enters the called function so you can debug inside it.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does a `ReferenceError` commonly indicate?",
+      "options": [
+        { "id": "a", "text": "Code tried to use a variable name that is not available in the current scope" },
+        { "id": "b", "text": "A network request returned 404" },
+        { "id": "c", "text": "CSS failed to load" },
+        { "id": "d", "text": "A Promise resolved successfully" }
+      ],
+      "correct": ["a"],
+      "explanation": "A `ReferenceError` often means a variable was misspelled or used outside the scope where it exists.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What should you inspect when you see `Cannot read properties of undefined`?",
+      "options": [
+        { "id": "a", "text": "The value immediately before the property access" },
+        { "id": "b", "text": "Only the CSS file" },
+        { "id": "c", "text": "The browser zoom level" },
+        { "id": "d", "text": "Whether semicolons are enabled" }
+      ],
+      "correct": ["a"],
+      "explanation": "This error means code expected an object but received `undefined`; inspect where that value came from.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is a common cause of seeing `Promise { <pending> }` where an object was expected?",
+      "options": [
+        { "id": "a", "text": "A Promise-producing operation was not awaited" },
+        { "id": "b", "text": "The object has too many properties" },
+        { "id": "c", "text": "The variable was declared with `const`" },
+        { "id": "d", "text": "The page used too much CSS" }
+      ],
+      "correct": ["a"],
+      "explanation": "A pending Promise often means an async operation still needs `await` or a `.then()` handler.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Does `fetch()` reject automatically for HTTP statuses like `404` or `500`?",
+      "options": [
+        { "id": "a", "text": "No, you should check `response.ok` or `response.status`" },
+        { "id": "b", "text": "Yes, always" },
+        { "id": "c", "text": "Only for JSON responses" },
+        { "id": "d", "text": "Only after calling `console.error()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`fetch()` usually rejects for network-level failures, not normal HTTP error statuses.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "In an event handler, what is `event.currentTarget`?",
+      "options": [
+        { "id": "a", "text": "The element whose listener is currently running" },
+        { "id": "b", "text": "Always the deepest clicked element" },
+        { "id": "c", "text": "Always the `window` object" },
+        { "id": "d", "text": "The previous page URL" }
+      ],
+      "correct": ["a"],
+      "explanation": "`event.currentTarget` is the element that owns the listener currently handling the event.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is the purpose of source maps?",
+      "options": [
+        { "id": "a", "text": "They map bundled or minified code back to original source files" },
+        { "id": "b", "text": "They make API requests faster" },
+        { "id": "c", "text": "They replace all tests" },
+        { "id": "d", "text": "They automatically remove memory leaks" }
+      ],
+      "correct": ["a"],
+      "explanation": "Source maps help DevTools and stack traces point back to original files after code has been bundled or transformed.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the main goal of a repeatable debugging workflow?",
+      "options": [
+        { "id": "a", "text": "Replace guesses with evidence and narrow down the root cause" },
+        { "id": "b", "text": "Change as many files as possible quickly" },
+        { "id": "c", "text": "Avoid reading error messages" },
+        { "id": "d", "text": "Hide every error with fallback values" }
+      ],
+      "correct": ["a"],
+      "explanation": "A good workflow helps you reproduce the bug, gather facts, test hypotheses, and fix the cause.",
+      "points": 1
+    }
+  ]
+}

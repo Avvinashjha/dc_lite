@@ -6,25 +6,71 @@
       "slug": "01-console-methods",
       "title": "Console Methods",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "02-browser-devtools",
       "title": "Browser DevTools",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "03-breakpoints-and-stepping",
       "title": "Breakpoints and Stepping",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "04-debugging-common-errors",
       "title": "Debugging Common Errors",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-debugging-async-code",
+      "title": "Debugging Async Code",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-network-and-api-debugging",
+      "title": "Network and API Debugging",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-dom-and-event-debugging",
+      "title": "DOM and Event Debugging",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-performance-and-memory-debugging",
+      "title": "Performance and Memory Debugging",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-practical-debugging-workflow",
+      "title": "Practical Debugging Workflow",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-debugging-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "11-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-debugging-applied-check",
+      "passingScore": 70
     }
   ]
 }

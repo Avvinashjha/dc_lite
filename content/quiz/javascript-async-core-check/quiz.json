@@ -1,0 +1,182 @@
+{
+  "id": "javascript-async-core-check",
+  "title": "JavaScript Asynchronous Programming Core Check",
+  "description": "Check your understanding of asynchronous JavaScript, callbacks, promises, async/await, error handling, and parallel tasks.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "async", "promises", "callbacks"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does asynchronous programming allow JavaScript to do?",
+      "options": [
+        { "id": "a", "text": "Schedule work to finish later without blocking everything else" },
+        { "id": "b", "text": "Run every line twice" },
+        { "id": "c", "text": "Avoid functions completely" },
+        { "id": "d", "text": "Make all network requests instant" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async programming lets JavaScript continue running while waiting operations finish later.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is a callback?",
+      "options": [
+        { "id": "a", "text": "A function passed to another function to be called later" },
+        { "id": "b", "text": "A value returned only by classes" },
+        { "id": "c", "text": "A JSON string" },
+        { "id": "d", "text": "A special kind of `const` variable" }
+      ],
+      "correct": ["a"],
+      "explanation": "Callbacks are functions passed as arguments and invoked later by another function or API.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is callback hell?",
+      "options": [
+        { "id": "a", "text": "Deeply nested callbacks that become hard to read and maintain" },
+        { "id": "b", "text": "A syntax error caused by arrays" },
+        { "id": "c", "text": "A promise that resolves too quickly" },
+        { "id": "d", "text": "An async function with no await" }
+      ],
+      "correct": ["a"],
+      "explanation": "Callback hell is nested callback-based async code that becomes difficult to follow.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does a Promise represent?",
+      "options": [
+        { "id": "a", "text": "A future result of an asynchronous operation" },
+        { "id": "b", "text": "A permanent synchronous value" },
+        { "id": "c", "text": "Only an error object" },
+        { "id": "d", "text": "A loop that never ends" }
+      ],
+      "correct": ["a"],
+      "explanation": "A Promise represents async work that may fulfill or reject later.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which are Promise states?",
+      "options": [
+        { "id": "a", "text": "`pending`, `fulfilled`, `rejected`" },
+        { "id": "b", "text": "`open`, `closed`, `waiting`" },
+        { "id": "c", "text": "`try`, `catch`, `finally`" },
+        { "id": "d", "text": "`sync`, `async`, `static`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A Promise starts pending, then settles as fulfilled or rejected.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which method handles a rejected Promise?",
+      "options": [
+        { "id": "a", "text": "`.then()` only" },
+        { "id": "b", "text": "`.catch()`" },
+        { "id": "c", "text": "`.map()`" },
+        { "id": "d", "text": "`.parse()`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`.catch()` handles promise rejections.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does an `async` function always return?",
+      "options": [
+        { "id": "a", "text": "A Promise" },
+        { "id": "b", "text": "A string" },
+        { "id": "c", "text": "An array" },
+        { "id": "d", "text": "A callback" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async functions always return promises, even when returning a normal value.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `await` do?",
+      "options": [
+        { "id": "a", "text": "Waits for a Promise inside an async function" },
+        { "id": "b", "text": "Creates a callback" },
+        { "id": "c", "text": "Turns an array into a Set" },
+        { "id": "d", "text": "Stops JavaScript forever" }
+      ],
+      "correct": ["a"],
+      "explanation": "`await` pauses the async function until the awaited Promise settles.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "How do you commonly handle rejected promises with `async` / `await`?",
+      "options": [
+        { "id": "a", "text": "Wrap awaited operations in `try...catch`" },
+        { "id": "b", "text": "Use `JSON.stringify`" },
+        { "id": "c", "text": "Use `Object.create`" },
+        { "id": "d", "text": "Put `catch` before `try`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Rejected awaited promises throw inside the async function and can be caught with `try...catch`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is `Promise.all()` used for?",
+      "options": [
+        { "id": "a", "text": "Waiting for multiple promises to fulfill together" },
+        { "id": "b", "text": "Converting promises into callbacks" },
+        { "id": "c", "text": "Ignoring every rejection" },
+        { "id": "d", "text": "Making synchronous code block longer" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.all()` waits for all input promises and returns their resolved values in input order.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What happens if one promise rejects inside `Promise.all()`?",
+      "options": [
+        { "id": "a", "text": "`Promise.all()` rejects" },
+        { "id": "b", "text": "`Promise.all()` always fulfills with `null`" },
+        { "id": "c", "text": "The rejection is always ignored" },
+        { "id": "d", "text": "JavaScript converts it to a callback" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.all()` rejects as soon as one of the input promises rejects.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which loop is usually better for sequential async work than `forEach`?",
+      "options": [
+        { "id": "a", "text": "`for...of` with `await`" },
+        { "id": "b", "text": "`forEach` with `await`" },
+        { "id": "c", "text": "`JSON.parse`" },
+        { "id": "d", "text": "`Object.keys` only" }
+      ],
+      "correct": ["a"],
+      "explanation": "`for...of` can await each iteration sequentially. `forEach` does not wait for async callbacks.",
+      "points": 1
+    }
+  ]
+}

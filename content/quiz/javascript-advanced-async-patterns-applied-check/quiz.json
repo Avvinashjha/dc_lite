@@ -1,0 +1,224 @@
+{
+  "id": "javascript-advanced-async-patterns-applied-check",
+  "title": "JavaScript Advanced Async Patterns Applied Check",
+  "description": "Apply advanced asynchronous patterns by choosing cancellation, retries, backoff, concurrency limits, stale-result protection, queues, debounce, throttle, async iterators, and Observables for realistic JavaScript scenarios.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "async", "fetch", "concurrency", "patterns"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is logged?\n```js\nfunction* numbers() {\n  yield 1;\n  yield 2;\n}\n\nconst iterator = numbers();\nconsole.log(iterator.next().value);\nconsole.log(iterator.next().value);\n```",
+      "options": [
+        { "id": "a", "text": "`1` then `2`" },
+        { "id": "b", "text": "`2` then `1`" },
+        { "id": "c", "text": "`undefined` then `undefined`" },
+        { "id": "d", "text": "A Promise object then a Promise object" }
+      ],
+      "correct": ["a"],
+      "explanation": "Each `.next()` resumes the generator until the next `yield`.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which pattern best fits an API that returns pages of results until `hasMore` is false?",
+      "options": [
+        { "id": "a", "text": "An async generator consumed with `for await...of`" },
+        { "id": "b", "text": "A single synchronous `return` statement" },
+        { "id": "c", "text": "A class static field only" },
+        { "id": "d", "text": "A JSON string with no loop" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async generators are a clean way to hide pagination and yield pages or items over time.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the main problem with this code?\n```js\nitems.forEach(async (item) => {\n  await saveItem(item);\n});\n\nconsole.log(\"done\");\n```",
+      "options": [
+        { "id": "a", "text": "`console.log(\"done\")` runs before the async saves finish" },
+        { "id": "b", "text": "`forEach()` automatically waits for every async callback" },
+        { "id": "c", "text": "`await` cannot be used in any callback" },
+        { "id": "d", "text": "`saveItem()` must return an array" }
+      ],
+      "correct": ["a"],
+      "explanation": "`forEach()` does not await async callbacks. Use `for...of` for sequential work or `Promise.all()` for concurrent work.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A user leaves a page while a `fetch()` request is still running. Which tool is most appropriate for cancelling the request?",
+      "options": [
+        { "id": "a", "text": "`AbortController`" },
+        { "id": "b", "text": "`JSON.stringify()`" },
+        { "id": "c", "text": "`Array.prototype.sort()`" },
+        { "id": "d", "text": "`Object.freeze()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`AbortController` can cancel a fetch request when its signal is passed to `fetch()`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Why is the `finally` block useful here?\n```js\nconst timeoutId = setTimeout(() => controller.abort(), 5000);\n\ntry {\n  return await fetch(url, { signal: controller.signal });\n} finally {\n  clearTimeout(timeoutId);\n}\n```",
+      "options": [
+        { "id": "a", "text": "It clears the timer whether the request succeeds, fails, or is aborted" },
+        { "id": "b", "text": "It forces the request to return JSON" },
+        { "id": "c", "text": "It retries the request forever" },
+        { "id": "d", "text": "It makes `fetch()` synchronous" }
+      ],
+      "correct": ["a"],
+      "explanation": "`finally` is ideal for cleanup that should run after any outcome.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which response status is usually a better retry candidate?",
+      "options": [
+        { "id": "a", "text": "`503 Service Unavailable`" },
+        { "id": "b", "text": "`400 Bad Request`" },
+        { "id": "c", "text": "`401 Unauthorized`" },
+        { "id": "d", "text": "`404 Not Found`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`503` is often temporary. Client errors such as `400`, `401`, and `404` usually need a different fix.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is a risk of retrying a request that creates an order?",
+      "options": [
+        { "id": "a", "text": "It may create duplicate orders unless the API handles idempotency" },
+        { "id": "b", "text": "It will always become a GET request" },
+        { "id": "c", "text": "It cannot ever fail" },
+        { "id": "d", "text": "It prevents the server from reading JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "Retrying write operations can duplicate side effects unless the server supports safeguards such as idempotency keys.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which approach is best for uploading 100 files without starting all uploads at once?",
+      "options": [
+        { "id": "a", "text": "Use a concurrency limit or queue" },
+        { "id": "b", "text": "Use `Promise.all()` on the full list with no limit" },
+        { "id": "c", "text": "Use `JSON.parse()` before every upload" },
+        { "id": "d", "text": "Use `return` before every upload starts" }
+      ],
+      "correct": ["a"],
+      "explanation": "A limit or queue controls how many uploads are in progress at a time.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "A search for `ab` finishes before an older search for `a`. The older result then overwrites the UI. What problem is this?",
+      "options": [
+        { "id": "a", "text": "A stale-result race condition" },
+        { "id": "b", "text": "A syntax error" },
+        { "id": "c", "text": "A JSON serialization feature" },
+        { "id": "d", "text": "A generator delegation" }
+      ],
+      "correct": ["a"],
+      "explanation": "The older async result is stale because it no longer matches the user's latest query.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which check prevents an older request from updating the UI?",
+      "options": [
+        { "id": "a", "text": "Compare the request's id to the latest request id before rendering" },
+        { "id": "b", "text": "Always call `render()` twice" },
+        { "id": "c", "text": "Convert the result to a string and ignore timing" },
+        { "id": "d", "text": "Use `var` instead of `const`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A request id lets only the latest operation update state.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which pattern best fits work that arrives over time and must be processed one task at a time?",
+      "options": [
+        { "id": "a", "text": "An async queue" },
+        { "id": "b", "text": "A template literal" },
+        { "id": "c", "text": "A private class field" },
+        { "id": "d", "text": "A destructuring assignment only" }
+      ],
+      "correct": ["a"],
+      "explanation": "An async queue stores tasks and processes them in a controlled order.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "A search request should run after the user stops typing for 300ms. Which pattern should you use?",
+      "options": [
+        { "id": "a", "text": "Debounce" },
+        { "id": "b", "text": "Throttle" },
+        { "id": "c", "text": "Deep freeze" },
+        { "id": "d", "text": "Prototype delegation" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing waits for a pause in frequent events.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "A scroll handler should run at most once every 500ms while scrolling continues. Which pattern should you use?",
+      "options": [
+        { "id": "a", "text": "Throttle" },
+        { "id": "b", "text": "Debounce only" },
+        { "id": "c", "text": "JSON stringify" },
+        { "id": "d", "text": "Promise rejection" }
+      ],
+      "correct": ["a"],
+      "explanation": "Throttling limits a function to at most one run per time window.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What is wrong with this debounce usage?\n```js\ninput.addEventListener(\"input\", (event) => {\n  const debounced = debounce(search, 300);\n  debounced(event.target.value);\n});\n```",
+      "options": [
+        { "id": "a", "text": "It creates a new debounced function for every input event" },
+        { "id": "b", "text": "It never passes the input value" },
+        { "id": "c", "text": "It makes `search` synchronous" },
+        { "id": "d", "text": "It automatically cancels all fetch requests" }
+      ],
+      "correct": ["a"],
+      "explanation": "The debounced function should be created once and reused, otherwise each event has its own timer.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "When should you consider an Observable-style pattern?",
+      "options": [
+        { "id": "a", "text": "When handling a push-based stream of values over time" },
+        { "id": "b", "text": "When making one simple request for one result" },
+        { "id": "c", "text": "When replacing every function with a class" },
+        { "id": "d", "text": "When avoiding cleanup for long-lived events" }
+      ],
+      "correct": ["a"],
+      "explanation": "Observables fit push-based event streams such as live messages, input streams, or dashboards.",
+      "points": 1
+    }
+  ]
+}

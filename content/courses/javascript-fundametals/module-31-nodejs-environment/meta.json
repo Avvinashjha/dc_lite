@@ -1,6 +1,6 @@
 {
   "title": "Node.js Environment",
-  "description": "Run JavaScript outside the browser with Node.js.",
+  "description": "Run JavaScript outside the browser with Node.js, built-in modules, npm, files, streams, and server-side runtime APIs.",
   "lessons": [
     {
       "slug": "01-what-is-nodejs",
@@ -15,22 +15,68 @@
       "duration": "10 min"
     },
     {
-      "slug": "03-modules-in-node",
-      "title": "Modules in Node (CommonJS vs ESM)",
+      "slug": "03-nodejs-runtime-and-globals",
+      "title": "Node.js Runtime and Globals",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
-      "slug": "04-npm-and-packages",
-      "title": "npm and Packages",
+      "slug": "04-modules-in-node",
+      "title": "Modules in Node",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
-      "slug": "05-working-with-the-file-system",
+      "slug": "05-package-json-npm-and-packages",
+      "title": "package.json, npm, and Packages",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-built-in-modules",
+      "title": "Built-In Modules",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-working-with-the-file-system",
       "title": "Working with the File System",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-environment-variables-and-cli-arguments",
+      "title": "Environment Variables and CLI Arguments",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-async-node-apis-and-errors",
+      "title": "Async Node APIs and Errors",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-streams-events-and-http",
+      "title": "Streams, Events, and HTTP",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "11-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-nodejs-environment-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "12-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-nodejs-environment-applied-check",
+      "passingScore": 70
     }
   ]
 }

@@ -1,0 +1,224 @@
+{
+  "id": "javascript-apis-fetch-applied-check",
+  "title": "JavaScript APIs and Fetch Applied Check",
+  "description": "Test your ability to build fetch requests, handle status codes and JSON, use headers and query params, and diagnose common CORS issues.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "fetch", "apis", "cors", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is wrong here?\n```js\nconst response = await fetch(\"/api/user\");\nconst data = response.json();\nconsole.log(data.name);\n```",
+      "options": [
+        { "id": "a", "text": "`response.json()` returns a Promise and should be awaited" },
+        { "id": "b", "text": "`fetch` cannot return JSON" },
+        { "id": "c", "text": "`console.log` cannot read objects" },
+        { "id": "d", "text": "`data.name` must always be uppercase" }
+      ],
+      "correct": ["a"],
+      "explanation": "`response.json()` is asynchronous. Without `await`, `data` is a Promise.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which code correctly treats HTTP error statuses as errors?",
+      "options": [
+        { "id": "a", "text": "`const response = await fetch(url); if (!response.ok) throw new Error(String(response.status));`" },
+        { "id": "b", "text": "`const response = await fetch(url); response.throwIfJson();`" },
+        { "id": "c", "text": "`const response = await fetch(url); if (response.ok) throw new Error();`" },
+        { "id": "d", "text": "`fetch(url).catch(() => response.status);`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`fetch` does not reject for HTTP statuses like 404, so checking `response.ok` is important.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which request correctly sends JSON to create a user?",
+      "options": [
+        { "id": "a", "text": "`fetch(\"/api/users\", { method: \"POST\", headers: { \"Content-Type\": \"application/json\" }, body: JSON.stringify(user) })`" },
+        { "id": "b", "text": "`fetch(\"/api/users\", { method: \"GET\", body: user })`" },
+        { "id": "c", "text": "`fetch(\"/api/users\", { method: \"POST\", body: user })`" },
+        { "id": "d", "text": "`fetch(\"/api/users\", JSON.stringify(user))`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A JSON POST request should set the method, content type header, and stringified JSON body.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What should you be careful about with a `204 No Content` response?",
+      "options": [
+        { "id": "a", "text": "It may not have a body, so calling `response.json()` can fail" },
+        { "id": "b", "text": "It always means the request failed" },
+        { "id": "c", "text": "It always contains a large JSON body" },
+        { "id": "d", "text": "It is a CORS-only status code" }
+      ],
+      "correct": ["a"],
+      "explanation": "`204 No Content` means there is no response body to parse.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the origin difference here?\n```text\nhttp://localhost:3000\nhttp://localhost:5000\n```",
+      "options": [
+        { "id": "a", "text": "They are different origins because the ports differ" },
+        { "id": "b", "text": "They are the same origin because both use localhost" },
+        { "id": "c", "text": "Origins ignore ports" },
+        { "id": "d", "text": "They are same-origin only for POST requests" }
+      ],
+      "correct": ["a"],
+      "explanation": "Origin includes protocol, domain, and port. Different ports mean different origins.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Why is `mode: \"no-cors\"` usually not a real fix for API calls?",
+      "options": [
+        { "id": "a", "text": "It produces an opaque response that JavaScript cannot read normally" },
+        { "id": "b", "text": "It automatically parses JSON twice" },
+        { "id": "c", "text": "It changes POST into DELETE" },
+        { "id": "d", "text": "It disables all browser security permanently" }
+      ],
+      "correct": ["a"],
+      "explanation": "`no-cors` does not let normal frontend code read the response body/status like a standard API response.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which is the best way to build this search URL safely?\n```text\n/api/search?q=javascript basics\n```",
+      "options": [
+        { "id": "a", "text": "`const params = new URLSearchParams({ q: \"javascript basics\" }); fetch(`/api/search?${params}`);`" },
+        { "id": "b", "text": "`fetch(\"/api/search?q=\" + \"javascript basics\")` always safely handles all input" },
+        { "id": "c", "text": "`fetch.URL(\"/api/search\", \"javascript basics\")`" },
+        { "id": "d", "text": "`JSON.stringify(\"/api/search?q=javascript basics\")`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`URLSearchParams` encodes query parameters safely.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which Authorization header is commonly expected for bearer-token APIs?",
+      "options": [
+        { "id": "a", "text": "`Authorization: Bearer abc123`" },
+        { "id": "b", "text": "`Authorization: abc123` is always equivalent" },
+        { "id": "c", "text": "`Token: Bearer`" },
+        { "id": "d", "text": "`Content-Type: Bearer abc123`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Many APIs expect the `Bearer` prefix in the `Authorization` header.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is a likely problem with hard-coding a secret API key in frontend JavaScript?",
+      "options": [
+        { "id": "a", "text": "Frontend source code is visible to users, so the secret can be exposed" },
+        { "id": "b", "text": "JavaScript cannot contain strings" },
+        { "id": "c", "text": "API keys only work in CSS" },
+        { "id": "d", "text": "Hard-coded strings always cause syntax errors" }
+      ],
+      "correct": ["a"],
+      "explanation": "Secrets should not be placed in public frontend code. Use a backend for secret-protected API calls.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which method is best for updating only part of a resource?",
+      "options": [
+        { "id": "a", "text": "`PATCH`" },
+        { "id": "b", "text": "`GET`" },
+        { "id": "c", "text": "`HEADERS`" },
+        { "id": "d", "text": "`READ`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`PATCH` is commonly used for partial updates.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does `credentials: \"include\"` do?",
+      "options": [
+        { "id": "a", "text": "Includes credentials such as cookies in cross-origin requests too" },
+        { "id": "b", "text": "Automatically adds a bearer token from nowhere" },
+        { "id": "c", "text": "Disables CORS" },
+        { "id": "d", "text": "Forces response JSON parsing" }
+      ],
+      "correct": ["a"],
+      "explanation": "`credentials: \"include\"` tells fetch to include credentials even for cross-origin requests, subject to CORS rules.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What CORS header usually tells the browser which frontend origin may read the response?",
+      "options": [
+        { "id": "a", "text": "`Access-Control-Allow-Origin`" },
+        { "id": "b", "text": "`Content-Type`" },
+        { "id": "c", "text": "`Authorization`" },
+        { "id": "d", "text": "`Allow-JSON-Origin`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Access-Control-Allow-Origin` is the key CORS response header for allowed origins.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What is a preflight request?",
+      "options": [
+        { "id": "a", "text": "An automatic browser `OPTIONS` request sent before certain cross-origin requests" },
+        { "id": "b", "text": "A JSON parsing method" },
+        { "id": "c", "text": "A request that always avoids CORS" },
+        { "id": "d", "text": "A server-only database query" }
+      ],
+      "correct": ["a"],
+      "explanation": "Browsers send preflight `OPTIONS` requests for certain cross-origin requests to check server permission.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which statement about CORS is correct?",
+      "options": [
+        { "id": "a", "text": "CORS controls whether browser JavaScript can read cross-origin responses" },
+        { "id": "b", "text": "CORS replaces authentication" },
+        { "id": "c", "text": "CORS prevents all servers from receiving requests" },
+        { "id": "d", "text": "CORS is fixed by changing `await` to `.then()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "CORS is a browser security feature controlling cross-origin response access.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which approach is often useful during local frontend/backend development to avoid CORS friction?",
+      "options": [
+        { "id": "a", "text": "A development proxy that forwards `/api` requests to the backend" },
+        { "id": "b", "text": "Hard-coding all API secrets in the browser" },
+        { "id": "c", "text": "Using `mode: \"no-cors\"` for every request" },
+        { "id": "d", "text": "Deleting all request headers" }
+      ],
+      "correct": ["a"],
+      "explanation": "A dev proxy can make API requests appear same-origin to the browser during local development.",
+      "points": 1
+    }
+  ]
+}

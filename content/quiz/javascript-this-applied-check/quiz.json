@@ -1,0 +1,224 @@
+{
+  "id": "javascript-this-applied-check",
+  "title": "JavaScript this Applied Check",
+  "description": "Test your ability to predict this behavior with callbacks, arrow functions, bind, call, apply, timers, and method borrowing.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "this", "bind", "call", "apply"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  greet: () => {\n    console.log(this.name);\n  },\n};\n\nuser.greet();\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "Usually `undefined`" },
+        { "id": "c", "text": "`greet`" },
+        { "id": "d", "text": "Always `user`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Arrow functions do not have their own `this`, so `user.greet()` does not set `this` to `user` inside the arrow function.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  greetLater() {\n    setTimeout(() => {\n      console.log(this.name);\n    }, 1000);\n  },\n};\n\nuser.greetLater();\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`setTimeout`" },
+        { "id": "d", "text": "`window` in every environment" }
+      ],
+      "correct": ["a"],
+      "explanation": "`greetLater` is called as a method, so `this` is `user`; the arrow callback inherits that `this`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction sayName() {\n  console.log(this.name);\n}\n\nconst user = {\n  name: \"Alice\",\n};\n\nconst bound = sayName.bind(user);\n\nbound();\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`sayName`" },
+        { "id": "d", "text": "`user`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`bind(user)` creates a new function where `this` is fixed to `user`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is true about `fn.bind(context)`?",
+      "options": [
+        { "id": "a", "text": "It calls `fn` immediately" },
+        { "id": "b", "text": "It returns a new function with `this` fixed to `context`" },
+        { "id": "c", "text": "It only works on arrow functions" },
+        { "id": "d", "text": "It converts `fn` to JSON" }
+      ],
+      "correct": ["b"],
+      "explanation": "`bind()` does not call the function immediately; it returns a new bound function.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction introduce(role, city) {\n  console.log(`${this.name} is a ${role} from ${city}`);\n}\n\nconst user = {\n  name: \"Alice\",\n};\n\nintroduce.call(user, \"developer\", \"Delhi\");\n```",
+      "options": [
+        { "id": "a", "text": "`Alice is a developer from Delhi`" },
+        { "id": "b", "text": "`undefined is a developer from Delhi`" },
+        { "id": "c", "text": "`user is a developer from Delhi`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`call()` sets `this` to `user` and passes the remaining arguments one by one.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which call is correct when the arguments are already in an array?",
+      "options": [
+        { "id": "a", "text": "`introduce.call(user, [\"developer\", \"Delhi\"])`" },
+        { "id": "b", "text": "`introduce.apply(user, [\"developer\", \"Delhi\"])`" },
+        { "id": "c", "text": "`introduce.bind(user, [\"developer\", \"Delhi\"])()`" },
+        { "id": "d", "text": "`introduce.this(user, [\"developer\", \"Delhi\"])`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`apply()` is designed for calling a function with arguments supplied as an array or array-like value.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction add(a, b) {\n  return a + b;\n}\n\nconsole.log(add.apply(null, [2, 3]));\n```",
+      "options": [
+        { "id": "a", "text": "`5`" },
+        { "id": "b", "text": "`23`" },
+        { "id": "c", "text": "`[2, 3]`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`apply()` spreads the array values into individual arguments for the function call.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  describe() {\n    return `User: ${this.name}`;\n  },\n};\n\nconst admin = {\n  name: \"Ava\",\n};\n\nconsole.log(user.describe.call(admin));\n```",
+      "options": [
+        { "id": "a", "text": "`User: Alice`" },
+        { "id": "b", "text": "`User: Ava`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`admin.describe is not a function`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`call(admin)` runs `user.describe` with `this` set to `admin`, so it reads `admin.name`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is the main difference between `call()` and `apply()`?",
+      "options": [
+        { "id": "a", "text": "`call()` binds for later; `apply()` calls immediately" },
+        { "id": "b", "text": "`call()` takes arguments one by one; `apply()` takes them as an array" },
+        { "id": "c", "text": "`call()` works only with objects; `apply()` works only with arrays" },
+        { "id": "d", "text": "`call()` changes arrow function `this`; `apply()` does not" }
+      ],
+      "correct": ["b"],
+      "explanation": "Both call immediately with a chosen `this`; the difference is how arguments are supplied.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction showName() {\n  console.log(this.name);\n}\n\nconst alice = { name: \"Alice\" };\nconst ava = { name: \"Ava\" };\n\nconst showAlice = showName.bind(alice);\nconst tryShowAva = showAlice.bind(ava);\n\ntryShowAva();\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`Ava`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A bound function keeps its original binding. Rebinding it does not replace the first `this` value.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which option best fixes this context-loss problem?\n```js\nsetTimeout(user.greet, 1000);\n```",
+      "options": [
+        { "id": "a", "text": "`setTimeout(user.greet(), 1000);`" },
+        { "id": "b", "text": "`setTimeout(() => user.greet(), 1000);`" },
+        { "id": "c", "text": "`setTimeout(user.greet.call(user), 1000);`" },
+        { "id": "d", "text": "`setTimeout(user.greet.apply, 1000);`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The wrapper preserves the method call `user.greet()` for later. Option `c` calls the method immediately instead of passing a callback.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What happens when you try to change an arrow function's `this` with `call()`?",
+      "options": [
+        { "id": "a", "text": "The arrow function receives the new `this`" },
+        { "id": "b", "text": "`call()` converts it into a regular function" },
+        { "id": "c", "text": "The arrow function keeps its lexical `this`" },
+        { "id": "d", "text": "JavaScript always throws a syntax error" }
+      ],
+      "correct": ["c"],
+      "explanation": "Arrow functions do not have their own dynamic `this`, so `call`, `apply`, and `bind` cannot replace it.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which modern expression is often clearer than `Math.max.apply(null, numbers)`?",
+      "options": [
+        { "id": "a", "text": "`Math.max(numbers)`" },
+        { "id": "b", "text": "`Math.max(...numbers)`" },
+        { "id": "c", "text": "`Math.max.call(numbers)`" },
+        { "id": "d", "text": "`numbers.Math.max()`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Spread syntax passes array elements as individual arguments, which is often clearer in modern JavaScript.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does this code store in `result`?\n```js\nfunction greet() {\n  return `Hello, ${this.name}`;\n}\n\nconst user = { name: \"Alice\" };\n\nconst result = greet.call(user);\n```",
+      "options": [
+        { "id": "a", "text": "A bound function" },
+        { "id": "b", "text": "`Hello, Alice`" },
+        { "id": "c", "text": "`user`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`call()` runs the function immediately, so `result` receives the function's return value.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which comparison is correct?",
+      "options": [
+        { "id": "a", "text": "`bind`, `call`, and `apply` all return bound functions for later" },
+        { "id": "b", "text": "`bind` returns a function; `call` and `apply` call immediately" },
+        { "id": "c", "text": "`call` returns a function; `bind` and `apply` call immediately" },
+        { "id": "d", "text": "`apply` is the only one that can set `this`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`bind()` returns a new function. `call()` and `apply()` invoke the function immediately.",
+      "points": 1
+    }
+  ]
+}

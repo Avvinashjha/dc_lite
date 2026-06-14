@@ -1,0 +1,182 @@
+{
+  "id": "javascript-debugging-applied-check",
+  "title": "JavaScript Debugging Applied Check",
+  "description": "Test your ability to diagnose practical JavaScript bugs using DevTools, stack traces, async reasoning, network evidence, DOM inspection, and tests.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "debugging", "devtools", "applied", "workflow"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A click handler does not seem to run. What is the best first check?\n```js\nconst button = document.querySelector(\".save-button\");\nbutton.addEventListener(\"click\", save);\n```",
+      "options": [
+        { "id": "a", "text": "Check whether `button` is `null` and whether the listener setup code runs" },
+        { "id": "b", "text": "Change every `const` to `var`" },
+        { "id": "c", "text": "Add `mode: \"no-cors\"`" },
+        { "id": "d", "text": "Remove all CSS from the page" }
+      ],
+      "correct": ["a"],
+      "explanation": "If the selector does not find an element or setup code never runs, the listener will not be attached.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the bug here?\n```js\nasync function loadUser() {\n  const response = fetch(\"/api/user\");\n  const user = await response.json();\n  return user;\n}\n```",
+      "options": [
+        { "id": "a", "text": "`fetch()` was not awaited, so `response` is a Promise" },
+        { "id": "b", "text": "`response.json()` can never be awaited" },
+        { "id": "c", "text": "The function cannot be marked `async`" },
+        { "id": "d", "text": "The URL must be uppercase" }
+      ],
+      "correct": ["a"],
+      "explanation": "`fetch()` returns a Promise. The code must use `const response = await fetch(...)` before calling `response.json()`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A form briefly logs the right data, then the page reloads and the log disappears. What should you check?",
+      "options": [
+        { "id": "a", "text": "Whether the submit handler calls `event.preventDefault()`" },
+        { "id": "b", "text": "Whether the array uses `.map()`" },
+        { "id": "c", "text": "Whether `console.table()` is installed" },
+        { "id": "d", "text": "Whether the status code is exactly 201" }
+      ],
+      "correct": ["a"],
+      "explanation": "Forms submit and navigate by default. `event.preventDefault()` is commonly needed for JavaScript-handled forms.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A request appears in the Network panel with status `401`. What should you inspect first?",
+      "options": [
+        { "id": "a", "text": "Authentication details such as token, cookies, credentials, or authorization header" },
+        { "id": "b", "text": "Only the element's `z-index`" },
+        { "id": "c", "text": "Whether a loop uses `break`" },
+        { "id": "d", "text": "Whether the JavaScript file has comments" }
+      ],
+      "correct": ["a"],
+      "explanation": "`401` means the request is not authenticated, so inspect auth-related request details.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the best way to debug this intermittent issue?\n```js\nselectUser(1);\nselectUser(2);\n// Sometimes user 1 appears after user 2 was selected.\n```",
+      "options": [
+        { "id": "a", "text": "Check whether the async requests can finish out of order and track the latest request" },
+        { "id": "b", "text": "Assume the browser always runs requests in call order" },
+        { "id": "c", "text": "Remove every `await`" },
+        { "id": "d", "text": "Use `JSON.stringify()` on the button element" }
+      ],
+      "correct": ["a"],
+      "explanation": "This is likely a race condition. Later requests can finish before earlier requests.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A stack trace points to `calculateTotal`, but that function received `cart` as `undefined`. What should you do next?",
+      "options": [
+        { "id": "a", "text": "Use the call stack to find who called it and where `cart` came from" },
+        { "id": "b", "text": "Immediately return `0` for every error without investigation" },
+        { "id": "c", "text": "Rename the function until the error disappears" },
+        { "id": "d", "text": "Ignore the stack trace because it is never useful" }
+      ],
+      "correct": ["a"],
+      "explanation": "The crash happens in `calculateTotal`, but the root cause may be an earlier caller passing the wrong value.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which debugging approach best narrows this flow?\n```text\nform input -> request payload -> API response -> transform -> render\n```",
+      "options": [
+        { "id": "a", "text": "Inspect a middle step, then decide whether the bug is before or after it" },
+        { "id": "b", "text": "Change all steps at once" },
+        { "id": "c", "text": "Only inspect the final rendered text" },
+        { "id": "d", "text": "Delete the request payload" }
+      ],
+      "correct": ["a"],
+      "explanation": "Binary search debugging checks the middle of a flow to narrow which half contains the bug.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is wrong with this performance-sensitive code?\n```js\nfor (const item of items) {\n  document.body.innerHTML += `<p>${item.name}</p>`;\n}\n```",
+      "options": [
+        { "id": "a", "text": "It repeatedly reparses and rewrites the body instead of batching the DOM update" },
+        { "id": "b", "text": "Template literals cannot be used in loops" },
+        { "id": "c", "text": "`for...of` cannot read arrays" },
+        { "id": "d", "text": "`innerHTML` always throws a SyntaxError" }
+      ],
+      "correct": ["a"],
+      "explanation": "Repeated DOM writes can be expensive. Building the HTML once and inserting it once is usually better.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "A search API is called on every keystroke and the UI feels sluggish. Which technique is likely appropriate?",
+      "options": [
+        { "id": "a", "text": "Debounce the input handler so work runs after the user pauses typing" },
+        { "id": "b", "text": "Call the API twice per keystroke" },
+        { "id": "c", "text": "Store the password in the console" },
+        { "id": "d", "text": "Turn the input into a `var`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing reduces repeated work caused by rapid events such as input changes.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is the best next step after you fix a reproducible bug?",
+      "options": [
+        { "id": "a", "text": "Rerun the reproduction steps and add a focused test when possible" },
+        { "id": "b", "text": "Leave temporary `debugger` statements in the code" },
+        { "id": "c", "text": "Remove the error message without testing" },
+        { "id": "d", "text": "Assume all related cases are fixed automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Verifying the original steps and adding a test helps prove the fix and prevent regressions.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which fix addresses the cause instead of only hiding the symptom?\n```js\nconst discount = total * coupon.percent; // NaN when coupon.percent is \"20%\"\n```",
+      "options": [
+        { "id": "a", "text": "Parse and validate percentage strings before calculating" },
+        { "id": "b", "text": "Use `total * coupon.percent || 0` everywhere without checking input" },
+        { "id": "c", "text": "Delete the coupon object" },
+        { "id": "d", "text": "Log `NaN` as a success message" }
+      ],
+      "correct": ["a"],
+      "explanation": "Parsing and validating the input fixes the invalid value. A fallback may hide the bug without correcting the cause.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "A removed DOM element still seems to consume memory because it is stored in a global array. What is the likely issue?",
+      "options": [
+        { "id": "a", "text": "A lingering reference prevents the removed element from being garbage collected" },
+        { "id": "b", "text": "DOM elements cannot be removed from memory" },
+        { "id": "c", "text": "The element needs a different CSS color" },
+        { "id": "d", "text": "The array should be converted to a string" }
+      ],
+      "correct": ["a"],
+      "explanation": "Objects can stay in memory while reachable from references such as global arrays, caches, closures, or listeners.",
+      "points": 1
+    }
+  ]
+}

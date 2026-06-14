@@ -31,6 +31,34 @@
       "title": "Concurrency Model",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-rendering-and-long-tasks",
+      "title": "Rendering and Long Tasks",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-predicting-execution-order",
+      "title": "Predicting Execution Order",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-event-loop-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-event-loop-applied-check",
+      "passingScore": 70
     }
   ]
 }

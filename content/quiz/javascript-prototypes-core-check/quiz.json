@@ -1,0 +1,182 @@
+{
+  "id": "javascript-prototypes-core-check",
+  "title": "JavaScript Prototypes Core Check",
+  "description": "Check your understanding of the prototype chain, own vs inherited properties, Object.create, __proto__, constructor prototypes, and classes.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "prototypes", "inheritance"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the prototype chain used for?",
+      "options": [
+        { "id": "a", "text": "Looking up properties and methods through linked objects" },
+        { "id": "b", "text": "Sorting arrays automatically" },
+        { "id": "c", "text": "Converting objects to JSON" },
+        { "id": "d", "text": "Preventing all mutation" }
+      ],
+      "correct": ["a"],
+      "explanation": "When a property is not found directly on an object, JavaScript searches the object's prototype chain.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is an own property?",
+      "options": [
+        { "id": "a", "text": "A property that exists directly on an object" },
+        { "id": "b", "text": "A property inherited from `Object.prototype`" },
+        { "id": "c", "text": "A property that can never be changed" },
+        { "id": "d", "text": "A property only classes can create" }
+      ],
+      "correct": ["a"],
+      "explanation": "An own property is stored directly on the object, not inherited through the prototype chain.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which method is recommended for checking only own properties?",
+      "options": [
+        { "id": "a", "text": "`Object.hasOwn(object, key)`" },
+        { "id": "b", "text": "`key in object`" },
+        { "id": "c", "text": "`Object.keys(object).includesInherited(key)`" },
+        { "id": "d", "text": "`object.__proto__.has(key)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.hasOwn()` checks direct properties only, while `in` checks own and inherited properties.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does `Object.create(parent)` do?",
+      "options": [
+        { "id": "a", "text": "Creates a new object whose prototype is `parent`" },
+        { "id": "b", "text": "Copies every property deeply from `parent`" },
+        { "id": "c", "text": "Converts `parent` into an array" },
+        { "id": "d", "text": "Freezes `parent`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.create(parent)` creates a new object linked to `parent` through the prototype chain.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the preferred modern way to inspect an object's prototype?",
+      "options": [
+        { "id": "a", "text": "`Object.getPrototypeOf(object)`" },
+        { "id": "b", "text": "`object.prototype`" },
+        { "id": "c", "text": "`object.getParent()`" },
+        { "id": "d", "text": "`Object.parentOf(object)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.getPrototypeOf()` is the standard modern API for reading an object's prototype.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is `__proto__`?",
+      "options": [
+        { "id": "a", "text": "A commonly seen accessor for an object's prototype" },
+        { "id": "b", "text": "The same thing as a function's `prototype` property" },
+        { "id": "c", "text": "A keyword for creating classes" },
+        { "id": "d", "text": "A private field marker" }
+      ],
+      "correct": ["a"],
+      "explanation": "`__proto__` points to an object's prototype, but modern code should usually prefer `Object.getPrototypeOf()`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does a constructor function's `.prototype` property provide?",
+      "options": [
+        { "id": "a", "text": "The object that instances created with `new` inherit from" },
+        { "id": "b", "text": "A list of constructor arguments" },
+        { "id": "c", "text": "A JSON representation of the function" },
+        { "id": "d", "text": "The function's return value" }
+      ],
+      "correct": ["a"],
+      "explanation": "When `new Constructor()` runs, the new object is linked to `Constructor.prototype`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Where should shared methods usually be placed when using constructor functions?",
+      "options": [
+        { "id": "a", "text": "Inside every instance as a new function" },
+        { "id": "b", "text": "On the constructor function's `.prototype`" },
+        { "id": "c", "text": "Inside JSON" },
+        { "id": "d", "text": "On `null`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Putting shared methods on `.prototype` lets instances share one method instead of creating a copy per instance.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Where do normal class methods usually live?",
+      "options": [
+        { "id": "a", "text": "Directly as own properties on every instance" },
+        { "id": "b", "text": "On `ClassName.prototype`" },
+        { "id": "c", "text": "Only inside the constructor" },
+        { "id": "d", "text": "On `Object.create(null)`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Class methods are prototype methods, so instances inherit them from `ClassName.prototype`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does the `in` operator check?",
+      "options": [
+        { "id": "a", "text": "Only own properties" },
+        { "id": "b", "text": "Own and inherited properties" },
+        { "id": "c", "text": "Only private fields" },
+        { "id": "d", "text": "Only array indexes" }
+      ],
+      "correct": ["b"],
+      "explanation": "`key in object` returns true for both own and inherited properties.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Why should you generally avoid modifying built-in prototypes like `Array.prototype`?",
+      "options": [
+        { "id": "a", "text": "It can cause conflicts, surprising behavior, and maintenance problems" },
+        { "id": "b", "text": "It makes arrays stop working immediately" },
+        { "id": "c", "text": "It is required before using `map()`" },
+        { "id": "d", "text": "It prevents objects from having own properties" }
+      ],
+      "correct": ["a"],
+      "explanation": "Modifying built-in prototypes affects shared global behavior and can conflict with libraries or future JavaScript features.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is prototype pollution?",
+      "options": [
+        { "id": "a", "text": "Accidentally or maliciously changing shared prototypes such as `Object.prototype`" },
+        { "id": "b", "text": "Creating too many arrays" },
+        { "id": "c", "text": "Using `const` with objects" },
+        { "id": "d", "text": "Writing classes in separate modules" }
+      ],
+      "correct": ["a"],
+      "explanation": "Prototype pollution changes shared prototypes and can cause unexpected inherited properties or security problems.",
+      "points": 1
+    }
+  ]
+}

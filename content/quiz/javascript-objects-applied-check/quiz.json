@@ -1,0 +1,224 @@
+{
+  "id": "javascript-objects-applied-check",
+  "title": "JavaScript Objects Applied Check",
+  "description": "Test your ability to predict object reference behavior, JSON conversion, shallow copying, nested updates, and applied object patterns.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "objects", "json", "immutability"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n};\n\nconst admin = user;\nadmin.name = \"Ava\";\n\nconsole.log(user.name);\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`Ava`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`admin` and `user` reference the same object, so changing one reference changes the shared object.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log({ name: \"Alice\" } === { name: \"Alice\" });\n```",
+      "options": [
+        { "id": "a", "text": "`true`, because the objects have the same properties" },
+        { "id": "b", "text": "`false`, because they are two different object references" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Objects are compared by reference, not by matching contents.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  role: \"user\",\n};\n\nconst updatedUser = {\n  ...user,\n  role: \"admin\",\n};\n\nconsole.log(user.role);\n```",
+      "options": [
+        { "id": "a", "text": "`user`" },
+        { "id": "b", "text": "`admin`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`role`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The spread update creates a new object. The original `user.role` remains `\"user\"`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  role: \"user\",\n};\n\nconst updatedUser = {\n  role: \"admin\",\n  ...user,\n};\n\nconsole.log(updatedUser.role);\n```",
+      "options": [
+        { "id": "a", "text": "`admin`" },
+        { "id": "b", "text": "`user`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Spread order matters. The later `...user` overwrites the earlier `role: \"admin\"`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  address: {\n    city: \"Delhi\",\n  },\n};\n\nconst copy = {\n  ...user,\n};\n\ncopy.address.city = \"Mumbai\";\n\nconsole.log(user.address.city);\n```",
+      "options": [
+        { "id": "a", "text": "`Delhi`" },
+        { "id": "b", "text": "`Mumbai`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`ReferenceError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object spread is shallow. The nested `address` object is still shared between `user` and `copy`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which update copies nested object data correctly without changing the original city?",
+      "options": [
+        { "id": "a", "text": "`user.address.city = \"Mumbai\"`" },
+        { "id": "b", "text": "`const updated = { ...user, address: { ...user.address, city: \"Mumbai\" } };`" },
+        { "id": "c", "text": "`const updated = user; updated.address.city = \"Mumbai\";`" },
+        { "id": "d", "text": "`const updated = { address: user.address }; updated.address.city = \"Mumbai\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "To update nested data immutably, copy the top-level object and the nested object being changed.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does `const copy = { ...user };` create?",
+      "options": [
+        { "id": "a", "text": "A deep copy of all nested data" },
+        { "id": "b", "text": "A shallow copy of the top-level object" },
+        { "id": "c", "text": "A read-only object" },
+        { "id": "d", "text": "A JSON string" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object spread creates a new top-level object, but nested objects remain shared references.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `const json = JSON.stringify({ name: \"Alice\" });` store in `json`?",
+      "options": [
+        { "id": "a", "text": "A JavaScript object" },
+        { "id": "b", "text": "A JSON string" },
+        { "id": "c", "text": "An array of object keys" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`JSON.stringify()` converts a JavaScript value into a JSON string.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which string is valid JSON?",
+      "options": [
+        { "id": "a", "text": "`{ name: \"Alice\" }`" },
+        { "id": "b", "text": "`{ 'name': 'Alice' }`" },
+        { "id": "c", "text": "`{ \"name\": \"Alice\" }`" },
+        { "id": "d", "text": "`{ \"name\": undefined }`" }
+      ],
+      "correct": ["c"],
+      "explanation": "JSON requires double quotes around property names and string values, and it does not support `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What happens when `JSON.parse()` receives invalid JSON?",
+      "options": [
+        { "id": "a", "text": "It returns `undefined`" },
+        { "id": "b", "text": "It returns `null`" },
+        { "id": "c", "text": "It throws a syntax error" },
+        { "id": "d", "text": "It automatically fixes the JSON" }
+      ],
+      "correct": ["c"],
+      "explanation": "`JSON.parse()` expects valid JSON text. Invalid JSON throws a `SyntaxError`.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  email: undefined,\n  greet() {\n    return \"Hello\";\n  },\n};\n\nconsole.log(JSON.stringify(user));\n```",
+      "options": [
+        { "id": "a", "text": "`{\"name\":\"Alice\"}`" },
+        { "id": "b", "text": "`{\"name\":\"Alice\",\"email\":undefined}`" },
+        { "id": "c", "text": "`{\"name\":\"Alice\",\"greet\":\"Hello\"}`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "JSON does not represent `undefined` or functions, so those properties are omitted during stringification.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is a limitation of `JSON.parse(JSON.stringify(object))` for deep copying?",
+      "options": [
+        { "id": "a", "text": "It cannot copy plain strings" },
+        { "id": "b", "text": "It only works on arrays, not objects" },
+        { "id": "c", "text": "It loses JSON-unsafe values like functions, `undefined`, and `Date` objects" },
+        { "id": "d", "text": "It always mutates the original object" }
+      ],
+      "correct": ["c"],
+      "explanation": "JSON-based deep copying only preserves JSON-compatible data and loses several JavaScript-specific value types.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst settings = Object.freeze({\n  theme: \"dark\",\n});\n\nsettings.theme = \"light\";\n\nconsole.log(settings.theme);\n```",
+      "options": [
+        { "id": "a", "text": "`dark`" },
+        { "id": "b", "text": "`light`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "Always throws a syntax error before running" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.freeze()` prevents top-level property changes. In strict mode, the assignment may throw, but the value does not change.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n};\n\nconst json = JSON.stringify(user);\n\nconsole.log(json.name);\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`name`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`SyntaxError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`json` is a string, not an object. It does not have a `name` property containing `Alice`.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which function updates a user's role without mutating the original object?",
+      "options": [
+        { "id": "a", "text": "`function promote(user) { user.role = \"admin\"; return user; }`" },
+        { "id": "b", "text": "`function promote(user) { return { ...user, role: \"admin\" }; }`" },
+        { "id": "c", "text": "`function promote(user) { const next = user; next.role = \"admin\"; return next; }`" },
+        { "id": "d", "text": "`function promote(user) { return JSON.stringify(user); }`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Returning `{ ...user, role: \"admin\" }` creates a new object with the updated role and leaves the original object unchanged.",
+      "points": 1
+    }
+  ]
+}

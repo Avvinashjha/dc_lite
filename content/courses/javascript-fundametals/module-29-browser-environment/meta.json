@@ -1,12 +1,12 @@
 {
   "title": "Browser Environment",
-  "description": "Manipulate the DOM and interact with the browser.",
+  "description": "Use JavaScript in the browser to work with the DOM, events, browser APIs, storage, navigation, rendering, compatibility, and DevTools.",
   "lessons": [
     {
       "slug": "01-the-dom",
-      "title": "The DOM",
+      "title": "Browser Runtime and the DOM",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "02-selecting-elements",
@@ -18,19 +18,71 @@
       "slug": "03-creating-elements",
       "title": "Creating Elements",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "04-modifying-elements",
       "title": "Modifying Elements",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "05-types-of-selectors",
       "title": "Types of Selectors",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-events-and-the-event-loop",
+      "title": "Events and the Event Loop",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-script-loading-and-browser-modules",
+      "title": "Script Loading and Browser Modules",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-browser-apis-storage-and-security",
+      "title": "Browser APIs, Storage, and Security",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-location-history-and-navigation",
+      "title": "Location, History, and Navigation",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-rendering-performance-and-compatibility",
+      "title": "Rendering, Performance, and Compatibility",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "11-devtools-and-browser-pitfalls",
+      "title": "DevTools and Browser Pitfalls",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "12-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-browser-environment-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "13-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-browser-environment-applied-check",
+      "passingScore": 70
     }
   ]
 }

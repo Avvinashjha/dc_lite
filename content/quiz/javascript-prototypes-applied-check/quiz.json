@@ -1,0 +1,224 @@
+{
+  "id": "javascript-prototypes-applied-check",
+  "title": "JavaScript Prototypes Applied Check",
+  "description": "Test your ability to predict prototype-chain lookup, inherited methods, constructor prototypes, class prototype behavior, and prototype-related pitfalls.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "prototypes", "inheritance", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n};\n\nconsole.log(Object.hasOwn(user, \"name\"));\nconsole.log(Object.hasOwn(user, \"toString\"));\n```",
+      "options": [
+        { "id": "a", "text": "`true` then `true`" },
+        { "id": "b", "text": "`true` then `false`" },
+        { "id": "c", "text": "`false` then `true`" },
+        { "id": "d", "text": "`false` then `false`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`name` is an own property. `toString` is inherited from `Object.prototype`, so it is not own.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {};\n\nconsole.log(\"toString\" in user);\nconsole.log(Object.hasOwn(user, \"toString\"));\n```",
+      "options": [
+        { "id": "a", "text": "`true` then `false`" },
+        { "id": "b", "text": "`false` then `true`" },
+        { "id": "c", "text": "`true` then `true`" },
+        { "id": "d", "text": "`false` then `false`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`in` checks inherited properties too, while `Object.hasOwn()` checks only direct properties.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst parent = {\n  role: \"user\",\n};\n\nconst child = Object.create(parent);\nchild.name = \"Alice\";\n\nconsole.log(child.role);\nconsole.log(Object.hasOwn(child, \"role\"));\n```",
+      "options": [
+        { "id": "a", "text": "`user` then `true`" },
+        { "id": "b", "text": "`user` then `false`" },
+        { "id": "c", "text": "`undefined` then `true`" },
+        { "id": "d", "text": "`undefined` then `false`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`role` is inherited from `parent`, so it is accessible but not an own property of `child`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst methods = {\n  greet() {\n    return `Hello, ${this.name}`;\n  },\n};\n\nconst user = Object.create(methods);\nuser.name = \"Alice\";\n\nconsole.log(user.greet());\n```",
+      "options": [
+        { "id": "a", "text": "`Hello, Alice`" },
+        { "id": "b", "text": "`Hello, undefined`" },
+        { "id": "c", "text": "`TypeError`" },
+        { "id": "d", "text": "`methods`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The method is inherited, but it is called as `user.greet()`, so `this` is `user`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction User(name) {\n  this.name = name;\n}\n\nconst user = new User(\"Alice\");\n\nconsole.log(Object.getPrototypeOf(user) === User.prototype);\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Objects created with `new User()` inherit from `User.prototype`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nfunction User(name) {\n  this.name = name;\n}\n\nUser.prototype.greet = function () {\n  return `Hello, ${this.name}`;\n};\n\nconst alice = new User(\"Alice\");\nconst bob = new User(\"Bob\");\n\nconsole.log(alice.greet === bob.greet);\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Both instances inherit the same shared `greet` function from `User.prototype`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass User {\n  constructor(name) {\n    this.name = name;\n  }\n\n  greet() {\n    return `Hello, ${this.name}`;\n  }\n}\n\nconst user = new User(\"Alice\");\n\nconsole.log(Object.hasOwn(user, \"name\"));\nconsole.log(Object.hasOwn(user, \"greet\"));\n```",
+      "options": [
+        { "id": "a", "text": "`true` then `true`" },
+        { "id": "b", "text": "`true` then `false`" },
+        { "id": "c", "text": "`false` then `true`" },
+        { "id": "d", "text": "`false` then `false`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`name` is assigned in the constructor as an own property. `greet` lives on `User.prototype`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass Animal {\n  speak() {\n    return \"Animal sound\";\n  }\n}\n\nclass Dog extends Animal {\n  bark() {\n    return \"Woof\";\n  }\n}\n\nconst dog = new Dog();\n\nconsole.log(dog.speak());\n```",
+      "options": [
+        { "id": "a", "text": "`Animal sound`" },
+        { "id": "b", "text": "`Woof`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Dog.prototype` inherits from `Animal.prototype`, so `dog` can access `speak`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which chain is correct for `const dog = new Dog()` where `class Dog extends Animal {}`?",
+      "options": [
+        { "id": "a", "text": "`dog -> Dog.prototype -> Animal.prototype -> Object.prototype -> null`" },
+        { "id": "b", "text": "`dog -> Animal -> Dog -> null`" },
+        { "id": "c", "text": "`dog -> Object.create -> Array.prototype -> null`" },
+        { "id": "d", "text": "`dog -> null -> Object.prototype`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Instances inherit from the child prototype, which inherits from the parent prototype, then `Object.prototype`, then `null`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass Counter {\n  count = 0;\n\n  increment() {\n    this.count += 1;\n  }\n}\n\nconst counter = new Counter();\n\nconsole.log(Object.hasOwn(counter, \"count\"));\nconsole.log(Object.hasOwn(counter, \"increment\"));\n```",
+      "options": [
+        { "id": "a", "text": "`true` then `true`" },
+        { "id": "b", "text": "`true` then `false`" },
+        { "id": "c", "text": "`false` then `true`" },
+        { "id": "d", "text": "`false` then `false`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Public fields become own properties on each instance. Class methods live on the prototype.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is the key difference between `object.__proto__` and `Constructor.prototype`?",
+      "options": [
+        { "id": "a", "text": "`__proto__` points to an object's prototype; `.prototype` is used by constructor functions for new instances" },
+        { "id": "b", "text": "They are always exactly the same property on the same object" },
+        { "id": "c", "text": "`prototype` is only for arrays" },
+        { "id": "d", "text": "`__proto__` creates private fields" }
+      ],
+      "correct": ["a"],
+      "explanation": "`__proto__` is an object-level prototype accessor. A function's `.prototype` is the object assigned as prototype to instances created with `new`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst dictionary = Object.create(null);\n\ndictionary.name = \"Alice\";\n\nconsole.log(dictionary.toString);\n```",
+      "options": [
+        { "id": "a", "text": "`[Function: toString]`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`Alice`" },
+        { "id": "d", "text": "`null`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Object.create(null)` creates an object with no prototype, so it does not inherit `toString`.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Why is this usually discouraged?\n```js\nArray.prototype.last = function () {\n  return this[this.length - 1];\n};\n```",
+      "options": [
+        { "id": "a", "text": "It modifies a built-in prototype and can cause conflicts or surprising behavior" },
+        { "id": "b", "text": "Arrays cannot have prototypes" },
+        { "id": "c", "text": "Functions cannot return array elements" },
+        { "id": "d", "text": "It immediately deletes all arrays" }
+      ],
+      "correct": ["a"],
+      "explanation": "Changing built-in prototypes affects global shared behavior and can conflict with libraries or future language features.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What is wrong with this constructor-function call?\n```js\nfunction User(name) {\n  this.name = name;\n}\n\nconst user = User(\"Alice\");\n```",
+      "options": [
+        { "id": "a", "text": "It is missing `new`" },
+        { "id": "b", "text": "Constructor functions cannot accept arguments" },
+        { "id": "c", "text": "Functions cannot assign to `this`" },
+        { "id": "d", "text": "The function must be named `constructor`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Constructor functions should be called with `new`; otherwise no new instance is created.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass User {\n  greet = () => \"Hello\";\n}\n\nconst a = new User();\nconst b = new User();\n\nconsole.log(Object.hasOwn(a, \"greet\"));\nconsole.log(a.greet === b.greet);\n```",
+      "options": [
+        { "id": "a", "text": "`true` then `false`" },
+        { "id": "b", "text": "`false` then `true`" },
+        { "id": "c", "text": "`true` then `true`" },
+        { "id": "d", "text": "`false` then `false`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Arrow function fields are created as own properties per instance, so each instance gets a different function.",
+      "points": 1
+    }
+  ]
+}

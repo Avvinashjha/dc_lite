@@ -1,0 +1,182 @@
+{
+  "id": "javascript-apis-fetch-core-check",
+  "title": "JavaScript APIs and Fetch Core Check",
+  "description": "Check your understanding of fetch, REST APIs, JSON, status codes, CORS, request options, query params, headers, and authentication basics.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "fetch", "apis", "http", "cors"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does `fetch()` return?",
+      "options": [
+        { "id": "a", "text": "A Promise that resolves to a Response object" },
+        { "id": "b", "text": "The final JSON object immediately" },
+        { "id": "c", "text": "Only a string" },
+        { "id": "d", "text": "A DOM element" }
+      ],
+      "correct": ["a"],
+      "explanation": "`fetch()` is asynchronous and returns a Promise. The fulfilled value is a `Response` object.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which method parses a JSON response body?",
+      "options": [
+        { "id": "a", "text": "`response.json()`" },
+        { "id": "b", "text": "`response.parseJson()`" },
+        { "id": "c", "text": "`fetch.json()`" },
+        { "id": "d", "text": "`JSON.fetch()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`response.json()` reads and parses the response body as JSON. It returns a Promise.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does `response.ok` mean?",
+      "options": [
+        { "id": "a", "text": "The status code is in the 200-299 range" },
+        { "id": "b", "text": "The response body is always valid JSON" },
+        { "id": "c", "text": "The API used CORS" },
+        { "id": "d", "text": "The request was a POST request" }
+      ],
+      "correct": ["a"],
+      "explanation": "`response.ok` is true for successful HTTP status codes from 200 through 299.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Does `fetch()` automatically reject for a `404 Not Found` response?",
+      "options": [
+        { "id": "a", "text": "No, it usually resolves with a Response whose `ok` is false" },
+        { "id": "b", "text": "Yes, always" },
+        { "id": "c", "text": "Only if the body is JSON" },
+        { "id": "d", "text": "Only in Node.js" }
+      ],
+      "correct": ["a"],
+      "explanation": "`fetch()` rejects for network-level failures, not normal HTTP error statuses like 404 or 500.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which HTTP method is commonly used to create a resource?",
+      "options": [
+        { "id": "a", "text": "`POST`" },
+        { "id": "b", "text": "`GET`" },
+        { "id": "c", "text": "`READ`" },
+        { "id": "d", "text": "`FIND`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`POST` is commonly used to create resources in REST APIs.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which header should you usually send with a JSON request body?",
+      "options": [
+        { "id": "a", "text": "`Content-Type: application/json`" },
+        { "id": "b", "text": "`Accept: text/html`" },
+        { "id": "c", "text": "`Mode: JSON`" },
+        { "id": "d", "text": "`Body-Type: object`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Content-Type: application/json` tells the server the request body contains JSON text.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "How should a JavaScript object be sent as a JSON request body?",
+      "options": [
+        { "id": "a", "text": "`body: JSON.stringify(object)`" },
+        { "id": "b", "text": "`body: object`" },
+        { "id": "c", "text": "`body: object.toHTML()`" },
+        { "id": "d", "text": "`body: fetch(object)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Request bodies are sent as text or binary data. Use `JSON.stringify()` to convert an object to JSON text.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does CORS stand for?",
+      "options": [
+        { "id": "a", "text": "Cross-Origin Resource Sharing" },
+        { "id": "b", "text": "Code-Origin Runtime Security" },
+        { "id": "c", "text": "Client Object Request System" },
+        { "id": "d", "text": "Common Object Response Syntax" }
+      ],
+      "correct": ["a"],
+      "explanation": "CORS stands for Cross-Origin Resource Sharing.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which parts make up a web origin?",
+      "options": [
+        { "id": "a", "text": "Protocol, domain, and port" },
+        { "id": "b", "text": "Only the path" },
+        { "id": "c", "text": "Only the domain name" },
+        { "id": "d", "text": "Only the query string" }
+      ],
+      "correct": ["a"],
+      "explanation": "Origin is defined by protocol, domain, and port.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Where is CORS normally fixed?",
+      "options": [
+        { "id": "a", "text": "On the server or development proxy" },
+        { "id": "b", "text": "By adding `JSON.stringify()` to every response" },
+        { "id": "c", "text": "By changing `const` to `var`" },
+        { "id": "d", "text": "Only in CSS" }
+      ],
+      "correct": ["a"],
+      "explanation": "CORS permission comes from server response headers or a proxy configuration, not random frontend-only changes.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which API helps build query strings safely?",
+      "options": [
+        { "id": "a", "text": "`URLSearchParams`" },
+        { "id": "b", "text": "`JSONSearch`" },
+        { "id": "c", "text": "`HeaderParams`" },
+        { "id": "d", "text": "`Query.stringifyObject`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`URLSearchParams` builds and encodes query strings.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which header commonly sends a bearer token?",
+      "options": [
+        { "id": "a", "text": "`Authorization`" },
+        { "id": "b", "text": "`Content-Length`" },
+        { "id": "c", "text": "`Origin-Name`" },
+        { "id": "d", "text": "`Token-Type`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Bearer tokens are commonly sent with `Authorization: Bearer <token>`.",
+      "points": 1
+    }
+  ]
+}

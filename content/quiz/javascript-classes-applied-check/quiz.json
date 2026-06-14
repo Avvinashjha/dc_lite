@@ -1,0 +1,224 @@
+{
+  "id": "javascript-classes-applied-check",
+  "title": "JavaScript Classes Applied Check",
+  "description": "Test your ability to predict class behavior with constructors, this, inheritance, super, static methods, getters, setters, private fields, and composition.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "classes", "inheritance", "oop", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass User {\n  constructor(name) {\n    this.name = name;\n  }\n}\n\nconst user = new User(\"Alice\");\nconsole.log(user.name);\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`User`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The constructor assigns the argument to `this.name`, so the instance stores `\"Alice\"`.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nclass User {}\n\nconst user = User();\n```",
+      "options": [
+        { "id": "a", "text": "It creates a valid User instance" },
+        { "id": "b", "text": "It returns `undefined` silently" },
+        { "id": "c", "text": "It throws because classes must be called with `new`" },
+        { "id": "d", "text": "It creates a plain object" }
+      ],
+      "correct": ["c"],
+      "explanation": "Class constructors cannot be called like regular functions. They must be called with `new`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass Counter {\n  constructor() {\n    this.count = 0;\n  }\n\n  increment() {\n    this.count += 1;\n    return this.count;\n  }\n}\n\nconst counter = new Counter();\nconsole.log(counter.increment());\nconsole.log(counter.increment());\n```",
+      "options": [
+        { "id": "a", "text": "`0` then `0`" },
+        { "id": "b", "text": "`1` then `1`" },
+        { "id": "c", "text": "`1` then `2`" },
+        { "id": "d", "text": "`undefined` then `undefined`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Each call increments the same instance's `count` property.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the issue here?\n```js\nclass Admin extends User {\n  constructor(name) {\n    this.name = name;\n    super(name);\n  }\n}\n```",
+      "options": [
+        { "id": "a", "text": "`super()` must be called before using `this`" },
+        { "id": "b", "text": "`super()` cannot receive arguments" },
+        { "id": "c", "text": "Child classes cannot have constructors" },
+        { "id": "d", "text": "`extends` cannot be used with classes" }
+      ],
+      "correct": ["a"],
+      "explanation": "In a derived class constructor, `super()` must run before accessing `this`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass User {\n  describe() {\n    return \"Regular user\";\n  }\n}\n\nclass Admin extends User {\n  describe() {\n    return `${super.describe()} with admin access`;\n  }\n}\n\nconsole.log(new Admin().describe());\n```",
+      "options": [
+        { "id": "a", "text": "`Regular user`" },
+        { "id": "b", "text": "`with admin access`" },
+        { "id": "c", "text": "`Regular user with admin access`" },
+        { "id": "d", "text": "`undefined with admin access`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`super.describe()` calls the parent method, and the child method adds extra text.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nclass MathUtils {\n  static add(a, b) {\n    return a + b;\n  }\n}\n\nconst utils = new MathUtils();\nconsole.log(utils.add(2, 3));\n```",
+      "options": [
+        { "id": "a", "text": "Logs `5`" },
+        { "id": "b", "text": "Logs `undefined`" },
+        { "id": "c", "text": "Throws because `add` is static and is not an instance method" },
+        { "id": "d", "text": "Creates a private method" }
+      ],
+      "correct": ["c"],
+      "explanation": "Static methods are called on the class, such as `MathUtils.add(2, 3)`, not on instances.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass Rectangle {\n  constructor(width, height) {\n    this.width = width;\n    this.height = height;\n  }\n\n  get area() {\n    return this.width * this.height;\n  }\n}\n\nconst rectangle = new Rectangle(4, 5);\nconsole.log(rectangle.area);\n```",
+      "options": [
+        { "id": "a", "text": "`20`" },
+        { "id": "b", "text": "`area`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`TypeError` because getters require parentheses" }
+      ],
+      "correct": ["a"],
+      "explanation": "Getters are accessed like properties and compute a value when read.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is wrong with this setter?\n```js\nset price(value) {\n  this.price = value;\n}\n```",
+      "options": [
+        { "id": "a", "text": "It recursively calls itself" },
+        { "id": "b", "text": "Setters cannot receive values" },
+        { "id": "c", "text": "Setters must be static" },
+        { "id": "d", "text": "It creates a private field automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Assigning to `this.price` inside the `price` setter calls the same setter again. Use a different internal property.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nclass Account {\n  #balance = 0;\n\n  deposit(amount) {\n    this.#balance += amount;\n  }\n}\n\nconst account = new Account();\nconsole.log(account.#balance);\n```",
+      "options": [
+        { "id": "a", "text": "Logs `0`" },
+        { "id": "b", "text": "Logs `undefined`" },
+        { "id": "c", "text": "Throws a syntax error because private fields cannot be accessed outside the class" },
+        { "id": "d", "text": "Creates a public field named `#balance`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Private fields are only accessible inside the class body.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass Counter {\n  count = 0;\n\n  increment() {\n    this.count += 1;\n    return this.count;\n  }\n}\n\nconst a = new Counter();\nconst b = new Counter();\n\na.increment();\nconsole.log(b.count);\n```",
+      "options": [
+        { "id": "a", "text": "`0`" },
+        { "id": "b", "text": "`1`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`Counter`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Public fields are per-instance. Incrementing `a` does not change `b.count`.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is the likely problem here?\n```js\nconst greet = user.greet;\ngreet();\n```",
+      "options": [
+        { "id": "a", "text": "The method may lose its `this` context" },
+        { "id": "b", "text": "Methods cannot be assigned to variables" },
+        { "id": "c", "text": "Classes cannot have methods named `greet`" },
+        { "id": "d", "text": "`greet` becomes static automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Extracting a method and calling it as a plain function can lose the original instance as `this`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which design is better for `Car has an Engine`?",
+      "options": [
+        { "id": "a", "text": "`class Car extends Engine`" },
+        { "id": "b", "text": "`class Car { constructor(engine) { this.engine = engine; } }`" },
+        { "id": "c", "text": "`class Engine extends Car`" },
+        { "id": "d", "text": "`class Car extends JSON`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Car has an Engine` is a composition relationship, so passing an engine into the car is a better model.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nclass User {\n  static createGuest() {\n    return new User(\"Guest\");\n  }\n\n  constructor(name) {\n    this.name = name;\n  }\n}\n\nconst guest = User.createGuest();\nconsole.log(guest.name);\n```",
+      "options": [
+        { "id": "a", "text": "`Guest`" },
+        { "id": "b", "text": "`User`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`createGuest`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The static factory method creates and returns a new `User` instance with the name `Guest`.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which statement about methods declared in a class body is correct?",
+      "options": [
+        { "id": "a", "text": "They are generally shared by instances through the prototype" },
+        { "id": "b", "text": "They are recreated inside every constructor call automatically" },
+        { "id": "c", "text": "They are always private" },
+        { "id": "d", "text": "They can only be static" }
+      ],
+      "correct": ["a"],
+      "explanation": "Class body methods are shared through the prototype, which is memory-efficient.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "When is a plain object probably better than a class?",
+      "options": [
+        { "id": "a", "text": "When storing simple configuration data with no shared behavior" },
+        { "id": "b", "text": "When creating many objects with shared methods" },
+        { "id": "c", "text": "When using `extends`" },
+        { "id": "d", "text": "When a constructor must validate input" }
+      ],
+      "correct": ["a"],
+      "explanation": "Simple data without shared behavior is often clearer as a plain object.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "id": "javascript-classes-core-check",
+  "title": "JavaScript Classes Core Check",
+  "description": "Check your understanding of class syntax, constructors, instance methods, inheritance, static methods, getters, setters, and fields.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "classes", "inheritance", "oop"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a class in JavaScript?",
+      "options": [
+        { "id": "a", "text": "A blueprint for creating objects with shared structure and behavior" },
+        { "id": "b", "text": "A special kind of array method" },
+        { "id": "c", "text": "A JSON-only data format" },
+        { "id": "d", "text": "A variable that cannot be changed" }
+      ],
+      "correct": ["a"],
+      "explanation": "A class defines a blueprint for creating instances with shared behavior and per-instance data.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which keyword creates an instance of a class?",
+      "options": [
+        { "id": "a", "text": "`class`" },
+        { "id": "b", "text": "`extends`" },
+        { "id": "c", "text": "`new`" },
+        { "id": "d", "text": "`static`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Use `new ClassName(...)` to create an instance of a class.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does the constructor do?",
+      "options": [
+        { "id": "a", "text": "It runs when a new instance is created and initializes instance data" },
+        { "id": "b", "text": "It deletes an instance" },
+        { "id": "c", "text": "It imports another module" },
+        { "id": "d", "text": "It always creates a static method" }
+      ],
+      "correct": ["a"],
+      "explanation": "The constructor runs during `new ClassName(...)` and usually initializes instance properties.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Inside a constructor called with `new`, what does `this` refer to?",
+      "options": [
+        { "id": "a", "text": "The new instance being created" },
+        { "id": "b", "text": "The class file name" },
+        { "id": "c", "text": "Always the global object" },
+        { "id": "d", "text": "The parent module" }
+      ],
+      "correct": ["a"],
+      "explanation": "When a class is called with `new`, `this` inside the constructor refers to the new object.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which syntax defines an instance method?",
+      "options": [
+        { "id": "a", "text": "`greet() { return \"Hello\"; }` inside the class body" },
+        { "id": "b", "text": "`method greet = \"Hello\"`" },
+        { "id": "c", "text": "`instance greet() => \"Hello\"`" },
+        { "id": "d", "text": "`function class.greet() {}`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Class instance methods use method shorthand syntax inside the class body.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does `extends` do?",
+      "options": [
+        { "id": "a", "text": "Creates a child class that inherits from a parent class" },
+        { "id": "b", "text": "Creates a private field" },
+        { "id": "c", "text": "Calls a static method" },
+        { "id": "d", "text": "Converts an object to JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "`extends` creates an inheritance relationship between a child class and a parent class.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What must a derived class constructor call before using `this`?",
+      "options": [
+        { "id": "a", "text": "`super()`" },
+        { "id": "b", "text": "`static()`" },
+        { "id": "c", "text": "`new()`" },
+        { "id": "d", "text": "`constructor()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A child class constructor must call `super()` before accessing `this`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "How do you call a static method named `createGuest` on class `User`?",
+      "options": [
+        { "id": "a", "text": "`new User().static.createGuest()`" },
+        { "id": "b", "text": "`User.createGuest()`" },
+        { "id": "c", "text": "`createGuest.User()`" },
+        { "id": "d", "text": "`User.prototype.createGuest()`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Static methods belong to the class itself, so they are called on the class.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "How is a getter accessed?",
+      "options": [
+        { "id": "a", "text": "Like a property, without parentheses" },
+        { "id": "b", "text": "Only with `new`" },
+        { "id": "c", "text": "Only with `static`" },
+        { "id": "d", "text": "Like a module import" }
+      ],
+      "correct": ["a"],
+      "explanation": "Getters are methods that are read like properties, such as `user.fullName`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What symbol starts a private class field?",
+      "options": [
+        { "id": "a", "text": "`_`" },
+        { "id": "b", "text": "`#`" },
+        { "id": "c", "text": "`@`" },
+        { "id": "d", "text": "`$`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Private fields use `#`, such as `#balance`.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which relationship is best modeled with inheritance?",
+      "options": [
+        { "id": "a", "text": "`Car has an Engine`" },
+        { "id": "b", "text": "`Admin is a User`" },
+        { "id": "c", "text": "`Checkout uses a PaymentProcessor`" },
+        { "id": "d", "text": "`App has a Config`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Inheritance is best for true `is-a` relationships, such as `Admin is a User`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which relationship is usually better modeled with composition?",
+      "options": [
+        { "id": "a", "text": "`Dog is an Animal`" },
+        { "id": "b", "text": "`Admin is a User`" },
+        { "id": "c", "text": "`Car has an Engine`" },
+        { "id": "d", "text": "`SavingsAccount is a BankAccount`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Composition is often better for `has-a` relationships, such as a car having an engine.",
+      "points": 1
+    }
+  ]
+}

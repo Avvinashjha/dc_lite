@@ -1,6 +1,6 @@
 {
   "title": "Events",
-  "description": "Handle, propagate, and create browser events with full control.",
+  "description": "Handle browser events, event flow, delegation, forms, and event-driven UI patterns.",
   "lessons": [
     {
       "slug": "01-event-driven-programming",
@@ -58,9 +58,37 @@
     },
     {
       "slug": "10-event-methods",
-      "title": "Event Methods (stopPropagation, stopImmediatePropagation, preventDefault)",
+      "title": "Event Methods",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "11-keyboard-form-and-input-events",
+      "title": "Keyboard, Form, and Input Events",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "12-event-handler-patterns",
+      "title": "Event Handler Patterns",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "13-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-events-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "14-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-events-applied-check",
+      "passingScore": 70
     }
   ]
 }

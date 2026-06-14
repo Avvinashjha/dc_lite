@@ -3,28 +3,98 @@
   "description": "Solve common problems with established JavaScript design patterns.",
   "lessons": [
     {
-      "slug": "01-module-pattern",
+      "slug": "01-what-are-design-patterns",
+      "title": "What Are Design Patterns?",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-module-pattern",
       "title": "Module Pattern",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "02-factory-pattern",
+      "slug": "03-factory-pattern",
       "title": "Factory Pattern",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "03-singleton-pattern",
+      "slug": "04-singleton-pattern",
       "title": "Singleton Pattern",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "04-observer-pattern",
-      "title": "Observer Pattern",
+      "slug": "05-observer-and-pub-sub",
+      "title": "Observer and Pub/Sub",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-strategy-pattern",
+      "title": "Strategy Pattern",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-adapter-and-facade",
+      "title": "Adapter and Facade",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-decorator-and-wrapper",
+      "title": "Decorator and Wrapper Pattern",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-command-pattern",
+      "title": "Command Pattern",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-iterator-pattern",
+      "title": "Iterator Pattern",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "11-dependency-injection",
+      "title": "Dependency Injection Basics",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "12-composition-over-inheritance",
+      "title": "Composition Over Inheritance",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "13-pattern-tradeoffs-and-anti-patterns",
+      "title": "Pattern Tradeoffs and Anti-Patterns",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "14-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-design-patterns-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "15-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-design-patterns-applied-check",
+      "passingScore": 70
     }
   ]
 }

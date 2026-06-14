@@ -1,0 +1,182 @@
+{
+  "id": "javascript-events-core-check",
+  "title": "JavaScript Events Core Check",
+  "description": "Check your understanding of event-driven programming, event listeners, event objects, propagation, delegation, default actions, custom events, and listener cleanup.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "events", "dom", "browser"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is event-driven programming in the browser?",
+      "options": [
+        { "id": "a", "text": "Writing code that responds when browser or user events happen" },
+        { "id": "b", "text": "Writing only synchronous code from top to bottom" },
+        { "id": "c", "text": "Replacing all functions with JSON" },
+        { "id": "d", "text": "Running JavaScript only before the DOM exists" }
+      ],
+      "correct": ["a"],
+      "explanation": "Event-driven browser code registers handlers that run later when events such as clicks, input, or form submissions happen.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which code correctly registers a click handler?",
+      "options": [
+        { "id": "a", "text": "`button.addEventListener(\"click\", handleClick)`" },
+        { "id": "b", "text": "`button.addEventListener(handleClick, \"click\")`" },
+        { "id": "c", "text": "`button.clickListener(handleClick)`" },
+        { "id": "d", "text": "`button.addEventListener(\"click\", handleClick())`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`addEventListener` receives the event name first and the function reference second.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "In an event handler, what is `event.target`?",
+      "options": [
+        { "id": "a", "text": "The element where the event originally started" },
+        { "id": "b", "text": "Always the document object" },
+        { "id": "c", "text": "Always the element whose listener is currently running" },
+        { "id": "d", "text": "The previous sibling of the clicked element" }
+      ],
+      "correct": ["a"],
+      "explanation": "`event.target` is the original event target. `event.currentTarget` is the element whose listener is currently running.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does event bubbling mean?",
+      "options": [
+        { "id": "a", "text": "An event can travel upward from its target through ancestor elements" },
+        { "id": "b", "text": "An event is converted into a Promise" },
+        { "id": "c", "text": "An event only runs on the window object" },
+        { "id": "d", "text": "An event stops before reaching the target" }
+      ],
+      "correct": ["a"],
+      "explanation": "During bubbling, many events move from the target element up through its ancestors.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "How do you register a listener for the capturing phase?",
+      "options": [
+        { "id": "a", "text": "`element.addEventListener(\"click\", handler, { capture: true })`" },
+        { "id": "b", "text": "`element.addEventListener(\"click\", handler, { bubble: false })`" },
+        { "id": "c", "text": "`element.capture(\"click\", handler)`" },
+        { "id": "d", "text": "`handler.capture = true`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `capture: true` listener option makes the listener run during the capturing phase.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does `event.preventDefault()` do?",
+      "options": [
+        { "id": "a", "text": "Prevents the browser's default action for a cancelable event" },
+        { "id": "b", "text": "Removes every listener on the page" },
+        { "id": "c", "text": "Stops JavaScript from running permanently" },
+        { "id": "d", "text": "Forces the event to bubble" }
+      ],
+      "correct": ["a"],
+      "explanation": "`preventDefault()` is used to stop default browser behavior such as form navigation when the event is cancelable.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does `event.stopPropagation()` do?",
+      "options": [
+        { "id": "a", "text": "Stops the event from continuing to other elements in the propagation path" },
+        { "id": "b", "text": "Prevents a form from submitting but keeps bubbling" },
+        { "id": "c", "text": "Deletes the target element" },
+        { "id": "d", "text": "Runs all listeners twice" }
+      ],
+      "correct": ["a"],
+      "explanation": "`stopPropagation()` stops the event from continuing through capturing or bubbling, but it does not automatically prevent default browser behavior.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is event delegation?",
+      "options": [
+        { "id": "a", "text": "Listening on a parent element and handling events from matching child elements" },
+        { "id": "b", "text": "Creating a new event loop for every button" },
+        { "id": "c", "text": "Using only inline `onclick` attributes" },
+        { "id": "d", "text": "Preventing all events from bubbling" }
+      ],
+      "correct": ["a"],
+      "explanation": "Delegation relies on bubbling so a parent listener can handle events that started on child elements.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which event is usually best for handling a form being submitted?",
+      "options": [
+        { "id": "a", "text": "`submit` on the form" },
+        { "id": "b", "text": "`mousemove` on the document" },
+        { "id": "c", "text": "`load` on the input" },
+        { "id": "d", "text": "`resize` on the button" }
+      ],
+      "correct": ["a"],
+      "explanation": "The form's `submit` event handles button clicks and Enter-key submissions consistently.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which listener option removes a listener after it runs one time?",
+      "options": [
+        { "id": "a", "text": "`once: true`" },
+        { "id": "b", "text": "`single: true`" },
+        { "id": "c", "text": "`passive: false`" },
+        { "id": "d", "text": "`remove: automatic`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`once: true` tells the browser to remove the listener after its first successful run.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Where does custom event data usually live?",
+      "options": [
+        { "id": "a", "text": "`event.detail`" },
+        { "id": "b", "text": "`event.body`" },
+        { "id": "c", "text": "`event.dataset.detail`" },
+        { "id": "d", "text": "`event.response`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`CustomEvent` uses the `detail` property to pass application-specific data to listeners.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Why should long-lived listeners on `window` or `document` often be cleaned up?",
+      "options": [
+        { "id": "a", "text": "They can keep behavior and referenced objects alive after the UI that needed them is gone" },
+        { "id": "b", "text": "Browsers allow only one listener per page" },
+        { "id": "c", "text": "They automatically disable CSS" },
+        { "id": "d", "text": "They make `const` variables invalid" }
+      ],
+      "correct": ["a"],
+      "explanation": "Listeners can retain references and continue running after related UI is removed, so cleanup prevents leaks and unexpected behavior.",
+      "points": 1
+    }
+  ]
+}

@@ -37,6 +37,40 @@
       "title": "Rest Operator",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-enhanced-object-literals",
+      "title": "Enhanced Object Literals",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-map-and-set",
+      "title": "Map and Set",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-modern-operators",
+      "title": "Modern Operators",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-es6-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "11-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-es6-applied-check",
+      "passingScore": 70
     }
   ]
 }

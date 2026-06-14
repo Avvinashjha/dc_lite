@@ -1,0 +1,210 @@
+{
+  "id": "javascript-nodejs-environment-applied-check",
+  "title": "JavaScript Node.js Environment Applied Check",
+  "description": "Test your ability to run Node.js scripts, choose module syntax, handle files and errors, work with environment variables, reason about async APIs, and avoid common Node.js pitfalls.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "nodejs", "applied", "files", "async"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is wrong here?\n```js\nimport { readFile } from \"node:fs/promises\";\n\nconst text = readFile(\"notes.txt\", \"utf8\");\nconsole.log(text.toUpperCase());\n```",
+      "options": [
+        { "id": "a", "text": "`readFile()` returns a Promise, so the result should be awaited before using string methods" },
+        { "id": "b", "text": "`readFile()` can only read images" },
+        { "id": "c", "text": "`toUpperCase()` only works in browsers" },
+        { "id": "d", "text": "`node:fs/promises` is a CSS module" }
+      ],
+      "correct": ["a"],
+      "explanation": "The promise-based `readFile()` API must be awaited or handled with `.then()` before you can use the file text.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which code correctly reads a text file as a string?",
+      "options": [
+        { "id": "a", "text": "`const text = await readFile(\"notes.txt\", \"utf8\");`" },
+        { "id": "b", "text": "`const text = await readFile(\"notes.txt\"); text.toUpperCase();` always safely works" },
+        { "id": "c", "text": "`const text = document.readFile(\"notes.txt\");`" },
+        { "id": "d", "text": "`const text = JSON.parse(\"notes.txt\");`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Passing `\"utf8\"` tells Node to return a string for a text file.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A script is run as `node greet.js Ada`. Which expression gets `Ada`?",
+      "options": [
+        { "id": "a", "text": "`process.argv[2]`" },
+        { "id": "b", "text": "`process.argv[0]`" },
+        { "id": "c", "text": "`process.env[2]`" },
+        { "id": "d", "text": "`document.args[0]`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`process.argv[0]` is the Node executable, `process.argv[1]` is the script path, and user arguments begin at index 2.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is a problem with this check?\n```js\nconst debug = Boolean(process.env.DEBUG);\n```",
+      "options": [
+        { "id": "a", "text": "The string `\"false\"` is truthy, so it may incorrectly enable debug mode" },
+        { "id": "b", "text": "Environment variables can only be numbers" },
+        { "id": "c", "text": "`process.env` cannot be read in Node.js" },
+        { "id": "d", "text": "`Boolean()` always throws in Node.js" }
+      ],
+      "correct": ["a"],
+      "explanation": "Environment variables are strings. The string `\"false\"` is truthy, so compare explicitly when parsing booleans.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which import correctly loads a local ES module named `math.js` from the same folder?",
+      "options": [
+        { "id": "a", "text": "`import { add } from \"./math.js\";`" },
+        { "id": "b", "text": "`import { add } from \"math.js\";`" },
+        { "id": "c", "text": "`import { add } from \"node:math.js\";`" },
+        { "id": "d", "text": "`import { add } from \"./math\";` is always preferred in Node ES modules" }
+      ],
+      "correct": ["a"],
+      "explanation": "Local relative imports should use `./`, and Node ES modules commonly require the file extension.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which package decision is usually best for a small task that Node already supports with a built-in module?",
+      "options": [
+        { "id": "a", "text": "Use the built-in module unless a package clearly adds value" },
+        { "id": "b", "text": "Always install a package for every task" },
+        { "id": "c", "text": "Copy code from unknown packages into `node_modules` manually" },
+        { "id": "d", "text": "Avoid `package.json` entirely" }
+      ],
+      "correct": ["a"],
+      "explanation": "Built-in modules reduce dependency risk and are often enough for common tasks like paths, files, URLs, and simple HTTP servers.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which code handles a missing optional file while still rethrowing unexpected file errors?",
+      "options": [
+        { "id": "a", "text": "`try { await readFile(\"optional.txt\", \"utf8\"); } catch (error) { if (error.code === \"ENOENT\") console.log(\"missing\"); else throw error; }`" },
+        { "id": "b", "text": "`try { await readFile(\"optional.txt\", \"utf8\"); } catch (error) {}`" },
+        { "id": "c", "text": "`await readFile(\"optional.txt\", \"utf8\"); // no error handling needed`" },
+        { "id": "d", "text": "`if (readFile.error) console.log(\"missing\");`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Handle the expected `ENOENT` case specifically and rethrow errors you did not expect.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Why is this risky if `fileName` comes from a user?\n```js\nconst text = await readFile(`uploads/${fileName}`, \"utf8\");\n```",
+      "options": [
+        { "id": "a", "text": "The user may pass a path like `../../secret.txt` and attempt path traversal" },
+        { "id": "b", "text": "Template literals cannot be used in Node.js" },
+        { "id": "c", "text": "`readFile()` automatically deletes files" },
+        { "id": "d", "text": "The `uploads` folder is always public on npm" }
+      ],
+      "correct": ["a"],
+      "explanation": "Untrusted file paths can escape the intended directory unless they are validated and resolved carefully.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which approach is best for two independent async file reads?",
+      "options": [
+        { "id": "a", "text": "`const [a, b] = await Promise.all([readFile(\"a.txt\", \"utf8\"), readFile(\"b.txt\", \"utf8\")]);`" },
+        { "id": "b", "text": "`const a = readFile(\"a.txt\"); const b = readFile(\"b.txt\"); console.log(a + b);`" },
+        { "id": "c", "text": "`readFileSync()` is always required for two files" },
+        { "id": "d", "text": "`Promise.all()` can only run in browsers" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.all()` starts independent async operations and waits for all of them to finish.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What should you add when working with a Node stream that may fail?",
+      "options": [
+        { "id": "a", "text": "An `error` handler or a pipeline utility that handles stream errors" },
+        { "id": "b", "text": "A DOM click handler" },
+        { "id": "c", "text": "A CSS reset" },
+        { "id": "d", "text": "A `package-lock.json` parser" }
+      ],
+      "correct": ["a"],
+      "explanation": "Streams can emit errors. Handle them directly or use helpers like `pipeline()` that manage error propagation.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this server do for `GET /health`?\n```js\nconst server = http.createServer((request, response) => {\n  if (request.method === \"GET\" && request.url === \"/health\") {\n    response.statusCode = 200;\n    response.end(\"OK\");\n    return;\n  }\n\n  response.statusCode = 404;\n  response.end(\"Not found\");\n});\n```",
+      "options": [
+        { "id": "a", "text": "Responds with status 200 and body `OK`" },
+        { "id": "b", "text": "Always responds with 404" },
+        { "id": "c", "text": "Reads a local file named `health`" },
+        { "id": "d", "text": "Installs a package named `health`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The condition matches `GET /health`, sets status 200, sends `OK`, and returns before the 404 code.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Why is a long CPU-heavy loop inside a Node HTTP request handler a problem?",
+      "options": [
+        { "id": "a", "text": "It can block the event loop and delay other requests" },
+        { "id": "b", "text": "It automatically enables CORS" },
+        { "id": "c", "text": "It converts ES modules to CommonJS" },
+        { "id": "d", "text": "It deletes `package.json`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Node handles asynchronous I/O well, but JavaScript execution still runs on the main thread. CPU-heavy synchronous work can block other events.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which value should usually be committed for repeatable npm installs in an application?",
+      "options": [
+        { "id": "a", "text": "`package-lock.json`" },
+        { "id": "b", "text": "`node_modules`" },
+        { "id": "c", "text": "real production API keys" },
+        { "id": "d", "text": "temporary log files" }
+      ],
+      "correct": ["a"],
+      "explanation": "`package-lock.json` records exact dependency versions. `node_modules` is usually regenerated with npm and should not be committed.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which is the safest response to a missing required `API_KEY` environment variable at startup?",
+      "options": [
+        { "id": "a", "text": "Throw or report a clear startup error before continuing" },
+        { "id": "b", "text": "Silently use the string `undefined` as the key" },
+        { "id": "c", "text": "Log every environment variable to find it" },
+        { "id": "d", "text": "Hard-code the real key in source control" }
+      ],
+      "correct": ["a"],
+      "explanation": "Failing early with a clear message prevents confusing later failures and avoids leaking secrets into logs or source files.",
+      "points": 1
+    }
+  ]
+}

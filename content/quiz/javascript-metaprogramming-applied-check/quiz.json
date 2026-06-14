@@ -1,0 +1,224 @@
+{
+  "id": "javascript-metaprogramming-applied-check",
+  "title": "JavaScript Metaprogramming Applied Check",
+  "description": "Apply JavaScript metaprogramming concepts by predicting descriptor behavior, using symbols and iterables, delegating with Reflect, and choosing safe proxy patterns.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "metaprogramming", "proxy", "reflect", "iterators", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is logged?\n```js\nconst user = {};\n\nObject.defineProperty(user, \"name\", {\n  value: \"Ava\"\n});\n\nuser.name = \"Mia\";\n\nconsole.log(user.name);\n```",
+      "options": [
+        { "id": "a", "text": "`\"Ava\"`" },
+        { "id": "b", "text": "`\"Mia\"`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "A syntax error" }
+      ],
+      "correct": ["a"],
+      "explanation": "`writable` defaults to `false` when omitted in `Object.defineProperty()`, so the assignment does not change the value in non-strict mode.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which call is most complete for getting an object's own string keys, symbol keys, enumerable keys, and non-enumerable keys?",
+      "options": [
+        { "id": "a", "text": "`Reflect.ownKeys(object)`" },
+        { "id": "b", "text": "`Object.keys(object)`" },
+        { "id": "c", "text": "`JSON.stringify(object)`" },
+        { "id": "d", "text": "`Object.values(object)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Reflect.ownKeys()` returns all own property keys, including non-enumerable strings and symbols.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is logged?\n```js\nconst id = Symbol(\"id\");\n\nconst user = {\n  name: \"Ava\",\n  [id]: \"u_123\"\n};\n\nconsole.log(Object.keys(user));\n```",
+      "options": [
+        { "id": "a", "text": "`[\"name\"]`" },
+        { "id": "b", "text": "`[\"name\", Symbol(id)]`" },
+        { "id": "c", "text": "`[]`" },
+        { "id": "d", "text": "`[\"id\"]`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.keys()` returns enumerable string keys, not symbol keys.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is logged?\n```js\nconst first = Symbol.for(\"app.id\");\nconst second = Symbol.for(\"app.id\");\n\nconsole.log(first === second);\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "A TypeError" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Symbol.for()` uses the global symbol registry, so the same key returns the same symbol.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Why does this setter fail?\n```js\nconst user = {\n  set name(value) {\n    this.name = value;\n  }\n};\n\nuser.name = \"Ava\";\n```",
+      "options": [
+        { "id": "a", "text": "The setter assigns to the same property, causing recursive setter calls" },
+        { "id": "b", "text": "Setters cannot receive values" },
+        { "id": "c", "text": "Objects cannot have setters" },
+        { "id": "d", "text": "The string must be converted to a symbol first" }
+      ],
+      "correct": ["a"],
+      "explanation": "Assigning `this.name` inside the `name` setter calls the same setter again until the call stack overflows.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is logged?\n```js\nconst range = {\n  start: 1,\n  end: 3,\n\n  *[Symbol.iterator]() {\n    for (let value = this.start; value <= this.end; value++) {\n      yield value;\n    }\n  }\n};\n\nconsole.log([...range]);\n```",
+      "options": [
+        { "id": "a", "text": "`[1, 2, 3]`" },
+        { "id": "b", "text": "`[]`" },
+        { "id": "c", "text": "`[3, 2, 1]`" },
+        { "id": "d", "text": "A TypeError because plain objects can never be iterable" }
+      ],
+      "correct": ["a"],
+      "explanation": "The object defines `Symbol.iterator` with a generator, so spread can collect the yielded values.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is wrong with this iterable?\n```js\nconst bad = {\n  [Symbol.iterator]() {\n    return [1, 2, 3];\n  }\n};\n```",
+      "options": [
+        { "id": "a", "text": "`Symbol.iterator` should return an iterator object, not just an iterable array" },
+        { "id": "b", "text": "Arrays cannot contain numbers" },
+        { "id": "c", "text": "`Symbol.iterator` must always be async" },
+        { "id": "d", "text": "The method name must be a string, not a symbol" }
+      ],
+      "correct": ["a"],
+      "explanation": "The method should return an iterator with `next()`. Returning `[1, 2, 3][Symbol.iterator]()` would work.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this proxy do?\n```js\nconst user = { name: \"Ava\" };\n\nconst proxy = new Proxy(user, {\n  get(target, property, receiver) {\n    console.log(String(property));\n    return Reflect.get(target, property, receiver);\n  }\n});\n\nconsole.log(proxy.name);\n```",
+      "options": [
+        { "id": "a", "text": "It logs the property name, then returns the normal property value" },
+        { "id": "b", "text": "It deletes the property after reading it" },
+        { "id": "c", "text": "It prevents all property reads" },
+        { "id": "d", "text": "It converts the object to JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `get` trap adds logging and delegates the actual property read to `Reflect.get()`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is the problem here?\n```js\nconst user = { name: \"Ava\" };\n\nconst proxy = new Proxy(user, {\n  get(target, property) {\n    console.log(property);\n  }\n});\n\nconsole.log(proxy.name);\n```",
+      "options": [
+        { "id": "a", "text": "The trap does not return the original value, so the read produces `undefined`" },
+        { "id": "b", "text": "`get` traps cannot log" },
+        { "id": "c", "text": "The target must be an array" },
+        { "id": "d", "text": "`property` is always a number" }
+      ],
+      "correct": ["a"],
+      "explanation": "A trap replaces the default operation. If it does not return a value or delegate, the result is `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which proxy trap should validate assignments like `proxy.age = 31`?",
+      "options": [
+        { "id": "a", "text": "`set`" },
+        { "id": "b", "text": "`get`" },
+        { "id": "c", "text": "`apply`" },
+        { "id": "d", "text": "`construct`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `set` trap intercepts property assignment.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which proxy trap runs for this operation?\n```js\n\"name\" in proxy\n```",
+      "options": [
+        { "id": "a", "text": "`has`" },
+        { "id": "b", "text": "`get`" },
+        { "id": "c", "text": "`ownKeys`" },
+        { "id": "d", "text": "`deleteProperty`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `has` trap intercepts the `in` operator.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which proxy trap runs for this operation?\n```js\ndelete proxy.name;\n```",
+      "options": [
+        { "id": "a", "text": "`deleteProperty`" },
+        { "id": "b", "text": "`set`" },
+        { "id": "c", "text": "`apply`" },
+        { "id": "d", "text": "`construct`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `deleteProperty` trap intercepts property deletion.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which trap is used when a proxied function is called like `loggedAdd(2, 3)`?",
+      "options": [
+        { "id": "a", "text": "`apply`" },
+        { "id": "b", "text": "`construct`" },
+        { "id": "c", "text": "`has`" },
+        { "id": "d", "text": "`ownKeys`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `apply` trap intercepts calls to function proxies.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which trap is used when a proxied class is called with `new`?",
+      "options": [
+        { "id": "a", "text": "`construct`" },
+        { "id": "b", "text": "`apply`" },
+        { "id": "c", "text": "`setPrototype`" },
+        { "id": "d", "text": "`newTarget`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `construct` trap intercepts `new ProxyConstructor(...)` and must return an object.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which choice is the best use of metaprogramming?",
+      "options": [
+        { "id": "a", "text": "Using a proxy to add documented, reusable behavior that would otherwise be repeated across many objects" },
+        { "id": "b", "text": "Using a proxy so no one can understand where values come from" },
+        { "id": "c", "text": "Using symbol properties to store passwords securely" },
+        { "id": "d", "text": "Using getters for expensive network requests because property reads should hide all costs" }
+      ],
+      "correct": ["a"],
+      "explanation": "Metaprogramming is best when it creates a clear reusable interface. It should not hide secrets, costly work, or surprising behavior.",
+      "points": 1
+    }
+  ]
+}
