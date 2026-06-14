@@ -571,10 +571,13 @@ const chevronSvg = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" 
       setTimeout(hydrateAndRefresh, 600);
     });
 
-    // Server is the source of truth: hydrate from it first, then render and
-    // record the resume pointer. (No IndexedDB; progress lives in memory +
-    // the Google Sheet.)
-    hydrateAndRefresh().then(trackLastLesson);
+    // Render the lock gate / progress instantly from locally-persisted
+    // IndexedDB state so a module is never wrongly locked while the network is
+    // pending (and it works offline). Then reconcile with the server in the
+    // background (last-write-wins) and record the resume pointer.
+    refresh().then(function () {
+      hydrateAndRefresh().then(trackLastLesson);
+    });
   })();
 </script>
 
