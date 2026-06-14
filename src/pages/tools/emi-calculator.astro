@@ -1,0 +1,565 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout
+  title="EMI Calculator with Prepayment (Reduce Tenure or EMI)"
+  description="Free loan EMI calculator with prepayment support. Compare reducing your loan tenure vs reducing your EMI, add monthly, yearly or random one-time prepayments, see full amortization schedules, and save plans."
+  toolName="EMI Calculator"
+  keywords="emi calculator, loan emi calculator, prepayment calculator, reduce tenure vs reduce emi, home loan prepayment, amortization schedule, part payment calculator"
+  faqs={[
+    { q: "What is the difference between reducing tenure and reducing EMI?", a: "When you prepay a loan you can either keep the EMI the same and finish the loan earlier (reduce tenure) or keep the tenure the same and lower your monthly EMI (reduce EMI). Reducing tenure almost always saves more interest." },
+    { q: "How is EMI calculated?", a: "EMI = P x r x (1+r)^n / ((1+r)^n - 1), where P is the loan amount, r is the monthly interest rate (annual rate / 12 / 100), and n is the number of months." },
+    { q: "What kinds of prepayments can I model?", a: "You can add a fixed monthly prepayment, a yearly prepayment (applied in a chosen month each year), and any number of one-time prepayments in specific months." },
+    { q: "Is my data sent anywhere?", a: "No. All calculations run entirely in your browser. Saved plans are stored locally on your device and only synced if you have sync enabled on your account." },
+  ]}
+>
+  <div class="emi-grid">
+    <!-- Inputs -->
+    <section class="emi-card emi-inputs">
+      <div class="emi-field">
+        <label class="tool-panel__label" for="emi-amount">Loan Amount (₹)</label>
+        <input id="emi-amount" class="tool-input" type="number" min="0" step="1000" value="15000000" />
+      </div>
+      <div class="emi-field">
+        <label class="tool-panel__label" for="emi-rate">Interest Rate (% per year)</label>
+        <input id="emi-rate" class="tool-input" type="number" min="0" step="0.05" value="8" />
+      </div>
+      <div class="emi-field">
+        <label class="tool-panel__label" for="emi-tenure">Tenure (years)</label>
+        <input id="emi-tenure" class="tool-input" type="number" min="0" step="1" value="20" />
+      </div>
+      <div class="emi-starting">
+        <span class="tool-panel__label">Starting EMI</span>
+        <div id="emi-starting-emi" class="emi-starting-value">₹0</div>
+      </div>
+    </section>
+
+    <!-- Prepayment plan -->
+    <section class="emi-card emi-prepay">
+      <h2 class="emi-card__title">Prepayment Plan</h2>
+      <div class="emi-prepay-fields">
+        <div class="emi-field">
+          <label class="tool-panel__label" for="emi-prepay-monthly">Monthly Prepay (₹)</label>
+          <input id="emi-prepay-monthly" class="tool-input" type="number" min="0" step="500" value="30000" />
+        </div>
+        <div class="emi-field">
+          <label class="tool-panel__label" for="emi-prepay-yearly">Yearly Prepay (₹)</label>
+          <input id="emi-prepay-yearly" class="tool-input" type="number" min="0" step="1000" value="0" />
+        </div>
+        <div class="emi-field">
+          <label class="tool-panel__label" for="emi-prepay-yearly-month">Yearly in Month</label>
+          <select id="emi-prepay-yearly-month" class="tool-input">
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+              <option value={m} selected={m === 12}>{m}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div class="emi-random">
+        <div class="emi-random-head">
+          <span class="tool-panel__label">Random Month Prepayments</span>
+          <button type="button" id="emi-random-add" class="tool-btn">+ Add month</button>
+        </div>
+        <div id="emi-random-list"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Saved plans -->
+  <section class="emi-card emi-plans">
+    <div class="emi-plans-bar">
+      <span class="tool-panel__label">Saved Plans</span>
+      <div class="emi-plans-save">
+        <input id="emi-plan-name" class="tool-input" type="text" placeholder="Plan name (e.g. Home loan + 30k/mo)" />
+        <button type="button" id="emi-save-btn" class="tool-btn tool-btn--primary">Save plan</button>
+      </div>
+    </div>
+    <div id="emi-plans-list" class="emi-plans-list"></div>
+  </section>
+
+  <!-- Results -->
+  <section class="emi-results">
+    <div class="emi-tabs" role="tablist">
+      <button type="button" class="emi-tab is-active" data-emi-tab="summary">Summary</button>
+      <button type="button" class="emi-tab" data-emi-tab="term">Reduce Term</button>
+      <button type="button" class="emi-tab" data-emi-tab="emi">Reduce EMI</button>
+    </div>
+
+    <div class="emi-panel is-active" data-emi-panel="summary">
+      <div id="emi-insights"></div>
+      <div id="emi-summary"></div>
+      <div id="emi-charts"></div>
+    </div>
+    <div class="emi-panel" data-emi-panel="term">
+      <p class="emi-panel-hint">EMI stays fixed; prepayments cut the principal so the loan finishes earlier.</p>
+      <div id="emi-schedule-term"></div>
+    </div>
+    <div class="emi-panel" data-emi-panel="emi">
+      <p class="emi-panel-hint">Tenure stays fixed; the EMI is recomputed after each prepayment, so it gradually drops.</p>
+      <div id="emi-schedule-emi"></div>
+    </div>
+  </section>
+
+  <section slot="about" class="tool-about">
+    <h2>Reduce Tenure vs Reduce EMI: which is better?</h2>
+    <p>
+      When you make a prepayment (part payment) on a loan, your bank lets you choose what happens to the
+      saved money. You can either keep paying the same EMI and finish the loan sooner (<strong>reduce
+      tenure</strong>), or keep the same end date and lower your monthly payment (<strong>reduce EMI</strong>).
+      This calculator runs both scenarios side by side so you can see the exact interest saved.
+    </p>
+
+    <h3>What this tool does</h3>
+    <ul>
+      <li>Calculates the EMI for any loan amount, interest rate and tenure.</li>
+      <li>Models monthly, yearly, and one-time random-month prepayments together.</li>
+      <li>Compares <em>No prepayment</em>, <em>Reduce Term</em> and <em>Reduce EMI</em> on total paid, interest paid, and amount saved.</li>
+      <li>Shows the full month-by-month amortization schedule for each strategy.</li>
+      <li>Saves named plans locally so you can compare different loans later.</li>
+    </ul>
+
+    <h3>How EMI is calculated</h3>
+    <p>
+      The EMI uses the standard reducing-balance formula
+      <code>EMI = P x r x (1+r)^n / ((1+r)^n - 1)</code>, where <code>P</code> is the loan amount,
+      <code>r</code> is the monthly interest rate (annual rate / 12 / 100), and <code>n</code> is the
+      number of monthly installments. Reducing tenure typically saves more interest than reducing EMI
+      because the outstanding principal falls faster.
+    </p>
+  </section>
+</ToolLayout>
+
+<script src="/js/store.js" is:inline></script>
+<script src="/js/emi-calculator.js?v=2" is:inline></script>
+
+<style is:global>
+  .emi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .emi-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem;
+  }
+  .emi-card__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.85rem;
+  }
+  .emi-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .emi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .emi-starting {
+    margin-top: auto;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--color-border);
+  }
+  .emi-starting-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--color-primary);
+    margin-top: 0.25rem;
+  }
+  .emi-prepay-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.8fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .emi-random-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .emi-random-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .emi-random-remove {
+    padding: 0 0.7rem;
+    line-height: 1;
+    font-size: 1.1rem;
+  }
+
+  /* Saved plans */
+  .emi-plans { margin-bottom: 1.25rem; }
+  .emi-plans-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .emi-plans-save {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 260px;
+    max-width: 520px;
+  }
+  .emi-plans-save .tool-input { flex: 1; }
+  .emi-plans-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+  }
+  .emi-plans-empty {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+  }
+  .emi-plan-chip {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+  .emi-plan-load {
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+  }
+  .emi-plan-load:hover { color: var(--color-primary); }
+  .emi-plan-del {
+    border: 0;
+    border-left: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-light);
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 0.6rem;
+    cursor: pointer;
+  }
+  .emi-plan-del:hover { color: #ef4444; }
+
+  /* Tabs */
+  .emi-tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+  }
+  .emi-tab {
+    border: 0;
+    background: transparent;
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .emi-tab:hover { color: var(--color-text); }
+  .emi-tab.is-active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+  .emi-panel { display: none; }
+  .emi-panel.is-active { display: block; }
+  .emi-panel-hint {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    margin: 0 0 0.85rem;
+  }
+
+  /* Summary cards */
+  .emi-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+  .emi-sumcard {
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.1rem 0.6rem;
+    background: var(--color-surface);
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  }
+  .emi-sumcard:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+  }
+  .emi-sumcard--accent {
+    border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border));
+  }
+  .emi-sumcard--best {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 1px color-mix(in oklab, #16a34a 45%, transparent);
+  }
+  .emi-sumcard__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+  .emi-sumcard__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .emi-card-badge {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.18rem 0.45rem;
+    border-radius: 999px;
+    background: var(--color-code-bg);
+    color: var(--color-text-light);
+    white-space: nowrap;
+  }
+  .emi-card-badge--best {
+    background: color-mix(in oklab, #16a34a 18%, transparent);
+    color: #16a34a;
+  }
+  .emi-saved {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.7rem 0.85rem;
+    margin-bottom: 0.9rem;
+    border-radius: var(--radius-md);
+    background: color-mix(in oklab, #16a34a 12%, transparent);
+    border: 1px solid color-mix(in oklab, #16a34a 28%, transparent);
+  }
+  .emi-saved__label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: color-mix(in oklab, #16a34a 70%, var(--color-text));
+  }
+  .emi-saved__value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: #16a34a;
+    line-height: 1.1;
+  }
+  .emi-saved--zero {
+    background: var(--color-code-bg);
+    border-color: var(--color-border);
+  }
+  .emi-saved--zero .emi-saved__label { color: var(--color-text-light); }
+  .emi-saved--zero .emi-saved__value { color: var(--color-text-light); }
+  .emi-sumcard__rows {
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .emi-sumrow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.42rem 0;
+    font-size: 0.82rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .emi-sumrow:last-child { border-bottom: 0; }
+  .emi-sumrow dt { color: var(--color-text-light); margin: 0; }
+  .emi-sumrow dd {
+    margin: 0;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-align: right;
+  }
+  .emi-empty {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Key insights */
+  .emi-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .emi-insight {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .emi-insight__icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    font-size: 1rem;
+  }
+  .emi-insight__icon--green { background: color-mix(in oklab, #16a34a 16%, transparent); color: #16a34a; }
+  .emi-insight__icon--blue { background: color-mix(in oklab, var(--color-primary) 16%, transparent); color: var(--color-primary); }
+  .emi-insight__icon--amber { background: color-mix(in oklab, #f59e0b 18%, transparent); color: #d97706; }
+  .emi-insight__body { min-width: 0; }
+  .emi-insight__value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    line-height: 1.15;
+  }
+  .emi-insight__label {
+    font-size: 0.74rem;
+    color: var(--color-text-light);
+    margin-top: 0.15rem;
+  }
+
+  /* Charts */
+  .emi-chart{
+    width: 90%;
+  }
+  .emi-section-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-light);
+    margin: 1.5rem 0 0.75rem;
+  }
+  .emi-chart-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    padding: 1rem 1.1rem 0.75rem;
+  }
+  .emi-chart-card svg { width: 100%; height: auto; display: block; }
+  .emi-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+  }
+  .emi-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .emi-legend i { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+  .emi-axis-label { fill: var(--color-text-light); font-size: 11px; font-family: var(--font-mono); }
+  .emi-grid-line { stroke: var(--color-border); stroke-width: 1; }
+  .emi-close-line { stroke-dasharray: 4 3; stroke-width: 1.5; opacity: 0.7; }
+  .emi-close-label { font-size: 10px; font-weight: 700; font-family: var(--font-mono); }
+
+  /* Comparison bars */
+  .emi-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .emi-bars-group {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    padding: 1rem 1.1rem;
+  }
+  .emi-bars-group h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0 0 0.85rem;
+  }
+  .emi-bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.65rem;
+  }
+  .emi-bar-row:last-child { margin-bottom: 0; }
+  .emi-bar-label { font-size: 0.76rem; color: var(--color-text-light); }
+  .emi-bar-track {
+    height: 16px;
+    border-radius: 8px;
+    background: var(--color-code-bg);
+    overflow: hidden;
+  }
+  .emi-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    min-width: 2px;
+    transition: width 350ms ease;
+  }
+  .emi-bar-value { font-size: 0.76rem; font-weight: 700; font-family: var(--font-mono); white-space: nowrap; }
+
+  /* Schedule tables */
+  .emi-table-wrap {
+    max-height: 540px;
+    overflow: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .emi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+  }
+  .emi-table th,
+  .emi-table td {
+    padding: 0.45rem 0.6rem;
+    text-align: right;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .emi-table th {
+    position: sticky;
+    top: 0;
+    background: var(--color-surface);
+    font-weight: 700;
+    z-index: 1;
+  }
+  .emi-table th:first-child,
+  .emi-table td:first-child { text-align: left; }
+  .emi-table tbody tr:hover { background: var(--color-code-bg); }
+  /* Highlighted prepayment column */
+  .emi-table th.emi-col-prepay {
+    background: color-mix(in oklab, #16a34a 22%, var(--color-surface));
+    color: #15803d;
+  }
+  .emi-table td.emi-prepay-cell {
+    background: color-mix(in oklab, #16a34a 10%, transparent);
+    color: #15803d;
+    font-weight: 700;
+  }
+  .emi-table tbody tr:hover td.emi-prepay-cell {
+    background: color-mix(in oklab, #16a34a 18%, transparent);
+  }
+
+  @media (max-width: 860px) {
+    .emi-grid { grid-template-columns: 1fr; }
+    .emi-summary-grid { grid-template-columns: 1fr; }
+    .emi-bars { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .emi-prepay-fields { grid-template-columns: 1fr; }
+  }
+</style>
