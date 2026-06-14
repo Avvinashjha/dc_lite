@@ -45,14 +45,14 @@
       "duration": "10 min"
     },
     {
-      "slug": "08-sort",
-      "title": "sort",
+      "slug": "08-slice-and-splice",
+      "title": "slice and splice",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "09-reverse",
-      "title": "reverse",
+      "slug": "09-sort-and-reverse",
+      "title": "sort and reverse",
       "type": "text",
       "duration": "10 min"
     },
@@ -73,6 +73,36 @@
       "title": "entries",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "13-multi-dimensional-arrays",
+      "title": "Multi-dimensional Arrays",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "14-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-arrays-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "15-methods-knowledge-check",
+      "title": "Array Methods Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-arrays-methods-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "16-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-arrays-applied-check",
+      "passingScore": 70
     }
   ]
 }
