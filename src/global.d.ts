@@ -34,7 +34,7 @@ declare global {
     requireAuth: (reason: string, callback: (user: User) => void) => void;
     isUserSignedIn: () => boolean;
     getCurrentUser: () => User | null;
-    getFirebaseIdToken: () => Promise<string | null>;
+    getFirebaseIdToken: (forceRefresh?: boolean) => Promise<string | null>;
     DCStore: DCStoreAPI;
     DCSyncService: DCSyncServiceAPI;
   }

@@ -52,6 +52,13 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
       { name: 'Clipboard Manager', desc: 'Save, search, and organize clipboard snippets', href: '/tools/clipboard', icon: '📋' },
     ],
   },
+  {
+    name: 'Finance Tools',
+    icon: '₹',
+    tools: [
+      { name: 'EMI Calculator', desc: 'Loan EMI with prepayment: reduce tenure or EMI, monthly/yearly/random prepays, saved plans', href: '/tools/emi-calculator', icon: '₹' },
+    ],
+  },
 ];
 
 export const ALL_TOOLS: (ToolEntry & { category: string })[] = TOOL_CATEGORIES.flatMap((c) =>

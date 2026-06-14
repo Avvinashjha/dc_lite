@@ -22,17 +22,40 @@ export function isQuizApiConfigured(): boolean {
   return getQuizApiUrl().trim().length > 0;
 }
 
-async function getIdToken(): Promise<string> {
+async function getIdToken(forceRefresh = false): Promise<string | null> {
   if (typeof window === 'undefined') return '';
-  const w = window as unknown as { getFirebaseIdToken?: () => Promise<string | null> };
+  const w = window as unknown as { getFirebaseIdToken?: (forceRefresh?: boolean) => Promise<string | null> };
   if (typeof w.getFirebaseIdToken === 'function') {
     try {
-      return (await w.getFirebaseIdToken()) || '';
+      return await w.getFirebaseIdToken(forceRefresh);
     } catch {
-      return '';
+      return null;
     }
   }
-  return '';
+  return null;
+}
+
+async function postWithAuth(url: string, body: Record<string, unknown>): Promise<unknown> {
+  const idToken = await getIdToken();
+  if (!idToken) {
+    return { status: 'error', message: 'Sign in required' };
+  }
+
+  async function send(token: string) {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ ...body, idToken: token }),
+    });
+    return res.json();
+  }
+
+  const data = await send(idToken);
+  if (data?.status === 'error' && data?.message === 'Authentication required') {
+    const freshToken = await getIdToken(true);
+    if (freshToken && freshToken !== idToken) return send(freshToken);
+  }
+  return data;
 }
 
 export interface CommunityQuizResponse {
@@ -120,14 +143,10 @@ export async function submitScore(submission: ScoreSubmission): Promise<SubmitRe
   if (!url) return { ok: false, configured: false };
 
   try {
-    const idToken = await getIdToken();
-    const payload = JSON.stringify({ action: 'submitScore', idToken, ...submission });
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: payload,
-    });
-    const data = await res.json();
+    const data = await postWithAuth(url, { action: 'submitScore', ...submission }) as {
+      status?: string;
+      message?: string;
+    };
     if (data.status !== 'success') {
       return { ok: false, configured: true, error: data.message || 'Submission failed' };
     }
@@ -153,19 +172,11 @@ export async function createCommunityQuiz(
   if (!url) return { ok: false, configured: false };
 
   try {
-    const idToken = await getIdToken();
-    const payload = JSON.stringify({
+    const data = await postWithAuth(url, {
       action: 'createQuiz',
       uid,
-      idToken,
       quiz: { ...quiz, source: 'community', ranked: false },
-    });
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: payload,
-    });
-    const data = await res.json();
+    }) as { status?: string; message?: string; slug?: string };
     if (data.status !== 'success') {
       return { ok: false, configured: true, error: data.message || 'Create failed' };
     }

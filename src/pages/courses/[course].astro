@@ -251,6 +251,31 @@ const courseJsonLd = {
   const structure = (window as any).__dcCourseStructure;
   const CP = (window as any).DCCourseProgress;
   let enrolled = false;
+  const ENROLL_LABEL = "Enroll \u2014 it's free";
+  const moduleEls = Array.from(document.querySelectorAll('[data-module-index]'));
+
+  // Loading veil shown while the user's progress is being fetched from the sheet,
+  // so we never flash the misleading "Enroll / 0 of N" state to a user who is in
+  // fact enrolled with progress (which would then jump to "Continue learning").
+  function showLoading() {
+    enrollBtn.classList.add('is-loading');
+    enrollBtn.disabled = true;
+    enrollBtn.setAttribute('aria-busy', 'true');
+    enrollBtn.innerHTML = '<span class="course-hero__spinner" aria-hidden="true"></span>Loading\u2026';
+    enrollStatus.textContent = 'Loading your progress\u2026';
+    moduleEls.forEach((el) => el.classList.add('course-module--loading'));
+  }
+
+  function hideLoading() {
+    enrollBtn.classList.remove('is-loading');
+    enrollBtn.disabled = false;
+    enrollBtn.removeAttribute('aria-busy');
+    moduleEls.forEach((el) => el.classList.remove('course-module--loading'));
+    if (!enrolled) {
+      enrollBtn.textContent = ENROLL_LABEL;
+      enrollStatus.textContent = '';
+    }
+  }
 
   function renderProgress(row: any) {
     const safe = row || { completedLessons: [], quizScores: {} };
@@ -313,6 +338,7 @@ const courseJsonLd = {
     const row = await CP.getRow(courseSlug);
     if (row && row.enrolledAt) markEnrolledUI('Enrolled');
     renderProgress(row);
+    return row;
   }
 
   async function doEnroll() {
@@ -384,11 +410,73 @@ const courseJsonLd = {
     return loadEnrollment();
   }
 
+  // React to later sign-in / sign-out during the session.
   window.addEventListener('dc:authchange', () => {
     setTimeout(hydrateAndLoad, 600);
   });
 
-  hydrateAndLoad();
+  function authResolved() {
+    return typeof (window as any).__dcAuthUser !== 'undefined';
+  }
+
+  // Wait until DCSyncService has been initialised (it starts on the auth event)
+  // so the first load actually pulls the signed-in user's sheet data.
+  function waitForSyncActive(maxMs: number) {
+    return new Promise<void>((resolve) => {
+      const start = Date.now();
+      (function check() {
+        const sync = (window as any).DCSyncService;
+        if (sync && sync.isActive && sync.isActive()) return resolve();
+        if (Date.now() - start > maxMs) return resolve();
+        setTimeout(check, 80);
+      })();
+    });
+  }
+
+  // Once auth is known: signed-in users get a server pull, signed-out users get
+  // the (stable) local/empty state. Either way the loading veil is then removed.
+  function resolveInitial() {
+    const user = (window as any).__dcAuthUser;
+    if (!user) {
+      loadEnrollment().finally(hideLoading);
+      return;
+    }
+    waitForSyncActive(2500).then(() => hydrateAndLoad().finally(hideLoading));
+  }
+
+  // 1) Show the loading veil immediately.
+  showLoading();
+
+  // 2) If we already have locally-persisted progress, render it instantly so a
+  //    returning user sees the correct state with no spinner.
+  CP.getRow(courseSlug).then((row: any) => {
+    if (row && row.enrolledAt) {
+      markEnrolledUI('Enrolled');
+      renderProgress(row);
+      hideLoading();
+    }
+  });
+
+  // 3) Resolve authoritatively once auth state is known (with a safety timeout
+  //    so the spinner can never get stuck if auth/network never responds).
+  if (authResolved()) {
+    resolveInitial();
+  } else {
+    let done = false;
+    const onAuth = () => {
+      if (done) return;
+      done = true;
+      window.removeEventListener('dc:authchange', onAuth);
+      resolveInitial();
+    };
+    window.addEventListener('dc:authchange', onAuth);
+    setTimeout(() => {
+      if (done) return;
+      done = true;
+      window.removeEventListener('dc:authchange', onAuth);
+      resolveInitial();
+    }, 5000);
+  }
 </script>
 
 <style>
@@ -519,6 +607,43 @@ const courseJsonLd = {
   .course-hero__enroll {
     width: 100%;
     justify-content: center;
+  }
+  .course-hero__enroll.is-loading {
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .course-hero__spinner {
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: -0.12em;
+    animation: course-spin 0.6s linear infinite;
+  }
+  /* Per-module spinner shown while course progress is still loading. */
+  .course-module--loading .module__status::after {
+    content: '';
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 2px solid var(--color-border);
+    border-right-color: var(--color-primary);
+    border-radius: 50%;
+    animation: course-spin 0.6s linear infinite;
+  }
+  @keyframes course-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .course-hero__spinner,
+    .course-module--loading .module__status::after {
+      animation-duration: 1.4s;
+    }
   }
   .course-hero__status {
     display: block;

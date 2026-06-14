@@ -1,19 +1,25 @@
 /**
  * DCCourseProgress – client-side course completion + gating helpers.
  *
+ * IndexedDB (DCStore, tool 'course-progress', id = courseSlug) is the LOCAL
+ * source of truth that drives the UI: gating (module locking), progress bars
+ * and completion badges are computed from the locally-persisted row so they
+ * render instantly on every page load — no network round-trip, works offline,
+ * and a user is never wrongly "locked out" while a slow request is pending.
+ *
  * The Google Sheet (course_enrollments / course_module_progress /
- * course_quiz_scores, via DCSyncService) is the SINGLE SOURCE OF TRUTH for
- * course progress. This module keeps only an in-memory, per-page-session cache
- * (NOT IndexedDB): it is hydrated from the server on load / sign-in and pushes
- * every change straight back. Nothing course-related is persisted to
- * IndexedDB anymore — that previously caused a confusing dual source of truth
- * (local blob vs. server) that could drift and never reconcile.
+ * course_quiz_scores, via DCSyncService) is a background mirror for
+ * cross-device consistency. Every change is persisted to IndexedDB immediately
+ * and pushed to the sheet in the background (debounced, best-effort). On load /
+ * sign-in the server is pulled and reconciled with the local row using
+ * row-level last-write-wins on `updatedAt` (newer wins; if local is newer it is
+ * pushed up). This avoids both UI-blocking and the older "wrong lock" race.
  *
- * Trade-off: a signed-out user's progress lives only for the current page
- * session (it is not persisted anywhere), since there is no server identity to
- * store it against.
+ * Trade-off: a signed-out user's progress is still kept only in memory for the
+ * current page session (IndexedDB persistence + sync are keyed to a signed-in
+ * identity).
  *
- * In-memory row shape (keyed by courseSlug):
+ * Row shape (keyed by courseSlug):
  *   {
  *     enrolledAt, lastModule, lastLesson, lastLessonAt, updatedAt, completedAt,
  *     completedLessons: ["moduleSlug/lessonSlug", ...],
@@ -28,16 +34,48 @@
  * (injected per page as window.__dcCourseStructure).
  */
 var DCCourseProgress = (function () {
-  // In-memory, per-page-session cache: courseSlug -> row. Replaces IndexedDB.
+  // IndexedDB object-store namespace for course rows.
+  var STORE_TOOL = 'course-progress';
+
+  // In-memory mirror of the persisted rows: courseSlug -> row. Backed by
+  // IndexedDB (DCStore); kept in memory so gating helpers can read synchronously
+  // once a row has been loaded.
   var cache = {};
 
-  // Number of structured pushes currently in flight. While > 0, a hydrate must
-  // NOT authoritatively replace the cache: the server may not yet reflect the
-  // un-persisted local write, so replacing would clobber it.
+  // Background-sync bookkeeping. `pendingPushes` counts courses with a local
+  // change that has not yet been confirmed pushed to the sheet (queued OR
+  // in flight). While > 0 for a course, a server hydrate must NOT clobber the
+  // local row — it may be newer than what the server has seen.
   var pendingPushes = 0;
+  var SYNC_DEBOUNCE_MS = 1500;
+  var syncTimers = {};   // courseSlug -> setTimeout handle
+  var syncDirty = {};    // courseSlug -> bool (has an unsynced local change)
 
   function key(moduleSlug, lessonSlug) {
     return moduleSlug + '/' + lessonSlug;
+  }
+
+  // ── Local persistence (IndexedDB via DCStore) ──────────────────────────────
+  function persistLocal(courseSlug, row) {
+    if (typeof DCStore === 'undefined') return Promise.resolve();
+    // 'course-progress' is intentionally NOT a DCSyncService SYNCED_TOOL, so
+    // this write does not trigger the generic blob sync — we push the
+    // structured payload ourselves via scheduleSync().
+    return Promise.resolve(DCStore.set(STORE_TOOL, courseSlug, { row: row }))
+      .catch(function () {});
+  }
+
+  // Read a row from IndexedDB into the in-memory cache (best-effort).
+  function loadLocal(courseSlug) {
+    if (typeof DCStore === 'undefined') return Promise.resolve(null);
+    return Promise.resolve(DCStore.get(STORE_TOOL, courseSlug))
+      .then(function (item) {
+        if (!item || !item.row) return null;
+        var row = normalize(item.row);
+        cache[courseSlug] = row;
+        return row;
+      })
+      .catch(function () { return null; });
   }
 
   function normalize(row) {
@@ -56,17 +94,56 @@ var DCCourseProgress = (function () {
     return (typeof window !== 'undefined' && window.__dcCourseStructure) || null;
   }
 
-  // Push the structured (3-table) payload to the server, best-effort. Tracks
-  // the in-flight push so a concurrent hydrate won't clobber this write.
-  function syncStructured(courseSlug, row) {
+  // ── Background sheet sync (debounced, best-effort) ─────────────────────────
+  // Queue a structured (3-table) push for this course. Rapid changes (e.g.
+  // time tracking, quick mark/undo) are coalesced into one request. The push is
+  // fire-and-forget and never blocks the UI; IndexedDB already holds the change.
+  function scheduleSync(courseSlug, row) {
     if (typeof DCSyncService === 'undefined' || !DCSyncService.isActive()) return;
     if (typeof DCSyncService.pushCourseProgress !== 'function') return;
     var struct = structure();
     if (!struct || struct.slug !== courseSlug) return;
-    pendingPushes++;
-    function settle() { pendingPushes = Math.max(0, pendingPushes - 1); }
-    Promise.resolve(DCSyncService.pushCourseProgress(buildStructuredPayload(struct, row)))
+
+    // Mark the course dirty (counts as a pending push until it lands) so a
+    // concurrent hydrate won't clobber this not-yet-synced local change.
+    if (!syncDirty[courseSlug]) { syncDirty[courseSlug] = true; pendingPushes++; }
+
+    if (syncTimers[courseSlug]) clearTimeout(syncTimers[courseSlug]);
+    syncTimers[courseSlug] = setTimeout(function () { flushSync(courseSlug); }, SYNC_DEBOUNCE_MS);
+  }
+
+  // Push any pending change for a course right now (or no-op if clean). Called
+  // by the debounce timer and on demand (e.g. page unload drains).
+  function flushSync(courseSlug) {
+    if (syncTimers[courseSlug]) { clearTimeout(syncTimers[courseSlug]); syncTimers[courseSlug] = null; }
+    if (!syncDirty[courseSlug]) return Promise.resolve();
+
+    var struct = structure();
+    var row = cache[courseSlug];
+    function settle() {
+      syncDirty[courseSlug] = false;
+      pendingPushes = Math.max(0, pendingPushes - 1);
+    }
+    if (typeof DCSyncService === 'undefined' || !DCSyncService.isActive() ||
+        typeof DCSyncService.pushCourseProgress !== 'function' ||
+        !struct || struct.slug !== courseSlug || !row) {
+      settle();
+      return Promise.resolve();
+    }
+    return Promise.resolve(DCSyncService.pushCourseProgress(buildStructuredPayload(struct, row)))
       .then(settle, settle);
+  }
+
+  // Push every pending course immediately (best-effort drain, e.g. on unload).
+  function flushAll() {
+    Object.keys(syncDirty).forEach(function (courseSlug) {
+      if (syncDirty[courseSlug]) flushSync(courseSlug);
+    });
+  }
+
+  // Back-compat alias: callers that previously forced a structured push.
+  function syncStructured(courseSlug, row) {
+    scheduleSync(courseSlug, row);
   }
 
   // True while a local write is still being synced to the server.
@@ -74,8 +151,11 @@ var DCCourseProgress = (function () {
     return pendingPushes > 0;
   }
 
+  // Resolve a row for gating/render: prefer the in-memory mirror, otherwise load
+  // it from IndexedDB so locking is computed from persisted local state.
   function getRow(courseSlug) {
-    return Promise.resolve(cache[courseSlug] ? normalize(cache[courseSlug]) : null);
+    if (cache[courseSlug]) return Promise.resolve(normalize(cache[courseSlug]));
+    return loadLocal(courseSlug);
   }
 
   function freshRow() {
@@ -112,8 +192,10 @@ var DCCourseProgress = (function () {
       row.completedAt = Date.now();
     }
     cache[courseSlug] = row;
-    // Structured, per-module/quiz sync (course_enrollments / course_module_progress / course_quiz_scores).
-    syncStructured(courseSlug, row);
+    // Persist to IndexedDB immediately (drives gating/UI on the next load) and
+    // queue a background push to the sheet. Neither blocks the returned row.
+    persistLocal(courseSlug, row);
+    scheduleSync(courseSlug, row);
     return Promise.resolve(row);
   }
 
@@ -300,18 +382,10 @@ var DCCourseProgress = (function () {
     return { total: total, completed: done, percent: total ? Math.round((done / total) * 100) : 0 };
   }
 
-  // Rebuild the in-memory row authoritatively from server-side structured
-  // progress (called on load / sign-in). The server is the source of truth, so
-  // this REPLACES the cached row rather than union-merging — no drift, no
-  // confusion. Per-module server time becomes the `timeBaseline`; this-session
-  // `timeSpent` starts empty and is added on top before the next push.
-  function applyServerProgress(courseSlug, server) {
-    if (!server) return Promise.resolve(null);
-
-    // A local write is mid-flight; the server response may predate it. Skip the
-    // authoritative replace so we don't clobber the un-persisted change.
-    if (pendingPushes > 0) return getRow(courseSlug);
-
+  // Build a row from the server's structured payload. `updatedAt` is taken from
+  // the enrollment header so it can be compared against the local row for
+  // last-write-wins. Per-module server time becomes the `timeBaseline`.
+  function rowFromServer(server) {
     var row = {
       enrolledAt: 0, lastModule: '', lastLesson: '', lastLessonAt: null,
       completedAt: null, completedLessons: [], quizScores: {}, quizMeta: {},
@@ -325,6 +399,7 @@ var DCCourseProgress = (function () {
       row.lastModule = en.lastModule || '';
       row.lastLesson = en.lastLesson || '';
       row.lastLessonAt = en.lastLessonAt || null;
+      row.updatedAt = Number(en.updatedAt) || 0;
     }
 
     (server.modules || []).forEach(function (m) {
@@ -348,9 +423,38 @@ var DCCourseProgress = (function () {
       };
     });
 
-    row.updatedAt = Date.now();
-    cache[courseSlug] = row;
-    return Promise.resolve(normalize(row));
+    return row;
+  }
+
+  // Reconcile server-side structured progress with the locally-persisted row
+  // (called on load / sign-in). Uses row-level last-write-wins on `updatedAt`:
+  // the newer copy wins; if the local copy is strictly newer it is kept and a
+  // background push is queued so the sheet catches up. The chosen row is mirrored
+  // back to IndexedDB so the UI/gating stays consistent across reloads.
+  function applyServerProgress(courseSlug, server) {
+    if (!server) return getRow(courseSlug);
+
+    // A local write is still pending sync; the server may not reflect it yet, so
+    // keep local and let the background push reconcile.
+    if (pendingPushes > 0) return getRow(courseSlug);
+
+    var serverRow = rowFromServer(server);
+
+    return getRow(courseSlug).then(function (local) {
+      var localUpdated = local ? (local.updatedAt || 0) : 0;
+      var serverUpdated = serverRow.updatedAt || 0;
+
+      // Local is strictly newer than what the server knows: keep it, push it up.
+      if (local && localUpdated > serverUpdated) {
+        scheduleSync(courseSlug, local);
+        return normalize(local);
+      }
+
+      // Otherwise the server wins (newer, equal, or no local row yet).
+      cache[courseSlug] = serverRow;
+      persistLocal(courseSlug, serverRow);
+      return normalize(serverRow);
+    });
   }
 
   return {
@@ -366,7 +470,10 @@ var DCCourseProgress = (function () {
     trackLastLesson: trackLastLesson,
     buildStructuredPayload: buildStructuredPayload,
     applyServerProgress: applyServerProgress,
+    loadLocal: loadLocal,
     syncStructured: syncStructured,
+    flushSync: flushSync,
+    flushAll: flushAll,
     hasPendingPush: hasPendingPush,
     moduleComplete: moduleComplete,
     moduleUnlocked: moduleUnlocked,
