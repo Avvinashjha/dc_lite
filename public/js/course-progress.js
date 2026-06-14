@@ -354,11 +354,13 @@ var DCCourseProgress = (function () {
     });
   }
 
-  // Module 0 is always unlocked; later modules unlock when the previous one
-  // is fully complete.
-  function moduleUnlocked(structure, row, moduleIndex) {
-    if (moduleIndex <= 0) return true;
-    return moduleComplete(structure, row, moduleIndex - 1);
+  // Module gating is disabled: every module is freely navigable so learners can
+  // view any module independently. Completion badges and progress bars are still
+  // driven by moduleComplete()/counts(); only the lock is removed.
+  // (Previously: module 0 unlocked, later modules unlocked once the prior one
+  // was fully complete.)
+  function moduleUnlocked(_structure, _row, _moduleIndex) {
+    return true;
   }
 
   function courseComplete(structure, row) {
