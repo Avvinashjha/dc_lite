@@ -31,6 +31,22 @@
       "title": "Batching and Scheduling",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-21-core-check"
+    },
+    {
+      "slug": "07-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-21-applied-check"
     }
   ]
 }

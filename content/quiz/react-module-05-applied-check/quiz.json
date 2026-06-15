@@ -1,0 +1,241 @@
+{
+  "id": "react-module-05-applied-check",
+  "title": "React Module 05 Applied Check",
+  "description": "Apply state and event handling concepts to immutable updates, batching, stale closures, event behavior, and shared state scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "state",
+    "events",
+    "immutability",
+    "batching"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the likely result of calling `setCount(count + 1); setCount(count + 1);` in one click handler?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The count may increase by 1 because both updates used the same snapshot"
+        },
+        {
+          "id": "b",
+          "text": "The count always increases by 2"
+        },
+        {
+          "id": "c",
+          "text": "React throws because two setters are illegal"
+        },
+        {
+          "id": "d",
+          "text": "The component unmounts"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "State values are snapshots during a render. Use functional updates when queuing multiple updates based on previous state.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which replacement reliably increments twice in one handler?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`setCount(c => c + 1); setCount(c => c + 1);`"
+        },
+        {
+          "id": "b",
+          "text": "`count++; count++;`"
+        },
+        {
+          "id": "c",
+          "text": "`setCount(count++); setCount(count++);`"
+        },
+        {
+          "id": "d",
+          "text": "`setCount(count); setCount(count);`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Each functional updater receives the latest queued value.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are immutable ways to update array state? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "`setItems([...items, newItem])`"
+        },
+        {
+          "id": "b",
+          "text": "`setItems(items.filter(item => item.id !== id))`"
+        },
+        {
+          "id": "c",
+          "text": "`items.push(newItem); setItems(items)`"
+        },
+        {
+          "id": "d",
+          "text": "`setItems(items.map(item => item.id === id ? { ...item, done: true } : item))`"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Spread, filter, and map create new arrays. Pushing mutates the existing array.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A form submit reloads the page unexpectedly. What is the usual fix in the submit handler?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Call `event.preventDefault()`"
+        },
+        {
+          "id": "b",
+          "text": "Call `event.stopRender()`"
+        },
+        {
+          "id": "c",
+          "text": "Mutate the submit button"
+        },
+        {
+          "id": "d",
+          "text": "Use `key={Math.random()}`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Preventing the default form submission lets React handle the submit without a page reload.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Calling a state setter directly while rendering can create a render loop.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Render should be pure. Unconditional state updates during render cause React to render again repeatedly.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A child button should notify its parent with an item id. Which pattern is best?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`<button onClick={() => onSelect(item.id)}>`"
+        },
+        {
+          "id": "b",
+          "text": "`<button onClick={onSelect(item.id)}>` when rendering"
+        },
+        {
+          "id": "c",
+          "text": "Mutate `props.selectedId`"
+        },
+        {
+          "id": "d",
+          "text": "Call `document.querySelector` in the child"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Wrap the callback so it runs on click, not during render.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which choices help avoid stale closures? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use functional state updates when next state depends on previous state"
+        },
+        {
+          "id": "b",
+          "text": "Put changing values in the right dependency list for effects"
+        },
+        {
+          "id": "c",
+          "text": "Assume a timeout callback always sees the newest state"
+        },
+        {
+          "id": "d",
+          "text": "Use refs intentionally for mutable latest values when appropriate"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Functional updates, correct dependencies, and carefully used refs address common stale value issues.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Two controls must stay synchronized with one selected tab value. What is the most reliable design?",
+      "options": [
+        {
+          "id": "a",
+          "text": "One parent owns `selectedTab` and passes it plus change callbacks down"
+        },
+        {
+          "id": "b",
+          "text": "Each child stores unrelated local selected tab state"
+        },
+        {
+          "id": "c",
+          "text": "Use a regular variable outside React"
+        },
+        {
+          "id": "d",
+          "text": "Read the DOM to find the active tab"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A single source of truth keeps siblings synchronized.",
+      "points": 2
+    }
+  ]
+}

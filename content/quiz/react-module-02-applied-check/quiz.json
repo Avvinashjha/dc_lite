@@ -1,0 +1,241 @@
+{
+  "id": "react-module-02-applied-check",
+  "title": "React Module 02 Applied Check",
+  "description": "Apply component, prop, state, children, and composition concepts to realistic React design choices and mistakes.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "components",
+    "props",
+    "children",
+    "state"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A `Card` component should wrap arbitrary headings, paragraphs, and buttons. Which API is most flexible?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accept `children` and render it inside the card"
+        },
+        {
+          "id": "b",
+          "text": "Accept only a `title` string"
+        },
+        {
+          "id": "c",
+          "text": "Hard-code all content inside `Card`"
+        },
+        {
+          "id": "d",
+          "text": "Use one global variable named content"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`children` lets layout components wrap arbitrary JSX supplied by the parent.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "A child needs to request that a parent updates selected item state. Which are appropriate? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pass a callback prop like `onSelect`"
+        },
+        {
+          "id": "b",
+          "text": "Call the callback from the child event handler"
+        },
+        {
+          "id": "c",
+          "text": "Mutate the parent state variable directly from the child"
+        },
+        {
+          "id": "d",
+          "text": "Keep the source of truth in the common parent"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Parents own state; children communicate through callback props.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is wrong with `function User({ user }) { user.name = \"New\"; return <p>{user.name}</p>; }`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It mutates a prop during render"
+        },
+        {
+          "id": "b",
+          "text": "It uses destructuring"
+        },
+        {
+          "id": "c",
+          "text": "It returns a paragraph"
+        },
+        {
+          "id": "d",
+          "text": "It uses braces in JSX"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Components should treat props as immutable and avoid side effects during render.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A prop is optional and should default to `\"Button\"`. Which pattern is appropriate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`function Button({ label = \"Button\" }) { ... }`"
+        },
+        {
+          "id": "b",
+          "text": "`function Button(label default \"Button\") { ... }`"
+        },
+        {
+          "id": "c",
+          "text": "Mutate `props.label` during render"
+        },
+        {
+          "id": "d",
+          "text": "Read `window.label`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Default values can be supplied through JavaScript parameter defaults when destructuring props.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Passing a new inline function as a prop is always a bug in beginner React apps.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Function props are common for events. Identity can matter for optimization later, but inline callbacks are not automatically bugs.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Two sibling components must show and change the same selected value. Where should the state usually live?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Inside only the first sibling"
+        },
+        {
+          "id": "b",
+          "text": "Inside only the second sibling"
+        },
+        {
+          "id": "c",
+          "text": "In their nearest common parent"
+        },
+        {
+          "id": "d",
+          "text": "Inside the CSS file"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Shared state should be lifted to the closest owner that can pass values and callbacks down.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which are signs that a component may be doing too much? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "It mixes unrelated layout, data rules, and many event flows"
+        },
+        {
+          "id": "b",
+          "text": "It cannot be reused without copying large blocks"
+        },
+        {
+          "id": "c",
+          "text": "It has a clear name and one focused responsibility"
+        },
+        {
+          "id": "d",
+          "text": "Small changes regularly break unrelated UI inside it"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Focused components are easier to reuse and maintain; unrelated responsibilities make them fragile.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `<Panel><Profile /></Panel>` pass to `Panel`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A `children` prop containing `<Profile />`"
+        },
+        {
+          "id": "b",
+          "text": "A `profile` HTML attribute"
+        },
+        {
+          "id": "c",
+          "text": "A state setter"
+        },
+        {
+          "id": "d",
+          "text": "Nothing; nested components are ignored"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Nested JSX becomes the `children` prop of the wrapping component.",
+      "points": 1
+    }
+  ]
+}

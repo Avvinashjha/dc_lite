@@ -1,0 +1,23 @@
+{
+  "id": "react-module-17-core-check",
+  "title": "React Data Fetching Core Check",
+  "description": "Check your understanding of data fetching, request state, fetch, Axios, TanStack Query, SWR, caching, revalidation, cancellation, and optimistic updates.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "data-fetching", "fetch", "axios", "cache"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Where should a basic client-side fetch usually be started in a React function component?","options":[{"id":"a","text":"Directly in the component body during render"},{"id":"b","text":"Inside an event handler or an effect such as `useEffect`"},{"id":"c","text":"Inside the JSX return expression"},{"id":"d","text":"Inside a CSS Module"}],"correct":["b"],"explanation":"Fetching during render causes repeated side effects. Effects and event handlers are appropriate places for client-side requests.","points":1},
+    {"id":"q2","type":"multiple","prompt":"Which request states are commonly useful for a data-fetching UI? (Select all that apply.)","options":[{"id":"a","text":"idle or initial"},{"id":"b","text":"loading"},{"id":"c","text":"success with data"},{"id":"d","text":"error with a retry path"}],"correct":["a","b","c","d"],"explanation":"A clear status model helps avoid ambiguous UI and supports loading, success, error, retry, and initial states.","points":2},
+    {"id":"q3","type":"single","prompt":"With the Fetch API, what does `fetch()` do for HTTP 404 or 500 responses?","options":[{"id":"a","text":"It rejects the promise automatically"},{"id":"b","text":"It resolves, so you should check `response.ok`"},{"id":"c","text":"It retries the request once"},{"id":"d","text":"It returns parsed JSON automatically"}],"correct":["b"],"explanation":"Fetch rejects on network failures, but HTTP error status responses still resolve and must be checked with fields like `ok` or `status`.","points":1},
+    {"id":"q4","type":"single","prompt":"Why might a team create an Axios instance?","options":[{"id":"a","text":"To avoid using promises"},{"id":"b","text":"To centralize base URLs, headers, and interceptors"},{"id":"c","text":"To make React render synchronously"},{"id":"d","text":"To replace component state entirely"}],"correct":["b"],"explanation":"Axios instances are useful for shared configuration such as base URLs, auth headers, timeouts, and interceptors.","points":1},
+    {"id":"q5","type":"single","prompt":"In TanStack Query, what should a query key represent?","options":[{"id":"a","text":"Only the component name"},{"id":"b","text":"The identity of the data, including variables like an id or filters"},{"id":"c","text":"A random value generated on every render"},{"id":"d","text":"The CSS class used by the list"}],"correct":["b"],"explanation":"Query keys identify cached server state. Variables that change the requested data should be part of the key.","points":1},
+    {"id":"q6","type":"boolean","prompt":"SWR and TanStack Query can both revalidate cached data in the background.","options":[{"id":"true","text":"True"},{"id":"false","text":"False"}],"correct":["true"],"explanation":"Both libraries support stale-while-revalidate style workflows where cached data can be shown while fresh data is requested.","points":1},
+    {"id":"q7","type":"single","prompt":"What is `AbortController` commonly used for in client-side fetching?","options":[{"id":"a","text":"Cancelling an in-flight request when it is no longer needed"},{"id":"b","text":"Converting JSON into JSX"},{"id":"c","text":"Forcing an error boundary to reset"},{"id":"d","text":"Making all requests synchronous"}],"correct":["a"],"explanation":"AbortController lets you cancel fetch work, which is helpful for cleanup, route changes, and avoiding stale updates.","points":1},
+    {"id":"q8","type":"single","prompt":"What is an optimistic update?","options":[{"id":"a","text":"Showing a successful UI state before the server confirms, then rolling back if needed"},{"id":"b","text":"Waiting for every request to finish before rendering anything"},{"id":"c","text":"Caching only failed responses"},{"id":"d","text":"Turning every query into a mutation"}],"correct":["a"],"explanation":"Optimistic updates make the UI feel fast by applying the expected change immediately, with rollback or correction on failure.","points":1}
+  ]
+}

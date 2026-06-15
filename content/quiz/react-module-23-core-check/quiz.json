@@ -1,0 +1,23 @@
+{
+  "id": "react-module-23-core-check",
+  "title": "React Backend Integration Core Check",
+  "description": "Check your understanding of connecting React to APIs, REST integration, authentication flows, tokens, sessions, WebSockets, file uploads, error handling, retries, and security concerns.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "backend", "rest", "auth", "websockets"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Why create a central API helper in a React app?","options":[{"id":"a","text":"To centralize base URLs, headers, parsing, and error handling"},{"id":"b","text":"To make components render without state"},{"id":"c","text":"To replace all backend authorization"},{"id":"d","text":"To store CSS variables"}],"correct":["a"],"explanation":"Central API helpers reduce repeated request code and keep cross-cutting behavior consistent.","points":1},
+    {"id":"q2","type":"single","prompt":"Which REST method is commonly used to create a resource?","options":[{"id":"a","text":"POST"},{"id":"b","text":"GET"},{"id":"c","text":"HEAD only"},{"id":"d","text":"OPTIONS only"}],"correct":["a"],"explanation":"POST is commonly used to create resources, while GET retrieves them.","points":1},
+    {"id":"q3","type":"multiple","prompt":"Which HTTP status ranges should client code generally handle differently? (Select all that apply.)","options":[{"id":"a","text":"2xx success"},{"id":"b","text":"4xx client or validation/auth errors"},{"id":"c","text":"5xx server errors"},{"id":"d","text":"CSS color names"}],"correct":["a","b","c"],"explanation":"Status codes communicate different outcomes and should influence success, validation, auth, retry, and error UI.","points":2},
+    {"id":"q4","type":"single","prompt":"What is a session cookie often used for?","options":[{"id":"a","text":"Maintaining authenticated server-side session state across requests"},{"id":"b","text":"Rendering React components without JavaScript"},{"id":"c","text":"Replacing all CSRF protections automatically"},{"id":"d","text":"Uploading files without a server"}],"correct":["a"],"explanation":"Session cookies let the browser send an identifier to the server, which can look up session state.","points":1},
+    {"id":"q5","type":"boolean","prompt":"Storing long-lived access tokens in localStorage can increase risk if an XSS bug exists.","options":[{"id":"true","text":"True"},{"id":"false","text":"False"}],"correct":["true"],"explanation":"JavaScript-readable storage can be exposed by XSS. Token storage choices should consider XSS, CSRF, expiry, and refresh flows.","points":1},
+    {"id":"q6","type":"single","prompt":"When are WebSockets a good fit?","options":[{"id":"a","text":"Bidirectional real-time updates such as chat, presence, or live collaboration"},{"id":"b","text":"Static pages that never update"},{"id":"c","text":"Replacing every REST request regardless of need"},{"id":"d","text":"Compiling TypeScript types"}],"correct":["a"],"explanation":"WebSockets maintain a persistent connection for real-time bidirectional communication.","points":1},
+    {"id":"q7","type":"single","prompt":"What should be used to upload a file with `fetch` or Axios in the browser?","options":[{"id":"a","text":"`FormData` with the selected `File`"},{"id":"b","text":"A CSS string"},{"id":"c","text":"`JSON.stringify(file)` as the only step"},{"id":"d","text":"A React key"}],"correct":["a"],"explanation":"FormData is the standard browser API for multipart file uploads.","points":1},
+    {"id":"q8","type":"single","prompt":"What is an important security rule for React API integration?","options":[{"id":"a","text":"Do not trust the client; enforce authorization and validation on the server"},{"id":"b","text":"Hide secrets in JSX comments"},{"id":"c","text":"Skip validation if TypeScript compiles"},{"id":"d","text":"Send admin tokens to every browser"}],"correct":["a"],"explanation":"Client-side checks improve UX but cannot enforce security. The server must validate and authorize requests.","points":1}
+  ]
+}

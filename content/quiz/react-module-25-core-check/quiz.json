@@ -1,0 +1,247 @@
+{
+  "id": "react-module-25-core-check",
+  "title": "React Architecture Core Check",
+  "description": "Check your understanding of project structure, feature architecture, separation of concerns, patterns, scalable state, and error boundaries.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "architecture",
+    "project-structure",
+    "state"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the recommended approach when a React project is still small?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Start with a deeply nested enterprise folder layout"
+        },
+        {
+          "id": "b",
+          "text": "Keep the structure simple and let real pain points guide growth"
+        },
+        {
+          "id": "c",
+          "text": "Move every component into a global shared folder"
+        },
+        {
+          "id": "d",
+          "text": "Create a separate package for every component"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The architecture lessons emphasize starting simple and adding structure when the current layout starts to hurt.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "In a feature-based architecture, what should a feature folder usually contain?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only CSS files"
+        },
+        {
+          "id": "b",
+          "text": "Only route components"
+        },
+        {
+          "id": "c",
+          "text": "UI, hooks, API code, and tests owned by that feature"
+        },
+        {
+          "id": "d",
+          "text": "All shared utilities used by the whole app"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Feature folders group code by product capability and ownership, not just by technical file type.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the main purpose of a feature public API file such as an index export?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Expose every internal helper to other features"
+        },
+        {
+          "id": "b",
+          "text": "Make imports longer but more explicit"
+        },
+        {
+          "id": "c",
+          "text": "Define the supported imports other modules may depend on"
+        },
+        {
+          "id": "d",
+          "text": "Disable tree shaking"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A public API creates an import boundary so other features rely only on intentional exports.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "Which are examples of separate concerns in a React app? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rendering UI"
+        },
+        {
+          "id": "b",
+          "text": "Fetching data"
+        },
+        {
+          "id": "c",
+          "text": "Domain calculations"
+        },
+        {
+          "id": "d",
+          "text": "Duplicating server state into several components"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "UI rendering, data access, and domain rules are different concerns. Duplicated state is a design problem, not a concern to preserve.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Why are custom hooks useful for architecture?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They let components share stateful logic without mixing it into presentation code"
+        },
+        {
+          "id": "b",
+          "text": "They replace all components"
+        },
+        {
+          "id": "c",
+          "text": "They make Hooks optional"
+        },
+        {
+          "id": "d",
+          "text": "They prevent all re-renders"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Custom hooks are a common way to separate reusable stateful behavior from component markup.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which design pattern lets related components share implicit parent context, such as Tabs, TabList, and TabPanel?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adapter pattern"
+        },
+        {
+          "id": "b",
+          "text": "Compound components"
+        },
+        {
+          "id": "c",
+          "text": "Singleton pattern"
+        },
+        {
+          "id": "d",
+          "text": "Observer pattern only"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Compound components coordinate related children through a parent component API.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the default state architecture guideline from the module?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put all state in a global store immediately"
+        },
+        {
+          "id": "b",
+          "text": "Keep state close to where it is used until sharing needs justify moving it"
+        },
+        {
+          "id": "c",
+          "text": "Store all state in URL parameters"
+        },
+        {
+          "id": "d",
+          "text": "Avoid reducers in every case"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Keeping state close reduces accidental coupling and unnecessary app-wide re-renders.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which errors can a React error boundary catch? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Errors thrown during rendering below the boundary"
+        },
+        {
+          "id": "b",
+          "text": "Errors thrown in lifecycle methods below the boundary"
+        },
+        {
+          "id": "c",
+          "text": "Errors thrown inside an event handler callback"
+        },
+        {
+          "id": "d",
+          "text": "Errors from asynchronous code after the render finished"
+        }
+      ],
+      "correct": [
+        "a",
+        "b"
+      ],
+      "explanation": "Error boundaries catch render and lifecycle failures in their subtree, but not event handler or later async errors.",
+      "points": 2
+    }
+  ]
+}

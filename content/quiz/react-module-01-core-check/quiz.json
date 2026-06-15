@@ -1,0 +1,240 @@
+{
+  "id": "react-module-01-core-check",
+  "title": "React Module 01 Core Check",
+  "description": "Check your understanding of React fundamentals, setup, first components, props, state, and the React mental model.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "introduction",
+    "setup",
+    "components"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What problem does React primarily help solve?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Building user interfaces from reusable pieces of UI"
+        },
+        {
+          "id": "b",
+          "text": "Writing SQL queries in the browser"
+        },
+        {
+          "id": "c",
+          "text": "Replacing all CSS in an application"
+        },
+        {
+          "id": "d",
+          "text": "Running a backend server"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React is a UI library focused on building interfaces from reusable components.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which statement best describes declarative UI in React?",
+      "options": [
+        {
+          "id": "a",
+          "text": "You manually edit DOM nodes for every change"
+        },
+        {
+          "id": "b",
+          "text": "You describe the desired UI for a given state"
+        },
+        {
+          "id": "c",
+          "text": "You write HTML files only"
+        },
+        {
+          "id": "d",
+          "text": "You avoid JavaScript expressions"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "React code describes what the UI should look like; React handles updating the DOM.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are core React ideas introduced in this module? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Components"
+        },
+        {
+          "id": "b",
+          "text": "Props"
+        },
+        {
+          "id": "c",
+          "text": "State"
+        },
+        {
+          "id": "d",
+          "text": "Database indexes"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Components, props, state, and composition are central React ideas. Database indexes are unrelated.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "In a Vite React project, which command commonly starts the development server?",
+      "options": [
+        {
+          "id": "a",
+          "text": "npm run build"
+        },
+        {
+          "id": "b",
+          "text": "npm run dev"
+        },
+        {
+          "id": "c",
+          "text": "node index.html"
+        },
+        {
+          "id": "d",
+          "text": "vite deploy"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Vite projects commonly use `npm run dev` to start a local development server.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the usual role of `src/main.jsx` or `src/main.tsx` in a React app?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It defines database schemas"
+        },
+        {
+          "id": "b",
+          "text": "It mounts the root React component into the HTML page"
+        },
+        {
+          "id": "c",
+          "text": "It stores all CSS variables"
+        },
+        {
+          "id": "d",
+          "text": "It replaces package.json"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The entry point creates or uses a React root and renders the app into the HTML mount point.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "boolean",
+      "prompt": "React components should be named with a capital letter when used in JSX.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Capitalized names tell JSX to treat the tag as a component instead of a built-in HTML element.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does a basic function component return?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A JSX description of UI"
+        },
+        {
+          "id": "b",
+          "text": "A package-lock file"
+        },
+        {
+          "id": "c",
+          "text": "A database connection"
+        },
+        {
+          "id": "d",
+          "text": "Only a CSS selector"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Function components return React elements, usually written with JSX.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which statements about props are correct? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Props pass data into a component"
+        },
+        {
+          "id": "b",
+          "text": "Props should be treated as read-only by the receiving component"
+        },
+        {
+          "id": "c",
+          "text": "Props are always strings"
+        },
+        {
+          "id": "d",
+          "text": "Props help configure reusable components"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Props are read-only inputs that configure components and can hold many value types.",
+      "points": 2
+    }
+  ]
+}

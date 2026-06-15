@@ -20,6 +20,22 @@
       "type": "video",
       "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       "duration": "20 min"
+    },
+    {
+      "slug": "04-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-01-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-01-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

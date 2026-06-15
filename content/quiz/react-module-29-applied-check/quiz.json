@@ -1,0 +1,247 @@
+{
+  "id": "react-module-29-applied-check",
+  "title": "React Security Applied Check",
+  "description": "Apply React security knowledge to tricky XSS, CSRF, auth-storage, dependency, rendering, and secret-handling scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "security",
+    "authentication",
+    "dependencies"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A profile page renders user bio HTML from an API with `dangerouslySetInnerHTML`. What is required before doing this?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trust the source or sanitize the HTML with a proven sanitizer"
+        },
+        {
+          "id": "b",
+          "text": "Wrap it in useMemo only"
+        },
+        {
+          "id": "c",
+          "text": "Rename the prop to safeHtml"
+        },
+        {
+          "id": "d",
+          "text": "Move it to localStorage"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Raw HTML rendering must be controlled carefully; naming or memoization does not make untrusted HTML safe.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A user-controlled URL is placed in an anchor href without validation. Which risk should you consider?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Unsafe schemes such as `javascript:` or phishing redirects"
+        },
+        {
+          "id": "b",
+          "text": "React will stop escaping all text"
+        },
+        {
+          "id": "c",
+          "text": "The bundle cannot be minified"
+        },
+        {
+          "id": "d",
+          "text": "CSRF tokens become invalid automatically"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "User-controlled URLs need scheme and destination validation because escaping text is not enough for URL safety.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A cookie-authenticated API accepts `POST /transfer` with no CSRF token or SameSite protection. What is the concern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Another site may trigger an authenticated state-changing request"
+        },
+        {
+          "id": "b",
+          "text": "React components cannot post forms"
+        },
+        {
+          "id": "c",
+          "text": "ESLint will remove cookies"
+        },
+        {
+          "id": "d",
+          "text": "Source maps will leak bundle size"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "CSRF protections matter for cookie-authenticated state-changing operations.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A developer says CORS is enough CSRF protection. What is the correction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "CORS is not a substitute for CSRF defenses on cookie-authenticated writes"
+        },
+        {
+          "id": "b",
+          "text": "CORS only formats code"
+        },
+        {
+          "id": "c",
+          "text": "CORS encrypts cookies"
+        },
+        {
+          "id": "d",
+          "text": "CORS disables all forms"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "CORS and CSRF solve different problems; CSRF needs safe methods, SameSite, tokens, or similar defenses.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "An access token is stored in localStorage and the app later has an XSS bug. What is the main added risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The token can be read by injected JavaScript"
+        },
+        {
+          "id": "b",
+          "text": "The token becomes HttpOnly"
+        },
+        {
+          "id": "c",
+          "text": "React automatically rotates it"
+        },
+        {
+          "id": "d",
+          "text": "The browser refuses to render"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "localStorage is accessible to JavaScript, so XSS can expose tokens stored there.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "Before adding a new UI dependency, what should you review? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Maintenance and package reputation"
+        },
+        {
+          "id": "b",
+          "text": "Transitive dependency and audit signals"
+        },
+        {
+          "id": "c",
+          "text": "Bundle impact"
+        },
+        {
+          "id": "d",
+          "text": "Whether it asks for secrets in client config"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "Dependency security includes trust, maintenance, audit findings, bundle awareness, and suspicious setup requirements.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A `.env.production` file with private keys is committed and referenced by a React build. What should happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rotate exposed secrets and move private operations to a trusted backend"
+        },
+        {
+          "id": "b",
+          "text": "Rename the file and keep using the same keys"
+        },
+        {
+          "id": "c",
+          "text": "Add the keys to VITE_ variables"
+        },
+        {
+          "id": "d",
+          "text": "Rely on minification to hide them"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Committed or bundled secrets should be considered exposed and rotated; client builds cannot keep them private.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A protected route briefly renders private content before auth loading finishes. What is the safer UI pattern?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Render an explicit loading or unknown-auth state until access is known"
+        },
+        {
+          "id": "b",
+          "text": "Hide content with opacity only"
+        },
+        {
+          "id": "c",
+          "text": "Fetch private data before checking auth"
+        },
+        {
+          "id": "d",
+          "text": "Disable logout"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Protected routes need loading states that avoid flashing private UI while authentication is unresolved.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "id": "react-module-16-applied-check",
+  "title": "State Management Applied Check",
+  "description": "Practice choosing between local state, context, Redux Toolkit, Zustand, atom stores, server cache, and URL state.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "state-management",
+    "context-vs-redux",
+    "tool-selection"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A dropdown open flag is used only inside one menu component. Where should it usually live?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Local component state"
+        },
+        {
+          "id": "b",
+          "text": "Redux Toolkit store"
+        },
+        {
+          "id": "c",
+          "text": "URL query string"
+        },
+        {
+          "id": "d",
+          "text": "A Recoil atom by default"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Very local UI state should stay near the component that owns it.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A product search page has filters that should be bookmarkable and shareable. What is a good home for them?",
+      "options": [
+        {
+          "id": "a",
+          "text": "URL search params"
+        },
+        {
+          "id": "b",
+          "text": "A ref"
+        },
+        {
+          "id": "c",
+          "text": "A hidden module variable"
+        },
+        {
+          "id": "d",
+          "text": "componentDidMount only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Shareable view state such as filters and sorting often belongs in the URL.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "A shopping cart is used across many routes and updated by several components. Which tools could be reasonable? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Context with reducer for moderate complexity"
+        },
+        {
+          "id": "b",
+          "text": "Redux Toolkit for structured global updates"
+        },
+        {
+          "id": "c",
+          "text": "Zustand for a lightweight external store"
+        },
+        {
+          "id": "d",
+          "text": "A local useState inside one button only"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Shared client state can fit context plus reducer, Redux Toolkit, or Zustand depending on complexity and team needs.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A list of users comes from an API and needs caching, loading states, errors, and revalidation. What category is it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Server state"
+        },
+        {
+          "id": "b",
+          "text": "DOM ref state"
+        },
+        {
+          "id": "c",
+          "text": "Pure local toggle state"
+        },
+        {
+          "id": "d",
+          "text": "This binding state"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Remote data should be treated as server state with cache and synchronization concerns.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Reducers should stay pure and avoid starting network requests inside reducer logic.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Reducers calculate next state from inputs; async work belongs in thunks, effects, or data libraries.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A Redux slice needs to update state after an async save succeeds. What Redux Toolkit feature can help model the async flow?",
+      "options": [
+        {
+          "id": "a",
+          "text": "createAsyncThunk or similar async logic outside reducers"
+        },
+        {
+          "id": "b",
+          "text": "forwardRef"
+        },
+        {
+          "id": "c",
+          "text": "useImperativeHandle"
+        },
+        {
+          "id": "d",
+          "text": "NavLink"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "RTK supports async thunks that dispatch lifecycle actions handled by reducers.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "When might atom-based stores like Jotai or Recoil fit? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Many small independent pieces of state"
+        },
+        {
+          "id": "b",
+          "text": "Derived state graphs"
+        },
+        {
+          "id": "c",
+          "text": "A need to avoid one large centralized object"
+        },
+        {
+          "id": "d",
+          "text": "Replacing server authorization"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Atom stores can model granular client state and derived relationships; they do not replace backend security.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A team asks which state library to pick. What should guide the decision first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "State ownership, sharing scope, update complexity, async needs, and team familiarity"
+        },
+        {
+          "id": "b",
+          "text": "The newest library name only"
+        },
+        {
+          "id": "c",
+          "text": "Whether it removes all props"
+        },
+        {
+          "id": "d",
+          "text": "Whether it makes state immutable automatically everywhere"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Tool choice should follow the problem: who owns the state, who reads it, how it changes, and what the team can maintain.",
+      "points": 1
+    }
+  ]
+}

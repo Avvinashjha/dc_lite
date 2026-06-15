@@ -1,0 +1,241 @@
+{
+  "id": "react-module-03-applied-check",
+  "title": "React Module 03 Applied Check",
+  "description": "Apply JSX syntax, expression, attribute, fragment, list, and security rules to realistic rendering mistakes.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "jsx",
+    "security",
+    "fragments",
+    "attributes"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is wrong with `return <h1>Hi</h1><p>Welcome</p>;` inside a component?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It returns adjacent JSX without one root value"
+        },
+        {
+          "id": "b",
+          "text": "`h1` cannot be used in React"
+        },
+        {
+          "id": "c",
+          "text": "Paragraphs require `className`"
+        },
+        {
+          "id": "d",
+          "text": "Text cannot appear in JSX"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Adjacent elements must be wrapped in a parent element or Fragment.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which JSX correctly renders a dynamic image alt value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`<img alt=\"{label}\" />`"
+        },
+        {
+          "id": "b",
+          "text": "`<img alt={label} />`"
+        },
+        {
+          "id": "c",
+          "text": "`<img alt: label />`"
+        },
+        {
+          "id": "d",
+          "text": "`<img {alt=label} />`"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Use curly braces to pass the JavaScript value of `label`, not the literal string `{label}`.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are common JSX mistakes? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using `class` instead of `className`"
+        },
+        {
+          "id": "b",
+          "text": "Using `for` instead of `htmlFor` on labels"
+        },
+        {
+          "id": "c",
+          "text": "Forgetting to close tags like `<img />`"
+        },
+        {
+          "id": "d",
+          "text": "Using expressions in curly braces"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "JSX has DOM prop naming rules and requires tags to be closed. Expressions in braces are normal.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the safer default for rendering user text like `comment.body`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Render `{comment.body}` as text"
+        },
+        {
+          "id": "b",
+          "text": "Always pass it to `dangerouslySetInnerHTML`"
+        },
+        {
+          "id": "c",
+          "text": "Use `eval(comment.body)`"
+        },
+        {
+          "id": "d",
+          "text": "Store it in `style`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React escapes rendered text by default, which helps prevent script injection.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "`dangerouslySetInnerHTML` should be reserved for trusted or sanitized HTML because it bypasses React text escaping.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Injecting raw HTML can create XSS risks unless the content is trusted or sanitized.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does `{items.length && <List />}` render when `items.length` is `0`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nothing at all"
+        },
+        {
+          "id": "b",
+          "text": "The number `0` may be rendered"
+        },
+        {
+          "id": "c",
+          "text": "`false` as text"
+        },
+        {
+          "id": "d",
+          "text": "It always throws"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The `&&` expression returns `0`, and React can render the number. Prefer an explicit comparison.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which JSX snippets are valid ways to conditionally render UI? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "`{isOpen ? <Panel /> : null}`"
+        },
+        {
+          "id": "b",
+          "text": "`{isOpen && <Panel />}`"
+        },
+        {
+          "id": "c",
+          "text": "`{if (isOpen) <Panel />}`"
+        },
+        {
+          "id": "d",
+          "text": "An early `return null` before the main JSX"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Ternaries, logical AND, and early returns are valid. A raw `if` statement is not an expression inside JSX braces.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which prop spread use is easiest to reason about?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Spread known safe props intentionally, such as `<Button {...buttonProps} />`"
+        },
+        {
+          "id": "b",
+          "text": "Spread every object from an API directly onto a DOM element"
+        },
+        {
+          "id": "c",
+          "text": "Use spread to avoid knowing which props are accepted"
+        },
+        {
+          "id": "d",
+          "text": "Spread user input into `dangerouslySetInnerHTML`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Prop spread is useful when the object is intentional and understood; blind spreading can leak unwanted attributes or behavior.",
+      "points": 2
+    }
+  ]
+}

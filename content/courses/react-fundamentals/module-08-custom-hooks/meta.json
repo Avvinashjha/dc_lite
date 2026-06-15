@@ -25,6 +25,22 @@
       "title": "Common Custom Hooks",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "05-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-08-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "06-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-08-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

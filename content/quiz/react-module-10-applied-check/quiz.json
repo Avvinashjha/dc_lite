@@ -1,0 +1,240 @@
+{
+  "id": "react-module-10-applied-check",
+  "title": "Context API Applied Check",
+  "description": "Practice choosing context boundaries, provider placement, custom hooks, and performance-aware context design.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "context",
+    "performance",
+    "state-sharing"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A theme value is needed by most pages, but a modal-specific setting is needed only inside one modal. Where should each provider go?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Both at the app root"
+        },
+        {
+          "id": "b",
+          "text": "Theme high in the tree, modal setting near the modal subtree"
+        },
+        {
+          "id": "c",
+          "text": "Both inside every button"
+        },
+        {
+          "id": "d",
+          "text": "No providers; use global variables"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Providers should be placed as high as necessary and as low as practical.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "A context value is { user, setUser, searchText, setSearchText }. searchText changes on each keystroke. What could improve updates? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep searchText local if only the search box needs it"
+        },
+        {
+          "id": "b",
+          "text": "Split user and search state into separate contexts"
+        },
+        {
+          "id": "c",
+          "text": "Move everything into one larger context"
+        },
+        {
+          "id": "d",
+          "text": "Memoize provider values where object identity is the issue"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Fast-changing or local state should not force unrelated context consumers to update.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A component calls useContext(AuthContext) outside AuthProvider and receives null. What is a good custom hook behavior?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Throw a clear error explaining the provider is missing"
+        },
+        {
+          "id": "b",
+          "text": "Silently create a new provider"
+        },
+        {
+          "id": "c",
+          "text": "Mutate the default context"
+        },
+        {
+          "id": "d",
+          "text": "Reload the page"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A custom hook can fail fast with a helpful message when provider placement is wrong.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "boolean",
+      "prompt": "Putting a new object literal directly in provider value can cause consumers to update whenever the provider renders.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Context compares value identity, so a new object reference can trigger consumer updates.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A deeply nested component needs one callback and one label from its immediate parent. What is often simplest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pass props directly"
+        },
+        {
+          "id": "b",
+          "text": "Create a new global context"
+        },
+        {
+          "id": "c",
+          "text": "Use Redux Toolkit immediately"
+        },
+        {
+          "id": "d",
+          "text": "Store the label in localStorage"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Short, local prop passing is clear and often simpler than adding context.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "Which are reasonable reasons to avoid context for a particular state? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "The value changes very frequently and many consumers do not need it"
+        },
+        {
+          "id": "b",
+          "text": "The value is server cache data better handled by a data fetching library"
+        },
+        {
+          "id": "c",
+          "text": "The value is only used by a parent and one child"
+        },
+        {
+          "id": "d",
+          "text": "The value is theme used by the whole app"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Context is not always the right tool for high-frequency, server, or very local state.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Two nested ThemeProviders provide \"light\" and then \"dark\". What does a consumer inside the inner provider read?",
+      "options": [
+        {
+          "id": "a",
+          "text": "dark"
+        },
+        {
+          "id": "b",
+          "text": "light"
+        },
+        {
+          "id": "c",
+          "text": "Both values as an array"
+        },
+        {
+          "id": "d",
+          "text": "The default value"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Consumers read the nearest matching provider value above them.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A provider exposes state and actions. Which pattern is usually clean?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Expose a stable, documented context shape and update it through provider-owned state"
+        },
+        {
+          "id": "b",
+          "text": "Let consumers mutate provider internals directly"
+        },
+        {
+          "id": "c",
+          "text": "Put unrelated app-wide variables into the same context"
+        },
+        {
+          "id": "d",
+          "text": "Require consumers to import private module variables"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Providers should own updates and expose a clear value shape to consumers.",
+      "points": 1
+    }
+  ]
+}

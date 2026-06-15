@@ -1,0 +1,230 @@
+{
+  "id": "react-module-09-core-check",
+  "title": "Effects and Lifecycle Core Check",
+  "description": "Check your understanding of component lifecycle, useEffect, dependencies, cleanup, and effect boundaries.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "effects",
+    "lifecycle",
+    "useeffect"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the main purpose of useEffect in React?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To calculate JSX during render"
+        },
+        {
+          "id": "b",
+          "text": "To synchronize a component with an external system"
+        },
+        {
+          "id": "c",
+          "text": "To create local state variables"
+        },
+        {
+          "id": "d",
+          "text": "To prevent all re-renders"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Effects are for synchronization with systems outside React, such as the DOM, subscriptions, timers, or network requests.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which sequence best describes React work around the DOM?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Commit, render, cleanup"
+        },
+        {
+          "id": "b",
+          "text": "Render, commit, then effects run after commit"
+        },
+        {
+          "id": "c",
+          "text": "Effect, render, commit"
+        },
+        {
+          "id": "d",
+          "text": "Cleanup, effect, render"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "React calculates UI during render, commits changes to the DOM, then runs effects after the committed update.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which values usually belong in an effect dependency array? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Props read by the effect"
+        },
+        {
+          "id": "b",
+          "text": "State read by the effect"
+        },
+        {
+          "id": "c",
+          "text": "Local variables derived during render and read by the effect"
+        },
+        {
+          "id": "d",
+          "text": "The effect function name as a string"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Dependencies should include reactive values from component scope that the effect reads.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does an empty dependency array usually mean?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Run the effect after every render"
+        },
+        {
+          "id": "b",
+          "text": "Run the effect after mount, then cleanup on unmount"
+        },
+        {
+          "id": "c",
+          "text": "Never run the effect"
+        },
+        {
+          "id": "d",
+          "text": "Run cleanup before every render"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "An empty dependency array means the effect does not depend on changing reactive values, so it runs after mount and cleans up on unmount.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "A cleanup function can remove event listeners, clear timers, unsubscribe, or abort an in-flight request.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Cleanup releases external resources created by the effect.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "When does React run the cleanup for an effect whose dependencies changed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when the browser tab closes"
+        },
+        {
+          "id": "b",
+          "text": "Before running the next version of that effect"
+        },
+        {
+          "id": "c",
+          "text": "Before rendering any component"
+        },
+        {
+          "id": "d",
+          "text": "Only after a full page reload"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "For changed dependencies, React cleans up the previous effect before running the next effect setup.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which task usually should not be put in an effect?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Opening a WebSocket subscription"
+        },
+        {
+          "id": "b",
+          "text": "Starting and clearing an interval"
+        },
+        {
+          "id": "c",
+          "text": "Deriving fullName from firstName and lastName for display"
+        },
+        {
+          "id": "d",
+          "text": "Synchronizing document.title with state"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Pure derived values should be calculated during render instead of stored and updated through an effect.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "In development Strict Mode, effects may run setup and cleanup more than once to reveal unsafe side effects.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Strict Mode intentionally re-runs effects in development so missing cleanup and non-idempotent logic are easier to find.",
+      "points": 1
+    }
+  ]
+}

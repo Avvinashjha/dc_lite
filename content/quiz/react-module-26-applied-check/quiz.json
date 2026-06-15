@@ -1,0 +1,246 @@
+{
+  "id": "react-module-26-applied-check",
+  "title": "React Tooling Applied Check",
+  "description": "Apply React tooling knowledge to tricky build, environment, linting, source-map, and bundle-inspection scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "tooling",
+    "builds",
+    "environment-variables"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A developer puts `VITE_STRIPE_SECRET_KEY` in a Vite React app. What is the problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The value can be bundled into browser-visible code"
+        },
+        {
+          "id": "b",
+          "text": "Vite ignores every variable with VITE_"
+        },
+        {
+          "id": "c",
+          "text": "The variable will be encrypted in the bundle"
+        },
+        {
+          "id": "d",
+          "text": "React will convert it to state"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Anything exposed to client code must be treated as public; secret keys belong on a server.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Ops changes `VITE_API_BASE_URL` on a server after a static React bundle was already built, but the app still calls the old URL. Why?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Frontend build-time variables are baked into the generated assets"
+        },
+        {
+          "id": "b",
+          "text": "React caches environment variables in useState"
+        },
+        {
+          "id": "c",
+          "text": "Prettier removed the value"
+        },
+        {
+          "id": "d",
+          "text": "The browser blocks all environment variables"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Build-time configuration is substituted during the build; runtime changes need a different config delivery strategy.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "What should you check before publishing source maps for a production app? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether original source contains sensitive comments or secrets"
+        },
+        {
+          "id": "b",
+          "text": "Who can access the uploaded maps"
+        },
+        {
+          "id": "c",
+          "text": "Whether maps are needed for error monitoring"
+        },
+        {
+          "id": "d",
+          "text": "Whether source maps make passwords safe to expose"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Source maps can be valuable, but access and source contents need review. They do not make secrets safe.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "An app uses modern syntax that builds successfully, but older supported browsers fail at runtime because a missing API is not available. What tooling concept is involved?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Polyfills"
+        },
+        {
+          "id": "b",
+          "text": "JSX fragments"
+        },
+        {
+          "id": "c",
+          "text": "Git tags"
+        },
+        {
+          "id": "d",
+          "text": "ARIA labels"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Babel can transform syntax, but missing browser APIs may require polyfills depending on target support.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "During development, React Fast Refresh preserves component state after an edit. What common caveat should you remember?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Preserved state can hide initialization bugs until a full reload"
+        },
+        {
+          "id": "b",
+          "text": "It means production builds also hot reload"
+        },
+        {
+          "id": "c",
+          "text": "It disables Hooks rules"
+        },
+        {
+          "id": "d",
+          "text": "It replaces all tests"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Fast Refresh is helpful, but a full reload can reveal issues hidden by preserved local state.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A bundle report shows a large date library in the main chunk used only on an admin route. What is a reasonable next step?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Consider route-level code splitting or a smaller dependency"
+        },
+        {
+          "id": "b",
+          "text": "Move the library into every component"
+        },
+        {
+          "id": "c",
+          "text": "Disable minification"
+        },
+        {
+          "id": "d",
+          "text": "Commit the bundle report as source code"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Build inspection should guide practical improvements such as splitting infrequent code or replacing heavy dependencies.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "ESLint and Prettier keep changing the same line back and forth. What is the likely issue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Formatting-related lint rules are conflicting with Prettier configuration"
+        },
+        {
+          "id": "b",
+          "text": "React state is stale"
+        },
+        {
+          "id": "c",
+          "text": "The browser lacks source-map support"
+        },
+        {
+          "id": "d",
+          "text": "Vite cannot run ESLint"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Tooling should be configured so Prettier owns formatting and ESLint focuses on code issues.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A Webpack app ships one huge initial bundle despite having rarely used admin pages. Which feature targets this issue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Code splitting"
+        },
+        {
+          "id": "b",
+          "text": "Boolean props"
+        },
+        {
+          "id": "c",
+          "text": "CSS inheritance"
+        },
+        {
+          "id": "d",
+          "text": "CSRF tokens"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Code splitting can move less-used code out of the initial bundle.",
+      "points": 1
+    }
+  ]
+}

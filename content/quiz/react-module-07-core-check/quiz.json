@@ -1,0 +1,248 @@
+{
+  "id": "react-module-07-core-check",
+  "title": "React Module 07 Core Check",
+  "description": "Check your understanding of built-in Hooks, the Rules of Hooks, useState, useEffect, useContext, useRef, useMemo, useCallback, and useReducer.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "hooks",
+    "useeffect",
+    "usestate"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What do Hooks let function components do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use React features such as state, effects, refs, and context"
+        },
+        {
+          "id": "b",
+          "text": "Write SQL in JSX"
+        },
+        {
+          "id": "c",
+          "text": "Skip rendering forever"
+        },
+        {
+          "id": "d",
+          "text": "Turn CSS into JavaScript automatically"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Hooks are functions that let components use React features during rendering.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "Which are Rules of Hooks? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Call Hooks at the top level"
+        },
+        {
+          "id": "b",
+          "text": "Call Hooks only from React functions or custom Hooks"
+        },
+        {
+          "id": "c",
+          "text": "Call Hooks inside any loop if it is short"
+        },
+        {
+          "id": "d",
+          "text": "Use custom Hook names that start with `use`"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Stable Hook order matters, and custom Hook names signal Hook behavior to tooling.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which Hook is used for synchronizing with external systems after render?",
+      "options": [
+        {
+          "id": "a",
+          "text": "useEffect"
+        },
+        {
+          "id": "b",
+          "text": "useMemo"
+        },
+        {
+          "id": "c",
+          "text": "useReducer"
+        },
+        {
+          "id": "d",
+          "text": "useCallback"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`useEffect` runs after render and is used for side effects such as subscriptions or data fetching.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which Hook reads a Context value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "useContext"
+        },
+        {
+          "id": "b",
+          "text": "useRef"
+        },
+        {
+          "id": "c",
+          "text": "useReducer"
+        },
+        {
+          "id": "d",
+          "text": "useCallback"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`useContext` reads the nearest matching provider value.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is a common use of `useRef`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accessing a DOM node or storing a mutable value that does not trigger renders"
+        },
+        {
+          "id": "b",
+          "text": "Replacing every state update"
+        },
+        {
+          "id": "c",
+          "text": "Creating CSS modules"
+        },
+        {
+          "id": "d",
+          "text": "Sorting arrays automatically"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Refs hold mutable `.current` values and can point to DOM elements. Updating a ref does not re-render.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does `useMemo` memoize?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A calculated value"
+        },
+        {
+          "id": "b",
+          "text": "A component file on disk"
+        },
+        {
+          "id": "c",
+          "text": "A reducer action"
+        },
+        {
+          "id": "d",
+          "text": "A DOM event name"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`useMemo` caches a calculated value until dependencies change.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does `useCallback` memoize?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A function identity"
+        },
+        {
+          "id": "b",
+          "text": "A CSS selector"
+        },
+        {
+          "id": "c",
+          "text": "A Context provider"
+        },
+        {
+          "id": "d",
+          "text": "A browser tab"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`useCallback(fn, deps)` returns a stable function reference while dependencies stay the same.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "When can `useReducer` be a good fit? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "State transitions are complex"
+        },
+        {
+          "id": "b",
+          "text": "Updates are easier to express as actions"
+        },
+        {
+          "id": "c",
+          "text": "The reducer can stay pure"
+        },
+        {
+          "id": "d",
+          "text": "You need to perform network requests inside the reducer"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Reducers centralize pure state transitions. Side effects should stay outside reducers.",
+      "points": 2
+    }
+  ]
+}

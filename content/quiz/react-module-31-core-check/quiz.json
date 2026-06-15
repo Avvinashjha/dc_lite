@@ -1,0 +1,238 @@
+{
+  "id": "react-module-31-core-check",
+  "title": "React Project-Based Learning Core Check",
+  "description": "Check your understanding of project requirements, component architecture, milestones, acceptance criteria, extensions, and tradeoffs.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "projects",
+    "requirements",
+    "architecture"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What should define the scope of a project before coding?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Core requirements and acceptance criteria"
+        },
+        {
+          "id": "b",
+          "text": "The longest possible folder names"
+        },
+        {
+          "id": "c",
+          "text": "Only the CSS framework"
+        },
+        {
+          "id": "d",
+          "text": "A random dependency list"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Project lessons begin with goals, requirements, and acceptance criteria.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "In the Todo app project, why split components such as input, list, and item?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To keep responsibilities clear and easier to test"
+        },
+        {
+          "id": "b",
+          "text": "To prevent all state changes"
+        },
+        {
+          "id": "c",
+          "text": "To avoid props"
+        },
+        {
+          "id": "d",
+          "text": "To require global state"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Suggested component architectures separate responsibilities into focused pieces.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What issue does the Weather Dashboard lesson call out around fast repeated searches?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stale responses arriving out of order"
+        },
+        {
+          "id": "b",
+          "text": "CSS variables disappearing"
+        },
+        {
+          "id": "c",
+          "text": "React refusing to fetch data"
+        },
+        {
+          "id": "d",
+          "text": "Keys becoming optional"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Async projects must handle stale or out-of-order responses.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is a key requirement in an e-commerce cart?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Update quantities and totals correctly"
+        },
+        {
+          "id": "b",
+          "text": "Store prices as random strings"
+        },
+        {
+          "id": "c",
+          "text": "Never handle empty carts"
+        },
+        {
+          "id": "d",
+          "text": "Use only uncontrolled inputs"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Cart projects center on correct cart actions, quantities, totals, and edge cases.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multiple",
+      "prompt": "Which are useful project milestones? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Static UI"
+        },
+        {
+          "id": "b",
+          "text": "State interactions"
+        },
+        {
+          "id": "c",
+          "text": "API or persistence integration"
+        },
+        {
+          "id": "d",
+          "text": "Ignoring manual testing until after launch"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Milestones break a project into reviewable increments such as UI, state, data, and polish.",
+      "points": 2
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Why write a manual test script for a project?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To verify important user flows and edge cases consistently"
+        },
+        {
+          "id": "b",
+          "text": "To replace all code review"
+        },
+        {
+          "id": "c",
+          "text": "To generate production secrets"
+        },
+        {
+          "id": "d",
+          "text": "To avoid acceptance criteria"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Manual test scripts make project validation repeatable.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is an extension idea in project-based learning?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A non-essential enhancement after core requirements work"
+        },
+        {
+          "id": "b",
+          "text": "A bug that blocks the first milestone"
+        },
+        {
+          "id": "c",
+          "text": "A replacement for the project goal"
+        },
+        {
+          "id": "d",
+          "text": "A hidden dependency"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Extensions add stretch value after the core project is complete.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "A project README checklist can help communicate setup, features, tradeoffs, and known limitations.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "The project module encourages documenting how the app works and what decisions were made.",
+      "points": 1
+    }
+  ]
+}

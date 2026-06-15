@@ -31,6 +31,28 @@
       "title": "Form Libraries",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-submit-flows-and-async-errors",
+      "title": "Submit Flows and Async Errors",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-06-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-06-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

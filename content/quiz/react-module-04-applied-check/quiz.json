@@ -1,0 +1,241 @@
+{
+  "id": "react-module-04-applied-check",
+  "title": "React Module 04 Applied Check",
+  "description": "Apply rendering, reconciliation, key, list, conditional UI, and state preservation concepts to practical React scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "rendering",
+    "reconciliation",
+    "keys",
+    "conditional-rendering"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A todo list uses `key={index}` and users can reorder todos. What is the main risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "React may preserve state on the wrong item after reordering"
+        },
+        {
+          "id": "b",
+          "text": "The app will not compile because indexes are forbidden"
+        },
+        {
+          "id": "c",
+          "text": "The list will always render twice"
+        },
+        {
+          "id": "d",
+          "text": "CSS classes will disappear"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Index keys track position, not item identity, so reordering can attach state to the wrong row.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Why are random keys like `key={Math.random()}` harmful?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They change every render, forcing React to recreate items"
+        },
+        {
+          "id": "b",
+          "text": "They make numbers render as strings"
+        },
+        {
+          "id": "c",
+          "text": "They disable JSX"
+        },
+        {
+          "id": "d",
+          "text": "They prevent arrays from mapping"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Changing keys make React treat existing children as new, losing state and doing extra work.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which choices help React preserve the right identity? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use stable IDs from data as keys"
+        },
+        {
+          "id": "b",
+          "text": "Keep the same component type at a position when preserving state matters"
+        },
+        {
+          "id": "c",
+          "text": "Use keys to intentionally reset state when needed"
+        },
+        {
+          "id": "d",
+          "text": "Generate a new random key on each render"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Stable keys and consistent types preserve identity; changing a key can intentionally reset state.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A component switches between `<Input />` and `<textarea />` at the same position. What should you expect?",
+      "options": [
+        {
+          "id": "a",
+          "text": "React treats different element types as different trees"
+        },
+        {
+          "id": "b",
+          "text": "React preserves all DOM state no matter what"
+        },
+        {
+          "id": "c",
+          "text": "React ignores the change"
+        },
+        {
+          "id": "d",
+          "text": "React converts textarea into Input props"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Different element or component types cause React to replace that part of the tree.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "The virtual DOM makes every update free, so render performance never matters.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "The virtual DOM helps React organize updates, but rendering still has costs and poor patterns can hurt performance.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is a good empty-state pattern for a list?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Render a helpful fallback when the filtered array is empty"
+        },
+        {
+          "id": "b",
+          "text": "Render nothing and assume users know why"
+        },
+        {
+          "id": "c",
+          "text": "Use duplicate keys for all items"
+        },
+        {
+          "id": "d",
+          "text": "Throw an error when there are no items"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Empty states explain why no list items are visible and improve usability.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which conditional rendering choices are appropriate in React? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Early return for loading or error states"
+        },
+        {
+          "id": "b",
+          "text": "Ternary for choosing between two UI branches"
+        },
+        {
+          "id": "c",
+          "text": "Returning `null` when there is intentionally no UI"
+        },
+        {
+          "id": "d",
+          "text": "Mutating the DOM manually in an `if` statement during render"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "React conditions should choose what JSX to return rather than imperatively editing the DOM.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A detail form should reset when selecting a different user. Which approach can be intentional?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Key the form by `user.id`"
+        },
+        {
+          "id": "b",
+          "text": "Use the same key for every user"
+        },
+        {
+          "id": "c",
+          "text": "Use array index from an unrelated list"
+        },
+        {
+          "id": "d",
+          "text": "Remove all state setters"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Changing a key tells React to treat the form as a new instance, resetting its state.",
+      "points": 2
+    }
+  ]
+}
