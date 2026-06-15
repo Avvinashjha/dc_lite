@@ -1,0 +1,230 @@
+{
+  "id": "react-module-10-core-check",
+  "title": "Context API Core Check",
+  "description": "Check your understanding of prop drilling, context creation, providers, useContext, and context best practices.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "context",
+    "provider",
+    "usecontext"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What problem does React Context primarily help solve?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sharing values through a component subtree without passing props at every level"
+        },
+        {
+          "id": "b",
+          "text": "Replacing all local state"
+        },
+        {
+          "id": "c",
+          "text": "Making network requests faster"
+        },
+        {
+          "id": "d",
+          "text": "Preventing every render"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Context is useful when many descendants need the same value and prop drilling becomes awkward.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "boolean",
+      "prompt": "Prop drilling is always bad and should always be replaced with context.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Passing props is often explicit and simple. Context is best when shared access improves clarity.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which component makes a context value available to descendants?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Context.Provider"
+        },
+        {
+          "id": "b",
+          "text": "Context.Consumer only"
+        },
+        {
+          "id": "c",
+          "text": "React.memo"
+        },
+        {
+          "id": "d",
+          "text": "StrictMode"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A Provider supplies the value that descendants can read from the context.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does useContext(SomeContext) return?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The nearest matching provider value above the component"
+        },
+        {
+          "id": "b",
+          "text": "A setter for the provider only"
+        },
+        {
+          "id": "c",
+          "text": "Every provider in the app"
+        },
+        {
+          "id": "d",
+          "text": "The default value even when a provider exists"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "useContext reads the value from the closest matching provider in the component tree.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multiple",
+      "prompt": "Which values are common fits for context? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Current theme"
+        },
+        {
+          "id": "b",
+          "text": "Authenticated user summary"
+        },
+        {
+          "id": "c",
+          "text": "Locale"
+        },
+        {
+          "id": "d",
+          "text": "Every keystroke of a local form field"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Theme, auth user, and locale are commonly shared across a subtree; local form input often belongs near the form.",
+      "points": 2
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Why might a custom hook wrap useContext?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To centralize provider-missing checks and simplify imports"
+        },
+        {
+          "id": "b",
+          "text": "To make context update synchronously before render"
+        },
+        {
+          "id": "c",
+          "text": "To bypass React rendering"
+        },
+        {
+          "id": "d",
+          "text": "To mutate the context default value"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A custom hook can provide a clean API and throw a helpful error when used outside its provider.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Why split one large context into smaller contexts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To group values with different change patterns and reduce unnecessary consumers updates"
+        },
+        {
+          "id": "b",
+          "text": "To make all updates global"
+        },
+        {
+          "id": "c",
+          "text": "To avoid using providers entirely"
+        },
+        {
+          "id": "d",
+          "text": "To remove the need for state"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Separating slow-changing and fast-changing values can keep unrelated consumers from updating together.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "Provider value identity can matter for performance when many consumers depend on the context.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "A newly created object or function value can notify consumers more often than intended.",
+      "points": 1
+    }
+  ]
+}

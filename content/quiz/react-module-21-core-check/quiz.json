@@ -1,0 +1,23 @@
+{
+  "id": "react-module-21-core-check",
+  "title": "React Internals Core Check",
+  "description": "Check your understanding of React architecture, Fiber, reconciliation, render and commit phases, concurrent rendering, scheduling, batching, and Strict Mode.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "internals", "fiber", "reconciliation", "concurrency"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {"id":"q1","type":"single","prompt":"Which statement best describes React's declarative model?","options":[{"id":"a","text":"You describe the UI for a given state, and React figures out the DOM updates"},{"id":"b","text":"You manually mutate every DOM node yourself"},{"id":"c","text":"React stores CSS in the browser kernel"},{"id":"d","text":"Components must always be classes"}],"correct":["a"],"explanation":"React lets you describe what the UI should look like, then it reconciles and commits necessary updates.","points":1},
+    {"id":"q2","type":"single","prompt":"What is a Fiber in React's implementation?","options":[{"id":"a","text":"A unit of work representing part of the component tree"},{"id":"b","text":"A CSS file imported by a component"},{"id":"c","text":"A browser-only network request"},{"id":"d","text":"A replacement for JavaScript promises"}],"correct":["a"],"explanation":"Fiber is React's internal structure for tracking component work, state, effects, and scheduling.","points":1},
+    {"id":"q3","type":"single","prompt":"During reconciliation, why do keys matter for lists?","options":[{"id":"a","text":"They help React match children and preserve the right state across reorders"},{"id":"b","text":"They make arrays sort alphabetically"},{"id":"c","text":"They disable rerenders"},{"id":"d","text":"They become CSS ids automatically"}],"correct":["a"],"explanation":"Stable keys help React understand item identity, which is crucial for correct state preservation.","points":1},
+    {"id":"q4","type":"single","prompt":"What should happen during the render phase?","options":[{"id":"a","text":"Pure calculation of the next UI"},{"id":"b","text":"Direct DOM mutations and subscriptions"},{"id":"c","text":"Synchronous localStorage writes on every render"},{"id":"d","text":"Manual network retries"}],"correct":["a"],"explanation":"Render should be pure. Side effects belong in effects, event handlers, or the commit phase mechanisms React controls.","points":1},
+    {"id":"q5","type":"single","prompt":"What happens in the commit phase?","options":[{"id":"a","text":"React applies changes to the host environment and runs commit-related lifecycles and effects"},{"id":"b","text":"React only compares JavaScript objects forever"},{"id":"c","text":"React parses TypeScript types"},{"id":"d","text":"React downloads npm packages"}],"correct":["a"],"explanation":"The commit phase is when calculated changes are applied, refs update, layout effects run, and later passive effects are scheduled.","points":1},
+    {"id":"q6","type":"boolean","prompt":"Concurrent rendering means React may start rendering work, pause it, and continue or discard it before commit.","options":[{"id":"true","text":"True"},{"id":"false","text":"False"}],"correct":["true"],"explanation":"Concurrent rendering lets React interrupt and prioritize render work, but only committed work affects the DOM.","points":1},
+    {"id":"q7","type":"multiple","prompt":"Which ideas are related to batching and scheduling? (Select all that apply.)","options":[{"id":"a","text":"Multiple state updates can be grouped into one render"},{"id":"b","text":"Updates can have different priorities"},{"id":"c","text":"State updates are requests, not immediate variable mutations"},{"id":"d","text":"Every `setState` always commits synchronously"}],"correct":["a","b","c"],"explanation":"React can batch updates and schedule work by priority. State setters request updates rather than changing current render variables immediately.","points":2},
+    {"id":"q8","type":"single","prompt":"Why does Strict Mode intentionally double-invoke some development-only behavior?","options":[{"id":"a","text":"To surface impure render logic and missing cleanup problems"},{"id":"b","text":"To make production twice as slow"},{"id":"c","text":"To prevent all effects from running"},{"id":"d","text":"To replace testing libraries"}],"correct":["a"],"explanation":"Strict Mode helps reveal side effects and cleanup issues during development. It does not double-invoke production behavior the same way.","points":1}
+  ]
+}

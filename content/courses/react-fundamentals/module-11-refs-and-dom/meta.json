@@ -31,6 +31,22 @@
       "title": "useImperativeHandle",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-11-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-11-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

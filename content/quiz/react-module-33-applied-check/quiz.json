@@ -1,0 +1,246 @@
+{
+  "id": "react-module-33-applied-check",
+  "title": "React Certification Applied Check",
+  "description": "Apply certification-readiness judgment to capstone, final assessment, rubric, debugging, and mock interview scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "certification",
+    "final-assessment",
+    "mock-interview"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A capstone works locally but has no README, setup steps, or tradeoff notes. What assessment risk does this create?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reviewers may not be able to run or evaluate the work fully"
+        },
+        {
+          "id": "b",
+          "text": "React will not render components"
+        },
+        {
+          "id": "c",
+          "text": "The app becomes inaccessible automatically"
+        },
+        {
+          "id": "d",
+          "text": "The bundle cannot be minified"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Certification evidence should make setup, behavior, and decisions clear to reviewers.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A candidate passes a quiz by memorization but cannot debug a broken effect dependency. What should remediation focus on?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hands-on debugging and explaining effect behavior"
+        },
+        {
+          "id": "b",
+          "text": "More memorization only"
+        },
+        {
+          "id": "c",
+          "text": "Changing the project name"
+        },
+        {
+          "id": "d",
+          "text": "Skipping Hooks"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Readiness requires applying concepts to real debugging, not just recalling terms.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "A strong final coding submission should include which qualities? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Correct core behavior"
+        },
+        {
+          "id": "b",
+          "text": "Handled edge cases"
+        },
+        {
+          "id": "c",
+          "text": "Clear component and state structure"
+        },
+        {
+          "id": "d",
+          "text": "Secrets embedded in the frontend for convenience"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Rubrics typically reward correctness, edge cases, clarity, and safe decisions.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "During a mock interview, the interviewer challenges your use of Context for server data. What is the best response?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Explain the tradeoff and discuss when a server-state library would be better"
+        },
+        {
+          "id": "b",
+          "text": "Say Context is always perfect"
+        },
+        {
+          "id": "c",
+          "text": "Ignore the question"
+        },
+        {
+          "id": "d",
+          "text": "Switch topics to styling only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Mock readiness includes defending choices with tradeoffs and alternatives.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A capstone has a polished UI but fails on empty, loading, and error states. How should a rubric likely treat it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "As incomplete because user flows and edge cases matter"
+        },
+        {
+          "id": "b",
+          "text": "As perfect because visuals are complete"
+        },
+        {
+          "id": "c",
+          "text": "As unrelated to React"
+        },
+        {
+          "id": "d",
+          "text": "As a deployment-only issue"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Assessment should value behavior and resilience, not only visual polish.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A debugging scenario shows state updates based on old state after rapid clicks. Which explanation demonstrates readiness?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use functional state updates when the next value depends on the previous value"
+        },
+        {
+          "id": "b",
+          "text": "React state cannot update rapidly"
+        },
+        {
+          "id": "c",
+          "text": "Move the click handler outside React"
+        },
+        {
+          "id": "d",
+          "text": "Use source maps to prevent the bug"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Functional updates are a core fix when next state depends on previous state under rapid updates.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A candidate cannot finish every extension idea before submission. What is the best choice?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ship the core requirements well and document deferred extensions"
+        },
+        {
+          "id": "b",
+          "text": "Hide unfinished features in production"
+        },
+        {
+          "id": "c",
+          "text": "Remove acceptance criteria"
+        },
+        {
+          "id": "d",
+          "text": "Commit broken code to show ambition"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Extensions are secondary to a complete, reliable core submission.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A final self-assessment rates every skill as perfect but gives no evidence. What is missing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Concrete examples, test results, project links, or explanations supporting the rating"
+        },
+        {
+          "id": "b",
+          "text": "A longer dependency list"
+        },
+        {
+          "id": "c",
+          "text": "A private API key"
+        },
+        {
+          "id": "d",
+          "text": "A random folder structure"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Certification readiness should be supported by evidence, not unsupported confidence.",
+      "points": 1
+    }
+  ]
+}

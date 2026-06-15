@@ -55,6 +55,22 @@
       "title": "Rules of Hooks",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "10-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-07-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "11-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-07-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

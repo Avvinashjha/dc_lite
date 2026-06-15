@@ -1,0 +1,241 @@
+{
+  "id": "react-module-06-applied-check",
+  "title": "React Module 06 Applied Check",
+  "description": "Apply form concepts to controlled/uncontrolled tradeoffs, numeric inputs, checkboxes, validation timing, async submits, and library decisions.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "forms",
+    "validation",
+    "async",
+    "uncontrolled"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "An input has `value={name}` but no `onChange`. What is the likely problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It becomes read-only from the user perspective"
+        },
+        {
+          "id": "b",
+          "text": "It becomes uncontrolled automatically"
+        },
+        {
+          "id": "c",
+          "text": "It submits twice"
+        },
+        {
+          "id": "d",
+          "text": "It turns into a checkbox"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A controlled input needs an update path. Without `onChange`, user edits cannot update the state value.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A checkbox handler reads `event.target.value` and stores `\"on\"` instead of true or false. What should it usually read?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`event.target.checked`"
+        },
+        {
+          "id": "b",
+          "text": "`event.target.name.length`"
+        },
+        {
+          "id": "c",
+          "text": "`event.currentTarget.key`"
+        },
+        {
+          "id": "d",
+          "text": "`event.defaultPrevented`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Checkbox checked state is represented by the `checked` boolean.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are good async submit practices? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Set a submitting flag while the request is in flight"
+        },
+        {
+          "id": "b",
+          "text": "Disable or guard duplicate submits"
+        },
+        {
+          "id": "c",
+          "text": "Show field-level errors when the server returns field errors"
+        },
+        {
+          "id": "d",
+          "text": "Ignore rejected promises so users see nothing"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Async forms should communicate pending state, prevent duplicates, and surface errors clearly.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Why is server validation still required when client validation exists?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Client validation can be bypassed and cannot enforce trusted rules alone"
+        },
+        {
+          "id": "b",
+          "text": "Server validation is only for styling"
+        },
+        {
+          "id": "c",
+          "text": "Client validation never improves UX"
+        },
+        {
+          "id": "d",
+          "text": "React prevents invalid network requests automatically"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Client validation improves feedback, but the server must enforce correctness and security.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "A file input should usually be treated as uncontrolled in React.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Browsers restrict programmatic file input values, so refs or form submission APIs are typical.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A numeric input stores `event.target.value`. What should you remember?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The value from the input is still a string unless you convert it"
+        },
+        {
+          "id": "b",
+          "text": "React automatically stores all numbers as BigInt"
+        },
+        {
+          "id": "c",
+          "text": "Numeric inputs cannot be controlled"
+        },
+        {
+          "id": "d",
+          "text": "The value is always null"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Input values are strings from the DOM; convert when numeric logic needs a number.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which are signs that a form library may be worthwhile? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Many fields with repeated validation and touched/error state"
+        },
+        {
+          "id": "b",
+          "text": "Complex nested or dynamic fields"
+        },
+        {
+          "id": "c",
+          "text": "One simple newsletter email field"
+        },
+        {
+          "id": "d",
+          "text": "Team-wide need for consistent form patterns"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Libraries add value when form state and validation patterns become repetitive or complex.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A submit button remains enabled during a slow request. Users can click it repeatedly. What should you add?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A pending state guard and disabled UI while submitting"
+        },
+        {
+          "id": "b",
+          "text": "A random key on the button every render"
+        },
+        {
+          "id": "c",
+          "text": "A direct DOM mutation only"
+        },
+        {
+          "id": "d",
+          "text": "Remove all error handling"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Pending state prevents duplicate submits and gives users feedback.",
+      "points": 2
+    }
+  ]
+}

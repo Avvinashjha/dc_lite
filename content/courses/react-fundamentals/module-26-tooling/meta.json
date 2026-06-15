@@ -37,6 +37,28 @@
       "title": "Environment Variables",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-source-maps-and-build-inspection",
+      "title": "Source Maps and Build Inspection",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-26-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-26-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

@@ -1,0 +1,240 @@
+{
+  "id": "react-module-04-core-check",
+  "title": "React Module 04 Core Check",
+  "description": "Check your understanding of rendering elements, the virtual DOM, reconciliation, keys, lists, and conditional rendering.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "rendering",
+    "virtual-dom",
+    "keys"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a React element?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A description of what should appear in the UI"
+        },
+        {
+          "id": "b",
+          "text": "A real DOM node created by hand"
+        },
+        {
+          "id": "c",
+          "text": "A database table"
+        },
+        {
+          "id": "d",
+          "text": "A CSS animation"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React elements are lightweight descriptions used by React to build and update the UI.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the HTML mount point commonly used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The DOM node where React attaches the app"
+        },
+        {
+          "id": "b",
+          "text": "A folder for images"
+        },
+        {
+          "id": "c",
+          "text": "A package manager lock file"
+        },
+        {
+          "id": "d",
+          "text": "A replacement for components"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React renders the root component into a DOM container such as an element with id `root`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does reconciliation refer to?",
+      "options": [
+        {
+          "id": "a",
+          "text": "React comparing element trees to decide what changed"
+        },
+        {
+          "id": "b",
+          "text": "Installing dependencies"
+        },
+        {
+          "id": "c",
+          "text": "Writing CSS modules"
+        },
+        {
+          "id": "d",
+          "text": "Encrypting source maps"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "During reconciliation, React diffs the previous and next descriptions to decide updates.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "Which statements about keys are correct? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keys help React track item identity in lists"
+        },
+        {
+          "id": "b",
+          "text": "Stable IDs usually make good keys"
+        },
+        {
+          "id": "c",
+          "text": "Keys should be unique among siblings"
+        },
+        {
+          "id": "d",
+          "text": "Keys are visible as normal props in the child automatically"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Keys identify sibling list items for reconciliation. They are not passed as ordinary props.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Components should be pure while rendering and avoid causing side effects in the render body.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Render should calculate UI from inputs; side effects belong in events or effects.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which is a common way to render an array of items?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use `.map()` to return an element for each item"
+        },
+        {
+          "id": "b",
+          "text": "Use `.sort()` without returning JSX"
+        },
+        {
+          "id": "c",
+          "text": "Write SQL inside JSX"
+        },
+        {
+          "id": "d",
+          "text": "Use `document.write`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React commonly renders lists by mapping data to elements.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which conditional rendering pattern can render no UI for a component?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return `null`"
+        },
+        {
+          "id": "b",
+          "text": "Return `undefined` from every component"
+        },
+        {
+          "id": "c",
+          "text": "Return a CSS file"
+        },
+        {
+          "id": "d",
+          "text": "Return a key only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Returning `null` tells React to render nothing for that component.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which can cause unnecessary or confusing list behavior? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using array indexes as keys for reorderable items"
+        },
+        {
+          "id": "b",
+          "text": "Using random keys that change every render"
+        },
+        {
+          "id": "c",
+          "text": "Using stable item IDs as keys"
+        },
+        {
+          "id": "d",
+          "text": "Omitting keys for sibling list items"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Unstable, missing, or index keys for changing lists can break identity tracking.",
+      "points": 2
+    }
+  ]
+}

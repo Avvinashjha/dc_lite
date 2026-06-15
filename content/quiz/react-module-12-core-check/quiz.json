@@ -1,0 +1,238 @@
+{
+  "id": "react-module-12-core-check",
+  "title": "Class Components Core Check",
+  "description": "Check your understanding of class syntax, state, lifecycle methods, this binding, and function component migration.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "class-components",
+    "lifecycle",
+    "setstate"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which method must a class component define to return UI?",
+      "options": [
+        {
+          "id": "a",
+          "text": "render"
+        },
+        {
+          "id": "b",
+          "text": "useEffect"
+        },
+        {
+          "id": "c",
+          "text": "componentState"
+        },
+        {
+          "id": "d",
+          "text": "createElementOnly"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Class components return their UI from the render method.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "How should class component state usually be updated?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By calling this.setState"
+        },
+        {
+          "id": "b",
+          "text": "By assigning this.state directly after mount"
+        },
+        {
+          "id": "c",
+          "text": "By mutating this.props"
+        },
+        {
+          "id": "d",
+          "text": "By returning state from render"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "setState schedules state updates and tells React to render with the new state.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are common class lifecycle methods? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "componentDidMount"
+        },
+        {
+          "id": "b",
+          "text": "componentDidUpdate"
+        },
+        {
+          "id": "c",
+          "text": "componentWillUnmount"
+        },
+        {
+          "id": "d",
+          "text": "useMemo"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Mount, update, and unmount work in class components is handled through lifecycle methods.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "When is componentDidMount called?",
+      "options": [
+        {
+          "id": "a",
+          "text": "After the component is first rendered and committed"
+        },
+        {
+          "id": "b",
+          "text": "Before the constructor"
+        },
+        {
+          "id": "c",
+          "text": "On every state update before render"
+        },
+        {
+          "id": "d",
+          "text": "Only when a component unmounts"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "componentDidMount runs after the component has mounted.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Class component render methods should be pure and avoid side effects.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "render should describe UI from props and state without causing external side effects.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Why do class event handlers often need binding?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To make this refer to the component instance when the handler runs"
+        },
+        {
+          "id": "b",
+          "text": "To make props mutable"
+        },
+        {
+          "id": "c",
+          "text": "To stop React from rendering"
+        },
+        {
+          "id": "d",
+          "text": "To convert JSX into HTML"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "JavaScript method calls can lose this, so handlers need binding or arrow class fields.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "How does class setState handle object updates?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It shallowly merges the provided object into current state"
+        },
+        {
+          "id": "b",
+          "text": "It replaces props"
+        },
+        {
+          "id": "c",
+          "text": "It deeply clones every nested object"
+        },
+        {
+          "id": "d",
+          "text": "It always runs synchronously"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Class setState merges top-level object keys, but nested data still requires immutable updates.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which hook commonly maps to side-effect lifecycle work in function components?",
+      "options": [
+        {
+          "id": "a",
+          "text": "useEffect"
+        },
+        {
+          "id": "b",
+          "text": "useId only"
+        },
+        {
+          "id": "c",
+          "text": "useDebugValue only"
+        },
+        {
+          "id": "d",
+          "text": "useRef only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "useEffect covers many synchronization cases previously handled by lifecycle methods.",
+      "points": 1
+    }
+  ]
+}

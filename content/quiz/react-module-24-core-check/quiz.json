@@ -1,0 +1,23 @@
+{
+  "id": "react-module-24-core-check",
+  "title": "React GraphQL Core Check",
+  "description": "Check your understanding of GraphQL queries, mutations, subscriptions, Apollo Client, variables, fetch policies, normalized caching, cache updates, and authorization concerns.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "graphql", "apollo", "cache", "subscriptions"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {"id":"q1","type":"single","prompt":"What is a GraphQL query used for?","options":[{"id":"a","text":"Reading data by selecting the fields the client needs"},{"id":"b","text":"Writing CSS utility classes"},{"id":"c","text":"Starting a browser-only interval"},{"id":"d","text":"Replacing all server authorization"}],"correct":["a"],"explanation":"Queries read data and let clients specify the fields they need from the schema.","points":1},
+    {"id":"q2","type":"single","prompt":"What is a GraphQL mutation used for?","options":[{"id":"a","text":"Changing server data, such as creating or updating a record"},{"id":"b","text":"Only subscribing to real-time messages"},{"id":"c","text":"Compiling TypeScript"},{"id":"d","text":"Hydrating SSR HTML"}],"correct":["a"],"explanation":"Mutations represent write operations and typically return fields needed to update the UI.","points":1},
+    {"id":"q3","type":"single","prompt":"Why use GraphQL fragments?","options":[{"id":"a","text":"To reuse field selections across operations"},{"id":"b","text":"To hide all fields from the server"},{"id":"c","text":"To force every response to be uncached"},{"id":"d","text":"To replace React props"}],"correct":["a"],"explanation":"Fragments help keep repeated field selections consistent and maintainable.","points":1},
+    {"id":"q4","type":"single","prompt":"In Apollo Client, why are `id` and `__typename` important?","options":[{"id":"a","text":"They help identify normalized cache objects"},{"id":"b","text":"They make every query a subscription"},{"id":"c","text":"They disable errors"},{"id":"d","text":"They are required CSS selectors"}],"correct":["a"],"explanation":"Apollo's normalized cache uses object identity, commonly based on typename and id, to store and update entities.","points":1},
+    {"id":"q5","type":"boolean","prompt":"GraphQL removes the need for server-side authorization checks.","options":[{"id":"true","text":"True"},{"id":"false","text":"False"}],"correct":["false"],"explanation":"GraphQL changes the API shape, not the need for authorization. Resolvers and services must still enforce access control.","points":1},
+    {"id":"q6","type":"multiple","prompt":"Which Apollo features relate to request and cache behavior? (Select all that apply.)","options":[{"id":"a","text":"Fetch policies such as `cache-first` or `network-only`"},{"id":"b","text":"Variables passed to queries"},{"id":"c","text":"Cache updates after mutations"},{"id":"d","text":"CSS media queries"}],"correct":["a","b","c"],"explanation":"Apollo queries use variables, fetch policies, and cache behavior to control how data is read and updated.","points":2},
+    {"id":"q7","type":"single","prompt":"What are GraphQL subscriptions commonly used for?","options":[{"id":"a","text":"Receiving real-time updates over a persistent connection"},{"id":"b","text":"Rendering static build-time pages only"},{"id":"c","text":"Replacing all mutations"},{"id":"d","text":"Creating CSS animations"}],"correct":["a"],"explanation":"Subscriptions are useful for real-time events such as messages, live status, or notifications.","points":1},
+    {"id":"q8","type":"single","prompt":"Why are list updates after mutations sometimes manual in Apollo?","options":[{"id":"a","text":"Apollo may update normalized entities automatically, but it may not know which lists should include or remove an item"},{"id":"b","text":"Apollo cannot cache objects"},{"id":"c","text":"Lists are not valid GraphQL fields"},{"id":"d","text":"Mutations never return data"}],"correct":["a"],"explanation":"Normalized object updates are often automatic, but list membership, ordering, and pagination usually need explicit cache handling or refetching.","points":1}
+  ]
+}

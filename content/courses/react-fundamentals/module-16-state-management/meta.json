@@ -43,6 +43,22 @@
       "title": "Choosing a Solution",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-16-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-16-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

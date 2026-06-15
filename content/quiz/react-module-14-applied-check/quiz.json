@@ -1,0 +1,240 @@
+{
+  "id": "react-module-14-applied-check",
+  "title": "Performance Optimization Applied Check",
+  "description": "Practice diagnosing render cost, memoization pitfalls, code splitting tradeoffs, virtualization, and profiler-driven optimization.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "performance",
+    "react-memo",
+    "virtualization"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A memoized child still re-renders because the parent passes onSave={() => save(id)} every render. What can help if the child is expensive?",
+      "options": [
+        {
+          "id": "a",
+          "text": "useCallback with correct dependencies or redesigning the prop"
+        },
+        {
+          "id": "b",
+          "text": "Removing all props"
+        },
+        {
+          "id": "c",
+          "text": "Calling setState in render"
+        },
+        {
+          "id": "d",
+          "text": "Wrapping the child in BrowserRouter"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React.memo uses shallow comparison, so unstable function props can cause re-renders.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "When is React.memo most likely to help? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "The component renders often with the same props"
+        },
+        {
+          "id": "b",
+          "text": "Rendering the component is meaningfully expensive"
+        },
+        {
+          "id": "c",
+          "text": "Props are stable or can be made stable"
+        },
+        {
+          "id": "d",
+          "text": "The component always reads a rapidly changing context"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Memoization helps when repeated renders can be skipped and comparison is cheaper than rendering.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A useMemo result is stale because a variable used inside is missing from dependencies. What is the correct fix?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Add the missing dependency or restructure the calculation"
+        },
+        {
+          "id": "b",
+          "text": "Disable dependencies permanently"
+        },
+        {
+          "id": "c",
+          "text": "Move the variable to a comment"
+        },
+        {
+          "id": "d",
+          "text": "Use React.memo on the parent only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Memoized values must list all reactive inputs they read.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "boolean",
+      "prompt": "Memoizing everything can make code harder to maintain and may add overhead without improving user experience.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Memoization has cost and complexity, so it should follow measured need.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A page imports a heavy chart only used after opening an analytics route. What optimization fits?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Route-level or component-level lazy loading with a good fallback"
+        },
+        {
+          "id": "b",
+          "text": "Rendering the chart hidden on every page"
+        },
+        {
+          "id": "c",
+          "text": "Putting the chart data in context"
+        },
+        {
+          "id": "d",
+          "text": "Replacing all state with refs"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Lazy loading defers expensive code until users need that UI.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "What should you watch when virtualizing a list? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Row height assumptions"
+        },
+        {
+          "id": "b",
+          "text": "Overscan amount"
+        },
+        {
+          "id": "c",
+          "text": "Keyboard and screen reader accessibility"
+        },
+        {
+          "id": "d",
+          "text": "Removing all item keys"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Virtualized lists need careful sizing, buffering, and accessibility behavior.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "The profiler shows a slow parent recalculating an expensive filtered list every render. What is a likely fix?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Move unnecessary state down and memoize the expensive calculation with correct dependencies"
+        },
+        {
+          "id": "b",
+          "text": "Add an empty dependency effect to set the same state"
+        },
+        {
+          "id": "c",
+          "text": "Use document.querySelector"
+        },
+        {
+          "id": "d",
+          "text": "Remove all dependency arrays"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "State placement and useMemo can reduce repeated expensive work when inputs are unchanged.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Why measure before and after an optimization?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To verify the change improved the real bottleneck"
+        },
+        {
+          "id": "b",
+          "text": "To make React.memo required everywhere"
+        },
+        {
+          "id": "c",
+          "text": "To avoid writing JSX"
+        },
+        {
+          "id": "d",
+          "text": "To convert browser state to server state"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Profiling confirms that optimization work targets and improves the actual issue.",
+      "points": 1
+    }
+  ]
+}

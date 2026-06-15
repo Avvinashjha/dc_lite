@@ -1,0 +1,240 @@
+{
+  "id": "react-module-09-applied-check",
+  "title": "Effects and Lifecycle Applied Check",
+  "description": "Practice effect dependency decisions, cleanup timing, request races, aborts, and common useEffect pitfalls.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "effects",
+    "cleanup",
+    "race-conditions"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A component fetches user data when userId changes. Which dependency array is correct if the effect reads userId?",
+      "options": [
+        {
+          "id": "a",
+          "text": "[]"
+        },
+        {
+          "id": "b",
+          "text": "[userId]"
+        },
+        {
+          "id": "c",
+          "text": "[setUser]"
+        },
+        {
+          "id": "d",
+          "text": "No dependency array"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The request depends on userId, so the effect should re-run when userId changes.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "A search effect can return results out of order when users type quickly. Which fixes help? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Abort the previous request in cleanup"
+        },
+        {
+          "id": "b",
+          "text": "Ignore stale responses with an active flag"
+        },
+        {
+          "id": "c",
+          "text": "Remove the query from dependencies"
+        },
+        {
+          "id": "d",
+          "text": "Track which request is current before setting state"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Race conditions are handled by canceling or ignoring stale work, not by hiding dependencies.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "An effect adds window.addEventListener(\"resize\", onResize). What should cleanup do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Call window.removeEventListener(\"resize\", onResize)"
+        },
+        {
+          "id": "b",
+          "text": "Set onResize to null only"
+        },
+        {
+          "id": "c",
+          "text": "Call setState twice"
+        },
+        {
+          "id": "d",
+          "text": "Return the listener function itself without removing it"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Cleanup should undo the subscription using the same event type and handler reference.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "An effect sets state from props only to compute a filtered list. What is usually better?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Store the filtered list in another state variable"
+        },
+        {
+          "id": "b",
+          "text": "Calculate the filtered list during render or with useMemo if expensive"
+        },
+        {
+          "id": "c",
+          "text": "Use no dependency array"
+        },
+        {
+          "id": "d",
+          "text": "Move all filtering into cleanup"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Derived render data should generally be computed from current inputs instead of synchronized through effects.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Suppressing the exhaustive-deps warning is usually the best first fix for an effect that re-runs too often.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "A warning usually points to a design or dependency issue; restructure the effect before suppressing it.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "An effect depends on an object literal created inside render, causing repeated runs. What is a good fix?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Put the object creation inside the effect or memoize it with correct dependencies"
+        },
+        {
+          "id": "b",
+          "text": "Remove all dependencies"
+        },
+        {
+          "id": "c",
+          "text": "Convert the object to a global variable every time"
+        },
+        {
+          "id": "d",
+          "text": "Call the effect manually from render"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Unstable object identities can be avoided by moving creation inside the effect or memoizing based on real inputs.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A button click should submit a form immediately. Where should the submit logic usually live?",
+      "options": [
+        {
+          "id": "a",
+          "text": "In the click or submit event handler"
+        },
+        {
+          "id": "b",
+          "text": "In an effect that watches a clicked boolean"
+        },
+        {
+          "id": "c",
+          "text": "In componentWillUnmount"
+        },
+        {
+          "id": "d",
+          "text": "In the cleanup function"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "User-initiated event logic belongs in event handlers, while effects synchronize after rendering.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which are signs an effect may be overused? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "It only copies props into state"
+        },
+        {
+          "id": "b",
+          "text": "It derives display text from existing state"
+        },
+        {
+          "id": "c",
+          "text": "It subscribes to an external store and cleans up"
+        },
+        {
+          "id": "d",
+          "text": "It chains state updates that could be calculated directly"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Effects are often unnecessary for pure derivation, copying state, and render-time calculations.",
+      "points": 2
+    }
+  ]
+}

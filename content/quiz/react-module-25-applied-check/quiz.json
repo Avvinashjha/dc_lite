@@ -1,0 +1,246 @@
+{
+  "id": "react-module-25-applied-check",
+  "title": "React Architecture Applied Check",
+  "description": "Apply React architecture decisions to realistic project structure, state ownership, pattern, and error-boundary scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "architecture",
+    "project-structure",
+    "error-boundaries"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A team adds every reusable-looking component to `shared/components` on day one. What is the likely long-term issue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Shared code becomes a dumping ground with unclear ownership"
+        },
+        {
+          "id": "b",
+          "text": "React will stop rendering shared components"
+        },
+        {
+          "id": "c",
+          "text": "The code cannot be code split"
+        },
+        {
+          "id": "d",
+          "text": "Components cannot accept props"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The lessons warn that shared folders need clear ownership and should not become a default destination for uncertain code.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Feature A imports `../featureB/internal/useFeatureBForm` because it is convenient. What is the architectural risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The import boundary is bypassed, coupling Feature A to Feature B internals"
+        },
+        {
+          "id": "b",
+          "text": "The hook will run twice automatically"
+        },
+        {
+          "id": "c",
+          "text": "The browser cannot resolve relative imports"
+        },
+        {
+          "id": "d",
+          "text": "The code becomes more accessible"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Feature public APIs protect ownership boundaries; reaching into internals makes later changes harder.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A product page stores `selectedVariantId` and also stores a copied `selectedVariant` object that can get out of sync. What is the better approach?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep both and manually sync them in every handler"
+        },
+        {
+          "id": "b",
+          "text": "Store the source of truth and derive the rest when rendering"
+        },
+        {
+          "id": "c",
+          "text": "Move both values into localStorage"
+        },
+        {
+          "id": "d",
+          "text": "Put both values in separate contexts"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Avoid duplicated state when one value can be derived from another source of truth.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Server data is cached in a broad React context and manually refetched from many screens. Which lesson principle is being missed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Server state has different needs from local UI state"
+        },
+        {
+          "id": "b",
+          "text": "Context cannot contain arrays"
+        },
+        {
+          "id": "c",
+          "text": "Reducers are only for forms"
+        },
+        {
+          "id": "d",
+          "text": "URL state should hold API responses"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Server state needs cache, freshness, loading, and error handling behavior that differs from simple UI state.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "An error boundary fallback remains visible after the user navigates to a different item id. What is a common reset strategy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Give the boundary a key tied to the item or route segment"
+        },
+        {
+          "id": "b",
+          "text": "Wrap the event handler in useMemo"
+        },
+        {
+          "id": "c",
+          "text": "Remove the fallback UI"
+        },
+        {
+          "id": "d",
+          "text": "Store the error in CSS"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Changing a boundary key remounts it, which is a common way to reset boundary state for a new route or entity.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A click handler throws while saving a form, but the nearest error boundary does not catch it. What should the app do instead?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Handle the async or event error in the action flow and show explicit UI state"
+        },
+        {
+          "id": "b",
+          "text": "Move the button outside React"
+        },
+        {
+          "id": "c",
+          "text": "Convert the handler to a class method only"
+        },
+        {
+          "id": "d",
+          "text": "Disable logging"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Error boundaries do not catch event handler or async failures; those need ordinary error handling in the interaction flow.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which choices fit a compound component API for a reusable Modal? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Modal.Root coordinates open state"
+        },
+        {
+          "id": "b",
+          "text": "Modal.Title provides a semantic title slot"
+        },
+        {
+          "id": "c",
+          "text": "Every consumer must manually query DOM nodes"
+        },
+        {
+          "id": "d",
+          "text": "Modal.Close can access close behavior through context"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Compound components expose related pieces while hiding coordination details inside the parent API.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A developer moves every keystroke of every input into Redux because the app is growing. What is the best critique?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Growth alone does not mean every local value belongs in global state"
+        },
+        {
+          "id": "b",
+          "text": "Redux cannot store strings"
+        },
+        {
+          "id": "c",
+          "text": "React forms must never use state"
+        },
+        {
+          "id": "d",
+          "text": "Global state always improves performance"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Scalable state architecture depends on ownership and sharing needs, not project size alone.",
+      "points": 1
+    }
+  ]
+}

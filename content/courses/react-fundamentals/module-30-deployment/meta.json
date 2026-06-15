@@ -1,6 +1,6 @@
 {
   "title": "Deployment",
-  "description": "Learn the core concepts of Deployment in React.",
+  "description": "Build, configure, containerize, and deploy React applications with production-ready workflows.",
   "lessons": [
     {
       "slug": "01-building-for-production",
@@ -37,6 +37,28 @@
       "title": "CI/CD Pipelines",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-environment-config-and-caching",
+      "title": "Environment Config and Caching",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-30-core-check"
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-30-applied-check"
     }
   ]
 }

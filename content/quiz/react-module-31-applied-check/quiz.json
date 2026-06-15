@@ -1,0 +1,246 @@
+{
+  "id": "react-module-31-applied-check",
+  "title": "React Project-Based Learning Applied Check",
+  "description": "Apply project planning and implementation judgment to realistic requirements, milestones, architecture, edge cases, and tradeoffs.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "projects",
+    "capstone",
+    "tradeoffs"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A Todo app accepts empty items because the input handler only checks for `value !== null`. What should the project do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trim input and reject empty text before adding"
+        },
+        {
+          "id": "b",
+          "text": "Store empty todos and hide them with CSS"
+        },
+        {
+          "id": "c",
+          "text": "Move validation to the list item component only"
+        },
+        {
+          "id": "d",
+          "text": "Disable all keyboard input"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The Todo project edge cases include preventing blank or whitespace-only todos.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A weather app search for \"Paris\" returns after a later search for \"Tokyo\" and overwrites the UI. What pattern addresses this?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ignore stale responses or track the current request"
+        },
+        {
+          "id": "b",
+          "text": "Remove loading states"
+        },
+        {
+          "id": "c",
+          "text": "Use random keys"
+        },
+        {
+          "id": "d",
+          "text": "Render both cities in the same field"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Handling stale responses is an explicit async edge case in the weather project.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A cart total is calculated with floating-point math and displayed with inconsistent cents. What should you consider?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Represent money carefully, such as cents integers or deliberate rounding"
+        },
+        {
+          "id": "b",
+          "text": "Store totals in component names"
+        },
+        {
+          "id": "c",
+          "text": "Disable quantity updates"
+        },
+        {
+          "id": "d",
+          "text": "Use aria-live to calculate totals"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The e-commerce cart lesson calls out money and rounding as a common source of mistakes.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "A full-stack project API contract should clarify which details? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Request and response shapes"
+        },
+        {
+          "id": "b",
+          "text": "Error responses"
+        },
+        {
+          "id": "c",
+          "text": "Authentication expectations if relevant"
+        },
+        {
+          "id": "d",
+          "text": "Only the frontend color palette"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "API contracts define data and failure behavior between frontend and backend.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A team starts with persistence, auth, charts, and animations before a basic project flow works. What project-planning issue is this?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Skipping milestones and overloading the first increment"
+        },
+        {
+          "id": "b",
+          "text": "Using acceptance criteria too early"
+        },
+        {
+          "id": "c",
+          "text": "Testing too much keyboard behavior"
+        },
+        {
+          "id": "d",
+          "text": "Choosing semantic HTML"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Milestones should get a basic vertical slice working before layering extensions.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A project requirement says \"users can remove cart items,\" but the acceptance criteria never mentions empty-cart UI. What should you add?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A clear expected empty-cart state after the last item is removed"
+        },
+        {
+          "id": "b",
+          "text": "A hidden global variable"
+        },
+        {
+          "id": "c",
+          "text": "A Docker deployment"
+        },
+        {
+          "id": "d",
+          "text": "A class component rewrite"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Acceptance criteria should include edge states that users can reach.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A capstone reflection explains why Context was used instead of Redux for a small cart. What makes that reflection valuable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It documents tradeoffs and scope-based reasoning"
+        },
+        {
+          "id": "b",
+          "text": "It proves Redux is always wrong"
+        },
+        {
+          "id": "c",
+          "text": "It removes the need for tests"
+        },
+        {
+          "id": "d",
+          "text": "It hides implementation details from reviewers"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Project-based learning values explaining tradeoffs, not just shipping code.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A manual test script only checks the happy path. What should be added?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Edge cases such as empty input, API failure, invalid quantities, and reload behavior"
+        },
+        {
+          "id": "b",
+          "text": "Only screenshots of the home page"
+        },
+        {
+          "id": "c",
+          "text": "A larger logo"
+        },
+        {
+          "id": "d",
+          "text": "A source-map setting"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Manual scripts should cover important edge cases from the project requirements.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "id": "react-module-08-core-check",
+  "title": "React Module 08 Core Check",
+  "description": "Check your understanding of custom Hooks, extraction, naming, inputs, return values, reuse of stateful logic, common hooks, and testing awareness.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "custom-hooks",
+    "reuse",
+    "hooks"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a custom Hook?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A reusable function that starts with `use` and can call other Hooks"
+        },
+        {
+          "id": "b",
+          "text": "A class component lifecycle method"
+        },
+        {
+          "id": "c",
+          "text": "A CSS utility class"
+        },
+        {
+          "id": "d",
+          "text": "A Vite plugin only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Custom Hooks extract reusable stateful logic into functions named with the `use` prefix.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "boolean",
+      "prompt": "Custom Hook names should start with `use`.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "The `use` prefix communicates Hook behavior and lets lint tooling enforce Hook rules.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What should usually stay outside a custom Hook?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Specific UI markup"
+        },
+        {
+          "id": "b",
+          "text": "Reusable stateful logic"
+        },
+        {
+          "id": "c",
+          "text": "Calls to built-in Hooks needed by the logic"
+        },
+        {
+          "id": "d",
+          "text": "Configuration arguments"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Custom Hooks should usually return data and behavior, while components render the UI.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "When is extracting a custom Hook useful? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "The same stateful logic is repeated in multiple components"
+        },
+        {
+          "id": "b",
+          "text": "A component is hard to read because logic and UI are tangled"
+        },
+        {
+          "id": "c",
+          "text": "You want to share behavior without sharing markup"
+        },
+        {
+          "id": "d",
+          "text": "You have one clear line of code used once"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Hooks are useful for repeated or complex stateful behavior, not for needless abstraction.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What should a custom Hook return?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whatever API makes the consuming component clear, such as values and functions"
+        },
+        {
+          "id": "b",
+          "text": "Only JSX"
+        },
+        {
+          "id": "c",
+          "text": "Only a single boolean always"
+        },
+        {
+          "id": "d",
+          "text": "Only DOM nodes"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Custom Hooks can return arrays or objects; the API should make usage clear and stable.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which is a common custom Hook example?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`useToggle`"
+        },
+        {
+          "id": "b",
+          "text": "`ButtonPrimary`"
+        },
+        {
+          "id": "c",
+          "text": "`main.jsx`"
+        },
+        {
+          "id": "d",
+          "text": "`packageLock`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`useToggle` is a typical custom Hook that manages boolean state and toggle behavior.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which concerns belong in a custom Hook that uses effects? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Correct dependency arrays"
+        },
+        {
+          "id": "b",
+          "text": "Cleanup for subscriptions or timers"
+        },
+        {
+          "id": "c",
+          "text": "Calling Hooks conditionally after an early return"
+        },
+        {
+          "id": "d",
+          "text": "Clear inputs for values the hook depends on"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Custom Hooks follow the same Hook rules as components and should manage dependencies and cleanup carefully.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "Each component call to a custom Hook gets its own independent Hook state.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "A custom Hook shares logic, not one shared state instance across all callers.",
+      "points": 1
+    }
+  ]
+}

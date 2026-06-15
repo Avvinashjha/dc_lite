@@ -1,146 +1,219 @@
 # JSX In Depth
 
-JSX is a syntax extension for JavaScript that looks like HTML. It's one of the most distinctive features of React.
+JSX is the syntax most React components return.
 
-## What is JSX?
+This lesson reviews JSX through the lens of components and props: how data flows into markup, how components compose, and where common mistakes appear.
 
-JSX stands for JavaScript XML. It lets you write HTML-like syntax directly in your JavaScript code:
+## JSX Creates React Elements
 
-```jsx
-const element = <h1>Hello, world!</h1>;
-```
-
-Under the hood, JSX is transformed into regular JavaScript function calls:
-
-```javascript
-const element = React.createElement('h1', null, 'Hello, world!');
-```
-
-## JSX Rules
-
-### 1. Return a Single Root Element
-
-Every component must return a single root element:
+JSX looks like HTML, but it becomes JavaScript.
 
 ```jsx
-// Bad - multiple root elements
-function Bad() {
+const element = <h1>Hello, world</h1>;
+```
+
+Conceptually, this is similar to creating a React element object.
+
+```jsx
+import { createElement } from "react";
+
+const element = createElement("h1", null, "Hello, world");
+```
+
+You normally write JSX because it is easier to read when UI has nested structure.
+
+## Components Use JSX as Return Values
+
+```jsx
+function PageTitle({ title, subtitle }) {
   return (
-    <h1>Title</h1>
-    <p>Content</p>
+    <header>
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+    </header>
   );
 }
+```
 
-// Good - wrapped in a div
-function Good() {
+The component receives props, then returns JSX based on those props.
+
+That pattern is the heart of React:
+
+```txt
+props + state -> JSX
+```
+
+## JSX Rules That Matter for Components
+
+Return one root value:
+
+```jsx
+function Card({ title, children }) {
   return (
-    <div>
-      <h1>Title</h1>
-      <p>Content</p>
-    </div>
+    <article>
+      <h2>{title}</h2>
+      {children}
+    </article>
   );
 }
+```
 
-// Better - use a Fragment
-function Better() {
+Use fragments when you do not want an extra wrapper:
+
+```jsx
+function NameFields() {
   return (
     <>
-      <h1>Title</h1>
-      <p>Content</p>
+      <input name="firstName" />
+      <input name="lastName" />
     </>
   );
 }
 ```
 
-### 2. Close All Tags
-
-In JSX, all tags must be closed:
+Close every tag:
 
 ```jsx
-// HTML allows this
-<img src="photo.jpg">
-<br>
-
-// JSX requires closing
-<img src="photo.jpg" />
-<br />
+<Avatar />
+<img src="/avatar.png" alt="Avatar" />
 ```
 
-### 3. Use camelCase for Attributes
-
-HTML attributes become camelCase in JSX:
+Use JSX prop names:
 
 ```jsx
-// HTML
-<div class="container" onclick="handleClick()">
-
-// JSX
-<div className="container" onClick={handleClick}>
+<label htmlFor="email" className="label">
+  Email
+</label>
 ```
 
-## Embedding Expressions
+## Passing Props in JSX
 
-Use curly braces `{}` to embed JavaScript expressions in JSX:
+Props are written like attributes.
 
 ```jsx
-function UserProfile({ user }) {
-  const isAdmin = user.role === 'admin';
+<UserCard name="Ada" age={36} isAdmin={true} />
+```
 
+Strings can use quotes. JavaScript values use braces.
+
+```jsx
+const user = { name: "Ada", role: "Admin" };
+
+<UserCard user={user} showRole />
+```
+
+`showRole` without a value is the same as `showRole={true}`.
+
+## Children as a Prop
+
+Everything between opening and closing component tags becomes the `children` prop.
+
+```jsx
+function Notice({ children }) {
+  return <aside className="notice">{children}</aside>;
+}
+
+function App() {
   return (
-    <div>
-      <h1>{user.name.toUpperCase()}</h1>
-      <p>Joined: {new Date(user.joinDate).toLocaleDateString()}</p>
-      <p>Posts: {user.posts.length}</p>
-      {isAdmin && <span className="badge">Admin</span>}
-    </div>
+    <Notice>
+      <strong>Heads up:</strong> Unsaved changes will be lost.
+    </Notice>
   );
 }
 ```
 
-## Conditional Rendering
+Children are useful for wrappers, layouts, modals, cards, tabs, and reusable design components.
 
-There are several ways to conditionally render in JSX:
+## Conditional JSX
+
+Use JavaScript expressions for conditional UI.
 
 ```jsx
-// Ternary operator
-{isLoggedIn ? <Dashboard /> : <LoginForm />}
+function UserMenu({ user }) {
+  if (!user) {
+    return <LoginButton />;
+  }
 
-// Logical AND
-{hasNotifications && <NotificationBadge />}
-
-// Early return
-function Content({ isLoading, error, data }) {
-  if (isLoading) return <Spinner />;
-  if (error) return <Error message={error} />;
-  return <DataView data={data} />;
+  return (
+    <nav>
+      <Avatar user={user} />
+      {user.isAdmin && <AdminLink />}
+    </nav>
+  );
 }
 ```
 
-## Rendering Lists
-
-Use `.map()` to render arrays of elements:
+Be careful with numeric conditions:
 
 ```jsx
-function TodoList({ items }) {
+// Can render 0
+{items.length && <ItemList items={items} />}
+
+// Clearer
+{items.length > 0 && <ItemList items={items} />}
+```
+
+## Lists and Keys
+
+Use `.map()` to render arrays.
+
+```jsx
+function TodoList({ todos }) {
   return (
     <ul>
-      {items.map(item => (
-        <li key={item.id}>{item.text}</li>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
   );
 }
 ```
 
-Always provide a unique `key` prop when rendering lists!
+Keys help React track identity. Use stable ids from your data when possible.
+
+Avoid `Math.random()` and avoid indexes for lists that can reorder, insert, or delete items.
+
+## Common JSX and Prop Mistakes
+
+- Passing numbers or booleans as strings by accident.
+- Calling event handlers during render: `onClick={save()}`.
+- Forgetting that children must be rendered with `{children}` inside wrapper components.
+- Using lowercase component names.
+- Rendering objects directly: `<p>{user}</p>`.
+- Using unstable keys in lists.
 
 :::quiz
-question: Why do you need a `key` prop when rendering lists in React?
+question: What does `<Modal><p>Saved</p></Modal>` pass to `Modal`?
 options:
-  - For CSS styling purposes
-  - To help React identify which items have changed, been added, or removed
-  - To make the list sortable
-  - It's optional and just a best practice
+  - A prop named `p`
+  - A `children` prop containing the paragraph element
+  - A string prop named `Modal`
+  - Nothing, because components cannot contain children
 answer: 1
-explanation: The key prop helps React's reconciliation algorithm efficiently update the DOM by identifying which list items have changed between renders.
+explanation: JSX nested between component tags is passed as the special `children` prop.
 :::
+
+## Practice Challenge
+
+Build a `Panel` component.
+
+Requirements:
+
+- accepts `title`
+- accepts `children`
+- renders a `<section>`
+- renders the title in an `<h2>`
+- renders children below the title
+
+Example usage:
+
+```jsx
+<Panel title="Profile">
+  <p>Manage your account details.</p>
+  <button>Edit profile</button>
+</Panel>
+```
+
+## Recap
+
+JSX is JavaScript syntax for describing React elements. Components use JSX to combine props, children, conditional logic, and lists into reusable UI.
