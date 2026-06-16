@@ -31,6 +31,26 @@
       "title": "Publishing Packages",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-lockfiles-and-repeatable-installs",
+      "title": "Lockfiles and Repeatable Installs",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-dependency-security-and-auditing",
+      "title": "Dependency Security and Auditing",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-05-knowledge-check",
+      "passingScore": 70
     }
   ]
 }

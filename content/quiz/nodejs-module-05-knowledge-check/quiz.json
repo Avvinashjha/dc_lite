@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-05-knowledge-check",
+  "title": "NPM and Packages Knowledge Check",
+  "description": "Check your understanding of npm, package.json, semantic versioning, scripts, lockfiles, publishing, and dependency security.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "npm", "packages", "security"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is `package.json` mainly used for?",
+      "options": [
+        { "id": "a", "text": "Project metadata, scripts, dependencies, and package configuration" },
+        { "id": "b", "text": "Browser DOM storage" },
+        { "id": "c", "text": "Database rows" },
+        { "id": "d", "text": "Docker image layers only" }
+      ],
+      "correct": ["a"],
+      "explanation": "`package.json` describes the project and how npm should manage it.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Why should application repositories usually commit `package-lock.json`?",
+      "options": [
+        { "id": "a", "text": "To make dependency installs more repeatable" },
+        { "id": "b", "text": "To store production secrets" },
+        { "id": "c", "text": "To replace source code" },
+        { "id": "d", "text": "To avoid using npm" }
+      ],
+      "correct": ["a"],
+      "explanation": "Lockfiles record exact dependency versions so installs are reproducible.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "In semver, what kind of change should increment the major version?",
+      "options": [
+        { "id": "a", "text": "A breaking API change" },
+        { "id": "b", "text": "Only documentation changes" },
+        { "id": "c", "text": "A compatible bug fix" },
+        { "id": "d", "text": "A local shell alias" }
+      ],
+      "correct": ["a"],
+      "explanation": "Semantic versioning reserves major version changes for breaking changes.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the purpose of dependency auditing?",
+      "options": [
+        { "id": "a", "text": "Identifying known vulnerabilities in dependency trees" },
+        { "id": "b", "text": "Creating route handlers" },
+        { "id": "c", "text": "Rendering HTML templates" },
+        { "id": "d", "text": "Reading request bodies" }
+      ],
+      "correct": ["a"],
+      "explanation": "Auditing checks installed packages against vulnerability advisories.",
+      "points": 1
+    }
+  ]
+}

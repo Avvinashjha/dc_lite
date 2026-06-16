@@ -25,6 +25,20 @@
       "title": "Timers, nextTick and setImmediate",
       "type": "text",
       "duration": "15 min"
+    },
+    {
+      "slug": "05-worker-threads-and-child-processes",
+      "title": "Worker Threads and Child Processes",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-02-knowledge-check",
+      "passingScore": 70
     }
   ]
 }

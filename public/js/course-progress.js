@@ -360,8 +360,9 @@ var DCCourseProgress = (function () {
   // (Previously: module 0 unlocked, later modules unlocked once the prior one
   // was fully complete.)
   function moduleUnlocked(_structure, _row, _moduleIndex) {
-    if (_moduleIndex <= 0) return true;
-    return moduleComplete(_structure, _row, _moduleIndex - 1);
+    // if (_moduleIndex <= 0) return true;
+    // return moduleComplete(_structure, _row, _moduleIndex - 1);
+    return true; 
   }
 
   function courseComplete(structure, row) {

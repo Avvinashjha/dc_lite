@@ -1,6 +1,6 @@
 {
   "title": "Express.js",
-  "description": "Build web servers with Express: routing, middleware, the MVC pattern, and rendering HTML with EJS templates.",
+  "description": "Build web servers with Express: routing, middleware, request parsing, validation, security middleware, MVC, and server-rendered HTML.",
   "lessons": [
     {
       "slug": "01-introduction-to-express",
@@ -31,6 +31,38 @@
       "title": "EJS Templates and Serving HTML Pages",
       "type": "text",
       "duration": "15 min"
+    },
+    {
+      "slug": "06-request-parsing-and-validation",
+      "title": "Request Parsing and Validation",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-security-middleware",
+      "title": "Security Middleware: CORS, Helmet, and Rate Limits",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "08-error-handling-middleware",
+      "title": "Error Handling Middleware",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-project-structure-for-apis",
+      "title": "Project Structure for Express APIs",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "10-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-06-knowledge-check",
+      "passingScore": 70
     }
   ]
 }

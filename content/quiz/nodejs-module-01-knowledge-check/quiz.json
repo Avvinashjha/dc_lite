@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-01-knowledge-check",
+  "title": "Node.js Introduction Knowledge Check",
+  "description": "Check your understanding of the Node.js runtime, use cases, installation basics, REPL usage, and module systems.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "runtime", "modules", "backend"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is Node.js primarily used for?",
+      "options": [
+        { "id": "a", "text": "Running JavaScript outside the browser" },
+        { "id": "b", "text": "Replacing HTML in web pages" },
+        { "id": "c", "text": "Styling browser layouts" },
+        { "id": "d", "text": "Writing SQL queries only" }
+      ],
+      "correct": ["a"],
+      "explanation": "Node.js is a JavaScript runtime commonly used for servers, CLIs, scripts, and tooling outside the browser.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which command runs a file named `server.js` with Node.js?",
+      "options": [
+        { "id": "a", "text": "`node server.js`" },
+        { "id": "b", "text": "`npm server.js`" },
+        { "id": "c", "text": "`browser server.js`" },
+        { "id": "d", "text": "`html server.js`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `node` command executes JavaScript files with the Node runtime.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which pair belongs to CommonJS modules?",
+      "options": [
+        { "id": "a", "text": "`require()` and `module.exports`" },
+        { "id": "b", "text": "`import` and `export` only" },
+        { "id": "c", "text": "`document.querySelector()` and `window`" },
+        { "id": "d", "text": "`SELECT` and `FROM`" }
+      ],
+      "correct": ["a"],
+      "explanation": "CommonJS uses `require()` to import values and `module.exports` to expose them.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does the Node.js REPL help you do?",
+      "options": [
+        { "id": "a", "text": "Try JavaScript expressions interactively" },
+        { "id": "b", "text": "Deploy a database cluster automatically" },
+        { "id": "c", "text": "Compile CSS to images" },
+        { "id": "d", "text": "Replace package.json" }
+      ],
+      "correct": ["a"],
+      "explanation": "The REPL is useful for quick experiments and runtime exploration.",
+      "points": 1
+    }
+  ]
+}

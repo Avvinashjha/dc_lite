@@ -1,6 +1,6 @@
 {
   "title": "Streams and Streaming",
-  "description": "Process data piece by piece with streams: readable, writable, pipes, and real-world streaming.",
+  "description": "Process data piece by piece with streams: readable, writable, duplex, transform, pipes, backpressure, and real-world streaming.",
   "lessons": [
     {
       "slug": "01-what-are-streams",
@@ -25,6 +25,32 @@
       "title": "Streaming in Practice",
       "type": "text",
       "duration": "15 min"
+    },
+    {
+      "slug": "05-duplex-and-transform-streams",
+      "title": "Duplex and Transform Streams",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-backpressure",
+      "title": "Backpressure",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-pipeline-and-stream-promises",
+      "title": "pipeline() and stream/promises",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-04-knowledge-check",
+      "passingScore": 70
     }
   ]
 }
