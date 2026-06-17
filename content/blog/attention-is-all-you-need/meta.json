@@ -1,0 +1,17 @@
+{
+  "title": "Attention Is All You Need: The Paper That Introduced Transformers",
+  "description": "Attention Is All You Need is a 2017 research paper introducing the Transformer architecture, a deep learning model that revolutionized natural language processing. It eliminated recurrent and convolutional layers in favor of self-attention mechanisms, dramatically improving parallelization and performance on large text corpora.",
+  "date": "2026-06-17",
+  "author": "Avinash Jha",
+  "tags": [
+    "transformer",
+    "attention",
+    "machine-learning",
+    "deep-learning",
+    "neural-networks",
+    "llm"
+  ],
+  "category": "blog",
+  "draft": false,
+  "image": "/blog/attention-is-all-you-need/transformerBluePrint.png"
+}
