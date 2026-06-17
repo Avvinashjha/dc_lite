@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-08-knowledge-check",
+  "title": "Databases with Node.js Knowledge Check",
+  "description": "Check your understanding of SQL and NoSQL access, PostgreSQL, connection pooling, transactions, migrations, and ORMs/query builders.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "databases", "postgresql", "mongodb", "transactions"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Why do production Node.js apps commonly use database connection pools?",
+      "options": [
+        { "id": "a", "text": "To reuse a limited set of database connections efficiently" },
+        { "id": "b", "text": "To store static images in JavaScript memory" },
+        { "id": "c", "text": "To remove the need for queries" },
+        { "id": "d", "text": "To convert MongoDB into HTML" }
+      ],
+      "correct": ["a"],
+      "explanation": "Pools avoid creating a new database connection for every request and control concurrency.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the main purpose of a transaction?",
+      "options": [
+        { "id": "a", "text": "To make a group of database changes succeed or fail together" },
+        { "id": "b", "text": "To install a package globally" },
+        { "id": "c", "text": "To render an EJS page" },
+        { "id": "d", "text": "To create an HTTP route" }
+      ],
+      "correct": ["a"],
+      "explanation": "Transactions protect consistency when multiple database operations must be atomic.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What are database migrations used for?",
+      "options": [
+        { "id": "a", "text": "Versioning and applying schema changes over time" },
+        { "id": "b", "text": "Compressing HTTP responses" },
+        { "id": "c", "text": "Starting the Node REPL" },
+        { "id": "d", "text": "Hashing passwords only" }
+      ],
+      "correct": ["a"],
+      "explanation": "Migrations make schema changes trackable, reviewable, and repeatable across environments.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is an ORM or query builder meant to help with?",
+      "options": [
+        { "id": "a", "text": "Structuring database access and queries in application code" },
+        { "id": "b", "text": "Replacing the event loop" },
+        { "id": "c", "text": "Running browser CSS" },
+        { "id": "d", "text": "Creating TLS certificates automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "ORMs and query builders provide abstractions for modeling and querying data.",
+      "points": 1
+    }
+  ]
+}

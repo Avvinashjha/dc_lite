@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-17-knowledge-check",
+  "title": "Error Handling and Configuration Knowledge Check",
+  "description": "Check your understanding of Node.js error handling, async failures, Express error boundaries, environment configuration, safe logging, and graceful shutdown.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "errors", "configuration", "express", "logging"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Why should required configuration be validated at startup?",
+      "options": [
+        { "id": "a", "text": "To fail early with a clear error instead of running with invalid settings" },
+        { "id": "b", "text": "To hide all runtime errors" },
+        { "id": "c", "text": "To skip environment variables entirely" },
+        { "id": "d", "text": "To publish packages faster" }
+      ],
+      "correct": ["a"],
+      "explanation": "Startup validation catches missing or malformed config before the app starts serving traffic.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What should an Express error handler usually produce?",
+      "options": [
+        { "id": "a", "text": "A consistent HTTP error response and safe logging" },
+        { "id": "b", "text": "A new database schema" },
+        { "id": "c", "text": "A package-lock file" },
+        { "id": "d", "text": "A browser-only DOM event" }
+      ],
+      "correct": ["a"],
+      "explanation": "Centralized error handling standardizes status codes, response shapes, and logging behavior.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which data should generally not be included in production error logs?",
+      "options": [
+        { "id": "a", "text": "Secrets such as tokens, passwords, and API keys" },
+        { "id": "b", "text": "A non-sensitive request id" },
+        { "id": "c", "text": "A timestamp" },
+        { "id": "d", "text": "An error code" }
+      ],
+      "correct": ["a"],
+      "explanation": "Logs are often widely accessible, so secrets and sensitive personal data should be redacted.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is graceful shutdown meant to do?",
+      "options": [
+        { "id": "a", "text": "Stop accepting new work, finish or drain active work, and close resources" },
+        { "id": "b", "text": "Ignore termination signals forever" },
+        { "id": "c", "text": "Delete all database data" },
+        { "id": "d", "text": "Disable HTTP responses" }
+      ],
+      "correct": ["a"],
+      "explanation": "Graceful shutdown reduces dropped requests and resource leaks during deploys or restarts.",
+      "points": 1
+    }
+  ]
+}

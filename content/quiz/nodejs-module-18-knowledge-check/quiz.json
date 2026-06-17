@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-18-knowledge-check",
+  "title": "Testing Node.js APIs Knowledge Check",
+  "description": "Check your understanding of backend test strategy, test runners, unit tests, Supertest API tests, mocks, integration tests, and E2E tradeoffs.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "testing", "api-testing", "supertest", "mocks"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What should most backend tests focus on?",
+      "options": [
+        { "id": "a", "text": "Observable behavior and important contracts" },
+        { "id": "b", "text": "Private variable names only" },
+        { "id": "c", "text": "The exact line count of source files" },
+        { "id": "d", "text": "CSS selector order" }
+      ],
+      "correct": ["a"],
+      "explanation": "Behavior-focused tests survive refactors better and verify what callers rely on.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is Supertest commonly used for?",
+      "options": [
+        { "id": "a", "text": "Testing HTTP APIs without manually starting a real external server" },
+        { "id": "b", "text": "Building Docker images" },
+        { "id": "c", "text": "Replacing database indexes" },
+        { "id": "d", "text": "Publishing npm packages" }
+      ],
+      "correct": ["a"],
+      "explanation": "Supertest can exercise Express and Node HTTP handlers through request-like assertions.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "When is mocking most useful?",
+      "options": [
+        { "id": "a", "text": "When isolating code from slow, flaky, or expensive external dependencies" },
+        { "id": "b", "text": "When hiding every bug" },
+        { "id": "c", "text": "When replacing assertions" },
+        { "id": "d", "text": "When avoiding source control" }
+      ],
+      "correct": ["a"],
+      "explanation": "Mocks help isolate behavior, but over-mocking can make tests less realistic.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is a useful role for integration tests?",
+      "options": [
+        { "id": "a", "text": "Checking that multiple real parts work together across a boundary" },
+        { "id": "b", "text": "Only counting source files" },
+        { "id": "c", "text": "Replacing all unit tests" },
+        { "id": "d", "text": "Skipping application startup entirely" }
+      ],
+      "correct": ["a"],
+      "explanation": "Integration tests are valuable for database, API, queue, or service boundaries where wiring matters.",
+      "points": 1
+    }
+  ]
+}

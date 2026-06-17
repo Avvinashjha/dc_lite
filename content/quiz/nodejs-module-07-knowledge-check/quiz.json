@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-07-knowledge-check",
+  "title": "REST APIs Knowledge Check",
+  "description": "Check your understanding of REST resources, CRUD endpoints, status codes, pagination, OpenAPI, SSE, WebSockets, and webhooks.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "rest", "api-design", "webhooks", "websockets"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "In REST API design, what should URLs usually represent?",
+      "options": [
+        { "id": "a", "text": "Resources" },
+        { "id": "b", "text": "JavaScript variable names only" },
+        { "id": "c", "text": "Docker containers" },
+        { "id": "d", "text": "CSS class names" }
+      ],
+      "correct": ["a"],
+      "explanation": "REST APIs are organized around resources, with HTTP methods expressing actions.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which status code is most appropriate after successfully creating a resource?",
+      "options": [
+        { "id": "a", "text": "`201 Created`" },
+        { "id": "b", "text": "`404 Not Found`" },
+        { "id": "c", "text": "`500 Internal Server Error`" },
+        { "id": "d", "text": "`301 Moved Permanently`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`201 Created` communicates that the server created a new resource.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is OpenAPI commonly used for?",
+      "options": [
+        { "id": "a", "text": "Describing and documenting HTTP APIs" },
+        { "id": "b", "text": "Replacing all database drivers" },
+        { "id": "c", "text": "Compiling TypeScript only" },
+        { "id": "d", "text": "Running Docker images" }
+      ],
+      "correct": ["a"],
+      "explanation": "OpenAPI specifications describe endpoints, request bodies, responses, and schemas.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "When is a webhook typically used?",
+      "options": [
+        { "id": "a", "text": "When one system needs to notify another system about an event" },
+        { "id": "b", "text": "When a local variable changes" },
+        { "id": "c", "text": "When npm installs a package" },
+        { "id": "d", "text": "When a CSS file loads" }
+      ],
+      "correct": ["a"],
+      "explanation": "Webhooks are event callbacks delivered over HTTP between systems.",
+      "points": 1
+    }
+  ]
+}

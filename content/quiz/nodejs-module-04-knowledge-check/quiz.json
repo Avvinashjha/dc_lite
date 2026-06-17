@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-04-knowledge-check",
+  "title": "Streams Knowledge Check",
+  "description": "Check your understanding of readable, writable, duplex, transform streams, pipes, backpressure, and pipeline utilities.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "streams", "backpressure", "pipeline"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Why are streams useful for large files?",
+      "options": [
+        { "id": "a", "text": "They process data in chunks instead of loading everything into memory" },
+        { "id": "b", "text": "They make every operation synchronous" },
+        { "id": "c", "text": "They replace all HTTP APIs" },
+        { "id": "d", "text": "They only work in browsers" }
+      ],
+      "correct": ["a"],
+      "explanation": "Streams let Node handle large or continuous data without buffering the entire payload in memory.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does a transform stream do?",
+      "options": [
+        { "id": "a", "text": "Reads input chunks, modifies them, and writes output chunks" },
+        { "id": "b", "text": "Installs npm packages" },
+        { "id": "c", "text": "Creates SQL tables" },
+        { "id": "d", "text": "Blocks the event loop intentionally" }
+      ],
+      "correct": ["a"],
+      "explanation": "Transform streams are duplex streams that derive output from input, such as compression or parsing.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What problem does backpressure help manage?",
+      "options": [
+        { "id": "a", "text": "A writable destination receiving data faster than it can handle" },
+        { "id": "b", "text": "A missing package name" },
+        { "id": "c", "text": "A malformed SQL migration" },
+        { "id": "d", "text": "A browser CSS conflict" }
+      ],
+      "correct": ["a"],
+      "explanation": "Backpressure coordinates producers and consumers so memory does not grow uncontrollably.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Why is `pipeline()` preferred over manually chaining streams in many cases?",
+      "options": [
+        { "id": "a", "text": "It handles completion and error propagation more reliably" },
+        { "id": "b", "text": "It disables all stream errors" },
+        { "id": "c", "text": "It converts streams to SQL queries" },
+        { "id": "d", "text": "It only works with HTML templates" }
+      ],
+      "correct": ["a"],
+      "explanation": "`pipeline()` wires streams together and helps manage errors and cleanup.",
+      "points": 1
+    }
+  ]
+}

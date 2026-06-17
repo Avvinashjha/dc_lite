@@ -362,6 +362,7 @@ var DCCourseProgress = (function () {
   function moduleUnlocked(_structure, _row, _moduleIndex) {
     if (_moduleIndex <= 0) return true;
     return moduleComplete(_structure, _row, _moduleIndex - 1);
+    // return true; 
   }
 
   function courseComplete(structure, row) {
