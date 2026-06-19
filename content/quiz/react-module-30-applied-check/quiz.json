@@ -1,0 +1,246 @@
+{
+  "id": "react-module-30-applied-check",
+  "title": "React Deployment Applied Check",
+  "description": "Apply deployment knowledge to production build, Git, Docker, Netlify, Vercel, CI/CD, environment, and caching edge cases.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "deployment",
+    "docker",
+    "caching"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A deployed SPA works at `/` but refreshing `/settings` returns 404 on Netlify. What is likely missing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An SPA fallback redirect to the app entry point"
+        },
+        {
+          "id": "b",
+          "text": "A useReducer hook"
+        },
+        {
+          "id": "c",
+          "text": "A source map upload only"
+        },
+        {
+          "id": "d",
+          "text": "A design token"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Static hosts need a fallback rule so client-side routes resolve to the SPA shell.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A Docker image runs `npm run dev -- --host` in production. What is the main issue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The development server is not the intended production serving path"
+        },
+        {
+          "id": "b",
+          "text": "Docker cannot run JavaScript"
+        },
+        {
+          "id": "c",
+          "text": "React Router requires dev mode"
+        },
+        {
+          "id": "d",
+          "text": "Nginx cannot serve static files"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Production containers should serve optimized build output, not a dev server with development behavior.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A new deployment still serves old JavaScript even after a successful build. Which area should you inspect first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cache headers, hashed asset references, and CDN invalidation behavior"
+        },
+        {
+          "id": "b",
+          "text": "ARIA roles"
+        },
+        {
+          "id": "c",
+          "text": "Reducer action names"
+        },
+        {
+          "id": "d",
+          "text": "JSX fragments"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Stale production assets usually point to cache or CDN configuration problems.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "Which files or values should usually not be committed? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": ".env files containing secrets"
+        },
+        {
+          "id": "b",
+          "text": "Generated build output unless the repo explicitly requires it"
+        },
+        {
+          "id": "c",
+          "text": "Private deployment tokens"
+        },
+        {
+          "id": "d",
+          "text": "The package lockfile for an app"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Secrets and generated output usually do not belong in source; app lockfiles commonly should be committed.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A Vercel app has correct routes locally but serverless API calls fail only in preview. What should you compare?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Preview environment variables and platform function configuration"
+        },
+        {
+          "id": "b",
+          "text": "Only local component state"
+        },
+        {
+          "id": "c",
+          "text": "The browser zoom level"
+        },
+        {
+          "id": "d",
+          "text": "Whether Prettier used double quotes"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Preview and production environments can have different variables and serverless settings.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A CI workflow caches `node_modules` broadly and intermittent dependency issues appear after lockfile changes. What is safer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Key the cache by lockfile or cache the package manager store appropriately"
+        },
+        {
+          "id": "b",
+          "text": "Ignore the lockfile"
+        },
+        {
+          "id": "c",
+          "text": "Commit every cache artifact"
+        },
+        {
+          "id": "d",
+          "text": "Disable dependency installation"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "CI caches should be invalidated when dependency definitions change.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A feature flag is compiled into the static bundle, then toggled in the hosting dashboard after deployment with no effect. Why?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The flag was build-time config, not runtime config"
+        },
+        {
+          "id": "b",
+          "text": "React ignores booleans"
+        },
+        {
+          "id": "c",
+          "text": "The flag needs an ARIA role"
+        },
+        {
+          "id": "d",
+          "text": "Git tags block flags"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Static frontend bundles cannot see changed build-time variables until rebuilt or supplied via runtime config.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A team needs a rollback after a broken deployment. Which Git and release practice helps?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tag releases and keep commits small enough to identify the bad change"
+        },
+        {
+          "id": "b",
+          "text": "Squash all history into one unreviewed commit"
+        },
+        {
+          "id": "c",
+          "text": "Delete the lockfile"
+        },
+        {
+          "id": "d",
+          "text": "Disable preview deploys"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Tags, reviewable commits, and release records make rollback and diagnosis easier.",
+      "points": 1
+    }
+  ]
+}

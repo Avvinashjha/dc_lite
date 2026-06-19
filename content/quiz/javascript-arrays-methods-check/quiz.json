@@ -1,0 +1,224 @@
+{
+  "id": "javascript-arrays-methods-check",
+  "title": "JavaScript Array Methods Check",
+  "description": "Test your ability to choose and predict common array methods like forEach, map, filter, reduce, find, some, every, includes, and entries.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "arrays", "array-methods", "callbacks"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which method is best when you want to transform every item and get a new array of the same length?",
+      "options": [
+        { "id": "a", "text": "`forEach`" },
+        { "id": "b", "text": "`map`" },
+        { "id": "c", "text": "`filter`" },
+        { "id": "d", "text": "`some`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`map` transforms each element and returns a new array with the same length.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [1, 2, 3].forEach((number) => number * 2);\n```",
+      "options": [
+        { "id": "a", "text": "`[2, 4, 6]`" },
+        { "id": "b", "text": "`[1, 2, 3]`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`6`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`forEach` always returns `undefined`; it is meant for side effects.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [1, 2, 3].map((number) => {\n  number * 2;\n});\n```",
+      "options": [
+        { "id": "a", "text": "`[2, 4, 6]`" },
+        { "id": "b", "text": "`[undefined, undefined, undefined]`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`[1, 2, 3]`" }
+      ],
+      "correct": ["b"],
+      "explanation": "With braces, the arrow callback needs an explicit `return`. Without it, each result is `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which method is best when you want all items that match a condition?",
+      "options": [
+        { "id": "a", "text": "`find`" },
+        { "id": "b", "text": "`filter`" },
+        { "id": "c", "text": "`includes`" },
+        { "id": "d", "text": "`forEach`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`filter` returns a new array containing all matching items.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [1, 2, 3, 4].filter((number) => number > 2);\n```",
+      "options": [
+        { "id": "a", "text": "`[3, 4]`" },
+        { "id": "b", "text": "`3`" },
+        { "id": "c", "text": "`true`" },
+        { "id": "d", "text": "`[1, 2]`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`filter` keeps all items where the condition is true.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which method is best when you want the first matching item itself?",
+      "options": [
+        { "id": "a", "text": "`find`" },
+        { "id": "b", "text": "`filter`" },
+        { "id": "c", "text": "`some`" },
+        { "id": "d", "text": "`entries`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`find` returns the first matching element, or `undefined` if no match exists.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [5, 8, 12, 20].find((number) => number > 10);\n```",
+      "options": [
+        { "id": "a", "text": "`[12, 20]`" },
+        { "id": "b", "text": "`12`" },
+        { "id": "c", "text": "`true`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`find` stops at the first matching item, which is `12`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which method is best for answering: \"Does at least one item match?\"",
+      "options": [
+        { "id": "a", "text": "`every`" },
+        { "id": "b", "text": "`some`" },
+        { "id": "c", "text": "`map`" },
+        { "id": "d", "text": "`reduce`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`some` returns `true` when at least one item passes the condition.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [2, 4, 6].every((number) => number % 2 === 0);\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`[2, 4, 6]`" },
+        { "id": "d", "text": "`2`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Every number in the array is even, so `every` returns `true`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which method is best when you want to turn an array into one accumulated result?",
+      "options": [
+        { "id": "a", "text": "`map`" },
+        { "id": "b", "text": "`filter`" },
+        { "id": "c", "text": "`reduce`" },
+        { "id": "d", "text": "`includes`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`reduce` builds one final accumulated result, such as a number, object, string, or array.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [1, 2, 3].reduce((sum, number) => sum + number, 0);\n```",
+      "options": [
+        { "id": "a", "text": "`[1, 2, 3]`" },
+        { "id": "b", "text": "`6`" },
+        { "id": "c", "text": "`0`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The accumulator starts at `0` and adds each number, producing `6`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst roles = [\"admin\", \"editor\", \"viewer\"];\nroles.includes(\"editor\");\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`\"editor\"`" },
+        { "id": "d", "text": "`1`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`includes` checks whether the array contains the exact value and returns a boolean.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which method gives index-value pairs like `[0, \"Apple\"]`?",
+      "options": [
+        { "id": "a", "text": "`keys()`" },
+        { "id": "b", "text": "`values()`" },
+        { "id": "c", "text": "`entries()`" },
+        { "id": "d", "text": "`includes()`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`entries()` returns an iterator of `[index, value]` pairs.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [[1, 2], [3, 4]].flat();\n```",
+      "options": [
+        { "id": "a", "text": "`[[1, 2], [3, 4]]`" },
+        { "id": "b", "text": "`[1, 2, 3, 4]`" },
+        { "id": "c", "text": "`[1, [2], 3, [4]]`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`flat()` flattens one level by default.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which is most similar to `array.flatMap(callback)`?",
+      "options": [
+        { "id": "a", "text": "`array.map(callback).flat()`" },
+        { "id": "b", "text": "`array.filter(callback).map()`" },
+        { "id": "c", "text": "`array.reduce(callback).flat()`" },
+        { "id": "d", "text": "`array.forEach(callback).flat()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`flatMap` maps each item, then flattens the result one level.",
+      "points": 1
+    }
+  ]
+}

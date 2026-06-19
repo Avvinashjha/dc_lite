@@ -1,0 +1,224 @@
+{
+  "id": "javascript-testing-applied-check",
+  "title": "JavaScript Testing Applied Check",
+  "description": "Apply JavaScript testing concepts by choosing appropriate test types, writing assertions, handling async code, using mocks, and avoiding brittle tests.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "testing", "jest", "mocks", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which test best checks this function's behavior?\n```js\nfunction formatPrice(cents) {\n  return `$${(cents / 100).toFixed(2)}`;\n}\n```",
+      "options": [
+        { "id": "a", "text": "`expect(formatPrice(1299)).toBe(\"$12.99\")`" },
+        { "id": "b", "text": "`expect(formatPrice).toBe(\"function formatPrice\")`" },
+        { "id": "c", "text": "`expect(String).toBe(Number)`" },
+        { "id": "d", "text": "`expect(cents).toBeDefined()` outside the function" }
+      ],
+      "correct": ["a"],
+      "explanation": "The useful test checks the observable output for a specific input.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the best assertion for this result?\n```js\nconst result = getActiveUsers(users);\n// result should be [{ id: 1, active: true }]\n```",
+      "options": [
+        { "id": "a", "text": "`expect(result).toEqual([{ id: 1, active: true }])`" },
+        { "id": "b", "text": "`expect(result).toBe([{ id: 1, active: true }])`" },
+        { "id": "c", "text": "`expect(result).toThrow()`" },
+        { "id": "d", "text": "`expect(result).toBeTruthyOnly()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Use deep equality for object and array contents.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which test name is most useful?",
+      "options": [
+        { "id": "a", "text": "`returns no discount for totals below the threshold`" },
+        { "id": "b", "text": "`works`" },
+        { "id": "c", "text": "`test 1`" },
+        { "id": "d", "text": "`misc`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A good test name describes the behavior being checked.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What important edge case should be tested for this rule?\n```js\nfunction canRegister(age) {\n  return age >= 18;\n}\n```",
+      "options": [
+        { "id": "a", "text": "`age` exactly `18`" },
+        { "id": "b", "text": "Whether `return` is a JavaScript keyword" },
+        { "id": "c", "text": "Whether numbers can be stored in variables" },
+        { "id": "d", "text": "Whether the file name contains a dash" }
+      ],
+      "correct": ["a"],
+      "explanation": "Boundary values such as exactly 18 are important edge cases for comparison logic.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is wrong with this async test?\n```js\ntest(\"loads user\", () => {\n  getUser().then((user) => {\n    expect(user.name).toBe(\"Ava\");\n  });\n});\n```",
+      "options": [
+        { "id": "a", "text": "The test does not return or await the Promise" },
+        { "id": "b", "text": "`then()` can never be used in JavaScript" },
+        { "id": "c", "text": "`expect()` only works outside tests" },
+        { "id": "d", "text": "The test name must be uppercase" }
+      ],
+      "correct": ["a"],
+      "explanation": "The test runner may finish before the assertion runs unless the Promise is returned or awaited.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which Jest test correctly checks that an async function rejects?",
+      "options": [
+        { "id": "a", "text": "`await expect(loadUser()).rejects.toThrow(\"Not found\")`" },
+        { "id": "b", "text": "`expect(await loadUser()).toReject(\"Not found\")`" },
+        { "id": "c", "text": "`expect(loadUser()).toBeThrownLater()`" },
+        { "id": "d", "text": "`loadUser().catch = true`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`await expect(promise).rejects...` is the Jest pattern for checking rejected Promises.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which dependency is a good candidate to replace with a mock in a regular automated test?",
+      "options": [
+        { "id": "a", "text": "A network request to a production API" },
+        { "id": "b", "text": "A pure `add(a, b)` function being tested directly" },
+        { "id": "c", "text": "The `+` operator" },
+        { "id": "d", "text": "A local variable inside the same function" }
+      ],
+      "correct": ["a"],
+      "explanation": "External network calls are slow and unpredictable, so tests often replace them with controlled mocks or stubs.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this assertion check?\n```js\nexpect(sendEmail).toHaveBeenCalledWith(\"ava@example.com\", \"Welcome!\");\n```",
+      "options": [
+        { "id": "a", "text": "That the spy or mock was called with those arguments" },
+        { "id": "b", "text": "That an email was definitely delivered to an inbox" },
+        { "id": "c", "text": "That the browser opened a mail app" },
+        { "id": "d", "text": "That the function returned a Promise" }
+      ],
+      "correct": ["a"],
+      "explanation": "This checks recorded call arguments on a mock or spy. It does not prove real email delivery.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which test is least brittle?",
+      "options": [
+        { "id": "a", "text": "Checking the returned user-facing result" },
+        { "id": "b", "text": "Checking every private helper call in exact order" },
+        { "id": "c", "text": "Checking the number of blank lines in the source file" },
+        { "id": "d", "text": "Checking the local variable names used inside the function" }
+      ],
+      "correct": ["a"],
+      "explanation": "Tests that focus on observable behavior are usually less brittle than tests tied to private implementation details.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What should a regression test for a fixed bug do?",
+      "options": [
+        { "id": "a", "text": "Fail before the fix and pass after the fix" },
+        { "id": "b", "text": "Never make an assertion" },
+        { "id": "c", "text": "Delete the bug report" },
+        { "id": "d", "text": "Only check that the test file exists" }
+      ],
+      "correct": ["a"],
+      "explanation": "A regression test should capture the buggy behavior so future changes do not reintroduce it.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which is the best reason to use `beforeEach()`?",
+      "options": [
+        { "id": "a", "text": "To create fresh setup needed by each test" },
+        { "id": "b", "text": "To make tests depend on previous tests" },
+        { "id": "c", "text": "To skip all assertions" },
+        { "id": "d", "text": "To convert all tests to manual tests" }
+      ],
+      "correct": ["a"],
+      "explanation": "`beforeEach()` is useful for repeated fresh setup while keeping tests independent.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the best interpretation of high code coverage?",
+      "options": [
+        { "id": "a", "text": "A lot of code ran during tests, but the assertions still need to be meaningful" },
+        { "id": "b", "text": "The app has no bugs" },
+        { "id": "c", "text": "Manual testing is impossible" },
+        { "id": "d", "text": "Every edge case is definitely tested" }
+      ],
+      "correct": ["a"],
+      "explanation": "Coverage is useful, but it is only a signal. Tests need meaningful assertions and good case selection.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which kind of test would best check that a login form works through the browser from typing credentials to seeing the dashboard?",
+      "options": [
+        { "id": "a", "text": "End-to-end test" },
+        { "id": "b", "text": "A unit test of `2 + 2`" },
+        { "id": "c", "text": "A JSON parser test only" },
+        { "id": "d", "text": "A variable naming test" }
+      ],
+      "correct": ["a"],
+      "explanation": "A full browser workflow is an end-to-end test.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which test setup is most independent?",
+      "options": [
+        { "id": "a", "text": "Each test creates the data it needs or gets fresh data from `beforeEach()`" },
+        { "id": "b", "text": "The second test depends on a user created by the first test" },
+        { "id": "c", "text": "All tests mutate the same global object without resetting it" },
+        { "id": "d", "text": "Tests must run alphabetically to pass" }
+      ],
+      "correct": ["a"],
+      "explanation": "Independent tests are easier to run, debug, and parallelize.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which statement best describes TDD?",
+      "options": [
+        { "id": "a", "text": "Write a failing test, make it pass, then refactor while tests stay passing" },
+        { "id": "b", "text": "Write all production code first and never run tests" },
+        { "id": "c", "text": "Only test after deployment" },
+        { "id": "d", "text": "Replace assertions with comments" }
+      ],
+      "correct": ["a"],
+      "explanation": "TDD is commonly summarized as red, green, refactor.",
+      "points": 1
+    }
+  ]
+}

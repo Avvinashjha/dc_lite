@@ -25,6 +25,34 @@
       "title": "Prototypal Inheritance",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "05-constructor-functions-and-prototype",
+      "title": "Constructor Functions and prototype",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-classes-and-prototypes",
+      "title": "Classes and Prototypes",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-prototypes-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "08-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-prototypes-applied-check",
+      "passingScore": 70
     }
   ]
 }

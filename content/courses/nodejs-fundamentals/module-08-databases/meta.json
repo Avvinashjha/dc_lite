@@ -1,6 +1,6 @@
 {
   "title": "Databases with Node.js",
-  "description": "Connect Node.js to relational and NoSQL databases: SQLite, MySQL, and MongoDB.",
+  "description": "Connect Node.js to relational and NoSQL databases, covering drivers, pooling, transactions, migrations, ORMs, and production data-access patterns.",
   "lessons": [
     {
       "slug": "01-sqlite-and-nodejs",
@@ -19,6 +19,44 @@
       "title": "MongoDB and Node.js",
       "type": "text",
       "duration": "20 min"
+    },
+    {
+      "slug": "04-postgresql-and-nodejs",
+      "title": "PostgreSQL and Node.js",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-connection-pooling",
+      "title": "Connection Pooling",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-transactions",
+      "title": "Transactions",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-migrations",
+      "title": "Database Migrations",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-orms-and-query-builders",
+      "title": "ORMs and Query Builders",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "09-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-08-knowledge-check",
+      "passingScore": 70
     }
   ]
 }

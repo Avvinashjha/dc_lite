@@ -1,0 +1,245 @@
+{
+  "id": "react-module-32-core-check",
+  "title": "React Interview Questions Core Check",
+  "description": "Check your understanding of React interview fundamentals, hooks, performance, coding challenges, and frontend system design answers.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "interview",
+    "hooks",
+    "performance"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "In an interview, how should you explain what problem React solves?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It helps build UI from reusable components that update predictably with state"
+        },
+        {
+          "id": "b",
+          "text": "It replaces every backend API"
+        },
+        {
+          "id": "c",
+          "text": "It makes CSS unnecessary"
+        },
+        {
+          "id": "d",
+          "text": "It guarantees zero bugs"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Core React answers should connect components, state, and declarative rendering.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is the difference between props and state?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Props are passed in; state is owned and updated by a component or hook"
+        },
+        {
+          "id": "b",
+          "text": "Props can change but state never changes"
+        },
+        {
+          "id": "c",
+          "text": "State only works in class components"
+        },
+        {
+          "id": "d",
+          "text": "Props are always global"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Props are inputs from parents; state is local owned data that can trigger re-renders.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are Rules of Hooks? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Call Hooks at the top level"
+        },
+        {
+          "id": "b",
+          "text": "Call Hooks only from React functions or custom Hooks"
+        },
+        {
+          "id": "c",
+          "text": "Call Hooks inside loops when convenient"
+        },
+        {
+          "id": "d",
+          "text": "Call Hooks conditionally after early returns"
+        }
+      ],
+      "correct": [
+        "a",
+        "b"
+      ],
+      "explanation": "Hooks rely on consistent call order, so they belong at the top level of React functions or custom hooks.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is a stale closure in a hook-related interview answer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A callback or effect reading an older captured value than expected"
+        },
+        {
+          "id": "b",
+          "text": "A component with no props"
+        },
+        {
+          "id": "c",
+          "text": "A CSS class that is unused"
+        },
+        {
+          "id": "d",
+          "text": "A source map from an old build"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Stale closures happen when functions capture values from a previous render.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "When is `useRef` a good fit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Storing mutable values or DOM references that should not trigger re-renders"
+        },
+        {
+          "id": "b",
+          "text": "Replacing every state variable"
+        },
+        {
+          "id": "c",
+          "text": "Fetching server data automatically"
+        },
+        {
+          "id": "d",
+          "text": "Declaring component props"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Refs persist across renders without causing re-renders when changed.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What should you do before applying React.memo in a performance interview scenario?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Identify whether re-renders are the real bottleneck"
+        },
+        {
+          "id": "b",
+          "text": "Memoize every component immediately"
+        },
+        {
+          "id": "c",
+          "text": "Remove all props"
+        },
+        {
+          "id": "d",
+          "text": "Disable DevTools"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Strong performance answers begin with measurement and bottleneck identification.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does list virtualization solve?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rendering too many visible and offscreen list items at once"
+        },
+        {
+          "id": "b",
+          "text": "Authentication token storage"
+        },
+        {
+          "id": "c",
+          "text": "CSRF protection"
+        },
+        {
+          "id": "d",
+          "text": "ARIA labels"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Virtualization limits rendered rows to the visible window plus a buffer.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What makes a good frontend system design answer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Requirements, data flow, component boundaries, performance, failures, and tradeoffs"
+        },
+        {
+          "id": "b",
+          "text": "Only naming the newest library"
+        },
+        {
+          "id": "c",
+          "text": "Writing code before asking questions"
+        },
+        {
+          "id": "d",
+          "text": "Ignoring loading states"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "System design interviews evaluate structured reasoning and tradeoffs, not only tool selection.",
+      "points": 1
+    }
+  ]
+}

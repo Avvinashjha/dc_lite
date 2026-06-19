@@ -1,0 +1,224 @@
+{
+  "id": "javascript-security-applied-check",
+  "title": "JavaScript Security Applied Check",
+  "description": "Apply JavaScript security concepts by choosing safer DOM updates, validating input, handling auth storage, reasoning about CORS and CSRF, avoiding dynamic code risks, and protecting secrets.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "security", "dom", "authentication", "secure-coding"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which update is safest for displaying a user's plain-text comment?\n```js\nconst comment = getCommentFromApi();\nconst preview = document.querySelector(\"#preview\");\n```",
+      "options": [
+        { "id": "a", "text": "`preview.textContent = comment.body;`" },
+        { "id": "b", "text": "`preview.innerHTML = comment.body;`" },
+        { "id": "c", "text": "`eval(comment.body);`" },
+        { "id": "d", "text": "`document.write(comment.body);`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`textContent` displays the comment as text. The other options parse or run the value in unsafe ways.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which pattern is best when users may choose a sort field for an API request?",
+      "options": [
+        { "id": "a", "text": "Allow only known fields such as `name`, `price`, or `createdAt`" },
+        { "id": "b", "text": "Send any field name directly to the server without checks" },
+        { "id": "c", "text": "Run the field name with `eval()` first" },
+        { "id": "d", "text": "Store the field name as an access token" }
+      ],
+      "correct": ["a"],
+      "explanation": "An allow list keeps accepted values narrow and predictable.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is wrong with this security assumption?\n```js\nif (user.role !== \"admin\") {\n  hideDeleteButton();\n}\n```",
+      "options": [
+        { "id": "a", "text": "Hiding a button improves UI but does not enforce server-side authorization" },
+        { "id": "b", "text": "Buttons cannot be hidden with JavaScript" },
+        { "id": "c", "text": "Only CSS can check roles" },
+        { "id": "d", "text": "All users must see every button" }
+      ],
+      "correct": ["a"],
+      "explanation": "Frontend checks are useful for display, but the server must still enforce permissions for the action.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A form has this hidden input:\n```html\n<input type=\"hidden\" name=\"price\" value=\"1999\">\n```\nWhat should the server do?",
+      "options": [
+        { "id": "a", "text": "Calculate or verify the price from trusted server-side data" },
+        { "id": "b", "text": "Trust the hidden input because users cannot see it" },
+        { "id": "c", "text": "Treat hidden inputs as encrypted" },
+        { "id": "d", "text": "Skip validation because the frontend supplied the value" }
+      ],
+      "correct": ["a"],
+      "explanation": "Hidden inputs are still user-controlled. Sensitive values like prices must be verified by the server.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which request is a better shape for changing profile data?",
+      "options": [
+        { "id": "a", "text": "`fetch(\"/api/profile\", { method: \"PATCH\", body: JSON.stringify(data) })` with server validation" },
+        { "id": "b", "text": "`fetch(\"/api/delete-account\")` using GET for a destructive action" },
+        { "id": "c", "text": "A request that trusts only hidden form fields" },
+        { "id": "d", "text": "A request that relies on CORS instead of authentication" }
+      ],
+      "correct": ["a"],
+      "explanation": "State-changing actions should use appropriate HTTP methods and must be validated by the server.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which statement correctly describes this code?\n```js\nawait fetch(\"https://api.example.com/me\", {\n  credentials: \"include\",\n});\n```",
+      "options": [
+        { "id": "a", "text": "It may include cookies, so the server should be configured carefully and consider CSRF protections" },
+        { "id": "b", "text": "It disables all cookies" },
+        { "id": "c", "text": "It proves the response is public" },
+        { "id": "d", "text": "It stores the user's password in localStorage" }
+      ],
+      "correct": ["a"],
+      "explanation": "`credentials: \"include\"` can send credentials on cross-origin requests when server policy allows it.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A browser shows a CORS error when calling an admin API. What is the best security conclusion?",
+      "options": [
+        { "id": "a", "text": "The server still needs authentication and authorization; CORS is not enough" },
+        { "id": "b", "text": "The admin API is automatically secure" },
+        { "id": "c", "text": "The route should allow every origin with credentials" },
+        { "id": "d", "text": "The frontend should place an admin token in the URL" }
+      ],
+      "correct": ["a"],
+      "explanation": "CORS controls browser response reading. It does not replace server-side access control.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which alternative is safer than this pattern?\n```js\nconst calculate = new Function(\"price\", `return ${formula}`);\n```",
+      "options": [
+        { "id": "a", "text": "Map allowed operation names to functions written by your code" },
+        { "id": "b", "text": "Wrap the formula in `eval()`" },
+        { "id": "c", "text": "Store the formula in a cookie" },
+        { "id": "d", "text": "Disable HTTPS for the page" }
+      ],
+      "correct": ["a"],
+      "explanation": "Allowing users to choose from known operations keeps data separate from executable code.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Why is this object handling pattern safer for profile updates?\n```js\nfunction parseProfileUpdate(input) {\n  return {\n    displayName: String(input.displayName ?? \"\").trim(),\n    bio: String(input.bio ?? \"\").trim(),\n  };\n}\n```",
+      "options": [
+        { "id": "a", "text": "It copies only expected properties and ignores unexpected keys" },
+        { "id": "b", "text": "It deeply merges every property from input" },
+        { "id": "c", "text": "It authenticates the user automatically" },
+        { "id": "d", "text": "It makes all HTML safe to render with `innerHTML`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Copying known properties makes the accepted data shape explicit and avoids blindly trusting unknown object keys.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which error handling pattern is safer for production users?",
+      "options": [
+        { "id": "a", "text": "Log details for developers and show users a general helpful message" },
+        { "id": "b", "text": "Show users the full stack trace and internal file paths" },
+        { "id": "c", "text": "Put access tokens inside error messages" },
+        { "id": "d", "text": "Ignore every error silently" }
+      ],
+      "correct": ["a"],
+      "explanation": "Users need useful messages, but internal details and sensitive data should not be exposed.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "A frontend app needs to call a payment provider using a private API key. What is the safest general approach?",
+      "options": [
+        { "id": "a", "text": "Call your backend, and let the backend use the private key" },
+        { "id": "b", "text": "Bundle the private key into frontend JavaScript" },
+        { "id": "c", "text": "Put the private key in a comment" },
+        { "id": "d", "text": "Send the key in the URL so it is easy to debug" }
+      ],
+      "correct": ["a"],
+      "explanation": "Private secrets must stay on the server. The frontend can call a backend endpoint that enforces validation and permissions.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which frontend behavior can support server-side rate limiting but not replace it?",
+      "options": [
+        { "id": "a", "text": "Temporarily disabling a submit button while a request is in progress" },
+        { "id": "b", "text": "Trusting every repeated request" },
+        { "id": "c", "text": "Putting the rate limit value in a hidden input" },
+        { "id": "d", "text": "Using `innerHTML` for all status messages" }
+      ],
+      "correct": ["a"],
+      "explanation": "Disabling a button improves user experience, but real rate limiting must be enforced by the server.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which code best builds a query string from user input?",
+      "options": [
+        { "id": "a", "text": "`new URLSearchParams({ q: searchInput.value }).toString()`" },
+        { "id": "b", "text": "`\"q=\" + searchInput.value` without encoding" },
+        { "id": "c", "text": "`eval(searchInput.value)`" },
+        { "id": "d", "text": "`document.write(searchInput.value)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`URLSearchParams` handles URL encoding for query parameter values.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which production error message is most appropriate after a failed save?",
+      "options": [
+        { "id": "a", "text": "`We could not save your changes. Please try again.`" },
+        { "id": "b", "text": "`Database password is ...`" },
+        { "id": "c", "text": "`Stack trace: /srv/private/app/db.js:42`" },
+        { "id": "d", "text": "`Authorization: Bearer ey...`" }
+      ],
+      "correct": ["a"],
+      "explanation": "A general helpful message avoids leaking sensitive internal details.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which checklist item is most important before rendering user-generated rich text?",
+      "options": [
+        { "id": "a", "text": "Use a trusted sanitizer with a narrow allowed markup policy" },
+        { "id": "b", "text": "Insert it directly with `innerHTML` because it came from a form" },
+        { "id": "c", "text": "Store it in localStorage first to make it safe" },
+        { "id": "d", "text": "Disable CORS" }
+      ],
+      "correct": ["a"],
+      "explanation": "If an app intentionally renders rich user HTML, it needs careful sanitization. Plain text should use text APIs.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "id": "react-module-28-applied-check",
+  "title": "React Accessibility Applied Check",
+  "description": "Apply accessibility knowledge to edge cases involving ARIA, keyboard interaction, forms, focus management, and testing.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "accessibility",
+    "forms",
+    "keyboard"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A custom clickable card uses `<div onClick>Buy</div>` and cannot be activated with Enter or Space. What is the best fix?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use a native button for the action or fully implement button semantics and keyboard behavior"
+        },
+        {
+          "id": "b",
+          "text": "Add more margin"
+        },
+        {
+          "id": "c",
+          "text": "Use aria-hidden on the text"
+        },
+        {
+          "id": "d",
+          "text": "Move the handler to useEffect"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Native buttons are the right default for actions because they include keyboard and semantic behavior.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "An icon-only close button has no text label. What should you add?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An accessible name such as `aria-label=\"Close\"`"
+        },
+        {
+          "id": "b",
+          "text": "`aria-hidden=\"false\"` on every parent"
+        },
+        {
+          "id": "c",
+          "text": "A random tabindex"
+        },
+        {
+          "id": "d",
+          "text": "A source map"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Icon-only controls need a programmatic label because the icon may not provide a useful name.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A modal opens but focus stays behind it on the page. What is the accessibility problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keyboard users may interact with background content and miss the dialog"
+        },
+        {
+          "id": "b",
+          "text": "React cannot render portals"
+        },
+        {
+          "id": "c",
+          "text": "Screen readers always ignore modals"
+        },
+        {
+          "id": "d",
+          "text": "The bundle will be larger"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Dialogs need deliberate focus management so keyboard and assistive technology users enter and leave predictably.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "A form submit fails validation. Which improvements help accessibility? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Associate each error with its field"
+        },
+        {
+          "id": "b",
+          "text": "Summarize errors when useful"
+        },
+        {
+          "id": "c",
+          "text": "Use color alone to mark invalid fields"
+        },
+        {
+          "id": "d",
+          "text": "Move focus or announce the error state appropriately"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Validation should be perceivable, associated with fields, and reachable without relying only on color.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A disabled-looking submit button is actually a styled link with `href=\"#\"`. What is the problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The element role and behavior do not match the intended action"
+        },
+        {
+          "id": "b",
+          "text": "Links cannot have CSS"
+        },
+        {
+          "id": "c",
+          "text": "Buttons cannot submit forms"
+        },
+        {
+          "id": "d",
+          "text": "The app cannot be tested"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Choose elements by meaning: links navigate, buttons perform actions.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A status message appears after async save but screen reader users get no feedback. What pattern can help?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A polite live region for non-disruptive status updates"
+        },
+        {
+          "id": "b",
+          "text": "Removing the message from the DOM"
+        },
+        {
+          "id": "c",
+          "text": "Setting tabIndex on every paragraph"
+        },
+        {
+          "id": "d",
+          "text": "Using localStorage"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Live regions can announce dynamic save, loading, or error messages.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A developer adds `role=\"button\"` to a `<div>` and assumes accessibility is complete. What is missing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keyboard handling, focusability, states, and expected behavior"
+        },
+        {
+          "id": "b",
+          "text": "A Webpack loader"
+        },
+        {
+          "id": "c",
+          "text": "A Redux store"
+        },
+        {
+          "id": "d",
+          "text": "A production build"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "ARIA roles do not add native keyboard behavior or manage focus by themselves.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Your automated axe test passes, but Tab navigation skips the primary menu. What should you conclude?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Manual keyboard testing still found a real issue to fix"
+        },
+        {
+          "id": "b",
+          "text": "The issue is impossible because automation passed"
+        },
+        {
+          "id": "c",
+          "text": "The menu should be aria-hidden"
+        },
+        {
+          "id": "d",
+          "text": "Only source maps can diagnose it"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Automated checks complement manual testing; passing automation does not prove every interaction works.",
+      "points": 1
+    }
+  ]
+}

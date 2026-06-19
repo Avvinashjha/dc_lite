@@ -1,0 +1,182 @@
+{
+  "id": "javascript-metaprogramming-core-check",
+  "title": "JavaScript Metaprogramming Core Check",
+  "description": "Check your understanding of object introspection, property descriptors, getters and setters, symbols, custom iterables, Reflect, proxies, and practical metaprogramming cautions.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "metaprogramming", "symbols", "proxy", "reflect"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does JavaScript metaprogramming usually involve?",
+      "options": [
+        { "id": "a", "text": "Inspecting or customizing how objects, functions, or language operations behave" },
+        { "id": "b", "text": "Only writing CSS from JavaScript" },
+        { "id": "c", "text": "Removing all objects from a program" },
+        { "id": "d", "text": "Turning every function into a Promise" }
+      ],
+      "correct": ["a"],
+      "explanation": "Metaprogramming means code works with the structure or behavior of other code and objects.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which method returns a descriptor for an object's own property?",
+      "options": [
+        { "id": "a", "text": "`Object.getOwnPropertyDescriptor(object, key)`" },
+        { "id": "b", "text": "`Object.keys(object, key)`" },
+        { "id": "c", "text": "`Reflect.describe(object)`" },
+        { "id": "d", "text": "`JSON.descriptor(object)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.getOwnPropertyDescriptor()` returns descriptor details such as `value`, `writable`, `enumerable`, and `configurable`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does the `enumerable` descriptor field control?",
+      "options": [
+        { "id": "a", "text": "Whether common enumeration tools like `Object.keys()` include the property" },
+        { "id": "b", "text": "Whether the property is encrypted" },
+        { "id": "c", "text": "Whether the property can only contain numbers" },
+        { "id": "d", "text": "Whether the property belongs to a class" }
+      ],
+      "correct": ["a"],
+      "explanation": "`enumerable` controls whether the property appears in common enumeration. It does not make data private.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is surprising about properties created with `Object.defineProperty()` when descriptor fields are omitted?",
+      "options": [
+        { "id": "a", "text": "Boolean fields like `writable`, `enumerable`, and `configurable` default to `false`" },
+        { "id": "b", "text": "They always become deeply frozen arrays" },
+        { "id": "c", "text": "They automatically become symbol properties" },
+        { "id": "d", "text": "They are always inherited from `Object.prototype`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Unlike assignment-created properties, `Object.defineProperty()` defaults omitted boolean descriptor fields to `false`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which descriptor shape represents an accessor property?",
+      "options": [
+        { "id": "a", "text": "A descriptor with `get` and/or `set`" },
+        { "id": "b", "text": "A descriptor with both `value` and `get`" },
+        { "id": "c", "text": "A descriptor with only `writable` and no function" },
+        { "id": "d", "text": "A descriptor with `JSON` and `fetch` fields" }
+      ],
+      "correct": ["a"],
+      "explanation": "Accessor descriptors use `get` and/or `set`; data descriptors use `value` and `writable`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is true about `Symbol(\"id\") === Symbol(\"id\")`?",
+      "options": [
+        { "id": "a", "text": "It is `false` because each `Symbol()` call creates a unique symbol" },
+        { "id": "b", "text": "It is `true` because the descriptions match" },
+        { "id": "c", "text": "It throws because symbols cannot have descriptions" },
+        { "id": "d", "text": "It is `true` only in strict mode" }
+      ],
+      "correct": ["a"],
+      "explanation": "A symbol description is a debugging label, not its identity.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which method returns own symbol keys from an object?",
+      "options": [
+        { "id": "a", "text": "`Object.getOwnPropertySymbols(object)`" },
+        { "id": "b", "text": "`Object.keys(object)`" },
+        { "id": "c", "text": "`JSON.stringify(object)`" },
+        { "id": "d", "text": "`Array.fromSymbols(object)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Object.getOwnPropertySymbols()` returns own symbol property keys. `Object.keys()` returns enumerable string keys.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `Symbol.iterator` customize?",
+      "options": [
+        { "id": "a", "text": "How an object is iterated by `for...of`, spread, and `Array.from()`" },
+        { "id": "b", "text": "How JSON parses text" },
+        { "id": "c", "text": "How CSS classes are generated" },
+        { "id": "d", "text": "How `fetch()` handles status codes" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Symbol.iterator` defines the iterable protocol for an object.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What should an iterator's `next()` method return?",
+      "options": [
+        { "id": "a", "text": "An object with `value` and `done` properties" },
+        { "id": "b", "text": "Only a string" },
+        { "id": "c", "text": "Only `true` or `false`" },
+        { "id": "d", "text": "A CSS selector" }
+      ],
+      "correct": ["a"],
+      "explanation": "The iterator protocol expects `next()` to return `{ value, done }` objects.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Why is `Reflect` often used inside proxy traps?",
+      "options": [
+        { "id": "a", "text": "It delegates to the default operation while keeping trap code explicit" },
+        { "id": "b", "text": "It disables all proxy invariants" },
+        { "id": "c", "text": "It converts every object to JSON" },
+        { "id": "d", "text": "It makes properties private" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Reflect` methods are useful in traps because they perform the normal operation after custom behavior is added.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which proxy trap intercepts property reads?",
+      "options": [
+        { "id": "a", "text": "`get`" },
+        { "id": "b", "text": "`readFile`" },
+        { "id": "c", "text": "`propertyReadOnly`" },
+        { "id": "d", "text": "`json`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `get` trap runs when code reads a property through the proxy.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which proxy trap intercepts calling a function proxy?",
+      "options": [
+        { "id": "a", "text": "`apply`" },
+        { "id": "b", "text": "`construct`" },
+        { "id": "c", "text": "`ownKeys`" },
+        { "id": "d", "text": "`has`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `apply` trap runs when a proxied function is called. `construct` runs for `new`.",
+      "points": 1
+    }
+  ]
+}

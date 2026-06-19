@@ -1,0 +1,23 @@
+{
+  "id": "react-module-22-core-check",
+  "title": "React SSR Core Check",
+  "description": "Check your understanding of CSR, SSR, SSG, React Server Components, Next.js, hydration, mismatches, streaming, and rendering strategy tradeoffs.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "ssr", "hydration", "nextjs", "rsc"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {"id":"q1","type":"single","prompt":"What does client-side rendering primarily mean?","options":[{"id":"a","text":"The browser downloads JavaScript and React builds much of the UI on the client"},{"id":"b","text":"The database renders HTML directly"},{"id":"c","text":"No JavaScript is ever sent"},{"id":"d","text":"Every page is generated only at build time"}],"correct":["a"],"explanation":"In CSR, the browser runs JavaScript to render the app UI, often after receiving a minimal HTML shell.","points":1},
+    {"id":"q2","type":"single","prompt":"What does server-side rendering produce for an initial request?","options":[{"id":"a","text":"HTML generated on the server for that request"},{"id":"b","text":"Only a CSS file"},{"id":"c","text":"A browser extension"},{"id":"d","text":"A TypeScript declaration file"}],"correct":["a"],"explanation":"SSR renders HTML on the server, which can improve first content and SEO for suitable pages.","points":1},
+    {"id":"q3","type":"single","prompt":"What is static site generation best suited for?","options":[{"id":"a","text":"Pages that can be generated ahead of time and do not need per-request personalization"},{"id":"b","text":"Highly personalized dashboards requiring fresh data on every request"},{"id":"c","text":"Only WebSocket messages"},{"id":"d","text":"Replacing hydration completely"}],"correct":["a"],"explanation":"SSG creates pages at build time or regeneration time, making it a good fit for content that is mostly stable.","points":1},
+    {"id":"q4","type":"single","prompt":"What is hydration?","options":[{"id":"a","text":"React attaching event handlers and state to server-rendered HTML in the browser"},{"id":"b","text":"The server deleting all HTML"},{"id":"c","text":"A CSS media query for dark mode"},{"id":"d","text":"A GraphQL cache update"}],"correct":["a"],"explanation":"Hydration bridges server HTML and the interactive client React tree.","points":1},
+    {"id":"q5","type":"boolean","prompt":"Server Components and SSR are the same thing.","options":[{"id":"true","text":"True"},{"id":"false","text":"False"}],"correct":["false"],"explanation":"React Server Components define where components execute and what is sent to the client. SSR is a rendering strategy for producing HTML.","points":1},
+    {"id":"q6","type":"multiple","prompt":"Which values can commonly cause hydration mismatches if rendered differently on server and client? (Select all that apply.)","options":[{"id":"a","text":"`Date.now()` rendered directly"},{"id":"b","text":"`Math.random()` rendered directly"},{"id":"c","text":"Browser-only state such as `window.innerWidth` during initial render"},{"id":"d","text":"A stable prop passed from the server"}],"correct":["a","b","c"],"explanation":"Initial server and client output must match. Time, randomness, and browser-only values often differ.","points":2},
+    {"id":"q7","type":"single","prompt":"In the Next.js App Router, what is an important mental model?","options":[{"id":"a","text":"Components are Server Components by default unless marked with `use client`"},{"id":"b","text":"All components are browser-only by default"},{"id":"c","text":"There is no server rendering support"},{"id":"d","text":"Routes must be class components"}],"correct":["a"],"explanation":"The App Router defaults to Server Components, with client boundaries declared explicitly.","points":1},
+    {"id":"q8","type":"single","prompt":"What can streaming with Suspense improve?","options":[{"id":"a","text":"It can send parts of the UI as they become ready instead of waiting for everything"},{"id":"b","text":"It removes all network latency"},{"id":"c","text":"It prevents every hydration warning"},{"id":"d","text":"It makes every component a client component"}],"correct":["a"],"explanation":"Streaming lets the server progressively send HTML for ready boundaries, improving perceived loading for suitable pages.","points":1}
+  ]
+}

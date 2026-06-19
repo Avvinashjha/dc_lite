@@ -1,66 +1,176 @@
 # What is React?
 
-React is a JavaScript library for building user interfaces. Created by Facebook (now Meta) in 2013, it has become the most popular front-end library in the world.
+React is a JavaScript library for building user interfaces.
 
-## Why React?
+Its core job is to help you keep the UI in sync with changing data.
 
-React solves a fundamental problem in web development: **keeping the UI in sync with application state**. Before React, developers had to manually manipulate the DOM, which was error-prone and hard to maintain.
+Instead of manually finding DOM nodes and updating them one by one, you describe what the UI should look like for a given state. React figures out how to update the page.
 
-### Key Concepts
+## The Problem React Solves
 
-1. **Declarative**: You describe *what* the UI should look like, not *how* to update it
-2. **Component-Based**: Build encapsulated components that manage their own state
-3. **Learn Once, Write Anywhere**: Use React for web, mobile (React Native), and more
+A web app usually has state:
 
-## How React Works
+- the signed-in user
+- the selected tab
+- items in a cart
+- a form draft
+- whether data is loading
+- validation errors
 
-React introduces a concept called the **Virtual DOM**:
+Without a UI library, you often write code like this:
 
+```js
+const button = document.querySelector("#save-button");
+const status = document.querySelector("#status");
+
+button.disabled = isSaving;
+status.textContent = isSaving ? "Saving..." : "Ready";
 ```
-User Action → State Change → Virtual DOM Update → Diff → Real DOM Update
-```
 
-Instead of updating the real DOM directly, React:
-1. Creates a virtual representation of the UI
-2. When state changes, creates a new virtual DOM
-3. Compares (diffs) the old and new virtual DOM
-4. Updates only the parts that actually changed
+That is fine for tiny pages. It becomes harder when many parts of the UI depend on the same data.
 
-This makes updates efficient and predictable.
-
-## A Simple Example
-
-Here's what a React component looks like:
+React lets you express the result:
 
 ```jsx
-function Welcome({ name }) {
-  return <h1>Hello, {name}!</h1>;
+function SaveStatus({ isSaving }) {
+  return (
+    <button disabled={isSaving}>
+      {isSaving ? "Saving..." : "Save"}
+    </button>
+  );
 }
-
-// Usage
-<Welcome name="World" />
 ```
 
-This might look like HTML, but it's actually **JSX** - a syntax extension that lets you write HTML-like code in JavaScript.
+The component says what the button should look like. React handles the update.
 
-## What You'll Learn
+## The Modern React Mental Model
 
-In this course, you'll learn:
-- How to create and compose components
-- Managing state and props
-- Handling events and forms
-- Working with hooks
-- Building a complete project
+Think of React UI as a function of state.
 
-Let's get started!
+```txt
+state + props -> UI
+```
+
+If state changes, React calls your components again and calculates the next UI description.
+
+```jsx
+function Greeting({ name }) {
+  return <h1>Hello, {name}</h1>;
+}
+```
+
+For the same `name`, this component should return the same UI. That predictability makes components easier to test, reuse, and combine.
+
+## Core Ideas
+
+React is built around a few ideas you will see throughout the course.
+
+### Declarative UI
+
+You describe the desired result, not every DOM operation.
+
+```jsx
+{isLoggedIn ? <Dashboard /> : <LoginForm />}
+```
+
+### Components
+
+Components are reusable pieces of UI.
+
+```jsx
+function Avatar({ user }) {
+  return <img src={user.avatarUrl} alt={user.name} />;
+}
+```
+
+### Props
+
+Props are inputs passed from a parent component to a child component.
+
+```jsx
+<Avatar user={currentUser} />
+```
+
+### State
+
+State is data a component remembers and can update.
+
+```jsx
+const [isOpen, setIsOpen] = useState(false);
+```
+
+### Composition
+
+Small components combine into larger screens.
+
+```jsx
+function ProfilePage({ user }) {
+  return (
+    <main>
+      <Avatar user={user} />
+      <ProfileDetails user={user} />
+    </main>
+  );
+}
+```
+
+## React and the Ecosystem
+
+React is the UI library. Real applications often include other tools:
+
+- Vite or another build tool for local development and production builds
+- React DOM for rendering React to the browser
+- React Router or a framework for navigation
+- a data fetching approach for APIs
+- testing tools such as Testing Library
+- a styling strategy such as CSS modules, utility CSS, or plain CSS
+- frameworks like Next.js or Remix when routing, data loading, or server rendering are needed
+
+You do not need all of these to learn React. Start with components, props, JSX, state, events, and rendering.
+
+## How React Updates the Page
+
+At a high level:
+
+1. A user action, network response, or timer changes state.
+2. React calls affected components again.
+3. Components return new React elements.
+4. React compares the new tree with the previous tree.
+5. React commits the necessary DOM updates.
+
+This comparison process is part of reconciliation, which you will study in the rendering module.
+
+## What React Is Not
+
+React is not:
+
+- a full backend framework
+- a database layer
+- a CSS framework
+- a guarantee that your app is automatically fast
+- a replacement for understanding JavaScript
+
+React helps with UI. You still need good JavaScript fundamentals, accessible HTML, CSS, and thoughtful application design.
+
+## Common Mistakes
+
+- Thinking React is HTML with extra syntax. React components are JavaScript functions.
+- Updating the DOM manually for UI React owns.
+- Putting every value in state instead of deriving values during render.
+- Learning hooks without understanding props, state, and rendering first.
+- Starting with a large framework before understanding React's core model.
 
 :::quiz
-question: What problem does React primarily solve?
+question: What problem does React primarily help solve?
 options:
-  - Database management
-  - Keeping UI in sync with application state
-  - Server-side rendering
-  - CSS styling
+  - Managing database indexes
+  - Keeping the UI in sync with changing application state
+  - Replacing all CSS
+  - Running JavaScript without a browser
 answer: 1
-explanation: React's primary purpose is to efficiently keep the user interface in sync with the application's state through its virtual DOM and declarative approach.
+explanation: React helps developers describe UI as a function of state and props, then updates the browser DOM when that data changes.
 :::
+
+## Recap
+
+React is a UI library based on components and declarative rendering. You describe what the UI should look like for the current state, and React updates the page to match.

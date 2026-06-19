@@ -25,6 +25,40 @@
       "title": "Writing Modular Code",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "05-modules-in-browser-and-node",
+      "title": "Modules in the Browser and Node.js",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-re-exports-and-barrel-files",
+      "title": "Re-exports and Barrel Files",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "07-side-effects-and-dynamic-imports",
+      "title": "Side Effects and Dynamic Imports",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-modules-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-modules-applied-check",
+      "passingScore": 70
     }
   ]
 }

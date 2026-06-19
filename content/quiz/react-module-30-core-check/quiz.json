@@ -1,0 +1,238 @@
+{
+  "id": "react-module-30-core-check",
+  "title": "React Deployment Core Check",
+  "description": "Check your understanding of production builds, Git workflows, Docker, Netlify, Vercel, CI/CD, environment configuration, and caching.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "deployment",
+    "production-builds",
+    "ci-cd"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does `npm run build` commonly produce for a React SPA?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Static optimized assets ready to serve"
+        },
+        {
+          "id": "b",
+          "text": "A database backup"
+        },
+        {
+          "id": "c",
+          "text": "A running Kubernetes cluster"
+        },
+        {
+          "id": "d",
+          "text": "A Git branch"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A production build usually outputs static HTML, JS, CSS, and assets.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Why should lockfiles be included in deployment workflows?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They help CI and teammates install reproducible dependencies"
+        },
+        {
+          "id": "b",
+          "text": "They replace production testing"
+        },
+        {
+          "id": "c",
+          "text": "They store environment secrets"
+        },
+        {
+          "id": "d",
+          "text": "They configure React Router"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Lockfiles make dependency installation more predictable across machines and CI.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the common Docker production pattern for a React SPA?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Build static assets, then serve them from a lightweight web server such as Nginx"
+        },
+        {
+          "id": "b",
+          "text": "Run the Vite dev server in production"
+        },
+        {
+          "id": "c",
+          "text": "Expose source files directly with no build"
+        },
+        {
+          "id": "d",
+          "text": "Install dependencies on every request"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The Docker lesson describes building static assets and serving them from a production web server.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What do Netlify SPA redirects usually solve?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Direct visits to client-side routes returning 404"
+        },
+        {
+          "id": "b",
+          "text": "React state updates"
+        },
+        {
+          "id": "c",
+          "text": "ESLint formatting"
+        },
+        {
+          "id": "d",
+          "text": "Dependency auditing"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "SPAs need fallback routing so paths handled by the client route to the app entry point.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is a Vercel preview deployment useful for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reviewing a branch before promoting or merging"
+        },
+        {
+          "id": "b",
+          "text": "Storing private tokens in the browser"
+        },
+        {
+          "id": "c",
+          "text": "Skipping all tests"
+        },
+        {
+          "id": "d",
+          "text": "Replacing Git history"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Preview environments let teams inspect branch changes before production release.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "What should a CI pipeline commonly check before deployment? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Install dependencies"
+        },
+        {
+          "id": "b",
+          "text": "Run lint and tests"
+        },
+        {
+          "id": "c",
+          "text": "Build the app"
+        },
+        {
+          "id": "d",
+          "text": "Manually edit production files over SSH"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "CI should automate repeatable quality checks such as install, lint, test, and build.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which cache strategy is appropriate for hashed JS and CSS build assets?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Long-lived immutable caching"
+        },
+        {
+          "id": "b",
+          "text": "Never cache anything"
+        },
+        {
+          "id": "c",
+          "text": "Cache forever without filename hashing"
+        },
+        {
+          "id": "d",
+          "text": "Store them in cookies"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Hashed filenames support long caching because a content change produces a new URL.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "Frontend build-time environment variables are safe places for private secrets because users cannot inspect production bundles.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Client bundles are inspectable, so build-time frontend values must be treated as public.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "id": "react-module-29-core-check",
+  "title": "React Security Core Check",
+  "description": "Check your understanding of React security risks, XSS, CSRF, authentication storage, dependencies, secure rendering, and environment mistakes.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "security",
+    "xss",
+    "csrf"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which statement about frontend authorization is correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Frontend checks improve UX but server-side authorization must enforce access"
+        },
+        {
+          "id": "b",
+          "text": "Hiding a button fully protects an API"
+        },
+        {
+          "id": "c",
+          "text": "React routes replace backend permissions"
+        },
+        {
+          "id": "d",
+          "text": "CSS can secure private data"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The frontend can guide users, but the server must enforce sensitive authorization rules.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "How does React help reduce basic text injection XSS risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It escapes values rendered as text by default"
+        },
+        {
+          "id": "b",
+          "text": "It encrypts all strings"
+        },
+        {
+          "id": "c",
+          "text": "It blocks every script URL automatically"
+        },
+        {
+          "id": "d",
+          "text": "It validates every API response"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React escapes text interpolation by default, which helps prevent many basic XSS cases.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Why is `dangerouslySetInnerHTML` risky?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It can render untrusted HTML as executable markup if not sanitized"
+        },
+        {
+          "id": "b",
+          "text": "It prevents all styling"
+        },
+        {
+          "id": "c",
+          "text": "It only works in production"
+        },
+        {
+          "id": "d",
+          "text": "It disables Hooks"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Rendering raw HTML requires strong trust and sanitization because it bypasses React text escaping.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is CSRF primarily about?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A browser sending authenticated cookie-based requests triggered by another site"
+        },
+        {
+          "id": "b",
+          "text": "A component re-rendering too often"
+        },
+        {
+          "id": "c",
+          "text": "A missing source map"
+        },
+        {
+          "id": "d",
+          "text": "A slow image download"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "CSRF is relevant when credentials such as cookies are automatically attached to cross-site requests.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which cookie setting helps reduce CSRF risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SameSite"
+        },
+        {
+          "id": "b",
+          "text": "display: none"
+        },
+        {
+          "id": "c",
+          "text": "useMemo"
+        },
+        {
+          "id": "d",
+          "text": "VITE_ prefix"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "SameSite controls when cookies are sent in cross-site contexts.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "Which are safer practices for authentication in a React app? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use secure, HttpOnly cookies when appropriate for sessions"
+        },
+        {
+          "id": "b",
+          "text": "Treat localStorage tokens as exposed to XSS risk"
+        },
+        {
+          "id": "c",
+          "text": "Keep authorization enforcement on the server"
+        },
+        {
+          "id": "d",
+          "text": "Store refresh tokens in a public JavaScript variable"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "HttpOnly cookies can reduce token exposure, localStorage has XSS risk, and servers must enforce authorization.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Why should lockfiles be committed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They make dependency resolution more reproducible"
+        },
+        {
+          "id": "b",
+          "text": "They hide vulnerabilities automatically"
+        },
+        {
+          "id": "c",
+          "text": "They replace audits"
+        },
+        {
+          "id": "d",
+          "text": "They store user sessions"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Lockfiles help teams and CI install predictable dependency versions.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "Frontend environment variables bundled into client JavaScript should be treated as public values.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Anything in the shipped browser bundle can be inspected by users.",
+      "points": 1
+    }
+  ]
+}

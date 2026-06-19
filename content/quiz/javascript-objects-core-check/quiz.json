@@ -1,0 +1,182 @@
+{
+  "id": "javascript-objects-core-check",
+  "title": "JavaScript Objects Core Check",
+  "description": "Check your understanding of object literals, properties, methods, dynamic keys, and object inspection methods.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "objects", "fundamentals"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which syntax creates a JavaScript object literal?",
+      "options": [
+        { "id": "a", "text": "`const user = [name: \"Alice\"];`" },
+        { "id": "b", "text": "`const user = { name: \"Alice\" };`" },
+        { "id": "c", "text": "`const user = object(\"Alice\");`" },
+        { "id": "d", "text": "`const user = <name>Alice</name>;`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object literals use curly braces and key-value pairs, such as `{ name: \"Alice\" }`.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst book = {\n  title: \"JavaScript Basics\",\n  pages: 250,\n};\n\nconsole.log(book.title);\n```",
+      "options": [
+        { "id": "a", "text": "`JavaScript Basics`" },
+        { "id": "b", "text": "`title`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`250`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Dot notation accesses the value of the `title` property.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "When should bracket notation be used?",
+      "options": [
+        { "id": "a", "text": "Only when accessing array indexes" },
+        { "id": "b", "text": "When the property name is stored in a variable or is not a valid identifier" },
+        { "id": "c", "text": "Only when the object is empty" },
+        { "id": "d", "text": "Only for methods, not properties" }
+      ],
+      "correct": ["b"],
+      "explanation": "Bracket notation is useful for dynamic property names and names like `\"dark-mode\"` or `\"font size\"`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n};\n\nconst key = \"name\";\n\nconsole.log(user.key);\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`name`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`ReferenceError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`user.key` looks for a property literally named `key`. To use the variable, write `user[key]`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is a method?",
+      "options": [
+        { "id": "a", "text": "A function stored as a property on an object" },
+        { "id": "b", "text": "Any property whose value is a string" },
+        { "id": "c", "text": "An object with no properties" },
+        { "id": "d", "text": "A variable declared inside an array" }
+      ],
+      "correct": ["a"],
+      "explanation": "A method is a function that belongs to an object as one of its properties.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which object uses method shorthand correctly?",
+      "options": [
+        { "id": "a", "text": "`const user = { greet() { return \"Hello\"; } };`" },
+        { "id": "b", "text": "`const user = { greet => return \"Hello\" };`" },
+        { "id": "c", "text": "`const user = { function greet() { return \"Hello\"; } };`" },
+        { "id": "d", "text": "`const user = { method greet: \"Hello\" };`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Method shorthand uses `methodName(parameters) { ... }` inside an object literal.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code create?\n```js\nconst key = \"email\";\n\nconst user = {\n  [key]: \"alice@example.com\",\n};\n```",
+      "options": [
+        { "id": "a", "text": "A property named `key`" },
+        { "id": "b", "text": "A property named `email`" },
+        { "id": "c", "text": "A syntax error" },
+        { "id": "d", "text": "An array with one item" }
+      ],
+      "correct": ["b"],
+      "explanation": "Computed property names evaluate the expression inside `[]`, so `[key]` becomes `email`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does `Object.keys({ name: \"Alice\", role: \"admin\" })` return?",
+      "options": [
+        { "id": "a", "text": "`[\"Alice\", \"admin\"]`" },
+        { "id": "b", "text": "`[\"name\", \"role\"]`" },
+        { "id": "c", "text": "`[[\"name\", \"Alice\"], [\"role\", \"admin\"]]`" },
+        { "id": "d", "text": "`2`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Object.keys()` returns an array of property names.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does `Object.values({ name: \"Alice\", role: \"admin\" })` return?",
+      "options": [
+        { "id": "a", "text": "`[\"name\", \"role\"]`" },
+        { "id": "b", "text": "`[\"Alice\", \"admin\"]`" },
+        { "id": "c", "text": "`{ Alice: \"name\", admin: \"role\" }`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Object.values()` returns an array of property values.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does `Object.entries({ name: \"Alice\" })` return?",
+      "options": [
+        { "id": "a", "text": "`[\"name\"]`" },
+        { "id": "b", "text": "`[\"Alice\"]`" },
+        { "id": "c", "text": "`[[\"name\", \"Alice\"]]`" },
+        { "id": "d", "text": "`{ name: [\"Alice\"] }`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`Object.entries()` returns an array of `[key, value]` pairs.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "How can you count the number of normal own properties in an object?",
+      "options": [
+        { "id": "a", "text": "`object.length`" },
+        { "id": "b", "text": "`Object.keys(object).length`" },
+        { "id": "c", "text": "`object.count()`" },
+        { "id": "d", "text": "`Object.length(object)`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Objects do not have array-style `.length`; `Object.keys(object).length` counts the keys returned in an array.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the best structure for a list of users where each user has an id and name?",
+      "options": [
+        { "id": "a", "text": "`[1, \"Alice\", 2, \"Bob\"]`" },
+        { "id": "b", "text": "`{ 0: \"Alice\", 1: \"Bob\" }`" },
+        { "id": "c", "text": "`[{ id: 1, name: \"Alice\" }, { id: 2, name: \"Bob\" }]`" },
+        { "id": "d", "text": "`\"Alice,Bob\"`" }
+      ],
+      "correct": ["c"],
+      "explanation": "An array of objects is the standard shape when you have an ordered list of records with named fields.",
+      "points": 1
+    }
+  ]
+}

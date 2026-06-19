@@ -1,0 +1,355 @@
+{
+  "id": "javascript-memory-management-core-check",
+  "title": "JavaScript Memory Management Core Check",
+  "description": "Check your understanding of JavaScript memory lifecycle, stack and heap, references, reachability, garbage collection, memory leaks, weak collections, and cleanup patterns.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": [
+    "javascript",
+    "memory-management",
+    "garbage-collection",
+    "weakmap"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What are the three broad stages of the JavaScript memory lifecycle?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Allocate, use, and release"
+        },
+        {
+          "id": "b",
+          "text": "Compile, style, and deploy"
+        },
+        {
+          "id": "c",
+          "text": "Import, export, and bundle"
+        },
+        {
+          "id": "d",
+          "text": "Request, parse, and render only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "JavaScript values are allocated, used, and later released when they are no longer reachable.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does it mean for a value to be reachable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The engine can get to it from active roots by following references"
+        },
+        {
+          "id": "b",
+          "text": "It is stored only as a string"
+        },
+        {
+          "id": "c",
+          "text": "It has already been garbage collected"
+        },
+        {
+          "id": "d",
+          "text": "It is inside a comment"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Reachability means a value can be accessed from roots such as globals, active stack frames, timers, or DOM references.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which values usually live on the heap in the stack/heap mental model?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Objects, arrays, and functions"
+        },
+        {
+          "id": "b",
+          "text": "Only semicolons"
+        },
+        {
+          "id": "c",
+          "text": "Only CSS files"
+        },
+        {
+          "id": "d",
+          "text": "Only values that are already deleted"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Objects, arrays, and functions are reference values commonly described as living on the heap.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What commonly causes a stack overflow?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Recursive calls that never reach a base case"
+        },
+        {
+          "id": "b",
+          "text": "Using a small object literal"
+        },
+        {
+          "id": "c",
+          "text": "Calling `JSON.stringify()` once"
+        },
+        {
+          "id": "d",
+          "text": "Declaring a boolean"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Unbounded recursion keeps adding call frames until the call stack runs out of space.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is mark and sweep?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A garbage collection strategy that marks reachable values and sweeps away unreachable ones"
+        },
+        {
+          "id": "b",
+          "text": "A way to sort arrays alphabetically"
+        },
+        {
+          "id": "c",
+          "text": "A DOM event type"
+        },
+        {
+          "id": "d",
+          "text": "A syntax rule for class fields"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Mark-and-sweep collection starts at roots, marks reachable values, and reclaims values not marked.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Do circular references always cause memory leaks in modern JavaScript engines?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No, cycles can be collected if nothing reachable points to them"
+        },
+        {
+          "id": "b",
+          "text": "Yes, every cycle leaks forever"
+        },
+        {
+          "id": "c",
+          "text": "Only if they contain numbers"
+        },
+        {
+          "id": "d",
+          "text": "Only in arrow functions"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Modern JavaScript garbage collection is reachability-based, so unreachable cycles can be collected.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which collection strongly references object keys and can keep them alive?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`Map`"
+        },
+        {
+          "id": "b",
+          "text": "`WeakMap`"
+        },
+        {
+          "id": "c",
+          "text": "`WeakSet`"
+        },
+        {
+          "id": "d",
+          "text": "`Promise`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A regular `Map` strongly references its keys and values until entries are removed or the map itself is collected.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What can be used to store metadata for object keys without preventing those keys from being garbage collected?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`WeakMap`"
+        },
+        {
+          "id": "b",
+          "text": "A global array"
+        },
+        {
+          "id": "c",
+          "text": "A JSON string only"
+        },
+        {
+          "id": "d",
+          "text": "`setInterval()`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "`WeakMap` holds object keys weakly, making it useful for metadata tied to object lifetimes.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which is true about `WeakMap` and `WeakSet`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They are not iterable and do not expose a reliable size"
+        },
+        {
+          "id": "b",
+          "text": "They can only store strings"
+        },
+        {
+          "id": "c",
+          "text": "They prevent all garbage collection"
+        },
+        {
+          "id": "d",
+          "text": "They replace every need for cleanup"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Weak collections are intentionally not iterable because their entries depend on garbage collection.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Why can closures affect memory usage?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A closure can keep variables from its outer scope reachable"
+        },
+        {
+          "id": "b",
+          "text": "A closure deletes all outer variables immediately"
+        },
+        {
+          "id": "c",
+          "text": "A closure can only store primitive values"
+        },
+        {
+          "id": "d",
+          "text": "A closure disables garbage collection globally"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Functions retain the outer variables they use, which can keep large objects or DOM nodes alive.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which cleanup is usually needed for a repeating timer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Call `clearInterval()` with the interval ID"
+        },
+        {
+          "id": "b",
+          "text": "Call `JSON.parse()` on the callback"
+        },
+        {
+          "id": "c",
+          "text": "Set the callback name to uppercase"
+        },
+        {
+          "id": "d",
+          "text": "Use `Math.random()`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A repeating timer remains active until it is cleared with `clearInterval()`.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the safest rule for `FinalizationRegistry`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Do not rely on it for required cleanup because timing is unpredictable"
+        },
+        {
+          "id": "b",
+          "text": "Use it to save important user data"
+        },
+        {
+          "id": "c",
+          "text": "Use it instead of removing event listeners"
+        },
+        {
+          "id": "d",
+          "text": "Expect it to run immediately after `null` assignment"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Finalizers may run late or not before shutdown, so required cleanup should be explicit.",
+      "points": 1
+    }
+  ]
+}

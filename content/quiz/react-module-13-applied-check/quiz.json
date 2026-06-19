@@ -1,0 +1,240 @@
+{
+  "id": "react-module-13-applied-check",
+  "title": "Component Patterns Applied Check",
+  "description": "Practice choosing composition APIs, avoiding HOC and render-prop pitfalls, and designing controlled component patterns.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "patterns",
+    "composition",
+    "controlled-components"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A Card needs customizable header, body, and footer areas. Which API is often a good fit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Composition with children or named slot props"
+        },
+        {
+          "id": "b",
+          "text": "A deep inheritance chain"
+        },
+        {
+          "id": "c",
+          "text": "A global event bus"
+        },
+        {
+          "id": "d",
+          "text": "Direct DOM mutation"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Slots and children let callers place UI in well-defined areas without subclassing.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "An HOC injects a prop named user. What should you consider? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Avoid colliding with a user prop already supplied by callers"
+        },
+        {
+          "id": "b",
+          "text": "Pass unrelated props through to the wrapped component"
+        },
+        {
+          "id": "c",
+          "text": "Set a helpful displayName for debugging"
+        },
+        {
+          "id": "d",
+          "text": "Mutate the wrapped component directly"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Good HOCs avoid prop collisions, preserve pass-through props, and keep debugging names clear.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A render prop creates a new inline function each render and a memoized child still re-renders. Why?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The function prop has a new identity each render"
+        },
+        {
+          "id": "b",
+          "text": "Render props cannot render children"
+        },
+        {
+          "id": "c",
+          "text": "React keys are disabled"
+        },
+        {
+          "id": "d",
+          "text": "Context stops all memoization"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Function identity can defeat shallow memoization unless stabilized or designed around.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Tabs.Tab and Tabs.Panel coordinate with Tabs state through context. What pattern is this?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Compound components"
+        },
+        {
+          "id": "b",
+          "text": "A reducer only"
+        },
+        {
+          "id": "c",
+          "text": "Class inheritance"
+        },
+        {
+          "id": "d",
+          "text": "Code splitting"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Compound components expose related pieces that share parent-managed state.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Compound components still need accessibility concerns such as roles, labels, and keyboard behavior.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Flexible composition does not remove accessibility responsibilities.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A component can manage its own open state or accept open and onOpenChange from a parent. What is this supporting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Controlled and uncontrolled usage"
+        },
+        {
+          "id": "b",
+          "text": "Server rendering only"
+        },
+        {
+          "id": "c",
+          "text": "Ref forwarding only"
+        },
+        {
+          "id": "d",
+          "text": "A required global store"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Components can offer internal state by default while allowing callers to control state when needed.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which are good reasons to extract a custom hook instead of a container component? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "You want reusable stateful logic without prescribing markup"
+        },
+        {
+          "id": "b",
+          "text": "Multiple components need the same behavior with different UI"
+        },
+        {
+          "id": "c",
+          "text": "You need to subclass React.Component"
+        },
+        {
+          "id": "d",
+          "text": "The logic is independent of a specific layout"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Custom hooks reuse behavior while letting each component choose its own presentation.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A pattern makes a simple component harder to understand without reducing duplication. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prefer the simpler direct implementation"
+        },
+        {
+          "id": "b",
+          "text": "Add another abstraction layer"
+        },
+        {
+          "id": "c",
+          "text": "Convert it to an HOC automatically"
+        },
+        {
+          "id": "d",
+          "text": "Move all props to context"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Patterns should solve real complexity; unnecessary abstraction hurts maintainability.",
+      "points": 1
+    }
+  ]
+}

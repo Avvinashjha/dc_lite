@@ -1,0 +1,224 @@
+{
+  "id": "javascript-functional-programming-applied-check",
+  "title": "JavaScript Functional Programming Applied Check",
+  "description": "Apply functional programming concepts by identifying mutation, choosing array methods, reasoning about currying and composition, and using reduce and recursion correctly.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "functional-programming", "arrays", "composition", "recursion"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Is this function pure?\n```js\nfunction addTax(price, taxRate) {\n  return price + price * taxRate;\n}\n```",
+      "options": [
+        { "id": "a", "text": "Yes, its output depends only on its inputs and it has no side effects" },
+        { "id": "b", "text": "No, all math functions are impure" },
+        { "id": "c", "text": "No, because it returns a value" },
+        { "id": "d", "text": "No, because it has two arguments" }
+      ],
+      "correct": ["a"],
+      "explanation": "The function is pure because the same `price` and `taxRate` always produce the same result and nothing external is changed.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Why is this function impure?\n```js\nlet taxRate = 0.1;\n\nfunction addTax(price) {\n  return price + price * taxRate;\n}\n```",
+      "options": [
+        { "id": "a", "text": "It depends on external state" },
+        { "id": "b", "text": "It uses multiplication" },
+        { "id": "c", "text": "It has a return statement" },
+        { "id": "d", "text": "It does not use an array" }
+      ],
+      "correct": ["a"],
+      "explanation": "The function depends on `taxRate`, which can change outside the function.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which update is immutable?",
+      "options": [
+        { "id": "a", "text": "`const updatedUser = { ...user, role: \"admin\" };`" },
+        { "id": "b", "text": "`user.role = \"admin\";`" },
+        { "id": "c", "text": "`users.push(user);`" },
+        { "id": "d", "text": "`settings.theme = \"dark\";`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The spread version creates a new object instead of changing the original.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the result?\n```js\nconst numbers = [1, 2, 3];\nconst doubled = numbers.map((number) => {\n  number * 2;\n});\n\nconsole.log(doubled);\n```",
+      "options": [
+        { "id": "a", "text": "`[undefined, undefined, undefined]`" },
+        { "id": "b", "text": "`[2, 4, 6]`" },
+        { "id": "c", "text": "`[1, 2, 3]`" },
+        { "id": "d", "text": "`6`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The callback uses braces but does not return a value, so each mapped result is `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which method best expresses this goal: get all users with `active: true`?",
+      "options": [
+        { "id": "a", "text": "`filter()`" },
+        { "id": "b", "text": "`map()`" },
+        { "id": "c", "text": "`reduce()` only" },
+        { "id": "d", "text": "`JSON.stringify()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`filter()` keeps only the items that match a condition.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which method best expresses this goal: get each user's name as a new array?",
+      "options": [
+        { "id": "a", "text": "`map()`" },
+        { "id": "b", "text": "`filter()`" },
+        { "id": "c", "text": "`some()`" },
+        { "id": "d", "text": "`push()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`map()` transforms each item into a new value.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this produce?\n```js\nconst multiply = (a) => (b) => a * b;\nconst double = multiply(2);\n\nconsole.log(double(5));\n```",
+      "options": [
+        { "id": "a", "text": "`10`" },
+        { "id": "b", "text": "`7`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "A syntax error" }
+      ],
+      "correct": ["a"],
+      "explanation": "`multiply(2)` returns a function that multiplies its argument by 2.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is logged?\n```js\nconst add = (a) => (b) => a + b;\nconsole.log(typeof add(2));\n```",
+      "options": [
+        { "id": "a", "text": "`\"function\"`" },
+        { "id": "b", "text": "`\"number\"`" },
+        { "id": "c", "text": "`\"object\"`" },
+        { "id": "d", "text": "`\"undefined\"`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`add(2)` returns the inner function waiting for `b`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Given `pipe(trim, lowercase)`, which order should the data flow?",
+      "options": [
+        { "id": "a", "text": "First `trim`, then `lowercase`" },
+        { "id": "b", "text": "First `lowercase`, then `trim`" },
+        { "id": "c", "text": "Both run at the same time" },
+        { "id": "d", "text": "Neither function runs" }
+      ],
+      "correct": ["a"],
+      "explanation": "A typical `pipe` helper runs functions left to right.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which is the clearest way to total numbers with `reduce()`?",
+      "options": [
+        { "id": "a", "text": "`numbers.reduce((sum, number) => sum + number, 0)`" },
+        { "id": "b", "text": "`numbers.map((sum, number) => sum + number, 0)`" },
+        { "id": "c", "text": "`numbers.filter((sum, number) => sum + number)`" },
+        { "id": "d", "text": "`numbers.find((sum, number) => sum + number)`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`reduce()` combines array values into one result. The initial value `0` makes the total clear and safe.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is a problem with this recursive function?\n```js\nfunction countDown(number) {\n  console.log(number);\n  countDown(number - 1);\n}\n```",
+      "options": [
+        { "id": "a", "text": "It has no base case" },
+        { "id": "b", "text": "It uses `console.log`" },
+        { "id": "c", "text": "It has one parameter" },
+        { "id": "d", "text": "It is not an arrow function" }
+      ],
+      "correct": ["a"],
+      "explanation": "Without a base case, the function keeps calling itself until the stack overflows.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which data shape is recursion especially useful for?",
+      "options": [
+        { "id": "a", "text": "Nested tree-like data, such as comments with replies" },
+        { "id": "b", "text": "Only flat arrays of numbers" },
+        { "id": "c", "text": "Only CSS strings" },
+        { "id": "d", "text": "Only booleans" }
+      ],
+      "correct": ["a"],
+      "explanation": "Recursion fits nested data where each item can contain more items of the same shape.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What is wrong with using `map()` here?\n```js\nusers.map((user) => console.log(user.name));\n```",
+      "options": [
+        { "id": "a", "text": "`map()` is being used only for side effects; `forEach()` would express that better" },
+        { "id": "b", "text": "`map()` cannot use callbacks" },
+        { "id": "c", "text": "`console.log` always returns arrays" },
+        { "id": "d", "text": "User names cannot be logged" }
+      ],
+      "correct": ["a"],
+      "explanation": "`map()` is intended for transformations that use the returned array. Use `forEach()` for side effects.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which function is best suited for composition?",
+      "options": [
+        { "id": "a", "text": "`const trim = (value) => value.trim();`" },
+        { "id": "b", "text": "`const save = () => database.write(Math.random());`" },
+        { "id": "c", "text": "`const mutate = (user) => { user.active = true; };`" },
+        { "id": "d", "text": "`const log = (value) => console.log(value);`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Small pure functions with one input and one output are easiest to compose.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which update avoids mutating the original array?",
+      "options": [
+        { "id": "a", "text": "`const updated = [...items, newItem];`" },
+        { "id": "b", "text": "`items.push(newItem);`" },
+        { "id": "c", "text": "`items.splice(0, 1);`" },
+        { "id": "d", "text": "`items.reverse();`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Spreading into a new array and adding the new item leaves the original array unchanged.",
+      "points": 1
+    }
+  ]
+}

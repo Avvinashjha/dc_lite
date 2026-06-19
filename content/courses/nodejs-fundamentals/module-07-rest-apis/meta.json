@@ -1,6 +1,6 @@
 {
   "title": "REST APIs, SSE and Webhooks",
-  "description": "Design RESTful APIs and add real-time communication with Server-Sent Events and webhooks.",
+  "description": "Design RESTful APIs with clear resources, status codes, validation boundaries, documentation, and real-time options such as SSE, webhooks, and WebSockets.",
   "lessons": [
     {
       "slug": "01-what-is-rest",
@@ -25,6 +25,38 @@
       "title": "Webhooks",
       "type": "text",
       "duration": "15 min"
+    },
+    {
+      "slug": "05-status-codes-and-error-responses",
+      "title": "Status Codes and Error Responses",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-api-versioning-and-pagination",
+      "title": "API Versioning and Pagination",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-openapi-and-documentation",
+      "title": "OpenAPI and API Documentation",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "08-websockets-vs-sse",
+      "title": "WebSockets vs Server-Sent Events",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-07-knowledge-check",
+      "passingScore": 70
     }
   ]
 }

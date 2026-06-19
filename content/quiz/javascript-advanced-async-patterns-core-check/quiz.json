@@ -1,0 +1,182 @@
+{
+  "id": "javascript-advanced-async-patterns-core-check",
+  "title": "JavaScript Advanced Async Patterns Core Check",
+  "description": "Check your understanding of generators, async iterators, for await...of, streaming, cancellation, retries, backoff, concurrency limits, queues, debouncing, throttling, and Observables.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "async", "generators", "streams", "concurrency"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does `yield` do inside a generator function?",
+      "options": [
+        { "id": "a", "text": "It sends out a value and pauses the generator" },
+        { "id": "b", "text": "It cancels every Promise in the program" },
+        { "id": "c", "text": "It parses JSON automatically" },
+        { "id": "d", "text": "It makes the function run in parallel" }
+      ],
+      "correct": ["a"],
+      "explanation": "`yield` produces a value and pauses the generator until the next `.next()` call.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does an async iterator's `.next()` method return?",
+      "options": [
+        { "id": "a", "text": "A Promise that resolves to an iterator result object" },
+        { "id": "b", "text": "Only a string" },
+        { "id": "c", "text": "A synchronous DOM event" },
+        { "id": "d", "text": "A completed array every time" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async iterator `.next()` calls return Promises for objects such as `{ value, done }`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which syntax consumes an async iterable?",
+      "options": [
+        { "id": "a", "text": "`for await...of`" },
+        { "id": "b", "text": "`for sync...of`" },
+        { "id": "c", "text": "`await forEach`" },
+        { "id": "d", "text": "`Promise.loop`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`for await...of` loops over async iterables one value at a time.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Why are streaming patterns useful?",
+      "options": [
+        { "id": "a", "text": "They allow data to be processed gradually as chunks arrive" },
+        { "id": "b", "text": "They make all network requests synchronous" },
+        { "id": "c", "text": "They prevent all possible errors" },
+        { "id": "d", "text": "They require every value to be stored upfront" }
+      ],
+      "correct": ["a"],
+      "explanation": "Streaming lets code process pieces of data over time instead of waiting for everything first.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is `AbortController` commonly used for?",
+      "options": [
+        { "id": "a", "text": "Cancelling async operations that support an abort signal" },
+        { "id": "b", "text": "Converting objects to JSON" },
+        { "id": "c", "text": "Creating private class fields" },
+        { "id": "d", "text": "Sorting Promise results" }
+      ],
+      "correct": ["a"],
+      "explanation": "`AbortController` creates a signal that supported APIs, such as `fetch()`, can use for cancellation.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Do JavaScript Promises have built-in cancellation by themselves?",
+      "options": [
+        { "id": "a", "text": "No, cancellation must be supported by the async operation or API" },
+        { "id": "b", "text": "Yes, every Promise has a `.cancel()` method" },
+        { "id": "c", "text": "Only promises created with `var` can be cancelled" },
+        { "id": "d", "text": "Only fulfilled promises can be cancelled" }
+      ],
+      "correct": ["a"],
+      "explanation": "A Promise represents a result. Cancellation requires cooperation from the underlying async operation.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is exponential backoff?",
+      "options": [
+        { "id": "a", "text": "Increasing the delay between retry attempts" },
+        { "id": "b", "text": "Running every retry at the same exact time" },
+        { "id": "c", "text": "Cancelling successful requests" },
+        { "id": "d", "text": "Parsing response headers into arrays" }
+      ],
+      "correct": ["a"],
+      "explanation": "Exponential backoff spaces retries farther apart after repeated failures.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Why limit concurrency?",
+      "options": [
+        { "id": "a", "text": "To control how many async operations run at the same time" },
+        { "id": "b", "text": "To force all code to become synchronous" },
+        { "id": "c", "text": "To remove the need for error handling" },
+        { "id": "d", "text": "To make arrays immutable" }
+      ],
+      "correct": ["a"],
+      "explanation": "Concurrency limits prevent too many operations from running at once, which can protect browsers, servers, and APIs.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is a stale result?",
+      "options": [
+        { "id": "a", "text": "An older async result that is no longer relevant when it finishes" },
+        { "id": "b", "text": "A JSON object with missing quotes" },
+        { "id": "c", "text": "A Promise that fulfilled successfully" },
+        { "id": "d", "text": "An array returned from `map()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Stale results commonly happen when an older request finishes after a newer request.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is an async queue used for?",
+      "options": [
+        { "id": "a", "text": "Storing tasks and processing them later in a controlled way" },
+        { "id": "b", "text": "Making CSS animations faster" },
+        { "id": "c", "text": "Deleting errors from the console" },
+        { "id": "d", "text": "Replacing every Promise with a callback" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async queues help manage work that arrives over time and should be processed in order or with limits.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "When is debouncing most useful?",
+      "options": [
+        { "id": "a", "text": "When work should run after frequent events pause" },
+        { "id": "b", "text": "When every event must run immediately" },
+        { "id": "c", "text": "Only when parsing JSON" },
+        { "id": "d", "text": "Only for class constructors" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing waits until rapid events settle, such as a user pausing while typing.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is an Observable?",
+      "options": [
+        { "id": "a", "text": "A pattern for values pushed to subscribers over time" },
+        { "id": "b", "text": "A Promise that always resolves once" },
+        { "id": "c", "text": "A browser-only JSON type" },
+        { "id": "d", "text": "A required replacement for `async/await`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Observables model event-like streams where subscribers receive values over time.",
+      "points": 1
+    }
+  ]
+}

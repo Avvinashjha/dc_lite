@@ -1,0 +1,238 @@
+{
+  "id": "react-module-13-core-check",
+  "title": "Component Patterns Core Check",
+  "description": "Check your understanding of composition, HOCs, render props, compound components, and container patterns.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "component-patterns",
+    "composition",
+    "hoc"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does React composition usually prefer over inheritance?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Combining components with props, children, and small APIs"
+        },
+        {
+          "id": "b",
+          "text": "Subclassing components to reuse UI"
+        },
+        {
+          "id": "c",
+          "text": "Mutating child components"
+        },
+        {
+          "id": "d",
+          "text": "Using only global state"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React favors composing behavior and UI through component relationships rather than inheritance hierarchies.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is a higher-order component?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A function that takes a component and returns an enhanced component"
+        },
+        {
+          "id": "b",
+          "text": "A component with more than one div"
+        },
+        {
+          "id": "c",
+          "text": "A hook that returns JSX only"
+        },
+        {
+          "id": "d",
+          "text": "A class method named render"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "An HOC wraps a component to share behavior or inject props.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is a render prop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A prop that is a function used to decide what UI to render"
+        },
+        {
+          "id": "b",
+          "text": "The key prop on a list"
+        },
+        {
+          "id": "c",
+          "text": "A CSS class name"
+        },
+        {
+          "id": "d",
+          "text": "A provider value"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Render props pass rendering control to the caller through a function.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "Which are composition techniques covered in this module? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "children"
+        },
+        {
+          "id": "b",
+          "text": "slot props"
+        },
+        {
+          "id": "c",
+          "text": "compound components"
+        },
+        {
+          "id": "d",
+          "text": "Prototype inheritance for UI reuse"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "children, slot props, and compound components are common React composition APIs.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is the idea behind compound components?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Related components coordinate behind a shared parent API"
+        },
+        {
+          "id": "b",
+          "text": "Every component must be wrapped in React.memo"
+        },
+        {
+          "id": "c",
+          "text": "Components inherit methods from each other"
+        },
+        {
+          "id": "d",
+          "text": "State is stored only in URLs"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Compound components let callers compose related pieces while the parent manages shared behavior.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does the container/presentational split separate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Data and behavior from display-focused UI"
+        },
+        {
+          "id": "b",
+          "text": "JavaScript from JSON"
+        },
+        {
+          "id": "c",
+          "text": "Server state from HTTP"
+        },
+        {
+          "id": "d",
+          "text": "React from the browser"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Containers manage data and behavior; presentational components focus on rendering props.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "boolean",
+      "prompt": "Controlled components receive their current value and change handler from outside.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Controlled APIs put state ownership in the parent or caller.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is a common HOC pitfall?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prop name collisions with the wrapped component"
+        },
+        {
+          "id": "b",
+          "text": "Using children at all"
+        },
+        {
+          "id": "c",
+          "text": "Passing props explicitly"
+        },
+        {
+          "id": "d",
+          "text": "Returning JSX from render"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "HOCs can accidentally override or collide with props expected by the wrapped component.",
+      "points": 1
+    }
+  ]
+}

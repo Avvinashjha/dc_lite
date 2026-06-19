@@ -17,50 +17,69 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function codeRenderer(token: CodeToken): string {
+  const text = token.text;
+  const requested = (token.lang || '').trim().split(/\s+/)[0];
+
+  if (requested === 'mermaid') {
+    return `<div class="mermaid">${escapeHtml(text)}</div>`;
+  }
+
+  const language = requested && hljs.getLanguage(requested) ? requested : 'plaintext';
+  const label = requested || 'text';
+
+  let highlighted: string;
+  try {
+    highlighted = hljs.highlight(text, { language }).value;
+  } catch {
+    highlighted = escapeHtml(text);
+  }
+
+  const lineCount = text.replace(/\n$/, '').split('\n').length;
+  const gutter = Array.from({ length: lineCount }, (_, i) => i + 1).join('\n');
+  const safeLabel = escapeHtml(label);
+
+  return (
+    `<figure class="cb" data-lang="${safeLabel}">` +
+    `<figcaption class="cb__bar"><span class="cb__lang">${safeLabel}</span>` +
+    `<button type="button" class="cb__copy" aria-label="Copy code">` +
+    `<svg class="cb__copy-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">` +
+    `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>` +
+    `<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>` +
+    `</svg><span class="cb__copy-label">Copy</span></button></figcaption>` +
+    `<div class="cb__main"><pre class="cb__gutter" aria-hidden="true">${gutter}</pre>` +
+    `<pre class="cb__code"><code class="hljs language-${language}">${highlighted}</code></pre></div>` +
+    `</figure>`
+  );
+}
+
 // Create marked instance with a custom code renderer (runs at build time only - zero runtime JS)
 const marked = new Marked();
 
-marked.use({
-  renderer: {
-    code(token: CodeToken): string {
-      const text = token.text;
-      const requested = (token.lang || '').trim().split(/\s+/)[0];
-
-      if (requested === 'mermaid') {
-        return `<div class="mermaid">${escapeHtml(text)}</div>`;
-      }
-
-      const language = requested && hljs.getLanguage(requested) ? requested : 'plaintext';
-      const label = requested || 'text';
-
-      let highlighted: string;
-      try {
-        highlighted = hljs.highlight(text, { language }).value;
-      } catch {
-        highlighted = escapeHtml(text);
-      }
-
-      const lineCount = text.replace(/\n$/, '').split('\n').length;
-      const gutter = Array.from({ length: lineCount }, (_, i) => i + 1).join('\n');
-      const safeLabel = escapeHtml(label);
-
-      return (
-        `<figure class="cb" data-lang="${safeLabel}">` +
-        `<figcaption class="cb__bar"><span class="cb__lang">${safeLabel}</span>` +
-        `<button type="button" class="cb__copy" aria-label="Copy code">` +
-        `<svg class="cb__copy-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">` +
-        `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>` +
-        `<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>` +
-        `</svg><span class="cb__copy-label">Copy</span></button></figcaption>` +
-        `<div class="cb__main"><pre class="cb__gutter" aria-hidden="true">${gutter}</pre>` +
-        `<pre class="cb__code"><code class="hljs language-${language}">${highlighted}</code></pre></div>` +
-        `</figure>`
-      );
-    }
-  }
-});
+marked.use({ renderer: { code: codeRenderer } });
 
 marked.setOptions({
+  gfm: true,
+  breaks: false,
+});
+
+// Dedicated instance for quiz rich text. Quiz prompts/options/explanations are
+// often literal HTML (e.g. an option whose text is `<script src="...">`), so raw
+// HTML must be escaped and shown as text rather than parsed into (invisible)
+// elements. Lesson markdown intentionally keeps raw HTML, so it uses `marked`.
+const markedQuiz = new Marked();
+
+markedQuiz.use({
+  renderer: {
+    code: codeRenderer,
+    // Escape both block- and inline-level raw HTML tokens.
+    html(token: { text?: string; raw?: string }): string {
+      return escapeHtml(token.text ?? token.raw ?? '');
+    },
+  },
+});
+
+markedQuiz.setOptions({
   gfm: true,
   breaks: false,
 });
@@ -88,8 +107,8 @@ export function parseInlineMarkdown(markdown: string): string {
  */
 export function renderQuizRichText(text: string): string {
   if (!text) return '';
-  if (!text.includes('```')) return parseInlineMarkdown(text);
-  const html = parseMarkdown(text).trim();
+  if (!text.includes('```')) return markedQuiz.parseInline(text) as string;
+  const html = (markedQuiz.parse(text) as string).trim();
   const single = html.match(/^<p>([\s\S]*?)<\/p>$/);
   if (single && !single[1].includes('<p') && !single[1].includes('<figure')) {
     return single[1];

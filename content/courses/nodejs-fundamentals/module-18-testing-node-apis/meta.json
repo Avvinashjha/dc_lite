@@ -1,0 +1,50 @@
+{
+  "title": "Testing Node.js APIs",
+  "description": "Test Node.js services with unit tests, API tests, mocks, integration checks, and maintainable test strategy.",
+  "lessons": [
+    {
+      "slug": "01-testing-strategy-for-nodejs",
+      "title": "Testing Strategy for Node.js",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-node-test-runner-vitest-and-jest",
+      "title": "Node Test Runner, Vitest, and Jest",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "03-unit-testing-services",
+      "title": "Unit Testing Services",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "04-api-testing-with-supertest",
+      "title": "API Testing with Supertest",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-mocking-databases-and-external-services",
+      "title": "Mocking Databases and External Services",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "06-integration-and-e2e-testing",
+      "title": "Integration and E2E Testing",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "07-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-18-knowledge-check",
+      "passingScore": 70
+    }
+  ]
+}

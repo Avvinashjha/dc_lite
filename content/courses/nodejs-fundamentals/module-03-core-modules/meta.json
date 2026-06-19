@@ -1,6 +1,6 @@
 {
   "title": "Core Modules",
-  "description": "Explore the built-in modules that ship with Node.js: http, fs, path, os, and the EventEmitter.",
+  "description": "Explore the built-in modules that ship with Node.js: http, fs, path, os, events, process, Buffer, crypto, URL, util, and HTTPS.",
   "lessons": [
     {
       "slug": "01-http-module",
@@ -31,6 +31,44 @@
       "title": "Events and EventEmitter",
       "type": "text",
       "duration": "15 min"
+    },
+    {
+      "slug": "06-process-buffer-and-globals",
+      "title": "process, Buffer, and Node.js Globals",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-url-and-query-strings",
+      "title": "URL and Query String Handling",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-crypto-module",
+      "title": "The crypto Module",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "09-util-and-promisify",
+      "title": "The util Module and promisify",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "10-https-and-tls-basics",
+      "title": "HTTPS and TLS Basics",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "11-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-03-knowledge-check",
+      "passingScore": 70
     }
   ]
 }

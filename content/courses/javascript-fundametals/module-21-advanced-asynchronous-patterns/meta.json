@@ -1,6 +1,6 @@
 {
   "title": "Advanced Asynchronous Patterns",
-  "description": "Explore generators, async iterators, and observables.",
+  "description": "Use advanced asynchronous patterns to manage streams, cancellation, retries, concurrency, queues, and event-driven work.",
   "lessons": [
     {
       "slug": "01-generators",
@@ -15,10 +15,68 @@
       "duration": "10 min"
     },
     {
-      "slug": "03-observables",
-      "title": "Observables (e.g. RxJS)",
+      "slug": "03-for-await-and-streaming-data",
+      "title": "for await...of and Streaming Data",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
+    },
+    {
+      "slug": "04-cancellation-with-abortcontroller",
+      "title": "Cancellation With AbortController",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-timeouts-retries-and-backoff",
+      "title": "Timeouts, Retries, and Backoff",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-concurrency-limits-and-pools",
+      "title": "Concurrency Limits and Pools",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-race-conditions-and-stale-results",
+      "title": "Race Conditions and Stale Results",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-async-queues-and-task-scheduling",
+      "title": "Async Queues and Task Scheduling",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-debouncing-and-throttling-async-work",
+      "title": "Debouncing and Throttling Async Work",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-observables-and-event-streams",
+      "title": "Observables and Event Streams",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "11-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-advanced-async-patterns-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "12-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-advanced-async-patterns-applied-check",
+      "passingScore": 70
     }
   ]
 }

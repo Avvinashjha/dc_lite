@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-02-knowledge-check",
+  "title": "Event Loop and I/O Knowledge Check",
+  "description": "Check your understanding of asynchronous execution, event loop phases, blocking work, timers, and worker threads.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "event-loop", "async", "io"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Why can CPU-heavy synchronous work be harmful in a Node.js server?",
+      "options": [
+        { "id": "a", "text": "It can block the event loop and delay other requests" },
+        { "id": "b", "text": "It automatically deletes timers" },
+        { "id": "c", "text": "It converts CommonJS to ESM" },
+        { "id": "d", "text": "It disables npm scripts" }
+      ],
+      "correct": ["a"],
+      "explanation": "JavaScript execution runs on the main thread, so long synchronous work can delay other callbacks and requests.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which API is best suited for moving CPU-bound JavaScript work off the main thread?",
+      "options": [
+        { "id": "a", "text": "`worker_threads`" },
+        { "id": "b", "text": "`setTimeout()`" },
+        { "id": "c", "text": "`path.join()`" },
+        { "id": "d", "text": "`res.json()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Worker threads allow CPU-heavy JavaScript tasks to run outside the main event loop thread.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is non-blocking I/O designed to avoid?",
+      "options": [
+        { "id": "a", "text": "Waiting synchronously while an external operation completes" },
+        { "id": "b", "text": "Using JavaScript functions" },
+        { "id": "c", "text": "Creating HTTP routes" },
+        { "id": "d", "text": "Reading environment variables" }
+      ],
+      "correct": ["a"],
+      "explanation": "Non-blocking I/O lets Node continue handling other work while file, network, or database operations are pending.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which callback queue is associated with `setTimeout()`?",
+      "options": [
+        { "id": "a", "text": "The timers phase" },
+        { "id": "b", "text": "The file path parser" },
+        { "id": "c", "text": "The package installer" },
+        { "id": "d", "text": "The template renderer" }
+      ],
+      "correct": ["a"],
+      "explanation": "`setTimeout()` callbacks are handled through the event loop's timers phase.",
+      "points": 1
+    }
+  ]
+}

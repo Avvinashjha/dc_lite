@@ -1,0 +1,224 @@
+{
+  "id": "javascript-es6-applied-check",
+  "title": "JavaScript ES6+ Applied Check",
+  "description": "Test your ability to predict and apply modern JavaScript behavior with arrows, destructuring, spread, rest, Map, Set, and modern operators.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "es6", "modern-javascript", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst double = (number) => {\n  number * 2;\n};\n\ndouble(5);\n```",
+      "options": [
+        { "id": "a", "text": "`10`" },
+        { "id": "b", "text": "`5`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`NaN`" }
+      ],
+      "correct": ["c"],
+      "explanation": "An arrow function with braces needs an explicit `return`. Without it, the function returns `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which arrow function correctly returns an object literal?",
+      "options": [
+        { "id": "a", "text": "`const createUser = (name) => { name };`" },
+        { "id": "b", "text": "`const createUser = (name) => ({ name });`" },
+        { "id": "c", "text": "`const createUser = (name) => object { name };`" },
+        { "id": "d", "text": "`const createUser = (name) => return { name };`" }
+      ],
+      "correct": ["b"],
+      "explanation": "An implicitly returned object literal must be wrapped in parentheses.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst count = 0;\n\nconsole.log(count || 10);\nconsole.log(count ?? 10);\n```",
+      "options": [
+        { "id": "a", "text": "`0` then `0`" },
+        { "id": "b", "text": "`10` then `10`" },
+        { "id": "c", "text": "`10` then `0`" },
+        { "id": "d", "text": "`0` then `10`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`||` falls back for any falsy value, but `??` falls back only for `null` or `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {};\n\nconsole.log(user.profile?.email ?? \"No email\");\n```",
+      "options": [
+        { "id": "a", "text": "`No email`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "`TypeError`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Optional chaining returns `undefined` instead of throwing, then `??` provides the fallback.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  role: \"user\",\n};\n\nconst updated = {\n  role: \"admin\",\n  ...user,\n};\n\nconsole.log(updated.role);\n```",
+      "options": [
+        { "id": "a", "text": "`admin`" },
+        { "id": "b", "text": "`user`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`role`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object spread order matters. The later `...user` overwrites the earlier `role: \"admin\"`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst numbers = [1, 2, 2, 3];\nconst unique = [...new Set(numbers)];\n\nconsole.log(unique);\n```",
+      "options": [
+        { "id": "a", "text": "`[1, 2, 2, 3]`" },
+        { "id": "b", "text": "`[1, 2, 3]`" },
+        { "id": "c", "text": "`Set(4)`" },
+        { "id": "d", "text": "`[2, 3]`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Set` removes duplicate primitive values, and spread converts the Set back into an array.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst a = { id: 1 };\nconst b = { id: 1 };\n\nconst set = new Set([a, b]);\n\nconsole.log(set.size);\n```",
+      "options": [
+        { "id": "a", "text": "`1`" },
+        { "id": "b", "text": "`2`" },
+        { "id": "c", "text": "`0`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Objects are unique by reference. `a` and `b` are different objects even though their contents match.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst key = \"email\";\nconst user = {\n  [key]: \"alice@example.com\",\n};\n\nconsole.log(user.email);\n```",
+      "options": [
+        { "id": "a", "text": "`alice@example.com`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`email`" },
+        { "id": "d", "text": "`key`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Computed property names evaluate the expression inside brackets, so `[key]` becomes `email`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst [first, ...rest] = [10, 20, 30];\n\nconsole.log(first);\nconsole.log(rest);\n```",
+      "options": [
+        { "id": "a", "text": "`10` then `[20, 30]`" },
+        { "id": "b", "text": "`[10]` then `[20, 30]`" },
+        { "id": "c", "text": "`10` then `20`" },
+        { "id": "d", "text": "`undefined` then `[10, 20, 30]`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Array rest destructuring collects the remaining items into a new array.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = {\n  name: \"Alice\",\n  role: \"admin\",\n  password: \"secret\",\n};\n\nconst { password, ...publicUser } = user;\n\nconsole.log(publicUser);\n```",
+      "options": [
+        { "id": "a", "text": "`{ password: \"secret\" }`" },
+        { "id": "b", "text": "`{ name: \"Alice\", role: \"admin\" }`" },
+        { "id": "c", "text": "`{ name: \"Alice\", role: \"admin\", password: \"secret\" }`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object rest collects the remaining properties after `password` is extracted.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst roles = new Map();\nroles.set(\"alice\", \"admin\");\n\nconsole.log(roles.get(\"alice\"));\n```",
+      "options": [
+        { "id": "a", "text": "`alice`" },
+        { "id": "b", "text": "`admin`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`Map`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`.set()` stores a key-value pair, and `.get()` retrieves the value for that key.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst user = null;\n\nconsole.log(user.profile?.name);\n```",
+      "options": [
+        { "id": "a", "text": "`undefined`" },
+        { "id": "b", "text": "`null`" },
+        { "id": "c", "text": "`TypeError`" },
+        { "id": "d", "text": "`name`" }
+      ],
+      "correct": ["c"],
+      "explanation": "The optional chain starts too late. Since `user` is `null`, `user.profile` throws before `?.name` can help. Use `user?.profile?.name`.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which option best creates a new object with `active` changed to `false` without mutating `user`?",
+      "options": [
+        { "id": "a", "text": "`user.active = false`" },
+        { "id": "b", "text": "`const updated = { ...user, active: false };`" },
+        { "id": "c", "text": "`const updated = user; updated.active = false;`" },
+        { "id": "d", "text": "`const updated = [...user, false];`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Object spread creates a new top-level object and the later `active` property overrides the previous value.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst name = \"Alice\";\nconst role = \"admin\";\nconst user = { name, role };\n\nconsole.log(user);\n```",
+      "options": [
+        { "id": "a", "text": "`{ name: \"Alice\", role: \"admin\" }`" },
+        { "id": "b", "text": "`{ Alice: \"name\", admin: \"role\" }`" },
+        { "id": "c", "text": "`[\"Alice\", \"admin\"]`" },
+        { "id": "d", "text": "`{ name, role }` as plain text" }
+      ],
+      "correct": ["a"],
+      "explanation": "Property shorthand uses the variable names as property names and their values as property values.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which statement about spread and rest is correct?",
+      "options": [
+        { "id": "a", "text": "Spread collects values, rest expands values" },
+        { "id": "b", "text": "Spread and rest use different symbols" },
+        { "id": "c", "text": "Spread expands values, rest collects values" },
+        { "id": "d", "text": "Rest can only be used with objects" }
+      ],
+      "correct": ["c"],
+      "explanation": "Both use `...`, but spread expands values while rest collects values.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "id": "javascript-events-applied-check",
+  "title": "JavaScript Events Applied Check",
+  "description": "Test your ability to choose event patterns, debug event targets, handle forms, use delegation, manage async handlers, and prevent performance or cleanup issues.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "events", "dom", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is wrong here?\n```js\nbutton.addEventListener(\"click\", saveUser());\n```",
+      "options": [
+        { "id": "a", "text": "`saveUser()` runs immediately; pass `saveUser` as the function reference instead" },
+        { "id": "b", "text": "`click` must be written as `Click`" },
+        { "id": "c", "text": "`addEventListener` cannot listen to buttons" },
+        { "id": "d", "text": "The handler must always be async" }
+      ],
+      "correct": ["a"],
+      "explanation": "The second argument should be a function reference. Calling `saveUser()` invokes it immediately and passes its return value.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A button contains an icon span. The listener is on the button. Which property should you use to reliably refer to the button inside that listener?",
+      "options": [
+        { "id": "a", "text": "`event.currentTarget`" },
+        { "id": "b", "text": "`event.target`" },
+        { "id": "c", "text": "`event.key`" },
+        { "id": "d", "text": "`event.detail.itemCount`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`currentTarget` is the element whose listener is currently running. `target` could be the nested span.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which delegated click handler best handles clicks on icons inside delete buttons?",
+      "options": [
+        { "id": "a", "text": "`const button = event.target.closest(\".delete\"); if (button) button.closest(\"li\").remove();`" },
+        { "id": "b", "text": "`if (event.currentTarget.matches(\".delete\")) event.currentTarget.remove();`" },
+        { "id": "c", "text": "`event.stopImmediatePropagation();`" },
+        { "id": "d", "text": "`document.removeEventListener(\"click\", event.target);`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`closest` can find the delete button even when the original target is a nested icon or span.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A form should be submitted with `fetch` without reloading the page. Which pattern is best?",
+      "options": [
+        { "id": "a", "text": "Listen for `submit` on the form and call `event.preventDefault()` before the fetch request" },
+        { "id": "b", "text": "Listen for `mousemove` and call `stopPropagation()`" },
+        { "id": "c", "text": "Listen for `click` on the document and remove the form" },
+        { "id": "d", "text": "Use `passive: true` and call `preventDefault()` inside it" }
+      ],
+      "correct": ["a"],
+      "explanation": "The form's `submit` event captures normal submission paths. `preventDefault()` stops the browser navigation so JavaScript can handle the request.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A search input sends an API request on every `input` event and feels too noisy. Which pattern is usually best?",
+      "options": [
+        { "id": "a", "text": "Debounce the search handler so it runs after the user pauses typing" },
+        { "id": "b", "text": "Call `stopPropagation()` on every key" },
+        { "id": "c", "text": "Use a capturing listener on `window`" },
+        { "id": "d", "text": "Replace the input event with `load`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing is a good fit for search because it waits until rapid input activity pauses.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A scroll progress indicator needs to update during scrolling without running too often. Which pattern is usually best?",
+      "options": [
+        { "id": "a", "text": "Throttle the scroll handler and consider a passive listener" },
+        { "id": "b", "text": "Run a large loop inside every `scroll` event" },
+        { "id": "c", "text": "Use `preventDefault()` in a passive listener" },
+        { "id": "d", "text": "Use `submit` instead of `scroll`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Throttling limits work during frequent events. `passive: true` can help scrolling stay smooth when default behavior is not prevented.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A modal adds a `keydown` listener to `document` for Escape. What should happen when the modal closes?",
+      "options": [
+        { "id": "a", "text": "Remove the listener or abort it with an `AbortController`" },
+        { "id": "b", "text": "Leave the listener forever because the browser deletes all document listeners automatically" },
+        { "id": "c", "text": "Call `preventDefault()` on the close button only" },
+        { "id": "d", "text": "Set `event.target` to `null`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Long-lived document listeners should be cleaned up when the UI that needed them is removed.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is the likely issue here?\n```js\nwindow.addEventListener(\"resize\", () => {\n  console.log(window.innerWidth);\n});\n\nwindow.removeEventListener(\"resize\", () => {\n  console.log(window.innerWidth);\n});\n```",
+      "options": [
+        { "id": "a", "text": "The listener is not removed because the two arrow functions are different function objects" },
+        { "id": "b", "text": "`resize` listeners cannot be removed" },
+        { "id": "c", "text": "`window.innerWidth` is not available in handlers" },
+        { "id": "d", "text": "The listener runs during capture by default" }
+      ],
+      "correct": ["a"],
+      "explanation": "`removeEventListener` needs the same function reference that was passed to `addEventListener`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "A parent delegated click listener stopped working after a child button handler was changed. Which child code is most likely responsible?",
+      "options": [
+        { "id": "a", "text": "`event.stopPropagation()`" },
+        { "id": "b", "text": "`console.log(event.target)`" },
+        { "id": "c", "text": "`event.currentTarget.disabled = true`" },
+        { "id": "d", "text": "`await fetch(\"/api\")`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Delegated parent listeners rely on bubbling. `stopPropagation()` can prevent the event from reaching them.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which approach is most accessible for an action the user can activate?",
+      "options": [
+        { "id": "a", "text": "Use a real `<button>` and listen for `click`" },
+        { "id": "b", "text": "Use a `<div>` with only a `mouseenter` listener" },
+        { "id": "c", "text": "Use text that changes only on hover" },
+        { "id": "d", "text": "Disable keyboard focus for the control" }
+      ],
+      "correct": ["a"],
+      "explanation": "A real button provides expected semantics and keyboard activation, while a click listener handles activation behavior.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What should an async click handler usually include when a network request can fail?",
+      "options": [
+        { "id": "a", "text": "`try` / `catch` around the awaited work" },
+        { "id": "b", "text": "`stopImmediatePropagation()` before every `await`" },
+        { "id": "c", "text": "`passive: true` to catch errors" },
+        { "id": "d", "text": "`event.target = error`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async handlers should handle rejected Promises or thrown errors with `try` / `catch` so the UI can recover.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "A custom `cart:updated` event should let listeners read the new item count. Which event creation is best?",
+      "options": [
+        { "id": "a", "text": "`new CustomEvent(\"cart:updated\", { detail: { itemCount: 3 } })`" },
+        { "id": "b", "text": "`new Event(\"cart:updated\", { itemCount: 3 })`" },
+        { "id": "c", "text": "`document.addEventListener(\"cart:updated\", { itemCount: 3 })`" },
+        { "id": "d", "text": "`new MouseEvent({ detail: 3 })`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`CustomEvent` supports a `detail` object for application-specific event data.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "You are debugging why a click listener on a parent reacts to unexpected child clicks. What is a useful first log?",
+      "options": [
+        { "id": "a", "text": "`console.log(event.target, event.currentTarget, event.composedPath())`" },
+        { "id": "b", "text": "`console.log(JSON.stringify(window))`" },
+        { "id": "c", "text": "`console.log(document.body.innerHTML = \"\")`" },
+        { "id": "d", "text": "`console.log(event.preventDefault)` and then delete the listener" }
+      ],
+      "correct": ["a"],
+      "explanation": "`target`, `currentTarget`, and the composed path reveal where the event started and how it reached the listener.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which event is best for live character counting as the user types in a textarea?",
+      "options": [
+        { "id": "a", "text": "`input`" },
+        { "id": "b", "text": "`submit`" },
+        { "id": "c", "text": "`beforeunload`" },
+        { "id": "d", "text": "`resize`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`input` fires when the value changes, making it a good fit for live character counters.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "A listener is added with `{ capture: true }`. Which removal is correct?",
+      "options": [
+        { "id": "a", "text": "`element.removeEventListener(\"click\", handler, { capture: true })`" },
+        { "id": "b", "text": "`element.removeEventListener(\"click\", handler, { passive: true })`" },
+        { "id": "c", "text": "`element.removeEventListener(handler, \"click\")`" },
+        { "id": "d", "text": "`handler.remove(\"click\")`" }
+      ],
+      "correct": ["a"],
+      "explanation": "When removing capture listeners, the event type, function reference, and capture setting must match.",
+      "points": 1
+    }
+  ]
+}

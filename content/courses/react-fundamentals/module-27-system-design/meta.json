@@ -37,6 +37,22 @@
       "title": "Building a Design System",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-27-core-check",
+      "passingScore": 70,
+      "duration": "10 min"
+    },
+    {
+      "slug": "08-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "quizSlug": "react-module-27-applied-check",
+      "passingScore": 70,
+      "duration": "10 min"
     }
   ]
 }

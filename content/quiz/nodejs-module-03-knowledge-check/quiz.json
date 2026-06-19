@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-03-knowledge-check",
+  "title": "Core Modules Knowledge Check",
+  "description": "Check your understanding of Node.js built-in modules including fs, path, http, events, process, Buffer, URL, crypto, util, and HTTPS.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "core-modules", "fs", "crypto", "http"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which built-in module helps create cross-platform file paths?",
+      "options": [
+        { "id": "a", "text": "`node:path`" },
+        { "id": "b", "text": "`node:http`" },
+        { "id": "c", "text": "`node:events`" },
+        { "id": "d", "text": "`node:crypto`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`node:path` provides helpers such as `join`, `resolve`, and `extname` for file paths.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does `Buffer` represent in Node.js?",
+      "options": [
+        { "id": "a", "text": "Binary data" },
+        { "id": "b", "text": "A browser DOM node" },
+        { "id": "c", "text": "A package version range" },
+        { "id": "d", "text": "An Express route" }
+      ],
+      "correct": ["a"],
+      "explanation": "Buffers are used to work with raw binary data, such as file chunks or network payloads.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which module should you use for hashing, random bytes, and HMAC operations?",
+      "options": [
+        { "id": "a", "text": "`node:crypto`" },
+        { "id": "b", "text": "`node:os`" },
+        { "id": "c", "text": "`node:path`" },
+        { "id": "d", "text": "`node:url`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`node:crypto` provides cryptographic primitives used in security-sensitive Node.js code.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is an `EventEmitter` used for?",
+      "options": [
+        { "id": "a", "text": "Publishing named events and registering listeners" },
+        { "id": "b", "text": "Installing dependencies" },
+        { "id": "c", "text": "Rendering EJS templates only" },
+        { "id": "d", "text": "Creating database migrations" }
+      ],
+      "correct": ["a"],
+      "explanation": "EventEmitter is a core Node pattern for event-driven communication.",
+      "points": 1
+    }
+  ]
+}

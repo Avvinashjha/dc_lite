@@ -1,0 +1,182 @@
+{
+  "id": "javascript-testing-core-check",
+  "title": "JavaScript Testing Core Check",
+  "description": "Check your understanding of testing types, unit tests, integration tests, assertions, async tests, mocks, setup and teardown, coverage, and testing workflow.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "testing", "unit-tests", "integration-tests", "jest"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the main purpose of automated tests?",
+      "options": [
+        { "id": "a", "text": "To repeatedly check that important behavior still works" },
+        { "id": "b", "text": "To prove a program can never have bugs" },
+        { "id": "c", "text": "To replace all code reviews" },
+        { "id": "d", "text": "To make JavaScript run without a browser or Node.js" }
+      ],
+      "correct": ["a"],
+      "explanation": "Automated tests repeatedly check expected behavior. They provide evidence and confidence, but they do not prove software is perfect.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does a unit test usually check?",
+      "options": [
+        { "id": "a", "text": "One small piece of code, such as a function or method" },
+        { "id": "b", "text": "A full user workflow across the whole app" },
+        { "id": "c", "text": "Only server hardware" },
+        { "id": "d", "text": "Whether CSS colors match a design exactly" }
+      ],
+      "correct": ["a"],
+      "explanation": "A unit test is focused on a small unit of behavior, often a single function or module.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does an integration test check?",
+      "options": [
+        { "id": "a", "text": "Whether multiple pieces of code work together correctly" },
+        { "id": "b", "text": "Only whether one arithmetic expression works" },
+        { "id": "c", "text": "Only whether comments are formatted correctly" },
+        { "id": "d", "text": "Whether JavaScript keywords exist" }
+      ],
+      "correct": ["a"],
+      "explanation": "Integration tests verify behavior across connected modules or components.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which test type is closest to a real user completing a workflow in the app?",
+      "options": [
+        { "id": "a", "text": "End-to-end test" },
+        { "id": "b", "text": "Unit test" },
+        { "id": "c", "text": "Lint rule" },
+        { "id": "d", "text": "Variable declaration" }
+      ],
+      "correct": ["a"],
+      "explanation": "End-to-end tests exercise complete workflows, often through a browser or full application environment.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What do arrange, act, and assert mean in a test?",
+      "options": [
+        { "id": "a", "text": "Prepare data, run the code, then check the result" },
+        { "id": "b", "text": "Import CSS, compile HTML, then deploy" },
+        { "id": "c", "text": "Create a branch, commit, then push" },
+        { "id": "d", "text": "Declare variables alphabetically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Arrange, act, assert is a common structure for readable tests.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which assertion is usually appropriate for checking object or array contents in Jest?",
+      "options": [
+        { "id": "a", "text": "`toEqual()`" },
+        { "id": "b", "text": "`toBeAlwaysObject()`" },
+        { "id": "c", "text": "`toCompile()`" },
+        { "id": "d", "text": "`toImport()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`toEqual()` checks object and array contents with deep equality.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Why are pure functions often easy to unit test?",
+      "options": [
+        { "id": "a", "text": "Their output depends only on inputs and they avoid side effects" },
+        { "id": "b", "text": "They must always be asynchronous" },
+        { "id": "c", "text": "They can only return strings" },
+        { "id": "d", "text": "They automatically create test files" }
+      ],
+      "correct": ["a"],
+      "explanation": "Pure functions are predictable: the same input gives the same output, and they do not change outside state.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "How should an async test usually wait for a Promise-based function?",
+      "options": [
+        { "id": "a", "text": "Use `await` or return the Promise" },
+        { "id": "b", "text": "Call the function and ignore the Promise" },
+        { "id": "c", "text": "Wrap the test in a string" },
+        { "id": "d", "text": "Use `JSON.stringify()` on the Promise" }
+      ],
+      "correct": ["a"],
+      "explanation": "Tests must wait for asynchronous work before making or completing assertions.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is a spy commonly used for?",
+      "options": [
+        { "id": "a", "text": "Recording how a function was called" },
+        { "id": "b", "text": "Changing `const` into `let`" },
+        { "id": "c", "text": "Automatically fixing syntax errors" },
+        { "id": "d", "text": "Converting tests into production code" }
+      ],
+      "correct": ["a"],
+      "explanation": "A spy records call information, such as arguments and call count.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Why should tests usually avoid calling real production APIs?",
+      "options": [
+        { "id": "a", "text": "Real APIs can be slow, unavailable, costly, or unpredictable" },
+        { "id": "b", "text": "JavaScript cannot call APIs" },
+        { "id": "c", "text": "Tests are not allowed to use async functions" },
+        { "id": "d", "text": "Assertions only work with numbers" }
+      ],
+      "correct": ["a"],
+      "explanation": "Tests should be reliable and controlled. External services can make regular automated tests flaky.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does code coverage measure?",
+      "options": [
+        { "id": "a", "text": "How much code ran during tests" },
+        { "id": "b", "text": "How many users visited a site" },
+        { "id": "c", "text": "How many variables use `const`" },
+        { "id": "d", "text": "How fast the keyboard typed" }
+      ],
+      "correct": ["a"],
+      "explanation": "Coverage reports show which code was executed by tests, but high coverage does not automatically mean the tests are meaningful.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is a regression test?",
+      "options": [
+        { "id": "a", "text": "A test added to prevent a fixed bug from returning" },
+        { "id": "b", "text": "A test that intentionally never runs" },
+        { "id": "c", "text": "A test that only checks indentation" },
+        { "id": "d", "text": "A test that deletes old source files" }
+      ],
+      "correct": ["a"],
+      "explanation": "Regression tests protect against old bugs coming back after future changes.",
+      "points": 1
+    }
+  ]
+}

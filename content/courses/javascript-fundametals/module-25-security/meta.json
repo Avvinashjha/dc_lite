@@ -1,24 +1,70 @@
 {
   "title": "Security",
-  "description": "Protect your applications from common web security threats.",
+  "description": "Protect JavaScript applications from common web security risks.",
   "lessons": [
     {
       "slug": "01-preventing-xss",
       "title": "Preventing XSS",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "02-preventing-csrf",
       "title": "Preventing CSRF",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "03-sanitizing-input",
       "title": "Sanitizing Input",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "04-authentication-and-token-storage",
+      "title": "Authentication and Token Storage",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-cors-and-browser-security-boundaries",
+      "title": "CORS and Browser Security Boundaries",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-dangerous-code-and-prototype-pollution",
+      "title": "Dangerous Code and Prototype Pollution",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-dependencies-secrets-and-error-handling",
+      "title": "Dependencies, Secrets, and Error Handling",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-practical-secure-coding-habits",
+      "title": "Practical Secure Coding Habits",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-security-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "10-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-security-applied-check",
+      "passingScore": 70
     }
   ]
 }

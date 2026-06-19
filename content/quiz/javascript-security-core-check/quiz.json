@@ -1,0 +1,182 @@
+{
+  "id": "javascript-security-core-check",
+  "title": "JavaScript Security Core Check",
+  "description": "Check your understanding of XSS prevention, CSRF, validation and sanitization, token storage, CORS, dangerous code patterns, dependency hygiene, secrets, and safe errors.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "security", "xss", "csrf", "web-security"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the main risk of assigning untrusted user input to `innerHTML`?",
+      "options": [
+        { "id": "a", "text": "The browser may parse the value as HTML and executable content" },
+        { "id": "b", "text": "The value is always converted to a number" },
+        { "id": "c", "text": "The page can no longer use CSS" },
+        { "id": "d", "text": "The request method changes to POST" }
+      ],
+      "correct": ["a"],
+      "explanation": "`innerHTML` parses a string as HTML. Untrusted strings can change page structure or behavior if rendered this way.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which DOM API is usually safest when displaying plain user-provided text?",
+      "options": [
+        { "id": "a", "text": "`textContent`" },
+        { "id": "b", "text": "`innerHTML`" },
+        { "id": "c", "text": "`eval()`" },
+        { "id": "d", "text": "`document.write()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`textContent` treats the value as text instead of parsing it as HTML.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does validation do?",
+      "options": [
+        { "id": "a", "text": "Checks whether a value is acceptable according to rules" },
+        { "id": "b", "text": "Runs a string as JavaScript" },
+        { "id": "c", "text": "Automatically authenticates a user" },
+        { "id": "d", "text": "Disables all browser security features" }
+      ],
+      "correct": ["a"],
+      "explanation": "Validation accepts or rejects data based on rules such as type, length, format, or allowed values.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does sanitization usually do?",
+      "options": [
+        { "id": "a", "text": "Cleans, normalizes, or limits a value before use" },
+        { "id": "b", "text": "Proves the user is logged in" },
+        { "id": "c", "text": "Turns every request into a GET request" },
+        { "id": "d", "text": "Makes frontend code private" }
+      ],
+      "correct": ["a"],
+      "explanation": "Sanitization transforms data, such as trimming an email or removing unsafe markup. It does not replace validation.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Why is frontend-only validation not enough for important security rules?",
+      "options": [
+        { "id": "a", "text": "Users can bypass or modify frontend code and call the server directly" },
+        { "id": "b", "text": "Frontend validation only works with CSS" },
+        { "id": "c", "text": "Servers cannot validate JSON" },
+        { "id": "d", "text": "Browsers reject all validated data" }
+      ],
+      "correct": ["a"],
+      "explanation": "Frontend validation helps user experience, but the server must enforce important rules because clients are not trusted.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is CSRF mainly about?",
+      "options": [
+        { "id": "a", "text": "Unwanted authenticated requests sent by a browser" },
+        { "id": "b", "text": "A syntax error in an arrow function" },
+        { "id": "c", "text": "A slow array method" },
+        { "id": "d", "text": "A missing semicolon in JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "CSRF targets the browser's automatic credential behavior, especially with cookie-based sessions.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which cookie flag prevents JavaScript from reading a cookie?",
+      "options": [
+        { "id": "a", "text": "`HttpOnly`" },
+        { "id": "b", "text": "`Readable`" },
+        { "id": "c", "text": "`LocalOnly`" },
+        { "id": "d", "text": "`JSONOnly`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`HttpOnly` cookies are sent by the browser but are not exposed through JavaScript APIs.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Why can storing sensitive bearer tokens in `localStorage` be risky?",
+      "options": [
+        { "id": "a", "text": "JavaScript running on the page can read `localStorage`" },
+        { "id": "b", "text": "`localStorage` only stores numbers" },
+        { "id": "c", "text": "`localStorage` sends tokens over FTP" },
+        { "id": "d", "text": "Browsers publish `localStorage` values in search results" }
+      ],
+      "correct": ["a"],
+      "explanation": "If malicious or vulnerable code runs on the page, it may be able to read tokens stored in `localStorage`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does CORS primarily control?",
+      "options": [
+        { "id": "a", "text": "Whether browser JavaScript can read a cross-origin response" },
+        { "id": "b", "text": "Whether a user is an administrator" },
+        { "id": "c", "text": "Whether a password is strong" },
+        { "id": "d", "text": "Whether a package has tests" }
+      ],
+      "correct": ["a"],
+      "explanation": "CORS is a browser-enforced read boundary for cross-origin responses. It is not authentication.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which statement about frontend secrets is correct?",
+      "options": [
+        { "id": "a", "text": "Private secrets should not be bundled into browser JavaScript" },
+        { "id": "b", "text": "Minification makes private secrets safe" },
+        { "id": "c", "text": "Environment variables are always private in frontend code" },
+        { "id": "d", "text": "Comments hide secrets from users" }
+      ],
+      "correct": ["a"],
+      "explanation": "Frontend code is visible to users, so private secrets must stay on the server.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Why should `eval()` be avoided with untrusted input?",
+      "options": [
+        { "id": "a", "text": "It runs a string as JavaScript code" },
+        { "id": "b", "text": "It validates all input too strictly" },
+        { "id": "c", "text": "It only works with arrays" },
+        { "id": "d", "text": "It disables HTTPS" }
+      ],
+      "correct": ["a"],
+      "explanation": "`eval()` executes strings as code, which is dangerous when the string is influenced by untrusted data.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is a good habit before adding a new dependency?",
+      "options": [
+        { "id": "a", "text": "Check whether a built-in API or existing project package already solves the problem" },
+        { "id": "b", "text": "Add the largest package available" },
+        { "id": "c", "text": "Remove the lockfile" },
+        { "id": "d", "text": "Disable all tests" }
+      ],
+      "correct": ["a"],
+      "explanation": "Every dependency adds code and maintenance risk. Prefer built-in APIs or existing dependencies when they fit.",
+      "points": 1
+    }
+  ]
+}

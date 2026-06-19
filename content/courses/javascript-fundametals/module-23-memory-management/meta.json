@@ -1,24 +1,76 @@
 {
   "title": "Memory Management",
-  "description": "Understand garbage collection and avoid memory leaks.",
+  "description": "Understand JavaScript memory, garbage collection, reachability, leaks, weak references, and practical cleanup patterns.",
   "lessons": [
     {
-      "slug": "01-garbage-collection",
+      "slug": "01-memory-lifecycle",
+      "title": "Memory Lifecycle",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "02-stack-and-heap",
+      "title": "Stack and Heap",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "03-garbage-collection",
       "title": "Garbage Collection",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
-      "slug": "02-avoiding-memory-leaks",
-      "title": "Avoiding Memory Leaks",
+      "slug": "04-references-and-reachability",
+      "title": "References and Reachability",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-common-memory-leaks",
+      "title": "Common Memory Leaks",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-closures-and-async-cleanup",
+      "title": "Closures and Async Cleanup",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-weakmap-and-weakset",
+      "title": "WeakMap and WeakSet",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "03-weak-references",
-      "title": "Weak References (WeakMap)",
+      "slug": "08-weakref-and-finalizationregistry",
+      "title": "WeakRef and FinalizationRegistry",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "09-practical-memory-debugging",
+      "title": "Practical Memory Debugging",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-memory-management-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "11-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-memory-management-applied-check",
+      "passingScore": 70
     }
   ]
 }

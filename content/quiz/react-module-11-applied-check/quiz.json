@@ -1,0 +1,239 @@
+{
+  "id": "react-module-11-applied-check",
+  "title": "Refs and DOM Applied Check",
+  "description": "Practice safe DOM access, mutable refs, forwarding refs, imperative handles, and ref-related pitfalls.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "refs",
+    "forwardref",
+    "imperative-handle"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A component needs to focus an input after the user clicks \"Edit\". What is a good approach?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Attach a ref to the input and call inputRef.current.focus() in the click handler after checking it exists"
+        },
+        {
+          "id": "b",
+          "text": "Query the entire document during render"
+        },
+        {
+          "id": "c",
+          "text": "Store focus in state and expect the browser to focus automatically"
+        },
+        {
+          "id": "d",
+          "text": "Mutate the JSX object"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Focusing is an imperative DOM action that fits an event handler plus a DOM ref.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "You need to store a timeout id so cleanup can clear it, but the id should not render. What should you use?",
+      "options": [
+        {
+          "id": "a",
+          "text": "useRef"
+        },
+        {
+          "id": "b",
+          "text": "useState"
+        },
+        {
+          "id": "c",
+          "text": "Context"
+        },
+        {
+          "id": "d",
+          "text": "React.memo"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A ref is appropriate for mutable bookkeeping that does not affect UI.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which patterns avoid unsafe DOM access? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Check ref.current before using it"
+        },
+        {
+          "id": "b",
+          "text": "Measure layout in an effect or layout-aware callback rather than during render"
+        },
+        {
+          "id": "c",
+          "text": "Assume Strict Mode attaches refs exactly once"
+        },
+        {
+          "id": "d",
+          "text": "Clean up third-party DOM integrations"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Refs can be null, layout reads need committed DOM, and integrations should be cleaned up.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A design-system Input wraps an HTML input. Parent components need to focus it. What API decision is needed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Forward the ref or expose a focused imperative handle"
+        },
+        {
+          "id": "b",
+          "text": "Tell parents to use document.querySelector"
+        },
+        {
+          "id": "c",
+          "text": "Make the input global"
+        },
+        {
+          "id": "d",
+          "text": "Convert all props to context"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Reusable components must intentionally decide whether and how to expose ref access.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "useImperativeHandle is a good fit for exposing a small focus() method instead of the whole DOM node.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "A narrow imperative API can hide implementation details and reduce coupling.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A component reads ref.current.offsetWidth during render to choose what to display. What is the problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The DOM may not be committed yet and render should stay pure"
+        },
+        {
+          "id": "b",
+          "text": "offsetWidth is always a string"
+        },
+        {
+          "id": "c",
+          "text": "Refs cannot point to DOM nodes"
+        },
+        {
+          "id": "d",
+          "text": "React requires class components for measurement"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "DOM measurement should happen after commit, often using an effect, ResizeObserver, or layout effect when appropriate.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which values should usually be state instead of refs? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether a details panel is open and rendered"
+        },
+        {
+          "id": "b",
+          "text": "Current input text shown in the UI"
+        },
+        {
+          "id": "c",
+          "text": "An interval id used only for cleanup"
+        },
+        {
+          "id": "d",
+          "text": "A previous value used only for comparison inside an effect"
+        }
+      ],
+      "correct": [
+        "a",
+        "b"
+      ],
+      "explanation": "Values that affect rendered output should be state; hidden mutable bookkeeping can be refs.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A HOC wraps a component but does not forward refs. What happens to a parent ref passed to the wrapped export?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It points to the wrapper or is not delivered to the inner component as intended"
+        },
+        {
+          "id": "b",
+          "text": "It automatically reaches the inner DOM node"
+        },
+        {
+          "id": "c",
+          "text": "It becomes context"
+        },
+        {
+          "id": "d",
+          "text": "It triggers a re-render every time current changes"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Refs are not normal props; wrappers must explicitly forward them when ref access is part of the API.",
+      "points": 1
+    }
+  ]
+}

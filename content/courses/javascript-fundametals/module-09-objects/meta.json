@@ -25,6 +25,28 @@
       "title": "Working with JSON",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "05-object-references-and-copying",
+      "title": "Object References and Copying",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-objects-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "07-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-objects-applied-check",
+      "passingScore": 70
     }
   ]
 }

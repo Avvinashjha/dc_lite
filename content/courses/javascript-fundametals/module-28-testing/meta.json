@@ -1,36 +1,70 @@
 {
   "title": "Testing",
-  "description": "Write tests to verify your code with popular testing frameworks.",
+  "description": "Write reliable JavaScript tests with unit, integration, async, mock, and workflow patterns.",
   "lessons": [
     {
       "slug": "01-types-of-testing",
       "title": "Types of Testing",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "02-unit-testing",
       "title": "Unit Testing",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "03-integration-testing",
       "title": "Integration Testing",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "04-jest",
       "title": "Jest",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "05-mocha",
       "title": "Mocha",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-testing-async-code-and-errors",
+      "title": "Testing Async Code and Errors",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "07-mocks-stubs-spies-and-fetch",
+      "title": "Mocks, Stubs, Spies, and Fetch",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-test-organization-and-workflow",
+      "title": "Test Organization and Workflow",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-testing-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "10-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-testing-applied-check",
+      "passingScore": 70
     }
   ]
 }

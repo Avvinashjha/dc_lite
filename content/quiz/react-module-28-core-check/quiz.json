@@ -1,0 +1,238 @@
+{
+  "id": "react-module-28-core-check",
+  "title": "React Accessibility Core Check",
+  "description": "Check your understanding of accessibility fundamentals, semantic HTML, ARIA, keyboard navigation, accessible forms, and testing.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "accessibility",
+    "semantic-html",
+    "aria"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Why is semantic HTML important for accessibility?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It gives browsers and assistive technologies built-in meaning"
+        },
+        {
+          "id": "b",
+          "text": "It prevents every JavaScript error"
+        },
+        {
+          "id": "c",
+          "text": "It replaces all CSS"
+        },
+        {
+          "id": "d",
+          "text": "It makes source maps smaller"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Semantic elements provide meaning and behavior that assistive technologies can understand.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "When should a native `<button>` usually be preferred over a clickable `<div>`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "When the user triggers an action"
+        },
+        {
+          "id": "b",
+          "text": "Only when the app has no CSS"
+        },
+        {
+          "id": "c",
+          "text": "Never in React"
+        },
+        {
+          "id": "d",
+          "text": "Only for links to other pages"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Buttons include keyboard and accessibility behavior for actions by default.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does ARIA primarily add?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Semantic information for assistive technologies"
+        },
+        {
+          "id": "b",
+          "text": "Keyboard behavior automatically"
+        },
+        {
+          "id": "c",
+          "text": "Visual styling"
+        },
+        {
+          "id": "d",
+          "text": "Network caching"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "ARIA can describe roles, names, and states, but it does not add interaction behavior by itself.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is an accessible name?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The label text assistive technology uses to identify a control"
+        },
+        {
+          "id": "b",
+          "text": "A CSS class name"
+        },
+        {
+          "id": "c",
+          "text": "The React component filename"
+        },
+        {
+          "id": "d",
+          "text": "A browser cache key"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Controls need accessible names so screen reader users know what each control does.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is `aria-live` used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Announcing dynamic content changes to screen readers"
+        },
+        {
+          "id": "b",
+          "text": "Making an element focusable"
+        },
+        {
+          "id": "c",
+          "text": "Submitting a form"
+        },
+        {
+          "id": "d",
+          "text": "Preventing XSS"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Live regions can announce status updates that appear after initial render.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "Which are part of good keyboard accessibility? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Logical tab order"
+        },
+        {
+          "id": "b",
+          "text": "Visible focus indication"
+        },
+        {
+          "id": "c",
+          "text": "Keyboard support for custom interactive widgets"
+        },
+        {
+          "id": "d",
+          "text": "Removing outlines from every focused element"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Keyboard users need predictable navigation, visible focus, and working interactions.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the best way to associate a visible label with a form input?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use a `<label>` connected by nesting or `htmlFor` and `id`"
+        },
+        {
+          "id": "b",
+          "text": "Use placeholder text only"
+        },
+        {
+          "id": "c",
+          "text": "Put the label in a comment"
+        },
+        {
+          "id": "d",
+          "text": "Use a random `div` nearby"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Native labels give inputs accessible names and improve click targets.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "Automated accessibility checks can find many issues, but they do not replace manual keyboard and screen reader testing.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Automated tools are useful but cannot verify every interaction, focus, or screen reader experience.",
+      "points": 1
+    }
+  ]
+}

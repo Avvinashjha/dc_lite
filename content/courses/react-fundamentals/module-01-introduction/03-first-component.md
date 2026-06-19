@@ -1,138 +1,214 @@
 # Your First Component
 
-In this lesson, we'll build a real React component step by step.
+In React, a component is a reusable piece of UI.
+
+Most modern React components are JavaScript functions that return JSX.
 
 :::video
 url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 title: Building Your First React Component
 :::
 
-## What is a Component?
+## Start Small
 
-A React component is a reusable piece of UI. Think of it like a custom HTML element that you define yourself. Components can:
-
-- Accept data (props)
-- Manage their own state
-- Render other components
-- Respond to user events
-
-## Function Components
-
-The simplest way to create a component is with a function:
+Create a function with a capitalized name:
 
 ```jsx
 function Greeting() {
-  return <h1>Hello, World!</h1>;
+  return <h1>Hello, React</h1>;
 }
 ```
 
-This is a valid React component! You can use it like an HTML tag:
+Use it from another component:
 
 ```jsx
 function App() {
   return (
-    <div>
+    <main>
       <Greeting />
-      <Greeting />
-      <Greeting />
-    </div>
+      <p>This page is made of components.</p>
+    </main>
+  );
+}
+
+export default App;
+```
+
+Component names must start with a capital letter. Lowercase JSX tags are treated as built-in DOM elements.
+
+```jsx
+<Greeting />
+<button>Save</button>
+```
+
+## Components Return JSX
+
+JSX can contain normal HTML-like elements and other components.
+
+```jsx
+function PageHeader() {
+  return (
+    <header>
+      <h1>Course Dashboard</h1>
+      <p>Track your progress through React fundamentals.</p>
+    </header>
   );
 }
 ```
 
-## Adding Props
-
-Props let you pass data to components:
+If a component returns multiple sibling elements, wrap them in one parent or a fragment.
 
 ```jsx
-function Greeting({ name, emoji }) {
+function HeaderText() {
   return (
-    <h1>
-      Hello, {name}! {emoji}
-    </h1>
+    <>
+      <h1>React Fundamentals</h1>
+      <p>Build UI from components.</p>
+    </>
   );
 }
-
-// Usage
-<Greeting name="Alice" emoji="👋" />
-<Greeting name="Bob" emoji="🎉" />
 ```
 
-## Building a Card Component
+## Add Props
 
-Let's build something more useful - a profile card:
+Props are inputs from a parent component.
 
 ```jsx
-function ProfileCard({ name, role, avatar, bio }) {
+function Greeting({ name }) {
+  return <h1>Hello, {name}</h1>;
+}
+
+function App() {
   return (
-    <div style={{
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      padding: '20px',
-      maxWidth: '300px',
-    }}>
-      <img
-        src={avatar}
-        alt={name}
-        style={{ width: '80px', borderRadius: '50%' }}
-      />
+    <main>
+      <Greeting name="Alice" />
+      <Greeting name="Bob" />
+    </main>
+  );
+}
+```
+
+The same component can render different output based on props.
+
+Props are read-only. A child component should not modify them.
+
+## Build a Profile Card
+
+```jsx
+function ProfileCard({ name, role, avatarUrl, bio }) {
+  return (
+    <article className="profile-card">
+      <img src={avatarUrl} alt={name} />
       <h2>{name}</h2>
-      <p style={{ color: '#666' }}>{role}</p>
+      <p>{role}</p>
       <p>{bio}</p>
-    </div>
+    </article>
   );
 }
 ```
 
-## Component Composition
-
-The real power of React comes from composing components together:
+Use it:
 
 ```jsx
 function App() {
-  const team = [
-    { name: 'Alice', role: 'Developer', bio: 'Loves React' },
-    { name: 'Bob', role: 'Designer', bio: 'CSS wizard' },
-  ];
-
   return (
-    <div>
-      <h1>Our Team</h1>
-      {team.map(person => (
-        <ProfileCard key={person.name} {...person} />
-      ))}
-    </div>
+    <main>
+      <h1>Team</h1>
+      <ProfileCard
+        name="Ada Lovelace"
+        role="Programmer"
+        avatarUrl="/avatars/ada.png"
+        bio="Wrote notes on one of the earliest computing machines."
+      />
+    </main>
   );
 }
 ```
 
-## Key Takeaways
+## Compose Components
 
-1. Components are functions that return JSX
-2. Props pass data from parent to child
-3. Components can be composed together
-4. Always name components with a capital letter
+Composition means building larger UI from smaller components.
+
+```jsx
+function TeamList({ members }) {
+  return (
+    <section>
+      <h1>Team</h1>
+      <div className="grid">
+        {members.map((member) => (
+          <ProfileCard
+            key={member.id}
+            name={member.name}
+            role={member.role}
+            avatarUrl={member.avatarUrl}
+            bio={member.bio}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+```
+
+Notice the `key` prop in the list. React uses keys to track item identity when rendering arrays.
+
+## Add Simple Interactivity
+
+Components can also use state and events.
+
+```jsx
+import { useState } from "react";
+
+function FavoriteButton() {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  return (
+    <button onClick={() => setIsFavorite(!isFavorite)}>
+      {isFavorite ? "Favorited" : "Add favorite"}
+    </button>
+  );
+}
+```
+
+You will study state and events in detail later. For now, notice the pattern:
+
+- state stores a changing value
+- event handlers respond to user actions
+- rendering uses the current state
+
+## Common Mistakes
+
+- Naming a component `profileCard` instead of `ProfileCard`.
+- Forgetting to return JSX from the component.
+- Returning sibling elements without a wrapper or fragment.
+- Calling a component as a regular function inside JSX instead of using `<Component />`.
+- Mutating props inside a child component.
+- Using array indexes as keys for lists that can reorder or delete items.
 
 :::quiz
-question: What is the correct way to pass a prop called "name" with value "Alice" to a component?
+question: Why should React component names start with a capital letter?
 options:
-  - <Greeting name="Alice" />
-  - <Greeting props="name:Alice" />
-  - <Greeting {name: "Alice"} />
-  - Greeting(name="Alice")
-answer: 0
-explanation: In JSX, props are passed as attributes, similar to HTML. The syntax is attribute="value" for strings.
+  - Capitalized names render faster
+  - React treats lowercase JSX tags as built-in DOM elements
+  - Capitalized names are required by CSS
+  - It prevents props from changing
+answer: 1
+explanation: In JSX, lowercase tags like `button` and `section` refer to DOM elements. Capitalized tags like `ProfileCard` refer to JavaScript component functions.
 :::
 
 :::exercise
 title: Build a ProductCard Component
-description: Create a ProductCard component that accepts name, price, and description props. Display them in a styled card.
+description: Create a ProductCard component that accepts name, price, description, and isFeatured props. Display them in a card and conditionally show a "Featured" label.
 starterCode: |
-  function ProductCard({ name, price, description }) {
+  function ProductCard({ name, price, description, isFeatured }) {
     return (
-      <div>
-        {/* Your code here */}
-      </div>
+      <article className="product-card">
+        {/* Add the product UI here */}
+      </article>
     );
   }
 :::
+
+## Recap
+
+A component is a capitalized function that returns JSX. Props configure components, composition combines them, and state plus events make them interactive.

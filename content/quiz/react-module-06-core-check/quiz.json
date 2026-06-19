@@ -1,0 +1,240 @@
+{
+  "id": "react-module-06-core-check",
+  "title": "React Module 06 Core Check",
+  "description": "Check your understanding of controlled and uncontrolled components, multiple inputs, validation, submit flows, async errors, and form libraries.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "forms",
+    "controlled-components",
+    "validation"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a controlled input in React?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An input whose value is driven by React state"
+        },
+        {
+          "id": "b",
+          "text": "An input that cannot be edited"
+        },
+        {
+          "id": "c",
+          "text": "An input controlled only by CSS"
+        },
+        {
+          "id": "d",
+          "text": "A file input with no ref"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Controlled inputs use React state as the source of truth and update via events.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which pair is typical for a controlled text input?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`value` and `onChange`"
+        },
+        {
+          "id": "b",
+          "text": "`defaultValue` and no event"
+        },
+        {
+          "id": "c",
+          "text": "`href` and `src`"
+        },
+        {
+          "id": "d",
+          "text": "`key` and `refOnly`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A controlled text input renders `value` from state and updates state in `onChange`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "boolean",
+      "prompt": "Uncontrolled inputs can be read with refs or `FormData` instead of storing every keystroke in React state.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Uncontrolled inputs keep their current value in the DOM and can be read when needed.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "Which cases often fit uncontrolled form patterns? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Simple forms read only on submit"
+        },
+        {
+          "id": "b",
+          "text": "File inputs"
+        },
+        {
+          "id": "c",
+          "text": "Fields needing live validation on each keystroke"
+        },
+        {
+          "id": "d",
+          "text": "Integrating a non-React widget"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Uncontrolled patterns can be useful for simple submit reads, file inputs, and DOM-oriented integrations.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "How can multiple related text inputs be stored in one state object?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use each input `name` and update `[event.target.name]`"
+        },
+        {
+          "id": "b",
+          "text": "Mutate the DOM node directly"
+        },
+        {
+          "id": "c",
+          "text": "Use one hard-coded value for every input"
+        },
+        {
+          "id": "d",
+          "text": "Store all values in a CSS class"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The input `name` can choose which state field to update.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Why track touched state in validation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To avoid showing errors before a user interacts with a field"
+        },
+        {
+          "id": "b",
+          "text": "To disable all submit handlers"
+        },
+        {
+          "id": "c",
+          "text": "To make inputs uncontrolled"
+        },
+        {
+          "id": "d",
+          "text": "To replace server validation"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Touched state helps display validation feedback at a useful time.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which are valid parts of a robust submit flow? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Prevent default browser submission"
+        },
+        {
+          "id": "b",
+          "text": "Track pending submit state"
+        },
+        {
+          "id": "c",
+          "text": "Display field or form errors"
+        },
+        {
+          "id": "d",
+          "text": "Allow unlimited duplicate submits while pending"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Good submit flows prevent reloads, communicate progress, and handle errors while avoiding duplicate actions.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "When might a form library help?",
+      "options": [
+        {
+          "id": "a",
+          "text": "When forms have many fields, validation rules, and repeated patterns"
+        },
+        {
+          "id": "b",
+          "text": "Only for one text input with no validation"
+        },
+        {
+          "id": "c",
+          "text": "Only when React state is forbidden"
+        },
+        {
+          "id": "d",
+          "text": "When you want to avoid accessibility concerns"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Libraries help manage complexity, but simple forms may not need one.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "id": "javascript-arrays-core-check",
+  "title": "JavaScript Arrays Core Check",
+  "description": "Check your understanding of array creation, indexing, length, mutability, references, and basic array operations.",
+  "category": "JavaScript",
+  "difficulty": "easy",
+  "tags": ["javascript", "arrays", "fundamentals"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which syntax is the recommended way to create an array?",
+      "options": [
+        { "id": "a", "text": "`new Array(3)`" },
+        { "id": "b", "text": "`Array.create(1, 2, 3)`" },
+        { "id": "c", "text": "`[1, 2, 3]`" },
+        { "id": "d", "text": "`array(1, 2, 3)`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Array literal syntax with square brackets is the standard, predictable way to create arrays.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst colors = [\"Red\", \"Green\", \"Blue\"];\nconsole.log(colors[0]);\n```",
+      "options": [
+        { "id": "a", "text": "`Red`" },
+        { "id": "b", "text": "`Green`" },
+        { "id": "c", "text": "`Blue`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Arrays are zero-indexed, so index `0` is the first element.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst animals = [\"Dog\", \"Cat\", \"Bird\"];\nconsole.log(animals[animals.length - 1]);\n```",
+      "options": [
+        { "id": "a", "text": "`Dog`" },
+        { "id": "b", "text": "`Cat`" },
+        { "id": "c", "text": "`Bird`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`animals.length` is `3`, so `animals.length - 1` is `2`, the last valid index.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst items = [\"A\", \"B\"];\nconsole.log(items[2]);\n```",
+      "options": [
+        { "id": "a", "text": "`A`" },
+        { "id": "b", "text": "`B`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws a `RangeError`" }
+      ],
+      "correct": ["c"],
+      "explanation": "Accessing an array index that does not exist returns `undefined`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nconst scores = [90, 80];\nscores.push(100);\nconsole.log(scores);\n```",
+      "options": [
+        { "id": "a", "text": "`[90, 80]`" },
+        { "id": "b", "text": "`[90, 80, 100]`" },
+        { "id": "c", "text": "It throws because `scores` is `const`" },
+        { "id": "d", "text": "`100`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`const` prevents reassignment of the variable, but the array contents can still be mutated.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does `.push()` return?",
+      "options": [
+        { "id": "a", "text": "The added item" },
+        { "id": "b", "text": "The removed item" },
+        { "id": "c", "text": "The new array length" },
+        { "id": "d", "text": "A new copied array" }
+      ],
+      "correct": ["c"],
+      "explanation": "`push()` mutates the array and returns the new length.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does `.pop()` return?",
+      "options": [
+        { "id": "a", "text": "The removed last element" },
+        { "id": "b", "text": "The first element" },
+        { "id": "c", "text": "The new array length" },
+        { "id": "d", "text": "A copied array" }
+      ],
+      "correct": ["a"],
+      "explanation": "`pop()` removes the last element and returns that removed value.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst original = [1, 2, 3];\nconst copy = original;\ncopy.push(4);\nconsole.log(original);\n```",
+      "options": [
+        { "id": "a", "text": "`[1, 2, 3]`" },
+        { "id": "b", "text": "`[1, 2, 3, 4]`" },
+        { "id": "c", "text": "`[4]`" },
+        { "id": "d", "text": "It throws because arrays cannot share references" }
+      ],
+      "correct": ["b"],
+      "explanation": "Assigning an array to another variable copies the reference, not the array itself.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which creates a shallow copy of an array?",
+      "options": [
+        { "id": "a", "text": "`const copy = original;`" },
+        { "id": "b", "text": "`const copy = [...original];`" },
+        { "id": "c", "text": "`const copy = original.push();`" },
+        { "id": "d", "text": "`const copy = new Reference(original);`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Spread syntax creates a new shallow array copy.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst first = [1, 2];\nconst second = [1, 2];\nconsole.log(first === second);\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Arrays are reference types. These two arrays have the same contents but are different references.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does `new Array(3)` create?",
+      "options": [
+        { "id": "a", "text": "`[3]`" },
+        { "id": "b", "text": "`[1, 2, 3]`" },
+        { "id": "c", "text": "An array with 3 empty slots" },
+        { "id": "d", "text": "A string with value `3`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`new Array(3)` creates an array with length 3 and empty slots, which is one reason array literals are preferred.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst values = [10, 20, 30];\nconsole.log(values.at(-1));\n```",
+      "options": [
+        { "id": "a", "text": "`10`" },
+        { "id": "b", "text": "`20`" },
+        { "id": "c", "text": "`30`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`at(-1)` returns the last element of the array.",
+      "points": 1
+    }
+  ]
+}

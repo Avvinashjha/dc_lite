@@ -1,0 +1,246 @@
+{
+  "id": "react-module-27-core-check",
+  "title": "React System Design Core Check",
+  "description": "Check your understanding of frontend system design, large-scale components, state architecture, performance, micro-frontends, and design systems.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "system-design",
+    "performance",
+    "design-systems"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What should usually come first in a frontend system design discussion?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Choosing a state library"
+        },
+        {
+          "id": "b",
+          "text": "Clarifying requirements, users, constraints, and success criteria"
+        },
+        {
+          "id": "c",
+          "text": "Writing CSS tokens"
+        },
+        {
+          "id": "d",
+          "text": "Picking a folder name"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The system design module starts with requirements before architecture choices.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Why break an app into surfaces during design?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To identify major user flows, responsibilities, and boundaries"
+        },
+        {
+          "id": "b",
+          "text": "To avoid writing components"
+        },
+        {
+          "id": "c",
+          "text": "To force every page into one route"
+        },
+        {
+          "id": "d",
+          "text": "To remove loading states"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Surfaces help organize product areas and clarify data flow, ownership, and failure states.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which are useful state categories at scale? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Local UI state"
+        },
+        {
+          "id": "b",
+          "text": "Server state"
+        },
+        {
+          "id": "c",
+          "text": "URL state"
+        },
+        {
+          "id": "d",
+          "text": "Random duplicated state"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "The lessons separate local, server, and URL state because they have different ownership and persistence needs.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is an important warning about React context at scale?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Context is not automatically a full state-management solution"
+        },
+        {
+          "id": "b",
+          "text": "Context cannot pass objects"
+        },
+        {
+          "id": "c",
+          "text": "Context only works in class components"
+        },
+        {
+          "id": "d",
+          "text": "Context prevents all re-renders"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Context is useful for dependency distribution, but it needs careful value design and does not solve all store concerns by itself.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Why do stable keys matter in large component lists?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They preserve identity so React can reconcile items correctly"
+        },
+        {
+          "id": "b",
+          "text": "They make text bold"
+        },
+        {
+          "id": "c",
+          "text": "They disable network requests"
+        },
+        {
+          "id": "d",
+          "text": "They replace accessibility labels"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Keys communicate item identity to React during reconciliation.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is the recommended first step for performance work?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Measure and identify the bottleneck"
+        },
+        {
+          "id": "b",
+          "text": "Wrap every component in memo"
+        },
+        {
+          "id": "c",
+          "text": "Disable all images"
+        },
+        {
+          "id": "d",
+          "text": "Move all code into one file"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The performance-at-scale lesson emphasizes measuring before optimizing.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "When can micro-frontends be helpful?",
+      "options": [
+        {
+          "id": "a",
+          "text": "When independent teams need separately deployable product areas"
+        },
+        {
+          "id": "b",
+          "text": "For every small React app"
+        },
+        {
+          "id": "c",
+          "text": "To avoid API contracts"
+        },
+        {
+          "id": "d",
+          "text": "To make shared dependencies irrelevant"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Micro-frontends trade complexity for team and deployment independence in large systems.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What are design tokens used for in a design system?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Representing shared design decisions such as color, spacing, and typography"
+        },
+        {
+          "id": "b",
+          "text": "Storing user passwords"
+        },
+        {
+          "id": "c",
+          "text": "Replacing component tests"
+        },
+        {
+          "id": "d",
+          "text": "Bundling routes"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Design tokens encode reusable visual decisions that components can consume consistently.",
+      "points": 1
+    }
+  ]
+}

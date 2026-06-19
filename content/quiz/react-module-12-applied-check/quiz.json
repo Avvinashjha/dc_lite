@@ -1,0 +1,240 @@
+{
+  "id": "react-module-12-applied-check",
+  "title": "Class Components Applied Check",
+  "description": "Practice class state updates, lifecycle cleanup, this binding, and migration decisions.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "class-components",
+    "migration",
+    "this-binding"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "A class method handleClick is passed as onClick={this.handleClick} and this is undefined inside it. What is a common fix?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bind it in the constructor or define it as a class field arrow method"
+        },
+        {
+          "id": "b",
+          "text": "Call render manually"
+        },
+        {
+          "id": "c",
+          "text": "Move props into state"
+        },
+        {
+          "id": "d",
+          "text": "Use componentWillUnmount"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Binding or arrow class fields preserve the intended component instance as this.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A class increments count with this.setState({ count: this.state.count + 1 }) twice in one event. What is safer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use functional setState based on previous state"
+        },
+        {
+          "id": "b",
+          "text": "Mutate this.state.count directly"
+        },
+        {
+          "id": "c",
+          "text": "Call forceUpdate first"
+        },
+        {
+          "id": "d",
+          "text": "Put count in props"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Functional setState avoids stale state when updates are batched.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "A class starts an interval in componentDidMount. What should it do? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Store the interval id"
+        },
+        {
+          "id": "b",
+          "text": "Clear the interval in componentWillUnmount"
+        },
+        {
+          "id": "c",
+          "text": "Start a new interval in render"
+        },
+        {
+          "id": "d",
+          "text": "Avoid leaking work after unmount"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "External resources created by lifecycle methods should be cleaned up on unmount.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A class fetches data when props.userId changes. Where should it compare previous and current props?",
+      "options": [
+        {
+          "id": "a",
+          "text": "componentDidUpdate"
+        },
+        {
+          "id": "b",
+          "text": "constructor only"
+        },
+        {
+          "id": "c",
+          "text": "render only by calling fetch"
+        },
+        {
+          "id": "d",
+          "text": "componentWillUnmount"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "componentDidUpdate receives previous props/state and is the place to react to relevant updates.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "Nested class state can be mutated directly because setState shallowly merges top-level keys.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Nested state still needs immutable updates; shallow merging does not make direct mutation safe.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "When migrating a class with componentDidMount, componentDidUpdate, and componentWillUnmount subscription logic, which function component tool is most relevant?",
+      "options": [
+        {
+          "id": "a",
+          "text": "useEffect with dependencies and cleanup"
+        },
+        {
+          "id": "b",
+          "text": "useMemo with no dependencies"
+        },
+        {
+          "id": "c",
+          "text": "React.lazy"
+        },
+        {
+          "id": "d",
+          "text": "A render prop only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "An effect can set up, update, and clean up a subscription based on dependencies.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which are valid reasons to keep understanding class components? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Maintaining older React codebases"
+        },
+        {
+          "id": "b",
+          "text": "Understanding lifecycle concepts"
+        },
+        {
+          "id": "c",
+          "text": "Using error boundaries in current React patterns"
+        },
+        {
+          "id": "d",
+          "text": "Because hooks do not support state"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Class components remain important for legacy maintenance, lifecycle literacy, and common error boundary implementations.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A class passes onClick={this.deleteItem(id)} and deletion happens during render. What is the fix?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pass a function, such as onClick={() => this.deleteItem(id)}"
+        },
+        {
+          "id": "b",
+          "text": "Move deleteItem into componentDidMount"
+        },
+        {
+          "id": "c",
+          "text": "Return null from render"
+        },
+        {
+          "id": "d",
+          "text": "Rename id to key"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Calling the method during render executes it immediately; pass a callback for React to call later.",
+      "points": 1
+    }
+  ]
+}

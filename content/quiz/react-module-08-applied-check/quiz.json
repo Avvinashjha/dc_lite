@@ -1,0 +1,243 @@
+{
+  "id": "react-module-08-applied-check",
+  "title": "React Module 08 Applied Check",
+  "description": "Apply custom Hook design to extraction choices, dependency handling, return APIs, composition, testing awareness, and common reusable hooks.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "custom-hooks",
+    "testing",
+    "reuse",
+    "effects"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Two components duplicate window resize subscription logic. What is a good custom Hook direction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Extract the subscription and cleanup into something like `useWindowSize`"
+        },
+        {
+          "id": "b",
+          "text": "Copy the code into every new component"
+        },
+        {
+          "id": "c",
+          "text": "Move the logic into global mutable variables only"
+        },
+        {
+          "id": "d",
+          "text": "Put the resize listener directly in JSX"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A custom Hook can reuse subscription logic while each component keeps its own render UI.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "A well-designed `useDebouncedValue(value, delay)` should usually do which things? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Track debounced state"
+        },
+        {
+          "id": "b",
+          "text": "Set and clear a timer in an effect"
+        },
+        {
+          "id": "c",
+          "text": "Include `value` and `delay` as dependencies"
+        },
+        {
+          "id": "d",
+          "text": "Render the input element itself"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "The hook manages timing behavior and returns a value; the component remains responsible for UI.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Why is `function getOnlineStatus() { const [online] = useState(true); }` a poor custom Hook name?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It calls a Hook but does not start with `use`"
+        },
+        {
+          "id": "b",
+          "text": "It returns too many DOM nodes"
+        },
+        {
+          "id": "c",
+          "text": "It uses a boolean"
+        },
+        {
+          "id": "d",
+          "text": "It is not in a class"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Functions that call Hooks should be React components or custom Hooks named with `use`.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "boolean",
+      "prompt": "Custom Hooks are a good place to hide all UI markup so consuming components cannot control rendering.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Custom Hooks usually extract behavior and state, while components decide how to render UI.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multiple",
+      "prompt": "Which are good testing-aware custom Hook practices? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep inputs and outputs explicit"
+        },
+        {
+          "id": "b",
+          "text": "Separate pure helper logic when possible"
+        },
+        {
+          "id": "c",
+          "text": "Mock or control external systems such as storage or fetch in tests"
+        },
+        {
+          "id": "d",
+          "text": "Rely only on manual clicking forever"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Clear APIs and separated logic make hooks easier to test; external systems need controlled test doubles.",
+      "points": 2
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A hook named `useLocalStorageState` reads from localStorage during every render. What improvement is usually better?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use lazy initial state to read the initial value once"
+        },
+        {
+          "id": "b",
+          "text": "Call localStorage in JSX attributes"
+        },
+        {
+          "id": "c",
+          "text": "Store the value only in a ref and never render updates"
+        },
+        {
+          "id": "d",
+          "text": "Make the hook conditional"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Lazy initialization avoids repeated storage reads during every render.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "multiple",
+      "prompt": "Which return API choices can be reasonable for custom Hooks? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return an object for named values when there are several fields"
+        },
+        {
+          "id": "b",
+          "text": "Return a tuple for small state/setter-style APIs"
+        },
+        {
+          "id": "c",
+          "text": "Return undocumented values in a changing order"
+        },
+        {
+          "id": "d",
+          "text": "Return functions that let the component trigger behavior"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Objects, tuples, and functions can all be good APIs when they are predictable and clear.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A custom `useFetch` hook starts a request in an effect but never handles stale responses when the URL changes quickly. What risk appears?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An older response may overwrite newer data"
+        },
+        {
+          "id": "b",
+          "text": "React will stop supporting effects"
+        },
+        {
+          "id": "c",
+          "text": "The URL becomes a key automatically"
+        },
+        {
+          "id": "d",
+          "text": "The component cannot ever unmount"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Async hooks should guard cancellation or stale responses so old requests do not win after inputs change.",
+      "points": 2
+    }
+  ]
+}

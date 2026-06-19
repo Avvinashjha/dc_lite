@@ -1,0 +1,240 @@
+{
+  "id": "react-module-03-core-check",
+  "title": "React Module 03 Core Check",
+  "description": "Check your understanding of JSX syntax, expressions, attributes, fragments, children, JSX versus HTML, and text safety.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "jsx",
+    "attributes",
+    "fragments"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is JSX?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A JavaScript syntax extension for describing UI"
+        },
+        {
+          "id": "b",
+          "text": "A database query language"
+        },
+        {
+          "id": "c",
+          "text": "A CSS preprocessor"
+        },
+        {
+          "id": "d",
+          "text": "A browser-only HTML parser"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "JSX lets React developers write markup-like UI descriptions in JavaScript.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which rule applies when a component returns JSX?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return one root value"
+        },
+        {
+          "id": "b",
+          "text": "Never use parentheses"
+        },
+        {
+          "id": "c",
+          "text": "All tags can remain unclosed"
+        },
+        {
+          "id": "d",
+          "text": "Only strings can be returned"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A component must return a single root element or Fragment.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which JSX attribute should you use instead of HTML `class`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "className"
+        },
+        {
+          "id": "b",
+          "text": "htmlClass"
+        },
+        {
+          "id": "c",
+          "text": "css"
+        },
+        {
+          "id": "d",
+          "text": "classList"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "JSX uses `className` because `class` is a JavaScript keyword-related DOM property naming concern.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which JSX attribute should a label use instead of HTML `for`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "htmlFor"
+        },
+        {
+          "id": "b",
+          "text": "labelFor"
+        },
+        {
+          "id": "c",
+          "text": "forName"
+        },
+        {
+          "id": "d",
+          "text": "targetFor"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React JSX uses `htmlFor` for label associations.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "multiple",
+      "prompt": "Which can be placed inside JSX curly braces? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "A variable like `{name}`"
+        },
+        {
+          "id": "b",
+          "text": "An expression like `{count + 1}`"
+        },
+        {
+          "id": "c",
+          "text": "A `.map()` call that returns elements"
+        },
+        {
+          "id": "d",
+          "text": "An `if` statement directly inside braces"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "JSX braces accept expressions, not statements such as a raw `if`.",
+      "points": 2
+    },
+    {
+      "id": "q6",
+      "type": "boolean",
+      "prompt": "Fragments let a component return adjacent elements without adding an extra DOM wrapper.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Fragments group children in React without creating an extra DOM node.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "How do inline styles work in JSX?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pass a JavaScript object, such as `style={{ color: \"red\" }}`"
+        },
+        {
+          "id": "b",
+          "text": "Pass a CSS string only, such as `style=\"color: red\"`"
+        },
+        {
+          "id": "c",
+          "text": "Use `class` for all inline styles"
+        },
+        {
+          "id": "d",
+          "text": "Inline styles are impossible in JSX"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The JSX `style` prop expects an object with camelCased property names.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which values does React usually skip rendering as visible text? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "false"
+        },
+        {
+          "id": "b",
+          "text": "null"
+        },
+        {
+          "id": "c",
+          "text": "undefined"
+        },
+        {
+          "id": "d",
+          "text": "The string `\"hello\"`"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "React ignores booleans, null, and undefined as children, while strings render as text.",
+      "points": 2
+    }
+  ]
+}

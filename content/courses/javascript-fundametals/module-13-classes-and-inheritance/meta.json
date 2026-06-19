@@ -37,6 +37,34 @@
       "title": "Getters and Setters",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-public-and-private-fields",
+      "title": "Public and Private Fields",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-composition-vs-inheritance",
+      "title": "Composition vs Inheritance",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "09-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-classes-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "10-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-classes-applied-check",
+      "passingScore": 70
     }
   ]
 }

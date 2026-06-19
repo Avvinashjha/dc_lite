@@ -1,30 +1,88 @@
 {
   "title": "Project Based Learning",
-  "description": "Apply everything you've learned by building a real project.",
+  "description": "Apply JavaScript fundamentals by planning, building, testing, documenting, and sharing complete projects.",
   "lessons": [
     {
       "slug": "01-project-overview",
       "title": "Project Overview",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "02-planning-your-project",
       "title": "Planning Your Project",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
       "slug": "03-building-the-project",
-      "title": "Building the Project",
+      "title": "Breaking Work Into Milestones",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
-      "slug": "04-deploying-your-project",
-      "title": "Deploying Your Project",
+      "slug": "04-project-setup-and-organization",
+      "title": "Project Setup and Organization",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-designing-data-and-state",
+      "title": "Designing Data and State",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-dom-events-apis-and-storage",
+      "title": "DOM, Events, APIs, and Storage",
+      "type": "text",
+      "duration": "14 min"
+    },
+    {
+      "slug": "07-debugging-and-testing-strategy",
+      "title": "Debugging and Testing Strategy",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-refactoring-performance-and-security",
+      "title": "Refactoring, Performance, and Security",
+      "type": "text",
+      "duration": "14 min"
+    },
+    {
+      "slug": "09-documenting-deploying-and-sharing",
+      "title": "Documenting, Deploying, and Sharing",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "10-practical-project-briefs",
+      "title": "Practical Project Briefs",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "11-capstone-project-plan",
+      "title": "Capstone Project Plan",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "12-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-project-based-learning-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "13-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-project-based-learning-applied-check",
+      "passingScore": 70
     }
   ]
 }

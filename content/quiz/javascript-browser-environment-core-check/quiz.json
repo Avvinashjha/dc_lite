@@ -1,0 +1,224 @@
+{
+  "id": "javascript-browser-environment-core-check",
+  "title": "JavaScript Browser Environment Core Check",
+  "description": "Check your understanding of the browser runtime, window, document, DOM selection and modification, events, script loading, browser APIs, storage, navigation, rendering, compatibility, and DevTools.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "browser", "dom", "events", "web-apis"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does the browser runtime provide around the JavaScript engine?",
+      "options": [
+        { "id": "a", "text": "Web APIs such as `document`, `window`, `fetch`, storage, timers, and events" },
+        { "id": "b", "text": "Only the syntax rules for functions and objects" },
+        { "id": "c", "text": "Only a database engine" },
+        { "id": "d", "text": "A replacement for HTML and CSS" }
+      ],
+      "correct": ["a"],
+      "explanation": "The JavaScript engine runs the language. The browser runtime provides browser-specific APIs such as DOM, events, fetch, storage, and timers.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does `document` represent in a browser page?",
+      "options": [
+        { "id": "a", "text": "The loaded HTML page as a DOM document" },
+        { "id": "b", "text": "Only the browser's address bar" },
+        { "id": "c", "text": "Only local storage values" },
+        { "id": "d", "text": "The JavaScript module system" }
+      ],
+      "correct": ["a"],
+      "explanation": "`document` represents the loaded page and exposes the DOM APIs used to inspect and change it.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does `document.querySelector()` return?",
+      "options": [
+        { "id": "a", "text": "The first element that matches the CSS selector, or `null`" },
+        { "id": "b", "text": "All matching elements as an array" },
+        { "id": "c", "text": "Only elements selected by ID" },
+        { "id": "d", "text": "A Promise for a DOM element" }
+      ],
+      "correct": ["a"],
+      "explanation": "`querySelector()` returns the first matching element in document order, or `null` if there is no match.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which method is commonly used to select all elements matching a CSS selector?",
+      "options": [
+        { "id": "a", "text": "`document.querySelectorAll()`" },
+        { "id": "b", "text": "`document.selectEvery()`" },
+        { "id": "c", "text": "`document.findAllCss()`" },
+        { "id": "d", "text": "`window.getAllElements()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`querySelectorAll()` returns a static NodeList of matching elements.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which property is usually safest for inserting plain user-provided text into an element?",
+      "options": [
+        { "id": "a", "text": "`textContent`" },
+        { "id": "b", "text": "`innerHTML`" },
+        { "id": "c", "text": "`outerHTML`" },
+        { "id": "d", "text": "`document.write()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`textContent` treats the value as text. `innerHTML` parses strings as HTML and can be risky with untrusted content.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which API is best for adding or removing a single CSS class from an element?",
+      "options": [
+        { "id": "a", "text": "`element.classList`" },
+        { "id": "b", "text": "`element.classDatabase`" },
+        { "id": "c", "text": "`window.styles`" },
+        { "id": "d", "text": "`document.classNameList()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`classList` provides methods such as `add()`, `remove()`, `toggle()`, and `contains()`.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does `event.preventDefault()` do?",
+      "options": [
+        { "id": "a", "text": "Prevents the browser's default action for that event when possible" },
+        { "id": "b", "text": "Deletes the event listener permanently" },
+        { "id": "c", "text": "Stops JavaScript from running anywhere on the page" },
+        { "id": "d", "text": "Converts the event into JSON" }
+      ],
+      "correct": ["a"],
+      "explanation": "`preventDefault()` is commonly used for forms and links when JavaScript should handle the action instead of the browser default.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is event delegation?",
+      "options": [
+        { "id": "a", "text": "Handling events from child elements with a listener on an ancestor" },
+        { "id": "b", "text": "Copying events into localStorage" },
+        { "id": "c", "text": "Running all events in a Web Worker" },
+        { "id": "d", "text": "Disabling bubbling for every event" }
+      ],
+      "correct": ["a"],
+      "explanation": "Event delegation relies on event bubbling so a parent can handle events from matching child elements.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which script attribute downloads a classic script without blocking parsing and runs scripts in order after parsing?",
+      "options": [
+        { "id": "a", "text": "`defer`" },
+        { "id": "b", "text": "`async`" },
+        { "id": "c", "text": "`blocking`" },
+        { "id": "d", "text": "`ordered-async`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`defer` lets HTML parsing continue and preserves script execution order.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which statement about browser module scripts is correct?",
+      "options": [
+        { "id": "a", "text": "They have module scope, support `import` and `export`, and are deferred by default" },
+        { "id": "b", "text": "They automatically turn every top-level variable into a `window` property" },
+        { "id": "c", "text": "They cannot import other files" },
+        { "id": "d", "text": "They always run before the HTML parser starts" }
+      ],
+      "correct": ["a"],
+      "explanation": "Browser modules support the module system, run in their own scope, use strict mode, and are deferred by default.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which browser storage API persists string key-value data across browser restarts until cleared?",
+      "options": [
+        { "id": "a", "text": "`localStorage`" },
+        { "id": "b", "text": "`sessionStorage` only" },
+        { "id": "c", "text": "`history.state`" },
+        { "id": "d", "text": "`document.title`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`localStorage` persists for an origin until it is cleared. Values are stored as strings.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is CORS mainly about in browser JavaScript?",
+      "options": [
+        { "id": "a", "text": "Whether browser JavaScript from one origin may read responses from another origin" },
+        { "id": "b", "text": "Whether CSS selectors can match classes" },
+        { "id": "c", "text": "Whether `const` can be reassigned" },
+        { "id": "d", "text": "Whether the DOM can contain buttons" }
+      ],
+      "correct": ["a"],
+      "explanation": "CORS is a browser security mechanism for controlled cross-origin response access.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which API is preferred for safely building query strings?",
+      "options": [
+        { "id": "a", "text": "`URLSearchParams`" },
+        { "id": "b", "text": "`JSON.stringifyUrl()`" },
+        { "id": "c", "text": "`document.queryString()`" },
+        { "id": "d", "text": "`CSS.escapeUrl()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`URLSearchParams` encodes query parameter names and values safely.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What is feature detection?",
+      "options": [
+        { "id": "a", "text": "Checking whether an API or capability exists before using it" },
+        { "id": "b", "text": "Guessing support from the user's screen size" },
+        { "id": "c", "text": "Turning off browser security" },
+        { "id": "d", "text": "Selecting all elements with a feature class" }
+      ],
+      "correct": ["a"],
+      "explanation": "Feature detection checks for support directly, such as `if ('clipboard' in navigator)`.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which DevTools panel is usually most useful for inspecting request URLs, headers, status codes, and responses?",
+      "options": [
+        { "id": "a", "text": "Network" },
+        { "id": "b", "text": "Elements" },
+        { "id": "c", "text": "Application only" },
+        { "id": "d", "text": "Fonts" }
+      ],
+      "correct": ["a"],
+      "explanation": "The Network panel shows browser requests and responses, including status codes, headers, payloads, and timing.",
+      "points": 1
+    }
+  ]
+}

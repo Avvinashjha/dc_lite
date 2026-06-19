@@ -1,0 +1,411 @@
+{
+  "id": "javascript-design-patterns-applied-check",
+  "title": "JavaScript Design Patterns Applied Check",
+  "description": "Apply JavaScript design patterns to realistic code examples and choose simple designs that avoid over-engineering.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": [
+    "javascript",
+    "design-patterns",
+    "refactoring",
+    "architecture"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Which pattern best fits this problem: user objects are created in many files with different default properties?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Factory"
+        },
+        {
+          "id": "b",
+          "text": "Iterator"
+        },
+        {
+          "id": "c",
+          "text": "Observer"
+        },
+        {
+          "id": "d",
+          "text": "Command"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A factory centralizes creation so user objects have a consistent shape.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What pattern is shown here?\n```js\nconst shipping = {\n  standard: (total) => 5,\n  express: (total) => 15,\n  free: (total) => total >= 50 ? 0 : 5,\n};\n\nfunction calculateShipping(type, total) {\n  return shipping[type](total);\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Strategy"
+        },
+        {
+          "id": "b",
+          "text": "Singleton"
+        },
+        {
+          "id": "c",
+          "text": "Iterator"
+        },
+        {
+          "id": "d",
+          "text": "Facade"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The code chooses from interchangeable shipping algorithms at runtime.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is the biggest issue with this module?\n```js\nexport const appState = {\n  currentUser: null,\n  cart: [],\n  settings: {},\n};\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "It exposes broad mutable global state"
+        },
+        {
+          "id": "b",
+          "text": "It cannot contain arrays"
+        },
+        {
+          "id": "c",
+          "text": "It must use a class"
+        },
+        {
+          "id": "d",
+          "text": "It is automatically immutable"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Many files can mutate this shared object, making changes hard to trace.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Which code is the best adapter for API user data?\n```js\nconst apiUser = { user_id: 1, full_name: \"Ada\" };\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "`const user = { id: apiUser.user_id, name: apiUser.full_name };`"
+        },
+        {
+          "id": "b",
+          "text": "`const user = apiUser;`"
+        },
+        {
+          "id": "c",
+          "text": "`const user = JSON.stringify(apiUser);`"
+        },
+        {
+          "id": "d",
+          "text": "`const user = [apiUser.user_id, apiUser.full_name];`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The adapter converts external field names into the app's internal shape.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is wrong with this wrapper?\n```js\nfunction withLogging(fn) {\n  return function (...args) {\n    console.log(\"calling\");\n    fn(...args);\n  };\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "It does not return the wrapped function's result"
+        },
+        {
+          "id": "b",
+          "text": "It logs before calling the function"
+        },
+        {
+          "id": "c",
+          "text": "It accepts rest parameters"
+        },
+        {
+          "id": "d",
+          "text": "It returns a function"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A wrapper should usually preserve the original return value with `return fn(...args)`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which pattern is most appropriate for many parts of an app reacting when `cart:item-added` happens?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Observer or pub/sub"
+        },
+        {
+          "id": "b",
+          "text": "Factory only"
+        },
+        {
+          "id": "c",
+          "text": "Iterator only"
+        },
+        {
+          "id": "d",
+          "text": "Adapter only"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Observer and pub/sub patterns notify listeners when events occur.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What should a `subscribe()` method usually return?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An unsubscribe function"
+        },
+        {
+          "id": "b",
+          "text": "A random number"
+        },
+        {
+          "id": "c",
+          "text": "The global window object"
+        },
+        {
+          "id": "d",
+          "text": "A JSON string"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Returning an unsubscribe function makes cleanup clear and helps avoid memory leaks.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which design is easiest to test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`loadUser(id, apiClient)` where the API client is passed in"
+        },
+        {
+          "id": "b",
+          "text": "`loadUser(id)` that always imports and uses the real API client"
+        },
+        {
+          "id": "c",
+          "text": "`loadUser()` that reads a global user ID and real API client"
+        },
+        {
+          "id": "d",
+          "text": "`loadUser()` that writes directly to the DOM"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Passing the dependency allows tests to provide a fake API client.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What pattern best fits a drawing app that stores actions so users can undo them?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Command"
+        },
+        {
+          "id": "b",
+          "text": "Facade"
+        },
+        {
+          "id": "c",
+          "text": "Module"
+        },
+        {
+          "id": "d",
+          "text": "Adapter"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Commands can represent actions with `execute` and `undo` behavior.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this function create?\n```js\nfunction* range(start, end) {\n  for (let number = start; number <= end; number += 1) {\n    yield number;\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "An iterable sequence produced lazily"
+        },
+        {
+          "id": "b",
+          "text": "A singleton service"
+        },
+        {
+          "id": "c",
+          "text": "A facade over localStorage"
+        },
+        {
+          "id": "d",
+          "text": "A required class hierarchy"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A generator function creates an iterator/iterable that yields values one at a time.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Which is the clearest facade?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`saveSettings(settings)` that validates, serializes, stores, and publishes the change"
+        },
+        {
+          "id": "b",
+          "text": "`utils(value)` that does unrelated work based on many flags"
+        },
+        {
+          "id": "c",
+          "text": "An object that exposes every private helper"
+        },
+        {
+          "id": "d",
+          "text": "A function that renames one API field"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A facade provides one simple operation over a coherent set of internal steps.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "A team has one small `if` statement with two short cases that are unlikely to grow. What is usually best?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the simple conditional"
+        },
+        {
+          "id": "b",
+          "text": "Create a large strategy framework immediately"
+        },
+        {
+          "id": "c",
+          "text": "Move all state into a singleton"
+        },
+        {
+          "id": "d",
+          "text": "Add an event bus"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Patterns should solve real complexity. A simple conditional can be the clearest design.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which is an example of composition?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Creating an order service from injected `paymentService` and `emailService`"
+        },
+        {
+          "id": "b",
+          "text": "Making every service inherit from one huge parent class"
+        },
+        {
+          "id": "c",
+          "text": "Keeping all app behavior in one object"
+        },
+        {
+          "id": "d",
+          "text": "Reading every dependency from global variables"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Composition builds larger behavior by combining smaller collaborators.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which situation suggests over-engineering?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A tiny feature requires many managers, factories, strategies, and commands with no clear benefit"
+        },
+        {
+          "id": "b",
+          "text": "Duplicated object creation was extracted into a small factory"
+        },
+        {
+          "id": "c",
+          "text": "External API data is adapted at the boundary"
+        },
+        {
+          "id": "d",
+          "text": "A listener returns an unsubscribe function"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Stacking patterns without improving clarity is pattern soup and should be simplified.",
+      "points": 1
+    }
+  ]
+}

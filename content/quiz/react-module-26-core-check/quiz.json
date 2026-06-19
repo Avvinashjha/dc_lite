@@ -1,0 +1,238 @@
+{
+  "id": "react-module-26-core-check",
+  "title": "React Tooling Core Check",
+  "description": "Check your understanding of React build tools, Vite, Webpack, Babel, linting, formatting, environment variables, source maps, and build inspection.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "tooling",
+    "vite",
+    "webpack"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a production build mainly responsible for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Serving unoptimized source files with extra debugging helpers"
+        },
+        {
+          "id": "b",
+          "text": "Transforming, bundling, and optimizing app code for deployment"
+        },
+        {
+          "id": "c",
+          "text": "Running unit tests in the browser only"
+        },
+        {
+          "id": "d",
+          "text": "Replacing React with HTML strings"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Production builds prepare optimized browser assets, usually with minification, bundling, and environment-specific behavior.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What happens to JSX before it runs in the browser?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It is transformed into JavaScript function calls"
+        },
+        {
+          "id": "b",
+          "text": "It is sent to the browser as XML"
+        },
+        {
+          "id": "c",
+          "text": "It is interpreted by CSS"
+        },
+        {
+          "id": "d",
+          "text": "It is stored only in source maps"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Build tooling transforms JSX into JavaScript the browser can execute.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does Vite use during development to make startup fast?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Native ES modules and on-demand transformation"
+        },
+        {
+          "id": "b",
+          "text": "A required full production bundle on every save"
+        },
+        {
+          "id": "c",
+          "text": "Server-side Java only"
+        },
+        {
+          "id": "d",
+          "text": "Manual script tags for each component"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Vite serves source through native ESM in development and transforms modules as needed.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "In Webpack, what is a loader commonly used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Transforming files before they enter the bundle"
+        },
+        {
+          "id": "b",
+          "text": "Opening production pull requests"
+        },
+        {
+          "id": "c",
+          "text": "Formatting commit messages"
+        },
+        {
+          "id": "d",
+          "text": "Rotating API keys"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Loaders teach Webpack how to transform file types such as JSX, CSS, or images.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which statement about Babel is correct?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Babel transforms syntax but is not a type checker"
+        },
+        {
+          "id": "b",
+          "text": "Babel replaces ESLint and Prettier"
+        },
+        {
+          "id": "c",
+          "text": "Babel automatically secures all dependencies"
+        },
+        {
+          "id": "d",
+          "text": "Babel is only used for CSS"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The Babel lesson highlights JSX and syntax transforms while noting it does not type-check code.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "Which tools have different primary responsibilities? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "ESLint finds code-quality and correctness issues"
+        },
+        {
+          "id": "b",
+          "text": "Prettier formats code consistently"
+        },
+        {
+          "id": "c",
+          "text": "Source maps map built code back to source"
+        },
+        {
+          "id": "d",
+          "text": "Environment variables encrypt frontend secrets automatically"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "ESLint, Prettier, and source maps serve distinct purposes. Frontend environment variables are not automatic secret storage.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "In Vite, which environment variable is exposed to client code by convention?",
+      "options": [
+        {
+          "id": "a",
+          "text": "SECRET_KEY"
+        },
+        {
+          "id": "b",
+          "text": "VITE_API_BASE_URL"
+        },
+        {
+          "id": "c",
+          "text": "DATABASE_PASSWORD"
+        },
+        {
+          "id": "d",
+          "text": "PRIVATE_TOKEN"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Vite exposes variables prefixed with VITE_ to client code.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "boolean",
+      "prompt": "Source maps can help debug production bundle errors by mapping generated code back to original source.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Source maps are specifically useful for connecting built output and stack traces to original source code.",
+      "points": 1
+    }
+  ]
+}

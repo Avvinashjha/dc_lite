@@ -1,0 +1,242 @@
+{
+  "id": "react-module-02-core-check",
+  "title": "React Module 02 Core Check",
+  "description": "Check your understanding of components, JSX, props, state, children, composition, and prop patterns.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "components",
+    "props",
+    "state",
+    "composition"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What are props in React?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Read-only inputs passed from a parent component"
+        },
+        {
+          "id": "b",
+          "text": "Local variables that always trigger renders"
+        },
+        {
+          "id": "c",
+          "text": "CSS files imported by React"
+        },
+        {
+          "id": "d",
+          "text": "Database records owned by a component"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Props are inputs passed down from parent to child and should be treated as read-only.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is state used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Data a component needs to remember between renders"
+        },
+        {
+          "id": "b",
+          "text": "Static HTML comments"
+        },
+        {
+          "id": "c",
+          "text": "Only values passed from children to parents"
+        },
+        {
+          "id": "d",
+          "text": "Replacing event handlers"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "State is component-owned data that React remembers and uses when rendering.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "Which values can commonly be passed as props? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Strings"
+        },
+        {
+          "id": "b",
+          "text": "Numbers"
+        },
+        {
+          "id": "c",
+          "text": "Booleans"
+        },
+        {
+          "id": "d",
+          "text": "Functions"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "explanation": "Props can be any JavaScript value, including functions used as callbacks.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "How is the special `children` prop usually supplied?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By placing content between a component opening and closing tag"
+        },
+        {
+          "id": "b",
+          "text": "Only by editing React internals"
+        },
+        {
+          "id": "c",
+          "text": "Only through environment variables"
+        },
+        {
+          "id": "d",
+          "text": "By naming the component children"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React passes nested JSX content as the `children` prop.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "A child component should directly mutate a prop object to notify its parent about a change.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Props are read-only. Children should communicate changes through callbacks or parent-managed state.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does lifting state up mean?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Moving shared state to the nearest common parent"
+        },
+        {
+          "id": "b",
+          "text": "Moving all state into CSS"
+        },
+        {
+          "id": "c",
+          "text": "Converting props into strings"
+        },
+        {
+          "id": "d",
+          "text": "Removing every event handler"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "State is lifted when multiple components need to read or update the same data.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "Which JSX passes a string prop named `label`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "`<Button label=\"Save\" />`"
+        },
+        {
+          "id": "b",
+          "text": "`<Button label={Save} />` when Save is not defined"
+        },
+        {
+          "id": "c",
+          "text": "`<Button label: \"Save\" />`"
+        },
+        {
+          "id": "d",
+          "text": "`<Button.label>Save</Button.label>`"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "String props can be passed with quoted attributes in JSX.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which are common component design practices? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep components focused"
+        },
+        {
+          "id": "b",
+          "text": "Use props to configure reusable pieces"
+        },
+        {
+          "id": "c",
+          "text": "Compose components together"
+        },
+        {
+          "id": "d",
+          "text": "Store all app data in every child component"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Focused, configurable, composed components are easier to reuse and reason about.",
+      "points": 2
+    }
+  ]
+}

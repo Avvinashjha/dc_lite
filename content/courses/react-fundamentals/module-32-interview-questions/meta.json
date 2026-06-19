@@ -1,6 +1,6 @@
 {
   "title": "Interview Questions",
-  "description": "Learn the core concepts of Interview Questions in React.",
+  "description": "Prepare for React interviews with concept questions, hooks, performance, coding prompts, and frontend system design.",
   "lessons": [
     {
       "slug": "01-core-concept-questions",
@@ -31,6 +31,22 @@
       "title": "System Design Questions",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "06-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-32-core-check"
+    },
+    {
+      "slug": "07-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-32-applied-check"
     }
   ]
 }

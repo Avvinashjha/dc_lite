@@ -1,6 +1,6 @@
 {
   "title": "Certification",
-  "description": "Learn the core concepts of Certification in React.",
+  "description": "Prepare for the React final assessment with certification expectations, capstone criteria, rubrics, and interview readiness.",
   "lessons": [
     {
       "slug": "01-certification-overview",
@@ -13,6 +13,22 @@
       "title": "Final Assessment",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "03-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-33-core-check"
+    },
+    {
+      "slug": "04-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-33-applied-check"
     }
   ]
 }

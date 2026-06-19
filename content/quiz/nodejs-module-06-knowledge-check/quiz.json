@@ -1,0 +1,70 @@
+{
+  "id": "nodejs-module-06-knowledge-check",
+  "title": "Express Knowledge Check",
+  "description": "Check your understanding of Express routing, middleware, request parsing, validation, security middleware, error handling, and API structure.",
+  "category": "Node.js",
+  "difficulty": "medium",
+  "tags": ["nodejs", "express", "middleware", "api-security"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-16",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is Express middleware?",
+      "options": [
+        { "id": "a", "text": "A function that runs during the request-response cycle" },
+        { "id": "b", "text": "A database table format" },
+        { "id": "c", "text": "A Docker command" },
+        { "id": "d", "text": "A package version" }
+      ],
+      "correct": ["a"],
+      "explanation": "Middleware can inspect, modify, end, or pass along requests and responses.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Why should request bodies be validated before application logic uses them?",
+      "options": [
+        { "id": "a", "text": "Clients can send malformed or unexpected data" },
+        { "id": "b", "text": "Validation makes HTTP unnecessary" },
+        { "id": "c", "text": "Validation installs dependencies" },
+        { "id": "d", "text": "All request bodies are trusted by default" }
+      ],
+      "correct": ["a"],
+      "explanation": "Validation protects route handlers from invalid inputs and makes error responses consistent.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which middleware category helps set safer HTTP response headers?",
+      "options": [
+        { "id": "a", "text": "Helmet-style security middleware" },
+        { "id": "b", "text": "Template loops" },
+        { "id": "c", "text": "SQL migrations" },
+        { "id": "d", "text": "npm publishing hooks" }
+      ],
+      "correct": ["a"],
+      "explanation": "Helmet and similar middleware set security-related headers for Express responses.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the purpose of centralized Express error handling middleware?",
+      "options": [
+        { "id": "a", "text": "To turn thrown or forwarded errors into consistent responses" },
+        { "id": "b", "text": "To create database indexes" },
+        { "id": "c", "text": "To parse package-lock files" },
+        { "id": "d", "text": "To disable all HTTP errors" }
+      ],
+      "correct": ["a"],
+      "explanation": "A central error handler keeps response shape, logging, and status handling consistent.",
+      "points": 1
+    }
+  ]
+}

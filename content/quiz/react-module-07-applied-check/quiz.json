@@ -1,0 +1,243 @@
+{
+  "id": "react-module-07-applied-check",
+  "title": "React Module 07 Applied Check",
+  "description": "Apply Hooks concepts to dependency arrays, cleanup, stale closures, refs, memoization, context updates, reducers, and Hook rule mistakes.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "hooks",
+    "dependencies",
+    "refs",
+    "reducers"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is wrong with `if (enabled) { const [count, setCount] = useState(0); }`?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It calls a Hook conditionally"
+        },
+        {
+          "id": "b",
+          "text": "`useState` cannot store numbers"
+        },
+        {
+          "id": "c",
+          "text": "The variable name is too long"
+        },
+        {
+          "id": "d",
+          "text": "Hooks must be async"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Hooks must be called in the same order on every render, so conditions go inside Hook logic, not around Hook calls.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "multiple",
+      "prompt": "An effect subscribes to `roomId` changes. Which are usually needed? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Include `roomId` in the dependency array"
+        },
+        {
+          "id": "b",
+          "text": "Return cleanup that unsubscribes from the old room"
+        },
+        {
+          "id": "c",
+          "text": "Leave the dependency array empty so it never changes"
+        },
+        {
+          "id": "d",
+          "text": "Keep subscription side effects out of render"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Effects should list changing values they use and clean up subscriptions before rerunning or unmounting.",
+      "points": 2
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which value should go in an effect dependency array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reactive values from props, state, or component scope that the effect reads"
+        },
+        {
+          "id": "b",
+          "text": "Only literal strings"
+        },
+        {
+          "id": "c",
+          "text": "Only values from package.json"
+        },
+        {
+          "id": "d",
+          "text": "Nothing, dependencies are optional style"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Dependencies describe the reactive values the effect uses so React can rerun it when needed.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "boolean",
+      "prompt": "Updating `ref.current` causes React to re-render the component.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "false"
+      ],
+      "explanation": "Refs are mutable containers that do not schedule renders when changed.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "When is `useMemo` most justified?",
+      "options": [
+        {
+          "id": "a",
+          "text": "For an expensive derived calculation whose dependencies change less often"
+        },
+        {
+          "id": "b",
+          "text": "For every simple string concatenation"
+        },
+        {
+          "id": "c",
+          "text": "To run side effects after render"
+        },
+        {
+          "id": "d",
+          "text": "To replace all local variables"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Memoization has overhead and is most useful for expensive calculations or identity-sensitive values.",
+      "points": 2
+    },
+    {
+      "id": "q6",
+      "type": "multiple",
+      "prompt": "Which are common `useCallback` pitfalls? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Omitting dependencies used by the callback"
+        },
+        {
+          "id": "b",
+          "text": "Using it everywhere without a reason"
+        },
+        {
+          "id": "c",
+          "text": "Expecting it to make the function body faster"
+        },
+        {
+          "id": "d",
+          "text": "Pairing it with memoized children when function identity matters"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "`useCallback` stabilizes identity, not execution speed. It still needs correct dependencies and a reason.",
+      "points": 2
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A reducer directly mutates state and returns the same object. What is the issue?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reducers should be pure and return new state objects for changes"
+        },
+        {
+          "id": "b",
+          "text": "Reducers must always fetch data"
+        },
+        {
+          "id": "c",
+          "text": "Reducers cannot handle objects"
+        },
+        {
+          "id": "d",
+          "text": "Actions cannot have types"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Reducer logic should be pure and immutable so React can detect and reason about updates.",
+      "points": 2
+    },
+    {
+      "id": "q8",
+      "type": "multiple",
+      "prompt": "Which statements about context are correct? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Consumers re-render when the provider value they read changes"
+        },
+        {
+          "id": "b",
+          "text": "Context is useful for avoiding prop drilling for shared values"
+        },
+        {
+          "id": "c",
+          "text": "Context is automatically a full server cache"
+        },
+        {
+          "id": "d",
+          "text": "Provider value identity can matter for unnecessary renders"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Context shares values through the tree, but it is not a data-fetching cache and updates can re-render consumers.",
+      "points": 2
+    }
+  ]
+}

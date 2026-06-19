@@ -1,0 +1,246 @@
+{
+  "id": "react-module-27-applied-check",
+  "title": "React System Design Applied Check",
+  "description": "Apply frontend system design thinking to realistic scale, data, performance, micro-frontend, and design-system tradeoffs.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "system-design",
+    "frontend-architecture",
+    "scale"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "You are designing a dashboard with slow APIs. Which design concern should be explicit early?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Loading, partial failure, refresh, and empty states"
+        },
+        {
+          "id": "b",
+          "text": "Only the final happy-path screenshot"
+        },
+        {
+          "id": "c",
+          "text": "The exact variable names in every component"
+        },
+        {
+          "id": "d",
+          "text": "The number of semicolons"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Large frontend design should account for loading and failure states, not only ideal data.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A search page should be shareable and back-button friendly. Where does the query usually belong?",
+      "options": [
+        {
+          "id": "a",
+          "text": "URL state"
+        },
+        {
+          "id": "b",
+          "text": "A hidden module variable"
+        },
+        {
+          "id": "c",
+          "text": "Only a component ref"
+        },
+        {
+          "id": "d",
+          "text": "A design token"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "URL state is appropriate for state users expect to share, bookmark, and navigate through.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "A team memoizes every component before profiling and sees no improvement. What principle did they skip?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Measure first and optimize the actual bottleneck"
+        },
+        {
+          "id": "b",
+          "text": "Context cannot re-render"
+        },
+        {
+          "id": "c",
+          "text": "All performance issues are network issues"
+        },
+        {
+          "id": "d",
+          "text": "Memoization always fixes bundle size"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Memoization is a targeted tool, not a substitute for understanding where time is spent.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "multiple",
+      "prompt": "A product list renders 20,000 rows. Which options are reasonable to consider? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "List virtualization"
+        },
+        {
+          "id": "b",
+          "text": "Pagination or incremental loading"
+        },
+        {
+          "id": "c",
+          "text": "Rendering all rows eagerly because React will skip them"
+        },
+        {
+          "id": "d",
+          "text": "Measuring render and interaction cost"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "d"
+      ],
+      "explanation": "Long lists often need virtualization or pagination, guided by measurement.",
+      "points": 2
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Two micro-frontends ship different incompatible versions of a shared design-system component. What risk does this create?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Visual and behavioral inconsistency across the product"
+        },
+        {
+          "id": "b",
+          "text": "Automatic React reconciliation across apps"
+        },
+        {
+          "id": "c",
+          "text": "Guaranteed faster bundles"
+        },
+        {
+          "id": "d",
+          "text": "No need for contracts"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Micro-frontends require dependency, design-system, and contract discipline to avoid fragmentation.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A design-system Button exposes 30 visual props for one-off needs. What is the likely API problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The component is becoming over-general and hard to govern"
+        },
+        {
+          "id": "b",
+          "text": "The button is too semantic"
+        },
+        {
+          "id": "c",
+          "text": "Props cannot be documented"
+        },
+        {
+          "id": "d",
+          "text": "React forbids design-system buttons"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Reusable components should have intentional APIs rather than absorbing every exception.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "A server-state cache refetches data but the UI never distinguishes stale data from loading. What user-facing issue can result?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Users may not know whether they are seeing fresh, stale, or failed data"
+        },
+        {
+          "id": "b",
+          "text": "The app becomes server-rendered automatically"
+        },
+        {
+          "id": "c",
+          "text": "The bundle cannot be split"
+        },
+        {
+          "id": "d",
+          "text": "Keys stop working"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Data-state architecture should communicate freshness and failure clearly.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "A system design answer jumps straight to Redux without discussing ownership, API shape, or rendering surfaces. What is missing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A requirements-driven architecture rationale"
+        },
+        {
+          "id": "b",
+          "text": "A CSS reset only"
+        },
+        {
+          "id": "c",
+          "text": "A source-map upload"
+        },
+        {
+          "id": "d",
+          "text": "A Dockerfile"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Good frontend system design explains tradeoffs from requirements, data flow, ownership, and constraints.",
+      "points": 1
+    }
+  ]
+}

@@ -21,16 +21,44 @@
       "duration": "10 min"
     },
     {
-      "slug": "04-async-await",
+      "slug": "04-promises",
+      "title": "Promises",
+      "type": "text",
+      "duration": "10 min"
+    },
+    {
+      "slug": "05-async-await",
       "title": "async / await",
       "type": "text",
       "duration": "10 min"
     },
     {
-      "slug": "05-error-handling-with-catch",
+      "slug": "06-error-handling-with-catch",
       "title": "Error Handling with catch",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-running-tasks-in-parallel",
+      "title": "Running Tasks in Parallel",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "08-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-async-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "09-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-async-applied-check",
+      "passingScore": 70
     }
   ]
 }

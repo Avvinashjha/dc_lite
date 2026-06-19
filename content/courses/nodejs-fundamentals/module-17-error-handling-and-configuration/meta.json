@@ -1,0 +1,50 @@
+{
+  "title": "Error Handling and Configuration",
+  "description": "Handle failures predictably in Node.js and Express, validate runtime configuration, and shut services down gracefully.",
+  "lessons": [
+    {
+      "slug": "01-nodejs-error-model",
+      "title": "The Node.js Error Model",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "02-async-errors-and-promises",
+      "title": "Async Errors and Promises",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "03-express-error-boundaries",
+      "title": "Express Error Boundaries",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "04-environment-variables-and-config-validation",
+      "title": "Environment Variables and Config Validation",
+      "type": "text",
+      "duration": "20 min"
+    },
+    {
+      "slug": "05-logging-errors-safely",
+      "title": "Logging Errors Safely",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "06-graceful-shutdown",
+      "title": "Graceful Shutdown",
+      "type": "text",
+      "duration": "15 min"
+    },
+    {
+      "slug": "07-knowledge-check",
+      "title": "Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "nodejs-module-17-knowledge-check",
+      "passingScore": 70
+    }
+  ]
+}

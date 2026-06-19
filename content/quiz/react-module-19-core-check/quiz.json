@@ -1,0 +1,23 @@
+{
+  "id": "react-module-19-core-check",
+  "title": "React TypeScript Core Check",
+  "description": "Check your understanding of TypeScript with React props, state, hooks, events, generics, context, discriminated unions, and common typing mistakes.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": ["react", "typescript", "props", "hooks", "context"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {"id":"q1","type":"single","prompt":"What is a main benefit of typing component props?","options":[{"id":"a","text":"It documents and enforces the component contract at compile time"},{"id":"b","text":"It replaces runtime data fetching"},{"id":"c","text":"It makes CSS global automatically"},{"id":"d","text":"It prevents all production errors"}],"correct":["a"],"explanation":"Prop types describe what a component expects, helping catch incorrect usage before runtime.","points":1},
+    {"id":"q2","type":"single","prompt":"Which type is commonly used for renderable children in React TypeScript?","options":[{"id":"a","text":"`React.ReactNode`"},{"id":"b","text":"`number[]`"},{"id":"c","text":"`HTMLElement` only"},{"id":"d","text":"`Promise<string>`"}],"correct":["a"],"explanation":"React.ReactNode covers strings, numbers, elements, fragments, null, and other values React can render.","points":1},
+    {"id":"q3","type":"single","prompt":"How would you type a text input change handler parameter?","options":[{"id":"a","text":"`React.ChangeEvent<HTMLInputElement>`"},{"id":"b","text":"`React.MouseEvent<HTMLFormElement>`"},{"id":"c","text":"`CSSProperties`"},{"id":"d","text":"`Record<string, never>`"}],"correct":["a"],"explanation":"Input change events use React.ChangeEvent with the relevant element type, such as HTMLInputElement.","points":1},
+    {"id":"q4","type":"boolean","prompt":"TypeScript validates API responses at runtime automatically.","options":[{"id":"true","text":"True"},{"id":"false","text":"False"}],"correct":["false"],"explanation":"TypeScript is erased at runtime. External data still needs runtime validation when its shape cannot be trusted.","points":1},
+    {"id":"q5","type":"single","prompt":"When is an explicit generic useful with `useState`?","options":[{"id":"a","text":"When initial state like `null` or `[]` does not give enough information"},{"id":"b","text":"Only when the component has no props"},{"id":"c","text":"Only for CSS classes"},{"id":"d","text":"Never; `useState` cannot use generics"}],"correct":["a"],"explanation":"Examples like `useState<User | null>(null)` or `useState<Item[]>([])` give TypeScript the intended state shape.","points":1},
+    {"id":"q6","type":"single","prompt":"What is a discriminated union useful for in React props?","options":[{"id":"a","text":"Modeling variants where allowed fields depend on a shared discriminant such as `kind` or `type`"},{"id":"b","text":"Making every prop optional"},{"id":"c","text":"Avoiding all conditional rendering"},{"id":"d","text":"Converting JSX to HTML strings"}],"correct":["a"],"explanation":"A discriminant field lets TypeScript narrow the correct prop shape for each variant.","points":1},
+    {"id":"q7","type":"multiple","prompt":"Which React areas commonly benefit from TypeScript? (Select all that apply.)","options":[{"id":"a","text":"Props and callbacks"},{"id":"b","text":"State and reducers"},{"id":"c","text":"Context values"},{"id":"d","text":"Event handlers"}],"correct":["a","b","c","d"],"explanation":"Types are useful across component boundaries, state transitions, event handlers, and shared context contracts.","points":2},
+    {"id":"q8","type":"single","prompt":"Why wrap a nullable context in a custom hook?","options":[{"id":"a","text":"To throw a clear error when the provider is missing and return a non-null value after the check"},{"id":"b","text":"To make context update outside React"},{"id":"c","text":"To skip all rerenders"},{"id":"d","text":"To convert context into localStorage"}],"correct":["a"],"explanation":"A custom hook can centralize the provider check so consumers get a safer non-null value.","points":1}
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "id": "javascript-arrays-applied-check",
+  "title": "JavaScript Arrays Applied Check",
+  "description": "A tricky applied quiz covering array mutation, shallow copies, callback returns, sorting, references, flattening, and multi-dimensional arrays.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "arrays", "mutation", "sorting", "nested-arrays"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst numbers = [10, 2, 1, 25, 3];\nnumbers.sort();\nconsole.log(numbers);\n```",
+      "options": [
+        { "id": "a", "text": "`[1, 2, 3, 10, 25]`" },
+        { "id": "b", "text": "`[1, 10, 2, 25, 3]`" },
+        { "id": "c", "text": "`[25, 10, 3, 2, 1]`" },
+        { "id": "d", "text": "It throws because numbers need a compare function" }
+      ],
+      "correct": ["b"],
+      "explanation": "Default `sort()` compares values as strings, so numeric order is not guaranteed unless you provide a compare function.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which expression sorts numbers ascending without mutating the original array?",
+      "options": [
+        { "id": "a", "text": "`numbers.sort()`" },
+        { "id": "b", "text": "`numbers.sort((a, b) => a - b)`" },
+        { "id": "c", "text": "`[...numbers].sort((a, b) => a - b)`" },
+        { "id": "d", "text": "`numbers.reverse().sort()`" }
+      ],
+      "correct": ["c"],
+      "explanation": "The spread syntax creates a shallow copy, and the compare function sorts that copy numerically.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst letters = [\"A\", \"B\", \"C\"];\nconst reversed = letters.reverse();\nconsole.log(letters);\nconsole.log(reversed);\n```",
+      "options": [
+        { "id": "a", "text": "`[\"A\", \"B\", \"C\"]` then `[\"C\", \"B\", \"A\"]`" },
+        { "id": "b", "text": "`[\"C\", \"B\", \"A\"]` then `[\"C\", \"B\", \"A\"]`" },
+        { "id": "c", "text": "`[\"A\", \"B\", \"C\"]` then `undefined`" },
+        { "id": "d", "text": "`undefined` then `[\"C\", \"B\", \"A\"]`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`reverse()` mutates the original array and returns the same reversed array.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst items = [\"A\", \"B\", \"C\", \"D\"];\nconst result = items.slice(1, 3);\nconsole.log(result);\nconsole.log(items);\n```",
+      "options": [
+        { "id": "a", "text": "`[\"B\", \"C\"]` then `[\"A\", \"B\", \"C\", \"D\"]`" },
+        { "id": "b", "text": "`[\"B\", \"C\"]` then `[\"A\", \"D\"]`" },
+        { "id": "c", "text": "`[\"B\", \"C\", \"D\"]` then `[\"A\"]`" },
+        { "id": "d", "text": "`[\"A\", \"D\"]` then `[\"B\", \"C\"]`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`slice(1, 3)` extracts indexes 1 and 2 into a new array and does not mutate the original.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst items = [\"A\", \"B\", \"C\", \"D\"];\nconst result = items.splice(1, 2);\nconsole.log(result);\nconsole.log(items);\n```",
+      "options": [
+        { "id": "a", "text": "`[\"B\", \"C\"]` then `[\"A\", \"B\", \"C\", \"D\"]`" },
+        { "id": "b", "text": "`[\"B\", \"C\"]` then `[\"A\", \"D\"]`" },
+        { "id": "c", "text": "`[\"A\", \"D\"]` then `[\"B\", \"C\"]`" },
+        { "id": "d", "text": "`undefined` then `[\"A\", \"D\"]`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`splice(1, 2)` removes two elements starting at index 1, mutates the original, and returns the removed elements.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst result = [1, [2, [3, [4]]]].flat(2);\n```",
+      "options": [
+        { "id": "a", "text": "`[1, 2, 3, [4]]`" },
+        { "id": "b", "text": "`[1, 2, [3, [4]]]`" },
+        { "id": "c", "text": "`[1, 2, 3, 4]`" },
+        { "id": "d", "text": "`[[1], [2], [3], [4]]`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`flat(2)` flattens two levels. The innermost `[4]` remains nested.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst sentences = [\"hi there\", \"learn arrays\"];\nconst words = sentences.flatMap((sentence) => sentence.split(\" \"));\n```",
+      "options": [
+        { "id": "a", "text": "`[[\"hi\", \"there\"], [\"learn\", \"arrays\"]]`" },
+        { "id": "b", "text": "`[\"hi\", \"there\", \"learn\", \"arrays\"]`" },
+        { "id": "c", "text": "`[\"hi there\", \"learn arrays\"]`" },
+        { "id": "d", "text": "`undefined`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`flatMap` maps each sentence to an array of words, then flattens one level.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst users = [{ id: 1, name: \"Alice\" }];\nconsole.log(users.includes({ id: 1, name: \"Alice\" }));\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws because `includes` cannot check objects" }
+      ],
+      "correct": ["b"],
+      "explanation": "Objects are compared by reference. The object passed to `includes` is a different object from the one in the array.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What should you use to check whether an array contains an object with `id === 1`?",
+      "options": [
+        { "id": "a", "text": "`users.includes({ id: 1 })`" },
+        { "id": "b", "text": "`users.some((user) => user.id === 1)`" },
+        { "id": "c", "text": "`users.at(1)`" },
+        { "id": "d", "text": "`users.flat(1)`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`some` checks a condition and returns a boolean, which is right for object property checks.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst grid = [\n  [\"A\", \"B\"],\n  [\"C\", \"D\"]\n];\nconsole.log(grid[1][0]);\n```",
+      "options": [
+        { "id": "a", "text": "`A`" },
+        { "id": "b", "text": "`B`" },
+        { "id": "c", "text": "`C`" },
+        { "id": "d", "text": "`D`" }
+      ],
+      "correct": ["c"],
+      "explanation": "`grid[1]` selects the second row, and `[0]` selects the first item in that row.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst grid = [[\"A\"]];\nconsole.log(grid[2]?.[0]);\n```",
+      "options": [
+        { "id": "a", "text": "`A`" },
+        { "id": "b", "text": "`undefined`" },
+        { "id": "c", "text": "`null`" },
+        { "id": "d", "text": "It throws a `TypeError`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Optional chaining safely stops because `grid[2]` does not exist.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst users = [{ name: \"Alice\" }];\nconst copy = users.slice();\ncopy[0].name = \"Ava\";\nconsole.log(users[0].name);\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "`Ava`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws because `slice` freezes nested objects" }
+      ],
+      "correct": ["b"],
+      "explanation": "`slice()` creates a shallow array copy. The object inside is still shared by reference.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst scores = [0, 10, 20, null];\nconst cleaned = scores.filter((score) => score);\n```",
+      "options": [
+        { "id": "a", "text": "`[0, 10, 20]`" },
+        { "id": "b", "text": "`[10, 20]`" },
+        { "id": "c", "text": "`[null]`" },
+        { "id": "d", "text": "`[]`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`0` and `null` are falsy, so both are removed by this truthy filter.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What does this code return?\n```js\nconst values = [];\nconst result = values.every((value) => value > 10);\n```",
+      "options": [
+        { "id": "a", "text": "`true`" },
+        { "id": "b", "text": "`false`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "It throws because the array is empty" }
+      ],
+      "correct": ["a"],
+      "explanation": "`every` returns `true` for an empty array because no item fails the condition.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which statement is most accurate?",
+      "options": [
+        { "id": "a", "text": "`map`, `filter`, and `flat` mutate the original array" },
+        { "id": "b", "text": "`sort`, `reverse`, and `splice` mutate the original array" },
+        { "id": "c", "text": "`slice`, `includes`, and `find` always mutate the original array" },
+        { "id": "d", "text": "No array methods mutate the original array" }
+      ],
+      "correct": ["b"],
+      "explanation": "`sort`, `reverse`, and `splice` are classic mutating array methods.",
+      "points": 1
+    }
+  ]
+}

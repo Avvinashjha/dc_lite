@@ -1,0 +1,210 @@
+{
+  "id": "javascript-nodejs-environment-core-check",
+  "title": "JavaScript Node.js Environment Core Check",
+  "description": "Check your understanding of the Node.js runtime, globals, modules, npm, built-in modules, file system APIs, environment variables, async Node APIs, streams, events, and HTTP basics.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "nodejs", "runtime", "npm", "backend"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is Node.js?",
+      "options": [
+        { "id": "a", "text": "A JavaScript runtime for running JavaScript outside the browser" },
+        { "id": "b", "text": "A replacement for HTML and CSS" },
+        { "id": "c", "text": "A browser-only DOM library" },
+        { "id": "d", "text": "A database query language" }
+      ],
+      "correct": ["a"],
+      "explanation": "Node.js is a runtime that lets JavaScript run outside the browser, commonly for servers, tools, and scripts.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which command runs a Node.js script named `app.js`?",
+      "options": [
+        { "id": "a", "text": "`node app.js`" },
+        { "id": "b", "text": "`run app.js`" },
+        { "id": "c", "text": "`browser app.js`" },
+        { "id": "d", "text": "`npm app.js`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `node` command runs JavaScript files with Node.js.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Which global object represents the current Node.js process?",
+      "options": [
+        { "id": "a", "text": "`process`" },
+        { "id": "b", "text": "`document`" },
+        { "id": "c", "text": "`navigator`" },
+        { "id": "d", "text": "`screen`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`process` exposes information about the current Node process, including environment variables, arguments, and the working directory.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "Where are environment variables accessed in Node.js?",
+      "options": [
+        { "id": "a", "text": "`process.env`" },
+        { "id": "b", "text": "`document.env`" },
+        { "id": "c", "text": "`window.variables`" },
+        { "id": "d", "text": "`npm.env()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Node exposes environment variables through `process.env`.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "Which pair is used by CommonJS modules?",
+      "options": [
+        { "id": "a", "text": "`require()` and `module.exports`" },
+        { "id": "b", "text": "`import` and `export` only" },
+        { "id": "c", "text": "`include()` and `send`" },
+        { "id": "d", "text": "`load()` and `return module`" }
+      ],
+      "correct": ["a"],
+      "explanation": "CommonJS uses `require()` to import and `module.exports` to export values.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "In a package with `{ \"type\": \"module\" }`, what module style do `.js` files use by default?",
+      "options": [
+        { "id": "a", "text": "ES modules" },
+        { "id": "b", "text": "CommonJS only" },
+        { "id": "c", "text": "HTML modules" },
+        { "id": "d", "text": "CSS modules" }
+      ],
+      "correct": ["a"],
+      "explanation": "The `type` field controls how Node treats `.js` files. With `\"module\"`, they are ES modules.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is `package.json` mainly used for in a Node.js project?",
+      "options": [
+        { "id": "a", "text": "Describing the project, scripts, and dependencies" },
+        { "id": "b", "text": "Storing all generated HTML" },
+        { "id": "c", "text": "Replacing JavaScript source files" },
+        { "id": "d", "text": "Running the operating system" }
+      ],
+      "correct": ["a"],
+      "explanation": "`package.json` contains project metadata, scripts, dependencies, and configuration fields such as `type`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which built-in module helps build file paths across operating systems?",
+      "options": [
+        { "id": "a", "text": "`node:path`" },
+        { "id": "b", "text": "`node:http`" },
+        { "id": "c", "text": "`node:events`" },
+        { "id": "d", "text": "`node:console`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`node:path` provides helpers like `path.join()` for working with file paths.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Which API is the modern promise-based way to read files in Node.js?",
+      "options": [
+        { "id": "a", "text": "`readFile` from `node:fs/promises`" },
+        { "id": "b", "text": "`document.readFile()`" },
+        { "id": "c", "text": "`window.openFile()`" },
+        { "id": "d", "text": "`JSON.read()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`node:fs/promises` provides promise-based file system APIs that work well with `async` and `await`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does `Buffer` represent in Node.js?",
+      "options": [
+        { "id": "a", "text": "Binary data" },
+        { "id": "b", "text": "A DOM element" },
+        { "id": "c", "text": "A CSS animation" },
+        { "id": "d", "text": "A package version" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Buffer` is used for binary data, such as file bytes and network chunks.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is an `EventEmitter` used for?",
+      "options": [
+        { "id": "a", "text": "Emitting named events and registering listeners for them" },
+        { "id": "b", "text": "Selecting DOM elements" },
+        { "id": "c", "text": "Installing npm packages" },
+        { "id": "d", "text": "Parsing CSS selectors" }
+      ],
+      "correct": ["a"],
+      "explanation": "`EventEmitter` lets code publish named events and lets other code listen for those events.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Why are streams useful in Node.js?",
+      "options": [
+        { "id": "a", "text": "They process data in chunks instead of loading everything at once" },
+        { "id": "b", "text": "They make all code synchronous" },
+        { "id": "c", "text": "They replace every npm package" },
+        { "id": "d", "text": "They create browser DOM nodes" }
+      ],
+      "correct": ["a"],
+      "explanation": "Streams are useful for large files and network data because they handle data piece by piece.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which built-in module can create a basic HTTP server?",
+      "options": [
+        { "id": "a", "text": "`node:http`" },
+        { "id": "b", "text": "`node:path`" },
+        { "id": "c", "text": "`node:fs/promises`" },
+        { "id": "d", "text": "`node:buffer`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`node:http` provides low-level APIs for creating HTTP servers and handling requests.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Which statement about browser APIs and Node.js is correct?",
+      "options": [
+        { "id": "a", "text": "`document` is a browser API and is not available in normal Node.js scripts" },
+        { "id": "b", "text": "`document` is required to read files in Node.js" },
+        { "id": "c", "text": "`window` is the main Node.js process object" },
+        { "id": "d", "text": "Node.js code always runs inside a web page" }
+      ],
+      "correct": ["a"],
+      "explanation": "Node.js does not provide a DOM by default, so browser APIs like `document` are not available in normal Node scripts.",
+      "points": 1
+    }
+  ]
+}

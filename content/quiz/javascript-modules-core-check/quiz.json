@@ -1,0 +1,182 @@
+{
+  "id": "javascript-modules-core-check",
+  "title": "JavaScript Modules Core Check",
+  "description": "Check your understanding of ES modules, import/export syntax, default and named exports, browser modules, re-exports, and dynamic imports.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "modules", "imports", "exports"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is a JavaScript module?",
+      "options": [
+        { "id": "a", "text": "A JavaScript file that can import and export code" },
+        { "id": "b", "text": "A special kind of array" },
+        { "id": "c", "text": "A function that must return an object" },
+        { "id": "d", "text": "A browser tab running JavaScript" }
+      ],
+      "correct": ["a"],
+      "explanation": "A module is a JavaScript file with its own scope that can share code through exports and use code through imports.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which keyword makes a function available to other modules?",
+      "options": [
+        { "id": "a", "text": "`import`" },
+        { "id": "b", "text": "`export`" },
+        { "id": "c", "text": "`module`" },
+        { "id": "d", "text": "`public`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`export` makes a value available for import by other modules.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "How do you import this named export?\n```js\nexport function add(a, b) {\n  return a + b;\n}\n```",
+      "options": [
+        { "id": "a", "text": "`import add from \"./math.js\";`" },
+        { "id": "b", "text": "`import { add } from \"./math.js\";`" },
+        { "id": "c", "text": "`import * add from \"./math.js\";`" },
+        { "id": "d", "text": "`export { add } from \"./math.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Named exports are imported with curly braces and the exported name.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "How do you import this default export?\n```js\nexport default function log(message) {\n  console.log(message);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`import { log } from \"./logger.js\";`" },
+        { "id": "b", "text": "`import log from \"./logger.js\";`" },
+        { "id": "c", "text": "`import * log from \"./logger.js\";`" },
+        { "id": "d", "text": "`import default { log } from \"./logger.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Default exports are imported without curly braces.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "How many default exports can one module have?",
+      "options": [
+        { "id": "a", "text": "Zero or one" },
+        { "id": "b", "text": "Exactly two" },
+        { "id": "c", "text": "Unlimited" },
+        { "id": "d", "text": "One per function" }
+      ],
+      "correct": ["a"],
+      "explanation": "A module may have no default export or one default export, but not multiple default exports.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which import collects all named exports into one object?",
+      "options": [
+        { "id": "a", "text": "`import all from \"./math.js\";`" },
+        { "id": "b", "text": "`import * as math from \"./math.js\";`" },
+        { "id": "c", "text": "`import { * } from \"./math.js\";`" },
+        { "id": "d", "text": "`import math.* from \"./math.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`import * as math` creates a namespace object containing the module's named exports.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What should a browser script tag include if the JavaScript file uses `import` statements?",
+      "options": [
+        { "id": "a", "text": "`type=\"module\"`" },
+        { "id": "b", "text": "`type=\"import\"`" },
+        { "id": "c", "text": "`module=\"true\"`" },
+        { "id": "d", "text": "`src=\"module\"`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Browser ES modules are loaded with `<script type=\"module\" src=\"...\"></script>`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which local import path is usually correct from the same folder in browser modules?",
+      "options": [
+        { "id": "a", "text": "`import { add } from \"math.js\";`" },
+        { "id": "b", "text": "`import { add } from \"./math.js\";`" },
+        { "id": "c", "text": "`import { add } from \"#math.js\";`" },
+        { "id": "d", "text": "`import { add } from \"local:math.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Relative local imports commonly start with `./` or `../`.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is a side-effect import?",
+      "options": [
+        { "id": "a", "text": "An import that runs a module without importing named values" },
+        { "id": "b", "text": "An import that always fails silently" },
+        { "id": "c", "text": "An import that only works with arrays" },
+        { "id": "d", "text": "An import that creates a default export" }
+      ],
+      "correct": ["a"],
+      "explanation": "`import \"./setup.js\"` runs the module for its side effects without importing bindings.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What does dynamic `import()` return?",
+      "options": [
+        { "id": "a", "text": "A Promise for a module object" },
+        { "id": "b", "text": "A plain string path" },
+        { "id": "c", "text": "A synchronous function result" },
+        { "id": "d", "text": "Always a default export directly" }
+      ],
+      "correct": ["a"],
+      "explanation": "Dynamic `import()` is asynchronous and returns a Promise that resolves to the module object.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What does `export * from \"./math.js\"` re-export?",
+      "options": [
+        { "id": "a", "text": "All named exports from `math.js`" },
+        { "id": "b", "text": "Only the default export from `math.js`" },
+        { "id": "c", "text": "Only comments from `math.js`" },
+        { "id": "d", "text": "Nothing; this syntax is invalid" }
+      ],
+      "correct": ["a"],
+      "explanation": "`export *` re-exports named exports. It does not automatically re-export a default export.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is one benefit of modules compared with old global script files?",
+      "options": [
+        { "id": "a", "text": "Modules make all variables global automatically" },
+        { "id": "b", "text": "Modules avoid global scope pollution and make dependencies explicit" },
+        { "id": "c", "text": "Modules remove the need for functions" },
+        { "id": "d", "text": "Modules only run in HTML, never in Node.js" }
+      ],
+      "correct": ["b"],
+      "explanation": "Modules have their own scope and use explicit imports/exports, which reduces accidental global dependencies.",
+      "points": 1
+    }
+  ]
+}

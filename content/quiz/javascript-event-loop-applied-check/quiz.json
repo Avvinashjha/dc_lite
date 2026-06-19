@@ -1,0 +1,224 @@
+{
+  "id": "javascript-event-loop-applied-check",
+  "title": "JavaScript Event Loop Applied Check",
+  "description": "Test your ability to predict event-loop execution order and identify microtask, macrotask, rendering, and long-task behavior.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "event-loop", "microtasks", "macrotasks", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nconsole.log(\"C\");\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`, `B`" },
+        { "id": "c", "text": "`B`, `A`, `C`" },
+        { "id": "d", "text": "`C`, `A`, `B`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The timer callback is scheduled as a later task. Synchronous logs run first.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(\"A\");\nPromise.resolve().then(() => console.log(\"B\"));\nconsole.log(\"C\");\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`, `B`" },
+        { "id": "c", "text": "`B`, `A`, `C`" },
+        { "id": "d", "text": "`C`, `B`, `A`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The promise callback is a microtask, so it runs after synchronous code finishes.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(\"Start\");\n\nsetTimeout(() => console.log(\"Timer\"), 0);\n\nPromise.resolve().then(() => console.log(\"Promise\"));\n\nconsole.log(\"End\");\n```",
+      "options": [
+        { "id": "a", "text": "`Start`, `Timer`, `Promise`, `End`" },
+        { "id": "b", "text": "`Start`, `End`, `Promise`, `Timer`" },
+        { "id": "c", "text": "`Start`, `End`, `Timer`, `Promise`" },
+        { "id": "d", "text": "`Promise`, `Timer`, `Start`, `End`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Synchronous logs run first, then the promise microtask, then the timer task.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nPromise.resolve().then(() => {\n  console.log(\"A\");\n  Promise.resolve().then(() => console.log(\"B\"));\n});\n\nsetTimeout(() => console.log(\"C\"), 0);\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`, `B`" },
+        { "id": "c", "text": "`C`, `A`, `B`" },
+        { "id": "d", "text": "`B`, `A`, `C`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Microtasks drain fully before the timer task runs. The second promise callback is queued as another microtask.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nsetTimeout(() => {\n  console.log(\"Timer 1\");\n  Promise.resolve().then(() => console.log(\"Promise inside timer\"));\n}, 0);\n\nsetTimeout(() => {\n  console.log(\"Timer 2\");\n}, 0);\n```",
+      "options": [
+        { "id": "a", "text": "`Timer 1`, `Timer 2`, `Promise inside timer`" },
+        { "id": "b", "text": "`Timer 1`, `Promise inside timer`, `Timer 2`" },
+        { "id": "c", "text": "`Promise inside timer`, `Timer 1`, `Timer 2`" },
+        { "id": "d", "text": "`Timer 2`, `Timer 1`, `Promise inside timer`" }
+      ],
+      "correct": ["b"],
+      "explanation": "After each task, microtasks run before the next task. The promise created in Timer 1 runs before Timer 2.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Why can this freeze the UI?\n```js\nbutton.addEventListener(\"click\", () => {\n  for (let i = 0; i < 1_000_000_000; i++) {}\n});\n```",
+      "options": [
+        { "id": "a", "text": "The long synchronous loop blocks the main thread" },
+        { "id": "b", "text": "Click handlers always run in parallel" },
+        { "id": "c", "text": "Loops automatically create promises" },
+        { "id": "d", "text": "The browser renders between every loop iteration" }
+      ],
+      "correct": ["a"],
+      "explanation": "Long synchronous work keeps the call stack busy, delaying rendering and input handling.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is the issue with this code?\n```js\nfunction loop() {\n  queueMicrotask(loop);\n}\nloop();\n```",
+      "options": [
+        { "id": "a", "text": "It can starve timers and rendering by endlessly scheduling microtasks" },
+        { "id": "b", "text": "It creates a syntax error" },
+        { "id": "c", "text": "It runs only once" },
+        { "id": "d", "text": "It turns microtasks into macrotasks" }
+      ],
+      "correct": ["a"],
+      "explanation": "The microtask queue drains before tasks/rendering. Endless microtasks can prevent the loop from moving on.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconst promise = Promise.resolve(\"Done\");\n\nconsole.log(\"A\");\npromise.then((value) => console.log(value));\nconsole.log(\"B\");\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `Done`, `B`" },
+        { "id": "b", "text": "`A`, `B`, `Done`" },
+        { "id": "c", "text": "`Done`, `A`, `B`" },
+        { "id": "d", "text": "`B`, `A`, `Done`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Even already-resolved promises schedule `.then()` callbacks as microtasks.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "Why might the user not see `Working...` before `Done`?\n```js\nstatus.textContent = \"Working...\";\nfor (let i = 0; i < 1_000_000_000; i++) {}\nstatus.textContent = \"Done\";\n```",
+      "options": [
+        { "id": "a", "text": "The long task can block rendering until after both DOM changes" },
+        { "id": "b", "text": "DOM updates are not allowed in JavaScript" },
+        { "id": "c", "text": "`textContent` always waits for promises" },
+        { "id": "d", "text": "Loops erase DOM updates" }
+      ],
+      "correct": ["a"],
+      "explanation": "The browser may not paint while JavaScript is blocking the main thread.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is a good use for `requestAnimationFrame`?",
+      "options": [
+        { "id": "a", "text": "Scheduling visual updates before the next repaint" },
+        { "id": "b", "text": "Replacing every async function" },
+        { "id": "c", "text": "Parsing JSON on a background thread automatically" },
+        { "id": "d", "text": "Making timers exact" }
+      ],
+      "correct": ["a"],
+      "explanation": "`requestAnimationFrame` is designed for animation and visual updates aligned with rendering.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "If a timer is set for 100ms but the call stack is busy for 2 seconds, when can the timer callback run?",
+      "options": [
+        { "id": "a", "text": "Only after the stack becomes clear" },
+        { "id": "b", "text": "Exactly at 100ms no matter what" },
+        { "id": "c", "text": "Before synchronous code finishes" },
+        { "id": "d", "text": "Never, because timers are cancelled by loops" }
+      ],
+      "correct": ["a"],
+      "explanation": "Timer delays are minimum delays. The callback cannot run while the call stack is busy.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What is the best first step when predicting event-loop output?",
+      "options": [
+        { "id": "a", "text": "Identify and run all synchronous code first" },
+        { "id": "b", "text": "Run timers first" },
+        { "id": "c", "text": "Run rendering before JavaScript" },
+        { "id": "d", "text": "Ignore promise callbacks" }
+      ],
+      "correct": ["a"],
+      "explanation": "Synchronous stack code runs before queued microtasks and tasks.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which statement is correct?",
+      "options": [
+        { "id": "a", "text": "Async callbacks still run on the call stack when executed" },
+        { "id": "b", "text": "Async callbacks never use the call stack" },
+        { "id": "c", "text": "Promise callbacks are macrotasks" },
+        { "id": "d", "text": "Timers always run before microtasks" }
+      ],
+      "correct": ["a"],
+      "explanation": "Async callbacks are scheduled for later, but when they execute, they still run on the JavaScript call stack.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What can help with heavy CPU work that should not freeze the browser UI?",
+      "options": [
+        { "id": "a", "text": "A Web Worker" },
+        { "id": "b", "text": "More `console.log` calls" },
+        { "id": "c", "text": "Putting it inside `JSON.stringify`" },
+        { "id": "d", "text": "Using `var` instead of `let`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Web Workers can run CPU-heavy work off the main thread.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which ordering model is most useful for beginner event-loop prediction?",
+      "options": [
+        { "id": "a", "text": "Synchronous stack code, then microtasks, then tasks" },
+        { "id": "b", "text": "Tasks, then microtasks, then synchronous code" },
+        { "id": "c", "text": "Rendering, then timers, then stack" },
+        { "id": "d", "text": "Promises, then imports, then classes" }
+      ],
+      "correct": ["a"],
+      "explanation": "The simplified model stack -> microtasks -> tasks predicts many common examples.",
+      "points": 1
+    }
+  ]
+}

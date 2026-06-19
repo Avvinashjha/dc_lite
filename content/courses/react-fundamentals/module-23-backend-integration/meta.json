@@ -37,6 +37,22 @@
       "title": "File Uploads",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "07-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-23-core-check"
+    },
+    {
+      "slug": "08-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-23-applied-check"
     }
   ]
 }

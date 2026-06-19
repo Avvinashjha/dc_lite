@@ -3,7 +3,7 @@
   "description": "Master backend development with Node.js — from the event loop and core modules to Express, databases, caching, TypeScript, and Docker.",
   "author": "Avinash Jha",
   "level": "intermediate",
-  "duration": "12 hours",
+  "duration": "18 hours",
   "image": "/images/courses/nodejs.jpg",
   "tags": [
     "nodejs",
@@ -38,8 +38,16 @@
       "title": "Express.js"
     },
     {
+      "slug": "module-17-error-handling-and-configuration",
+      "title": "Error Handling and Configuration"
+    },
+    {
       "slug": "module-07-rest-apis",
       "title": "REST APIs, SSE and Webhooks"
+    },
+    {
+      "slug": "module-18-testing-node-apis",
+      "title": "Testing Node.js APIs"
     },
     {
       "slug": "module-08-databases",

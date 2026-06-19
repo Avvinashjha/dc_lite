@@ -1,0 +1,246 @@
+{
+  "id": "react-module-32-applied-check",
+  "title": "React Interview Questions Applied Check",
+  "description": "Apply React interview reasoning to tricky hooks, performance, coding challenge, and frontend system design scenarios.",
+  "category": "React",
+  "difficulty": "medium",
+  "tags": [
+    "react",
+    "interview",
+    "coding-challenges",
+    "system-design"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "An interview counter with step uses `setCount(count + step)` inside a delayed callback and sometimes uses old values. What answer should you discuss?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stale closures and functional updates or correct dependencies"
+        },
+        {
+          "id": "b",
+          "text": "Only CSS specificity"
+        },
+        {
+          "id": "c",
+          "text": "Webpack plugin order"
+        },
+        {
+          "id": "d",
+          "text": "Replacing buttons with links"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Delayed callbacks often expose stale closure problems; functional updates can read the latest state.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "A candidate puts `useEffect` around a calculation that can be derived during render. What is the likely critique?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Avoid unnecessary effects for derived render data"
+        },
+        {
+          "id": "b",
+          "text": "All calculations require effects"
+        },
+        {
+          "id": "c",
+          "text": "Effects cannot read props"
+        },
+        {
+          "id": "d",
+          "text": "Derived values must be stored in localStorage"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Interview answers should avoid using effects as a default escape hatch for derived data.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "multiple",
+      "prompt": "For a fetch coding challenge, which UI states should usually be represented? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Loading"
+        },
+        {
+          "id": "b",
+          "text": "Error"
+        },
+        {
+          "id": "c",
+          "text": "Success data"
+        },
+        {
+          "id": "d",
+          "text": "A hidden failure state with no message"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "Fetch challenges should communicate loading, failure, and success clearly.",
+      "points": 2
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A tabs coding challenge keeps active tab by array index, then tabs can be reordered. What is the robust alternative?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use a stable tab id"
+        },
+        {
+          "id": "b",
+          "text": "Use Math.random on every render"
+        },
+        {
+          "id": "c",
+          "text": "Store active tab in CSS only"
+        },
+        {
+          "id": "d",
+          "text": "Remove keys"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Stable ids preserve identity when collections reorder.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "A modal challenge has no Escape key support and does not restore focus. What topic should you raise?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accessible keyboard and focus management"
+        },
+        {
+          "id": "b",
+          "text": "Redux middleware"
+        },
+        {
+          "id": "c",
+          "text": "Babel polyfills only"
+        },
+        {
+          "id": "d",
+          "text": "Dependency audits"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Modal implementations are judged on interaction quality as well as rendering.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "A cart reducer mutates the existing item object and returns the same state array. What bug can this cause?",
+      "options": [
+        {
+          "id": "a",
+          "text": "React may not see a changed reference and UI updates become unreliable"
+        },
+        {
+          "id": "b",
+          "text": "The reducer becomes asynchronous automatically"
+        },
+        {
+          "id": "c",
+          "text": "The cart cannot contain numbers"
+        },
+        {
+          "id": "d",
+          "text": "The browser deletes localStorage"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Reducers should return new references for changed state.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "In a product-page system design interview, the interviewer asks about slow images and reviews loading late. Which answer is strongest?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Discuss skeletons, progressive loading, caching, layout stability, and failure states"
+        },
+        {
+          "id": "b",
+          "text": "Say React.memo solves all of it"
+        },
+        {
+          "id": "c",
+          "text": "Ignore network behavior"
+        },
+        {
+          "id": "d",
+          "text": "Move all data into props manually"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Good frontend design answers cover network, rendering, and user experience tradeoffs.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "An interviewer asks how to design authentication in a React app. What should be included?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Auth state loading, protected routes, token/session handling, server enforcement, and logout"
+        },
+        {
+          "id": "b",
+          "text": "Only hiding links in the nav"
+        },
+        {
+          "id": "c",
+          "text": "Only localStorage persistence"
+        },
+        {
+          "id": "d",
+          "text": "Only a login form CSS layout"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Authentication design needs state, routing, storage, security, and backend enforcement considerations.",
+      "points": 1
+    }
+  ]
+}

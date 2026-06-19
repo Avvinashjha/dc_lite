@@ -1,0 +1,224 @@
+{
+  "id": "javascript-async-applied-check",
+  "title": "JavaScript Asynchronous Programming Applied Check",
+  "description": "Test your ability to predict async execution order, promise chains, async/await behavior, error handling, and parallel task patterns.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "async", "promises", "async-await", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nconsole.log(\"C\");\n```",
+      "options": [
+        { "id": "a", "text": "`A`, `B`, `C`" },
+        { "id": "b", "text": "`A`, `C`, `B`" },
+        { "id": "c", "text": "`B`, `A`, `C`" },
+        { "id": "d", "text": "`C`, `A`, `B`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The timer callback is scheduled for later, so synchronous logs run first.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What is wrong here?\n```js\nsetTimeout(showMessage(), 1000);\n```",
+      "options": [
+        { "id": "a", "text": "`showMessage` is called immediately instead of being passed as a callback" },
+        { "id": "b", "text": "`setTimeout` cannot receive functions" },
+        { "id": "c", "text": "The delay must be a string" },
+        { "id": "d", "text": "Callbacks cannot be named functions" }
+      ],
+      "correct": ["a"],
+      "explanation": "Use `setTimeout(showMessage, 1000)` or `setTimeout(() => showMessage(), 1000)`.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nasync function getName() {\n  return \"Alice\";\n}\n\nconst name = getName();\nconsole.log(name);\n```",
+      "options": [
+        { "id": "a", "text": "`Alice`" },
+        { "id": "b", "text": "A Promise" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`null`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Async functions always return promises, even when returning normal values.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What is the bug in this promise chain?\n```js\ngetUser()\n  .then((user) => {\n    getOrders(user.id);\n  })\n  .then((orders) => {\n    console.log(orders);\n  });\n```",
+      "options": [
+        { "id": "a", "text": "`getOrders(user.id)` is not returned, so the next `.then()` receives `undefined`" },
+        { "id": "b", "text": "Promises cannot use `.then()`" },
+        { "id": "c", "text": "`console.log` rejects promises" },
+        { "id": "d", "text": "`getUser` must be a class" }
+      ],
+      "correct": ["a"],
+      "explanation": "A `.then()` callback should return the next promise if the following step depends on it.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What does this code log?\n```js\nPromise.resolve(2)\n  .then((number) => number * 2)\n  .then((number) => console.log(number));\n```",
+      "options": [
+        { "id": "a", "text": "`2`" },
+        { "id": "b", "text": "`4`" },
+        { "id": "c", "text": "`undefined`" },
+        { "id": "d", "text": "`Promise`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The first `.then()` returns `4`, which becomes the value for the next `.then()`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What happens here?\n```js\nPromise.resolve()\n  .then(() => {\n    throw new Error(\"Failed\");\n  })\n  .catch((error) => console.log(error.message));\n```",
+      "options": [
+        { "id": "a", "text": "Logs `Failed`" },
+        { "id": "b", "text": "The error is ignored" },
+        { "id": "c", "text": "Logs `undefined`" },
+        { "id": "d", "text": "Promises cannot catch thrown errors" }
+      ],
+      "correct": ["a"],
+      "explanation": "Throwing inside `.then()` rejects the chain, and `.catch()` handles it.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is wrong here?\n```js\ntry {\n  loadUser();\n} catch (error) {\n  console.log(\"Caught\");\n}\n```",
+      "options": [
+        { "id": "a", "text": "If `loadUser()` returns a rejecting Promise, this catch will not catch it unless the promise is awaited" },
+        { "id": "b", "text": "`try...catch` cannot be used in async code at all" },
+        { "id": "c", "text": "`loadUser` must be inside `.then()` only" },
+        { "id": "d", "text": "The catch block runs before `loadUser`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Promise rejections must be handled with `.catch()` or `await` inside `try...catch`.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "Which version runs independent tasks in parallel?",
+      "options": [
+        { "id": "a", "text": "`const a = await taskA(); const b = await taskB();`" },
+        { "id": "b", "text": "`const [a, b] = await Promise.all([taskA(), taskB()]);`" },
+        { "id": "c", "text": "`const a = taskA; const b = taskB;`" },
+        { "id": "d", "text": "`await taskA(taskB())`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Promise.all()` starts both promises and waits for both results.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What order are `Promise.all()` results returned in?",
+      "options": [
+        { "id": "a", "text": "Input order" },
+        { "id": "b", "text": "Completion order" },
+        { "id": "c", "text": "Alphabetical order" },
+        { "id": "d", "text": "Random order" }
+      ],
+      "correct": ["a"],
+      "explanation": "`Promise.all()` results match the order of the input promises, even if completion order differs.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which API waits for all promises even if some reject?",
+      "options": [
+        { "id": "a", "text": "`Promise.all()`" },
+        { "id": "b", "text": "`Promise.allSettled()`" },
+        { "id": "c", "text": "`Promise.rejectAll()`" },
+        { "id": "d", "text": "`Promise.map()`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`Promise.allSettled()` returns results for both fulfilled and rejected promises.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "Why is this usually wrong when you need to wait for all saves?\n```js\nusers.forEach(async (user) => {\n  await saveUser(user);\n});\n```",
+      "options": [
+        { "id": "a", "text": "`forEach` does not wait for promises returned by async callbacks" },
+        { "id": "b", "text": "Arrays cannot contain users" },
+        { "id": "c", "text": "`await` cannot be used with functions" },
+        { "id": "d", "text": "`saveUser` must be synchronous" }
+      ],
+      "correct": ["a"],
+      "explanation": "Use `for...of` for sequential waits or `Promise.all(users.map(...))` for parallel waits.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "When is sequential `await` the right choice?",
+      "options": [
+        { "id": "a", "text": "When each step depends on the result of the previous step" },
+        { "id": "b", "text": "Whenever tasks are independent" },
+        { "id": "c", "text": "Only when there are no promises" },
+        { "id": "d", "text": "Never; sequential await is always wrong" }
+      ],
+      "correct": ["a"],
+      "explanation": "Sequential await is correct when later work needs earlier results or order matters.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "What does this async function return on failure?\n```js\nasync function loadUser() {\n  try {\n    return await fetchUser();\n  } catch (error) {\n    console.log(error.message);\n  }\n}\n```",
+      "options": [
+        { "id": "a", "text": "`undefined`" },
+        { "id": "b", "text": "The original error object" },
+        { "id": "c", "text": "`null` automatically" },
+        { "id": "d", "text": "`false` automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "The catch block does not return a value, so the async function resolves to `undefined` on failure.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "What is a good use for promise `.finally()` or `finally` with async/await?",
+      "options": [
+        { "id": "a", "text": "Cleanup such as turning off loading state" },
+        { "id": "b", "text": "Replacing every `.catch()`" },
+        { "id": "c", "text": "Making promises synchronous" },
+        { "id": "d", "text": "Preventing functions from returning" }
+      ],
+      "correct": ["a"],
+      "explanation": "`finally` is useful for cleanup that should happen on success or failure.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "Which statement is correct?",
+      "options": [
+        { "id": "a", "text": "`async` / `await` replaces promises completely" },
+        { "id": "b", "text": "`async` / `await` is syntax built on top of promises" },
+        { "id": "c", "text": "`await` can be used in any normal function" },
+        { "id": "d", "text": "Promises cannot reject when using `await`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`async` / `await` makes promise code easier to read, but promises are still the underlying model.",
+      "points": 1
+    }
+  ]
+}

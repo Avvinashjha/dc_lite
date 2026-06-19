@@ -1,0 +1,224 @@
+{
+  "id": "javascript-modules-applied-check",
+  "title": "JavaScript Modules Applied Check",
+  "description": "Test your ability to diagnose module import/export mistakes, reason about module behavior, and choose the right module pattern.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "modules", "import-export", "applied"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "Given this export, which import is correct?\n```js\n// math.js\nexport function add(a, b) {\n  return a + b;\n}\n```",
+      "options": [
+        { "id": "a", "text": "`import add from \"./math.js\";`" },
+        { "id": "b", "text": "`import { add } from \"./math.js\";`" },
+        { "id": "c", "text": "`import { default as add } from \"./math.js\";`" },
+        { "id": "d", "text": "`import add as named from \"./math.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "`add` is a named export, so it must be imported with curly braces unless re-exported differently.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Given this export, which import is correct?\n```js\n// logger.js\nexport default function log(message) {\n  console.log(message);\n}\n```",
+      "options": [
+        { "id": "a", "text": "`import { log } from \"./logger.js\";`" },
+        { "id": "b", "text": "`import log from \"./logger.js\";`" },
+        { "id": "c", "text": "`import * log from \"./logger.js\";`" },
+        { "id": "d", "text": "`import { default log } from \"./logger.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "Default exports are imported without curly braces.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What is wrong with this browser import for a local file in the same folder?\n```js\nimport { add } from \"math.js\";\n```",
+      "options": [
+        { "id": "a", "text": "Local imports usually need `./`, so it should be `\"./math.js\"`" },
+        { "id": "b", "text": "Named imports cannot use local files" },
+        { "id": "c", "text": "The `.js` extension is never allowed" },
+        { "id": "d", "text": "Imports cannot contain functions" }
+      ],
+      "correct": ["a"],
+      "explanation": "In browser modules, local relative imports usually start with `./` or `../`.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does this import do?\n```js\nimport \"./setup.js\";\n```",
+      "options": [
+        { "id": "a", "text": "Imports all exports as an object named `setup`" },
+        { "id": "b", "text": "Runs `setup.js` for its side effects without importing names" },
+        { "id": "c", "text": "Creates a default export from `setup.js`" },
+        { "id": "d", "text": "Loads `setup.js` only after a button click" }
+      ],
+      "correct": ["b"],
+      "explanation": "A bare import like this is a side-effect import.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is wrong with this dynamic import usage?\n```js\nconst math = import(\"./math.js\");\nconsole.log(math.add(2, 3));\n```",
+      "options": [
+        { "id": "a", "text": "`import()` returns a Promise, so `math.add` is not available yet" },
+        { "id": "b", "text": "Dynamic import cannot load local files" },
+        { "id": "c", "text": "`import()` only works with CSS" },
+        { "id": "d", "text": "Dynamic import must use curly braces" }
+      ],
+      "correct": ["a"],
+      "explanation": "Dynamic `import()` is asynchronous. Use `await import(...)` or `.then(...)`.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "Which code correctly uses a named export from a dynamic import?",
+      "options": [
+        { "id": "a", "text": "`const { add } = await import(\"./math.js\");`" },
+        { "id": "b", "text": "`const add = import \"./math.js\";`" },
+        { "id": "c", "text": "`import { add } await \"./math.js\";`" },
+        { "id": "d", "text": "`const add = await import.add(\"./math.js\");`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Dynamic import resolves to a module object, so you can destructure named exports from it.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "How can a default export from `Button.js` be re-exported as a named export?",
+      "options": [
+        { "id": "a", "text": "`export * as Button from \"./Button.js\";`" },
+        { "id": "b", "text": "`export { default as Button } from \"./Button.js\";`" },
+        { "id": "c", "text": "`export default as Button from \"./Button.js\";`" },
+        { "id": "d", "text": "`export Button default from \"./Button.js\";`" }
+      ],
+      "correct": ["b"],
+      "explanation": "The syntax `export { default as Button } from \"./Button.js\"` re-exports a default export under a named export.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What is a likely problem with a giant `utils.js` file containing unrelated helpers?",
+      "options": [
+        { "id": "a", "text": "It makes module responsibilities unclear" },
+        { "id": "b", "text": "It prevents JavaScript from using functions" },
+        { "id": "c", "text": "It automatically turns all imports into defaults" },
+        { "id": "d", "text": "It cannot be imported by any module" }
+      ],
+      "correct": ["a"],
+      "explanation": "A giant utility file often becomes a dumping ground. Focused module names make code easier to navigate.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What is a circular dependency?",
+      "options": [
+        { "id": "a", "text": "A module importing itself through a loop of imports" },
+        { "id": "b", "text": "A function with a loop inside it" },
+        { "id": "c", "text": "An import that uses parentheses" },
+        { "id": "d", "text": "A file that has no exports" }
+      ],
+      "correct": ["a"],
+      "explanation": "A circular dependency occurs when modules depend on each other directly or indirectly, such as `a.js` importing `b.js` while `b.js` imports `a.js`.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "What is one good way to fix two modules that import each other for shared logic?",
+      "options": [
+        { "id": "a", "text": "Extract the shared logic into a third module" },
+        { "id": "b", "text": "Convert all named exports into default exports" },
+        { "id": "c", "text": "Remove all imports and use global variables" },
+        { "id": "d", "text": "Rename both files to `index.js`" }
+      ],
+      "correct": ["a"],
+      "explanation": "Shared logic can often move into a separate module that both original modules import.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What is true about top-level variables in ES modules?",
+      "options": [
+        { "id": "a", "text": "They automatically become global variables" },
+        { "id": "b", "text": "They are scoped to the module unless exported" },
+        { "id": "c", "text": "They can only be declared with `var`" },
+        { "id": "d", "text": "They are deleted after each import" }
+      ],
+      "correct": ["b"],
+      "explanation": "Modules have their own scope. Top-level variables are not automatically global.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "What happens when a module is imported by multiple files?",
+      "options": [
+        { "id": "a", "text": "The module is generally evaluated once and shared" },
+        { "id": "b", "text": "The module is copied into a new global variable every time" },
+        { "id": "c", "text": "The browser deletes the previous import" },
+        { "id": "d", "text": "Imports stop working after the first file" }
+      ],
+      "correct": ["a"],
+      "explanation": "Modules are evaluated once, and later imports use the same module instance.",
+      "points": 1
+    },
+    {
+      "id": "q13",
+      "type": "single",
+      "prompt": "Which import combines a default import with named imports?",
+      "options": [
+        { "id": "a", "text": "`import request, { buildUrl } from \"./api.js\";`" },
+        { "id": "b", "text": "`import { request default, buildUrl } from \"./api.js\";`" },
+        { "id": "c", "text": "`import { request }, buildUrl from \"./api.js\";`" },
+        { "id": "d", "text": "`import * request, buildUrl from \"./api.js\";`" }
+      ],
+      "correct": ["a"],
+      "explanation": "The default import comes first, followed by named imports in curly braces.",
+      "points": 1
+    },
+    {
+      "id": "q14",
+      "type": "single",
+      "prompt": "Why might a side-effect import be harder to understand than an explicit setup function?",
+      "options": [
+        { "id": "a", "text": "It hides what action is performed unless you inspect the imported file" },
+        { "id": "b", "text": "It cannot run JavaScript code" },
+        { "id": "c", "text": "It always imports a wrong default export" },
+        { "id": "d", "text": "It only works inside loops" }
+      ],
+      "correct": ["a"],
+      "explanation": "A side-effect import like `import \"./setup.js\"` does not show the performed action at the call site.",
+      "points": 1
+    },
+    {
+      "id": "q15",
+      "type": "single",
+      "prompt": "When is dynamic import usually a good choice?",
+      "options": [
+        { "id": "a", "text": "For every dependency, even simple required ones" },
+        { "id": "b", "text": "For optional or heavy code that should load only when needed" },
+        { "id": "c", "text": "Only when exporting variables with `var`" },
+        { "id": "d", "text": "Only to import JSON strings" }
+      ],
+      "correct": ["b"],
+      "explanation": "Dynamic imports are useful for delayed loading, such as optional features or large modules.",
+      "points": 1
+    }
+  ]
+}

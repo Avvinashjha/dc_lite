@@ -1,0 +1,182 @@
+{
+  "id": "javascript-performance-optimization-core-check",
+  "title": "JavaScript Performance Optimization Core Check",
+  "description": "Check your understanding of measuring performance, browser rendering, long tasks, DOM batching, debouncing, throttling, memoization, lazy loading, workers, network cost, and DevTools profiling.",
+  "category": "JavaScript",
+  "difficulty": "medium",
+  "tags": ["javascript", "performance", "browser", "optimization", "devtools"],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-14",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "What is the best first step before optimizing JavaScript code?",
+      "options": [
+        { "id": "a", "text": "Measure the problem and identify the real bottleneck" },
+        { "id": "b", "text": "Rewrite all loops as `for` loops" },
+        { "id": "c", "text": "Add memoization to every function" },
+        { "id": "d", "text": "Remove all comments" }
+      ],
+      "correct": ["a"],
+      "explanation": "Optimization should start with measurement so you improve the code that is actually causing user-visible problems.",
+      "points": 1
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "Which API is designed for precise timing measurements in the browser?",
+      "options": [
+        { "id": "a", "text": "`performance.now()`" },
+        { "id": "b", "text": "`Math.random()`" },
+        { "id": "c", "text": "`document.now()`" },
+        { "id": "d", "text": "`JSON.now()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`performance.now()` provides high-resolution timing useful for performance measurements.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "Why can heavy JavaScript make a page feel frozen?",
+      "options": [
+        { "id": "a", "text": "It can keep the main thread busy, delaying input and rendering" },
+        { "id": "b", "text": "JavaScript always disables CSS" },
+        { "id": "c", "text": "Browsers cannot run event handlers" },
+        { "id": "d", "text": "HTML stops existing while JavaScript runs" }
+      ],
+      "correct": ["a"],
+      "explanation": "Most browser JavaScript runs on the main thread, which also handles many interaction and rendering tasks.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "A long task is commonly described as main-thread work that takes more than about how long?",
+      "options": [
+        { "id": "a", "text": "50 milliseconds" },
+        { "id": "b", "text": "1 millisecond" },
+        { "id": "c", "text": "5 seconds" },
+        { "id": "d", "text": "1 minute" }
+      ],
+      "correct": ["a"],
+      "explanation": "The 50 millisecond threshold is commonly used as a warning line for long main-thread tasks.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "prompt": "What is layout in browser rendering?",
+      "options": [
+        { "id": "a", "text": "Calculating the size and position of elements" },
+        { "id": "b", "text": "Downloading JavaScript files" },
+        { "id": "c", "text": "Parsing JSON responses" },
+        { "id": "d", "text": "Choosing variable names" }
+      ],
+      "correct": ["a"],
+      "explanation": "Layout is the browser's process of determining where elements go and how large they are.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What does debouncing do?",
+      "options": [
+        { "id": "a", "text": "Waits until activity pauses before running a function" },
+        { "id": "b", "text": "Runs a function on every animation frame forever" },
+        { "id": "c", "text": "Copies objects deeply" },
+        { "id": "d", "text": "Makes network requests synchronous" }
+      ],
+      "correct": ["a"],
+      "explanation": "Debouncing resets a timer on repeated calls and runs the callback after activity has paused.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What does throttling do?",
+      "options": [
+        { "id": "a", "text": "Limits a function to run at most once during a time window" },
+        { "id": "b", "text": "Runs a function only after page reload" },
+        { "id": "c", "text": "Prevents functions from returning values" },
+        { "id": "d", "text": "Deletes unused CSS automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Throttling controls the rate of repeated function calls while activity continues.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "When is memoization most useful?",
+      "options": [
+        { "id": "a", "text": "When an expensive function receives the same inputs repeatedly" },
+        { "id": "b", "text": "When every input is unique and the function is cheap" },
+        { "id": "c", "text": "When the function depends on random values" },
+        { "id": "d", "text": "When memory usage must always be zero" }
+      ],
+      "correct": ["a"],
+      "explanation": "Memoization avoids repeated expensive work by returning cached results for repeated inputs.",
+      "points": 1
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "prompt": "What does dynamic `import()` allow?",
+      "options": [
+        { "id": "a", "text": "Loading a module when it is needed" },
+        { "id": "b", "text": "Importing CSS as a number" },
+        { "id": "c", "text": "Skipping all network requests" },
+        { "id": "d", "text": "Changing `const` into `let` at runtime" }
+      ],
+      "correct": ["a"],
+      "explanation": "Dynamic `import()` returns a Promise and can defer loading module code until the feature is needed.",
+      "points": 1
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "prompt": "Which API is usually best for JavaScript-driven visual updates before the next paint?",
+      "options": [
+        { "id": "a", "text": "`requestAnimationFrame()`" },
+        { "id": "b", "text": "`JSON.stringify()`" },
+        { "id": "c", "text": "`localStorage.clear()`" },
+        { "id": "d", "text": "`parseInt()`" }
+      ],
+      "correct": ["a"],
+      "explanation": "`requestAnimationFrame()` schedules visual work to run before the browser's next paint.",
+      "points": 1
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "prompt": "What are Web Workers mainly useful for?",
+      "options": [
+        { "id": "a", "text": "Running CPU-heavy work off the main thread" },
+        { "id": "b", "text": "Directly editing DOM elements from another file" },
+        { "id": "c", "text": "Replacing all event listeners" },
+        { "id": "d", "text": "Making CSS selectors faster automatically" }
+      ],
+      "correct": ["a"],
+      "explanation": "Workers can run JavaScript on a background thread, but they cannot directly access the DOM.",
+      "points": 1
+    },
+    {
+      "id": "q12",
+      "type": "single",
+      "prompt": "Which DevTools panel is most useful for recording main-thread work during a slow interaction?",
+      "options": [
+        { "id": "a", "text": "Performance panel" },
+        { "id": "b", "text": "Elements panel only" },
+        { "id": "c", "text": "Application panel only" },
+        { "id": "d", "text": "Fonts panel" }
+      ],
+      "correct": ["a"],
+      "explanation": "The Performance panel records JavaScript execution, rendering work, long tasks, and event handlers.",
+      "points": 1
+    }
+  ]
+}

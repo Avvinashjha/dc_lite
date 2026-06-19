@@ -1,6 +1,6 @@
 {
   "title": "Project Based Learning",
-  "description": "Learn the core concepts of Project Based Learning in React.",
+  "description": "Build practical React projects with requirements, architecture, milestones, edge cases, and extension paths.",
   "lessons": [
     {
       "slug": "01-todo-app",
@@ -25,6 +25,22 @@
       "title": "Full-Stack App",
       "type": "text",
       "duration": "10 min"
+    },
+    {
+      "slug": "05-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-31-core-check"
+    },
+    {
+      "slug": "06-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "passingScore": 70,
+      "quizSlug": "react-module-31-applied-check"
     }
   ]
 }

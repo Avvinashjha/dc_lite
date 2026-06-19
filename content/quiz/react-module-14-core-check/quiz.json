@@ -1,0 +1,238 @@
+{
+  "id": "react-module-14-core-check",
+  "title": "Performance Optimization Core Check",
+  "description": "Check your understanding of rendering, memoization, code splitting, virtualization, and profiling.",
+  "category": "React",
+  "difficulty": "easy",
+  "tags": [
+    "react",
+    "performance",
+    "memoization",
+    "profiling"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-06-15",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multiple",
+      "prompt": "What can trigger a React component render? (Select all that apply.)",
+      "options": [
+        {
+          "id": "a",
+          "text": "Its state updates"
+        },
+        {
+          "id": "b",
+          "text": "Its parent renders with changed props"
+        },
+        {
+          "id": "c",
+          "text": "A context value it reads changes"
+        },
+        {
+          "id": "d",
+          "text": "A CSS file exists"
+        }
+      ],
+      "correct": [
+        "a",
+        "b",
+        "c"
+      ],
+      "explanation": "State, props from parent renders, and context changes are common render triggers.",
+      "points": 2
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "prompt": "What does React.memo do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Skips re-rendering a component when props are shallowly equal"
+        },
+        {
+          "id": "b",
+          "text": "Caches every network response"
+        },
+        {
+          "id": "c",
+          "text": "Prevents state updates"
+        },
+        {
+          "id": "d",
+          "text": "Turns a component into a class"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "React.memo memoizes component output based on prop comparison.",
+      "points": 1
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "prompt": "What does useMemo memoize?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The result of a calculation"
+        },
+        {
+          "id": "b",
+          "text": "A component file download"
+        },
+        {
+          "id": "c",
+          "text": "A DOM event"
+        },
+        {
+          "id": "d",
+          "text": "A route path"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "useMemo caches a computed value until its dependencies change.",
+      "points": 1
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "prompt": "What does useCallback memoize?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A function reference"
+        },
+        {
+          "id": "b",
+          "text": "A CSS class"
+        },
+        {
+          "id": "c",
+          "text": "A rendered DOM node"
+        },
+        {
+          "id": "d",
+          "text": "A browser request"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "useCallback returns a stable function identity when dependencies are unchanged.",
+      "points": 1
+    },
+    {
+      "id": "q5",
+      "type": "boolean",
+      "prompt": "A re-render is not automatically a performance bug.",
+      "options": [
+        {
+          "id": "true",
+          "text": "True"
+        },
+        {
+          "id": "false",
+          "text": "False"
+        }
+      ],
+      "correct": [
+        "true"
+      ],
+      "explanation": "Many renders are cheap and expected; optimize based on measured problems.",
+      "points": 1
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "prompt": "What is route-level code splitting meant to improve?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Initial bundle size by loading route code when needed"
+        },
+        {
+          "id": "b",
+          "text": "The number of React hooks allowed"
+        },
+        {
+          "id": "c",
+          "text": "The syntax of JSX"
+        },
+        {
+          "id": "d",
+          "text": "The shape of Redux actions"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Lazy loading route code can reduce what users download before they need it.",
+      "points": 1
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "prompt": "What is list virtualization?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rendering only the visible portion of a large list plus some buffer"
+        },
+        {
+          "id": "b",
+          "text": "Sorting a list alphabetically"
+        },
+        {
+          "id": "c",
+          "text": "Converting a list into context"
+        },
+        {
+          "id": "d",
+          "text": "Removing keys from list items"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Virtualization limits DOM work by rendering a window of visible rows.",
+      "points": 1
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "prompt": "What tool helps identify which components rendered and how expensive they were?",
+      "options": [
+        {
+          "id": "a",
+          "text": "React DevTools Profiler"
+        },
+        {
+          "id": "b",
+          "text": "localStorage"
+        },
+        {
+          "id": "c",
+          "text": "forwardRef"
+        },
+        {
+          "id": "d",
+          "text": "Browser bookmarks"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The React DevTools Profiler helps measure component render behavior.",
+      "points": 1
+    }
+  ]
+}

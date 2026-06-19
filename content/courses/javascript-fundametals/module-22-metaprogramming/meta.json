@@ -1,30 +1,70 @@
 {
   "title": "Metaprogramming",
-  "description": "Inspect and customize language behavior with proxies, reflect, and symbols.",
+  "description": "Inspect and customize JavaScript object behavior with descriptors, symbols, Reflect, proxies, and iterables.",
   "lessons": [
     {
-      "slug": "01-proxies",
-      "title": "Proxies",
+      "slug": "01-object-introspection-and-descriptors",
+      "title": "Object Introspection and Descriptors",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
-      "slug": "02-reflect",
+      "slug": "02-defining-and-controlling-properties",
+      "title": "Defining and Controlling Properties",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "03-getters-setters-and-computed-behavior",
+      "title": "Getters, Setters, and Computed Behavior",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "04-symbols-and-well-known-symbols",
+      "title": "Symbols and Well-Known Symbols",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "05-custom-iterables-and-symbol-iterator",
+      "title": "Custom Iterables and Symbol.iterator",
+      "type": "text",
+      "duration": "12 min"
+    },
+    {
+      "slug": "06-reflect",
       "title": "Reflect",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
     },
     {
-      "slug": "03-symbols",
-      "title": "Symbols",
+      "slug": "07-proxies",
+      "title": "Proxies",
       "type": "text",
-      "duration": "10 min"
+      "duration": "15 min"
     },
     {
-      "slug": "04-iterators",
-      "title": "Iterators ([Symbol.iterator])",
+      "slug": "08-practical-metaprogramming-patterns",
+      "title": "Practical Metaprogramming Patterns",
       "type": "text",
-      "duration": "10 min"
+      "duration": "12 min"
+    },
+    {
+      "slug": "09-core-knowledge-check",
+      "title": "Core Knowledge Check",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "javascript-metaprogramming-core-check",
+      "passingScore": 70
+    },
+    {
+      "slug": "10-applied-knowledge-check",
+      "title": "Applied Knowledge Check",
+      "type": "quiz",
+      "duration": "15 min",
+      "quizSlug": "javascript-metaprogramming-applied-check",
+      "passingScore": 70
     }
   ]
 }
