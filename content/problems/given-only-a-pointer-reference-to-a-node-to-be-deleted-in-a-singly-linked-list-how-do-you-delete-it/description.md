@@ -1,4 +1,4 @@
-You are given access to a node in a singly linked list that is to be deleted. You do not have access to the head of the list. The given node is guaranteed not to be the tail node. Write a function to delete the given node by modifying the list in-place. Instead of actually removing the node, copy the next node's value into the current node and then skip the next node.
+Suppose you only have a reference to one particular node inside a singly linked list — not the list's head — and you need to remove that exact node from the list. It's guaranteed that the node you're given is not the last one in the list. Since you can't reach the preceding node, delete it by overwriting its value with the following node's value and then linking past that following node.
 
 **Example:**
 ```

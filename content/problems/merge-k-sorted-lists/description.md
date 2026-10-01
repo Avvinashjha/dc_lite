@@ -1,4 +1,4 @@
-You are given an array of `k` linked lists `lists`, each linked list is sorted in ascending order. Merge all the linked lists into one sorted linked list and return it. Lists are represented as arrays of sorted values.
+You're given an array `lists` holding `k` linked lists, each already sorted in ascending order. Combine all of them into one single sorted linked list and return it. Each list is represented here as an array of its sorted values.
 
 **Example 1:**
 ```

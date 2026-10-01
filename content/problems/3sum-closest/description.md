@@ -1,1 +1,1 @@
-Given an integer array `nums` of length `n` and an integer `target`, find three integers in `nums` such that the sum is closest to `target`. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+You're given an integer array `nums` of length `n` along with a target value `target`. Pick any three numbers from `nums` so that their sum lands as close as possible to `target`, and return that sum (not the indices or the numbers themselves). The input is guaranteed to have exactly one closest-sum solution.

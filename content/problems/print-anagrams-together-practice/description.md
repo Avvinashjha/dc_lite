@@ -1,11 +1,11 @@
-You get an array of strings. Group them so that words that are anagrams of each other sit in the same group. Two strings are anagrams if they use the same multiset of letters (same counts, order may differ). The order of groups and the order of words inside a group can be any valid arrangement unless the problem statement on the judge says otherwise.
+You're given an array of strings. Cluster them so that any two words built from the same letters (same letter counts, regardless of order) land in the same group — that's what makes them anagrams of each other. Groups can come back in any order, and so can the words inside each group, unless the judge says otherwise.
 
-Empty strings are anagrams of each other.
+Two empty strings count as anagrams of each other too.
 
 **Example 1**
 
 - Input: `words = ["eat", "tea", "tan", "ate", "nat", "bat"]`
-- Output: `[["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]` (or any grouping equivalent up to order)
+- Output: `[["bat"], ["nat", "tan"], ["ate", "eat", "tea"]]` (or any equivalent grouping, order aside)
 
 **Example 2**
 

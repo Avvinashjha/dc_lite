@@ -1,3 +1,3 @@
-Implement the Boyer-Moore pattern searching algorithm. Given a text and a pattern, find all occurrences of the pattern in the text.
+Using the Boyer-Moore string-matching technique, locate every position in `text` where `pattern` appears as a substring, and return those starting indices.
 
 **Example:** text = "ABAAABCD", pattern = "ABC" → Output: [4]

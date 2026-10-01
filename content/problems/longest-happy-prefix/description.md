@@ -1,4 +1,4 @@
-A **happy prefix** is a non-empty prefix of a string that is also a suffix (excluding the entire string itself). Given a string `s`, return the longest happy prefix. If no such prefix exists, return an empty string.
+Call a non-empty prefix of a string a **happy prefix** if that same sequence of characters also shows up as a suffix of the string, as long as it isn't the whole string itself. Given a string `s`, find its longest happy prefix, or return an empty string if none exists.
 
 **Example 1:**
 ```

@@ -1,4 +1,4 @@
-Implement both a stack (LIFO) and a queue (FIFO) using a deque (double-ended queue). A deque supports addFront, addBack, removeFront, and removeBack operations. The stack should support push and pop, while the queue should support enqueue and dequeue. Demonstrate that both data structures can be efficiently built on top of a deque.
+A deque (double-ended queue) lets you add or remove elements from either end, giving you `addFront`, `addBack`, `removeFront`, and `removeBack`. Using only these operations, build both a LIFO stack (with `push` and `pop`) and a FIFO queue (with `enqueue` and `dequeue`) on top of the same deque structure, showing how a single double-ended container can efficiently power either behavior.
 
 **Example:**
 ```

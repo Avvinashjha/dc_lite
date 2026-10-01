@@ -1,3 +1,3 @@
-Given a matrix of debts between N friends, minimize the total number of transactions to settle all debts.
+You're given a group of `N` friends along with a matrix describing how much each one owes the others. Work out a way to settle every debt using as few individual payments as possible.
 
-**Example:** 3 friends with various debts → settle with minimum transactions
+**Example:** With 3 friends holding various debts between them, all of it can be settled using the minimum possible number of transactions.

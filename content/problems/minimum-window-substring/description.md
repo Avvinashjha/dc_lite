@@ -1,6 +1,6 @@
-Given two strings `s` and `t`, find the smallest substring of `s` that contains every character of `t` (including duplicates). If no such substring exists, return an empty string.
+Given two strings `s` and `t`, locate the shortest contiguous substring of `s` that includes every character from `t`, matching duplicate counts as well. If no such substring is present, return an empty string instead.
 
-There is exactly one unique minimum window when an answer exists.
+Whenever a valid window exists, there's exactly one smallest one that satisfies the condition.
 
 ### Examples
 
@@ -17,7 +17,7 @@ Output: "a"
 ```
 Input: s = "a", t = "aa"
 Output: ""
-Explanation: 't' needs two 'a's but 's' only has one.
+Explanation: `t` calls for two `'a'`s, but `s` only contains one.
 ```
 
 ### Constraints

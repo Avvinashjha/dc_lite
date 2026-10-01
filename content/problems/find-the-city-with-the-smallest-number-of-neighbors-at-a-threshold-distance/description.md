@@ -1,4 +1,4 @@
-There are `n` cities numbered from 0 to n-1. Given `edges` where `edges[i] = [from, to, weight]` represents a bidirectional weighted edge, and an integer `distanceThreshold`, return the city with the smallest number of cities reachable within `distanceThreshold`. If multiple cities qualify, return the one with the greatest index. A city is reachable if the shortest path distance is at most `distanceThreshold`.
+There are `n` cities labeled `0` through `n-1`, connected by bidirectional weighted roads given as `edges`, where each entry `[from, to, weight]` describes one road. For a given `distanceThreshold`, a city counts as a neighbor of another if the shortest path between them is no greater than that threshold. Find the city with the fewest such neighbors; if more than one city ties for fewest, return the one with the largest index.
 
 **Example:**
 ```

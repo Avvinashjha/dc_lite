@@ -1,4 +1,4 @@
-Given two integer arrays `nums1` and `nums2`, return the maximum length of a subarray that appears in both arrays. A subarray is a contiguous part of an array.
+You're given two integer arrays, `nums1` and `nums2`. Find the length of the longest contiguous run of elements that shows up identically in both arrays, in the same order.
 
 **Example:**
 ```

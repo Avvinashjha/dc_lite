@@ -1,4 +1,4 @@
-Given a linked list where every node represents a linked list and contains two pointers: (i) a `next` pointer to the next node in the main list, (ii) a `bottom` pointer to a linked list where this node is the head. All the bottom linked lists are sorted. Flatten the list into a single sorted list using the `bottom` pointer.
+You're given a linked list where each node sits at the head of its own sorted sub-list: alongside a `next` pointer connecting it to the following node in the main list, every node also has a `bottom` pointer leading down through its own vertical sorted list. Merge everything into one fully sorted list that's linked purely through `bottom` pointers.
 
 **Example:**
 ```

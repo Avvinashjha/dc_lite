@@ -1,4 +1,4 @@
-Given an `m x n` integers matrix, return the length of the longest increasing path. From each cell, you can move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary. Each step must go to a cell with a strictly greater value.
+Given an `m x n` matrix of integers, find the longest path you can trace where each step strictly increases in value. From any cell you may only step up, down, left, or right (no diagonal moves, and never off the edge of the grid), and every move must land on a cell whose value is strictly larger than the one you're leaving.
 
 **Example 1:**
 ```

@@ -1,4 +1,4 @@
-Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. The mapping of digit to letters is the same as on telephone buttons (2->abc, 3->def, ..., 9->wxyz). Return the answer in any order. If the input string is empty, return an empty array.
+Given a string made up of digits 2 through 9, work out every letter combination it could spell, using the same digit-to-letter mapping found on an old telephone keypad (2 maps to abc, 3 to def, and so on through 9 mapping to wxyz). The combinations can come back in any order. An empty input string should simply produce an empty array of results.
 
 **Example 1:**
 ```

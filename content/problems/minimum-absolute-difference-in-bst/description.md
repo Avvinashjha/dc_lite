@@ -1,6 +1,6 @@
-You get the root of a **binary search tree** (BST). Among all pairs of distinct nodes, consider the absolute difference of their values. Return the **minimum** such difference.
+You're handed the root of a **binary search tree** (BST). Look at every possible pair of distinct nodes and compute the absolute difference between their values — return the smallest difference found across all such pairs.
 
-In a BST, an inorder traversal visits values in sorted order. The minimum gap often occurs between two consecutive values in that order, but your answer must be correct for the whole tree.
+Since an inorder walk of a BST produces values in sorted order, the smallest gap usually turns up between two values that are neighbors in that ordering. Still, your solution needs to hold for the tree as a whole, not just one neighboring pair.
 
 **Example 1**
 

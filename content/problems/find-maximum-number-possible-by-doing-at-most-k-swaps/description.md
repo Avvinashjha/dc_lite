@@ -1,4 +1,4 @@
-Given a number as a string and an integer `k`, find the largest number you can produce by swapping any two digits at most `k` times.
+You're given a number represented as a string `num`, along with an integer `k`. By swapping any two digits within the string, at most `k` times, determine the largest possible numeric value you can form.
 
 **Example 1:**
 ```
@@ -16,7 +16,7 @@ Output: "5543333"
 ```
 Input: num = "1234", k = 1
 Output: "4231"
-Explanation: Swap '1' and '4' to get the maximum in one swap.
+Explanation: Swapping '1' and '4' produces the largest value using just one swap.
 ```
 
-**Edge cases:** `k = 0` returns the original number. Number already in descending order. Multiple occurrences of the maximum digit.
+**Edge cases:** When `k = 0`, the original number is returned unchanged. The digits may already be sorted in descending order. The maximum digit may appear more than once.

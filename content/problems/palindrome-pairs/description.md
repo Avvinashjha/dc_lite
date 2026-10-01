@@ -1,3 +1,3 @@
-Given a list of unique words, find all pairs (i,j) such that words[i]+words[j] is a palindrome.
+You're given a list of distinct words. Find every pair of indices `(i, j)` — where `i` and `j` are different — such that joining `words[i]` and `words[j]` together produces a palindrome.
 
-**Example:** words = ["abcd","dcba","lls","s","sssll"] → [[0,1],[1,0],[3,2],[2,4]]
+**Example:** For `words = ["abcd","dcba","lls","s","sssll"]`, the valid index pairs are `[[0,1],[1,0],[3,2],[2,4]]`.

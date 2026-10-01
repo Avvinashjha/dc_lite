@@ -1,1 +1,1 @@
-You are initially positioned at the array's first index, and each element in the array represents your maximum jump length at that position. Return `true` if you can reach the last index, or `false` otherwise.
+You start at index 0 of an array, where each value tells you the farthest you're allowed to jump forward from that position. Decide whether it's possible to chain jumps together and land on the final index, returning `true` if so and `false` if you'd get stuck short of it.

@@ -1,3 +1,3 @@
-Given a singly linked list, determine if it is a palindrome.
+Given the head of a singly linked list, check whether the sequence of values it holds reads the same forwards and backwards.
 
-**Example:** head = [1,2,2,1] → true
+**Example:** For `head = [1, 2, 2, 1]`, the result is `true`.

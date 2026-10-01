@@ -1,6 +1,6 @@
-You get the head of a singly linked list whose values are sorted in non-decreasing order. Remove duplicates so each value appears at most once. Keep the list sorted. Return the head of the modified list.
+You're given the head of a singly linked list whose values are already arranged in non-decreasing order. Delete duplicate values so each distinct value remains only once, keeping the list sorted, and return the head of the updated list.
 
-Do not allocate a whole new list for the result; reuse nodes and adjust pointers.
+Solve it in place — reuse the existing nodes and simply adjust their pointers rather than building a new list.
 
 **Example 1**
 

@@ -1,6 +1,6 @@
-You get a graph as an **adjacency list** `adj`. Vertex labels are `0` to `V - 1`, where `V = adj.length`. The list `adj[i]` holds the neighbors of `i`. Perform **depth-first search (DFS)** starting from vertex `0`. Return the order in which vertices are **first visited** (preorder-style DFS).
+You're given a graph as an **adjacency list** `adj`, where vertices are numbered `0` through `V - 1` (with `V = adj.length`), and `adj[i]` lists the neighbors reachable directly from vertex `i`. Starting at vertex `0`, perform a **depth-first search (DFS)** and return the sequence in which vertices are **first reached** (a preorder-style traversal).
 
-Use the usual DFS rule: from a vertex, explore one neighbor fully before backing up, following the order neighbors appear in each adjacency list unless the problem specifies otherwise.
+Follow the standard DFS approach: fully explore one neighbor's branch before backtracking to try the next, visiting neighbors in the order they appear in each adjacency list unless stated otherwise.
 
 **Example 1**
 

@@ -1,4 +1,4 @@
-Given the `root` of a binary tree, return the inorder traversal of its nodes' values. Inorder traversal visits nodes in the order: left subtree, root, then right subtree. This produces sorted order for BSTs. Implement the solution iteratively using a stack for better space understanding.
+You're given the `root` of a binary tree. Walk it in **inorder** order — left subtree first, then the current node, then the right subtree — and return the node values you collect, in that order. Applying this traversal to a binary search tree naturally yields the values in ascending order. Rather than relying on recursion, write an iterative version that uses an explicit stack, which makes the space usage easier to reason about.
 
 **Example 1:**
 ```

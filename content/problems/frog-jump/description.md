@@ -1,4 +1,4 @@
-A frog is crossing a river. The river is divided into units and at each unit there may or may not be a stone. Given an array `stones` of stone positions in sorted ascending order, the frog starts at stone 0 and its first jump must be 1 unit. If the last jump was `k` units, the next jump must be `k-1`, `k`, or `k+1` units. The frog can only jump forward. Determine if the frog can reach the last stone.
+A frog needs to cross a river that's divided into evenly spaced units, some of which have stones. You're given the positions of the stones as a sorted array `stones`, with the frog beginning on the stone at position 0 and required to make its very first jump exactly 1 unit forward. After a jump of `k` units, its next jump must measure `k-1`, `k`, or `k+1` units, and it can only ever jump forward. Determine whether the frog is able to reach the final stone.
 
 **Example 1:**
 ```

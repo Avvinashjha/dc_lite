@@ -1,4 +1,4 @@
-Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support: `push(x)` to push element x to the top, `pop()` to remove and return the top element, `top()` to get the top element without removing it, and `empty()` to check whether the stack is empty. You must use only standard queue operations.
+Using only two queues as your storage, construct a stack that behaves in last-in-first-out order. It must expose `push(x)` (place `x` on top), `pop()` (remove and hand back the top value), `top()` (peek at the top value and leave it in place), and `empty()` (check whether anything remains). Only the standard queue operations are available to you under the hood.
 
 **Example:**
 ```

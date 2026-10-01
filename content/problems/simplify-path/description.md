@@ -1,6 +1,6 @@
-Given an absolute Unix-style file path, simplify it to its canonical form.
+You're given an absolute path in a Unix-style file system. Convert it into its canonical (simplified) form.
 
-Rules: `"."` refers to the current directory, `".."` moves up one directory, multiple consecutive slashes are treated as a single slash, and any trailing slash is removed. The result always starts with a single `"/"`.
+Along the way: a `"."` segment means stay in the current directory and can be dropped, a `".."` segment means step up to the parent directory, consecutive slashes collapse into one, and a trailing slash gets stripped. The simplified path always begins with exactly one `"/"`.
 
 ### Examples
 

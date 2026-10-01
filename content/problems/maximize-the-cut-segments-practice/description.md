@@ -1,4 +1,4 @@
-Given a rod of length `n` and three segment lengths `x`, `y`, and `z`, maximize the number of segments the rod can be cut into such that each segment has length `x`, `y`, or `z`. If the rod cannot be completely cut into valid segments, return 0.
+You have a rod of length `n` and three allowed cut lengths `x`, `y`, and `z`. Cut the rod into as many pieces as possible where every piece measures exactly `x`, `y`, or `z`, using up the rod with nothing left over. If there's no way to cut the whole rod into pieces of these lengths, return 0.
 
 **Example 1:**
 ```

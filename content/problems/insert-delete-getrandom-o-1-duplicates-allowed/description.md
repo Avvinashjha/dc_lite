@@ -1,1 +1,1 @@
-Implement a data structure that supports `insert`, `remove`, and `getRandom` operations in average O(1) time, allowing duplicates.
+Design a collection that supports three operations — `insert`, `remove`, and `getRandom` — each running in average O(1) time, with the twist that the same value is allowed to appear in the collection more than once.

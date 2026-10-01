@@ -1,4 +1,4 @@
-Given a weighted directed graph represented as an adjacency matrix `graph` of size `V x V`, find the shortest distances between every pair of vertices using the Floyd-Warshall algorithm. If no path exists, the distance remains as a large value (use `10000` to represent infinity). `graph[i][j]` is the weight of the edge from vertex `i` to vertex `j`. `graph[i][i]` is always 0.
+You're given a directed, weighted graph as a `V x V` adjacency matrix `graph`, where `graph[i][j]` holds the weight of the edge going from vertex `i` to vertex `j`, and every diagonal entry `graph[i][i]` is `0`. Compute the shortest distance between every pair of vertices using the Floyd-Warshall all-pairs shortest path algorithm. Wherever no path connects two vertices, leave the distance at the large sentinel value `10000`, which stands in for infinity.
 
 **Example:**
 ```

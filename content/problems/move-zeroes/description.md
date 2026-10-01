@@ -1,1 +1,1 @@
-Given an integer array `nums`, move all 0's to the end of it while maintaining the relative order of the non-zero elements. You must do this in-place without making a copy of the array.
+Given an integer array `nums`, shift every `0` to the end of the array while keeping the non-zero elements in their original relative order. The operation must be performed in-place, without allocating a separate copy of the array.

@@ -1,4 +1,4 @@
-Given an integer array `nums`, return the length of the longest strictly increasing subsequence. A subsequence is derived from the array by deleting some or no elements without changing the order of the remaining elements.
+Given an integer array `nums`, find the length of its longest subsequence that is strictly increasing. Remember that a subsequence comes from deleting zero or more elements from the array while keeping the relative order of what's left untouched.
 
 **Example 1:**
 ```

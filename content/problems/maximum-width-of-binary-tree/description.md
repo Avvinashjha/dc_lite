@@ -1,4 +1,4 @@
-Given the `root` of a binary tree, return the maximum width of the given tree. The maximum width is the maximum length between the leftmost and rightmost non-null nodes at any level, where null nodes between them are also counted.
+You're given the `root` of a binary tree. Return its maximum width, measured as the greatest distance between the leftmost and rightmost non-null nodes on any single level — counting the null gaps that fall between them as if they were present.
 
 **Example:**
 ```

@@ -1,4 +1,4 @@
-Given a binary search tree (BST) and two node values `p` and `q`, find their lowest common ancestor (LCA). The LCA is the deepest node that has both `p` and `q` as descendants (a node can be a descendant of itself). Use the BST property to solve efficiently without visiting every node.
+You're given the root of a binary search tree (BST) along with two node values `p` and `q` known to exist in it. Find their lowest common ancestor (LCA) — the deepest node in the tree that has both `p` and `q` somewhere below it (a node counts as its own descendant too). Since the tree is a BST, you can lean on its ordering property to locate the LCA without touching every node.
 
 **Example 1:**
 ```

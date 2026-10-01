@@ -1,4 +1,4 @@
-Implement two stacks using a single array efficiently. Both stacks should grow in opposite directions: stack 1 grows from the start and stack 2 grows from the end of the array. Support `push1`, `push2`, `pop1`, and `pop2` operations. An overflow occurs only when the two stacks meet in the middle.
+Fit two independent stacks inside a single array without wasting space. Let the first stack grow forward from index 0, and the second grow backward from the last index, so they advance toward each other from opposite ends. Expose `push1`, `push2`, `pop1`, and `pop2` for each stack respectively — space only runs out once the two stacks' pointers meet somewhere in the middle of the array.
 
 **Example:**
 ```

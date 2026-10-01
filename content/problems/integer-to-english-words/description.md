@@ -1,4 +1,4 @@
-Convert a non-negative integer `num` to its English words representation. Handle numbers from 0 up to 2^31 - 1. The words should follow standard English conventions: groupings of Billion, Million, Thousand, and combinations of Hundred with Tens and Ones.
+Spell out a non-negative integer `num` as English words, exactly as you'd say it out loud. Your solution needs to handle everything from 0 up through 2^31 - 1, following the usual English number-naming pattern of breaking the value into Billion, Million, and Thousand groupings, each of which is itself built from Hundreds, Tens, and Ones.
 
 **Example 1:**
 ```

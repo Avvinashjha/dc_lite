@@ -1,1 +1,1 @@
-Given an array of integers `heights` representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+Picture a histogram made of bars of width 1 standing side by side, with `heights` giving each bar's height. Find the biggest rectangle you can fit within the outline of these bars and return its area.

@@ -1,3 +1,3 @@
-Given two arrays nums1 (subset of nums2), for each element in nums1 find the next greater element in nums2. Return -1 if no greater element exists.
+You're given two arrays, `nums1` and `nums2`, where every element of `nums1` also appears somewhere in `nums2`. For each value in `nums1`, locate that same value's position in `nums2` and find the first element to its right that is larger — this is its "next greater element." If no larger element follows it in `nums2`, use `-1` instead.
 
-**Example:** nums1 = [4,1,2], nums2 = [1,3,4,2] → Output: [-1,3,-1]
+**Example:** For `nums1 = [4, 1, 2]` and `nums2 = [1, 3, 4, 2]`, the result is `[-1, 3, -1]`.

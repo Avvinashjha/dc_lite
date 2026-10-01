@@ -1,1 +1,1 @@
-You are given an integer array `prices` where `prices[i]` is the price of a given stock on the `ith` day. On each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. Find and return the maximum profit you can achieve.
+You're given an integer array `prices`, where `prices[i]` is the stock's price on day `i`. You're free to buy and sell as many times as you like, on any days, but you can never hold more than one share at once (so you must sell before buying again). Determine the maximum total profit obtainable.

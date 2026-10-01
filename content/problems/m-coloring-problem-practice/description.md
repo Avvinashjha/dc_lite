@@ -1,4 +1,4 @@
-Given an undirected graph represented as an adjacency list and an integer `m`, determine whether the graph can be colored using at most `m` colors such that no two adjacent vertices share the same color.
+You're given an undirected graph as an adjacency list, along with an integer `m`. Decide whether the graph's vertices can be colored using no more than `m` colors so that every pair of adjacent vertices ends up with different colors.
 
 **Example 1:**
 ```

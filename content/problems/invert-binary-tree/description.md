@@ -1,4 +1,4 @@
-Given the `root` of a binary tree, invert the tree and return its root. Inverting a binary tree means swapping the left and right children of every node in the tree, producing a mirror image of the original tree.
+Given the `root` of a binary tree, flip the whole tree into its mirror image and return the new root. "Inverting" means that at every single node, its left and right children trade places.
 
 **Example 1:**
 ```

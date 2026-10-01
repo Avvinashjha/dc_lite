@@ -1,6 +1,6 @@
-You get the head of a singly linked list. Reverse the links so the former last node becomes the head. Return the new head.
+Given the head of a singly linked list, flip the direction of the entire list so what used to be the last node becomes the first, and return this new head.
 
-Do it by changing `next` pointers. You may solve it iteratively or recursively.
+Achieve this by rewiring each node's `next` pointer — either an iterative loop or a recursive approach works.
 
 **Example 1**
 

@@ -1,3 +1,3 @@
-Given two numbers represented by linked lists, multiply them and return the result.
+You're given two numbers, each represented as a linked list where every node holds a single digit. Multiply the two numbers together and return the resulting product.
 
-**Example:** l1 = [3,2], l2 = [2] → 32 × 2 = 64
+**Example:** With `l1 = [3, 2]` representing `32` and `l2 = [2]` representing `2`, the product is `32 × 2 = 64`.

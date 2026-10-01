@@ -1,3 +1,3 @@
-Given an array and a number N, find if there exists a pair with the given difference.
+Given an array `arr` and a target value `N`, determine whether any two elements in the array differ by exactly `N`.
 
-**Example:** arr = [5, 20, 3, 2, 50, 80], N = 78 → Output: true (80-2=78)
+**Example:** For `arr = [5, 20, 3, 2, 50, 80]` and `N = 78`, the answer is `true`, since `80 - 2 = 78`.

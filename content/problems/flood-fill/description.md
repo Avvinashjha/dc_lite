@@ -1,4 +1,4 @@
-An image is represented by an `m x n` integer grid where `image[i][j]` represents the pixel value. Given a starting pixel `(sr, sc)` and a new color `color`, perform a flood fill starting from that pixel. To perform a flood fill, color the starting pixel plus all pixels connected 4-directionally that share the same original color with the new color. Return the modified image.
+You're given an `m x n` grid of integers called `image`, where each value is a pixel's color. Starting from a given pixel at `(sr, sc)`, repaint it along with every pixel reachable from it through 4-directional moves (up/down/left/right) that share the pixel's original color, changing them all to the new `color`. Return the resulting grid.
 
 **Example:**
 ```

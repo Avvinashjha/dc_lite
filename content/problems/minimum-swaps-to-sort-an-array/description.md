@@ -1,3 +1,3 @@
-Given an array of N distinct elements, find the minimum number of swaps to sort it.
+You're given an array of `N` distinct values. Using swaps that exchange any two elements, determine the fewest swaps needed to arrange the array in ascending order.
 
-**Example:** arr = [4,3,2,1] → Output: 2
+**Example:** For `arr = [4, 3, 2, 1]`, the array can be fully sorted in a minimum of `2` swaps.

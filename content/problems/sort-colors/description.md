@@ -1,1 +1,1 @@
-Given an array `nums` with `n` objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue. We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.
+You're given an array `nums` representing `n` objects, each colored red, white, or blue and encoded as the integers `0`, `1`, and `2` respectively. Rearrange the array in-place so objects of the same color end up next to each other, with the groups ordered red, then white, then blue.

@@ -1,6 +1,6 @@
-You get the roots of two binary trees, `p` and `q`. Return `true` if they are the **same** tree: same shape and the same value at every corresponding node. Otherwise return `false`.
+Given the roots of two binary trees, `p` and `q`, determine whether they're structurally identical with matching values at every corresponding position, returning `true` if so and `false` otherwise.
 
-Compare structure and values together. One missing child on one side and a node on the other means the trees differ.
+Both shape and values matter together — if one tree has a child where the other has none at that same position, the trees are different regardless of values elsewhere.
 
 **Example 1**
 

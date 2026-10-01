@@ -1,4 +1,4 @@
-Given an integer array `nums`, find a contiguous non-empty subarray that has the largest product, and return the product. A negative number multiplied by another negative can produce a large positive, so both maximum and minimum products at each position must be tracked.
+You're given an integer array `nums`. Find a non-empty contiguous subarray whose elements multiply together to the largest possible value, and return that product. Because multiplying two negative numbers flips the sign back to positive, you'll need to keep track of both the running maximum and running minimum product at each position.
 
 **Example 1:**
 ```

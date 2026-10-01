@@ -1,6 +1,6 @@
-Place `n` queens on an `n x n` chessboard so that no two queens threaten each other. No two queens can share the same row, column, or diagonal. Return all distinct valid board configurations.
+Arrange `n` queens on an `n x n` chessboard so that none of them attack one another — meaning no two queens may share a row, a column, or a diagonal. Return every distinct board arrangement that satisfies this.
 
-Each solution is represented as an array of strings where `'Q'` marks a queen and `'.'` marks an empty square.
+Each returned solution is an array of strings, where `'Q'` denotes a square holding a queen and `'.'` denotes an empty one.
 
 ### Examples
 

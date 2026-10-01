@@ -1,4 +1,4 @@
-Design and implement a data structure for a Least Recently Used (LRU) cache. It should support `get(key)` which returns the value if the key exists (otherwise -1), and `put(key, value)` which inserts or updates the key-value pair. When the cache reaches its capacity, it should invalidate the least recently used item before inserting a new item. Both operations must run in O(1) time.
+Build a data structure that implements a Least Recently Used (LRU) cache. It needs two operations: `get(key)`, which returns the stored value for that key or `-1` if the key isn't present, and `put(key, value)`, which adds a new key-value pair or updates an existing one. Once the cache is full, inserting a fresh key must first evict whichever entry was used least recently. Both `get` and `put` are expected to run in constant, O(1) time.
 
 **Example:**
 ```

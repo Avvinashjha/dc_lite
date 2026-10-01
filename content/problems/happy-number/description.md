@@ -1,4 +1,4 @@
-Write an algorithm to determine if a number `n` is happy. A happy number is defined by the following process: starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1, or it loops endlessly in a cycle that does not include 1. Numbers for which this process ends in 1 are happy.
+Determine whether a given positive integer `n` is a happy number. To test this, repeatedly replace the number with the sum of the squares of its individual digits. If this process eventually lands on `1`, the original number is happy; if instead it falls into a repeating cycle that never includes `1`, the number is not happy.
 
 **Example 1:**
 ```

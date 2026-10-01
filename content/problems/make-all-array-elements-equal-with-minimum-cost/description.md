@@ -1,4 +1,4 @@
-Given an array of integers, find the minimum total cost to make all elements equal. The cost of changing an element from value `a` to value `b` is `|a - b|`. The optimal target value that minimizes the total absolute deviation is the median of the array.
+You're given an array of integers, and you want every element to end up with the same value for the lowest possible total cost. Changing a single element from `a` to `b` costs `|a - b|`. Picking the array's median as the common target value is what minimizes this total cost.
 
 **Example 1:**
 ```

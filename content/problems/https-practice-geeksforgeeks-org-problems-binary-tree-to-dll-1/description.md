@@ -1,4 +1,4 @@
-Given a binary tree, convert it to a doubly linked list (DLL) in-place. The left pointer of the tree node should act as the previous pointer of the DLL, and the right pointer should act as the next pointer. The DLL nodes should follow the inorder traversal order of the binary tree. Return the head of the DLL.
+Take a binary tree and reshape it, in-place, into a doubly linked list. Reuse the existing node pointers rather than allocating new ones: each node's left pointer becomes the "previous" link of the list, and its right pointer becomes the "next" link. The order of nodes in the resulting list should match the tree's inorder sequence (left, node, right). Return the node that becomes the head of the list.
 
 **Example:**
 ```

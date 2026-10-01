@@ -1,6 +1,6 @@
-Excel labels columns `A, B, …, Z`, then `AA, AB, …`, then `AAA`, and so on. You get a positive integer `columnNumber` where `1` means `A`, `2` means `B`, …, `26` means `Z`, `27` means `AA`. Return the column title string.
+Spreadsheet programs like Excel name columns `A, B, …, Z`, then continue with `AA, AB, …`, then `AAA`, and so forth. Given a positive integer `columnNumber` — where `1` corresponds to `A`, `2` to `B`, …, `26` to `Z`, and `27` to `AA` — return the matching column title as a string.
 
-This is a base-26 style encoding, but note it is **1-based**, not 0-based like plain binary.
+Think of it as base-26, except the digits start counting from **1** instead of 0, unlike ordinary binary or decimal place-value systems.
 
 **Example 1**
 

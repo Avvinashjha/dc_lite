@@ -1,6 +1,6 @@
-Given a string `s`, return `true` if it can become a palindrome after deleting **at most one** character.
+You're given a string `s`. Report `true` if removing **no more than one** character from it can turn it into a palindrome.
 
-The string only contains lowercase letters. If it's already a palindrome, return `true` as well (zero deletions is valid).
+The string is made up solely of lowercase letters, and a string that's already a palindrome also counts — you're allowed to delete zero characters.
 
 ### Examples
 
@@ -12,7 +12,7 @@ Output: true
 ```
 Input: s = "abca"
 Output: true
-Explanation: Removing 'b' gives "aca", or removing 'c' gives "aba" — both palindromes.
+Explanation: Take out 'b' to get "aca", or take out 'c' to get "aba" — either way you're left with a palindrome.
 ```
 
 ```

@@ -1,4 +1,4 @@
-Given an integer array `nums`, find a peak element and return its index. A peak element is strictly greater than its neighbors. You may imagine that `nums[-1] = nums[n] = -∞`. In other words, an element is always considered greater than a neighbor outside the array boundary. The array is guaranteed to have at least one peak. If multiple peaks exist, return the index of any one of them. You must write an algorithm that runs in O(log n) time.
+You're given an integer array `nums`. An element is a peak if it's strictly larger than the elements immediately beside it, and for this problem the edges of the array are treated as bordered by negative infinity — so the first or last element only needs to beat its single real neighbor to count as a peak. Return the index of any one peak element; at least one is guaranteed to exist, and when there are several, any valid index is accepted. Aim for an O(log n) solution.
 
 **Example 1:**
 ```

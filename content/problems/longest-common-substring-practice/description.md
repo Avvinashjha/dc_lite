@@ -1,4 +1,4 @@
-Given two strings `s1` and `s2`, find the length of the longest common substring. A substring is a contiguous sequence of characters within a string, unlike a subsequence which need not be contiguous.
+Given two strings `s1` and `s2`, determine how long the longest substring they both contain is. Remember that a substring must be made of consecutive characters pulled straight from the string — unlike a subsequence, you can't skip characters along the way.
 
 **Example 1:**
 ```

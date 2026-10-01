@@ -1,6 +1,6 @@
-Given an integer array `nums`, return all the triplets `[nums[i], nums[j], nums[k]]` such that `i != j`, `i != k`, and `j != k`, and `nums[i] + nums[j] + nums[k] == 0`.
+You're given an integer array `nums`. Find every triplet of values `[nums[i], nums[j], nums[k]]` drawn from three distinct indices `i`, `j`, and `k` where the three values sum to zero, and return all such triplets.
 
-Notice that the solution set must not contain duplicate triplets.
+The same triplet of values should never show up twice in the result, even if it can be built from more than one combination of indices.
 
 **Example 1:**
 
@@ -18,7 +18,7 @@ Explanation:
 ```
 Input: nums = [0,1,1]
 Output: []
-Explanation: The only possible triplet does not sum up to 0.
+Explanation: No triplet in this array sums to 0.
 ```
 
 **Example 3:**
@@ -26,5 +26,5 @@ Explanation: The only possible triplet does not sum up to 0.
 ```
 Input: nums = [0,0,0]
 Output: [[0,0,0]]
-Explanation: The only possible triplet sums up to 0.
+Explanation: The one available triplet happens to sum to 0.
 ```

@@ -1,6 +1,6 @@
-Given a string, find all characters that appear more than once and print each duplicate character along with its count.
+You're given a string. Identify every character that shows up more than once, and report each one together with how many times it occurs.
 
-The comparison is case-sensitive — `'a'` and `'A'` are treated as different characters.
+Treat uppercase and lowercase as distinct characters — `'a'` and `'A'` don't count as the same.
 
 ### Examples
 

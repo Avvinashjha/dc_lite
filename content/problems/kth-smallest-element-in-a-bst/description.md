@@ -1,4 +1,4 @@
-Given the `root` of a binary search tree and an integer `k`, return the `k`th smallest value (1-indexed) of all the values of the nodes in the tree. The BST property guarantees that an inorder traversal visits nodes in ascending order.
+Given the `root` of a binary search tree and an integer `k`, find the `k`th smallest value stored in the tree (using 1-based counting). Because of how a BST is ordered, visiting its nodes inorder naturally produces them from smallest to largest, which is worth keeping in mind here.
 
 **Example 1:**
 ```

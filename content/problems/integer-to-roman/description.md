@@ -1,4 +1,4 @@
-Given an integer, convert it to a Roman numeral. Roman numerals use seven symbols: `I` (1), `V` (5), `X` (10), `L` (50), `C` (100), `D` (500), `M` (1000). Subtractive notation is used for 4, 9, 40, 90, 400, and 900 (e.g., `IV` = 4, `IX` = 9).
+Translate an integer into its Roman numeral form. The Roman numeral system is built from seven base symbols — `I` (1), `V` (5), `X` (10), `L` (50), `C` (100), `D` (500), and `M` (1000) — combined by addition, except for six special cases (4, 9, 40, 90, 400, 900) where a smaller symbol placed before a larger one means subtraction instead (so `IV` reads as 4 and `IX` as 9).
 
 **Example 1:**
 ```

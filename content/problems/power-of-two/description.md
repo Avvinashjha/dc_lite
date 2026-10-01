@@ -1,6 +1,6 @@
-You get an integer `n`. Decide whether `n` is a power of two: there must exist some integer `k >= 0` with `n = 2^k`. Return `true` or `false`.
+You're given an integer `n`. Determine whether `n` is a power of two — that is, whether some non-negative integer `k` satisfies `n = 2^k`. Return `true` or `false` accordingly.
 
-Powers of two are `1, 2, 4, 8, ...`. Zero and negative integers are not powers of two in the usual sense for this problem.
+The powers of two start `1, 2, 4, 8, ...`. Neither zero nor any negative number qualifies here.
 
 **Example 1**
 

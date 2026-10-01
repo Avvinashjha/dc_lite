@@ -1,4 +1,4 @@
-Given an integer array `nums` that may contain duplicates, return all possible subsets (the power set). The result must not contain duplicate subsets. Return the subsets in any order.
+You're given an integer array `nums` that might contain repeated values. Generate every possible subset (the power set), making sure no two subsets in the result are identical. The subsets can be returned in any order.
 
 ### Examples
 

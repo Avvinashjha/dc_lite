@@ -1,6 +1,6 @@
-Given two integers `n` and `k`, return all possible combinations of `k` numbers chosen from the range `[1, n]`. The answer can be in any order.
+Given integers `n` and `k`, generate every possible way to pick `k` numbers out of the range `[1, n]`, returning them as a list of combinations in any order.
 
-Each combination is a unique selection — `[1, 2]` and `[2, 1]` are the same combination, so only one should appear.
+Order within a combination doesn't matter — picking `1` then `2` is the same selection as picking `2` then `1`, so each such group should appear only once.
 
 ### Examples
 

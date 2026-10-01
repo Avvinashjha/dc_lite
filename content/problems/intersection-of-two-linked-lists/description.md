@@ -1,4 +1,4 @@
-Given the heads of two singly linked lists `headA` and `headB`, return the node at which the two lists intersect. If the two linked lists have no intersection, return `null`. The linked lists must retain their original structure after the function returns. There are no cycles anywhere in the entire linked structure.
+You're given the heads of two singly linked lists, `headA` and `headB`, which may merge into a shared tail at some point. Find and return the exact node where they come together, or `null` if they never do. Neither list may be modified in the process — both must look the same after your function returns — and you're guaranteed neither list loops back on itself anywhere.
 
 **Example:**
 ```

@@ -1,1 +1,1 @@
-You are given an array `points` containing the coordinates of points on a 2D plane, sorted by the x-values, and an integer `k`. Return the maximum value of the equation `yi + yj + |xi - xj|` where `|xi - xj| <= k` and `1 <= i < j <= points.length`.
+You're given an array `points` of 2D coordinates, already sorted by their x-values, plus an integer `k`. Among all index pairs `i < j` whose x-values satisfy `|xi - xj| <= k`, find the largest possible result of the expression `yi + yj + |xi - xj|`.

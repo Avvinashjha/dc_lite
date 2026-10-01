@@ -1,4 +1,4 @@
-Given an array of strings, find the longest common prefix shared by all of them. If there is no common prefix, return an empty string `""`.
+You're given an array of strings. Work out the longest prefix that every single one of them starts with. If the strings don't share any starting characters at all, return an empty string `""`.
 
 **Example 1:**
 ```

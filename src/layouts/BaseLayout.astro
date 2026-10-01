@@ -206,7 +206,7 @@ if (type === 'website') {
                 <Icons name="moon" size={18} />
               </span>
             </button>
-            <AuthWidget client:load />
+            <AuthWidget client:idle />
           </nav>
 
           <!-- Mobile controls -->
@@ -242,7 +242,7 @@ if (type === 'website') {
             >{item.label}</a>
           ))}
           <div style="margin-top: 1rem; display: flex; justify-content: center;">
-             <AuthWidget client:load />
+             <AuthWidget client:idle />
           </div>
         </div>
       </nav>
@@ -320,7 +320,7 @@ if (type === 'website') {
       </div>
     </footer>
 
-    <LoginModal client:load />
+    <LoginModal client:idle />
     <script src="/js/auth-gate.js" is:inline></script>
     <script src="/js/sync.js" is:inline></script>
     <script is:inline define:vars={{ syncScriptUrl }}>

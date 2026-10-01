@@ -1,4 +1,4 @@
-Given an `m x n` matrix filled with 'X' and 'O', capture all regions that are completely surrounded by 'X'. A region of 'O' is captured by flipping all 'O's into 'X's in that surrounded region. An 'O' on the border or connected to a border 'O' cannot be captured. Return the modified matrix.
+You're given an `m x n` board made up of the characters `'X'` and `'O'`. Any region of connected `'O'` cells that is fully enclosed by `'X'` cells should be captured — flip every `'O'` in such a region over to `'X'`. An `'O'` sitting on the board's edge, or connected to one that is, is never considered enclosed and must stay as-is. Return the updated board.
 
 **Example:**
 ```

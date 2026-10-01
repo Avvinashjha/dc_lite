@@ -1,4 +1,4 @@
-Given a string `s` representing a mathematical expression with non-negative integers and the operators `+`, `-`, `*`, `/`, return the result of evaluating it. Integer division should truncate toward zero. The expression contains no parentheses and is always valid.
+You're given a string `s` that holds a basic arithmetic expression made up of non-negative integers and the operators `+`, `-`, `*`, and `/`, with standard operator precedence (multiplication and division happen before addition and subtraction) and no parentheses anywhere. Evaluate the expression and return the result, truncating any division toward zero. The input is guaranteed to be a valid expression.
 
 **Example 1:**
 ```
@@ -18,4 +18,4 @@ Input: s = " 3+5 / 2 "
 Output: 5
 ```
 
-**Edge cases:** Spaces anywhere in the string. Single number with no operators. Division that truncates (e.g., `14 / 3 = 4`).
+**Edge cases:** The string may contain spaces anywhere. It may be a single number with no operators at all. Division truncates rather than rounds (e.g., `14 / 3 = 4`).

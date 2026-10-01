@@ -1,4 +1,4 @@
-Given `head`, the head of a linked list, determine if the linked list has a cycle in it. A cycle exists if some node in the list can be reached again by continuously following the `next` pointer. Return `true` if there is a cycle, otherwise return `false`. Solve it using O(1) extra memory.
+Given the `head` of a linked list, figure out whether it loops back on itself anywhere — that is, whether repeatedly following `next` pointers eventually revisits a node you've already seen. Return `true` if such a loop exists and `false` if the list simply ends. Aim for a solution that uses only O(1) extra memory.
 
 **Example 1:**
 ```

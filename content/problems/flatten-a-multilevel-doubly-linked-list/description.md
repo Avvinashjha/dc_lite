@@ -1,4 +1,4 @@
-You are given a doubly linked list where each node may have a `child` pointer to a separate doubly linked list. These child lists may also have children, forming a multilevel structure. Flatten the list so that all nodes appear in a single-level doubly linked list. Child lists should be inserted between the current node and its next node, depth-first. After flattening, no node should have a child pointer.
+You're given a doubly linked list in which any node may additionally hold a `child` pointer to the head of its own separate doubly linked list, and those child lists can themselves contain further nested children, forming a multilevel structure. Collapse the entire structure into one single-level doubly linked list, inserting each child list depth-first between its parent node and the parent's original next node. Once flattened, no node should retain a `child` pointer.
 
 **Example:**
 ```

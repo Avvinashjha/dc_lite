@@ -1,1 +1,1 @@
-Given an integer array `nums` of length `n` where all the integers of `nums` are in the range `[1, n]` and each integer appears at most twice, return an array of all the integers that appears twice. You must write an algorithm that runs in O(n) time and uses only constant extra space.
+You're given an integer array `nums` of length `n`, where every value lies between `1` and `n` inclusive and each value occurs either once or twice. Return a list of all the values that occur exactly twice. Your solution should run in O(n) time while using only constant extra space.

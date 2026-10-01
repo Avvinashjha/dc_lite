@@ -1,6 +1,6 @@
-You get the head of a singly linked list. Each node stores `0` or `1`. Treat the list from head to tail as the bits of a binary number, **most significant bit at the head**. Return the integer value in decimal.
+You're given the `head` of a singly linked list whose nodes each hold a single bit, `0` or `1`. Reading the list from `head` to tail gives the binary digits of a number, with the **most significant bit at the head**. Convert that binary value to its decimal integer and return it.
 
-The answer fits in a normal integer for the given constraints.
+Given the constraints below, the result always fits in a standard integer.
 
 **Example 1**
 

@@ -1,1 +1,1 @@
-Given a set of n integers, divide the set in two subsets of n/2 sizes each such that the difference of the sum of two subsets is as minimum as possible. If n is even, then sizes of both subsets must be n/2. If n is odd, then one subset should be (n-1)/2 and other should be (n+1)/2.
+Split a set of `n` integers into two groups so that the gap between their sums is as small as it can possibly be, under a fixed sizing rule: when `n` is even, both groups must contain exactly `n/2` elements; when `n` is odd, one group gets `(n-1)/2` elements and the other gets `(n+1)/2`.

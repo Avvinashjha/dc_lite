@@ -1,4 +1,4 @@
-Given an integer array `nums`, find three numbers whose product is maximum and return that maximum product. The array may contain both positive and negative numbers, so the maximum product could come from two large negatives multiplied by a large positive.
+You're given an integer array `nums`. Pick any three numbers from it whose product is as large as possible, and return that product. Since the array can hold negative values too, the best product might actually come from multiplying the two smallest (most negative) numbers with the single largest positive one.
 
 **Example 1:**
 ```

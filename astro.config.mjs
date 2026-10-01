@@ -54,6 +54,14 @@ function isCanonicalTaxonomyPath(page) {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://dailycoder.in',
+  redirects: {
+    // Duplicate problem pages removed (exact dupes of the canonical slug, same
+    // problem/example/solution — left over from a scraping bug).
+    '/problems/number-of-islands-2': '/problems/number-of-islands',
+    '/problems/spiral-matrix-2': '/problems/spiral-matrix',
+    '/problems/permute-two-arrays-such-that-sum-of-every-pair-is-greater-or-equal-to-k-2': '/problems/permute-two-arrays-such-that-sum-of-every-pair-is-greater-or-equal-to-k',
+    '/problems/https-leetcode-com-problems-implement-stack-using-queues': '/problems/implement-stack-using-queues',
+  },
   integrations: [
     sitemap({
       filter: (page) =>

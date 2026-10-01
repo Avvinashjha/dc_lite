@@ -1,1 +1,1 @@
-Given two strings `needle` and `haystack`, return the index of the first occurrence of `needle` in `haystack`, or -1 if `needle` is not part of `haystack`.
+You're given two strings, `haystack` and `needle`. Locate the first position in `haystack` where `needle` appears as a contiguous substring and return that index; if `needle` never occurs in `haystack`, return `-1`.

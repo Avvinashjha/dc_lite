@@ -1,4 +1,4 @@
-Given a binary tree and two node values `p` and `q`, find their lowest common ancestor (LCA). The LCA is the deepest node that has both `p` and `q` as descendants. A node can be a descendant of itself. Unlike BST, no ordering property is available here, so a general recursive approach is needed.
+You're given the root of a binary tree and two node values `p` and `q`. Find their lowest common ancestor (LCA) — the deepest node in the tree that has both `p` and `q` among its descendants, where a node is allowed to be a descendant of itself. The tree has no BST-style ordering to exploit here, so this calls for a general tree traversal rather than value comparisons.
 
 **Example 1:**
 ```

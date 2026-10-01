@@ -1,4 +1,4 @@
-Given an undirected graph represented as an adjacency matrix and `m` colors, determine if the graph can be colored using at most `m` colors such that no two adjacent vertices share the same color. This is the classic graph m-coloring decision problem solved using backtracking.
+You're given an undirected graph as an adjacency matrix, along with a budget of `m` colors. Decide whether every vertex can be assigned one of those `m` colors so that no two vertices joined by an edge end up with the same color. This is the well-known graph m-coloring decision problem, typically tackled with a backtracking search over color assignments.
 
 **Example 1:**
 ```

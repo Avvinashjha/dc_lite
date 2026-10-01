@@ -1,26 +1,9 @@
-Given an `n x n` maze (where `n` is odd), find all paths from any corner cell to the center cell `(n/2, n/2)`. From cell `(i, j)`, you must move exactly `maze[i][j]` steps in one of the four cardinal directions (up, down, left, right). You cannot revisit a cell in the same path.
+You're given an `n x n` maze, where `n` is odd, filled with movement values. Starting from any of the four corner cells, find every path that leads to the maze's center cell at `(n/2, n/2)` (integer division). From a cell `(i, j)`, you must move exactly `maze[i][j]` steps in a single direction — up, down, left, or right — landing on the next cell in that path; a cell already visited on the current path cannot be revisited, and moves that go outside the grid are not allowed.
 
-**Example 1:**
+**Example:**
 ```
-Input: maze = [
-  [3, 5, 4, 4, 7],
-  [3, 1, 3, 3, 1],
-  [3, 2, 3, 1, 2],
-  [6, 3, 1, 5, 3],
-  [1, 2, 3, 4, 1]
-]
-Output: One valid path from (0,0): (0,0) → (0,3) → (0,7 invalid)... 
-The paths vary; the goal is to reach (2,2) from corners.
+Input: maze = [[3, 5, 4, 4, 7, 3, 4, 6, 3], [6, 7, 5, 6, 6, 2, 0, 3, 1], [3, 3, 4, 6, 1, 2, 4, 6, 5], [2, 4, 5, 6, 8, 5, 6, 5, 1], [2, 3, 2, 4, 0, 4, 2, 6, 2], [6, 5, 3, 2, 4, 3, 2, 6, 1], [1, 3, 5, 7, 8, 3, 2, 4, 3], [6, 1, 1, 0, 1, 2, 1, 0, 7], [1, 3, 2, 2, 1, 0, 8, 5, 1]]
+Output: [(0,0) -> (0,3) -> (0,7) -> (6,7) -> (6,3) -> (3,3) -> (3,5) -> (6,5) -> (6,2) -> (2,2) -> (2,6) -> (4,6) -> (4,4)]
 ```
 
-**Example 2:**
-```
-Input: maze = [
-  [2, 1, 3],
-  [1, 1, 1],
-  [3, 1, 2]
-]
-Output: Paths from (0,0) to (1,1): (0,0)→(0,2)→(0,2 can't, bounds)
-```
-
-**Edge cases:** No valid path exists from a given corner. Maze with size 1 — the corner is the center.
+**Edge cases:** A given corner may have no valid path to the center at all. When `n = 1`, the single corner cell is itself the center.

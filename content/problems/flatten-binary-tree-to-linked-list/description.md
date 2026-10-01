@@ -1,4 +1,4 @@
-Given the `root` of a binary tree, flatten the tree into a "linked list" in-place. The linked list should use the same `TreeNode` class where the `right` child pointer points to the next node and the `left` child pointer is always `null`. The list should be in the same order as a pre-order traversal of the binary tree.
+Given the `root` of a binary tree, rearrange it in-place into a "linked list" built from the same `TreeNode` structure: every node's `left` pointer becomes `null`, and its `right` pointer leads to the next node in the sequence. The resulting order of nodes should match what a pre-order traversal of the original tree would produce.
 
 **Example 1:**
 ```

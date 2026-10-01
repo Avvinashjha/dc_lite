@@ -46,14 +46,27 @@ const potdScheduleDate = getLatestPotdScheduleDateForSlug(slug) || '';
 const problemImage = new URL(ogImageForPath(Astro.url.pathname), Astro.site).href;
 const publishedDate = problem.publishedAt ? new Date(problem.publishedAt) : null;
 const datePublishedIso = publishedDate && !isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
+const proficiencyLevel = problem.difficulty === 'Easy'
+  ? 'Beginner'
+  : problem.difficulty === 'Hard'
+    ? 'Advanced'
+    : 'Intermediate';
+
 const problemJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': ['TechArticle', 'LearningResource'],
   headline: problem.title,
   description: pageDescription,
   image: problemImage,
   educationalLevel: problem.difficulty,
+  proficiencyLevel,
+  learningResourceType: 'Coding exercise',
+  educationalUse: 'Practice',
+  teaches: topics.join(', '),
+  about: topics.map((t: string) => ({ '@type': 'Thing', name: t })),
   keywords: topics.join(', '),
+  isAccessibleForFree: true,
+  inLanguage: 'en',
   url: Astro.url.href,
   author: { '@type': 'Organization', name: 'DailyCoder' },
   publisher: {

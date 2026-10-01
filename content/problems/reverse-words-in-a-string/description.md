@@ -1,6 +1,6 @@
-Given a string `s`, reverse the order of the words. A word is a sequence of non-space characters. Return the words in reverse order, separated by a single space.
+You're given a string `s` made up of words — where a word is any run of non-space characters — separated by spaces. Produce a string containing those words in reverse order, with exactly one space between consecutive words.
 
-The input may have leading/trailing spaces and multiple spaces between words. The output should have no extra spaces.
+Because the input can have leading or trailing spaces and runs of multiple spaces between words, make sure none of that extra spacing survives into the output.
 
 ### Examples
 

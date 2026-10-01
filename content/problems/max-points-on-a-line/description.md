@@ -1,4 +1,4 @@
-Given an array of `points` where `points[i] = [xi, yi]` represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
+You're given an array `points`, where each `points[i] = [xi, yi]` marks a point on the X-Y plane. Find the largest number of these points that can all sit on one common straight line.
 
 **Example 1:**
 ```

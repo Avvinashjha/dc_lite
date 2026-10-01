@@ -1,6 +1,6 @@
-You get an `n × n` matrix of integers. Rotate the image **90 degrees clockwise**. You must do it **in place**: do not allocate another `n × n` matrix for the final result (extra constant space for a few variables is fine).
+You're given an `n × n` matrix of integers representing an image. Rotate it **90 degrees clockwise**, modifying the matrix **in place** — allocating a second `n × n` matrix for the output isn't allowed, though a few extra scalar variables are fine.
 
-Visual rule: what was the first row becomes the last column, and so on.
+As a sanity check: after rotating, the original first row becomes the new last column, and the same pattern continues for every row.
 
 **Example 1**
 

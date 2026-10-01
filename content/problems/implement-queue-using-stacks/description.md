@@ -1,4 +1,4 @@
-Implement a first-in-first-out (FIFO) queue using only two stacks. The queue should support: `push(x)` to push element to the back, `pop()` to remove from the front, `peek()` to get the front element, and `empty()` to check if queue is empty. You must use only standard stack operations: push to top, peek/pop from top, size, and is empty.
+Build a first-in-first-out (FIFO) queue using nothing but two stacks as the underlying storage. It needs to support `push(x)` (add an element to the back), `pop()` (remove the element at the front), `peek()` (look at the front element without removing it), and `empty()` (report whether the queue has anything left). The only moves allowed on the underlying stacks are the usual ones — pushing to the top, popping or peeking the top, checking the size, and checking if a stack is empty.
 
 **Example:**
 ```

@@ -1,1 +1,1 @@
-Write a program to solve a Sudoku puzzle by filling the empty cells. A sudoku solution must satisfy all of the following rules: Each of the digits 1-9 must occur exactly once in each row, column, and each of the 9 3x3 sub-boxes of the grid.
+Complete a partially filled 9x9 Sudoku grid so that every row, every column, and each of the nine 3x3 boxes contains the digits 1 through 9 with no repeats. Fill in the empty cells directly to produce a valid, fully solved board.

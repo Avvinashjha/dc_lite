@@ -1,6 +1,6 @@
-You get an array `nums` of length `n`. It contains `n` distinct integers, each in the range `[0, n]` inclusive. Exactly one integer in that range is missing from the array. Find and return that missing number.
+You're given an array `nums` holding `n` distinct integers, with every value falling somewhere in the inclusive range `[0, n]`. Out of all the integers in that range, exactly one does not appear in the array — figure out which one and return it.
 
-The full set should be `{0, 1, …, n}`; the array lists `n` of them.
+The complete range spans `n + 1` values, `{0, 1, …, n}`, while the array only holds `n` of them.
 
 **Example 1**
 

@@ -1,4 +1,4 @@
-Given a binary tree, find the size (number of nodes) of the largest subtree which is also a valid Binary Search Tree (BST). A BST is a tree where for every node, all values in the left subtree are smaller and all values in the right subtree are larger.
+Somewhere inside a given binary tree, there may be a subtree that happens to satisfy the binary search tree property — every node's left descendants hold smaller values and its right descendants hold larger ones. Find the largest such subtree and report how many nodes it contains.
 
 **Example:**
 ```

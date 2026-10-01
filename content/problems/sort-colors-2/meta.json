@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0257",
-  "title": "Sort Colors",
+  "title": "Sort Colors (One-Pass, Constant Space)",
   "difficulty": "Medium",
   "topic": "Two-Pointer",
   "topics": [

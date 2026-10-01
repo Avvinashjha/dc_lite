@@ -1,6 +1,6 @@
-Given a string `s`, partition it such that every substring in the partition is a palindrome. Return all possible palindrome partitionings.
+Given a string `s`, split it into pieces so that every piece is itself a palindrome, and return every way of partitioning the string that achieves this.
 
-A palindrome reads the same forwards and backwards. Each partition must use every character of the string exactly once.
+A palindrome is a sequence that reads identically in both directions. Each partitioning must account for every character of `s` exactly once, with no characters skipped or reused.
 
 ### Examples
 

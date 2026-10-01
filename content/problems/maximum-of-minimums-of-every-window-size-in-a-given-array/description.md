@@ -1,4 +1,4 @@
-Given an integer array of size `n`, find the maximum of the minimums for every window size from 1 to n. For each window size `w`, consider all contiguous subarrays of that size, find the minimum of each, and take the maximum among those minimums.
+You're given an integer array of size `n`. For every window size `w` from 1 up to `n`, look at all contiguous subarrays of that length, take the minimum value within each one, and then report the largest of those minimums. Do this for every window size and return the full set of results.
 
 **Example:**
 ```

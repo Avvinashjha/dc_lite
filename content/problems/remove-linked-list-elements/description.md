@@ -1,6 +1,6 @@
-You get the head of a singly linked list and an integer `val`. Delete every node whose value equals `val`. Return the head of the new list (which may differ from the original head if the first nodes are removed).
+Given the head of a singly linked list and an integer `val`, remove every node whose value matches `val` and return the head of what's left. Note the head itself may change if the leading nodes are among those removed.
 
-Keep relative order for the nodes you keep.
+The surviving nodes should stay in their original relative order.
 
 **Example 1**
 

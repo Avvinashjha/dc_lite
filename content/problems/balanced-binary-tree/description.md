@@ -1,3 +1,3 @@
-Given a binary tree, determine if it is height-balanced. A balanced tree is one where the depth of the two subtrees of every node never differs by more than one.
+You're given the root of a binary tree. Determine whether it's height-balanced — meaning that for every node in the tree, the heights of its left and right subtrees differ by at most one.
 
 **Example:** root = [3,9,20,null,null,15,7] → Output: true
