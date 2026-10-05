@@ -362,19 +362,20 @@ const enabled = (config as any).comments?.enabled && validScriptUrl;
   }
   
   .comments__btn {
-    background: var(--color-text);
-    color: var(--color-background);
+    background: var(--color-primary);
+    color: white;
     border: none;
     padding: 0.6rem 1.25rem;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: background 0.2s, transform 0.2s;
   }
-  
+
   .comments__btn:hover {
-    opacity: 0.9;
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
   }
   
   .comments__btn:disabled {

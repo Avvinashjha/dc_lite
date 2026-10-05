@@ -154,6 +154,7 @@ const listJsonLd = {
 
       <!-- Table view -->
       <div id="view-table">
+        <div class="problem-table-scroll" id="problem-table-scroll">
         <table class="problem-table">
           <thead>
             <tr>
@@ -198,6 +199,7 @@ const listJsonLd = {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       <!-- Grid view (hidden by default) -->
@@ -317,6 +319,21 @@ const listJsonLd = {
     viewBtns.forEach(b => b.classList.toggle('problems-view-toggle__btn--active', b.dataset.view === view));
   }
   viewBtns.forEach(b => b.addEventListener('click', () => switchView(b.dataset.view!)));
+
+  // ── Table scroll affordance (mobile: hint that Difficulty/Platform columns are offscreen) ──
+  var tableScrollEl = document.getElementById('problem-table-scroll');
+  if (tableScrollEl) {
+    var updateTableScrollState = function () {
+      var el = tableScrollEl!;
+      var hasOverflow = el.scrollWidth > el.clientWidth + 1;
+      el.classList.toggle('problem-table-scroll--no-overflow', !hasOverflow);
+      var atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+      el.classList.toggle('problem-table-scroll--at-end', hasOverflow && atEnd);
+    };
+    tableScrollEl.addEventListener('scroll', updateTableScrollState, { passive: true });
+    window.addEventListener('resize', updateTableScrollState);
+    updateTableScrollState();
+  }
 
   // ── Topic chips ──
   var topicChips = Array.from(document.querySelectorAll<HTMLButtonElement>('#topic-chips .problems-topic-chips__chip'));

@@ -45,7 +45,7 @@ const relatedTools = getToolsForPost({ title, tags, category }, 3);
   ]}
 >
   <article class="article">
-    <div class="container content">
+    <div class="container content article-container">
       <a href="/blog" class="back-link">&larr; Back to Blog</a>
 
       <header class="article__header">
@@ -65,11 +65,13 @@ const relatedTools = getToolsForPost({ title, tags, category }, 3);
         >
           <a href={`/blog/category/${categorySlug}`} class="tag">{category}</a>
           {
-            tags.map((tag) => (
-              <a href={`/blog/tag/${slugifyTaxonomy(tag)}`} class="tag">
-                {tag}
-              </a>
-            ))
+            tags
+              .filter((tag) => tag.toLowerCase() !== category.toLowerCase())
+              .map((tag) => (
+                <a href={`/blog/tag/${slugifyTaxonomy(tag)}`} class="tag">
+                  {tag}
+                </a>
+              ))
           }
         </div>
       </header>
@@ -145,6 +147,12 @@ const relatedTools = getToolsForPost({ title, tags, category }, 3);
 </BaseLayout>
 
 <style>
+  /* Cap prose width for readability — long, unconstrained lines are hard to
+     read on wide viewports. Keeps the page-level `.content` max-width (1500px)
+     untouched for other pages that reuse that utility class. */
+  .content.article-container {
+    max-width: 760px;
+  }
   .article__image-wrap {
     border-radius: var(--radius-md, 0.5rem);
     overflow: hidden;

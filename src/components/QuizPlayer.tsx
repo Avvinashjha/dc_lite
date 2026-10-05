@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 import { useState, useEffect, useRef, useCallback } from 'preact/hooks';
 import { useStore } from '@nanostores/preact';
-import { userStore } from '../store/userStore';
+import { userStore, isAuthLoading } from '../store/userStore';
 import { openLoginModal } from '../store/authModalStore';
 import type { Quiz, Question, QuizAnswers, QuizResult } from '../types/quiz';
 import { gradeQuiz } from '../lib/quizScoring';
@@ -87,6 +87,7 @@ function fieldHtml(pre: string | undefined, raw: string): string {
 
 export default function QuizPlayer({ quiz }: Props) {
   const user = useStore(userStore);
+  const authLoading = useStore(isAuthLoading);
   const questions = quiz.questions || [];
   const total = questions.length;
 
@@ -277,12 +278,15 @@ export default function QuizPlayer({ quiz }: Props) {
           )}
         </ul>
 
-        {quiz.ranked && !user && (
+        {quiz.ranked && authLoading && (
+          <p class="quiz-note">Checking sign-in status&hellip;</p>
+        )}
+        {quiz.ranked && !authLoading && !user && (
           <p class="quiz-note">
             Playing in <strong>practice mode</strong>. <button type="button" class="quiz-link-btn" onClick={() => openLoginModal('Sign in to submit your score to the leaderboard')}>Sign in</button> to submit your score to the leaderboard.
           </p>
         )}
-        {quiz.ranked && user && (
+        {quiz.ranked && !authLoading && user && (
           <p class="quiz-note">Signed in as <strong>{user.displayName || 'you'}</strong> — your score will be submitted to the leaderboard.</p>
         )}
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getSiteConfig } from '../utils/contentLoader';
+import { ALL_TOOLS } from '../data/tools';
 const config = getSiteConfig();
 ---
 
@@ -23,7 +24,7 @@ const config = getSiteConfig();
         <li><strong>Blog</strong> — In-depth articles on JavaScript, TypeScript, CSS, React, and modern web development</li>
         <li><strong>Courses</strong> — Structured learning paths with interactive quizzes and exercises</li>
         <li><strong>Documentation</strong> — Technical guides and project docs</li>
-        <li><strong>Developer Tools</strong> — 13+ free client-side tools (JSON formatter, diff checker, regex tester, and more)</li>
+        <li><strong>Developer Tools</strong> — {ALL_TOOLS.length}+ free client-side tools (JSON formatter, diff checker, regex tester, and more)</li>
       </ul>
       
       <h2>Built With Modern Tech</h2>

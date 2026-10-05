@@ -782,6 +782,33 @@
 }
 
 // ── Problem table ──
+.problem-table-scroll {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  // Right-edge fade hints that more columns exist offscreen. Hidden once the
+  // table is fully scrolled (via the `--at-end` class, toggled in JS) or when
+  // the table already fits (`--no-overflow`, toggled in JS).
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 28px;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--color-background) 85%);
+    opacity: 1;
+    transition: opacity 0.15s ease;
+  }
+
+  &--at-end::after,
+  &--no-overflow::after {
+    opacity: 0;
+  }
+}
+
 .problem-table {
   width: 100%;
   border-collapse: collapse;
