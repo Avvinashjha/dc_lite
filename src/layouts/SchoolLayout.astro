@@ -1,0 +1,28 @@
+---
+import '../styles/global.scss';
+import '../styles/school.scss';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fafbf6" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+  </head>
+  <body class="school-body">
+    <a class="school-skip-link" href="#school-main">Skip to learning content</a>
+    <slot />
+    <noscript><p class="school-noscript">Turn on JavaScript to choose your class and use the interactive School activities. You can also browse the <a href="https://ncert.nic.in/textbook.php">NCERT textbook library</a>.</p></noscript>
+  </body>
+</html>

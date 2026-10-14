@@ -4,6 +4,7 @@ A scalable, high-performance content platform built with **Astro**, featuring bl
 
 ## Features
 
+- **School preview**: A separate `/school` area for Classes 1–12 with class-based lessons, games, beginner coding, quizzes, and subject checks. See [School scope and roadmap](docs/school.md) for current coverage and the planned Ask service.
 - **Blog**: Full blog with tags, categories, search, RSS feed
 - **Courses**: Interactive courses with modules, lessons, embedded videos, quizzes, and exercises
 - **Documentation**: Project docs and tech guides with sidebar navigation

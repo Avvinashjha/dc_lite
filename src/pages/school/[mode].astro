@@ -1,0 +1,12 @@
+---
+import SchoolLayout from '../../layouts/SchoolLayout.astro';
+import SchoolApp from '../../components/school/SchoolApp';
+import { SCHOOL_MODES } from '../../data/school';
+export function getStaticPaths() {
+  return SCHOOL_MODES.map(item => ({ params: { mode: item.id }, props: { item } }));
+}
+const { item } = Astro.props;
+---
+<SchoolLayout title={`${item.label} | DailyCoder School`} description={item.description}>
+  <SchoolApp mode={item.id} client:load />
+</SchoolLayout>
