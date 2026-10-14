@@ -12,11 +12,62 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=https%3A%2F%2Fpractice.geeksforgeeks.org%2Fproblems%2Fbinary-tree-to-dll%2F1",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          12,
+          15,
+          25,
+          30,
+          36
+        ]
+      ],
+      "expected": [
+        25,
+        12,
+        30,
+        10,
+        36,
+        15
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
   "functionName": "binaryTreeToDll",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {TreeNode}\n */\nfunction bToDLL(root) {\n  // Convert binary tree to DLL\n}",
+  "templateCode": "function binaryTreeToDll(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= Number of nodes <= 10^5",
     "-10^5 <= Node.val <= 10^5"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ],
+    "outputType": "dll"
+  },
+  "examples": [
+    {
+      "input": "root = [10,12,15,25,30,36]",
+      "output": "[25,12,30,10,36,15]"
+    },
+    {
+      "input": "root = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "root = [10,12,15,25,30,36]",
+  "sampleOutput": "[25,12,30,10,36,15]",
+  "inputFormat": "Implement binaryTreeToDll(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nThe output is read along right pointers; left pointers must link backward correctly."
 }

@@ -38,11 +38,26 @@
       "expected": 7
     }
   ],
-  "functionName": "bestTimeToBuyAndSellStockIv",
-  "templateCode": "/**\n * @param {number} k\n * @param {number[]} prices\n * @return {number}\n */\nfunction maxProfit(k, prices) {\n  // Max profit with at most k transactions\n}",
+  "functionName": "maxProfit",
+  "templateCode": "function maxProfit(k, prices) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= k <= 100",
     "1 <= prices.length <= 1000",
     "0 <= prices[i] <= 1000"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "k = 2\nprices = [2,4,1]",
+      "output": "2"
+    },
+    {
+      "input": "k = 2\nprices = [3,2,6,5,0,3]",
+      "output": "7"
+    }
+  ],
+  "sampleInput": "k = 2\nprices = [2,4,1]",
+  "sampleOutput": "2",
+  "inputFormat": "Implement maxProfit(k, prices). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

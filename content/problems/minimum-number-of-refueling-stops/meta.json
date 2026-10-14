@@ -11,12 +11,79 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "minimumNumberOfRefuelingStops",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumNumberOfRefuelingStops(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        100,
+        10,
+        [
+          [
+            10,
+            60
+          ],
+          [
+            20,
+            30
+          ],
+          [
+            30,
+            30
+          ],
+          [
+            60,
+            40
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        1,
+        1,
+        []
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        100,
+        1,
+        [
+          [
+            10,
+            100
+          ]
+        ]
+      ],
+      "expected": -1
+    }
+  ],
+  "functionName": "minRefuelStops",
+  "templateCode": "function minRefuelStops(target, startFuel, stations) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= target <= 10^9",
     "0 <= startFuel <= 10^9",
-    "0 <= stations.length <= 500"
-  ]
+    "0 <= stations.length <= 500",
+    "Stations are sorted by increasing position; positions and fuel amounts are positive integers."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "target = 100\nstartFuel = 10\nstations = [[10,60],[20,30],[30,30],[60,40]]",
+      "output": "2"
+    },
+    {
+      "input": "target = 1\nstartFuel = 1\nstations = []",
+      "output": "0"
+    },
+    {
+      "input": "target = 100\nstartFuel = 1\nstations = [[10,100]]",
+      "output": "-1"
+    }
+  ],
+  "sampleInput": "target = 100\nstartFuel = 10\nstations = [[10,60],[20,30],[30,30],[60,40]]",
+  "sampleOutput": "2",
+  "inputFormat": "Implement minRefuelStops(target, startFuel, stations). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

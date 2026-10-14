@@ -12,11 +12,62 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Predecessor%20and%20Successor%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "predecessorAndSuccessor",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction predecessorAndSuccessor(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          50,
+          30,
+          70,
+          20,
+          40,
+          60,
+          80
+        ],
+        65
+      ],
+      "expected": [
+        60,
+        70
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        null,
+        null
+      ]
+    }
+  ],
+  "functionName": "findPreSuc",
+  "templateCode": "function findPreSuc(root, key) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^4",
     "1 <= key <= 10^6"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ],
+    "outputType": "nodeValues"
+  },
+  "examples": [
+    {
+      "input": "root = [50,30,70,20,40,60,80]\nkey = 65",
+      "output": "[60,70]"
+    },
+    {
+      "input": "root = [1]\nkey = 1",
+      "output": "[null,null]"
+    }
+  ],
+  "sampleInput": "root = [50,30,70,20,40,60,80]\nkey = 65",
+  "sampleOutput": "[60,70]",
+  "inputFormat": "Implement findPreSuc(root, key). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturn [predecessorNode, successorNode]; the editor displays their values or null."
 }

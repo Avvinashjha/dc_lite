@@ -11,13 +11,61 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Solving%20Cryptarithmetic%20Puzzles",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "SEND + MORE = MONEY",
-  "sampleOutput": "S=9, E=5, N=6, D=7, M=1, O=0, R=8, Y=2",
-  "testCases": [],
-  "functionName": "solvingCryptarithmeticPuzzles",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction solvingCryptarithmeticPuzzles(input) {\n  // Write your solution here\n}\n",
+  "sampleInput": "words = [\"SEND\",\"MORE\"]\nresult = \"MONEY\"",
+  "sampleOutput": "{\"S\":9,\"E\":5,\"N\":6,\"D\":7,\"M\":1,\"O\":0,\"R\":8,\"Y\":2}",
+  "testCases": [
+    {
+      "args": [
+        [
+          "SEND",
+          "MORE"
+        ],
+        "MONEY"
+      ],
+      "expected": {
+        "S": 9,
+        "E": 5,
+        "N": 6,
+        "D": 7,
+        "M": 1,
+        "O": 0,
+        "R": 8,
+        "Y": 2
+      }
+    },
+    {
+      "args": [
+        [
+          "A",
+          "B"
+        ],
+        "AA"
+      ],
+      "expected": null
+    }
+  ],
+  "functionName": "solveCryptarithmetic",
+  "templateCode": "function solveCryptarithmetic(words, result) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "Each word has at most 10 unique characters",
-    "Total unique characters <= 10"
-  ]
+    "1 <= words.length <= 5",
+    "1 <= words[i].length, result.length <= 20",
+    "All characters are uppercase English letters.",
+    "At most 10 distinct letters occur across all words.",
+    "Every leading letter must map to a non-zero digit."
+  ],
+  "runner": {
+    "validator": "cryptarithm"
+  },
+  "examples": [
+    {
+      "input": "words = [\"SEND\",\"MORE\"]\nresult = \"MONEY\"",
+      "output": "{\"S\":9,\"E\":5,\"N\":6,\"D\":7,\"M\":1,\"O\":0,\"R\":8,\"Y\":2}"
+    },
+    {
+      "input": "words = [\"A\",\"B\"]\nresult = \"AA\"",
+      "output": "null"
+    }
+  ],
+  "inputFormat": "Implement solveCryptarithmetic(words, result). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nAny result satisfying the statement is accepted."
 }

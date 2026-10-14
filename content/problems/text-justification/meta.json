@@ -11,12 +11,59 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/text-justification/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "textJustification",
-  "templateCode": "/**\n * @param {string[]} words\n * @param {number} maxWidth\n * @return {string[]}\n */\nfunction fullJustify(words, maxWidth) {\n  // Text justification\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          "This",
+          "is",
+          "an",
+          "example",
+          "of",
+          "text",
+          "justification."
+        ],
+        16
+      ],
+      "expected": [
+        "This    is    an",
+        "example  of text",
+        "justification.  "
+      ]
+    },
+    {
+      "args": [
+        [
+          "a"
+        ],
+        3
+      ],
+      "expected": [
+        "a  "
+      ]
+    }
+  ],
+  "functionName": "fullJustify",
+  "templateCode": "function fullJustify(words, maxWidth) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= words.length <= 300",
-    "1 <= words[i].length <= 20",
-    "1 <= maxWidth <= 100"
-  ]
+    "1 <= maxWidth <= 100",
+    "1 <= words[i].length <= min(20,maxWidth)",
+    "Words contain no spaces."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "words = [\"This\",\"is\",\"an\",\"example\",\"of\",\"text\",\"justification.\"]\nmaxWidth = 16",
+      "output": "[\"This    is    an\",\"example  of text\",\"justification.  \"]"
+    },
+    {
+      "input": "words = [\"a\"]\nmaxWidth = 3",
+      "output": "[\"a  \"]"
+    }
+  ],
+  "sampleInput": "words = [\"This\",\"is\",\"an\",\"example\",\"of\",\"text\",\"justification.\"]\nmaxWidth = 16",
+  "sampleOutput": "[\"This    is    an\",\"example  of text\",\"justification.  \"]",
+  "inputFormat": "Implement fullJustify(words, maxWidth). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

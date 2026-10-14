@@ -12,11 +12,74 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Travelling%20Salesman%20Problem%20using%20Dynamic%20Programming",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "travellingSalesmanProblemUsingDynamicProgramming",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction travellingSalesmanProblemUsingDynamicProgramming(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0,
+            10,
+            15,
+            20
+          ],
+          [
+            10,
+            0,
+            35,
+            25
+          ],
+          [
+            15,
+            35,
+            0,
+            30
+          ],
+          [
+            20,
+            25,
+            30,
+            0
+          ]
+        ]
+      ],
+      "expected": 80
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            5
+          ],
+          [
+            5,
+            0
+          ]
+        ]
+      ],
+      "expected": 10
+    }
+  ],
+  "functionName": "tsp",
+  "templateCode": "function tsp(dist) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 20",
-    "1 <= cost[i][j] <= 10^4"
-  ]
+    "1 <= dist.length <= 20",
+    "dist is square with diagonal entries 0.",
+    "Off-diagonal distances are integers in [1,10^4]."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "dist = [[0,10,15,20],[10,0,35,25],[15,35,0,30],[20,25,30,0]]",
+      "output": "80"
+    },
+    {
+      "input": "dist = [[0,5],[5,0]]",
+      "output": "10"
+    }
+  ],
+  "sampleInput": "dist = [[0,10,15,20],[10,0,35,25],[15,35,0,30],[20,25,30,0]]",
+  "sampleOutput": "80",
+  "inputFormat": "Implement tsp(dist). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

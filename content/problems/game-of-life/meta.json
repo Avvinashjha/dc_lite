@@ -61,12 +61,41 @@
           0
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ]
+      ]
     }
   ],
   "functionName": "gameOfLife",
-  "templateCode": "/**\n * @param {number[][]} board\n * @return {any}\n */\nfunction gameOfLife(board) {\n  // Write your solution here\n}\n\n// Sample: console.log(gameOfLife([[0,1,0],[0,0,1],[1,1,1],[0,0,0]]));",
+  "templateCode": "function gameOfLife(board) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 25",
     "board[i][j] is 0 or 1"
-  ]
+  ],
+  "runner": {
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+      "output": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]"
+    },
+    {
+      "input": "board = [[1]]",
+      "output": "[[0]]"
+    }
+  ],
+  "inputFormat": "Implement gameOfLife(board). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
 }

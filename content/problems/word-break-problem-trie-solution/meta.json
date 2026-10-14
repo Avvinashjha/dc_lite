@@ -10,12 +10,51 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Word%20Break%20Problem%20%7C%20(Trie%20solution)",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "wordBreakProblemTrieSolution",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction wordBreakProblemTrieSolution(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        "leetcode",
+        [
+          "leet",
+          "code"
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "catsandog",
+        [
+          "cats",
+          "dog",
+          "sand",
+          "and",
+          "cat"
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "wordBreak",
+  "templateCode": "function wordBreak(s, wordDict) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 300",
     "1 <= wordDict.length <= 1000",
     "1 <= wordDict[i].length <= 20"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"leetcode\"\nwordDict = [\"leet\",\"code\"]",
+      "output": "true"
+    },
+    {
+      "input": "s = \"catsandog\"\nwordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "s = \"leetcode\"\nwordDict = [\"leet\",\"code\"]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement wordBreak(s, wordDict). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

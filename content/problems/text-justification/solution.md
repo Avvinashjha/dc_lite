@@ -22,4 +22,4 @@ function fullJustify(words, maxWidth) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time:** O(C + W), where C is total input characters and W is total output characters | **Space:** O(W), including output

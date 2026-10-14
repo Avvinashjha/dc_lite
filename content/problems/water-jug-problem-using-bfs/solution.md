@@ -5,8 +5,9 @@ function canMeasureWater(x, y, target) {
   if (target > x + y) return false;
   const visited = new Set(), q = [[0, 0]];
   visited.add('0,0');
-  while (q.length) {
-    const [a, b] = q.shift();
+  let head = 0;
+  while (head < q.length) {
+    const [a, b] = q[head++];
     if (a===target||b===target||a+b===target) return true;
     const states = [[x,b],[a,y],[0,b],[a,0],
       [a-Math.min(a,y-b), b+Math.min(a,y-b)],

@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0222",
-  "title": "phone-directory",
+  "title": "Phone Directory",
   "difficulty": "Hard",
   "topic": "Tries",
   "topics": [
@@ -9,11 +9,57 @@
   ],
   "platform": "Other",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          "gforgeeks",
+          "geeksforgeeks"
+        ],
+        "ge"
+      ],
+      "expected": [
+        [
+          "geeksforgeeks",
+          "gforgeeks"
+        ],
+        [
+          "geeksforgeeks"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "abc"
+        ],
+        "z"
+      ],
+      "expected": [
+        []
+      ]
+    }
+  ],
   "functionName": "phoneDirectory",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction phoneDirectory(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function phoneDirectory(contacts, query) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 20",
-    "1 <= query.length <= 20"
-  ]
+    "1 <= contacts.length <= 20",
+    "1 <= query.length, contacts[i].length <= 20",
+    "Contacts are unique lowercase English words; query contains lowercase letters."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "contacts = [\"gforgeeks\",\"geeksforgeeks\"]\nquery = \"ge\"",
+      "output": "[[\"geeksforgeeks\",\"gforgeeks\"],[\"geeksforgeeks\"]]"
+    },
+    {
+      "input": "contacts = [\"abc\"]\nquery = \"z\"",
+      "output": "[[]]"
+    }
+  ],
+  "sampleInput": "contacts = [\"gforgeeks\",\"geeksforgeeks\"]\nquery = \"ge\"",
+  "sampleOutput": "[[\"geeksforgeeks\",\"gforgeeks\"],[\"geeksforgeeks\"]]",
+  "inputFormat": "Implement phoneDirectory(contacts, query). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

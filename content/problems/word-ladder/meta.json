@@ -27,13 +27,42 @@
         ]
       ],
       "expected": 5
+    },
+    {
+      "args": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "dot",
+          "dog",
+          "lot",
+          "log"
+        ]
+      ],
+      "expected": 0
     }
   ],
-  "functionName": "wordLadder",
-  "templateCode": "/**\n * @param {string} beginWord\n * @param {string} endWord\n * @param {string[]} wordList\n * @return {number}\n */\nfunction ladderLength(beginWord, endWord, wordList) {\n  // Shortest transformation sequence length\n}",
+  "functionName": "ladderLength",
+  "templateCode": "function ladderLength(beginWord, endWord, wordList) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= beginWord.length <= 10",
     "endWord.length == beginWord.length",
     "1 <= wordList.length <= 5000"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "beginWord = \"hit\"\nendWord = \"cog\"\nwordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+      "output": "5"
+    },
+    {
+      "input": "beginWord = \"hit\"\nendWord = \"cog\"\nwordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "beginWord = \"hit\"\nendWord = \"cog\"\nwordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+  "sampleOutput": "5",
+  "inputFormat": "Implement ladderLength(beginWord, endWord, wordList). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

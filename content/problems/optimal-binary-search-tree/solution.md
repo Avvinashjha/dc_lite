@@ -1,4 +1,4 @@
-## DP (Knuth's Optimization)
+## Interval Dynamic Programming
 
 ```javascript
 function optimalBST(keys, freq) {

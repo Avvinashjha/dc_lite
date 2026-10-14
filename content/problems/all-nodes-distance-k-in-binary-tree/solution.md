@@ -14,16 +14,17 @@ function distanceK(root, target, k) {
   const visited = new Set(), q = [target];
   visited.add(target);
   let dist = 0;
-  while (q.length && dist < k) {
-    const size = q.length; dist++;
+  let head = 0;
+  while (head < q.length && dist < k) {
+    const size = q.length - head; dist++;
     for (let i = 0; i < size; i++) {
-      const n = q.shift();
+      const n = q[head++];
       for (const next of [n.left, n.right, parents.get(n)]) {
         if (next && !visited.has(next)) { visited.add(next); q.push(next); }
       }
     }
   }
-  return q.map(n => n.val);
+  return q.slice(head).map(n => n.val);
 }
 ```
 

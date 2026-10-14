@@ -26,12 +26,37 @@
         ]
       ],
       "expected": 5
+    },
+    {
+      "args": [
+        [
+          7,
+          6,
+          4,
+          3,
+          1
+        ]
+      ],
+      "expected": 0
     }
   ],
-  "functionName": "bestTimeToBuyAndSellStock",
-  "templateCode": "/**\n * @param {number[]} prices\n * @return {any}\n */\nfunction bestTimeToBuyAndSellStock(prices) {\n  // Write your solution here\n}\n\n// Sample: console.log(bestTimeToBuyAndSellStock([7,1,5,3,6,4]));",
+  "functionName": "maxProfit",
+  "templateCode": "function maxProfit(prices) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= prices.length <= 10^5",
     "0 <= prices[i] <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "prices = [7,1,5,3,6,4]",
+      "output": "5"
+    },
+    {
+      "input": "prices = [7,6,4,3,1]",
+      "output": "0"
+    }
+  ],
+  "inputFormat": "Implement maxProfit(prices). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

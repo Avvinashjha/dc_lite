@@ -12,11 +12,60 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Preorder%20to%20BST%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "preorderToBst",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction preorderToBst(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          8,
+          5,
+          1,
+          7,
+          10,
+          12
+        ]
+      ],
+      "expected": [
+        8,
+        5,
+        10,
+        1,
+        7,
+        null,
+        12
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "preorderToBST",
+  "templateCode": "function preorderToBST(pre) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^3",
     "1 <= pre[i] <= 10^4"
-  ]
+  ],
+  "runner": {
+    "outputType": "tree"
+  },
+  "examples": [
+    {
+      "input": "pre = [8,5,1,7,10,12]",
+      "output": "[8,5,10,1,7,null,12]"
+    },
+    {
+      "input": "pre = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "pre = [8,5,1,7,10,12]",
+  "sampleOutput": "[8,5,10,1,7,null,12]",
+  "inputFormat": "Implement preorderToBST(pre). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
 }

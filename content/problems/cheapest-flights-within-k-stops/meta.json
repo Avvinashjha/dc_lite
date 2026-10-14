@@ -48,14 +48,75 @@
         1
       ],
       "expected": 700
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            1,
+            2,
+            10
+          ],
+          [
+            0,
+            2,
+            100
+          ]
+        ],
+        0,
+        2,
+        0
+      ],
+      "expected": 100
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            0,
+            1,
+            10
+          ]
+        ],
+        0,
+        2,
+        1
+      ],
+      "expected": -1
     }
   ],
-  "functionName": "cheapestFlightsWithinKStops",
-  "templateCode": "/**\n * @param {number} n\n * @param {number[][]} flights\n * @param {number} src\n * @param {number} dst\n * @param {number} k\n * @return {number}\n */\nfunction findCheapestPrice(n, flights, src, dst, k) {\n  // Cheapest flight with at most k stops\n}",
+  "functionName": "findCheapestPrice",
+  "templateCode": "function findCheapestPrice(n, flights, src, dst, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 100",
     "0 <= flights.length <= n*(n-1)/2",
     "0 <= src, dst, k < n",
     "1 <= price <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 4\nflights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]\nsrc = 0\ndst = 3\nk = 1",
+      "output": "700"
+    },
+    {
+      "input": "n = 3\nflights = [[0,1,10],[1,2,10],[0,2,100]]\nsrc = 0\ndst = 2\nk = 0",
+      "output": "100"
+    },
+    {
+      "input": "n = 3\nflights = [[0,1,10]]\nsrc = 0\ndst = 2\nk = 1",
+      "output": "-1"
+    }
+  ],
+  "sampleInput": "n = 4\nflights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]\nsrc = 0\ndst = 3\nk = 1",
+  "sampleOutput": "700",
+  "inputFormat": "Implement findCheapestPrice(n, flights, src, dst, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

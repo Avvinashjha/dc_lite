@@ -19,11 +19,30 @@
         2
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        1
+      ],
+      "expected": 1
     }
   ],
-  "functionName": "beautifulArrangement",
-  "templateCode": "/**\n * @param {number} n\n * @return {any}\n */\nfunction beautifulArrangement(n) {\n  // Write your solution here\n}\n\n// Sample: console.log(beautifulArrangement(2));",
+  "functionName": "countArrangement",
+  "templateCode": "function countArrangement(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 15"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "2"
+    },
+    {
+      "input": "n = 1",
+      "output": "1"
+    }
+  ],
+  "inputFormat": "Implement countArrangement(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

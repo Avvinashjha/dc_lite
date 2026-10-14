@@ -1,3 +1,1 @@
-Build a phone directory that supports a `search(query)` operation: given a partial query string, it should return all stored contacts that start with that prefix.
-
-**Example:** contacts = ["gforgeeks","geeksforgeeks"], query = "ge" → ["geeksforgeeks","gforgeeks"] filtered by prefix
+Given unique lowercase contacts and a query string, return one list of matching contacts for each successive non-empty prefix of the query. Sort each list lexicographically. If a prefix has no matches, its list is empty.

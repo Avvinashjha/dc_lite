@@ -11,7 +11,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/k-th-symbol-in-grammar/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "n = 2, k = 1",
+  "sampleInput": "n = 2\nk = 1",
   "sampleOutput": "0",
   "testCases": [
     {
@@ -20,12 +20,32 @@
         1
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        4,
+        8
+      ],
+      "expected": 1
     }
   ],
-  "functionName": "kThSymbolInGrammar",
-  "templateCode": "/**\n * @param {number} n\n * @param {number} k\n * @return {any}\n */\nfunction kThSymbolInGrammar(n, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(kThSymbolInGrammar(2, 1));",
+  "functionName": "kthGrammar",
+  "templateCode": "function kthGrammar(n, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 30",
     "1 <= k <= 2^(n-1)"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 2\nk = 1",
+      "output": "0"
+    },
+    {
+      "input": "n = 4\nk = 8",
+      "output": "1"
+    }
+  ],
+  "inputFormat": "Implement kthGrammar(n, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

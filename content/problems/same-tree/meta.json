@@ -12,11 +12,61 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/same-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "sameTree",
-  "templateCode": "/**\n * @param {TreeNode} p\n * @param {TreeNode} q\n * @return {boolean}\n */\nfunction isSameTree(p, q) {\n  // Check if two trees are identical\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "isSameTree",
+  "templateCode": "function isSameTree(p, q) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 100",
     "-10^4 <= Node.val <= 10^4"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree",
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "p = [1,2,3]\nq = [1,2,3]",
+      "output": "true"
+    },
+    {
+      "input": "p = [1,2]\nq = [1,null,2]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "p = [1,2,3]\nq = [1,2,3]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement isSameTree(p, q). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

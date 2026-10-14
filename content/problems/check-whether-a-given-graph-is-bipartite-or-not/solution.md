@@ -9,8 +9,9 @@ function isBipartite(graph) {
     if (color[i] !== -1) continue;
     color[i] = 0;
     const q = [i];
-    while (q.length) {
-      const u = q.shift();
+    let head = 0;
+  while (head < q.length) {
+      const u = q[head++];
       for (const v of graph[u]) {
         if (color[v] === -1) { color[v] = 1 - color[u]; q.push(v); }
         else if (color[v] === color[u]) return false;

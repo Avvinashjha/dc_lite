@@ -1,25 +1,17 @@
-## Approach: Border DFS
+## Border Flood Fill
 
-First DFS from all border 'O's and mark them as safe ('S'). Then iterate through the entire board: convert remaining 'O's to 'X' (they are surrounded), and convert 'S' back to 'O'.
+Only regions connected to a border survive. Mark all such cells safe with an iterative flood fill, then capture unmarked O cells.
 
 ```javascript
 function givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX(board) {
-  if (!board.length) return board;
-  const m = board.length, n = board[0].length;
-  function dfs(r, c) {
-    if (r < 0 || r >= m || c < 0 || c >= n || board[r][c] !== "O") return;
-    board[r][c] = "S";
-    dfs(r+1,c); dfs(r-1,c); dfs(r,c+1); dfs(r,c-1);
-  }
-  for (let i = 0; i < m; i++) { dfs(i, 0); dfs(i, n-1); }
-  for (let j = 0; j < n; j++) { dfs(0, j); dfs(m-1, j); }
-  for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++)
-      board[i][j] = board[i][j] === "S" ? "O" : "X";
+  if(!board.length)return board;
+  const rows=board.length,cols=board[0].length,stack=[];
+  function visit(r,c){if(r>=0&&r<rows&&c>=0&&c<cols&&board[r][c]==='O'){board[r][c]='S';stack.push([r,c]);}}
+  for(let r=0;r<rows;r++){visit(r,0);visit(r,cols-1);}for(let c=0;c<cols;c++){visit(0,c);visit(rows-1,c);}
+  while(stack.length){const [r,c]=stack.pop();visit(r+1,c);visit(r-1,c);visit(r,c+1);visit(r,c-1);}
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)board[r][c]=board[r][c]==='S'?'O':'X';
   return board;
 }
 ```
 
-**Time Complexity:** O(m × n)
-
-**Space Complexity:** O(m × n) for recursion stack
+**Time:** O(rows × cols) | **Space:** O(rows × cols)

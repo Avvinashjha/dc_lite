@@ -11,8 +11,8 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/4sum/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "nums = [1,0,-1,0,-2,2], target = 0",
-  "sampleOutput": "[[-2,-1,1,2],[-2,0,0,2],[-1,0,1,1]]",
+  "sampleInput": "nums = [1,0,-1,0,-2,2]\ntarget = 0",
+  "sampleOutput": "[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]",
   "testCases": [
     {
       "args": [
@@ -46,13 +46,49 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        8
+      ],
+      "expected": [
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ]
     }
   ],
   "functionName": "fourSum",
-  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {any}\n */\nfunction fourSum(nums, target) {\n  // Write your solution here\n}\n\n// Sample: console.log(fourSum([1,0,-1,0,-2,2], 0));",
+  "templateCode": "function fourSum(nums, target) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 200",
     "-10^9 <= nums[i] <= 10^9",
     "-10^9 <= target <= 10^9"
-  ]
+  ],
+  "runner": {
+    "unordered": true,
+    "unorderedInner": true
+  },
+  "examples": [
+    {
+      "input": "nums = [1,0,-1,0,-2,2]\ntarget = 0",
+      "output": "[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]"
+    },
+    {
+      "input": "nums = [2,2,2,2,2]\ntarget = 8",
+      "output": "[[2,2,2,2]]"
+    }
+  ],
+  "inputFormat": "Implement fourSum(nums, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
 }

@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0051",
-  "title": "Given a matrix of \u2018O\u2019 and \u2018X\u2019, replace \u2018O\u2019 with \u2018X\u2019 if surrounded by \u2018X\u2019",
+  "title": "Given a matrix of ‘O’ and ‘X’, replace ‘O’ with ‘X’ if surrounded by ‘X’",
   "difficulty": "Medium",
   "topic": "Matrix",
   "topics": [
@@ -68,12 +68,41 @@
           "X"
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            "O"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "O"
+        ]
+      ]
     }
   ],
   "functionName": "givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX",
-  "templateCode": "/**\n * @param {string[][]} board\n * @return {void}\n */\nfunction solve(board) {\n  // Capture surrounded regions\n}",
+  "templateCode": "function givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX(board) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 200",
     "board[i][j] is 'X' or 'O'"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
+      "output": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]"
+    },
+    {
+      "input": "board = [[\"O\"]]",
+      "output": "[[\"O\"]]"
+    }
+  ],
+  "sampleInput": "board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
+  "sampleOutput": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
+  "inputFormat": "Implement givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX(board). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

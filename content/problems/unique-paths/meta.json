@@ -28,8 +28,24 @@
     }
   ],
   "functionName": "uniquePaths",
-  "templateCode": "/**\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nfunction uniquePaths(m, n) {\n  // Count unique paths in m×n grid\n}\n\n// Sample: console.log(uniquePaths(3, 7));",
+  "templateCode": "function uniquePaths(m, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= m, n <= 100"
-  ]
+    "1 <= m, n <= 100",
+    "The answer is at most 2 * 10^9."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "m = 3\nn = 7",
+      "output": "28"
+    },
+    {
+      "input": "m = 3\nn = 2",
+      "output": "3"
+    }
+  ],
+  "sampleInput": "m = 3\nn = 7",
+  "sampleOutput": "28",
+  "inputFormat": "Implement uniquePaths(m, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

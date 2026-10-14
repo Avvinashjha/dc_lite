@@ -1,26 +1,26 @@
-## Approach: Postorder Traversal
+## Iterative Postorder
 
-For each node, return its subtree size, min, max, and whether it is a valid BST. A node forms a valid BST if both children are BSTs and the node value is within the valid range. Track the maximum BST size found.
+Each subtree reports its size, minimum, maximum, and validity. A parent is a BST only if both children are BSTs and their value ranges lie strictly on the correct sides.
 
 ```javascript
 function largestBstInABinaryTree(root) {
-  let maxSize = 0;
-  function solve(node) {
-    if (!node) return { size: 0, min: Infinity, max: -Infinity, isBST: true };
-    const left = solve(node.left);
-    const right = solve(node.right);
-    if (left.isBST && right.isBST && node.val > left.max && node.val < right.min) {
-      const size = left.size + right.size + 1;
-      maxSize = Math.max(maxSize, size);
-      return { size, min: Math.min(node.val, left.min), max: Math.max(node.val, right.max), isBST: true };
-    }
-    return { size: 0, min: 0, max: 0, isBST: false };
+  if (!root) return 0;
+  const order = [], stack = [root];
+  while(stack.length) {
+    const node=stack.pop();order.push(node);
+    if(node.left)stack.push(node.left);
+    if(node.right)stack.push(node.right);
   }
-  solve(root);
-  return maxSize;
+  const info=new Map(),empty={size:0,min:Infinity,max:-Infinity,valid:true};let best=0;
+  for(let i=order.length-1;i>=0;i--) {
+    const node=order[i],l=info.get(node.left)||empty,r=info.get(node.right)||empty;
+    if(l.valid&&r.valid&&node.val>l.max&&node.val<r.min) {
+      const size=l.size+r.size+1;best=Math.max(best,size);
+      info.set(node,{size,min:Math.min(node.val,l.min),max:Math.max(node.val,r.max),valid:true});
+    } else info.set(node,{valid:false});
+  }
+  return best;
 }
 ```
 
-**Time Complexity:** O(n)
-
-**Space Complexity:** O(h)
+**Time:** O(n) | **Space:** O(n) auxiliary space, excluding output

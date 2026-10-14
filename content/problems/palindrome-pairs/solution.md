@@ -1,4 +1,4 @@
-## Trie / Hash Map
+## Hash Map of Reversed Split Candidates
 
 ```javascript
 function palindromePairs(words) {

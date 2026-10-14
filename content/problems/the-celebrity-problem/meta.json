@@ -10,10 +10,70 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=The%20Celebrity%20Problem",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "theCelebrityProblem",
-  "templateCode": "/**\n * @param {number} n\n * @param {function} knows\n * @return {number}\n */\nfunction findCelebrity(n, knows) {\n  // Find celebrity in party\n}",
+  "testCases": [
+    {
+      "args": [
+        3,
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        2,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": -1
+    }
+  ],
+  "functionName": "findCelebrity",
+  "templateCode": "function findCelebrity(n, knows) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= n <= 500"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "json",
+      "knows"
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 3\nknows = [[0,1,0],[0,0,0],[0,1,0]]",
+      "output": "1"
+    },
+    {
+      "input": "n = 2\nknows = [[0,1],[1,0]]",
+      "output": "-1"
+    }
+  ],
+  "sampleInput": "n = 3\nknows = [[0,1,0],[0,0,0],[0,1,0]]",
+  "sampleOutput": "1",
+  "inputFormat": "Implement findCelebrity(n, knows). Inputs below show JavaScript function arguments; there is no stdin parsing.\nThe fixture supplies a 0/1 matrix; the editor passes it as a knows(a,b) function.",
+  "outputFormat": "Return the result described in the statement."
 }

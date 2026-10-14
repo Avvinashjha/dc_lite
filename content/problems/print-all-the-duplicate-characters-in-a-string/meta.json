@@ -11,13 +11,43 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20the%20duplicate%20characters%20in%20a%20string",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "s = \"test string\"",
-  "sampleOutput": "t: 3, s: 2",
-  "testCases": [],
-  "functionName": "printAllTheDuplicateCharactersInAString",
-  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction printAllTheDuplicateCharactersInAString(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(printAllTheDuplicateCharactersInAString(\"test string\"));",
+  "sampleInput": "str = \"programming\"",
+  "sampleOutput": "{\"r\":2,\"g\":2,\"m\":2}",
+  "testCases": [
+    {
+      "args": [
+        "programming"
+      ],
+      "expected": {
+        "r": 2,
+        "g": 2,
+        "m": 2
+      }
+    },
+    {
+      "args": [
+        ""
+      ],
+      "expected": {}
+    }
+  ],
+  "functionName": "findDuplicates",
+  "templateCode": "function findDuplicates(str) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= s.length <= 10^5",
-    "s consists of printable ASCII characters"
-  ]
+    "0 <= str.length <= 10^5",
+    "str consists of printable ASCII characters."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "str = \"programming\"",
+      "output": "{\"r\":2,\"g\":2,\"m\":2}"
+    },
+    {
+      "input": "str = \"\"",
+      "output": "{}"
+    }
+  ],
+  "inputFormat": "Implement findDuplicates(str). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

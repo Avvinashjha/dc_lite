@@ -11,8 +11,9 @@ function nearestCell(grid) {
     for (let j = 0; j < n; j++)
       if (grid[i][j] === 1) { dist[i][j] = 0; q.push([i, j]); }
   const dirs = [[0,1],[0,-1],[1,0],[-1,0]];
-  while (q.length) {
-    const [r, c] = q.shift();
+  let head = 0;
+  while (head < q.length) {
+    const [r, c] = q[head++];
     for (const [dr, dc] of dirs) {
       const nr = r+dr, nc = c+dc;
       if (nr >= 0 && nr < m && nc >= 0 && nc < n && dist[nr][nc] > dist[r][c]+1) {

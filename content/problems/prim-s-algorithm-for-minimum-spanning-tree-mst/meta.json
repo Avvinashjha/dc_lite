@@ -12,12 +12,76 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Prim%E2%80%99s%20Algorithm%20for%20Minimum%20Spanning%20Tree%20(MST)",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "primSAlgorithmForMinimumSpanningTreeMst",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction primSAlgorithmForMinimumSpanningTreeMst(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        3,
+        [
+          [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ]
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        1,
+        [
+          []
+        ]
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "primMST",
+  "templateCode": "function primMST(V, adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "2 <= V <= 1000",
-    "1 <= E <= V*(V-1)/2",
+    "1 <= V <= 1000",
+    "The graph is connected and undirected.",
+    "adj[u] lists [neighbor, weight] pairs; each edge appears in both endpoint lists.",
     "1 <= weight <= 10^5"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "V = 3\nadj = [[[1,1],[2,3]],[[0,1],[2,2]],[[0,3],[1,2]]]",
+      "output": "3"
+    },
+    {
+      "input": "V = 1\nadj = [[]]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "V = 3\nadj = [[[1,1],[2,3]],[[0,1],[2,2]],[[0,3],[1,2]]]",
+  "sampleOutput": "3",
+  "inputFormat": "Implement primMST(V, adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

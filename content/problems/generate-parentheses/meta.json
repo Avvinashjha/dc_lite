@@ -25,11 +25,34 @@
         "()(())",
         "()()()"
       ]
+    },
+    {
+      "args": [
+        1
+      ],
+      "expected": [
+        "()"
+      ]
     }
   ],
-  "functionName": "generateParentheses",
-  "templateCode": "/**\n * @param {number} n\n * @return {any}\n */\nfunction generateParentheses(n) {\n  // Write your solution here\n}\n\n// Sample: console.log(generateParentheses(3));",
+  "functionName": "generateParenthesis",
+  "templateCode": "function generateParenthesis(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 8"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "n = 3",
+      "output": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[\"()\"]"
+    }
+  ],
+  "inputFormat": "Implement generateParenthesis(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

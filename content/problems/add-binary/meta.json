@@ -36,10 +36,29 @@
     }
   ],
   "functionName": "addBinary",
-  "templateCode": "/**\n * @param {string} a\n * @param {string} b\n * @return {string}\n */\nfunction addBinary(a, b) {\n  // Return sum of two binary strings\n}\n\n// Sample: console.log(addBinary(\"11\", \"1\"));",
+  "templateCode": "function addBinary(a, b) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= a.length, b.length <= 10^4",
     "a and b consist only of 0 or 1",
     "No leading zeros except 0 itself"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "a = \"11\"\nb = \"1\"",
+      "output": "\"100\""
+    },
+    {
+      "input": "a = \"1010\"\nb = \"1011\"",
+      "output": "\"10101\""
+    },
+    {
+      "input": "a = \"0\"\nb = \"0\"",
+      "output": "\"0\""
+    }
+  ],
+  "sampleInput": "a = \"11\"\nb = \"1\"",
+  "sampleOutput": "\"100\"",
+  "inputFormat": "Implement addBinary(a, b). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

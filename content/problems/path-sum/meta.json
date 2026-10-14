@@ -12,11 +12,63 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/path-sum/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "pathSum",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} targetSum\n * @return {boolean}\n */\nfunction hasPathSum(root, targetSum) {\n  // Check if root-to-leaf path sums to target\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          5,
+          4,
+          8,
+          11,
+          null,
+          13,
+          4,
+          7,
+          2,
+          null,
+          null,
+          null,
+          1
+        ],
+        22
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        5
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "hasPathSum",
+  "templateCode": "function hasPathSum(root, targetSum) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 5000",
     "-1000 <= Node.val, targetSum <= 1000"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [5,4,8,11,null,13,4,7,2,null,null,null,1]\ntargetSum = 22",
+      "output": "true"
+    },
+    {
+      "input": "root = [1,2,3]\ntargetSum = 5",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "root = [5,4,8,11,null,13,4,7,2,null,null,null,1]\ntargetSum = 22",
+  "sampleOutput": "true",
+  "inputFormat": "Implement hasPathSum(root, targetSum). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

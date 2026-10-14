@@ -18,11 +18,33 @@
         "ACDGHR"
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        "ABC",
+        "ACB"
+      ],
+      "expected": 1
     }
   ],
   "functionName": "longestCommonSubstring",
-  "templateCode": "/**\n * @param {string} s1\n * @param {string} s2\n * @return {number}\n */\nfunction longestCommonSubstring(s1, s2) {\n  // Length of longest common substring\n}",
+  "templateCode": "function longestCommonSubstring(s1, s2) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= |S1|, |S2| <= 500"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s1 = \"ABCDGH\"\ns2 = \"ACDGHR\"",
+      "output": "4"
+    },
+    {
+      "input": "s1 = \"ABC\"\ns2 = \"ACB\"",
+      "output": "1"
+    }
+  ],
+  "sampleInput": "s1 = \"ABCDGH\"\ns2 = \"ACDGHR\"",
+  "sampleOutput": "4",
+  "inputFormat": "Implement longestCommonSubstring(s1, s2). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

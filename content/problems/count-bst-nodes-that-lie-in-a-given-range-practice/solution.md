@@ -1,12 +1,13 @@
-## Pruned Inorder DFS
+## Pruned Iterative DFS
+
+Count nodes in the range and skip subtrees whose values cannot fall inside it.
 
 ```javascript
 function countInRange(root, l, h) {
-  if (!root) return 0;
-  if (root.val < l) return countInRange(root.right, l, h);
-  if (root.val > h) return countInRange(root.left, l, h);
-  return 1 + countInRange(root.left, l, h) + countInRange(root.right, l, h);
+  const stack=root?[root]:[];let count=0;
+  while(stack.length){const node=stack.pop();if(node.val>=l&&node.val<=h)count++;if(node.left&&node.val>=l)stack.push(node.left);if(node.right&&node.val<=h)stack.push(node.right);}
+  return count;
 }
 ```
 
-**Time:** O(h + k) where k = nodes in range | **Space:** O(h)
+**Time:** O(n) | **Space:** O(h) auxiliary space, excluding output

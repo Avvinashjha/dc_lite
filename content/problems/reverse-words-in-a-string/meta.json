@@ -19,12 +19,31 @@
         "the sky is blue"
       ],
       "expected": "blue is sky the"
+    },
+    {
+      "args": [
+        "  hello   world  "
+      ],
+      "expected": "world hello"
     }
   ],
-  "functionName": "reverseWordsInAString",
-  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction reverseWordsInAString(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(reverseWordsInAString(\"the sky is blue\"));",
+  "functionName": "reverseWords",
+  "templateCode": "function reverseWords(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 10^4",
     "s contains English letters, digits, and spaces"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"the sky is blue\"",
+      "output": "\"blue is sky the\""
+    },
+    {
+      "input": "s = \"  hello   world  \"",
+      "output": "\"world hello\""
+    }
+  ],
+  "inputFormat": "Implement reverseWords(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

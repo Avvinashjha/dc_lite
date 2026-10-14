@@ -1,4 +1,4 @@
-## Binary Search + BFS / Dijkstra
+## Binary Search with BFS Reachability
 
 ```javascript
 function swimInWater(grid) {
@@ -9,8 +9,9 @@ function swimInWater(grid) {
     const visited = Array.from({length:n}, ()=>Array(n).fill(false));
     const q = [[0,0]]; visited[0][0] = true;
     if (grid[0][0] > mid) { lo = mid+1; continue; }
-    while (q.length) {
-      const [r,c] = q.shift();
+    let head = 0;
+  while (head < q.length) {
+      const [r,c] = q[head++];
       for (const [dr,dc] of dirs) {
         const nr=r+dr,nc=c+dc;
         if (nr>=0&&nr<n&&nc>=0&&nc<n&&!visited[nr][nc]&&grid[nr][nc]<=mid) { visited[nr][nc]=true; q.push([nr,nc]); }

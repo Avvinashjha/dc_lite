@@ -12,11 +12,74 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Rat%20in%20a%20Maze%20Problem%20-%20I%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "ratInAMazeProblemI",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction ratInAMazeProblemI(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        "DDRDRR",
+        "DRDDRR"
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "findPath",
+  "templateCode": "function findPath(maze) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "2 <= N <= 5",
-    "0 <= maze[i][j] <= 1"
-  ]
+    "1 <= maze.length <= 5",
+    "maze is square; maze[i][j] is 0 or 1",
+    "Paths cannot revisit cells."
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "maze = [[1,0,0,0],[1,1,0,1],[1,1,0,0],[0,1,1,1]]",
+      "output": "[\"DDRDRR\",\"DRDDRR\"]"
+    },
+    {
+      "input": "maze = [[0]]",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "maze = [[1,0,0,0],[1,1,0,1],[1,1,0,0],[0,1,1,1]]",
+  "sampleOutput": "[\"DDRDRR\",\"DRDDRR\"]",
+  "inputFormat": "Implement findPath(maze). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

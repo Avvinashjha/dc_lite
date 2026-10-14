@@ -11,11 +11,12 @@ function orangesRotting(grid) {
   if (!fresh) return 0;
   const dirs = [[0,1],[0,-1],[1,0],[-1,0]];
   let time = 0;
-  while (q.length && fresh) {
+  let head = 0;
+  while (head < q.length && fresh) {
     time++;
-    const size = q.length;
+    const size = q.length - head;
     for (let k=0;k<size;k++) {
-      const [r,c] = q.shift();
+      const [r,c] = q[head++];
       for (const [dr,dc] of dirs) {
         const nr=r+dr, nc=c+dc;
         if (nr>=0&&nr<m&&nc>=0&&nc<n&&grid[nr][nc]===1) {

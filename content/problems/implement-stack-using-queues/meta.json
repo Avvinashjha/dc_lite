@@ -10,11 +10,95 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/implement-stack-using-queues/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [],
+        [
+          [
+            "push",
+            1
+          ],
+          [
+            "push",
+            2
+          ],
+          [
+            "top"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        2,
+        2,
+        false,
+        1,
+        true
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "empty"
+          ],
+          [
+            "push",
+            3
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        null,
+        3,
+        true
+      ]
+    }
+  ],
   "functionName": "implementStackUsingQueues",
-  "templateCode": "function MyStack() {\n  // Initialize stack using queues\n}\nMyStack.prototype.push = function(x) {};\nMyStack.prototype.pop = function() {};\nMyStack.prototype.top = function() {};\nMyStack.prototype.empty = function() {};",
+  "templateCode": "function implementStackUsingQueues() {\n  return {\n    push(x) { /* Write your implementation. */ },\n    pop() { /* Write your implementation. */ },\n    top() { /* Write your implementation. */ },\n    empty() { /* Write your implementation. */ }\n  };\n}\n",
   "constraints": [
     "1 <= x <= 9",
     "At most 100 calls"
-  ]
+  ],
+  "runner": {
+    "mode": "operations",
+    "factory": true
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = []\noperations = [[\"push\",1],[\"push\",2],[\"top\"],[\"pop\"],[\"empty\"],[\"pop\"],[\"empty\"]]",
+      "output": "[null,null,2,2,false,1,true]"
+    },
+    {
+      "input": "constructorArgs = []\noperations = [[\"empty\"],[\"push\",3],[\"pop\"],[\"empty\"]]",
+      "output": "[true,null,3,true]"
+    }
+  ],
+  "sampleInput": "constructorArgs = []\noperations = [[\"push\",1],[\"push\",2],[\"top\"],[\"pop\"],[\"empty\"],[\"pop\"],[\"empty\"]]",
+  "sampleOutput": "[null,null,2,2,false,1,true]",
+  "inputFormat": "Implement the factory function implementStackUsingQueues. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

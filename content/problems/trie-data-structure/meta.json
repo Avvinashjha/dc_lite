@@ -10,12 +10,98 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Trie%20Data%20Structure",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "trieDataStructure",
-  "templateCode": "function Trie() {}\nTrie.prototype.insert = function(word) {};\nTrie.prototype.search = function(word) {};\nTrie.prototype.startsWith = function(prefix) {};",
+  "testCases": [
+    {
+      "args": [
+        [],
+        [
+          [
+            "insert",
+            "apple"
+          ],
+          [
+            "search",
+            "apple"
+          ],
+          [
+            "search",
+            "app"
+          ],
+          [
+            "startsWith",
+            "app"
+          ],
+          [
+            "insert",
+            "app"
+          ],
+          [
+            "search",
+            "app"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        true,
+        false,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "search",
+            "x"
+          ],
+          [
+            "startsWith",
+            "x"
+          ],
+          [
+            "insert",
+            "x"
+          ],
+          [
+            "search",
+            "x"
+          ]
+        ]
+      ],
+      "expected": [
+        false,
+        false,
+        null,
+        true
+      ]
+    }
+  ],
+  "functionName": "Trie",
+  "templateCode": "class Trie {\n  constructor() {\n    // Write your implementation here.\n  }\n  insert(word) {\n    // Write your implementation here.\n  }\n  search(word) {\n    // Write your implementation here.\n  }\n  startsWith(prefix) {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= word.length <= 2000",
     "word consists of lowercase English letters",
     "At most 3 * 10^4 calls"
-  ]
+  ],
+  "runner": {
+    "mode": "operations"
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = []\noperations = [[\"insert\",\"apple\"],[\"search\",\"apple\"],[\"search\",\"app\"],[\"startsWith\",\"app\"],[\"insert\",\"app\"],[\"search\",\"app\"]]",
+      "output": "[null,true,false,true,null,true]"
+    },
+    {
+      "input": "constructorArgs = []\noperations = [[\"search\",\"x\"],[\"startsWith\",\"x\"],[\"insert\",\"x\"],[\"search\",\"x\"]]",
+      "output": "[false,false,null,true]"
+    }
+  ],
+  "sampleInput": "constructorArgs = []\noperations = [[\"insert\",\"apple\"],[\"search\",\"apple\"],[\"search\",\"app\"],[\"startsWith\",\"app\"],[\"insert\",\"app\"],[\"search\",\"app\"]]",
+  "sampleOutput": "[null,true,false,true,null,true]",
+  "inputFormat": "Implement the class Trie. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

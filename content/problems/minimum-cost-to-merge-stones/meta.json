@@ -11,12 +11,52 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-cost-to-merge-stones/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "minimumCostToMergeStones",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumCostToMergeStones(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        2
+      ],
+      "expected": 20
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        3
+      ],
+      "expected": -1
+    }
+  ],
+  "functionName": "mergeStones",
+  "templateCode": "function mergeStones(stones, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= stones.length <= 30",
     "1 <= stones[i] <= 100",
     "2 <= k <= 30"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "stones = [3,2,4,1]\nk = 2",
+      "output": "20"
+    },
+    {
+      "input": "stones = [3,2,4,1]\nk = 3",
+      "output": "-1"
+    }
+  ],
+  "sampleInput": "stones = [3,2,4,1]\nk = 2",
+  "sampleOutput": "20",
+  "inputFormat": "Implement mergeStones(stones, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

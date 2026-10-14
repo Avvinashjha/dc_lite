@@ -10,11 +10,63 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Radix%20Sort%20%E2%80%93%20Data%20Structures%20and%20Algorithms%20Tutorials",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "radixSortDataStructuresAndAlgorithmsTutorials",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction radixSortDataStructuresAndAlgorithmsTutorials(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          170,
+          45,
+          75,
+          90,
+          802,
+          24,
+          2,
+          66
+        ]
+      ],
+      "expected": [
+        2,
+        24,
+        45,
+        66,
+        75,
+        90,
+        170,
+        802
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0
+      ]
+    }
+  ],
+  "functionName": "radixSort",
+  "templateCode": "function radixSort(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^5",
     "0 <= arr[i] <= 10^9"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [170,45,75,90,802,24,2,66]",
+      "output": "[2,24,45,66,75,90,170,802]"
+    },
+    {
+      "input": "arr = [0,0]",
+      "output": "[0,0]"
+    }
+  ],
+  "sampleInput": "arr = [170,45,75,90,802,24,2,66]",
+  "sampleOutput": "[2,24,45,66,75,90,170,802]",
+  "inputFormat": "Implement radixSort(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

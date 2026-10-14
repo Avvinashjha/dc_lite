@@ -1,22 +1,27 @@
-## Approach: Single Queue Rotation
+## Rotate a Single Queue
 
-Use a single queue. After pushing a new element, rotate all previous elements behind it by dequeuing and re-enqueuing n-1 elements. This ensures the most recently pushed element is always at the front for O(1) pop and top operations.
+After enqueuing a new value, rotate the previous values behind it. The newest value is then at the front. The linked queue below supplies constant-time enqueue, dequeue, and front operations; push performs n-1 rotations.
 
 ```javascript
 function implementStackUsingQueues() {
-  const queue = [];
+  let head = null, tail = null, size = 0;
+  function enqueue(value) {
+    const node = {value, next:null};
+    if (tail) tail.next = node; else head = node;
+    tail = node; size++;
+  }
+  function dequeue() {
+    const value = head.value; head = head.next; size--;
+    if (!head) tail = null;
+    return value;
+  }
   return {
-    push(x) {
-      queue.push(x);
-      for (let i = 0; i < queue.length - 1; i++) queue.push(queue.shift());
-    },
-    pop() { return queue.shift(); },
-    top() { return queue[0]; },
-    empty() { return queue.length === 0; }
+    push(x) { const oldSize = size; enqueue(x); for(let i=0;i<oldSize;i++)enqueue(dequeue()); },
+    pop() { return dequeue(); },
+    top() { return head.value; },
+    empty() { return size === 0; }
   };
 }
 ```
 
-**Time Complexity:** O(n) push, O(1) pop/top
-
-**Space Complexity:** O(n)
+**Time:** O(n) push, O(1) pop/top/empty | **Space:** O(n)

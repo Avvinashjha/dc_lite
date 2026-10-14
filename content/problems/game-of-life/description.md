@@ -5,4 +5,4 @@ Conway's Game of Life is played on an `m x n` board where each cell is either al
 - A live cell with more than three live neighbors dies (overpopulation).
 - A dead cell with exactly three live neighbors comes alive (reproduction).
 
-Given the board's current state, compute its next state.
+Given the board's current state, compute its next state in place. Every transition must use the original board state.

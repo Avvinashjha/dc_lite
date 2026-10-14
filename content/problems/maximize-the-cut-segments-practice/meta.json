@@ -20,12 +20,36 @@
         1
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        7,
+        2,
+        4,
+        6
+      ],
+      "expected": 0
     }
   ],
   "functionName": "maximizeTheCutSegments",
-  "templateCode": "/**\n * @param {number} n\n * @param {number} x\n * @param {number} y\n * @param {number} z\n * @return {number}\n */\nfunction maximizeCuts(n, x, y, z) {\n  // Maximize cut segments\n}",
+  "templateCode": "function maximizeTheCutSegments(n, x, y, z) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^4",
     "1 <= x, y, z <= N"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 4\nx = 2\ny = 1\nz = 1",
+      "output": "4"
+    },
+    {
+      "input": "n = 7\nx = 2\ny = 4\nz = 6",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "n = 4\nx = 2\ny = 1\nz = 1",
+  "sampleOutput": "4",
+  "inputFormat": "Implement maximizeTheCutSegments(n, x, y, z). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

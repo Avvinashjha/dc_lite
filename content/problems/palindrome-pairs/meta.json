@@ -10,12 +10,77 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/palindrome-pairs/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          "abcd",
+          "dcba",
+          "lls",
+          "s",
+          "sssll"
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "a",
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  ],
   "functionName": "palindromePairs",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction palindromePairs(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function palindromePairs(words) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= words.length <= 5000",
     "0 <= words[i].length <= 300",
     "words[i] consists of lowercase English letters"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "words = [\"abcd\",\"dcba\",\"lls\",\"s\",\"sssll\"]",
+      "output": "[[0,1],[1,0],[3,2],[2,4]]"
+    },
+    {
+      "input": "words = [\"a\",\"\"]",
+      "output": "[[0,1],[1,0]]"
+    }
+  ],
+  "sampleInput": "words = [\"abcd\",\"dcba\",\"lls\",\"s\",\"sssll\"]",
+  "sampleOutput": "[[0,1],[1,0],[3,2],[2,4]]",
+  "inputFormat": "Implement palindromePairs(words). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

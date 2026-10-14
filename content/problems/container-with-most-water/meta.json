@@ -29,12 +29,34 @@
         ]
       ],
       "expected": 49
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1
     }
   ],
-  "functionName": "containerWithMostWater",
-  "templateCode": "/**\n * @param {number[]} height\n * @return {any}\n */\nfunction containerWithMostWater(height) {\n  // Write your solution here\n}\n\n// Sample: console.log(containerWithMostWater([1,8,6,2,5,4,8,3,7]));",
+  "functionName": "maxArea",
+  "templateCode": "function maxArea(height) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= height.length <= 10^5",
     "0 <= height[i] <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "height = [1,8,6,2,5,4,8,3,7]",
+      "output": "49"
+    },
+    {
+      "input": "height = [1,1]",
+      "output": "1"
+    }
+  ],
+  "inputFormat": "Implement maxArea(height). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

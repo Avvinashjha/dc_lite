@@ -23,12 +23,33 @@
         ]
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "majorityElement",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction majorityElement(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(majorityElement([3,2,3]));",
+  "templateCode": "function majorityElement(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 5 * 10^4",
     "-10^9 <= nums[i] <= 10^9"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [3,2,3]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [1]",
+      "output": "1"
+    }
+  ],
+  "inputFormat": "Implement majorityElement(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

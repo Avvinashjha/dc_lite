@@ -1,23 +1,15 @@
-## LCA + Distance
+## Parent Map and Ancestor Distances
 
-Find LCA, then sum distances from LCA to each node.
+Record parent pointers, then map the distance from a to each ancestor. Walk upward from b until reaching one of those ancestors; add the two distances.
 
 ```javascript
 function findDist(root, a, b) {
-  function lca(node) {
-    if (!node || node.val===a || node.val===b) return node;
-    const l = lca(node.left), r = lca(node.right);
-    return l && r ? node : l || r;
-  }
-  function dist(node, target, d) {
-    if (!node) return -1;
-    if (node.val === target) return d;
-    const l = dist(node.left, target, d+1);
-    return l !== -1 ? l : dist(node.right, target, d+1);
-  }
-  const ancestor = lca(root);
-  return dist(ancestor, a, 0) + dist(ancestor, b, 0);
+  const parent=new Map([[root,null]]),stack=[root];let an,bn;
+  while(stack.length){const node=stack.pop();if(node.val===a)an=node;if(node.val===b)bn=node;for(const child of [node.left,node.right])if(child){parent.set(child,node);stack.push(child);}}
+  const distance=new Map();let d=0;while(an){distance.set(an,d++);an=parent.get(an);}
+  d=0;while(!distance.has(bn)){bn=parent.get(bn);d++;}
+  return d+distance.get(bn);
 }
 ```
 
-**Time:** O(n) | **Space:** O(h)
+**Time:** O(n) | **Space:** O(n) auxiliary space, excluding output

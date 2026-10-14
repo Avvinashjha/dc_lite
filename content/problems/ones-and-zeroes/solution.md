@@ -14,4 +14,4 @@ function findMaxForm(strs, m, n) {
 }
 ```
 
-**Time:** O(L × m × n) | **Space:** O(m × n)
+**Time:** O(C + S × m × n), where C is total input characters and S is the number of strings | **Space:** O(m × n)

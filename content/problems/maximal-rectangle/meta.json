@@ -59,9 +59,24 @@
     }
   ],
   "functionName": "maximalRectangle",
-  "templateCode": "/**\n * @param {string[][]} matrix\n * @return {number}\n */\nfunction maximalRectangle(matrix) {\n  // Largest rectangle of 1s\n}",
+  "templateCode": "function maximalRectangle(matrix) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= rows, cols <= 200",
     "matrix[i][j] is '0' or '1'"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
+      "output": "6"
+    },
+    {
+      "input": "matrix = [[\"0\"]]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
+  "sampleOutput": "6",
+  "inputFormat": "Implement maximalRectangle(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

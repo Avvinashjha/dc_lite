@@ -38,12 +38,36 @@
         ]
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 1
     }
   ],
-  "functionName": "uniquePathsIii",
-  "templateCode": "/**\n * @param {number[][]} grid\n * @return {any}\n */\nfunction uniquePathsIii(grid) {\n  // Write your solution here\n}\n\n// Sample: console.log(uniquePathsIii([[1,0,0,0],[0,0,0,0],[0,0,2,-1]]));",
+  "functionName": "uniquePathsIII",
+  "templateCode": "function uniquePathsIII(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 20",
     "m * n <= 20"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "grid = [[1,0,0,0],[0,0,0,0],[0,0,2,-1]]",
+      "output": "2"
+    },
+    {
+      "input": "grid = [[1,2]]",
+      "output": "1"
+    }
+  ],
+  "inputFormat": "Implement uniquePathsIII(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

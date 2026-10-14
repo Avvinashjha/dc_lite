@@ -10,12 +10,68 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            6,
+            1
+          ],
+          [
+            8,
+            4,
+            5
+          ]
+        ]
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          []
+        ]
+      ],
+      "expected": null
+    }
+  ],
   "functionName": "intersectionOfTwoLinkedLists",
-  "templateCode": "/**\n * @param {ListNode} headA\n * @param {ListNode} headB\n * @return {ListNode}\n */\nfunction getIntersectionNode(headA, headB) {\n  // Find intersection node\n}",
+  "templateCode": "function intersectionOfTwoLinkedLists(headA, headB) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "m + n nodes total",
-    "1 <= Node.val <= 10^5",
-    "0 <= skipA <= m, 0 <= skipB <= n"
-  ]
+    "0 <= length of either list <= 3 * 10^4",
+    "1 <= node.val <= 10^5",
+    "Lists are acyclic; intersection means shared node identity, not equal values."
+  ],
+  "runner": {
+    "argTypes": [
+      "intersectionLists"
+    ],
+    "outputType": "nodeValue"
+  },
+  "examples": [
+    {
+      "input": "listFixture = [[4,1],[5,6,1],[8,4,5]]",
+      "output": "8"
+    },
+    {
+      "input": "listFixture = [[1],[2],[]]",
+      "output": "null"
+    }
+  ],
+  "sampleInput": "listFixture = [[4,1],[5,6,1],[8,4,5]]",
+  "sampleOutput": "8",
+  "inputFormat": "Implement intersectionOfTwoLinkedLists(headA, headB). Inputs below show JavaScript function arguments; there is no stdin parsing.\nlistFixture is [prefixA, prefixB, sharedTail]. The editor builds two list heads that share the same tail nodes.",
+  "outputFormat": "Return the result described in the statement.\nReturn the intersection node itself; the editor displays its value or null."
 }

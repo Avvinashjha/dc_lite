@@ -12,11 +12,72 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/merge-two-binary-trees/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "mergeTwoBinaryTrees",
-  "templateCode": "/**\n * @param {TreeNode} t1\n * @param {TreeNode} t2\n * @return {TreeNode}\n */\nfunction mergeTrees(t1, t2) {\n  // Merge two binary trees\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          3,
+          2,
+          5
+        ],
+        [
+          2,
+          1,
+          3,
+          null,
+          4,
+          null,
+          7
+        ]
+      ],
+      "expected": [
+        3,
+        4,
+        5,
+        5,
+        4,
+        null,
+        7
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "mergeTrees",
+  "templateCode": "function mergeTrees(t1, t2) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 2000",
     "-10^4 <= Node.val <= 10^4"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree",
+      "tree"
+    ],
+    "outputType": "tree"
+  },
+  "examples": [
+    {
+      "input": "t1 = [1,3,2,5]\nt2 = [2,1,3,null,4,null,7]",
+      "output": "[3,4,5,5,4,null,7]"
+    },
+    {
+      "input": "t1 = []\nt2 = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "t1 = [1,3,2,5]\nt2 = [2,1,3,null,4,null,7]",
+  "sampleOutput": "[3,4,5,5,4,null,7]",
+  "inputFormat": "Implement mergeTrees(t1, t2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
 }

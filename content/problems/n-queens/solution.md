@@ -35,5 +35,5 @@ function solveNQueens(n) {
 }
 ```
 
-**Time:** O(n!) — pruning eliminates most branches, but worst case is factorial.
-**Space:** O(n) for the sets and recursion stack.
+**Time:** O(n² × n!) as a loose upper bound including candidate checks and board-string construction.
+**Space:** O(n²) for the current board strings, plus O(n) for sets and recursion, excluding returned boards.

@@ -4,7 +4,7 @@
 function splitArray(nums, k) {
   let lo = Math.max(...nums), hi = nums.reduce((a,b)=>a+b,0);
   while (lo < hi) {
-    const mid = (lo+hi)>>1;
+    const mid = Math.floor(lo + (hi-lo)/2);
     let splits = 1, sum = 0;
     for (const n of nums) { if (sum+n>mid) { splits++; sum=n; } else sum+=n; }
     if (splits <= k) hi = mid; else lo = mid+1;

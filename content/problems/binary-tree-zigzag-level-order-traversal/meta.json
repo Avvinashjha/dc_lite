@@ -12,11 +12,63 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "binaryTreeZigzagLevelOrderTraversal",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number[][]}\n */\nfunction zigzagLevelOrder(root) {\n  // Zigzag level order traversal\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": [
+        [
+          3
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          15,
+          7
+        ]
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "zigzagLevelOrder",
+  "templateCode": "function zigzagLevelOrder(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 2000",
     "-100 <= Node.val <= 100"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [3,9,20,null,null,15,7]",
+      "output": "[[3],[20,9],[15,7]]"
+    },
+    {
+      "input": "root = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "root = [3,9,20,null,null,15,7]",
+  "sampleOutput": "[[3],[20,9],[15,7]]",
+  "inputFormat": "Implement zigzagLevelOrder(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

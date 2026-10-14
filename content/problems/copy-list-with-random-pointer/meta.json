@@ -10,12 +10,87 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/copy-list-with-random-pointer/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "copyListWithRandomPointer",
-  "templateCode": "/**\n * @param {Node} head\n * @return {Node}\n */\nfunction copyRandomList(head) {\n  // Deep copy linked list with random pointers\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            7,
+            null
+          ],
+          [
+            13,
+            0
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          7,
+          null
+        ],
+        [
+          13,
+          0
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "copyRandomList",
+  "templateCode": "function copyRandomList(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= n <= 1000",
     "-10^4 <= Node.val <= 10^4",
     "random is null or points to a node in the list"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "randomList"
+    ],
+    "outputType": "randomList"
+  },
+  "examples": [
+    {
+      "input": "head = [[7,null],[13,0],[11,4],[10,2],[1,0]]",
+      "output": "[[7,null],[13,0],[11,4],[10,2],[1,0]]"
+    },
+    {
+      "input": "head = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [[7,null],[13,0],[11,4],[10,2],[1,0]]",
+  "sampleOutput": "[[7,null],[13,0],[11,4],[10,2],[1,0]]",
+  "inputFormat": "Implement copyRandomList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nRandom lists use [value, randomIndex] pairs; null means no random pointer. The editor builds next and random references.",
+  "outputFormat": "Return the result described in the statement."
 }

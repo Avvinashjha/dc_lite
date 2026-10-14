@@ -42,10 +42,25 @@
       "expected": false
     }
   ],
-  "functionName": "checkIfItIsPossibleToFinishAllTaskFromGivenDependenciesCourseScheduleI",
-  "templateCode": "/**\n * @param {number} numCourses\n * @param {number[][]} prerequisites\n * @return {boolean}\n */\nfunction canFinish(numCourses, prerequisites) {\n  // Check if all courses can be finished\n}",
+  "functionName": "canFinish",
+  "templateCode": "function canFinish(numCourses, prerequisites) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= numCourses <= 2000",
     "0 <= prerequisites.length <= 5000"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "numCourses = 2\nprerequisites = [[1,0]]",
+      "output": "true"
+    },
+    {
+      "input": "numCourses = 2\nprerequisites = [[1,0],[0,1]]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "numCourses = 2\nprerequisites = [[1,0]]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement canFinish(numCourses, prerequisites). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

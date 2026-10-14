@@ -29,12 +29,37 @@
           "b"
         ]
       ]
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": [
+        [
+          "a"
+        ]
+      ]
     }
   ],
-  "functionName": "palindromePartitioning",
-  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction palindromePartitioning(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(palindromePartitioning(\"aab\"));",
+  "functionName": "partition",
+  "templateCode": "function partition(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 16",
     "s consists of lowercase English letters"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]"
+    },
+    {
+      "input": "s = \"a\"",
+      "output": "[[\"a\"]]"
+    }
+  ],
+  "inputFormat": "Implement partition(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

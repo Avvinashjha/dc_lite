@@ -42,11 +42,26 @@
       "expected": -1
     }
   ],
-  "functionName": "searchInRotatedSortedArray",
-  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nfunction search(nums, target) {\n  // Search in rotated sorted array\n}",
+  "functionName": "search",
+  "templateCode": "function search(nums, target) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 5000",
     "-10^4 <= nums[i] <= 10^4",
     "All values are unique"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [4,5,6,7,0,1,2]\ntarget = 0",
+      "output": "4"
+    },
+    {
+      "input": "nums = [4,5,6,7,0,1,2]\ntarget = 3",
+      "output": "-1"
+    }
+  ],
+  "sampleInput": "nums = [4,5,6,7,0,1,2]\ntarget = 0",
+  "sampleOutput": "4",
+  "inputFormat": "Implement search(nums, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -34,12 +34,37 @@
         ]
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "longestIncreasingPathInAMatrix",
-  "templateCode": "/**\n * @param {number[][]} matrix\n * @return {number}\n */\nfunction longestIncreasingPath(matrix) {\n  // Longest increasing path in matrix\n}",
+  "templateCode": "function longestIncreasingPathInAMatrix(matrix) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 200",
     "0 <= matrix[i][j] <= 2^31 - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
+      "output": "4"
+    },
+    {
+      "input": "matrix = [[1]]",
+      "output": "1"
+    }
+  ],
+  "sampleInput": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
+  "sampleOutput": "4",
+  "inputFormat": "Implement longestIncreasingPathInAMatrix(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -32,12 +32,35 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        1,
+        []
+      ],
+      "expected": 0
     }
   ],
-  "functionName": "numberOfOperationsToMakeNetworkConnected",
-  "templateCode": "/**\n * @param {number} n\n * @param {number[][]} connections\n * @return {number}\n */\nfunction makeConnected(n, connections) {\n  // Min operations to connect network\n}",
+  "functionName": "makeConnected",
+  "templateCode": "function makeConnected(n, connections) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 10^5",
-    "1 <= connections.length <= min(n*(n-1)/2, 10^5)"
-  ]
+    "0 <= connections.length <= min(n*(n-1)/2,10^5)",
+    "Connections are distinct undirected edges between different computers."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 4\nconnections = [[0,1],[0,2],[1,2]]",
+      "output": "1"
+    },
+    {
+      "input": "n = 1\nconnections = []",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "n = 4\nconnections = [[0,1],[0,2],[1,2]]",
+  "sampleOutput": "1",
+  "inputFormat": "Implement makeConnected(n, connections). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

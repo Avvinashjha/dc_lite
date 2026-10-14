@@ -11,12 +11,54 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20Palindromic%20Partitions%20of%20a%20String%20using%20Bit%20Manipulation",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "nitin",
-  "sampleOutput": "[[\"n\", \"i\", \"t\", \"i\", \"n\"], [\"n\", \"iti\", \"n\"], [\"nitin\"]]",
-  "testCases": [],
-  "functionName": "printAllPalindromicPartitionsOfAStringUsingBitManipulation",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction printAllPalindromicPartitionsOfAStringUsingBitManipulation(input) {\n  // Write your solution here\n}\n",
+  "sampleInput": "s = \"aab\"",
+  "sampleOutput": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]",
+  "testCases": [
+    {
+      "args": [
+        "aab"
+      ],
+      "expected": [
+        [
+          "a",
+          "a",
+          "b"
+        ],
+        [
+          "aa",
+          "b"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": [
+        [
+          "a"
+        ]
+      ]
+    }
+  ],
+  "functionName": "allPalindromicPartitions",
+  "templateCode": "function allPalindromicPartitions(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 15"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]"
+    },
+    {
+      "input": "s = \"a\"",
+      "output": "[[\"a\"]]"
+    }
+  ],
+  "inputFormat": "Implement allPalindromicPartitions(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

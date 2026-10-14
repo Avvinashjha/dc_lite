@@ -24,6 +24,7 @@ const runnerConfig = {
   functionName: problem.functionName || null,
   templateCode: problem.templateCode || null,
   sampleInput: problem.sampleInput || '',
+  runner: problem.runner || {},
   testCases: (problem.testCases || []).map((tc: { input?: string; output?: string; args?: unknown[]; expected?: unknown }) => ({
     input: tc.input,
     output: tc.output,
@@ -88,7 +89,7 @@ const problemJsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(problemJsonLd)} />
   </Fragment>
 
-  <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig)} />
+  <script id="problem-runner-config" type="application/json" set:html={JSON.stringify(runnerConfig).replace(/</g, '\u003c')} />
 
   <div
     class="problem-ide"
@@ -177,6 +178,8 @@ const problemJsonLd = {
 
 <script src="/js/store.js" is:inline></script>
 <script>
+  import { invokeProblem, compareProblemResult } from '../../utils/problemRuntime.js';
+
   // ── Tab switching (left panel) ──
   const leftTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#left-tabs .problem-tabs__btn'));
   const leftPanes = Array.from(document.querySelectorAll<HTMLElement>('.problem-tab-content .problem-tab-pane'));
@@ -280,7 +283,6 @@ const problemJsonLd = {
   const resetBtn = document.getElementById('reset-js')!;
   const consoleEl = document.getElementById('output-console')!;
   const testsEl = document.getElementById('output-tests')!;
-  const frameEl = document.getElementById('problem-js-frame') as HTMLIFrameElement;
   const localProgressEl = document.getElementById('local-progress-state')!;
   const toggleSolvedBtn = document.getElementById('toggle-problem-solved')!;
   const solutionLockedBanner = document.getElementById('solution-locked-banner') as HTMLElement | null;
@@ -303,164 +305,139 @@ const problemJsonLd = {
     consoleEl.scrollTop = consoleEl.scrollHeight;
   }
 
-  // ── Run code ──
+  // Execute off the UI thread so an infinite loop can be terminated.
+  type SandboxRunner = {
+    terminate: () => void;
+    postMessage: (payload: unknown) => void;
+    onmessage: ((event: {data: any}) => void) | null;
+    onerror: ((event: {message: string}) => void) | null;
+  };
+  let activeWorker: SandboxRunner | null = null;
+  function createSandboxWorker(source: string, id: number): SandboxRunner {
+    // Keep the worker inside an opaque-origin iframe, preserving the editor sandbox.
+    const frame = document.createElement('iframe');
+    frame.setAttribute('sandbox','allow-scripts');
+    frame.title = 'JavaScript execution sandbox'; frame.hidden = true;
+    let ready = false, pending: unknown;
+    const runner: SandboxRunner = {
+      onmessage: null, onerror: null,
+      terminate() { window.removeEventListener('message',receive); frame.remove(); },
+      postMessage(payload) { pending = payload; if(ready) frame.contentWindow?.postMessage({id,payload},'*'); }
+    };
+    function receive(event: MessageEvent) {
+      if (event.source !== frame.contentWindow || event.data?.id !== id) return;
+      if (event.data.type === 'ready') { ready = true; if(pending) frame.contentWindow?.postMessage({id,payload:pending},'*'); }
+      else if (event.data.type === 'worker-error') runner.onerror?.({message:event.data.message});
+      else runner.onmessage?.({data:event.data.payload});
+    }
+    window.addEventListener('message',receive);
+    const encodedSource = JSON.stringify(source).replace(/</g,'\\u003c');
+    frame.srcdoc = '<!doctype html><html><body><script>' +
+      'const id=' + id + '; const emit=(type,payload)=>parent.postMessage({id,type,payload},"*");' +
+      'try { const url=URL.createObjectURL(new Blob([' + encodedSource + '],{type:"text/javascript"}));' +
+      'const worker=new Worker(url); URL.revokeObjectURL(url);' +
+      'worker.onmessage=e=>emit("message",e.data);' +
+      'worker.onerror=e=>parent.postMessage({id,type:"worker-error",message:e.message},"*");' +
+      'addEventListener("message",e=>{if(e.source===parent&&e.data.id===id)worker.postMessage(e.data.payload);});' +
+      'emit("ready"); } catch(e) {parent.postMessage({id,type:"worker-error",message:e.message},"*");}' +
+      '<' + '/script></body></html>';
+    document.body.appendChild(frame);
+    return runner;
+  }
+  let executionTimer: ReturnType<typeof setTimeout> | null = null;
+  function stopExecution() {
+    activeWorker?.terminate(); activeWorker = null;
+    if (executionTimer) clearTimeout(executionTimer);
+    executionTimer = null;
+  }
+  function startExecution(mode: 'sample' | 'tests') {
+    stopExecution();
+    runId++;
+    recordAttempt();
+    const currentRun = runId;
+    const code = getCode();
+    const source = `
+      const invokeProblem = ${invokeProblem.toString()};
+      self.onmessage = function(event) {
+        const { code, name, tests, config, mode } = event.data;
+        const format = v => typeof v === 'string' ? v : JSON.stringify(v);
+        console.log = (...values) => postMessage({type:'log', text:values.map(format).join(' ')});
+        console.warn = (...values) => postMessage({type:'log', text:values.map(format).join(' ')});
+        console.error = (...values) => postMessage({type:'log', text:values.map(format).join(' ')});
+        try {
+          for (let i = 0; i < tests.length; i++) {
+            try {
+              // A fresh function scope prevents state leaking between independent fixtures.
+              const fn = new Function(code + '\\nreturn ' + name + ';')();
+              if (typeof fn !== 'function') throw new Error('Define ' + name + ' in the editor.');
+              const actual = invokeProblem(fn, tests[i].args, config);
+              postMessage({type:'case', index:i, actual});
+            } catch (error) { postMessage({type:'case', index:i, error:String(error.message || error)}); }
+          }
+          postMessage({type:'done'});
+        } catch (error) { postMessage({type:'error', error:String(error.message || error)}); }
+      };
+    `;
+    activeWorker = createSandboxWorker(source,currentRun);
+    let passed = 0;
+    const results: {index:number; actual?:unknown; error?:string}[] = [];
+    const selectedTests = mode === 'sample' ? testCases.slice(0,1) : testCases;
+    function renderTests() {
+      testsEl.replaceChildren();
+      const summary = document.createElement('div'); summary.className = 'test-results__summary';
+      summary.textContent = `${passed}/${selectedTests.length} passed`;
+      const list = document.createElement('ul'); list.className = 'test-results__list';
+      for (const result of results) {
+        const tc = selectedTests[result.index];
+        const ok = !result.error && compareProblemResult(result.actual, tc.expected, tc.args, runnerConfig.runner);
+        const item = document.createElement('li'); item.className = `test-results__item test-results__item--${ok ? 'pass' : 'fail'}`;
+        item.textContent = `Case ${result.index+1}: ${ok ? 'Pass' : 'Fail'}` + (result.error ? ` — ${result.error}` : ok ? '' : ` — Expected ${JSON.stringify(tc.expected)}, got ${JSON.stringify(result.actual)}`);
+        list.appendChild(item);
+      }
+      testsEl.append(summary,list);
+    }
+    activeWorker.onmessage = event => {
+      if (currentRun !== runId) return;
+      const data = event.data;
+      if (data.type === 'log') appendConsole('LOG',data.text);
+      if (data.type === 'case') {
+        if (mode === 'sample') appendConsole(data.error ? 'ERROR' : 'RESULT', data.error || JSON.stringify(data.actual));
+        else {
+          results.push(data);
+          const tc = selectedTests[data.index];
+          if (!data.error && compareProblemResult(data.actual,tc.expected,tc.args,runnerConfig.runner)) passed++;
+          renderTests();
+        }
+      }
+      if (data.type === 'done') { stopExecution(); if(mode === 'sample') appendConsole('INFO','Execution finished'); }
+      if (data.type === 'error') { appendConsole('ERROR',data.error); stopExecution(); }
+    };
+    activeWorker.onerror = event => {
+      if (mode === 'tests') { testsEl.textContent = 'Execution error: ' + event.message; }
+      else appendConsole('ERROR',event.message);
+      stopExecution();
+    };
+    executionTimer = setTimeout(() => {
+      stopExecution();
+      if (mode === 'tests') {
+        const error = document.createElement('p'); error.className = 'test-results__error';
+        error.textContent = 'Execution timed out after 5 seconds. Check for an infinite loop or an overly slow solution.';
+        testsEl.appendChild(error);
+      } else appendConsole('ERROR','Execution timed out after 5 seconds.');
+    },5000);
+    activeWorker.postMessage({code,name:functionName,tests:selectedTests,config:runnerConfig.runner || {},mode});
+  }
   function runCode() {
-    runId += 1;
-    const currentRunId = runId;
-    recordAttempt();
-    switchOutputTab('console');
-    appendConsole('INFO', 'Running...');
-    const code = getCode();
-    const srcdoc = [
-      '<!doctype html><html><body><script>',
-      '(function(){',
-      "var SOURCE='problem-js';",
-      'var RUN_ID=' + currentRunId + ';',
-      'function emit(type,payload){ parent.postMessage({source:SOURCE,runId:RUN_ID,type:type,payload:payload},"*"); }',
-      'function stringify(v){ if (typeof v === "string") return v; try { return JSON.stringify(v); } catch(e){ return String(v); } }',
-      'var base = window.console;',
-      'window.console={',
-      'log:function(){ emit("log", Array.prototype.slice.call(arguments).map(stringify)); },',
-      'error:function(){ emit("error", Array.prototype.slice.call(arguments).map(stringify)); },',
-      'warn:function(){ emit("warn", Array.prototype.slice.call(arguments).map(stringify)); }',
-      '};',
-      'try {',
-      '  var code=' + JSON.stringify(code) + ';',
-      '  (0,eval)(code);',
-      '  emit("result", ["Execution finished"]);',
-      '} catch (e) {',
-      '  emit("runtime-error", [e && (e.stack || e.message) ? (e.stack || e.message) : String(e)]);',
-      '} finally {',
-      '  window.console = base;',
-      '}',
-      '})();',
-      '<' + '/script></body></html>'
-    ].join('');
-    frameEl.srcdoc = srcdoc;
-    if (isPotdScheduled && (window as any).DCTrack) {
-      (window as any).DCTrack('run_daily_code', { problem_slug: slug });
-    }
+    switchOutputTab('console'); consoleEl.textContent = '';
+    appendConsole('INFO','Running sample...'); startExecution('sample');
+    if (isPotdScheduled && (window as any).DCTrack) (window as any).DCTrack('run_daily_code',{problem_slug:slug});
   }
-
-  window.addEventListener('message', (event) => {
-    const data = event.data;
-    if (!data || data.source !== 'problem-js' || data.runId !== runId) return;
-    const type = data.type || 'log';
-    const payload = (data.payload || []).join(' ');
-    if (type === 'runtime-error') {
-      appendConsole('ERROR', payload);
-      return;
-    }
-    appendConsole(type.toUpperCase(), payload);
-  });
-
-  // ── Run tests ──
-  function normalizeResult(v: any): string {
-    if (v === null || v === undefined) return String(v);
-    if (typeof v === 'object') return JSON.stringify(v);
-    return String(v).trim();
-  }
-
   function runTests() {
-    if (!testCases.length) {
-      appendConsole('INFO', 'No test cases defined for this problem.');
-      return;
-    }
-    recordAttempt();
-    switchOutputTab('tests');
-    testsEl.innerHTML = '<p style="font-size:0.8rem;">Running tests...</p>';
-    const code = getCode();
-    const harness = [
-      '<!doctype html><html><body><script>',
-      '(function(){',
-      'var code=' + JSON.stringify(code) + ';',
-      'try { (0,eval)(code); } catch (e) {',
-      '  parent.postMessage({ type: "test-error", error: (e && (e.message || e.stack)) || String(e) }, "*");',
-      '  return;',
-      '}',
-      'window.addEventListener("message", function(ev) {',
-      '  var d = ev.data;',
-      '  if (d.type !== "invoke") return;',
-      '  var id = d.id, mode = d.mode, name = d.name, args = d.args, input = d.input;',
-      '  try {',
-      '    var r;',
-      '    if (mode === "solve") r = typeof solve !== "undefined" ? solve(input) : undefined;',
-      '    else r = typeof window[name] === "function" ? window[name].apply(null, args) : undefined;',
-      '    ev.source.postMessage({ type: "result", id: id, result: r }, ev.origin);',
-      '  } catch (err) {',
-      '    ev.source.postMessage({ type: "result", id: id, error: (err && err.message) || String(err) }, ev.origin);',
-      '  }',
-      '});',
-      'parent.postMessage({ type: "test-ready" }, "*");',
-      '})();',
-      '<' + '/script></body></html>'
-    ].join('');
-    frameEl.srcdoc = harness;
-
-    const results: Record<number, any> = {};
-    const expectCount = testCases.length;
-
-    function onTestMessage(ev: MessageEvent) {
-      const d = ev.data;
-      if (d.type === 'test-error') {
-        testsEl.innerHTML = `<p class="test-results__error">Error: ${(d.error || '').replace(/</g, '&lt;')}</p>`;
-        window.removeEventListener('message', onTestMessage);
-        return;
-      }
-      if (d.type === 'test-ready') {
-        for (let i = 0; i < testCases.length; i++) {
-          const tc = testCases[i];
-          const msg: any = { type: 'invoke', id: i };
-          if (tc.args != null && tc.expected !== undefined && functionName) {
-            msg.mode = 'function';
-            msg.name = functionName;
-            msg.args = tc.args;
-          } else {
-            msg.mode = 'solve';
-            msg.input = tc.input != null ? tc.input : '';
-          }
-          frameEl.contentWindow!.postMessage(msg, '*');
-        }
-        return;
-      }
-      if (d.type === 'result') {
-        results[d.id] = d;
-        if (Object.keys(results).length === expectCount) {
-          window.removeEventListener('message', onTestMessage);
-          let passed = 0;
-          let html = '<div class="test-results__summary"></div><ul class="test-results__list">';
-          for (let j = 0; j < testCases.length; j++) {
-            const tc = testCases[j];
-            const res = results[j];
-            let ok = false;
-            let detail = '';
-            if (res?.error) {
-              detail = 'Error: ' + res.error;
-            } else if (tc.args != null && tc.expected !== undefined) {
-              const got = res?.result;
-              ok = JSON.stringify(got) === JSON.stringify(tc.expected);
-              if (!ok) detail = `Expected ${JSON.stringify(tc.expected)}, got ${JSON.stringify(got)}`;
-            } else {
-              const expectedStr = (tc.output ?? '').trim();
-              const gotStr = res?.result !== undefined ? normalizeResult(res.result) : '';
-              ok = gotStr === expectedStr;
-              if (!ok) detail = `Expected ${expectedStr}, got ${gotStr}`;
-            }
-            if (ok) passed++;
-            html += `<li class="test-results__item test-results__item--${ok ? 'pass' : 'fail'}">Case ${j + 1}: ${ok ? 'Pass' : 'Fail'}${detail ? ' \u2014 ' + detail.replace(/</g, '&lt;') : ''}</li>`;
-          }
-          html += '</ul>';
-          testsEl.innerHTML = html;
-          const summaryEl = testsEl.querySelector('.test-results__summary');
-          if (summaryEl) summaryEl.textContent = `${passed}/${testCases.length} passed`;
-        }
-      }
-    }
-    window.addEventListener('message', onTestMessage);
-    if (isPotdScheduled && (window as any).DCTrack) {
-      (window as any).DCTrack('run_daily_tests', { problem_slug: slug });
-    }
+    if (!testCases.length) { appendConsole('INFO','No test cases defined for this problem.'); return; }
+    switchOutputTab('tests'); testsEl.textContent = 'Running tests...'; startExecution('tests');
+    if (isPotdScheduled && (window as any).DCTrack) (window as any).DCTrack('run_daily_tests',{problem_slug:slug});
   }
+  window.addEventListener('pagehide',stopExecution);
 
   runBtn.addEventListener('click', runCode);
   runTestsBtn.addEventListener('click', runTests);

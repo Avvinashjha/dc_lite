@@ -26,12 +26,35 @@
         "ce",
         "cf"
       ]
+    },
+    {
+      "args": [
+        ""
+      ],
+      "expected": []
     }
   ],
   "functionName": "letterCombinationsOfAPhoneNumber",
-  "templateCode": "/**\n * @param {string} digits\n * @return {string[]}\n */\nfunction letterCombinations(digits) {\n  // Phone keypad letter combinations\n}",
+  "templateCode": "function letterCombinationsOfAPhoneNumber(digits) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= digits.length <= 4",
     "digits[i] is in range ['2', '9']"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "digits = \"23\"",
+      "output": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
+    },
+    {
+      "input": "digits = \"\"",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "digits = \"23\"",
+  "sampleOutput": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]",
+  "inputFormat": "Implement letterCombinationsOfAPhoneNumber(digits). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nResult ordering is ignored."
 }

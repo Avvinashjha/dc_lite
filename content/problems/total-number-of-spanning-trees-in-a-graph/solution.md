@@ -16,6 +16,7 @@ function countSpanningTrees(adj, V) {
     let pivot = i;
     for (let j=i+1;j<n;j++) if (Math.abs(M[j][i])>Math.abs(M[pivot][i])) pivot=j;
     if (pivot!==i) { [M[i],M[pivot]]=[M[pivot],M[i]]; det*=-1; }
+    if (Math.abs(M[i][i]) < 1e-12) return 0;
     det *= M[i][i];
     for (let j=i+1;j<n;j++) {
       const f=M[j][i]/M[i][i];

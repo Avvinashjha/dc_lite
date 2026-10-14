@@ -35,4 +35,4 @@ function canPartitionKSubsets(nums, k) {
 
 **Time Complexity:** O(k^n) worst case, but pruning drastically reduces this
 
-**Space Complexity:** O(n) for recursion stack
+**Space Complexity:** O(n × k) as a loose upper bound for recursion and per-frame symmetry sets

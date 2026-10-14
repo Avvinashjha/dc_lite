@@ -1,3 +1,1 @@
-You're given a list of words that have already been sorted according to the rules of an unknown alien alphabet. Using the order in which these words appear, work out the relative ordering of the letters themselves, and return that ordering as a single string.
-
-**Example:** Input: ["wrt","wrf","er","ett","rftt"] → Output: "wertf"
+You're given a list of words that have already been sorted according to the rules of an unknown alien alphabet. Using the order in which these words appear, work out the relative ordering of the letters themselves, and return that ordering as a single string containing each observed letter exactly once. Return an empty string if the ordering is impossible, including cycles and a longer word appearing before its own prefix. If several orders work, return any valid one.

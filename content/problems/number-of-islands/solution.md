@@ -1,19 +1,20 @@
-## DFS Flood Fill
+## Iterative Flood Fill
+
+Each unvisited land cell starts a new island. Mark cells when they enter the stack so every land cell is processed once.
 
 ```javascript
 function numIslands(grid) {
-  const m = grid.length, n = grid[0].length;
-  let count = 0;
-  function dfs(r, c) {
-    if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] !== '1') return;
-    grid[r][c] = '0';
-    dfs(r+1,c); dfs(r-1,c); dfs(r,c+1); dfs(r,c-1);
+  const rows=grid.length,cols=grid[0].length;let count=0;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++) {
+    if(grid[r][c]!=='1')continue;
+    count++;grid[r][c]='0';const stack=[[r,c]];
+    while(stack.length){const [x,y]=stack.pop();for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+      const nx=x+dx,ny=y+dy;
+      if(nx>=0&&nx<rows&&ny>=0&&ny<cols&&grid[nx][ny]==='1'){grid[nx][ny]='0';stack.push([nx,ny]);}
+    }}
   }
-  for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++)
-      if (grid[i][j] === '1') { count++; dfs(i, j); }
   return count;
 }
 ```
 
-**Time:** O(mn) | **Space:** O(mn)
+**Time:** O(rows × cols) | **Space:** O(rows × cols)

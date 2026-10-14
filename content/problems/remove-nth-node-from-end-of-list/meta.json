@@ -10,12 +10,60 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "removeNthNodeFromEndOfList",
-  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} n\n * @return {ListNode}\n */\nfunction removeNthFromEnd(head, n) {\n  // Remove nth node from end\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        2
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "removeNthFromEnd",
+  "templateCode": "function removeNthFromEnd(head, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= sz <= 30",
     "0 <= Node.val <= 100",
     "1 <= n <= sz"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,3,4,5]\nn = 2",
+      "output": "[1,2,3,5]"
+    },
+    {
+      "input": "head = [1]\nn = 1",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [1,2,3,4,5]\nn = 2",
+  "sampleOutput": "[1,2,3,5]",
+  "inputFormat": "Implement removeNthFromEnd(head, n). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

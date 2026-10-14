@@ -18,8 +18,9 @@ function alienDictionary(words) {
     }
   }
   const q = [...inDeg.keys()].filter(c => inDeg.get(c) === 0), res = [];
-  while (q.length) {
-    const c = q.shift(); res.push(c);
+  let head = 0;
+  while (head < q.length) {
+    const c = q[head++]; res.push(c);
     for (const n of graph.get(c)) { inDeg.set(n, inDeg.get(n)-1); if (inDeg.get(n)===0) q.push(n); }
   }
   return res.length === inDeg.size ? res.join('') : "";

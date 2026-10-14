@@ -10,7 +10,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/longest-repeating-character-replacement/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "s = \"ABAB\", k = 2",
+  "sampleInput": "s = \"ABAB\"\nk = 2",
   "sampleOutput": "4",
   "testCases": [
     {
@@ -19,13 +19,33 @@
         2
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        "AABABBA",
+        1
+      ],
+      "expected": 4
     }
   ],
-  "functionName": "longestRepeatingCharacterReplacement",
-  "templateCode": "/**\n * @param {string} s\n * @param {number} k\n * @return {any}\n */\nfunction longestRepeatingCharacterReplacement(s, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(longestRepeatingCharacterReplacement(\"ABAB\", 2));",
+  "functionName": "characterReplacement",
+  "templateCode": "function characterReplacement(s, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 10^5",
     "s consists of uppercase English letters",
     "0 <= k <= s.length"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"ABAB\"\nk = 2",
+      "output": "4"
+    },
+    {
+      "input": "s = \"AABABBA\"\nk = 1",
+      "output": "4"
+    }
+  ],
+  "inputFormat": "Implement characterReplacement(s, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

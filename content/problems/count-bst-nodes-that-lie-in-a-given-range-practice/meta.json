@@ -12,11 +12,57 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Count%20BST%20nodes%20that%20lie%20in%20a%20given%20range%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "countBstNodesThatLieInAGivenRange",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} l\n * @param {number} h\n * @return {number}\n */\nfunction countInRange(root, l, h) {\n  // Count BST nodes in range [l, h]\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          5,
+          50,
+          1,
+          null,
+          40,
+          100
+        ],
+        5,
+        45
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          10
+        ],
+        11,
+        20
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "countInRange",
+  "templateCode": "function countInRange(root, l, h) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^4",
     "1 <= l <= h <= 10^5"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [10,5,50,1,null,40,100]\nl = 5\nh = 45",
+      "output": "3"
+    },
+    {
+      "input": "root = [10]\nl = 11\nh = 20",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "root = [10,5,50,1,null,40,100]\nl = 5\nh = 45",
+  "sampleOutput": "3",
+  "inputFormat": "Implement countInRange(root, l, h). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

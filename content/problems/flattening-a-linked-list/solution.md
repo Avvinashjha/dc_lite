@@ -1,6 +1,6 @@
-## Approach: Merge from Right to Left
+## Approach: Merge the Bottom Lists
 
-Start from the rightmost two lists and merge them into a sorted list using the bottom pointer. Continue merging the result with the next list to the left until all lists are merged into one sorted bottom list.
+Walk the horizontal chain, saving each next pointer before merging its sorted bottom list into the accumulated result. Clear horizontal links so the output is a single bottom chain.
 
 ```javascript
 function flatteningALinkedList(root) {
@@ -16,14 +16,19 @@ function flatteningALinkedList(root) {
     return dummy.bottom;
   }
   if (!root) return null;
-  let result = root;
-  while (result.next) {
-    result = merge(result, result.next);
+  // Save each horizontal successor before merging; merged nodes use bottom only.
+  let result = null, current = root;
+  while (current) {
+    const next = current.next;
+    current.next = null;
+    result = merge(result, current);
+    current = next;
   }
+  for (let node = result; node; node = node.bottom) node.next = null;
   return result;
 }
 ```
 
-**Time Complexity:** O(n*m) where n is number of main nodes and m is average bottom list length
+**Time Complexity:** O(N × k) in the worst case, where N is the total number of nodes and k is the number of bottom lists
 
 **Space Complexity:** O(1)

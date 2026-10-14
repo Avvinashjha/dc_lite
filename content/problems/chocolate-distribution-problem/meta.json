@@ -11,7 +11,7 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Chocolate%20Distribution%20Problem",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "N = 8, M = 5, A = [3, 4, 1, 9, 56, 7, 9, 12]",
+  "sampleInput": "arr = [3,4,1,9,56,7,9,12]\nm = 5",
   "sampleOutput": "6",
   "testCases": [
     {
@@ -26,17 +26,40 @@
           9,
           12
         ],
-        8,
         5
       ],
       "expected": 6
+    },
+    {
+      "args": [
+        [
+          1,
+          10,
+          20
+        ],
+        1
+      ],
+      "expected": 0
     }
   ],
-  "functionName": "chocolateDistributionProblem",
-  "templateCode": "/**\n * @param {number} N\n * @param {number} M\n * @param {number[]} A\n * @return {any}\n */\nfunction chocolateDistributionProblem(N, M, A) {\n  // Write your solution here\n}\n\n// Sample: console.log(chocolateDistributionProblem(8, 5, [3, 4, 1, 9, 56, 7, 9, 12]));",
+  "functionName": "findMinDiff",
+  "templateCode": "function findMinDiff(arr, m) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^5",
     "1 <= A[i] <= 10^9",
     "1 <= M <= N"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [3,4,1,9,56,7,9,12]\nm = 5",
+      "output": "6"
+    },
+    {
+      "input": "arr = [1,10,20]\nm = 1",
+      "output": "0"
+    }
+  ],
+  "inputFormat": "Implement findMinDiff(arr, m). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

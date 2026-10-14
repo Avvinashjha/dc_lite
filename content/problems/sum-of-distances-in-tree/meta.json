@@ -12,11 +12,71 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/sum-of-distances-in-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        6,
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ]
+        ]
+      ],
+      "expected": [
+        8,
+        12,
+        6,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "args": [
+        1,
+        []
+      ],
+      "expected": [
+        0
+      ]
+    }
+  ],
   "functionName": "sumOfDistancesInTree",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction sumOfDistancesInTree(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function sumOfDistancesInTree(n, edges) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 3 * 10^4",
     "edges.length == n - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 6\nedges = [[0,1],[0,2],[2,3],[2,4],[2,5]]",
+      "output": "[8,12,6,10,10,10]"
+    },
+    {
+      "input": "n = 1\nedges = []",
+      "output": "[0]"
+    }
+  ],
+  "sampleInput": "n = 6\nedges = [[0,1],[0,2],[2,3],[2,4],[2,5]]",
+  "sampleOutput": "[8,12,6,10,10,10]",
+  "inputFormat": "Implement sumOfDistancesInTree(n, edges). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

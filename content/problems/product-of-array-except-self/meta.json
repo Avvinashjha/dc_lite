@@ -26,13 +26,44 @@
         8,
         6
       ]
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          2,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0,
+        0
+      ]
     }
   ],
-  "functionName": "productOfArrayExceptSelf",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nfunction productExceptSelf(nums) {\n  // Product of array except self\n}",
+  "functionName": "productExceptSelf",
+  "templateCode": "function productExceptSelf(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= nums.length <= 10^5",
     "-30 <= nums[i] <= 30",
     "Guaranteed product of any prefix/suffix fits in 32-bit integer"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4]",
+      "output": "[24,12,8,6]"
+    },
+    {
+      "input": "nums = [0,1,2,0]",
+      "output": "[0,0,0,0]"
+    }
+  ],
+  "sampleInput": "nums = [1,2,3,4]",
+  "sampleOutput": "[24,12,8,6]",
+  "inputFormat": "Implement productExceptSelf(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -17,12 +17,33 @@
         "bccb"
       ],
       "expected": 6
+    },
+    {
+      "args": [
+        "aaa"
+      ],
+      "expected": 3
     }
   ],
-  "functionName": "countDifferentPalindromicSubsequences",
-  "templateCode": "/**\n * @param {string} s\n * @return {number}\n */\nfunction countPalindromicSubsequences(s) {\n  // Count unique palindromic subsequences\n}",
+  "functionName": "countPalindromicSubsequences",
+  "templateCode": "function countPalindromicSubsequences(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 1000",
     "s contains only a, b, c, d"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"bccb\"",
+      "output": "6"
+    },
+    {
+      "input": "s = \"aaa\"",
+      "output": "3"
+    }
+  ],
+  "sampleInput": "s = \"bccb\"",
+  "sampleOutput": "6",
+  "inputFormat": "Implement countPalindromicSubsequences(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

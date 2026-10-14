@@ -12,10 +12,72 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Steps%20by%20Knight%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "stepsByKnight",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction stepsByKnight(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        6,
+        [
+          3,
+          4
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        1,
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        2,
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": -1
+    }
+  ],
+  "functionName": "minSteps",
+  "templateCode": "function minSteps(n, src, dest) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 1000"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 6\nsrc = [3,4]\ndest = [0,0]",
+      "output": "3"
+    },
+    {
+      "input": "n = 1\nsrc = [0,0]\ndest = [0,0]",
+      "output": "0"
+    },
+    {
+      "input": "n = 2\nsrc = [0,0]\ndest = [1,1]",
+      "output": "-1"
+    }
+  ],
+  "sampleInput": "n = 6\nsrc = [3,4]\ndest = [0,0]",
+  "sampleOutput": "3",
+  "inputFormat": "Implement minSteps(n, src, dest). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

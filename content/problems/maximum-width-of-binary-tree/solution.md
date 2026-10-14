@@ -7,15 +7,17 @@ function maximumWidthOfBinaryTree(root) {
   if (!root) return 0;
   let maxWidth = 0;
   const queue = [[root, 0n]];
-  while (queue.length) {
-    const size = queue.length;
+  let head = 0;
+  while (head < queue.length) {
+    const size = queue.length - head;
     const first = queue[0][1];
     let last = first;
     for (let i = 0; i < size; i++) {
-      const [node, pos] = queue.shift();
+      const [node, pos] = queue[head++];
       last = pos;
-      if (node.left) queue.push([node.left, 2n * pos]);
-      if (node.right) queue.push([node.right, 2n * pos + 1n]);
+      const offset = pos - first;
+      if (node.left) queue.push([node.left, 2n * offset]);
+      if (node.right) queue.push([node.right, 2n * offset + 1n]);
     }
     maxWidth = Math.max(maxWidth, Number(last - first + 1n));
   }

@@ -237,6 +237,18 @@ export interface ProblemMeta {
   solutionVisuals?: ProblemVisual[];
   functionName?: string;
   templateCode?: string;
+  runner?: {
+    argTypes?: string[];
+    constructorTypes?: string[];
+    mode?: string;
+    factory?: boolean;
+    outputType?: string;
+    resultArg?: number;
+    unordered?: boolean;
+    unorderedInner?: boolean;
+    validator?: string;
+    tolerance?: number;
+  };
   constraints?: string | string[];
   followUps?: string | string[];
   draft?: boolean;

@@ -12,11 +12,59 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/symmetric-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "symmetricTree",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nfunction isSymmetric(root) {\n  // Check if tree is symmetric\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          3,
+          4,
+          4,
+          3
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          null,
+          3,
+          null,
+          3
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "isSymmetric",
+  "templateCode": "function isSymmetric(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= number of nodes <= 1000",
     "-100 <= Node.val <= 100"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [1,2,2,3,4,4,3]",
+      "output": "true"
+    },
+    {
+      "input": "root = [1,2,2,null,3,null,3]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "root = [1,2,2,3,4,4,3]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement isSymmetric(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

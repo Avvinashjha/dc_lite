@@ -12,12 +12,60 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/path-sum-iii/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "pathSumIii",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} targetSum\n * @return {number}\n */\nfunction pathSum(root, targetSum) {\n  // Count paths summing to target\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          5,
+          -3,
+          3,
+          2,
+          null,
+          11,
+          3,
+          -2,
+          null,
+          1
+        ],
+        8
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 1
+    }
+  ],
+  "functionName": "pathSum",
+  "templateCode": "function pathSum(root, targetSum) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 1000",
     "-10^9 <= Node.val <= 10^9",
     "-1000 <= targetSum <= 1000"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [10,5,-3,3,2,null,11,3,-2,null,1]\ntargetSum = 8",
+      "output": "3"
+    },
+    {
+      "input": "root = [1]\ntargetSum = 1",
+      "output": "1"
+    }
+  ],
+  "sampleInput": "root = [10,5,-3,3,2,null,11,3,-2,null,1]\ntargetSum = 8",
+  "sampleOutput": "3",
+  "inputFormat": "Implement pathSum(root, targetSum). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

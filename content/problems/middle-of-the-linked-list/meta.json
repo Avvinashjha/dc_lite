@@ -10,11 +10,65 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/middle-of-the-linked-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "middleOfTheLinkedList",
-  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction middleNode(head) {\n  // Return middle node of linked list\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": [
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "functionName": "middleNode",
+  "templateCode": "function middleNode(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 to 100 nodes",
     "1 <= Node.val <= 100"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,3,4,5]",
+      "output": "[3,4,5]"
+    },
+    {
+      "input": "head = [1,2,3,4,5,6]",
+      "output": "[4,5,6]"
+    }
+  ],
+  "sampleInput": "head = [1,2,3,4,5]",
+  "sampleOutput": "[3,4,5]",
+  "inputFormat": "Implement middleNode(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

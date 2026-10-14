@@ -41,12 +41,48 @@
           3
         ]
       ]
+    },
+    {
+      "args": [
+        2,
+        [
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ]
+      ]
     }
   ],
-  "functionName": "criticalConnectionsInANetwork",
-  "templateCode": "/**\n * @param {number} n\n * @param {number[][]} connections\n * @return {number[][]}\n */\nfunction criticalConnections(n, connections) {\n  // Find all bridges in the network\n}",
+  "functionName": "criticalConnections",
+  "templateCode": "function criticalConnections(n, connections) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= n <= 10^5",
-    "n - 1 <= connections.length <= 10^5"
-  ]
+    "n - 1 <= connections.length <= 10^5",
+    "The network is connected and undirected, with no self-loops or duplicate edges."
+  ],
+  "runner": {
+    "unordered": true,
+    "unorderedInner": true
+  },
+  "examples": [
+    {
+      "input": "n = 4\nconnections = [[0,1],[1,2],[2,0],[1,3]]",
+      "output": "[[1,3]]"
+    },
+    {
+      "input": "n = 2\nconnections = [[0,1]]",
+      "output": "[[0,1]]"
+    }
+  ],
+  "sampleInput": "n = 4\nconnections = [[0,1],[1,2],[2,0],[1,3]]",
+  "sampleOutput": "[[1,3]]",
+  "inputFormat": "Implement criticalConnections(n, connections). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
 }

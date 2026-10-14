@@ -23,13 +23,36 @@
         ]
       ],
       "expected": "fl"
+    },
+    {
+      "args": [
+        [
+          "dog",
+          "racecar",
+          "car"
+        ]
+      ],
+      "expected": ""
     }
   ],
   "functionName": "longestCommonPrefix",
-  "templateCode": "/**\n * @param {number[]} strs\n * @return {any}\n */\nfunction longestCommonPrefix(strs) {\n  // Write your solution here\n}\n\n// Sample: console.log(longestCommonPrefix([\"flower\",\"flow\",\"flight\"]));",
+  "templateCode": "function longestCommonPrefix(strs) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= strs.length <= 200",
     "0 <= strs[i].length <= 200",
     "strs[i] consists of lowercase English letters"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "strs = [\"flower\",\"flow\",\"flight\"]",
+      "output": "\"fl\""
+    },
+    {
+      "input": "strs = [\"dog\",\"racecar\",\"car\"]",
+      "output": "\"\""
+    }
+  ],
+  "inputFormat": "Implement longestCommonPrefix(strs). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

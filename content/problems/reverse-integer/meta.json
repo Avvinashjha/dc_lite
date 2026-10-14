@@ -32,9 +32,28 @@
       "expected": 21
     }
   ],
-  "functionName": "reverseInteger",
-  "templateCode": "/**\n * @param {number} x\n * @return {number}\n */\nfunction reverse(x) {\n  // Reverse digits of integer\n}\n\n// Sample: console.log(reverse(123));",
+  "functionName": "reverse",
+  "templateCode": "function reverse(x) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "-2^31 <= x <= 2^31 - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "x = 123",
+      "output": "321"
+    },
+    {
+      "input": "x = -123",
+      "output": "-321"
+    },
+    {
+      "input": "x = 120",
+      "output": "21"
+    }
+  ],
+  "sampleInput": "x = 123",
+  "sampleOutput": "321",
+  "inputFormat": "Implement reverse(x). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

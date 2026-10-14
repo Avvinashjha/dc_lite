@@ -10,12 +10,62 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Given%20only%20a%20pointer%2Freference%20to%20a%20node%20to%20be%20deleted%20in%20a%20singly%20linked%20list%2C%20how%20do%20you%20delete%20it%3F",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          4,
+          5,
+          1,
+          9
+        ],
+        1
+      ],
+      "expected": [
+        4,
+        1,
+        9
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        0
+      ],
+      "expected": [
+        2
+      ]
+    }
+  ],
   "functionName": "givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt",
-  "templateCode": "/**\n * @param {ListNode} node\n * @return {void}\n */\nfunction deleteNode(node) {\n  // Delete node without head access\n}",
+  "templateCode": "function givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt(node) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= number of nodes <= 1000",
     "-1000 <= Node.val <= 1000",
     "The given node is not the tail"
-  ]
+  ],
+  "runner": {
+    "mode": "deleteNode",
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [4,5,1,9]\nnodeIndex = 1",
+      "output": "[4,1,9]"
+    },
+    {
+      "input": "head = [1,2]\nnodeIndex = 0",
+      "output": "[2]"
+    }
+  ],
+  "sampleInput": "head = [4,5,1,9]\nnodeIndex = 1",
+  "sampleOutput": "[4,1,9]",
+  "inputFormat": "Implement givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt(node). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.\nThe fixture supplies a list and a zero-based nodeIndex. The editor passes only the selected non-tail node to your function.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

@@ -25,9 +25,24 @@
       "expected": "Zero"
     }
   ],
-  "functionName": "integerToEnglishWords",
-  "templateCode": "/**\n * @param {number} num\n * @return {string}\n */\nfunction numberToWords(num) {\n  // Convert integer to English words\n}",
+  "functionName": "numberToWords",
+  "templateCode": "function numberToWords(num) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= num <= 2^31 - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "num = 123",
+      "output": "\"One Hundred Twenty Three\""
+    },
+    {
+      "input": "num = 0",
+      "output": "\"Zero\""
+    }
+  ],
+  "sampleInput": "num = 123",
+  "sampleOutput": "\"One Hundred Twenty Three\"",
+  "inputFormat": "Implement numberToWords(num). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

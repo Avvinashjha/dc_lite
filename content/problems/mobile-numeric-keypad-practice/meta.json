@@ -11,10 +11,48 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Mobile%20numeric%20keypad%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "mobileNumericKeypad",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction mobileNumericKeypad(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        1
+      ],
+      "expected": 10
+    },
+    {
+      "args": [
+        2
+      ],
+      "expected": 36
+    },
+    {
+      "args": [
+        3
+      ],
+      "expected": 138
+    }
+  ],
+  "functionName": "getCount",
+  "templateCode": "function getCount(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 25"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 1",
+      "output": "10"
+    },
+    {
+      "input": "n = 2",
+      "output": "36"
+    },
+    {
+      "input": "n = 3",
+      "output": "138"
+    }
+  ],
+  "sampleInput": "n = 1",
+  "sampleOutput": "10",
+  "inputFormat": "Implement getCount(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

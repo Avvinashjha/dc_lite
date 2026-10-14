@@ -47,9 +47,30 @@
     }
   ],
   "functionName": "flattenBinaryTreeToLinkedList",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {void}\n */\nfunction flatten(root) {\n  // Flatten to linked list in-place\n}",
+  "templateCode": "function flattenBinaryTreeToLinkedList(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 2000",
     "-100 <= Node.val <= 100"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ],
+    "outputType": "tree",
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "root = [1,2,5,3,4,null,6]",
+      "output": "[1,null,2,null,3,null,4,null,5,null,6]"
+    },
+    {
+      "input": "root = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "root = [1,2,5,3,4,null,6]",
+  "sampleOutput": "[1,null,2,null,3,null,4,null,5,null,6]",
+  "inputFormat": "Implement flattenBinaryTreeToLinkedList(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Modify the input tree in place. The editor checks the original root after the call and displays its level-order array; return values are ignored."
 }

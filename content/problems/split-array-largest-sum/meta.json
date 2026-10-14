@@ -23,13 +23,39 @@
         2
       ],
       "expected": 18
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        3
+      ],
+      "expected": 3
     }
   ],
-  "functionName": "splitArrayLargestSum",
-  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number}\n */\nfunction splitArray(nums, k) {\n  // Minimize largest subarray sum\n}",
+  "functionName": "splitArray",
+  "templateCode": "function splitArray(nums, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 1000",
     "0 <= nums[i] <= 10^6",
     "1 <= k <= min(50, nums.length)"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [7,2,5,10,8]\nk = 2",
+      "output": "18"
+    },
+    {
+      "input": "nums = [1,2,3]\nk = 3",
+      "output": "3"
+    }
+  ],
+  "sampleInput": "nums = [7,2,5,10,8]\nk = 2",
+  "sampleOutput": "18",
+  "inputFormat": "Implement splitArray(nums, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

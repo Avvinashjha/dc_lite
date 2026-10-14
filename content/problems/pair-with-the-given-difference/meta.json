@@ -10,11 +10,67 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Pair%20with%20the%20given%20difference",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "pairWithTheGivenDifference",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction pairWithTheGivenDifference(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          5,
+          20,
+          3,
+          2,
+          50,
+          80
+        ],
+        78
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        0
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ],
+        0
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "findPair",
+  "templateCode": "function findPair(arr, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
-    "1 <= arr[i] <= 10^5"
-  ]
+    "1 <= arr.length <= 10^5",
+    "1 <= arr[i] <= 10^5",
+    "0 <= n <= 10^5; the difference uses distinct indices."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [5,20,3,2,50,80]\nn = 78",
+      "output": "true"
+    },
+    {
+      "input": "arr = [1,2,3]\nn = 0",
+      "output": "false"
+    },
+    {
+      "input": "arr = [1,1]\nn = 0",
+      "output": "true"
+    }
+  ],
+  "sampleInput": "arr = [5,20,3,2,50,80]\nn = 78",
+  "sampleOutput": "true",
+  "inputFormat": "Implement findPair(arr, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

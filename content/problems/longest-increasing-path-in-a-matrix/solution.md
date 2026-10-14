@@ -1,30 +1,21 @@
-## Approach: DFS + Memoization
+## Topological Layers
 
-For each cell, perform DFS to all 4 neighbors with strictly greater values. Cache the longest path from each cell to avoid recomputation. The answer is the maximum cached value.
+Orient edges from smaller cells to larger neighbors. Cells with no smaller neighbor start the first layer. Remove them, decrement successor indegrees, and repeat. The number of layers equals the longest increasing path; strict increases make the graph acyclic.
 
 ```javascript
 function longestIncreasingPathInAMatrix(matrix) {
-  const m = matrix.length, n = matrix[0].length;
-  const memo = Array.from({length: m}, () => Array(n).fill(0));
-  const dirs = [[0,1],[0,-1],[1,0],[-1,0]];
-  function dfs(r, c) {
-    if (memo[r][c]) return memo[r][c];
-    let best = 1;
-    for (const [dr, dc] of dirs) {
-      const nr = r + dr, nc = c + dc;
-      if (nr >= 0 && nr < m && nc >= 0 && nc < n && matrix[nr][nc] > matrix[r][c])
-        best = Math.max(best, 1 + dfs(nr, nc));
-    }
-    return memo[r][c] = best;
+  const rows=matrix.length,cols=matrix[0].length,dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+  const indegree=Array.from({length:rows},()=>Array(cols).fill(0)),queue=[];
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    for(const [dr,dc] of dirs){const nr=r+dr,nc=c+dc;if(nr>=0&&nr<rows&&nc>=0&&nc<cols&&matrix[nr][nc]<matrix[r][c])indegree[r][c]++;}
+    if(indegree[r][c]===0)queue.push([r,c]);
   }
-  let result = 0;
-  for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++)
-      result = Math.max(result, dfs(i, j));
-  return result;
+  let head=0,length=0;
+  while(head<queue.length){const end=queue.length;length++;
+    while(head<end){const [r,c]=queue[head++];for(const [dr,dc] of dirs){const nr=r+dr,nc=c+dc;if(nr>=0&&nr<rows&&nc>=0&&nc<cols&&matrix[nr][nc]>matrix[r][c]&&--indegree[nr][nc]===0)queue.push([nr,nc]);}}
+  }
+  return length;
 }
 ```
 
-**Time Complexity:** O(m × n)
-
-**Space Complexity:** O(m × n)
+**Time:** O(rows × cols) | **Space:** O(rows × cols)

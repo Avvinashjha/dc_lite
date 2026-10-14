@@ -33,10 +33,25 @@
       "expected": 10
     }
   ],
-  "functionName": "burstBalloons",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction maxCoins(nums) {\n  // Maximum coins from bursting balloons\n}",
+  "functionName": "maxCoins",
+  "templateCode": "function maxCoins(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 300",
     "0 <= nums[i] <= 100"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [3,1,5,8]",
+      "output": "167"
+    },
+    {
+      "input": "nums = [1,5]",
+      "output": "10"
+    }
+  ],
+  "sampleInput": "nums = [3,1,5,8]",
+  "sampleOutput": "167",
+  "inputFormat": "Implement maxCoins(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

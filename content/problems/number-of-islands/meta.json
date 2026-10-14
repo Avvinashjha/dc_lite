@@ -12,11 +12,59 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Number%20of%20Islands",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "numberOfIslands",
-  "templateCode": "/**\n * @param {string[][]} grid\n * @return {number}\n */\nfunction numIslands(grid) {\n  // Count number of islands\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            "0"
+          ]
+        ]
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "numIslands",
+  "templateCode": "function numIslands(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 300",
     "grid[i][j] is '1' or '0'"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "grid = [[\"1\",\"1\",\"0\"],[\"0\",\"1\",\"0\"],[\"0\",\"0\",\"1\"]]",
+      "output": "2"
+    },
+    {
+      "input": "grid = [[\"0\"]]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "grid = [[\"1\",\"1\",\"0\"],[\"0\",\"1\",\"0\"],[\"0\",\"0\",\"1\"]]",
+  "sampleOutput": "2",
+  "inputFormat": "Implement numIslands(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

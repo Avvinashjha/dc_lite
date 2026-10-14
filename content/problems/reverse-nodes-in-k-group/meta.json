@@ -10,12 +10,63 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "reverseNodesInKGroup",
-  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} k\n * @return {ListNode}\n */\nfunction reverseKGroup(head, k) {\n  // Reverse nodes in k-groups\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        2
+      ],
+      "expected": [
+        2,
+        1,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "reverseKGroup",
+  "templateCode": "function reverseKGroup(head, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 5000",
     "0 <= Node.val <= 1000",
     "1 <= k <= n"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,3,4,5]\nk = 2",
+      "output": "[2,1,4,3,5]"
+    },
+    {
+      "input": "head = [1]\nk = 1",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "head = [1,2,3,4,5]\nk = 2",
+  "sampleOutput": "[2,1,4,3,5]",
+  "inputFormat": "Implement reverseKGroup(head, k). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

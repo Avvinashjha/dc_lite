@@ -1,32 +1,26 @@
-## Approach: Deque Operations Mapping
+## Map Stack and Queue Operations to a Deque
 
-For stack: push maps to addBack, pop maps to removeBack. For queue: enqueue maps to addBack, dequeue maps to removeFront. The deque naturally supports both patterns.
+Use an independent deque for each structure. A stack adds and removes at the back; a queue adds at the back and removes at the front. This linked deque keeps all those operations constant-time.
 
 ```javascript
 function implementStackAndQueueUsingDeque() {
+  function deque() {
+    let head = null, tail = null;
+    return {
+      addBack(value) { const n={value,prev:tail,next:null}; if(tail)tail.next=n;else head=n;tail=n; },
+      removeBack() { if(!tail)return undefined;const v=tail.value;tail=tail.prev;if(tail)tail.next=null;else head=null;return v; },
+      removeFront() { if(!head)return undefined;const v=head.value;head=head.next;if(head)head.prev=null;else tail=null;return v; },
+      front() { return head?.value; },
+      back() { return tail?.value; },
+      empty() { return head === null; }
+    };
+  }
+  const s=deque(),q=deque();
   return {
-    stack: (() => {
-      const d = [];
-      return {
-        push(x) { d.push(x); },
-        pop() { return d.pop(); },
-        peek() { return d[d.length - 1]; },
-        empty() { return d.length === 0; }
-      };
-    })(),
-    queue: (() => {
-      const d = [];
-      return {
-        enqueue(x) { d.push(x); },
-        dequeue() { return d.shift(); },
-        peek() { return d[0]; },
-        empty() { return d.length === 0; }
-      };
-    })()
+    stack: { push(x){s.addBack(x);},pop(){return s.removeBack();},peek(){return s.back();},empty(){return s.empty();} },
+    queue: { enqueue(x){q.addBack(x);},dequeue(){return q.removeFront();},peek(){return q.front();},empty(){return q.empty();} }
   };
 }
 ```
 
-**Time Complexity:** O(1) for stack operations, O(n) for queue dequeue
-
-**Space Complexity:** O(n)
+**Time:** O(1) per operation | **Space:** O(n) for stored elements

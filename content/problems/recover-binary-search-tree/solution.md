@@ -1,4 +1,4 @@
-## Morris Inorder / Stack Inorder
+## Recursive Inorder Traversal
 
 Find two nodes where inorder sequence is violated.
 

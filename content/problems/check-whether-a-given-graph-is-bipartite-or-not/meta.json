@@ -62,10 +62,25 @@
       "expected": false
     }
   ],
-  "functionName": "checkWhetherAGivenGraphIsBipartiteOrNot",
-  "templateCode": "/**\n * @param {number[][]} graph\n * @return {boolean}\n */\nfunction isBipartite(graph) {\n  // Check if graph is bipartite\n}",
+  "functionName": "isBipartite",
+  "templateCode": "function isBipartite(graph) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 200",
     "0 <= E <= V*(V-1)/2"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "graph = [[1,3],[0,2],[1,3],[0,2]]",
+      "output": "true"
+    },
+    {
+      "input": "graph = [[1,2,3],[0,2],[0,1,3],[0,2]]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "graph = [[1,3],[0,2],[1,3],[0,2]]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement isBipartite(graph). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

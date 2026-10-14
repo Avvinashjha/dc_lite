@@ -10,12 +10,98 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "designAddAndSearchWordsDataStructure",
-  "templateCode": "function WordDictionary() {\n  // Initialize data structure\n}\nWordDictionary.prototype.addWord = function(word) {};\nWordDictionary.prototype.search = function(word) {};",
+  "testCases": [
+    {
+      "args": [
+        [],
+        [
+          [
+            "addWord",
+            "bad"
+          ],
+          [
+            "addWord",
+            "dad"
+          ],
+          [
+            "search",
+            "pad"
+          ],
+          [
+            "search",
+            "bad"
+          ],
+          [
+            "search",
+            ".ad"
+          ],
+          [
+            "search",
+            "b.."
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "search",
+            "a"
+          ],
+          [
+            "addWord",
+            "ab"
+          ],
+          [
+            "search",
+            "."
+          ],
+          [
+            "search",
+            ".."
+          ]
+        ]
+      ],
+      "expected": [
+        false,
+        null,
+        false,
+        true
+      ]
+    }
+  ],
+  "functionName": "WordDictionary",
+  "templateCode": "class WordDictionary {\n  constructor() {\n    // Write your implementation here.\n  }\n  addWord(word) {\n    // Write your implementation here.\n  }\n  search(word) {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= word.length <= 25",
-    "word consists of lowercase letters or .",
-    "At most 10^4 calls to addWord and search"
-  ]
+    "addWord accepts lowercase letters only; search additionally accepts dot wildcards.",
+    "At most 10^4 calls."
+  ],
+  "runner": {
+    "mode": "operations"
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = []\noperations = [[\"addWord\",\"bad\"],[\"addWord\",\"dad\"],[\"search\",\"pad\"],[\"search\",\"bad\"],[\"search\",\".ad\"],[\"search\",\"b..\"]]",
+      "output": "[null,null,false,true,true,true]"
+    },
+    {
+      "input": "constructorArgs = []\noperations = [[\"search\",\"a\"],[\"addWord\",\"ab\"],[\"search\",\".\"],[\"search\",\"..\"]]",
+      "output": "[false,null,false,true]"
+    }
+  ],
+  "sampleInput": "constructorArgs = []\noperations = [[\"addWord\",\"bad\"],[\"addWord\",\"dad\"],[\"search\",\"pad\"],[\"search\",\"bad\"],[\"search\",\".ad\"],[\"search\",\"b..\"]]",
+  "sampleOutput": "[null,null,false,true,true,true]",
+  "inputFormat": "Implement the class WordDictionary. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

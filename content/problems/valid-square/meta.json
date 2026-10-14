@@ -33,11 +33,47 @@
         ]
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "expected": false
     }
   ],
   "functionName": "validSquare",
-  "templateCode": "/**\n * @param {number[]} p1\n * @param {number[]} p2\n * @param {number[]} p3\n * @param {number[]} p4\n * @return {boolean}\n */\nfunction validSquare(p1, p2, p3, p4) {\n  // Check if 4 points form a valid square\n}",
+  "templateCode": "function validSquare(p1, p2, p3, p4) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "Coordinates are integers in range [-10^4, 10^4]"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "p1 = [0,0]\np2 = [1,1]\np3 = [1,0]\np4 = [0,1]",
+      "output": "true"
+    },
+    {
+      "input": "p1 = [0,0]\np2 = [0,0]\np3 = [1,1]\np4 = [1,0]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "p1 = [0,0]\np2 = [1,1]\np3 = [1,0]\np4 = [0,1]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement validSquare(p1, p2, p3, p4). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

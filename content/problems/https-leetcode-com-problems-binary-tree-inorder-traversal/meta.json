@@ -46,9 +46,32 @@
     }
   ],
   "functionName": "binaryTreeInorderTraversal",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number[]}\n */\nfunction inorderTraversal(root) {\n  // Inorder traversal of binary tree\n}",
+  "templateCode": "function binaryTreeInorderTraversal(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= Number of nodes <= 100",
     "-100 <= Node.val <= 100"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [1,null,2,3]",
+      "output": "[1,3,2]"
+    },
+    {
+      "input": "root = []",
+      "output": "[]"
+    },
+    {
+      "input": "root = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "root = [1,null,2,3]",
+  "sampleOutput": "[1,3,2]",
+  "inputFormat": "Implement binaryTreeInorderTraversal(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

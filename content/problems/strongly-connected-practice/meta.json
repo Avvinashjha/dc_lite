@@ -12,11 +12,77 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Strongly%20Connected%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "stronglyConnected",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction stronglyConnected(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        5,
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            4
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ]
+    },
+    {
+      "args": [
+        1,
+        [
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ]
+      ]
+    }
+  ],
+  "functionName": "findSCCs",
+  "templateCode": "function findSCCs(V, adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 5000",
     "0 <= E <= V*(V-1)"
-  ]
+  ],
+  "runner": {
+    "unordered": true,
+    "unorderedInner": true
+  },
+  "examples": [
+    {
+      "input": "V = 5\nadj = [[1],[2],[0,3],[4],[]]",
+      "output": "[[0,1,2],[3],[4]]"
+    },
+    {
+      "input": "V = 1\nadj = [[]]",
+      "output": "[[0]]"
+    }
+  ],
+  "sampleInput": "V = 5\nadj = [[1],[2],[0,3],[4],[]]",
+  "sampleOutput": "[[0,1,2],[3],[4]]",
+  "inputFormat": "Implement findSCCs(V, adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
 }

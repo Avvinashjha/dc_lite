@@ -1,4 +1,4 @@
-## DP with Trie
+## DP with a Hash Set
 
 ```javascript
 function wordBreak(s, wordDict) {
@@ -12,4 +12,4 @@ function wordBreak(s, wordDict) {
 }
 ```
 
-**Time:** O(n² × k) | **Space:** O(n)
+**Time:** O(n³) worst case including substring creation and hashing | **Space:** O(n + D), where D is total dictionary size

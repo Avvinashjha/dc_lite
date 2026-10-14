@@ -22,5 +22,5 @@ function generateParenthesis(n) {
 }
 ```
 
-**Time:** O(4^n / √n) — the nth Catalan number bounds the valid combinations.
+**Time:** O(n × Cn) = O(4^n / √n), where Cn is the nth Catalan number and each output string has length 2n.
 **Space:** O(n) for the recursion stack.

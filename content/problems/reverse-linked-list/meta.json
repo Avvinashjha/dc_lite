@@ -28,12 +28,38 @@
         2,
         1
       ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
     }
   ],
-  "functionName": "reverseLinkedList",
-  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction reverseList(head) {\n  // Reverse linked list\n}",
+  "functionName": "reverseList",
+  "templateCode": "function reverseList(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 to 5000 nodes",
     "-5000 <= Node.val <= 5000"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,3,4,5]",
+      "output": "[5,4,3,2,1]"
+    },
+    {
+      "input": "head = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [1,2,3,4,5]",
+  "sampleOutput": "[5,4,3,2,1]",
+  "inputFormat": "Implement reverseList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

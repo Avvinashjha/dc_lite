@@ -23,4 +23,4 @@ function mergeKLists(lists) {
 }
 ```
 
-**Time:** O(N log k) | **Space:** O(1)
+**Time:** O(N log k) | **Space:** O(k) for arrays of list heads (excluding output nodes)

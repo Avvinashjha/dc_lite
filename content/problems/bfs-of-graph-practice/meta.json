@@ -37,11 +37,43 @@
         3,
         4
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        0,
+        1
+      ]
     }
   ],
   "functionName": "bfsOfGraph",
-  "templateCode": "/**\n * @param {number[][]} adj\n * @return {number[]}\n */\nfunction bfsOfGraph(adj) {\n  // BFS traversal from node 0\n}",
+  "templateCode": "function bfsOfGraph(adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= V, E <= 10^4"
-  ]
+    "1 <= V <= 10^4",
+    "0 <= E <= 10^4",
+    "Neighbors are visited in the listed order; vertices unreachable from 0 are omitted."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "adj = [[1,2],[3],[4],[],[]]",
+      "output": "[0,1,2,3,4]"
+    },
+    {
+      "input": "adj = [[1],[],[]]",
+      "output": "[0,1]"
+    }
+  ],
+  "sampleInput": "adj = [[1,2],[3],[4],[],[]]",
+  "sampleOutput": "[0,1,2,3,4]",
+  "inputFormat": "Implement bfsOfGraph(adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

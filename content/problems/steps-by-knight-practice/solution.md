@@ -5,8 +5,9 @@ function minSteps(n, src, dest) {
   const moves = [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]];
   const visited = Array.from({length:n}, ()=>Array(n).fill(false));
   const q = [[src[0],src[1],0]]; visited[src[0]][src[1]] = true;
-  while (q.length) {
-    const [r,c,d] = q.shift();
+  let head = 0;
+  while (head < q.length) {
+    const [r,c,d] = q[head++];
     if (r===dest[0] && c===dest[1]) return d;
     for (const [dr,dc] of moves) {
       const nr=r+dr, nc=c+dc;

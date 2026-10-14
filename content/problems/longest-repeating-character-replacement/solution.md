@@ -1,4 +1,4 @@
-Use a sliding window approach. Maintain a count of characters in the current window. If the window size minus the most frequent character count exceeds `k`, shrink the window from the left.
+Use a sliding window approach. Maintain a count of characters in the current window. If the window size minus the largest character frequency seen so far exceeds `k`, shrink the window from the left.
 
 ```javascript
 function characterReplacement(s, k) {

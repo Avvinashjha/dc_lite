@@ -25,12 +25,37 @@
         ]
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          1,
+          0,
+          4
+        ]
+      ],
+      "expected": false
     }
   ],
-  "functionName": "jumpGame",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction jumpGame(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(jumpGame([2,3,1,1,4]));",
+  "functionName": "canJump",
+  "templateCode": "function canJump(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 10^4",
     "0 <= nums[i] <= 10^5"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [2,3,1,1,4]",
+      "output": "true"
+    },
+    {
+      "input": "nums = [3,2,1,0,4]",
+      "output": "false"
+    }
+  ],
+  "inputFormat": "Implement canJump(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

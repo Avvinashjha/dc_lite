@@ -12,11 +12,55 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Water%20Jug%20problem%20using%20BFS",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "waterJugProblemUsingBfs",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction waterJugProblemUsingBfs(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        3,
+        5,
+        4
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        2,
+        6,
+        5
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        3,
+        5,
+        8
+      ],
+      "expected": true
+    }
+  ],
+  "functionName": "canMeasureWater",
+  "templateCode": "function canMeasureWater(x, y, target) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= x, y <= 10^6",
     "0 <= target <= 10^6"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "x = 3\ny = 5\ntarget = 4",
+      "output": "true"
+    },
+    {
+      "input": "x = 2\ny = 6\ntarget = 5",
+      "output": "false"
+    },
+    {
+      "input": "x = 3\ny = 5\ntarget = 8",
+      "output": "true"
+    }
+  ],
+  "sampleInput": "x = 3\ny = 5\ntarget = 4",
+  "sampleOutput": "true",
+  "inputFormat": "Implement canMeasureWater(x, y, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

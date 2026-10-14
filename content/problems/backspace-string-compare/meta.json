@@ -33,10 +33,29 @@
       "expected": false
     }
   ],
-  "functionName": "backspaceStringCompare",
-  "templateCode": "/**\n * @param {string} s\n * @param {string} t\n * @return {boolean}\n */\nfunction backspaceCompare(s, t) {\n  // Compare strings with backspace processing\n}\n\n// Sample: console.log(backspaceCompare(\"ab#c\", \"ad#c\"));",
+  "functionName": "backspaceCompare",
+  "templateCode": "function backspaceCompare(s, t) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length, t.length <= 200",
     "s and t contain lowercase letters and #"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"ab#c\"\nt = \"ad#c\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"ab##\"\nt = \"c#d#\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"a#c\"\nt = \"b\"",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "s = \"ab#c\"\nt = \"ad#c\"",
+  "sampleOutput": "true",
+  "inputFormat": "Implement backspaceCompare(s, t). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

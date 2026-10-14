@@ -10,11 +10,66 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          {
+            "val": 2,
+            "child": [
+              3,
+              {
+                "val": 4,
+                "child": [
+                  5
+                ]
+              }
+            ]
+          },
+          6
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
   "functionName": "flattenAMultilevelDoublyLinkedList",
-  "templateCode": "/**\n * @param {Node} head\n * @return {Node}\n */\nfunction flatten(head) {\n  // Flatten multilevel doubly linked list\n}",
+  "templateCode": "function flattenAMultilevelDoublyLinkedList(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 1000",
     "1 <= Node.val <= 10^5"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "multilevel"
+    ],
+    "outputType": "multilevel"
+  },
+  "examples": [
+    {
+      "input": "head = [1,{\"val\":2,\"child\":[3,{\"val\":4,\"child\":[5]}]},6]",
+      "output": "[1,2,3,4,5,6]"
+    },
+    {
+      "input": "head = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [1,{\"val\":2,\"child\":[3,{\"val\":4,\"child\":[5]}]},6]",
+  "sampleOutput": "[1,2,3,4,5,6]",
+  "inputFormat": "Implement flattenAMultilevelDoublyLinkedList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nA multilevel list uses numbers or {val, child:[...]} entries. The editor builds doubly linked nodes with val, prev, next, and child properties.",
+  "outputFormat": "Return the result described in the statement.\nOutput is a value array; prev pointers must be correct and child pointers must be null."
 }

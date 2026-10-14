@@ -55,10 +55,29 @@
     }
   ],
   "functionName": "lowestCommonAncestorOfABinarySearchTree",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @param {TreeNode} p\n * @param {TreeNode} q\n * @return {TreeNode}\n */\nfunction lowestCommonAncestor(root, p, q) {\n  // LCA in BST\n}",
+  "templateCode": "function lowestCommonAncestorOfABinarySearchTree(root, p, q) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= number of nodes <= 10^5",
     "-10^9 <= Node.val <= 10^9",
     "All values are unique"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [6,2,8,0,4,7,9,null,null,3,5]\np = 2\nq = 8",
+      "output": "6"
+    },
+    {
+      "input": "root = [6,2,8,0,4,7,9,null,null,3,5]\np = 2\nq = 4",
+      "output": "2"
+    }
+  ],
+  "sampleInput": "root = [6,2,8,0,4,7,9,null,null,3,5]\np = 2\nq = 8",
+  "sampleOutput": "6",
+  "inputFormat": "Implement lowestCommonAncestorOfABinarySearchTree(root, p, q). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -11,11 +11,54 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Optimal%20Binary%20Search%20Tree",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "optimalBinarySearchTree",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction optimalBinarySearchTree(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          12,
+          20
+        ],
+        [
+          34,
+          8,
+          50
+        ]
+      ],
+      "expected": 142
+    },
+    {
+      "args": [
+        [
+          10
+        ],
+        [
+          5
+        ]
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "optimalBST",
+  "templateCode": "function optimalBST(keys, freq) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= n <= 50",
-    "keys are sorted"
-  ]
+    "1 <= keys.length == freq.length <= 50",
+    "Keys are distinct and sorted in increasing order.",
+    "Frequencies are non-negative integers, and the cost fits in a safe JavaScript integer."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "keys = [10,12,20]\nfreq = [34,8,50]",
+      "output": "142"
+    },
+    {
+      "input": "keys = [10]\nfreq = [5]",
+      "output": "5"
+    }
+  ],
+  "sampleInput": "keys = [10,12,20]\nfreq = [34,8,50]",
+  "sampleOutput": "142",
+  "inputFormat": "Implement optimalBST(keys, freq). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

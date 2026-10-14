@@ -5,7 +5,7 @@ function aggressiveCows(stalls, c) {
   stalls.sort((a,b)=>a-b);
   let lo = 1, hi = stalls[stalls.length-1] - stalls[0];
   while (lo <= hi) {
-    const mid = (lo+hi)>>1;
+    const mid = Math.floor(lo + (hi-lo)/2);
     let cows = 1, last = stalls[0];
     for (let i = 1; i < stalls.length; i++) {
       if (stalls[i] - last >= mid) { cows++; last = stalls[i]; }

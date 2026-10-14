@@ -10,11 +10,100 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/implement-queue-using-stacks/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [],
+        [
+          [
+            "push",
+            1
+          ],
+          [
+            "push",
+            2
+          ],
+          [
+            "peek"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        1,
+        1,
+        false,
+        2,
+        true
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "empty"
+          ],
+          [
+            "push",
+            3
+          ],
+          [
+            "pop"
+          ],
+          [
+            "push",
+            4
+          ],
+          [
+            "peek"
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        null,
+        3,
+        null,
+        4
+      ]
+    }
+  ],
   "functionName": "implementQueueUsingStacks",
-  "templateCode": "function MyQueue() {\n  // Initialize queue using stacks\n}\nMyQueue.prototype.push = function(x) {};\nMyQueue.prototype.pop = function() {};\nMyQueue.prototype.peek = function() {};\nMyQueue.prototype.empty = function() {};",
+  "templateCode": "function implementQueueUsingStacks() {\n  return {\n    push(x) { /* Write your implementation. */ },\n    pop() { /* Write your implementation. */ },\n    peek() { /* Write your implementation. */ },\n    empty() { /* Write your implementation. */ }\n  };\n}\n",
   "constraints": [
     "1 <= x <= 9",
     "At most 100 calls to push, pop, peek, empty"
-  ]
+  ],
+  "runner": {
+    "mode": "operations",
+    "factory": true
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = []\noperations = [[\"push\",1],[\"push\",2],[\"peek\"],[\"pop\"],[\"empty\"],[\"pop\"],[\"empty\"]]",
+      "output": "[null,null,1,1,false,2,true]"
+    },
+    {
+      "input": "constructorArgs = []\noperations = [[\"empty\"],[\"push\",3],[\"pop\"],[\"push\",4],[\"peek\"]]",
+      "output": "[true,null,3,null,4]"
+    }
+  ],
+  "sampleInput": "constructorArgs = []\noperations = [[\"push\",1],[\"push\",2],[\"peek\"],[\"pop\"],[\"empty\"],[\"pop\"],[\"empty\"]]",
+  "sampleOutput": "[null,null,1,1,false,2,true]",
+  "inputFormat": "Implement the factory function implementQueueUsingStacks. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

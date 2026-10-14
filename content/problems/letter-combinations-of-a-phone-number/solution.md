@@ -16,6 +16,6 @@ function letterCombinationsOfAPhoneNumber(digits) {
 }
 ```
 
-**Time Complexity:** O(4^n) where n is the length of digits
+**Time Complexity:** O(n × 4^n) including output strings, where n is the length of digits
 
 **Space Complexity:** O(n) for recursion depth

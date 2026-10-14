@@ -43,12 +43,40 @@
         5,
         6
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        1
+      ]
     }
   ],
-  "functionName": "findEventualSafeStates",
-  "templateCode": "/**\n * @param {number[][]} graph\n * @return {number[]}\n */\nfunction eventualSafeNodes(graph) {\n  // Find all eventually safe nodes\n}",
+  "functionName": "eventualSafeNodes",
+  "templateCode": "function eventualSafeNodes(graph) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 10^4",
     "0 <= graph[i].length <= n"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "graph = [[1,2],[2,3],[5],[0],[5],[],[]]",
+      "output": "[2,4,5,6]"
+    },
+    {
+      "input": "graph = [[0],[]]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "graph = [[1,2],[2,3],[5],[0],[5],[],[]]",
+  "sampleOutput": "[2,4,5,6]",
+  "inputFormat": "Implement eventualSafeNodes(graph). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

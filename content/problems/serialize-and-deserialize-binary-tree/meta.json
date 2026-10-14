@@ -12,11 +12,60 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "serializeAndDeserializeBinaryTree",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {string}\n */\nfunction serialize(root) {}\n/**\n * @param {string} data\n * @return {TreeNode}\n */\nfunction deserialize(data) {}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          null,
+          null,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        null,
+        null,
+        4,
+        5
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "codecRoundTrip",
+  "templateCode": "function serialize(root) {\n  // Encode the tree as a string.\n}\n\nfunction deserialize(data) {\n  // Decode the string to a tree.\n}\n\nfunction codecRoundTrip(root) {\n  return deserialize(serialize(root));\n}\n",
   "constraints": [
     "0 <= number of nodes <= 10^4",
     "-1000 <= Node.val <= 1000"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ],
+    "outputType": "tree"
+  },
+  "examples": [
+    {
+      "input": "root = [1,2,3,null,null,4,5]",
+      "output": "[1,2,3,null,null,4,5]"
+    },
+    {
+      "input": "root = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "root = [1,2,3,null,null,4,5]",
+  "sampleOutput": "[1,2,3,null,null,4,5]",
+  "inputFormat": "Implement codecRoundTrip(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
 }

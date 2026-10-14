@@ -10,11 +10,51 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/palindrome-linked-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "palindromeLinkedList",
-  "templateCode": "/**\n * @param {ListNode} head\n * @return {boolean}\n */\nfunction isPalindrome(head) {\n  // Check if linked list is palindrome\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "isPalindrome",
+  "templateCode": "function isPalindrome(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 to 10^5 nodes",
     "0 <= Node.val <= 9"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ]
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,2,1]",
+      "output": "true"
+    },
+    {
+      "input": "head = [1,2]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "head = [1,2,2,1]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement isPalindrome(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

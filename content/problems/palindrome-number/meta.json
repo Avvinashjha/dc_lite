@@ -32,9 +32,28 @@
       "expected": false
     }
   ],
-  "functionName": "palindromeNumber",
-  "templateCode": "/**\n * @param {number} x\n * @return {boolean}\n */\nfunction isPalindrome(x) {\n  // Check if integer is palindrome\n}\n\n// Sample: console.log(isPalindrome(121));",
+  "functionName": "isPalindrome",
+  "templateCode": "function isPalindrome(x) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "-2^31 <= x <= 2^31 - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "x = 121",
+      "output": "true"
+    },
+    {
+      "input": "x = -121",
+      "output": "false"
+    },
+    {
+      "input": "x = 10",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "x = 121",
+  "sampleOutput": "true",
+  "inputFormat": "Implement isPalindrome(x). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

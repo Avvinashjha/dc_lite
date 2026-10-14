@@ -1,3 +1,1 @@
-Given a list of words and a target line width `maxWidth`, lay the words out into lines so each line (except possibly the last) is padded with spaces to be exactly `maxWidth` characters wide, with the extra space distributed evenly between words.
-
-**Example:** words = ["This","is","an","example","of","text","justification."], maxWidth = 16
+Given a list of words and a target line width `maxWidth`, lay the words out into lines so each line (except possibly the last) is padded with spaces to be exactly `maxWidth` characters wide, with extra spaces distributed as evenly as possible between words. Pack each line greedily; when spaces do not divide evenly, give the leftmost gaps one extra space. The last line and any single-word line are left-aligned with trailing spaces, and every line must be exactly `maxWidth` characters long.

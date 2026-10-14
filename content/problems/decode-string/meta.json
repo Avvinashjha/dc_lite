@@ -27,10 +27,25 @@
     }
   ],
   "functionName": "decodeString",
-  "templateCode": "/**\n * @param {string} s\n * @return {string}\n */\nfunction decodeString(s) {\n  // Decode the encoded string\n}\n\n// Sample: console.log(decodeString(\"3[a2[c]]\"));",
+  "templateCode": "function decodeString(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 30",
-    "s consists of lowercase letters, digits, [ and ]",
-    "All integers in s are in range [1, 300]"
-  ]
+    "Input encoding is valid; repeat counts lie in [1,300].",
+    "The decoded output has at most 10^5 characters."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"3[a]2[bc]\"",
+      "output": "\"aaabcbc\""
+    },
+    {
+      "input": "s = \"3[a2[c]]\"",
+      "output": "\"accaccacc\""
+    }
+  ],
+  "sampleInput": "s = \"3[a]2[bc]\"",
+  "sampleOutput": "\"aaabcbc\"",
+  "inputFormat": "Implement decodeString(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

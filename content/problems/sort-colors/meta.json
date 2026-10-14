@@ -2,7 +2,7 @@
   "draft": false,
   "id": "problem-0002",
   "title": "Sort Colors",
-  "difficulty": "Easy",
+  "difficulty": "Medium",
   "topic": "Array",
   "topics": [
     "Array",
@@ -33,12 +33,39 @@
         2,
         2
       ]
+    },
+    {
+      "args": [
+        [
+          2,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        2
+      ]
     }
   ],
   "functionName": "sortColors",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction sortColors(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(sortColors([2,0,2,1,1,0]));",
+  "templateCode": "function sortColors(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 300",
     "nums[i] is 0, 1, or 2"
-  ]
+  ],
+  "runner": {
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "nums = [2,0,2,1,1,0]",
+      "output": "[0,0,1,1,2,2]"
+    },
+    {
+      "input": "nums = [2,0]",
+      "output": "[0,2]"
+    }
+  ],
+  "inputFormat": "Implement sortColors(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
 }

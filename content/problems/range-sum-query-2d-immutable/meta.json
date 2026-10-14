@@ -11,12 +11,124 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/range-sum-query-2d-immutable/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "rangeSumQuery2dImmutable",
-  "templateCode": "/**\n * @param {number[][]} matrix\n */\nfunction NumMatrix(matrix) {}\nNumMatrix.prototype.sumRegion = function(r1, c1, r2, c2) {};",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            [
+              3,
+              0,
+              1,
+              4,
+              2
+            ],
+            [
+              5,
+              6,
+              3,
+              2,
+              1
+            ],
+            [
+              1,
+              2,
+              0,
+              1,
+              5
+            ],
+            [
+              4,
+              1,
+              0,
+              1,
+              7
+            ],
+            [
+              1,
+              0,
+              3,
+              0,
+              5
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            2,
+            1,
+            4,
+            3
+          ],
+          [
+            "sumRegion",
+            1,
+            1,
+            2,
+            2
+          ],
+          [
+            "sumRegion",
+            1,
+            2,
+            2,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        8,
+        11,
+        12
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              5
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        5
+      ]
+    }
+  ],
+  "functionName": "NumMatrix",
+  "templateCode": "class NumMatrix {\n  constructor(matrix) {\n    // Write your implementation here.\n  }\n  sumRegion(r1, c1, r2, c2) {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= m, n <= 200",
     "-10^4 <= matrix[i][j] <= 10^4",
     "At most 10^4 calls to sumRegion"
-  ]
+  ],
+  "runner": {
+    "mode": "operations"
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = [[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]]\noperations = [[\"sumRegion\",2,1,4,3],[\"sumRegion\",1,1,2,2],[\"sumRegion\",1,2,2,4]]",
+      "output": "[8,11,12]"
+    },
+    {
+      "input": "constructorArgs = [[[5]]]\noperations = [[\"sumRegion\",0,0,0,0]]",
+      "output": "[5]"
+    }
+  ],
+  "sampleInput": "constructorArgs = [[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]]\noperations = [[\"sumRegion\",2,1,4,3],[\"sumRegion\",1,1,2,2],[\"sumRegion\",1,2,2,4]]",
+  "sampleOutput": "[8,11,12]",
+  "inputFormat": "Implement the class NumMatrix. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

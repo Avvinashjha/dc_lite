@@ -11,7 +11,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/word-search/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"",
+  "sampleInput": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nword = \"ABCCED\"",
   "sampleOutput": "true",
   "testCases": [
     {
@@ -39,13 +39,38 @@
         "ABCCED"
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "ABA"
+      ],
+      "expected": false
     }
   ],
-  "functionName": "wordSearch",
-  "templateCode": "/**\n * @param {number[][]} board\n * @param {string} word\n * @return {any}\n */\nfunction wordSearch(board, word) {\n  // Write your solution here\n}\n\n// Sample: console.log(wordSearch([[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], \"ABCCED\"));",
+  "functionName": "exist",
+  "templateCode": "function exist(board, word) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 6",
     "1 <= word.length <= 15",
     "board and word consist of lowercase and uppercase English letters"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nword = \"ABCCED\"",
+      "output": "true"
+    },
+    {
+      "input": "board = [[\"A\",\"B\"]]\nword = \"ABA\"",
+      "output": "false"
+    }
+  ],
+  "inputFormat": "Implement exist(board, word). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

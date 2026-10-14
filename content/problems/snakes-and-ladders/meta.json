@@ -12,12 +12,65 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/snakes-and-ladders/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1
+          ]
+        ]
+      ],
+      "expected": 2
+    }
+  ],
   "functionName": "snakesAndLadders",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction snakesAndLadders(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function snakesAndLadders(board) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "n == board.length == board[i].length",
     "2 <= n <= 20",
     "-1 <= board[i][j] <= n^2"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "board = [[-1,-1],[-1,-1]]",
+      "output": "1"
+    },
+    {
+      "input": "board = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]",
+      "output": "2"
+    }
+  ],
+  "sampleInput": "board = [[-1,-1],[-1,-1]]",
+  "sampleOutput": "1",
+  "inputFormat": "Implement snakesAndLadders(board). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

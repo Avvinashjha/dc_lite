@@ -22,12 +22,37 @@
         ]
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 0
     }
   ],
-  "functionName": "minimumMovesToEqualArrayElements",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction minMoves(nums) {\n  // Minimum moves to equalize array\n}",
+  "functionName": "minMoves",
+  "templateCode": "function minMoves(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 10^5",
     "-10^9 <= nums[i] <= 10^9"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [1,2,3]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [1,1,1]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "nums = [1,2,3]",
+  "sampleOutput": "3",
+  "inputFormat": "Implement minMoves(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

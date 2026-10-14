@@ -26,12 +26,41 @@
         ]
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "largestBstInABinaryTree",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction largestBST(root) {\n  // Size of largest BST subtree\n}",
+  "templateCode": "function largestBstInABinaryTree(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^5",
     "1 <= Node.val <= 10^6"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [10,5,15,1,8,null,7]",
+      "output": "3"
+    },
+    {
+      "input": "root = [2,1,3]",
+      "output": "3"
+    }
+  ],
+  "sampleInput": "root = [10,5,15,1,8,null,7]",
+  "sampleOutput": "3",
+  "inputFormat": "Implement largestBstInABinaryTree(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

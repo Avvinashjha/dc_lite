@@ -12,11 +12,66 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "populatingNextRightPointersInEachNode",
-  "templateCode": "/**\n * @param {Node} root\n * @return {Node}\n */\nfunction connect(root) {\n  // Connect next right pointers\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "connect",
+  "templateCode": "function connect(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 2^12 - 1",
     "-1000 <= Node.val <= 1000"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ],
+    "outputType": "nextLevels"
+  },
+  "examples": [
+    {
+      "input": "root = [1,2,3,4,5,6,7]",
+      "output": "[[1],[2,3],[4,5,6,7]]"
+    },
+    {
+      "input": "root = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "root = [1,2,3,4,5,6,7]",
+  "sampleOutput": "[[1],[2,3],[4,5,6,7]]",
+  "inputFormat": "Implement connect(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nThe output lists the values reached through next pointers at each level."
 }

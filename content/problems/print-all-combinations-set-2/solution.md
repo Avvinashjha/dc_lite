@@ -27,4 +27,4 @@ function combinations(arr, r) {
 
 **Time Complexity:** O(C(n, r) × r) — generating all C(n, r) combinations, each of size r
 
-**Space Complexity:** O(r) for the recursion depth (excluding output storage)
+**Space Complexity:** O(n) for the pick/skip recursion depth (excluding output storage)

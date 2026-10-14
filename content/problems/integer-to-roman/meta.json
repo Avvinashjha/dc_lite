@@ -19,11 +19,30 @@
         3
       ],
       "expected": "III"
+    },
+    {
+      "args": [
+        1994
+      ],
+      "expected": "MCMXCIV"
     }
   ],
-  "functionName": "integerToRoman",
-  "templateCode": "/**\n * @param {number} num\n * @return {any}\n */\nfunction integerToRoman(num) {\n  // Write your solution here\n}\n\n// Sample: console.log(integerToRoman(3));",
+  "functionName": "intToRoman",
+  "templateCode": "function intToRoman(num) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= num <= 3999"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "num = 3",
+      "output": "\"III\""
+    },
+    {
+      "input": "num = 1994",
+      "output": "\"MCMXCIV\""
+    }
+  ],
+  "inputFormat": "Implement intToRoman(num). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -38,9 +38,24 @@
     }
   ],
   "functionName": "maximumProductOfThreeNumbers",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {number}\n */\nfunction maximumProduct(nums) {\n  // Maximum product of three numbers\n}",
+  "templateCode": "function maximumProductOfThreeNumbers(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "3 <= nums.length <= 10^4",
     "-1000 <= nums[i] <= 1000"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [1,2,3,4]",
+      "output": "24"
+    },
+    {
+      "input": "nums = [-4,-3,-2,1,60]",
+      "output": "720"
+    }
+  ],
+  "sampleInput": "nums = [1,2,3,4]",
+  "sampleOutput": "24",
+  "inputFormat": "Implement maximumProductOfThreeNumbers(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

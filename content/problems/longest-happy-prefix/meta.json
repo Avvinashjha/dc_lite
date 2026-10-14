@@ -19,12 +19,31 @@
         "level"
       ],
       "expected": "l"
+    },
+    {
+      "args": [
+        "ababab"
+      ],
+      "expected": "abab"
     }
   ],
-  "functionName": "longestHappyPrefix",
-  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction longestHappyPrefix(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(longestHappyPrefix(\"level\"));",
+  "functionName": "longestPrefix",
+  "templateCode": "function longestPrefix(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 10^5",
     "s contains only lowercase English letters"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"level\"",
+      "output": "\"l\""
+    },
+    {
+      "input": "s = \"ababab\"",
+      "output": "\"abab\""
+    }
+  ],
+  "inputFormat": "Implement longestPrefix(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

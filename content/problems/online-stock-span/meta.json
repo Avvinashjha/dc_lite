@@ -10,11 +10,97 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/online-stock-span/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "onlineStockSpan",
-  "templateCode": "function StockSpanner() {}\nStockSpanner.prototype.next = function(price) {\n  // Return stock span\n};",
+  "testCases": [
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            100
+          ],
+          [
+            "next",
+            80
+          ],
+          [
+            "next",
+            60
+          ],
+          [
+            "next",
+            70
+          ],
+          [
+            "next",
+            60
+          ],
+          [
+            "next",
+            75
+          ],
+          [
+            "next",
+            85
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        4,
+        6
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            100
+          ],
+          [
+            "next",
+            100
+          ],
+          [
+            "next",
+            100
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "functionName": "StockSpanner",
+  "templateCode": "class StockSpanner {\n  constructor() {\n    // Write your implementation here.\n  }\n  next(price) {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= price <= 10^5",
     "At most 10^4 calls to next"
-  ]
+  ],
+  "runner": {
+    "mode": "operations"
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = []\noperations = [[\"next\",100],[\"next\",80],[\"next\",60],[\"next\",70],[\"next\",60],[\"next\",75],[\"next\",85]]",
+      "output": "[1,1,1,2,1,4,6]"
+    },
+    {
+      "input": "constructorArgs = []\noperations = [[\"next\",100],[\"next\",100],[\"next\",100]]",
+      "output": "[1,2,3]"
+    }
+  ],
+  "sampleInput": "constructorArgs = []\noperations = [[\"next\",100],[\"next\",80],[\"next\",60],[\"next\",70],[\"next\",60],[\"next\",75],[\"next\",85]]",
+  "sampleOutput": "[1,1,1,2,1,4,6]",
+  "inputFormat": "Implement the class StockSpanner. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

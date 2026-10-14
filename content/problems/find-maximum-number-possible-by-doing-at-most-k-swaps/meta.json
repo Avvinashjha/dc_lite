@@ -11,21 +11,53 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20Maximum%20number%20possible%20by%20doing%20at-most%20K%20swaps",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "K = 4, str = \"1234567\"",
+  "sampleInput": "num = \"1234567\"\nk = 4",
   "sampleOutput": "\"7654321\"",
   "testCases": [
     {
       "args": [
-        4,
-        "1234567"
+        "1234567",
+        4
       ],
       "expected": "7654321"
+    },
+    {
+      "args": [
+        "1234",
+        1
+      ],
+      "expected": "4231"
+    },
+    {
+      "args": [
+        "1234",
+        0
+      ],
+      "expected": "1234"
     }
   ],
-  "functionName": "findMaximumNumberPossibleByDoingAtMostKSwaps",
-  "templateCode": "/**\n * @param {number} K\n * @param {string} str\n * @return {any}\n */\nfunction findMaximumNumberPossibleByDoingAtMostKSwaps(K, str) {\n  // Write your solution here\n}\n\n// Sample: console.log(findMaximumNumberPossibleByDoingAtMostKSwaps(4, \"1234567\"));",
+  "functionName": "findMaximumNum",
+  "templateCode": "function findMaximumNum(num, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= K <= 10",
-    "1 <= str.length <= 30"
-  ]
+    "0 <= k <= 10",
+    "1 <= num.length <= 30",
+    "num contains decimal digits."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "num = \"1234567\"\nk = 4",
+      "output": "\"7654321\""
+    },
+    {
+      "input": "num = \"1234\"\nk = 1",
+      "output": "\"4231\""
+    },
+    {
+      "input": "num = \"1234\"\nk = 0",
+      "output": "\"1234\""
+    }
+  ],
+  "inputFormat": "Implement findMaximumNum(num, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

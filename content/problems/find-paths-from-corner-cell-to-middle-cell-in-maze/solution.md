@@ -7,7 +7,7 @@ function findPaths(maze) {
   const n = maze.length;
   const mid = Math.floor(n / 2);
   const results = [];
-  const corners = [[0, 0], [0, n - 1], [n - 1, 0], [n - 1, n - 1]];
+  const corners = n === 1 ? [[0, 0]] : [[0, 0], [0, n - 1], [n - 1, 0], [n - 1, n - 1]];
   const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
 
   function dfs(r, c, path, visited) {

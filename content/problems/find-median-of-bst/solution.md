@@ -1,27 +1,17 @@
-## Morris Inorder Traversal (Two Pass)
+## Iterative Inorder
 
-First count nodes, then find the middle element(s) via inorder.
+Collect the sorted node values with an explicit stack. Return the middle value for an odd count or the average of the two middle values for an even count.
 
 ```javascript
 function findMedian(root) {
-  let count = 0;
-  function countNodes(node) { if (!node) return; countNodes(node.left); count++; countNodes(node.right); }
-  countNodes(root);
-  let idx = 0, prev = 0, result = 0;
-  function inorder(node) {
-    if (!node) return;
-    inorder(node.left);
-    idx++;
-    if (count % 2 === 1 && idx === Math.ceil(count / 2)) result = node.val;
-    if (count % 2 === 0) {
-      if (idx === count / 2) prev = node.val;
-      if (idx === count / 2 + 1) result = (prev + node.val) / 2;
-    }
-    inorder(node.right);
+  const stack=[],values=[];let current=root;
+  while(current||stack.length) {
+    while(current){stack.push(current);current=current.left;}
+    current=stack.pop();values.push(current.val);current=current.right;
   }
-  inorder(root);
-  return result;
+  const mid=Math.floor(values.length/2);
+  return values.length%2 ? values[mid] : (values[mid-1]+values[mid])/2;
 }
 ```
 
-**Time:** O(n) | **Space:** O(h)
+**Time:** O(n) | **Space:** O(n) auxiliary space, excluding output

@@ -11,7 +11,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/subarray-sums-divisible-by-k/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "nums = [4,5,0,-2,-3,1], k = 5",
+  "sampleInput": "nums = [4,5,0,-2,-3,1]\nk = 5",
   "sampleOutput": "7",
   "testCases": [
     {
@@ -27,13 +27,37 @@
         5
       ],
       "expected": 7
+    },
+    {
+      "args": [
+        [
+          -1,
+          2,
+          9
+        ],
+        2
+      ],
+      "expected": 2
     }
   ],
-  "functionName": "subarraySumsDivisibleByK",
-  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {any}\n */\nfunction subarraySumsDivisibleByK(nums, k) {\n  // Write your solution here\n}\n\n// Sample: console.log(subarraySumsDivisibleByK([4,5,0,-2,-3,1], 5));",
+  "functionName": "subarraysDivByK",
+  "templateCode": "function subarraysDivByK(nums, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 3 * 10^4",
     "-10^4 <= nums[i] <= 10^4",
     "2 <= k <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [4,5,0,-2,-3,1]\nk = 5",
+      "output": "7"
+    },
+    {
+      "input": "nums = [-1,2,9]\nk = 2",
+      "output": "2"
+    }
+  ],
+  "inputFormat": "Implement subarraysDivByK(nums, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

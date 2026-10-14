@@ -12,10 +12,55 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/unique-binary-search-trees-ii/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "uniqueBinarySearchTreesIi",
-  "templateCode": "/**\n * @param {number} n\n * @return {TreeNode[]}\n */\nfunction generateTrees(n) {\n  // Generate all unique BSTs\n}",
+  "testCases": [
+    {
+      "args": [
+        2
+      ],
+      "expected": [
+        [
+          1,
+          null,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        1
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ]
+    }
+  ],
+  "functionName": "generateTrees",
+  "templateCode": "function generateTrees(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 8"
-  ]
+  ],
+  "runner": {
+    "outputType": "trees",
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "[[1,null,2],[2,1]]"
+    },
+    {
+      "input": "n = 1",
+      "output": "[[1]]"
+    }
+  ],
+  "sampleInput": "n = 2",
+  "sampleOutput": "[[1,null,2],[2,1]]",
+  "inputFormat": "Implement generateTrees(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nEach returned tree is displayed as a level-order array.\nThe order of the outer result array does not matter."
 }

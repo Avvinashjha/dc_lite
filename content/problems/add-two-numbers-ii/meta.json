@@ -31,13 +31,50 @@
         0,
         7
       ]
+    },
+    {
+      "args": [
+        [
+          9,
+          9
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        0,
+        0
+      ]
     }
   ],
-  "functionName": "addTwoNumbersIi",
-  "templateCode": "/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nfunction addTwoNumbersII(l1, l2) {\n  // Add two numbers (MSB first)\n}",
+  "functionName": "addTwoNumbersII",
+  "templateCode": "function addTwoNumbersII(l1, l2) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 to 100 nodes per list",
     "0 <= Node.val <= 9",
     "Numbers have no leading zeros"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list",
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "l1 = [7,2,4,3]\nl2 = [5,6,4]",
+      "output": "[7,8,0,7]"
+    },
+    {
+      "input": "l1 = [9,9]\nl2 = [1]",
+      "output": "[1,0,0]"
+    }
+  ],
+  "sampleInput": "l1 = [7,2,4,3]\nl2 = [5,6,4]",
+  "sampleOutput": "[7,8,0,7]",
+  "inputFormat": "Implement addTwoNumbersII(l1, l2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

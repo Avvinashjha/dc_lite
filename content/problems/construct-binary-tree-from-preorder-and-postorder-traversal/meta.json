@@ -12,11 +12,74 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "constructBinaryTreeFromPreorderAndPostorderTraversal",
-  "templateCode": "/**\n * @param {number[]} preorder\n * @param {number[]} postorder\n * @return {TreeNode}\n */\nfunction constructFromPrePost(preorder, postorder) {\n  // Reconstruct tree from preorder and postorder\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          4,
+          5,
+          3,
+          6,
+          7
+        ],
+        [
+          4,
+          5,
+          2,
+          6,
+          7,
+          3,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "constructFromPrePost",
+  "templateCode": "function constructFromPrePost(preorder, postorder) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= preorder.length <= 30",
     "preorder and postorder are permutations of 1..n"
-  ]
+  ],
+  "runner": {
+    "outputType": "tree",
+    "validator": "prePost"
+  },
+  "examples": [
+    {
+      "input": "preorder = [1,2,4,5,3,6,7]\npostorder = [4,5,2,6,7,3,1]",
+      "output": "[1,2,3,4,5,6,7]"
+    },
+    {
+      "input": "preorder = [1]\npostorder = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "preorder = [1,2,4,5,3,6,7]\npostorder = [4,5,2,6,7,3,1]",
+  "sampleOutput": "[1,2,3,4,5,6,7]",
+  "inputFormat": "Implement constructFromPrePost(preorder, postorder). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls.\nAny result satisfying the statement is accepted."
 }

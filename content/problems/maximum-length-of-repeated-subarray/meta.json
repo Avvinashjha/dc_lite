@@ -30,12 +30,39 @@
         ]
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "maximumLengthOfRepeatedSubarray",
-  "templateCode": "/**\n * @param {number[]} nums1\n * @param {number[]} nums2\n * @return {number}\n */\nfunction findLength(nums1, nums2) {\n  // Max length of repeated subarray\n}",
+  "templateCode": "function maximumLengthOfRepeatedSubarray(nums1, nums2) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums1.length, nums2.length <= 1000",
     "0 <= nums1[i], nums2[i] <= 100"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums1 = [1,2,3,2,1]\nnums2 = [3,2,1,4,7]",
+      "output": "3"
+    },
+    {
+      "input": "nums1 = [0,0]\nnums2 = [0]",
+      "output": "1"
+    }
+  ],
+  "sampleInput": "nums1 = [1,2,3,2,1]\nnums2 = [3,2,1,4,7]",
+  "sampleOutput": "3",
+  "inputFormat": "Implement maximumLengthOfRepeatedSubarray(nums1, nums2). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

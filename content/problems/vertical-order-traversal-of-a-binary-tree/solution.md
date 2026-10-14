@@ -1,4 +1,4 @@
-## BFS with Column Tracking
+## DFS with Coordinate Sorting
 
 ```javascript
 function verticalTraversal(root) {

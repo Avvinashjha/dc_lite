@@ -1,16 +1,13 @@
-## DFS with Range Tracking
+## Iterative Range Tracking
 
-Track valid range [low, high] for each node. A leaf is a dead end if low == high.
+Each node has an inclusive range of allowed positive integers. When the lower and upper bounds are equal, no further value can be inserted below that node.
 
 ```javascript
 function isDeadEnd(root) {
-  function dfs(node, lo, hi) {
-    if (!node) return false;
-    if (lo === hi) return true;
-    return dfs(node.left, lo, node.val - 1) || dfs(node.right, node.val + 1, hi);
-  }
-  return dfs(root, 1, Infinity);
+  const stack=root?[[root,1,Infinity]]:[];
+  while(stack.length){const [node,lo,hi]=stack.pop();if(lo===hi)return true;if(node.left)stack.push([node.left,lo,node.val-1]);if(node.right)stack.push([node.right,node.val+1,hi]);}
+  return false;
 }
 ```
 
-**Time:** O(n) | **Space:** O(h)
+**Time:** O(n) | **Space:** O(h) auxiliary space, excluding output

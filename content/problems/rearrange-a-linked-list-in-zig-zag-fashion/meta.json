@@ -10,10 +10,65 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20Linked%20List%20in%20Zig-Zag%20fashion",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "rearrangeALinkedListInZigZagFashion",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction rearrangeALinkedListInZigZagFashion(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          4,
+          3,
+          7,
+          8,
+          6,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        3,
+        7,
+        4,
+        8,
+        2,
+        6,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "zigZagList",
+  "templateCode": "function zigZagList(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^4"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list",
+    "resultArg": 0,
+    "validator": "zigzag"
+  },
+  "examples": [
+    {
+      "input": "head = [4,3,7,8,6,2,1]",
+      "output": "[3,7,4,8,2,6,1]"
+    },
+    {
+      "input": "head = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "head = [4,3,7,8,6,2,1]",
+  "sampleOutput": "[3,7,4,8,2,6,1]",
+  "inputFormat": "Implement zigZagList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.\nReturned list heads are displayed as value arrays; a null head is [].\nAny result satisfying the statement is accepted."
 }

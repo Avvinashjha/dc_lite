@@ -1,18 +1,15 @@
-## Two DFS (Re-rooting)
+## Iterative Rerooting
+
+First build a parent-before-child order. Process it backward to compute subtree sizes and distances from each subtree root. Process it forward to reroot: moving to a child makes its subtree nodes one step closer and all remaining nodes one step farther.
 
 ```javascript
 function sumOfDistancesInTree(n, edges) {
-  const graph = Array.from({length:n}, ()=>[]);
-  for (const [u,v] of edges) { graph[u].push(v); graph[v].push(u); }
-  const count = Array(n).fill(1), ans = Array(n).fill(0);
-  function dfs1(u, parent) {
-    for (const v of graph[u]) if (v!==parent) { dfs1(v, u); count[u]+=count[v]; ans[u]+=ans[v]+count[v]; }
-  }
-  function dfs2(u, parent) {
-    for (const v of graph[u]) if (v!==parent) { ans[v]=ans[u]-count[v]+(n-count[v]); dfs2(v, u); }
-  }
-  dfs1(0,-1); dfs2(0,-1);
-  return ans;
+  const graph=Array.from({length:n},()=>[]);for(const [u,v] of edges){graph[u].push(v);graph[v].push(u);}
+  const parent=Array(n).fill(-1),order=[0],count=Array(n).fill(1),answer=Array(n).fill(0);
+  for(let i=0;i<order.length;i++){const u=order[i];for(const v of graph[u])if(v!==parent[u]){parent[v]=u;order.push(v);}}
+  for(let i=n-1;i>0;i--){const u=order[i],p=parent[u];count[p]+=count[u];answer[p]+=answer[u]+count[u];}
+  for(let i=1;i<n;i++){const u=order[i];answer[u]=answer[parent[u]]+n-2*count[u];}
+  return answer;
 }
 ```
 

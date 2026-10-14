@@ -11,7 +11,7 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "nums = [3, 34, 4, 12, 5, 2], sum = 9",
+  "sampleInput": "arr = [3,34,4,12,5,2]\nsum = 9",
   "sampleOutput": "true",
   "testCases": [
     {
@@ -27,13 +27,36 @@
         9
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        0
+      ],
+      "expected": true
     }
   ],
-  "functionName": "subsetSumProblem",
-  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} sum\n * @return {any}\n */\nfunction subsetSumProblem(nums, sum) {\n  // Write your solution here\n}\n\n// Sample: console.log(subsetSumProblem([3, 34, 4, 12, 5, 2], 9));",
+  "functionName": "isSubsetSum",
+  "templateCode": "function isSubsetSum(arr, sum) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 100",
-    "1 <= arr[i] <= 10^4",
-    "1 <= sum <= 10^5"
-  ]
+    "1 <= arr.length <= 100",
+    "0 <= arr[i] <= 10^4",
+    "0 <= sum <= 10^5"
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [3,34,4,12,5,2]\nsum = 9",
+      "output": "true"
+    },
+    {
+      "input": "arr = [1,2]\nsum = 0",
+      "output": "true"
+    }
+  ],
+  "inputFormat": "Implement isSubsetSum(arr, sum). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

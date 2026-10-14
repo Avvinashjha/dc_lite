@@ -30,10 +30,29 @@
       "expected": 0
     }
   ],
-  "functionName": "convertBinaryNumberInALinkedListToInteger",
-  "templateCode": "/**\n * @param {ListNode} head\n * @return {number}\n */\nfunction getDecimalValue(head) {\n  // Convert binary linked list to integer\n}",
+  "functionName": "getDecimalValue",
+  "templateCode": "function getDecimalValue(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 to 30 nodes",
     "Node.val is 0 or 1"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ]
+  },
+  "examples": [
+    {
+      "input": "head = [1,0,1]",
+      "output": "5"
+    },
+    {
+      "input": "head = [0]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "head = [1,0,1]",
+  "sampleOutput": "5",
+  "inputFormat": "Implement getDecimalValue(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

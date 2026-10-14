@@ -10,11 +10,89 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Flattening%20a%20Linked%20List",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            5,
+            7,
+            8,
+            30
+          ],
+          [
+            10,
+            20
+          ],
+          [
+            19,
+            22,
+            50
+          ],
+          [
+            28,
+            35,
+            40,
+            45
+          ]
+        ]
+      ],
+      "expected": [
+        5,
+        7,
+        8,
+        10,
+        19,
+        20,
+        22,
+        28,
+        30,
+        35,
+        40,
+        45,
+        50
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    }
+  ],
   "functionName": "flatteningALinkedList",
-  "templateCode": "/**\n * @param {Node} root\n * @return {Node}\n */\nfunction flattenList(root) {\n  // Flatten sorted linked list\n}",
+  "templateCode": "function flatteningALinkedList(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "0 <= N <= 50",
-    "1 <= Node.val <= 10^3"
-  ]
+    "0 <= number of bottom lists <= 50",
+    "Each bottom list is sorted in non-decreasing order and non-empty.",
+    "1 <= node.data <= 1000"
+  ],
+  "runner": {
+    "argTypes": [
+      "bottomLists"
+    ],
+    "outputType": "bottomList"
+  },
+  "examples": [
+    {
+      "input": "root = [[5,7,8,30],[10,20],[19,22,50],[28,35,40,45]]",
+      "output": "[5,7,8,10,19,20,22,28,30,35,40,45,50]"
+    },
+    {
+      "input": "root = [[1,2]]",
+      "output": "[1,2]"
+    }
+  ],
+  "sampleInput": "root = [[5,7,8,30],[10,20],[19,22,50],[28,35,40,45]]",
+  "sampleOutput": "[5,7,8,10,19,20,22,28,30,35,40,45,50]",
+  "inputFormat": "Implement flatteningALinkedList(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nEach inner array is one sorted bottom chain. The editor builds nodes with data, bottom, and next properties.",
+  "outputFormat": "Return the result described in the statement.\nThe output is read along bottom pointers as an array of node.data values."
 }

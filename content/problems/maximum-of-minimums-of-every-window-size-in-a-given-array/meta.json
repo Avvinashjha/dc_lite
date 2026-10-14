@@ -32,11 +32,41 @@
         10,
         10
       ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          -2,
+          -3
+        ]
+      ],
+      "expected": [
+        -1,
+        -2,
+        -3
+      ]
     }
   ],
   "functionName": "maximumOfMinimumsOfEveryWindowSizeInAGivenArray",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction maximumOfMinimumsOfEveryWindowSizeInAGivenArray(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5"
-  ]
+    "1 <= arr.length <= 10^5",
+    "-10^9 <= arr[i] <= 10^9"
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [10,20,30,50,10,70,30]",
+      "output": "[70,30,20,10,10,10,10]"
+    },
+    {
+      "input": "arr = [-1,-2,-3]",
+      "output": "[-1,-2,-3]"
+    }
+  ],
+  "sampleInput": "arr = [10,20,30,50,10,70,30]",
+  "sampleOutput": "[70,30,20,10,10,10,10]",
+  "inputFormat": "Implement maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

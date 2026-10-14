@@ -1,3 +1,1 @@
-You're given an arithmetic expression `exp` written in postfix form. Evaluate it and return the final result, supporting the operators `+`, `-`, `*`, and `/`.
-
-**Example:** exp = "231*+9-" → Output: -4 (2+3*1-9)
+You're given an arithmetic expression `exp` written in postfix form. Evaluate it and return the final result, supporting the operators `+`, `-`, `*`, and `/`. Operands are single digits (`0` through `9`) and the expression has no separators. Division truncates toward zero. The expression is valid and never divides by zero.

@@ -32,9 +32,28 @@
       "expected": "ZY"
     }
   ],
-  "functionName": "excelSheetColumnTitle",
-  "templateCode": "/**\n * @param {number} columnNumber\n * @return {string}\n */\nfunction convertToTitle(columnNumber) {\n  // Convert number to Excel column title\n}\n\n// Sample: console.log(convertToTitle(28));",
+  "functionName": "convertToTitle",
+  "templateCode": "function convertToTitle(columnNumber) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= columnNumber <= 2^31 - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "columnNumber = 1",
+      "output": "\"A\""
+    },
+    {
+      "input": "columnNumber = 28",
+      "output": "\"AB\""
+    },
+    {
+      "input": "columnNumber = 701",
+      "output": "\"ZY\""
+    }
+  ],
+  "sampleInput": "columnNumber = 1",
+  "sampleOutput": "\"A\"",
+  "inputFormat": "Implement convertToTitle(columnNumber). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

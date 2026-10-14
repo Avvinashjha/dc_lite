@@ -11,13 +11,57 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Tug%20of%20War",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "[3, 4, 5, -3, 100, 1, 89, 54, 23, 20]",
-  "sampleOutput": "Subsets with minimum difference",
-  "testCases": [],
+  "sampleInput": "arr = [1,2,3,4]",
+  "sampleOutput": "{\"minDiff\":0,\"bestSubset\":[1,4]}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": {
+        "minDiff": 0,
+        "bestSubset": [
+          1,
+          4
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": {
+        "minDiff": 1,
+        "bestSubset": []
+      }
+    }
+  ],
   "functionName": "tugOfWar",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction tugOfWar(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function tugOfWar(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 20",
     "-10^6 <= arr[i] <= 10^6"
-  ]
+  ],
+  "runner": {
+    "validator": "tug"
+  },
+  "examples": [
+    {
+      "input": "arr = [1,2,3,4]",
+      "output": "{\"minDiff\":0,\"bestSubset\":[1,4]}"
+    },
+    {
+      "input": "arr = [1]",
+      "output": "{\"minDiff\":1,\"bestSubset\":[]}"
+    }
+  ],
+  "inputFormat": "Implement tugOfWar(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nAny result satisfying the statement is accepted."
 }

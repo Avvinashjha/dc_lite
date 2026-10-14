@@ -10,10 +10,95 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Implement%20two%20Stacks%20in%20an%20Array",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "implementTwoStacksInAnArray",
-  "templateCode": "function TwoStacks(n) {\n  // Initialize two stacks in one array\n}\nTwoStacks.prototype.push1 = function(x) {};\nTwoStacks.prototype.push2 = function(x) {};\nTwoStacks.prototype.pop1 = function() {};\nTwoStacks.prototype.pop2 = function() {};",
+  "testCases": [
+    {
+      "args": [
+        [
+          3
+        ],
+        [
+          [
+            "push1",
+            1
+          ],
+          [
+            "push2",
+            2
+          ],
+          [
+            "push1",
+            3
+          ],
+          [
+            "pop1"
+          ],
+          [
+            "pop2"
+          ],
+          [
+            "pop2"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        3,
+        2,
+        -1
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          [
+            "push1",
+            1
+          ],
+          [
+            "push2",
+            2
+          ],
+          [
+            "pop2"
+          ],
+          [
+            "pop1"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        -1,
+        1
+      ]
+    }
+  ],
+  "functionName": "TwoStacks",
+  "templateCode": "class TwoStacks {\n  constructor(n) {\n    // Write your implementation here.\n  }\n  push1(x) {\n    // Write your implementation here.\n  }\n  push2(x) {\n    // Write your implementation here.\n  }\n  pop1() {\n    // Write your implementation here.\n  }\n  pop2() {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= N <= 100"
-  ]
+  ],
+  "runner": {
+    "mode": "operations"
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = [3]\noperations = [[\"push1\",1],[\"push2\",2],[\"push1\",3],[\"pop1\"],[\"pop2\"],[\"pop2\"]]",
+      "output": "[null,null,null,3,2,-1]"
+    },
+    {
+      "input": "constructorArgs = [1]\noperations = [[\"push1\",1],[\"push2\",2],[\"pop2\"],[\"pop1\"]]",
+      "output": "[null,null,-1,1]"
+    }
+  ],
+  "sampleInput": "constructorArgs = [3]\noperations = [[\"push1\",1],[\"push2\",2],[\"push1\",3],[\"pop1\"],[\"pop2\"],[\"pop2\"]]",
+  "sampleOutput": "[null,null,null,3,2,-1]",
+  "inputFormat": "Implement the class TwoStacks. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

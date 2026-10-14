@@ -26,12 +26,41 @@
         1,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        0
+      ]
     }
   ],
-  "functionName": "countOfSmallerNumbersAfterSelf",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nfunction countSmaller(nums) {\n  // Count smaller elements to the right\n}",
+  "functionName": "countSmaller",
+  "templateCode": "function countSmaller(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 10^5",
     "-10^4 <= nums[i] <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [5,2,6,1]",
+      "output": "[2,1,1,0]"
+    },
+    {
+      "input": "nums = [2,2,1]",
+      "output": "[1,1,0]"
+    }
+  ],
+  "sampleInput": "nums = [5,2,6,1]",
+  "sampleOutput": "[2,1,1,0]",
+  "inputFormat": "Implement countSmaller(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

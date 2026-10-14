@@ -28,9 +28,24 @@
     }
   ],
   "functionName": "superEggDrop",
-  "templateCode": "/**\n * @param {number} k\n * @param {number} n\n * @return {number}\n */\nfunction superEggDrop(k, n) {\n  // Min moves to find critical floor\n}",
+  "templateCode": "function superEggDrop(k, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= k <= 100",
     "1 <= n <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "k = 2\nn = 6",
+      "output": "3"
+    },
+    {
+      "input": "k = 1\nn = 2",
+      "output": "2"
+    }
+  ],
+  "sampleInput": "k = 2\nn = 6",
+  "sampleOutput": "3",
+  "inputFormat": "Implement superEggDrop(k, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

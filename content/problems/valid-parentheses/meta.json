@@ -19,12 +19,31 @@
         "()[]{}"
       ],
       "expected": true
+    },
+    {
+      "args": [
+        "([)]"
+      ],
+      "expected": false
     }
   ],
-  "functionName": "validParentheses",
-  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction validParentheses(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(validParentheses(\"()[]{}\"));",
+  "functionName": "isValid",
+  "templateCode": "function isValid(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= s.length <= 10^4",
-    "s consists of '()[]{}' only"
-  ]
+    "0 <= s.length <= 10^4",
+    "s consists of '()[]{}' only."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"()[]{}\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"([)]\"",
+      "output": "false"
+    }
+  ],
+  "inputFormat": "Implement isValid(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -10,12 +10,55 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "removeDuplicatesFromSortedList",
-  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction deleteDuplicates(head) {\n  // Remove duplicates from sorted list\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          1,
+          2,
+          3,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "deleteDuplicates",
+  "templateCode": "function deleteDuplicates(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 to 300 nodes",
     "-100 <= Node.val <= 100",
     "List is sorted in ascending order"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [1,1,2,3,3]",
+      "output": "[1,2,3]"
+    },
+    {
+      "input": "head = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [1,1,2,3,3]",
+  "sampleOutput": "[1,2,3]",
+  "inputFormat": "Implement deleteDuplicates(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

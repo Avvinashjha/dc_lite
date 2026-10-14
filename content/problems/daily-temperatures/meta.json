@@ -34,12 +34,41 @@
         0,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          100,
+          90,
+          80
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
     }
   ],
   "functionName": "dailyTemperatures",
-  "templateCode": "/**\n * @param {number[]} temperatures\n * @return {number[]}\n */\nfunction dailyTemperatures(temperatures) {\n  // Days until warmer temperature\n}",
+  "templateCode": "function dailyTemperatures(temperatures) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= temperatures.length <= 10^5",
     "30 <= temperatures[i] <= 100"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "temperatures = [73,74,75,71,69,72,76,73]",
+      "output": "[1,1,4,2,1,1,0,0]"
+    },
+    {
+      "input": "temperatures = [100,90,80]",
+      "output": "[0,0,0]"
+    }
+  ],
+  "sampleInput": "temperatures = [73,74,75,71,69,72,76,73]",
+  "sampleOutput": "[1,1,4,2,1,1,0,0]",
+  "inputFormat": "Implement dailyTemperatures(temperatures). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

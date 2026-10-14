@@ -10,11 +10,97 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Implement%20Stack%20and%20Queue%20using%20Deque",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [],
+        [
+          [
+            "stack.push",
+            1
+          ],
+          [
+            "stack.push",
+            2
+          ],
+          [
+            "stack.pop"
+          ],
+          [
+            "queue.enqueue",
+            1
+          ],
+          [
+            "queue.enqueue",
+            2
+          ],
+          [
+            "queue.dequeue"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        2,
+        null,
+        null,
+        1
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "stack.empty"
+          ],
+          [
+            "queue.empty"
+          ],
+          [
+            "queue.enqueue",
+            3
+          ],
+          [
+            "queue.peek"
+          ],
+          [
+            "stack.empty"
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        true,
+        null,
+        3,
+        true
+      ]
+    }
+  ],
   "functionName": "implementStackAndQueueUsingDeque",
-  "templateCode": "function Deque() {\n  // Initialize deque\n}\nDeque.prototype.pushFront = function(x) {};\nDeque.prototype.pushBack = function(x) {};\nDeque.prototype.popFront = function() {};\nDeque.prototype.popBack = function() {};",
+  "templateCode": "function implementStackAndQueueUsingDeque() {\n  return {\n    stack: {\n      push(x) {}, pop() {}, peek() {}, empty() {}\n    },\n    queue: {\n      enqueue(x) {}, dequeue() {}, peek() {}, empty() {}\n    }\n  };\n}\n",
   "constraints": [
     "1 <= N <= 100",
     "1 <= value <= 10^5"
-  ]
+  ],
+  "runner": {
+    "mode": "operations",
+    "factory": true
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = []\noperations = [[\"stack.push\",1],[\"stack.push\",2],[\"stack.pop\"],[\"queue.enqueue\",1],[\"queue.enqueue\",2],[\"queue.dequeue\"]]",
+      "output": "[null,null,2,null,null,1]"
+    },
+    {
+      "input": "constructorArgs = []\noperations = [[\"stack.empty\"],[\"queue.empty\"],[\"queue.enqueue\",3],[\"queue.peek\"],[\"stack.empty\"]]",
+      "output": "[true,true,null,3,true]"
+    }
+  ],
+  "sampleInput": "constructorArgs = []\noperations = [[\"stack.push\",1],[\"stack.push\",2],[\"stack.pop\"],[\"queue.enqueue\",1],[\"queue.enqueue\",2],[\"queue.dequeue\"]]",
+  "sampleOutput": "[null,null,2,null,null,1]",
+  "inputFormat": "Implement the factory function implementStackAndQueueUsingDeque. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

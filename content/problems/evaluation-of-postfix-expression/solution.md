@@ -1,5 +1,7 @@
 ## Stack-Based Evaluation
 
+This version uses single-digit operands with no separators. Pop the right operand before the left; division truncates toward zero.
+
 ```javascript
 function evaluatePostfix(exp) {
   const stack = [];

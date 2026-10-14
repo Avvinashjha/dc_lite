@@ -19,12 +19,31 @@
         "/home/"
       ],
       "expected": "/home"
+    },
+    {
+      "args": [
+        "/../.../a/./"
+      ],
+      "expected": "/.../a"
     }
   ],
   "functionName": "simplifyPath",
-  "templateCode": "/**\n * @param {string} path\n * @return {any}\n */\nfunction simplifyPath(path) {\n  // Write your solution here\n}\n\n// Sample: console.log(simplifyPath(\"/home/\"));",
+  "templateCode": "function simplifyPath(path) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= path.length <= 3000",
     "path consists of English letters, digits, period, slash, or underscore"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "path = \"/home/\"",
+      "output": "\"/home\""
+    },
+    {
+      "input": "path = \"/../.../a/./\"",
+      "output": "\"/.../a\""
+    }
+  ],
+  "inputFormat": "Implement simplifyPath(path). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

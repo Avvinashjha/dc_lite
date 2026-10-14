@@ -1,17 +1,23 @@
-## DFS with Global Max
+## Iterative Postorder
+
+Collect a parent-before-child order and process it backward. Each node contributes the sum of its two child heights to the diameter.
 
 ```javascript
 function diameterOfBinaryTree(root) {
-  let diameter = 0;
-  function depth(node) {
-    if (!node) return 0;
-    const l = depth(node.left), r = depth(node.right);
-    diameter = Math.max(diameter, l + r);
-    return Math.max(l, r) + 1;
+  if (!root) return 0;
+  const order = [], stack = [root];
+  while(stack.length) {
+    const node=stack.pop();order.push(node);
+    if(node.left)stack.push(node.left);
+    if(node.right)stack.push(node.right);
   }
-  depth(root);
+  const heights = new Map();let diameter=0;
+  for(let i=order.length-1;i>=0;i--) {
+    const node=order[i],l=heights.get(node.left)||0,r=heights.get(node.right)||0;
+    diameter=Math.max(diameter,l+r);heights.set(node,1+Math.max(l,r));
+  }
   return diameter;
 }
 ```
 
-**Time:** O(n) | **Space:** O(h)
+**Time:** O(n) | **Space:** O(n) auxiliary space, excluding output

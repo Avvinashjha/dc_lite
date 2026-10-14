@@ -12,12 +12,105 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/binary-search-tree-iterator/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "binarySearchTreeIterator",
-  "templateCode": "/**\n * @param {TreeNode} root\n */\nfunction BSTIterator(root) {\n  // Initialize BST iterator\n}\nBSTIterator.prototype.next = function() {};\nBSTIterator.prototype.hasNext = function() {};",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            7,
+            3,
+            15,
+            null,
+            null,
+            9,
+            20
+          ]
+        ],
+        [
+          [
+            "next"
+          ],
+          [
+            "next"
+          ],
+          [
+            "hasNext"
+          ],
+          [
+            "next"
+          ],
+          [
+            "next"
+          ],
+          [
+            "next"
+          ],
+          [
+            "hasNext"
+          ]
+        ]
+      ],
+      "expected": [
+        3,
+        7,
+        true,
+        9,
+        15,
+        20,
+        false
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ],
+        [
+          [
+            "hasNext"
+          ],
+          [
+            "next"
+          ],
+          [
+            "hasNext"
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        1,
+        false
+      ]
+    }
+  ],
+  "functionName": "BSTIterator",
+  "templateCode": "class BSTIterator {\n  constructor(root) {\n    // Write your implementation here.\n  }\n  next() {\n    // Write your implementation here.\n  }\n  hasNext() {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= number of nodes <= 10^5",
     "0 <= Node.val <= 10^6",
     "At most 10^5 calls to next() and hasNext()"
-  ]
+  ],
+  "runner": {
+    "mode": "operations",
+    "constructorTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "constructorArgs = [[7,3,15,null,null,9,20]]\noperations = [[\"next\"],[\"next\"],[\"hasNext\"],[\"next\"],[\"next\"],[\"next\"],[\"hasNext\"]]",
+      "output": "[3,7,true,9,15,20,false]"
+    },
+    {
+      "input": "constructorArgs = [[1]]\noperations = [[\"hasNext\"],[\"next\"],[\"hasNext\"]]",
+      "output": "[true,1,false]"
+    }
+  ],
+  "sampleInput": "constructorArgs = [[7,3,15,null,null,9,20]]\noperations = [[\"next\"],[\"next\"],[\"hasNext\"],[\"next\"],[\"next\"],[\"next\"],[\"hasNext\"]]",
+  "sampleOutput": "[3,7,true,9,15,20,false]",
+  "inputFormat": "Implement the class BSTIterator. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
 }

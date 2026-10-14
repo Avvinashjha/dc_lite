@@ -1,27 +1,35 @@
-## Preorder with null markers
+## Iterative Preorder with Null Markers
+
+Serialize nodes in preorder, recording a null marker for every missing child so shape is preserved. To deserialize, track each unfinished node and whether its next child is left or right. Both operations use explicit stacks, so a long chain does not overflow the JavaScript call stack.
 
 ```javascript
 function serialize(root) {
-  const result = [];
-  function dfs(node) {
-    if (!node) { result.push('null'); return; }
-    result.push(node.val);
-    dfs(node.left); dfs(node.right);
+  const stack = [root], values = [];
+  while (stack.length) {
+    const node = stack.pop();
+    if (!node) values.push('null');
+    else { values.push(String(node.val)); stack.push(node.right, node.left); }
   }
-  dfs(root);
-  return result.join(',');
+  return values.join(',');
 }
 function deserialize(data) {
-  const vals = data.split(',');
-  let i = 0;
-  function build() {
-    if (vals[i] === 'null') { i++; return null; }
-    const node = {val: Number(vals[i++]), left: null, right: null};
-    node.left = build(); node.right = build();
-    return node;
+  const values = data.split(',');
+  if (values[0] === 'null') return null;
+  const root = {val:Number(values[0]),left:null,right:null}, stack = [[root,0]];
+  for (let i = 1; i < values.length; i++) {
+    const frame = stack[stack.length-1], side = frame[1]++ === 0 ? 'left' : 'right';
+    if (frame[1] === 2) stack.pop();
+    const node = values[i] === 'null' ? null : {val:Number(values[i]),left:null,right:null};
+    frame[0][side] = node;
+    if (node) stack.push([node,0]);
   }
-  return build();
+  return root;
+}
+function codecRoundTrip(root) {
+  return deserialize(serialize(root));
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time:** O(n) | **Space:** O(n), including the encoded string and reconstructed tree.
+
+The editor calls `codecRoundTrip` to check the composition of both operations. Any serialization format that reconstructs the same tree is accepted.

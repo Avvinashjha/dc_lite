@@ -2,16 +2,16 @@ Maximize `(yi + yj) + |xi - xj|`. Since points are sorted by x, this simplifies 
 
 ```javascript
 function findMaxValueOfEquation(points, k) {
-  const deque = [];
+  const deque = []; let head = 0;
   let result = -Infinity;
 
   for (const [xj, yj] of points) {
-    while (deque.length && xj - deque[0][1] > k) {
-      deque.shift();
+    while (deque.length > head && xj - deque[head][1] > k) {
+      head++;
     }
 
-    if (deque.length) {
-      result = Math.max(result, yj + xj + deque[0][0]);
+    if (deque.length > head) {
+      result = Math.max(result, yj + xj + deque[head][0]);
     }
 
     const val = yj - xj;

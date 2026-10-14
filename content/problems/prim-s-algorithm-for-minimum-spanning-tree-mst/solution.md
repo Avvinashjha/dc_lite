@@ -1,4 +1,4 @@
-## Prim's with Priority Queue
+## Prim's with Linear Minimum Selection
 
 ```javascript
 function primMST(V, adj) {
@@ -15,4 +15,4 @@ function primMST(V, adj) {
 }
 ```
 
-**Time:** O(V²) or O(E log V) with heap | **Space:** O(V)
+**Time:** O(V² + E) for this implementation | **Space:** O(V)

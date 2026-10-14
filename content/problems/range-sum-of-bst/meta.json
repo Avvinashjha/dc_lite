@@ -12,12 +12,58 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/range-sum-of-bst/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "rangeSumOfBst",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} low\n * @param {number} high\n * @return {number}\n */\nfunction rangeSumBST(root, low, high) {\n  // Sum of BST values in range\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          5,
+          15,
+          3,
+          7,
+          null,
+          18
+        ],
+        7,
+        15
+      ],
+      "expected": 32
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        2,
+        3
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "rangeSumBST",
+  "templateCode": "function rangeSumBST(root, low, high) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= number of nodes <= 2 * 10^4",
     "1 <= Node.val <= 10^5",
     "1 <= low <= high <= 10^5"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [10,5,15,3,7,null,18]\nlow = 7\nhigh = 15",
+      "output": "32"
+    },
+    {
+      "input": "root = [1]\nlow = 2\nhigh = 3",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "root = [10,5,15,3,7,null,18]\nlow = 7\nhigh = 15",
+  "sampleOutput": "32",
+  "inputFormat": "Implement rangeSumBST(root, low, high). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

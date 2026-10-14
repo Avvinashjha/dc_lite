@@ -12,11 +12,57 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=BST%20with%20Dead%20End%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "bstWithDeadEnd",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {boolean}\n */\nfunction isDeadEnd(root) {\n  // Check if BST has a dead end\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          8,
+          5,
+          11,
+          2,
+          7,
+          null,
+          null,
+          1,
+          3
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          8,
+          5,
+          11
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "isDeadEnd",
+  "templateCode": "function isDeadEnd(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^4",
     "1 <= Node.val <= 10^4"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [8,5,11,2,7,null,null,1,3]",
+      "output": "true"
+    },
+    {
+      "input": "root = [8,5,11]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "root = [8,5,11,2,7,null,null,1,3]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement isDeadEnd(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

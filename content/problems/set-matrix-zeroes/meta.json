@@ -51,12 +51,51 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          3
+        ]
+      ]
     }
   ],
-  "functionName": "setMatrixZeroes",
-  "templateCode": "/**\n * @param {number[][]} matrix\n * @return {any}\n */\nfunction setMatrixZeroes(matrix) {\n  // Write your solution here\n}\n\n// Sample: console.log(setMatrixZeroes([[1,1,1],[1,0,1],[1,1,1]]));",
+  "functionName": "setZeroes",
+  "templateCode": "function setZeroes(matrix) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 200",
     "-2^31 <= matrix[i][j] <= 2^31 - 1"
-  ]
+  ],
+  "runner": {
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "matrix = [[1,1,1],[1,0,1],[1,1,1]]",
+      "output": "[[1,0,1],[0,0,0],[1,0,1]]"
+    },
+    {
+      "input": "matrix = [[0,1],[2,3]]",
+      "output": "[[0,0],[0,3]]"
+    }
+  ],
+  "inputFormat": "Implement setZeroes(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
 }

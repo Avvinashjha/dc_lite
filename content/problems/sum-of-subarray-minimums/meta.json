@@ -21,12 +21,36 @@
         ]
       ],
       "expected": 17
+    },
+    {
+      "args": [
+        [
+          2,
+          2
+        ]
+      ],
+      "expected": 6
     }
   ],
-  "functionName": "sumOfSubarrayMinimums",
-  "templateCode": "/**\n * @param {number[]} arr\n * @return {number}\n */\nfunction sumSubarrayMins(arr) {\n  // Sum of subarray minimums\n}",
+  "functionName": "sumSubarrayMins",
+  "templateCode": "function sumSubarrayMins(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= arr.length <= 3 * 10^4",
     "1 <= arr[i] <= 3 * 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [3,1,2,4]",
+      "output": "17"
+    },
+    {
+      "input": "arr = [2,2]",
+      "output": "6"
+    }
+  ],
+  "sampleInput": "arr = [3,1,2,4]",
+  "sampleOutput": "17",
+  "inputFormat": "Implement sumSubarrayMins(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

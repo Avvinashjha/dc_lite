@@ -1,19 +1,16 @@
-## Find Unsorted Window
+## Compare with the Sorted Order
 
-Find the first and last position where the array deviates, check if reversing makes it sorted.
+Find the first and last indices that differ from a sorted copy. If one reversal can sort the array, reversing that complete interval must produce the sorted order. This also handles duplicate values at the interval boundaries.
 
 ```javascript
 function canSortByReversing(arr) {
-  const n = arr.length;
-  let i = 0;
-  while (i < n - 1 && arr[i] <= arr[i+1]) i++;
-  if (i === n - 1) return true;
-  let j = n - 1;
-  while (j > 0 && arr[j] >= arr[j-1]) j--;
-  const reversed = [...arr.slice(0, i), ...arr.slice(i, j+1).reverse(), ...arr.slice(j+1)];
-  for (let k = 0; k < n - 1; k++) if (reversed[k] > reversed[k+1]) return false;
+  const sorted = [...arr].sort((a,b)=>a-b);
+  let left = 0, right = arr.length - 1;
+  while (left < arr.length && arr[left] === sorted[left]) left++;
+  while (right > left && arr[right] === sorted[right]) right--;
+  for (let i = left; i <= right; i++) if (arr[left + right - i] !== sorted[i]) return false;
   return true;
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time:** O(n log n) | **Space:** O(n)

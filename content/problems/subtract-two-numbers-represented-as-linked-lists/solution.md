@@ -1,4 +1,4 @@
-## Pad + Subtract with Borrow
+## Exact BigInt Subtraction
 
 ```javascript
 function subtractLists(l1, l2) {
@@ -14,4 +14,4 @@ function subtractLists(l1, l2) {
 }
 ```
 
-**Time:** O(m + n) | **Space:** O(max(m,n))
+**Time:** O(m² + n²) as a loose bound when accounting for growing BigInt arithmetic | **Space:** O(max(m,n))

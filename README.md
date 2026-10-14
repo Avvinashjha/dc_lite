@@ -98,7 +98,8 @@ npm run dev          # Start dev server
 npm run build        # Build for production
 npm run preview      # Preview build
 npm run new-post     # Create new blog post
-npm run validate     # Validate all content
+npm run validate     # Validate posts
+npm run validate:problems # Audit problems, execute solutions, and check the runner
 ```
 
 ## Customization
@@ -125,3 +126,5 @@ Then set your web app URL in:
 ---
 
 Built with [Astro](https://astro.build)
+
+Problem pages load `meta.json`, `description.md`, and `solution.md` from each directory in `content/problems`. Keep examples synchronized with their corresponding test fixtures; Example 1 is executed by Run Sample. Node fixtures and judging rules are configured through `runner` in the metadata. `npm run build` runs the complete problem validation suite before generating the site. To export a per-problem validation report, run `node scripts/audit-problems.mjs --report /tmp/problem-content-audit.json` or `node scripts/verify-problem-solutions.mjs --report /tmp/problem-solution-audit.json`.

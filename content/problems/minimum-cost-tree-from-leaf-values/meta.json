@@ -10,11 +10,46 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "minimumCostTreeFromLeafValues",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumCostTreeFromLeafValues(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          6,
+          2,
+          4
+        ]
+      ],
+      "expected": 32
+    },
+    {
+      "args": [
+        [
+          4,
+          11
+        ]
+      ],
+      "expected": 44
+    }
+  ],
+  "functionName": "mctFromLeafValues",
+  "templateCode": "function mctFromLeafValues(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= arr.length <= 40",
     "1 <= arr[i] <= 15"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "arr = [6,2,4]",
+      "output": "32"
+    },
+    {
+      "input": "arr = [4,11]",
+      "output": "44"
+    }
+  ],
+  "sampleInput": "arr = [6,2,4]",
+  "sampleOutput": "32",
+  "inputFormat": "Implement mctFromLeafValues(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

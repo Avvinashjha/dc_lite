@@ -45,10 +45,31 @@
     }
   ],
   "functionName": "addTwoNumbers",
-  "templateCode": "/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nfunction addTwoNumbers(l1, l2) {\n  // Add two numbers represented as linked lists\n}",
+  "templateCode": "function addTwoNumbers(l1, l2) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "Each linked list has 1 to 100 nodes",
     "0 <= Node.val <= 9",
     "Numbers do not have leading zeros"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list",
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "l1 = [2,4,3]\nl2 = [5,6,4]",
+      "output": "[7,0,8]"
+    },
+    {
+      "input": "l1 = [0]\nl2 = [0]",
+      "output": "[0]"
+    }
+  ],
+  "sampleInput": "l1 = [2,4,3]\nl2 = [5,6,4]",
+  "sampleOutput": "[7,0,8]",
+  "inputFormat": "Implement addTwoNumbers(l1, l2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

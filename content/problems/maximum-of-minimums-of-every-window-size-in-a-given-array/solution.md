@@ -17,7 +17,7 @@ function maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr) {
     right[i] = stack.length ? stack[stack.length-1] : n;
     stack.push(i);
   }
-  const result = new Array(n + 1).fill(0);
+  const result = new Array(n + 1).fill(-Infinity);
   for (let i = 0; i < n; i++) {
     const len = right[i] - left[i] - 1;
     result[len] = Math.max(result[len], arr[i]);

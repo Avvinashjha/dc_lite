@@ -33,15 +33,6 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
 
   <div class="problem-desc__body" set:html={problem.descriptionHtml} />
 
-  <div class="problem-example">
-    <div class="problem-example__label">Sample Input</div>
-    <div class="problem-example__content">{problem.sampleInput || '\u2014'}</div>
-  </div>
-  <div class="problem-example">
-    <div class="problem-example__label">Sample Output</div>
-    <div class="problem-example__content">{problem.sampleOutput || '\u2014'}</div>
-  </div>
-
   {problem.inputFormat && (
     <div class="problem-example">
       <div class="problem-example__label">Input Format</div>
@@ -57,11 +48,15 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
 
   {examples.length > 0 && (
     <div class="problem-section">
-      <div class="problem-section__heading">Examples</div>
+      <h2 class="problem-section__heading">Sample Input and Output</h2>
       {examples.map((ex, idx) => (
         <div class="problem-example" style="margin-top:0.5rem;">
-          <div class="problem-example__label">Example {idx + 1}</div>
-          <div class="problem-example__content">{`Input: ${ex.input}\nOutput: ${ex.output}${ex.explanation ? `\nExplanation: ${ex.explanation}` : ''}`}</div>
+          <h3 class="problem-example__label">Example {idx + 1}{idx === 0 ? ' · Run Sample' : ''}</h3>
+          <div class="problem-example__label">Input</div>
+          <pre class="problem-example__content"><code>{ex.input}</code></pre>
+          <div class="problem-example__label">Output</div>
+          <pre class="problem-example__content"><code>{ex.output}</code></pre>
+          {ex.explanation && <p><strong>Explanation:</strong> {ex.explanation}</p>}
         </div>
       ))}
     </div>
@@ -100,8 +95,8 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
   )}
 
   {problem.testCases.length > 0 && (
-    <div class="problem-section">
-      <div class="problem-section__heading">Test Cases</div>
+    <details class="problem-section">
+      <summary class="problem-section__heading">Test Cases ({problem.testCases.length})</summary>
       {problem.testCases.map((tc, idx) => (
         <div class="problem-example" style="margin-top:0.5rem;">
           <div class="problem-example__label">Case {idx + 1}</div>
@@ -112,7 +107,7 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
           }</div>
         </div>
       ))}
-    </div>
+    </details>
   )}
 
   <div class="problem-section">

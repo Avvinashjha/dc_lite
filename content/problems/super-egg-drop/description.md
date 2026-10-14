@@ -1,3 +1,1 @@
-You have `k` identical eggs and a building with `n` floors. There's a critical floor such that an egg breaks if dropped from that floor or any floor above it, and survives a drop from any floor below it. Determine the minimum number of egg drops needed, in the worst case, to pinpoint exactly which floor is critical.
-
-**Example:** k=2, n=6 → Output: 3
+You have `k` identical eggs and a building with `n` floors. There is an unknown highest safe floor `f` in `[0, n]`: an egg survives at floors at or below `f` and breaks above `f`. A broken egg cannot be reused. Determine the minimum number of drops needed in the worst case to identify `f`, including the possibilities that every floor is safe or no floor is safe.

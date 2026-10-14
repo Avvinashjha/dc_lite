@@ -19,12 +19,41 @@
         "0"
       ],
       "expected": true
+    },
+    {
+      "args": [
+        "99e2.5"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        ".1"
+      ],
+      "expected": true
     }
   ],
-  "functionName": "validNumber",
-  "templateCode": "/**\n * @param {string} s\n * @return {any}\n */\nfunction validNumber(s) {\n  // Write your solution here\n}\n\n// Sample: console.log(validNumber(\"0\"));",
+  "functionName": "isNumber",
+  "templateCode": "function isNumber(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 20",
-    "s consists of relevant characters"
-  ]
+    "s contains ASCII letters, decimal digits, plus, minus, or dot; letters other than e/E invalidate the number."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"0\"",
+      "output": "true"
+    },
+    {
+      "input": "s = \"99e2.5\"",
+      "output": "false"
+    },
+    {
+      "input": "s = \".1\"",
+      "output": "true"
+    }
+  ],
+  "inputFormat": "Implement isNumber(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

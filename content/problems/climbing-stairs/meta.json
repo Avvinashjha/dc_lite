@@ -31,9 +31,28 @@
       "expected": 8
     }
   ],
-  "functionName": "climbingStairs",
-  "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction climbStairs(n) {\n  // Count distinct ways to climb n stairs\n}\n\n// Sample: console.log(climbStairs(3));",
+  "functionName": "climbStairs",
+  "templateCode": "function climbStairs(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 45"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "2"
+    },
+    {
+      "input": "n = 3",
+      "output": "3"
+    },
+    {
+      "input": "n = 5",
+      "output": "8"
+    }
+  ],
+  "sampleInput": "n = 2",
+  "sampleOutput": "2",
+  "inputFormat": "Implement climbStairs(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

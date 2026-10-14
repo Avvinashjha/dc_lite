@@ -12,12 +12,61 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "convertSortedArrayToBinarySearchTree",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {TreeNode}\n */\nfunction sortedArrayToBST(nums) {\n  // Convert sorted array to balanced BST\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          -10,
+          -3,
+          0,
+          5,
+          9
+        ]
+      ],
+      "expected": [
+        0,
+        -10,
+        5,
+        null,
+        -3,
+        null,
+        9
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "sortedArrayToBST",
+  "templateCode": "function sortedArrayToBST(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 10^4",
     "-10^4 <= nums[i] <= 10^4",
     "nums is sorted in strictly increasing order"
-  ]
+  ],
+  "runner": {
+    "outputType": "tree",
+    "validator": "balancedBST"
+  },
+  "examples": [
+    {
+      "input": "nums = [-10,-3,0,5,9]",
+      "output": "[0,-10,5,null,-3,null,9]"
+    },
+    {
+      "input": "nums = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "nums = [-10,-3,0,5,9]",
+  "sampleOutput": "[0,-10,5,null,-3,null,9]",
+  "inputFormat": "Implement sortedArrayToBST(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls.\nAny result satisfying the statement is accepted."
 }

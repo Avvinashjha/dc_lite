@@ -24,7 +24,7 @@ function visiblePoints(points, angle, location) {
   let left = 0;
 
   for (let right = 0; right < doubled.length; right++) {
-    while (doubled[right] - doubled[left] > angle) left++;
+    while (right - left + 1 > n || doubled[right] - doubled[left] > angle + 1e-9) left++;
     max = Math.max(max, right - left + 1);
   }
 

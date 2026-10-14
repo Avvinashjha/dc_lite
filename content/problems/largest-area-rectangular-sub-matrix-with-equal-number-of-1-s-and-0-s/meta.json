@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0250",
-  "title": "Largest area rectangular sub-matrix with equal number of 1\u2019s and 0\u2019s",
+  "title": "Largest area rectangular sub-matrix with equal number of 1’s and 0’s",
   "difficulty": "Hard",
   "topic": "Dynamic-Programming",
   "topics": [
@@ -42,11 +42,36 @@
         ]
       ],
       "expected": 8
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 0
     }
   ],
-  "functionName": "largestAreaRectangularSubMatrixWithEqualNumberOf1SAnd0S",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction largestAreaRectangularSubMatrixWithEqualNumberOf1SAnd0S(input) {\n  // Write your solution here\n}\n",
+  "functionName": "largestAreaEqual",
+  "templateCode": "function largestAreaEqual(matrix) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= R, C <= 50"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "matrix = [[0,0,1,1],[0,1,1,0],[1,1,1,0],[1,0,0,1]]",
+      "output": "8"
+    },
+    {
+      "input": "matrix = [[1]]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "matrix = [[0,0,1,1],[0,1,1,0],[1,1,1,0],[1,0,0,1]]",
+  "sampleOutput": "8",
+  "inputFormat": "Implement largestAreaEqual(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

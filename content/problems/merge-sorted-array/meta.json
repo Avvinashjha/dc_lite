@@ -11,7 +11,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/merge-sorted-array/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3",
+  "sampleInput": "nums1 = [1,2,3,0,0,0]\nm = 3\nnums2 = [2,5,6]\nn = 3",
   "sampleOutput": "[1,2,2,3,5,6]",
   "testCases": [
     {
@@ -40,13 +40,44 @@
         5,
         6
       ]
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        0,
+        [
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ]
     }
   ],
-  "functionName": "mergeSortedArray",
-  "templateCode": "/**\n * @param {number[]} nums1\n * @param {number} m\n * @param {number[]} nums2\n * @param {number} n\n * @return {any}\n */\nfunction mergeSortedArray(nums1, m, nums2, n) {\n  // Write your solution here\n}\n\n// Sample: console.log(mergeSortedArray([1,2,3,0,0,0], 3, [2,5,6], 3));",
+  "functionName": "merge",
+  "templateCode": "function merge(nums1, m, nums2, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "m + n == nums1.length",
-    "0 <= m, n <= 200",
+    "nums1.length == m + n; nums2.length == n",
+    "0 <= m, n <= 200; m + n >= 1",
+    "Valid portions of both arrays are sorted in non-decreasing order.",
     "-10^9 <= nums1[i], nums2[j] <= 10^9"
-  ]
+  ],
+  "runner": {
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "nums1 = [1,2,3,0,0,0]\nm = 3\nnums2 = [2,5,6]\nn = 3",
+      "output": "[1,2,2,3,5,6]"
+    },
+    {
+      "input": "nums1 = [0]\nm = 0\nnums2 = [1]\nn = 1",
+      "output": "[1]"
+    }
+  ],
+  "inputFormat": "Implement merge(nums1, m, nums2, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
 }

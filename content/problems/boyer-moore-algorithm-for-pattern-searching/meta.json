@@ -20,12 +20,38 @@
       "expected": [
         4
       ]
+    },
+    {
+      "args": [
+        "AAAAA",
+        "AAA"
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
     }
   ],
-  "functionName": "boyerMooreAlgorithmForPatternSearching",
-  "templateCode": "/**\n * @param {string} text\n * @param {string} pattern\n * @return {number[]}\n */\nfunction boyerMoore(text, pattern) {\n  // Find all occurrences of pattern in text\n}",
+  "functionName": "boyerMoore",
+  "templateCode": "function boyerMoore(text, pattern) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= text.length <= 10^5",
     "1 <= pattern.length <= text.length"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "text = \"ABAAABCD\"\npattern = \"ABC\"",
+      "output": "[4]"
+    },
+    {
+      "input": "text = \"AAAAA\"\npattern = \"AAA\"",
+      "output": "[0,1,2]"
+    }
+  ],
+  "sampleInput": "text = \"ABAAABCD\"\npattern = \"ABC\"",
+  "sampleOutput": "[4]",
+  "inputFormat": "Implement boyerMoore(text, pattern). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

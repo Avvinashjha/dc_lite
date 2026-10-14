@@ -8,8 +8,9 @@ function snakesAndLadders(board) {
     return [n-1-r, r%2===0 ? c : n-1-c];
   }
   const visited = new Set([1]), q = [[1, 0]];
-  while (q.length) {
-    const [pos, moves] = q.shift();
+  let head = 0;
+  while (head < q.length) {
+    const [pos, moves] = q[head++];
     for (let i = 1; i <= 6; i++) {
       let next = pos + i; if (next > n*n) continue;
       const [r, c] = getRC(next);

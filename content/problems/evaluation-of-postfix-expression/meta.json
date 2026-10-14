@@ -16,11 +16,32 @@
         "231*+9-"
       ],
       "expected": -4
+    },
+    {
+      "args": [
+        "82/"
+      ],
+      "expected": 4
     }
   ],
-  "functionName": "evaluationOfPostfixExpression",
-  "templateCode": "/**\n * @param {string} exp\n * @return {number}\n */\nfunction evaluatePostfix(exp) {\n  // Evaluate postfix expression\n}",
+  "functionName": "evaluatePostfix",
+  "templateCode": "function evaluatePostfix(exp) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= length of expression <= 100"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "exp = \"231*+9-\"",
+      "output": "-4"
+    },
+    {
+      "input": "exp = \"82/\"",
+      "output": "4"
+    }
+  ],
+  "sampleInput": "exp = \"231*+9-\"",
+  "sampleOutput": "-4",
+  "inputFormat": "Implement evaluatePostfix(exp). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -11,12 +11,67 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Weighted%20Job%20Scheduling",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "weightedJobScheduling",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction weightedJobScheduling(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            50
+          ],
+          [
+            3,
+            5,
+            20
+          ],
+          [
+            6,
+            19,
+            100
+          ],
+          [
+            2,
+            100,
+            200
+          ]
+        ]
+      ],
+      "expected": 250
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            5
+          ]
+        ]
+      ],
+      "expected": 5
+    }
+  ],
+  "functionName": "maxProfit",
+  "templateCode": "function maxProfit(jobs) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^5",
     "1 <= start[i] < end[i] <= 10^9",
     "1 <= profit[i] <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "jobs = [[1,2,50],[3,5,20],[6,19,100],[2,100,200]]",
+      "output": "250"
+    },
+    {
+      "input": "jobs = [[1,2,5]]",
+      "output": "5"
+    }
+  ],
+  "sampleInput": "jobs = [[1,2,50],[3,5,20],[6,19,100],[2,100,200]]",
+  "sampleOutput": "250",
+  "inputFormat": "Implement maxProfit(jobs). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

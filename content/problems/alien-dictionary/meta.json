@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0211",
-  "title": "alien-dictionary",
+  "title": "Alien Dictionary",
   "difficulty": "Hard",
   "topic": "Graph",
   "topics": [
@@ -32,13 +32,53 @@
         ]
       ],
       "expected": "zx"
+    },
+    {
+      "args": [
+        [
+          "abc",
+          "ab"
+        ]
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        [
+          "z",
+          "x",
+          "z"
+        ]
+      ],
+      "expected": ""
     }
   ],
   "functionName": "alienDictionary",
-  "templateCode": "/**\n * @param {string[]} words\n * @return {string}\n */\nfunction alienDictionary(words) {\n  // Derive character order from sorted alien words\n}",
+  "templateCode": "function alienDictionary(words) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= words.length <= 100",
     "1 <= words[i].length <= 100",
     "words[i] consists of lowercase English letters"
-  ]
+  ],
+  "runner": {
+    "validator": "alien"
+  },
+  "examples": [
+    {
+      "input": "words = [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+      "output": "\"wertf\""
+    },
+    {
+      "input": "words = [\"z\",\"x\"]",
+      "output": "\"zx\""
+    },
+    {
+      "input": "words = [\"abc\",\"ab\"]",
+      "output": "\"\""
+    }
+  ],
+  "sampleInput": "words = [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+  "sampleOutput": "\"wertf\"",
+  "inputFormat": "Implement alienDictionary(words). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nAny result satisfying the statement is accepted."
 }

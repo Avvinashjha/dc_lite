@@ -24,5 +24,5 @@ function countArrangement(n) {
 }
 ```
 
-**Time:** O(k) where k is the number of valid permutations (bounded by n!)
+**Time:** O(n × n!) as a loose upper bound, including candidate checks at partial arrangements
 **Space:** O(n) for recursion stack and visited array

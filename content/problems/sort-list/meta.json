@@ -10,11 +10,54 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/sort-list/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          4,
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    }
+  ],
   "functionName": "sortList",
-  "templateCode": "/**\n * @param {ListNode} head\n * @return {ListNode}\n */\nfunction sortList(head) {\n  // Sort linked list\n}",
+  "templateCode": "function sortList(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 to 5 * 10^4 nodes",
     "-10^5 <= Node.val <= 10^5"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [4,2,1,3]",
+      "output": "[1,2,3,4]"
+    },
+    {
+      "input": "head = []",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [4,2,1,3]",
+  "sampleOutput": "[1,2,3,4]",
+  "inputFormat": "Implement sortList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

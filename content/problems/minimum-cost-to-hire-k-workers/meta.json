@@ -11,11 +11,65 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-cost-to-hire-k-workers/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "minimumCostToHireKWorkers",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumCostToHireKWorkers(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          10,
+          20,
+          5
+        ],
+        [
+          70,
+          50,
+          30
+        ],
+        2
+      ],
+      "expected": 105
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          10,
+          10,
+          1
+        ],
+        [
+          4,
+          8,
+          2,
+          2,
+          7
+        ],
+        3
+      ],
+      "expected": 30.6666666667
+    }
+  ],
+  "functionName": "mincostToHireWorkers",
+  "templateCode": "function mincostToHireWorkers(quality, wage, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= k <= workers <= 10^4",
     "1 <= quality[i], wage[i] <= 10^4"
-  ]
+  ],
+  "runner": {
+    "tolerance": 0.00001
+  },
+  "examples": [
+    {
+      "input": "quality = [10,20,5]\nwage = [70,50,30]\nk = 2",
+      "output": "105"
+    },
+    {
+      "input": "quality = [3,1,10,10,1]\nwage = [4,8,2,2,7]\nk = 3",
+      "output": "30.6666666667"
+    }
+  ],
+  "sampleInput": "quality = [10,20,5]\nwage = [70,50,30]\nk = 2",
+  "sampleOutput": "105",
+  "inputFormat": "Implement mincostToHireWorkers(quality, wage, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nFloating-point results are compared with relative tolerance 0.00001."
 }

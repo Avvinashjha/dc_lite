@@ -10,12 +10,64 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/remove-linked-list-elements/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "removeLinkedListElements",
-  "templateCode": "/**\n * @param {ListNode} head\n * @param {number} val\n * @return {ListNode}\n */\nfunction removeElements(head, val) {\n  // Remove all nodes with given value\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          6,
+          3,
+          4,
+          5,
+          6
+        ],
+        6
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          7,
+          7
+        ],
+        7
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "removeElements",
+  "templateCode": "function removeElements(head, val) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 to 10^4 nodes",
     "1 <= Node.val <= 50",
     "0 <= val <= 50"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list"
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,6,3,4,5,6]\nval = 6",
+      "output": "[1,2,3,4,5]"
+    },
+    {
+      "input": "head = [7,7]\nval = 7",
+      "output": "[]"
+    }
+  ],
+  "sampleInput": "head = [1,2,6,3,4,5,6]\nval = 6",
+  "sampleOutput": "[1,2,3,4,5]",
+  "inputFormat": "Implement removeElements(head, val). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
 }

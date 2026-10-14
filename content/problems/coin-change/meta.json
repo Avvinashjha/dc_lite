@@ -43,10 +43,29 @@
     }
   ],
   "functionName": "coinChange",
-  "templateCode": "/**\n * @param {number[]} coins\n * @param {number} amount\n * @return {number}\n */\nfunction coinChange(coins, amount) {\n  // Minimum coins to make amount\n}\n\n// Sample: console.log(coinChange([1,2,5], 11));",
+  "templateCode": "function coinChange(coins, amount) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= coins.length <= 12",
     "1 <= coins[i] <= 2^31 - 1",
     "0 <= amount <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "coins = [1,2,5]\namount = 11",
+      "output": "3"
+    },
+    {
+      "input": "coins = [2]\namount = 3",
+      "output": "-1"
+    },
+    {
+      "input": "coins = [1]\namount = 0",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "coins = [1,2,5]\namount = 11",
+  "sampleOutput": "3",
+  "inputFormat": "Implement coinChange(coins, amount). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

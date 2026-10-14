@@ -18,4 +18,4 @@ function generateTrees(n) {
 }
 ```
 
-**Time:** O(4^n / n^(3/2)) | **Space:** O(4^n / n^(3/2))
+**Time:** O(n × Cn) as a loose upper bound, where Cn is the nth Catalan number | **Space:** O(n × Cn), including returned trees

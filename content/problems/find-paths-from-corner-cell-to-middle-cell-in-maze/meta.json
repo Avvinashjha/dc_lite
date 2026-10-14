@@ -11,13 +11,68 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20paths%20from%20corner%20cell%20to%20middle%20cell%20in%20maze",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "maze = [[3, 5, 4, 4, 7, 3, 4, 6, 3], [6, 7, 5, 6, 6, 2, 0, 3, 1], [3, 3, 4, 6, 1, 2, 4, 6, 5], [2, 4, 5, 6, 8, 5, 6, 5, 1], [2, 3, 2, 4, 0, 4, 2, 6, 2], [6, 5, 3, 2, 4, 3, 2, 6, 1], [1, 3, 5, 7, 8, 3, 2, 4, 3], [6, 1, 1, 0, 1, 2, 1, 0, 7], [1, 3, 2, 2, 1, 0, 8, 5, 1]]",
-  "sampleOutput": "[(0,0) -> (0,3) -> (0,7) -> (6,7) -> (6,3) -> (3,3) -> (3,5) -> (6,5) -> (6,2) -> (2,2) -> (2,6) -> (4,6) -> (4,4)]",
-  "testCases": [],
-  "functionName": "findPathsFromCornerCellToMiddleCellInMaze",
-  "templateCode": "/**\n * @param {number[][]} maze\n * @return {any}\n */\nfunction findPathsFromCornerCellToMiddleCellInMaze(maze) {\n  // Write your solution here\n}\n\n// Sample: console.log(findPathsFromCornerCellToMiddleCellInMaze([[3, 5, 4, 4, 7, 3, 4, 6, 3], [6, 7, 5, 6, 6, 2, 0, 3, 1], [3, 3, 4, 6, 1, 2, 4, 6, 5], [2, 4, 5, 6, 8, 5, 6, 5, 1], [2, 3, 2, 4, 0, 4, 2, 6, 2], [6, 5, 3, 2, 4, 3, 2, 6, 1], [1, 3, 5, 7, 8, 3, 2, 4, 3], [6, 1, 1, 0, 1, 2, 1, 0, 7], [1, 3, 2, 2, 1, 0, 8, 5, 1]]));",
+  "sampleInput": "maze = [[0]]",
+  "sampleOutput": "[[[0,0]]]",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          [
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": []
+    }
+  ],
+  "functionName": "findPaths",
+  "templateCode": "function findPaths(maze) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 9",
     "n is odd"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "maze = [[0]]",
+      "output": "[[[0,0]]]"
+    },
+    {
+      "input": "maze = [[0,0,0],[0,0,0],[0,0,0]]",
+      "output": "[]"
+    }
+  ],
+  "inputFormat": "Implement findPaths(maze). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

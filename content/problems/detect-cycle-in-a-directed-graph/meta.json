@@ -12,11 +12,62 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Detect%20Cycle%20in%20a%20Directed%20Graph",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "detectCycleInADirectedGraph",
-  "templateCode": "/**\n * @param {number} V\n * @param {number[][]} adj\n * @return {boolean}\n */\nfunction hasCycle(V, adj) {\n  // Detect cycle in directed graph\n}",
+  "testCases": [
+    {
+      "args": [
+        4,
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          []
+        ]
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "hasCycle",
+  "templateCode": "function hasCycle(V, adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 10^4",
     "0 <= E <= 10^4"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "V = 4\nadj = [[1],[2],[3],[1]]",
+      "output": "true"
+    },
+    {
+      "input": "V = 3\nadj = [[1],[2],[]]",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "V = 4\nadj = [[1],[2],[3],[1]]",
+  "sampleOutput": "true",
+  "inputFormat": "Implement hasCycle(V, adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

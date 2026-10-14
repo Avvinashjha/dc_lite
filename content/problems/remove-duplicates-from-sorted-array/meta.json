@@ -12,7 +12,7 @@
   "externalUrl": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
   "problemSet": "top-300-leetcode",
   "sampleInput": "nums = [1,1,2]",
-  "sampleOutput": "2",
+  "sampleOutput": "{\"k\":2,\"nums\":[1,2]}",
   "testCases": [
     {
       "args": [
@@ -22,14 +22,50 @@
           2
         ]
       ],
-      "expected": 2
+      "expected": {
+        "k": 2,
+        "nums": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": {
+        "k": 1,
+        "nums": [
+          1
+        ]
+      }
     }
   ],
-  "functionName": "removeDuplicatesFromSortedArray",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction removeDuplicatesFromSortedArray(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(removeDuplicatesFromSortedArray([1,1,2]));",
+  "functionName": "removeDuplicates",
+  "templateCode": "function removeDuplicates(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 3 * 10^4",
     "-100 <= nums[i] <= 100",
     "nums is sorted in non-decreasing order"
-  ]
+  ],
+  "runner": {
+    "outputType": "uniquePrefix"
+  },
+  "examples": [
+    {
+      "input": "nums = [1,1,2]",
+      "output": "{\"k\":2,\"nums\":[1,2]}"
+    },
+    {
+      "input": "nums = [1,1,1]",
+      "output": "{\"k\":1,\"nums\":[1]}"
+    }
+  ],
+  "inputFormat": "Implement removeDuplicates(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return k and place the distinct values in the first k entries of nums. The editor checks both, displaying {k, nums: first k entries}; entries after k are ignored."
 }

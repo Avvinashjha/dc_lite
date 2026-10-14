@@ -10,11 +10,69 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20Anagrams%20Together%20%7C%20Practice",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "printAnagramsTogether",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction printAnagramsTogether(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          "eat",
+          "tea",
+          "tan",
+          "ate",
+          "nat",
+          "bat"
+        ]
+      ],
+      "expected": [
+        [
+          "bat"
+        ],
+        [
+          "nat",
+          "tan"
+        ],
+        [
+          "ate",
+          "eat",
+          "tea"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          ""
+        ]
+      ]
+    }
+  ],
+  "functionName": "groupAnagrams",
+  "templateCode": "function groupAnagrams(words) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 100",
-    "1 <= |words[i]| <= 10"
-  ]
+    "1 <= words.length <= 100",
+    "0 <= words[i].length <= 10",
+    "Words contain lowercase English letters."
+  ],
+  "runner": {
+    "unordered": true,
+    "unorderedInner": true
+  },
+  "examples": [
+    {
+      "input": "words = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+      "output": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"
+    },
+    {
+      "input": "words = [\"\"]",
+      "output": "[[\"\"]]"
+    }
+  ],
+  "sampleInput": "words = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+  "sampleOutput": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]",
+  "inputFormat": "Implement groupAnagrams(words). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
 }

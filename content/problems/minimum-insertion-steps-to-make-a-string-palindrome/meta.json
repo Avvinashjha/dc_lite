@@ -11,11 +11,39 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "minimumInsertionStepsToMakeAStringPalindrome",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction minimumInsertionStepsToMakeAStringPalindrome(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        "leetcode"
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        "zzazz"
+      ],
+      "expected": 0
+    }
+  ],
+  "functionName": "minInsertions",
+  "templateCode": "function minInsertions(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length <= 500",
     "s consists of lowercase English letters"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "s = \"leetcode\"",
+      "output": "5"
+    },
+    {
+      "input": "s = \"zzazz\"",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "s = \"leetcode\"",
+  "sampleOutput": "5",
+  "inputFormat": "Implement minInsertions(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

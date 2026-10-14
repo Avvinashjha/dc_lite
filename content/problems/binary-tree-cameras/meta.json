@@ -12,11 +12,51 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/binary-tree-cameras/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "binaryTreeCameras",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction minCameraCover(root) {\n  // Minimum cameras to monitor all nodes\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          0,
+          0,
+          null,
+          0,
+          0
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 1
+    }
+  ],
+  "functionName": "minCameraCover",
+  "templateCode": "function minCameraCover(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= number of nodes <= 1000",
     "Node.val == 0"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [0,0,null,0,0]",
+      "output": "1"
+    },
+    {
+      "input": "root = [0]",
+      "output": "1"
+    }
+  ],
+  "sampleInput": "root = [0,0,null,0,0]",
+  "sampleOutput": "1",
+  "inputFormat": "Implement minCameraCover(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -1,21 +1,15 @@
-## Approach: Recursive DFS
+## Parent Map
 
-If the current node is null or matches p or q, return it. Recurse into left and right subtrees. If both return non-null, the current node is the LCA (p and q are in different subtrees). Otherwise, return whichever side is non-null.
+Record each node’s parent. Mark all ancestors of p, then walk from q toward the root until the first marked ancestor is reached.
 
 ```javascript
 function lowestCommonAncestorOfABinaryTree(root, p, q) {
-  function dfs(node) {
-    if (!node || node.val === p || node.val === q) return node;
-    const left = dfs(node.left);
-    const right = dfs(node.right);
-    if (left && right) return node;
-    return left || right;
-  }
-  const result = dfs(root);
-  return result ? result.val : -1;
+  const parent=new Map([[root,null]]),stack=[root];let pn,qn;
+  while(stack.length){const node=stack.pop();if(node.val===p)pn=node;if(node.val===q)qn=node;for(const child of [node.left,node.right])if(child){parent.set(child,node);stack.push(child);}}
+  const ancestors=new Set();while(pn){ancestors.add(pn);pn=parent.get(pn);}
+  while(!ancestors.has(qn))qn=parent.get(qn);
+  return qn.val;
 }
 ```
 
-**Time Complexity:** O(n)
-
-**Space Complexity:** O(h)
+**Time:** O(n) | **Space:** O(n) auxiliary space, excluding output

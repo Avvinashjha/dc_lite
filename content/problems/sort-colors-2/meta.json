@@ -8,13 +8,61 @@
     "Two Pointer"
   ],
   "platform": "LeetCode",
-  "externalUrl": "https://leetcode.com/problems/sort-colors-2/",
+  "externalUrl": "https://leetcode.com/problems/sort-colors/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          0,
+          2,
+          1,
+          1,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
   "functionName": "sortColors",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction sortColors(input) {\n  // Write your solution here\n}\n",
+  "templateCode": "function sortColors(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^3",
     "0 <= arr[i] <= 2"
-  ]
+  ],
+  "runner": {
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "nums = [2,0,2,1,1,0]",
+      "output": "[0,0,1,1,2,2]"
+    },
+    {
+      "input": "nums = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "nums = [2,0,2,1,1,0]",
+  "sampleOutput": "[0,0,1,1,2,2]",
+  "inputFormat": "Implement sortColors(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
 }

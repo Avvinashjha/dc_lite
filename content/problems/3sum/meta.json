@@ -19,7 +19,7 @@
     "-10^5 <= nums[i] <= 10^5"
   ],
   "functionName": "threeSum",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {number[][]}\n */\nfunction threeSum(nums) {\n  // Return all unique triplets that sum to zero\n  return [];\n}\n\n// Sample: console.log(threeSum([-1,0,1,2,-1,-4]));",
+  "templateCode": "function threeSum(nums) {\n  // Write your solution here.\n}\n",
   "testCases": [
     {
       "args": [
@@ -59,5 +59,25 @@
       ],
       "expected": []
     }
-  ]
+  ],
+  "runner": {
+    "unordered": true,
+    "unorderedInner": true
+  },
+  "examples": [
+    {
+      "input": "nums = [-1,0,1,2,-1,-4]",
+      "output": "[[-1,-1,2],[-1,0,1]]"
+    },
+    {
+      "input": "nums = []",
+      "output": "[]"
+    },
+    {
+      "input": "nums = [0]",
+      "output": "[]"
+    }
+  ],
+  "inputFormat": "Implement threeSum(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
 }

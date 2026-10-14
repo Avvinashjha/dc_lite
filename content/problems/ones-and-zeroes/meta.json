@@ -25,13 +25,40 @@
         3
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        [
+          "0",
+          "0",
+          "1"
+        ],
+        1,
+        1
+      ],
+      "expected": 2
     }
   ],
-  "functionName": "onesAndZeroes",
-  "templateCode": "/**\n * @param {string[]} strs\n * @param {number} m\n * @param {number} n\n * @return {number}\n */\nfunction findMaxForm(strs, m, n) {\n  // Max strings within m zeros and n ones\n}",
+  "functionName": "findMaxForm",
+  "templateCode": "function findMaxForm(strs, m, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= strs.length <= 600",
     "1 <= strs[i].length <= 100",
     "1 <= m, n <= 100"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "strs = [\"10\",\"0001\",\"111001\",\"1\",\"0\"]\nm = 5\nn = 3",
+      "output": "4"
+    },
+    {
+      "input": "strs = [\"0\",\"0\",\"1\"]\nm = 1\nn = 1",
+      "output": "2"
+    }
+  ],
+  "sampleInput": "strs = [\"10\",\"0001\",\"111001\",\"1\",\"0\"]\nm = 5\nn = 3",
+  "sampleOutput": "4",
+  "inputFormat": "Implement findMaxForm(strs, m, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

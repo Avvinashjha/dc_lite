@@ -12,11 +12,53 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/sum-of-left-leaves/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
+  "testCases": [
+    {
+      "args": [
+        [
+          3,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": 24
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 0
+    }
+  ],
   "functionName": "sumOfLeftLeaves",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @return {number}\n */\nfunction sumOfLeftLeaves(root) {\n  // Sum of all left leaves\n}",
+  "templateCode": "function sumOfLeftLeaves(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= number of nodes <= 1000",
     "-1000 <= Node.val <= 1000"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [3,9,20,null,null,15,7]",
+      "output": "24"
+    },
+    {
+      "input": "root = [1]",
+      "output": "0"
+    }
+  ],
+  "sampleInput": "root = [3,9,20,null,null,15,7]",
+  "sampleOutput": "24",
+  "inputFormat": "Implement sumOfLeftLeaves(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

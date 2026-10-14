@@ -58,11 +58,26 @@
       "expected": 4
     }
   ],
-  "functionName": "asFarFromLandAsPossible",
-  "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction maxDistance(grid) {\n  // Find max distance from any water cell to nearest land\n}",
+  "functionName": "maxDistance",
+  "templateCode": "function maxDistance(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "n == grid.length == grid[i].length",
     "1 <= n <= 100",
     "grid[i][j] is 0 or 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "grid = [[1,0,1],[0,0,0],[1,0,1]]",
+      "output": "2"
+    },
+    {
+      "input": "grid = [[1,0,0],[0,0,0],[0,0,0]]",
+      "output": "4"
+    }
+  ],
+  "sampleInput": "grid = [[1,0,1],[0,0,0],[1,0,1]]",
+  "sampleOutput": "2",
+  "inputFormat": "Implement maxDistance(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -27,8 +27,23 @@
     }
   ],
   "functionName": "happyNumber",
-  "templateCode": "/**\n * @param {number} n\n * @return {boolean}\n */\nfunction isHappy(n) {\n  // Check if n is a happy number\n}\n\n// Sample: console.log(isHappy(19));",
+  "templateCode": "function happyNumber(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 2^31 - 1"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 19",
+      "output": "true"
+    },
+    {
+      "input": "n = 2",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "n = 19",
+  "sampleOutput": "true",
+  "inputFormat": "Implement happyNumber(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

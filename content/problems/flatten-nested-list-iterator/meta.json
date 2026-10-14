@@ -52,10 +52,27 @@
       ]
     }
   ],
-  "functionName": "flattenNestedListIterator",
-  "templateCode": "/**\n * @param {Array} nestedList\n */\nfunction NestedIterator(nestedList) {}\nNestedIterator.prototype.hasNext = function() {};\nNestedIterator.prototype.next = function() {};",
+  "functionName": "NestedIterator",
+  "templateCode": "class NestedIterator {\n  constructor(nestedList) {\n    // Write your implementation here.\n  }\n  hasNext() {\n    // Write your implementation here.\n  }\n  next() {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "1 <= nestedList.length <= 500",
     "Values are in range [-10^6, 10^6]"
-  ]
+  ],
+  "runner": {
+    "mode": "iterator"
+  },
+  "examples": [
+    {
+      "input": "nestedList = [[1,1],2,[1,1]]",
+      "output": "[1,1,2,1,1]"
+    },
+    {
+      "input": "nestedList = [1,[4,[6]]]",
+      "output": "[1,4,6]"
+    }
+  ],
+  "sampleInput": "nestedList = [[1,1],2,[1,1]]",
+  "sampleOutput": "[1,1,2,1,1]",
+  "inputFormat": "Implement NestedIterator(nestedList). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Implement hasNext() and next(). The editor displays the fully drained iterator as an array."
 }

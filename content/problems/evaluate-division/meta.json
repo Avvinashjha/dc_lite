@@ -12,12 +12,104 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/evaluate-division/",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "evaluateDivision",
-  "templateCode": "/**\n * @param {string[][]} equations\n * @param {number[]} values\n * @param {string[][]} queries\n * @return {number[]}\n */\nfunction calcEquation(equations, values, queries) {\n  // Evaluate division queries\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          [
+            "a",
+            "c"
+          ],
+          [
+            "b",
+            "a"
+          ],
+          [
+            "a",
+            "e"
+          ],
+          [
+            "a",
+            "a"
+          ],
+          [
+            "x",
+            "x"
+          ]
+        ]
+      ],
+      "expected": [
+        6,
+        0.5,
+        -1,
+        1,
+        -1
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            "x",
+            "y"
+          ]
+        ],
+        [
+          4
+        ],
+        [
+          [
+            "y",
+            "x"
+          ],
+          [
+            "x",
+            "z"
+          ]
+        ]
+      ],
+      "expected": [
+        0.25,
+        -1
+      ]
+    }
+  ],
+  "functionName": "calcEquation",
+  "templateCode": "function calcEquation(equations, values, queries) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= equations.length <= 20",
     "1 <= queries.length <= 20",
     "values[i] > 0"
-  ]
+  ],
+  "runner": {
+    "tolerance": 0.00001
+  },
+  "examples": [
+    {
+      "input": "equations = [[\"a\",\"b\"],[\"b\",\"c\"]]\nvalues = [2,3]\nqueries = [[\"a\",\"c\"],[\"b\",\"a\"],[\"a\",\"e\"],[\"a\",\"a\"],[\"x\",\"x\"]]",
+      "output": "[6,0.5,-1,1,-1]"
+    },
+    {
+      "input": "equations = [[\"x\",\"y\"]]\nvalues = [4]\nqueries = [[\"y\",\"x\"],[\"x\",\"z\"]]",
+      "output": "[0.25,-1]"
+    }
+  ],
+  "sampleInput": "equations = [[\"a\",\"b\"],[\"b\",\"c\"]]\nvalues = [2,3]\nqueries = [[\"a\",\"c\"],[\"b\",\"a\"],[\"a\",\"e\"],[\"a\",\"a\"],[\"x\",\"x\"]]",
+  "sampleOutput": "[6,0.5,-1,1,-1]",
+  "inputFormat": "Implement calcEquation(equations, values, queries). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nFloating-point results are compared with relative tolerance 0.00001."
 }

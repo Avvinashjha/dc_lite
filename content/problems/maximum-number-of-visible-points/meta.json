@@ -10,7 +10,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-number-of-visible-points/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "points = [[2,1],[2,2],[3,3]], angle = 90, location = [1,1]",
+  "sampleInput": "points = [[2,1],[2,2],[3,3]]\nangle = 90\nlocation = [1,1]",
   "sampleOutput": "3",
   "testCases": [
     {
@@ -56,12 +56,69 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        360,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ]
+        ],
+        90,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 1
     }
   ],
-  "functionName": "maximumNumberOfVisiblePoints",
-  "templateCode": "/**\n * @param {number[][]} points\n * @param {number} angle\n * @param {number[]} location\n * @return {any}\n */\nfunction maximumNumberOfVisiblePoints(points, angle, location) {\n  // Write your solution here\n}\n\n// Sample: console.log(maximumNumberOfVisiblePoints([[2,1],[2,2],[3,3]], 90, [1,1]));",
+  "functionName": "visiblePoints",
+  "templateCode": "function visiblePoints(points, angle, location) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= points.length <= 10^5",
     "1 <= angle <= 360"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "points = [[2,1],[2,2],[3,3]]\nangle = 90\nlocation = [1,1]",
+      "output": "3"
+    },
+    {
+      "input": "points = [[1,0],[2,1]]\nangle = 13\nlocation = [1,1]",
+      "output": "1"
+    },
+    {
+      "input": "points = [[1,0],[0,1],[-1,0]]\nangle = 360\nlocation = [0,0]",
+      "output": "3"
+    }
+  ],
+  "inputFormat": "Implement visiblePoints(points, angle, location). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

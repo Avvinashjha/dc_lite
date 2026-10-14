@@ -1,23 +1,20 @@
-## Approach: Inorder Traversal with Prev Pointer
+## Iterative Inorder with Previous Pointer
 
-Perform an inorder traversal. Maintain a `prev` pointer. For each visited node, set its left to prev and prev's right to the current node. The first node visited becomes the head.
+Visit nodes in inorder, saving each original right child before linking the current node to the preceding node. Reuse left and right as previous and next links.
 
 ```javascript
 function binaryTreeToDll(root) {
-  let prev = null, head = null;
-  function inorder(node) {
-    if (!node) return;
-    inorder(node.left);
-    if (!prev) head = node;
-    else { node.left = prev; prev.right = node; }
-    prev = node;
-    inorder(node.right);
+  const stack=[];let current=root,previous=null,head=null;
+  while(current||stack.length) {
+    while(current){stack.push(current);current=current.left;}
+    const node=stack.pop(),right=node.right;
+    node.left=previous;
+    if(previous)previous.right=node;else head=node;
+    previous=node;current=right;
   }
-  inorder(root);
+  if(previous)previous.right=null;
   return head;
 }
 ```
 
-**Time Complexity:** O(n)
-
-**Space Complexity:** O(h) where h is tree height
+**Time:** O(n) | **Space:** O(h) auxiliary space, excluding output

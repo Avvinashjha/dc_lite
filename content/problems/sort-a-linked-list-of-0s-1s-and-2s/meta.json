@@ -10,11 +10,63 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Sort%20a%20linked%20list%20of%200s%2C%201s%20and%202s",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "sortALinkedListOf0s1sAnd2s",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction sortALinkedListOf0s1sAnd2s(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          0,
+          1,
+          2,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    }
+  ],
+  "functionName": "sortList012",
+  "templateCode": "function sortList012(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^3",
     "0 <= Node.val <= 2"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "list"
+    ],
+    "outputType": "list",
+    "resultArg": 0
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,0,1,2,0]",
+      "output": "[0,0,1,1,2,2]"
+    },
+    {
+      "input": "head = [0]",
+      "output": "[0]"
+    }
+  ],
+  "sampleInput": "head = [1,2,0,1,2,0]",
+  "sampleOutput": "[0,0,1,1,2,2]",
+  "inputFormat": "Implement sortList012(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.\nReturned list heads are displayed as value arrays; a null head is []."
 }

@@ -44,9 +44,28 @@
     }
   ],
   "functionName": "kthSmallestElementInABst",
-  "templateCode": "/**\n * @param {TreeNode} root\n * @param {number} k\n * @return {number}\n */\nfunction kthSmallest(root, k) {\n  // kth smallest element in BST\n}",
+  "templateCode": "function kthSmallestElementInABst(root, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= k <= n <= 10^4",
     "0 <= Node.val <= 10^4"
-  ]
+  ],
+  "runner": {
+    "argTypes": [
+      "tree"
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [3,1,4,null,2]\nk = 1",
+      "output": "1"
+    },
+    {
+      "input": "root = [5,3,6,2,4,null,null,1]\nk = 3",
+      "output": "3"
+    }
+  ],
+  "sampleInput": "root = [3,1,4,null,2]\nk = 1",
+  "sampleOutput": "1",
+  "inputFormat": "Implement kthSmallestElementInABst(root, k). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "Return the result described in the statement."
 }

@@ -11,7 +11,7 @@
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "haystack = \"sadbutsad\", needle = \"sad\"",
+  "sampleInput": "haystack = \"sadbutsad\"\nneedle = \"sad\"",
   "sampleOutput": "0",
   "testCases": [
     {
@@ -20,12 +20,32 @@
         "sad"
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        "leetcode",
+        "leeto"
+      ],
+      "expected": -1
     }
   ],
-  "functionName": "findTheIndexOfTheFirstOccurrenceInAString",
-  "templateCode": "/**\n * @param {string} haystack\n * @param {string} needle\n * @return {any}\n */\nfunction findTheIndexOfTheFirstOccurrenceInAString(haystack, needle) {\n  // Write your solution here\n}\n\n// Sample: console.log(findTheIndexOfTheFirstOccurrenceInAString(\"sadbutsad\", \"sad\"));",
+  "functionName": "strStr",
+  "templateCode": "function strStr(haystack, needle) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= haystack.length, needle.length <= 10^4",
     "haystack and needle consist of lowercase English letters"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "haystack = \"sadbutsad\"\nneedle = \"sad\"",
+      "output": "0"
+    },
+    {
+      "input": "haystack = \"leetcode\"\nneedle = \"leeto\"",
+      "output": "-1"
+    }
+  ],
+  "inputFormat": "Implement strStr(haystack, needle). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

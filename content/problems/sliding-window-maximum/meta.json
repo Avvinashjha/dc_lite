@@ -34,13 +34,43 @@
         6,
         7
       ]
+    },
+    {
+      "args": [
+        [
+          4,
+          3,
+          2
+        ],
+        1
+      ],
+      "expected": [
+        4,
+        3,
+        2
+      ]
     }
   ],
-  "functionName": "slidingWindowMaximum",
-  "templateCode": "/**\n * @param {number[]} nums\n * @param {number} k\n * @return {number[]}\n */\nfunction maxSlidingWindow(nums, k) {\n  // Max in each sliding window\n}",
+  "functionName": "maxSlidingWindow",
+  "templateCode": "function maxSlidingWindow(nums, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= nums.length <= 10^5",
     "-10^4 <= nums[i] <= 10^4",
     "1 <= k <= nums.length"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "nums = [1,3,-1,-3,5,3,6,7]\nk = 3",
+      "output": "[3,3,5,5,6,7]"
+    },
+    {
+      "input": "nums = [4,3,2]\nk = 1",
+      "output": "[4,3,2]"
+    }
+  ],
+  "sampleInput": "nums = [1,3,-1,-3,5,3,6,7]\nk = 3",
+  "sampleOutput": "[3,3,5,5,6,7]",
+  "inputFormat": "Implement maxSlidingWindow(nums, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

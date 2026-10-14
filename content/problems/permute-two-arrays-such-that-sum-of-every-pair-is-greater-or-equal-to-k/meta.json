@@ -10,11 +10,57 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Permute%20two%20arrays%20such%20that%20sum%20of%20every%20pair%20is%20greater%20or%20equal%20to%20K",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "permuteTwoArraysSuchThatSumOfEveryPairIsGreaterOrEqualToK",
-  "templateCode": "/**\n * @param {any} input\n * @return {any}\n */\nfunction permuteTwoArraysSuchThatSumOfEveryPairIsGreaterOrEqualToK(input) {\n  // Write your solution here\n}\n",
+  "testCases": [
+    {
+      "args": [
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          7,
+          8,
+          9
+        ],
+        10
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        5
+      ],
+      "expected": false
+    }
+  ],
+  "functionName": "canPermute",
+  "templateCode": "function canPermute(A, B, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^5",
     "1 <= A[i], B[i] <= 10^6"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "A = [2,1,3]\nB = [7,8,9]\nk = 10",
+      "output": "true"
+    },
+    {
+      "input": "A = [1,2]\nB = [1,2]\nk = 5",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "A = [2,1,3]\nB = [7,8,9]\nk = 10",
+  "sampleOutput": "true",
+  "inputFormat": "Implement canPermute(A, B, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

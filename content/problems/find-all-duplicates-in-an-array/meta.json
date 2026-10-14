@@ -31,14 +31,37 @@
         2,
         3
       ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": []
     }
   ],
-  "functionName": "findAllDuplicatesInAnArray",
-  "templateCode": "/**\n * @param {number[]} nums\n * @return {any}\n */\nfunction findAllDuplicatesInAnArray(nums) {\n  // Write your solution here\n}\n\n// Sample: console.log(findAllDuplicatesInAnArray([4,3,2,7,8,2,3,1]));",
+  "functionName": "findDuplicates",
+  "templateCode": "function findDuplicates(nums) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "n == nums.length",
     "1 <= n <= 10^5",
     "1 <= nums[i] <= n",
     "Each element appears once or twice"
-  ]
+  ],
+  "runner": {
+    "unordered": true
+  },
+  "examples": [
+    {
+      "input": "nums = [4,3,2,7,8,2,3,1]",
+      "output": "[2,3]"
+    },
+    {
+      "input": "nums = [1]",
+      "output": "[]"
+    }
+  ],
+  "inputFormat": "Implement findDuplicates(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
 }

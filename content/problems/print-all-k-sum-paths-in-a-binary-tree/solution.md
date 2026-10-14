@@ -19,4 +19,4 @@ function kSumPaths(root, k) {
 }
 ```
 
-**Time:** O(n²) | **Space:** O(n)
+**Time:** O(n × h + P), where h is height and P is the total length of returned paths | **Space:** O(h) auxiliary space, excluding output

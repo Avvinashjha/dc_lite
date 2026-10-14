@@ -27,13 +27,50 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "shortestBridge",
-  "templateCode": "/**\n * @param {number[][]} grid\n * @return {number}\n */\nfunction shortestBridge(grid) {\n  // Min 0s to flip to connect two islands\n}",
+  "templateCode": "function shortestBridge(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= n <= 100",
     "grid[i][j] is 0 or 1",
     "Exactly two islands"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "grid = [[0,1],[1,0]]",
+      "output": "1"
+    },
+    {
+      "input": "grid = [[0,1,0],[0,0,0],[0,0,1]]",
+      "output": "2"
+    }
+  ],
+  "sampleInput": "grid = [[0,1],[1,0]]",
+  "sampleOutput": "1",
+  "inputFormat": "Implement shortestBridge(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

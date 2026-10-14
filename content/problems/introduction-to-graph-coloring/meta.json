@@ -70,10 +70,25 @@
     }
   ],
   "functionName": "introductionToGraphColoring",
-  "templateCode": "/**\n * @param {number} V\n * @param {number[][]} adj\n * @param {number} M\n * @return {boolean}\n */\nfunction graphColoring(V, adj, M) {\n  // Can graph be colored with M colors?\n}",
+  "templateCode": "function introductionToGraphColoring(graph, m) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 50",
-    "0 <= E <= V*(V-1)/2",
-    "1 <= M (colors) <= V"
-  ]
+    "1 <= m <= V",
+    "graph is a symmetric V × V 0/1 adjacency matrix with zero diagonal."
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "graph = [[0,1,1,1],[1,0,1,0],[1,1,0,1],[1,0,1,0]]\nm = 3",
+      "output": "true"
+    },
+    {
+      "input": "graph = [[0,1,1],[1,0,1],[1,1,0]]\nm = 2",
+      "output": "false"
+    }
+  ],
+  "sampleInput": "graph = [[0,1,1,1],[1,0,1,0],[1,1,0,1],[1,0,1,0]]\nm = 3",
+  "sampleOutput": "true",
+  "inputFormat": "Implement introductionToGraphColoring(graph, m). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

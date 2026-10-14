@@ -12,12 +12,61 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Construct%20BST%20from%20Preorder%20Traversal",
   "problemSet": "top-300-leetcode",
-  "testCases": [],
-  "functionName": "constructBstFromPreorderTraversal",
-  "templateCode": "/**\n * @param {number[]} preorder\n * @return {TreeNode}\n */\nfunction bstFromPreorder(preorder) {\n  // Build BST from preorder traversal\n}",
+  "testCases": [
+    {
+      "args": [
+        [
+          8,
+          5,
+          1,
+          7,
+          10,
+          12
+        ]
+      ],
+      "expected": [
+        8,
+        5,
+        10,
+        1,
+        7,
+        null,
+        12
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    }
+  ],
+  "functionName": "bstFromPreorder",
+  "templateCode": "function bstFromPreorder(preorder) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= preorder.length <= 100",
     "1 <= preorder[i] <= 10^8",
     "All values are unique"
-  ]
+  ],
+  "runner": {
+    "outputType": "tree"
+  },
+  "examples": [
+    {
+      "input": "preorder = [8,5,1,7,10,12]",
+      "output": "[8,5,10,1,7,null,12]"
+    },
+    {
+      "input": "preorder = [1]",
+      "output": "[1]"
+    }
+  ],
+  "sampleInput": "preorder = [8,5,1,7,10,12]",
+  "sampleOutput": "[8,5,10,1,7,null,12]",
+  "inputFormat": "Implement bstFromPreorder(preorder). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
 }

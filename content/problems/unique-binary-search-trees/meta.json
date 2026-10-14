@@ -26,9 +26,24 @@
       "expected": 1
     }
   ],
-  "functionName": "uniqueBinarySearchTrees",
-  "templateCode": "/**\n * @param {number} n\n * @return {number}\n */\nfunction numTrees(n) {\n  // Count unique BSTs with n nodes\n}",
+  "functionName": "numTrees",
+  "templateCode": "function numTrees(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 19"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "n = 3",
+      "output": "5"
+    },
+    {
+      "input": "n = 1",
+      "output": "1"
+    }
+  ],
+  "sampleInput": "n = 3",
+  "sampleOutput": "5",
+  "inputFormat": "Implement numTrees(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }

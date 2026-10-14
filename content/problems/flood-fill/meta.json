@@ -53,12 +53,44 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ],
+        0,
+        0,
+        1
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ]
     }
   ],
   "functionName": "floodFill",
-  "templateCode": "/**\n * @param {number[][]} image\n * @param {number} sr\n * @param {number} sc\n * @param {number} color\n * @return {number[][]}\n */\nfunction floodFill(image, sr, sc, color) {\n  // Flood fill from (sr, sc)\n}",
+  "templateCode": "function floodFill(image, sr, sc, color) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 50",
     "0 <= image[i][j], color < 2^16"
-  ]
+  ],
+  "runner": {},
+  "examples": [
+    {
+      "input": "image = [[1,1,1],[1,1,0],[1,0,1]]\nsr = 1\nsc = 1\ncolor = 2",
+      "output": "[[2,2,2],[2,2,0],[2,0,1]]"
+    },
+    {
+      "input": "image = [[1]]\nsr = 0\nsc = 0\ncolor = 1",
+      "output": "[[1]]"
+    }
+  ],
+  "sampleInput": "image = [[1,1,1],[1,1,0],[1,0,1]]\nsr = 1\nsc = 1\ncolor = 2",
+  "sampleOutput": "[[2,2,2],[2,2,0],[2,0,1]]",
+  "inputFormat": "Implement floodFill(image, sr, sc, color). Inputs below show JavaScript function arguments; there is no stdin parsing.",
+  "outputFormat": "Return the result described in the statement."
 }
