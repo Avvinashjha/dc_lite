@@ -3,11 +3,10 @@
   "id": "problem-0054",
   "title": "Minimum Moves to Equal Array Elements",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Array",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Array",
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-moves-to-equal-array-elements/",
@@ -32,6 +31,63 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          7
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          -3,
+          -1,
+          2
+        ]
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          5
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          -1000000000,
+          1000000000
+        ]
+      ],
+      "expected": 2000000000
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          10
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          5,
+          3,
+          3
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "minMoves",
@@ -53,6 +109,6 @@
   ],
   "sampleInput": "nums = [1,2,3]",
   "sampleOutput": "3",
-  "inputFormat": "Implement minMoves(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minMoves(nums). Receive a nonempty integer array; values may be negative.",
+  "outputFormat": "Return the minimum number of moves needed, not the final common value or a modified array."
 }

@@ -1,6 +1,12 @@
-## Approach: Backtracking with Pruning
+## Backtracking with Symmetry Pruning
 
-Sort the array in descending order to fail faster. Maintain `k` buckets — try placing each element into a bucket, and if the bucket sum would exceed the target, skip it. Also skip buckets that have the same current sum as a previously tried bucket (symmetry pruning).
+Every group must sum to `total / k`. Reject a total that is not divisible by `k`, or an entry larger than the target. Positivity is essential for this capacity check: later entries cannot lower a bucket's sum.
+
+Sort in descending order, then assign each entry to one of `k` buckets without exceeding the target. Large entries are considered first because they have fewer possible placements. Undo each failed placement before trying another bucket.
+
+At a given recursion depth, buckets with equal current sums are interchangeable. Try only one of each sum, using a fresh `seen` set for that depth. This skips equivalent assignments without removing a possible solution.
+
+After all entries are assigned, each bucket must equal the target. Since all values and the target are positive, these groups are also nonempty. Sorting changes the input order but not its values.
 
 ```javascript
 function canPartitionKSubsets(nums, k) {
@@ -14,7 +20,7 @@ function canPartitionKSubsets(nums, k) {
   const buckets = new Array(k).fill(0);
 
   function backtrack(idx) {
-    if (idx === nums.length) return buckets.every(b => b === target);
+    if (idx === nums.length) return buckets.every((b) => b === target);
 
     const seen = new Set();
     for (let i = 0; i < k; i++) {
@@ -33,6 +39,6 @@ function canPartitionKSubsets(nums, k) {
 }
 ```
 
-**Time Complexity:** O(k^n) worst case, but pruning drastically reduces this
+**Time:** O(n log n + k^(n + 1)) as a conservative worst-case bound for sorting, at most k^n assignments, and up to k work per search state. Symmetry and capacity checks prune the search.
 
-**Space Complexity:** O(n × k) as a loose upper bound for recursion and per-frame symmetry sets
+**Space:** O(n × k) as an upper bound for the recursion stack, per-frame symmetry sets, and buckets. Here n is nums.length.

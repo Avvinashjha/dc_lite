@@ -41,12 +41,122 @@
         "minDiff": 1,
         "bestSubset": []
       }
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          10
+        ]
+      ],
+      "expected": {
+        "minDiff": 7,
+        "bestSubset": [
+          10
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          5,
+          5,
+          5,
+          5
+        ]
+      ],
+      "expected": {
+        "minDiff": 0,
+        "bestSubset": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          -5,
+          -2,
+          1,
+          6
+        ]
+      ],
+      "expected": {
+        "minDiff": 2,
+        "bestSubset": [
+          -5,
+          6
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": {
+        "minDiff": 0,
+        "bestSubset": [
+          0
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          -7
+        ]
+      ],
+      "expected": {
+        "minDiff": 7,
+        "bestSubset": []
+      }
+    },
+    {
+      "args": [
+        [
+          1000000,
+          -1000000,
+          1000000,
+          -1000000
+        ]
+      ],
+      "expected": {
+        "minDiff": 0,
+        "bestSubset": [
+          1000000,
+          -1000000
+        ]
+      }
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          2,
+          4,
+          8
+        ]
+      ],
+      "expected": {
+        "minDiff": 2,
+        "bestSubset": [
+          1,
+          8
+        ]
+      }
     }
   ],
   "functionName": "tugOfWar",
   "templateCode": "function tugOfWar(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= n <= 20",
+    "1 <= arr.length <= 20",
     "-10^6 <= arr[i] <= 10^6"
   ],
   "runner": {
@@ -63,5 +173,5 @@
     }
   ],
   "inputFormat": "Implement tugOfWar(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nAny result satisfying the statement is accepted."
+  "outputFormat": "Return {minDiff, bestSubset}, where minDiff is the minimum absolute difference between group sums and bestSubset contains floor(arr.length / 2) input values. Any optimal subset is accepted."
 }

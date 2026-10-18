@@ -37,6 +37,39 @@
         ]
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          3,
+          4,
+          2
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          1,
+          4,
+          4,
+          2,
+          4
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "findDuplicate",
@@ -44,7 +77,8 @@
   "constraints": [
     "1 <= n <= 10^5",
     "nums.length == n + 1",
-    "1 <= nums[i] <= n"
+    "1 <= nums[i] <= n",
+    "Exactly one distinct value appears more than once; every other value appears at most once."
   ],
   "runner": {},
   "examples": [
@@ -57,6 +91,6 @@
       "output": "2"
     }
   ],
-  "inputFormat": "Implement findDuplicate(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "nums has n + 1 integers in [1, n]. Exactly one distinct value occurs more than once; it may occur more than twice.",
+  "outputFormat": "Return the repeated value, not an index. Do not modify nums; use O(1) auxiliary space."
 }

@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Stack&Queue"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/basic-calculator-ii/",
@@ -25,12 +25,38 @@
         "14-3/2"
       ],
       "expected": 13
+    },
+    {
+      "args": [
+        "42"
+      ],
+      "expected": 42
+    },
+    {
+      "args": [
+        " 3 + 5 / 2 "
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        "0-7/3"
+      ],
+      "expected": -2
+    },
+    {
+      "args": [
+        "8/3*3"
+      ],
+      "expected": 6
     }
   ],
   "functionName": "calculate",
   "templateCode": "function calculate(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "The expression is valid; division never uses a zero divisor.",
+    "1 <= s.length <= 3 * 10^5",
+    "Operands are integers from 0 to 2^31 - 1.",
+    "The expression is valid; operators are binary and division never uses a zero divisor.",
     "All intermediate results fit in a signed 32-bit integer."
   ],
   "runner": {},
@@ -44,6 +70,6 @@
       "output": "13"
     }
   ],
-  "inputFormat": "Implement calculate(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement calculate(s), where s is a valid expression of non-negative integer operands, binary +, -, *, / operators, and optional spaces between tokens.",
+  "outputFormat": "The integer result using standard precedence, left-to-right evaluation for equal-precedence operators, and division truncated toward zero."
 }

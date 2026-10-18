@@ -7,7 +7,7 @@
   "topics": [
     "Graph",
     "BFS",
-    "DFS"
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/word-ladder/",
@@ -41,6 +41,85 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        "a",
+        "c",
+        [
+          "a",
+          "b",
+          "c"
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "hit",
+        "hot",
+        [
+          "hot"
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "hit",
+        "cog",
+        [
+          "hot",
+          "cog"
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "hit",
+        "cog",
+        [
+          "hit",
+          "hot",
+          "dot",
+          "dog",
+          "cog"
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        "aaa",
+        "bbb",
+        [
+          "aab",
+          "abb",
+          "bbb",
+          "aba",
+          "baa",
+          "bab"
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "aaa",
+        "bbb",
+        [
+          "aac",
+          "acc",
+          "ccc",
+          "ccb",
+          "cbb",
+          "bbb",
+          "aab",
+          "abb"
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "ladderLength",
@@ -48,7 +127,10 @@
   "constraints": [
     "1 <= beginWord.length <= 10",
     "endWord.length == beginWord.length",
-    "1 <= wordList.length <= 5000"
+    "1 <= wordList.length <= 5000",
+    "beginWord and endWord are different.",
+    "All words contain only lowercase English letters and have the same length as beginWord.",
+    "All words in wordList are unique."
   ],
   "runner": {},
   "examples": [
@@ -64,5 +146,5 @@
   "sampleInput": "beginWord = \"hit\"\nendWord = \"cog\"\nwordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
   "sampleOutput": "5",
   "inputFormat": "Implement ladderLength(beginWord, endWord, wordList). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the number of words in the shortest valid chain, including both endpoints, or 0 if no chain exists."
 }

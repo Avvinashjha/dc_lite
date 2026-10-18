@@ -3,11 +3,10 @@
   "id": "problem-0064",
   "title": "Valid Square",
   "difficulty": "Medium",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math",
+    "Geometry"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/valid-square/",
@@ -54,12 +53,160 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          2,
+          -1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          -10000,
+          -10000
+        ],
+        [
+          10000,
+          10000
+        ],
+        [
+          -10000,
+          10000
+        ],
+        [
+          10000,
+          -10000
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "validSquare",
   "templateCode": "function validSquare(p1, p2, p3, p4) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "Coordinates are integers in range [-10^4, 10^4]"
+    "Coordinates are integers in range [-10^4, 10^4]",
+    "Each point is an array [x, y] of exactly two coordinates."
   ],
   "runner": {},
   "examples": [
@@ -75,5 +222,12 @@
   "sampleInput": "p1 = [0,0]\np2 = [1,1]\np3 = [1,0]\np4 = [0,1]",
   "sampleOutput": "true",
   "inputFormat": "Implement validSquare(p1, p2, p3, p4). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if the four points form a square with positive side length; otherwise return false.",
+  "visuals": [
+    {
+      "title": "A square can be rotated",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" role=\"img\" aria-label=\"A rotated square with vertices at zero one, one zero, zero minus one, and minus one zero\"><path d=\"M40 115h240 M160 20v190\" stroke=\"currentColor\" opacity=\".2\"/><path d=\"m160 45 70 70-70 70-70-70z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"/><g fill=\"currentColor\"><circle cx=\"160\" cy=\"45\" r=\"4\"/><circle cx=\"230\" cy=\"115\" r=\"4\"/><circle cx=\"160\" cy=\"185\" r=\"4\"/><circle cx=\"90\" cy=\"115\" r=\"4\"/></g><g font-family=\"system-ui,sans-serif\" font-size=\"13\" fill=\"currentColor\" text-anchor=\"middle\"><text x=\"160\" y=\"30\">(0, 1)</text><text x=\"269\" y=\"120\">(1, 0)</text><text x=\"160\" y=\"213\">(0, \u22121)</text><text x=\"48\" y=\"120\">(\u22121, 0)</text></g></svg>",
+      "caption": "All four sides have squared length 2, and both diagonals have squared length 4. The input points may appear in any order."
+    }
+  ]
 }

@@ -3,9 +3,10 @@
   "id": "problem-0119",
   "title": "Minimum Cost Tree From Leaf Values",
   "difficulty": "Medium",
-  "topic": "Stack&Queue",
+  "topic": "Monotonic Stack",
   "topics": [
-    "Stack&Queue"
+    "Monotonic Stack",
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/",
@@ -29,6 +30,75 @@
         ]
       ],
       "expected": 44
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          15,
+          1,
+          15
+        ]
+      ],
+      "expected": 240
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          15,
+          15
+        ]
+      ],
+      "expected": 225
     }
   ],
   "functionName": "mctFromLeafValues",
@@ -50,6 +120,13 @@
   ],
   "sampleInput": "arr = [6,2,4]",
   "sampleOutput": "32",
-  "inputFormat": "Implement mctFromLeafValues(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement mctFromLeafValues(arr). The positive integers in arr must be the leaf values in left-to-right order; they cannot be rearranged.",
+  "outputFormat": "Return the minimum sum of internal-node values. Do not include leaf values or return a tree.",
+  "visuals": [
+    {
+      "title": "Example 1: internal cost 32",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 220\" role=\"img\" aria-labelledby=\"leaf-cost-title\" style=\"width:100%;height:auto;max-width:420px;color:var(--color-text)\"><title id=\"leaf-cost-title\">Leaves 6, 2, and 4 form a tree with internal costs 24 and 8, totaling 32</title><g stroke=\"currentColor\" fill=\"none\"><path d=\"M120 47L50 100M120 47L190 100M190 117L150 175M190 117L230 175\"/><circle cx=\"120\" cy=\"30\" r=\"22\" stroke-width=\"2\"/><circle cx=\"190\" cy=\"100\" r=\"20\" stroke-width=\"2\"/></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" text-anchor=\"middle\" font-size=\"17\"><text x=\"120\" y=\"36\">24</text><text x=\"190\" y=\"106\">8</text><text x=\"50\" y=\"119\">6</text><text x=\"150\" y=\"193\">2</text><text x=\"230\" y=\"193\">4</text></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"13\"><text x=\"270\" y=\"74\">Internal costs only:</text><text x=\"270\" y=\"102\">24 + 8 = 32</text><text x=\"270\" y=\"130\">Return 32</text><text x=\"18\" y=\"216\">Leaf order: 6 \u2192 2 \u2192 4</text></g></svg>",
+      "caption": "Circled values are internal-node costs. The root uses leaf maxima 6 and 4, so its value is 24, not 6 \u00d7 8."
+    }
+  ]
 }

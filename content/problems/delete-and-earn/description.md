@@ -1,1 +1,3 @@
-You're given an integer array nums. In each move, choose some value present in the array, add that value to your score for every occurrence of it, and then remove every occurrence of that value along with any elements equal to value-1 and value+1. Keep making moves until no elements remain, and return the maximum total score achievable.
+Given an integer array `nums`, repeatedly choose one element with value `x` and remove it to earn `x` points. You must also remove every remaining element equal to `x - 1` or `x + 1`, earning no points for those removals.
+
+Other occurrences of `x` remain available to choose in later moves. Return the maximum total points you can earn.

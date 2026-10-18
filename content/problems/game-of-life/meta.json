@@ -6,7 +6,8 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Matrix",
+    "Simulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/game-of-life/",
@@ -75,6 +76,92 @@
           0
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
     }
   ],
   "functionName": "gameOfLife",
@@ -96,6 +183,6 @@
       "output": "[[0]]"
     }
   ],
-  "inputFormat": "Implement gameOfLife(board). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
+  "inputFormat": "board is a nonempty rectangular matrix of 0 (dead) and 1 (alive).",
+  "outputFormat": "Update board in place by exactly one simultaneous generation. Return values are ignored; the runner checks board."
 }

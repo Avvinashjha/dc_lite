@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0197",
-  "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+  "title": "City with the Fewest Reachable Neighbors",
   "difficulty": "Medium",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "Shortest Path",
+    "Dynamic Programming"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
@@ -55,20 +55,80 @@
         1
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        4,
+        [
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        1
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            0,
+            2,
+            10
+          ]
+        ],
+        4
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ]
+        ],
+        0
+      ],
+      "expected": 2
     }
   ],
-  "functionName": "findTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance",
-  "templateCode": "function findTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance(n, edges, distanceThreshold) {\n  // Write your solution here.\n}\n",
+  "functionName": "findTheCity",
+  "templateCode": "function findTheCity(n, edges, distanceThreshold) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= n <= 100",
     "1 <= edges.length <= n*(n-1)/2",
-    "0 <= distanceThreshold <= 10^4"
+    "0 <= distanceThreshold <= 10^4",
+    "0 <= u, v < n; u != v; each pair has at most one road.",
+    "1 <= weight <= 10^4"
   ],
   "runner": {},
   "examples": [
     {
       "input": "n = 4\nedges = [[0,1,3],[1,2,1],[1,3,4],[2,3,1]]\ndistanceThreshold = 4",
-      "output": "3"
+      "output": "3",
+      "explanation": "Reachable-neighbor counts are [2,3,3,2]. Cities 0 and 3 tie, so return 3."
     },
     {
       "input": "n = 2\nedges = [[0,1,10]]\ndistanceThreshold = 1",
@@ -77,6 +137,6 @@
   ],
   "sampleInput": "n = 4\nedges = [[0,1,3],[1,2,1],[1,3,4],[2,3,1]]\ndistanceThreshold = 4",
   "sampleOutput": "3",
-  "inputFormat": "Implement findTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance(n, edges, distanceThreshold). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "n is the number of cities. Each [u, v, weight] in edges is one undirected road. distanceThreshold is the inclusive shortest-path limit.",
+  "outputFormat": "Return the city index with the fewest other cities within the threshold; break ties by choosing the largest index."
 }

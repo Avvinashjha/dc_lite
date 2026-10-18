@@ -51,12 +51,113 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          -1,
+          -2,
+          3
+        ],
+        [
+          -2
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "isSubtree",
   "templateCode": "function isSubtree(root, subRoot) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= number of nodes <= 2000",
+    "Each of root and subRoot contains between 1 and 2000 nodes",
     "-10^4 <= Node.val <= 10^4"
   ],
   "runner": {
@@ -72,11 +173,12 @@
     },
     {
       "input": "root = [3,4,5,1,2,null,null,null,null,0]\nsubRoot = [4,1,2]",
-      "output": "false"
+      "output": "false",
+      "explanation": "The node with value 4 has an additional descendant 0 below its right child. A subtree includes every descendant, so that branch cannot be ignored."
     }
   ],
   "sampleInput": "root = [3,4,5,1,2]\nsubRoot = [4,1,2]",
   "sampleOutput": "true",
   "inputFormat": "Implement isSubtree(root, subRoot). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if a node in root, together with all its descendants, exactly matches subRoot in values and left/right structure; otherwise return false."
 }

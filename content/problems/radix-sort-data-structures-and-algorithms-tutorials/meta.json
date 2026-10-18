@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0071",
-  "title": "Radix Sort – Data Structures and Algorithms Tutorials",
+  "title": "Radix Sort",
   "difficulty": "Medium",
   "topic": "Sorting&Searching",
   "topics": [
-    "Sorting&Searching"
+    "Array",
+    "Sorting",
+    "Radix Sort"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Radix%20Sort%20%E2%80%93%20Data%20Structures%20and%20Algorithms%20Tutorials",
@@ -46,12 +48,138 @@
         0,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          7
+        ]
+      ],
+      "expected": [
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          21,
+          12,
+          11
+        ]
+      ],
+      "expected": [
+        11,
+        12,
+        21
+      ]
+    },
+    {
+      "args": [
+        [
+          100,
+          10,
+          1,
+          0,
+          1000
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        10,
+        100,
+        1000
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          5,
+          5
+        ]
+      ],
+      "expected": [
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          1000000000,
+          999999999,
+          0,
+          10
+        ]
+      ],
+      "expected": [
+        0,
+        10,
+        999999999,
+        1000000000
+      ]
+    },
+    {
+      "args": [
+        [
+          91,
+          81,
+          71,
+          61
+        ]
+      ],
+      "expected": [
+        61,
+        71,
+        81,
+        91
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
     }
   ],
   "functionName": "radixSort",
   "templateCode": "function radixSort(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
+    "1 <= arr.length <= 10^5",
     "0 <= arr[i] <= 10^9"
   ],
   "runner": {},
@@ -68,5 +196,5 @@
   "sampleInput": "arr = [170,45,75,90,802,24,2,66]",
   "sampleOutput": "[2,24,45,66,75,90,170,802]",
   "inputFormat": "Implement radixSort(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return all input values sorted in nondecreasing numeric order, preserving duplicates."
 }

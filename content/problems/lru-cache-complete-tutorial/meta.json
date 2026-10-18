@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0130",
-  "title": "LRU Cache – Complete Tutorial",
+  "title": "LRU Cache",
   "difficulty": "Hard",
-  "topic": "Stack&Queue",
+  "topic": "Design",
   "topics": [
-    "Stack&Queue"
+    "Design",
+    "Hash Table",
+    "Linked List"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=LRU%20Cache%20%E2%80%93%20Complete%20Tutorial",
@@ -114,10 +116,197 @@
         -1,
         3
       ]
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          [
+            "put",
+            1,
+            10
+          ],
+          [
+            "put",
+            2,
+            20
+          ],
+          [
+            "put",
+            1,
+            11
+          ],
+          [
+            "put",
+            3,
+            30
+          ],
+          [
+            "get",
+            2
+          ],
+          [
+            "get",
+            1
+          ],
+          [
+            "get",
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        null,
+        -1,
+        11,
+        30
+      ]
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          [
+            "put",
+            0,
+            0
+          ],
+          [
+            "put",
+            1,
+            10
+          ],
+          [
+            "get",
+            9
+          ],
+          [
+            "put",
+            2,
+            20
+          ],
+          [
+            "get",
+            0
+          ],
+          [
+            "get",
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        -1,
+        null,
+        -1,
+        10
+      ]
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          [
+            "put",
+            0,
+            0
+          ],
+          [
+            "put",
+            1,
+            10
+          ],
+          [
+            "get",
+            0
+          ],
+          [
+            "get",
+            0
+          ],
+          [
+            "put",
+            2,
+            20
+          ],
+          [
+            "get",
+            1
+          ],
+          [
+            "get",
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        0,
+        0,
+        null,
+        -1,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          [
+            "get",
+            1
+          ],
+          [
+            "put",
+            1,
+            0
+          ],
+          [
+            "put",
+            2,
+            2
+          ],
+          [
+            "put",
+            1,
+            3
+          ],
+          [
+            "get",
+            2
+          ],
+          [
+            "get",
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        -1,
+        null,
+        null,
+        null,
+        -1,
+        3
+      ]
     }
   ],
-  "functionName": "lruCacheCompleteTutorial",
-  "templateCode": "function lruCacheCompleteTutorial(capacity) {\n  return {\n    get(key) { /* Write your implementation. */ },\n    put(key, value) { /* Write your implementation. */ }\n  };\n}\n",
+  "functionName": "createLRUCache",
+  "templateCode": "function createLRUCache(capacity) {\n  return {\n    get(key) { /* Write your implementation. */ },\n    put(key, value) { /* Write your implementation. */ }\n  };\n}\n",
   "constraints": [
     "1 <= capacity <= 3000",
     "0 <= key <= 10^4",
@@ -140,6 +329,6 @@
   ],
   "sampleInput": "constructorArgs = [2]\noperations = [[\"put\",1,1],[\"put\",2,2],[\"get\",1],[\"put\",3,3],[\"get\",2],[\"put\",4,4],[\"get\",1],[\"get\",3],[\"get\",4]]",
   "sampleOutput": "[null,null,1,null,-1,null,-1,3,4]",
-  "inputFormat": "Implement the factory function lruCacheCompleteTutorial. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
-  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
+  "inputFormat": "Implement createLRUCache(capacity), returning an object with get(key) and put(key, value) methods. Fixtures supply constructor arguments and then [method, ...arguments] calls on that object; each fixture creates a fresh cache.",
+  "outputFormat": "get returns the stored value or -1. put returns nothing (displayed as null). Results appear in operation order."
 }

@@ -3,10 +3,10 @@
   "id": "problem-0260",
   "title": "K-th Symbol in Grammar",
   "difficulty": "Medium",
-  "topic": "Backtracking",
+  "topic": "Recursion",
   "topics": [
-    "Backtracking",
-    "Recursion"
+    "Recursion",
+    "Bit Manipulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/k-th-symbol-in-grammar/",
@@ -27,6 +27,41 @@
         8
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        1,
+        1
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        3,
+        2
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        3,
+        3
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        3,
+        4
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        30,
+        536870912
+      ],
+      "expected": 1
     }
   ],
   "functionName": "kthGrammar",
@@ -43,9 +78,10 @@
     },
     {
       "input": "n = 4\nk = 8",
-      "output": "1"
+      "output": "1",
+      "explanation": "Row 4 is 01101001; its eighth symbol is 1."
     }
   ],
-  "inputFormat": "Implement kthGrammar(n, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "n is the one-based row number; k is a one-based position within that row.",
+  "outputFormat": "Return the numeric digit 0 or 1 at position k in row n, not a string or the full row."
 }

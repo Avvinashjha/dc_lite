@@ -3,7 +3,7 @@
   "id": "problem-0235",
   "title": "Coin Change",
   "difficulty": "Medium",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
     "Memoization"
@@ -40,6 +40,26 @@
         0
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          4
+        ],
+        6
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          2147483647
+        ],
+        1
+      ],
+      "expected": -1
     }
   ],
   "functionName": "coinChange",
@@ -66,6 +86,6 @@
   ],
   "sampleInput": "coins = [1,2,5]\namount = 11",
   "sampleOutput": "3",
-  "inputFormat": "Implement coinChange(coins, amount). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement coinChange(coins, amount), where coins contains positive denominations and amount is a non-negative integer. Each denomination can be reused without limit.",
+  "outputFormat": "The fewest coins summing exactly to amount; -1 if impossible; 0 when amount is zero."
 }

@@ -3,10 +3,11 @@
   "id": "problem-0251",
   "title": "Trapping Rain Water",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Array",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Array",
+    "Two Pointers",
+    "Monotonic Stack"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/trapping-rain-water/",
@@ -43,12 +44,95 @@
         ]
       ],
       "expected": 9
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          5,
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          1,
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          3,
+          0,
+          2
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          2,
+          0,
+          2,
+          0,
+          2
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          5,
+          0,
+          1,
+          0,
+          5
+        ]
+      ],
+      "expected": 14
     }
   ],
   "functionName": "trap",
   "templateCode": "function trap(height) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= n <= 2 * 10^4",
+    "1 <= height.length <= 20000",
     "0 <= height[i] <= 10^5"
   ],
   "runner": {},
@@ -65,5 +149,12 @@
   "sampleInput": "height = [0,1,0,2,1,0,1,3,2,1,2,1]",
   "sampleOutput": "6",
   "inputFormat": "Implement trap(height). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the total number of unit squares of water trapped above the bars.",
+  "visuals": [
+    {
+      "title": "The lower wall limits the water",
+      "caption": "For heights [3,0,2], the middle position holds 2 units of water. The left wall\u2019s extra height cannot raise the water above the right wall.",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 180\" role=\"img\" aria-label=\"Bars of height 3, 0, and 2; two units of water sit between them\"><g fill=\"currentColor\" opacity=\".55\"><rect x=\"60\" y=\"20\" width=\"60\" height=\"120\"/><rect x=\"180\" y=\"60\" width=\"60\" height=\"80\"/></g><rect x=\"120\" y=\"60\" width=\"60\" height=\"80\" fill=\"currentColor\" opacity=\".12\"/><path d=\"M120 60H180 M120 100H180\" fill=\"none\" stroke=\"currentColor\" stroke-dasharray=\"4 3\"/><path d=\"M45 140H255\" stroke=\"currentColor\"/><g fill=\"currentColor\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"15\"><text x=\"90\" y=\"164\">3</text><text x=\"150\" y=\"164\">0</text><text x=\"210\" y=\"164\">2</text><text x=\"150\" y=\"88\">1</text><text x=\"150\" y=\"128\">1</text></g></svg>"
+    }
+  ]
 }

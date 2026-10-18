@@ -3,11 +3,10 @@
   "id": "problem-0188",
   "title": "Decode String",
   "difficulty": "Medium",
-  "topic": "Graph",
+  "topic": "String",
   "topics": [
-    "Graph",
-    "BFS",
-    "DFS"
+    "String",
+    "Stack&Queue"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/decode-string/",
@@ -24,6 +23,24 @@
         "3[a2[c]]"
       ],
       "expected": "accaccacc"
+    },
+    {
+      "args": [
+        "abc"
+      ],
+      "expected": "abc"
+    },
+    {
+      "args": [
+        "ab2[c]d"
+      ],
+      "expected": "abccd"
+    },
+    {
+      "args": [
+        "12[a]"
+      ],
+      "expected": "aaaaaaaaaaaa"
     }
   ],
   "functionName": "decodeString",
@@ -31,7 +48,8 @@
   "constraints": [
     "1 <= s.length <= 30",
     "Input encoding is valid; repeat counts lie in [1,300].",
-    "The decoded output has at most 10^5 characters."
+    "The decoded output has at most 10^5 characters.",
+    "Digits appear only as repeat counts immediately before [. Literal text consists of lowercase English letters."
   ],
   "runner": {},
   "examples": [
@@ -41,11 +59,12 @@
     },
     {
       "input": "s = \"3[a2[c]]\"",
-      "output": "\"accaccacc\""
+      "output": "\"accaccacc\"",
+      "explanation": "First decode 2[c] as cc, then repeat acc three times."
     }
   ],
   "sampleInput": "s = \"3[a]2[bc]\"",
   "sampleOutput": "\"aaabcbc\"",
-  "inputFormat": "Implement decodeString(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement decodeString(s), where s is a valid encoding using lowercase letters, positive integer repeat counts, and square brackets.",
+  "outputFormat": "The fully expanded string, preserving the order of literal text and repeated groups."
 }

@@ -7,6 +7,8 @@ import { signInWithPopup, signOut, linkWithPopup, type AuthProvider } from 'fire
 
 export default function AuthWidget() {
     const user = useStore(userStore);
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => { setMounted(true); }, []);
     const loading = useStore(isAuthLoading);
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
     const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -68,8 +70,8 @@ export default function AuthWidget() {
         return (parts[0][0] + (parts[parts.length - 1][0] || '')).toUpperCase();
     };
 
-    if (loading) {
-        return <div class="auth-widget">...</div>;
+    if (!mounted || loading) {
+        return <div class="auth-widget" aria-busy="true"><button class="button button--primary" disabled>Login</button></div>;
     }
 
     if (user) {

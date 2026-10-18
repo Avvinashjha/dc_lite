@@ -6,10 +6,12 @@ Build a weighted graph, DFS from dividend to divisor multiplying weights.
 function calcEquation(equations, values, queries) {
   const graph = new Map();
   for (let i = 0; i < equations.length; i++) {
-    const [a, b] = equations[i], v = values[i];
+    const [a, b] = equations[i],
+      v = values[i];
     if (!graph.has(a)) graph.set(a, []);
     if (!graph.has(b)) graph.set(b, []);
-    graph.get(a).push([b, v]); graph.get(b).push([a, 1/v]);
+    graph.get(a).push([b, v]);
+    graph.get(b).push([a, 1 / v]);
   }
   function dfs(src, dst, visited) {
     if (!graph.has(src) || !graph.has(dst)) return -1;

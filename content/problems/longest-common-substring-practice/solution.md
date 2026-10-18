@@ -1,6 +1,6 @@
 ## Approach: Dynamic Programming
 
-Create a 2D DP table where `dp[i][j]` stores the length of the longest common suffix ending at `s1[i-1]` and `s2[j-1]`. If characters match, `dp[i][j] = dp[i-1][j-1] + 1`. Track the maximum value seen.
+Create a 2D DP table where `dp[i][j]` stores the length of the longest common suffix ending at `s1[i-1]` and `s2[j-1]`. If characters match, `dp[i][j] = dp[i-1][j-1] + 1`. On a mismatch the entry stays zero: a contiguous match cannot cross that position. Track the maximum across every cell, since the best substring need not end at the last character of either string.
 
 ```javascript
 function longestCommonSubstring(s1, s2) {

@@ -32,6 +32,35 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          3,
+          4,
+          5,
+          null,
+          null,
+          6
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "diameterOfBinaryTree",
@@ -57,6 +86,13 @@
   ],
   "sampleInput": "root = [1,2,3,4,5]",
   "sampleOutput": "3",
-  "inputFormat": "Implement diameterOfBinaryTree(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "root is the root node of a nonempty binary tree. Test inputs use level-order arrays with null for missing children; the function receives nodes with val, left, and right properties.",
+  "outputFormat": "Return the maximum number of edges on a path between any two nodes.",
+  "visuals": [
+    {
+      "title": "Count edges, not nodes",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 190\" role=\"img\" aria-label=\"Path 4 to 2 to 1 to 3 contains three edges\" style=\"width:100%;height:auto;max-width:360px;color:var(--color-text)\"><path d=\"M180 30L100 90L55 150M180 30L260 90\" fill=\"none\" stroke=\"var(--color-primary)\" stroke-width=\"5\"/><path d=\"M100 90L145 150\" fill=\"none\" stroke=\"var(--color-text-light)\" stroke-width=\"2\"/><circle cx=\"180\" cy=\"30\" r=\"20\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"180\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">1</text><circle cx=\"100\" cy=\"90\" r=\"20\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"100\" y=\"96\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">2</text><circle cx=\"260\" cy=\"90\" r=\"20\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"260\" y=\"96\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">3</text><circle cx=\"55\" cy=\"150\" r=\"20\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"55\" y=\"156\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">4</text><circle cx=\"145\" cy=\"150\" r=\"20\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"145\" y=\"156\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">5</text></svg>",
+      "caption": "For [1,2,3,4,5], the path 4 \u2192 2 \u2192 1 \u2192 3 has 3 edges. A longest path need not pass through the root."
+    }
+  ]
 }

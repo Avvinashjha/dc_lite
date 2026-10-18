@@ -37,4 +37,4 @@ function threeSum(nums) {
 
 **Time Complexity:** O(n^2) — sorting is O(n log n), the nested loop is O(n^2).
 
-**Space Complexity:** O(1) extra space (ignoring the output array).
+**Space Complexity:** O(1) for the two-pointer scan, excluding the output and the JavaScript engine’s sorting workspace. The sort may allocate additional memory.

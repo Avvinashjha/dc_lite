@@ -1,12 +1,12 @@
 {
   "draft": false,
   "id": "problem-0239",
-  "title": "Longest Common Substring | Practice",
+  "title": "Longest Common Substring",
   "difficulty": "Medium",
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "String"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Longest%20Common%20Substring%20%7C%20Practice",
@@ -25,12 +25,55 @@
         "ACB"
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        "ABC",
+        "xyz"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "Ab",
+        "ab"
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "AAAA",
+        "AA"
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "same",
+        "same"
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "XYabcZ",
+        "QabcR"
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        "a",
+        "a"
+      ],
+      "expected": 1
     }
   ],
   "functionName": "longestCommonSubstring",
   "templateCode": "function longestCommonSubstring(s1, s2) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= |S1|, |S2| <= 500"
+    "1 <= s1.length, s2.length <= 500",
+    "s1 and s2 contain uppercase and lowercase English letters"
   ],
   "runner": {},
   "examples": [
@@ -45,6 +88,6 @@
   ],
   "sampleInput": "s1 = \"ABCDGH\"\ns2 = \"ACDGHR\"",
   "sampleOutput": "4",
-  "inputFormat": "Implement longestCommonSubstring(s1, s2). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement longestCommonSubstring(s1, s2). Receive two nonempty strings of English letters. Comparisons are case-sensitive.",
+  "outputFormat": "Return the length of the longest contiguous substring present in both strings. Return 0 if they share no character."
 }

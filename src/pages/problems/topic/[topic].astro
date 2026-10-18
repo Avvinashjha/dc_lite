@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import '../../../styles/problems.scss';
+import '../../../styles/problem-list.scss';
 import { getProblems, getProblemTopics } from '../../../utils/contentLoader';
 import { slugifyTaxonomy, buildTaxonomy, findTaxonomyEntry } from '../../../utils/taxonomy';
 
@@ -105,7 +106,6 @@ const jsonLd = {
         <tr>
           <th>Title</th>
           <th class="problem-table__difficulty">Difficulty</th>
-          <th class="problem-table__platform">Platform</th>
         </tr>
       </thead>
       <tbody>
@@ -117,7 +117,6 @@ const jsonLd = {
             <td class="problem-table__difficulty">
               <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
             </td>
-            <td class="problem-table__platform">{p.platform}</td>
           </tr>
         ))}
       </tbody>

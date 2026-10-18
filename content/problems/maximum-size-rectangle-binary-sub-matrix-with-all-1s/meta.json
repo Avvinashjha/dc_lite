@@ -1,13 +1,12 @@
 {
   "draft": false,
   "id": "problem-0049",
-  "title": "Maximum size rectangle binary sub-matrix with all 1s",
+  "title": "Largest All-Ones Rectangle",
   "difficulty": "Medium",
   "topic": "Matrix",
   "topics": [
     "Matrix",
-    "BFS",
-    "DFS"
+    "Monotonic Stack"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Maximum%20size%20rectangle%20binary%20sub-matrix%20with%20all%201s",
@@ -53,6 +52,102 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 0
     }
   ],
   "functionName": "maximumSizeRectangleBinarySubMatrixWithAll1s",
@@ -74,6 +169,13 @@
   ],
   "sampleInput": "matrix = [[0,1,1,0],[1,1,1,1],[1,1,1,1],[1,1,0,0]]",
   "sampleOutput": "8",
-  "inputFormat": "Implement maximumSizeRectangleBinarySubMatrixWithAll1s(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maximumSizeRectangleBinarySubMatrixWithAll1s(matrix). Receive a nonempty rectangular matrix of numeric 0 and 1 values.",
+  "outputFormat": "Return the largest all-ones rectangle area, or 0 when the matrix contains no 1.",
+  "visuals": [
+    {
+      "title": "Example 1: eight cells",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 185\" role=\"img\" aria-labelledby=\"numeric-rect-title\" style=\"width:100%;height:auto;max-width:360px;color:var(--color-text)\"><title id=\"numeric-rect-title\">Two rows of four ones form a rectangle of area eight</title><g font-family=\"system-ui,sans-serif\"><text x=\"35\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"71\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"107\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"143\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"35\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"107\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"143\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"35\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"107\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"143\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"35\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"107\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"143\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><rect x=\"17\" y=\"48\" width=\"144\" height=\"72\" rx=\"5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/><g fill=\"currentColor\" font-size=\"14\"><text x=\"204\" y=\"82\">2 rows \u00d7 4 columns</text><text x=\"204\" y=\"108\">Return 8</text><text x=\"17\" y=\"173\" font-size=\"12\">All eight enclosed cells contain 1.</text></g></g></svg>",
+      "caption": "Rows 1\u20132 and columns 0\u20133 (zero-based) form the largest all-ones rectangle."
+    }
+  ]
 }

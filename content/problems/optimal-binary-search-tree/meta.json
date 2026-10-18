@@ -6,7 +6,7 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Binary Search Tree"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Optimal%20Binary%20Search%20Tree",
@@ -37,6 +37,94 @@
         ]
       ],
       "expected": 5
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          100
+        ]
+      ],
+      "expected": 102
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          10,
+          1,
+          10
+        ]
+      ],
+      "expected": 33
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          -10,
+          0,
+          5,
+          100
+        ],
+        [
+          2,
+          8,
+          1,
+          3
+        ]
+      ],
+      "expected": 21
     }
   ],
   "functionName": "optimalBST",
@@ -60,5 +148,12 @@
   "sampleInput": "keys = [10,12,20]\nfreq = [34,8,50]",
   "sampleOutput": "142",
   "inputFormat": "Implement optimalBST(keys, freq). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the minimum sum of frequency \u00d7 level over every key, with root level 1.",
+  "visuals": [
+    {
+      "title": "An optimal tree for the first example",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 520 260\" role=\"img\" aria-labelledby=\"optimal-bst-title optimal-bst-desc\" style=\"width:100%;height:auto;max-width:520px;color:var(--color-text)\"><title id=\"optimal-bst-title\">Optimal search tree with total cost 142</title><desc id=\"optimal-bst-desc\">Root 20 at level 1 has left child 10 at level 2. Node 10 has right child 12 at level 3. Their weighted costs are 50, 68, and 24.</desc><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M247 60 L173 113 M173 151 L217 200\"/><circle cx=\"260\" cy=\"42\" r=\"24\"/><circle cx=\"160\" cy=\"132\" r=\"24\"/><circle cx=\"230\" cy=\"220\" r=\"24\"/></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"16\" text-anchor=\"middle\"><text x=\"260\" y=\"48\">20</text><text x=\"160\" y=\"138\">10</text><text x=\"230\" y=\"226\">12</text></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"14\"><text x=\"305\" y=\"47\">Level 1 \u00b7 50 \u00d7 1 = 50</text><text x=\"205\" y=\"137\">Level 2 \u00b7 34 \u00d7 2 = 68</text><text x=\"275\" y=\"225\">Level 3 \u00b7 8 \u00d7 3 = 24</text></g></svg>",
+      "caption": "BST order determines where each key may go. A frequently searched key can be worth placing closer to the root."
+    }
+  ]
 }

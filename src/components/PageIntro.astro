@@ -1,0 +1,20 @@
+---
+import Icon from './school/SchoolIcon';
+interface Props { title: string; description?: string; eyebrow?: string; icon?: string; tone?: 'sage' | 'sky' | 'peach' | 'lavender'; }
+const { title, description, eyebrow = 'A LITTLE CURIOSITY, EVERY DAY', icon = 'leaf', tone = 'sage' } = Astro.props;
+---
+<header class:list={['page-intro', `page-intro--${tone}`]}>
+  <div class="page-intro__copy"><p class="page-intro__eyebrow"><Icon name={icon} size={16}/>{eyebrow}</p><h1>{title}</h1>{description && <p class="page-intro__description">{description}</p>}<slot/></div>
+  <span class="page-intro__art" aria-hidden="true"><Icon name={icon} size={48}/><span>✳</span></span>
+</header>
+<style>
+  .page-intro { display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid var(--dc-hero-line); border-radius: 18px; padding: 28px 24px; margin-bottom: 28px; background: var(--dc-hero); }
+  .page-intro--sky { background: var(--dc-sky); border-color: color-mix(in srgb, var(--dc-sky-ink) 18%, transparent); }
+  .page-intro--peach { background: var(--dc-peach); border-color: color-mix(in srgb, var(--dc-peach-ink) 18%, transparent); }
+  .page-intro--lavender { background: var(--dc-lavender); border-color: color-mix(in srgb, var(--dc-lavender-ink) 18%, transparent); }
+  .page-intro__eyebrow { display: flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .1em; font-weight: 650; margin-bottom: 18px; color: var(--color-text-light); text-transform: uppercase; }
+  .page-intro h1 { margin: 0 0 14px; font-size: clamp(30px, 4vw, 46px); font-weight: 550; letter-spacing: -.045em; line-height: 1.16; }
+  .page-intro__description { font-size: 15px; max-width: 620px; color: var(--color-text-light); line-height: 1.75; margin: 0; }
+  .page-intro__art { display: none; }
+  @media (min-width: 700px) { .page-intro { padding: 38px; border-radius: 22px; margin-bottom: 32px; }.page-intro__art { display: grid; place-items: center; width: 120px; height: 130px; flex-shrink: 0; border-radius: 6px 20px 20px 6px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-primary); transform: rotate(7deg); position: relative; margin: 0 22px; }.page-intro__art span { position: absolute; top: -17px; right: -20px; font-size: 34px; color: var(--dc-butter-ink); } }
+</style>

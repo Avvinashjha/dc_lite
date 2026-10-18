@@ -11,6 +11,52 @@ interface Props {
 type RankFilter = 'all' | 'ranked' | 'practice';
 type CommunityState = 'idle' | 'loading' | 'ready' | 'unconfigured' | 'error';
 
+type FilterOption = {
+  value: string;
+  label: string;
+};
+
+interface FilterSelectProps {
+  label: string;
+  value: string;
+  options: FilterOption[];
+  onChange: (value: string) => void;
+}
+
+function FilterSelect({ label, value, options, onChange }: FilterSelectProps) {
+  const selected = options.find(option => option.value === value) ?? options[0];
+
+  const choose = (event: Event, nextValue: string) => {
+    onChange(nextValue);
+    const menu = (event.currentTarget as HTMLElement).closest('details');
+    if (menu) menu.open = false;
+  };
+
+  return (
+    <details class="quiz-select">
+      <summary class="quiz-select__trigger" aria-label={label}>
+        <span>{selected.label}</span>
+        <svg class="quiz-select__chevron" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="m4 6 4 4 4-4" />
+        </svg>
+      </summary>
+      <div class="quiz-select__menu" role="listbox" aria-label={label}>
+        {options.map(option => (
+          <button
+            type="button"
+            class={`quiz-select__option${option.value === value ? ' quiz-select__option--selected' : ''}`}
+            role="option"
+            aria-selected={option.value === value}
+            onClick={event => choose(event, option.value)}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+    </details>
+  );
+}
+
 function QuizCard({ item }: { item: QuizListItem }) {
   return (
     <a class="quiz-tile" href={toListItemUrl(item)}>
@@ -92,23 +138,33 @@ export default function QuizBrowser({ curated, categories }: Props) {
           value={search}
           onInput={e => setSearch((e.target as HTMLInputElement).value)}
         />
-        <select class="quiz-filters__select" value={category} onChange={e => setCategory((e.target as HTMLSelectElement).value)}>
-          <option value="all">All categories</option>
-          {allCategories.map(c => (
-            <option value={c}>{c}</option>
-          ))}
-        </select>
-        <select class="quiz-filters__select" value={difficulty} onChange={e => setDifficulty((e.target as HTMLSelectElement).value)}>
-          <option value="all">All difficulties</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        <select class="quiz-filters__select" value={rank} onChange={e => setRank((e.target as HTMLSelectElement).value as RankFilter)}>
-          <option value="all">Ranked & practice</option>
-          <option value="ranked">Ranked only</option>
-          <option value="practice">Practice only</option>
-        </select>
+        <FilterSelect
+          label="Filter by category"
+          value={category}
+          onChange={setCategory}
+          options={[{ value: 'all', label: 'All categories' }, ...allCategories.map(value => ({ value, label: value }))]}
+        />
+        <FilterSelect
+          label="Filter by difficulty"
+          value={difficulty}
+          onChange={setDifficulty}
+          options={[
+            { value: 'all', label: 'All difficulties' },
+            { value: 'easy', label: 'Easy' },
+            { value: 'medium', label: 'Medium' },
+            { value: 'hard', label: 'Hard' },
+          ]}
+        />
+        <FilterSelect
+          label="Filter by quiz type"
+          value={rank}
+          onChange={value => setRank(value as RankFilter)}
+          options={[
+            { value: 'all', label: 'Ranked & practice' },
+            { value: 'ranked', label: 'Ranked only' },
+            { value: 'practice', label: 'Practice only' },
+          ]}
+        />
       </div>
 
       <p class="quiz-browser__count quiz-muted">

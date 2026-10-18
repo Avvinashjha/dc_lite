@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0102",
-  "title": "Rearrange a Linked List in Zig-Zag fashion",
+  "title": "Zigzag Linked List",
   "difficulty": "Medium",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Greedy"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20Linked%20List%20in%20Zig-Zag%20fashion",
@@ -42,12 +43,127 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        1,
+        3,
+        2,
+        5,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        4,
+        5,
+        2,
+        3,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          -3,
+          -2,
+          0
+        ]
+      ],
+      "expected": [
+        -3,
+        -1,
+        -2,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          4,
+          1,
+          4,
+          1,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        4,
+        1,
+        4,
+        4
+      ]
     }
   ],
   "functionName": "zigZagList",
   "templateCode": "function zigZagList(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^4"
+    "1 <= N <= 10^4",
+    "Node values are safe JavaScript integers; duplicate values are allowed."
   ],
   "runner": {
     "argTypes": [

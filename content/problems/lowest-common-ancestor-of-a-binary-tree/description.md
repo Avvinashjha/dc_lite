@@ -1,1 +1,5 @@
-You're given the root of a binary tree and two distinct node values `p` and `q`, both guaranteed to exist in a tree with unique values. Return the ancestor’s value. Find their lowest common ancestor (LCA) — the deepest node in the tree that has both `p` and `q` among its descendants, where a node is allowed to be a descendant of itself. The tree has no BST-style ordering to exploit here, so this calls for a general tree traversal rather than value comparisons.
+Given the root of a binary tree and two distinct node values `p` and `q`, return the **value** of their lowest common ancestor (LCA). All node values are unique, and both targets exist in the tree.
+
+The LCA is the deepest node with both targets among its descendants. A node counts as its own descendant: if one target is an ancestor of the other, return that target’s value.
+
+The tree is not necessarily a BST; numerical comparisons do not tell you which subtree contains a target.

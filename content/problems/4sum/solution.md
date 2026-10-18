@@ -30,4 +30,4 @@ function fourSum(nums, target) {
 ```
 
 **Time:** O(n³)
-**Space:** O(1) (ignoring output)
+**Space:** O(1) for the pointer scan, excluding the output and the JavaScript engine’s sorting workspace. The sort may allocate additional memory.

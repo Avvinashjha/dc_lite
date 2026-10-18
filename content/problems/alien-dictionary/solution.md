@@ -27,4 +27,4 @@ function alienDictionary(words) {
 }
 ```
 
-**Time:** O(C) where C = total chars | **Space:** O(U + min(U², N)) where U = unique chars
+**Time:** O(C) where C = total chars | **Space:** O(U + min(U², N)) where U = unique characters and N = number of words

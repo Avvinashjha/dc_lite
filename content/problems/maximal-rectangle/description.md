@@ -1,1 +1,3 @@
-You're given a `rows x cols` matrix made up of the characters `'0'` and `'1'`. Find the biggest rectangular region made entirely of `'1'`s and return its area. A useful way to think about this: each row can act as the base of a histogram built from consecutive `1`s stacked above it, turning the problem into a 2D version of finding the largest rectangle in a histogram.
+Given a matrix containing the characters `"0"` and `"1"`, find the largest **rectangle** made entirely of `"1"` cells. Its sides must follow the grid: choose consecutive rows and consecutive columns without skipping cells.
+
+Return its **area**, not its coordinates. A rectangle may have different height and width. If there are no `"1"` cells, return `0`.

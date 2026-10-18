@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Stack&Queue"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/valid-parentheses/",
@@ -25,6 +25,36 @@
         "([)]"
       ],
       "expected": false
+    },
+    {
+      "args": [
+        ""
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "("
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        ")("
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "([{}])"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "(]"
+      ],
+      "expected": false
     }
   ],
   "functionName": "isValid",
@@ -41,9 +71,17 @@
     },
     {
       "input": "s = \"([)]\"",
-      "output": "false"
+      "output": "false",
+      "explanation": "The closing parenthesis appears before the square bracket has closed, so the nesting is invalid."
     }
   ],
-  "inputFormat": "Implement isValid(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement isValid(s), where s is a string containing only bracket characters.",
+  "outputFormat": "A boolean: true if all brackets match in the correct nested order, otherwise false.",
+  "visuals": [
+    {
+      "title": "Matching brackets must nest",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 150\" role=\"img\" aria-label=\"Parentheses containing square brackets is valid; crossing parentheses and square brackets is invalid\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><g fill=\"currentColor\" font-family=\"monospace\" font-size=\"26\" text-anchor=\"middle\"><text x=\"55\" y=\"94\">(</text><text x=\"95\" y=\"94\">[</text><text x=\"135\" y=\"94\">]</text><text x=\"175\" y=\"94\">)</text><text x=\"295\" y=\"94\">(</text><text x=\"335\" y=\"94\">[</text><text x=\"375\" y=\"94\">)</text><text x=\"415\" y=\"94\">]</text></g><g fill=\"none\" stroke-width=\"2\"><path d=\"M55 64V24H175V64M95 64V46H135V64\" stroke=\"var(--color-success)\"/><path d=\"M295 64V24H375V64M335 64V46H415V64\" stroke=\"var(--color-danger)\"/></g><g fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"14\" text-anchor=\"middle\"><text x=\"115\" y=\"132\">Nested: valid</text><text x=\"355\" y=\"132\">Crossing: invalid</text></g></svg>",
+      "caption": "Each closing bracket must match the most recent opening bracket that is still unmatched."
+    }
+  ]
 }

@@ -6,7 +6,8 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Hash Table",
+    "Sliding Window"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-window-substring/",
@@ -27,13 +28,63 @@
         "aa"
       ],
       "expected": ""
+    },
+    {
+      "args": [
+        "a",
+        "a"
+      ],
+      "expected": "a"
+    },
+    {
+      "args": [
+        "a",
+        "A"
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        "AAAB",
+        "AAB"
+      ],
+      "expected": "AAB"
+    },
+    {
+      "args": [
+        "zzBACxx",
+        "ABC"
+      ],
+      "expected": "BAC"
+    },
+    {
+      "args": [
+        "ABC",
+        "D"
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        "xyABC",
+        "CBA"
+      ],
+      "expected": "ABC"
+    },
+    {
+      "args": [
+        "ab",
+        "ab"
+      ],
+      "expected": "ab"
     }
   ],
   "functionName": "minWindow",
   "templateCode": "function minWindow(s, t) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= s.length, t.length <= 10^5",
-    "s and t consist of uppercase and lowercase English letters"
+    "s and t consist of uppercase and lowercase English letters",
+    "If a covering window exists, the minimum-length window is unique"
   ],
   "runner": {},
   "examples": [
@@ -46,6 +97,6 @@
       "output": "\"\""
     }
   ],
-  "inputFormat": "Implement minWindow(s, t). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minWindow(s, t). Receive two nonempty English-letter strings. Character comparisons are case-sensitive.",
+  "outputFormat": "Return the shortest contiguous substring of s containing every character of t with at least its required count, or \"\" if impossible."
 }

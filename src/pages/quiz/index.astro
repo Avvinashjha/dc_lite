@@ -1,4 +1,5 @@
 ---
+import PageIntro from '../../components/PageIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/quiz.scss';
 import QuizBrowser from '../../components/QuizBrowser';
@@ -44,14 +45,7 @@ const listJsonLd = {
   </Fragment>
 
   <div class="container quiz-page">
-    <section class="quiz-hero">
-      <p class="quiz-hero__eyebrow">Knowledge Arena</p>
-      <h1 class="quiz-hero__title">{pageMeta.title}</h1>
-      <p class="quiz-hero__desc">{pageMeta.description}</p>
-      <div class="quiz-hero__actions">
-        <a class="quiz-btn quiz-btn--primary" href="/quiz/create">Create a quiz</a>
-      </div>
-    </section>
+    <PageIntro title="Put your curiosity to the test." description="Explore a topic, check what you know, and discover what to learn next." eyebrow="SMALL QUESTIONS. NEW DISCOVERIES." icon="check" tone="lavender"><a class="quiz-btn quiz-btn--primary" style="margin-top:20px" href="/quiz/create">Create a quiz</a></PageIntro>
 
     <QuizBrowser client:load curated={curated} categories={categories} />
   </div>

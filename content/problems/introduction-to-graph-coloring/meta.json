@@ -1,13 +1,12 @@
 {
   "draft": false,
   "id": "problem-0194",
-  "title": "Introduction to Graph Coloring",
+  "title": "Graph Coloring with M Colors",
   "difficulty": "Medium",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "Backtracking"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Introduction%20to%20Graph%20Coloring",
@@ -67,6 +66,88 @@
         2
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ],
+        1
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        1
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        1
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        2
+      ],
+      "expected": true
     }
   ],
   "functionName": "introductionToGraphColoring",
@@ -74,13 +155,14 @@
   "constraints": [
     "1 <= V <= 50",
     "1 <= m <= V",
-    "graph is a symmetric V × V 0/1 adjacency matrix with zero diagonal."
+    "graph is a symmetric V \u00d7 V 0/1 adjacency matrix with zero diagonal."
   ],
   "runner": {},
   "examples": [
     {
       "input": "graph = [[0,1,1,1],[1,0,1,0],[1,1,0,1],[1,0,1,0]]\nm = 3",
-      "output": "true"
+      "output": "true",
+      "explanation": "One valid assignment to vertices 0\u20133 is [1,2,3,2]. Vertices 1 and 3 may share a color because they are not adjacent."
     },
     {
       "input": "graph = [[0,1,1],[1,0,1],[1,1,0]]\nm = 2",
@@ -89,6 +171,6 @@
   ],
   "sampleInput": "graph = [[0,1,1,1],[1,0,1,0],[1,1,0,1],[1,0,1,0]]\nm = 3",
   "sampleOutput": "true",
-  "inputFormat": "Implement introductionToGraphColoring(graph, m). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "graph is a symmetric 0/1 adjacency matrix for a loop-free undirected graph. graph[u][v] = 1 means u and v share an edge; m is the available color count.",
+  "outputFormat": "Return true if every vertex can be colored using at most m colors with different colors at each edge\u2019s endpoints; otherwise return false."
 }

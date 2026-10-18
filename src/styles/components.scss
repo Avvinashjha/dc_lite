@@ -16,7 +16,7 @@
 
 @mixin button-primary {
   background: var(--color-primary);
-  color: white;
+  color: var(--color-on-primary);
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--radius-md);
   border: none;
@@ -241,7 +241,7 @@
   
   &:hover {
     background: var(--color-primary);
-    color: white;
+    color: var(--color-on-primary);
     text-decoration: none;
   }
 }
@@ -252,11 +252,11 @@
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  color: white;
+  color: var(--color-on-primary);
   font-size: 0.9rem;
 
   &:hover {
-    color: white;
+    color: var(--color-on-primary);
     text-decoration: none;
   }
   
@@ -480,7 +480,7 @@
       
       &:hover {
         background: var(--color-primary);
-        color: white;
+        color: var(--color-on-primary);
         text-decoration: none;
       }
       
@@ -588,7 +588,7 @@
   height: 36px;
   border-radius: 50%;
   background-color: var(--color-primary, #2563eb);
-  color: #fff;
+  color: var(--color-on-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -816,7 +816,7 @@
     &:focus {
       outline: none;
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent);
     }
   }
 }

@@ -5,8 +5,7 @@
   "difficulty": "Hard",
   "topic": "String",
   "topics": [
-    "String",
-    "Hash Table"
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/valid-number/",
@@ -29,6 +28,114 @@
     {
       "args": [
         ".1"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "4."
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "-.9"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "+6e-1"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "46.e3"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "0089"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "1e999"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "."
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "+"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "e3"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "1e"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "1e+"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "1e2e3"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "--6"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "1.2.3"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "Infinity"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "NaN"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "0x10"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "6E+2"
       ],
       "expected": true
     }
@@ -55,5 +162,5 @@
     }
   ],
   "inputFormat": "Implement isNumber(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if the entire string matches the numeric syntax in the statement; otherwise return false."
 }

@@ -22,18 +22,45 @@
         "82/"
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        "23-2/"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "73-"
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "7"
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        "93-2/"
+      ],
+      "expected": 3
     }
   ],
   "functionName": "evaluatePostfix",
   "templateCode": "function evaluatePostfix(exp) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= length of expression <= 100"
+    "1 <= length of expression <= 100",
+    "The expression is valid and never divides by zero.",
+    "Every intermediate result and the final answer fit in a signed 32-bit integer."
   ],
   "runner": {},
   "examples": [
     {
       "input": "exp = \"231*+9-\"",
-      "output": "-4"
+      "output": "-4",
+      "explanation": "The expression is 2 + (3 \u00d7 1) - 9 = -4."
     },
     {
       "input": "exp = \"82/\"",
@@ -42,6 +69,6 @@
   ],
   "sampleInput": "exp = \"231*+9-\"",
   "sampleOutput": "-4",
-  "inputFormat": "Implement evaluatePostfix(exp). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "exp is a valid postfix string containing only single digits 0\u20139 and the operators +, -, *, /, without spaces.",
+  "outputFormat": "Return the integer result, truncating each division toward zero."
 }

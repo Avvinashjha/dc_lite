@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0105",
-  "title": "Rearrange a given linked list in-place",
+  "title": "Reorder a Linked List",
   "difficulty": "Medium",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Two Pointers"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Rearrange%20a%20given%20linked%20list%20in-place",
@@ -38,6 +39,104 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        3,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        4,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": [
+        1,
+        6,
+        2,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          1,
+          4,
+          1,
+          3,
+          2
+        ]
+      ],
+      "expected": [
+        5,
+        2,
+        1,
+        3,
+        4,
+        1
+      ]
     }
   ],
   "functionName": "rearrange",
@@ -50,7 +149,7 @@
     "argTypes": [
       "list"
     ],
-    "outputType": "list",
+    "outputType": "reorderedList",
     "resultArg": 0
   },
   "examples": [
@@ -66,5 +165,5 @@
   "sampleInput": "head = [1,2,3,4,5]",
   "sampleOutput": "[1,5,2,4,3]",
   "inputFormat": "Implement rearrange(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Rewire the original list in place. The runner inspects the original head after the call and ignores the return value; it displays the resulting node values."
 }

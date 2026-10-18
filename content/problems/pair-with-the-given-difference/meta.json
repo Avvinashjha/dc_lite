@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0068",
-  "title": "Pair with the given difference",
+  "title": "Pair with a Given Difference",
   "difficulty": "Easy",
   "topic": "Sorting&Searching",
   "topics": [
-    "Sorting&Searching"
+    "Array",
+    "Hash Table"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Pair%20with%20the%20given%20difference",
@@ -45,6 +46,76 @@
         0
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        0
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          9,
+          4
+        ],
+        5
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          4,
+          9
+        ],
+        5
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          100000
+        ],
+        99999
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          100000
+        ],
+        100000
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          2,
+          5,
+          8,
+          11
+        ],
+        4
+      ],
+      "expected": false
     }
   ],
   "functionName": "findPair",
@@ -72,5 +143,5 @@
   "sampleInput": "arr = [5,20,3,2,50,80]\nn = 78",
   "sampleOutput": "true",
   "inputFormat": "Implement findPair(arr, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if two distinct indices have an absolute value difference of n; otherwise return false."
 }

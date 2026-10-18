@@ -49,12 +49,129 @@
         ]
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "shortestBridge",
   "templateCode": "function shortestBridge(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "2 <= n <= 100",
+    "grid is n \u00d7 n, with 2 <= n <= 100",
     "grid[i][j] is 0 or 1",
     "Exactly two islands"
   ],
@@ -72,5 +189,12 @@
   "sampleInput": "grid = [[0,1],[1,0]]",
   "sampleOutput": "1",
   "inputFormat": "Implement shortestBridge(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the minimum number of water cells (0s) to flip to connect the two islands using horizontal or vertical adjacency.",
+  "visuals": [
+    {
+      "title": "A bridge needs three water cells",
+      "caption": "For opposite corners of a 3 \u00d7 3 grid, one shortest route flips the three outlined water cells. The two existing land cells are not counted.",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"Three by three grid with land in opposite corners and three water cells forming a connecting path\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\".25\"><path d=\"M90 20H270V200H90Z M150 20V200 M210 20V200 M90 80H270 M90 140H270\"/></g><g fill=\"currentColor\" opacity=\".14\"><rect x=\"94\" y=\"24\" width=\"52\" height=\"52\" rx=\"6\"/><rect x=\"214\" y=\"144\" width=\"52\" height=\"52\" rx=\"6\"/></g><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-dasharray=\"4 3\"><rect x=\"154\" y=\"24\" width=\"52\" height=\"52\" rx=\"6\"/><rect x=\"214\" y=\"24\" width=\"52\" height=\"52\" rx=\"6\"/><rect x=\"214\" y=\"84\" width=\"52\" height=\"52\" rx=\"6\"/></g><g fill=\"currentColor\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"18\"><text x=\"120\" y=\"56\">1</text><text x=\"180\" y=\"56\">0</text><text x=\"240\" y=\"56\">0</text><text x=\"120\" y=\"116\">0</text><text x=\"180\" y=\"116\">0</text><text x=\"240\" y=\"116\">0</text><text x=\"120\" y=\"176\">0</text><text x=\"180\" y=\"176\">0</text><text x=\"240\" y=\"176\">1</text></g></svg>"
+    }
+  ]
 }

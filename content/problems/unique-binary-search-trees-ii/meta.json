@@ -6,8 +6,8 @@
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "Binary Search Tree",
+    "Backtracking"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/unique-binary-search-trees-ii/",
@@ -38,6 +38,163 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        3
+      ],
+      "expected": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ],
+        [
+          1,
+          null,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          3,
+          1,
+          null,
+          null,
+          2
+        ],
+        [
+          3,
+          2,
+          null,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3,
+          null,
+          4
+        ],
+        [
+          1,
+          null,
+          2,
+          null,
+          4,
+          3
+        ],
+        [
+          1,
+          null,
+          3,
+          2,
+          4
+        ],
+        [
+          1,
+          null,
+          4,
+          2,
+          null,
+          null,
+          3
+        ],
+        [
+          1,
+          null,
+          4,
+          3,
+          null,
+          2
+        ],
+        [
+          2,
+          1,
+          3,
+          null,
+          null,
+          null,
+          4
+        ],
+        [
+          2,
+          1,
+          4,
+          null,
+          null,
+          3
+        ],
+        [
+          3,
+          1,
+          4,
+          null,
+          2
+        ],
+        [
+          3,
+          2,
+          4,
+          1
+        ],
+        [
+          4,
+          1,
+          null,
+          null,
+          2,
+          null,
+          3
+        ],
+        [
+          4,
+          1,
+          null,
+          null,
+          3,
+          2
+        ],
+        [
+          4,
+          2,
+          null,
+          1,
+          3
+        ],
+        [
+          4,
+          3,
+          null,
+          1,
+          null,
+          null,
+          2
+        ],
+        [
+          4,
+          3,
+          null,
+          2,
+          null,
+          1
+        ]
+      ]
     }
   ],
   "functionName": "generateTrees",
@@ -62,5 +219,5 @@
   "sampleInput": "n = 2",
   "sampleOutput": "[[1,null,2],[2,1]]",
   "inputFormat": "Implement generateTrees(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nEach returned tree is displayed as a level-order array.\nThe order of the outer result array does not matter."
+  "outputFormat": "Return an array of tree roots with val, left, and right properties. Use null for missing children. The runner displays each tree as a level-order array; tree order is ignored, but duplicate or missing trees are incorrect."
 }

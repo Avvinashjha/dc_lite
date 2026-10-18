@@ -4,50 +4,46 @@ import CodeEditor from "../../components/CodeEditor.astro";
 ---
 
 <ToolLayout
-  title="Code Formatter & Preview"
-  description="Format and minify code in your browser with side-by-side CodeMirror preview and syntax highlighting."
-  toolName="Code Formatter & Preview"
-  keywords="code formatter, javascript formatter, json formatter, code beautifier, code preview, codemirror"
+  title="JavaScript Formatter"
+  description="Format JavaScript in your browser with a reliable Prettier-based formatter, configurable indentation, and side-by-side syntax-highlighted preview."
+  toolName="JavaScript Formatter"
+  keywords="javascript formatter, js formatter, js beautifier, format javascript online, prettier javascript formatter"
+  features={['Format JavaScript with Prettier', 'Choose 2 or 4 spaces', 'Syntax-highlighted preview', 'Private in-browser processing']}
+  workbench={true}
   faqs={[
-    { q: "What languages can it format?", a: "It formats common web languages like JavaScript and JSON and shows a side-by-side preview using CodeMirror." },
+    { q: "What languages can it format?", a: "This workspace is focused on JavaScript. For JSON, use the JSON Toolkit, which also validates, converts, and compares data." },
     { q: "Does it send my code to a server?", a: "No. Formatting and preview run completely client-side in your browser." },
-    { q: "Can I minify as well as format?", a: "Yes, you can both beautify and minify your code." },
+    { q: "Will formatting change how my JavaScript runs?", a: "No. The formatter only rewrites whitespace and layout. It reports syntax errors rather than guessing how to repair broken code." },
   ]}
 >
-  <div class="tool-row">
-    <div class="tool-row__field">
-      <label class="tool-panel__label" for="language">Language</label>
-      <select id="language" class="tool-input">
-        <option value="javascript">JavaScript</option>
-        <option value="json">JSON</option>
-        <option value="text">Plain Text</option>
-      </select>
-    </div>
-    <div class="tool-row__field">
+  <div class="formatter-toolbar">
+    <div class="formatter-toolbar__field">
       <label class="tool-panel__label" for="indent-size">Indent</label>
-      <select id="indent-size" class="tool-input">
-        <option value="2">2 spaces</option>
-        <option value="4">4 spaces</option>
-      </select>
+      <input id="indent-size" type="hidden" value="2" />
+      <details class="select-menu" id="indent-menu">
+        <summary class="select-menu__trigger"><span id="indent-label">2 spaces</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg></summary>
+        <div class="select-menu__options" role="menu" aria-label="Indent size">
+          <button type="button" data-indent="2" role="menuitemradio" aria-checked="true">2 spaces</button>
+          <button type="button" data-indent="4" role="menuitemradio" aria-checked="false">4 spaces</button>
+        </div>
+      </details>
     </div>
-  </div>
-
-  <div class="tool-actions">
-    <button id="btn-format" class="tool-btn tool-btn--primary">Format</button>
-    <button id="btn-minify" class="tool-btn">Minify</button>
-    <button id="btn-copy" class="tool-btn">Copy Output</button>
-    <button id="btn-sample" class="tool-btn">Load Sample</button>
-    <button id="btn-clear" class="tool-btn">Clear</button>
+    <div class="formatter-toolbar__actions">
+      <button id="btn-format" class="tool-btn tool-btn--primary">Format</button>
+      <button id="btn-copy" class="tool-btn">Copy</button>
+      <button id="btn-sample" class="tool-btn">Sample</button>
+      <button id="btn-clear" class="tool-btn">Clear</button>
+    </div>
   </div>
 
   <div class="tool-panels">
     <div class="tool-panel">
       <span class="tool-panel__label">Input</span>
-      <CodeEditor id="code-formatter-input" minHeight={320} />
+      <CodeEditor id="code-formatter-input" minHeight={320} fill={true} />
     </div>
     <div class="tool-panel">
       <span class="tool-panel__label">Preview</span>
-      <CodeEditor id="code-formatter-output" minHeight={320} />
+      <CodeEditor id="code-formatter-output" minHeight={320} fill={true} />
     </div>
   </div>
 
@@ -56,52 +52,47 @@ import CodeEditor from "../../components/CodeEditor.astro";
   <section slot="about" class="tool-about">
     <h2>Why Format Code?</h2>
     <p>
-      Consistent formatting makes code easier to read, review, and maintain. But different projects use different
-      styles — tabs vs. spaces, semicolons vs. no semicolons, single quotes vs. double quotes. This tool
-      lets you format (or minify) code in multiple languages with syntax-highlighted preview, all in the browser.
+      Consistent formatting makes JavaScript easier to read, review, and maintain. This workspace uses Prettier’s
+      JavaScript parser in the browser, with a syntax-highlighted preview before you copy the result.
     </p>
 
-    <h3>Supported Languages</h3>
+    <h3>Focused on JavaScript</h3>
     <p>
-      JavaScript, TypeScript, JSON, HTML, CSS, and more. Select a language, paste your code, and hit Format.
-      The side-by-side CodeMirror preview shows the result with proper syntax highlighting so you can
-      verify it looks right before copying.
+      Paste JavaScript, choose two or four spaces, and hit Format. The side-by-side CodeMirror preview shows the
+      result with proper syntax highlighting so you can verify it looks right before copying. For API payloads or
+      config data, use the <a href="/tools/json-formatter">JSON Toolkit</a> instead.
     </p>
 
-    <h3>Minification</h3>
+    <h3>Formatting, not unsafe compression</h3>
     <p>
-      Need to shrink your code for production? The minify option strips whitespace and shortens where possible.
-      It's not a full bundler — for that you'd use Webpack or esbuild — but it's handy for quick one-off
-      minification of a config file or snippet.
+      This workspace deliberately does not pretend to be a production minifier. Minifying JavaScript safely requires
+      a full parser and build-aware optimisation; use your project’s bundler for that. Here, the goal is reliable,
+      readable formatting.
     </p>
   </section>
 </ToolLayout>
 
 <script>
   import { createCodeEditor } from "../../utils/codeEditor";
+  import { formatJavaScript } from "../../utils/formatJavaScript";
 
-  const sampleByLanguage = {
-    javascript: [
+  const sampleCode = [
       "const users=[{name:'Ada',score:90},{name:'Linus',score:84}];",
       "function topScorer(items){return items.sort((a,b)=>b.score-a.score)[0]}",
       "console.log(topScorer(users));",
-    ].join("\n"),
-    json: '{"name":"DailyCoder","features":["tools","courses","blog"],"active":true,"meta":{"users":1240,"rating":4.9}}',
-    text: "Paste any text and format/minify for supported languages.",
-  };
+    ].join("\n");
 
   const statusEl = document.getElementById("status");
-  const languageEl = document.getElementById("language");
   const indentEl = document.getElementById("indent-size");
   const formatBtn = document.getElementById("btn-format");
-  const minifyBtn = document.getElementById("btn-minify");
   const copyBtn = document.getElementById("btn-copy");
   const sampleBtn = document.getElementById("btn-sample");
   const clearBtn = document.getElementById("btn-clear");
+  const indentLabel = document.getElementById("indent-label");
 
   const inputEditor = createCodeEditor({
     rootId: "code-formatter-input",
-    doc: sampleByLanguage.javascript,
+    doc: sampleCode,
     language: "javascript",
     lineWrapping: true,
   });
@@ -119,183 +110,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
     statusEl.textContent = message;
   }
 
-  function formatJson(value, indent) {
-    return JSON.stringify(JSON.parse(value), null, indent);
-  }
-
-  function minifyJson(value) {
-    return JSON.stringify(JSON.parse(value));
-  }
-
-  function formatJavaScript(code, indentSize) {
-    const indentUnit = " ".repeat(indentSize);
-    let out = "";
-    let indentLevel = 0;
-    let inSingle = false;
-    let inDouble = false;
-    let inTemplate = false;
-    let inLineComment = false;
-    let inBlockComment = false;
-    let escape = false;
-
-    function appendIndent() {
-      out += indentUnit.repeat(Math.max(indentLevel, 0));
-    }
-
-    function ensureNewLine() {
-      if (!out.endsWith("\n")) out += "\n";
-    }
-
-    function trimLineEnd() {
-      out = out.replace(/[ \t]+$/g, "");
-    }
-
-    for (let i = 0; i < code.length; i += 1) {
-      const ch = code[i];
-      const next = code[i + 1] || "";
-
-      if (inLineComment) {
-        out += ch;
-        if (ch === "\n") {
-          inLineComment = false;
-          appendIndent();
-        }
-        continue;
-      }
-
-      if (inBlockComment) {
-        out += ch;
-        if (ch === "*" && next === "/") {
-          out += "/";
-          i += 1;
-          inBlockComment = false;
-        }
-        continue;
-      }
-
-      if (inSingle || inDouble || inTemplate) {
-        out += ch;
-        if (escape) {
-          escape = false;
-        } else if (ch === "\\") {
-          escape = true;
-        } else if (inSingle && ch === "'") {
-          inSingle = false;
-        } else if (inDouble && ch === '"') {
-          inDouble = false;
-        } else if (inTemplate && ch === "`") {
-          inTemplate = false;
-        }
-        continue;
-      }
-
-      if (ch === "/" && next === "/") {
-        out += "//";
-        i += 1;
-        inLineComment = true;
-        continue;
-      }
-
-      if (ch === "/" && next === "*") {
-        out += "/*";
-        i += 1;
-        inBlockComment = true;
-        continue;
-      }
-
-      if (ch === "'") {
-        inSingle = true;
-        out += ch;
-        continue;
-      }
-
-      if (ch === '"') {
-        inDouble = true;
-        out += ch;
-        continue;
-      }
-
-      if (ch === "`") {
-        inTemplate = true;
-        out += ch;
-        continue;
-      }
-
-      if (/\s/.test(ch)) {
-        if (!out.endsWith(" ") && !out.endsWith("\n")) {
-          out += " ";
-        }
-        continue;
-      }
-
-      if (ch === "{") {
-        trimLineEnd();
-        if (!out.endsWith(" ") && !out.endsWith("\n")) out += " ";
-        out += "{";
-        ensureNewLine();
-        indentLevel += 1;
-        appendIndent();
-        continue;
-      }
-
-      if (ch === "}") {
-        indentLevel -= 1;
-        trimLineEnd();
-        ensureNewLine();
-        appendIndent();
-        out += "}";
-        if (next && next !== ";" && next !== "," && next !== ")" && next !== "]") {
-          ensureNewLine();
-          appendIndent();
-        }
-        continue;
-      }
-
-      if (ch === ";") {
-        out += ";";
-        ensureNewLine();
-        appendIndent();
-        continue;
-      }
-
-      if (ch === ",") {
-        out += ", ";
-        continue;
-      }
-
-      out += ch;
-    }
-
-    return out
-      .split("\n")
-      .map((line) => line.replace(/[ \t]+$/g, ""))
-      .join("\n")
-      .replace(/\n{3,}/g, "\n\n")
-      .trim();
-  }
-
-  function minifyJavaScript(code) {
-    return code
-      .replace(/\/\*[\s\S]*?\*\//g, "")
-      .replace(/\/\/[^\n\r]*/g, "")
-      .replace(/\s+/g, " ")
-      .replace(/\s*([{}()[\];,:=+\-*/<>!?&|])\s*/g, "$1")
-      .trim();
-  }
-
-  function getLanguage() {
-    return languageEl.value;
-  }
-
-  function updateLanguage() {
-    const language = getLanguage();
-    inputEditor.setLanguage(language);
-    outputEditor.setLanguage(language);
-    setStatus("Language changed to " + language + ".", "success");
-  }
-
-  function runFormatter(mode) {
-    const language = getLanguage();
+  async function runFormatter() {
     const indentSize = Number(indentEl.value);
     const source = inputEditor.getValue().trim();
 
@@ -306,34 +121,18 @@ import CodeEditor from "../../components/CodeEditor.astro";
     }
 
     try {
-      let result = source;
-
-      if (language === "json") {
-        result = mode === "minify" ? minifyJson(source) : formatJson(source, indentSize);
-      } else if (language === "javascript") {
-        result = mode === "minify" ? minifyJavaScript(source) : formatJavaScript(source, indentSize);
-      } else if (language === "text") {
-        result = mode === "minify" ? source.replace(/\s+/g, " ").trim() : source;
-      }
+      const result = await formatJavaScript(source, { tabWidth: indentSize });
 
       outputEditor.setValue(result);
-      setStatus((mode === "minify" ? "Minified" : "Formatted") + " successfully.", "success");
+      setStatus("Formatted successfully.", "success");
     } catch (error) {
       outputEditor.setValue("");
       setStatus("Unable to process input: " + (error && error.message ? error.message : String(error)), "error");
     }
   }
 
-  languageEl.addEventListener("change", function () {
-    updateLanguage();
-  });
-
   formatBtn.addEventListener("click", function () {
-    runFormatter("format");
-  });
-
-  minifyBtn.addEventListener("click", function () {
-    runFormatter("minify");
+    runFormatter();
   });
 
   copyBtn.addEventListener("click", function () {
@@ -347,8 +146,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
   });
 
   sampleBtn.addEventListener("click", function () {
-    const language = getLanguage();
-    inputEditor.setValue(sampleByLanguage[language] || "");
+    inputEditor.setValue(sampleCode);
     outputEditor.setValue("");
     setStatus("Sample loaded.", "success");
   });
@@ -358,18 +156,80 @@ import CodeEditor from "../../components/CodeEditor.astro";
     outputEditor.setValue("");
     setStatus("Cleared.", "success");
   });
+
+  document.querySelectorAll("[data-indent]").forEach(function (option) {
+    option.addEventListener("click", function () {
+      indentEl.value = option.dataset.indent;
+      indentLabel.textContent = option.textContent;
+      document.querySelectorAll("[data-indent]").forEach(function (item) {
+        item.setAttribute("aria-checked", String(item === option));
+      });
+      document.getElementById("indent-menu").removeAttribute("open");
+    });
+  });
 </script>
 
 <style>
-  .tool-row {
+  .formatter-toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
   }
-
-  .tool-row__field {
-    flex: 1;
-    min-width: 220px;
+  .formatter-toolbar__field { display: flex; align-items: center; gap: 0.35rem; }
+  .select-menu { position: relative; }
+  .select-menu > summary { list-style: none; cursor: pointer; }
+  .select-menu > summary::-webkit-details-marker { display: none; }
+  .select-menu__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 112px;
+    min-height: 32px;
+    gap: 0.5rem;
+    padding: 0.35rem 0.45rem 0.35rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .select-menu__trigger svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; transition: transform 140ms ease; }
+  .select-menu[open] .select-menu__trigger { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent); }
+  .select-menu[open] .select-menu__trigger svg { transform: rotate(180deg); }
+  .select-menu__options {
+    position: absolute;
+    z-index: 12;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    display: grid;
+    width: 150px;
+    padding: 0.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+  .select-menu__options button {
+    border: 0;
+    border-radius: 0.35rem;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0.45rem 0.55rem;
+    font: inherit;
+    font-size: 0.78rem;
+    text-align: left;
+  }
+  .select-menu__options button:hover,
+  .select-menu__options button:focus-visible { background: var(--color-code-bg); color: var(--color-primary); outline: none; }
+  .formatter-toolbar__actions { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .formatter-toolbar__actions .tool-btn { min-height: 32px; padding: 0.35rem 0.65rem; }
+  @media (max-width: 620px) {
+    .formatter-toolbar { align-items: stretch; }
+    .formatter-toolbar__field { justify-content: space-between; }
   }
 </style>

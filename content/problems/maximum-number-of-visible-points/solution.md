@@ -2,6 +2,8 @@
 
 Convert each point to its angle relative to the location using `atan2`. Sort the angles, then duplicate the array with +360° to handle the wraparound. Slide a window of size `angle` degrees across the sorted list to find the maximum count. Add points that sit exactly on the location separately since they're always visible.
 
+Keep at most `n` entries in the window, where `n` is the number of points away from the observer, so the duplicated angle list cannot count a point twice. This also handles a 360-degree view correctly. The small tolerance in the angle comparison absorbs floating-point rounding at inclusive boundaries.
+
 ```javascript
 function visiblePoints(points, angle, location) {
   const [lx, ly] = location;

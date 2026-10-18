@@ -6,7 +6,7 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/",
@@ -23,6 +23,48 @@
         "zzazz"
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "ab"
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "abc"
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "aaaa"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "mbadm"
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "race"
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        "aab"
+      ],
+      "expected": 1
     }
   ],
   "functionName": "minInsertions",
@@ -44,6 +86,6 @@
   ],
   "sampleInput": "s = \"leetcode\"",
   "sampleOutput": "5",
-  "inputFormat": "Implement minInsertions(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minInsertions(s). Receive a nonempty string of lowercase English letters.",
+  "outputFormat": "Return the minimum number of single-character insertions needed to form a palindrome."
 }

@@ -56,13 +56,80 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            1
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
     }
   ],
   "functionName": "eventualSafeNodes",
   "templateCode": "function eventualSafeNodes(graph) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= n <= 10^4",
-    "0 <= graph[i].length <= n"
+    "1 <= n == graph.length <= 10^4",
+    "0 <= graph[u].length <= n",
+    "Each neighbor is an integer in [0, n - 1]; adjacency lists contain no duplicates.",
+    "Self-loops and disconnected components are allowed."
   ],
   "runner": {},
   "examples": [
@@ -72,11 +139,12 @@
     },
     {
       "input": "graph = [[0],[]]",
-      "output": "[1]"
+      "output": "[1]",
+      "explanation": "Vertex 0 can stay in its self-loop forever. Vertex 1 is terminal and therefore safe."
     }
   ],
   "sampleInput": "graph = [[1,2],[2,3],[5],[0],[5],[],[]]",
   "sampleOutput": "[2,4,5,6]",
-  "inputFormat": "Implement eventualSafeNodes(graph). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "graph is a directed adjacency list: vertices are 0 through graph.length - 1, and graph[u] lists the destinations of edges from u.",
+  "outputFormat": "Return all safe vertex indices in ascending order."
 }

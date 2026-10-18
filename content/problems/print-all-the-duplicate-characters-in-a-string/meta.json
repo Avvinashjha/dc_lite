@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0030",
-  "title": "Print all the duplicate characters in a string",
+  "title": "Duplicate Character Counts",
   "difficulty": "Easy",
   "topic": "String",
   "topics": [
@@ -29,6 +29,74 @@
         ""
       ],
       "expected": {}
+    },
+    {
+      "args": [
+        "abc"
+      ],
+      "expected": {}
+    },
+    {
+      "args": [
+        "aAa! "
+      ],
+      "expected": {
+        "a": 2
+      }
+    },
+    {
+      "args": [
+        "aaa"
+      ],
+      "expected": {
+        "a": 3
+      }
+    },
+    {
+      "args": [
+        "AaAa"
+      ],
+      "expected": {
+        "A": 2,
+        "a": 2
+      }
+    },
+    {
+      "args": [
+        "  !!11"
+      ],
+      "expected": {
+        " ": 2,
+        "!": 2,
+        "1": 2
+      }
+    },
+    {
+      "args": [
+        "012345678900"
+      ],
+      "expected": {
+        "0": 3
+      }
+    },
+    {
+      "args": [
+        "a b a b"
+      ],
+      "expected": {
+        "a": 2,
+        " ": 3,
+        "b": 2
+      }
+    },
+    {
+      "args": [
+        "~!~!"
+      ],
+      "expected": {
+        "~": 2,
+        "!": 2
+      }
     }
   ],
   "functionName": "findDuplicates",
@@ -49,5 +117,5 @@
     }
   ],
   "inputFormat": "Implement findDuplicates(str). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return an object mapping each character occurring at least twice to its total occurrence count. Return {} if none repeat; property order does not matter."
 }

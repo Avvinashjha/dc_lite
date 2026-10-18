@@ -1,1 +1,3 @@
-Given the `root` of a binary tree, flip the whole tree into its mirror image and return the new root. "Inverting" means that at every single node, its left and right children trade places.
+Return the mirror image of the binary tree rooted at `root`: swap the left and right children at **every** node, preserving all node values. You may modify the tree in place.
+
+Return the resulting root node. An empty input returns `null`; a single-node tree remains unchanged.

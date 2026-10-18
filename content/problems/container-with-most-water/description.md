@@ -1,1 +1,3 @@
-You're given an integer array `height` with `n` elements. Picture `n` vertical lines, where the `ith` line runs from `(i, 0)` up to `(i, height[i])`. Choose two of these lines so that, together with the x-axis between them, they form a container holding as much water as possible, and return that maximum volume.
+You're given an integer array `height` with `n` elements. Picture `n` vertical lines, where the `ith` line runs from `(i, 0)` up to `(i, height[i])`. Choose two of these lines so that, together with the x-axis between them, they form a container holding as much water as possible, and return that maximum area.
+
+The container cannot be tilted. Lines between the chosen sides do not reduce the available area.

@@ -1,12 +1,12 @@
 {
   "draft": false,
   "id": "problem-0184",
-  "title": "Rat in a Maze Problem - I | Practice",
-  "difficulty": "Easy",
+  "title": "All Paths Through a Maze",
+  "difficulty": "Medium",
   "topic": "Graph",
   "topics": [
-    "Graph",
-    "BFS",
+    "Backtracking",
+    "Matrix",
     "DFS"
   ],
   "platform": "GeeksforGeeks",
@@ -56,6 +56,140 @@
         ]
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        ""
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        "RD",
+        "DR"
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        "RRDD",
+        "RRDLDR",
+        "RRDLLDRR",
+        "RDRD",
+        "RDDR",
+        "RDLDRR",
+        "DRRD",
+        "DRDR",
+        "DRURDD",
+        "DDRR",
+        "DDRURD",
+        "DDRUURDD"
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        "DRDR"
+      ]
     }
   ],
   "functionName": "findPath",
@@ -81,5 +215,5 @@
   "sampleInput": "maze = [[1,0,0,0],[1,1,0,1],[1,1,0,0],[0,1,1,1]]",
   "sampleOutput": "[\"DDRDRR\",\"DRDDRR\"]",
   "inputFormat": "Implement findPath(maze). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "outputFormat": "Return each valid route once as a string of D, L, R, and U moves. Outer order does not matter. Return [] for no route and [\"\"] for an open 1\u00d71 maze."
 }

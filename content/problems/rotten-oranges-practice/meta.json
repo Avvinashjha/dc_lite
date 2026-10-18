@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0123",
-  "title": "Rotten Oranges | Practice",
+  "title": "Rotting Oranges",
   "difficulty": "Medium",
-  "topic": "Stack&Queue",
+  "topic": "Matrix",
   "topics": [
-    "Stack&Queue"
+    "Matrix",
+    "BFS",
+    "Queue"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Rotten%20Oranges%20%7C%20Practice",
@@ -42,12 +44,134 @@
         ]
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            2
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            2
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            1,
+            1,
+            1,
+            2
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          [
+            2
+          ],
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": -1
     }
   ],
   "functionName": "orangesRotting",
   "templateCode": "function orangesRotting(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= m, n <= 500",
+    "1 <= grid.length, grid[0].length <= 500; the grid is rectangular.",
     "0 <= grid[i][j] <= 2"
   ],
   "runner": {},
@@ -64,5 +188,5 @@
   "sampleInput": "grid = [[2,1,1],[1,1,0],[0,1,1]]",
   "sampleOutput": "4",
   "inputFormat": "Implement orangesRotting(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the minutes until all fresh oranges rot, 0 if none are initially fresh, or -1 if any remain unreachable."
 }

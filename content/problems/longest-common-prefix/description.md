@@ -1,3 +1,5 @@
-You're given an array of strings. Work out the longest prefix that every single one of them starts with. If the strings don't share any starting characters at all, return an empty string `""`.
+Given a nonempty array of strings `strs`, return the longest string that is a **prefix of every input string**. A prefix starts at index `0`; matching characters elsewhere do not count.
 
-**Edge cases:** Array with a single string returns that string. Empty array returns `""`. One of the strings is empty.
+Return `""` if there is no shared starting character or any input string is empty. With one input string, return that entire string.
+
+For `"flower"`, `"flow"`, and `"flight"`, the shared prefix is `"fl"`. The next characters differ, so no longer prefix is possible.

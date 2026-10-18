@@ -6,3 +6,5 @@ Conway's Game of Life is played on an `m x n` board where each cell is either al
 - A dead cell with exactly three live neighbors comes alive (reproduction).
 
 Given the board's current state, compute its next state in place. Every transition must use the original board state.
+
+The board is finite: positions outside it are dead, and edges do not wrap around. Compute exactly one generation.

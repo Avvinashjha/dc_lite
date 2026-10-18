@@ -6,7 +6,7 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Hash Table"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/find-all-duplicates-in-an-array/",
@@ -39,6 +39,42 @@
         ]
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": []
     }
   ],
   "functionName": "findDuplicates",
@@ -62,6 +98,6 @@
       "output": "[]"
     }
   ],
-  "inputFormat": "Implement findDuplicates(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "inputFormat": "nums contains n integers in [1, n], each appearing once or twice. You may modify nums.",
+  "outputFormat": "Return each value that appears twice exactly once, in any order. The output array does not count toward the O(1) extra-space limit."
 }

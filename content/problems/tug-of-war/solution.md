@@ -1,4 +1,4 @@
-Each element can belong to either subset. Use backtracking to explore all partitions of size `n/2` and track the minimum absolute difference between the two subset sums.
+Each element can belong to either subset. Use backtracking to explore all groups of size `floor(n/2)` and track the minimum absolute difference between the two subset sums.
 
 ```javascript
 function tugOfWar(arr) {
@@ -30,5 +30,5 @@ function tugOfWar(arr) {
 }
 ```
 
-**Time:** O(2^n)
+**Time:** O(n × 2^n) as a conservative bound including copies of improved subsets
 **Space:** O(n)

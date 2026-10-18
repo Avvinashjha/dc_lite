@@ -5,7 +5,9 @@
   "difficulty": "Medium",
   "topic": "Stack&Queue",
   "topics": [
-    "Stack&Queue"
+    "Stack&Queue",
+    "Iterator",
+    "Design"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/flatten-nested-list-iterator/",
@@ -50,6 +52,55 @@
         4,
         6
       ]
+    },
+    {
+      "args": [
+        [
+          [],
+          [
+            []
+          ],
+          []
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          [],
+          [
+            0,
+            [],
+            [
+              -1
+            ]
+          ],
+          [],
+          2
+        ]
+      ],
+      "expected": [
+        0,
+        -1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              [
+                5
+              ]
+            ]
+          ]
+        ]
+      ],
+      "expected": [
+        5
+      ]
     }
   ],
   "functionName": "NestedIterator",
@@ -73,6 +124,6 @@
   ],
   "sampleInput": "nestedList = [[1,1],2,[1,1]]",
   "sampleOutput": "[1,1,2,1,1]",
-  "inputFormat": "Implement NestedIterator(nestedList). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Implement hasNext() and next(). The editor displays the fully drained iterator as an array."
+  "inputFormat": "The constructor receives ordinary JavaScript arrays containing integers or nested arrays, not NestedInteger wrapper objects.",
+  "outputFormat": "hasNext() returns whether an unread integer remains, without consuming it. next() returns and consumes that integer. The runner drains the iterator and displays the integers as an array."
 }

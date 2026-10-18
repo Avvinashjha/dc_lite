@@ -1,0 +1,11 @@
+<script is:inline>
+  (() => {
+    let theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') theme = saved;
+      if (localStorage.getItem('readingMode') === 'true') document.documentElement.dataset.readingMode = 'true';
+    } catch { /* Theme still follows the system when storage is unavailable. */ }
+    document.documentElement.dataset.theme = theme;
+  })();
+</script>

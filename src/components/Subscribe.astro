@@ -17,6 +17,8 @@ const enabled = (config as any).newsletter?.enabled && scriptUrl && scriptUrl !=
         <input
           type="email"
           name="email"
+          aria-label="Email address"
+          autocomplete="email"
           placeholder="your@email.com"
           required
           class="subscribe__input"
@@ -108,7 +110,7 @@ const enabled = (config as any).newsletter?.enabled && scriptUrl && scriptUrl !=
   }
   .subscribe__input-group:focus-within {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent);
   }
   .subscribe__input {
     flex: 1;
@@ -135,10 +137,10 @@ const enabled = (config as any).newsletter?.enabled && scriptUrl && scriptUrl !=
     min-height: 1.25rem;
   }
   .subscribe__status--success {
-    color: #16a34a;
+    color: var(--color-success);
   }
   .subscribe__status--error {
-    color: #dc2626;
+    color: var(--color-danger);
   }
   @media (max-width: 480px) {
     .subscribe__input-group {

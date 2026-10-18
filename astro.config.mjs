@@ -54,7 +54,18 @@ function isCanonicalTaxonomyPath(page) {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://dailycoder.in',
+  // The on-demand problem formatter imports Prettier, which creates multiple
+  // worker chunks. ES modules are required for code-split workers in Vite.
+  vite: {
+    worker: { format: 'es' },
+  },
   redirects: {
+    // Focused workspaces replace overlapping single-purpose tools. Preserve any
+    // existing links while avoiding separate, thin pages for the same job.
+    '/tools/csv-json': '/tools/json-formatter',
+    '/tools/json-diff': '/tools/json-formatter#compare',
+    '/tools/color-converter': '/tools/color-picker',
+    '/tools/emi-calculator': '/tools',
     // Duplicate problem pages removed (exact dupes of the canonical slug, same
     // problem/example/solution — left over from a scraping bug).
     '/problems/number-of-islands-2': '/problems/number-of-islands',

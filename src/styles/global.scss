@@ -1,17 +1,40 @@
 // Variables
 :root {
-  // Colors
-  --color-primary: #2563eb;
-  --color-primary-dark: #1e40af;
-  --color-text: #1f2937;
-  --color-text-light: #6b7280;
-  --color-background: #ffffff;
-  --color-surface: #f9fafb;
-  --color-border: #e5e7eb;
-  --color-code-bg: #f3f4f6;
-  
+  // Shared surfaces, actions, and semantic colors.
+  color-scheme: light;
+  --color-primary: #315f45;
+  --color-primary-dark: #234833;
+  --color-on-primary: #ffffff;
+  --color-text: #293b31;
+  --color-text-light: #5f6c63;
+  --color-background: #f8f9f5;
+  --color-surface: #ffffff;
+  --color-border: #dfe5db;
+  --color-code-bg: #eef2e9;
+  --color-success: #2e6b43;
+  --color-warning: #855c1d;
+  --color-danger: #b13d46;
+  --color-info: #3d6785;
+  --color-purple: #73558f;
+  --color-focus: #956b27;
+  --site-header-height: 68px;
+  --dc-hero: #eaf0de;
+  --dc-hero-line: #d9e3cc;
+  --dc-panel: #f4f0e5;
+  --dc-panel-line: #e4ddcb;
+  --dc-on-action: var(--color-on-primary);
+  --dc-sage: #e7eedc; --dc-sage-ink: #476940;
+  --dc-peach: #f8e8d9; --dc-peach-ink: #87552f;
+  --dc-lavender: #eeebf7; --dc-lavender-ink: #70608f;
+  --dc-butter: #f6edce; --dc-butter-ink: #80651f;
+  --dc-sky: #e5edf3; --dc-sky-ink: #466b85;
+  --dc-rose: #f5e6e8; --dc-rose-ink: #8d5666;
+  --dc-paper: #fffdf5; --dc-paper-line: #dedfcd;
+  --dc-code-ink: #395441; --dc-code-comment: #66735f;
+  --dc-code-purple: #77618c; --dc-code-rust: #9a613e;
+
   // Typography
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-sans: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
   
   // Spacing
@@ -40,18 +63,39 @@
   --transition-slow: 350ms ease;
   
   // Container
-  --container-max-width: 1500px;
-  --content-max-width: 1500px;
+  --container-max-width: 1280px;
+  --content-max-width: 820px;
 }
 
-// Dark mode
+// Neutral charcoal surfaces keep sage an accent instead of tinting every panel.
 [data-theme="dark"] {
-  --color-text: #f9fafb;
-  --color-text-light: #d1d5db;
-  --color-background: #111827;
-  --color-surface: #1f2937;
-  --color-border: #374151;
-  --color-code-bg: #1f2937;
+  color-scheme: dark;
+  --color-primary: #b7cbb1;
+  --color-primary-dark: #d0dfca;
+  --color-on-primary: #19271e;
+  --color-text: #e6e9e3;
+  --color-text-light: #b3bcb5;
+  --color-background: #181b1a;
+  --color-surface: #222624;
+  --color-border: #3b423d;
+  --color-code-bg: #2b302d;
+  --color-success: #9dcea9;
+  --color-warning: #e2c181;
+  --color-danger: #f0a4a9;
+  --color-info: #a7c8df;
+  --color-purple: #cbb8e1;
+  --color-focus: #e3bf7b;
+  --dc-hero: #293129; --dc-hero-line: #414b3e;
+  --dc-panel: #2e2d26; --dc-panel-line: #49463a;
+  --dc-sage: #303c2e; --dc-sage-ink: #b8cfa9;
+  --dc-peach: #3c3028; --dc-peach-ink: #dfb89a;
+  --dc-lavender: #34303e; --dc-lavender-ink: #c9bce0;
+  --dc-butter: #3c3726; --dc-butter-ink: #dfc98e;
+  --dc-sky: #2b353e; --dc-sky-ink: #adc8db;
+  --dc-rose: #3d2e34; --dc-rose-ink: #dfb0bf;
+  --dc-paper: #242a25; --dc-paper-line: #465044;
+  --dc-code-ink: #d4e0cd; --dc-code-comment: #aebca6;
+  --dc-code-purple: #cfb9df; --dc-code-rust: #e0bc97;
 }
 
 // Reading mode
@@ -103,13 +147,14 @@ body {
 
 // Typography
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: -0.035em;
   line-height: 1.2;
   margin-bottom: var(--spacing-md);
   color: var(--color-text);
 }
 
-h1 { font-size: 2.5rem; }
+h1 { font-size: clamp(2rem, 4vw, 3rem); }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.75rem; }
 h4 { font-size: 1.5rem; }
@@ -210,13 +255,12 @@ img {
 
 // Utilities
 .container {
+  width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-xl);
-  
-  @media (max-width: 768px) {
-    padding: 0 var(--spacing-lg);
-  }
+  padding-inline: 16px;
+  @media (min-width: 640px) { padding-inline: 24px; }
+  @media (min-width: 1200px) { padding-inline: 32px; }
 }
 
 .content {
@@ -227,7 +271,7 @@ img {
 // Responsive
 @media (max-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 16px;
   }
   
   h1 { font-size: 2rem; }

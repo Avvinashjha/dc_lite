@@ -1,1 +1,5 @@
-Suppose you only have a reference to one particular node inside a singly linked list — not the list's head — and you need to remove that exact node from the list. It's guaranteed that the node you're given is not the last one in the list. Since you can't reach the preceding node, delete it by overwriting its value with the following node's value and then linking past that following node.
+Given only a reference to a non-tail node of a singly linked list, remove its position from the list’s **value sequence**. You cannot access the head or the preceding node.
+
+The resulting list must have one fewer node and preserve the order of all remaining values. Node values may be overwritten; you are not required to detach the exact object passed to the function.
+
+For `4 → 5 → 1 → 9`, selecting the node at index `1` must leave `4 → 1 → 9`.

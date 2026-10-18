@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { parseMarkdown } from './markdown';
+import { slugifyTaxonomy } from './taxonomy';
 import type {
   SiteConfig, BlogIndex, PostMeta, Post,
   CoursesIndex, CourseMeta, ModuleMeta, CourseModule, Course, Lesson,
@@ -39,9 +40,11 @@ function normalizeDayKey(value?: string): string | null {
 }
 
 function normalizeProblemMeta(meta: ProblemMeta): ProblemMeta {
+  const topics = Array.isArray(meta.topics) && meta.topics.length ? meta.topics : [meta.topic].filter(Boolean);
   return {
     ...meta,
-    topics: Array.isArray(meta.topics) && meta.topics.length ? meta.topics : [meta.topic].filter(Boolean),
+    topic: topics.find(topic => slugifyTaxonomy(topic) === slugifyTaxonomy(meta.topic)) || meta.topic,
+    topics,
     examples: Array.isArray(meta.examples) ? meta.examples : [],
     constraints: Array.isArray(meta.constraints) ? meta.constraints : (meta.constraints ? [meta.constraints] : []),
     visuals: Array.isArray(meta.visuals) ? meta.visuals : [],

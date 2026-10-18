@@ -4,14 +4,15 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:problems && npm run test:school && astro build && pagefind --site dist",
+    "build": "npm run validate:problems && npm run test:school && astro build && npm run audit:problem-output && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "new-post": "node scripts/add-post.js",
     "validate": "node scripts/validate-posts.js",
     "build:gas": "node scripts/apps-script/build.mjs",
     "test:school": "node --experimental-strip-types --test scripts/test-school.mjs",
-    "validate:problems": "node scripts/audit-problems.mjs && node scripts/verify-problem-solutions.mjs && node --test scripts/test-problem-runtime.mjs"
+    "validate:problems": "node scripts/audit-problems.mjs && node scripts/verify-problem-solutions.mjs && node --test scripts/test-problem-runtime.mjs && node --test scripts/test-problem-format.mjs && node --test scripts/test-problem-discussion.mjs",
+    "audit:problem-output": "node scripts/audit-problem-output.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^5.1.4",
@@ -27,6 +28,7 @@
     "marked-highlight": "^2.2.3",
     "nanostores": "^1.1.0",
     "preact": "^10.28.3",
+    "prettier": "3.9.6",
     "satori": "^0.26.0"
   },
   "devDependencies": {

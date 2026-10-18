@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0111",
-  "title": "Implement Queue using Stacks",
+  "title": "Implement Queue Using Stacks",
   "difficulty": "Easy",
   "topic": "Stack&Queue",
   "topics": [
@@ -80,13 +80,66 @@
         null,
         4
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "push",
+            1
+          ],
+          [
+            "push",
+            2
+          ],
+          [
+            "peek"
+          ],
+          [
+            "push",
+            3
+          ],
+          [
+            "peek"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "peek"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        2,
+        3,
+        3,
+        true
+      ]
     }
   ],
   "functionName": "implementQueueUsingStacks",
   "templateCode": "function implementQueueUsingStacks() {\n  return {\n    push(x) { /* Write your implementation. */ },\n    pop() { /* Write your implementation. */ },\n    peek() { /* Write your implementation. */ },\n    empty() { /* Write your implementation. */ }\n  };\n}\n",
   "constraints": [
     "1 <= x <= 9",
-    "At most 100 calls to push, pop, peek, empty"
+    "At most 100 calls to push, pop, peek, empty",
+    "pop and peek are called only when the queue is nonempty."
   ],
   "runner": {
     "mode": "operations",

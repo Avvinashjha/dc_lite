@@ -1,17 +1,21 @@
 ---
+import PageIntro from '../../components/PageIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { TOOL_CATEGORIES as categories, ALL_TOOLS as allTools } from '../../data/tools';
+import { TOOL_CATEGORIES as categories } from '../../data/tools';
 ---
 
-<BaseLayout title="Developer Tools | DailyCoder" description="Free online developer tools — JSON formatter, regex tester, JWT decoder, and more. All client-side, no data leaves your browser.">
-  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem; text-align: center;">Developer Tools</h1>
-    <p style="text-align: center; color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem;">
-      Free, fast, and private. Everything runs in your browser.
-    </p>
-    <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7; margin-bottom: 1.5rem;">
-      No data is sent to any server. {allTools.length} tools available.
-    </p>
+<BaseLayout title="Free Developer Tools: JSON Formatter, Converter & More | DailyCoder" description="Private, fast browser tools for JSON formatting and conversion, code, regex, JWTs, colors, timestamps, and more. No sign-up or uploads.">
+  <div class="container collection-page">
+    <PageIntro title="Useful tools. One focused workspace at a time." description="Start with the job you need. Each workspace keeps the controls, conversions, and exports together — and your data stays in your browser." eyebrow="PRIVATE BY DEFAULT" icon="bolt" tone="sage" />
+
+    <section class="tools-featured" aria-labelledby="featured-tool-heading">
+      <div>
+        <span class="tools-featured__eyebrow">MOST USED DATA WORKFLOW</span>
+        <h2 id="featured-tool-heading">JSON Toolkit</h2>
+        <p>Format and validate JSON, convert JSON and CSV, create JavaScript or TypeScript, sort keys, and compare payloads without hopping between tools.</p>
+      </div>
+      <a class="tools-featured__cta" href="/tools/json-formatter">Open JSON Toolkit <span aria-hidden="true">→</span></a>
+    </section>
 
     <!-- Quick filter -->
     <div class="tools-filter">
@@ -64,6 +68,16 @@ import { TOOL_CATEGORIES as categories, ALL_TOOLS as allTools } from '../../data
     margin-bottom: 2.5rem; padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--color-border);
   }
+  .tools-featured {
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    margin: 0 0 2rem; padding: 1.25rem 1.4rem;
+    border: 1px solid var(--dc-hero-line); border-radius: var(--radius-lg); background: var(--dc-hero);
+  }
+  .tools-featured__eyebrow { display: block; margin-bottom: 0.25rem; color: var(--dc-sage-ink); font-size: 0.67rem; font-weight: 800; letter-spacing: 0.08em; }
+  .tools-featured h2 { margin: 0 0 0.3rem; font-size: 1.25rem; }
+  .tools-featured p { max-width: 680px; margin: 0; color: var(--color-text-light); font-size: 0.86rem; line-height: 1.55; }
+  .tools-featured__cta { flex: 0 0 auto; padding: 0.65rem 0.8rem; border-radius: var(--radius-md); background: var(--color-primary); color: var(--color-on-primary); font-size: 0.8rem; font-weight: 750; text-decoration: none; }
+  .tools-featured__cta:hover { color: var(--color-on-primary); background: var(--color-primary-dark); text-decoration: none; }
   .tools-filter__btn {
     padding: 0.4rem 1rem; border: 1px solid var(--color-border);
     border-radius: 100px; background: var(--color-surface); color: var(--color-text-light);
@@ -72,7 +86,7 @@ import { TOOL_CATEGORIES as categories, ALL_TOOLS as allTools } from '../../data
   }
   .tools-filter__btn:hover { border-color: var(--color-primary); color: var(--color-text); }
   .tools-filter__btn--active {
-    background: var(--color-primary); color: white; border-color: var(--color-primary);
+    background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary);
   }
 
   .tools-section { margin-bottom: 2.5rem; }
@@ -112,5 +126,5 @@ import { TOOL_CATEGORIES as categories, ALL_TOOLS as allTools } from '../../data
   .tool-card__desc { font-size: 0.78rem; color: var(--color-text-light); line-height: 1.4; }
 
   @media (max-width: 1024px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px) { .tools-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .tools-grid { grid-template-columns: 1fr; } .tools-featured { align-items: flex-start; flex-direction: column; gap: 1rem; } }
 </style>

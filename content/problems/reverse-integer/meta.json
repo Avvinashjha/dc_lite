@@ -3,11 +3,9 @@
   "id": "problem-0061",
   "title": "Reverse Integer",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/reverse-integer/",
@@ -30,6 +28,66 @@
         120
       ],
       "expected": 21
+    },
+    {
+      "args": [
+        0
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        -120
+      ],
+      "expected": -21
+    },
+    {
+      "args": [
+        1000
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        1534236469
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        2147483647
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        -2147483648
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        1463847412
+      ],
+      "expected": 2147483641
+    },
+    {
+      "args": [
+        -1463847412
+      ],
+      "expected": -2147483641
+    },
+    {
+      "args": [
+        1563847412
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        -1563847412
+      ],
+      "expected": 0
     }
   ],
   "functionName": "reverse",
@@ -55,5 +113,5 @@
   "sampleInput": "x = 123",
   "sampleOutput": "321",
   "inputFormat": "Implement reverse(x). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the decimal digit reversal with its original sign, or 0 if it falls outside [-2147483648, 2147483647]."
 }

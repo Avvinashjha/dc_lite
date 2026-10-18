@@ -25,11 +25,8 @@ function deserialize(data) {
   }
   return root;
 }
-function codecRoundTrip(root) {
-  return deserialize(serialize(root));
-}
 ```
 
 **Time:** O(n) | **Space:** O(n), including the encoded string and reconstructed tree.
 
-The editor calls `codecRoundTrip` to check the composition of both operations. Any serialization format that reconstructs the same tree is accepted.
+The runner calls `serialize` and `deserialize` in separate fresh scopes. Any string format that reconstructs the same tree is accepted. Explicit null markers distinguish left-only and right-only children, even when values repeat.

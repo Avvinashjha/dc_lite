@@ -1,5 +1,6 @@
 ---
 import CodeEditor from './CodeEditor.astro';
+import Icon from './ProblemIcon.astro';
 
 interface Props {
   id?: string;
@@ -12,13 +13,16 @@ const { id = 'problem-js-editor' } = Astro.props;
   <div class="problem-editor-toolbar">
     <span style="font-size:0.78rem;font-weight:600;color:var(--color-text-light);">JavaScript</span>
     <div class="spacer"></div>
-    <button id="run-js" class="p-btn p-btn--primary" type="button">Run Sample</button>
-    <button id="run-tests" class="p-btn p-btn--primary" type="button">Run Tests</button>
-    <button id="reset-js" class="p-btn" type="button">Reset</button>
+    <button id="format-js" class="p-btn p-btn--icon" type="button" title="Format code (Alt+Shift+F)" aria-label="Format code"><Icon name="format"/></button>
+    <button id="run-js" class="p-btn" type="button" title="Run first example (Ctrl/Cmd+Enter)"><Icon name="run"/><span>Run</span></button>
+    <button id="run-tests" class="p-btn p-btn--primary" type="button" title="Run all test cases"><Icon name="test"/><span>Test</span></button>
+    <button id="reset-js" class="p-btn p-btn--icon" type="button" title="Reset starter code" aria-label="Reset starter code"><Icon name="reset"/></button>
   </div>
+  <p id="format-status" class="problem-format-status" role="status" hidden></p>
   <div class="problem-editor-mount">
     <CodeEditor id={id} minHeight={200} fill={true} />
   </div>
+  <div class="problem-resizer problem-resizer--output" role="separator" tabindex="0" aria-label="Resize output panel" aria-orientation="horizontal" aria-valuemin="100" aria-valuemax="500" aria-valuenow="180"></div>
   <div class="problem-output-area">
     <div class="problem-output-tabs">
       <button class="problem-output-tabs__btn problem-output-tabs__btn--active" data-out-tab="console" type="button">Console</button>

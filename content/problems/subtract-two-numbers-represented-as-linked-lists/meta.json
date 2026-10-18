@@ -1,9 +1,9 @@
 {
   "draft": false,
   "id": "problem-0110",
-  "title": "Subtract Two Numbers represented as Linked Lists",
+  "title": "Subtract Two Numbers Represented as Linked Lists",
   "difficulty": "Hard",
-  "topic": "Linked-List",
+  "topic": "Linked List",
   "topics": [
     "Linked List"
   ],
@@ -39,12 +39,136 @@
       "expected": [
         0
       ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        9,
+        9
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          9,
+          9,
+          9
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          9,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        7,
+        9,
+        9
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        0
+      ]
     }
   ],
   "functionName": "subtractLists",
   "templateCode": "function subtractLists(l1, l2) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 to 10^4 nodes per list"
+    "1 to 10^4 nodes per list",
+    "Each node contains an integer digit from 0 through 9",
+    "Leading zeros are allowed in the input lists"
   ],
   "runner": {
     "argTypes": [
@@ -66,5 +190,5 @@
   "sampleInput": "l1 = [1,0,0]\nl2 = [1]",
   "sampleOutput": "[9,9]",
   "inputFormat": "Implement subtractLists(l1, l2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Return the absolute difference as a most-significant-digit-first list. Remove leading zeros; zero must be represented by one node with val = 0."
 }

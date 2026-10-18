@@ -6,8 +6,8 @@
   "topic": "Matrix",
   "topics": [
     "Matrix",
-    "BFS",
-    "DFS"
+    "Math",
+    "Array"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/rotate-image/",
@@ -64,6 +64,186 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          2
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            -1
+          ],
+          [
+            2,
+            -3
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          2,
+          0
+        ],
+        [
+          -3,
+          -1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            5,
+            6,
+            7,
+            8
+          ],
+          [
+            9,
+            10,
+            11,
+            12
+          ],
+          [
+            13,
+            14,
+            15,
+            16
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          13,
+          9,
+          5,
+          1
+        ],
+        [
+          14,
+          10,
+          6,
+          2
+        ],
+        [
+          15,
+          11,
+          7,
+          3
+        ],
+        [
+          16,
+          12,
+          8,
+          4
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            -1000
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          -1000
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            0,
+            5,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          2,
+          0
+        ],
+        [
+          5,
+          3,
+          1
+        ],
+        [
+          0,
+          4,
+          0
+        ]
+      ]
     }
   ],
   "functionName": "rotate",
@@ -89,5 +269,12 @@
   "sampleInput": "matrix = [[1,2,3],[4,5,6],[7,8,9]]",
   "sampleOutput": "[[7,4,1],[8,5,2],[9,6,3]]",
   "inputFormat": "Implement rotate(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.",
+  "visuals": [
+    {
+      "title": "A quarter turn clockwise",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 170\" role=\"img\" aria-labelledby=\"rotate-title rotate-desc\" style=\"width:100%;height:auto;max-width:460px;color:var(--color-text)\"><title id=\"rotate-title\">Clockwise matrix rotation</title><desc id=\"rotate-desc\">Before: top row 1, 2; bottom row 3, 4. After a clockwise quarter turn: top row 3, 1; bottom row 4, 2.</desc><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M20 35H140V135H20ZM80 35V135M20 85H140M320 35H440V135H320ZM380 35V135M320 85H440M180 85H280M270 77L280 85L270 93\"/></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" text-anchor=\"middle\" font-size=\"18\"><text x=\"50\" y=\"67\">1</text><text x=\"110\" y=\"67\">2</text><text x=\"50\" y=\"117\">3</text><text x=\"110\" y=\"117\">4</text><text x=\"350\" y=\"67\">3</text><text x=\"410\" y=\"67\">1</text><text x=\"350\" y=\"117\">4</text><text x=\"410\" y=\"117\">2</text><text x=\"230\" y=\"61\" font-size=\"13\">90\u00b0 clockwise</text><text x=\"80\" y=\"158\" font-size=\"13\">Before</text><text x=\"380\" y=\"158\" font-size=\"13\">After</text></g></svg>",
+      "caption": "The top row [1, 2] becomes the rightmost column."
+    }
+  ]
 }

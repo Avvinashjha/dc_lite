@@ -1,1 +1,5 @@
-You're given an `m x n` board made up of the characters `'X'` and `'O'`. Any region of connected `'O'` cells that is fully enclosed by `'X'` cells should be captured — flip every `'O'` in such a region over to `'X'`. An `'O'` sitting on the board's edge, or connected to one that is, is never considered enclosed and must stay as-is. Return the updated board.
+Given a board of `'O'` and `'X'` cells, replace every enclosed region of `'O'` cells with `'X'`.
+
+Cells are connected only through shared sides—up, down, left, or right. Diagonal contact does not connect regions. A region is enclosed if none of its cells can reach the board’s outer edge through connected `'O'` cells.
+
+Keep all border-connected `'O'` cells and all existing `'X'` cells unchanged. Return the resulting board.

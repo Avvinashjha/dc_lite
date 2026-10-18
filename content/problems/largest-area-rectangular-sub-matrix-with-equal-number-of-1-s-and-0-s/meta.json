@@ -1,12 +1,13 @@
 {
   "draft": false,
   "id": "problem-0250",
-  "title": "Largest area rectangular sub-matrix with equal number of 1’s and 0’s",
+  "title": "Largest Rectangle with Equal Zeros and Ones",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Matrix",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Matrix",
+    "Prefix Sum",
+    "Hash Table"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Largest%20area%20rectangular%20sub-matrix%20with%20equal%20number%20of%201%E2%80%99s%20and%200%E2%80%99s",
@@ -52,18 +53,99 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "largestAreaEqual",
   "templateCode": "function largestAreaEqual(matrix) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= R, C <= 50"
+    "1 <= R, C <= 50",
+    "matrix is rectangular and every entry is 0 or 1."
   ],
   "runner": {},
   "examples": [
     {
       "input": "matrix = [[0,0,1,1],[0,1,1,0],[1,1,1,0],[1,0,0,1]]",
-      "output": "8"
+      "output": "8",
+      "explanation": "The rectangle consisting of the first two rows and all four columns has four zeros and four ones, for area 8."
     },
     {
       "input": "matrix = [[1]]",
@@ -72,6 +154,6 @@
   ],
   "sampleInput": "matrix = [[0,0,1,1],[0,1,1,0],[1,1,1,0],[1,0,0,1]]",
   "sampleOutput": "8",
-  "inputFormat": "Implement largestAreaEqual(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "matrix is a nonempty rectangular binary matrix.",
+  "outputFormat": "Return the maximum area (number of cells) of a contiguous rectangle containing equal counts of 0 and 1. Return 0 if none exists."
 }

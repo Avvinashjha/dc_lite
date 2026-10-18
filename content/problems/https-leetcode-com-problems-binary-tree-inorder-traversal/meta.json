@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0148",
-  "title": "https://leetcode.com/problems/binary-tree-inorder-traversal/",
+  "title": "Binary Tree Inorder Traversal",
   "difficulty": "Easy",
   "topic": "Tree",
   "topics": [
@@ -43,6 +43,49 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": [
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          null,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ]
     }
   ],
   "functionName": "binaryTreeInorderTraversal",
@@ -72,6 +115,6 @@
   ],
   "sampleInput": "root = [1,null,2,3]",
   "sampleOutput": "[1,3,2]",
-  "inputFormat": "Implement binaryTreeInorderTraversal(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Test inputs are level-order arrays with null for missing children. The function receives tree nodes with val, left, and right properties.",
+  "outputFormat": "Return an array of node values in left-subtree, node, right-subtree order. An empty tree returns []."
 }

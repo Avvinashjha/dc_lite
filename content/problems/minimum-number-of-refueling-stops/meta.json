@@ -6,7 +6,7 @@
   "topic": "Heap",
   "topics": [
     "Heap",
-    "Priority Queue"
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
@@ -57,6 +57,108 @@
         ]
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        10,
+        0,
+        []
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        10,
+        10,
+        [
+          [
+            5,
+            2
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        10,
+        5,
+        [
+          [
+            5,
+            5
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        20,
+        5,
+        [
+          [
+            5,
+            5
+          ],
+          [
+            10,
+            10
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        50,
+        10,
+        [
+          [
+            10,
+            5
+          ],
+          [
+            20,
+            100
+          ]
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        100,
+        50,
+        [
+          [
+            10,
+            60
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            30,
+            5
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        20,
+        5,
+        [
+          [
+            5,
+            100
+          ]
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "minRefuelStops",
@@ -65,7 +167,7 @@
     "1 <= target <= 10^9",
     "0 <= startFuel <= 10^9",
     "0 <= stations.length <= 500",
-    "Stations are sorted by increasing position; positions and fuel amounts are positive integers."
+    "Stations have strictly increasing positions with 1 <= position < target and 1 <= fuel <= 10^9"
   ],
   "runner": {},
   "examples": [
@@ -84,6 +186,6 @@
   ],
   "sampleInput": "target = 100\nstartFuel = 10\nstations = [[10,60],[20,30],[30,30],[60,40]]",
   "sampleOutput": "2",
-  "inputFormat": "Implement minRefuelStops(target, startFuel, stations). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minRefuelStops(target, startFuel, stations). The car starts at position 0; stations contains [position, availableFuel] pairs in route order.",
+  "outputFormat": "Return the minimum number of stations where fuel must be taken, or -1 if the target is unreachable. Return 0 if starting fuel is sufficient."
 }

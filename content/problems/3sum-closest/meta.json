@@ -36,6 +36,30 @@
         1
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        6
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          -5,
+          -4,
+          -3,
+          -2
+        ],
+        -20
+      ],
+      "expected": -12
     }
   ],
   "functionName": "threeSumClosest",
@@ -56,6 +80,6 @@
       "output": "0"
     }
   ],
-  "inputFormat": "Implement threeSumClosest(nums, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement threeSumClosest(nums, target), where nums is an integer array and target is an integer.",
+  "outputFormat": "The sum of three elements at distinct indices closest to target. The closest sum is guaranteed to be unique."
 }

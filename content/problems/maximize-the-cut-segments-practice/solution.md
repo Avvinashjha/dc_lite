@@ -1,6 +1,6 @@
 ## Approach: DP (Unbounded Knapsack Variant)
 
-`dp[i]` stores the maximum number of segments for rod length `i`. For each length, try cutting with x, y, or z. If the remaining length has a valid solution, update dp[i].
+`dp[i]` stores the maximum number of segments for rod length `i`. For each length, try cutting with x, y, or z. If the remaining length has a valid solution, update dp[i]. Initialize unreachable lengths to -1, rather than 0, so an impossible remainder cannot create a false solution. The base dp[0] = 0 represents an exactly consumed rod.
 
 ```javascript
 function maximizeTheCutSegments(n, x, y, z) {

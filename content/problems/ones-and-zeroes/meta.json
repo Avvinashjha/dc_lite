@@ -2,11 +2,12 @@
   "draft": false,
   "id": "problem-0229",
   "title": "Ones and Zeroes",
-  "difficulty": "Easy",
+  "difficulty": "Medium",
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Array",
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/ones-and-zeroes/",
@@ -37,6 +38,79 @@
         1
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        [
+          "00",
+          "11"
+        ],
+        1,
+        1
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          "0"
+        ],
+        5,
+        5
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          "0",
+          "0",
+          "0",
+          "1",
+          "1"
+        ],
+        2,
+        1
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          "10",
+          "10",
+          "10"
+        ],
+        2,
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          "000",
+          "0",
+          "1"
+        ],
+        4,
+        2
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          "0011",
+          "0",
+          "0",
+          "1",
+          "1"
+        ],
+        2,
+        2
+      ],
+      "expected": 4
     }
   ],
   "functionName": "findMaxForm",
@@ -44,7 +118,8 @@
   "constraints": [
     "1 <= strs.length <= 600",
     "1 <= strs[i].length <= 100",
-    "1 <= m, n <= 100"
+    "1 <= m, n <= 100",
+    "Each strs[i] contains only '0' and '1'."
   ],
   "runner": {},
   "examples": [
@@ -60,5 +135,5 @@
   "sampleInput": "strs = [\"10\",\"0001\",\"111001\",\"1\",\"0\"]\nm = 5\nn = 3",
   "sampleOutput": "4",
   "inputFormat": "Implement findMaxForm(strs, m, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the maximum number of array entries that fit within both character budgets."
 }

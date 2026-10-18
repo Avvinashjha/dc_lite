@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0175",
-  "title": "Print all k-sum paths in a binary tree",
+  "title": "All Downward Paths with Sum K",
   "difficulty": "Hard",
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "DFS",
+    "Prefix Sum"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20k-sum%20paths%20in%20a%20binary%20tree",
@@ -40,13 +40,141 @@
         2
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ],
+        1
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          null,
+          0,
+          null,
+          0
+        ],
+        0
+      ],
+      "expected": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2
+        ],
+        0
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          2,
+          -1,
+          -1
+        ],
+        1
+      ],
+      "expected": [
+        [
+          2,
+          -1
+        ],
+        [
+          2,
+          -1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          2
+        ],
+        2
+      ],
+      "expected": [
+        [
+          2
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          null,
+          1,
+          null,
+          -1
+        ],
+        -1
+      ],
+      "expected": [
+        [
+          -1
+        ],
+        [
+          -1
+        ],
+        [
+          -1,
+          1,
+          -1
+        ]
+      ]
     }
   ],
   "functionName": "kSumPaths",
   "templateCode": "function kSumPaths(root, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^4",
-    "-10^4 <= Node.val <= 10^4"
+    "-10^4 <= Node.val <= 10^4",
+    "k is an integer with -10^8 <= k <= 10^8."
   ],
   "runner": {
     "argTypes": [
@@ -67,5 +195,5 @@
   "sampleInput": "root = [1,2,3]\nk = 3",
   "sampleOutput": "[[1,2],[3]]",
   "inputFormat": "Implement kSumPaths(root, k). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "outputFormat": "Return one value array for each matching nonempty downward path, ordered from ancestor to descendant. Outer order does not matter; equal arrays from different node paths must remain."
 }

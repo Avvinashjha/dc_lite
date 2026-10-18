@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0222",
-  "title": "Phone Directory",
-  "difficulty": "Hard",
+  "title": "Contact Suggestions by Prefix",
+  "difficulty": "Medium",
   "topic": "Tries",
   "topics": [
-    "Tries"
+    "Trie",
+    "String",
+    "Sorting"
   ],
   "platform": "Other",
   "problemSet": "top-300-leetcode",
@@ -38,6 +40,152 @@
       "expected": [
         []
       ]
+    },
+    {
+      "args": [
+        [
+          "alice",
+          "ali",
+          "bob"
+        ],
+        "alix"
+      ],
+      "expected": [
+        [
+          "ali",
+          "alice"
+        ],
+        [
+          "ali",
+          "alice"
+        ],
+        [
+          "ali",
+          "alice"
+        ],
+        []
+      ]
+    },
+    {
+      "args": [
+        [
+          "a",
+          "aa",
+          "aaa"
+        ],
+        "aaaa"
+      ],
+      "expected": [
+        [
+          "a",
+          "aa",
+          "aaa"
+        ],
+        [
+          "aa",
+          "aaa"
+        ],
+        [
+          "aaa"
+        ],
+        []
+      ]
+    },
+    {
+      "args": [
+        [
+          "z",
+          "a",
+          "ab"
+        ],
+        "a"
+      ],
+      "expected": [
+        [
+          "a",
+          "ab"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "cat",
+          "bat"
+        ],
+        "at"
+      ],
+      "expected": [
+        [],
+        []
+      ]
+    },
+    {
+      "args": [
+        [
+          "ab",
+          "ac"
+        ],
+        "azzz"
+      ],
+      "expected": [
+        [
+          "ab",
+          "ac"
+        ],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "args": [
+        [
+          "geek",
+          "geeks",
+          "gee"
+        ],
+        "geek"
+      ],
+      "expected": [
+        [
+          "gee",
+          "geek",
+          "geeks"
+        ],
+        [
+          "gee",
+          "geek",
+          "geeks"
+        ],
+        [
+          "gee",
+          "geek",
+          "geeks"
+        ],
+        [
+          "geek",
+          "geeks"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "b",
+          "ab"
+        ],
+        "abc"
+      ],
+      "expected": [
+        [
+          "ab"
+        ],
+        [
+          "ab"
+        ],
+        []
+      ]
     }
   ],
   "functionName": "phoneDirectory",
@@ -61,5 +209,5 @@
   "sampleInput": "contacts = [\"gforgeeks\",\"geeksforgeeks\"]\nquery = \"ge\"",
   "sampleOutput": "[[\"geeksforgeeks\",\"gforgeeks\"],[\"geeksforgeeks\"]]",
   "inputFormat": "Implement phoneDirectory(contacts, query). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return one lexicographically sorted contact list per nonempty query prefix, in prefix-length order. Use [] for no matches."
 }

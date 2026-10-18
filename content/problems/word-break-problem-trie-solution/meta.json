@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0218",
-  "title": "Word Break Problem | (Trie solution)",
+  "title": "Word Break (Trie)",
   "difficulty": "Medium",
   "topic": "Tries",
   "topics": [
-    "Tries"
+    "Tries",
+    "Dynamic Programming",
+    "String"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Word%20Break%20Problem%20%7C%20(Trie%20solution)",
@@ -33,6 +35,88 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        "applepenapple",
+        [
+          "apple",
+          "pen"
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "cars",
+        [
+          "car",
+          "ca",
+          "rs"
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "abcd",
+        [
+          "ab",
+          "abc",
+          "cd"
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "abc",
+        [
+          "ab",
+          "bc"
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "a",
+        [
+          "aa"
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "a",
+        [
+          "a"
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "aaaaab",
+        [
+          "a",
+          "aa",
+          "aaa"
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "aaaa",
+        [
+          "a",
+          "aa",
+          "a"
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "wordBreak",
@@ -56,5 +140,5 @@
   "sampleInput": "s = \"leetcode\"\nwordDict = [\"leet\",\"code\"]",
   "sampleOutput": "true",
   "inputFormat": "Implement wordBreak(s, wordDict). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if the entire string can be split into dictionary words; otherwise return false."
 }

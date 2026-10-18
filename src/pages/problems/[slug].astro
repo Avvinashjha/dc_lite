@@ -101,20 +101,10 @@ const problemJsonLd = {
     data-is-potd-scheduled={isPotdCatalog ? 'true' : 'false'}
     data-potd-schedule-date={potdScheduleDate}
   >
-    <!-- Breadcrumbs -->
-    <nav class="problem-breadcrumbs" aria-label="Breadcrumb">
-      <a href="/">Home</a>
-      <span class="problem-breadcrumbs__sep">/</span>
-      <a href="/problems">Problems</a>
-      <span class="problem-breadcrumbs__sep">/</span>
-      <a href={`/problems/topic/${problem.topic.toLowerCase().replace(/\s+/g, '-')}`}>{problem.topic}</a>
-      <span class="problem-breadcrumbs__sep">/</span>
-      <span class="problem-breadcrumbs__current">{problem.title}</span>
-    </nav>
-
     <!-- Toolbar -->
     <div class="problem-toolbar">
-      <span class="problem-toolbar__title">{problem.title}</span>
+      <a href="/problems" class="p-btn p-btn--icon" aria-label="Back to problem list" title="Problem list">←</a>
+      <h1 class="problem-toolbar__title">{problem.title}</h1>
       <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
       <span id="local-progress-state" class="p-badge p-badge--neutral">0 attempts</span>
       <div class="problem-toolbar__actions">
@@ -123,10 +113,13 @@ const problemJsonLd = {
         )}
         <button type="button" id="problem-favorite-btn" class="p-btn p-btn--icon p-btn--fav" title="Toggle favorite" aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
         <button type="button" id="toggle-problem-solved" class="p-btn">Mark Solved</button>
-        {problem.externalUrl && (
-          <a href={problem.externalUrl} target="_blank" rel="noopener" class="p-btn">{problem.platform} &#8599;</a>
-        )}
+
       </div>
+    </div>
+
+    <div class="problem-mobile-views" role="group" aria-label="Workspace view">
+      <button type="button" data-workspace-view="description" aria-pressed="true">Problem</button>
+      <button type="button" data-workspace-view="editor" aria-pressed="false">Code</button>
     </div>
 
     <!-- Split pane -->
@@ -141,7 +134,7 @@ const problemJsonLd = {
         </div>
         <div class="problem-tab-content">
           <div class="problem-tab-pane problem-tab-pane--active" data-pane="description">
-            <ProblemDescription problem={problem} />
+            <ProblemDescription problem={problem} embedded />
           </div>
           <div class="problem-tab-pane" data-pane="solution">
             <div id="solution-locked-banner" class="problem-example" style="display:none;">
@@ -168,6 +161,8 @@ const problemJsonLd = {
         </div>
       </div>
 
+      <div class="problem-resizer problem-resizer--columns" role="separator" tabindex="0" aria-label="Resize description and editor" aria-orientation="vertical" aria-valuemin="25" aria-valuemax="70" aria-valuenow="45"></div>
+
       <!-- Right: Editor + Output -->
       <div class="problem-right">
         <ProblemEditor />
@@ -178,16 +173,57 @@ const problemJsonLd = {
 
 <script src="/js/store.js" is:inline></script>
 <script>
+  import { setupProblemWorkspace } from '../../utils/problemWorkspace';
+  setupProblemWorkspace();
   import { invokeProblem, compareProblemResult } from '../../utils/problemRuntime.js';
 
   // ── Tab switching (left panel) ──
   const leftTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#left-tabs .problem-tabs__btn'));
   const leftPanes = Array.from(document.querySelectorAll<HTMLElement>('.problem-tab-content .problem-tab-pane'));
+  const leftScroll = document.querySelector<HTMLElement>('.problem-tab-content')!;
+  const tabScrollPositions = new Map<string, number>();
+  let activeLeftTab = 'description';
+
+  function enableTabKeys(buttons: HTMLButtonElement[]) {
+    buttons[0]?.parentElement?.setAttribute('role', 'tablist');
+    buttons.forEach((button, index) => {
+      button.setAttribute('role', 'tab');
+      button.addEventListener('keydown', event => {
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        else if (event.key === 'ArrowLeft') next = (index + buttons.length - 1) % buttons.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = buttons.length - 1;
+        else return;
+        event.preventDefault();
+        buttons[next].click();
+        buttons[next].focus();
+      });
+    });
+  }
 
   function switchLeftTab(name: string) {
-    leftTabs.forEach(b => b.classList.toggle('problem-tabs__btn--active', b.dataset.tab === name));
-    leftPanes.forEach(p => p.classList.toggle('problem-tab-pane--active', p.dataset.pane === name));
+    tabScrollPositions.set(activeLeftTab, leftScroll.scrollTop);
+    leftTabs.forEach(b => {
+      const active = b.dataset.tab === name;
+      b.classList.toggle('problem-tabs__btn--active', active);
+      b.setAttribute('aria-selected', String(active));
+      b.tabIndex = active ? 0 : -1;
+      b.id = `tab-${b.dataset.tab}`;
+      b.setAttribute('aria-controls', `pane-${b.dataset.tab}`);
+    });
+    leftPanes.forEach(p => {
+      p.classList.toggle('problem-tab-pane--active', p.dataset.pane === name);
+      p.id = `pane-${p.dataset.pane}`;
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('aria-labelledby', `tab-${p.dataset.pane}`);
+      p.tabIndex = 0;
+    });
+    activeLeftTab = name;
+    leftScroll.scrollTop = tabScrollPositions.get(name) || 0;
   }
+  enableTabKeys(leftTabs);
+  switchLeftTab('description');
   leftTabs.forEach(b => b.addEventListener('click', () => switchLeftTab(b.dataset.tab!)));
 
   // ── Output tab switching ──
@@ -196,10 +232,24 @@ const problemJsonLd = {
   const testsPaneEl = document.getElementById('output-tests')!;
 
   function switchOutputTab(name: string) {
-    outBtns.forEach(b => b.classList.toggle('problem-output-tabs__btn--active', b.dataset.outTab === name));
+    outBtns.forEach(b => {
+      const active = b.dataset.outTab === name;
+      b.classList.toggle('problem-output-tabs__btn--active', active);
+      b.setAttribute('aria-selected', String(active));
+      b.tabIndex = active ? 0 : -1;
+      b.id = `output-tab-${b.dataset.outTab}`;
+      b.setAttribute('aria-controls', b.dataset.outTab === 'console' ? 'output-console' : 'output-tests');
+    });
     consolePaneEl.style.display = name === 'console' ? '' : 'none';
     testsPaneEl.style.display = name === 'tests' ? '' : 'none';
   }
+  enableTabKeys(outBtns);
+  [consolePaneEl, testsPaneEl].forEach(p => {
+    p.setAttribute('role', 'tabpanel');
+    p.setAttribute('aria-labelledby', `output-tab-${p === consolePaneEl ? 'console' : 'tests'}`);
+    p.tabIndex = 0;
+  });
+  switchOutputTab('console');
   outBtns.forEach(b => b.addEventListener('click', () => switchOutputTab(b.dataset.outTab!)));
 
   // ── Runner config ──
@@ -227,6 +277,24 @@ const problemJsonLd = {
     'console.log(solve(`' + (sampleInput || '').replace(/`/g, '\\`').replace(/\\/g, '\\\\') + '`));'
   ].join('\n');
   const template = runnerConfig.templateCode || defaultTemplate;
+  const draftKey = 'problem-code-v1:' + slug;
+  let initialCode = template;
+  try { initialCode = localStorage.getItem(draftKey) ?? template; } catch { /* Storage may be unavailable. */ }
+  let draftTimer: ReturnType<typeof setTimeout> | null = null;
+  function saveDraft() {
+    if (draftTimer) clearTimeout(draftTimer);
+    draftTimer = null;
+    const code = getCode();
+    try {
+      if (code === template) localStorage.removeItem(draftKey);
+      else localStorage.setItem(draftKey, code);
+    } catch { /* A full or disabled store must not interrupt editing. */ }
+  }
+  function scheduleDraft() {
+    if (draftTimer) clearTimeout(draftTimer);
+    draftTimer = setTimeout(saveDraft, 350);
+  }
+  window.addEventListener('pagehide', () => { if (draftTimer) saveDraft(); });
 
   // The editor is created via a dynamic import so a failure to load CodeMirror
   // (e.g. a transient network/bundling hiccup) degrades gracefully instead of
@@ -242,7 +310,7 @@ const problemJsonLd = {
   }
   function setCode(value: string) {
     if (codeEditor) codeEditor.setValue(value);
-    else if (fallbackArea) fallbackArea.value = value;
+    else if (fallbackArea) { fallbackArea.value = value; scheduleDraft(); }
   }
 
   function mountFallbackEditor(message: string) {
@@ -256,7 +324,8 @@ const problemJsonLd = {
     fallbackArea = document.createElement('textarea');
     fallbackArea.className = 'problem-editor-fallback__area';
     fallbackArea.spellcheck = false;
-    fallbackArea.value = template;
+    fallbackArea.value = initialCode;
+    fallbackArea.addEventListener('input', scheduleDraft);
     mount.appendChild(note);
     mount.appendChild(fallbackArea);
   }
@@ -266,7 +335,8 @@ const problemJsonLd = {
       const { createCodeEditor } = await import('../../utils/codeEditor');
       codeEditor = createCodeEditor({
         rootId: 'problem-js-editor',
-        doc: template,
+        doc: initialCode,
+        onDocChange: scheduleDraft,
         language: 'javascript',
         lineWrapping: true,
         onModEnter: () => runCode(),
@@ -276,6 +346,35 @@ const problemJsonLd = {
       mountFallbackEditor('Rich editor unavailable — using a basic text area. Your code still runs.');
     }
   })();
+
+  const formatButton = document.getElementById('format-js') as HTMLButtonElement;
+  const formatStatus = document.getElementById('format-status')!;
+  async function formatCode() {
+    if (formatButton.disabled) return;
+    const source = getCode();
+    formatButton.disabled = true;
+    formatStatus.hidden = false;
+    formatStatus.textContent = 'Formatting…';
+    try {
+      const { formatProblemCode } = await import('../../utils/problemFormatter');
+      const formatted = await formatProblemCode(source);
+      if (getCode() !== source) {
+        formatStatus.textContent = 'Code changed while formatting. Format again to use your latest edits.';
+      } else {
+        setCode(formatted);
+        formatStatus.textContent = codeEditor ? 'Code formatted. Undo restores the previous version.' : 'Code formatted.';
+      }
+    } catch (error) {
+      formatStatus.textContent = error instanceof Error ? error.message : 'Unable to format. Your code has not changed.';
+    } finally { formatButton.disabled = false; }
+  }
+  formatButton.addEventListener('click', formatCode);
+  document.getElementById('problem-js-editor')?.addEventListener('input', () => {
+    if (!formatButton.disabled) formatStatus.hidden = true;
+  });
+  document.getElementById('problem-js-editor')?.addEventListener('keydown', event => {
+    if (event.altKey && event.shiftKey && event.code === 'KeyF') { event.preventDefault(); formatCode(); }
+  });
 
   // ── DOM refs ──
   const runBtn = document.getElementById('run-js')!;
@@ -368,7 +467,9 @@ const problemJsonLd = {
           for (let i = 0; i < tests.length; i++) {
             try {
               // A fresh function scope prevents state leaking between independent fixtures.
-              const fn = new Function(code + '\\nreturn ' + name + ';')();
+              const fn = config.mode === 'codec'
+                ? () => new Function(code + '\\nreturn {serialize, deserialize};')()
+                : new Function(code + '\\nreturn ' + name + ';')();
               if (typeof fn !== 'function') throw new Error('Define ' + name + ' in the editor.');
               const actual = invokeProblem(fn, tests[i].args, config);
               postMessage({type:'case', index:i, actual});
@@ -441,7 +542,18 @@ const problemJsonLd = {
 
   runBtn.addEventListener('click', runCode);
   runTestsBtn.addEventListener('click', runTests);
-  resetBtn.addEventListener('click', () => { setCode(template); });
+  resetBtn.addEventListener('click', () => {
+    stopExecution();
+    runId++;
+    setCode(template);
+    saveDraft();
+    formatStatus.hidden = true;
+    formatStatus.textContent = '';
+    consoleEl.replaceChildren();
+    testsEl.replaceChildren();
+    switchOutputTab('console');
+    appendConsole('INFO', 'Starter code restored.');
+  });
 
   // Gracefully reflect when a problem ships without runnable test cases.
   if (!testCases.length) {
@@ -587,6 +699,9 @@ const problemJsonLd = {
   const DISCUSSION_TOOL = 'problem-discussion';
   const discussionListEl = document.getElementById('discussion-list')!;
   const discussionMsgEl = document.getElementById('discussion-message') as HTMLTextAreaElement;
+  const discussionStatusEl = document.getElementById('discussion-status')!;
+  const discussionLoadStatusEl = document.getElementById('discussion-load-status')!;
+  const discussionPostBtn = document.getElementById('discussion-post') as HTMLButtonElement;
 
   function escapeHtml(s: string) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -606,89 +721,111 @@ const problemJsonLd = {
   }
 
   async function loadDiscussion() {
-    // Show cached data immediately
-    await (window as any).DCStore.init();
-    const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
-    if (cached && cached.posts) renderDiscussionList(cached.posts);
-
-    // Migrate from old localStorage if present
-    const legacyKey = 'problem-discussion-' + slug;
-    const legacy = localStorage.getItem(legacyKey);
-    if (legacy) {
-      try {
-        const legacyPosts = JSON.parse(legacy);
-        if (legacyPosts.length && (!cached || !cached.posts || !cached.posts.length)) {
-          renderDiscussionList(legacyPosts);
-          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: legacyPosts });
+    let cachedPosts: any[] = [];
+    try {
+      await (window as any).DCStore.init();
+      const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
+      if (Array.isArray(cached?.posts)) cachedPosts = cached.posts;
+      const legacyKey = 'problem-discussion-' + slug;
+      const legacy = localStorage.getItem(legacyKey);
+      if (legacy) {
+        const posts = JSON.parse(legacy);
+        if (!cachedPosts.length && Array.isArray(posts)) {
+          cachedPosts = posts;
+          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts });
         }
-      } catch (_) {}
-      localStorage.removeItem(legacyKey);
-    }
-
-    // Fetch from server
-    if (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService.isActive()) {
-      try {
-        const syncUrl = (window as any).DCSyncService._getScriptUrl ? (window as any).DCSyncService._getScriptUrl() : null;
-        if (!syncUrl) return;
-        const res = await fetch(syncUrl + '?action=getDiscussion&slug=' + encodeURIComponent(slug));
-        const data = await res.json();
-        if (data.status === 'success' && data.posts) {
-          renderDiscussionList(data.posts);
-          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: data.posts });
-        }
-      } catch (err) {
-        console.warn('[Discussion] Server fetch failed:', err);
+        localStorage.removeItem(legacyKey);
       }
+    } catch { /* A local cache failure must not prevent the server read. */ }
+    if (cachedPosts.length) renderDiscussionList(cachedPosts);
+    const sync = (window as any).DCSyncService;
+    const syncUrl = sync?.isActive?.() ? sync._getScriptUrl?.() : null;
+    if (!syncUrl) {
+      discussionLoadStatusEl.textContent = cachedPosts.length
+        ? 'Showing saved discussion. Live updates are unavailable.'
+        : 'Discussion is unavailable right now.';
+      return;
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(syncUrl + '?action=getDiscussion&slug=' + encodeURIComponent(slug), { signal: controller.signal });
+      if (!response.ok) throw new Error('Discussion request failed');
+      const data = await response.json();
+      if (data.status !== 'success' || !Array.isArray(data.posts)) throw new Error('Invalid discussion response');
+      renderDiscussionList(data.posts);
+      discussionLoadStatusEl.textContent = '';
+      try { await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: data.posts }); } catch { /* Live results remain visible. */ }
+    } catch {
+      discussionLoadStatusEl.textContent = cachedPosts.length
+        ? 'Unable to refresh. Showing saved discussion.'
+        : 'Unable to load discussion. Refresh to try again.';
+    } finally {
+      clearTimeout(timer);
     }
   }
 
-  document.getElementById('discussion-post')!.addEventListener('click', () => {
+  discussionPostBtn.addEventListener('click', () => {
+    if (!discussionMsgEl.value.trim()) {
+      discussionStatusEl.textContent = 'Write a message before posting.';
+      discussionMsgEl.focus();
+      return;
+    }
     const doPost = async () => {
-      const user = (window as any).getCurrentUser ? (window as any).getCurrentUser() : null;
-      const name = user?.displayName || 'Anonymous';
-      const message = (discussionMsgEl.value || '').trim();
-      if (!message) return;
-
-      const post = { name, message, ts: Date.now(), uid: user?.uid || '' };
-
-      // Update local cache immediately
-      await (window as any).DCStore.init();
-      const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
-      const posts = (cached && cached.posts) ? cached.posts : [];
-      posts.unshift(post);
-      await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts: posts.slice(0, 200) });
-      renderDiscussionList(posts);
-      discussionMsgEl.value = '';
-
-      // Push to server (fire-and-forget, same pattern as comments)
-      const syncUrl = (typeof (window as any).DCSyncService !== 'undefined' && (window as any).DCSyncService._getScriptUrl)
-        ? (window as any).DCSyncService._getScriptUrl() : null;
-      if (syncUrl && window.getFirebaseIdToken) {
-        window.getFirebaseIdToken().then(function (token) {
-          var payload = JSON.stringify({
-            action: 'postDiscussion',
-            slug: slug,
-            name: name,
-            message: message,
-            uid: user?.uid || '',
-            idToken: token || '',
-            timestamp: new Date(post.ts).toISOString()
-          });
-          fetch(syncUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain' },
-            body: payload
-          }).catch(function (err) {
-            console.warn('[Discussion] Server push failed:', err);
-          });
+      if (discussionPostBtn.disabled) return;
+      const user = (window as any).getCurrentUser?.();
+      if (!user) {
+        discussionStatusEl.textContent = 'Sign in to join the discussion.';
+        return;
+      }
+      const message = discussionMsgEl.value.trim();
+      const syncUrl = (window as any).DCSyncService?._getScriptUrl?.();
+      if (!syncUrl || !window.getFirebaseIdToken) {
+        discussionStatusEl.textContent = 'Discussion is unavailable right now. Your message has not been posted.';
+        return;
+      }
+      discussionPostBtn.disabled = true;
+      discussionStatusEl.textContent = 'Posting…';
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+      try {
+        const token = await window.getFirebaseIdToken();
+        if (!token) throw new Error('Sign in again before posting.');
+        const post = { name: user.displayName || 'Anonymous', message, ts: Date.now(), uid: user.uid };
+        const response = await fetch(syncUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          signal: controller.signal,
+          body: JSON.stringify({ action: 'postDiscussion', slug, ...post, idToken: token, timestamp: new Date(post.ts).toISOString() }),
         });
+        if (!response.ok) throw new Error('The discussion service did not accept the post.');
+        const data = await response.json();
+        if (data.status !== 'success') throw new Error(data.message || 'The discussion service did not accept the post.');
+        // Only confirmed posts enter the local cache. Cache failure must not invite duplicate submissions.
+        if (discussionMsgEl.value.trim() === message) discussionMsgEl.value = '';
+        discussionStatusEl.textContent = 'Posted.';
+        try {
+          await (window as any).DCStore.init();
+          const cached = await (window as any).DCStore.get(DISCUSSION_TOOL, slug);
+          const posts = [post, ...(cached?.posts || [])].slice(0, 200);
+          renderDiscussionList(posts);
+          await (window as any).DCStore.set(DISCUSSION_TOOL, slug, { posts });
+        } catch {
+          discussionStatusEl.textContent = 'Posted. Refresh to load the discussion.';
+        }
+      } catch (error) {
+        discussionStatusEl.textContent = controller.signal.aborted
+          ? 'Confirmation timed out. Your message is kept here; refresh the discussion before retrying to avoid a duplicate.'
+          : (error instanceof Error ? error.message : 'Unable to post. Your message is kept here.');
+      } finally {
+        clearTimeout(timer);
+        discussionPostBtn.disabled = false;
       }
     };
-
     if ((window as any).requireAuth) {
       (window as any).requireAuth('Sign in to join the discussion', doPost);
     } else {
-      doPost();
+      discussionStatusEl.textContent = 'Sign-in is unavailable right now. Your message has not been posted.';
     }
   });
 

@@ -13,10 +13,10 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     { q: "Is it timezone aware?", a: "It shows both local and UTC interpretations so you can convert across timezones." },
   ]}
 >
-  <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; margin-bottom: 2rem;">
+  <div class="timestamp-live">
     <span class="tool-panel__label">Current Unix Timestamp</span>
-    <div id="live-ts" style="font-size: 2rem; font-weight: 700; font-family: var(--font-mono); margin: 0.5rem 0;"></div>
-    <div id="live-date" style="font-size: 0.9rem; color: var(--color-text-light);"></div>
+    <div id="live-ts"></div>
+    <div id="live-date"></div>
   </div>
 
   <div class="tool-panels">
@@ -109,3 +109,20 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       '<div style="color:var(--color-text-light);margin-top:0.25rem;">' + relativeTime(d) + '</div>';
   });
 </script>
+
+<style>
+  .timestamp-live {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  #live-ts { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 750; }
+  #live-date { min-width: 0; overflow: hidden; color: var(--color-text-light); font-size: 0.8rem; text-overflow: ellipsis; white-space: nowrap; }
+  @media (max-width: 620px) {
+    .timestamp-live { grid-template-columns: 1fr; gap: 0.25rem; align-items: start; }
+  }
+</style>

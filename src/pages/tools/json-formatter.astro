@@ -4,38 +4,49 @@ import CodeEditor from "../../components/CodeEditor.astro";
 ---
 
 <ToolLayout
-  title="JSON Formatter"
-  description="Free online JSON formatter, validator, minifier, and parser. Format JSON with syntax highlighting, parse input into prettified JSON, validate, and minify. Multi-tab support with auto-save."
-  toolName="JSON Formatter"
-  keywords="json formatter, json beautifier, json validator, json minifier, json parser, parse json online, format json online, pretty print json"
+  title="JSON Formatter & Converter"
+  description="Free online JSON formatter, validator, minifier, and converter. Format JSON, convert JSON to CSV, JavaScript, or TypeScript, convert CSV to JSON, sort keys, and compare payloads privately in your browser."
+  toolName="JSON Formatter & Converter"
+  keywords="json formatter, json beautifier, json validator, json minifier, json to csv, csv to json, json to javascript, json to typescript, json parser, format json online, pretty print json"
+  features={['Format and validate JSON', 'Minify and sort JSON keys', 'Convert JSON to CSV and CSV to JSON', 'Export JavaScript and TypeScript', 'Compare JSON payloads', 'Private in-browser processing']}
+  minimalHeader={true}
   faqs={[
     { q: "Is this JSON formatter safe to use with sensitive data?", a: "Yes. Everything runs locally in your browser — your JSON is never uploaded to any server, so you can safely paste API responses or config files." },
     { q: "What's the difference between Format and Minify?", a: "Format adds indentation and line breaks so JSON is easy to read, while Minify strips all whitespace to produce the smallest valid JSON for production." },
     { q: "Why does it say my JSON is invalid?", a: "The parser reports the first syntax error it finds — usually a missing comma, an extra trailing comma, unquoted keys, or single quotes instead of double quotes." },
+    { q: "Can I convert JSON to CSV, JavaScript, or TypeScript?", a: "Yes. Open Convert above the workspace. JSON to CSV accepts one object or an array of objects; JavaScript and TypeScript exports are useful for fixtures, constants, and typed API models." },
+    { q: "How do I rename a tab?", a: "Click the active tab name, enter its new name, and press OK. Your tabs are saved locally in your browser." },
   ]}
 >
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
-    <button class="tab-add" id="btn-add-tab" title="New tab">+</button>
-  </div>
-
-  <div class="tool-actions">
-    <button class="tool-btn tool-btn--primary" id="btn-format">Format</button>
-    <button class="tool-btn" id="btn-minify">Minify</button>
-    <button class="tool-btn" id="btn-parse">Parse</button>
-    <button class="tool-btn" id="btn-validate">Validate</button>
-    <button class="tool-btn" id="btn-copy">Copy Output</button>
-    <button class="tool-btn" id="btn-download">Download</button>
-    <button class="tool-btn" id="btn-save">Save Tab</button>
+    <button class="tab-add" id="btn-add-tab" type="button" title="New tab" aria-label="New tab">+</button>
   </div>
 
   <div id="split-workbench" class="jf-workbench" style="--left-pane: 50%;">
     <div class="tool-panel jf-pane jf-pane--left">
-      <span class="tool-panel__label">Input JSON</span>
+      <div class="jf-pane__head">
+        <span class="tool-panel__label">Input</span>
+        <div class="jf-pane__actions" aria-label="Transform or convert input">
+          <button class="tool-btn tool-btn--primary" id="btn-format">Format</button>
+          <button class="tool-btn" id="btn-minify">Minify</button>
+          <button class="tool-btn" id="btn-validate">Validate</button>
+          <button class="tool-btn" id="btn-sort">Sort</button>
+          <details class="convert-menu">
+            <summary class="tool-btn">Convert <span aria-hidden="true">⌄</span></summary>
+            <div class="convert-menu__options" role="menu" aria-label="Convert JSON">
+              <button id="btn-json-to-csv" type="button" role="menuitem">JSON to CSV</button>
+              <button id="btn-csv-to-json" type="button" role="menuitem">CSV to JSON</button>
+              <button id="btn-to-js" type="button" role="menuitem">JSON to JavaScript</button>
+              <button id="btn-to-ts" type="button" role="menuitem">JSON to TypeScript</button>
+            </div>
+          </details>
+        </div>
+      </div>
       <textarea
         id="input"
         class="tool-textarea"
-        placeholder='{"name": "John", "age": 30}'></textarea>
+        placeholder='Paste JSON or CSV here…'></textarea>
     </div>
 
     <div
@@ -50,14 +61,41 @@ import CodeEditor from "../../components/CodeEditor.astro";
     </div>
 
     <div class="tool-panel jf-pane jf-pane--right">
-      <span class="tool-panel__label">Output</span>
+      <div class="jf-pane__head">
+        <span class="tool-panel__label">Output</span>
+        <div class="jf-pane__actions jf-pane__actions--output">
+          <button class="tool-btn" id="btn-copy">Copy</button>
+          <button class="tool-btn" id="btn-download">Download</button>
+          <button class="tool-btn" id="btn-open-compare">Compare</button>
+        </div>
+      </div>
       <CodeEditor id="json-formatter-output" minHeight={250} fill={true} />
     </div>
   </div>
   <div id="status"></div>
 
+  <section id="json-compare" class="json-compare" hidden aria-labelledby="json-compare-heading">
+    <div class="json-compare__head">
+      <div>
+        <span class="tool-panel__label">JSON compare</span>
+        <h2 id="json-compare-heading">Compare two JSON documents</h2>
+      </div>
+      <button class="tool-btn" id="btn-close-compare" type="button">Close</button>
+    </div>
+    <div class="json-compare__inputs">
+      <label class="tool-panel"><span class="tool-panel__label">Original</span><textarea id="compare-a" class="tool-textarea" placeholder="Paste original JSON…"></textarea></label>
+      <label class="tool-panel"><span class="tool-panel__label">Modified</span><textarea id="compare-b" class="tool-textarea" placeholder="Paste changed JSON…"></textarea></label>
+    </div>
+    <div class="tool-actions json-compare__actions">
+      <button class="tool-btn tool-btn--primary" id="btn-run-compare" type="button">Compare</button>
+      <button class="tool-btn" id="btn-swap-compare" type="button">Swap</button>
+    </div>
+    <div id="compare-status" aria-live="polite"></div>
+    <div id="compare-output" class="json-compare__output" aria-live="polite"></div>
+  </section>
+
   <section slot="about" class="tool-about">
-    <h2>What Does a JSON Formatter Do?</h2>
+    <h2>Format, validate, and convert JSON in one workspace</h2>
     <p>
       JSON (JavaScript Object Notation) is everywhere — API responses, config files, database exports, package manifests.
       But raw JSON from an API or a minified file is nearly impossible to read. A formatter takes that dense blob of text
@@ -65,7 +103,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
     </p>
     <p>
       This tool parses your JSON, checks that it's valid, and outputs standard prettified JSON (indentation and quoted keys).
-      <strong>Format</strong> and <strong>Parse</strong> both rebuild the value from parsed data so the output is clean, valid JSON.
+      <strong>Format</strong> rebuilds the value into clean JSON; <strong>Sort keys</strong> makes large payloads easier to compare.
       If something's wrong — a missing comma, an extra bracket, an unquoted key — you'll get a clear error pointing to the problem.
     </p>
 
@@ -79,9 +117,9 @@ import CodeEditor from "../../components/CodeEditor.astro";
 
     <h3>Tips</h3>
     <p>
-      Use multiple tabs to compare different JSON payloads side by side. Your tabs auto-save to the browser,
-      so they'll still be there when you come back. If you need to compare two JSON objects structurally,
-      try our <a href="/tools/json-diff">JSON Diff</a> tool instead.
+      Use multiple tabs to keep different payloads available. Your tabs auto-save to the browser, so they'll still
+      be there when you come back. Use <strong>Compare JSON</strong> when you need to inspect structural differences
+      between two payloads.
     </p>
   </section>
 </ToolLayout>
@@ -106,6 +144,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
   });
 
   var MAX_JSON_STRING_UNWRAP = 12;
+  var outputType = "json";
 
   function looksLikeJsonDocument(s) {
     s = s.trim();
@@ -145,6 +184,153 @@ import CodeEditor from "../../components/CodeEditor.astro";
     status.textContent = msg;
   }
 
+  function setResult(value, language, type) {
+    outputEditor.setLanguage(language || "text");
+    setOutput(value);
+    outputType = type || "txt";
+  }
+
+  function sortJson(value) {
+    if (Array.isArray(value)) return value.map(sortJson);
+    if (value && typeof value === "object") {
+      var result = {};
+      Object.keys(value).sort().forEach(function (key) { result[key] = sortJson(value[key]); });
+      return result;
+    }
+    return value;
+  }
+
+  function parseCsv(text) {
+    var rows = [];
+    var row = [];
+    var field = "";
+    var quoted = false;
+    for (var i = 0; i < text.length; i++) {
+      var char = text[i];
+      if (quoted) {
+        if (char === '"' && text[i + 1] === '"') { field += '"'; i++; }
+        else if (char === '"') quoted = false;
+        else field += char;
+      } else if (char === '"') quoted = true;
+      else if (char === ",") { row.push(field); field = ""; }
+      else if (char === "\n" || char === "\r") {
+        if (char === "\r" && text[i + 1] === "\n") i++;
+        row.push(field); field = "";
+        if (row.some(function (cell) { return cell !== ""; })) rows.push(row);
+        row = [];
+      } else field += char;
+    }
+    if (quoted) throw new Error("CSV has an unclosed quoted value");
+    row.push(field);
+    if (row.some(function (cell) { return cell !== ""; })) rows.push(row);
+    if (rows.length < 2) throw new Error("CSV needs a header row and at least one data row");
+    var headers = rows[0].map(function (header, index) { return (header || "column_" + (index + 1)).trim(); });
+    return rows.slice(1).map(function (values) {
+      var item = {};
+      headers.forEach(function (header, index) {
+        var value = values[index] == null ? "" : values[index];
+        item[header] = value === "" ? "" : value === "true" ? true : value === "false" ? false : value === "null" ? null : (/^-?(?:\d+|\d*\.\d+)$/.test(value) ? Number(value) : value);
+      });
+      return item;
+    });
+  }
+
+  function flattenForCsv(value, prefix, result) {
+    if (Array.isArray(value)) { result[prefix] = JSON.stringify(value); return; }
+    if (value && typeof value === "object") {
+      Object.keys(value).forEach(function (key) {
+        flattenForCsv(value[key], prefix ? prefix + "." + key : key, result);
+      });
+      return;
+    }
+    result[prefix] = value == null ? "" : value;
+  }
+
+  function toCsv(value) {
+    // A single JSON object is a useful one-row CSV, not an error.
+    var values = Array.isArray(value) ? value : [value];
+    if (!values.length || values.some(function (item) { return !item || typeof item !== "object" || Array.isArray(item); })) {
+      throw new Error("JSON to CSV needs an object or a non-empty array of objects");
+    }
+    var rows = values.map(function (item) { var flat = {}; flattenForCsv(item, "", flat); return flat; });
+    var seen = {};
+    var headers = [];
+    rows.forEach(function (row) { Object.keys(row).forEach(function (key) { if (!seen[key]) { seen[key] = true; headers.push(key); } }); });
+    function quote(cell) { var text = String(cell == null ? "" : cell); return /[",\n\r]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text; }
+    return headers.map(quote).join(",") + "\n" + rows.map(function (row) { return headers.map(function (header) { return quote(row[header]); }).join(","); }).join("\n");
+  }
+
+  function typeName(value, depth) {
+    var pad = new Array((depth || 0) + 1).join("  ");
+    var nextPad = new Array((depth || 0) + 2).join("  ");
+    if (value === null) return "null";
+    if (Array.isArray(value)) {
+      if (!value.length) return "unknown[]";
+      var itemTypes = [];
+      value.slice(0, 20).forEach(function (item) { var type = typeName(item, (depth || 0) + 1); if (itemTypes.indexOf(type) === -1) itemTypes.push(type); });
+      return "(" + itemTypes.join(" | ") + ")[]";
+    }
+    if (typeof value === "object") {
+      var keys = Object.keys(value);
+      if (!keys.length) return "Record<string, never>";
+      return "{\n" + keys.map(function (key) { return nextPad + ( /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? key : JSON.stringify(key) ) + ": " + typeName(value[key], (depth || 0) + 1) + ";"; }).join("\n") + "\n" + pad + "}";
+    }
+    return typeof value;
+  }
+
+  function jsonPath(base, key, isArray) {
+    if (isArray) return base + "[" + key + "]";
+    return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? base + "." + key : base + "[" + JSON.stringify(key) + "]";
+  }
+
+  function previewValue(value) {
+    var text = typeof value === "string" ? JSON.stringify(value) : JSON.stringify(value);
+    return text.length > 180 ? text.slice(0, 177) + "…" : text;
+  }
+
+  function structuralDiff(before, after, path, changes) {
+    if (JSON.stringify(before) === JSON.stringify(after)) return;
+    var beforeIsObject = before && typeof before === "object";
+    var afterIsObject = after && typeof after === "object";
+    var bothArrays = Array.isArray(before) && Array.isArray(after);
+    var bothObjects = beforeIsObject && afterIsObject && !Array.isArray(before) && !Array.isArray(after);
+    if (bothArrays) {
+      var max = Math.max(before.length, after.length);
+      for (var index = 0; index < max; index++) {
+        if (index >= before.length) changes.push({ kind: "added", path: jsonPath(path, index, true), after: after[index] });
+        else if (index >= after.length) changes.push({ kind: "removed", path: jsonPath(path, index, true), before: before[index] });
+        else structuralDiff(before[index], after[index], jsonPath(path, index, true), changes);
+      }
+      return;
+    }
+    if (bothObjects) {
+      var keys = {};
+      Object.keys(before).forEach(function (key) { keys[key] = true; });
+      Object.keys(after).forEach(function (key) { keys[key] = true; });
+      Object.keys(keys).sort().forEach(function (key) {
+        if (!(key in before)) changes.push({ kind: "added", path: jsonPath(path, key, false), after: after[key] });
+        else if (!(key in after)) changes.push({ kind: "removed", path: jsonPath(path, key, false), before: before[key] });
+        else structuralDiff(before[key], after[key], jsonPath(path, key, false), changes);
+      });
+      return;
+    }
+    changes.push({ kind: "changed", path: path, before: before, after: after });
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
+  }
+
+  function renderComparison(changes) {
+    if (!changes.length) return '<div class="json-compare__empty">The documents are structurally identical.</div>';
+    return '<div class="json-compare__summary">' + changes.length + ' change' + (changes.length === 1 ? '' : 's') + '</div><ul class="json-compare__list">' + changes.map(function (change) {
+      var before = change.kind === "added" ? "" : '<code>' + escapeHtml(previewValue(change.before)) + '</code>';
+      var after = change.kind === "removed" ? "" : '<code>' + escapeHtml(previewValue(change.after)) + '</code>';
+      var arrow = change.kind === "changed" ? '<span aria-hidden="true">→</span>' : '';
+      return '<li class="json-compare__change json-compare__change--' + change.kind + '"><span class="json-compare__kind">' + change.kind + '</span><code class="json-compare__path">' + escapeHtml(change.path) + '</code><span class="json-compare__values">' + before + arrow + after + '</span></li>';
+    }).join("") + '</ul>';
+  }
+
   function genId() {
     return "tab-" + Date.now().toString(36);
   }
@@ -155,8 +341,10 @@ import CodeEditor from "../../components/CodeEditor.astro";
     list.innerHTML = "";
     tabs.forEach(function (tab) {
       var el = document.createElement("div");
-      el.className =
-        "tab-item" + (tab.id === activeTab ? " tab-item--active" : "");
+      el.className = "tab-item" + (tab.id === activeTab ? " tab-item--active" : "");
+      el.setAttribute("role", "tab");
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-selected", String(tab.id === activeTab));
       el.innerHTML =
         '<span class="tab-item__name">' +
         (tab.name || "Untitled") +
@@ -166,9 +354,14 @@ import CodeEditor from "../../components/CodeEditor.astro";
             tab.id +
             '">&times;</button>'
           : "");
-      el.addEventListener("click", function (e) {
-        if (e.target.classList.contains("tab-item__close")) return;
-        switchTab(tab.id);
+      function selectOrRename(e) {
+        if (e && e.target.classList.contains("tab-item__close")) return;
+        if (tab.id === activeTab) renameTab(tab);
+        else switchTab(tab.id);
+      }
+      el.addEventListener("click", selectOrRename);
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectOrRename(e); }
       });
       list.appendChild(el);
     });
@@ -215,6 +408,25 @@ import CodeEditor from "../../components/CodeEditor.astro";
     };
     tabs.push(tab);
     switchTab(tab.id);
+  }
+
+  function renameTab(tab) {
+    var item = document.querySelector(".tab-item--active");
+    if (!tab || !item) return;
+    var field = document.createElement("input");
+    field.className = "tab-item__rename";
+    field.value = tab.name || "";
+    field.setAttribute("aria-label", "Rename JSON tab");
+    item.replaceChildren(field); field.focus(); field.select();
+    var done = false;
+    function finish() {
+      if (done) return; done = true;
+      tab.name = field.value.trim() || "Untitled";
+      renderTabs(); saveToDB(); setStatus("Tab renamed", "success");
+    }
+    field.addEventListener("click", function(e) { e.stopPropagation(); });
+    field.addEventListener("keydown", function(e) { if (e.key === "Enter") finish(); if (e.key === "Escape") { done = true; renderTabs(); } });
+    field.addEventListener("blur", finish);
   }
 
   function closeTab(id) {
@@ -275,8 +487,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
   document.getElementById("btn-format").addEventListener("click", function () {
     try {
       var parsed = parseJsonInput(input.value);
-      outputEditor.setLanguage("json");
-      setOutput(JSON.stringify(parsed, null, 2));
+      setResult(JSON.stringify(parsed, null, 2), "json", "json");
       setStatus("Formatted", "success");
     } catch (e) {
       setOutput("");
@@ -286,8 +497,7 @@ import CodeEditor from "../../components/CodeEditor.astro";
 
   document.getElementById("btn-minify").addEventListener("click", function () {
     try {
-      outputEditor.setLanguage("json");
-      setOutput(JSON.stringify(parseJsonInput(input.value)));
+      setResult(JSON.stringify(parseJsonInput(input.value)), "json", "json");
       setStatus("Minified", "success");
     } catch (e) {
       setOutput("");
@@ -295,12 +505,11 @@ import CodeEditor from "../../components/CodeEditor.astro";
     }
   });
 
-  document.getElementById("btn-parse").addEventListener("click", function () {
+  document.getElementById("btn-sort").addEventListener("click", function () {
     try {
       var parsed = parseJsonInput(input.value);
-      outputEditor.setLanguage("json");
-      setOutput(JSON.stringify(parsed, null, 2));
-      setStatus("Parsed", "success");
+      setResult(JSON.stringify(sortJson(parsed), null, 2), "json", "json");
+      setStatus("Sorted keys alphabetically", "success");
     } catch (e) {
       setOutput("");
       setStatus("Invalid JSON: " + e.message, "error");
@@ -312,14 +521,90 @@ import CodeEditor from "../../components/CodeEditor.astro";
     .addEventListener("click", function () {
       try {
         parseJsonInput(input.value);
-        outputEditor.setLanguage("text");
-        setOutput("Valid JSON ✓");
+        setResult("Valid JSON ✓", "text", "txt");
         setStatus("Valid JSON!", "success");
       } catch (e) {
         setOutput("");
         setStatus("Invalid: " + e.message, "error");
       }
     });
+
+  document.getElementById("btn-json-to-csv").addEventListener("click", function () {
+    try {
+      var csv = toCsv(parseJsonInput(input.value));
+      setResult(csv, "text", "csv");
+      setStatus("Converted JSON to CSV", "success");
+    } catch (e) { setOutput(""); setStatus("Could not convert: " + e.message, "error"); }
+  });
+
+  document.getElementById("btn-csv-to-json").addEventListener("click", function () {
+    try {
+      var json = parseCsv(input.value);
+      setResult(JSON.stringify(json, null, 2), "json", "json");
+      setStatus("Converted " + json.length + " CSV rows to JSON", "success");
+    } catch (e) { setOutput(""); setStatus("Could not convert: " + e.message, "error"); }
+  });
+
+  document.getElementById("btn-to-js").addEventListener("click", function () {
+    try {
+      setResult("const data = " + JSON.stringify(parseJsonInput(input.value), null, 2) + ";\n", "javascript", "js");
+      setStatus("Created a JavaScript object", "success");
+    } catch (e) { setOutput(""); setStatus("Invalid JSON: " + e.message, "error"); }
+  });
+
+  document.getElementById("btn-to-ts").addEventListener("click", function () {
+    try {
+      var data = parseJsonInput(input.value);
+      var declaration = "export type Data = " + typeName(data, 0) + ";\n\nexport const data: Data = " + JSON.stringify(data, null, 2) + ";\n";
+      setResult(declaration, "javascript", "ts");
+      setStatus("Created a TypeScript type and value", "success");
+    } catch (e) { setOutput(""); setStatus("Invalid JSON: " + e.message, "error"); }
+  });
+
+  document.querySelectorAll(".convert-menu__options button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      button.closest("details").removeAttribute("open");
+    });
+  });
+
+  var compareWorkspace = document.getElementById("json-compare");
+  var compareA = document.getElementById("compare-a");
+  var compareB = document.getElementById("compare-b");
+  var compareStatus = document.getElementById("compare-status");
+  var compareOutput = document.getElementById("compare-output");
+
+  function openCompare() {
+    compareWorkspace.hidden = false;
+    if (!compareA.value.trim()) compareA.value = input.value;
+    window.location.hash = "compare";
+    compareA.focus();
+  }
+
+  document.getElementById("btn-open-compare").addEventListener("click", openCompare);
+  document.getElementById("btn-close-compare").addEventListener("click", function () {
+    compareWorkspace.hidden = true;
+    compareStatus.textContent = "";
+    compareOutput.innerHTML = "";
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  });
+  document.getElementById("btn-swap-compare").addEventListener("click", function () {
+    var original = compareA.value;
+    compareA.value = compareB.value;
+    compareB.value = original;
+  });
+  document.getElementById("btn-run-compare").addEventListener("click", function () {
+    try {
+      var changes = [];
+      structuralDiff(parseJsonInput(compareA.value), parseJsonInput(compareB.value), "$", changes);
+      compareStatus.className = "tool-success";
+      compareStatus.textContent = changes.length ? "Comparison complete" : "Objects are identical";
+      compareOutput.innerHTML = renderComparison(changes);
+    } catch (e) {
+      compareStatus.className = "tool-error";
+      compareStatus.textContent = "Invalid JSON: " + e.message;
+      compareOutput.innerHTML = "";
+    }
+  });
 
   document.getElementById("btn-copy").addEventListener("click", function () {
     var currentOutput = getOutput();
@@ -334,28 +619,16 @@ import CodeEditor from "../../components/CodeEditor.astro";
     .addEventListener("click", function () {
       var currentOutput = getOutput();
       if (!currentOutput) return;
-      var blob = new Blob([currentOutput], { type: "application/json" });
+      var type = outputType === "csv" ? "text/csv" : outputType === "json" ? "application/json" : "text/plain";
+      var blob = new Blob([currentOutput], { type: type });
       var a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download =
         (tabs.find(function (t) {
           return t.id === activeTab;
-        }).name || "formatted") + ".json";
+        }).name || "converted") + "." + outputType;
       a.click();
     });
-
-  document.getElementById("btn-save").addEventListener("click", function () {
-    var tab = tabs.find(function (t) {
-      return t.id === activeTab;
-    });
-    var name = prompt("Tab name:", tab ? tab.name : "");
-    if (name !== null && tab) {
-      tab.name = name;
-      renderTabs();
-      saveToDB();
-      setStatus("Saved!", "success");
-    }
-  });
 
   document.getElementById("btn-add-tab").addEventListener("click", function () {
     addTab();
@@ -450,26 +723,49 @@ import CodeEditor from "../../components/CodeEditor.astro";
     });
   })();
 
+  if (window.location.hash === "#compare") openCompare();
+
   loadFromDB();
 </script>
 
 <!-- Tab styles are in global.scss -->
 <style>
+  .json-compare {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .json-compare__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.85rem; }
+  .json-compare__head h2 { margin: 0.12rem 0 0; font-size: 1.08rem; }
+  .json-compare__inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .json-compare__inputs .tool-textarea { min-height: 220px; }
+  .json-compare__actions { margin: 0.75rem 0; }
+  .json-compare__output { margin-top: 0.65rem; }
+  .json-compare__summary { margin-bottom: 0.5rem; color: var(--color-text-light); font-size: 0.8rem; font-weight: 650; }
+  .json-compare__list { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+  .json-compare__change { display: grid; grid-template-columns: 4.7rem minmax(9rem, 0.8fr) minmax(0, 2fr); gap: 0.65rem; align-items: start; padding: 0.55rem 0.65rem; border-radius: var(--radius-sm); background: var(--color-code-bg); font-size: 0.78rem; }
+  .json-compare__kind { width: max-content; padding: 0.1rem 0.35rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+  .json-compare__change--added .json-compare__kind { color: var(--color-success); background: color-mix(in srgb, var(--color-success) 13%, transparent); }
+  .json-compare__change--removed .json-compare__kind { color: var(--color-danger); background: color-mix(in srgb, var(--color-danger) 13%, transparent); }
+  .json-compare__change--changed .json-compare__kind { color: var(--color-warning); background: color-mix(in srgb, var(--color-warning) 15%, transparent); }
+  .json-compare__path { color: var(--color-info); overflow-wrap: anywhere; }
+  .json-compare__values { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; min-width: 0; color: var(--color-text-light); }
+  .json-compare__values code { max-width: 100%; overflow-wrap: anywhere; }
+  .json-compare__empty { padding: 1.2rem; border: 1px dashed var(--color-border); border-radius: var(--radius-md); color: var(--color-text-light); font-size: 0.86rem; text-align: center; }
   .jf-workbench {
-    margin-top: 1rem;
+    margin-top: 0;
     display: flex;
     align-items: stretch;
     gap: 0;
-    min-height: 580px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--color-surface);
+    min-height: calc(100dvh - var(--site-header-height) - 72px);
+    background: transparent;
   }
   .jf-pane {
     margin: 0;
-    gap: 0.5rem;
-    padding: 0.8rem;
+    gap: 0;
+    padding: 0;
     box-sizing: border-box;
     min-height: 0;
   }
@@ -477,7 +773,6 @@ import CodeEditor from "../../components/CodeEditor.astro";
     width: var(--left-pane);
     min-width: 300px;
     max-width: calc(100% - 320px);
-    border-right: 1px solid var(--color-border);
   }
   .jf-pane--right {
     flex: 1;
@@ -486,25 +781,48 @@ import CodeEditor from "../../components/CodeEditor.astro";
     grid-template-rows: auto 1fr;
     align-content: stretch;
   }
+  .jf-pane__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-height: 38px;
+    padding: 0.25rem 0.5rem 0.25rem 0.7rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+    background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  }
+  .jf-pane__head .tool-panel__label { flex: 0 0 auto; margin: 0; font-size: 0.68rem; }
+  .jf-pane__actions { display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem; flex-wrap: wrap; }
+  .jf-pane__actions .tool-btn { min-height: 26px; padding: 0.25rem 0.42rem; border-radius: 0.35rem; font-size: 0.68rem; }
   .jf-pane .tool-textarea,
   .jf-pane .tool-output {
-    min-height: 520px;
-    height: calc(100% - 1.4rem);
+    flex: 1;
+    min-height: 0;
+    height: 100%;
     margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
   .jf-pane .dc-editor {
-    min-height: 520px;
+    flex: 1;
+    min-height: 0;
     margin: 0;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent;
+    box-shadow: none !important;
   }
+  .jf-pane .dc-editor .dc-editor__mount,
+  .jf-pane .dc-editor .cm-editor { border-radius: 0 !important; box-shadow: none !important; }
   .jf-pane--right .dc-editor {
     height: 100%;
     min-height: 0;
   }
   .jf-splitter {
-    width: 12px;
-    background: var(--color-surface);
-    border-right: 1px solid var(--color-border);
-    border-left: 1px solid var(--color-border);
+    width: 8px;
+    background: transparent;
+    border: 0;
     cursor: col-resize;
     display: flex;
     align-items: center;
@@ -513,8 +831,8 @@ import CodeEditor from "../../components/CodeEditor.astro";
     touch-action: none;
   }
   .jf-splitter span {
-    width: 3px;
-    height: 42px;
+    width: 2px;
+    height: 32px;
     border-radius: 999px;
     background: color-mix(in oklab, var(--color-text-light) 45%, transparent);
   }
@@ -523,7 +841,40 @@ import CodeEditor from "../../components/CodeEditor.astro";
   .jf-workbench--dragging .jf-splitter span {
     background: var(--color-primary);
   }
-  @media (max-width: 980px) {
+  .convert-menu { position: relative; }
+  .convert-menu > summary { list-style: none; cursor: pointer; }
+  .convert-menu > summary::-webkit-details-marker { display: none; }
+  .convert-menu > summary span { display: inline-block; transition: transform 150ms ease; }
+  .convert-menu[open] > summary span { transform: rotate(180deg); }
+  .convert-menu__options {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 0.35rem);
+    right: 0;
+    display: grid;
+    min-width: 178px;
+    padding: 0.3rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+  .convert-menu__options button {
+    appearance: none;
+    width: 100%;
+    padding: 0.45rem 0.55rem;
+    border: 0;
+    border-radius: 0.3rem;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.72rem;
+    text-align: left;
+  }
+  .convert-menu__options button:hover,
+  .convert-menu__options button:focus-visible { background: var(--color-code-bg); color: var(--color-primary); outline: none; }
+  @media (max-width: 760px) {
     .jf-workbench {
       display: block;
       min-height: 0;
@@ -536,12 +887,12 @@ import CodeEditor from "../../components/CodeEditor.astro";
       min-width: 0;
       max-width: 100%;
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       margin-bottom: 0.75rem;
     }
     .jf-pane .tool-textarea,
     .jf-pane .tool-output {
-      min-height: 320px;
+      min-height: 350px;
       max-height: 50vh;
     }
     .jf-pane .dc-editor {
@@ -551,5 +902,12 @@ import CodeEditor from "../../components/CodeEditor.astro";
     .jf-splitter {
       display: none;
     }
+  }
+  @media (max-width: 620px) {
+    .jf-pane__head { align-items: flex-start; flex-direction: column; padding: 0.45rem 0.6rem; }
+    .jf-pane__actions { justify-content: flex-start; }
+    .json-compare { padding: 0.75rem; }
+    .json-compare__inputs { grid-template-columns: 1fr; }
+    .json-compare__change { grid-template-columns: 1fr; gap: 0.35rem; }
   }
 </style>

@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0114",
-  "title": "Implement Stack and Queue using Deque",
+  "title": "Implement Stack and Queue Using a Deque",
   "difficulty": "Easy",
   "topic": "Stack&Queue",
   "topics": [
@@ -77,13 +77,78 @@
         3,
         true
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "stack.push",
+            7
+          ],
+          [
+            "queue.enqueue",
+            8
+          ],
+          [
+            "stack.peek"
+          ],
+          [
+            "stack.peek"
+          ],
+          [
+            "queue.peek"
+          ],
+          [
+            "stack.pop"
+          ],
+          [
+            "stack.empty"
+          ],
+          [
+            "queue.empty"
+          ],
+          [
+            "queue.dequeue"
+          ],
+          [
+            "queue.empty"
+          ],
+          [
+            "queue.enqueue",
+            9
+          ],
+          [
+            "queue.dequeue"
+          ],
+          [
+            "queue.empty"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        7,
+        7,
+        8,
+        7,
+        true,
+        false,
+        8,
+        true,
+        null,
+        9,
+        true
+      ]
     }
   ],
   "functionName": "implementStackAndQueueUsingDeque",
   "templateCode": "function implementStackAndQueueUsingDeque() {\n  return {\n    stack: {\n      push(x) {}, pop() {}, peek() {}, empty() {}\n    },\n    queue: {\n      enqueue(x) {}, dequeue() {}, peek() {}, empty() {}\n    }\n  };\n}\n",
   "constraints": [
-    "1 <= N <= 100",
-    "1 <= value <= 10^5"
+    "1 <= number of method calls <= 100",
+    "1 <= value <= 10^5",
+    "Removal and peek operations are called only on a nonempty structure."
   ],
   "runner": {
     "mode": "operations",

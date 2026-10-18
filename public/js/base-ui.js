@@ -27,7 +27,7 @@
         var current = document.documentElement.getAttribute('data-theme') || 'light';
         var next = current === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+        try { localStorage.setItem('theme', next); } catch (_) {}
         updateIcons(next);
       });
     });
@@ -46,12 +46,16 @@
     btn.addEventListener('click', function () {
       var open = nav.classList.toggle('header__mobile-nav--open');
       btn.innerHTML = open ? closeIcon : menuIcon;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
 
     nav.querySelectorAll('a').forEach(function (anchor) {
       anchor.addEventListener('click', function () {
         nav.classList.remove('header__mobile-nav--open');
         btn.innerHTML = menuIcon;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
       });
     });
   }
@@ -77,7 +81,7 @@
         var on = document.documentElement.getAttribute('data-reading-mode') === 'true';
         if (on) document.documentElement.removeAttribute('data-reading-mode');
         else document.documentElement.setAttribute('data-reading-mode', 'true');
-        localStorage.setItem('readingMode', String(!on));
+        try { localStorage.setItem('readingMode', String(!on)); } catch (_) {}
         updateStyle();
       });
     });

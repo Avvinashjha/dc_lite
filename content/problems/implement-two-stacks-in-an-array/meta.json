@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0117",
-  "title": "Implement two Stacks in an Array",
+  "title": "Implement Two Stacks in One Array",
   "difficulty": "Easy",
   "topic": "Stack&Queue",
   "topics": [
@@ -77,12 +77,102 @@
         -1,
         1
       ]
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          [
+            "push1",
+            1
+          ],
+          [
+            "push1",
+            2
+          ],
+          [
+            "push2",
+            3
+          ],
+          [
+            "pop1"
+          ],
+          [
+            "push2",
+            4
+          ],
+          [
+            "pop1"
+          ],
+          [
+            "pop2"
+          ],
+          [
+            "pop1"
+          ],
+          [
+            "pop2"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        2,
+        null,
+        1,
+        4,
+        -1,
+        -1
+      ]
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          [
+            "push2",
+            7
+          ],
+          [
+            "push2",
+            8
+          ],
+          [
+            "pop2"
+          ],
+          [
+            "pop2"
+          ],
+          [
+            "push1",
+            9
+          ],
+          [
+            "pop1"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        8,
+        7,
+        null,
+        9
+      ]
     }
   ],
   "functionName": "TwoStacks",
   "templateCode": "class TwoStacks {\n  constructor(n) {\n    // Write your implementation here.\n  }\n  push1(x) {\n    // Write your implementation here.\n  }\n  push2(x) {\n    // Write your implementation here.\n  }\n  pop1() {\n    // Write your implementation here.\n  }\n  pop2() {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
-    "1 <= N <= 100"
+    "1 <= n <= 100",
+    "Each pushed value is a JavaScript safe integer."
   ],
   "runner": {
     "mode": "operations"
@@ -99,6 +189,6 @@
   ],
   "sampleInput": "constructorArgs = [3]\noperations = [[\"push1\",1],[\"push2\",2],[\"push1\",3],[\"pop1\"],[\"pop2\"],[\"pop2\"]]",
   "sampleOutput": "[null,null,null,3,2,-1]",
-  "inputFormat": "Implement the class TwoStacks. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
-  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
+  "inputFormat": "Construct TwoStacks(n), where n is the total capacity shared by both stacks. Each fixture supplies [n] and method calls on a fresh instance.",
+  "outputFormat": "push1 and push2 have no return value, including when full. pop1 and pop2 remove and return their stack\u2019s top value, or -1 if empty. Undefined results display as null."
 }

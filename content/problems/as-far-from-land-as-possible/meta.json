@@ -3,11 +3,10 @@
   "id": "problem-0196",
   "title": "As Far from Land as Possible",
   "difficulty": "Medium",
-  "topic": "Graph",
+  "topic": "Matrix",
   "topics": [
-    "Graph",
-    "BFS",
-    "DFS"
+    "Matrix",
+    "BFS"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/as-far-from-land-as-possible/",
@@ -56,6 +55,36 @@
         ]
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": -1
     }
   ],
   "functionName": "maxDistance",
@@ -78,6 +107,13 @@
   ],
   "sampleInput": "grid = [[1,0,1],[0,0,0],[1,0,1]]",
   "sampleOutput": "2",
-  "inputFormat": "Implement maxDistance(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxDistance(grid), where grid is an n \u00d7 n array with 0 for water and 1 for land.",
+  "outputFormat": "The largest distance from any water cell to its nearest land cell, or -1 if there is no water or no land.",
+  "visuals": [
+    {
+      "title": "Distance to the nearest land",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 200\" role=\"img\" aria-label=\"Land occupies the four corners. Edge water cells have distance 1; the center has distance 2\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><rect x=\"145\" y=\"8\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"172\" y=\"43\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">L</text><rect x=\"205\" y=\"8\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sky)\" stroke=\"var(--color-border)\"/><text x=\"232\" y=\"43\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">1</text><rect x=\"265\" y=\"8\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"292\" y=\"43\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">L</text><rect x=\"145\" y=\"68\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sky)\" stroke=\"var(--color-border)\"/><text x=\"172\" y=\"103\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">1</text><rect x=\"205\" y=\"68\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-peach)\" stroke=\"var(--color-border)\"/><text x=\"232\" y=\"103\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">2</text><rect x=\"265\" y=\"68\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sky)\" stroke=\"var(--color-border)\"/><text x=\"292\" y=\"103\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">1</text><rect x=\"145\" y=\"128\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"172\" y=\"163\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">L</text><rect x=\"205\" y=\"128\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sky)\" stroke=\"var(--color-border)\"/><text x=\"232\" y=\"163\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">1</text><rect x=\"265\" y=\"128\" width=\"54\" height=\"54\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"292\" y=\"163\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"22\">L</text></svg>",
+      "caption": "L marks land. Numbers show nearest-land distance for water cells. The center gives the maximum, 2."
+    }
+  ]
 }

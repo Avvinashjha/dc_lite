@@ -7,7 +7,7 @@
   "topics": [
     "Tree",
     "Binary Tree",
-    "DFS"
+    "BFS"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",
@@ -44,6 +44,46 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ]
     }
   ],
   "functionName": "zigzagLevelOrder",
@@ -69,6 +109,13 @@
   ],
   "sampleInput": "root = [3,9,20,null,null,15,7]",
   "sampleOutput": "[[3],[20,9],[15,7]]",
-  "inputFormat": "Implement zigzagLevelOrder(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement zigzagLevelOrder(root). The runner converts the level-order input array into nodes with val, left, and right fields; [] becomes null.",
+  "outputFormat": "An array of levels, alternating left-to-right and right-to-left order, starting left-to-right at the root. Return [] for an empty tree.",
+  "visuals": [
+    {
+      "title": "Alternate the reading direction",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 305\" role=\"img\" aria-label=\"Tree with zigzag output 3; then 20, 9; then 15, 7\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><path d=\"M190 30L95 105\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M190 30L285 105\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M285 105L235 180\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M285 105L335 180\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><circle cx=\"190\" cy=\"30\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"190\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">3</text><circle cx=\"95\" cy=\"105\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"95\" y=\"111\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">9</text><circle cx=\"285\" cy=\"105\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"285\" y=\"111\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">20</text><circle cx=\"235\" cy=\"180\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"235\" y=\"186\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">15</text><circle cx=\"335\" cy=\"180\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"335\" y=\"186\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">7</text><text x=\"190\" y=\"220\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">Level 0 \u2192 [3]</text><text x=\"190\" y=\"245\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">Level 1 \u2190 [20, 9]</text><text x=\"190\" y=\"270\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">Level 2 \u2192 [15, 7]</text></svg>",
+      "caption": "Visit levels from top to bottom. Reverse the reading order on every second level."
+    }
+  ]
 }

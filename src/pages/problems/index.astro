@@ -1,4 +1,6 @@
 ---
+import Icon from '../../components/ProblemIcon.astro';
+import '../../styles/problem-list.scss';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/problems.scss';
 import {
@@ -9,7 +11,6 @@ import {
   getProblemSets,
   getAllPotdScheduledSlugs,
   getTodaysProblem,
-  getPastDailyProblems,
 } from '../../utils/contentLoader';
 import { slugifyTaxonomy } from '../../utils/taxonomy';
 
@@ -18,10 +19,8 @@ const problems = getProblems();
 const topics = getProblemTopics();
 const difficulties = getProblemDifficulties();
 const problemSets = getProblemSets();
-const topTopics = topics.slice(0, 15);
 const potdSlugSet = new Set(getAllPotdScheduledSlugs());
 const todaysPotd = getTodaysProblem();
-const recentPotdPicks = getPastDailyProblems().slice(0, 8);
 
 const liteProblems = problems.map(p => ({
   slug: p.slug,
@@ -30,7 +29,6 @@ const liteProblems = problems.map(p => ({
   topics: p.topics,
   difficulty: p.difficulty,
   problemSet: p.problemSet || '',
-  platform: p.platform,
 }));
 
 const listJsonLd = {
@@ -63,53 +61,15 @@ const listJsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(listJsonLd)} />
   </Fragment>
 
-  <div class="container problems-page">
-    <!-- Hero -->
-    <section class="problems-hero">
-      <p class="problems-hero__eyebrow">Practice Arena</p>
-      <h1 class="problems-hero__title">{pageMeta.title}</h1>
-      <p class="problems-hero__desc">{pageMeta.description}</p>
-    </section>
-
-    <!-- Progress bar -->
-    <div class="problems-progress" id="progress-bar">
-      <span class="problems-progress__text" id="progress-text">0 / {problems.length} solved</span>
-      <div class="problems-progress__bar">
-        <div class="problems-progress__fill" id="progress-fill" style="width:0%"></div>
+  <div class="container problems-page problem-catalog">
+    <header class="problem-catalog__heading">
+      <div><h1>Problems</h1><p>Practice a pattern. Build your confidence.</p></div>
+      <div class="problems-progress" id="progress-bar">
+        <span class="problems-progress__text" id="progress-text">0 / {problems.length} solved</span>
+        <div class="problems-progress__bar"><div class="problems-progress__fill" id="progress-fill" style="width:0%"></div></div>
       </div>
-    </div>
-
-    {(todaysPotd || recentPotdPicks.length > 0) && (
-      <section class="problems-potd-strip" aria-label="Daily challenge">
-        <div class="problems-potd-strip__head">
-          <h2 class="problems-potd-strip__title">Daily challenge</h2>
-          <a class="problems-potd-strip__link" href="/#daily-challenge">Home hub →</a>
-        </div>
-        <div class="problems-potd-strip__row">
-          {todaysPotd && (
-            <a class="problems-potd-card problems-potd-card--today" href={`/problems/${todaysPotd.slug}`}>
-              <span class="problems-potd-card__eyebrow">Today · {todaysPotd.publishedAt}</span>
-              <span class="problems-potd-card__name">{todaysPotd.title}</span>
-              <span class="problems-potd-card__meta">{todaysPotd.topic} · {todaysPotd.difficulty}</span>
-            </a>
-          )}
-          {recentPotdPicks.map((p) => (
-            <a class="problems-potd-card" href={`/problems/${p.slug}`}>
-              <span class="problems-potd-card__eyebrow">{p.publishedAt}</span>
-              <span class="problems-potd-card__name">{p.title}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <!-- Topic chips -->
-    <div class="problems-topic-chips" id="topic-chips">
-      <button class="problems-topic-chips__chip problems-topic-chips__chip--active" data-chip="all" type="button">All</button>
-      {topTopics.map(t => (
-        <button class="problems-topic-chips__chip" data-chip={slugifyTaxonomy(t)} type="button">{t}</button>
-      ))}
-    </div>
+    </header>
+    {todaysPotd && <a class="problem-catalog__daily" href={`/problems/${todaysPotd.slug}`}><span>Today’s challenge</span><strong>{todaysPotd.title}</strong><span>→</span></a>}
 
     <!-- Tabs: Problems / Stats -->
     <nav style="display:flex;gap:0;margin-bottom:0.75rem;">
@@ -121,36 +81,34 @@ const listJsonLd = {
     <section id="pane-list">
       <!-- Filters -->
       <div class="problems-filters">
-        <input id="problem-search" class="problems-filters__input" placeholder="Search by title or topic..." />
-        <select id="problem-set" class="problems-filters__select">
+        <input aria-label="Search problems" id="problem-search" class="problems-filters__input" placeholder="Search by title or topic..." />
+        <select aria-label="Problem set" id="problem-set" class="problems-filters__select">
           <option value="all">All Sets</option>
           {problemSets.map(s => (
             <option value={s}>{s === 'top-300-leetcode' ? 'Top 300 LeetCode' : s}</option>
           ))}
         </select>
-        <select id="problem-topic" class="problems-filters__select">
+        <select aria-label="Topic" id="problem-topic" class="problems-filters__select">
           <option value="all">All Topics</option>
           {topics.map(t => <option value={slugifyTaxonomy(t)}>{t}</option>)}
         </select>
-        <select id="problem-difficulty" class="problems-filters__select">
+        <select aria-label="Difficulty" id="problem-difficulty" class="problems-filters__select">
           <option value="all">All Difficulty</option>
           {difficulties.map(d => <option value={d.toLowerCase()}>{d}</option>)}
         </select>
-        <label class="problems-filters__label">
-          <input type="checkbox" id="filter-favorites" />
-          <span>Favorites</span>
-        </label>
-        <label class="problems-filters__label">
-          <input type="checkbox" id="filter-daily-picks" />
-          <span>Daily picks</span>
-        </label>
+        <div class="problems-filters__actions">
+          <button type="button" id="filter-favorites" class="problems-filter-toggle" aria-pressed="false"><span class="problems-filter-toggle__track" aria-hidden="true"></span>Favorites</button>
+          <button type="button" id="filter-daily-picks" class="problems-filter-toggle" aria-pressed="false"><span class="problems-filter-toggle__track" aria-hidden="true"></span>Daily picks</button>
         <div class="problems-view-toggle" id="view-toggle">
-          <button class="problems-view-toggle__btn problems-view-toggle__btn--active" data-view="table" type="button" title="Table view">&#9776;</button>
-          <button class="problems-view-toggle__btn" data-view="grid" type="button" title="Card view">&#9638;</button>
+          <button class="problems-view-toggle__btn problems-view-toggle__btn--active" data-view="table" type="button" title="Table view" aria-label="Table view" aria-pressed="true"><Icon name="list"/></button>
+          <button class="problems-view-toggle__btn" data-view="grid" type="button" title="Card view" aria-label="Card view" aria-pressed="false"><Icon name="grid"/></button>
+        </div>
         </div>
       </div>
 
-      <p id="problem-count" style="margin:0 0 0.6rem;color:var(--color-text-light);font-size:0.82rem;">{problems.length} problems</p>
+      <p role="status" id="problem-count" style="margin:0 0 0.6rem;color:var(--color-text-light);font-size:0.82rem;">{problems.length} problems</p>
+
+      <div id="problem-empty" class="problem-catalog__empty" hidden>No problems match these filters. <button type="button" id="reset-filters">Clear filters</button></div>
 
       <!-- Table view -->
       <div id="view-table">
@@ -158,12 +116,9 @@ const listJsonLd = {
         <table class="problem-table">
           <thead>
             <tr>
-              <th class="problem-table__status">&#10004;</th>
-              <th class="problem-table__fav"></th>
-              <th class="problem-table__sortable" data-sort="title">Title <span class="sort-icon"></span></th>
-              <th class="problem-table__topic problem-table__sortable" data-sort="topic">Topic <span class="sort-icon"></span></th>
-              <th class="problem-table__difficulty problem-table__sortable" data-sort="difficulty">Difficulty <span class="sort-icon"></span></th>
-              <th class="problem-table__platform problem-table__sortable" data-sort="platform">Platform <span class="sort-icon"></span></th>
+              <th class="problem-table__sortable" data-sort="title" tabindex="0" aria-sort="none">Title <span class="sort-icon"></span></th>
+              <th class="problem-table__topic problem-table__sortable" data-sort="topic" tabindex="0" aria-sort="none">Topic <span class="sort-icon"></span></th>
+              <th class="problem-table__difficulty problem-table__sortable" data-sort="difficulty" tabindex="0" aria-sort="none">Difficulty <span class="sort-icon"></span></th>
             </tr>
           </thead>
           <tbody id="table-body">
@@ -176,17 +131,21 @@ const listJsonLd = {
                 data-problem-set={p.problemSet || ''}
                 data-daily-pick={potdSlugSet.has(p.slug) ? 'true' : 'false'}
               >
-                <td class="problem-table__status" data-status-for={p.slug}>&#9711;</td>
-                <td class="problem-table__fav">
-                  <button data-favorite-btn={p.slug} aria-label="Toggle favorite" aria-pressed="false">&#9734;</button>
-                </td>
                 <td class="problem-table__title">
+                  <div class="problem-table__identity">
+                    <div class="problem-table__actions">
+                      <button type="button" class="problem-solved-btn" data-solved-btn={p.slug} data-status-for={p.slug} aria-label={`Mark ${p.title} solved`} aria-pressed="false">&#9711;</button>
+                      <button type="button" data-favorite-btn={p.slug} aria-label={`Favorite ${p.title}`} aria-pressed="false">&#9734;</button>
+                    </div>
+                    <div class="problem-table__name">
                   <a href={`/problems/${p.slug}`}>{p.title}</a>
                   {potdSlugSet.has(p.slug) && (
                     <span class="problems-table-potd-badge" title="Appears on the daily schedule">
                       Daily
                     </span>
                   )}
+                    </div>
+                  </div>
                 </td>
                 <td class="problem-table__topic">
                   <a href={`/problems/topic/${slugifyTaxonomy(p.topic)}`} class="p-badge p-badge--neutral" style="text-decoration:none;font-size:0.68rem;">{p.topic}</a>
@@ -194,7 +153,6 @@ const listJsonLd = {
                 <td class="problem-table__difficulty">
                   <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
                 </td>
-                <td class="problem-table__platform">{p.platform}</td>
               </tr>
             ))}
           </tbody>
@@ -202,41 +160,6 @@ const listJsonLd = {
         </div>
       </div>
 
-      <!-- Grid view (hidden by default) -->
-      <div id="view-grid" class="problem-grid" style="display:none;">
-        {problems.map(p => (
-          <article
-            class="problem-card"
-            data-slug={p.slug}
-            data-title={p.title.toLowerCase()}
-            data-topic={slugifyTaxonomy(p.topic)}
-            data-difficulty={p.difficulty.toLowerCase()}
-            data-problem-set={p.problemSet || ''}
-            data-daily-pick={potdSlugSet.has(p.slug) ? 'true' : 'false'}
-          >
-            <div class="problem-card__head">
-              <button data-favorite-btn-card={p.slug} style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--color-text-light);padding:0;" aria-label="Toggle favorite">
-                <span data-favorite-icon-for={p.slug}>&#9734;</span>
-              </button>
-              <span class={`p-badge p-badge--${p.difficulty.toLowerCase()}`}>{p.difficulty}</span>
-              <span class="p-badge p-badge--neutral">{p.topic}</span>
-              <span class="p-badge p-badge--neutral" data-card-status-for={p.slug}>Not Solved</span>
-            </div>
-            <h3 class="problem-card__title">
-              <a href={`/problems/${p.slug}`}>{p.title}</a>
-            </h3>
-            <div class="problem-card__meta">
-              <span>{p.platform}</span>
-              <span>&middot;</span>
-              <span data-card-attempts-for={p.slug}>0 attempts</span>
-            </div>
-            <div class="problem-card__actions">
-              <a class="p-btn" href={`/problems/${p.slug}`}>Open</a>
-              <button class="p-btn p-btn--ghost problem-solved-btn" data-solved-btn={p.slug} type="button">Mark Solved</button>
-            </div>
-          </article>
-        ))}
-      </div>
     </section>
 
     <!-- Stats pane (hidden by default) -->
@@ -255,12 +178,12 @@ const listJsonLd = {
           <p class="stat-card__value" id="stat-days">0</p>
         </article>
         <article class="stat-card">
-          <p class="stat-card__label">Avg Confidence</p>
+          <p class="stat-card__label">Completion</p>
           <p class="stat-card__value" id="stat-confidence">0%</p>
         </article>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--spacing-md);margin-top:var(--spacing-md);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:var(--spacing-md);margin-top:var(--spacing-md);">
         <article class="stat-card">
           <p class="stat-card__label">Daily Activity</p>
           <div id="chart-daily" style="height:180px;display:grid;grid-template-columns:repeat(21,minmax(0,1fr));align-items:end;gap:3px;margin-top:0.5rem;"></div>
@@ -281,6 +204,7 @@ const listJsonLd = {
 <script id="problems-data" type="application/json" set:html={JSON.stringify(liteProblems)} />
 <script src="/js/store.js" is:inline></script>
 <script>
+  import { slugifyTaxonomy } from '../../utils/taxonomy';
   var TOOL = 'problem-progress';
   var FAVORITES_TOOL = 'problem-favorites';
   var problemsData = JSON.parse(document.getElementById('problems-data')!.textContent || '[]');
@@ -308,64 +232,36 @@ const listJsonLd = {
   mainTabList.addEventListener('click', () => switchMainTab('list'));
   mainTabStats.addEventListener('click', () => switchMainTab('stats'));
 
-  // ── View toggle ──
-  var viewTableEl = document.getElementById('view-table')!;
-  var viewGridEl = document.getElementById('view-grid')!;
-  var viewBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('#view-toggle .problems-view-toggle__btn'));
-
-  function switchView(view: string) {
-    viewTableEl.style.display = view === 'table' ? '' : 'none';
-    viewGridEl.style.display = view === 'grid' ? '' : 'none';
-    viewBtns.forEach(b => b.classList.toggle('problems-view-toggle__btn--active', b.dataset.view === view));
-  }
-  viewBtns.forEach(b => b.addEventListener('click', () => switchView(b.dataset.view!)));
-
-  // ── Table scroll affordance (mobile: hint that Difficulty/Platform columns are offscreen) ──
-  var tableScrollEl = document.getElementById('problem-table-scroll');
-  if (tableScrollEl) {
-    var updateTableScrollState = function () {
-      var el = tableScrollEl!;
-      var hasOverflow = el.scrollWidth > el.clientWidth + 1;
-      el.classList.toggle('problem-table-scroll--no-overflow', !hasOverflow);
-      var atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
-      el.classList.toggle('problem-table-scroll--at-end', hasOverflow && atEnd);
-    };
-    tableScrollEl.addEventListener('scroll', updateTableScrollState, { passive: true });
-    window.addEventListener('resize', updateTableScrollState);
-    updateTableScrollState();
-  }
-
-  // ── Topic chips ──
-  var topicChips = Array.from(document.querySelectorAll<HTMLButtonElement>('#topic-chips .problems-topic-chips__chip'));
-  var topicSelect = document.getElementById('problem-topic') as HTMLSelectElement;
-
-  topicChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      topicChips.forEach(c => c.classList.remove('problems-topic-chips__chip--active'));
-      chip.classList.add('problems-topic-chips__chip--active');
-      topicSelect.value = chip.dataset.chip!;
-      applyFilters();
+  // One set of rows serves both views; no duplicate problem cards in the document.
+  var table = document.querySelector<HTMLTableElement>('.problem-table')!;
+  var viewBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('#view-toggle button'));
+  viewBtns.forEach(button => button.addEventListener('click', () => {
+    table.classList.toggle('problem-table--cards', button.dataset.view === 'grid');
+    viewBtns.forEach(item => {
+      item.classList.toggle('problems-view-toggle__btn--active', item === button);
+      item.setAttribute('aria-pressed', String(item === button));
     });
-  });
+  }));
+  var topicSelect = document.getElementById('problem-topic') as HTMLSelectElement;
 
   // ── Filters ──
   var searchEl = document.getElementById('problem-search') as HTMLInputElement;
   var setEl = document.getElementById('problem-set') as HTMLSelectElement;
   var difficultyEl = document.getElementById('problem-difficulty') as HTMLSelectElement;
-  var favCheckEl = document.getElementById('filter-favorites') as HTMLInputElement;
-  var dailyPicksEl = document.getElementById('filter-daily-picks') as HTMLInputElement;
+  var favCheckEl = document.getElementById('filter-favorites') as HTMLButtonElement;
+  var dailyPicksEl = document.getElementById('filter-daily-picks') as HTMLButtonElement;
   var countEl = document.getElementById('problem-count')!;
 
   var tableRows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#table-body tr'));
-  var gridCards = Array.from(document.querySelectorAll<HTMLElement>('#view-grid .problem-card'));
 
   function applyFilters() {
     var search = (searchEl.value || '').trim().toLowerCase();
+    const searchTopic = slugifyTaxonomy(search);
     var set = setEl ? setEl.value : 'all';
     var topic = topicSelect.value;
     var difficulty = difficultyEl.value;
-    var favOnly = favCheckEl.checked;
-    var dailyOnly = dailyPicksEl && dailyPicksEl.checked;
+    var favOnly = favCheckEl.getAttribute('aria-pressed') === 'true';
+    var dailyOnly = dailyPicksEl.getAttribute('aria-pressed') === 'true';
     var visible = 0;
 
     function matchItem(
@@ -376,9 +272,10 @@ const listJsonLd = {
       itemSet: string,
       isDailyPick: boolean
     ): boolean {
-      if (search && title.indexOf(search) === -1 && itemTopic.indexOf(search) === -1) return false;
+      const itemTopics = (bySlug[slug]?.topics?.length ? bySlug[slug].topics : [bySlug[slug]?.topic || itemTopic]).map(slugifyTaxonomy);
+      if (search && !title.includes(search) && !(searchTopic && itemTopics.some((t: string) => t.includes(searchTopic)))) return false;
       if (set !== 'all' && itemSet !== set) return false;
-      if (topic !== 'all' && itemTopic !== topic) return false;
+      if (topic !== 'all' && !itemTopics.includes(topic)) return false;
       if (difficulty !== 'all' && itemDiff !== difficulty) return false;
       if (favOnly && !favoriteSet.has(slug)) return false;
       if (dailyOnly && !isDailyPick) return false;
@@ -399,28 +296,19 @@ const listJsonLd = {
       if (show) visible++;
     });
 
-    gridCards.forEach(card => {
-      const dailyPick = card.dataset.dailyPick === 'true';
-      const show = matchItem(
-        card.dataset.slug!,
-        card.dataset.title!,
-        card.dataset.topic!,
-        card.dataset.difficulty!,
-        card.dataset.problemSet!,
-        dailyPick
-      );
-      card.style.display = show ? '' : 'none';
-    });
-
     countEl.textContent = visible + ' problem' + (visible === 1 ? '' : 's');
+    document.getElementById('problem-empty')!.hidden = visible !== 0;
   }
 
+  document.getElementById('reset-filters')!.addEventListener('click', () => { searchEl.value = ''; setEl.value = 'all'; topicSelect.value = 'all'; difficultyEl.value = 'all'; favCheckEl.setAttribute('aria-pressed', 'false'); dailyPicksEl.setAttribute('aria-pressed', 'false'); applyFilters(); searchEl.focus(); });
   searchEl.addEventListener('input', applyFilters);
   if (setEl) setEl.addEventListener('change', applyFilters);
   topicSelect.addEventListener('change', applyFilters);
   difficultyEl.addEventListener('change', applyFilters);
-  favCheckEl.addEventListener('change', applyFilters);
-  if (dailyPicksEl) dailyPicksEl.addEventListener('change', applyFilters);
+  [favCheckEl, dailyPicksEl].forEach(button => button.addEventListener('click', () => {
+    button.setAttribute('aria-pressed', String(button.getAttribute('aria-pressed') !== 'true'));
+    applyFilters();
+  }));
 
   // ── Column sorting ──
   var DIFF_ORDER: Record<string, number> = { easy: 1, medium: 2, hard: 3 };
@@ -437,6 +325,7 @@ const listJsonLd = {
 
     sortHeaders.forEach(th => {
       var icon = th.querySelector('.sort-icon')!;
+      th.setAttribute('aria-sort', th.dataset.sort === key && currentSort.dir !== 0 ? currentSort.dir === 1 ? 'ascending' : 'descending' : 'none');
       if (th.dataset.sort === key) {
         icon.textContent = currentSort.dir === 1 ? ' ▲' : currentSort.dir === -1 ? ' ▼' : '';
         th.classList.toggle('problem-table__sortable--active', currentSort.dir !== 0);
@@ -465,10 +354,7 @@ const listJsonLd = {
       } else if (key === 'topic') {
         va = a.dataset.topic || '';
         vb = b.dataset.topic || '';
-      } else {
-        va = a.querySelector('.problem-table__platform')?.textContent?.toLowerCase() || '';
-        vb = b.querySelector('.problem-table__platform')?.textContent?.toLowerCase() || '';
-      }
+      } else return 0;
       if (va < vb) return -1 * currentSort.dir;
       if (va > vb) return 1 * currentSort.dir;
       return 0;
@@ -477,7 +363,10 @@ const listJsonLd = {
     sorted.forEach(row => tableBody.appendChild(row));
   }
 
-  sortHeaders.forEach(th => th.addEventListener('click', () => sortTable(th.dataset.sort!)));
+  sortHeaders.forEach(th => {
+    th.addEventListener('click', () => sortTable(th.dataset.sort!));
+    th.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); sortTable(th.dataset.sort!); } });
+  });
 
   // ── Progress ──
   async function loadProgress() {
@@ -504,33 +393,24 @@ const listJsonLd = {
     var row = progressMap[slug] || { solved: false };
     var statusEl = document.querySelector(`[data-status-for="${slug}"]`);
     if (statusEl) statusEl.innerHTML = row.solved ? '&#10003;' : '&#9711;';
-    if (statusEl) (statusEl as HTMLElement).style.color = row.solved ? '#16a34a' : '';
-  }
-
-  function renderCardState(slug: string) {
-    var row = progressMap[slug] || { solved: false, attempts: 0 };
-    var statusEl = document.querySelector(`[data-card-status-for="${slug}"]`);
-    if (statusEl) statusEl.textContent = row.solved ? 'Solved' : 'Not Solved';
-    var attEl = document.querySelector(`[data-card-attempts-for="${slug}"]`);
-    if (attEl) attEl.textContent = (row.attempts || 0) + ' attempts';
-    var btn = document.querySelector(`[data-solved-btn="${slug}"]`);
-    if (btn) btn.textContent = row.solved ? 'Mark Unsolved' : 'Mark Solved';
+    if (statusEl) {
+      (statusEl as HTMLElement).style.color = row.solved ? 'var(--color-success)' : '';
+      statusEl.setAttribute('aria-pressed', String(row.solved));
+      statusEl.setAttribute('aria-label', `Mark ${bySlug[slug]?.title || 'problem'} ${row.solved ? 'unsolved' : 'solved'}`);
+    }
   }
 
   function renderFavoriteIcon(slug: string) {
-    var iconEl = document.querySelector(`[data-favorite-icon-for="${slug}"]`);
-    if (iconEl) iconEl.innerHTML = favoriteSet.has(slug) ? '&#9733;' : '&#9734;';
     var tblBtn = document.querySelector<HTMLButtonElement>(`#table-body [data-favorite-btn="${slug}"]`);
     if (tblBtn) {
       tblBtn.innerHTML = favoriteSet.has(slug) ? '&#9733;' : '&#9734;';
       tblBtn.setAttribute('aria-pressed', String(favoriteSet.has(slug)));
-      tblBtn.style.color = favoriteSet.has(slug) ? '#eab308' : '';
+      tblBtn.style.color = favoriteSet.has(slug) ? 'var(--color-warning)' : '';
     }
   }
 
   function renderAllStates() {
     tableRows.forEach(row => { renderTableState(row.dataset.slug!); renderFavoriteIcon(row.dataset.slug!); });
-    gridCards.forEach(card => { renderCardState(card.dataset.slug!); renderFavoriteIcon(card.dataset.slug!); });
   }
 
   function updateProgress() {
@@ -565,16 +445,6 @@ const listJsonLd = {
         }
       });
     });
-    document.querySelectorAll<HTMLButtonElement>('[data-favorite-btn-card]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        var slug = btn.dataset.favoriteBtnCard!;
-        if ((window as any).requireAuth) {
-          (window as any).requireAuth('Sign in to bookmark problems', () => toggleFavorite(slug));
-        } else {
-          toggleFavorite(slug);
-        }
-      });
-    });
   }
 
   function bindSolvedButtons() {
@@ -592,7 +462,6 @@ const listJsonLd = {
           progressMap[slug] = next;
           await (window as any).DCStore.set(TOOL, slug, next);
           renderTableState(slug);
-          renderCardState(slug);
           updateProgress();
         };
         if ((window as any).requireAuth) {
@@ -641,18 +510,18 @@ const listJsonLd = {
     var maxDay = Math.max(...dayData, 1);
     var dailyEl = document.getElementById('chart-daily')!;
     dailyEl.innerHTML = dayData.map((count, idx) => {
-      var h = Math.max(6, Math.round((count / maxDay) * 92));
-      return '<div style="height:100%;display:flex;flex-direction:column;justify-content:end;gap:2px;" title="' + dayLabels[idx].slice(5) + ': ' + count + '"><span style="width:100%;background:linear-gradient(180deg,#3b82f6,#1d4ed8);border-radius:3px 3px 0 0;min-height:3px;height:' + h + '%;"></span><span style="font-size:.55rem;color:var(--color-text-light);text-align:center;">' + (idx % 3 === 0 ? dayLabels[idx].slice(5) : '') + '</span></div>';
+      var h = count ? Math.max(3, Math.round((count / maxDay) * 92)) : 0;
+      return '<div role="img" aria-label="' + dayLabels[idx] + ': ' + count + ' attempts" style="height:100%;display:flex;flex-direction:column;justify-content:end;gap:2px;" title="' + dayLabels[idx].slice(5) + ': ' + count + '"><span style="width:100%;background:var(--color-primary);border-radius:3px 3px 0 0;height:' + h + '%;"></span><span style="font-size:.55rem;color:var(--color-text-light);text-align:center;">' + (idx % 3 === 0 ? dayLabels[idx].slice(5) : '') + '</span></div>';
     }).join('');
 
     // Topic solved
-    var solvedEntries = Object.entries(topicSolved).sort((a, b) => b[1] - a[1]).slice(0, 10);
+    var solvedEntries = Object.entries(topicSolved).filter(([, count]) => count > 0).sort((a, b) => b[1] - a[1]).slice(0, 10);
     var solvedMax = Math.max(...solvedEntries.map(e => e[1]), 1);
     var topicEl = document.getElementById('chart-topic-solved')!;
     topicEl.innerHTML = solvedEntries.length
       ? solvedEntries.map(([topic, count]) => {
-          var w = Math.max(3, Math.round((count / solvedMax) * 100));
-          return '<div style="display:grid;grid-template-columns:90px 1fr 35px;gap:.4rem;align-items:center;font-size:.78rem;margin-bottom:.25rem;"><span style="color:var(--color-text-light);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + topic + '</span><span style="background:var(--color-code-bg);border-radius:999px;height:7px;overflow:hidden;border:1px solid var(--color-border);"><span style="display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#22c55e,#16a34a);width:' + w + '%;"></span></span><span style="text-align:right;font-weight:700;">' + count + '</span></div>';
+          var w = Math.round((count / solvedMax) * 100);
+          return '<div style="display:grid;grid-template-columns:90px 1fr 35px;gap:.4rem;align-items:center;font-size:.78rem;margin-bottom:.25rem;"><span style="color:var(--color-text-light);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + topic + '</span><span style="background:var(--color-code-bg);border-radius:999px;height:7px;overflow:hidden;border:1px solid var(--color-border);"><span style="display:block;height:100%;border-radius:999px;background:var(--color-primary);width:' + w + '%;"></span></span><span style="text-align:right;font-weight:700;">' + count + '</span></div>';
         }).join('')
       : '<p style="color:var(--color-text-light);font-size:.85rem;">No solved data yet.</p>';
 

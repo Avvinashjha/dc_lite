@@ -7,7 +7,7 @@
   "topics": [
     "Graph",
     "BFS",
-    "DFS"
+    "Matrix"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/snakes-and-ladders/",
@@ -49,6 +49,125 @@
         ]
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            9,
+            -1
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            9,
+            -1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            -1,
+            8,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            -1,
+            -1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            -1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          [
+            -1,
+            1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            15,
+            -1,
+            -1
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            -1,
+            -1,
+            -1
+          ],
+          [
+            1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1,
+            -1
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "snakesAndLadders",
@@ -56,7 +175,8 @@
   "constraints": [
     "n == board.length == board[i].length",
     "2 <= n <= 20",
-    "-1 <= board[i][j] <= n^2"
+    "Each board[i][j] is -1 or a destination label from 1 to n^2",
+    "Squares 1 and n^2 contain no snake or ladder"
   ],
   "runner": {},
   "examples": [
@@ -72,5 +192,12 @@
   "sampleInput": "board = [[-1,-1],[-1,-1]]",
   "sampleOutput": "1",
   "inputFormat": "Implement snakesAndLadders(board). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the minimum number of die rolls needed to reach square n^2, or -1 if it is unreachable.",
+  "visuals": [
+    {
+      "title": "Square labels on a 3 \u00d7 3 board",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 230\" role=\"img\" aria-label=\"Three by three board numbered 7 8 9 on the top row, 6 5 4 in the middle, and 1 2 3 on the bottom\"><g fill=\"none\" stroke=\"currentColor\" opacity=\".3\"><path d=\"M90 10H270V190H90Z M150 10V190 M210 10V190 M90 70H270 M90 130H270\"/></g><g fill=\"currentColor\" text-anchor=\"middle\" font-family=\"system-ui,sans-serif\" font-size=\"20\"><text x=\"120\" y=\"47\">7</text><text x=\"180\" y=\"47\">8</text><text x=\"240\" y=\"47\">9</text><text x=\"120\" y=\"107\">6</text><text x=\"180\" y=\"107\">5</text><text x=\"240\" y=\"107\">4</text><text x=\"120\" y=\"167\">1</text><text x=\"180\" y=\"167\">2</text><text x=\"240\" y=\"167\">3</text><text x=\"180\" y=\"218\" font-size=\"13\">Start at 1 \u00b7 Finish at 9</text></g></svg>",
+      "caption": "These are square labels, not cell values. The top array row contains squares 7, 8, and 9; a cell value gives a jump destination or -1."
+    }
+  ]
 }

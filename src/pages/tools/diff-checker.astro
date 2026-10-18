@@ -7,6 +7,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   description="Free online text diff checker. Compare two texts side-by-side with git-style highlighting. See additions, deletions, and changes line by line."
   toolName="Diff Checker"
   keywords="diff checker, text diff, compare text, text comparison, code diff, online diff tool"
+  workbench={true}
   faqs={[
     { q: "Does the diff checker send my text anywhere?", a: "No. Both texts are compared locally in your browser, so you can safely diff private code or documents." },
     { q: "What kind of diff does it show?", a: "It highlights additions, deletions, and changes line by line, similar to a git diff." },
@@ -18,19 +19,20 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     <button class="tab-add" id="btn-add-tab" title="New diff pair">+</button>
   </div>
 
-  <div class="tool-actions">
-    <button class="tool-btn tool-btn--primary" id="btn-diff">Compare</button>
-    <button class="tool-btn" id="btn-swap">Swap</button>
-    <button class="tool-btn" id="btn-sample">Load Sample</button>
-    <button class="tool-btn" id="btn-save">Save Tab</button>
-    <button class="tool-btn" id="btn-clear">Clear</button>
-  </div>
-
-  <div class="tool-panels">
+  <div class="tool-panels diff-panels" id="diff-panels">
     <div class="tool-panel">
-      <span class="tool-panel__label">Original</span>
+      <div class="tool-panel__head">
+        <span class="tool-panel__label">Original</span>
+        <div class="workspace-actions">
+          <button class="tool-btn tool-btn--primary" id="btn-diff">Compare</button>
+          <button class="tool-btn" id="btn-swap">Swap</button>
+          <button class="tool-btn" id="btn-sample">Sample</button>
+          <button class="tool-btn" id="btn-clear">Clear</button>
+        </div>
+      </div>
       <textarea id="inputA" class="tool-textarea" placeholder="Paste original text..."></textarea>
     </div>
+    <div id="diff-splitter" class="diff-splitter" role="separator" aria-label="Resize original and modified panes" aria-orientation="vertical" tabindex="0"></div>
     <div class="tool-panel">
       <span class="tool-panel__label">Modified</span>
       <textarea id="inputB" class="tool-textarea" placeholder="Paste modified text..."></textarea>
@@ -59,7 +61,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     <p>
       The diff is rendered with green and red highlighting — green for additions, red for deletions —
       just like you'd see in a pull request. For structured JSON comparison, try the
-      <a href="/tools/json-diff">JSON Diff</a> tool which understands key ordering.
+      <a href="/tools/json-formatter#compare">JSON Toolkit’s Compare JSON mode</a>, which understands key ordering.
     </p>
   </section>
 </ToolLayout>
@@ -117,7 +119,11 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       el.className = 'tab-item' + (tab.id === activeTab ? ' tab-item--active' : '');
       el.innerHTML = '<span class="tab-item__name">' + (tab.name || 'Untitled') + '</span>' +
         (tabs.length > 1 ? '<button class="tab-item__close" data-id="' + tab.id + '">&times;</button>' : '');
-      el.addEventListener('click', function(e) { if (!e.target.classList.contains('tab-item__close')) switchTab(tab.id); });
+      el.addEventListener('click', function(e) {
+        if (e.target.classList.contains('tab-item__close')) return;
+        if (tab.id === activeTab) renameTab(tab);
+        else switchTab(tab.id);
+      });
       list.appendChild(el);
     });
     list.querySelectorAll('.tab-item__close').forEach(function(btn) {
@@ -209,11 +215,19 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     inputB.value = 'function greet(name, greeting) {\n  const message = `${greeting}, ${name}!`;\n  console.log(message);\n  return message;\n}\n\nconst users = ["Alice", "Bob", "Charlie"];\n\nusers.forEach((user) => {\n  greet(user, "Hi");\n});';
   });
 
-  document.getElementById('btn-save').addEventListener('click', function() {
-    var tab = tabs.find(function(t) { return t.id === activeTab; });
-    var name = prompt('Tab name:', tab ? tab.name : '');
-    if (name !== null && tab) { tab.name = name; renderTabs(); saveToDB(); }
-  });
+  function renameTab(tab) {
+    var item = document.querySelector('.tab-item--active');
+    if (!tab || !item) return;
+    var input = document.createElement('input');
+    input.className = 'tab-item__rename'; input.value = tab.name || '';
+    input.setAttribute('aria-label', 'Rename diff tab');
+    item.replaceChildren(input); input.focus(); input.select();
+    var done = false;
+    function finish() { if (done) return; done = true; if (input.value.trim()) tab.name = input.value.trim(); renderTabs(); saveToDB(); }
+    input.addEventListener('click', function(e) { e.stopPropagation(); });
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') finish(); if (e.key === 'Escape') { done = true; renderTabs(); } });
+    input.addEventListener('blur', finish);
+  }
 
   document.getElementById('btn-add-tab').addEventListener('click', function() { addTab(); saveToDB(); });
 
@@ -229,5 +243,47 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   inputA.addEventListener('input', function() { clearTimeout(st); st = setTimeout(saveToDB, 1000); });
   inputB.addEventListener('input', function() { clearTimeout(st); st = setTimeout(saveToDB, 1000); });
 
+  (function enablePaneResize() {
+    var panels = document.getElementById('diff-panels');
+    var splitter = document.getElementById('diff-splitter');
+    var left = panels.querySelector('.tool-panel');
+    var right = panels.querySelectorAll('.tool-panel')[1];
+    function resize(clientX) {
+      var rect = panels.getBoundingClientRect();
+      var ratio = Math.min(0.72, Math.max(0.28, (clientX - rect.left) / rect.width));
+      left.style.flexBasis = (ratio * 100) + '%';
+      right.style.flexBasis = ((1 - ratio) * 100) + '%';
+    }
+    splitter.addEventListener('pointerdown', function(event) {
+      splitter.setPointerCapture(event.pointerId);
+      splitter.classList.add('is-dragging');
+      function move(e) { resize(e.clientX); }
+      function end(e) { splitter.releasePointerCapture(e.pointerId); splitter.classList.remove('is-dragging'); splitter.removeEventListener('pointermove', move); splitter.removeEventListener('pointerup', end); }
+      splitter.addEventListener('pointermove', move);
+      splitter.addEventListener('pointerup', end);
+    });
+    splitter.addEventListener('keydown', function(event) {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      var rect = panels.getBoundingClientRect();
+      var current = left.getBoundingClientRect().width / rect.width;
+      resize(rect.left + rect.width * (current + (event.key === 'ArrowLeft' ? -0.05 : 0.05)));
+    });
+  })();
+
   loadFromDB();
 </script>
+
+<style>
+  .diff-panels { display: flex; gap: 0; align-items: stretch; }
+  .diff-panels > .tool-panel { flex: 1 1 50%; min-width: 220px; min-height: 0; }
+  .diff-panels > .tool-panel .tool-textarea { flex: 1 1 auto; height: auto !important; min-height: 0; resize: none; }
+  .diff-splitter { width: 12px; flex: 0 0 12px; position: relative; cursor: col-resize; touch-action: none; }
+  .diff-splitter::before { content: ''; position: absolute; inset: 0 5px; background: var(--color-border); }
+  .diff-splitter:hover::before, .diff-splitter:focus-visible::before { background: var(--color-primary); }
+  .diff-splitter:focus-visible { outline: none; }
+  @media (max-width: 768px) {
+    .diff-panels { display: grid; gap: 0.75rem; }
+    .diff-splitter { display: none; }
+  }
+</style>

@@ -5,7 +5,9 @@
   "difficulty": "Medium",
   "topic": "Stack&Queue",
   "topics": [
-    "Stack&Queue"
+    "Stack",
+    "Monotonic Stack",
+    "Design"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/online-stock-span/",
@@ -78,6 +80,200 @@
         2,
         3
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            5
+          ],
+          [
+            "next",
+            4
+          ],
+          [
+            "next",
+            3
+          ],
+          [
+            "next",
+            2
+          ],
+          [
+            "next",
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            1
+          ],
+          [
+            "next",
+            2
+          ],
+          [
+            "next",
+            3
+          ],
+          [
+            "next",
+            4
+          ],
+          [
+            "next",
+            5
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            10
+          ],
+          [
+            "next",
+            1
+          ],
+          [
+            "next",
+            2
+          ],
+          [
+            "next",
+            3
+          ],
+          [
+            "next",
+            10
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        2,
+        3,
+        5
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            100000
+          ],
+          [
+            "next",
+            1
+          ],
+          [
+            "next",
+            1
+          ],
+          [
+            "next",
+            99999
+          ],
+          [
+            "next",
+            100000
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        2,
+        3,
+        5
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "next",
+            3
+          ],
+          [
+            "next",
+            2
+          ],
+          [
+            "next",
+            3
+          ],
+          [
+            "next",
+            2
+          ],
+          [
+            "next",
+            3
+          ],
+          [
+            "next",
+            2
+          ],
+          [
+            "next",
+            3
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        3,
+        1,
+        5,
+        1,
+        7
+      ]
     }
   ],
   "functionName": "StockSpanner",
@@ -102,5 +298,5 @@
   "sampleInput": "constructorArgs = []\noperations = [[\"next\",100],[\"next\",80],[\"next\",60],[\"next\",70],[\"next\",60],[\"next\",75],[\"next\",85]]",
   "sampleOutput": "[1,1,1,2,1,4,6]",
   "inputFormat": "Implement the class StockSpanner. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
-  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
+  "outputFormat": "Each next(price) call returns its integer span. The displayed array contains these spans in call order."
 }

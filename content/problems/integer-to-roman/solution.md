@@ -18,6 +18,6 @@ function intToRoman(num) {
 }
 ```
 
-**Time Complexity:** O(1) — bounded by the fixed set of symbols (at most ~15 iterations)
+**Time Complexity:** O(1) — bounded by 13 table entries and at most 15 emitted characters for the allowed input range
 
 **Space Complexity:** O(1)

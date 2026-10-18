@@ -1,1 +1,3 @@
 You're given a string `s` made of uppercase English letters and a budget of `k` character replacements — each replacement lets you pick any character in the string and replace it with a different uppercase letter. Using at most `k` such replacements, find the longest substring you can create that consists of a single repeated letter.
+
+Return the **length**, not the modified string. The substring must be contiguous; characters cannot be rearranged or skipped. You may use fewer than `k` replacements. For `"AABABBA"` with `k = 1`, changing the `B` in the first four characters produces `"AAAA"`, giving length `4`.

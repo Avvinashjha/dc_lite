@@ -44,6 +44,85 @@
         5
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [],
+        0
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        0
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        1
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        3
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          -2,
+          null,
+          -3
+        ],
+        -5
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          5,
+          -4
+        ],
+        1
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ],
+        0
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          -2,
+          3
+        ],
+        -2
+      ],
+      "expected": false
     }
   ],
   "functionName": "hasPathSum",
@@ -70,5 +149,5 @@
   "sampleInput": "root = [5,4,8,11,null,13,4,7,2,null,null,null,1]\ntargetSum = 22",
   "sampleOutput": "true",
   "inputFormat": "Implement hasPathSum(root, targetSum). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if a root-to-leaf path has the target sum; otherwise return false."
 }

@@ -26,6 +26,6 @@ function introductionToGraphColoring(graph, m) {
 }
 ```
 
-**Time Complexity:** O(m^V)
+**Time Complexity:** Exponential. There are at most m choices per vertex, and each attempted assignment scans V neighbors. For m ≥ 2, the worst-case bound is O(V × m^V); for m = 1, at most O(V²).
 
 **Space Complexity:** O(V)

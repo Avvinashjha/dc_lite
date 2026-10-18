@@ -1,1 +1,3 @@
 You're given two arrays, `nums1` and `nums2`, both already sorted in non-decreasing order, along with integers `m` and `n` telling you how many actual elements each array holds. The first `m` entries of `nums1` are valid data, followed by `n` reserved slots; all `n` entries of `nums2` are valid. Combine them into one sorted array, writing the result directly back into `nums1` rather than returning a new array.
+
+Only indices determine which entries are valid: a `0` within the first `m` positions is real data and must be preserved. The final `n` slots are placeholders, not additional values to merge. Either valid input portion may be empty.

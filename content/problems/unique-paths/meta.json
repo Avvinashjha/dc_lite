@@ -6,7 +6,7 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Combinatorics"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/unique-paths/",
@@ -25,6 +25,48 @@
         2
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        1,
+        1
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        1,
+        100
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        100,
+        1
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        2,
+        100
+      ],
+      "expected": 100
+    },
+    {
+      "args": [
+        10,
+        10
+      ],
+      "expected": 48620
+    },
+    {
+      "args": [
+        17,
+        17
+      ],
+      "expected": 601080390
     }
   ],
   "functionName": "uniquePaths",
@@ -47,5 +89,12 @@
   "sampleInput": "m = 3\nn = 7",
   "sampleOutput": "28",
   "inputFormat": "Implement uniquePaths(m, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the number of distinct paths as an integer.",
+  "visuals": [
+    {
+      "title": "Three routes in a 3 \u00d7 2 grid",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 190\" role=\"img\" aria-label=\"Three paths through a grid with three rows and two columns: right down down, down right down, down down right\"><path d=\"M28 20h80v120h-80z M68 20v120 M28 60h80 M28 100h80\" fill=\"none\" stroke=\"currentColor\" opacity=\".25\"/><polyline points=\"48,40 88,40 88,80 88,120\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"48\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"88\" cy=\"120\" r=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"68\" y=\"170\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"13\">R \u2192 D \u2192 D</text><path d=\"M168 20h80v120h-80z M208 20v120 M168 60h80 M168 100h80\" fill=\"none\" stroke=\"currentColor\" opacity=\".25\"/><polyline points=\"188,40 188,80 228,80 228,120\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"188\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"228\" cy=\"120\" r=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"208\" y=\"170\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"13\">D \u2192 R \u2192 D</text><path d=\"M308 20h80v120h-80z M348 20v120 M308 60h80 M308 100h80\" fill=\"none\" stroke=\"currentColor\" opacity=\".25\"/><polyline points=\"328,40 328,80 328,120 368,120\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"328\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"368\" cy=\"120\" r=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"348\" y=\"170\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"13\">D \u2192 D \u2192 R</text></svg>",
+      "caption": "R means one step right; D means one step down. Every route starts in the top-left cell and ends in the bottom-right cell."
+    }
+  ]
 }

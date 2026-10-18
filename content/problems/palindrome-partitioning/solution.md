@@ -1,4 +1,8 @@
-Use backtracking. At each index, try every possible prefix — if the prefix is a palindrome, add it to the current partition and recurse on the remainder. When the index reaches the end of the string, save the partition.
+## Backtracking over Cut Positions
+
+At index `start`, try every nonempty substring beginning there. If it is a palindrome, append it to the current partition and recurse from the next character. Remove it when returning so the next choice starts with the same prefix of pieces.
+
+When `start` reaches the end, copy the current partition into the result. Copying matters because backtracking subsequently changes the working array. Every partition corresponds to a unique sequence of cut positions, so this generates all valid partitions exactly once.
 
 ```javascript
 function partition(s) {
@@ -32,5 +36,6 @@ function partition(s) {
 }
 ```
 
-**Time:** O(n * 2^n) — there are 2^(n-1) ways to partition the string, and checking palindromes takes O(n).
-**Space:** O(n) for recursion depth.
+**Time:** O(n × 2^n) in the worst case. There are up to 2^(n - 1) cut patterns, and copying all returned partitions already requires O(n × 2^n) work for a string of identical letters.
+
+**Space:** O(n) auxiliary space for the recursion and current partition, excluding the result. The returned partitions require up to O(n × 2^n) space.

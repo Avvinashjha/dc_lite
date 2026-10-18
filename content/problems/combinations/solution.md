@@ -23,4 +23,4 @@ function combine(n, k) {
 ```
 
 **Time:** O(C(n, k) * k) — there are C(n, k) combinations, each taking O(k) to copy.
-**Space:** O(k) for the recursion stack.
+**Space:** O(k) auxiliary space for the current combination and recursion stack, excluding O(C(n, k) × k) output storage.

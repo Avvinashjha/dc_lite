@@ -1,5 +1,9 @@
 ## Union-Find
 
+Before adding an edge, check whether its endpoints are already connected by previously processed edges. If they are, the new edge closes a cycle. Otherwise merge their components. This naturally handles disconnected graphs, self-loops, and distinct parallel edges.
+
+Path compression and union by size keep component lookups nearly constant amortized time.
+
 ```javascript
 function hasCycle(V, edges) {
   const parent = Array.from({length:V},(_,i)=>i);
@@ -14,4 +18,4 @@ function hasCycle(V, edges) {
 }
 ```
 
-**Time:** O(E α(V)) | **Space:** O(V)
+**Time:** O(V + E α(V)), including initialization | **Space:** O(V)

@@ -1,4 +1,4 @@
-The first half of row n mirrors row n-1, and the second half is its complement. If k is in the first half, recurse with the same k. If k is in the second half, recurse with k minus the half-size and flip the result.
+The first half of row n is identical to row n-1, and the second half is its complement. If k is in the first half, recurse with the same k. If k is in the second half, recurse with k minus the half-size and flip the result.
 
 ```javascript
 function kthGrammar(n, k) {

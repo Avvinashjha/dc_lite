@@ -1,6 +1,8 @@
 ## Approach: Stack-based with Next/Prev Smaller
 
-For each element, compute the range where it is the minimum using next-smaller and prev-smaller stacks. That element is the answer for a window of that range length. Fill remaining positions from right to left.
+For each element, compute the range where it is the minimum using next-smaller and prev-smaller stacks. That element is a candidate for the answer at that range length; take the maximum across candidates. Both boundaries are strictly smaller, so equal values do not prematurely shorten a span.
+
+Propagate answers from larger sizes to smaller sizes: a window with minimum v contains a shorter window with minimum at least v. This fills missing sizes and ensures the answers are non-increasing. Initialize with -Infinity so negative arrays are handled correctly.
 
 ```javascript
 function maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr) {

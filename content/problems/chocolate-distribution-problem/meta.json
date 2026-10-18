@@ -1,12 +1,13 @@
 {
   "draft": false,
   "id": "problem-0008",
-  "title": "Chocolate Distribution Problem",
+  "title": "Chocolate Distribution",
   "difficulty": "Easy",
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Sorting",
+    "Sliding Window"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Chocolate%20Distribution%20Problem",
@@ -40,26 +41,50 @@
         1
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          7,
+          1,
+          4
+        ],
+        3
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          8
+        ],
+        3
+      ],
+      "expected": 0
     }
   ],
   "functionName": "findMinDiff",
   "templateCode": "function findMinDiff(arr, m) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
-    "1 <= A[i] <= 10^9",
-    "1 <= M <= N"
+    "1 <= arr.length <= 10^5",
+    "1 <= arr[i] <= 10^9",
+    "1 <= m <= arr.length"
   ],
   "runner": {},
   "examples": [
     {
       "input": "arr = [3,4,1,9,56,7,9,12]\nm = 5",
-      "output": "6"
+      "output": "6",
+      "explanation": "Choose packets with 3, 4, 7, 9, and 9 chocolates. Their difference is 9 - 3 = 6."
     },
     {
       "input": "arr = [1,10,20]\nm = 1",
       "output": "0"
     }
   ],
-  "inputFormat": "Implement findMinDiff(arr, m). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement findMinDiff(arr, m), where arr lists packet sizes and m is the number of students. Choose m distinct packets, one per student.",
+  "outputFormat": "The minimum possible difference between the largest and smallest chosen packet sizes."
 }

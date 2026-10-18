@@ -47,19 +47,67 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        4,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          []
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        1,
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        4,
+        [
+          [],
+          [
+            2
+          ],
+          [
+            1
+          ],
+          []
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "hasCycle",
   "templateCode": "function hasCycle(V, adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 10^4",
-    "0 <= E <= 10^4"
+    "0 <= E <= 10^4",
+    "adj.length equals V; every neighbor is an integer from 0 to V - 1."
   ],
   "runner": {},
   "examples": [
     {
       "input": "V = 4\nadj = [[1],[2],[3],[1]]",
-      "output": "true"
+      "output": "true",
+      "explanation": "Vertices 1 \u2192 2 \u2192 3 \u2192 1 form a directed cycle."
     },
     {
       "input": "V = 3\nadj = [[1],[2],[]]",
@@ -68,6 +116,6 @@
   ],
   "sampleInput": "V = 4\nadj = [[1],[2],[3],[1]]",
   "sampleOutput": "true",
-  "inputFormat": "Implement hasCycle(V, adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement hasCycle(V, adj), where adj has V lists and adj[u] contains destinations of outgoing edges from u.",
+  "outputFormat": "true if any component contains a directed cycle, including a self-loop; otherwise false."
 }

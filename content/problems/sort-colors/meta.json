@@ -45,6 +45,122 @@
         0,
         2
       ]
+    },
+    {
+      "args": [
+        [
+          2
+        ]
+      ],
+      "expected": [
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          0,
+          0,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        2
+      ]
     }
   ],
   "functionName": "sortColors",
@@ -67,5 +183,8 @@
     }
   ],
   "inputFormat": "Implement sortColors(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
+  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.",
+  "followUps": [
+    "Can you solve it in a single pass with O(1) auxiliary space?"
+  ]
 }

@@ -1,5 +1,9 @@
 ## Two Pointers
 
+At each position, water depth is min(left maximum, right maximum) minus the bar height. The two-pointer scan resolves the side with the lower current boundary: the opposite side already provides a sufficient wall, so the resolved side's running maximum determines its contribution. Move inward after accounting for that position.
+
+Keep the running maximum before subtracting the current height, ensuring each contribution is nonnegative. Each pointer only moves inward, so every position is handled at most once.
+
 ```javascript
 function trap(height) {
   let left = 0, right = height.length - 1;

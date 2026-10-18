@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Stack"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/simplify-path/",
@@ -25,13 +25,50 @@
         "/../.../a/./"
       ],
       "expected": "/.../a"
+    },
+    {
+      "args": [
+        "/"
+      ],
+      "expected": "/"
+    },
+    {
+      "args": [
+        "////"
+      ],
+      "expected": "/"
+    },
+    {
+      "args": [
+        "/../../a/../"
+      ],
+      "expected": "/"
+    },
+    {
+      "args": [
+        "/a//b/./c/../"
+      ],
+      "expected": "/a/b"
+    },
+    {
+      "args": [
+        "/.../..hidden/a..b/_x/"
+      ],
+      "expected": "/.../..hidden/a..b/_x"
+    },
+    {
+      "args": [
+        "/A/a/../"
+      ],
+      "expected": "/A"
     }
   ],
   "functionName": "simplifyPath",
   "templateCode": "function simplifyPath(path) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= path.length <= 3000",
-    "path consists of English letters, digits, period, slash, or underscore"
+    "path consists of English letters, digits, period, slash, or underscore",
+    "path is an absolute path and starts with /"
   ],
   "runner": {},
   "examples": [
@@ -45,5 +82,5 @@
     }
   ],
   "inputFormat": "Implement simplifyPath(path). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the canonical absolute path as a string. The root directory is represented by \"/\"."
 }

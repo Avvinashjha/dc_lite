@@ -24,7 +24,7 @@ const { id, minHeight = 250, className = '', fill = false } = Astro.props;
   }
   .dc-editor:focus-within {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent);
   }
   .dc-editor .dc-editor__mount {
     min-height: var(--dc-editor-min-height);

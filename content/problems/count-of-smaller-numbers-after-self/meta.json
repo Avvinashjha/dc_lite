@@ -40,6 +40,58 @@
         1,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          -2,
+          -3
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
     }
   ],
   "functionName": "countSmaller",
@@ -52,7 +104,8 @@
   "examples": [
     {
       "input": "nums = [5,2,6,1]",
-      "output": "[2,1,1,0]"
+      "output": "[2,1,1,0]",
+      "explanation": "After 5, the smaller values are 2 and 1; after 2, only 1; after 6, only 1; after the final element, none."
     },
     {
       "input": "nums = [2,2,1]",
@@ -61,6 +114,6 @@
   ],
   "sampleInput": "nums = [5,2,6,1]",
   "sampleOutput": "[2,1,1,0]",
-  "inputFormat": "Implement countSmaller(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement countSmaller(nums), where nums is an integer array.",
+  "outputFormat": "An array counts of the same length, where counts[i] is the number of indices j > i with nums[j] < nums[i]. Equal values are not counted."
 }

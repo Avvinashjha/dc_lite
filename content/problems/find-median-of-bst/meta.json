@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0177",
-  "title": "Find median of BST",
+  "title": "Median of a Binary Search Tree",
   "difficulty": "Hard",
   "topic": "Tree",
   "topics": [
@@ -35,12 +35,59 @@
         ]
       ],
       "expected": 1.5
+    },
+    {
+      "args": [
+        [
+          5
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          5,
+          null,
+          2,
+          4
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          5,
+          null,
+          2,
+          4,
+          6
+        ]
+      ],
+      "expected": 3.5
+    },
+    {
+      "args": [
+        [
+          0,
+          -2,
+          4
+        ]
+      ],
+      "expected": 0
     }
   ],
   "functionName": "findMedian",
   "templateCode": "function findMedian(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^4"
+    "1 <= N <= 10^4",
+    "Node values are integers in [-10^9, 10^9].",
+    "The input satisfies the binary search tree ordering property."
   ],
   "runner": {
     "argTypes": [
@@ -59,6 +106,6 @@
   ],
   "sampleInput": "root = [6,3,8,1,4,7,9]",
   "sampleOutput": "6",
-  "inputFormat": "Implement findMedian(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "root is a nonempty binary search tree. Test inputs use level-order arrays with null for missing children; the function receives nodes with val, left, and right properties.",
+  "outputFormat": "Return the middle sorted value for an odd node count, or the arithmetic mean of the two middle sorted values for an even count."
 }

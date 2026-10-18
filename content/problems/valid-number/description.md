@@ -1,3 +1,9 @@
-Check whether a given string qualifies as a well-formed number. That covers plain integers (`"42"`), decimal values (`"3.14"`, `".5"`, `"2."`), and numbers written in scientific notation (`"2e10"`, `"3.1E-5"`).
+Return whether the **entire string** `s` is a valid number under these rules:
 
-Structurally, a valid number may begin with a `'+'` or `'-'` sign, then a run of digits that can contain at most one decimal point, and may optionally end with an exponent — an `'e'` or `'E'` followed by an optional sign and more digits.
+1. Start with an optional `+` or `-` sign.
+2. Follow it with an integer or decimal containing at least one digit. A decimal has exactly one dot and may omit digits on either side, but not both: `"4."`, `".5"`, and `"4.5"` are valid; `"."` is not.
+3. Optionally append `e` or `E`, an optional sign, and **one or more digits**. The exponent must be an integer, so `"1e2.5"` is invalid.
+
+Leading zeros are allowed. Other letters are invalid, including `"NaN"`, `"Infinity"`, and hexadecimal notation such as `"0x10"`. Inputs contain no whitespace.
+
+Check syntax only, not numerical magnitude: `"1e999"` is valid even though its value exceeds the finite range of a JavaScript Number. Return a boolean, not a parsed number.

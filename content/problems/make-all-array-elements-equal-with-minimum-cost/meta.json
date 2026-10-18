@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0073",
-  "title": "Make all array elements equal with minimum cost",
+  "title": "Minimum Cost to Equalize an Array",
   "difficulty": "Medium",
-  "topic": "Sorting&Searching",
+  "topic": "Sorting",
   "topics": [
-    "Sorting&Searching"
+    "Sorting",
+    "Math"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Make%20all%20array%20elements%20equal%20with%20minimum%20cost",
@@ -29,13 +30,73 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          9
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          10
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          9,
+          10
+        ]
+      ],
+      "expected": 16
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          100
+        ]
+      ],
+      "expected": 99
+    },
+    {
+      "args": [
+        [
+          100000,
+          1,
+          100000,
+          1
+        ]
+      ],
+      "expected": 199998
+    },
+    {
+      "args": [
+        [
+          10,
+          2,
+          3
+        ]
+      ],
+      "expected": 8
     }
   ],
   "functionName": "makeAllArrayElementsEqualWithMinimumCost",
   "templateCode": "function makeAllArrayElementsEqualWithMinimumCost(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
-    "1 <= A[i] <= 10^5"
+    "1 <= arr.length <= 10^5",
+    "1 <= arr[i] <= 10^5"
   ],
   "runner": {},
   "examples": [
@@ -50,6 +111,6 @@
   ],
   "sampleInput": "arr = [1,100,101]",
   "sampleOutput": "100",
-  "inputFormat": "Implement makeAllArrayElementsEqualWithMinimumCost(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement makeAllArrayElementsEqualWithMinimumCost(arr). Receive a nonempty array of positive integers.",
+  "outputFormat": "Return the minimum total cost as a number, not the chosen target value."
 }

@@ -1,3 +1,3 @@
-Fit two independent stacks inside a single array without wasting space. Let the first stack grow forward from index 0, and the second grow backward from the last index, so they advance toward each other from opposite ends. Expose `push1`, `push2`, `pop1`, and `pop2` for each stack respectively — space only runs out once the two stacks' pointers meet somewhere in the middle of the array.
+Implement two independent LIFO stacks using one array with total capacity `n`. The stacks share all available slots: either stack may use the entire capacity when the other is empty.
 
-Pushes into a full shared array leave it unchanged. Popping an empty stack returns -1.
+Expose `push1(x)`, `push2(x)`, `pop1()`, and `pop2()`. A push when the combined element count equals `n` does nothing. A pop from an empty stack returns `-1`; otherwise it removes and returns the most recently pushed value from that stack. Freed slots must be reusable by either stack.

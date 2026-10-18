@@ -6,7 +6,8 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Merge Sort",
+    "Divide and Conquer"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/reverse-pairs/",
@@ -34,6 +35,103 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          3,
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          2147483647,
+          -2147483648
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          -2147483648,
+          -2147483648
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          2147483647,
+          1073741824
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          2,
+          4,
+          3,
+          5,
+          1
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          5,
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "reversePairs",
@@ -54,5 +152,5 @@
     }
   ],
   "inputFormat": "Implement reversePairs(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the number of original index pairs i < j satisfying nums[i] > 2 * nums[j]."
 }

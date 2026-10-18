@@ -1,41 +1,48 @@
-## Approach: Backtracking
+## Backtracking with Pruning
 
-For each position from left to right, find the maximum digit in the remaining positions. If it's larger than the current digit, swap them and recurse with `k - 1`. Track the global maximum found so far. Prune by skipping positions where the digit is already the max possible.
+Fix digits from left to right. If the current digit is already the largest in its suffix, keep it without spending a swap. Otherwise, place that largest digit here. When it appears more than once, try every occurrence: the displaced digit can change the best suffix.
+
+Track the best complete string. Stop as soon as it equals all digits sorted in descending order, the global upper bound. Memoize each arrangement and prefix position with the largest remaining swap budget already explored; a revisit with no more swaps cannot improve the result.
 
 ```javascript
 function findMaximumNum(num, k) {
-  let maxNum = num.split('');
+  const digits = [...num];
+  const target = [...num].sort().reverse().join('');
+  const seen = new Map();
+  let best = num;
 
-  function solve(arr, k, idx) {
-    if (k === 0 || idx === arr.length) return;
+  function search(index, remaining) {
+    const current = digits.join('');
+    if (current > best) best = current;
+    if (best === target || remaining === 0 || index === digits.length) return;
 
-    let maxDigit = arr[idx];
-    for (let i = idx + 1; i < arr.length; i++) {
-      if (arr[i] > maxDigit) maxDigit = arr[i];
+    const key = index + ':' + current;
+    if ((seen.get(key) ?? -1) >= remaining) return;
+    seen.set(key, remaining);
+
+    let largest = digits[index];
+    for (let i = index + 1; i < digits.length; i++) {
+      if (digits[i] > largest) largest = digits[i];
     }
-
-    if (maxDigit === arr[idx]) {
-      solve(arr, k, idx + 1);
+    if (largest === digits[index]) {
+      search(index + 1, remaining);
       return;
     }
 
-    for (let i = arr.length - 1; i > idx; i--) {
-      if (arr[i] === maxDigit) {
-        [arr[idx], arr[i]] = [arr[i], arr[idx]];
-        if (arr.join('') > maxNum.join('')) {
-          maxNum = [...arr];
-        }
-        solve(arr, k - 1, idx + 1);
-        [arr[idx], arr[i]] = [arr[i], arr[idx]];
-      }
+    for (let i = digits.length - 1; i > index; i--) {
+      if (digits[i] !== largest) continue;
+      [digits[index], digits[i]] = [digits[i], digits[index]];
+      search(index + 1, remaining - 1);
+      [digits[index], digits[i]] = [digits[i], digits[index]];
+      if (best === target) return;
     }
   }
 
-  solve(num.split(''), k, 0);
-  return maxNum.join('');
+  search(0, k);
+  return best;
 }
 ```
 
-**Time Complexity:** O(n! / (n-k)!) in the worst case, but pruning makes it much faster in practice
+**Time:** Exponential in the worst case. If `C` recursive calls are made, scanning, string construction, and map-key work cost O(nC), plus O(n log n) to form the target. Memoization and the upper bound prune repeated or already optimal searches; they do not make the problem polynomial.
 
-**Space Complexity:** O(n) for recursion stack
+**Space:** O(nS + n), where `S` is the number of memoized states. Each stored key contains the full arrangement, and recursion depth is at most `n`.

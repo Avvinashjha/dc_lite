@@ -1,1 +1,5 @@
-You're given a list of words that have already been sorted according to the rules of an unknown alien alphabet. Using the order in which these words appear, work out the relative ordering of the letters themselves, and return that ordering as a single string containing each observed letter exactly once. Return an empty string if the ordering is impossible, including cycles and a longer word appearing before its own prefix. If several orders work, return any valid one.
+Given an array of `words` claimed to be sorted in an unknown alphabet, infer an ordering of its letters. Return each letter that appears in the input exactly once. If several orders are possible, return any of them.
+
+Compare words lexicographically: the first different character determines their order. If one word is a prefix of another, the shorter word must come first.
+
+Return an empty string if the claimed order is impossible, including contradictory letter relationships or a longer word placed before its own prefix.

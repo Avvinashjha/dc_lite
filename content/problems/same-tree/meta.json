@@ -41,12 +41,115 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [],
+        []
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        []
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          -1,
+          0,
+          -2
+        ],
+        [
+          -1,
+          0,
+          -2
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          null,
+          1
+        ],
+        [
+          1,
+          1,
+          null,
+          null,
+          1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ],
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "isSameTree",
   "templateCode": "function isSameTree(p, q) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "0 <= number of nodes <= 100",
+    "Each tree contains between 0 and 100 nodes.",
     "-10^4 <= Node.val <= 10^4"
   ],
   "runner": {
@@ -68,5 +171,5 @@
   "sampleInput": "p = [1,2,3]\nq = [1,2,3]",
   "sampleOutput": "true",
   "inputFormat": "Implement isSameTree(p, q). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true when both trees have identical left/right structure and equal values at every corresponding node; otherwise return false."
 }

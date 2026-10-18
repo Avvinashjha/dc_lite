@@ -1,0 +1,93 @@
+// Problem-specific presentation; mobile uses one pane at a time.
+body.dc-editor-page {
+  .problem-ide { height: calc(100dvh - var(--site-header-height) - 1px); min-height: 420px; overflow: hidden; background: var(--color-background); }
+  .problem-toolbar { padding: 8px 12px; gap: 8px; min-height: 52px; }
+  .problem-toolbar__title { width: auto; flex: 1; margin: 0; font-size: 16px; font-weight: 650; line-height: 1.3; }
+  .problem-toolbar > .p-badge { display: none; }
+  .problem-toolbar__actions { gap: 6px; }
+  .problem-toolbar__actions > a { display: none; }
+  .problem-toolbar__actions #toggle-problem-solved { font-size: 12px; }
+  .p-btn { min-height: 36px; padding: 7px 10px; font-size: 12px; border-radius: 7px; }
+  .p-btn--icon { min-width: 36px; }
+  .problem-mobile-views { display: flex; padding: 4px 12px; border-bottom: 1px solid var(--color-border); background: var(--color-surface); gap: 8px; }
+  .problem-mobile-views button { min-height: 40px; flex: 1; border: 0; border-radius: 7px; color: var(--color-text-light); background: transparent; font: inherit; font-size: 13px; cursor: pointer; }
+  .problem-mobile-views button[aria-pressed='true'] { background: var(--dc-sage); color: var(--color-primary); font-weight: 650; }
+  .problem-split { flex: 1; min-height: 0; overflow: hidden; }
+  .problem-left { flex: 1; min-height: 0; overflow: hidden; border: 0; }
+  .problem-right { display: none; flex: 1; min-height: 0; }
+  .problem-ide[data-mobile-view='editor'] .problem-left { display: none; }
+  .problem-ide[data-mobile-view='editor'] .problem-right { display: flex; }
+  .problem-tabs { flex-shrink: 0; padding-inline: 4px; }
+  .problem-tabs__btn { min-height: 42px; padding: 9px 12px; font-size: 12px; }
+  .problem-tab-content { flex: 1; min-height: 0; max-height: none; padding: 20px; overflow: auto; }
+  .problem-desc__body { font-size: 14px; line-height: 1.75; }
+  .problem-desc__body p { margin-bottom: 14px; }
+  .problem-contract { font-size: 12px; color: var(--color-text-light); margin: 12px 0; line-height: 1.6; }
+  .problem-sample { margin: 22px 0; }
+  .problem-sample h2 { font-size: 13px; font-weight: 650; margin-bottom: 9px; letter-spacing: 0; }
+  .problem-sample__values { border-left: 3px solid var(--color-border); padding: 4px 0 4px 12px; }
+  .problem-sample__values > div { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 8px; padding: 3px 0; }
+  .problem-sample__values strong { font-size: 12px; line-height: 1.7; color: var(--color-text-light); font-weight: 600; }
+  .problem-sample pre, .problem-sample code { font-family: var(--font-mono); font-size: 12px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; background: transparent; padding: 0; margin: 0; color: var(--color-text); border: 0; }
+  .problem-sample p { font-size: 13px; margin: 10px 0 0; line-height: 1.7; }
+  .problem-section { margin-top: 20px; }
+  .problem-section__heading { font-size: 12px; letter-spacing: .02em; }
+  .problem-contract-details { margin: 12px 0; font-size: 12px; color: var(--color-text-light); }
+  .problem-contract-details summary { font-weight: 600; }
+  .problem-details summary { cursor: pointer; min-height: 36px; }
+  .problem-constraints { font-size: 12px; line-height: 1.8; }
+  .problem-editor-area { flex: 1; min-height: 0; }
+  .problem-editor-toolbar { min-height: 48px; padding: 6px 10px; gap: 6px; flex-wrap: nowrap; }
+  .problem-editor-mount { flex: 1; min-height: 100px; }
+  .problem-editor-mount .dc-editor, .problem-editor-mount .dc-editor__mount, .problem-editor-mount .cm-editor, .problem-editor-mount .cm-scroller { min-height: 0; }
+  .problem-output-area { flex: 0 0 var(--problem-output-height, 180px); min-height: 100px; max-height: 65%; display: flex; flex-direction: column; }
+  .problem-output-tabs { flex-shrink: 0; }
+  .problem-output-tabs__btn { min-height: 38px; font-size: 12px; }
+  .problem-output-content { flex: 1; min-height: 0; overflow: auto; white-space: pre-wrap; font-size: 12px; }
+  .problem-resizer { flex-shrink: 0; background: var(--color-background); position: relative; touch-action: none; outline-offset: -2px; }
+  .problem-resizer::after { content: ''; position: absolute; background: var(--color-border); border-radius: 3px; }
+  .problem-resizer:hover, .problem-resizer:focus-visible { background: var(--dc-sage); }
+  .problem-resizer--columns { display: none; width: 8px; cursor: col-resize; }
+  .problem-resizer--columns::after { width: 2px; height: 28px; top: calc(50% - 14px); left: 3px; }
+  .problem-resizer--output { height: 8px; cursor: row-resize; }
+  .problem-resizer--output::after { height: 2px; width: 28px; left: calc(50% - 14px); top: 3px; }
+  .problem-ide--resizing { user-select: none; }
+}
+@media (min-width: 1024px) {
+  body.dc-editor-page {
+    .problem-mobile-views { display: none; }
+    .problem-toolbar > .p-badge { display: inline-flex; }
+    .problem-toolbar__title { font-size: 15px; }
+    .problem-toolbar__actions > a { display: inline-flex; }
+    .problem-split { flex-direction: row; }
+    .problem-left, .problem-ide[data-mobile-view='editor'] .problem-left { display: flex; flex: 0 0 var(--problem-description-width, 45%); min-width: 0; }
+    .problem-right { display: flex; flex: 1; min-width: 0; }
+    .problem-resizer--columns { display: block; }
+    .problem-tab-content { padding: 24px; }
+  }
+}
+
+body.dc-editor-page {
+  .p-btn svg { flex-shrink: 0; }
+  .problem-desc__body h2 { font-size: 20px; line-height: 1.4; margin: 20px 0 12px; }
+  .problem-desc__body h3 { font-size: 16px; line-height: 1.5; margin: 16px 0 10px; }
+  .problem-visual > div { display: flex; justify-content: center; }
+  .problem-format-status { flex-shrink: 0; padding: 7px 12px; margin: 0; font-size: 12px; line-height: 1.5; max-height: 100px; overflow: auto; white-space: pre-wrap; background: var(--color-code-bg); color: var(--color-text-light); border-bottom: 1px solid var(--color-border); }
+  .problem-desc .cb { border-radius: 8px; overflow: hidden; box-shadow: none; margin: 16px 0; border: 1px solid var(--color-border); }
+  .problem-desc .cb__bar { min-height: 36px; padding: 4px 12px; background: var(--color-code-bg); }
+  .problem-desc .cb__code, .problem-desc .cb__gutter { font-size: 12px; line-height: 1.65; }
+  .problem-desc .cb__copy { min-height: 30px; min-width: 30px; }
+  .problem-desc .cb, .problem-desc .cb__code, .problem-desc .cb__code code { background: var(--color-surface); color: var(--color-text); }
+  .problem-desc .cb__gutter { background: var(--color-code-bg); color: var(--color-text-light); border-color: var(--color-border); }
+  .problem-desc .cb__lang, .problem-desc .cb__copy { color: var(--color-text-light); }
+  .problem-desc .cb__copy { border-color: var(--color-border); }
+  .problem-desc .cb__copy:hover { background: var(--dc-sage); color: var(--color-primary); }
+  .problem-desc .cb__copy--done { color: var(--color-success); }
+  .problem-desc .hljs-keyword, .problem-desc .hljs-meta { color: var(--color-purple); }
+  .problem-desc .hljs-string, .problem-desc .hljs-regexp { color: var(--color-success); }
+  .problem-desc .hljs-number, .problem-desc .hljs-literal { color: var(--color-warning); }
+  .problem-desc .hljs-title, .problem-desc .hljs-type, .problem-desc .hljs-built_in { color: var(--color-info); }
+  .problem-desc .hljs-comment, .problem-desc .hljs-quote { color: var(--color-text-light); }
+  .problem-desc .hljs-operator { color: var(--color-primary); }
+  .problem-desc .hljs-params, .problem-desc .hljs-property, .problem-desc .hljs-variable, .problem-desc .hljs-punctuation, .problem-desc .hljs-attr { color: var(--color-text); }
+}

@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0126",
-  "title": "Gas Station | Practice",
+  "title": "Gas Station",
   "difficulty": "Medium",
-  "topic": "Stack&Queue",
+  "topic": "Greedy",
   "topics": [
-    "Stack&Queue"
+    "Array",
+    "Greedy"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Gas%20Station%20%7C%20Practice",
@@ -44,13 +45,50 @@
         ]
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "gasStation",
   "templateCode": "function gasStation(gas, cost) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= N <= 10^5",
-    "0 <= gas[i], cost[i] <= 10^4"
+    "0 <= gas[i], cost[i] <= 10^4",
+    "gas.length == cost.length == N",
+    "If a valid starting station exists, it is unique."
   ],
   "runner": {},
   "examples": [
@@ -65,6 +103,6 @@
   ],
   "sampleInput": "gas = [1,2,3,4,5]\ncost = [3,4,5,1,2]",
   "sampleOutput": "3",
-  "inputFormat": "Implement gasStation(gas, cost). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "gas and cost are equal-length nonempty arrays. cost[i] is the fuel needed to reach station (i + 1) % n.",
+  "outputFormat": "Return the zero-based index of the unique valid starting station, or -1 if a full circuit is impossible."
 }

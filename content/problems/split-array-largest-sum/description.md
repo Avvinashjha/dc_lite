@@ -1,1 +1,3 @@
-You have an array `nums` of non-negative integers and need to divide it into `k` contiguous, non-empty pieces. Each way of splitting it produces `k` subarray sums — choose the split that keeps the largest of those sums as small as possible, and return that minimized value.
+Split the array `nums` into **exactly `k` nonempty contiguous subarrays**, preserving the original element order and using every element once.
+
+For each split, compute the sum of each subarray and take the largest sum. Return the smallest possible value of that largest sum. Return the value, not the partition itself. All input values are nonnegative, including possibly zero.

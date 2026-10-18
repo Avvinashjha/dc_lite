@@ -1,5 +1,6 @@
 ---
 import type { ProblemItem } from '../types/post';
+import { slugifyTaxonomy } from '../utils/taxonomy';
 
 interface Props {
   problem: ProblemItem;
@@ -17,6 +18,11 @@ const followUps = problem.followUps
   : [];
 const examples = Array.isArray(problem.examples) ? problem.examples : [];
 const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
+function visualWidth(svg: string): string {
+  const viewBox = svg.match(/viewBox=["']([^"']+)["']/i)?.[1].trim().split(/[\s,]+/).map(Number);
+  const width = viewBox?.[2];
+  return width && Number.isFinite(width) && width > 0 ? `${width}px` : '100%';
+}
 ---
 
 <div class:list={['problem-desc', embedded && 'problem-desc--embedded']}>
@@ -26,50 +32,44 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
       <div class="problem-desc__meta">
         <span class={`p-badge p-badge--${problem.difficulty.toLowerCase()}`}>{problem.difficulty}</span>
         {topics.map(t => <span class="p-badge p-badge--neutral">{t}</span>)}
-        <span class="p-badge p-badge--neutral">{problem.platform}</span>
+
       </div>
     </div>
   )}
 
   <div class="problem-desc__body" set:html={problem.descriptionHtml} />
 
-  {problem.inputFormat && (
-    <div class="problem-example">
-      <div class="problem-example__label">Input Format</div>
-      <div class="problem-example__content">{problem.inputFormat}</div>
-    </div>
-  )}
-  {problem.outputFormat && (
-    <div class="problem-example">
-      <div class="problem-example__label">Output Format</div>
-      <div class="problem-example__content">{problem.outputFormat}</div>
-    </div>
+  {(problem.inputFormat || (problem.outputFormat && problem.outputFormat !== 'Return the result described in the statement.')) && (
+    <details class="problem-details problem-contract-details">
+      <summary>Function contract</summary>
+      {problem.inputFormat && <p class="problem-contract">{problem.inputFormat.replace(' Inputs below show JavaScript function arguments; there is no stdin parsing.', '')}</p>}
+      {problem.outputFormat && problem.outputFormat !== 'Return the result described in the statement.' && <p class="problem-contract"><strong>Output:</strong> {problem.outputFormat}</p>}
+    </details>
   )}
 
   {examples.length > 0 && (
-    <div class="problem-section">
-      <h2 class="problem-section__heading">Sample Input and Output</h2>
+    <section class="problem-section" aria-label="Examples">
       {examples.map((ex, idx) => (
-        <div class="problem-example" style="margin-top:0.5rem;">
-          <h3 class="problem-example__label">Example {idx + 1}{idx === 0 ? ' · Run Sample' : ''}</h3>
-          <div class="problem-example__label">Input</div>
-          <pre class="problem-example__content"><code>{ex.input}</code></pre>
-          <div class="problem-example__label">Output</div>
-          <pre class="problem-example__content"><code>{ex.output}</code></pre>
+        <div class="problem-sample">
+          <h2>Example {idx + 1}</h2>
+          <div class="problem-sample__values">
+            <div><strong>Input</strong><pre><code>{ex.input}</code></pre></div>
+            <div><strong>Output</strong><pre><code>{ex.output}</code></pre></div>
+          </div>
           {ex.explanation && <p><strong>Explanation:</strong> {ex.explanation}</p>}
         </div>
       ))}
-    </div>
+    </section>
   )}
 
   {visuals.length > 0 && (
     <div class="problem-section">
       <div class="problem-section__heading">Visual Aid</div>
       {visuals.map((visual) => (
-        <figure style="margin:0.75rem 0;padding:0.75rem;border:1px solid var(--color-border);border-radius:10px;background:var(--color-code-bg);">
+        <figure class="problem-visual" style="margin:0.75rem 0;padding:0.75rem;border:1px solid var(--color-border);border-radius:10px;background:var(--color-code-bg);">
           {visual.title && <figcaption style="font-weight:700;margin-bottom:0.45rem;">{visual.title}</figcaption>}
           {visual.imageUrl && <img src={visual.imageUrl} alt={visual.caption || visual.title || 'Problem visual'} loading="lazy" />}
-          {visual.svg && <div set:html={visual.svg} />}
+          {visual.svg && <div style={`max-width:${visualWidth(visual.svg)};margin-inline:auto;`} set:html={visual.svg} />}
           {visual.caption && <p style="margin:0.4rem 0 0;color:var(--color-text-light);font-size:0.82rem;">{visual.caption}</p>}
         </figure>
       ))}
@@ -77,12 +77,12 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
   )}
 
   {constraints.length > 0 && (
-    <div class="problem-section">
-      <div class="problem-section__heading">Constraints</div>
+    <details class="problem-section problem-details" open>
+      <summary class="problem-section__heading">Constraints</summary>
       <ul class="problem-constraints">
         {constraints.map(c => <li>{c}</li>)}
       </ul>
-    </div>
+    </details>
   )}
 
   {followUps.length > 0 && (
@@ -94,27 +94,11 @@ const visuals = Array.isArray(problem.visuals) ? problem.visuals : [];
     </div>
   )}
 
-  {problem.testCases.length > 0 && (
-    <details class="problem-section">
-      <summary class="problem-section__heading">Test Cases ({problem.testCases.length})</summary>
-      {problem.testCases.map((tc, idx) => (
-        <div class="problem-example" style="margin-top:0.5rem;">
-          <div class="problem-example__label">Case {idx + 1}</div>
-          <div class="problem-example__content">{
-            tc.args !== undefined
-              ? `Args: ${JSON.stringify(tc.args)}\nExpected: ${JSON.stringify(tc.expected)}`
-              : `Input: ${tc.input ?? ''}\nOutput: ${tc.output ?? ''}`
-          }</div>
-        </div>
-      ))}
-    </details>
-  )}
-
   <div class="problem-section">
     <div class="problem-section__heading">Topics</div>
     <div class="problem-topics">
       {topics.map(t => (
-        <a href={`/problems/topic/${t.toLowerCase().replace(/\s+/g, '-')}`} class="p-badge p-badge--neutral" style="text-decoration:none;">{t}</a>
+        <a href={`/problems/topic/${slugifyTaxonomy(t)}`} class="p-badge p-badge--neutral" style="text-decoration:none;">{t}</a>
       ))}
     </div>
   </div>

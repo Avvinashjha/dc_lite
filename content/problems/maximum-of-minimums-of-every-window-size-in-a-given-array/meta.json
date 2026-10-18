@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0129",
-  "title": "Maximum of minimums of every window size in a given array",
+  "title": "Maximum of Window Minimums",
   "difficulty": "Hard",
-  "topic": "Stack&Queue",
+  "topic": "Array",
   "topics": [
-    "Stack&Queue"
+    "Array",
+    "Monotonic Stack"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Maximum%20of%20minimums%20of%20every%20window%20size%20in%20a%20given%20array",
@@ -46,6 +47,106 @@
         -2,
         -3
       ]
+    },
+    {
+      "args": [
+        [
+          5
+        ]
+      ],
+      "expected": [
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          4,
+          4,
+          4
+        ]
+      ],
+      "expected": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          -3,
+          -1,
+          -2
+        ]
+      ],
+      "expected": [
+        -1,
+        -2,
+        -3
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          2,
+          0,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        0,
+        0,
+        0
+      ]
     }
   ],
   "functionName": "maximumOfMinimumsOfEveryWindowSizeInAGivenArray",
@@ -67,6 +168,6 @@
   ],
   "sampleInput": "arr = [10,20,30,50,10,70,30]",
   "sampleOutput": "[70,30,20,10,10,10,10]",
-  "inputFormat": "Implement maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maximumOfMinimumsOfEveryWindowSizeInAGivenArray(arr). Receive a nonempty integer array; values may be negative.",
+  "outputFormat": "Return an array of length arr.length. Entry w - 1 is the maximum minimum among all contiguous windows of length w, for w from 1 through arr.length."
 }

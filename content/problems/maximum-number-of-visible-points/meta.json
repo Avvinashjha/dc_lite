@@ -3,9 +3,11 @@
   "id": "problem-0259",
   "title": "Maximum Number of Visible Points",
   "difficulty": "Medium",
-  "topic": "Two-Pointer",
+  "topic": "Geometry",
   "topics": [
-    "Two Pointer"
+    "Geometry",
+    "Sorting",
+    "Sliding Window"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-number-of-visible-points/",
@@ -96,13 +98,147 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ],
+        90,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            -10,
+            1
+          ],
+          [
+            -10,
+            -1
+          ],
+          [
+            10,
+            0
+          ]
+        ],
+        12,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        1,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        1,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        180,
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "visiblePoints",
   "templateCode": "function visiblePoints(points, angle, location) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= points.length <= 10^5",
-    "1 <= angle <= 360"
+    "1 <= angle <= 360",
+    "Point and location coordinates are integers in [-10^4, 10^4]",
+    "Duplicate point coordinates are allowed and count as separate points"
   ],
   "runner": {},
   "examples": [
@@ -119,6 +255,13 @@
       "output": "3"
     }
   ],
-  "inputFormat": "Implement visiblePoints(points, angle, location). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement visiblePoints(points, angle, location). Receive [x, y] point pairs, a field-of-view angle in degrees, and your fixed [x, y] location.",
+  "outputFormat": "Return the maximum number of points visible simultaneously over all viewing directions.",
+  "visuals": [
+    {
+      "title": "Field-of-view boundaries are inclusive",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 220\" role=\"img\" aria-labelledby=\"view-title view-desc\" style=\"width:100%;height:auto;max-width:420px;color:var(--color-text)\"><title id=\"view-title\">A ninety-degree field of view includes both boundary points</title><desc id=\"view-desc\">Observer at origin. Points lie east, north, west, and south. A ninety-degree sector between east and north includes two points.</desc><path d=\"M120 110H210A90 90 0 0 0 120 20Z\" fill=\"currentColor\" opacity=\".08\"/><g fill=\"none\" stroke=\"currentColor\"><path d=\"M25 110H215M120 205V15\" opacity=\".35\"/><path d=\"M120 20V110H210\" stroke-width=\"2\"/><path d=\"M150 110A30 30 0 0 0 120 80\"/></g><g fill=\"currentColor\"><circle cx=\"120\" cy=\"110\" r=\"4\"/><circle cx=\"190\" cy=\"110\" r=\"5\"/><circle cx=\"120\" cy=\"40\" r=\"5\"/><circle cx=\"50\" cy=\"110\" r=\"5\"/><circle cx=\"120\" cy=\"180\" r=\"5\"/></g><g font-family=\"system-ui,sans-serif\" fill=\"currentColor\" font-size=\"12\"><text x=\"154\" y=\"80\">90\u00b0</text><text x=\"132\" y=\"39\">(0,1)</text><text x=\"176\" y=\"132\">(1,0)</text><text x=\"17\" y=\"132\">(\u22121,0)</text><text x=\"132\" y=\"185\">(0,\u22121)</text><text x=\"78\" y=\"151\">observer</text><text x=\"250\" y=\"87\">Both edges count.</text><text x=\"250\" y=\"112\">2 visible points</text><text x=\"250\" y=\"137\">Return 2</text></g></svg>",
+      "caption": "With four points in the cardinal directions and angle = 90\u00b0, the best view contains two points, including points exactly on its edges."
+    }
+  ]
 }

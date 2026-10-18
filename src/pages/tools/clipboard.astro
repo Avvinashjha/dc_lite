@@ -15,9 +15,15 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 >
   <div class="tool-actions">
     <button class="tool-btn tool-btn--primary" id="btn-paste">Paste from Clipboard</button>
-    <button class="tool-btn" id="btn-add-manual">Add Manually</button>
     <button class="tool-btn" id="btn-clear-all">Clear All</button>
   </div>
+
+  <div class="clip-composer" aria-label="Add a snippet">
+    <input id="clip-name" class="tool-input" placeholder="Snippet name (optional)" />
+    <textarea id="clip-text" class="tool-textarea" rows="3" placeholder="Paste or write a snippet…"></textarea>
+    <button class="tool-btn tool-btn--primary" id="btn-save-clip">Save snippet</button>
+  </div>
+  <div id="clip-status" aria-live="polite"></div>
 
   <div id="clip-stats" style="font-size: 0.8rem; color: var(--color-text-light); margin-bottom: 1rem;"></div>
 
@@ -103,6 +109,13 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     await loadItems();
   }
 
+  function setStatus(message, isError) {
+    var el = document.getElementById('clip-status');
+    el.className = isError ? 'tool-error' : 'tool-success';
+    el.textContent = message;
+    setTimeout(function() { el.textContent = ''; }, 2600);
+  }
+
   function render(filter) {
     var el = document.getElementById('clip-list');
     var filtered = items;
@@ -117,7 +130,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 
     if (filtered.length === 0) {
       el.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--color-text-light);border:1px dashed var(--color-border);border-radius:var(--radius-md);">' +
-        (items.length === 0 ? 'No clips saved yet. Paste from clipboard or add manually.' : 'No results for "' + esc(filter) + '"') + '</div>';
+        (items.length === 0 ? 'No clips saved yet. Paste from your clipboard or write one above.' : 'No results for "' + esc(filter) + '"') + '</div>';
       return;
     }
 
@@ -152,25 +165,26 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     try {
       var text = await navigator.clipboard.readText();
       if (text) {
-        var name = prompt('Name this snippet (optional):', '');
-        await saveItem(text, name || '');
+        document.getElementById('clip-text').value = text;
+        document.getElementById('clip-name').focus();
+        setStatus('Clipboard pasted. Name it if you want, then save.');
+      } else {
+        setStatus('Your clipboard is empty.', true);
       }
     } catch(e) {
-      // Fallback
-      var text = prompt('Paste your text here:');
-      if (text) {
-        var name = prompt('Name this snippet (optional):', '');
-        await saveItem(text, name || '');
-      }
+      document.getElementById('clip-text').focus();
+      setStatus('Clipboard access was blocked. Paste into the field instead.', true);
     }
   });
 
-  document.getElementById('btn-add-manual').addEventListener('click', function() {
-    var text = prompt('Enter text to save:');
-    if (text) {
-      var name = prompt('Name this snippet (optional):', '');
-      saveItem(text, name || '');
-    }
+  document.getElementById('btn-save-clip').addEventListener('click', async function() {
+    var text = document.getElementById('clip-text').value;
+    var name = document.getElementById('clip-name').value.trim();
+    if (!text.trim()) { setStatus('Add a snippet before saving.', true); return; }
+    await saveItem(text, name);
+    document.getElementById('clip-text').value = '';
+    document.getElementById('clip-name').value = '';
+    setStatus('Snippet saved.');
   });
 
   document.getElementById('btn-clear-all').addEventListener('click', clearAll);
@@ -183,6 +197,16 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 </script>
 
 <style is:global>
+  .clip-composer {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    align-items: stretch;
+    margin: 0.65rem 0;
+  }
+  .clip-composer .tool-textarea { min-height: 76px; }
+  .clip-composer .tool-btn { align-self: end; }
+  #clip-status { min-height: 0; font-size: 0.8rem; }
   .clip-card {
     border: 1px solid var(--color-border); border-radius: var(--radius-md);
     padding: 0.75rem 1rem; margin-bottom: 0.6rem; background: var(--color-surface);
@@ -206,4 +230,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     max-height: 100px; line-height: 1.5;
   }
   .clip-card__actions { display: flex; gap: 0.4rem; }
+  @media (max-width: 700px) {
+    .clip-composer { grid-template-columns: 1fr; }
+    .clip-composer .tool-btn { justify-self: start; }
+  }
 </style>

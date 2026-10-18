@@ -1,6 +1,7 @@
 ---
 import '../styles/global.scss';
 import '../styles/school.scss';
+import ThemeInit from '../components/ThemeInit.astro';
 interface Props { title: string; description: string }
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -19,6 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <title>{title}</title>
+    <ThemeInit/>
   </head>
   <body class="school-body">
     <a class="school-skip-link" href="#school-main">Skip to learning content</a>

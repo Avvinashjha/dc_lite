@@ -3,9 +3,10 @@
   "id": "problem-0072",
   "title": "Product of Array Except Self",
   "difficulty": "Medium",
-  "topic": "Sorting&Searching",
+  "topic": "Array",
   "topics": [
-    "Sorting&Searching"
+    "Array",
+    "Prefix Sum"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Product%20of%20Array%20Except%20Self",
@@ -42,6 +43,136 @@
         0,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          0,
+          3
+        ]
+      ],
+      "expected": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          3,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        6
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          1,
+          0,
+          -3,
+          3
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        9,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          -2,
+          -3,
+          -4
+        ]
+      ],
+      "expected": [
+        -24,
+        -12,
+        -8,
+        -6
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          -2
+        ]
+      ],
+      "expected": [
+        -2,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        1
+      ]
     }
   ],
   "functionName": "productExceptSelf",
@@ -49,7 +180,7 @@
   "constraints": [
     "2 <= nums.length <= 10^5",
     "-30 <= nums[i] <= 30",
-    "Guaranteed product of any prefix/suffix fits in 32-bit integer"
+    "Every prefix product, suffix product, and output value fits in a signed 32-bit integer."
   ],
   "runner": {},
   "examples": [
@@ -65,5 +196,5 @@
   "sampleInput": "nums = [1,2,3,4]",
   "sampleOutput": "[24,12,8,6]",
   "inputFormat": "Implement productExceptSelf(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return an array where result[i] is the product of all input entries except nums[i], preserving index order."
 }

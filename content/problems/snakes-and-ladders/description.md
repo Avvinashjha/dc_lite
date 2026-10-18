@@ -1,1 +1,11 @@
-You're given an n×n snakes-and-ladders board, numbered boustrophedon-style: squares run from `1` to `n^2` starting at the bottom-left, moving right along the bottom row, then alternating direction on each row going up. Each square is either `-1` (nothing special) or the destination of a snake or ladder. Starting from square 1 and rolling a standard die each turn, find the minimum number of dice rolls needed to reach the last square, following at most one snake or ladder per roll (do not chain jumps). Return `-1` if the final square is unreachable.
+Given an `n × n` board, return the minimum number of die rolls needed to travel from square `1` to square `n²`.
+
+Squares are numbered from the **bottom-left**, left to right across the bottom row, then right to left across the next row, alternating upward. The input array is still stored in the usual top-row-first order.
+
+For each turn:
+
+1. Choose a destination from `current + 1` through `min(current + 6, n²)`. Moves cannot overshoot the final square.
+2. If that square contains `-1`, stay there. Otherwise, you **must** move to the destination label stored in that cell.
+3. Follow at most one snake or ladder in this turn. If its destination has another jump, do not follow that second jump.
+
+The jump does not cost an additional roll. Return `-1` if the final square cannot be reached. You are finding the fewest possible rolls, not an expected value over random dice outcomes.

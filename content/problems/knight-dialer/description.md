@@ -1,1 +1,12 @@
-Imagine a chess knight set down on a phone keypad instead of a chessboard. Starting from any digit cell 0-9, it hops around using its usual L-shaped chess move, and each cell it lands on gets appended as a digit to the number being dialed. For a given length `n`, count how many distinct `n`-digit numbers the knight could produce this way. Since the count can get huge, return it modulo 10^9 + 7. Note that the knight has nowhere to jump from cell 5.
+Count the distinct digit sequences of length `n` that a chess knight can dial on this keypad:
+
+```text
+1 2 3
+4 5 6
+7 8 9
+  0
+```
+
+Start on any digit. Each jump moves two cells in one direction and one cell perpendicular to it, landing only on a digit. The two blank bottom corners are unavailable.
+
+Include the starting digit, so a sequence of length `n` uses exactly `n - 1` jumps. Leading zeros and revisiting digits are allowed. For example, `04` and `40` are different valid sequences of length 2. Digit `5` has no legal moves, but still counts when `n = 1`. Return the count modulo `1000000007`.

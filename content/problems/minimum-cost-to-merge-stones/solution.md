@@ -1,5 +1,9 @@
 ## Interval DP
 
+Every merge reduces the pile count by k - 1, so one pile is reachable only when (n - 1) is divisible by k - 1.
+
+Let dp[i][j] be the minimum cost to reduce that interval to the smallest feasible number of piles: 1 + ((j - i) % (k - 1)). Intervals shorter than k need no merge. Try split points in steps of k - 1 so the left interval can become one pile. If the full interval can become one pile, add its total stone count for the final merge; prefix sums provide that total in O(1).
+
 ```javascript
 function mergeStones(stones, k) {
   const n = stones.length;
@@ -17,4 +21,4 @@ function mergeStones(stones, k) {
 }
 ```
 
-**Time:** O(n³/k) | **Space:** O(n²)
+**Time:** O(n² + n³/(k - 1)) | **Space:** O(n²)

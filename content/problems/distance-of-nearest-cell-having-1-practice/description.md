@@ -1,1 +1,3 @@
-You're given a matrix containing only 0s and 1s. For every cell, compute how far it is from the closest cell holding a 1, where distance between two cells is the Manhattan distance — the sum of the absolute differences between their row indices and their column indices. Return a matrix of these distances.
+Given a rectangular binary matrix `grid` containing at least one `1`, return the distance from every cell to its nearest cell containing `1`.
+
+Distance is measured in horizontal or vertical steps: between `(r, c)` and `(i, j)`, it is `|r - i| + |c - j|`. Diagonal steps are not allowed. A cell containing `1` has distance `0` from itself.

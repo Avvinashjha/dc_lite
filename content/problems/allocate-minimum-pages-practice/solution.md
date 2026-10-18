@@ -1,11 +1,15 @@
 ## Binary Search on Answer
 
-Binary search on the maximum pages. For each candidate, greedily check if M students can read all books.
+Binary search on the maximum pages. For each candidate limit, greedily count the contiguous groups needed. A limit is feasible if at most m groups are needed: since m does not exceed the number of books, groups can be split further until every student has a non-empty group.
 
 ```javascript
 function allocateMinimumPages(arr, m) {
   if (m > arr.length) return -1;
-  let lo = Math.max(...arr), hi = arr.reduce((a, b) => a + b, 0);
+  let lo = 0, hi = 0;
+  for (const pages of arr) {
+    lo = Math.max(lo, pages);
+    hi += pages;
+  }
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2);
     let students = 1, pages = 0;

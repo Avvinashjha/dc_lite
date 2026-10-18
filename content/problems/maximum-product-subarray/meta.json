@@ -2,11 +2,11 @@
   "draft": false,
   "id": "problem-0228",
   "title": "Maximum Product Subarray",
-  "difficulty": "Easy",
+  "difficulty": "Medium",
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Array"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-product-subarray/",
@@ -32,6 +32,74 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          -2
+        ]
+      ],
+      "expected": -2
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          -2,
+          -3
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          -2,
+          3,
+          -4
+        ]
+      ],
+      "expected": 24
+    },
+    {
+      "args": [
+        [
+          -2,
+          -3,
+          -4
+        ]
+      ],
+      "expected": 12
+    },
+    {
+      "args": [
+        [
+          0,
+          -2,
+          -3,
+          0,
+          -4
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "maxProduct",
@@ -54,6 +122,6 @@
   ],
   "sampleInput": "nums = [2,3,-2,4]",
   "sampleOutput": "6",
-  "inputFormat": "Implement maxProduct(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxProduct(nums). Receive a nonempty integer array. Every contiguous subarray product fits a signed 32-bit integer.",
+  "outputFormat": "Return the largest product of any nonempty contiguous subarray, not its indices or elements."
 }

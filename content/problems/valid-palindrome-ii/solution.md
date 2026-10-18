@@ -1,5 +1,7 @@
 Use two pointers from both ends moving inward. When a mismatch is found, try skipping either the left or right character and check if the remaining substring is a palindrome. If either works, return true.
 
+At the first mismatch, any successful single deletion must remove one of those two mismatching characters. The helper checks the resulting interval without allowing another deletion. Matching outer characters have already been checked and need no further work.
+
 ```javascript
 function validPalindrome(s) {
   function isPalin(left, right) {

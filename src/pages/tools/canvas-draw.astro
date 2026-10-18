@@ -14,10 +14,10 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   ]}
 >
   <!-- Project tab bar -->
-  <div class="cd-tabs">
-    <div class="cd-tabs__list" id="cd-tab-list"></div>
-    <button class="cd-tabs__add" id="cd-add-project" title="New project">+</button>
-    <div class="cd-tabs__right">
+  <div class="tab-bar cd-tabs">
+    <div class="tab-list cd-tabs__list" id="cd-tab-list"></div>
+    <button class="tab-add cd-tabs__add" id="cd-add-project" title="New project">+</button>
+    <div class="tab-bar__actions cd-tabs__right">
       <button class="tool-btn" id="cd-import-btn" title="Import JSON">Import</button>
       <button class="tool-btn" id="cd-export-btn" title="Export drawing">Export</button>
     </div>
@@ -378,56 +378,45 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 <script src="/js/canvas-draw.js" is:inline></script>
 
 <style is:global>
-  .cd-tabs {
-    display: flex; align-items: center; gap: 0.25rem;
-    border: 1px solid var(--color-border); border-radius: var(--radius-md);
-    background: var(--color-surface); padding: 0.25rem 0.5rem; margin-bottom: 0.5rem;
-    overflow-x: auto;
-  }
-  .cd-tabs__list { display: flex; gap: 0.2rem; flex: 1; min-width: 0; overflow-x: auto; }
+  .cd-tabs { gap: 0; margin-bottom: 0.45rem; overflow-x: auto; }
+  .cd-tabs__list { display: flex; gap: 0; flex: 0 1 auto; min-width: 0; overflow-x: auto; }
   .cd-tab {
     display: flex; align-items: center; gap: 0.3rem;
-    padding: 0.3rem 0.6rem; border-radius: var(--radius-sm);
-    background: transparent; border: 1px solid transparent;
-    font-size: 0.78rem; cursor: pointer; white-space: nowrap;
-    color: var(--color-text-light); transition: all 120ms;
+    padding: 0.55rem 1.1rem; border: 0; border-bottom: 2px solid transparent;
+    border-radius: 0; background: transparent; font-size: 0.82rem;
+    font-weight: 600; cursor: pointer; white-space: nowrap;
+    color: var(--color-text-light); transition: all 150ms;
   }
   .cd-tab:hover { background: var(--color-code-bg); color: var(--color-text); }
-  .cd-tab--active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .cd-tab--active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
   .cd-tab__close {
     display: inline-flex; width: 14px; height: 14px; align-items: center; justify-content: center;
     border: none; background: transparent; color: inherit; cursor: pointer;
     border-radius: 50%; font-size: 10px; line-height: 1; opacity: 0.6;
   }
   .cd-tab__close:hover { opacity: 1; background: rgba(0,0,0,0.15); }
-  .cd-tabs__add {
-    width: 26px; height: 26px; border-radius: var(--radius-sm);
-    border: 1px dashed var(--color-border); background: transparent;
-    font-size: 1rem; color: var(--color-text-light); cursor: pointer; flex-shrink: 0;
-  }
-  .cd-tabs__add:hover { border-color: var(--color-primary); color: var(--color-primary); }
-  .cd-tabs__right { display: flex; gap: 0.3rem; margin-left: auto; flex-shrink: 0; }
-  .cd-tabs__right .tool-btn { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+  .cd-tabs__add { margin-left: 0.1rem; }
+  .cd-tabs__right { flex-shrink: 0; }
 
   .cd-workspace {
     display: flex; gap: 0;
     border: 1px solid var(--color-border); border-radius: var(--radius-md);
-    overflow: hidden; height: calc(100vh - 150px);
+    overflow: hidden; height: calc(100dvh - var(--site-header-height) - 56px);
     background: var(--color-surface);
   }
 
   .cd-toolbar {
     display: flex; flex-direction: column; gap: 0.2rem;
-    padding: 0.4rem; border-right: 1px solid var(--color-border);
-    background: var(--color-surface); flex-shrink: 0; width: 44px;
+    padding: 0.25rem; border-right: 1px solid var(--color-border);
+    background: var(--color-surface); flex-shrink: 0; width: 40px;
   }
   .cd-tool {
-    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
     border: 1px solid transparent; border-radius: var(--radius-sm);
     background: transparent; color: var(--color-text); cursor: pointer; transition: all 120ms;
   }
   .cd-tool:hover { background: var(--color-code-bg); border-color: var(--color-border); }
-  .cd-tool--active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .cd-tool--active { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
   .cd-tool-sep { height: 1px; background: var(--color-border); margin: 0.2rem 0.25rem; }
 
   .cd-canvas-wrap {
@@ -516,7 +505,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   .cd-sel-outline { fill: none; stroke: var(--color-primary, #2563eb); stroke-width: 1.5; stroke-dasharray: 5 3; pointer-events: none; }
   .cd-handle { fill: #fff; stroke: var(--color-primary, #2563eb); stroke-width: 1.5; cursor: pointer; }
   [data-theme="dark"] .cd-handle { fill: #374151; }
-  .cd-marquee { fill: rgba(37,99,235,0.08); stroke: var(--color-primary, #2563eb); stroke-width: 1; stroke-dasharray: 4 3; }
+  .cd-marquee { fill: color-mix(in srgb, var(--color-primary) 8%, transparent); stroke: var(--color-primary, #2563eb); stroke-width: 1; stroke-dasharray: 4 3; }
   .cd-anchor-hint { fill: var(--color-primary, #2563eb); opacity: 0.6; cursor: crosshair; }
   .cd-conn-temp { stroke: var(--color-primary, #2563eb); stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
   .cd-conn-selected { outline: none; }
@@ -563,7 +552,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   .cd-swatch:hover { transform: scale(1.25); border-color: var(--color-text); }
 
   .cd-zoom-sep { border-left: 1px solid var(--color-border); }
-  #cd-snap-grid.cd-snap-active { background: var(--color-primary); color: #fff; }
+  #cd-snap-grid.cd-snap-active { background: var(--color-primary); color: var(--color-on-primary); }
   #cd-help-btn { font-size: 0.72rem; font-weight: 700; }
 
   .cd-help-modal { min-width: 560px; max-width: 90vw; }
@@ -579,7 +568,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   }
 
   @media (max-width: 768px) {
-    .cd-workspace { height: calc(100vh - 160px); flex-direction: column; }
+    .cd-workspace { height: calc(100dvh - var(--site-header-height) - 52px); flex-direction: column; }
     .cd-toolbar { flex-direction: row; width: 100%; border-right: none; border-bottom: 1px solid var(--color-border); overflow-x: auto; }
     .cd-tool-sep { width: 1px; height: auto; margin: 0.25rem 0.15rem; }
     .cd-props { width: 100%; border-left: none; border-top: 1px solid var(--color-border); max-height: 180px; }

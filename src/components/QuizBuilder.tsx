@@ -49,7 +49,10 @@ function booleanOptions(): { id: string; text: string }[] {
 type SubmitState = 'idle' | 'submitting' | 'done' | 'error' | 'unconfigured';
 
 export default function QuizBuilder() {
-  const user = useStore(userStore);
+  const liveUser = useStore(userStore);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const user = mounted ? liveUser : null;
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -57,7 +60,7 @@ export default function QuizBuilder() {
   const [difficulty, setDifficulty] = useState<QuizDifficulty>('easy');
   const [tags, setTags] = useState('');
   const [timeLimitMin, setTimeLimitMin] = useState('');
-  const [questions, setQuestions] = useState<EditableQuestion[]>([blankQuestion()]);
+  const [questions, setQuestions] = useState<EditableQuestion[]>([{ id: 'q_initial', type: 'single', prompt: '', options: [{ id: 'o_initial_1', text: '' }, { id: 'o_initial_2', text: '' }], correct: [], explanation: '', points: 1 }]);
 
   const [errors, setErrors] = useState<string[]>([]);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -259,10 +262,10 @@ export default function QuizBuilder() {
     }
   }
 
-  const apiConfigured = isQuizApiConfigured();
+  const apiConfigured = mounted && isQuizApiConfigured();
 
   return (
-    <div class="quiz-builder">
+    <div class="quiz-builder" inert={!mounted} aria-busy={!mounted}>
       {!user && (
         <div class="quiz-note quiz-note--block">
           You can build and save a draft without signing in. <button type="button" class="quiz-link-btn" onClick={() => openLoginModal('Sign in to publish your quiz')}>Sign in</button> to publish it to the community.

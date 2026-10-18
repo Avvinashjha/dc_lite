@@ -1,5 +1,7 @@
 Use a sliding window approach. Maintain a count of characters in the current window. If the window size minus the largest character frequency seen so far exceeds `k`, shrink the window from the left.
 
+`maxFreq` is a historical maximum, not necessarily the current window's maximum after shrinking. This is safe when finding only the best length: a stale count can retain a window of an already achievable size, but cannot establish a larger record until a sufficiently large frequency is reached again. Do not use this window directly to return the actual substring without validating its current counts.
+
 ```javascript
 function characterReplacement(s, k) {
   const count = {};

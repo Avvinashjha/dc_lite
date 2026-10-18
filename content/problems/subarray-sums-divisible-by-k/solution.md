@@ -2,6 +2,8 @@
 
 If two prefix sums have the same remainder when divided by `k`, the subarray between them sums to a multiple of `k`. Count remainder frequencies as you go. Be careful with negative remainders — add `k` and mod again to normalize.
 
+Seed the empty prefix with frequency 1 so subarrays starting at index 0 are counted. Count matches before recording the current prefix; reversing that order would count an empty subarray. Frequencies, rather than a set, preserve multiple valid starting indices.
+
 ```javascript
 function subarraysDivByK(nums, k) {
   const count = new Array(k).fill(0);
@@ -19,6 +21,6 @@ function subarraysDivByK(nums, k) {
 }
 ```
 
-**Time Complexity:** O(n)
+**Time Complexity:** O(n + k), including initialization of the k-entry frequency array
 
 **Space Complexity:** O(k)

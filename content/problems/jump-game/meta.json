@@ -6,7 +6,7 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/jump-game/",
@@ -37,6 +37,53 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          2,
+          0,
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "expected": false
     }
   ],
   "functionName": "canJump",
@@ -49,13 +96,14 @@
   "examples": [
     {
       "input": "nums = [2,3,1,1,4]",
-      "output": "true"
+      "output": "true",
+      "explanation": "Jump from index 0 to index 1, then from index 1 to index 4."
     },
     {
       "input": "nums = [3,2,1,0,4]",
       "output": "false"
     }
   ],
-  "inputFormat": "Implement canJump(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "nums is a nonempty array of nonnegative maximum jump lengths. You begin at index 0.",
+  "outputFormat": "Return true if the last index is reachable, otherwise false."
 }

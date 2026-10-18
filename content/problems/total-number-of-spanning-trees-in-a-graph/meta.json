@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0214",
-  "title": "Total number of Spanning Trees in a Graph",
+  "title": "Count Spanning Trees",
   "difficulty": "Hard",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "Math",
+    "Matrix"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Total%20number%20of%20Spanning%20Trees%20in%20a%20Graph",
@@ -52,13 +52,149 @@
         1
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ],
+        2
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2
+          ]
+        ],
+        4
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            3
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        4
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        4
+      ],
+      "expected": 16
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ]
+        ],
+        4
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ],
+        5
+      ],
+      "expected": 1
     }
   ],
   "functionName": "countSpanningTrees",
   "templateCode": "function countSpanningTrees(adj, V) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 10",
-    "0 <= E <= V*(V-1)/2"
+    "0 <= E <= V*(V-1)/2",
+    "adj has V rows and represents a simple undirected graph on labels 0 through V - 1",
+    "Every edge appears in both adjacency rows; no self-loops or duplicate edges"
   ],
   "runner": {},
   "examples": [
@@ -78,5 +214,5 @@
   "sampleInput": "adj = [[1,2],[0,2],[0,1]]\nV = 3",
   "sampleOutput": "3",
   "inputFormat": "Implement countSpanningTrees(adj, V). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the exact number of distinct spanning trees as a number. Return 0 for a disconnected graph and 1 for a single vertex."
 }

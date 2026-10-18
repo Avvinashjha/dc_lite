@@ -3,10 +3,10 @@
   "id": "problem-0248",
   "title": "Best Time to Buy and Sell Stock IV",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Array",
+    "Dynamic Programming"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/",
@@ -36,6 +36,55 @@
         ]
       ],
       "expected": 7
+    },
+    {
+      "args": [
+        1,
+        [
+          3,
+          2,
+          6,
+          5,
+          0,
+          3
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        2,
+        [
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        2,
+        [
+          5,
+          4,
+          3,
+          2
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        2,
+        [
+          1,
+          3,
+          1,
+          3,
+          1,
+          3
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "maxProfit",
@@ -58,6 +107,6 @@
   ],
   "sampleInput": "k = 2\nprices = [2,4,1]",
   "sampleOutput": "2",
-  "inputFormat": "Implement maxProfit(k, prices). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxProfit(k, prices), where k is the maximum number of completed buy-then-sell transactions.",
+  "outputFormat": "The maximum profit using at most k transactions, holding at most one share at a time. Return 0 if no trade is profitable."
 }

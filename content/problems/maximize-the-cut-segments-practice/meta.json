@@ -1,12 +1,11 @@
 {
   "draft": false,
   "id": "problem-0232",
-  "title": "Maximize The Cut Segments | Practice",
+  "title": "Maximize Cut Segments",
   "difficulty": "Medium",
   "topic": "Dynamic-Programming",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Dynamic Programming"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Maximize%20The%20Cut%20Segments%20%7C%20Practice",
@@ -29,13 +28,67 @@
         6
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        7,
+        2,
+        3,
+        5
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        9,
+        2,
+        4,
+        5
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        8,
+        3,
+        3,
+        3
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        12,
+        3,
+        4,
+        6
+      ],
+      "expected": 4
     }
   ],
   "functionName": "maximizeTheCutSegments",
   "templateCode": "function maximizeTheCutSegments(n, x, y, z) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^4",
-    "1 <= x, y, z <= N"
+    "1 <= n <= 10^4",
+    "1 <= x, y, z <= n"
   ],
   "runner": {},
   "examples": [
@@ -50,6 +103,6 @@
   ],
   "sampleInput": "n = 4\nx = 2\ny = 1\nz = 1",
   "sampleOutput": "4",
-  "inputFormat": "Implement maximizeTheCutSegments(n, x, y, z). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maximizeTheCutSegments(n, x, y, z). Receive the rod length and three allowed positive segment lengths.",
+  "outputFormat": "Return the maximum number of segments using the entire rod, or 0 if an exact partition is impossible."
 }

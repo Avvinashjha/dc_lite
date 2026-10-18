@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0070",
-  "title": "Check if reversing a sub array make the array sorted",
+  "title": "Sort an Array with One Reversal",
   "difficulty": "Medium",
   "topic": "Sorting&Searching",
   "topics": [
@@ -45,12 +45,51 @@
         ]
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "canSortByReversing",
   "templateCode": "function canSortByReversing(arr) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5"
+    "1 <= arr.length <= 10^5",
+    "arr contains safe integers."
   ],
   "runner": {},
   "examples": [
@@ -69,6 +108,6 @@
   ],
   "sampleInput": "arr = [1,2,5,4,3]",
   "sampleOutput": "true",
-  "inputFormat": "Implement canSortByReversing(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement canSortByReversing(arr), where arr is an integer array that may contain duplicates.",
+  "outputFormat": "true if reversing at most one contiguous interval makes arr nondecreasing; otherwise false. An already sorted array returns true."
 }

@@ -1,3 +1,5 @@
-Imagine standing at position `location` on a 2D plane, given an array of `points` and a viewing `angle` in degrees. Find the largest number of points that can fit inside your field of view at once. Any point sitting exactly at your own location is always counted as visible and doesn't take up any of your viewing angle.
+From a fixed position `location` on a 2D plane, you may rotate your viewing direction freely but cannot move. Your field of view is a sector of width `angle` degrees. Return the maximum number of input points visible at the same time.
 
-**Edge cases:** Points overlapping the location. `angle = 360` means all points are visible. All points at the same angle from the location.
+Points on either boundary of the sector count as visible. Distance does not limit visibility, and points do not block one another. Duplicate coordinates represent separate points and each counts. Points exactly at `location` are always visible, regardless of direction.
+
+An angle of `360` sees every point. For narrower angles, the sector can cross any compass direction, including the boundary where angle measurements wrap around.

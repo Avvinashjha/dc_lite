@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0088",
-  "title": "Multiply two numbers represented by Linked Lists",
+  "title": "Multiply Numbers Stored in Linked Lists",
   "difficulty": "Easy",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Math"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Multiply%20two%20numbers%20represented%20by%20Linked%20Lists",
@@ -34,6 +35,314 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          9
+        ],
+        [
+          9
+        ]
+      ],
+      "expected": 81
+    },
+    {
+      "args": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          7
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ]
+      ],
+      "expected": 5041
+    },
+    {
+      "args": [
+        [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ]
+      ],
+      "expected": 970624641
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "expected": 5535
     }
   ],
   "functionName": "multiplyLists",
@@ -60,6 +369,6 @@
   ],
   "sampleInput": "l1 = [3,2]\nl2 = [2]",
   "sampleOutput": "64",
-  "inputFormat": "Implement multiplyLists(l1, l2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement multiplyLists(l1, l2). The editor converts each digit array into a nonempty linked list with val and next properties. Digits run from most significant to least significant.",
+  "outputFormat": "Return (first number \u00d7 second number) modulo 1000000007 as a JavaScript number, not a linked list or BigInt."
 }

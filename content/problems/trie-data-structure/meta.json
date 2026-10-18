@@ -78,13 +78,164 @@
         null,
         true
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "insert",
+            "app"
+          ],
+          [
+            "insert",
+            "apple"
+          ],
+          [
+            "search",
+            "app"
+          ],
+          [
+            "search",
+            "ap"
+          ],
+          [
+            "startsWith",
+            "ap"
+          ],
+          [
+            "search",
+            "apples"
+          ],
+          [
+            "startsWith",
+            "apples"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "insert",
+            "cat"
+          ],
+          [
+            "insert",
+            "cat"
+          ],
+          [
+            "search",
+            "cat"
+          ],
+          [
+            "insert",
+            "car"
+          ],
+          [
+            "search",
+            "car"
+          ],
+          [
+            "startsWith",
+            "ca"
+          ],
+          [
+            "search",
+            "ca"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        true,
+        null,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "insert",
+            "ab"
+          ],
+          [
+            "insert",
+            "ac"
+          ],
+          [
+            "insert",
+            "z"
+          ],
+          [
+            "startsWith",
+            "b"
+          ],
+          [
+            "search",
+            "a"
+          ],
+          [
+            "search",
+            "z"
+          ],
+          [
+            "startsWith",
+            "a"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        null,
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "search",
+            "apple"
+          ],
+          [
+            "startsWith",
+            "app"
+          ]
+        ]
+      ],
+      "expected": [
+        false,
+        false
+      ]
     }
   ],
   "functionName": "Trie",
   "templateCode": "class Trie {\n  constructor() {\n    // Write your implementation here.\n  }\n  insert(word) {\n    // Write your implementation here.\n  }\n  search(word) {\n    // Write your implementation here.\n  }\n  startsWith(prefix) {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
-    "1 <= word.length <= 2000",
-    "word consists of lowercase English letters",
+    "1 <= word.length, prefix.length <= 2000",
+    "Words and prefixes contain only lowercase English letters",
     "At most 3 * 10^4 calls"
   ],
   "runner": {

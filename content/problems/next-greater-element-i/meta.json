@@ -3,9 +3,11 @@
   "id": "problem-0115",
   "title": "Next Greater Element I",
   "difficulty": "Easy",
-  "topic": "Stack&Queue",
+  "topic": "Array",
   "topics": [
-    "Stack&Queue"
+    "Array",
+    "Monotonic Stack",
+    "Hash Table"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/next-greater-element-i/",
@@ -44,6 +46,105 @@
       "expected": [
         -1
       ]
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "expected": [
+        -1
+      ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1,
+          5,
+          2
+        ]
+      ],
+      "expected": [
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          2
+        ],
+        [
+          5,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        -1
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        -1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          0,
+          3
+        ]
+      ],
+      "expected": [
+        3,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          4,
+          2,
+          1
+        ],
+        [
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        -1,
+        -1,
+        -1
+      ]
     }
   ],
   "functionName": "nextGreaterElement",
@@ -51,7 +152,7 @@
   "constraints": [
     "1 <= nums1.length <= nums2.length <= 1000",
     "0 <= nums1[i], nums2[i] <= 10^4",
-    "All values in nums1 and nums2 are unique"
+    "Values are unique within each array; every nums1 value appears in nums2"
   ],
   "runner": {},
   "examples": [
@@ -66,6 +167,6 @@
   ],
   "sampleInput": "nums1 = [4,1,2]\nnums2 = [1,3,4,2]",
   "sampleOutput": "[-1,3,-1]",
-  "inputFormat": "Implement nextGreaterElement(nums1, nums2). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement nextGreaterElement(nums1, nums2). nums1 contains query values drawn from nums2; each array has distinct values.",
+  "outputFormat": "Return one value per nums1 entry, in nums1 order: the first strictly greater value to its right in nums2, or -1 if none exists."
 }

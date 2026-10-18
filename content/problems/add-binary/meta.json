@@ -3,11 +3,10 @@
   "id": "problem-0055",
   "title": "Add Binary",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "String",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "String",
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/add-binary/",
@@ -33,6 +32,20 @@
         "0"
       ],
       "expected": "0"
+    },
+    {
+      "args": [
+        "1111",
+        "1"
+      ],
+      "expected": "10000"
+    },
+    {
+      "args": [
+        "1",
+        "100000"
+      ],
+      "expected": "100001"
     }
   ],
   "functionName": "addBinary",
@@ -59,6 +72,6 @@
   ],
   "sampleInput": "a = \"11\"\nb = \"1\"",
   "sampleOutput": "\"100\"",
-  "inputFormat": "Implement addBinary(a, b). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement addBinary(a, b), where a and b are non-empty binary strings.",
+  "outputFormat": "The sum as a binary string with no leading zeros, except for \"0\"."
 }

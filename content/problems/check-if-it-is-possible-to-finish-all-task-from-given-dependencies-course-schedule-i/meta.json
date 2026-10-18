@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0198",
-  "title": "Check if it is possible to finish all task from given dependencies (Course Schedule I)",
+  "title": "Course Schedule",
   "difficulty": "Medium",
   "topic": "Graph",
   "topics": [
@@ -40,13 +40,53 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        3,
+        []
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        1,
+        [
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        4,
+        [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      ],
+      "expected": false
     }
   ],
   "functionName": "canFinish",
   "templateCode": "function canFinish(numCourses, prerequisites) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= numCourses <= 2000",
-    "0 <= prerequisites.length <= 5000"
+    "0 <= prerequisites.length <= 5000",
+    "Each prerequisite is a pair [a, b] with 0 <= a, b < numCourses."
   ],
   "runner": {},
   "examples": [
@@ -61,6 +101,6 @@
   ],
   "sampleInput": "numCourses = 2\nprerequisites = [[1,0]]",
   "sampleOutput": "true",
-  "inputFormat": "Implement canFinish(numCourses, prerequisites). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement canFinish(numCourses, prerequisites). Courses are numbered 0 through numCourses - 1; [a, b] means b must be completed before a.",
+  "outputFormat": "true if all courses can be completed, including disconnected courses; false if any prerequisite cycle exists."
 }

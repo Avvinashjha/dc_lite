@@ -6,8 +6,8 @@
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "Topological Sort",
+    "Dynamic Programming"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
@@ -44,6 +44,101 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            7,
+            7
+          ],
+          [
+            7,
+            7
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            4
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            6,
+            5,
+            4
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            2147483647
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "longestIncreasingPathInAMatrix",
@@ -65,6 +160,13 @@
   ],
   "sampleInput": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
   "sampleOutput": "4",
-  "inputFormat": "Implement longestIncreasingPathInAMatrix(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement longestIncreasingPathInAMatrix(matrix). Receive a nonempty rectangular matrix of integers.",
+  "outputFormat": "Return the maximum number of cells in any strictly increasing path, including its starting cell.",
+  "visuals": [
+    {
+      "title": "Count cells, not moves",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 232\" role=\"img\" aria-labelledby=\"lip-title lip-desc\" style=\"width:100%;height:auto;max-width:420px;color:var(--color-text)\"><title id=\"lip-title\">An increasing path of four cells</title><desc id=\"lip-desc\">In the matrix 9 9 4; 6 6 8; 2 1 1, start at the bottom middle 1, move left to 2, then up to 6 and up to 9.</desc><defs><marker id=\"lip-arrow\" markerWidth=\"5\" markerHeight=\"5\" refX=\"4\" refY=\"2.5\" orient=\"auto\"><path d=\"M0 0L5 2.5L0 5Z\" fill=\"currentColor\"/></marker></defs><g font-family=\"system-ui,sans-serif\"><rect x=\"24\" y=\"24\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"50\" y=\"57\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">9</text><rect x=\"88\" y=\"24\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.45\"/><text x=\"114\" y=\"57\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">9</text><rect x=\"152\" y=\"24\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.45\"/><text x=\"178\" y=\"57\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">4</text><rect x=\"24\" y=\"88\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"50\" y=\"121\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">6</text><rect x=\"88\" y=\"88\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.45\"/><text x=\"114\" y=\"121\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">6</text><rect x=\"152\" y=\"88\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.45\"/><text x=\"178\" y=\"121\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">8</text><rect x=\"24\" y=\"152\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"50\" y=\"185\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">2</text><rect x=\"88\" y=\"152\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"114\" y=\"185\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">1</text><rect x=\"152\" y=\"152\" width=\"52\" height=\"52\" rx=\"8\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.45\"/><text x=\"178\" y=\"185\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"20\">1</text><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" marker-end=\"url(#lip-arrow)\"><path d=\"M88 178H78\"/><path d=\"M50 152V142\"/><path d=\"M50 88V78\"/></g><g fill=\"currentColor\" font-size=\"14\"><text x=\"242\" y=\"85\">1 \u2192 2 \u2192 6 \u2192 9</text><text x=\"242\" y=\"112\">4 cells \u00b7 3 moves</text><text x=\"242\" y=\"139\">Return 4</text></g><text x=\"24\" y=\"225\" font-size=\"12\" fill=\"currentColor\">Every step moves to a larger adjacent value.</text></g></svg>",
+      "caption": "One longest path starts at row 2, column 1 (zero-based), moves left, then up twice. All moves are horizontal or vertical."
+    }
+  ]
 }

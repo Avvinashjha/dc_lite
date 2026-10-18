@@ -47,17 +47,46 @@
     },
     {
       "args": [
-        []
+        [
+          0,
+          1,
+          1
+        ]
       ],
       "expected": []
     },
     {
       "args": [
         [
+          0,
+          0,
           0
         ]
       ],
-      "expected": []
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          0
+        ]
+      ]
     }
   ],
   "runner": {
@@ -70,14 +99,14 @@
       "output": "[[-1,-1,2],[-1,0,1]]"
     },
     {
-      "input": "nums = []",
+      "input": "nums = [0,1,1]",
       "output": "[]"
     },
     {
-      "input": "nums = [0]",
-      "output": "[]"
+      "input": "nums = [0,0,0]",
+      "output": "[[0,0,0]]"
     }
   ],
-  "inputFormat": "Implement threeSum(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
+  "inputFormat": "Implement threeSum(nums), where nums is an integer array.",
+  "outputFormat": "An array of unique value triplets summing to zero. Use three distinct indices per triplet. Triplet order and value order do not matter."
 }

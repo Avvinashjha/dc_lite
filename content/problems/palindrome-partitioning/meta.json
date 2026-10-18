@@ -6,7 +6,7 @@
   "topic": "Backtracking",
   "topics": [
     "Backtracking",
-    "Recursion"
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/palindrome-partitioning/",
@@ -39,6 +39,133 @@
           "a"
         ]
       ]
+    },
+    {
+      "args": [
+        "ab"
+      ],
+      "expected": [
+        [
+          "a",
+          "b"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "aaa"
+      ],
+      "expected": [
+        [
+          "aaa"
+        ],
+        [
+          "a",
+          "aa"
+        ],
+        [
+          "aa",
+          "a"
+        ],
+        [
+          "a",
+          "a",
+          "a"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "abba"
+      ],
+      "expected": [
+        [
+          "abba"
+        ],
+        [
+          "a",
+          "bb",
+          "a"
+        ],
+        [
+          "a",
+          "b",
+          "b",
+          "a"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "abc"
+      ],
+      "expected": [
+        [
+          "a",
+          "b",
+          "c"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "aabaa"
+      ],
+      "expected": [
+        [
+          "aabaa"
+        ],
+        [
+          "aa",
+          "b",
+          "aa"
+        ],
+        [
+          "a",
+          "a",
+          "b",
+          "aa"
+        ],
+        [
+          "a",
+          "aba",
+          "a"
+        ],
+        [
+          "aa",
+          "b",
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "a",
+          "b",
+          "a",
+          "a"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "abab"
+      ],
+      "expected": [
+        [
+          "a",
+          "bab"
+        ],
+        [
+          "aba",
+          "b"
+        ],
+        [
+          "a",
+          "b",
+          "a",
+          "b"
+        ]
+      ]
     }
   ],
   "functionName": "partition",
@@ -61,5 +188,5 @@
     }
   ],
   "inputFormat": "Implement partition(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "outputFormat": "Return all distinct palindrome partitions. Preserve substring order inside each partition; outer array order does not matter."
 }

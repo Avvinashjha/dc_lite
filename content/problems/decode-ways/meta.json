@@ -3,7 +3,7 @@
   "id": "problem-0236",
   "title": "Decode Ways",
   "difficulty": "Medium",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
     "Memoization"
@@ -29,6 +29,30 @@
         "06"
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        "10"
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "30"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "100"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "11106"
+      ],
+      "expected": 2
     }
   ],
   "functionName": "numDecodings",
@@ -46,7 +70,8 @@
     },
     {
       "input": "s = \"226\"",
-      "output": "3"
+      "output": "3",
+      "explanation": "The partitions are 2|2|6 (BBF), 22|6 (VF), and 2|26 (BZ)."
     },
     {
       "input": "s = \"06\"",
@@ -55,6 +80,6 @@
   ],
   "sampleInput": "s = \"12\"",
   "sampleOutput": "2",
-  "inputFormat": "Implement numDecodings(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement numDecodings(s), where s is a non-empty string of decimal digits. Codes 1 through 26 map to A through Z.",
+  "outputFormat": "The number of valid ways to split the entire string into codes from 1 to 26. Return 0 if no decoding exists."
 }

@@ -1,3 +1,5 @@
-Call a non-empty prefix of a string a **happy prefix** if that same sequence of characters also shows up as a suffix of the string, as long as it isn't the whole string itself. Given a string `s`, find its longest happy prefix, or return an empty string if none exists.
+Given a string `s`, return its longest **happy prefix**: a nonempty prefix that is also a suffix, but is shorter than the whole string. Return `""` if no such prefix exists.
 
-**Edge cases:** Single character strings always return `""`. Strings where all characters are the same (e.g., `"aaaa"` → `"aaa"`).
+The prefix and suffix may overlap. For `"ababab"`, the prefix at indices `0–3` and suffix at indices `2–5` are both `"abab"`, so return `"abab"`. For `"aaaa"`, return `"aaa"`; returning the entire string is not allowed.
+
+A one-character string always returns `""`.

@@ -1,12 +1,13 @@
 {
   "draft": false,
   "id": "problem-0245",
-  "title": "Range Sum Query 2D - Immutable",
+  "title": "2D Range Sum Queries",
   "difficulty": "Medium",
-  "topic": "Dynamic-Programming",
+  "topic": "Matrix",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Matrix",
+    "Prefix Sum",
+    "Design"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/range-sum-query-2d-immutable/",
@@ -105,6 +106,215 @@
       "expected": [
         5
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            1,
+            1,
+            2,
+            2
+          ],
+          [
+            "sumRegion",
+            0,
+            0,
+            2,
+            2
+          ],
+          [
+            "sumRegion",
+            0,
+            1,
+            0,
+            2
+          ],
+          [
+            "sumRegion",
+            0,
+            2,
+            2,
+            2
+          ],
+          [
+            "sumRegion",
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        28,
+        45,
+        5,
+        18,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              -3,
+              2,
+              -1
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            "sumRegion",
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        -2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              4
+            ],
+            [
+              -5
+            ],
+            [
+              7
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            "sumRegion",
+            1,
+            0,
+            2,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        6,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            0,
+            0,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            [
+              -1,
+              -2
+            ],
+            [
+              -3,
+              -4
+            ]
+          ]
+        ],
+        [
+          [
+            "sumRegion",
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            "sumRegion",
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            "sumRegion",
+            0,
+            0,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        -10,
+        -6,
+        -10
+      ]
     }
   ],
   "functionName": "NumMatrix",
@@ -112,7 +322,8 @@
   "constraints": [
     "1 <= m, n <= 200",
     "-10^4 <= matrix[i][j] <= 10^4",
-    "At most 10^4 calls to sumRegion"
+    "At most 10^4 calls to sumRegion",
+    "0 <= r1 <= r2 < m and 0 <= c1 <= c2 < n for every query."
   ],
   "runner": {
     "mode": "operations"
@@ -130,5 +341,12 @@
   "sampleInput": "constructorArgs = [[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]]\noperations = [[\"sumRegion\",2,1,4,3],[\"sumRegion\",1,1,2,2],[\"sumRegion\",1,2,2,4]]",
   "sampleOutput": "[8,11,12]",
   "inputFormat": "Implement the class NumMatrix. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
-  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
+  "outputFormat": "Each sumRegion call returns the inclusive rectangle sum. The displayed array lists these results in call order.",
+  "visuals": [
+    {
+      "title": "Both corners are included",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 230\" role=\"img\" aria-labelledby=\"range-grid-title range-grid-desc\" style=\"width:100%;height:auto;max-width:360px;color:var(--color-text)\"><title id=\"range-grid-title\">Inclusive rectangle sum</title><desc id=\"range-grid-desc\">A 3 by 3 matrix contains 1 through 9 in row order. The outlined bottom-right 2 by 2 region contains 5, 6, 8, and 9, summing to 28.</desc><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" text-anchor=\"middle\" font-size=\"15\"><text x=\"45\" y=\"62\">0</text><text x=\"90\" y=\"24\">0</text><text x=\"90\" y=\"62\">1</text><text x=\"150\" y=\"62\">2</text><text x=\"210\" y=\"62\">3</text><text x=\"45\" y=\"110\">1</text><text x=\"150\" y=\"24\">1</text><text x=\"90\" y=\"110\">4</text><text x=\"150\" y=\"110\">5</text><text x=\"210\" y=\"110\">6</text><text x=\"45\" y=\"158\">2</text><text x=\"210\" y=\"24\">2</text><text x=\"90\" y=\"158\">7</text><text x=\"150\" y=\"158\">8</text><text x=\"210\" y=\"158\">9</text></g><g fill=\"none\" stroke=\"currentColor\"><path d=\"M60 35H240V179H60ZM60 83H240M60 131H240M120 35V179M180 35V179\" opacity=\".4\"/><rect x=\"120\" y=\"83\" width=\"120\" height=\"96\" rx=\"3\" stroke-width=\"3\"/></g><text x=\"180\" y=\"213\" fill=\"currentColor\" font-family=\"system-ui,sans-serif\" text-anchor=\"middle\" font-size=\"14\">Rows 1\u20132, columns 1\u20132 \u00b7 sum = 28</text></svg>",
+      "caption": "The selected rectangle includes four cells, not just its boundary coordinates."
+    }
+  ]
 }

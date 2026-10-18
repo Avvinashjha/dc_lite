@@ -3,11 +3,11 @@
   "id": "problem-0060",
   "title": "Missing Number",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Array",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Array",
+    "Math",
+    "Bit Manipulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/missing-number/",
@@ -47,6 +47,52 @@
         ]
       ],
       "expected": 8
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          4,
+          2,
+          0,
+          1
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          2,
+          0
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "missingNumber",
@@ -74,6 +120,6 @@
   ],
   "sampleInput": "nums = [3,0,1]",
   "sampleOutput": "2",
-  "inputFormat": "Implement missingNumber(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement missingNumber(nums). Receive n distinct integers from the inclusive range 0 through n, where n is nums.length.",
+  "outputFormat": "Return the one missing integer. Input order does not matter."
 }

@@ -1,4 +1,8 @@
-## DFS with Coordinate Sorting
+## DFS with coordinate sorting
+
+Record each node as `[column, row, value]`. Sort these triples lexicographically by numeric column, row, then value. This preserves top-to-bottom priority while resolving only same-position ties by value.
+
+Walk the sorted triples and start a new output group whenever the column changes. No deduplication is needed: equal-valued nodes are still separate entries.
 
 ```javascript
 function verticalTraversal(root) {

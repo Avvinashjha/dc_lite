@@ -51,6 +51,23 @@
         ]
       ],
       "expected": ""
+    },
+    {
+      "args": [
+        [
+          "abc"
+        ]
+      ],
+      "expected": "abc"
+    },
+    {
+      "args": [
+        [
+          "ab",
+          "ab"
+        ]
+      ],
+      "expected": "ab"
     }
   ],
   "functionName": "alienDictionary",
@@ -79,6 +96,13 @@
   ],
   "sampleInput": "words = [\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
   "sampleOutput": "\"wertf\"",
-  "inputFormat": "Implement alienDictionary(words). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nAny result satisfying the statement is accepted."
+  "inputFormat": "Implement alienDictionary(words), where words is an array of strings in the proposed alien lexicographic order.",
+  "outputFormat": "A string containing each observed letter exactly once in a valid order, or \"\" if no order exists. Any valid order is accepted.",
+  "visuals": [
+    {
+      "title": "Letter order in example 1",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 85\" role=\"img\" aria-label=\"w precedes e, e precedes r, r precedes t, and t precedes f\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><circle cx=\"40\" cy=\"42\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"40\" y=\"48\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"20\">w</text><path d=\"M65 42h40m-6-5 6 5-6 5\" stroke=\"currentColor\" fill=\"none\"/><circle cx=\"130\" cy=\"42\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"130\" y=\"48\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"20\">e</text><path d=\"M155 42h40m-6-5 6 5-6 5\" stroke=\"currentColor\" fill=\"none\"/><circle cx=\"220\" cy=\"42\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"220\" y=\"48\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"20\">r</text><path d=\"M245 42h40m-6-5 6 5-6 5\" stroke=\"currentColor\" fill=\"none\"/><circle cx=\"310\" cy=\"42\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"310\" y=\"48\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"20\">t</text><path d=\"M335 42h40m-6-5 6 5-6 5\" stroke=\"currentColor\" fill=\"none\"/><circle cx=\"400\" cy=\"42\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"400\" y=\"48\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"20\">f</text></svg>",
+      "caption": "Adjacent word comparisons give t \u2192 f, w \u2192 e, r \u2192 t, and e \u2192 r. Together they require the order wertf."
+    }
+  ]
 }

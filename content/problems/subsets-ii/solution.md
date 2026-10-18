@@ -21,4 +21,6 @@ function subsetsWithDup(nums) {
 ```
 
 **Time:** O(n * 2^n) — up to 2^n subsets, each copied in O(n).
-**Space:** O(n) for the recursion stack.
+**Auxiliary space:** O(n) for the recursion stack and current subset (plus sorting workspace).
+
+**Output space:** O(n × 2^n) in the worst case when all values are distinct.

@@ -1,0 +1,13 @@
+---
+interface Props { name: 'run' | 'test' | 'format' | 'reset' | 'list' | 'grid'; size?: number; }
+const {name, size = 16} = Astro.props;
+const paths = {
+  run: 'm8 5 11 7-11 7V5Z',
+  test: 'm3 6 2 2 4-4m-6 12 2 2 4-4M12 7h9M12 17h9',
+  format: 'M8 4H5v16h3M16 4h3v16h-3M9 9h6M9 13h6',
+  reset: 'M3 10a9 9 0 1 1 1 7M3 3v7h7',
+  list: 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',
+  grid: 'M3 3h7v7H3V3Zm11 0h7v7h-7V3ZM3 14h7v7H3v-7Zm11 0h7v7h-7v-7Z',
+};
+---
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={paths[name]}/></svg>

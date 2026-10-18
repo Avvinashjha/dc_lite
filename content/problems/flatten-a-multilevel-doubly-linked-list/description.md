@@ -1,1 +1,3 @@
 You're given a doubly linked list in which any node may additionally hold a `child` pointer to the head of its own separate doubly linked list, and those child lists can themselves contain further nested children, forming a multilevel structure. Collapse the entire structure into one single-level doubly linked list, inserting each child list depth-first between its parent node and the parent's original next node. Once flattened, no node should retain a `child` pointer.
+
+Reconnect the original nodes without changing their values. Return the head node, with correct `prev` links and every `child` pointer set to `null`. An empty input returns `null`.

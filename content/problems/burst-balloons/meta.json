@@ -3,7 +3,7 @@
   "id": "problem-0255",
   "title": "Burst Balloons",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
     "Memoization"
@@ -31,6 +31,32 @@
         ]
       ],
       "expected": 10
+    },
+    {
+      "args": [
+        [
+          5
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 0
     }
   ],
   "functionName": "maxCoins",
@@ -52,6 +78,13 @@
   ],
   "sampleInput": "nums = [3,1,5,8]",
   "sampleOutput": "167",
-  "inputFormat": "Implement maxCoins(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxCoins(nums), where nums lists balloon values in their initial left-to-right order.",
+  "outputFormat": "The maximum total coins after bursting every balloon. Missing neighbors contribute 1; neighbors change after each burst.",
+  "visuals": [
+    {
+      "title": "Neighbors change after each burst",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 225\" role=\"img\" aria-label=\"An optimal order earns 15, 120, 24, and 8 coins for a total of 167\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><text x=\"16\" y=\"30\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"17\">[3, 1, 5, 8]  burst 1: +15</text><text x=\"16\" y=\"68\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"17\">[3,    5, 8]  burst 5: +120</text><text x=\"16\" y=\"106\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"17\">[3,       8]  burst 3: +24</text><text x=\"16\" y=\"144\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"17\">[         8]  burst 8: +8</text><text x=\"16\" y=\"182\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"17\">Total: 15 + 120 + 24 + 8 = 167</text></svg>",
+      "caption": "When 5 bursts, its neighbors are 3 and 8. The implicit boundary value is 1."
+    }
+  ]
 }

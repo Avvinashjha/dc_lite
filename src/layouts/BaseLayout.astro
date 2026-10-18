@@ -1,9 +1,11 @@
 ---
 import '../styles/global.scss';
 import '../styles/components.scss';
+import '../styles/site.scss';
+import SiteHeader from '../components/SiteHeader.astro';
+import ThemeInit from '../components/ThemeInit.astro';
 import Logo from '../components/Logo.astro';
 import Icons from '../components/Icons.astro';
-import AuthWidget from '../components/AuthWidget';
 import LoginModal from '../components/LoginModal';
 import { getSiteConfig } from '../utils/contentLoader';
 import { ogImageForPath } from '../utils/og';
@@ -17,6 +19,7 @@ interface Props {
   author?: string;
   tags?: string[];
   breadcrumbs?: { label: string; href: string }[];
+  homeWorkspace?: boolean;
 }
 
 const config = getSiteConfig();
@@ -30,7 +33,8 @@ const {
   publishedTime,
   author = config.site.author,
   tags = [],
-  breadcrumbs = []
+  breadcrumbs = [],
+  homeWorkspace = false
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -85,7 +89,7 @@ if (type === 'website') {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#2563eb" />
+    <meta name="theme-color" content="#f8f9f5" />
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
@@ -168,87 +172,13 @@ if (type === 'website') {
     )}
 
     <slot name="head" />
-    <script is:inline>
-      const theme = localStorage.getItem('theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      const rm = localStorage.getItem('readingMode') === 'true';
-      if (rm) document.documentElement.setAttribute('data-reading-mode', 'true');
-    </script>
+    <ThemeInit />
   </head>
-  <body>
-    <header class="header">
-      <div class="container">
-        <div class="header__inner">
-          <a href="/" class="header__logo">
-            <Logo size={28} color="var(--color-primary)" />
-            <span>{config.site.title}</span>
-          </a>
-          
-          <!-- Desktop nav -->
-          <nav class="header__nav header__nav--desktop">
-            {config.navigation.map(item => (
-              <a
-                href={item.path}
-                class:list={[
-                  Astro.url.pathname === item.path ||
-                  (item.path !== '/' && Astro.url.pathname.startsWith(item.path))
-                    ? 'header__nav-active'
-                    : ''
-                ]}
-              >{item.label}</a>
-            ))}
-            <button id="reading-mode-toggle" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
-              <Icons name="book" size={18} />
-            </button>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-              <span id="theme-icon" class="theme-toggle__icon">
-                <Icons name="moon" size={18} />
-              </span>
-            </button>
-            <AuthWidget client:idle />
-          </nav>
+  <body class:list={['dc-site', { 'dc-home': homeWorkspace }]}>
+    <a class="dc-skip" href={homeWorkspace ? "#workspace" : "#main-content"}>Skip to content</a>
+    <SiteHeader homeWorkspace={homeWorkspace} />
 
-          <!-- Mobile controls -->
-          <div class="header__mobile-controls">
-            <button id="reading-mode-toggle-mobile" class="theme-toggle" aria-label="Reading mode" title="Reading Mode">
-              <Icons name="book" size={18} />
-            </button>
-            <button id="theme-toggle-mobile" class="theme-toggle" aria-label="Toggle theme">
-              <span id="theme-icon-mobile" class="theme-toggle__icon">
-                <Icons name="moon" size={18} />
-              </span>
-            </button>
-            <button id="mobile-menu-btn" class="theme-toggle" aria-label="Open menu">
-              <Icons name="menu" size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile nav overlay -->
-      <nav id="mobile-nav" class="header__mobile-nav">
-        <div class="header__mobile-nav-inner">
-          {config.navigation.map(item => (
-            <a
-              href={item.path}
-              class:list={[
-                'header__mobile-link',
-                (Astro.url.pathname === item.path ||
-                  (item.path !== '/' && Astro.url.pathname.startsWith(item.path)))
-                  ? 'header__mobile-link--active'
-                  : ''
-              ]}
-            >{item.label}</a>
-          ))}
-          <div style="margin-top: 1rem; display: flex; justify-content: center;">
-             <AuthWidget client:idle />
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
 

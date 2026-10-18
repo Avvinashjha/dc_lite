@@ -1,6 +1,6 @@
 ## Monotonic Stack
 
-Maintain a decreasing stack of indices.
+Maintain unresolved day indices with non-increasing temperatures; equal readings stay on the stack. A strictly warmer reading resolves each cooler top index. Every index is pushed once and popped at most once, giving linear total work.
 
 ```javascript
 function dailyTemperatures(temperatures) {

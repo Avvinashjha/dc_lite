@@ -43,6 +43,100 @@
         0,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          7
+        ]
+      ],
+      "expected": [
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          -2,
+          0,
+          1,
+          -2
+        ]
+      ],
+      "expected": [
+        -2,
+        1,
+        -2,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          4
+        ]
+      ],
+      "expected": [
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          -2147483648,
+          0,
+          2147483647
+        ]
+      ],
+      "expected": [
+        -2147483648,
+        2147483647,
+        0
+      ]
     }
   ],
   "functionName": "moveZeroes",
@@ -64,6 +158,6 @@
       "output": "[0,0]"
     }
   ],
-  "inputFormat": "Implement moveZeroes(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored."
+  "inputFormat": "Implement moveZeroes(nums). Receive a nonempty integer array and modify that same array.",
+  "outputFormat": "Leave all nonzero values in their original relative order, followed by all zeros. Preserve array length. Return nothing; the runner checks nums and ignores the return value."
 }

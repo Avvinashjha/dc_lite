@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0275",
-  "title": "Find paths from corner cell to middle cell in maze",
+  "title": "Corner-to-Center Maze Paths",
   "difficulty": "Hard",
   "topic": "Backtracking",
   "topics": [
@@ -11,9 +11,46 @@
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Find%20paths%20from%20corner%20cell%20to%20middle%20cell%20in%20maze",
   "problemSet": "top-300-leetcode",
-  "sampleInput": "maze = [[0]]",
-  "sampleOutput": "[[[0,0]]]",
+  "sampleInput": "maze = [[1,1,0],[0,0,0],[0,0,0]]",
+  "sampleOutput": "[[[0,0],[0,1],[1,1]]]",
   "testCases": [
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ]
+    },
     {
       "args": [
         [
@@ -52,18 +89,132 @@
         ]
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ]
     }
   ],
   "functionName": "findPaths",
   "templateCode": "function findPaths(maze) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= n <= 9",
-    "n is odd"
+    "n is odd",
+    "maze is square; 0 <= maze[r][c] <= 10^4."
   ],
   "runner": {
     "unordered": true
   },
   "examples": [
+    {
+      "input": "maze = [[1,1,0],[0,0,0],[0,0,0]]",
+      "output": "[[[0,0],[0,1],[1,1]]]",
+      "explanation": "Start at the top-left corner, jump right once, then down once to the center. Other corners cannot move."
+    },
     {
       "input": "maze = [[0]]",
       "output": "[[[0,0]]]"
@@ -73,6 +224,13 @@
       "output": "[]"
     }
   ],
-  "inputFormat": "Implement findPaths(maze). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "inputFormat": "maze is a nonempty n \u00d7 n matrix with odd n. Each entry is a nonnegative integer jump length.",
+  "outputFormat": "Return an array of paths. Each path is an ordered array of zero-based [row, column] coordinates, including its corner and the center. Path order does not matter; do not duplicate paths.",
+  "visuals": [
+    {
+      "title": "One valid route",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 198\" role=\"img\" aria-label=\"A path from top-left (0,0), right to (0,1), then down to center (1,1)\" style=\"width:100%;height:auto;max-width:280px;color:var(--color-text)\"><rect x=\"34\" y=\"20\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"58\" y=\"51\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">1</text><rect x=\"88\" y=\"20\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"112\" y=\"51\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">1</text><rect x=\"142\" y=\"20\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"166\" y=\"51\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><rect x=\"34\" y=\"74\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"58\" y=\"105\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><rect x=\"88\" y=\"74\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"112\" y=\"105\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><rect x=\"142\" y=\"74\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"166\" y=\"105\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><rect x=\"34\" y=\"128\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"58\" y=\"159\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><rect x=\"88\" y=\"128\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"112\" y=\"159\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><rect x=\"142\" y=\"128\" width=\"48\" height=\"48\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"166\" y=\"159\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"21\">0</text><path d=\"M73 44H96M90 39L96 44L90 49M112 59V82M107 76L112 82L117 76\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>",
+      "caption": "(0,0) \u2192 (0,1) \u2192 (1,1). Stop at the center even though its value is 0."
+    }
+  ]
 }

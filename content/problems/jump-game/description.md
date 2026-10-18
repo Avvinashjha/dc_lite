@@ -1,1 +1,3 @@
-You start at index 0 of an array, where each value tells you the farthest you're allowed to jump forward from that position. Decide whether it's possible to chain jumps together and land on the final index, returning `true` if so and `false` if you'd get stuck short of it.
+Starting at index `0`, determine whether you can reach the final index of `nums`. From index `i`, you may jump forward any positive number of positions **up to** `nums[i]`; you do not have to use the maximum length.
+
+A zero prevents further movement from that index, but does not matter if it is already the destination. A one-element array is therefore always reachable. Return a boolean.

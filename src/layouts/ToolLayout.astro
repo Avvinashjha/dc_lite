@@ -17,10 +17,18 @@ interface Props {
   toolName: string;
   keywords?: string;
   faqs?: Faq[];
+  /** A concise, user-visible inventory of the actions available in the workspace. */
+  features?: string[];
+  /** Editor-style tools use the viewport as their working canvas. */
+  workbench?: boolean;
+  /** Keep only semantic page identity when an app workspace needs every visible pixel. */
+  minimalHeader?: boolean;
 }
 
 const config = getSiteConfig();
-const { title, description, toolName, keywords = '', faqs = [] } = Astro.props;
+// Tool pages are applications first. Their title remains semantic for search and
+// assistive technology, while the visible viewport is reserved for the tool.
+const { title, description, toolName, keywords = '', faqs = [], features = [], workbench = false, minimalHeader = true } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const hasAbout = Astro.slots.has('about');
 
@@ -45,6 +53,7 @@ const toolJsonLd = {
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   author: { '@type': 'Organization', name: config.site.title, url: config.site.url },
   browserRequirements: 'Requires JavaScript',
+  ...(features.length ? { featureList: features } : {}),
 };
 
 const faqJsonLd = faqs.length
@@ -68,17 +77,20 @@ const faqJsonLd = faqs.length
     {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
   </Fragment>
 
-  <div class="tool-page">
+  <div class:list={['tool-page', 'tool-page--workspace', { 'tool-page--workbench': workbench, 'tool-page--minimal-header': minimalHeader }]}>
     <div class="tool-container">
-      <nav class="tool-crumb">
-        <a href="/tools">All Tools</a>
-        <span class="tool-crumb__sep">/</span>
-        <h1>{toolName}</h1>
-        <span class="tool-crumb__badge">
-          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-1px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Client-side &middot; Secure
-        </span>
-      </nav>
+      {minimalHeader ? (
+        <h1 class="tool-title--sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">{toolName}</h1>
+      ) : (
+        <header class="tool-intro">
+          <a class="tool-back" href="/tools" aria-label="Back to all tools">← <span>All tools</span></a>
+          <div class="tool-intro__identity">
+            <h1>{toolName}</h1>
+            <p>{description}</p>
+          </div>
+          <span class="tool-privacy">Private · browser only</span>
+        </header>
+      )}
       <slot />
 
       {(hasAbout || faqs.length > 0 || relatedTools.length > 0) && (
@@ -146,45 +158,107 @@ const faqJsonLd = faqs.length
   .tool-container {
     max-width: var(--tool-max-width, 100%);
     margin: 0 auto;
-    padding: 0.5rem 1.5rem 1rem;
+    padding: 0.65rem 1.5rem 1rem;
   }
-  .tool-crumb {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 0.4rem;
-    margin-bottom: 0.5rem;
-    line-height: 1;
+  /* The tool is the page's product. Keep its identity available without
+     placing a marketing hero between the visitor and the workspace. */
+  .tool-page--workspace .tool-intro {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 46px;
+    margin: 0 0 0.75rem;
+    padding: 0 0 0.65rem;
+    border-bottom: 1px solid var(--color-border);
   }
-  .tool-crumb a {
-    color: var(--color-text-light);
+  .tool-page--workspace .tool-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: 32px;
+    margin: 0;
     font-size: 0.78rem;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .tool-crumb a:hover { color: var(--color-primary); }
-  .tool-crumb__sep {
-    color: var(--color-border);
-    font-size: 0.78rem;
-    user-select: none;
-  }
-  .tool-crumb h1 {
-    font-size: 0.82rem !important;
-    font-weight: 600 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    white-space: nowrap;
-    line-height: 1 !important;
-    display: inline !important;
-  }
-  .tool-crumb__badge {
-    font-size: 0.65rem;
+    font-weight: 650;
     color: var(--color-text-light);
-    opacity: 0.6;
-    white-space: nowrap;
-    margin-left: auto;
-    flex-shrink: 0;
   }
+  .tool-intro__identity { min-width: 0; }
+  .tool-page--workspace .tool-intro h1 {
+    margin: 0;
+    font-size: clamp(1rem, 1.7vw, 1.25rem);
+    letter-spacing: -0.02em;
+  }
+  .tool-page--workspace .tool-intro p {
+    overflow: hidden;
+    max-width: none;
+    margin: 0.1rem 0 0;
+    color: var(--color-text-light);
+    font-size: 0.73rem;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tool-page--workspace .tool-privacy {
+    white-space: nowrap;
+    padding: 0.25rem 0.48rem;
+    border-radius: 999px;
+    color: var(--dc-sage-ink);
+    background: var(--dc-sage);
+    font-size: 0.68rem;
+    font-weight: 650;
+  }
+  .tool-title--sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .tool-page--workbench .tool-panels {
+    min-height: max(480px, calc(100dvh - var(--site-header-height) - 168px));
+    align-items: stretch;
+  }
+  .tool-page--workbench .tool-panels > .tool-panel { min-height: 0; height: 100%; }
+  .tool-page--workbench .tool-panels .tool-textarea,
+  .tool-page--workbench .tool-panels .dc-editor,
+  .tool-page--workbench .tool-panels .tool-output {
+    flex: 1;
+    min-height: 0;
+  }
+  .tool-page--workbench .tool-panels .tool-textarea { height: 100%; resize: none; }
+  .tool-page--workbench .tool-panels .tool-output { height: 100%; margin: 0; }
+  .tool-page--workbench .tool-panels .dc-editor,
+  .tool-page--workbench .tool-panels .dc-editor .dc-editor__mount,
+  .tool-page--workbench .tool-panels .dc-editor .cm-editor,
+  .tool-page--workbench .tool-panels .dc-editor .cm-scroller { height: 100%; }
+  /* Workspace controls are toolbar controls, not marketing CTAs. */
+  .tool-page--workspace .tool-btn {
+    min-height: 32px;
+    padding: 0.34rem 0.62rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.76rem;
+  }
+  .tool-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .tool-panel__head .tool-panel__label { padding-right: 0; }
+  .workspace-actions,
+  .tab-bar__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .tab-bar__actions { margin-left: auto; }
   /* ── Tool guide: About + FAQ accordion (separated from the tool) ── */
   .tool-guide {
     margin: 3rem auto 0.5rem;
@@ -296,26 +370,31 @@ const faqJsonLd = faqs.length
   }
   @media (max-width: 768px) {
     .tool-container { padding: 0.5rem 1rem 0.75rem; }
-    .tool-crumb h1 { font-size: 0.78rem !important; }
+    .tool-page--workspace .tool-intro { gap: 0.5rem; min-height: 38px; margin-bottom: 0.6rem; padding-bottom: 0.55rem; }
+    .tool-page--workspace .tool-back span, .tool-page--workspace .tool-privacy { display: none; }
+    .tool-page--workspace .tool-intro p { font-size: 0.68rem; }
+    .tool-page--workbench .tool-panels { min-height: 0; }
     .tool-guide { margin-top: 2.25rem; }
   }
 </style>
 
 <style is:global>
   .tool-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .tool-panel { display: flex; flex-direction: column; gap: 0.5rem; }
+  .tool-panel { display: flex; flex-direction: column; gap: 0.4rem; }
   .tool-panel__label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-light); }
   .tool-textarea { width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-family: var(--font-mono); font-size: 0.8rem; resize: vertical; line-height: 1.5; }
-  .tool-textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+  .tool-textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 18%, transparent); }
   .tool-input { width: 100%; padding: 0.6rem 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-family: var(--font-mono); font-size: 0.85rem; }
-  .tool-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
-  .tool-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+  select.tool-input { padding-right: 2.35rem; cursor: pointer; }
+  select.tool-input option, select.tool-input optgroup { background: var(--color-surface); color: var(--color-text); }
+  .tool-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 10%, transparent); }
+  .tool-actions { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.55rem 0; }
   .tool-btn { padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 150ms ease; }
   .tool-btn:hover { border-color: var(--color-primary); background: var(--color-code-bg); }
-  .tool-btn--primary { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+  .tool-btn--primary { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
   .tool-btn--primary:hover { background: var(--color-primary-dark); }
-  .tool-output { width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: #1e293b; color: #e2e8f0; font-family: var(--font-mono); font-size: 0.8rem; overflow: auto; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
-  .tool-error { color: #ef4444; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
-  .tool-success { color: #22c55e; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+  .tool-output { width: 100%; min-height: 250px; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-code-bg); color: var(--color-text); font-family: var(--font-mono); font-size: 0.8rem; overflow: auto; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  .tool-error { color: var(--color-danger); font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
+  .tool-success { color: var(--color-success); font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem; }
   @media (max-width: 768px) { .tool-panels { grid-template-columns: 1fr; } .tool-textarea, .tool-output { min-height: 180px; } }
 </style>

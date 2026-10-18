@@ -14,7 +14,7 @@ for (const slug of fs.readdirSync(root)) {
     try {
       const context = vm.createContext({ console: { log() {} }, structuredClone });
       context.args = test.args; context.config = meta.runner || {};
-      const actual = vm.runInContext(`${code}\n(${invokeProblem.toString()})(${meta.functionName}, args, config)`, context, { timeout: 2000 });
+      const actual = vm.runInContext(`${code}\n(${invokeProblem.toString()})(${meta.runner?.mode === 'codec' ? '(() => {' + code + '; return {serialize, deserialize};})' : meta.functionName}, args, config)`, context, { timeout: 2000 });
       if (!compareProblemResult(actual, test.expected, test.args, meta.runner)) errors.push({ case: index+1, actual, expected: test.expected });
     } catch (e) { errors.push({ case: index+1, error: e.message }); }
   }

@@ -1,4 +1,4 @@
-Use the first row and first column as markers. Scan the matrix — when a zero is found, mark the corresponding first-row and first-column cell as zero. Then do a second pass to zero out marked rows and columns. Handle the first row and column separately using a dedicated flag to avoid overwriting markers prematurely.
+Use the first row and first column as markers. Scan the matrix — when a zero is found, mark the corresponding first-row and first-column cell as zero. Then do a second pass to zero out marked rows and columns. Handle the first row and column separately using two dedicated flags to avoid overwriting markers prematurely.
 
 ```javascript
 function setZeroes(matrix) {

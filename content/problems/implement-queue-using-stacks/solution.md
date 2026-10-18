@@ -4,9 +4,12 @@ Use an input stack for pushes and an output stack for pops. When the output stac
 
 ```javascript
 function implementQueueUsingStacks() {
-  const inStack = [], outStack = [];
+  const inStack = [],
+    outStack = [];
   return {
-    push(x) { inStack.push(x); },
+    push(x) {
+      inStack.push(x);
+    },
     pop() {
       if (!outStack.length) while (inStack.length) outStack.push(inStack.pop());
       return outStack.pop();
@@ -15,11 +18,13 @@ function implementQueueUsingStacks() {
       if (!outStack.length) while (inStack.length) outStack.push(inStack.pop());
       return outStack[outStack.length - 1];
     },
-    empty() { return !inStack.length && !outStack.length; }
+    empty() {
+      return !inStack.length && !outStack.length;
+    },
   };
 }
 ```
 
-**Time Complexity:** Amortized O(1) per operation
+**Time Complexity:** Amortized O(1) per operation; a single pop or peek can take O(n) when it transfers the input stack. Each element transfers at most once.
 
 **Space Complexity:** O(n)

@@ -1,6 +1,6 @@
 ## Approach: Slope Counting with GCD
 
-For each point, compute slopes to all other points. Use GCD to represent slopes as reduced fractions to avoid floating-point issues. Use a hashmap to count points sharing the same slope. Track the global maximum.
+For each point, compute slopes to all other points. Use GCD to represent slopes as reduced fractions to avoid floating-point issues. Use a hashmap to count points sharing the same slope. Normalize the sign so opposite directions along the same line use the same key. Vertical lines become `(0, 1)` and horizontal lines become `(1, 0)`. The stored count includes the anchor itself. Scanning only later points is sufficient: the earliest input point on any optimal line sees every other point on that line. Track the global maximum.
 
 ```javascript
 function maxPointsOnALine(points) {
@@ -24,6 +24,6 @@ function maxPointsOnALine(points) {
 }
 ```
 
-**Time Complexity:** O(n²)
+**Time Complexity:** O(n² log C), including Euclidean GCD, where C is the maximum absolute coordinate difference (use at least 2). With the fixed coordinate bounds, this is commonly written O(n²).
 
 **Space Complexity:** O(n)

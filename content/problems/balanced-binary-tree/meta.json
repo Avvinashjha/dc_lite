@@ -48,6 +48,25 @@
         []
       ],
       "expected": true
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          3
+        ]
+      ],
+      "expected": false
     }
   ],
   "functionName": "isBalanced",
@@ -77,6 +96,13 @@
   ],
   "sampleInput": "root = [3,9,20,null,null,15,7]",
   "sampleOutput": "true",
-  "inputFormat": "Implement isBalanced(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement isBalanced(root). The runner converts the level-order array into nodes with val, left, and right fields; [] becomes null.",
+  "outputFormat": "true if every node\u2019s left and right subtree heights differ by at most one; otherwise false. An empty tree is balanced.",
+  "visuals": [
+    {
+      "title": "Balanced does not mean identical",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 200\" role=\"img\" aria-label=\"Root 3 has left subtree height 1 and right subtree height 2; the tree is balanced\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><path d=\"M240 30L125 95\" stroke=\"currentColor\" fill=\"none\"/><path d=\"M240 30L350 95\" stroke=\"currentColor\" fill=\"none\"/><path d=\"M350 95L300 160\" stroke=\"currentColor\" fill=\"none\"/><path d=\"M350 95L410 160\" stroke=\"currentColor\" fill=\"none\"/><circle cx=\"240\" cy=\"30\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"240\" y=\"36\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">3</text><circle cx=\"125\" cy=\"95\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"125\" y=\"101\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">9</text><circle cx=\"350\" cy=\"95\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"350\" y=\"101\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">20</text><circle cx=\"300\" cy=\"160\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"300\" y=\"166\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">15</text><circle cx=\"410\" cy=\"160\" r=\"20\" fill=\"var(--dc-sage)\" stroke=\"var(--color-border)\"/><text x=\"410\" y=\"166\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">7</text><g fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\"><text x=\"45\" y=\"135\">Height 1</text><text x=\"375\" y=\"75\">Height 2</text></g></svg>",
+      "caption": "The root\u2019s subtree heights differ by 1, and every other node also satisfies the balance condition."
+    }
+  ]
 }

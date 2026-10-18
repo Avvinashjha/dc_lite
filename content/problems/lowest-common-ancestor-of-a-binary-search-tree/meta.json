@@ -6,8 +6,7 @@
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "Binary Search Tree"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
@@ -52,6 +51,77 @@
         4
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9
+        ],
+        0,
+        4
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        2,
+        1
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          0,
+          -3,
+          5,
+          -5,
+          -1
+        ],
+        -5,
+        -1
+      ],
+      "expected": -3
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ],
+        3,
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9
+        ],
+        9,
+        7
+      ],
+      "expected": 8
     }
   ],
   "functionName": "lowestCommonAncestorOfABinarySearchTree",
@@ -59,7 +129,8 @@
   "constraints": [
     "2 <= number of nodes <= 10^5",
     "-10^9 <= Node.val <= 10^9",
-    "All values are unique"
+    "All values are unique",
+    "p and q are distinct values present in the tree"
   ],
   "runner": {
     "argTypes": [
@@ -78,6 +149,13 @@
   ],
   "sampleInput": "root = [6,2,8,0,4,7,9,null,null,3,5]\np = 2\nq = 8",
   "sampleOutput": "6",
-  "inputFormat": "Implement lowestCommonAncestorOfABinarySearchTree(root, p, q). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement lowestCommonAncestorOfABinarySearchTree(root, p, q). The editor converts the level-order root array (null marks missing children) into nodes with val, left, and right. p and q are integer values, not node objects.",
+  "outputFormat": "Return the integer value of the lowest common ancestor, not a node object.",
+  "visuals": [
+    {
+      "title": "The deepest shared ancestor is 2",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 440 212\" role=\"img\" aria-labelledby=\"lca-title\" style=\"width:100%;height:auto;max-width:440px;color:var(--color-text)\"><title id=\"lca-title\">Targets 0 and 4 have lowest common ancestor 2</title><g fill=\"none\" stroke=\"currentColor\" opacity=\".55\"><path d=\"M220 46L110 78\"/><path d=\"M220 46L330 78\"/><path d=\"M110 114L55 146\"/><path d=\"M110 114L165 146\"/><path d=\"M330 114L275 146\"/><path d=\"M330 114L385 146\"/></g><g font-family=\"system-ui,sans-serif\"><circle cx=\"220\" cy=\"28\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\"/><text x=\"220\" y=\"33\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">6</text><circle cx=\"110\" cy=\"96\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\"/><text x=\"110\" y=\"101\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">2</text><circle cx=\"330\" cy=\"96\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\"/><text x=\"330\" y=\"101\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">8</text><circle cx=\"55\" cy=\"164\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\"/><text x=\"55\" y=\"169\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">0</text><text x=\"55\" y=\"200\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">p</text><circle cx=\"165\" cy=\"164\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\"/><text x=\"165\" y=\"169\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">4</text><text x=\"165\" y=\"200\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">q</text><circle cx=\"275\" cy=\"164\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\"/><text x=\"275\" y=\"169\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">7</text><circle cx=\"385\" cy=\"164\" r=\"19\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\"/><text x=\"385\" y=\"169\" text-anchor=\"middle\" font-size=\"15\" fill=\"currentColor\">9</text><text x=\"145\" y=\"91\" fill=\"currentColor\" font-size=\"11\">LCA</text></g></svg>",
+      "caption": "For this tree, p = 0 and q = 4. Both are below 2; neither target is an ancestor of the other. Return 2."
+    }
+  ]
 }

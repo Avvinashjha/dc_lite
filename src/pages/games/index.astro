@@ -1,4 +1,5 @@
 ---
+import PageIntro from '../../components/PageIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const categories = [
@@ -32,10 +33,8 @@ const totalCount = categories.reduce((s, c) => s + c.games.length, 0);
 ---
 
 <BaseLayout title="Free Online Games | DailyCoder" description={`Play ${readyCount} free browser games — no download, no signup. Snake, Tetris, Sudoku, and more coming soon.`}>
-  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem; text-align: center;">Games</h1>
-    <p style="text-align: center; color: var(--color-text-light); font-size: 1.05rem; margin-bottom: 0.25rem;">Free, instant, no download. Play right in your browser.</p>
-    <p style="text-align: center; font-size: 0.75rem; color: var(--color-text-light); opacity: 0.7; margin-bottom: 2.5rem;">{readyCount} playable now · {totalCount - readyCount} more coming soon</p>
+  <div class="container collection-page">
+    <PageIntro title="A little play. A fresh perspective." description="Take a breather with free browser games. No downloads, just a little room to unwind." eyebrow="MAKE TIME FOR A BREAK" icon="play" tone="lavender" />
 
     {categories.map(cat => (
       <section class="games-section">
@@ -45,7 +44,7 @@ const totalCount = categories.reduce((s, c) => s + c.games.length, 0);
         </h2>
         <div class="games-grid">
           {cat.games.map(g => (
-            <a href={g.href} class={`game-card ${g.href === '#' ? 'game-card--disabled' : ''}`}>
+            <a href={g.href === '#' ? undefined : g.href} aria-disabled={g.href === '#' ? 'true' : undefined} class={`game-card ${g.href === '#' ? 'game-card--disabled' : ''}`}>
               <span class="game-card__icon">{g.icon}</span>
               <h3 class="game-card__name">{g.name}</h3>
               <p class="game-card__desc">{g.desc}</p>

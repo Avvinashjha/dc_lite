@@ -6,7 +6,7 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Array"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-length-of-repeated-subarray/",
@@ -42,6 +42,108 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          9,
+          2,
+          9,
+          3
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          9,
+          1,
+          2,
+          8
+        ],
+        [
+          7,
+          1,
+          2,
+          6
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "maximumLengthOfRepeatedSubarray",
@@ -63,6 +165,6 @@
   ],
   "sampleInput": "nums1 = [1,2,3,2,1]\nnums2 = [3,2,1,4,7]",
   "sampleOutput": "3",
-  "inputFormat": "Implement maximumLengthOfRepeatedSubarray(nums1, nums2). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maximumLengthOfRepeatedSubarray(nums1, nums2). Receive two nonempty integer arrays.",
+  "outputFormat": "Return the length of the longest contiguous subarray present in both arrays, or 0 if no element matches."
 }

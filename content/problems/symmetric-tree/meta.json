@@ -40,6 +40,69 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          null,
+          3,
+          3
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          3,
+          null,
+          3
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          0,
+          -1,
+          -1
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "isSymmetric",
@@ -60,11 +123,12 @@
     },
     {
       "input": "root = [1,2,2,null,3,null,3]",
-      "output": "false"
+      "output": "false",
+      "explanation": "Both nodes with value 3 are right children. Reflection would require one to be a left child, so the shapes do not mirror each other."
     }
   ],
   "sampleInput": "root = [1,2,2,3,4,4,3]",
   "sampleOutput": "true",
   "inputFormat": "Implement isSymmetric(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true only if both values and left/right structure match under reflection; otherwise return false."
 }

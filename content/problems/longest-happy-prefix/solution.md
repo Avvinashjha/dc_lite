@@ -1,6 +1,6 @@
 ## Approach: KMP Failure Function
 
-This is directly solved by the KMP algorithm's LPS (Longest Proper Prefix which is also Suffix) array. Build the LPS array for the entire string — the value at the last index gives the length of the longest happy prefix.
+This is directly solved by the KMP algorithm's LPS (Longest Proper Prefix which is also Suffix) array. Build the LPS array for the entire string. At a mismatch, fall back to `lps[len - 1]` to try the next shorter border without rescanning characters. The last entry gives the answer length. Because every entry describes a proper prefix, the whole string is excluded while overlapping occurrences remain allowed.
 
 ```javascript
 function longestPrefix(s) {

@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/reverse-words-in-a-string/",
@@ -25,6 +25,54 @@
         "  hello   world  "
       ],
       "expected": "world hello"
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": "a"
+    },
+    {
+      "args": [
+        "   "
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        " one "
+      ],
+      "expected": "one"
+    },
+    {
+      "args": [
+        "a  b   c"
+      ],
+      "expected": "c b a"
+    },
+    {
+      "args": [
+        "Code 123"
+      ],
+      "expected": "123 Code"
+    },
+    {
+      "args": [
+        "same same word"
+      ],
+      "expected": "word same same"
+    },
+    {
+      "args": [
+        "a1 B2 c3"
+      ],
+      "expected": "c3 B2 a1"
+    },
+    {
+      "args": [
+        "  123 456  "
+      ],
+      "expected": "456 123"
     }
   ],
   "functionName": "reverseWords",
@@ -45,5 +93,5 @@
     }
   ],
   "inputFormat": "Implement reverseWords(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the words in reverse order, separated by single spaces with no leading or trailing spaces. Return an empty string when the input has no words."
 }

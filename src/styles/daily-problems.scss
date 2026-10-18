@@ -294,7 +294,7 @@
 
 .daily-btn--primary {
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   border-color: var(--color-primary);
   box-shadow: 0 1px 2px color-mix(in srgb, var(--color-primary) 40%, transparent);
 }

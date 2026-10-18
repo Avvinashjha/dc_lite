@@ -44,6 +44,58 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          {
+            "val": 1,
+            "child": [
+              2
+            ]
+          },
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          {
+            "val": 1,
+            "child": [
+              {
+                "val": 2,
+                "child": [
+                  3
+                ]
+              }
+            ]
+          }
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1
+      ]
     }
   ],
   "functionName": "flattenAMultilevelDoublyLinkedList",
@@ -70,6 +122,13 @@
   ],
   "sampleInput": "head = [1,{\"val\":2,\"child\":[3,{\"val\":4,\"child\":[5]}]},6]",
   "sampleOutput": "[1,2,3,4,5,6]",
-  "inputFormat": "Implement flattenAMultilevelDoublyLinkedList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nA multilevel list uses numbers or {val, child:[...]} entries. The editor builds doubly linked nodes with val, prev, next, and child properties.",
-  "outputFormat": "Return the result described in the statement.\nOutput is a value array; prev pointers must be correct and child pointers must be null."
+  "inputFormat": "head is a node with val, prev, next, and child pointers, or null. Test inputs use numbers or {val, child:[...]} entries; [] becomes null.",
+  "outputFormat": "Return the head of the flattened list using the original nodes and values. All child pointers must be null and prev links must be correct. The runner displays the returned list as a value array.",
+  "visuals": [
+    {
+      "title": "Finish each child list before returning",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 250\" role=\"img\" aria-label=\"Before: 1 links to 2 links to 6; 2 has children 3 and 4, and 4 has child 5. After flattening: 1, 2, 3, 4, 5, 6.\" style=\"width:100%;height:auto;max-width:400px;color:var(--color-text)\"><text x=\"8\" y=\"23\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">Before</text><rect x=\"92\" y=\"6\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"109\" y=\"28\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">1</text><rect x=\"170\" y=\"6\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"187\" y=\"28\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">2</text><rect x=\"326\" y=\"6\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"343\" y=\"28\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">6</text><rect x=\"170\" y=\"68\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"187\" y=\"90\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">3</text><rect x=\"248\" y=\"68\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"265\" y=\"90\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">4</text><rect x=\"248\" y=\"130\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"265\" y=\"152\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">5</text><text x=\"134\" y=\"29\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"22\">\u2194</text><text x=\"245\" y=\"29\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"22\">\u2194</text><text x=\"212\" y=\"91\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"22\">\u2194</text><path d=\"M187 38V63M182 57L187 63L192 57M265 100V125M260 119L265 125L270 119\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"198\" y=\"57\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"14\">child</text><text x=\"276\" y=\"119\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"14\">child</text><text x=\"8\" y=\"211\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">After</text><rect x=\"80\" y=\"190\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"97\" y=\"212\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">1</text><text x=\"116\" y=\"212\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">\u2194</text><rect x=\"133\" y=\"190\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"150\" y=\"212\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">2</text><text x=\"169\" y=\"212\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">\u2194</text><rect x=\"186\" y=\"190\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"203\" y=\"212\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">3</text><text x=\"222\" y=\"212\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">\u2194</text><rect x=\"239\" y=\"190\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"256\" y=\"212\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">4</text><text x=\"275\" y=\"212\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">\u2194</text><rect x=\"292\" y=\"190\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"309\" y=\"212\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">5</text><text x=\"328\" y=\"212\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">\u2194</text><rect x=\"345\" y=\"190\" width=\"34\" height=\"32\" rx=\"6\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"362\" y=\"212\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\">6</text></svg>",
+      "caption": "Visit 3, 4, and nested child 5 before returning to 6. Reconnect both directions and clear every child pointer."
+    }
+  ]
 }

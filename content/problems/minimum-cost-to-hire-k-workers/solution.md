@@ -1,6 +1,6 @@
 ## Sort by Ratio + Max-Heap
 
-Sort by wage/quality ratio. Use max-heap to maintain k smallest qualities.
+A selected group needs a rate at least as large as every member’s wage/quality ratio. Sort workers by that ratio. At each rate, all workers seen so far are affordable; retain the k smallest qualities using a max-heap, removing the largest quality when necessary. Their sum multiplied by the current rate is a feasible total. The optimal group is considered when its largest required ratio is reached.
 
 ```javascript
 function mincostToHireWorkers(quality, wage, k) {

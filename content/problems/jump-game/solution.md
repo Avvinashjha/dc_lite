@@ -1,4 +1,4 @@
-Iterate through the array while maintaining the farthest index you can reach. If you ever land on an index beyond your current reach, return false. Otherwise, update your reach as `max(maxReach, i + nums[i])`.
+Iterate through the array while maintaining the farthest index you can reach. If the scan reaches an index beyond this boundary, return false. Otherwise, update your reach as `max(maxReach, i + nums[i])`.
 
 ```javascript
 function canJump(nums) {

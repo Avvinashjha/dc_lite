@@ -5,7 +5,8 @@
   "difficulty": "Easy",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/palindrome-linked-list/",
@@ -30,6 +31,80 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          2,
+          1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          9,
+          0,
+          0,
+          9
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          2,
+          1
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "isPalindrome",
@@ -56,5 +131,5 @@
   "sampleInput": "head = [1,2,2,1]",
   "sampleOutput": "true",
   "inputFormat": "Implement isPalindrome(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if the list values form a palindrome; otherwise return false."
 }

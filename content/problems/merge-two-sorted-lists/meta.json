@@ -5,7 +5,8 @@
   "difficulty": "Easy",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/merge-two-sorted-lists/",
@@ -39,13 +40,114 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [],
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          -1
+        ],
+        []
+      ],
+      "expected": [
+        -1
+      ]
+    },
+    {
+      "args": [
+        [
+          -3,
+          -1,
+          2
+        ],
+        [
+          -2,
+          0
+        ]
+      ],
+      "expected": [
+        -3,
+        -2,
+        -1,
+        0,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     }
   ],
   "functionName": "mergeTwoLists",
   "templateCode": "function mergeTwoLists(l1, l2) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 to 50 nodes per list",
-    "-100 <= Node.val <= 100"
+    "-100 <= Node.val <= 100",
+    "Each input list is sorted in non-decreasing order"
   ],
   "runner": {
     "argTypes": [
@@ -66,6 +168,6 @@
   ],
   "sampleInput": "l1 = [1,2,4]\nl2 = [1,3,4]",
   "sampleOutput": "[1,1,2,3,4,4]",
-  "inputFormat": "Implement mergeTwoLists(l1, l2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "inputFormat": "Implement mergeTwoLists(l1, l2). Each displayed array is converted to a singly linked list with val and next properties. An empty array becomes null.",
+  "outputFormat": "Return the merged head node, or null if both lists are empty. The runner displays its values as an array."
 }

@@ -32,6 +32,102 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          -100,
+          -100,
+          0,
+          0,
+          100
+        ]
+      ],
+      "expected": [
+        -100,
+        0,
+        100
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          2,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ]
     }
   ],
   "functionName": "deleteDuplicates",
@@ -39,13 +135,14 @@
   "constraints": [
     "0 to 300 nodes",
     "-100 <= Node.val <= 100",
-    "List is sorted in ascending order"
+    "The list is sorted in nondecreasing order."
   ],
   "runner": {
     "argTypes": [
       "list"
     ],
-    "outputType": "list"
+    "outputType": "list",
+    "originalListNodes": true
   },
   "examples": [
     {
@@ -60,5 +157,5 @@
   "sampleInput": "head = [1,1,2,3,3]",
   "sampleOutput": "[1,2,3]",
   "inputFormat": "Implement deleteDuplicates(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Return the head of a sorted list containing one original node per distinct value, or null for an empty input. The runner displays node values as an array."
 }

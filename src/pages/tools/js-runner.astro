@@ -14,26 +14,36 @@ console.log('Ready to run');`;
   description="Simple in-browser JavaScript editor to write and run functions safely in a sandboxed iframe."
   toolName="JavaScript Runner"
   keywords="javascript runner, javascript editor, run javascript online, js playground, javascript function tester"
+  workbench={true}
   faqs={[
     { q: "Is it safe to run code here?", a: "Code runs in your own browser sandbox, not on a server, so it only has access to your local browser environment." },
     { q: "Can I test functions with inputs?", a: "Yes — write a function and execute it to see the output immediately." },
     { q: "Are my scripts saved?", a: "Your work is stored locally in your browser so it's still there when you return." },
   ]}
 >
-  <div class="tool-panel" style="margin-bottom: 1rem;">
-    <span class="tool-panel__label">JavaScript Code</span>
-    <CodeEditor id="js-runner-editor" minHeight={280} />
+  <div class="tab-bar" id="runner-tab-bar">
+    <div class="tab-list" id="runner-tab-list"></div>
+    <button class="tab-add" id="runner-add-tab" title="New script">+</button>
   </div>
 
-  <div class="tool-actions">
-    <button id="run-btn" class="tool-btn tool-btn--primary">Run</button>
-    <button id="sample-btn" class="tool-btn">Load Sample</button>
-    <button id="clear-btn" class="tool-btn">Clear Output</button>
-  </div>
-
-  <div class="tool-panel">
-    <span class="tool-panel__label">Output</span>
-    <pre id="output" class="tool-output"></pre>
+  <div class="tool-panels">
+    <div class="tool-panel">
+      <div class="tool-panel__head">
+        <span class="tool-panel__label">JavaScript Code</span>
+        <div class="workspace-actions">
+          <button id="run-btn" class="tool-btn tool-btn--primary">Run</button>
+          <button id="sample-btn" class="tool-btn">Sample</button>
+        </div>
+      </div>
+      <CodeEditor id="js-runner-editor" minHeight={320} fill={true} />
+    </div>
+    <div class="tool-panel">
+      <div class="tool-panel__head">
+        <span class="tool-panel__label">Output</span>
+        <div class="workspace-actions"><button id="clear-btn" class="tool-btn">Clear</button></div>
+      </div>
+      <pre id="output" class="tool-output"></pre>
+    </div>
   </div>
 
   <iframe
@@ -92,9 +102,15 @@ console.log('Ready to run');`;
   const clearBtn = document.getElementById('clear-btn');
   const outputEl = document.getElementById('output');
   const frameEl = document.getElementById('sandbox-frame');
+  const tabsKey = 'dc-js-runner-tabs-v1';
+  const tabListEl = document.getElementById('runner-tab-list');
+  const addTabBtn = document.getElementById('runner-add-tab');
+  let runnerTabs = [];
+  let activeTabId = null;
   let activeRunId = 0;
   let receivedMessageForRun = false;
   let runTimeout = null;
+  let saveTimer = null;
 
   function safeString(value) {
     if (typeof value === 'string') return value;
@@ -106,6 +122,78 @@ console.log('Ready to run');`;
     const line = '[' + prefix + '] ' + safeString(value);
     outputEl.textContent += (outputEl.textContent ? '\n' : '') + line;
     outputEl.scrollTop = outputEl.scrollHeight;
+    saveActiveTab();
+  }
+
+  function newTab(name) {
+    return { id: 'script-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), name: name || 'Script ' + (runnerTabs.length + 1), code: '', output: '' };
+  }
+
+  function saveTabs() {
+    try { localStorage.setItem(tabsKey, JSON.stringify({ activeTabId: activeTabId, tabs: runnerTabs })); } catch (e) {}
+  }
+
+  function saveActiveTab() {
+    const tab = runnerTabs.find(function(item) { return item.id === activeTabId; });
+    if (!tab) return;
+    tab.code = editor.getValue();
+    tab.output = outputEl.textContent;
+    saveTabs();
+  }
+
+  function renderTabs() {
+    tabListEl.innerHTML = '';
+    runnerTabs.forEach(function(tab) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'tab-item' + (tab.id === activeTabId ? ' tab-item--active' : '');
+      button.addEventListener('click', function() {
+        if (tab.id === activeTabId) {
+          const input = document.createElement('input');
+          input.className = 'tab-item__rename';
+          input.value = tab.name;
+          input.setAttribute('aria-label', 'Rename script');
+          button.replaceChildren(input);
+          input.focus(); input.select();
+          let done = false;
+          const finish = function() {
+            if (done) return; done = true;
+            if (input.value.trim()) tab.name = input.value.trim();
+            saveTabs(); renderTabs();
+          };
+          input.addEventListener('click', function(event) { event.stopPropagation(); });
+          input.addEventListener('keydown', function(event) { if (event.key === 'Enter') finish(); if (event.key === 'Escape') { done = true; renderTabs(); } });
+          input.addEventListener('blur', finish);
+          return;
+        }
+        saveActiveTab();
+        activeTabId = tab.id;
+        editor.setValue(tab.code || '');
+        outputEl.textContent = tab.output || '';
+        renderTabs();
+      });
+      button.textContent = tab.name;
+      tabListEl.appendChild(button);
+    });
+  }
+
+  function loadTabs() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(tabsKey) || 'null');
+      if (saved && Array.isArray(saved.tabs) && saved.tabs.length) {
+        runnerTabs = saved.tabs;
+        activeTabId = saved.tabs.some(function(tab) { return tab.id === saved.activeTabId; }) ? saved.activeTabId : saved.tabs[0].id;
+        const active = runnerTabs.find(function(tab) { return tab.id === activeTabId; });
+        editor.setValue(active.code || defaultCode);
+        outputEl.textContent = active.output || '';
+        renderTabs();
+        return;
+      }
+    } catch (e) {}
+    const tab = newTab('Script 1');
+    tab.code = defaultCode;
+    runnerTabs = [tab]; activeTabId = tab.id;
+    renderTabs(); saveTabs();
   }
 
   function runCode() {
@@ -121,6 +209,7 @@ console.log('Ready to run');`;
     }, 1200);
 
     appendOutput('INFO', 'Running...');
+    saveActiveTab();
 
     const srcdoc = [
       '<!doctype html><html><body><script>',
@@ -194,13 +283,29 @@ console.log('Ready to run');`;
 
     editor.setValue(sampleCode);
     appendOutput('INFO', 'Sample loaded.');
+    saveActiveTab();
   });
 
   clearBtn.addEventListener('click', function() {
     outputEl.textContent = '';
+    saveActiveTab();
   });
 
   runBtn.addEventListener('click', runCode);
 
-  appendOutput('INFO', 'Tip: Press Ctrl/Cmd + Enter to run.');
+  addTabBtn.addEventListener('click', function() {
+    saveActiveTab();
+    const tab = newTab();
+    runnerTabs.push(tab); activeTabId = tab.id;
+    editor.setValue(''); outputEl.textContent = '';
+    saveTabs(); renderTabs();
+  });
+
+  editor.view.dom.addEventListener('input', function() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveActiveTab, 400);
+  });
+
+  loadTabs();
+  if (!outputEl.textContent) appendOutput('INFO', 'Tip: Press Ctrl/Cmd + Enter to run.');
 </script>

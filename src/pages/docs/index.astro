@@ -1,4 +1,5 @@
 ---
+import PageIntro from '../../components/PageIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getDocsIndex, getDocProjects } from '../../utils/contentLoader';
 
@@ -7,9 +8,8 @@ const projects = getDocProjects();
 ---
 
 <BaseLayout title={`${index.title} | DailyCoder`} description={index.description}>
-  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">{index.title}</h1>
-    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 3rem;">{index.description}</p>
+  <div class="container collection-page">
+    <PageIntro title="A clearer way forward." description="Guides and documentation to help you understand the details and build with confidence." eyebrow="YOUR REFERENCE SHELF" icon="book" tone="sage" />
 
     <div class="grid grid--2">
       {projects.map(project => (

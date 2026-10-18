@@ -3,9 +3,10 @@
   "id": "problem-0258",
   "title": "Longest Repeating Character Replacement",
   "difficulty": "Medium",
-  "topic": "Two-Pointer",
+  "topic": "Sliding Window",
   "topics": [
-    "Two Pointer"
+    "Sliding Window",
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/longest-repeating-character-replacement/",
@@ -23,6 +24,55 @@
     {
       "args": [
         "AABABBA",
+        1
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "A",
+        0
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "AAAA",
+        0
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "ABCDE",
+        0
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "ABCDE",
+        2
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        "ABCDE",
+        5
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        "ABBB",
+        1
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "AAABBC",
         1
       ],
       "expected": 4
@@ -46,6 +96,6 @@
       "output": "4"
     }
   ],
-  "inputFormat": "Implement characterReplacement(s, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement characterReplacement(s, k). Receive an uppercase English string and a nonnegative replacement budget.",
+  "outputFormat": "Return the maximum length of a contiguous substring that can be made uniform using at most k replacements."
 }

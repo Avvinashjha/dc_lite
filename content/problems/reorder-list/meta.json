@@ -5,7 +5,8 @@
   "difficulty": "Medium",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/reorder-list/",
@@ -36,6 +37,104 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        3,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": [
+        1,
+        5,
+        2,
+        4,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "expected": [
+        1,
+        6,
+        2,
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "expected": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          1,
+          5,
+          2,
+          5
+        ]
+      ],
+      "expected": [
+        5,
+        5,
+        1,
+        2,
+        5
+      ]
     }
   ],
   "functionName": "reorderList",
@@ -48,7 +147,7 @@
     "argTypes": [
       "list"
     ],
-    "outputType": "list",
+    "outputType": "reorderedList",
     "resultArg": 0
   },
   "examples": [
@@ -64,5 +163,5 @@
   "sampleInput": "head = [1,2,3,4]",
   "sampleOutput": "[1,4,2,3]",
   "inputFormat": "Implement reorderList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Modify the original list in place by rewiring its nodes. The return value is ignored; the runner checks the list reached from the original head."
 }

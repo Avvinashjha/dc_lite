@@ -1,6 +1,6 @@
 ## Bellman-Ford
 
-Run V-1 relaxations, then check if any edge can still be relaxed.
+Initialize every distance to zero, equivalent to adding a virtual source with zero-weight edges to all vertices. This includes disconnected components. Run V - 1 relaxation passes, then check whether any edge can still reduce a distance.
 
 ```javascript
 function hasNegativeCycle(V, edges) {
@@ -18,4 +18,4 @@ function hasNegativeCycle(V, edges) {
 }
 ```
 
-**Time:** O(V × E) | **Space:** O(V)
+**Time:** O(V + V × E), including initialization | **Space:** O(V)

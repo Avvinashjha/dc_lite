@@ -1,10 +1,10 @@
 ## Approach: Sort and Compare
 
-Sort the array. The maximum product is either from the three largest numbers, or from the two smallest (most negative) numbers multiplied by the largest. Compare both candidates.
+Sort a copy of the array. The maximum product is either from the three largest numbers, or from the two smallest (most negative) numbers multiplied by the largest. Compare both candidates.
 
 ```javascript
 function maximumProductOfThreeNumbers(nums) {
-  nums.sort((a, b) => a - b);
+  nums = [...nums].sort((a, b) => a - b);
   const n = nums.length;
   return Math.max(
     nums[n-1] * nums[n-2] * nums[n-3],
@@ -15,4 +15,4 @@ function maximumProductOfThreeNumbers(nums) {
 
 **Time Complexity:** O(n log n)
 
-**Space Complexity:** O(1)
+**Space Complexity:** O(n) for the sorted copy and sorting workspace.

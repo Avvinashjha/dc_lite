@@ -1,5 +1,9 @@
 ## Recursive Generation
 
+Choose each possible root in the interval. Recursively generate every left tree from smaller keys and every right tree from larger keys, then combine every left/right pair with that root. Different roots or child shapes produce different trees.
+
+An empty interval returns [null], representing one choice of an absent child. Returning an empty array there would incorrectly eliminate combinations with a missing child.
+
 ```javascript
 function generateTrees(n) {
   function build(lo, hi) {

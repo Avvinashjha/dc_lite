@@ -3,10 +3,10 @@
   "id": "problem-0230",
   "title": "Counting Bits",
   "difficulty": "Easy",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Bit Manipulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/counting-bits/",
@@ -34,6 +34,30 @@
         1,
         2
       ]
+    },
+    {
+      "args": [
+        0
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        8
+      ],
+      "expected": [
+        0,
+        1,
+        1,
+        2,
+        1,
+        2,
+        2,
+        3,
+        1
+      ]
     }
   ],
   "functionName": "countBits",
@@ -54,6 +78,6 @@
   ],
   "sampleInput": "n = 2",
   "sampleOutput": "[0,1,1]",
-  "inputFormat": "Implement countBits(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement countBits(n), where n is a non-negative integer.",
+  "outputFormat": "An array of length n + 1 whose element at index i counts the 1 bits in i\u2019s binary representation, for every i from 0 through n."
 }

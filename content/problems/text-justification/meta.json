@@ -6,7 +6,8 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Greedy",
+    "Simulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/text-justification/",
@@ -41,6 +42,91 @@
       "expected": [
         "a  "
       ]
+    },
+    {
+      "args": [
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        1
+      ],
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "args": [
+        [
+          "ab",
+          "cd"
+        ],
+        5
+      ],
+      "expected": [
+        "ab cd"
+      ]
+    },
+    {
+      "args": [
+        [
+          "ab",
+          "c",
+          "d",
+          "long"
+        ],
+        8
+      ],
+      "expected": [
+        "ab  c  d",
+        "long    "
+      ]
+    },
+    {
+      "args": [
+        [
+          "a",
+          "b",
+          "c",
+          "dddd"
+        ],
+        8
+      ],
+      "expected": [
+        "a   b  c",
+        "dddd    "
+      ]
+    },
+    {
+      "args": [
+        [
+          "long",
+          "word",
+          "x"
+        ],
+        4
+      ],
+      "expected": [
+        "long",
+        "word",
+        "x   "
+      ]
+    },
+    {
+      "args": [
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        6
+      ],
+      "expected": [
+        "a b c "
+      ]
     }
   ],
   "functionName": "fullJustify",
@@ -65,5 +151,5 @@
   "sampleInput": "words = [\"This\",\"is\",\"an\",\"example\",\"of\",\"text\",\"justification.\"]\nmaxWidth = 16",
   "sampleOutput": "[\"This    is    an\",\"example  of text\",\"justification.  \"]",
   "inputFormat": "Implement fullJustify(words, maxWidth). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return an array of lines, each exactly maxWidth characters long. Preserve every space, including trailing spaces on the last line and single-word lines."
 }

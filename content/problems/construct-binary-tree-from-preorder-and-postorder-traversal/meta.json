@@ -56,13 +56,50 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        null,
+        3
+      ]
     }
   ],
   "functionName": "constructFromPrePost",
   "templateCode": "function constructFromPrePost(preorder, postorder) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= preorder.length <= 30",
-    "preorder and postorder are permutations of 1..n"
+    "preorder and postorder are permutations of 1..n",
+    "Both arrays have equal length and describe at least one valid binary tree."
   ],
   "runner": {
     "outputType": "tree",
@@ -80,6 +117,13 @@
   ],
   "sampleInput": "preorder = [1,2,4,5,3,6,7]\npostorder = [4,5,2,6,7,3,1]",
   "sampleOutput": "[1,2,3,4,5,6,7]",
-  "inputFormat": "Implement constructFromPrePost(preorder, postorder). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls.\nAny result satisfying the statement is accepted."
+  "inputFormat": "Implement constructFromPrePost(preorder, postorder). These arrays are valid traversals of the same tree with distinct values.",
+  "outputFormat": "A root node with val, left, and right fields. Any tree matching both traversals is accepted; the runner displays it as a level-order array with trailing nulls removed.",
+  "visuals": [
+    {
+      "title": "Both shapes are valid",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 190\" role=\"img\" aria-label=\"Two valid trees: root 1 with left child 2, or root 1 with right child 2\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><path d=\"M110 35L55 115\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M270 35L325 115\" stroke=\"var(--color-text-light)\" fill=\"none\"/><circle cx=\"110\" cy=\"35\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"110\" y=\"41\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">1</text><circle cx=\"55\" cy=\"115\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"55\" y=\"121\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">2</text><circle cx=\"270\" cy=\"35\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"270\" y=\"41\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">1</text><circle cx=\"325\" cy=\"115\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"325\" y=\"121\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">2</text><text x=\"190\" y=\"170\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\" text-anchor=\"middle\">Preorder [1,2] \u00b7 Postorder [2,1]</text></svg>",
+      "caption": "Either tree may be returned for these traversals. The checker compares traversals rather than requiring one fixed shape."
+    }
+  ]
 }

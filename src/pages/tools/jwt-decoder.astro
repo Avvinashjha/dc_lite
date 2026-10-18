@@ -24,14 +24,16 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   </div>
   <div id="status"></div>
 
-  <div id="jwt-result" style="display: none; margin-top: 1.5rem;">
-    <div class="jwt-section jwt-section--header">
-      <h3 class="jwt-section__title">Header <span style="font-weight:400;font-size:0.8rem;color:var(--color-text-light);">(Algorithm & Type)</span></h3>
-      <pre id="jwt-header" class="tool-output" style="min-height: auto;"></pre>
-    </div>
-    <div class="jwt-section jwt-section--payload">
-      <h3 class="jwt-section__title">Payload <span style="font-weight:400;font-size:0.8rem;color:var(--color-text-light);">(Data)</span></h3>
-      <pre id="jwt-payload" class="tool-output" style="min-height: auto;"></pre>
+  <div id="jwt-result" style="display: none; margin-top: 0.8rem;">
+    <div class="jwt-grid">
+      <div class="jwt-section jwt-section--header">
+        <h3 class="jwt-section__title">Header <span>(Algorithm &amp; Type)</span></h3>
+        <pre id="jwt-header" class="tool-output"></pre>
+      </div>
+      <div class="jwt-section jwt-section--payload">
+        <h3 class="jwt-section__title">Payload <span>(Data)</span></h3>
+        <pre id="jwt-payload" class="tool-output"></pre>
+      </div>
     </div>
     <div id="jwt-expiry" class="jwt-section"></div>
     <div class="jwt-section jwt-section--sig">
@@ -124,8 +126,12 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 </script>
 
 <style>
-  .jwt-section { margin-bottom: 1.5rem; }
-  .jwt-section__title { font-size: 1rem; margin-bottom: 0.5rem; }
+  .jwt-grid { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); gap: 0.75rem; }
+  .jwt-section { margin-bottom: 0.8rem; }
+  .jwt-section__title { margin: 0 0 0.35rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .jwt-section__title span { font-size: 0.7rem; font-weight: 400; color: var(--color-text-light); text-transform: none; letter-spacing: 0; }
+  .jwt-section .tool-output { min-height: 150px; margin: 0; }
   .jwt-section--header .tool-output { border-left: 3px solid #ef4444; }
   .jwt-section--payload .tool-output { border-left: 3px solid #a855f7; }
+  @media (max-width: 720px) { .jwt-grid { grid-template-columns: 1fr; } }
 </style>

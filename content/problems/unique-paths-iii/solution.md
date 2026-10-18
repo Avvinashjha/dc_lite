@@ -1,4 +1,8 @@
-Count total non-obstacle squares. Start DFS from the starting cell, tracking visited squares. When we reach the ending cell having visited all non-obstacle squares, increment the path count.
+## Backtracking
+
+Count all non-obstacle cells, including the start and end. Search from the start, temporarily marking each visited cell as blocked. Restore its original value after exploring its neighbors so other candidate paths can use it.
+
+`remaining` includes the current cell. At the ending cell, count the path only when `remaining === 1`; otherwise stop that branch because the end cannot be used as an intermediate cell.
 
 ```javascript
 function uniquePathsIII(grid) {
@@ -19,11 +23,12 @@ function uniquePathsIII(grid) {
       if (remaining === 1) count++;
       return;
     }
+    const original = grid[r][c];
     grid[r][c] = -1;
     for (const [dr, dc] of [[1,0],[-1,0],[0,1],[0,-1]]) {
       dfs(r + dr, c + dc, remaining - 1);
     }
-    grid[r][c] = 0;
+    grid[r][c] = original;
   }
 
   dfs(startR, startC, empty);
@@ -31,5 +36,5 @@ function uniquePathsIII(grid) {
 }
 ```
 
-**Time:** O(3^(m·n)) — at most 3 choices per cell due to backtracking
+**Time:** O(3^(m·n)) — after the first move, returning to the previous cell is forbidden, leaving at most 3 choices
 **Space:** O(m·n)

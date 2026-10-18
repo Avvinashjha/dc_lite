@@ -42,6 +42,126 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        1,
+        2
+      ],
+      "expected": [
+        2,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        1,
+        4
+      ],
+      "expected": [
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        1,
+        3
+      ],
+      "expected": [
+        3,
+        2,
+        1,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2,
+        4
+      ],
+      "expected": [
+        1,
+        4,
+        3,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        2,
+        2
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          2
+        ],
+        2,
+        3
+      ],
+      "expected": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          -2,
+          0,
+          4,
+          7
+        ],
+        2,
+        3
+      ],
+      "expected": [
+        -2,
+        4,
+        0,
+        7
+      ]
     }
   ],
   "functionName": "reverseBetween",
@@ -55,7 +175,9 @@
     "argTypes": [
       "list"
     ],
-    "outputType": "list"
+    "outputType": "list",
+    "originalListNodes": true,
+    "listOrder": "reverseBetween"
   },
   "examples": [
     {
@@ -70,5 +192,5 @@
   "sampleInput": "head = [1,2,3,4,5]\nleft = 2\nright = 4",
   "sampleOutput": "[1,4,3,2,5]",
   "inputFormat": "Implement reverseBetween(head, left, right). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Return the head after reversing the original nodes at positions left through right, inclusive. Preserve all node values and the order outside that segment."
 }

@@ -3,11 +3,10 @@
   "id": "problem-0058",
   "title": "Happy Number",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math",
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/happy-number/",
@@ -24,6 +23,30 @@
         2
       ],
       "expected": false
+    },
+    {
+      "args": [
+        1
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        100
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        7
+      ],
+      "expected": true
     }
   ],
   "functionName": "happyNumber",
@@ -35,7 +58,8 @@
   "examples": [
     {
       "input": "n = 19",
-      "output": "true"
+      "output": "true",
+      "explanation": "19 \u2192 82 \u2192 68 \u2192 100 \u2192 1."
     },
     {
       "input": "n = 2",
@@ -44,6 +68,6 @@
   ],
   "sampleInput": "n = 19",
   "sampleOutput": "true",
-  "inputFormat": "Implement happyNumber(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "n is a positive integer.",
+  "outputFormat": "Return true if repeatedly summing the squares of decimal digits reaches 1; otherwise return false."
 }

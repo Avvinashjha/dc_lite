@@ -66,6 +66,48 @@
           2
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        6
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        100
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          -1000000000,
+          -1000000000,
+          1000000000,
+          1000000000
+        ],
+        0
+      ],
+      "expected": [
+        [
+          -1000000000,
+          -1000000000,
+          1000000000,
+          1000000000
+        ]
+      ]
     }
   ],
   "functionName": "fourSum",
@@ -89,6 +131,6 @@
       "output": "[[2,2,2,2]]"
     }
   ],
-  "inputFormat": "Implement fourSum(nums, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
+  "inputFormat": "Implement fourSum(nums, target), where nums is an integer array and target is an integer.",
+  "outputFormat": "An array of unique value quadruplets summing to target. Use four distinct indices. Quadruplet order and value order do not matter."
 }

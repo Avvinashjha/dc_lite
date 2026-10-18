@@ -1,6 +1,6 @@
 ## DP
 
-dp[i][j] = largest square ending at (i,j). Sum all dp values.
+The value at (i, j) becomes the side length of the largest all-one square whose bottom-right corner is (i, j). If that length is k, exactly k squares of sizes 1 through k end there. Sum those lengths. This implementation overwrites the input matrix to store DP values.
 
 ```javascript
 function countSquares(matrix) {
@@ -18,4 +18,4 @@ function countSquares(matrix) {
 }
 ```
 
-**Time:** O(mn) | **Space:** O(1)
+**Time:** O(mn) | **Space:** O(1) auxiliary space, reusing the input matrix.

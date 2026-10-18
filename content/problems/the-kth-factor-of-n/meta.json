@@ -1,13 +1,11 @@
 {
   "draft": false,
   "id": "problem-0065",
-  "title": "The kth Factor of n",
+  "title": "Kth Factor of n",
   "difficulty": "Medium",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/the-kth-factor-of-n/",
@@ -33,6 +31,62 @@
         4
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        1,
+        1
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        36,
+        5
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        36,
+        9
+      ],
+      "expected": 36
+    },
+    {
+      "args": [
+        36,
+        10
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        1000,
+        16
+      ],
+      "expected": 1000
+    },
+    {
+      "args": [
+        1000,
+        17
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        997,
+        3
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        12,
+        1
+      ],
+      "expected": 1
     }
   ],
   "functionName": "kthFactor",
@@ -58,5 +112,5 @@
   "sampleInput": "n = 12\nk = 3",
   "sampleOutput": "3",
   "inputFormat": "Implement kthFactor(n, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the kth positive divisor in increasing order, using 1-based ranking, or -1 if it does not exist."
 }

@@ -1,3 +1,5 @@
-You're given a string `s` made up of words — where a word is any run of non-space characters — separated by spaces. Produce a string containing those words in reverse order, with exactly one space between consecutive words.
+Given a string `s` containing English letters, digits, and ordinary spaces, return its words in reverse order. A word is a maximal run of non-space characters.
 
-Because the input can have leading or trailing spaces and runs of multiple spaces between words, make sure none of that extra spacing survives into the output.
+Keep the characters and their case inside each word unchanged. Separate output words with exactly one space, removing all leading, trailing, and repeated separator spaces.
+
+For `"  hello   world  "`, return `"world hello"`. For `"Code 123"`, return `"123 Code"`; do not reverse the letters or digits inside the words. If the input contains only spaces, return `""`.

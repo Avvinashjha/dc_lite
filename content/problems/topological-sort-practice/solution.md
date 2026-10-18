@@ -1,5 +1,7 @@
 ## Kahn's Algorithm (BFS)
 
+Count incoming edges for each vertex. A zero-indegree vertex has no remaining prerequisites, so it can be emitted next. Remove its outgoing edges conceptually by decrementing its neighbors' indegrees, enqueuing each neighbor when that count becomes zero. Seed the queue with every zero-indegree vertex to include disconnected components. The DAG guarantee ensures all V vertices are eventually emitted.
+
 ```javascript
 function topologicalSort(V, adj) {
   const inDeg = Array(V).fill(0);

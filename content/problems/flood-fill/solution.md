@@ -1,22 +1,26 @@
-## Approach: DFS
+## Iterative Flood Fill
 
-Start from the source pixel and recursively fill all 4-directional neighbors that share the same original color. Skip if the new color equals the original color to avoid infinite loops.
+Record the source color. If it already equals the replacement, return immediately. Otherwise, repaint each pixel when adding it to the stack so it cannot be added twice. Explore only its four orthogonal neighbors.
 
 ```javascript
 function floodFill(image, sr, sc, color) {
-  const orig = image[sr][sc];
-  if (orig === color) return image;
-  function dfs(r, c) {
-    if (r < 0 || r >= image.length || c < 0 || c >= image[0].length) return;
-    if (image[r][c] !== orig) return;
-    image[r][c] = color;
-    dfs(r+1,c); dfs(r-1,c); dfs(r,c+1); dfs(r,c-1);
+  const original = image[sr][sc];
+  if (original === color) return image;
+  const stack = [[sr, sc]];
+  image[sr][sc] = color;
+  const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+  while (stack.length) {
+    const [r, c] = stack.pop();
+    for (const [dr, dc] of directions) {
+      const nr = r + dr, nc = c + dc;
+      if (nr < 0 || nr >= image.length || nc < 0 || nc >= image[0].length) continue;
+      if (image[nr][nc] !== original) continue;
+      image[nr][nc] = color;
+      stack.push([nr, nc]);
+    }
   }
-  dfs(sr, sc);
   return image;
 }
 ```
 
-**Time Complexity:** O(m × n)
-
-**Space Complexity:** O(m × n) for recursion stack
+**Time:** O(m × n) worst case | **Space:** O(m × n) for the explicit stack.

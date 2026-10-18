@@ -3,11 +3,9 @@
   "id": "problem-0059",
   "title": "Palindrome Number",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/palindrome-number/",
@@ -28,6 +26,60 @@
     {
       "args": [
         10
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        0
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        7
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        11
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        1001
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        12321
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        12331
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        2147447412
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        2147483647
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        -2147483648
       ],
       "expected": false
     }
@@ -55,5 +107,5 @@
   "sampleInput": "x = 121",
   "sampleOutput": "true",
   "inputFormat": "Implement isPalindrome(x). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if x is a decimal palindrome; otherwise return false."
 }

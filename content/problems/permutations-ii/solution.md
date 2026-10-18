@@ -1,4 +1,10 @@
-Build a frequency map of each number. At each recursive step, pick a number that still has remaining count, decrement it, and recurse. This naturally avoids duplicates since you never place the same value at the same position twice.
+## Backtracking with Value Frequencies
+
+Count each distinct value in a frequency map. At each position, choose any value with a positive remaining count, decrement its count, and append it to the current path. After exploring that choice, remove it and restore the count.
+
+When the path contains as many entries as the input, save a copy. The frequency counts guarantee that every entry is used exactly once. Choosing by value rather than by original index avoids duplicate arrangements: equal entries do not create separate branches for the same position.
+
+Every possible arrangement can be reached by choosing its values in order, so the search is complete. The input array is not modified.
 
 ```javascript
 function permuteUnique(nums) {
@@ -27,4 +33,4 @@ function permuteUnique(nums) {
 ```
 
 **Time:** O(n! * n) — at most n! permutations, each taking O(n) to copy.
-**Space:** O(n) for the recursion stack and frequency map.
+**Space:** O(n) auxiliary space for the working path, recursion, and frequency map, plus O(P × n) for P returned permutations. If value frequencies are c₁, c₂, …, then P = n! / (c₁! × c₂! × …).

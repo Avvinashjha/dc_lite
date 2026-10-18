@@ -4,13 +4,20 @@ Collect the sorted node values with an explicit stack. Return the middle value f
 
 ```javascript
 function findMedian(root) {
-  const stack=[],values=[];let current=root;
-  while(current||stack.length) {
-    while(current){stack.push(current);current=current.left;}
-    current=stack.pop();values.push(current.val);current=current.right;
+  const stack = [],
+    values = [];
+  let current = root;
+  while (current || stack.length) {
+    while (current) {
+      stack.push(current);
+      current = current.left;
+    }
+    current = stack.pop();
+    values.push(current.val);
+    current = current.right;
   }
-  const mid=Math.floor(values.length/2);
-  return values.length%2 ? values[mid] : (values[mid-1]+values[mid])/2;
+  const mid = Math.floor(values.length / 2);
+  return values.length % 2 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
 }
 ```
 

@@ -3,9 +3,11 @@
   "id": "problem-0080",
   "title": "Split Array Largest Sum",
   "difficulty": "Hard",
-  "topic": "Sorting&Searching",
+  "topic": "Binary Search",
   "topics": [
-    "Sorting&Searching"
+    "Array",
+    "Binary Search",
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/split-array-largest-sum/",
@@ -34,6 +36,86 @@
         3
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        1
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ],
+        2
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        1
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          1,
+          4,
+          4
+        ],
+        3
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          9,
+          1,
+          1,
+          1
+        ],
+        2
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        2
+      ],
+      "expected": 2
     }
   ],
   "functionName": "splitArray",
@@ -47,7 +129,8 @@
   "examples": [
     {
       "input": "nums = [7,2,5,10,8]\nk = 2",
-      "output": "18"
+      "output": "18",
+      "explanation": "Split into [7,2,5] and [10,8]. Their sums are 14 and 18, so the largest is 18; no valid split has a smaller largest sum."
     },
     {
       "input": "nums = [1,2,3]\nk = 3",
@@ -57,5 +140,5 @@
   "sampleInput": "nums = [7,2,5,10,8]\nk = 2",
   "sampleOutput": "18",
   "inputFormat": "Implement splitArray(nums, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the smallest possible largest subarray sum across all splits into exactly k nonempty contiguous subarrays."
 }

@@ -1,12 +1,12 @@
 {
   "draft": false,
   "id": "problem-0031",
-  "title": "Find the Index of the First Occurrence in a String",
+  "title": "First Occurrence in a String",
   "difficulty": "Easy",
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "String Matching"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
@@ -27,6 +27,41 @@
         "leeto"
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        "aaaab",
+        "aab"
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "abc",
+        "abc"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "a",
+        "aa"
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        "abc",
+        "c"
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        "aaaa",
+        "aa"
+      ],
+      "expected": 0
     }
   ],
   "functionName": "strStr",
@@ -46,6 +81,6 @@
       "output": "-1"
     }
   ],
-  "inputFormat": "Implement strStr(haystack, needle). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "haystack and needle are nonempty strings of lowercase English letters.",
+  "outputFormat": "Return the zero-based starting index of the first contiguous occurrence of needle in haystack, or -1 if absent."
 }

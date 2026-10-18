@@ -6,7 +6,8 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Binary Search",
+    "Sorting"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Weighted%20Job%20Scheduling",
@@ -50,14 +51,147 @@
         ]
       ],
       "expected": 5
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            5
+          ],
+          [
+            2,
+            3,
+            6
+          ],
+          [
+            3,
+            4,
+            7
+          ]
+        ]
+      ],
+      "expected": 18
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            5,
+            9
+          ],
+          [
+            2,
+            4,
+            10
+          ],
+          [
+            3,
+            6,
+            8
+          ]
+        ]
+      ],
+      "expected": 10
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            1,
+            3,
+            9
+          ],
+          [
+            3,
+            5,
+            6
+          ]
+        ]
+      ],
+      "expected": 15
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            10,
+            15
+          ],
+          [
+            1,
+            3,
+            8
+          ],
+          [
+            3,
+            6,
+            8
+          ],
+          [
+            6,
+            10,
+            8
+          ]
+        ]
+      ],
+      "expected": 24
+    },
+    {
+      "args": [
+        [
+          [
+            7,
+            9,
+            4
+          ],
+          [
+            1,
+            3,
+            6
+          ],
+          [
+            3,
+            7,
+            5
+          ]
+        ]
+      ],
+      "expected": 15
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1000000000,
+            10000
+          ],
+          [
+            999999999,
+            1000000000,
+            9999
+          ]
+        ]
+      ],
+      "expected": 10000
     }
   ],
   "functionName": "maxProfit",
   "templateCode": "function maxProfit(jobs) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
-    "1 <= start[i] < end[i] <= 10^9",
-    "1 <= profit[i] <= 10^4"
+    "1 <= jobs.length <= 10^5",
+    "Each job is [start, end, profit].",
+    "1 <= start < end <= 10^9",
+    "1 <= profit <= 10^4"
   ],
   "runner": {},
   "examples": [
@@ -73,5 +207,5 @@
   "sampleInput": "jobs = [[1,2,50],[3,5,20],[6,19,100],[2,100,200]]",
   "sampleOutput": "250",
   "inputFormat": "Implement maxProfit(jobs). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the maximum total profit as an integer, not the selected jobs."
 }

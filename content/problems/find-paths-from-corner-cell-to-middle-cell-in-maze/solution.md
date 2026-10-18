@@ -7,8 +7,21 @@ function findPaths(maze) {
   const n = maze.length;
   const mid = Math.floor(n / 2);
   const results = [];
-  const corners = n === 1 ? [[0, 0]] : [[0, 0], [0, n - 1], [n - 1, 0], [n - 1, n - 1]];
-  const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+  const corners =
+    n === 1
+      ? [[0, 0]]
+      : [
+          [0, 0],
+          [0, n - 1],
+          [n - 1, 0],
+          [n - 1, n - 1],
+        ];
+  const dirs = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+  ];
 
   function dfs(r, c, path, visited) {
     if (r === mid && c === mid) {
@@ -40,6 +53,6 @@ function findPaths(maze) {
 }
 ```
 
-**Time Complexity:** O(4^(n²)) worst case — each cell has up to 4 choices, but visited pruning keeps it manageable
+**Time:** O(4^(n²) + Pn²) as a loose worst-case bound, where `P` is the number of returned paths. Copying the paths can itself be expensive; this is an exhaustive enumeration problem.
 
-**Space Complexity:** O(n²) for the visited set and recursion stack
+**Space:** O(n²) auxiliary space for the current path, visited set, and recursion, plus O(Pn²) for the returned paths in the worst case.

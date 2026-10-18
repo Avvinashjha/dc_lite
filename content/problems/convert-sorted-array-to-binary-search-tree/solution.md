@@ -13,4 +13,4 @@ function sortedArrayToBST(nums) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(log n)
+**Time:** O(n) | **Space:** O(log n) auxiliary recursion space, excluding the O(n) returned tree.

@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0051",
-  "title": "Given a matrix of ‘O’ and ‘X’, replace ‘O’ with ‘X’ if surrounded by ‘X’",
+  "title": "Capture Surrounded Regions",
   "difficulty": "Medium",
   "topic": "Matrix",
   "topics": [
@@ -82,10 +82,106 @@
           "O"
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            "O",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "O",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            "X",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "O",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "X",
+          "O",
+          "X"
+        ],
+        [
+          "X",
+          "O",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "X"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            "O",
+            "O",
+            "X",
+            "O"
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          "O",
+          "O",
+          "X",
+          "O"
+        ]
+      ]
     }
   ],
-  "functionName": "givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX",
-  "templateCode": "function givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX(board) {\n  // Write your solution here.\n}\n",
+  "functionName": "captureRegions",
+  "templateCode": "function captureRegions(board) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 200",
     "board[i][j] is 'X' or 'O'"
@@ -94,7 +190,8 @@
   "examples": [
     {
       "input": "board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
-      "output": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]"
+      "output": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
+      "explanation": "The three interior O cells are captured. The O on the bottom edge remains unchanged."
     },
     {
       "input": "board = [[\"O\"]]",
@@ -103,6 +200,6 @@
   ],
   "sampleInput": "board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
   "sampleOutput": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
-  "inputFormat": "Implement givenAMatrixOfOAndXReplaceOWithXIfSurroundedByX(board). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "board is a nonempty rectangular matrix containing the characters 'O' and 'X'.",
+  "outputFormat": "Return the updated board. You may modify board in place; the returned matrix is checked."
 }

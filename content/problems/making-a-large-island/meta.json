@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0208",
-  "title": "Making A Large Island",
+  "title": "Making a Large Island",
   "difficulty": "Hard",
   "topic": "Graph",
   "topics": [
@@ -57,6 +57,92 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "largestIsland",
@@ -82,6 +168,13 @@
   ],
   "sampleInput": "grid = [[1,0],[0,1]]",
   "sampleOutput": "3",
-  "inputFormat": "Implement largestIsland(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement largestIsland(grid). Receive a nonempty n \u00d7 n matrix containing only numeric 0 and 1. You may modify the matrix while computing the answer.",
+  "outputFormat": "Return the largest possible island area (number of cells) after changing at most one 0 to 1.",
+  "visuals": [
+    {
+      "title": "One flip can merge several islands",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 420 215\" role=\"img\" aria-labelledby=\"island-title island-desc\" style=\"width:100%;height:auto;max-width:420px;color:var(--color-text)\"><title id=\"island-title\">One flip joins four islands into an island of area five</title><desc id=\"island-desc\">Before: land occupies the top middle, middle left, middle right, and bottom middle cells of a three by three grid. Flipping the center from zero to one connects all four.</desc><g font-family=\"system-ui,sans-serif\"><rect x=\"20\" y=\"32\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"42\" y=\"60\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"70\" y=\"32\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"92\" y=\"60\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"120\" y=\"32\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"142\" y=\"60\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"20\" y=\"82\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"42\" y=\"110\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"70\" y=\"82\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"1\"/><text x=\"92\" y=\"110\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"120\" y=\"82\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"142\" y=\"110\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"20\" y=\"132\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"42\" y=\"160\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"70\" y=\"132\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"92\" y=\"160\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"120\" y=\"132\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"142\" y=\"160\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><text x=\"92\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\">Four separate islands</text><rect x=\"248\" y=\"32\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"270\" y=\"60\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"298\" y=\"32\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"320\" y=\"60\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"348\" y=\"32\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"370\" y=\"60\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"248\" y=\"82\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"270\" y=\"110\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"298\" y=\"82\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"320\" y=\"110\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"348\" y=\"82\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"370\" y=\"110\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"248\" y=\"132\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"270\" y=\"160\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><rect x=\"298\" y=\"132\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"320\" y=\"160\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">1</text><rect x=\"348\" y=\"132\" width=\"44\" height=\"44\" rx=\"7\" fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.4\"/><text x=\"370\" y=\"160\" text-anchor=\"middle\" font-size=\"18\" fill=\"currentColor\">0</text><text x=\"320\" y=\"20\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\">One island: area 5</text><text x=\"206\" y=\"110\" text-anchor=\"middle\" font-size=\"24\" fill=\"currentColor\">\u2192</text><text x=\"210\" y=\"205\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\">Flip the center: 1 + 1 + 1 + 1 + 1 = 5</text></g></svg>",
+      "caption": "Diagonal contact does not connect the original four islands. Changing the center cell connects them through shared edges."
+    }
+  ]
 }

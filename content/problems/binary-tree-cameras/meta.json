@@ -32,6 +32,38 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          null,
+          0,
+          null,
+          0
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "minCameraCover",
@@ -57,6 +89,13 @@
   ],
   "sampleInput": "root = [0,0,null,0,0]",
   "sampleOutput": "1",
-  "inputFormat": "Implement minCameraCover(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minCameraCover(root). The runner converts the level-order input array into nodes with val, left, and right fields; [] becomes null.",
+  "outputFormat": "The minimum number of cameras needed to cover every node. A camera covers its own node, its parent, and its immediate children.",
+  "visuals": [
+    {
+      "title": "One camera covers all four nodes",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 255\" role=\"img\" aria-label=\"Camera at the root\u2019s left child covers itself, its parent and two children\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><path d=\"M190 30L95 105\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M95 105L45 180\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M95 105L145 180\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><circle cx=\"190\" cy=\"30\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"190\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">0</text><circle cx=\"95\" cy=\"105\" r=\"21\" fill=\"var(--dc-peach)\" stroke=\"currentColor\"/><text x=\"95\" y=\"111\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">0</text><circle cx=\"45\" cy=\"180\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"45\" y=\"186\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">0</text><circle cx=\"145\" cy=\"180\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"145\" y=\"186\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">0</text><text x=\"190\" y=\"220\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">Peach node: camera location</text></svg>",
+      "caption": "The camera on the root\u2019s left child watches all four nodes. Node values are labels, not camera indicators."
+    }
+  ]
 }

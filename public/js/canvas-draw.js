@@ -1596,11 +1596,6 @@
       tab.className = 'cd-tab' + (p.id === state.activeProjectId ? ' cd-tab--active' : '');
       var span = document.createElement('span');
       span.textContent = p.name;
-      span.addEventListener('dblclick', function(e) {
-        e.stopPropagation();
-        var n = prompt('Rename project:', p.name);
-        if (n && n.trim()) renameProject(p.id, n.trim());
-      });
       tab.appendChild(span);
       if (state.projects.length > 1) {
         var close = document.createElement('span');
@@ -1608,7 +1603,22 @@
         close.addEventListener('click', function(e) { e.stopPropagation(); removeProject(p.id); });
         tab.appendChild(close);
       }
-      tab.addEventListener('click', function() { if (state.activeProjectId !== p.id) loadProject(p.id); });
+      tab.addEventListener('click', function() {
+        if (state.activeProjectId !== p.id) { loadProject(p.id); return; }
+        var input = document.createElement('input');
+        input.className = 'tab-item__rename'; input.value = p.name;
+        input.setAttribute('aria-label', 'Rename project');
+        tab.replaceChildren(input);
+        input.focus(); input.select();
+        var done = false;
+        function finish() {
+          if (done) return; done = true;
+          if (input.value.trim()) renameProject(p.id, input.value.trim()); else renderTabs();
+        }
+        input.addEventListener('click', function(e) { e.stopPropagation(); });
+        input.addEventListener('keydown', function(e) { if (e.key === 'Enter') finish(); if (e.key === 'Escape') { done = true; renderTabs(); } });
+        input.addEventListener('blur', finish);
+      });
       tabList.appendChild(tab);
     });
   }

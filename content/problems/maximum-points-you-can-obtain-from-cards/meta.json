@@ -6,7 +6,7 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Sliding Window"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/",
@@ -39,6 +39,85 @@
         3
       ],
       "expected": 6
+    },
+    {
+      "args": [
+        [
+          8
+        ],
+        1
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          1,
+          100,
+          2
+        ],
+        1
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          9,
+          1,
+          1,
+          9
+        ],
+        2
+      ],
+      "expected": 18
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        [
+          4,
+          3,
+          2,
+          1
+        ],
+        2
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          1,
+          100,
+          3,
+          2
+        ],
+        2
+      ],
+      "expected": 101
     }
   ],
   "functionName": "maxScore",
@@ -59,6 +138,6 @@
       "output": "6"
     }
   ],
-  "inputFormat": "Implement maxScore(cardPoints, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxScore(cardPoints, k). Receive positive card values in their original row order and the exact number of cards to take.",
+  "outputFormat": "Return the maximum sum obtainable by removing exactly k cards from the current front or back."
 }

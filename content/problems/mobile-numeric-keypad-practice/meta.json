@@ -1,12 +1,12 @@
 {
   "draft": false,
   "id": "problem-0242",
-  "title": "Mobile numeric keypad | Practice",
+  "title": "Mobile Numeric Keypad",
   "difficulty": "Medium",
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Graph"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Mobile%20numeric%20keypad%20%7C%20Practice",
@@ -29,12 +29,36 @@
         3
       ],
       "expected": 138
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": 532
+    },
+    {
+      "args": [
+        5
+      ],
+      "expected": 2062
+    },
+    {
+      "args": [
+        10
+      ],
+      "expected": 1806282
+    },
+    {
+      "args": [
+        25
+      ],
+      "expected": 1217034591721250
     }
   ],
   "functionName": "getCount",
   "templateCode": "function getCount(n) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 25"
+    "1 <= n <= 25"
   ],
   "runner": {},
   "examples": [
@@ -53,6 +77,6 @@
   ],
   "sampleInput": "n = 1",
   "sampleOutput": "10",
-  "inputFormat": "Implement getCount(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement getCount(n). Receive the exact number of key presses in each digit sequence.",
+  "outputFormat": "Return the exact number of valid length-n digit sequences as a JavaScript number. Leading zeros count; no modulus is applied."
 }

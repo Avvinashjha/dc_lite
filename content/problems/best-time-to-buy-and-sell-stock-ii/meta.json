@@ -2,11 +2,11 @@
   "draft": false,
   "id": "problem-0010",
   "title": "Best Time to Buy and Sell Stock II",
-  "difficulty": "Easy",
+  "difficulty": "Medium",
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",
@@ -38,6 +38,36 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          5
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          1,
+          3
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "maxProfit",
@@ -50,13 +80,14 @@
   "examples": [
     {
       "input": "prices = [7,1,5,3,6,4]",
-      "output": "7"
+      "output": "7",
+      "explanation": "Buy at 1 and sell at 5, then buy at 3 and sell at 6: 4 + 3 = 7."
     },
     {
       "input": "prices = [7,6,4,3,1]",
       "output": "0"
     }
   ],
-  "inputFormat": "Implement maxProfit(prices). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxProfit(prices), where prices[i] is the price on day i.",
+  "outputFormat": "The maximum total profit from any number of buy-then-sell transactions while holding at most one share at a time."
 }

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import '../../../styles/problems.scss';
+import '../../../styles/problem-list.scss';
 import { getProblems, getProblemDifficulties } from '../../../utils/contentLoader';
 import { slugifyTaxonomy } from '../../../utils/taxonomy';
 
@@ -83,7 +84,6 @@ const jsonLd = {
         <tr>
           <th>Title</th>
           <th class="problem-table__topic">Topic</th>
-          <th class="problem-table__platform">Platform</th>
         </tr>
       </thead>
       <tbody>
@@ -95,7 +95,6 @@ const jsonLd = {
             <td class="problem-table__topic">
               <a href={`/problems/topic/${slugifyTaxonomy(p.topic)}`} class="p-badge p-badge--neutral" style="text-decoration:none;font-size:0.68rem;">{p.topic}</a>
             </td>
-            <td class="problem-table__platform">{p.platform}</td>
           </tr>
         ))}
       </tbody>

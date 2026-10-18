@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0047",
-  "title": "Boyer Moore Algorithm for Pattern Searching",
+  "title": "Boyer\u2013Moore Pattern Search",
   "difficulty": "Hard",
   "topic": "String",
   "topics": [
@@ -31,6 +31,32 @@
         1,
         2
       ]
+    },
+    {
+      "args": [
+        "ABCD",
+        "X"
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        "ABC",
+        "ABC"
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        "ABABA",
+        "ABA"
+      ],
+      "expected": [
+        0,
+        2
+      ]
     }
   ],
   "functionName": "boyerMoore",
@@ -52,6 +78,6 @@
   ],
   "sampleInput": "text = \"ABAAABCD\"\npattern = \"ABC\"",
   "sampleOutput": "[4]",
-  "inputFormat": "Implement boyerMoore(text, pattern). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement boyerMoore(text, pattern) for two non-empty strings. Indices use JavaScript UTF-16 code units.",
+  "outputFormat": "All zero-based starting indices where pattern occurs, in ascending order, including overlapping matches. Return [] if none exist."
 }

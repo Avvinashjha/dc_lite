@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0121",
-  "title": "Distance of nearest cell having 1 | Practice",
+  "title": "Distance to the Nearest 1",
   "difficulty": "Medium",
-  "topic": "Stack&Queue",
+  "topic": "Matrix",
   "topics": [
-    "Stack&Queue"
+    "Matrix",
+    "BFS",
+    "Queue"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Distance%20of%20nearest%20cell%20having%201%20%7C%20Practice",
@@ -64,6 +66,100 @@
           0
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          2,
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ]
+      ]
     }
   ],
   "functionName": "nearestCell",
@@ -86,6 +182,13 @@
   ],
   "sampleInput": "grid = [[0,0,0],[0,1,0],[1,0,1]]",
   "sampleOutput": "[[2,1,2],[1,0,1],[0,1,0]]",
-  "inputFormat": "Implement nearestCell(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "grid is a nonempty rectangular matrix of 0s and 1s containing at least one 1.",
+  "outputFormat": "Return a matrix of the same dimensions; each entry is the minimum Manhattan distance to any cell containing 1.",
+  "visuals": [
+    {
+      "title": "Nearest-source distances",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 170\" role=\"img\" aria-label=\"Input grid and distances to the nearest 1. Source cells have distance zero.\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><text x=\"75\" y=\"20\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">Input</text><rect x=\"12\" y=\"32\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"33\" y=\"59\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"54\" y=\"32\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"75\" y=\"59\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"96\" y=\"32\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"117\" y=\"59\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"12\" y=\"74\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"33\" y=\"101\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"54\" y=\"74\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"75\" y=\"101\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><rect x=\"96\" y=\"74\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"117\" y=\"101\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"12\" y=\"116\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"33\" y=\"143\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><rect x=\"54\" y=\"116\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"75\" y=\"143\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"96\" y=\"116\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"117\" y=\"143\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><text x=\"287\" y=\"20\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">Distance</text><rect x=\"224\" y=\"32\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"245\" y=\"59\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">2</text><rect x=\"266\" y=\"32\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"287\" y=\"59\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><rect x=\"308\" y=\"32\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"329\" y=\"59\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">2</text><rect x=\"224\" y=\"74\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"245\" y=\"101\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><rect x=\"266\" y=\"74\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"287\" y=\"101\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"308\" y=\"74\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"329\" y=\"101\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><rect x=\"224\" y=\"116\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"245\" y=\"143\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><rect x=\"266\" y=\"116\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"287\" y=\"143\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">1</text><rect x=\"308\" y=\"116\" width=\"42\" height=\"42\" rx=\"4\" fill=\"var(--dc-sage)\" stroke=\"var(--color-text-light)\"/><text x=\"329\" y=\"143\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"20\">0</text><text x=\"181\" y=\"102\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"26\">\u2192</text></svg>",
+      "caption": "Shaded cells contain 1 in the input and have distance 0. Each horizontal or vertical step adds 1."
+    }
+  ]
 }

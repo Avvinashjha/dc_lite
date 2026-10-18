@@ -48,6 +48,42 @@
         0,
         0
       ]
+    },
+    {
+      "args": [
+        [
+          70
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          70,
+          70,
+          71
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          70,
+          70
+        ]
+      ],
+      "expected": [
+        0,
+        0
+      ]
     }
   ],
   "functionName": "dailyTemperatures",
@@ -69,6 +105,6 @@
   ],
   "sampleInput": "temperatures = [73,74,75,71,69,72,76,73]",
   "sampleOutput": "[1,1,4,2,1,1,0,0]",
-  "inputFormat": "Implement dailyTemperatures(temperatures). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement dailyTemperatures(temperatures), where temperatures[i] is the reading on day i.",
+  "outputFormat": "An array of the same length containing the number of days until the first strictly warmer reading. Use 0 if no such later day exists."
 }

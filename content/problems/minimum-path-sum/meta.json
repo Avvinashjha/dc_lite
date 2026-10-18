@@ -6,7 +6,7 @@
   "topic": "Dynamic-Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Matrix"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-path-sum/",
@@ -43,6 +43,91 @@
         ]
       ],
       "expected": 5
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            1,
+            100,
+            1
+          ]
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            100
+          ],
+          [
+            100,
+            1
+          ]
+        ]
+      ],
+      "expected": 102
     }
   ],
   "functionName": "minPathSum",
@@ -64,6 +149,13 @@
   ],
   "sampleInput": "grid = [[1,3,1],[1,5,1],[4,2,1]]",
   "sampleOutput": "7",
-  "inputFormat": "Implement minPathSum(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minPathSum(grid). Receive a nonempty rectangular matrix of nonnegative integers. You may modify grid while computing the answer.",
+  "outputFormat": "Return the minimum sum along a top-left to bottom-right path, including both endpoint values.",
+  "visuals": [
+    {
+      "title": "Example 1: include both endpoints",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 410 200\" role=\"img\" aria-labelledby=\"path-sum-title\" style=\"width:100%;height:auto;max-width:410px;color:var(--color-text)\"><title id=\"path-sum-title\">Minimum path goes across the top row then down the right column, totaling seven</title><g font-family=\"system-ui,sans-serif\"><rect x=\"20\" y=\"20\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"42.5\" y=\"49\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><rect x=\"75\" y=\"20\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"97.5\" y=\"49\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">3</text><rect x=\"130\" y=\"20\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"152.5\" y=\"49\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><rect x=\"20\" y=\"75\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.35\"/><text x=\"42.5\" y=\"104\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><rect x=\"75\" y=\"75\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.35\"/><text x=\"97.5\" y=\"104\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">5</text><rect x=\"130\" y=\"75\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"152.5\" y=\"104\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><rect x=\"20\" y=\"130\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.35\"/><text x=\"42.5\" y=\"159\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">4</text><rect x=\"75\" y=\"130\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.35\"/><text x=\"97.5\" y=\"159\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">2</text><rect x=\"130\" y=\"130\" width=\"45\" height=\"45\" rx=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" opacity=\"1\"/><text x=\"152.5\" y=\"159\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><g fill=\"currentColor\" font-size=\"14\"><text x=\"215\" y=\"74\">Right \u2192 right \u2192 down \u2192 down</text><text x=\"215\" y=\"101\">1 + 3 + 1 + 1 + 1 = 7</text><text x=\"215\" y=\"128\">Return 7</text></g></g></svg>",
+      "caption": "The five cells with bold borders form a minimum-cost path. Only rightward and downward moves are used."
+    }
+  ]
 }

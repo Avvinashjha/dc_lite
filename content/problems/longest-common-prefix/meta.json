@@ -5,8 +5,7 @@
   "difficulty": "Easy",
   "topic": "String",
   "topics": [
-    "String",
-    "Hash Table"
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/longest-common-prefix/",
@@ -33,6 +32,60 @@
         ]
       ],
       "expected": ""
+    },
+    {
+      "args": [
+        [
+          "solo"
+        ]
+      ],
+      "expected": "solo"
+    },
+    {
+      "args": [
+        [
+          "",
+          "abc"
+        ]
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        [
+          "abc",
+          "abc"
+        ]
+      ],
+      "expected": "abc"
+    },
+    {
+      "args": [
+        [
+          "abcd",
+          "ab",
+          "abc"
+        ]
+      ],
+      "expected": "ab"
+    },
+    {
+      "args": [
+        [
+          "xabc",
+          "yabc"
+        ]
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        [
+          "a",
+          "ab"
+        ]
+      ],
+      "expected": "a"
     }
   ],
   "functionName": "longestCommonPrefix",
@@ -53,6 +106,6 @@
       "output": "\"\""
     }
   ],
-  "inputFormat": "Implement longestCommonPrefix(strs). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement longestCommonPrefix(strs). Receive a nonempty array of strings containing lowercase English letters; individual strings may be empty.",
+  "outputFormat": "Return the longest prefix shared by every string, or \"\" when none exists."
 }

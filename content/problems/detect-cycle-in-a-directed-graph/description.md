@@ -1,1 +1,3 @@
-You're given a directed graph with V vertices and an adjacency list adj, where adj[u] lists the destinations of edges leaving u. Determine whether following the edges can ever lead back to a vertex already visited — in other words, whether the graph contains a cycle.
+Given a directed graph with `V` vertices and adjacency list `adj`, determine whether it contains a directed cycle in any component. A directed cycle follows one or more edges and returns to its starting vertex.
+
+An edge to a vertex visited along a different, completed path does not by itself imply a cycle. During DFS, an edge back to a vertex on the current active path does.

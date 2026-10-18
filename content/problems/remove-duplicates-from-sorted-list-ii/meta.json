@@ -38,6 +38,110 @@
         ]
       ],
       "expected": []
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          2,
+          2,
+          3,
+          3
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          -100,
+          -100,
+          -1,
+          0,
+          0,
+          100
+        ]
+      ],
+      "expected": [
+        -1,
+        100
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          2,
+          3,
+          3,
+          4
+        ]
+      ],
+      "expected": [
+        2,
+        4
+      ]
     }
   ],
   "functionName": "deleteDuplicates",
@@ -45,13 +149,15 @@
   "constraints": [
     "0 to 300 nodes",
     "-100 <= Node.val <= 100",
-    "List is sorted"
+    "The list is sorted in nondecreasing order."
   ],
   "runner": {
     "argTypes": [
       "list"
     ],
-    "outputType": "list"
+    "outputType": "list",
+    "originalListNodes": true,
+    "listFilter": "uniqueValues"
   },
   "examples": [
     {
@@ -66,5 +172,5 @@
   "sampleInput": "head = [1,2,3,3,4,4,5]",
   "sampleOutput": "[1,2,5]",
   "inputFormat": "Implement deleteDuplicates(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Return the head linking only original nodes whose values occur exactly once, in original order; return null if none remain."
 }

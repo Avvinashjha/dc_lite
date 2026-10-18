@@ -78,8 +78,8 @@
 
 // ── Shared atoms ──
 .quiz-muted { color: var(--color-text-light); font-size: 0.85rem; }
-.quiz-ok { color: #16a34a; font-weight: 600; font-size: 0.88rem; }
-.quiz-err { color: #dc2626; font-weight: 600; font-size: 0.88rem; }
+.quiz-ok { color: var(--color-success); font-weight: 600; font-size: 0.88rem; }
+.quiz-err { color: var(--color-danger); font-weight: 600; font-size: 0.88rem; }
 
 .quiz-note {
   background: var(--color-surface);
@@ -117,11 +117,11 @@
   border: 1px solid transparent;
 
   &--neutral { background: var(--color-code-bg); color: var(--color-text-light); }
-  &--easy { background: rgba(22, 163, 74, 0.12); color: #16a34a; }
-  &--medium { background: rgba(217, 119, 6, 0.14); color: #d97706; }
-  &--hard { background: rgba(220, 38, 38, 0.12); color: #dc2626; }
-  &--ranked { background: rgba(37, 99, 235, 0.14); color: var(--color-primary); }
-  &--community { background: rgba(124, 58, 237, 0.14); color: #7c3aed; }
+  &--easy { background: rgba(22, 163, 74, 0.12); color: var(--color-success); }
+  &--medium { background: rgba(217, 119, 6, 0.14); color: var(--color-warning); }
+  &--hard { background: rgba(220, 38, 38, 0.12); color: var(--color-danger); }
+  &--ranked { background: color-mix(in srgb, var(--color-primary) 14%, transparent); color: var(--color-primary); }
+  &--community { background: rgba(124, 58, 237, 0.14); color: var(--color-purple); }
 }
 
 // ── Buttons ──
@@ -144,14 +144,14 @@
 
   &--primary {
     background: var(--color-primary);
-    color: #fff;
-    &:hover:not(:disabled) { background: var(--color-primary-dark); color: #fff; }
+    color: var(--color-on-primary);
+    &:hover:not(:disabled) { background: var(--color-primary-dark); color: var(--color-on-primary); }
   }
   &--outline {
     background: transparent;
     color: var(--color-primary);
     border-color: var(--color-primary);
-    &:hover:not(:disabled) { background: rgba(37, 99, 235, 0.08); }
+    &:hover:not(:disabled) { background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
   }
   &--ghost {
     background: var(--color-surface);
@@ -191,8 +191,7 @@
   gap: 0.6rem;
   margin-bottom: var(--spacing-md);
 
-  &__search,
-  &__select {
+  &__search {
     padding: 0.55rem 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
@@ -204,7 +203,93 @@
     flex: 1 1 220px;
     min-width: 0;
   }
-  &__select { flex: 0 0 auto; }
+}
+
+.quiz-select {
+  position: relative;
+  flex: 0 1 13rem;
+  min-width: 10.5rem;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.55rem 0.7rem 0.55rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 0.88rem;
+    line-height: 1.2;
+    list-style: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+
+    &::-webkit-details-marker { display: none; }
+    &:hover { border-color: var(--color-primary); }
+  }
+
+  &__chevron {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    fill: none;
+    transition: transform var(--transition-fast);
+  }
+
+  &[open] {
+    .quiz-select__trigger {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+    }
+    .quiz-select__chevron { transform: rotate(180deg); }
+  }
+
+  &:focus-within .quiz-select__trigger {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  }
+
+  &__menu {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.3rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  &__option {
+    display: block;
+    width: 100%;
+    padding: 0.48rem 0.55rem;
+    border: 0;
+    border-radius: calc(var(--radius-md) - 3px);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.84rem;
+    text-align: left;
+
+    &:hover,
+    &:focus-visible { background: var(--color-background); outline: none; }
+    &--selected { background: color-mix(in srgb, var(--color-primary) 16%, transparent); color: var(--color-primary); font-weight: 700; }
+  }
+
+  @media (max-width: 640px) {
+    flex-basis: 100%;
+  }
 }
 
 .quiz-browser__count { margin-bottom: var(--spacing-sm); }
@@ -296,7 +381,7 @@
 
   &__bar {
     height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    background: var(--color-primary);
     border-radius: 999px;
     transition: width var(--transition-base);
   }
@@ -315,7 +400,7 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--color-text);
-  &--low { color: #dc2626; }
+  &--low { color: var(--color-danger); }
 }
 
 .quiz-question__prompt {
@@ -356,7 +441,7 @@
   &:hover { border-color: var(--color-primary); }
   &--active {
     border-color: var(--color-primary);
-    background: rgba(37, 99, 235, 0.08);
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
   }
 
   &__marker {
@@ -369,7 +454,7 @@
     border: 2px solid var(--color-border);
     font-size: 0.7rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--color-on-primary);
 
     &--radio { border-radius: 50%; }
     &--check { border-radius: 6px; }
@@ -446,8 +531,8 @@
   }
   &__headline { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.2rem; }
 
-  &--pass { --ring-color: #16a34a; }
-  &--fail { --ring-color: #d97706; }
+  &--pass { --ring-color: var(--color-success); }
+  &--fail { --ring-color: var(--color-warning); }
 }
 
 .quiz-submit-status { margin-bottom: var(--spacing-sm); min-height: 1.4rem; }
@@ -486,8 +571,8 @@
     padding: var(--spacing-md);
     background: var(--color-background);
 
-    &--correct { border-left-color: #16a34a; }
-    &--wrong { border-left-color: #dc2626; }
+    &--correct { border-left-color: var(--color-success); }
+    &--wrong { border-left-color: var(--color-danger); }
   }
   &__q {
     display: flex;
@@ -513,8 +598,8 @@
     border-radius: var(--radius-sm);
     color: var(--color-text-light);
 
-    &--correct { color: #16a34a; background: rgba(22, 163, 74, 0.08); font-weight: 600; }
-    &--wrong { color: #dc2626; background: rgba(220, 38, 38, 0.08); }
+    &--correct { color: var(--color-success); background: rgba(22, 163, 74, 0.08); font-weight: 600; }
+    &--wrong { color: var(--color-danger); background: rgba(220, 38, 38, 0.08); }
   }
   &__opt-icon { width: 1rem; text-align: center; font-weight: 700; }
   &__explain {
@@ -539,7 +624,7 @@
   }
   &__rank { font-weight: 800; color: var(--color-primary); }
   &__name { font-weight: 600; }
-  &__row--me { background: rgba(37, 99, 235, 0.08); }
+  &__row--me { background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
 }
 
 // ── Builder ──
@@ -583,11 +668,11 @@
     border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
     background: var(--color-background);
-    color: #fff;
+    color: var(--color-on-primary);
     cursor: pointer;
     font-weight: 700;
 
-    &--on { background: #16a34a; border-color: #16a34a; }
+    &--on { background: var(--color-success); border-color: var(--color-success); }
   }
   &__bool { font-weight: 600; padding: 0.4rem 0; }
   &__opt-remove {
@@ -601,14 +686,14 @@
     cursor: pointer;
     font-size: 1.1rem;
     line-height: 1;
-    &:hover { color: #dc2626; border-color: #dc2626; }
+    &:hover { color: var(--color-danger); border-color: var(--color-danger); }
   }
 
   &__errors {
     list-style: disc;
     margin: 0 0 var(--spacing-md);
     padding-left: 1.3rem;
-    color: #dc2626;
+    color: var(--color-danger);
     font-size: 0.86rem;
   }
   &__actions { margin-top: 0; margin-bottom: var(--spacing-sm); }

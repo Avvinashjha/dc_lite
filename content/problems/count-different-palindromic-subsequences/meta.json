@@ -3,7 +3,7 @@
   "id": "problem-0253",
   "title": "Count Different Palindromic Subsequences",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
     "Memoization"
@@ -23,6 +23,24 @@
         "aaa"
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "abcd"
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        "aaaa"
+      ],
+      "expected": 4
     }
   ],
   "functionName": "countPalindromicSubsequences",
@@ -35,7 +53,8 @@
   "examples": [
     {
       "input": "s = \"bccb\"",
-      "output": "6"
+      "output": "6",
+      "explanation": "The distinct palindromes are b, c, bb, cc, bcb, and bccb."
     },
     {
       "input": "s = \"aaa\"",
@@ -44,6 +63,6 @@
   ],
   "sampleInput": "s = \"bccb\"",
   "sampleOutput": "6",
-  "inputFormat": "Implement countPalindromicSubsequences(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement countPalindromicSubsequences(s), where s contains only a, b, c, and d.",
+  "outputFormat": "The number of distinct non-empty palindromic strings obtainable as subsequences, modulo 1,000,000,007."
 }

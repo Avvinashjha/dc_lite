@@ -1,4 +1,8 @@
-## DP
+## Dynamic Programming in the Input Grid
+
+Process cells row by row. Overwrite each cell with the smallest path sum reaching it: its original cost plus the smaller of the already-computed top and left sums. The starting cell stays unchanged. Use Infinity for a missing neighbor so the first row and column can only extend their one available path.
+
+The last cell then holds the answer. Reusing the input grid gives constant auxiliary space and is allowed by the contract.
 
 ```javascript
 function minPathSum(grid) {

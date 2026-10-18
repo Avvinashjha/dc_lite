@@ -1,6 +1,8 @@
 ## LCS with Reverse
 
-Answer = n - LPS length (longest palindromic subsequence = LCS(s, reverse(s))).
+Keep a longest palindromic subsequence of length L unchanged and supply matching characters for the other n - L characters. The minimum insertion count is n - L. The length L equals the longest common subsequence length of s and its reverse; contiguity is not required.
+
+Compute that length row by row. A match extends the previous row’s diagonal; a mismatch chooses the best result from skipping one character in either string. Copying the prior row before updating keeps those dependencies intact.
 
 ```javascript
 function minInsertions(s) {

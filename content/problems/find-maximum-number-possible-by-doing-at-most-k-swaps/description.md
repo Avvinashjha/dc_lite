@@ -1,3 +1,3 @@
-You're given a number represented as a string `num`, along with an integer `k`. By swapping any two digits within the string, at most `k` times, determine the largest possible numeric value you can form.
+Given a digit string `num` and a nonnegative integer `k`, return the largest number you can form using **at most** `k` swaps. Each swap exchanges digits at any two positions; the positions need not be adjacent.
 
-**Edge cases:** When `k = 0`, the original number is returned unchanged. The digits may already be sorted in descending order. The maximum digit may appear more than once.
+Return a string of the same length, without converting it to a JavaScript number. Digits may repeat, and leading zeros are allowed in the input. You may use fewer than `k` swaps, including none when the arrangement is already optimal.

@@ -25,6 +25,18 @@
         1
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        3
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": 8
     }
   ],
   "functionName": "countArrangement",
@@ -36,13 +48,14 @@
   "examples": [
     {
       "input": "n = 2",
-      "output": "2"
+      "output": "2",
+      "explanation": "Both [1,2] and [2,1] satisfy the rule at positions 1 and 2."
     },
     {
       "input": "n = 1",
       "output": "1"
     }
   ],
-  "inputFormat": "Implement countArrangement(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement countArrangement(n), where n is an integer from 1 to 15.",
+  "outputFormat": "The number of permutations of 1 through n satisfying the divisibility rule at every 1-based position."
 }

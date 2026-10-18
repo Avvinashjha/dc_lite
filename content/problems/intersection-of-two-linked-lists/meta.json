@@ -45,6 +45,57 @@
         ]
       ],
       "expected": null
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            1
+          ],
+          []
+        ]
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        [
+          [],
+          [],
+          [
+            7,
+            8
+          ]
+        ]
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        [
+          [],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [],
+          [],
+          []
+        ]
+      ],
+      "expected": null
     }
   ],
   "functionName": "intersectionOfTwoLinkedLists",
@@ -72,6 +123,13 @@
   ],
   "sampleInput": "listFixture = [[4,1],[5,6,1],[8,4,5]]",
   "sampleOutput": "8",
-  "inputFormat": "Implement intersectionOfTwoLinkedLists(headA, headB). Inputs below show JavaScript function arguments; there is no stdin parsing.\nlistFixture is [prefixA, prefixB, sharedTail]. The editor builds two list heads that share the same tail nodes.",
-  "outputFormat": "Return the result described in the statement.\nReturn the intersection node itself; the editor displays its value or null."
+  "inputFormat": "listFixture = [prefixA, prefixB, sharedTail]. The runner builds separate prefix nodes and one shared tail, then passes headA and headB. An empty sharedTail means no intersection.",
+  "outputFormat": "Return the first node shared by both lists, or null. Return the node itself, not its value or a copy. The runner verifies identity and unchanged input lists, then displays its value.",
+  "visuals": [
+    {
+      "title": "Two prefixes, one shared tail",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 150\" role=\"img\" aria-label=\"A: 4 then 1; B: 5 then 6 then 1. Both paths merge into the same nodes 8, 4, 5.\" style=\"width:100%;height:auto;max-width:400px;color:var(--color-text)\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M58 32H135L230 74H365M58 116H175L230 74\"/></g><g fill=\"var(--color-surface)\" stroke=\"currentColor\"><circle cx=\"50\" cy=\"32\" r=\"17\"/><circle cx=\"125\" cy=\"32\" r=\"17\"/><circle cx=\"50\" cy=\"116\" r=\"17\"/><circle cx=\"110\" cy=\"116\" r=\"17\"/><circle cx=\"170\" cy=\"116\" r=\"17\"/></g><g fill=\"var(--dc-sage)\" stroke=\"currentColor\"><circle cx=\"240\" cy=\"74\" r=\"19\"/><circle cx=\"300\" cy=\"74\" r=\"19\"/><circle cx=\"360\" cy=\"74\" r=\"19\"/></g><g fill=\"currentColor\" font-family=\"monospace\" font-size=\"19\" text-anchor=\"middle\"><text x=\"15\" y=\"38\">A</text><text x=\"15\" y=\"122\">B</text><text x=\"50\" y=\"38\">4</text><text x=\"125\" y=\"38\">1</text><text x=\"50\" y=\"122\">5</text><text x=\"110\" y=\"122\">6</text><text x=\"170\" y=\"122\">1</text><text x=\"240\" y=\"80\">8</text><text x=\"300\" y=\"80\">4</text><text x=\"360\" y=\"80\">5</text></g></svg>",
+      "caption": "The two prefix nodes valued 1 are different objects. The intersection is the shared node valued 8; every node after it is shared too."
+    }
+  ]
 }

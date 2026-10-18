@@ -1,1 +1,3 @@
-You're given an array `nums` of `n` integers and a target value `target`. Find every distinct quadruplet of indices `a, b, c, d` (all different, each between `0` and `n - 1`) whose values `nums[a] + nums[b] + nums[c] + nums[d]` add up to `target`, and return the quadruplets themselves as `[nums[a], nums[b], nums[c], nums[d]]`. Each quadruplet in the result should be unique.
+Given an integer array `nums` and an integer `target`, return all unique groups of four values whose sum equals `target`. Each group must use four distinct indices in `nums`.
+
+Return the values, not their indices. Do not include duplicate groups, even when different choices of indices produce the same values.

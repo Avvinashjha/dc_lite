@@ -1,1 +1,3 @@
-Spell out a non-negative integer `num` as English words, exactly as you'd say it out loud. Your solution needs to handle everything from 0 up through 2^31 - 1, following the usual English number-naming pattern of breaking the value into Billion, Million, and Thousand groupings, each of which is itself built from Hundreds, Tens, and Ones.
+Convert the nonnegative integer `num` to English number words using Billion, Million, Thousand, and Hundred groups. Skip groups whose value is zero.
+
+Capitalize each word and use exactly one space between words. Do not include “and”, hyphens, or punctuation. For example, `1001` becomes `"One Thousand One"`, not `"One Thousand and One"`. The number `0` becomes `"Zero"`.

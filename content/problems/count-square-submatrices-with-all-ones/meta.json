@@ -3,10 +3,10 @@
   "id": "problem-0240",
   "title": "Count Square Submatrices with All Ones",
   "difficulty": "Medium",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Matrix",
+    "Dynamic Programming"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/count-square-submatrices-with-all-ones/",
@@ -46,6 +46,43 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "countSquares",
@@ -58,7 +95,8 @@
   "examples": [
     {
       "input": "matrix = [[0,1,1,1],[1,1,1,1],[0,1,1,1]]",
-      "output": "15"
+      "output": "15",
+      "explanation": "There are ten 1\u00d71 squares, four 2\u00d72 squares, and one 3\u00d73 square: 10 + 4 + 1 = 15."
     },
     {
       "input": "matrix = [[0]]",
@@ -67,6 +105,13 @@
   ],
   "sampleInput": "matrix = [[0,1,1,1],[1,1,1,1],[0,1,1,1]]",
   "sampleOutput": "15",
-  "inputFormat": "Implement countSquares(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement countSquares(matrix), where matrix is a non-empty rectangular binary grid.",
+  "outputFormat": "The total number of contiguous square submatrices containing only 1s, counting every position and side length separately.",
+  "visuals": [
+    {
+      "title": "Different sizes count separately",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 240\" role=\"img\" aria-label=\"A 2 by 2 all-one matrix contains four unit squares and one larger square\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><rect x=\"110\" y=\"15\" width=\"80\" height=\"80\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"150\" y=\"63\" fill=\"currentColor\" font-size=\"24\" font-family=\"monospace\" text-anchor=\"middle\">1</text><rect x=\"190\" y=\"15\" width=\"80\" height=\"80\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"230\" y=\"63\" fill=\"currentColor\" font-size=\"24\" font-family=\"monospace\" text-anchor=\"middle\">1</text><rect x=\"110\" y=\"95\" width=\"80\" height=\"80\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"150\" y=\"143\" fill=\"currentColor\" font-size=\"24\" font-family=\"monospace\" text-anchor=\"middle\">1</text><rect x=\"190\" y=\"95\" width=\"80\" height=\"80\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"230\" y=\"143\" fill=\"currentColor\" font-size=\"24\" font-family=\"monospace\" text-anchor=\"middle\">1</text><rect x=\"107\" y=\"12\" width=\"166\" height=\"166\" fill=\"none\" stroke=\"var(--color-info)\" stroke-width=\"3\"/><text x=\"190\" y=\"215\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\" text-anchor=\"middle\">Four 1\u00d71 + one 2\u00d72 = 5 squares</text></svg>",
+      "caption": "Overlapping squares are counted independently; this is not a partition of the grid."
+    }
+  ]
 }

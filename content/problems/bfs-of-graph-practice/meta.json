@@ -1,13 +1,12 @@
 {
   "draft": false,
   "id": "problem-0180",
-  "title": "BFS of graph | Practice",
+  "title": "Breadth-First Search of a Graph",
   "difficulty": "Easy",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "BFS"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=BFS%20of%20graph%20%7C%20Practice",
@@ -52,14 +51,63 @@
         0,
         1
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            2,
+            1
+          ],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        0,
+        2,
+        1
+      ]
     }
   ],
   "functionName": "bfsOfGraph",
   "templateCode": "function bfsOfGraph(adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= V <= 10^4",
-    "0 <= E <= 10^4",
-    "Neighbors are visited in the listed order; vertices unreachable from 0 are omitted."
+    "1 <= adj.length <= 10^4",
+    "0 <= total number of listed edges <= 10^4",
+    "Each neighbor is an integer from 0 to adj.length - 1."
   ],
   "runner": {},
   "examples": [
@@ -74,6 +122,13 @@
   ],
   "sampleInput": "adj = [[1,2],[3],[4],[],[]]",
   "sampleOutput": "[0,1,2,3,4]",
-  "inputFormat": "Implement bfsOfGraph(adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement bfsOfGraph(adj), where adj[v] lists the outgoing neighbors of vertex v. Vertex labels are 0 through adj.length - 1.",
+  "outputFormat": "An array of visited vertex labels in BFS order starting at 0. Inspect neighbors in their listed order; omit unreachable vertices.",
+  "visuals": [
+    {
+      "title": "Visit one level at a time",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 255\" role=\"img\" aria-label=\"Directed graph 0 to 1 and 2; 1 to 3; 2 to 4\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><path d=\"M190 30L95 105\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M116.0679058116867 83.27114028049569L113.0523036072688 90.74818136268253L121.02506012031887 89.55020240476308\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M190 30L285 105\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M258.97493987968113 89.55020240476308L266.9476963927312 90.74818136268253L263.93209418831333 83.27114028049569\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M95 105L95 180\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M91.0 150.0L95.0 157.0L99.0 150.0\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M285 105L285 180\" stroke=\"var(--color-text-light)\" stroke-width=\"1.5\" fill=\"none\"/><path d=\"M281.0 150.0L285.0 157.0L289.0 150.0\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"/><circle cx=\"190\" cy=\"30\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"190\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">0</text><circle cx=\"95\" cy=\"105\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"95\" y=\"111\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">1</text><circle cx=\"285\" cy=\"105\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"285\" y=\"111\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">2</text><circle cx=\"95\" cy=\"180\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"95\" y=\"186\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">3</text><circle cx=\"285\" cy=\"180\" r=\"21\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"285\" y=\"186\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\">4</text><text x=\"190\" y=\"220\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">BFS order: 0, 1, 2, 3, 4</text></svg>",
+      "caption": "For example 1, visit 0 first, then its neighbors 1 and 2, then 3 and 4."
+    }
+  ]
 }

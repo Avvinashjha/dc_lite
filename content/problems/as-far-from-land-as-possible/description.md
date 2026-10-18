@@ -1,1 +1,3 @@
-You're given an `N x N` grid where each cell is either `0` (water) or `1` (land). Using Manhattan distance measured over horizontal/vertical moves, find the water cell that is as far as possible from any land cell, and return that distance. If the grid is entirely water or entirely land, return `-1`.
+Given an `n × n` grid of water (`0`) and land (`1`), find each water cell’s distance to its **nearest** land cell. Return the largest of those distances.
+
+Distance is Manhattan distance: `|r1 - r2| + |c1 - c2|`, using horizontal and vertical steps. If there is no water or no land, return `-1`.

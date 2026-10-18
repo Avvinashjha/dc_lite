@@ -7,7 +7,8 @@ function evaluatePostfix(exp) {
   const stack = [];
   for (const c of exp) {
     if ('+-*/'.includes(c)) {
-      const b = stack.pop(), a = stack.pop();
+      const b = stack.pop(),
+        a = stack.pop();
       if (c === '+') stack.push(a + b);
       else if (c === '-') stack.push(a - b);
       else if (c === '*') stack.push(a * b);

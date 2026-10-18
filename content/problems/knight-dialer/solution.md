@@ -5,7 +5,18 @@ Define the valid knight moves for each digit. For each step, accumulate the coun
 ```javascript
 function knightDialer(n) {
   const MOD = 1e9 + 7;
-  const moves = {0:[4,6],1:[6,8],2:[7,9],3:[4,8],4:[0,3,9],5:[],6:[0,1,7],7:[2,6],8:[1,3],9:[2,4]};
+  const moves = {
+    0: [4, 6],
+    1: [6, 8],
+    2: [7, 9],
+    3: [4, 8],
+    4: [0, 3, 9],
+    5: [],
+    6: [0, 1, 7],
+    7: [2, 6],
+    8: [1, 3],
+    9: [2, 4],
+  };
   let dp = new Array(10).fill(1);
   for (let i = 1; i < n; i++) {
     const next = new Array(10).fill(0);

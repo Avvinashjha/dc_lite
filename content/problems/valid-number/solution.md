@@ -1,5 +1,7 @@
 Walk through the string character by character, tracking three boolean flags: whether a digit has been seen, whether a dot has been seen, and whether an exponent has been seen. Apply the rules at each character — signs are only valid at the start or right after `e`/`E`, dots can't appear after an exponent, and `e`/`E` requires a preceding digit.
 
+Reset the digit flag when encountering an exponent so a trailing `e`, `E`, or exponent sign cannot pass the final check. Do not use numeric conversion as the validator: its accepted forms and range differ from this grammar.
+
 ```javascript
 function isNumber(s) {
   let seenDigit = false;

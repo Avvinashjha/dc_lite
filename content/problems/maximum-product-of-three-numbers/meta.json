@@ -3,11 +3,11 @@
   "id": "problem-0056",
   "title": "Maximum Product of Three Numbers",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Array",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Array",
+    "Sorting",
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximum-product-of-three-numbers/",
@@ -35,6 +35,79 @@
         ]
       ],
       "expected": 720
+    },
+    {
+      "args": [
+        [
+          -5,
+          -4,
+          -3,
+          -2
+        ]
+      ],
+      "expected": -24
+    },
+    {
+      "args": [
+        [
+          -1,
+          -2,
+          0,
+          3
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          -3,
+          -2,
+          -1,
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": 8
+    },
+    {
+      "args": [
+        [
+          -1000,
+          -1000,
+          1000
+        ]
+      ],
+      "expected": 1000000000
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 6
     }
   ],
   "functionName": "maximumProductOfThreeNumbers",
@@ -56,6 +129,6 @@
   ],
   "sampleInput": "nums = [1,2,3,4]",
   "sampleOutput": "24",
-  "inputFormat": "Implement maximumProductOfThreeNumbers(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maximumProductOfThreeNumbers(nums). Receive an integer array containing at least three elements.",
+  "outputFormat": "Return the maximum product of elements at three distinct indices. Equal values at different indices may each be chosen."
 }

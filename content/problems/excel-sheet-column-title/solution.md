@@ -1,14 +1,16 @@
-## Base-26 Conversion
+## One-Based Base-26 Conversion
+
+Subtract one before extracting each digit, mapping the remainders 0–25 to A–Z. Collect letters from right to left, then reverse once.
 
 ```javascript
 function convertToTitle(columnNumber) {
-  let result = '';
+  const letters = [];
   while (columnNumber > 0) {
     columnNumber--;
-    result = String.fromCharCode(65 + (columnNumber % 26)) + result;
+    letters.push(String.fromCharCode(65 + (columnNumber % 26)));
     columnNumber = Math.floor(columnNumber / 26);
   }
-  return result;
+  return letters.reverse().join('');
 }
 ```
 

@@ -377,12 +377,12 @@
     padding: 0.25rem 0;
     font-size: 0.8rem;
 
-    &--pass { color: #16a34a; }
-    &--fail { color: #dc2626; }
+    &--pass { color: var(--color-success); }
+    &--fail { color: var(--color-danger); }
   }
 
   &__error {
-    color: #dc2626;
+    color: var(--color-danger);
     font-size: 0.82rem;
   }
 }
@@ -398,9 +398,9 @@
   letter-spacing: 0.01em;
   line-height: 1.4;
 
-  &--easy { background: rgba(34,197,94,.14); color: #16a34a; }
-  &--medium { background: rgba(245,158,11,.16); color: #d97706; }
-  &--hard { background: rgba(239,68,68,.15); color: #dc2626; }
+  &--easy { background: rgba(34,197,94,.14); color: var(--color-success); }
+  &--medium { background: rgba(245,158,11,.16); color: var(--color-warning); }
+  &--hard { background: rgba(239,68,68,.15); color: var(--color-danger); }
   &--neutral { background: var(--color-code-bg); color: var(--color-text-light); }
 }
 
@@ -434,13 +434,13 @@
 
   &--primary {
     background: var(--color-primary);
-    color: #fff;
+    color: var(--color-on-primary);
     border-color: var(--color-primary);
 
     &:hover {
       background: var(--color-primary-dark);
       border-color: var(--color-primary-dark);
-      color: #fff;
+      color: var(--color-on-primary);
     }
   }
 
@@ -494,7 +494,7 @@
     &:focus {
       outline: none;
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.12);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 12%, transparent);
     }
   }
 
@@ -727,7 +727,7 @@
     &:hover,
     &--active {
       background: var(--color-primary);
-      color: #fff;
+      color: var(--color-on-primary);
       border-color: var(--color-primary);
     }
   }
@@ -788,7 +788,7 @@
 
     &--active {
       background: var(--color-primary);
-      color: #fff;
+      color: var(--color-on-primary);
     }
   }
 }

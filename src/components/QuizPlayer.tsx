@@ -87,7 +87,10 @@ function fieldHtml(pre: string | undefined, raw: string): string {
 
 export default function QuizPlayer({ quiz }: Props) {
   const user = useStore(userStore);
-  const authLoading = useStore(isAuthLoading);
+  const storeAuthLoading = useStore(isAuthLoading);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const authLoading = !mounted || storeAuthLoading;
   const questions = quiz.questions || [];
   const total = questions.length;
 
@@ -291,7 +294,7 @@ export default function QuizPlayer({ quiz }: Props) {
         )}
 
         <div class="quiz-actions">
-          <button type="button" class="quiz-btn quiz-btn--primary" onClick={start}>
+          <button type="button" class="quiz-btn quiz-btn--primary" disabled={!mounted} onClick={start}>
             Start quiz
           </button>
         </div>
@@ -371,9 +374,10 @@ export default function QuizPlayer({ quiz }: Props) {
             <button
               type="button"
               aria-label={`Go to question ${i + 1}`}
+              aria-current={i === index ? 'step' : undefined}
               class={`quiz-dot ${i === index ? 'quiz-dot--current' : ''} ${(answers[qq.id] || []).length ? 'quiz-dot--done' : ''}`}
               onClick={() => setIndex(i)}
-            />
+            >{i + 1}</button>
           ))}
         </div>
       </div>
@@ -423,7 +427,7 @@ export default function QuizPlayer({ quiz }: Props) {
         )}
 
         <div class="quiz-actions">
-          <button type="button" class="quiz-btn quiz-btn--primary" onClick={start}>↺ Retry</button>
+          <button type="button" class="quiz-btn quiz-btn--primary" disabled={!mounted} onClick={start}>↺ Retry</button>
           <button type="button" class="quiz-btn quiz-btn--outline" onClick={shareResult}>Share result</button>
           <a class="quiz-btn quiz-btn--ghost" href="/quiz">All quizzes</a>
         </div>

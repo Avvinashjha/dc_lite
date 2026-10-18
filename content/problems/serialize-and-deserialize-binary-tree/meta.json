@@ -40,10 +40,92 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          -1000,
+          null,
+          1000
+        ]
+      ],
+      "expected": [
+        -1000,
+        null,
+        1000
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        null,
+        3,
+        null,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2,
+        null,
+        3
+      ]
     }
   ],
-  "functionName": "codecRoundTrip",
-  "templateCode": "function serialize(root) {\n  // Encode the tree as a string.\n}\n\nfunction deserialize(data) {\n  // Decode the string to a tree.\n}\n\nfunction codecRoundTrip(root) {\n  return deserialize(serialize(root));\n}\n",
+  "functionName": "serialize",
+  "templateCode": "function serialize(root) {\n  // Encode the tree as a string.\n}\n\nfunction deserialize(data) {\n  // Decode the string to a tree.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 10^4",
     "-1000 <= Node.val <= 1000"
@@ -52,7 +134,8 @@
     "argTypes": [
       "tree"
     ],
-    "outputType": "tree"
+    "outputType": "tree",
+    "mode": "codec"
   },
   "examples": [
     {
@@ -66,6 +149,6 @@
   ],
   "sampleInput": "root = [1,2,3,null,null,4,5]",
   "sampleOutput": "[1,2,3,null,null,4,5]",
-  "inputFormat": "Implement codecRoundTrip(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
+  "inputFormat": "Implement serialize(root) and deserialize(data). The runner calls them in separate fresh scopes, so the encoded string must contain all information needed to rebuild the tree.\nTrees are shown as level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
+  "outputFormat": "serialize must return a string in any format you choose. deserialize must return a new tree with the same values and structure. The reconstructed tree is displayed as a level-order array with trailing nulls removed."
 }

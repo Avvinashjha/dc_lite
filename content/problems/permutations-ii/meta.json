@@ -6,7 +6,7 @@
   "topic": "Backtracking",
   "topics": [
     "Backtracking",
-    "Recursion"
+    "Array"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/permutations-ii/",
@@ -53,6 +53,203 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          -1,
+          0
+        ]
+      ],
+      "expected": [
+        [
+          -1,
+          -1,
+          0
+        ],
+        [
+          -1,
+          0,
+          -1
+        ],
+        [
+          0,
+          -1,
+          -1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          -10,
+          10,
+          -10
+        ]
+      ],
+      "expected": [
+        [
+          -10,
+          -10,
+          10
+        ],
+        [
+          -10,
+          10,
+          -10
+        ],
+        [
+          10,
+          -10,
+          -10
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          3,
+          3,
+          3
+        ]
+      ],
+      "expected": [
+        [
+          3,
+          3,
+          3,
+          3
+        ]
+      ]
     }
   ],
   "functionName": "permuteUnique",
@@ -75,5 +272,5 @@
     }
   ],
   "inputFormat": "Implement permuteUnique(nums). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "outputFormat": "Return all distinct full-length permutations exactly once. Outer array order does not matter; order inside each permutation does."
 }

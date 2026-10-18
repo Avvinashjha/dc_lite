@@ -16,4 +16,4 @@ function bstFromPreorder(preorder) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time:** O(n) | **Space:** O(h) recursion depth, O(n) for a skewed tree, excluding the returned tree.

@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0075",
-  "title": "Allocate Minimum Pages | Practice",
+  "title": "Allocate Minimum Pages",
   "difficulty": "Hard",
   "topic": "Sorting&Searching",
   "topics": [
@@ -31,14 +31,38 @@
         2
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        [
+          12,
+          34,
+          67,
+          90
+        ],
+        1
+      ],
+      "expected": 203
+    },
+    {
+      "args": [
+        [
+          12,
+          34,
+          67,
+          90
+        ],
+        4
+      ],
+      "expected": 90
     }
   ],
   "functionName": "allocateMinimumPages",
   "templateCode": "function allocateMinimumPages(arr, m) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
-    "1 <= A[i] <= 10^6",
-    "1 <= M <= 10^5"
+    "1 <= arr.length <= 10^5",
+    "1 <= arr[i] <= 10^6",
+    "1 <= m <= 10^5"
   ],
   "runner": {},
   "examples": [
@@ -53,6 +77,13 @@
   ],
   "sampleInput": "arr = [12,34,67,90]\nm = 2",
   "sampleOutput": "113",
-  "inputFormat": "Implement allocateMinimumPages(arr, m). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement allocateMinimumPages(arr, m), where arr contains book page counts in shelf order and m is the number of students.",
+  "outputFormat": "The smallest possible maximum pages assigned to a student, or -1 when m exceeds arr.length.",
+  "visuals": [
+    {
+      "title": "Keep each student\u2019s books together",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 155\" role=\"img\" aria-label=\"Books 12, 34, and 67 go to the first student; book 90 goes to the second\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><rect x=\"10\" y=\"10\" width=\"310\" height=\"90\" rx=\"10\" fill=\"var(--dc-sage)\"/><rect x=\"335\" y=\"10\" width=\"130\" height=\"90\" rx=\"10\" fill=\"var(--dc-peach)\"/><text x=\"65\" y=\"54\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"24\">12</text><text x=\"165\" y=\"54\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"24\">34</text><text x=\"265\" y=\"54\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"24\">67</text><text x=\"400\" y=\"54\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"24\">90</text><g fill=\"currentColor\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"17\"><text x=\"165\" y=\"83\">Student 1: 113 pages</text><text x=\"400\" y=\"83\">Student 2: 90</text><text x=\"240\" y=\"133\">Maximum load = 113 pages</text></g></svg>",
+      "caption": "Other valid split points give maximum loads of 191 or 157 pages. This split minimizes the maximum at 113."
+    }
+  ]
 }

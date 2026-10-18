@@ -41,4 +41,4 @@ function minWindow(s, t) {
 ```
 
 **Time:** O(|s| + |t|) — each pointer traverses the string at most once.
-**Space:** O(|s| + |t|) for the hash maps.
+**Space:** O(1) auxiliary space for maps containing at most 52 distinct English letters, plus O(L) for the returned substring of length L.

@@ -1,5 +1,7 @@
 ## Cycle Detection
 
+Sorting a copy identifies the unique target position of every value. Map values to their original indices, then follow the resulting permutation cycles. A cycle of length L needs exactly L - 1 swaps: each swap can increase the number of resolved cycles by at most one, and repeatedly placing one cycle element achieves that bound. Sum the costs of disjoint cycles; fixed points cost zero. The distinct-value constraint makes the position mapping unambiguous.
+
 ```javascript
 function minSwaps(arr) {
   const sorted = [...arr].sort((a,b)=>a-b);

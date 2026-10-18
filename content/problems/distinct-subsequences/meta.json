@@ -3,10 +3,10 @@
   "id": "problem-0048",
   "title": "Distinct Subsequences",
   "difficulty": "Hard",
-  "topic": "String",
+  "topic": "Dynamic Programming",
   "topics": [
-    "String",
-    "Hash Table"
+    "Dynamic Programming",
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/distinct-subsequences/",
@@ -25,6 +25,41 @@
         "bag"
       ],
       "expected": 5
+    },
+    {
+      "args": [
+        "aaa",
+        "aa"
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        "a",
+        "aa"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "abc",
+        "abc"
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        "abc",
+        "d"
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        "aA",
+        "A"
+      ],
+      "expected": 1
     }
   ],
   "functionName": "numDistinct",
@@ -38,7 +73,8 @@
   "examples": [
     {
       "input": "s = \"rabbbit\"\nt = \"rabbit\"",
-      "output": "3"
+      "output": "3",
+      "explanation": "Choose any two of the three b positions in rabbbit. These three index selections all spell rabbit."
     },
     {
       "input": "s = \"babgbag\"\nt = \"bag\"",
@@ -47,6 +83,6 @@
   ],
   "sampleInput": "s = \"rabbbit\"\nt = \"rabbit\"",
   "sampleOutput": "3",
-  "inputFormat": "Implement numDistinct(s, t). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "s and t are nonempty, case-sensitive strings of English letters.",
+  "outputFormat": "Return the number of increasing index selections from s whose characters form t."
 }

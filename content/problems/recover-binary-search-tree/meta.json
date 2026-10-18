@@ -6,7 +6,7 @@
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
+    "Binary Search Tree",
     "DFS"
   ],
   "platform": "LeetCode",
@@ -50,20 +50,128 @@
         null,
         3
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          null,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          4,
+          2,
+          6,
+          7,
+          3,
+          5,
+          1
+        ]
+      ],
+      "expected": [
+        4,
+        2,
+        6,
+        1,
+        3,
+        5,
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          4,
+          3,
+          6,
+          1,
+          2,
+          5,
+          7
+        ]
+      ],
+      "expected": [
+        4,
+        2,
+        6,
+        1,
+        3,
+        5,
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          6,
+          4,
+          3,
+          5,
+          7
+        ]
+      ],
+      "expected": [
+        4,
+        2,
+        6,
+        1,
+        3,
+        5,
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          2147483647,
+          -2147483648
+        ]
+      ],
+      "expected": [
+        0,
+        -2147483648,
+        2147483647
+      ]
     }
   ],
   "functionName": "recoverTree",
   "templateCode": "function recoverTree(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= number of nodes <= 1000",
-    "-2^31 <= Node.val <= 2^31 - 1"
+    "-2^31 <= Node.val <= 2^31 - 1",
+    "All values are distinct. Exactly two node values in an otherwise valid strict BST have been swapped."
   ],
   "runner": {
     "argTypes": [
       "tree"
     ],
     "outputType": "tree",
-    "resultArg": 0
+    "resultArg": 0,
+    "preserveTreeStructure": true
   },
   "examples": [
     {

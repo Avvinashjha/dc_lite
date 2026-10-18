@@ -3,7 +3,7 @@
   "id": "problem-0083",
   "title": "Convert Binary Number in a Linked List to Integer",
   "difficulty": "Easy",
-  "topic": "Linked-List",
+  "topic": "Linked List",
   "topics": [
     "Linked List"
   ],
@@ -28,6 +28,53 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": 1073741823
     }
   ],
   "functionName": "getDecimalValue",
@@ -44,7 +91,8 @@
   "examples": [
     {
       "input": "head = [1,0,1]",
-      "output": "5"
+      "output": "5",
+      "explanation": "Read 1 \u2192 0 \u2192 1 as binary 101: 1\u00d74 + 0\u00d72 + 1 = 5."
     },
     {
       "input": "head = [0]",
@@ -53,6 +101,6 @@
   ],
   "sampleInput": "head = [1,0,1]",
   "sampleOutput": "5",
-  "inputFormat": "Implement getDecimalValue(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement getDecimalValue(head). The runner turns the displayed value array into linked nodes with val and next fields; the head contains the most significant bit.",
+  "outputFormat": "The non-negative integer represented by the list\u2019s binary digits."
 }

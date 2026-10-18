@@ -1,1 +1,1 @@
-You're given the root of a binary tree, a `target` node within that tree, and an integer `K`. Treating the tree as an undirected graph (so you can move toward parents as well as children), return the values of every node that is exactly `K` edges away from `target`.
+You're given the root of a binary tree, a `target` node within that tree, and an integer `k`. Treating the tree as an undirected graph (so you can move toward parents as well as children), return the values of every node that is exactly `k` edges away from `target`.

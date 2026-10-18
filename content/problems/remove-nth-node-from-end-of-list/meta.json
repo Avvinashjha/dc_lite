@@ -5,7 +5,8 @@
   "difficulty": "Medium",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
@@ -37,20 +38,122 @@
         1
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        1
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        2
+      ],
+      "expected": [
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4
+      ],
+      "expected": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        1
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        3
+      ],
+      "expected": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ],
+        2
+      ],
+      "expected": [
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          100,
+          0
+        ],
+        2
+      ],
+      "expected": [
+        0,
+        0
+      ]
     }
   ],
   "functionName": "removeNthFromEnd",
   "templateCode": "function removeNthFromEnd(head, n) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= sz <= 30",
+    "1 <= number of nodes <= 30",
     "0 <= Node.val <= 100",
-    "1 <= n <= sz"
+    "1 <= n <= number of nodes"
   ],
   "runner": {
     "argTypes": [
       "list"
     ],
-    "outputType": "list"
+    "outputType": "list",
+    "originalListNodes": true,
+    "listFilter": "removeNth"
   },
   "examples": [
     {
@@ -65,5 +168,5 @@
   "sampleInput": "head = [1,2,3,4,5]\nn = 2",
   "sampleOutput": "[1,2,3,5]",
   "inputFormat": "Implement removeNthFromEnd(head, n). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Return the head after removing exactly the nth original node from the end. Retain all other original nodes in order; return null if the list becomes empty."
 }

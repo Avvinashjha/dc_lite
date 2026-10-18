@@ -34,6 +34,72 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": 10
+    },
+    {
+      "args": [
+        [
+          1,
+          -2,
+          3
+        ]
+      ],
+      "expected": -2
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          null,
+          3
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2,
+          3
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "sumOfLeftLeaves",
@@ -50,7 +116,8 @@
   "examples": [
     {
       "input": "root = [3,9,20,null,null,15,7]",
-      "output": "24"
+      "output": "24",
+      "explanation": "The left leaves are 9 and 15, so the sum is 24. The right leaf 7 does not count."
     },
     {
       "input": "root = [1]",
@@ -60,5 +127,5 @@
   "sampleInput": "root = [3,9,20,null,null,15,7]",
   "sampleOutput": "24",
   "inputFormat": "Implement sumOfLeftLeaves(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the sum of values of leaves that are left children. The root itself never counts as a left leaf."
 }

@@ -1,6 +1,6 @@
 ## Bellman-Ford (K+1 iterations)
 
-Relax edges K+1 times to find shortest path with at most K stops.
+Relax edges k + 1 times. Read only from the previous pass and write into a copied array so each pass adds at most one flight; in-place updates could accidentally use too many stops.
 
 ```javascript
 function findCheapestPrice(n, flights, src, dst, k) {
@@ -17,4 +17,5 @@ function findCheapestPrice(n, flights, src, dst, k) {
 }
 ```
 
-**Time:** O(k * E) | **Space:** O(n)
+**Time:** O((k + 1) × (n + E)), including the price-array copy each pass.
+**Space:** O(n)

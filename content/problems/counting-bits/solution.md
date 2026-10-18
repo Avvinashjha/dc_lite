@@ -10,4 +10,4 @@ function countBits(n) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(n)
+**Time:** O(n + 1) | **Space:** O(n + 1) for the returned array and O(1) extra space.

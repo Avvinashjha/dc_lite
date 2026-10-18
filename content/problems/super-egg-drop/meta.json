@@ -3,10 +3,10 @@
   "id": "problem-0256",
   "title": "Super Egg Drop",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
-    "Memoization"
+    "Combinatorics"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/super-egg-drop/",
@@ -25,6 +25,55 @@
         2
       ],
       "expected": 2
+    },
+    {
+      "args": [
+        1,
+        1
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        1,
+        10000
+      ],
+      "expected": 10000
+    },
+    {
+      "args": [
+        2,
+        10
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        2,
+        11
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        3,
+        14
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        2,
+        100
+      ],
+      "expected": 14
+    },
+    {
+      "args": [
+        100,
+        10000
+      ],
+      "expected": 14
     }
   ],
   "functionName": "superEggDrop",
@@ -37,7 +86,8 @@
   "examples": [
     {
       "input": "k = 2\nn = 6",
-      "output": "3"
+      "output": "3",
+      "explanation": "Drop first from floor 3. If it breaks, use the remaining egg to check floors 1 and 2. If it survives, test floor 5, then floor 4 or 6 as needed. Three drops always suffice."
     },
     {
       "input": "k = 1\nn = 2",
@@ -47,5 +97,5 @@
   "sampleInput": "k = 2\nn = 6",
   "sampleOutput": "3",
   "inputFormat": "Implement superEggDrop(k, n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the minimum number of drops sufficient to determine f in the worst case, using at most k eggs."
 }

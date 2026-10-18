@@ -3,10 +3,10 @@
   "id": "problem-0254",
   "title": "Maximal Rectangle",
   "difficulty": "Hard",
-  "topic": "Dynamic-Programming",
+  "topic": "Matrix",
   "topics": [
-    "Dynamic Programming",
-    "Memoization"
+    "Matrix",
+    "Monotonic Stack"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/maximal-rectangle/",
@@ -56,6 +56,101 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0"
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          [
+            "1"
+          ],
+          [
+            "1"
+          ],
+          [
+            "1"
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1",
+            "1"
+          ]
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          [
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "0",
+            "1"
+          ],
+          [
+            "1",
+            "1",
+            "1"
+          ]
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "maximalRectangle",
@@ -77,6 +172,13 @@
   ],
   "sampleInput": "matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
   "sampleOutput": "6",
-  "inputFormat": "Implement maximalRectangle(matrix). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maximalRectangle(matrix). Receive a nonempty rectangular matrix of string characters \"0\" and \"1\", not numeric values.",
+  "outputFormat": "Return the area of the largest all-ones rectangle, or 0 if no cell contains \"1\".",
+  "visuals": [
+    {
+      "title": "Largest rectangle in Example 1",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 190\" role=\"img\" aria-labelledby=\"maximal-rectangle-title\" style=\"width:100%;height:auto;max-width:400px;color:var(--color-text)\"><title id=\"maximal-rectangle-title\">Highlighted rectangle has area 6</title><g font-family=\"system-ui,sans-serif\"><text x=\"35\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"107\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"143\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"179\" y=\"36\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"35\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"107\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"143\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"179\" y=\"72\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"35\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"107\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"143\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"179\" y=\"108\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"35\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"71\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"107\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><text x=\"143\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">1</text><text x=\"179\" y=\"144\" text-anchor=\"middle\" fill=\"currentColor\" font-size=\"18\">0</text><rect x=\"90\" y=\"48\" width=\"108\" height=\"72\" rx=\"5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/><text x=\"235\" y=\"80\" fill=\"currentColor\" font-size=\"15\">2 \u00d7 3 = 6 cells</text><text x=\"235\" y=\"106\" fill=\"currentColor\" font-size=\"15\">Return 6</text><text x=\"18\" y=\"176\" fill=\"currentColor\" font-size=\"12\">Every enclosed cell contains \"1\".</text></g></svg>",
+      "caption": "The outlined region spans two rows and 3 columns. Its area is 6."
+    }
+  ]
 }

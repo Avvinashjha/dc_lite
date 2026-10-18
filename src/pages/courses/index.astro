@@ -1,4 +1,5 @@
 ---
+import PageIntro from '../../components/PageIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCourses, getCoursesIndex } from '../../utils/contentLoader';
 
@@ -7,9 +8,8 @@ const courses = getCourses();
 ---
 
 <BaseLayout title={`${index.title} | DailyCoder`} description={index.description}>
-  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">{index.title}</h1>
-    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 3rem;">{index.description}</p>
+  <div class="container collection-page">
+    <PageIntro title="One lesson closer." description="Build a strong foundation with hands-on courses. Start where you are and learn at your own pace." eyebrow="MAKE ROOM TO GROW" icon="book" tone="peach" />
 
     <div class="grid grid--2">
       {courses.map(course => (
@@ -20,7 +20,7 @@ const courses = getCourses();
             <span>{course.duration}</span>
             <span>&bull;</span>
             <span>{course.totalLessons} lessons</span>
-            <span class="enrollment-badge" data-enroll-badge={course.slug} style="display:none;background:var(--color-primary);color:#fff;padding:0.1rem 0.5rem;border-radius:var(--radius-md);font-size:0.7rem;font-weight:700;">Enrolled</span>
+            <span class="enrollment-badge" data-enroll-badge={course.slug} style="display:none;background:var(--color-primary);color:var(--color-on-primary);padding:0.1rem 0.5rem;border-radius:var(--radius-md);font-size:0.7rem;font-weight:700;">Enrolled</span>
           </div>
           <h3 class="post-card__title">{course.title}</h3>
           <p class="post-card__description">{course.description}</p>

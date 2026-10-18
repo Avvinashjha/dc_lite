@@ -42,6 +42,91 @@
         "AA"
       ],
       "expected": null
+    },
+    {
+      "args": [
+        [
+          "A",
+          "B"
+        ],
+        "C"
+      ],
+      "expected": {
+        "A": 1,
+        "B": 2,
+        "C": 3
+      }
+    },
+    {
+      "args": [
+        [
+          "A",
+          "A"
+        ],
+        "B"
+      ],
+      "expected": {
+        "A": 1,
+        "B": 2
+      }
+    },
+    {
+      "args": [
+        [
+          "A",
+          "A"
+        ],
+        "A"
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        [
+          "AB",
+          "AB"
+        ],
+        "BA"
+      ],
+      "expected": null
+    },
+    {
+      "args": [
+        [
+          "I",
+          "BB"
+        ],
+        "ILL"
+      ],
+      "expected": {
+        "I": 1,
+        "B": 9,
+        "L": 0
+      }
+    },
+    {
+      "args": [
+        [
+          "AAAAAAAAAAAAAAAAAAAA",
+          "AAAAAAAAAAAAAAAAAAAA"
+        ],
+        "BBBBBBBBBBBBBBBBBBBB"
+      ],
+      "expected": {
+        "A": 1,
+        "B": 2
+      }
+    },
+    {
+      "args": [
+        [
+          "A"
+        ],
+        "A"
+      ],
+      "expected": {
+        "A": 1
+      }
     }
   ],
   "functionName": "solveCryptarithmetic",
@@ -50,8 +135,8 @@
     "1 <= words.length <= 5",
     "1 <= words[i].length, result.length <= 20",
     "All characters are uppercase English letters.",
-    "At most 10 distinct letters occur across all words.",
-    "Every leading letter must map to a non-zero digit."
+    "At most 10 distinct letters occur across all addends and the result.",
+    "The first letter of every word, including a one-letter word, must map to a non-zero digit."
   ],
   "runner": {
     "validator": "cryptarithm"
@@ -67,5 +152,5 @@
     }
   ],
   "inputFormat": "Implement solveCryptarithmetic(words, result). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nAny result satisfying the statement is accepted."
+  "outputFormat": "Return an object mapping every letter to its integer digit, or null when no assignment exists. Any valid assignment is accepted; object key order does not matter."
 }

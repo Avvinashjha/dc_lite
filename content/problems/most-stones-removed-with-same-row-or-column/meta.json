@@ -6,8 +6,7 @@
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "Union Find"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/",
@@ -54,13 +53,147 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            8
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            5
+          ]
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            10000
+          ],
+          [
+            10000,
+            10000
+          ],
+          [
+            10000,
+            0
+          ]
+        ]
+      ],
+      "expected": 2
     }
   ],
   "functionName": "removeStones",
   "templateCode": "function removeStones(stones) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= stones.length <= 1000",
-    "0 <= xi, yi <= 10^4"
+    "0 <= xi, yi <= 10^4",
+    "All stone coordinates are distinct"
   ],
   "runner": {},
   "examples": [
@@ -75,6 +208,6 @@
   ],
   "sampleInput": "stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]",
   "sampleOutput": "5",
-  "inputFormat": "Implement removeStones(stones). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement removeStones(stones). Receive distinct [row, column] coordinate pairs.",
+  "outputFormat": "Return the maximum number of removable stones. Each removal requires another currently remaining stone in the same row or column."
 }

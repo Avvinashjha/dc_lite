@@ -15,7 +15,6 @@ function flattenBinaryTreeToLinkedList(root) {
     }
     curr = curr.right;
   }
-  return root;
 }
 ```
 

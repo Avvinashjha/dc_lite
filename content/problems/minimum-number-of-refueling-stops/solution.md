@@ -1,6 +1,8 @@
 ## Greedy with Max-Heap
 
-As you pass stations, add their fuel to a max-heap. When empty, refuel from the largest available.
+Treat fuel as the farthest distance reachable from the origin using the fuel selected so far, not the fuel currently left in a moving car. Add every station within that reach to a max-heap. If the target is still beyond reach, take the largest available fuel amount and count one stop. If none is available, the trip is impossible.
+
+This retrospectively chooses which reachable station to stop at; it does not require driving backward. Among candidates already reachable, the largest fuel amount extends reach the most for one extra stop, so choosing it cannot require more stops than choosing a smaller amount. Each station enters and leaves the heap at most once.
 
 ```javascript
 function minRefuelStops(target, startFuel, stations) {

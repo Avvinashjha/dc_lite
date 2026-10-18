@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Math"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/integer-to-english-words/",
@@ -23,6 +23,36 @@
         0
       ],
       "expected": "Zero"
+    },
+    {
+      "args": [
+        40
+      ],
+      "expected": "Forty"
+    },
+    {
+      "args": [
+        1001
+      ],
+      "expected": "One Thousand One"
+    },
+    {
+      "args": [
+        1000001
+      ],
+      "expected": "One Million One"
+    },
+    {
+      "args": [
+        1010
+      ],
+      "expected": "One Thousand Ten"
+    },
+    {
+      "args": [
+        2147483647
+      ],
+      "expected": "Two Billion One Hundred Forty Seven Million Four Hundred Eighty Three Thousand Six Hundred Forty Seven"
     }
   ],
   "functionName": "numberToWords",
@@ -43,6 +73,6 @@
   ],
   "sampleInput": "num = 123",
   "sampleOutput": "\"One Hundred Twenty Three\"",
-  "inputFormat": "Implement numberToWords(num). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "num is an integer from 0 through 2147483647.",
+  "outputFormat": "Return title-cased English number words separated by single spaces, with no leading/trailing spaces, commas, hyphens, or \u201cand\u201d. Return \u201cZero\u201d for 0."
 }

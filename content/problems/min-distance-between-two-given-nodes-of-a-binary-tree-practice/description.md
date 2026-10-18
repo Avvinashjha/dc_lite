@@ -1,1 +1,5 @@
-You're given a binary tree along with two node values `a` and `b` known to exist in the tree. Values in the tree are unique. Find the distance between them, measured as the number of edges on the path connecting the two nodes — typically found by locating their lowest common ancestor and summing the edges from it down to each node.
+Given a binary tree with unique node values and two values `a` and `b` present in it, return the distance between those nodes, measured in **edges**.
+
+The path may travel upward toward the root and then downward. A tree has exactly one simple path between any two nodes. If `a` and `b` are equal, return `0`.
+
+In Example 1, the path is `4 → 2 → 1 → 3 → 6`. It contains five nodes but **four edges**, so return `4`. Node values identify the targets; they are not edge weights.

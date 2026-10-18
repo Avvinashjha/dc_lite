@@ -1,6 +1,6 @@
 ## Convert 0→-1 then Largest Zero-Sum Submatrix
 
-Replace 0s with -1s. For each pair of rows, compute column prefix sums and find longest zero-sum subarray.
+Replace 0s with -1s. For each pair of rows, accumulate each column’s sum across those rows, then find the longest zero-sum interval of columns. Store the earliest index for each running sum; repeating that sum identifies a zero-sum interval. Multiply its width by the selected row count.
 
 ```javascript
 function largestAreaEqual(matrix) {

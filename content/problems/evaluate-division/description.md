@@ -1,1 +1,3 @@
-You're given a list of division equations, such as `a / b = 2.0`, along with their results in `values`, and a list of `queries` asking for the result of other divisions, such as `a / c`. Using the known equations, work out the answer to each query; if a query's result can't be derived from the given equations, report `-1.0` for it instead.
+Use the given equations to evaluate each division query. An equation `[a, b]` with value `v` means `a / b = v`; the equations are consistent.
+
+Return `-1` when the ratio cannot be determined, including when either variable does not occur in any equation. A known variable divided by itself is `1`; an unknown variable divided by itself is still `-1`. Return answers in the same order as the queries.

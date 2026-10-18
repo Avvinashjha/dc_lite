@@ -1,11 +1,12 @@
 {
   "draft": false,
   "id": "problem-0076",
-  "title": "Minimum swaps to sort an array",
+  "title": "Minimum Swaps to Sort an Array",
   "difficulty": "Hard",
-  "topic": "Sorting&Searching",
+  "topic": "Sorting",
   "topics": [
-    "Sorting&Searching"
+    "Sorting",
+    "Permutation Cycles"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Minimum%20swaps%20to%20sort%20an%20array",
@@ -31,6 +32,66 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          9
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          2,
+          3,
+          4,
+          1
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          4,
+          3
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          10,
+          1,
+          2
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          3,
+          2,
+          4
+        ]
+      ],
+      "expected": 1
     }
   ],
   "functionName": "minSwaps",
@@ -53,6 +114,6 @@
   ],
   "sampleInput": "arr = [4,3,2,1]",
   "sampleOutput": "2",
-  "inputFormat": "Implement minSwaps(arr). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement minSwaps(arr). Receive a nonempty array of distinct positive integers.",
+  "outputFormat": "Return the minimum number of swaps between arbitrary pairs of indices required to sort the array in ascending order."
 }

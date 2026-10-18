@@ -1,5 +1,7 @@
 ## Histogram per Row + Largest Rectangle in Histogram
 
+For each row, accumulate consecutive ones in each column, resetting the height to zero at a zero cell. Treat these heights as a histogram. A non-decreasing stack of column indices finds its maximum rectangle: when a shorter bar arrives, pop taller bars and use the remaining stack top to locate the left boundary. A sentinel iteration flushes the stack. Each column is pushed and popped at most once per row.
+
 ```javascript
 function maximalRectangle(matrix) {
   if (!matrix.length) return 0;

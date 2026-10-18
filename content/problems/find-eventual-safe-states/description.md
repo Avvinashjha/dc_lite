@@ -1,1 +1,3 @@
-You're given a directed graph. A node with no outgoing edges is called a terminal node, and a node is eventually safe if following any path from it always eventually reaches a terminal node — meaning it can never be part of an endless cycle. Return the list of all eventually safe nodes.
+A terminal vertex has no outgoing edges. A vertex is **eventually safe** if every path starting there eventually reaches a terminal vertex. Equivalently, no directed cycle is reachable from it. Terminal vertices are themselves safe.
+
+It is not enough to have one path to a terminal: if another choice leads to a cycle, the starting vertex is unsafe. Return the safe vertex indices in ascending order.

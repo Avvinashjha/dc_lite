@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0067",
-  "title": "Ceiling in a sorted array",
+  "title": "Ceiling in a Sorted Array",
   "difficulty": "Easy",
   "topic": "Sorting&Searching",
   "topics": [
@@ -37,13 +37,47 @@
         0
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          2,
+          8
+        ],
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          8
+        ],
+        9
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        5
+      ],
+      "expected": 5
     }
   ],
   "functionName": "ceiling",
   "templateCode": "function ceiling(arr, x) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= arr.length <= 10^5",
-    "1 <= arr[i], x <= 10^6"
+    "1 <= arr[i] <= 10^6",
+    "0 <= x <= 10^6",
+    "arr is sorted in nondecreasing order."
   ],
   "runner": {},
   "examples": [
@@ -58,6 +92,6 @@
   ],
   "sampleInput": "arr = [1,2,8,10,10,12,19]\nx = 5",
   "sampleOutput": "8",
-  "inputFormat": "Implement ceiling(arr, x). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement ceiling(arr, x), where arr is sorted in nondecreasing order and may contain duplicates.",
+  "outputFormat": "The smallest array value greater than or equal to x, or -1 if no such value exists. Return a value, not an index."
 }

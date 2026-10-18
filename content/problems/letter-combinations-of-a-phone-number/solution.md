@@ -1,21 +1,33 @@
 ## Approach: Backtracking
 
-Map each digit to its corresponding letters. Recursively build combinations by choosing one letter per digit and advancing to the next digit. When the current combination length equals the digits length, add it to the result.
+Choose one mapped letter at each position. Keep the current choices in a shared path buffer, then join them into a string when every digit has been processed. Backtrack by removing the last choice before trying the next letter. Return an empty array immediately for empty input.
 
 ```javascript
 function letterCombinationsOfAPhoneNumber(digits) {
   if (!digits.length) return [];
-  const map = {2:"abc",3:"def",4:"ghi",5:"jkl",6:"mno",7:"pqrs",8:"tuv",9:"wxyz"};
+  const letters = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
   const result = [];
-  function backtrack(i, curr) {
-    if (i === digits.length) { result.push(curr); return; }
-    for (const ch of map[digits[i]]) backtrack(i + 1, curr + ch);
+  const path = [];
+
+  function visit(index) {
+    if (index === digits.length) {
+      result.push(path.join(""));
+      return;
+    }
+    for (const letter of letters[Number(digits[index])]) {
+      path.push(letter);
+      visit(index + 1);
+      path.pop();
+    }
   }
-  backtrack(0, "");
+
+  visit(0);
   return result;
 }
 ```
 
-**Time Complexity:** O(n × 4^n) including output strings, where n is the length of digits
+Let `n` be the number of digits and `C` the product of their mapped letter counts. For nonempty input, there are exactly `C` results; `C` is at most `4^n`.
 
-**Space Complexity:** O(n) for recursion depth
+**Time Complexity:** O(n × C), including construction of the output strings.
+
+**Space Complexity:** O(n) auxiliary space for the shared path and recursion, plus O(n × C) for the output. Empty input takes O(1) time and space.

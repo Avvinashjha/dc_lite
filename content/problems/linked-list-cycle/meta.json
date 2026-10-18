@@ -5,7 +5,8 @@
   "difficulty": "Easy",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/linked-list-cycle/",
@@ -35,13 +36,86 @@
         ]
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          [],
+          -1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          [
+            7
+          ],
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          0
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2
+          ],
+          1
+        ]
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          [
+            5,
+            5,
+            5
+          ],
+          -1
+        ]
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          3
+        ]
+      ],
+      "expected": true
     }
   ],
   "functionName": "linkedListCycle",
   "templateCode": "function linkedListCycle(head) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 to 10^4 nodes",
-    "-10^5 <= Node.val <= 10^5"
+    "-10^5 <= Node.val <= 10^5",
+    "pos is -1 or a valid zero-based node index; an empty list uses pos = -1"
   ],
   "runner": {
     "argTypes": [
@@ -61,5 +135,12 @@
   "sampleInput": "headFixture = [[3,2,0,-4],1]",
   "sampleOutput": "true",
   "inputFormat": "Implement linkedListCycle(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nheadFixture is [values, pos]; the tail links to the zero-based pos, or null when pos is -1. The function receives only the head.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if following next pointers revisits the same node object; otherwise return false.",
+  "visuals": [
+    {
+      "title": "A cycle follows links, not repeated values",
+      "caption": "For [[3,2,0,-4],1], the last node links back to index 1. Following next visits 2 \u2192 0 \u2192 \u22124 \u2192 2 repeatedly.",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 165\" role=\"img\" aria-labelledby=\"cycle-title cycle-desc\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><title id=\"cycle-title\">Linked list with a cycle starting at index one</title><desc id=\"cycle-desc\">Four nodes contain 3, 2, 0, and minus 4. Arrows connect consecutive nodes. A return arrow connects minus 4 back to 2.</desc><defs><marker id=\"cycle-arrow\" markerWidth=\"7\" markerHeight=\"7\" refX=\"6\" refY=\"3.5\" orient=\"auto\"><path d=\"M0 0L7 3.5L0 7Z\" fill=\"currentColor\"/></marker></defs><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" marker-end=\"url(#cycle-arrow)\"><path d=\"M89 69H138\"/><path d=\"M199 69H248\"/><path d=\"M309 69H358\"/><path d=\"M390 99V136H170V102\"/></g><g fill=\"var(--color-surface, #fff)\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"30\" y=\"39\" width=\"60\" height=\"60\" rx=\"10\"/><rect x=\"140\" y=\"39\" width=\"60\" height=\"60\" rx=\"10\"/><rect x=\"250\" y=\"39\" width=\"60\" height=\"60\" rx=\"10\"/><rect x=\"360\" y=\"39\" width=\"60\" height=\"60\" rx=\"10\"/></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" text-anchor=\"middle\"><g font-size=\"20\"><text x=\"60\" y=\"76\">3</text><text x=\"170\" y=\"76\">2</text><text x=\"280\" y=\"76\">0</text><text x=\"390\" y=\"76\">\u22124</text></g><g font-size=\"12\"><text x=\"60\" y=\"23\">head \u00b7 0</text><text x=\"170\" y=\"23\">index 1</text><text x=\"280\" y=\"23\">index 2</text><text x=\"390\" y=\"23\">index 3</text><text x=\"280\" y=\"157\">tail.next \u2192 index 1</text></g></g></svg>"
+    }
+  ]
 }

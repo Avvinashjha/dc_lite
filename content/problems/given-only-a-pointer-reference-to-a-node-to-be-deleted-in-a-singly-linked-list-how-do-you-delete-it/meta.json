@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0090",
-  "title": "Given only a pointer/reference to a node to be deleted in a singly linked list, how do you delete it?",
+  "title": "Delete a Node Without the Head",
   "difficulty": "Easy",
   "topic": "Linked-List",
   "topics": [
@@ -38,10 +38,54 @@
       "expected": [
         2
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        2
+      ],
+      "expected": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          5,
+          7
+        ],
+        0
+      ],
+      "expected": [
+        5,
+        7
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          0,
+          1
+        ],
+        1
+      ],
+      "expected": [
+        -1,
+        1
+      ]
     }
   ],
-  "functionName": "givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt",
-  "templateCode": "function givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt(node) {\n  // Write your solution here.\n}\n",
+  "functionName": "deleteNode",
+  "templateCode": "function deleteNode(node) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "2 <= number of nodes <= 1000",
     "-1000 <= Node.val <= 1000",
@@ -66,6 +110,6 @@
   ],
   "sampleInput": "head = [4,5,1,9]\nnodeIndex = 1",
   "sampleOutput": "[4,1,9]",
-  "inputFormat": "Implement givenOnlyAPointerReferenceToANodeToBeDeletedInASinglyLinkedListHowDoYouDeleteIt(node). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.\nThe fixture supplies a list and a zero-based nodeIndex. The editor passes only the selected non-tail node to your function.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "inputFormat": "The fixture supplies a value array and zero-based nodeIndex. Your function receives only that non-tail node, with val and next properties\u2014not the head or index.",
+  "outputFormat": "Modify the list in place so its value sequence omits the selected position. The runner checks the original list; return values are ignored."
 }

@@ -1,0 +1,34 @@
+---
+import Logo from './Logo.astro';
+import Icons from './Icons.astro';
+import AuthWidget from './AuthWidget';
+import { getSiteConfig } from '../utils/contentLoader';
+interface Props { homeWorkspace?: boolean }
+const { homeWorkspace = false } = Astro.props;
+const config = getSiteConfig();
+const navigation = [...config.navigation, ...[{ label: 'Games', path: '/games' }, { label: 'Docs', path: '/docs' }].filter(item => !config.navigation.some(existing => existing.path === item.path))];
+const desktopNavigation = homeWorkspace ? [{ label: 'DailyCoder School ↗', path: '/school' }, { label: 'About us', path: '/about' }] : navigation.filter(item => item.path !== '/about' && item.path !== '/docs');
+const active = (path: string) => Astro.url.pathname === path || (path !== '/' && Astro.url.pathname.startsWith(path + '/'));
+---
+<header class="header">
+  <div class="container"><div class="header__inner">
+    <a href="/" class="header__logo"><Logo size={24} color="currentColor"/><span>{config.site.title}</span></a>
+    <nav class="header__nav header__nav--desktop" aria-label="Main navigation">
+      {desktopNavigation.map(item => <a href={item.path} class:list={{ 'header__nav-active': active(item.path) }} aria-current={active(item.path) ? 'page' : undefined}>{item.label}</a>)}
+      {!homeWorkspace && <button id="reading-mode-toggle" class="theme-toggle" aria-label="Reading mode" title="Reading mode"><Icons name="book" size={18}/></button>}
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><span id="theme-icon" class="theme-toggle__icon"><Icons name="moon" size={18}/></span></button>
+      <AuthWidget client:idle/>
+    </nav>
+    <div class="header__mobile-controls">
+      <button id="theme-toggle-mobile" class="theme-toggle" aria-label="Toggle theme"><span id="theme-icon-mobile" class="theme-toggle__icon"><Icons name="moon" size={18}/></span></button>
+      <button id="mobile-menu-btn" class="theme-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><Icons name="menu" size={20}/></button>
+    </div>
+  </div></div>
+  <nav id="mobile-nav" class="header__mobile-nav" aria-label="Mobile navigation"><div class="header__mobile-nav-inner">
+    {navigation.map(item => <a href={item.path} class:list={['header__mobile-link', { 'header__mobile-link--active': active(item.path) }]} aria-current={active(item.path) ? 'page' : undefined}>{item.label}</a>)}
+    <div class="header__mobile-account">
+      <AuthWidget client:idle/>
+      {!homeWorkspace && <button id="reading-mode-toggle-mobile" class="theme-toggle" aria-label="Reading mode" title="Reading mode"><Icons name="book" size={18}/></button>}
+    </div>
+  </div></nav>
+</header>

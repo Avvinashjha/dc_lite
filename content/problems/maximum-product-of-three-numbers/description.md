@@ -1,1 +1,5 @@
-You're given an integer array `nums`. Pick any three numbers from it whose product is as large as possible, and return that product. Since the array can hold negative values too, the best product might actually come from multiplying the two smallest (most negative) numbers with the single largest positive one.
+Given an integer array `nums`, choose elements at **exactly three distinct indices** and return their maximum possible product.
+
+The indices need not be consecutive. Equal values at different indices may all be used, but you cannot reuse the same index. The answer may be negative or zero.
+
+For `[-4,-3,-2,1,60]`, choosing `-4`, `-3`, and `60` gives `720`. For `[-5,-4,-3,-2]`, the maximum product is `-24`, from `-4 × -3 × -2`.

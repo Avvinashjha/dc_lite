@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0077",
-  "title": "SPOJ.com - Problem AGGRCOW",
+  "title": "Aggressive Cows",
   "difficulty": "Hard",
-  "topic": "Sorting&Searching",
+  "topic": "Binary Search",
   "topics": [
-    "Sorting&Searching"
+    "Sorting",
+    "Binary Search",
+    "Greedy"
   ],
   "platform": "Other",
   "problemSet": "top-300-leetcode",
@@ -32,20 +34,116 @@
         2
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          9,
+          1,
+          8,
+          2,
+          4
+        ],
+        3
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          0,
+          1000000000
+        ],
+        2
+      ],
+      "expected": 1000000000
+    },
+    {
+      "args": [
+        [
+          0,
+          3,
+          4,
+          10
+        ],
+        4
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          0,
+          10,
+          20,
+          30
+        ],
+        3
+      ],
+      "expected": 10
+    },
+    {
+      "args": [
+        [
+          5,
+          5,
+          5
+        ],
+        2
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          10
+        ],
+        3
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          2,
+          3,
+          5,
+          12,
+          17
+        ],
+        2
+      ],
+      "expected": 15
+    },
+    {
+      "args": [
+        [
+          0,
+          2,
+          3,
+          4,
+          7
+        ],
+        3
+      ],
+      "expected": 3
     }
   ],
   "functionName": "aggressiveCows",
   "templateCode": "function aggressiveCows(stalls, c) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "2 <= N <= 10^5",
-    "0 <= positions[i] <= 10^9",
-    "2 <= C <= N"
+    "2 <= stalls.length <= 100000",
+    "0 <= stalls[i] <= 1000000000",
+    "2 <= c <= stalls.length"
   ],
   "runner": {},
   "examples": [
     {
       "input": "stalls = [1,2,4,8,9]\nc = 3",
-      "output": "3"
+      "output": "3",
+      "explanation": "Place cows at positions 1, 4, and 8. Their adjacent gaps are 3 and 4, so the minimum gap is 3. A minimum gap of 4 cannot accommodate all three cows."
     },
     {
       "input": "stalls = [1,2]\nc = 2",
@@ -55,5 +153,5 @@
   "sampleInput": "stalls = [1,2,4,8,9]\nc = 3",
   "sampleOutput": "3",
   "inputFormat": "Implement aggressiveCows(stalls, c). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the largest achievable minimum distance between any two occupied stalls."
 }

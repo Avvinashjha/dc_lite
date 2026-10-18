@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0066",
-  "title": "Permute two arrays such that sum of every pair is greater or equal to K",
+  "title": "Pair Arrays to Meet a Minimum Sum",
   "difficulty": "Easy",
   "topic": "Sorting&Searching",
   "topics": [
-    "Sorting&Searching"
+    "Array",
+    "Sorting",
+    "Greedy"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Permute%20two%20arrays%20such%20that%20sum%20of%20every%20pair%20is%20greater%20or%20equal%20to%20K",
@@ -40,13 +42,124 @@
         5
       ],
       "expected": false
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        2
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        3
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          100
+        ],
+        50
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          3
+        ],
+        5
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        10
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1000000
+        ],
+        [
+          1000000
+        ],
+        2000000
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        4
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        0
+      ],
+      "expected": true
     }
   ],
   "functionName": "canPermute",
   "templateCode": "function canPermute(A, B, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^5",
-    "1 <= A[i], B[i] <= 10^6"
+    "1 <= A.length == B.length <= 10^5",
+    "1 <= A[i], B[i] <= 10^6",
+    "k is a safe JavaScript integer."
   ],
   "runner": {},
   "examples": [
@@ -62,5 +175,5 @@
   "sampleInput": "A = [2,1,3]\nB = [7,8,9]\nk = 10",
   "sampleOutput": "true",
   "inputFormat": "Implement canPermute(A, B, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if a one-to-one pairing makes every sum at least k; otherwise return false."
 }

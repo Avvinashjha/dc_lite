@@ -31,6 +31,12 @@ function AskPanel({ lessons, initial }: { lessons: SchoolLesson[]; initial?: str
 export default function SchoolApp({ mode = 'home' }: { mode?: SchoolMode }) {
   const [profile, setProfile] = useState<SchoolProfile>({ ...DEFAULT_SCHOOL_PROFILE });
   const [ready, setReady] = useState(false);
+  const [dark, setDark] = useState(false);
+  function toggleTheme() {
+    const next = !dark; setDark(next);
+    document.documentElement.dataset.theme = next ? 'dark' : 'light';
+    try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {}
+  }
   const [storageAvailable, setStorageAvailable] = useState(true);
   const [subject, setSubject] = useState('all');
   const [lessonId, setLessonId] = useState('');
@@ -47,6 +53,7 @@ export default function SchoolApp({ mode = 'home' }: { mode?: SchoolMode }) {
   const currentAttempts = profile.attempts.filter(a => lessons.some(l => l.id === a.lessonId));
 
   useEffect(() => {
+    setDark(document.documentElement.dataset.theme === 'dark');
     let restored = restoreSchoolProfile(null);
     try { restored = restoreSchoolProfile(JSON.parse(localStorage.getItem(SCHOOL_STORAGE_KEY) || 'null')); }
     catch { setStorageAvailable(false); }
@@ -99,7 +106,7 @@ export default function SchoolApp({ mode = 'home' }: { mode?: SchoolMode }) {
 
   return <div class={`school-app school-stage-${stage}`} inert={!ready} aria-busy={!ready}>
     <header class="school-header"><a class="school-brand" href={href('home')} aria-label="DailyCoder School home"><span class="school-brand-mark" aria-hidden="true"><Icon name="book" size={25}/></span><span>dailycoder<span class="school-brand-school">school<span class="school-brand-dot">.</span></span></span></a>
-      <div class="school-header-right"><span class="school-board-label">CBSE / NCERT</span><label class="school-class-picker"><span>Your class</span><select aria-label="Your class" disabled={!ready} value={profile.grade} onChange={e => updateSelection(Number(e.currentTarget.value), profile.stream)}>{Array.from({ length: 12 }, (_, i) => <option value={i + 1} key={i + 1}>Class {i + 1}</option>)}</select></label><a class="school-back-link" href="/">DailyCoder <span aria-hidden="true">↗</span></a></div>
+      <div class="school-header-right"><button class="school-theme-toggle" aria-label="Toggle theme" aria-pressed={dark} onClick={toggleTheme}><Icon name={dark ? 'sun' : 'moon'} size={20}/></button><span class="school-board-label">CBSE / NCERT</span><label class="school-class-picker"><span>Your class</span><select aria-label="Your class" disabled={!ready} value={profile.grade} onChange={e => updateSelection(Number(e.currentTarget.value), profile.stream)}>{Array.from({ length: 12 }, (_, i) => <option value={i + 1} key={i + 1}>Class {i + 1}</option>)}</select></label><a class="school-back-link" href="/">DailyCoder <span aria-hidden="true">↗</span></a></div>
     </header>
     <div class="school-shell">
       <aside class="school-sidebar"><span class="school-nav-label">YOUR LEARNING SPACE</span><nav aria-label="School activities"><a class={mode === 'home' ? 'is-active' : ''} href={href('home')} aria-current={mode === 'home' ? 'page' : undefined}><Icon name="home"/><span>My space</span></a>{SCHOOL_MODES.map(item => <a class={mode === item.id ? 'is-active' : ''} href={href(item.id)} aria-current={mode === item.id ? 'page' : undefined} key={item.id}><Icon name={item.icon}/><span>{item.label}</span>{item.id === 'ask' && <span class="school-nav-soon">Soon</span>}</a>)}</nav>

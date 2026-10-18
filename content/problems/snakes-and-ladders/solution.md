@@ -1,4 +1,8 @@
-## BFS
+## Breadth-First Search
+
+Treat each square as a state. Each edge represents one legal die roll followed by its mandatory jump, if any. BFS visits states in increasing roll count, so the first arrival at the final square is optimal. Mark the post-jump destination visited to handle cycles without reprocessing states.
+
+Convert a label to its row counted from the bottom, reverse the column on odd-numbered rows, then convert to the top-first array row.
 
 ```javascript
 function snakesAndLadders(board) {

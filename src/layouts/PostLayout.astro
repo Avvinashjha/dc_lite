@@ -61,7 +61,7 @@ const relatedTools = getToolsForPost({ title, tags, category }, 3);
         <p class="article__description">{description}</p>
 
         <div
-          style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem;"
+          style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-start; margin-top: 1rem;"
         >
           <a href={`/blog/category/${categorySlug}`} class="tag">{category}</a>
           {
@@ -233,7 +233,7 @@ const relatedTools = getToolsForPost({ title, tags, category }, 3);
   }
   .share-btn--copy:hover {
     background: var(--color-primary);
-    color: white;
+    color: var(--color-on-primary);
     border-color: var(--color-primary);
   }
 </style>

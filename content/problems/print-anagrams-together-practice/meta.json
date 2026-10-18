@@ -1,11 +1,13 @@
 {
   "draft": false,
   "id": "problem-0220",
-  "title": "Print Anagrams Together | Practice",
+  "title": "Group Anagrams",
   "difficulty": "Medium",
-  "topic": "Tries",
+  "topic": "String",
   "topics": [
-    "Tries"
+    "String",
+    "Hash Table",
+    "Sorting"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20Anagrams%20Together%20%7C%20Practice",
@@ -48,6 +50,134 @@
           ""
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "aab",
+          "aba",
+          "abb",
+          "baa"
+        ]
+      ],
+      "expected": [
+        [
+          "aab",
+          "aba",
+          "baa"
+        ],
+        [
+          "abb"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "a",
+          "a",
+          "b"
+        ]
+      ],
+      "expected": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "ab",
+          "ba",
+          "ab"
+        ]
+      ],
+      "expected": [
+        [
+          "ab",
+          "ba",
+          "ab"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "abc",
+          "def",
+          "ghi"
+        ]
+      ],
+      "expected": [
+        [
+          "abc"
+        ],
+        [
+          "def"
+        ],
+        [
+          "ghi"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "",
+          "a",
+          ""
+        ]
+      ],
+      "expected": [
+        [
+          "",
+          ""
+        ],
+        [
+          "a"
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          "listen",
+          "silent",
+          "enlist",
+          "inlets",
+          "google"
+        ]
+      ],
+      "expected": [
+        [
+          "listen",
+          "silent",
+          "enlist",
+          "inlets"
+        ],
+        [
+          "google"
+        ]
+      ]
     }
   ],
   "functionName": "groupAnagrams",
@@ -74,5 +204,5 @@
   "sampleInput": "words = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
   "sampleOutput": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]",
   "inputFormat": "Implement groupAnagrams(words). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
+  "outputFormat": "Return one group for each anagram class, preserving every input occurrence. Group order and word order inside each group do not matter."
 }

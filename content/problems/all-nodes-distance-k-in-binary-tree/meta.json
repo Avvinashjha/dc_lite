@@ -48,6 +48,30 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1,
+        1
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        2,
+        2
+      ],
+      "expected": [
+        3
+      ]
     }
   ],
   "functionName": "distanceK",
@@ -56,7 +80,8 @@
     "1 <= number of nodes <= 500",
     "0 <= Node.val <= 500",
     "All values are unique",
-    "0 <= k <= 1000"
+    "0 <= k <= 1000",
+    "target is a node in the given tree"
   ],
   "runner": {
     "argTypes": [
@@ -77,6 +102,13 @@
   ],
   "sampleInput": "root = [3,5,1,6,2,0,8,null,null,7,4]\ntarget = 5\nk = 2",
   "sampleOutput": "[7,4,1]",
-  "inputFormat": "Implement distanceK(root, target, k). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.\nThe target value selects the actual node from the input tree.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "inputFormat": "Implement distanceK(root, target, k). The runner converts the level-order root array into nodes with val, left, and right fields. The target value selects the corresponding node object in that tree.",
+  "outputFormat": "An array of values of all nodes exactly k edges from target, in any order. Return [] if none exist.",
+  "visuals": [
+    {
+      "title": "Two edges from node 5",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 290\" role=\"img\" aria-label=\"Tree with target 5; nodes 7, 4 and 1 are two edges away\" style=\"width:100%;height:auto;max-width:480px;color:var(--color-text)\"><path d=\"M240 30L130 90\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M240 30L350 90\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M130 90L65 155\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M130 90L195 155\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M350 90L300 155\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M350 90L410 155\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M195 155L155 220\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M195 155L235 220\" stroke=\"var(--color-text-light)\" fill=\"none\"/><circle cx=\"240\" cy=\"30\" r=\"19\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"240\" y=\"36\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">3</text><circle cx=\"130\" cy=\"90\" r=\"19\" fill=\"var(--dc-peach)\" stroke=\"currentColor\"/><text x=\"130\" y=\"96\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">5</text><circle cx=\"350\" cy=\"90\" r=\"19\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"350\" y=\"96\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">1</text><circle cx=\"65\" cy=\"155\" r=\"19\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"65\" y=\"161\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">6</text><circle cx=\"195\" cy=\"155\" r=\"19\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"195\" y=\"161\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">2</text><circle cx=\"300\" cy=\"155\" r=\"19\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"300\" y=\"161\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">0</text><circle cx=\"410\" cy=\"155\" r=\"19\" fill=\"var(--color-surface)\" stroke=\"currentColor\"/><text x=\"410\" y=\"161\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">8</text><circle cx=\"155\" cy=\"220\" r=\"19\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"155\" y=\"226\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">7</text><circle cx=\"235\" cy=\"220\" r=\"19\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"235\" y=\"226\" fill=\"currentColor\" font-family=\"monospace\" text-anchor=\"middle\" font-size=\"18\">4</text><text x=\"10\" y=\"270\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"17\">Target: 5 \u00b7 k = 2 \u00b7 Result: 7, 4, 1</text></svg>",
+      "caption": "Paths 5 \u2192 2 \u2192 7, 5 \u2192 2 \u2192 4, and 5 \u2192 3 \u2192 1 each contain two edges."
+    }
+  ]
 }

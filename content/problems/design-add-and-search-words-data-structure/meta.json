@@ -78,6 +78,45 @@
         false,
         true
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "addWord",
+            "bad"
+          ],
+          [
+            "addWord",
+            "bad"
+          ],
+          [
+            "search",
+            "ba"
+          ],
+          [
+            "search",
+            "bad."
+          ],
+          [
+            "search",
+            "..."
+          ],
+          [
+            "search",
+            "b.d"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        false,
+        false,
+        true,
+        true
+      ]
     }
   ],
   "functionName": "WordDictionary",
@@ -93,7 +132,8 @@
   "examples": [
     {
       "input": "constructorArgs = []\noperations = [[\"addWord\",\"bad\"],[\"addWord\",\"dad\"],[\"search\",\"pad\"],[\"search\",\"bad\"],[\"search\",\".ad\"],[\"search\",\"b..\"]]",
-      "output": "[null,null,false,true,true,true]"
+      "output": "[null,null,false,true,true,true]",
+      "explanation": "After storing bad and dad, .ad matches either word and b.. matches bad. pad is not stored."
     },
     {
       "input": "constructorArgs = []\noperations = [[\"search\",\"a\"],[\"addWord\",\"ab\"],[\"search\",\".\"],[\"search\",\"..\"]]",
@@ -102,6 +142,6 @@
   ],
   "sampleInput": "constructorArgs = []\noperations = [[\"addWord\",\"bad\"],[\"addWord\",\"dad\"],[\"search\",\"pad\"],[\"search\",\"bad\"],[\"search\",\".ad\"],[\"search\",\"b..\"]]",
   "sampleOutput": "[null,null,false,true,true,true]",
-  "inputFormat": "Implement the class WordDictionary. Fixtures contain constructor arguments and a list of [method, ...arguments] calls. Each fixture starts with a fresh instance.",
-  "outputFormat": "Return the specified result from each method. The displayed output lists results in call order; undefined results appear as null."
+  "inputFormat": "Implement class WordDictionary with a no-argument constructor. Each test creates one instance and applies the listed [method, word] calls in order.",
+  "outputFormat": "addWord(word) stores the word and returns nothing (displayed as null). search(pattern) returns true only when a stored whole word matches; each dot matches exactly one letter."
 }

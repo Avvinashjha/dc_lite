@@ -63,7 +63,35 @@ export function invokeProblem(fn, rawArgs, config = {}) {
     }
     return dummy.next || null;
   }
+  if (config.mode === 'codec') {
+    // Separate instances ensure the string is sufficient to reconstruct the tree.
+    const source = tree(args[0]);
+    const encoded = fn().serialize(source);
+    if (typeof encoded !== 'string') throw new Error('serialize must return a string.');
+    const decoded = fn().deserialize(encoded);
+    const originalNodes = new Set(), pending = source ? [source] : [];
+    while (pending.length) {
+      const node = pending.pop();
+      if (originalNodes.has(node)) continue;
+      originalNodes.add(node);
+      if (node.left) pending.push(node.left);
+      if (node.right) pending.push(node.right);
+    }
+    const output = encodeTree(decoded);
+    const copies = decoded ? [decoded] : [];
+    while (copies.length) {
+      const node = copies.pop();
+      if (originalNodes.has(node)) throw new Error('deserialize must create independent nodes.');
+      if (node.left) copies.push(node.left);
+      if (node.right) copies.push(node.right);
+    }
+    return output;
+  }
   let originals;
+  let originalLinks;
+  let multilevelValues;
+  let intersectionSnapshot;
+  let intersectionNode;
   for (let i = 0; i < (config.argTypes || []).length; i++) {
     const type = config.argTypes[i];
     if (type === 'tree') args[i] = tree(args[i]);
@@ -71,10 +99,21 @@ export function invokeProblem(fn, rawArgs, config = {}) {
     if (type === 'knows') { const matrix = args[i]; args[i] = (a,b) => !!matrix[a][b]; }
     if (type === 'lists') args[i] = args[i].map(list);
     if (type === 'treeNode') args[i] = find(args[0], args[i]);
-    if (type === 'multilevel') args[i] = multi(args[i]);
+    if (type === 'multilevel') {
+      args[i] = multi(args[i]);
+      multilevelValues = new Map();
+      const pending = args[i] ? [args[i]] : [];
+      while (pending.length) {
+        const node = pending.pop();
+        multilevelValues.set(node, node.val);
+        if (node.next) pending.push(node.next);
+        if (node.child) pending.push(node.child);
+      }
+    }
     if (type === 'randomList') {
       originals = args[i].map(([val]) => ({ val, next: null, random: null }));
       args[i].forEach(([, r], j) => { originals[j].next = originals[j + 1] || null; originals[j].random = r == null ? null : originals[r]; });
+      originalLinks = originals.map(node => ({ val: node.val, next: node.next, random: node.random }));
       args[i] = originals[0] || null;
     }
     if (type === 'bottomLists') {
@@ -92,7 +131,118 @@ export function invokeProblem(fn, rawArgs, config = {}) {
       const [a, b, shared] = args[i], tail = list(shared);
       function attach(v) { const h = list(v); if (!h) return tail; let n = h; while (n.next) n = n.next; n.next = tail; return h; }
       args.splice(i, 1, attach(a), attach(b));
+      intersectionNode = tail;
+      intersectionSnapshot = new Map();
+      for (const head of [args[i], args[i + 1]]) {
+        let node = head;
+        while (node && !intersectionSnapshot.has(node)) {
+          intersectionSnapshot.set(node, { val: node.val, next: node.next });
+          node = node.next;
+        }
+      }
     }
+  }
+  let middleSnapshot;
+  let expectedMiddle;
+  if (config.outputType === 'middleList') {
+    middleSnapshot = [];
+    for (let node = args[0]; node; node = node.next) {
+      middleSnapshot.push({ node, val: node.val, next: node.next });
+    }
+    expectedMiddle = middleSnapshot[Math.floor(middleSnapshot.length / 2)]?.node ?? null;
+  }
+  let partitionSnapshot;
+  if (config.outputType === 'partitionList') {
+    const entries = [];
+    for (let node = args[0]; node; node = node.next) entries.push({node, val: node.val});
+    partitionSnapshot = [...entries.filter(e => e.val < args[1]), ...entries.filter(e => e.val >= args[1])];
+  }
+  let nextSnapshot, nextExpected;
+  if (config.outputType === 'nextLevels') {
+    nextSnapshot = [];
+    nextExpected = new Map();
+    let level = args[0] ? [args[0]] : [];
+    while (level.length) {
+      const children = [];
+      level.forEach((node, i) => {
+        nextSnapshot.push({node, val: node.val, left: node.left, right: node.right});
+        nextExpected.set(node, level[i + 1] || null);
+        if (node.left) children.push(node.left);
+        if (node.right) children.push(node.right);
+      });
+      level = children;
+    }
+  }
+  let neighborSnapshot, expectedNeighbors;
+  if (config.outputType === 'predecessorSuccessor') {
+    neighborSnapshot = [];
+    expectedNeighbors = [null, null];
+    const stack = args[0] ? [args[0]] : [];
+    while (stack.length) {
+      const node = stack.pop();
+      neighborSnapshot.push({node, val: node.val, left: node.left, right: node.right});
+      if (node.val < args[1] && (!expectedNeighbors[0] || node.val > expectedNeighbors[0].val)) expectedNeighbors[0] = node;
+      if (node.val > args[1] && (!expectedNeighbors[1] || node.val < expectedNeighbors[1].val)) expectedNeighbors[1] = node;
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+    }
+  }
+  let reorderedSnapshot;
+  if (config.outputType === 'reorderedList') {
+    const original = [];
+    for (let node = args[0]; node; node = node.next) original.push({node, val: node.val});
+    reorderedSnapshot = [];
+    for (let left = 0, right = original.length - 1; left <= right; left++, right--) {
+      reorderedSnapshot.push(original[left]);
+      if (left < right) reorderedSnapshot.push(original[right]);
+    }
+  }
+  let treeStructureSnapshot;
+  if (config.preserveTreeStructure) {
+    treeStructureSnapshot = [];
+    const stack = args[0] ? [args[0]] : [];
+    while (stack.length) {
+      const node = stack.pop();
+      treeStructureSnapshot.push({node, left: node.left, right: node.right});
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+    }
+  }
+  let originalListValues, expectedFilteredNodes;
+  if (config.originalListNodes) {
+    originalListValues = new Map();
+    for (let node = args[0]; node; node = node.next) originalListValues.set(node, node.val);
+    if (config.listOrder === 'reverse') expectedFilteredNodes = [...originalListValues.keys()].reverse();
+    if (config.listOrder === 'evenOdd') {
+      const original = [...originalListValues.keys()];
+      expectedFilteredNodes = [...original.filter(node => node.val % 2 === 0), ...original.filter(node => node.val % 2 !== 0)];
+    }
+    if (config.listOrder === 'reverseBetween') {
+      const original = [...originalListValues.keys()];
+      expectedFilteredNodes = [...original.slice(0, args[1] - 1), ...original.slice(args[1] - 1, args[2]).reverse(), ...original.slice(args[2])];
+    }
+    if (config.listOrder === 'reverseGroups') {
+      const original = [...originalListValues.keys()];
+      expectedFilteredNodes = [];
+      for (let i = 0; i < original.length; i += args[1]) {
+        const group = original.slice(i, i + args[1]);
+        expectedFilteredNodes.push(...(group.length === args[1] ? group.reverse() : group));
+      }
+    }
+    if (config.listFilter) {
+      const entries = [...originalListValues];
+      const counts = new Map();
+      for (const [, value] of entries) counts.set(value, (counts.get(value) || 0) + 1);
+      expectedFilteredNodes = entries.filter(([, value], index) => {
+        if (config.listFilter === 'excludeValue') return value !== args[1];
+        if (config.listFilter === 'removeNth') return index !== entries.length - args[1];
+        return counts.get(value) === 1;
+      }).map(([node]) => node);
+    }
+  }
+  const listLinks = new Map();
+  if (config.preserveListLinks) {
+    for (let node = args[0]; node; node = node.next) listLinks.set(node, node.next);
   }
   let result;
   if (config.mode === 'operations') {
@@ -113,11 +263,60 @@ export function invokeProblem(fn, rawArgs, config = {}) {
     fn(node); result = head;
   } else result = fn(...args);
   // In-place exercises are judged by the modified input, regardless of return value.
+  if (config.preserveListLinks) {
+    for (const [node, next] of listLinks) {
+      if (node.next !== next) throw new Error('Preserve the original list nodes and next links; overwrite values only.');
+    }
+  }
   if (config.resultArg !== undefined) result = args[config.resultArg];
   if (config.outputType === 'uniquePrefix') return { k: result, nums: args[0].slice(0,result) };
+  if (treeStructureSnapshot) {
+    for (const entry of treeStructureSnapshot) {
+      if (entry.node.left !== entry.left || entry.node.right !== entry.right) throw new Error('Preserve the original tree nodes and child links.');
+    }
+  }
   if (config.outputType === 'tree') return encodeTree(result);
   if (config.outputType === 'trees') return result.map(encodeTree);
-  if (config.outputType === 'list') return nodes(result);
+  if (config.outputType === 'middleList') {
+    if (result !== expectedMiddle) throw new Error('Return the original middle node.');
+    for (const entry of middleSnapshot) {
+      if (entry.node.val !== entry.val || entry.node.next !== entry.next) throw new Error('Preserve the input list.');
+    }
+    return nodes(result);
+  }
+  if (config.outputType === 'partitionList') {
+    let node = result;
+    for (const entry of partitionSnapshot) {
+      if (node !== entry.node || node.val !== entry.val) throw new Error('Preserve original nodes, values, and relative order within each partition.');
+      node = node.next;
+    }
+    if (node !== null) throw new Error('Terminate the partitioned list with null.');
+    return nodes(result);
+  }
+  if (config.outputType === 'reorderedList') {
+    let node = result;
+    for (const entry of reorderedSnapshot) {
+      if (node !== entry.node || node.val !== entry.val) throw new Error('Reorder the original nodes without changing values.');
+      node = node.next;
+    }
+    if (node !== null) throw new Error('Terminate the reordered list with null.');
+    return nodes(result);
+  }
+  if (config.outputType === 'list') {
+    if (originalListValues) {
+      const seen = new Set();
+      let filteredIndex = 0;
+      for (let node = result; node; node = node.next) {
+        if (seen.has(node)) throw new Error('Unexpected cycle in output');
+        if (!originalListValues.has(node) || node.val !== originalListValues.get(node)) throw new Error('Reuse original list nodes without changing their values.');
+        if (expectedFilteredNodes && node !== expectedFilteredNodes[filteredIndex++]) throw new Error('Keep every required original node in the required order.');
+        seen.add(node);
+      }
+      if (config.requireAllOriginalNodes && seen.size !== originalListValues.size) throw new Error('Keep every original list node exactly once.');
+      if (expectedFilteredNodes && filteredIndex !== expectedFilteredNodes.length) throw new Error('Keep every required original node in the required order.');
+    }
+    return nodes(result);
+  }
   if (config.outputType === 'bottomList') return nodes(result, 'bottom', 'data');
   if (config.outputType === 'dll') {
     let previous = null, node = result;
@@ -126,17 +325,54 @@ export function invokeProblem(fn, rawArgs, config = {}) {
   }
   if (config.outputType === 'multilevel') {
     let previous = null, node = result;
-    while (node) { if (node.prev !== previous || node.child) throw new Error('Invalid flattened links'); previous = node; node = node.next; }
+    const seen = new Set();
+    while (node) {
+      if (seen.has(node)) throw new Error('Cycle in flattened list');
+      if (node.prev !== previous || node.child !== null) throw new Error('Invalid flattened links');
+      if (multilevelValues && (!multilevelValues.has(node) || multilevelValues.get(node) !== node.val)) throw new Error('Flatten the original nodes without changing their values');
+      seen.add(node);
+      previous = node;
+      node = node.next;
+    }
+    if (multilevelValues && seen.size !== multilevelValues.size) throw new Error('Flattened list must contain every original node');
     return nodes(result);
   }
-  if (config.outputType === 'nodeValue') return result?.val ?? null;
+  if (config.outputType === 'nodeValue') {
+    if (intersectionSnapshot) {
+      if (result !== intersectionNode) throw new Error('Return the exact intersection node, or null when disjoint');
+      for (const [node, original] of intersectionSnapshot) {
+        if (node.val !== original.val || node.next !== original.next) throw new Error('Do not modify either input list');
+      }
+    }
+    return result?.val ?? null;
+  }
+  if (config.outputType === 'predecessorSuccessor') {
+    if (!Array.isArray(result) || result.length !== 2 || result.some((node, i) => node !== expectedNeighbors[i])) throw new Error('Return the original predecessor and successor nodes, or null when missing.');
+    for (const entry of neighborSnapshot) {
+      if (entry.node.val !== entry.val || entry.node.left !== entry.left || entry.node.right !== entry.right) throw new Error('Preserve the original BST.');
+    }
+    return result.map(node => node?.val ?? null);
+  }
   if (config.outputType === 'nodeValues') return result.map(n => n?.val ?? null);
   if (config.outputType === 'randomList') {
-    const copied = []; let node = result;
-    while (node) { if (copied.includes(node) || originals.includes(node)) throw new Error('Output must be an independent deep copy'); copied.push(node); node = node.next; }
-    return copied.map(n => { const r = n.random == null ? null : copied.indexOf(n.random); if (r === -1) throw new Error('Random pointer escapes copy'); return [n.val, r]; });
+    if (originals.some((node, i) => node.val !== originalLinks[i].val || node.next !== originalLinks[i].next || node.random !== originalLinks[i].random)) throw new Error('Restore the original list after copying');
+    const originalSet = new Set(originals), copied = [], indices = new Map(); let node = result;
+    while (node) {
+      if (indices.has(node) || originalSet.has(node)) throw new Error('Output must be an independent deep copy');
+      indices.set(node, copied.length); copied.push(node); node = node.next;
+    }
+    return copied.map(n => {
+      if (n.random != null && !indices.has(n.random)) throw new Error('Random pointer escapes copy');
+      return [n.val, n.random == null ? null : indices.get(n.random)];
+    });
   }
   if (config.outputType === 'nextLevels') {
+    if (result !== args[0]) throw new Error('Return the original root.');
+    for (const entry of nextSnapshot) {
+      const node = entry.node;
+      if (node.val !== entry.val || node.left !== entry.left || node.right !== entry.right) throw new Error('Preserve original tree values and child links.');
+      if (node.next !== nextExpected.get(node)) throw new Error('Link each original node to its next neighbor on the same level, or null.');
+    }
     const levels = []; let left = result;
     while (left) { const level = [], seen = new Set(); let n = left; while (n) { if (seen.has(n)) throw new Error('Cycle in next pointers'); seen.add(n); level.push(n.val); n = n.next; } levels.push(level); left = left.left; }
     return levels;
@@ -164,15 +400,15 @@ export function compareProblemResult(actual, expected, args, config = {}) {
   }
   if (config.validator === 'cashFlow') {
     if (!Array.isArray(actual) || actual.length !== expected.length) return false;
-    const graph = args[0], net = Array(graph.length).fill(0);
-    graph.forEach((row,i)=>row.forEach((v,j)=>{net[i]-=v;net[j]+=v;}));
+    const graph = args[0], net = Array(graph.length).fill(0n);
+    graph.forEach((row,i)=>row.forEach((v,j)=>{net[i]-=BigInt(v);net[j]+=BigInt(v);}));
     for (const payment of actual) {
       if (!Array.isArray(payment)||payment.length!==3) return false;
       const [a,b,v]=payment;
       if (!Number.isInteger(a)||!Number.isInteger(b)||a<0||b<0||a>=net.length||b>=net.length||a===b||!Number.isSafeInteger(v)||v<=0)return false;
-      net[a]+=v;net[b]-=v;
+      net[a]+=BigInt(v);net[b]-=BigInt(v);
     }
-    return net.every(v=>v===0);
+    return net.every(v=>v===0n);
   }
   if (config.validator === 'zigzag') {
     if (!Array.isArray(actual) || actual.length !== args[0].length) return false;

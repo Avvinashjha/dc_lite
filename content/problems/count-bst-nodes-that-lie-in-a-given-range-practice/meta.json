@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0168",
-  "title": "Count BST nodes that lie in a given range | Practice",
+  "title": "Count BST Nodes in a Range",
   "difficulty": "Medium",
   "topic": "Tree",
   "topics": [
@@ -38,13 +38,38 @@
         20
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          10,
+          5,
+          15
+        ],
+        10,
+        10
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          10,
+          5,
+          15
+        ],
+        1,
+        20
+      ],
+      "expected": 3
     }
   ],
   "functionName": "countInRange",
   "templateCode": "function countInRange(root, l, h) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 10^4",
-    "1 <= l <= h <= 10^5"
+    "1 <= number of nodes <= 10^4",
+    "1 <= l <= h <= 10^5",
+    "The input is a valid BST with integer node values."
   ],
   "runner": {
     "argTypes": [
@@ -54,7 +79,8 @@
   "examples": [
     {
       "input": "root = [10,5,50,1,null,40,100]\nl = 5\nh = 45",
-      "output": "3"
+      "output": "3",
+      "explanation": "The values 5, 10, and 40 lie in [5,45], so the count is 3."
     },
     {
       "input": "root = [10]\nl = 11\nh = 20",
@@ -63,6 +89,6 @@
   ],
   "sampleInput": "root = [10,5,50,1,null,40,100]\nl = 5\nh = 45",
   "sampleOutput": "3",
-  "inputFormat": "Implement countInRange(root, l, h). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement countInRange(root, l, h). The runner converts the level-order array into nodes with val, left, and right fields. The bounds l and h are inclusive.",
+  "outputFormat": "The number of nodes whose values are at least l and at most h."
 }

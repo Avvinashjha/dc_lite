@@ -49,13 +49,127 @@
         ]
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            2,
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            -1,
+            2
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            0,
+            -1,
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2
+          ]
+        ]
+      ],
+      "expected": 4
     }
   ],
   "functionName": "uniquePathsIII",
   "templateCode": "function uniquePathsIII(grid) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 20",
-    "m * n <= 20"
+    "m * n <= 20",
+    "grid is rectangular; every cell is -1, 0, 1, or 2.",
+    "There is exactly one starting cell (1) and exactly one ending cell (2)."
   ],
   "runner": {},
   "examples": [
@@ -69,5 +183,12 @@
     }
   ],
   "inputFormat": "Implement uniquePathsIII(grid). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the number of paths that visit every non-obstacle cell exactly once and finish at the ending cell.",
+  "visuals": [
+    {
+      "title": "Visit every open cell before finishing",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 180\" role=\"img\" aria-label=\"A valid path on a two row three column grid: start at top left, down, right, up, right, down to the end\"><path d=\"M30 20h240v120H30z M110 20v120 M190 20v120 M30 80h240\" fill=\"none\" stroke=\"currentColor\" opacity=\".25\"/><path d=\"M70 50v60h80V50h80v60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linejoin=\"round\"/><circle cx=\"70\" cy=\"50\" r=\"6\" fill=\"currentColor\"/><circle cx=\"230\" cy=\"110\" r=\"7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"12\" text-anchor=\"middle\"><text x=\"70\" y=\"38\">Start</text><text x=\"230\" y=\"132\">End</text><text x=\"150\" y=\"165\">Down \u2192 right \u2192 up \u2192 right \u2192 down</text></g></svg>",
+      "caption": "For [[1,0,0],[0,0,2]], this route visits all six cells. Going right, right, down reaches the end too early and does not count."
+    }
+  ]
 }

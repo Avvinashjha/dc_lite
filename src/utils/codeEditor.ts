@@ -1,9 +1,10 @@
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState, Compartment } from '@codemirror/state';
 import { basicSetup } from 'codemirror';
-import { indentWithTab } from '@codemirror/commands';
+import { indentWithTab, isolateHistory } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
-import { oneDark } from '@codemirror/theme-one-dark';
+import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
+import { tags } from '@lezer/highlight';
 
 type EditorLanguage = 'javascript' | 'json' | 'text';
 
@@ -14,6 +15,7 @@ interface CreateCodeEditorOptions {
   readOnly?: boolean;
   lineWrapping?: boolean;
   onModEnter?: () => void;
+  onDocChange?: () => void;
 }
 
 interface CodeEditorHandle {
@@ -55,17 +57,17 @@ const lightTheme = EditorView.theme({
     paddingRight: '4px',
   },
   '.cm-activeLine': {
-    backgroundColor: 'rgba(37,99,235,.04)',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 4%, transparent)',
   },
   '.cm-activeLineGutter': {
-    backgroundColor: 'rgba(37,99,235,.06)',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 6%, transparent)',
   },
   '.cm-selectionBackground': {
-    backgroundColor: 'rgba(37,99,235,.15) !important',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 15%, transparent) !important',
   },
   '.cm-matchingBracket': {
-    backgroundColor: 'rgba(37,99,235,.12)',
-    outline: '1px solid rgba(37,99,235,.3)',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 12%, transparent)',
+    outline: '1px solid color-mix(in srgb, var(--color-primary) 30%, transparent)',
   },
   '.cm-cursor': {
     borderLeftColor: 'var(--color-primary)',
@@ -79,57 +81,67 @@ const lightTheme = EditorView.theme({
   },
   '.cm-tooltip-autocomplete ul li[aria-selected]': {
     backgroundColor: 'var(--color-primary)',
-    color: '#fff',
+    color: 'var(--color-on-primary)',
   },
 });
 
 const darkTheme = EditorView.theme({
   '&': {
-    backgroundColor: '#1e293b',
-    color: '#e5e7eb',
+    backgroundColor: 'var(--color-surface)',
+    color: 'var(--color-text)',
   },
   '.cm-content': {
-    caretColor: '#60a5fa',
+    caretColor: 'var(--color-primary)',
     lineHeight: '1.6',
     padding: '0.5rem 0',
   },
   '.cm-gutters': {
-    backgroundColor: '#1e293b',
-    borderRight: '1px solid #374151',
-    color: '#9ca3af',
+    backgroundColor: 'var(--color-code-bg, var(--color-surface))',
+    borderRight: '1px solid var(--color-border)',
+    color: 'var(--color-text-light)',
     paddingRight: '4px',
   },
   '.cm-activeLine': {
-    backgroundColor: 'rgba(96,165,250,.08)',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 4%, transparent)',
   },
   '.cm-activeLineGutter': {
-    backgroundColor: 'rgba(96,165,250,.1)',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 6%, transparent)',
   },
   '.cm-selectionBackground': {
-    backgroundColor: 'rgba(96,165,250,.2) !important',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 15%, transparent) !important',
   },
   '.cm-matchingBracket': {
-    backgroundColor: 'rgba(96,165,250,.2)',
-    outline: '1px solid rgba(96,165,250,.4)',
+    backgroundColor: 'color-mix(in srgb, var(--color-primary) 12%, transparent)',
+    outline: '1px solid color-mix(in srgb, var(--color-primary) 30%, transparent)',
   },
   '.cm-cursor': {
-    borderLeftColor: '#60a5fa',
+    borderLeftColor: 'var(--color-primary)',
     borderLeftWidth: '2px',
   },
   '.cm-tooltip': {
-    backgroundColor: '#1f2937',
-    border: '1px solid #374151',
+    backgroundColor: 'var(--color-surface)',
+    border: '1px solid var(--color-border)',
     borderRadius: '6px',
-    boxShadow: '0 4px 16px rgba(0,0,0,.3)',
+    boxShadow: '0 4px 16px rgba(0,0,0,.12)',
   },
   '.cm-tooltip-autocomplete ul li[aria-selected]': {
-    backgroundColor: '#2563eb',
-    color: '#fff',
+    backgroundColor: 'var(--color-primary)',
+    color: 'var(--color-on-primary)',
   },
 }, { dark: true });
 
+
+const codeHighlighting = syntaxHighlighting(HighlightStyle.define([
+  { tag: tags.keyword, color: 'var(--color-purple)' },
+  { tag: [tags.string, tags.regexp], color: 'var(--color-success)' },
+  { tag: [tags.number, tags.bool, tags.null], color: 'var(--color-warning)' },
+  { tag: [tags.function(tags.variableName), tags.function(tags.propertyName), tags.typeName], color: 'var(--color-info)' },
+  { tag: tags.comment, color: 'var(--color-text-light)', fontStyle: 'italic' },
+  { tag: [tags.operator, tags.operatorKeyword], color: 'var(--color-primary)' },
+]));
+
 function themeExtension() {
-  return currentThemeIsDark() ? [darkTheme, oneDark] : [lightTheme];
+  return [currentThemeIsDark() ? darkTheme : lightTheme, codeHighlighting];
 }
 
 export function createCodeEditor(options: CreateCodeEditorOptions): CodeEditorHandle {
@@ -149,6 +161,12 @@ export function createCodeEditor(options: CreateCodeEditorOptions): CodeEditorHa
     themeCompartment.of(themeExtension()),
     languageCompartment.of(languageExtension(options.language || 'text')),
   ];
+
+  if (options.onDocChange) {
+    extensions.push(EditorView.updateListener.of(update => {
+      if (update.docChanged) options.onDocChange?.();
+    }));
+  }
 
   if (options.lineWrapping) {
     extensions.push(EditorView.lineWrapping);
@@ -200,6 +218,7 @@ export function createCodeEditor(options: CreateCodeEditorOptions): CodeEditorHa
     getValue: () => view.state.doc.toString(),
     setValue: (value: string) => {
       view.dispatch({
+        annotations: isolateHistory.of('full'),
         changes: {
           from: 0,
           to: view.state.doc.length,

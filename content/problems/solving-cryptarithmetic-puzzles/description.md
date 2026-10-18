@@ -1,3 +1,11 @@
-In a cryptarithmetic puzzle, every letter in an arithmetic expression stands for one fixed, unique digit from 0 through 9, and no word may begin with a letter mapped to 0. Given the addends as a string array `words` and the result as a string `result`, such as `["SEND", "MORE"]` and `"MONEY"`, work out a digit-to-letter mapping that makes the arithmetic correct.
+Assign a decimal digit to every letter so that the sum of the addends in `words` equals `result`.
 
-**Edge cases:** If no mapping satisfies the equation, return `null`. Since only 10 digits are available, a puzzle can involve at most 10 distinct letters.
+- Each letter always represents the same digit.
+- Different letters must represent different digits.
+- The first letter of every word must be nonzero. **In this version, this also applies to one-letter words.**
+- Return a **letter-to-digit object**, such as `{"A":1,"B":2,"C":3}` for `A + B = C`. Any valid assignment is accepted.
+- Return `null` if no assignment satisfies all rules.
+
+For `SEND + MORE = MONEY`, one assignment gives `9567 + 1085 = 10652`.
+
+Words may contain up to 20 letters. Their numeric values can exceed JavaScript's safe integer range; use column arithmetic with carries or exact integer arithmetic rather than converting whole words to `Number`.

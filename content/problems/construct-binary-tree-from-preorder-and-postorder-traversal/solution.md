@@ -1,6 +1,6 @@
 ## Recursive Construction
 
-The first element of preorder is root, the second is the left subtree root. Find it in postorder to determine left subtree size.
+The first element of preorder is root, the second begins the first child subtree. We choose to attach that subtree on the left; if it is the only child, either side is valid. Find it in postorder to determine left subtree size.
 
 ```javascript
 function constructFromPrePost(preorder, postorder) {

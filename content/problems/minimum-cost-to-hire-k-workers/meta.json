@@ -6,7 +6,8 @@
   "topic": "Heap",
   "topics": [
     "Heap",
-    "Priority Queue"
+    "Sorting",
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/minimum-cost-to-hire-k-workers/",
@@ -47,16 +48,102 @@
         3
       ],
       "expected": 30.6666666667
+    },
+    {
+      "args": [
+        [
+          10
+        ],
+        [
+          7
+        ],
+        1
+      ],
+      "expected": 7
+    },
+    {
+      "args": [
+        [
+          10,
+          1
+        ],
+        [
+          5,
+          8
+        ],
+        1
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          2,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        2
+      ],
+      "expected": 18
+    },
+    {
+      "args": [
+        [
+          2,
+          4,
+          6
+        ],
+        [
+          6,
+          12,
+          18
+        ],
+        2
+      ],
+      "expected": 18
+    },
+    {
+      "args": [
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        2
+      ],
+      "expected": 3.3333333333333335
+    },
+    {
+      "args": [
+        [
+          1,
+          10,
+          1
+        ],
+        [
+          10,
+          1,
+          10
+        ],
+        2
+      ],
+      "expected": 20
     }
   ],
   "functionName": "mincostToHireWorkers",
   "templateCode": "function mincostToHireWorkers(quality, wage, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= k <= workers <= 10^4",
+    "quality.length == wage.length == n; 1 <= k <= n <= 10^4",
     "1 <= quality[i], wage[i] <= 10^4"
   ],
   "runner": {
-    "tolerance": 0.00001
+    "tolerance": 1e-05
   },
   "examples": [
     {
@@ -70,6 +157,6 @@
   ],
   "sampleInput": "quality = [10,20,5]\nwage = [70,50,30]\nk = 2",
   "sampleOutput": "105",
-  "inputFormat": "Implement mincostToHireWorkers(quality, wage, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nFloating-point results are compared with relative tolerance 0.00001."
+  "inputFormat": "Implement mincostToHireWorkers(quality, wage, k). Matching indices describe the same worker: quality[i] is their quality and wage[i] their minimum acceptable pay.",
+  "outputFormat": "Return the minimum total pay for exactly k workers as a number; fractional pay is allowed. Accepted error is at most 0.00001 \u00d7 max(1, |expected|)."
 }

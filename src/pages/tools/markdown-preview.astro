@@ -7,6 +7,8 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   description="Write markdown and see a live rendered preview — with multiple tabs."
   toolName="Markdown Preview"
   keywords="markdown preview, markdown editor, markdown to html, live markdown preview, markdown to pdf"
+  features={['Live Markdown preview', 'Copy HTML', 'Download Markdown and HTML', 'Print to PDF', 'Private in-browser processing']}
+  workbench={true}
   faqs={[
     { q: "Does it support live preview?", a: "Yes. As you type markdown, the rendered HTML preview updates in real time." },
     { q: "Can I export to PDF?", a: "Yes, you can export your rendered markdown to a PDF." },
@@ -16,21 +18,19 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   <div class="tab-bar" id="tab-bar">
     <div class="tab-list" id="tab-list"></div>
     <button class="tab-add" id="btn-add-tab" title="New document">+</button>
-  </div>
-
-  <div class="tool-actions">
-    <button class="tool-btn tool-btn--primary" id="btn-pdf">Download PDF</button>
-    <button class="tool-btn" id="btn-copy-html">Copy HTML</button>
-    <button class="tool-btn" id="btn-download-html">Download HTML</button>
-    <button class="tool-btn" id="btn-download-md">Download .md</button>
-    <button class="tool-btn" id="btn-save">Save Tab</button>
-    <button class="tool-btn" id="btn-clear">Clear</button>
+    <div class="tab-bar__actions">
+      <button class="tool-btn tool-btn--primary" id="btn-pdf">PDF</button>
+      <button class="tool-btn" id="btn-copy-html">Copy HTML</button>
+      <button class="tool-btn" id="btn-download-html">HTML</button>
+      <button class="tool-btn" id="btn-download-md">.md</button>
+      <button class="tool-btn" id="btn-clear">Clear</button>
+    </div>
   </div>
 
   <div class="tool-panels">
     <div class="tool-panel">
       <span class="tool-panel__label">Markdown Input</span>
-      <textarea id="input" class="tool-textarea" style="min-height: 400px;"></textarea>
+      <textarea id="input" class="tool-textarea"></textarea>
     </div>
     <div class="tool-panel">
       <span class="tool-panel__label">Preview</span>
@@ -82,9 +82,13 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
     return '#';
   }
 
+  function escapeHtml(value) {
+    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   // --- Markdown parser ---
   function parseMd(md) {
-    return md
+    return escapeHtml(md)
       .replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
         return '<pre><code class="language-' + lang + '">' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code></pre>';
       })
@@ -124,7 +128,11 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
       el.className = 'tab-item' + (tab.id === activeTab ? ' tab-item--active' : '');
       el.innerHTML = '<span class="tab-item__name">' + (tab.name || 'Untitled') + '</span>' +
         (tabs.length > 1 ? '<button class="tab-item__close" data-id="' + tab.id + '">&times;</button>' : '');
-      el.addEventListener('click', function(e) { if (!e.target.classList.contains('tab-item__close')) switchTab(tab.id); });
+      el.addEventListener('click', function(e) {
+        if (e.target.classList.contains('tab-item__close')) return;
+        if (tab.id === activeTab) renameTab(tab);
+        else switchTab(tab.id);
+      });
       list.appendChild(el);
     });
     list.querySelectorAll('.tab-item__close').forEach(function(btn) {
@@ -188,11 +196,19 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   // --- Actions ---
   input.addEventListener('input', function() { render(); clearTimeout(window._mdSave); window._mdSave = setTimeout(saveToDB, 1000); });
 
-  document.getElementById('btn-save').addEventListener('click', function() {
-    var tab = tabs.find(function(t) { return t.id === activeTab; });
-    var name = prompt('Tab name:', tab ? tab.name : '');
-    if (name !== null && tab) { tab.name = name; renderTabs(); saveToDB(); }
-  });
+  function renameTab(tab) {
+    var item = document.querySelector('.tab-item--active');
+    if (!tab || !item) return;
+    var input = document.createElement('input');
+    input.className = 'tab-item__rename'; input.value = tab.name || '';
+    input.setAttribute('aria-label', 'Rename document tab');
+    item.replaceChildren(input); input.focus(); input.select();
+    var done = false;
+    function finish() { if (done) return; done = true; if (input.value.trim()) tab.name = input.value.trim(); renderTabs(); saveToDB(); }
+    input.addEventListener('click', function(e) { e.stopPropagation(); });
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') finish(); if (e.key === 'Escape') { done = true; renderTabs(); } });
+    input.addEventListener('blur', finish);
+  }
 
   document.getElementById('btn-add-tab').addEventListener('click', function() { addTab(); saveToDB(); });
 
@@ -231,7 +247,7 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 
 <style>
   .md-preview {
-    min-height: 400px; padding: 1rem; border: 1px solid var(--color-border);
+    flex: 1; min-height: 0; height: 100%; padding: 1rem; border: 1px solid var(--color-border);
     border-radius: var(--radius-md); background: var(--color-surface);
     overflow: auto; font-size: 0.9rem; line-height: 1.7;
   }
@@ -239,6 +255,6 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
   .md-preview :global(th), .md-preview :global(td) { border: 1px solid var(--color-border); padding: 0.5rem 0.75rem; text-align: left; }
   .md-preview :global(th) { background: var(--color-code-bg); font-weight: 600; }
   .md-preview :global(blockquote) { border-left: 3px solid var(--color-primary); padding-left: 1rem; color: var(--color-text-light); margin: 1rem 0; font-style: italic; }
-  .md-preview :global(pre) { background: #1e293b; color: #e2e8f0; padding: 0.75rem; border-radius: var(--radius-md); overflow-x: auto; margin: 1rem 0; }
+  .md-preview :global(pre) { background: var(--color-code-bg); color: var(--color-text); padding: 0.75rem; border-radius: var(--radius-md); overflow-x: auto; margin: 1rem 0; }
   .md-preview :global(hr) { border: none; border-top: 1px solid var(--color-border); margin: 1.5rem 0; }
 </style>

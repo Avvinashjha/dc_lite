@@ -3,11 +3,10 @@
   "id": "problem-0062",
   "title": "Power of Two",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math",
+    "Bit Manipulation"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/power-of-two/",
@@ -28,6 +27,60 @@
     {
       "args": [
         3
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        0
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        -1
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        -2147483648
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        2
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        1024
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        1023
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        1073741824
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        1073741825
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        2147483647
       ],
       "expected": false
     }
@@ -55,5 +108,5 @@
   "sampleInput": "n = 1",
   "sampleOutput": "true",
   "inputFormat": "Implement isPowerOfTwo(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if n equals 2 raised to a non-negative integer power; otherwise return false."
 }

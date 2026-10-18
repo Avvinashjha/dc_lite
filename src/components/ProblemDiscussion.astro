@@ -12,11 +12,14 @@ const { slug } = Astro.props;
       id="discussion-message"
       class="problem-discussion__textarea"
       rows="3"
+      aria-label="Discussion message"
       placeholder="Share your approach or ask a question..."
     ></textarea>
     <div class="problem-discussion__actions">
       <button type="button" id="discussion-post" class="p-btn p-btn--primary">Post</button>
     </div>
   </div>
+  <p id="discussion-status" role="status" aria-live="polite"></p>
+  <p id="discussion-load-status" role="status" aria-live="polite">Loading discussion…</p>
   <div id="discussion-list"></div>
 </div>

@@ -51,12 +51,100 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [],
+        []
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        []
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": [
+        4,
+        2,
+        4
+      ]
+    },
+    {
+      "args": [
+        [
+          -2
+        ],
+        [
+          2
+        ]
+      ],
+      "expected": [
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2
+        ],
+        [
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": [
+        4,
+        null,
+        6
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
     }
   ],
   "functionName": "mergeTrees",
   "templateCode": "function mergeTrees(t1, t2) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "0 <= number of nodes <= 2000",
+    "Each tree contains between 0 and 2000 nodes",
     "-10^4 <= Node.val <= 10^4"
   ],
   "runner": {
@@ -79,5 +167,5 @@
   "sampleInput": "t1 = [1,3,2,5]\nt2 = [2,1,3,null,4,null,7]",
   "sampleOutput": "[3,4,5,5,4,null,7]",
   "inputFormat": "Implement mergeTrees(t1, t2). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
+  "outputFormat": "Return the merged root node, or null when both trees are empty. The runner displays the tree in level order and trims trailing nulls."
 }

@@ -6,8 +6,8 @@
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "Binary Search Tree",
+    "Inorder Traversal"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
@@ -41,13 +41,61 @@
         3
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          0
+        ],
+        1
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          4,
+          null,
+          2
+        ],
+        4
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          null,
+          1
+        ],
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2,
+          null,
+          3
+        ],
+        3
+      ],
+      "expected": 3
     }
   ],
   "functionName": "kthSmallestElementInABst",
   "templateCode": "function kthSmallestElementInABst(root, k) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= k <= n <= 10^4",
-    "0 <= Node.val <= 10^4"
+    "0 <= Node.val <= 10^4",
+    "For every node, all left-subtree values are smaller and all right-subtree values are larger."
   ],
   "runner": {
     "argTypes": [
@@ -61,11 +109,12 @@
     },
     {
       "input": "root = [5,3,6,2,4,null,null,1]\nk = 3",
-      "output": "3"
+      "output": "3",
+      "explanation": "The values in sorted order are [1,2,3,4,5,6]; rank 3 contains value 3."
     }
   ],
   "sampleInput": "root = [3,1,4,null,2]\nk = 1",
   "sampleOutput": "1",
-  "inputFormat": "Implement kthSmallestElementInABst(root, k). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "root is a nonempty binary search tree with val, left, and right node properties; fixtures use level-order arrays. k is a valid one-based rank.",
+  "outputFormat": "Return the kth smallest node value, not the node or its index."
 }

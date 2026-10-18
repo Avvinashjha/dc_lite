@@ -1,13 +1,12 @@
 {
   "draft": false,
   "id": "problem-0212",
-  "title": "Water Jug problem using BFS",
+  "title": "Water Jug Problem Using BFS",
   "difficulty": "Hard",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "BFS"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Water%20Jug%20problem%20using%20BFS",
@@ -36,6 +35,70 @@
         8
       ],
       "expected": true
+    },
+    {
+      "args": [
+        1,
+        1,
+        0
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        3,
+        5,
+        9
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        4,
+        4,
+        2
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        4,
+        4,
+        8
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        5,
+        3,
+        4
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        1,
+        7,
+        6
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        6,
+        10,
+        8
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        999999,
+        1000000,
+        1
+      ],
+      "expected": true
     }
   ],
   "functionName": "canMeasureWater",
@@ -62,5 +125,5 @@
   "sampleInput": "x = 3\ny = 5\ntarget = 4",
   "sampleOutput": "true",
   "inputFormat": "Implement canMeasureWater(x, y, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if the target can be held in either jug or as their combined contents; otherwise return false."
 }

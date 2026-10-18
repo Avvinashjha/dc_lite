@@ -43,6 +43,37 @@
       "expected": [
         1
       ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2,
+        null,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        3,
+        2,
+        null,
+        1
+      ]
     }
   ],
   "functionName": "bstFromPreorder",
@@ -50,7 +81,8 @@
   "constraints": [
     "1 <= preorder.length <= 100",
     "1 <= preorder[i] <= 10^8",
-    "All values are unique"
+    "All values are unique",
+    "preorder is guaranteed to be a valid BST preorder traversal."
   ],
   "runner": {
     "outputType": "tree"
@@ -67,6 +99,13 @@
   ],
   "sampleInput": "preorder = [8,5,1,7,10,12]",
   "sampleOutput": "[8,5,10,1,7,null,12]",
-  "inputFormat": "Implement bstFromPreorder(preorder). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nReturned trees are displayed as level-order arrays, trimming trailing nulls."
+  "inputFormat": "Implement bstFromPreorder(preorder), where preorder is a valid root-left-right traversal of a BST with unique values.",
+  "outputFormat": "The root node of the BST, using val, left, and right fields. The runner displays it in level order, trimming trailing nulls.",
+  "visuals": [
+    {
+      "title": "Restore the BST shape",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 265\" role=\"img\" aria-label=\"BST rooted at 8, with left subtree 5 containing 1 and 7, and right subtree 10 containing 12\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><path d=\"M190 30L95 105\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M190 30L285 105\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M95 105L45 180\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M95 105L145 180\" stroke=\"var(--color-text-light)\" fill=\"none\"/><path d=\"M285 105L335 180\" stroke=\"var(--color-text-light)\" fill=\"none\"/><circle cx=\"190\" cy=\"30\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"190\" y=\"36\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">8</text><circle cx=\"95\" cy=\"105\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"95\" y=\"111\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">5</text><circle cx=\"285\" cy=\"105\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"285\" y=\"111\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">10</text><circle cx=\"45\" cy=\"180\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"45\" y=\"186\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">1</text><circle cx=\"145\" cy=\"180\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"145\" y=\"186\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">7</text><circle cx=\"335\" cy=\"180\" r=\"21\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"335\" y=\"186\" fill=\"currentColor\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\">12</text><text x=\"190\" y=\"240\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\" text-anchor=\"middle\">Preorder: 8, 5, 1, 7, 10, 12</text></svg>",
+      "caption": "Every left descendant is smaller than its ancestor and every right descendant is larger."
+    }
+  ]
 }

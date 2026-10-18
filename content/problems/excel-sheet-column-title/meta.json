@@ -3,11 +3,10 @@
   "id": "problem-0057",
   "title": "Excel Sheet Column Title",
   "difficulty": "Easy",
-  "topic": "Matrix",
+  "topic": "Math",
   "topics": [
-    "Matrix",
-    "BFS",
-    "DFS"
+    "Math",
+    "String"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/excel-sheet-column-title/",
@@ -30,6 +29,42 @@
         701
       ],
       "expected": "ZY"
+    },
+    {
+      "args": [
+        26
+      ],
+      "expected": "Z"
+    },
+    {
+      "args": [
+        27
+      ],
+      "expected": "AA"
+    },
+    {
+      "args": [
+        52
+      ],
+      "expected": "AZ"
+    },
+    {
+      "args": [
+        702
+      ],
+      "expected": "ZZ"
+    },
+    {
+      "args": [
+        703
+      ],
+      "expected": "AAA"
+    },
+    {
+      "args": [
+        2147483647
+      ],
+      "expected": "FXSHRXW"
     }
   ],
   "functionName": "convertToTitle",
@@ -54,6 +89,6 @@
   ],
   "sampleInput": "columnNumber = 1",
   "sampleOutput": "\"A\"",
-  "inputFormat": "Implement convertToTitle(columnNumber). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "columnNumber is a positive, one-based spreadsheet column index.",
+  "outputFormat": "Return its uppercase column title, using A\u2013Z."
 }

@@ -3,8 +3,10 @@
   "id": "problem-0112",
   "title": "Backspace String Compare",
   "difficulty": "Easy",
-  "topic": "Stack&Queue",
+  "topic": "String",
   "topics": [
+    "String",
+    "Two Pointers",
     "Stack&Queue"
   ],
   "platform": "LeetCode",
@@ -31,6 +33,20 @@
         "b"
       ],
       "expected": false
+    },
+    {
+      "args": [
+        "###a",
+        "a"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "a###",
+        "#"
+      ],
+      "expected": true
     }
   ],
   "functionName": "backspaceCompare",
@@ -56,6 +72,6 @@
   ],
   "sampleInput": "s = \"ab#c\"\nt = \"ad#c\"",
   "sampleOutput": "true",
-  "inputFormat": "Implement backspaceCompare(s, t). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement backspaceCompare(s, t), where # deletes the last character typed into an initially empty editor.",
+  "outputFormat": "true if the final strings are identical; otherwise false."
 }

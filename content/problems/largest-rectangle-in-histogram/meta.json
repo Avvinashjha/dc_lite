@@ -6,7 +6,7 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Monotonic Stack"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
@@ -35,6 +35,64 @@
         ]
       ],
       "expected": 4
+    },
+    {
+      "args": [
+        [
+          0
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          5
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          4,
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        [
+          2,
+          0,
+          2
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": 6
     }
   ],
   "functionName": "largestRectangleArea",
@@ -47,13 +105,21 @@
   "examples": [
     {
       "input": "heights = [2,1,5,6,2,3]",
-      "output": "10"
+      "output": "10",
+      "explanation": "Bars at indices 2 and 3 support a rectangle of height 5 and width 2, giving area 10."
     },
     {
       "input": "heights = [2,2]",
       "output": "4"
     }
   ],
-  "inputFormat": "Implement largestRectangleArea(heights). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "heights is a nonempty array of nonnegative bar heights. Every bar has width 1.",
+  "outputFormat": "Return the largest rectangle area under consecutive bars. Return 0 when all heights are zero.",
+  "visuals": [
+    {
+      "title": "The shorter bar limits the height",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"Histogram heights 2,1,5,6,2,3. The rectangle over indices 2 and 3 has height 5 and width 2, giving area 10.\" style=\"width:100%;height:auto;max-width:360px;color:var(--color-text)\"><rect x=\"35\" y=\"124\" width=\"48\" height=\"46\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"59\" y=\"117\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"monospace\">2</text><rect x=\"83\" y=\"147\" width=\"48\" height=\"23\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"107\" y=\"140\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"monospace\">1</text><rect x=\"131\" y=\"55\" width=\"48\" height=\"115\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"155\" y=\"48\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"monospace\">5</text><rect x=\"179\" y=\"32\" width=\"48\" height=\"138\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"203\" y=\"25\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"monospace\">6</text><rect x=\"227\" y=\"124\" width=\"48\" height=\"46\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"251\" y=\"117\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"monospace\">2</text><rect x=\"275\" y=\"101\" width=\"48\" height=\"69\" fill=\"var(--color-surface)\" stroke=\"var(--color-text-light)\"/><text x=\"299\" y=\"94\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"monospace\">3</text><rect x=\"131\" y=\"55\" width=\"96\" height=\"115\" fill=\"var(--dc-sage)\" fill-opacity=\"0.6\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"179\" y=\"118\" text-anchor=\"middle\" font-size=\"21\" fill=\"currentColor\" font-family=\"sans-serif\">10</text><text x=\"180\" y=\"204\" text-anchor=\"middle\" font-size=\"17\" fill=\"currentColor\" font-family=\"sans-serif\">width 2 \u00d7 height 5 = area 10</text></svg>",
+      "caption": "The adjacent bars of heights 5 and 6 support a height-5 rectangle. Each bar contributes one unit of width."
+    }
+  ]
 }

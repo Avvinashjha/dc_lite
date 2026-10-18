@@ -21,4 +21,4 @@ function isValid(s) {
 ```
 
 **Time:** O(n) — single pass through the string.
-**Space:** O(n) — stack holds at most n/2 elements.
+**Space:** O(n) — the stack can hold n elements when every character is an opening bracket.

@@ -2,10 +2,11 @@
   "draft": false,
   "id": "problem-0078",
   "title": "Search in Rotated Sorted Array",
-  "difficulty": "Hard",
+  "difficulty": "Medium",
   "topic": "Sorting&Searching",
   "topics": [
-    "Sorting&Searching"
+    "Array",
+    "Binary Search"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
@@ -40,6 +41,118 @@
         3
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        0
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        1
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        2
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        4
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          4,
+          1,
+          2,
+          3
+        ],
+        4
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          2,
+          3,
+          4,
+          1
+        ],
+        1
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          0,
+          5,
+          -10,
+          -3
+        ],
+        -3
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          4,
+          5,
+          6,
+          7,
+          0,
+          1,
+          2
+        ],
+        7
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          3,
+          5,
+          1
+        ],
+        4
+      ],
+      "expected": -1
     }
   ],
   "functionName": "search",
@@ -47,7 +160,9 @@
   "constraints": [
     "1 <= nums.length <= 5000",
     "-10^4 <= nums[i] <= 10^4",
-    "All values are unique"
+    "All values are unique",
+    "nums is a rotation (possibly by zero positions) of a strictly increasing array.",
+    "-10^4 <= target <= 10^4"
   ],
   "runner": {},
   "examples": [
@@ -63,5 +178,5 @@
   "sampleInput": "nums = [4,5,6,7,0,1,2]\ntarget = 0",
   "sampleOutput": "4",
   "inputFormat": "Implement search(nums, target). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the zero-based index of target in the given rotated array, or -1 if absent."
 }

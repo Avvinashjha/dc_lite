@@ -3,7 +3,7 @@
   "id": "problem-0094",
   "title": "Copy List with Random Pointer",
   "difficulty": "Medium",
-  "topic": "Linked-List",
+  "topic": "Linked List",
   "topics": [
     "Linked List"
   ],
@@ -64,6 +64,70 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          [
+            5,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          5,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            7,
+            null
+          ],
+          [
+            8,
+            null
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          7,
+          null
+        ],
+        [
+          8,
+          null
+        ]
+      ]
     }
   ],
   "functionName": "copyRandomList",
@@ -91,6 +155,13 @@
   ],
   "sampleInput": "head = [[7,null],[13,0],[11,4],[10,2],[1,0]]",
   "sampleOutput": "[[7,null],[13,0],[11,4],[10,2],[1,0]]",
-  "inputFormat": "Implement copyRandomList(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nRandom lists use [value, randomIndex] pairs; null means no random pointer. The editor builds next and random references.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement copyRandomList(head). The runner builds nodes with val, next, and random fields from [value, randomIndex] pairs. randomIndex is zero-based; null means no random pointer. An empty array becomes null.",
+  "outputFormat": "The head of a new, independent list preserving values and next/random relationships. Restore the original list before returning. No copied pointer may refer to an original node.",
+  "visuals": [
+    {
+      "title": "Same structure, separate nodes",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 380 245\" role=\"img\" aria-label=\"Original and copied lists each have nodes 7 then 13, with 13 pointing randomly to 7; no links connect the two lists\" style=\"width:100%;height:auto;max-width:380px;color:var(--color-text)\"><text x=\"10\" y=\"45\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">Original</text><rect x=\"105\" y=\"18\" width=\"50\" height=\"44\" rx=\"8\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"130\" y=\"46\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">7</text><rect x=\"265\" y=\"18\" width=\"50\" height=\"44\" rx=\"8\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"290\" y=\"46\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">13</text><path d=\"M158 40H260m-7-5 7 5-7 5\" fill=\"none\" stroke=\"currentColor\"/><path d=\"M290 65v28H130v-23m-5 7 5-7 5 7\" fill=\"none\" stroke=\"var(--color-info)\" stroke-dasharray=\"4 3\"/><text x=\"210\" y=\"113\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"14\">random \u2192 first node</text><text x=\"10\" y=\"160\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"16\">Copy</text><rect x=\"105\" y=\"133\" width=\"50\" height=\"44\" rx=\"8\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"130\" y=\"161\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">7</text><rect x=\"265\" y=\"133\" width=\"50\" height=\"44\" rx=\"8\" fill=\"var(--dc-sage)\" stroke=\"currentColor\"/><text x=\"290\" y=\"161\" fill=\"currentColor\" text-anchor=\"middle\" font-family=\"monospace\" font-size=\"18\">13</text><path d=\"M158 155H260m-7-5 7 5-7 5\" fill=\"none\" stroke=\"currentColor\"/><path d=\"M290 180v28H130v-23m-5 7 5-7 5 7\" fill=\"none\" stroke=\"var(--color-info)\" stroke-dasharray=\"4 3\"/><text x=\"210\" y=\"228\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"sans-serif\" font-size=\"14\">random \u2192 first node</text></svg>",
+      "caption": "For [[7,null],[13,0]], solid arrows are next links and dashed arrows are random links. The copied nodes share no identity with the original nodes."
+    }
+  ]
 }

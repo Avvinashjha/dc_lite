@@ -1,5 +1,7 @@
 ## Approach: Floyd-Warshall
 
+Convert absent edges to actual `Infinity` internally: the numeric sentinel must not participate in arithmetic, especially with negative edges, or cap long reachable paths. Convert only unreachable entries back to `10000` afterward.
+
 Use three nested loops. For each intermediate vertex `k`, update the shortest path between every pair `(i, j)` by checking if going through `k` gives a shorter distance: `dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])`.
 
 ```javascript

@@ -1,35 +1,22 @@
-Trim the string, split on one or more whitespace characters to extract words, reverse the array, and join with a single space. The regex split handles multiple consecutive spaces cleanly.
+## Scan Words from Right to Left
 
-```javascript
-function reverseWords(s) {
-  return s.trim().split(/\s+/).reverse().join(' ');
-}
-```
+Start at the end of the string. Skip spaces, then scan left across the next word. Copy that word in its original character order into a result array, and continue from the preceding space.
 
-For a more manual approach without built-in reverse:
+The scan discovers words in reverse order without reversing their characters. Joining the collected words with one space normalizes every separator. When the input contains only spaces, no words are collected and joining the empty array returns an empty string.
 
 ```javascript
 function reverseWords(s) {
   const words = [];
-  let i = 0;
-  while (i < s.length) {
-    while (i < s.length && s[i] === ' ') i++;
-    if (i >= s.length) break;
-    let j = i;
-    while (j < s.length && s[j] !== ' ') j++;
-    words.push(s.substring(i, j));
-    i = j;
+  let i = s.length - 1;
+  while (i >= 0) {
+    while (i >= 0 && s[i] === " ") i--;
+    if (i < 0) break;
+    const end = i + 1;
+    while (i >= 0 && s[i] !== " ") i--;
+    words.push(s.slice(i + 1, end));
   }
-
-  let left = 0, right = words.length - 1;
-  while (left < right) {
-    [words[left], words[right]] = [words[right], words[left]];
-    left++;
-    right--;
-  }
-  return words.join(' ');
+  return words.join(" ");
 }
 ```
 
-**Time:** O(n) — one pass to split, one to reverse.
-**Space:** O(n) for the words array.
+**Time:** O(n) for scanning and joining | **Space:** O(n) for the collected words and result. JavaScript strings are immutable, so this is not an in-place string operation.

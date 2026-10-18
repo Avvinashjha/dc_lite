@@ -1,4 +1,6 @@
-## Bit Shift Traversal
+## Accumulate Bits
+
+Double the accumulated value and add the next bit at each node.
 
 ```javascript
 function getDecimalValue(head) {

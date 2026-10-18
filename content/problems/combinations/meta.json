@@ -56,6 +56,36 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        3,
+        3
+      ],
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "args": [
+        3,
+        1
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ]
     }
   ],
   "functionName": "combine",
@@ -78,6 +108,6 @@
       "output": "[[1]]"
     }
   ],
-  "inputFormat": "Implement combine(n, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter.\nResult ordering is ignored, including element order within each combination or subset."
+  "inputFormat": "Implement combine(n, k), choosing k distinct integers from 1 through n.",
+  "outputFormat": "Every unique k-element combination exactly once. Both combination order and element order within each combination are ignored."
 }

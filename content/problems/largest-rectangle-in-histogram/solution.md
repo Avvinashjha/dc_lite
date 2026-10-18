@@ -1,4 +1,4 @@
-Use a monotonic stack that stores bar indices in increasing height order. When a shorter bar is encountered, pop the stack and compute the area using the popped bar's height as the rectangle height, with width determined by the current index and the new stack top.
+Use a monotonic stack that stores bar indices in non-decreasing height order. When a shorter bar is encountered, pop the stack and compute the area using the popped bar's height as the rectangle height, with width determined by the current index and the new stack top.
 
 ```javascript
 function largestRectangleArea(heights) {

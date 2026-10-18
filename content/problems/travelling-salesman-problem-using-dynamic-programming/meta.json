@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0213",
-  "title": "Travelling Salesman Problem using Dynamic Programming",
+  "title": "Travelling Salesman",
   "difficulty": "Hard",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "Dynamic Programming",
+    "Bitmask"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Travelling%20Salesman%20Problem%20using%20Dynamic%20Programming",
@@ -58,6 +58,106 @@
         ]
       ],
       "expected": 10
+    },
+    {
+      "args": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            2
+          ],
+          [
+            7,
+            0
+          ]
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            1,
+            9
+          ],
+          [
+            9,
+            0,
+            1
+          ],
+          [
+            1,
+            9,
+            0
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            10,
+            1
+          ],
+          [
+            1,
+            0,
+            10
+          ],
+          [
+            10,
+            1,
+            0
+          ]
+        ]
+      ],
+      "expected": 3
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            4,
+            6,
+            2
+          ],
+          [
+            7,
+            0,
+            3,
+            8
+          ],
+          [
+            2,
+            9,
+            0,
+            5
+          ],
+          [
+            6,
+            1,
+            4,
+            0
+          ]
+        ]
+      ],
+      "expected": 8
     }
   ],
   "functionName": "tsp",
@@ -65,7 +165,8 @@
   "constraints": [
     "1 <= dist.length <= 20",
     "dist is square with diagonal entries 0.",
-    "Off-diagonal distances are integers in [1,10^4]."
+    "Off-diagonal distances are integers in [1,10^4].",
+    "dist[i][j] need not equal dist[j][i]; every directed trip is available"
   ],
   "runner": {},
   "examples": [
@@ -81,5 +182,5 @@
   "sampleInput": "dist = [[0,10,15,20],[10,0,35,25],[15,35,0,30],[20,25,30,0]]",
   "sampleOutput": "80",
   "inputFormat": "Implement tsp(dist). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the minimum total cost of a tour that visits each city once and returns to its start. For one city, return 0."
 }

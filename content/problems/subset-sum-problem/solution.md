@@ -16,6 +16,6 @@ function isSubsetSum(arr, sum) {
 }
 ```
 
-**Time Complexity:** O(n × sum)
+**Time Complexity:** O(n × (sum + 1))
 
-**Space Complexity:** O(sum)
+**Space Complexity:** O(sum + 1)

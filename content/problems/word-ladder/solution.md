@@ -1,4 +1,8 @@
-## BFS
+## Breadth-first search
+
+Treat words as vertices and one-letter changes as edges. BFS explores all chains of a given length before longer chains, so the first discovery of the end word gives the shortest length. Start at length 1 to count the beginning word.
+
+Generate neighbors by replacing each position with each other lowercase letter. Only dictionary members can be enqueued. Mark words visited when enqueuing them to avoid cycles and repeated work. If the end word is absent from the dictionary, no chain can reach it.
 
 ```javascript
 function ladderLength(beginWord, endWord, wordList) {
@@ -11,6 +15,7 @@ function ladderLength(beginWord, endWord, wordList) {
     const [word, len] = q[head++];
     for (let i = 0; i < word.length; i++) {
       for (let c = 97; c <= 122; c++) {
+        if (c === word.charCodeAt(i)) continue;
         const next = word.slice(0,i) + String.fromCharCode(c) + word.slice(i+1);
         if (next === endWord) return len + 1;
         if (wordSet.has(next) && !visited.has(next)) {

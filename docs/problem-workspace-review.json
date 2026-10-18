@@ -1,0 +1,3010 @@
+{
+  "status": "blocked",
+  "requirements": {
+    "compactWorkspace": "Verified: shared compact split workspace; pointer/keyboard resizing and persistence; 390px mobile pane switching; long titles and code scrolling contained; redundant contracts collapsed; diagram native-width cap checked in final release.",
+    "externalProblemLinks": "detail UI links removed; all 540 problem Markdown files scanned with no URLs or Markdown links found; metadata source URLs retained but not rendered",
+    "resizing": "verified: pointer drag for columns and output, keyboard controls, reload persistence, double-click defaults, and mobile pane switching",
+    "formatting": "implemented; six automated tests pass; browser formatting, isolated undo, syntax-error preservation verified Production code-split formatter successfully loaded and formatted code on port 4322.",
+    "listRedesign": "implemented; desktop and 390px mobile inspected; table/card, secondary-topic filters including ampersands, combined difficulty filter, search normalization, empty reset, ascending/descending keyboard sorting, and stats verified; favorite/solved persistence audit pending Production tablet check at 760x988: compact two-column cards visually verified; word search plus Hard returns exactly three matching cards; Favorites toggles empty state and restores results.",
+    "contentReview": "Verified: all 270 individually reviewed with notes; 1963 reference cases pass. Latest release output audit checks all 270 rendered titles, pane/control presence, diagram accessible names and source-link removal: zero issues.",
+    "diagrams": "Verified: 62 inline SVGs, 43 added during individual content reviews. All valid XML with viewBox, image roles and accessible names. All 62 visually inspected in light and dark production CSS at 350px panel width; no clipping, overlapping labels or missing connections. Shared component caps intrinsic width; complex Sudoku and Island pages also inspected at 390px in both themes. Full light-theme sweep completed for all 62 diagrams; all remained readable.",
+    "featureVerification": "Verified locally: run/test worker isolation, timeout, reset/stale-output clearing, formatting/undo/syntax failure, copy, drafts/reload/empty draft, notes save/reload/clear, tabs, responsive panes and signed-out auth gates. Reset clears stale format notice (browser checked). Six isolated actual-handler discussion tests pass for success/failure/cache/unavailable states. Unverified: authenticated favorite/solved persistence and live discussion end-to-end; browser signed out and local discussion unavailable. No live posts sent.",
+    "performance": "Verified local build/runtime scope: release build exits 0; all 270 rendered pages pass; Pagefind indexes 1336 pages. Shared code editor is 166021 gzip bytes; formatting imports only on demand. SVG total 108107 source bytes across 62 diagrams. Worker boundary cases complete under five-second timeout (20-city TSP 173ms locally). Final two-line Reset notice cleanup verified through dev compilation and browser; no new dependencies or assets.",
+    "readOnlyCode": "verified light/dark surfaces, shared editor syntax palette, compact headings and line numbers, Copy feedback, and mobile horizontal scrolling contained inside code blocks",
+    "tabNavigation": "implemented accessible tab roles, roving focus with arrow/Home/End keys, independent left-pane scroll positions; browser verified left and output tab keyboard selection"
+  },
+  "problems": [
+    {
+      "slug": "3sum",
+      "title": "3Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and scalar/array contract are sufficient",
+      "cases": 4,
+      "notes": [
+        "Replaced examples and fixtures shorter than the minimum length of three.",
+        "Added duplicate-zero and no-solution cases.",
+        "Clarified values versus indices and unordered output; corrected sort-space caveat."
+      ]
+    },
+    {
+      "slug": "3sum-closest",
+      "title": "3Sum Closest",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and scalar/array contract are sufficient",
+      "cases": 4,
+      "notes": [
+        "Clarified distinct indices and unique sum rather than unique index combination.",
+        "Added exact-target and all-negative fixtures."
+      ]
+    },
+    {
+      "slug": "4sum",
+      "title": "4Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and scalar/array contract are sufficient",
+      "cases": 5,
+      "notes": [
+        "Removed ambiguity between returning indices and values.",
+        "Added insufficient-length, no-solution, and large-value arithmetic fixtures.",
+        "Corrected sort-space caveat."
+      ]
+    },
+    {
+      "slug": "add-binary",
+      "title": "Add Binary",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and scalar/array contract are sufficient",
+      "cases": 5,
+      "notes": [
+        "Corrected unrelated Matrix/BFS/DFS topics to String and Math.",
+        "Replaced repeated string prepending with an array buffer so the stated linear time is justified.",
+        "Added unequal lengths and carry-chain fixtures."
+      ]
+    },
+    {
+      "slug": "add-two-numbers",
+      "title": "Add Two Numbers",
+      "contentReview": "reviewed",
+      "diagramReview": "added inline SVG showing input and result node order with decimal values",
+      "cases": 3,
+      "notes": [
+        "Clarified node arguments and returned head rather than arrays.",
+        "Normalized Linked List topic label.",
+        "Checked digit-order semantics and carry propagation; added zero/unequal-length boundary fixture."
+      ]
+    },
+    {
+      "slug": "add-two-numbers-ii",
+      "title": "Add Two Numbers II",
+      "contentReview": "reviewed",
+      "diagramReview": "added inline SVG showing input and result node order with decimal values",
+      "cases": 4,
+      "notes": [
+        "Clarified node arguments and returned head rather than arrays.",
+        "Normalized Linked List topic label.",
+        "Checked digit-order semantics and carry propagation; added zero/unequal-length boundary fixture."
+      ]
+    },
+    {
+      "slug": "alien-dictionary",
+      "title": "Alien Dictionary",
+      "contentReview": "reviewed",
+      "diagramReview": "added inline SVG of precedence constraints for example 1",
+      "cases": 6,
+      "notes": [
+        "Clarified proposed ordering may be inconsistent and defined lexicographic comparison.",
+        "Added isolated-letter and duplicate-word fixtures.",
+        "Defined variables in complexity explanation."
+      ]
+    },
+    {
+      "slug": "all-nodes-distance-k-in-binary-tree",
+      "title": "All Nodes Distance K in Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added inline SVG highlighting target and distance-two nodes in example 1",
+      "cases": 4,
+      "notes": [
+        "Standardized lowercase k to match function signature.",
+        "Explicitly states target exists and clarifies actual node identity.",
+        "Added k beyond tree diameter and upward traversal fixtures."
+      ]
+    },
+    {
+      "slug": "allocate-minimum-pages-practice",
+      "title": "Allocate Minimum Pages",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG showing the optimal contiguous split of the first example",
+      "cases": 4,
+      "notes": [
+        "Removed imported | Practice suffix from title, preserving URL.",
+        "Standardized parameter names in constraints.",
+        "Replaced spread into Math.max with a loop to avoid engine argument limits at 100,000 books.",
+        "Added one-student and one-book-per-student cases."
+      ]
+    },
+    {
+      "slug": "as-far-from-land-as-possible",
+      "title": "As Far from Land as Possible",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG showing each water cell\u2019s nearest-land distance for example 1",
+      "cases": 4,
+      "notes": [
+        "Clarified max-of-minimum distance; original wording could suggest farthest land.",
+        "Added all-water and all-land cases.",
+        "Updated topics to Matrix and BFS."
+      ]
+    },
+    {
+      "slug": "backspace-string-compare",
+      "title": "Backspace String Compare",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; short text examples clearly express the operation",
+      "cases": 5,
+      "notes": [
+        "Specified that backspacing an empty result has no effect.",
+        "Added leading and excess-backspace cases.",
+        "Included String and Two Pointers topics matching the solution."
+      ]
+    },
+    {
+      "slug": "balanced-binary-tree",
+      "title": "Balanced Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG of the balanced first example with subtree heights",
+      "cases": 5,
+      "notes": [
+        "Confirmed balance must hold at every node and null root is valid.",
+        "Kept iterative traversal to support skewed trees within the 5,000-node limit.",
+        "Added single-node and three-node-chain cases."
+      ]
+    },
+    {
+      "slug": "basic-calculator-ii",
+      "title": "Basic Calculator II",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; short text examples clearly express the operation",
+      "cases": 6,
+      "notes": [
+        "Specified token spacing rather than allowing spaces inside numbers.",
+        "Specified binary operators and equal-precedence associativity.",
+        "Added single number, whitespace, negative division, and left-associative division cases.",
+        "Corrected Hash Table topic to Stack&Queue."
+      ]
+    },
+    {
+      "slug": "beautiful-arrangement",
+      "title": "Beautiful Arrangement",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and return contract are clear without a diagram",
+      "cases": 4,
+      "notes": [
+        "Clarified 1-based positions to avoid JavaScript indexing ambiguity.",
+        "Explained both n=2 permutations and added n=3 and n=4 fixtures."
+      ]
+    },
+    {
+      "slug": "best-time-to-buy-and-sell-stock",
+      "title": "Best Time to Buy and Sell Stock",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and return contract are clear without a diagram",
+      "cases": 5,
+      "notes": [
+        "Changed exactly one purchase to at most one transaction, covering the one-day case.",
+        "Added single-day, flat-price, and increasing-price fixtures."
+      ]
+    },
+    {
+      "slug": "best-time-to-buy-and-sell-stock-ii",
+      "title": "Best Time to Buy and Sell Stock II",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and return contract are clear without a diagram",
+      "cases": 5,
+      "notes": [
+        "Confirmed unlimited trades and no overlapping holdings.",
+        "Corrected topic to Greedy and difficulty to Medium for consistency with this variant.",
+        "Added single-day, increasing, and repeated valley/peak fixtures."
+      ]
+    },
+    {
+      "slug": "best-time-to-buy-and-sell-stock-iv",
+      "title": "Best Time to Buy and Sell Stock IV",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and return contract are clear without a diagram",
+      "cases": 6,
+      "notes": [
+        "Normalized Dynamic Programming topic.",
+        "Explained exact DP state meanings and why transaction updates descend.",
+        "Added limited-budget, one-day, and no-profit fixtures."
+      ]
+    },
+    {
+      "slug": "bfs-of-graph-practice",
+      "title": "Breadth-First Search of a Graph",
+      "contentReview": "reviewed",
+      "diagramReview": "added directed graph SVG with BFS levels",
+      "cases": 5,
+      "notes": [
+        "Removed source-site suffix and standardized title.",
+        "Made deterministic neighbor order and disconnected behavior explicit.",
+        "Added cycles, self-loop, and reordered-neighbor fixtures."
+      ]
+    },
+    {
+      "slug": "binary-search-tree-iterator",
+      "title": "Binary Search Tree Iterator",
+      "contentReview": "reviewed",
+      "diagramReview": "added BST diagram and its inorder sequence",
+      "cases": 4,
+      "notes": [
+        "Clarified hasNext does not advance and next is called only while values remain.",
+        "Separated constructor cost from amortized next cost.",
+        "Added repeated hasNext and skewed-tree cases."
+      ]
+    },
+    {
+      "slug": "binary-tree-cameras",
+      "title": "Binary Tree Cameras",
+      "contentReview": "reviewed",
+      "diagramReview": "added diagram of a single camera covering example 1",
+      "cases": 5,
+      "notes": [
+        "Verified camera coverage is one edge only.",
+        "Added two-node, full three-node, and four-node-chain fixtures."
+      ]
+    },
+    {
+      "slug": "binary-tree-level-order-traversal",
+      "title": "Binary Tree Level Order Traversal",
+      "contentReview": "reviewed",
+      "diagramReview": "added tree with explicit level groups",
+      "cases": 4,
+      "notes": [
+        "Clarified nested output and preserved strict ordering.",
+        "Corrected traversal topic to BFS.",
+        "Added single-node and right-chain fixtures."
+      ]
+    },
+    {
+      "slug": "binary-tree-maximum-path-sum",
+      "title": "Binary Tree Maximum Path Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "added highlighted maximum path excluding the root",
+      "cases": 4,
+      "notes": [
+        "Specified non-empty path so all-negative trees return a negative value.",
+        "Retained iterative solution for the 30,000-node limit.",
+        "Added all-negative and path-through-root fixtures."
+      ]
+    },
+    {
+      "slug": "binary-tree-paths",
+      "title": "Binary Tree Paths",
+      "contentReview": "reviewed",
+      "diagramReview": "added tree showing both root-to-leaf paths",
+      "cases": 4,
+      "notes": [
+        "Defined leaf and confirmed unordered comparison accepts alternate path ordering.",
+        "Added negative-value and one-child fixtures."
+      ]
+    },
+    {
+      "slug": "binary-tree-right-side-view",
+      "title": "Binary Tree Right Side View",
+      "contentReview": "reviewed",
+      "diagramReview": "added highlighted rightmost nodes including one from the left subtree",
+      "cases": 4,
+      "notes": [
+        "Added a deeper left-subtree case to reject implementations that only follow right pointers.",
+        "Corrected topic to BFS."
+      ]
+    },
+    {
+      "slug": "binary-tree-zigzag-level-order-traversal",
+      "title": "Binary Tree Zigzag Level Order Traversal",
+      "contentReview": "reviewed",
+      "diagramReview": "added tree with alternating output direction explained",
+      "cases": 4,
+      "notes": [
+        "Confirmed strict alternating order without reversing tree structure.",
+        "Corrected topic to BFS.",
+        "Added full third-level fixture and single-node fixture."
+      ]
+    },
+    {
+      "slug": "boyer-moore-algorithm-for-pattern-searching",
+      "title": "Boyer\u2013Moore Pattern Search",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; text examples are sufficient",
+      "cases": 5,
+      "notes": [
+        "Specified index base, ordering, overlap handling, and string indexing convention.",
+        "Corrected best-case complexity to include pattern preprocessing.",
+        "Added absent, full-string, and boundary-match fixtures."
+      ]
+    },
+    {
+      "slug": "bst-with-dead-end-practice",
+      "title": "BST with a Dead End",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; text examples are sufficient",
+      "cases": 5,
+      "notes": [
+        "Removed source-site title suffix.",
+        "Replaced misleading global neighbor-insertion definition with the allowed range beneath a leaf.",
+        "Specified unique keys; added lower-bound and open-range cases."
+      ]
+    },
+    {
+      "slug": "burst-balloons",
+      "title": "Burst Balloons",
+      "contentReview": "reviewed",
+      "diagramReview": "added compact SVG tracing an optimal burst order for example 1",
+      "cases": 5,
+      "notes": [
+        "Clarified changing neighbors and interval boundaries.",
+        "Added singleton, zero, and all-zero cases."
+      ]
+    },
+    {
+      "slug": "ceiling-in-a-sorted-array",
+      "title": "Ceiling in a Sorted Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; text examples are sufficient",
+      "cases": 5,
+      "notes": [
+        "Standardized title capitalization.",
+        "Reconciled x=0 example with constraints.",
+        "Added exact match, duplicate values, and no-ceiling fixtures."
+      ]
+    },
+    {
+      "slug": "cheapest-flights-within-k-stops",
+      "title": "Cheapest Flights Within K Stops",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG contrasting direct and one-stop routes",
+      "cases": 6,
+      "notes": [
+        "Clarified city labels and zero-flight source-equals-destination case.",
+        "Corrected complexity to include array copies and the k=0 pass.",
+        "Added routes needing the full stop allowance and empty-network fixtures."
+      ]
+    },
+    {
+      "slug": "check-if-it-is-possible-to-finish-all-task-from-given-dependencies-course-schedule-i",
+      "title": "Course Schedule",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; text examples are sufficient",
+      "cases": 5,
+      "notes": [
+        "Replaced long imported title with Course Schedule; preserved URL.",
+        "Specified course-label bounds and added no-dependency, self-cycle, and disconnected-cycle cases."
+      ]
+    },
+    {
+      "slug": "check-if-reversing-a-sub-array-make-the-array-sorted",
+      "title": "Sort an Array with One Reversal",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete examples communicate the operation",
+      "cases": 7,
+      "notes": [
+        "Shortened ungrammatical title while preserving route.",
+        "Defined ascending/nondecreasing order and allowed zero reversals.",
+        "Added impossible, descending, singleton, and equal-value cases; existing exhaustive oracle covers duplicate boundaries."
+      ]
+    },
+    {
+      "slug": "check-whether-a-given-graph-is-bipartite-or-not",
+      "title": "Is Graph Bipartite?",
+      "contentReview": "reviewed",
+      "diagramReview": "added two-color SVG of the four-cycle in example 1",
+      "cases": 4,
+      "notes": [
+        "Shortened title to Is Graph Bipartite?.",
+        "Specified valid symmetric adjacency lists and disconnected graph behavior.",
+        "Added isolated vertices and disconnected odd-cycle fixtures."
+      ]
+    },
+    {
+      "slug": "chocolate-distribution-problem",
+      "title": "Chocolate Distribution",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete examples communicate the operation",
+      "cases": 4,
+      "notes": [
+        "Aligned arr and m names throughout statement and constraints.",
+        "Explained first example selection.",
+        "Added all-packets and duplicate-size cases."
+      ]
+    },
+    {
+      "slug": "climbing-stairs",
+      "title": "Climbing Stairs",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete examples communicate the operation",
+      "cases": 4,
+      "notes": [
+        "Clarified order matters and no overshooting.",
+        "Added smallest input and clarified the three sequences for n=3."
+      ]
+    },
+    {
+      "slug": "coin-change",
+      "title": "Coin Change",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete examples communicate the operation",
+      "cases": 5,
+      "notes": [
+        "Clarified minimum count rather than number of combinations.",
+        "Added a non-greedy optimum and denomination-larger-than-amount fixtures."
+      ]
+    },
+    {
+      "slug": "combinations",
+      "title": "Combinations",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete examples communicate the operation",
+      "cases": 4,
+      "notes": [
+        "Removed repetitive ordering boilerplate.",
+        "Verified comparator permits reordered groups and rejects duplicates.",
+        "Added k=n and k=1 boundaries; clarified auxiliary-space versus output storage."
+      ]
+    },
+    {
+      "slug": "construct-binary-tree-from-preorder-and-postorder-traversal",
+      "title": "Construct Binary Tree from Preorder and Postorder Traversal",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG showing two valid shapes for the same traversals",
+      "cases": 4,
+      "notes": [
+        "Specified valid traversal pairs rather than arbitrary permutations.",
+        "Explained preorder and postorder visitation rules.",
+        "Added two-node ambiguity and skewed-tree fixtures."
+      ]
+    },
+    {
+      "slug": "construct-bst-from-preorder-traversal",
+      "title": "Construct BST from Preorder Traversal",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG reconstructing the first example",
+      "cases": 4,
+      "notes": [
+        "Confirmed strict BST ordering and valid-input guarantee.",
+        "Added ascending and descending chains.",
+        "Clarified O(h) recursion depth within O(n) worst-case space."
+      ]
+    },
+    {
+      "slug": "container-with-most-water",
+      "title": "Container With Most Water",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG highlighting the optimal sides and water area in example 1",
+      "cases": 5,
+      "notes": [
+        "Replaced volume with area and specified the pair formula.",
+        "Added zero heights, equal heights, and interior tall-line cases."
+      ]
+    },
+    {
+      "slug": "convert-binary-number-in-a-linked-list-to-integer",
+      "title": "Convert Binary Number in a Linked List to Integer",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; the 101 = 5 explanation is sufficient",
+      "cases": 4,
+      "notes": [
+        "Clarified node input and most-significant-bit order.",
+        "Renamed inaccurate Bit Shift Traversal heading: the solution uses multiplication.",
+        "Added leading zeros and the maximum 30-bit value."
+      ]
+    },
+    {
+      "slug": "convert-sorted-array-to-binary-search-tree",
+      "title": "Convert Sorted Array to Binary Search Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed here; existing balanced-tree and reconstruction diagrams explain the same structure without adding a redundant diagram",
+      "cases": 4,
+      "notes": [
+        "Clarified subtree height rather than depth and allowed multiple valid outputs.",
+        "Specified all values exactly once and output node shape.",
+        "Added even-sized arrays; clarified auxiliary versus output space."
+      ]
+    },
+    {
+      "slug": "copy-list-with-random-pointer",
+      "title": "Copy List with Random Pointer",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG showing corresponding original and copied pointers",
+      "cases": 5,
+      "notes": [
+        "Made deep-copy identity and original-list preservation explicit.",
+        "Added self-reference, duplicate-value cross-reference, and null-random cases.",
+        "Strengthened runner to check original-list restoration and use linear-time identity maps."
+      ]
+    },
+    {
+      "slug": "count-bst-nodes-that-lie-in-a-given-range-practice",
+      "title": "Count BST Nodes in a Range",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit value sets and per-index explanations make the examples clear",
+      "cases": 4,
+      "notes": [
+        "Removed source-site title suffix.",
+        "Clarified inclusive boundaries, node input, and tree-height notation in complexity.",
+        "Added equal-bound and whole-tree fixtures."
+      ]
+    },
+    {
+      "slug": "count-different-palindromic-subsequences",
+      "title": "Count Different Palindromic Subsequences",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit value sets and per-index explanations make the examples clear",
+      "cases": 5,
+      "notes": [
+        "Defined subsequence and distinctness by string value, not selected indices.",
+        "Enumerated the first example to distinguish subsequences from substrings.",
+        "Added singleton, all-distinct, and repeated-character cases; existing exhaustive oracle remains applicable."
+      ]
+    },
+    {
+      "slug": "count-of-smaller-numbers-after-self",
+      "title": "Count of Smaller Numbers After Self",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit value sets and per-index explanations make the examples clear",
+      "cases": 6,
+      "notes": [
+        "Made strict inequality and original-index ordering explicit.",
+        "Explained descending merge order used by the reference implementation.",
+        "Added singleton, increasing, negative, and all-equal cases."
+      ]
+    },
+    {
+      "slug": "count-square-submatrices-with-all-ones",
+      "title": "Count Square Submatrices with All Ones",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG illustrating four unit squares plus one larger square",
+      "cases": 5,
+      "notes": [
+        "Clarified contiguous squares and counting overlapping placements.",
+        "Explained first example by square size and in-place DP space accounting.",
+        "Added all-one 2\u00d72, single-row, and singleton cases."
+      ]
+    },
+    {
+      "slug": "counting-bits",
+      "title": "Counting Bits",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and index-based explanation suffice",
+      "cases": 4,
+      "notes": [
+        "Made inclusive upper bound and zero input explicit.",
+        "Added n=0 and power-of-two boundary cases.",
+        "Clarified auxiliary space versus returned-array storage."
+      ]
+    },
+    {
+      "slug": "critical-connections-in-a-network",
+      "title": "Critical Connections in a Network",
+      "contentReview": "reviewed",
+      "diagramReview": "added SVG highlighting the bridge in example 1",
+      "cases": 4,
+      "notes": [
+        "Clarified undirected edge representation and accepted ordering.",
+        "Added cycle with no bridges and chain with all bridges.",
+        "Retained iterative DFS for the 100,000-node limit."
+      ]
+    },
+    {
+      "slug": "daily-temperatures",
+      "title": "Daily Temperatures",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and index-based explanation suffice",
+      "cases": 5,
+      "notes": [
+        "Specified first strictly warmer day; equal readings do not qualify.",
+        "Explained non-increasing stack and why each index is pushed/popped at most once.",
+        "Added equal-temperature and delayed-warmer cases."
+      ]
+    },
+    {
+      "slug": "decode-string",
+      "title": "Decode String",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; expanded strings, partitions, and move-by-move explanations directly illustrate the rules",
+      "cases": 5,
+      "notes": [
+        "Corrected unrelated Graph/BFS/DFS topics to String and Stack&Queue.",
+        "Specified grammar and multi-digit counts.",
+        "Added literal-only, adjacent literal, and multi-digit repeat cases.",
+        "Corrected complexity to account for intermediate string materialization."
+      ]
+    },
+    {
+      "slug": "decode-ways",
+      "title": "Decode Ways",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; expanded strings, partitions, and move-by-move explanations directly illustrate the rules",
+      "cases": 7,
+      "notes": [
+        "Specified that zero alone and leading-zero groups are invalid.",
+        "Explained distinct partitions for 226.",
+        "Added valid zero pair, invalid trailing zero pair, and ambiguous-prefix cases."
+      ]
+    },
+    {
+      "slug": "delete-and-earn",
+      "title": "Delete and Earn",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; expanded strings, partitions, and move-by-move explanations directly illustrate the rules",
+      "cases": 4,
+      "notes": [
+        "Restored the one-occurrence-per-move rule and explained why the solution can group equal values.",
+        "Added repeated-only and nonadjacent-value cases.",
+        "Replaced spread-based maximum with a simple scan."
+      ]
+    },
+    {
+      "slug": "depth-first-search-or-dfs-for-a-graph",
+      "title": "Depth-First Search of a Graph",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit traversal order and concrete wildcard examples explain the required behavior",
+      "cases": 5,
+      "notes": [
+        "Standardized title and removed unrelated BFS tag.",
+        "Clarified edge direction, reachability, first visits, and neighbor order.",
+        "Added cross-edge ordering, cyclic/disconnected, and singleton cases."
+      ]
+    },
+    {
+      "slug": "design-add-and-search-words-data-structure",
+      "title": "Design Add and Search Words Data Structure",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit traversal order and concrete wildcard examples explain the required behavior",
+      "cases": 3,
+      "notes": [
+        "Specified whole-word matches and exactly-one-character wildcard semantics.",
+        "Clarified method return values and repeated insertion.",
+        "Added prefix, excess-length, duplicate-word, and all-wildcard cases."
+      ]
+    },
+    {
+      "slug": "detect-a-negative-cycle-in-a-graph-bellman-ford",
+      "title": "Detect a Negative-Weight Cycle",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit cycle paths and weighted sums illustrate these examples",
+      "cases": 5,
+      "notes": [
+        "Corrected impossible one-vertex edge constraint by allowing zero edges.",
+        "Clarified weighted directed edge shape and graph-wide detection.",
+        "Added empty graph and zero-weight cycle cases."
+      ]
+    },
+    {
+      "slug": "detect-cycle-in-a-directed-graph",
+      "title": "Detect Cycle in a Directed Graph",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit cycle paths and weighted sums illustrate these examples",
+      "cases": 5,
+      "notes": [
+        "Corrected visited-vertex wording that falsely labels converging DAG paths as cycles.",
+        "Clarified disconnected components and self-loops.",
+        "Added diamond DAG, self-loop, and disconnected cycle fixtures."
+      ]
+    },
+    {
+      "slug": "diameter-of-binary-tree",
+      "title": "Diameter of Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible inline SVG illustrating the first example",
+      "cases": 4,
+      "notes": [
+        "Clarified node input and edge-count return value; a single node has diameter zero.",
+        "Added a skewed tree and a diameter entirely below the root.",
+        "Added an accessible diagram distinguishing three edges from four nodes."
+      ]
+    },
+    {
+      "slug": "distance-of-nearest-cell-having-1-practice",
+      "title": "Distance to the Nearest 1",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible inline SVG illustrating the first example",
+      "cases": 6,
+      "notes": [
+        "Removed platform suffix and replaced the unclear title.",
+        "Clarified rectangular matrix input, equal-sized output, and zero distance at source cells.",
+        "Added single-row, single-column, corner-source, and one-cell fixtures.",
+        "Added a side-by-side input/distance SVG; categorized under Matrix and BFS."
+      ]
+    },
+    {
+      "slug": "distinct-subsequences",
+      "title": "Distinct Subsequences",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; index-selection or arithmetic examples explain the operation directly",
+      "cases": 7,
+      "notes": [
+        "Clarified that different source index selections count separately, even when resulting strings are identical.",
+        "Corrected Hash Table classification to Dynamic Programming.",
+        "Added repeated-character, longer-target, exact-match, absent-character, and case-sensitive fixtures."
+      ]
+    },
+    {
+      "slug": "evaluate-division",
+      "title": "Evaluate Division",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible ratio-chain SVG",
+      "cases": 4,
+      "notes": [
+        "Specified consistent equations, variable lookup, disconnected pairs, and unknown self-queries.",
+        "Clarified query order and the actual absolute/relative tolerance formula used by the runner.",
+        "Added disconnected-component and consistent-cycle fixtures; added a ratio-chain SVG."
+      ]
+    },
+    {
+      "slug": "evaluate-reverse-polish-notation",
+      "title": "Evaluate Reverse Polish Notation",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; index-selection or arithmetic examples explain the operation directly",
+      "cases": 7,
+      "notes": [
+        "Stated valid-expression, nonzero-divisor, and 32-bit intermediate-result guarantees.",
+        "Explained left/right operand order and negative division.",
+        "Added negative division, subtraction order, zero, and single-token fixtures."
+      ]
+    },
+    {
+      "slug": "evaluation-of-postfix-expression",
+      "title": "Evaluation of Postfix Expression",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; index-selection or arithmetic examples explain the operation directly",
+      "cases": 6,
+      "notes": [
+        "Confirmed this variant uses single-digit operands, distinct from the token-array RPN problem.",
+        "Added negative fractional division, operand-order, single-digit, and nested-operation fixtures.",
+        "Bounded intermediate results to signed 32-bit integers so JavaScript arithmetic stays exact."
+      ]
+    },
+    {
+      "slug": "excel-sheet-column-title",
+      "title": "Excel Sheet Column Title",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; index-selection or arithmetic examples explain the operation directly",
+      "cases": 9,
+      "notes": [
+        "Replaced unrelated Matrix/BFS/DFS tags with Math and String.",
+        "Checked alphabet rollover boundaries and the largest allowed column number.",
+        "Used a character buffer and one reversal so the stated linear-in-digit-count conversion cost is explicit."
+      ]
+    },
+    {
+      "slug": "find-all-duplicates-in-an-array",
+      "title": "Find All Duplicates in an Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; array examples and explicit contract distinguish the relevant edge cases",
+      "cases": 5,
+      "notes": [
+        "Made permission to mutate nums explicit and excluded the required result from the constant-space bound.",
+        "Clarified unordered, duplicate-free output and corrected the unrelated Two Pointers topic.",
+        "Added all-unique, minimum duplicate, and two-duplicate fixtures."
+      ]
+    },
+    {
+      "slug": "find-eventual-safe-states",
+      "title": "Find Eventual Safe States",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; array examples and explicit contract distinguish the relevant edge cases",
+      "cases": 6,
+      "notes": [
+        "Specified directed adjacency-list input and ascending output required by the checker.",
+        "Clarified that every path must terminate; an escape to a terminal does not make a cycle-reachable vertex safe.",
+        "Added branching-to-cycle, all-terminal, cycle-only, and acyclic-chain fixtures."
+      ]
+    },
+    {
+      "slug": "find-maximum-number-possible-by-doing-at-most-k-swaps",
+      "title": "Largest Number After at Most K Swaps",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; digit strings and swap examples directly express the operation",
+      "cases": 9,
+      "notes": [
+        "Standardized title and made arbitrary-position swaps, string output, leading zeros, and at-most semantics explicit.",
+        "Added memoization and a sorted-target early exit while preserving all tied maximum-digit branches.",
+        "Replaced an invalid factorial complexity expression with state-dependent exponential time and memo storage bounds.",
+        "Verified against exhaustive swap reachability for all 81 length-four strings over 0, 1, 2 with budgets 0\u20132, plus a 30-digit duplicate-heavy fixture."
+      ]
+    },
+    {
+      "slug": "find-median-of-bst",
+      "title": "Median of a Binary Search Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; array examples and explicit contract distinguish the relevant edge cases",
+      "cases": 6,
+      "notes": [
+        "Standardized the title and clarified tree-node input, odd/even medians, and fractional outputs.",
+        "Verified iterative inorder traversal avoids recursive overflow for skewed trees.",
+        "Added single-node, odd/even interior medians, and negative-value fixtures."
+      ]
+    },
+    {
+      "slug": "find-paths-from-corner-cell-to-middle-cell-in-maze",
+      "title": "Corner-to-Center Maze Paths",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible corner-to-center jump SVG",
+      "cases": 5,
+      "notes": [
+        "Standardized title, explicit coordinate-path return type, and zero-jump behavior.",
+        "Clarified that only landing cells are visited; skipped cells do not become path entries.",
+        "Added successful single/multiple-corner and two-cell jump fixtures; added jump-path SVG.",
+        "Corrected exponential complexity to include path-copy output cost and removed the unsupported manageable-performance claim."
+      ]
+    },
+    {
+      "slug": "find-peak-element",
+      "title": "Find Peak Element",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and explicit index/count explanations are sufficient",
+      "cases": 6,
+      "notes": [
+        "Clarified index return, endpoint peaks, and alternative valid answers.",
+        "Corrected the false claim that a peak exists on both sides of every descent.",
+        "Added singleton, monotone increasing/decreasing, and negative-value fixtures."
+      ]
+    },
+    {
+      "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+      "title": "City with the Fewest Reachable Neighbors",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; examples and explicit index/count explanations are sufficient",
+      "cases": 5,
+      "notes": [
+        "Shortened the display title and function name while keeping the URL stable.",
+        "Specified distinct endpoints, positive weights, no parallel roads, inclusive threshold, and exclusion of the city itself.",
+        "Added disconnected, indirect-shortest-path, equality-boundary, and zero-threshold fixtures.",
+        "Corrected topic tags to Shortest Path and Dynamic Programming."
+      ]
+    },
+    {
+      "slug": "find-the-duplicate-number",
+      "title": "Find the Duplicate Number",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; compact index-walk or substring examples directly explain the operation",
+      "cases": 5,
+      "notes": [
+        "Made the exactly-one-distinct-duplicate constraint explicit and retained repeated occurrences beyond two.",
+        "Clarified value return, immutable input, and constant auxiliary space.",
+        "Verified the Floyd initialization and reset-to-zero convention; added smallest-input and repeated-value fixtures."
+      ]
+    },
+    {
+      "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+      "title": "First Occurrence in a String",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; compact index-walk or substring examples directly explain the operation",
+      "cases": 7,
+      "notes": [
+        "Shortened the display title and clarified zero-based first-occurrence output.",
+        "Replaced an unrelated Hash Table tag with String Matching.",
+        "Replaced engine-dependent indexOf code and mismatched complexity claims with explicit O(n + m) KMP.",
+        "Added overlapping-prefix, full-match, longer-pattern, final-position, and multiple-match fixtures."
+      ]
+    },
+    {
+      "slug": "flatten-a-multilevel-doubly-linked-list",
+      "title": "Flatten a Multilevel Doubly Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible before-and-after SVG; visually verified in the desktop workspace",
+      "cases": 5,
+      "notes": [
+        "Contract and checker corrected to require original nodes, unchanged values, all nodes retained, null child pointers, and correct backward links.",
+        "Added nested-child, resume-parent-next, and duplicate-value fixtures. Before-and-after diagram shows depth-first order and bidirectional links."
+      ]
+    },
+    {
+      "slug": "flatten-binary-tree-to-linked-list",
+      "title": "Flatten Binary Tree to Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit preorder arrow sequence and explanation of null entries clarify the tree-to-chain representation",
+      "cases": 6,
+      "notes": [
+        "Defined preorder and clarified in-place changes, null left pointers, preserved values, and empty input.",
+        "Explained the displayed level-order result using the preorder sequence.",
+        "Removed unnecessary return from the reference solution to match the ignored-return contract.",
+        "Added singleton, left-chain, already-flat, and duplicate-value fixtures."
+      ]
+    },
+    {
+      "slug": "flatten-nested-list-iterator",
+      "title": "Flatten Nested List Iterator",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; nested array examples show traversal order directly",
+      "cases": 5,
+      "notes": [
+        "Clarified ordinary JavaScript array input, empty nested lists, and non-consuming hasNext calls.",
+        "Replaced a broad pending-element stack with lazy list frames using O(depth) auxiliary space.",
+        "Corrected the per-integer amortized complexity claim: empty list entries must also be counted.",
+        "Added empty-list, zero/negative-value, nested-singleton fixtures and repeated-hasNext runtime regression."
+      ]
+    },
+    {
+      "slug": "flattening-a-linked-list",
+      "title": "Flatten Sorted Bottom Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete nested-array examples plus diagonal-region or bottom-chain explanation are sufficient",
+      "cases": 5,
+      "notes": [
+        "Clarified node input versus array representation, bottom-link return, cleared horizontal links, and duplicate preservation.",
+        "Confirmed heads need not be sorted horizontally; each individual bottom chain must be sorted.",
+        "Added empty, repeated-value, and unsorted-head fixtures."
+      ]
+    },
+    {
+      "slug": "flood-fill",
+      "title": "Flood Fill",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; concrete nested-array examples plus diagonal-region or bottom-chain explanation are sufficient",
+      "cases": 5,
+      "notes": [
+        "Specified valid source coordinates, rectangular input, and permitted in-place update.",
+        "Added diagonal-disconnection, separated same-color region, and single-pixel repaint fixtures.",
+        "Replaced recursive traversal with an explicit stack to avoid JavaScript call-stack limits."
+      ]
+    },
+    {
+      "slug": "floyd-warshall-practice",
+      "title": "Floyd\u2013Warshall: All-Pairs Shortest Paths",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; matrix examples or explicit route with jump lengths explain the relevant relationships",
+      "cases": 6,
+      "notes": [
+        "Standardized title and corrected unrelated BFS/DFS tags.",
+        "Clarified directed matrix input, negative weights, returned matrix, and sentinel semantics.",
+        "Added singleton, zero-weight plus negative-edge, and 11,000-distance fixtures to catch sentinel clamping."
+      ]
+    },
+    {
+      "slug": "frog-jump",
+      "title": "Frog Jump",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; matrix examples or explicit route with jump lengths explain the relevant relationships",
+      "cases": 6,
+      "notes": [
+        "Specified strictly increasing distinct positions and boolean return.",
+        "Added a valid route with jump lengths to explain the transition rule.",
+        "Added minimum success, missing first landing, increasing jumps, and excessive-gap fixtures.",
+        "Corrected Memoization tag to Hash Table for the iterative state-set approach."
+      ]
+    },
+    {
+      "slug": "game-of-life",
+      "title": "Game of Life",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit neighbor rules and matrix examples or circular-index contract describe the operation sufficiently",
+      "cases": 5,
+      "notes": [
+        "Clarified exactly one simultaneous in-place generation and rectangular binary input.",
+        "Specified finite boundaries without wrapping; corrected Two Pointers to Matrix/Simulation.",
+        "Added stable block, blinker, and all-dead fixtures to verify simultaneous updates."
+      ]
+    },
+    {
+      "slug": "gas-station-practice",
+      "title": "Gas Station",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit neighbor rules and matrix examples or circular-index contract describe the operation sufficiently",
+      "cases": 5,
+      "notes": [
+        "Removed platform suffix and corrected Stack/Queue classification to Greedy.",
+        "Specified equal lengths, clockwise wraparound, unique valid start, and zero-based return.",
+        "Added single-station success/failure and exact-fuel wraparound fixtures."
+      ]
+    },
+    {
+      "slug": "generate-parentheses",
+      "title": "Generate Parentheses",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; short balanced-string examples directly illustrate valid outputs",
+      "cases": 4,
+      "notes": [
+        "Clarified exact pair count, distinct outputs, and arbitrary result order.",
+        "Replaced unrelated Hash Table topic with Backtracking.",
+        "Used a shared character buffer so O(n) auxiliary-space accounting is explicit; included output storage in complexity.",
+        "Added n=2 and n=4 fixtures, with n=4 independently enumerated from all 256 candidate strings."
+      ]
+    },
+    {
+      "slug": "given-a-matrix-of-o-and-x-replace-o-with-x-if-surrounded-by-x",
+      "title": "Capture Surrounded Regions",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; matrix examples and border-connectivity explanation distinguish captured and preserved cells",
+      "cases": 5,
+      "notes": [
+        "Shortened the display title and callable function name while preserving the URL.",
+        "Defined four-directional connectivity, diagonal exclusion, border reachability, and returned-matrix contract.",
+        "Added diagonal-only contact, border-connected interior, and single-row fixtures.",
+        "Formatted iterative reference solution for readable code blocks."
+      ]
+    },
+    {
+      "slug": "given-only-a-pointer-reference-to-a-node-to-be-deleted-in-a-singly-linked-list-how-do-you-delete-it",
+      "title": "Delete a Node Without the Head",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; inline value sequence directly explains the transformation",
+      "cases": 5,
+      "notes": [
+        "Shortened title and function name; clarified selected-node input and ignored return value.",
+        "Corrected misleading exact-node deletion wording: the operation removes a position from the value sequence, while copying its successor.",
+        "Added penultimate-node, duplicate-value, and zero/negative-value fixtures."
+      ]
+    },
+    {
+      "slug": "happy-number",
+      "title": "Happy Number",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; inline value sequence directly explains the transformation",
+      "cases": 6,
+      "notes": [
+        "Corrected unrelated Matrix/BFS/DFS topic tags to Math and Two Pointers.",
+        "Added decimal digit-square sequence explanation and explicit boolean return.",
+        "Added already-happy, trailing-zero, known-cycle, and multi-step happy fixtures."
+      ]
+    },
+    {
+      "slug": "https-leetcode-com-problems-binary-tree-inorder-traversal",
+      "title": "Binary Tree Inorder Traversal",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit left-node-right ordering and sample value sequence explain the traversal",
+      "cases": 6,
+      "notes": [
+        "Replaced an external URL mistakenly used as the visible title; preserved the existing route.",
+        "Clarified node input and the array-versus-head return contract.",
+        "Added non-BST, left-skewed, and duplicate-value fixtures; inorder must preserve traversal order rather than sort values."
+      ]
+    },
+    {
+      "slug": "https-practice-geeksforgeeks-org-problems-binary-tree-to-dll-1",
+      "title": "Binary Tree to Doubly Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit left-node-right ordering and sample value sequence explain the traversal",
+      "cases": 5,
+      "notes": [
+        "Replaced an external URL mistakenly used as the visible title; preserved the existing route.",
+        "Clarified node input and the array-versus-head return contract.",
+        "Added non-BST, left-skewed, and duplicate-value fixtures; inorder must preserve traversal order rather than sort values."
+      ]
+    },
+    {
+      "slug": "implement-queue-using-stacks",
+      "title": "Implement Queue Using Stacks",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; method definitions and sequential operation fixtures show FIFO/LIFO behavior directly",
+      "cases": 3,
+      "notes": [
+        "Clarified pop returns the removed value, peek does not consume, and empty returns a boolean.",
+        "Added interleaved transfer/push/pop fixture to catch incorrectly mixing new pushes with pending output-stack values.",
+        "Kept amortized time claim and clarified individual transfers can take linear time."
+      ]
+    },
+    {
+      "slug": "implement-stack-and-queue-using-deque",
+      "title": "Implement Stack and Queue Using a Deque",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; method definitions and sequential operation fixtures show FIFO/LIFO behavior directly",
+      "cases": 3,
+      "notes": [
+        "Defined independent stack/queue state and all six value/boolean access methods.",
+        "Clarified nonempty-call preconditions and constructor factory input.",
+        "Added repeated peek, structure isolation, full drain, and reuse fixture.",
+        "Formatted linked-deque code for readable solution display."
+      ]
+    },
+    {
+      "slug": "implement-stack-using-queues",
+      "title": "Implement Stack Using Queues",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; operation sequences directly demonstrate LIFO order",
+      "cases": 4,
+      "notes": [
+        "Enumerated allowed queue operations and clarified queue storage is not supplied.",
+        "Specified no-return push, boolean empty, and nonempty pop/top preconditions.",
+        "Added repeated top, interleaving, reuse-after-drain, and duplicate-value fixtures.",
+        "Formatted the linked-queue implementation; its constant-time queue operations support the stated O(n) push complexity."
+      ]
+    },
+    {
+      "slug": "implement-two-stacks-in-an-array",
+      "title": "Implement Two Stacks in One Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; shared-capacity rules and operation sequences explain slot reuse",
+      "cases": 4,
+      "notes": [
+        "Clarified n is total shared capacity, either stack may use every slot, and freed slots are reusable.",
+        "Specified ignored full pushes, empty-pop sentinel, and no-return insertions.",
+        "Added overflow preservation, capacity transfer between stacks, full use by either stack, and reuse fixtures.",
+        "Removed the misleading statement that pointers must meet; storage becomes full when occupied ends are adjacent."
+      ]
+    },
+    {
+      "slug": "insert-delete-getrandom-o-1-duplicates-allowed",
+      "title": "Randomized Collection with Duplicates",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; operation definitions and multiplicity explanation state the required behavior",
+      "cases": 3,
+      "notes": [
+        "Shortened title and corrected Two Pointers tag to Hash Table/Design.",
+        "Confirmed occurrence-weighted sampling, single-occurrence removal, and nonempty random-call precondition.",
+        "Added duplicate-last-value removal, zero/negative values, full removal, and reinsertion fixture.",
+        "Verified reference sampling at controlled random positions and index integrity after removals. General runner distribution validation remains part of the feature audit."
+      ]
+    },
+    {
+      "slug": "integer-to-english-words",
+      "title": "Integer to English Words",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; exact string examples convey formatting and group omission",
+      "cases": 7,
+      "notes": [
+        "Replaced ambiguous spoken-English wording with exact capitalization, spacing, and no-and/no-hyphen rules.",
+        "Added zero middle groups, tens spelling, and maximum 32-bit value fixtures.",
+        "Corrected Hash Table topic to Math and explained constant complexity applies to the fixed input range.",
+        "Formatted reference solution."
+      ]
+    },
+    {
+      "slug": "integer-to-roman",
+      "title": "Integer to Roman",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; symbol-value pairs and decomposition example directly explain conversion",
+      "cases": 10,
+      "notes": [
+        "Explicitly listed all six permitted subtractive forms and disallowed nonstandard pairs.",
+        "Specified uppercase, no-space output and corrected topic tags.",
+        "Added all subtractive boundaries plus minimum and maximum inputs.",
+        "Corrected fixed-bound complexity wording to distinguish table entries from emitted characters."
+      ]
+    },
+    {
+      "slug": "intersection-of-two-linked-lists",
+      "title": "Intersection of Two Linked Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible shared-tail SVG and visually verified in browser",
+      "cases": 6,
+      "notes": [
+        "Clarified prefix/shared-tail fixture construction and exact-node return.",
+        "Runner now verifies node identity and unchanged original lists.",
+        "Added equal-value disjoint prefixes, shared heads, one empty prefix, and fully empty fixtures.",
+        "Diagram distinguishes separate nodes with equal values from genuinely shared nodes."
+      ]
+    },
+    {
+      "slug": "introduction-to-graph-coloring",
+      "title": "Graph Coloring with M Colors",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit color assignment explains reuse by nonadjacent vertices",
+      "cases": 6,
+      "notes": [
+        "Replaced vague introductory title with the actual decision task.",
+        "Clarified symmetric adjacency matrix, at-most color count, and boolean return.",
+        "Corrected BFS/DFS tags and complexity to include neighbor scanning.",
+        "Added singleton, edgeless, insufficient-color, and disconnected-component fixtures."
+      ]
+    },
+    {
+      "slug": "invert-binary-tree",
+      "title": "Invert Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; three-node example explicitly identifies the swapped children",
+      "cases": 7,
+      "notes": [
+        "Clarified node-versus-array input, root return, permitted in-place mutation, and preserved values.",
+        "Added singleton, skewed, sparse asymmetric, and repeated/negative-value fixtures.",
+        "Verified recursive implementation and O(height) auxiliary space within the 100-node constraint."
+      ]
+    },
+    {
+      "slug": "jump-game",
+      "title": "Jump Game",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit index route and maximum-jump rule explain movement",
+      "cases": 7,
+      "notes": [
+        "Clarified jump lengths are maxima, not mandatory exact distances.",
+        "Explained zero at destination and singleton reachability.",
+        "Corrected Two Pointers topic to Greedy and clarified scan versus actual jump sequence.",
+        "Added singleton, blocked start, zero destination, shorter-than-maximum jump, and interior dead-end fixtures."
+      ]
+    },
+    {
+      "slug": "k-th-symbol-in-grammar",
+      "title": "K-th Symbol in Grammar",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit row string and indexed symbol explain the grammar",
+      "cases": 7,
+      "notes": [
+        "Clarified one-based row/position inputs and numeric digit return.",
+        "Replaced ambiguous mirrors wording with identical first half.",
+        "Corrected Backtracking classification to Recursion and Bit Manipulation.",
+        "Added first row, half-boundary positions, and maximum row/position fixtures."
+      ]
+    },
+    {
+      "slug": "knight-dialer",
+      "title": "Knight Dialer",
+      "contentReview": "reviewed",
+      "diagramReview": "added compact text keypad; a separate SVG is unnecessary for this fixed grid",
+      "cases": 5,
+      "notes": [
+        "Added the missing keypad layout and explained unavailable corner cells.",
+        "Clarified starting digit, n-1 jumps, leading zeros, revisits, and digit 5 at n=1.",
+        "Specified modulo output and corrected Memoization tag to Graph.",
+        "Added lengths 3, 4, and 5; formatted the adjacency-map solution."
+      ]
+    },
+    {
+      "slug": "kth-smallest-element-in-a-bst",
+      "title": "Kth Smallest Element in a BST",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; sorted-value sequence and one-based rank explain the output",
+      "cases": 6,
+      "notes": [
+        "Specified strict BST ordering, valid one-based rank, and value rather than node return.",
+        "Added zero singleton, maximum rank, and both skew directions.",
+        "Refined topic tags and formatted iterative solution.",
+        "Verified O(height + k) traversal and O(height) stack reasoning."
+      ]
+    },
+    {
+      "slug": "largest-area-rectangular-sub-matrix-with-equal-number-of-1-s-and-0-s",
+      "title": "Largest Rectangle with Equal Zeros and Ones",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; example explicitly identifies selected rows/columns and balanced cell counts",
+      "cases": 7,
+      "notes": [
+        "Shortened title and replaced incorrect DP/Memoization tags with Matrix/Prefix Sum/Hash Table.",
+        "Clarified contiguous rectangle, binary input, cell-count area, and no-solution zero.",
+        "Moved algorithm hint out of the task statement and clarified prefix-sum reasoning in the solution.",
+        "Added single-row/column, whole-matrix, all-zero, and proper-subrectangle fixtures."
+      ]
+    },
+    {
+      "slug": "largest-bst-in-a-binary-tree",
+      "title": "Largest BST Subtree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; example names the qualifying root and all its descendants",
+      "cases": 6,
+      "notes": [
+        "Clarified complete rooted subtree and strict ordering, including duplicate rejection.",
+        "Shortened title, refined topic tags, and specified node-count return.",
+        "Added singleton, duplicates, ancestor-range violation, and whole-tree BST fixtures.",
+        "Formatted iterative postorder solution and verified its subtree-range checks."
+      ]
+    },
+    {
+      "slug": "largest-rectangle-in-histogram",
+      "title": "Largest Rectangle in Histogram",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible rectangle-overlay SVG and visually verified its bar heights, width, and area",
+      "cases": 8,
+      "notes": [
+        "Clarified consecutive bars, minimum-height bound, unit width, and area return.",
+        "Corrected stack-order wording to non-decreasing and topic to Monotonic Stack.",
+        "Added zero, singleton, increasing/decreasing, separated, and equal-height fixtures.",
+        "Added and visually verified a rectangle-overlay SVG showing height 5 \u00d7 width 2 = area 10."
+      ]
+    },
+    {
+      "slug": "letter-combinations-of-a-phone-number",
+      "title": "Letter Combinations of a Phone Number",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: compact complete mapping table directly explains all eight digits",
+      "cases": 7,
+      "notes": [
+        "Completed keypad mapping and clarified positional choices, repeated digits, uniqueness, and empty input.",
+        "Corrected Stack&Queue classification to Backtracking and String.",
+        "Used shared path buffer to make auxiliary-space claim explicit; distinguished output storage.",
+        "Added four-letter digits, repeated digits, mixed four-letter digits, and maximum-length fixtures."
+      ]
+    },
+    {
+      "slug": "linked-list-cycle",
+      "title": "Linked List Cycle",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible node-and-return-arrow SVG; inspected standalone render with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Clarified identity versus equal values, empty and self-loop cases, and fixture-only pos.",
+        "Added six boundary fixtures and a compact SVG showing the tail linking to index 1."
+      ]
+    },
+    {
+      "slug": "longest-common-prefix",
+      "title": "Longest Common Prefix",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: short shared-prefix example directly demonstrates the boundary",
+      "cases": 8,
+      "notes": [
+        "Removed empty-array claim conflicting with the nonempty-array constraint.",
+        "Clarified prefix starts at index zero, empty strings, and singleton input.",
+        "Removed unrelated Hash Table tag; added six boundary and distinction fixtures.",
+        "Included string-count overhead in complexity for empty strings."
+      ]
+    },
+    {
+      "slug": "longest-common-substring-practice",
+      "title": "Longest Common Substring",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: paired short strings distinguish contiguous substring from subsequence without extra visual space",
+      "cases": 8,
+      "notes": [
+        "Removed platform suffix from title and unrelated Memoization tag.",
+        "Specified alphabet, case sensitivity, length return, and zero-result case.",
+        "Explained mismatch reset and global maximum in DP solution.",
+        "Added six disjoint, case-sensitive, repeated-character, identical, interior-match, and singleton cases."
+      ]
+    },
+    {
+      "slug": "longest-happy-prefix",
+      "title": "Longest Happy Prefix",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit overlapping index ranges explain the key ambiguity compactly",
+      "cases": 8,
+      "notes": [
+        "Clarified overlapping prefix/suffix and exclusion of the whole string.",
+        "Corrected classification to String Matching and explained failure-function fallback.",
+        "Added singleton, repeated, no-match, overlap, and fallback cases."
+      ]
+    },
+    {
+      "slug": "longest-increasing-path-in-a-matrix",
+      "title": "Longest Increasing Path in a Matrix",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible grid/path SVG; standalone rendered image inspected with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Clarified arbitrary start/end, strict increase, cell count, and no wrapping.",
+        "Added equal, row, column, winding, diagonal-only, and numeric-boundary fixtures.",
+        "Added compact four-cell path SVG distinguishing cells from moves; formatted reference solution."
+      ]
+    },
+    {
+      "slug": "longest-increasing-subsequence",
+      "title": "Longest Increasing Subsequence",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: concrete chosen subsequence and equal-value counterexample explain order and strictness",
+      "cases": 8,
+      "notes": [
+        "Clarified length return, preserved ordering, skipped elements, and strict comparisons.",
+        "Replaced Memoization tag with Binary Search; explained lower-bound replacement and tails invariant.",
+        "Added six singleton, equal, descending, negative, duplicate, and mixed cases."
+      ]
+    },
+    {
+      "slug": "longest-repeating-character-replacement",
+      "title": "Longest Repeating Character Replacement",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit four-character replacement example shows the contiguous result",
+      "cases": 9,
+      "notes": [
+        "Clarified length-only return, contiguous selection, and at-most budget.",
+        "Corrected Sliding Window classification and documented historical max-frequency invariant.",
+        "Added seven zero-budget, uniform, distinct, full-budget, majority-change, and stale-frequency cases."
+      ]
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+      "title": "Lowest Common Ancestor of a Binary Search Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible seven-node LCA SVG; inspected standalone render with resolved theme colors",
+      "cases": 7,
+      "notes": [
+        "Explicit integer targets/return, distinct existing targets, and self-descendant rule.",
+        "Added sibling, ancestor, reversed-target, skewed, and negative-value cases.",
+        "Formatted iterative reference solution and added compact tree illustration."
+      ]
+    },
+    {
+      "slug": "lowest-common-ancestor-of-a-binary-tree",
+      "title": "Lowest Common Ancestor of a Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible seven-node LCA SVG; inspected standalone render with resolved theme colors",
+      "cases": 7,
+      "notes": [
+        "Explicit integer targets/return, distinct existing targets, and self-descendant rule.",
+        "Added sibling, ancestor, reversed-target, skewed, and negative-value cases.",
+        "Formatted iterative reference solution and added compact tree illustration."
+      ]
+    },
+    {
+      "slug": "lru-cache-complete-tutorial",
+      "title": "LRU Cache",
+      "contentReview": "reviewed",
+      "diagramReview": "compact operation/recency table explains eviction without an additional SVG",
+      "cases": 6,
+      "notes": [
+        "Removed tutorial suffix and renamed factory to createLRUCache.",
+        "Specified successful reads, updates, missing reads, zero values, and put return behavior.",
+        "Replaced ordered-map eviction shortcut with map plus doubly linked list.",
+        "Added update-recency, miss-recency, zero-value, repeated-read, capacity-one, and reinsert coverage."
+      ]
+    },
+    {
+      "slug": "m-coloring-problem-practice",
+      "title": "Graph Coloring with an Adjacency List",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: triangle/four-cycle contrast explains color reuse; adjacency-list contract is explicit",
+      "cases": 8,
+      "notes": [
+        "Removed platform suffix and distinguished adjacency-list variant from matrix coloring problem.",
+        "Clarified at-most colors, undirected symmetric lists, disconnected components, and simple graph constraints.",
+        "Corrected complexity to account for scanning neighbors.",
+        "Added isolated, edgeless, one-color edge, even-cycle, disconnected odd-cycle, and sufficient-color cases."
+      ]
+    },
+    {
+      "slug": "majority-element",
+      "title": "Majority Element",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: concise cancellation explanation captures the invariant without a graphic",
+      "cases": 8,
+      "notes": [
+        "Made majority guarantee and value-only return explicit in contract and constraints.",
+        "Replaced unrelated Two Pointers topic with Boyer-Moore Voting.",
+        "Explained cancellation and why no verification pass is required under the guarantee.",
+        "Added candidate changes, negatives, zero, even length, late majority, and numeric boundaries."
+      ]
+    },
+    {
+      "slug": "make-all-array-elements-equal-with-minimum-cost",
+      "title": "Minimum Cost to Equalize an Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit absolute-difference calculation and two-value interval illustrate the objective",
+      "cases": 8,
+      "notes": [
+        "Shortened title and clarified minimum cost versus target return.",
+        "Moved median strategy out of the statement into the solution; explained even-length ties.",
+        "Preserved input via sorted copy and corrected sorting-space claim.",
+        "Added singleton, two-value, even-length, outlier, numeric-boundary, and numeric-sort cases."
+      ]
+    },
+    {
+      "slug": "making-a-large-island",
+      "title": "Making a Large Island",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible before/after merge SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Clarified square numeric grid, allowed mutation, island area, and one-time counting.",
+        "Added singleton, surrounding-island, four-island merge, and distant-island cases.",
+        "Added before/after SVG showing one center flip joining four islands."
+      ]
+    },
+    {
+      "slug": "max-points-on-a-line",
+      "title": "Max Points on a Line",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible coordinate SVG; standalone render inspected with resolved theme colors",
+      "cases": 9,
+      "notes": [
+        "Corrected graph traversal tags to Math, Geometry, and Hash Table.",
+        "Clarified count return and vertical/horizontal lines; explained slope normalization and anchor counting.",
+        "Added seven boundary, sign, fractional-slope, noncollinear, and non-first-anchor cases.",
+        "Content checked; coordinate illustration pending.",
+        "Added coordinate illustration contrasting three collinear points with an off-line point."
+      ]
+    },
+    {
+      "slug": "max-value-of-equation",
+      "title": "Max Value of Equation",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: algebraic rewrite and explicit window rules explain this numerical objective",
+      "cases": 8,
+      "notes": [
+        "Fixed back-pop loop crossing the active deque head after expiry.",
+        "Added six boundary/regression fixtures and exhaustive pair-enumeration comparison over 324 small cases.",
+        "Clarified distinct points, inclusive distance, negative output, and dominance invariant."
+      ]
+    },
+    {
+      "slug": "maximal-rectangle",
+      "title": "Maximal Rectangle",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible example-region SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Clarified string cells, contiguous axis-aligned selection, and area return.",
+        "Corrected topic tags and added singleton, zero, row, column, non-square, and hole cases.",
+        "Explained solution mechanics and verified highlighted example area."
+      ]
+    },
+    {
+      "slug": "maximal-square",
+      "title": "Maximal Square",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible example-region SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Clarified string cells, contiguous axis-aligned selection, and area return.",
+        "Corrected topic tags and added singleton, zero, row, column, non-square, and hole cases.",
+        "Explained solution mechanics and verified highlighted example area."
+      ]
+    },
+    {
+      "slug": "maximize-the-cut-segments-practice",
+      "title": "Maximize Cut Segments",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit 2 + 2 + 3 partition clarifies exact coverage and piece count",
+      "cases": 8,
+      "notes": [
+        "Removed platform suffix; clarified unlimited reuse, repeated lengths, and pieces versus cuts.",
+        "Added greedy-failure, impossible-remainder, singleton, exact-single-piece, and reuse cases.",
+        "Explained unreachable-state sentinel in DP."
+      ]
+    },
+    {
+      "slug": "maximum-depth-of-binary-tree",
+      "title": "Maximum Depth of Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit example path distinguishes node depth from edge count compactly",
+      "cases": 8,
+      "notes": [
+        "Clarified leaf definition, empty/singleton depths, and nodes versus edges.",
+        "Added balanced, left/right skew, duplicate-value, and uneven-depth cases.",
+        "Retained iterative DFS for deep trees and formatted reference code."
+      ]
+    },
+    {
+      "slug": "maximum-length-of-repeated-subarray",
+      "title": "Maximum Length of Repeated Subarray",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: matching subarray and index ranges directly show contiguity in both inputs",
+      "cases": 9,
+      "notes": [
+        "Clarified contiguous matching, length return, and zero match.",
+        "Replaced full DP table with rolling shorter-array storage.",
+        "Added singleton, disjoint, subsequence-only, duplicate, interior, identical, and overlapping-run fixtures."
+      ]
+    },
+    {
+      "slug": "maximum-number-of-visible-points",
+      "title": "Maximum Number of Visible Points",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible inclusive-sector SVG; inspected standalone render with resolved theme colors",
+      "cases": 9,
+      "notes": [
+        "Specified fixed observer, free rotation, inclusive sector edges, no occlusion, and duplicate counting.",
+        "Added coordinate bounds and geometry/sliding-window classification.",
+        "Added boundary-angle, wraparound, duplicate-ray, observer-overlap, and half-circle cases.",
+        "Explained doubled-window size cap and floating-point tolerance."
+      ]
+    },
+    {
+      "slug": "maximum-of-minimums-of-every-window-size-in-a-given-array",
+      "title": "Maximum of Window Minimums",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: three-element walkthrough enumerates all window sizes compactly",
+      "cases": 9,
+      "notes": [
+        "Shortened title; clarified output indexing and overlapping contiguous windows.",
+        "Corrected candidate-versus-answer explanation and documented duplicate handling and backward propagation.",
+        "Added singleton, plateau, monotonic, valley, negative, and zero cases."
+      ]
+    },
+    {
+      "slug": "maximum-points-you-can-obtain-from-cards",
+      "title": "Maximum Points You Can Obtain from Cards",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: short end-selection examples show mixed-end choice and inaccessible interior",
+      "cases": 9,
+      "notes": [
+        "Clarified exact count, current endpoints, and ability to switch ends.",
+        "Corrected Sliding Window classification.",
+        "Added singleton, inaccessible maximum, mixed ends, one-sided choices, equal cards, and greedy trap."
+      ]
+    },
+    {
+      "slug": "maximum-product-of-three-numbers",
+      "title": "Maximum Product of Three Numbers",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: signed-product examples directly show candidate selection",
+      "cases": 9,
+      "notes": [
+        "Removed unrelated Matrix/BFS/DFS tags.",
+        "Clarified distinct indices, duplicate values, non-contiguous selection, and negative/zero answers.",
+        "Preserved input via sorted copy and corrected space complexity.",
+        "Added all-negative, zeros, duplicates, exact-three, and numeric-boundary cases."
+      ]
+    },
+    {
+      "slug": "maximum-product-subarray",
+      "title": "Maximum Product Subarray",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: zero-separated and singleton examples explain contiguity and nonempty selection",
+      "cases": 9,
+      "notes": [
+        "Aligned difficulty to Medium and removed Memoization tag.",
+        "Moved algorithm hint into solution and clarified nonempty contiguous selection.",
+        "Expanded min/max state explanation and added seven sign/zero boundary cases."
+      ]
+    },
+    {
+      "slug": "maximum-size-rectangle-binary-sub-matrix-with-all-1s",
+      "title": "Largest All-Ones Rectangle",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible selected-rectangle SVG; inspected standalone render with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Shortened title and corrected Monotonic Stack classification.",
+        "Clarified numeric cells, contiguous axis-aligned selection, and area return.",
+        "Explained stack boundaries, height resets, and sentinel flush.",
+        "Added six boundary fixtures and a compact example SVG."
+      ]
+    },
+    {
+      "slug": "maximum-width-of-binary-tree",
+      "title": "Maximum Width of Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible level-width SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 7,
+      "notes": [
+        "Fixed first-level-position lookup from queue[0] to queue[head].",
+        "Clarified inclusive width, internal gaps, and single-node levels.",
+        "Added five fixtures plus maximum-length right-chain regression.",
+        "Corrected BFS topic and added compact gap-counting illustration."
+      ]
+    },
+    {
+      "slug": "merge-k-sorted-lists",
+      "title": "Merge k Sorted Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: existing merged-output example and pairwise-round explanation show ordering without extra visual space",
+      "cases": 8,
+      "notes": [
+        "Clarified node-array input, null heads, non-decreasing order, and duplicate multiplicity.",
+        "Explained pairwise merge rounds and odd-list carryover.",
+        "Corrected time complexity to account for empty-list overhead.",
+        "Added all-empty, mixed-empty, single-list, negative/duplicate, and odd-count fixtures."
+      ]
+    },
+    {
+      "slug": "merge-sort-for-linked-lists",
+      "title": "Merge Sort for Linked Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: split-and-merge explanation and short examples describe the operation without extra visual space",
+      "cases": 8,
+      "notes": [
+        "Corrected array-only exercise to actual linked-list input/output adapters.",
+        "Changed starter parameter and example labels to head.",
+        "Replaced array merge sort with node-based splitting and iterative merging.",
+        "Added six edge fixtures and a 50000-node regression test."
+      ]
+    },
+    {
+      "slug": "merge-sorted-array",
+      "title": "Merge Sorted Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit valid-prefix/placeholder rule and examples distinguish zeros without a diagram",
+      "cases": 8,
+      "notes": [
+        "Named nums1 explicitly as mutated output and clarified ignored return.",
+        "Distinguished valid zero values from reserved slots.",
+        "Added empty-side, zero, negative, reverse-range, and duplicate fixtures.",
+        "Explained why only nums2 leftovers require copying."
+      ]
+    },
+    {
+      "slug": "merge-two-binary-trees",
+      "title": "Merge Two Binary Trees",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: compact three-node positional merge example explains retention and summation",
+      "cases": 8,
+      "notes": [
+        "Clarified position-based matching, whole one-sided subtree retention, and both-empty return.",
+        "Specified per-tree size bounds and returned node contract.",
+        "Explained shared output subtrees and overlap-sensitive complexity.",
+        "Added six empty, disjoint-child, zero-sum, skew, and duplicate-value fixtures."
+      ]
+    },
+    {
+      "slug": "merge-two-sorted-lists",
+      "title": "Merge Two Sorted Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: duplicate-preserving merge example and pointer explanation describe the operation compactly",
+      "cases": 8,
+      "notes": [
+        "Expanded one-sentence statement with sorting, duplicate, empty-input, node-return, and relinking rules.",
+        "Added six empty-side, negative, duplicate, and unequal-length cases.",
+        "Explained dummy-node exclusion and suffix attachment."
+      ]
+    },
+    {
+      "slug": "middle-of-the-linked-list",
+      "title": "Middle of the Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit zero-based middle index and odd/even suffix examples explain selection",
+      "cases": 7,
+      "notes": [
+        "Enforced original-middle identity and unchanged input in runner.",
+        "Clarified second-middle, singleton, and suffix-display behavior.",
+        "Added five short and duplicate-value cases; explained slow/fast invariant."
+      ]
+    },
+    {
+      "slug": "min-distance-between-two-given-nodes-of-a-binary-tree-practice",
+      "title": "Distance Between Two Tree Nodes",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit five-node/four-edge example path demonstrates the counting rule",
+      "cases": 8,
+      "notes": [
+        "Shortened title and specified unique existing value targets, including equal targets.",
+        "Clarified edges versus nodes and unweighted paths.",
+        "Added singleton, parent-child, siblings, ancestor, skewed, and reversed-target cases.",
+        "Explained ancestor-distance reasoning and formatted iterative reference."
+      ]
+    },
+    {
+      "slug": "minimize-cash-flow-among-a-given-set-of-friends-who-have-borrowed-money-from-each-other",
+      "title": "Minimum Payments to Settle Debts",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: three-person chain example directly explains netting and redirected payments",
+      "cases": 9,
+      "notes": [
+        "Shortened title and corrected Backtracking classification.",
+        "Specified matrix direction, payment triples, net-balance preservation, arbitrary counterparties, and minimum payment count.",
+        "Added singleton, cancelling debts, reciprocal netting, chain, cycle, and independent-pair fixtures.",
+        "Fixed intermediate integer precision using BigInt in solution and validator; verified optimality against zero-sum subset partitions on 50 generated graphs and a safe-integer boundary case."
+      ]
+    },
+    {
+      "slug": "minimum-absolute-difference-in-bst",
+      "title": "Minimum Absolute Difference in BST",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: non-parent-child pair example distinguishes value gap from tree distance",
+      "cases": 7,
+      "notes": [
+        "Clarified strict BST contract, distinct nodes, and value difference versus edge distance.",
+        "Moved traversal strategy to solution and corrected BST topic.",
+        "Added boundary, non-parent-child closest pair, skewed, and interior-minimum cases."
+      ]
+    },
+    {
+      "slug": "minimum-cost-to-hire-k-workers",
+      "title": "Minimum Cost to Hire K Workers",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit common-rate calculation explains proportional pay without a diagram",
+      "cases": 8,
+      "notes": [
+        "Specified equal-length inputs, common rate, fractional pay, and total-cost return.",
+        "Matched tolerance wording to runner formula.",
+        "Expanded greedy/heap reasoning and added singleton, all-workers, equal-ratio, fractional, and non-cheapest-rate cases."
+      ]
+    },
+    {
+      "slug": "minimum-cost-to-merge-stones",
+      "title": "Minimum Cost to Merge Stones",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: three-step arithmetic walkthrough shows adjacency and repeated merge costs",
+      "cases": 9,
+      "notes": [
+        "Clarified current adjacency, fixed order, repeated costs, singleton zero, and impossible result.",
+        "Explained interval DP state, feasibility, split stride, and final-merge cost.",
+        "Added seven singleton, insufficient-pile, exact-k, ternary, and repeated-value cases."
+      ]
+    },
+    {
+      "slug": "minimum-cost-tree-from-leaf-values",
+      "title": "Minimum Cost Tree From Leaf Values",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible leaf/internal-node SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 9,
+      "notes": [
+        "Clarified fixed leaf order, leaf maxima rather than child-root products, and internal-only sum.",
+        "Corrected Monotonic Stack and Greedy topics.",
+        "Explained stack pairing, sentinel, and final flush.",
+        "Added seven equal, monotonic, valley, unit, and boundary cases plus example tree SVG."
+      ]
+    },
+    {
+      "slug": "minimum-insertion-steps-to-make-a-string-palindrome",
+      "title": "Minimum Insertion Steps to Make a String Palindrome",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: single insertion example directly demonstrates the allowed operation",
+      "cases": 9,
+      "notes": [
+        "Clarified insertion-only operation, preserved order, and count return.",
+        "Explained LPS/LCS length identity and rolling-row dependencies.",
+        "Added seven singleton, palindrome, distinct, repeated, and interior-match cases."
+      ]
+    },
+    {
+      "slug": "minimum-moves-to-equal-array-elements",
+      "title": "Minimum Moves to Equal Array Elements",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: relative-value explanation captures the operation without a visual",
+      "cases": 8,
+      "notes": [
+        "Corrected unrelated Matrix/BFS/DFS tags.",
+        "Clarified exact n-1 increments and count-only return.",
+        "Removed spread call to avoid argument-count limits; explained equivalent decrement proof.",
+        "Added six edge fixtures and maximum-length regression."
+      ]
+    },
+    {
+      "slug": "minimum-number-of-refueling-stops",
+      "title": "Minimum Number of Refueling Stops",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit two-stop itinerary and reach explanation capture the route behavior compactly",
+      "cases": 10,
+      "notes": [
+        "Specified unlimited tank, one use per station, free skips, and zero-fuel arrival.",
+        "Clarified sorted positions and finite fuel bounds.",
+        "Replaced ambiguous heap description with farthest-reach invariant and greedy reasoning.",
+        "Added seven empty, exact-reach, chain, unreachable-gap, skipped-station, and overfill cases."
+      ]
+    },
+    {
+      "slug": "minimum-path-sum",
+      "title": "Minimum Path Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible highlighted-path SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 8,
+      "notes": [
+        "Clarified endpoints, one-cell behavior, exact moves, and allowed mutation.",
+        "Explained in-place DP and missing-neighbor handling.",
+        "Added six singleton, row, column, zero, greedy-trap, and diagonal-prohibition fixtures.",
+        "Added example path illustration."
+      ]
+    },
+    {
+      "slug": "minimum-swaps-to-sort-an-array",
+      "title": "Minimum Swaps to Sort an Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit two-swap walkthrough and cycle explanation cover the operation",
+      "cases": 8,
+      "notes": [
+        "Clarified arbitrary versus adjacent swaps and count return.",
+        "Explained unique-target permutation cycles and L-1 bound.",
+        "Added singleton, one swap, long cycle, separate cycles, numeric sort, and fixed-point fixtures."
+      ]
+    },
+    {
+      "slug": "minimum-window-substring",
+      "title": "Minimum Window Substring",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: duplicate-count and case-sensitive examples explain coverage concisely",
+      "cases": 9,
+      "notes": [
+        "Clarified case sensitivity, arbitrary target order, multiplicity, and substring return.",
+        "Recorded unique-minimum guarantee in constraints.",
+        "Corrected map-space bound for fixed alphabet; added seven boundary and coverage fixtures."
+      ]
+    },
+    {
+      "slug": "missing-number",
+      "title": "Missing Number",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit inclusive range and sum identity explain the missing element",
+      "cases": 8,
+      "notes": [
+        "Corrected unrelated Matrix/BFS/DFS tags.",
+        "Specified length-derived range and order-independent return.",
+        "Explained summation proof and numeric safety; added five endpoint/singleton/interior cases."
+      ]
+    },
+    {
+      "slug": "mobile-numeric-keypad-practice",
+      "title": "Mobile Numeric Keypad",
+      "contentReview": "reviewed",
+      "diagramReview": "added compact monospace keypad layout; SVG unnecessary for this simple fixed grid",
+      "cases": 7,
+      "notes": [
+        "Removed platform suffix and clarified exact sequences, leading zeros, staying put, blank keys, and no wrapping.",
+        "Added keypad layout and explicit neighbors for 0 and 5.",
+        "Explained rolling adjacency DP; verified upper-bound count using BigInt calculation.",
+        "Added length 4, 5, 10, and maximum 25 fixtures."
+      ]
+    },
+    {
+      "slug": "most-stones-removed-with-same-row-or-column",
+      "title": "Most Stones Removed with Same Row or Column",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: three-stone removal order illustrates remaining-neighbor rule and transitive connectivity",
+      "cases": 9,
+      "notes": [
+        "Clarified unique coordinates, non-adjacent row/column sharing, and remaining-stone rule.",
+        "Explained component-count proof and separate row/column ID namespaces.",
+        "Corrected Union Find topic and added seven connectivity/namespace/boundary fixtures."
+      ]
+    },
+    {
+      "slug": "move-zeroes",
+      "title": "Move Zeroes",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: short before/after sequence demonstrates stable order",
+      "cases": 9,
+      "notes": [
+        "Clarified same-array mutation, ignored return, length, multiplicity, and negative values.",
+        "Added seven singleton, no-zero, leading/trailing-zero, duplicate, and numeric-boundary fixtures."
+      ]
+    },
+    {
+      "slug": "multiply-two-numbers-represented-by-linked-lists",
+      "title": "Multiply Numbers Stored in Linked Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: explicit digit-order examples explain representation without extra diagram space",
+      "cases": 9,
+      "notes": [
+        "Shortened title and clarified digit order, leading zeros, nonnegative values, and Number return.",
+        "Explained per-digit reduction and exact BigInt multiplication.",
+        "Added seven cases including modulus boundary and two 100-digit operands; expected values computed with independent Python integer arithmetic."
+      ]
+    },
+    {
+      "slug": "n-queens",
+      "title": "N-Queens",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible four-queen board SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 5,
+      "notes": [
+        "Clarified exact queen count, distinct boards, symmetry, row order, and impossible output.",
+        "Added n=2,3,5 fixtures generated independently by permutation enumeration.",
+        "Added maximum-size solution-count, uniqueness, row/column, and diagonal validation.",
+        "Added compact valid-board illustration."
+      ]
+    },
+    {
+      "slug": "next-greater-element-i",
+      "title": "Next Greater Element I",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed: [1,5,2] counterexample directly distinguishes first-greater from smallest-greater",
+      "cases": 8,
+      "notes": [
+        "Clarified per-array uniqueness, subset guarantee, query ordering, and first strictly greater to right.",
+        "Corrected Monotonic Stack/Hash Table classification and explained unresolved-stack invariant.",
+        "Added singleton, first-versus-smallest, left-only greater, reordered queries, zero, and descending cases."
+      ]
+    },
+    {
+      "slug": "number-of-islands",
+      "title": "Number of Islands",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible labeled-islands SVG; inspected standalone rendering with resolved theme colors",
+      "cases": 9,
+      "notes": [
+        "Clarified string cells, allowed mutation, four-way connectivity, boundary land, lakes, and count versus area.",
+        "Added seven singleton, full-land, diagonal, row/column, ring, and checkerboard cases.",
+        "Formatted iterative flood-fill reference and added example component illustration."
+      ]
+    },
+    {
+      "slug": "number-of-operations-to-make-network-connected",
+      "title": "Number of Operations to Make Network Connected",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified selection/operation contracts, checked algorithm and complexity, and added six boundary and adversarial fixtures. Text example explains the key choice without a diagram."
+    },
+    {
+      "slug": "ones-and-zeroes",
+      "title": "Ones and Zeroes",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified selection/operation contracts, checked algorithm and complexity, and added six boundary and adversarial fixtures. Text example explains the key choice without a diagram."
+    },
+    {
+      "slug": "online-stock-span",
+      "title": "Online Stock Span",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified stateful/inclusive span and weighted BST levels respectively; six independent-oracle fixtures each; expanded correctness and complexity explanations. BST tree diagram added."
+    },
+    {
+      "slug": "optimal-binary-search-tree",
+      "title": "Optimal Binary Search Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "added",
+      "cases": 8,
+      "notes": "Clarified stateful/inclusive span and weighted BST levels respectively; six independent-oracle fixtures each; expanded correctness and complexity explanations. BST tree diagram added."
+    },
+    {
+      "slug": "pair-with-the-given-difference",
+      "title": "Pair with a Given Difference",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified value/index semantics and boundary examples; added seven fixtures. Palindrome reference now restores original links after both match and mismatch; identity restoration regression added."
+    },
+    {
+      "slug": "palindrome-linked-list",
+      "title": "Palindrome Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified value/index semantics and boundary examples; added seven fixtures. Palindrome reference now restores original links after both match and mismatch; identity restoration regression added."
+    },
+    {
+      "slug": "palindrome-number",
+      "title": "Palindrome Number",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 12,
+      "notes": "Corrected topic classifications and precise palindrome contracts; added boundary fixtures. Pair solution reverses each word once; exhaustive small word-subset regression checks completeness and uniqueness."
+    },
+    {
+      "slug": "palindrome-pairs",
+      "title": "Palindrome Pairs",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Corrected topic classifications and precise palindrome contracts; added boundary fixtures. Pair solution reverses each word once; exhaustive small word-subset regression checks completeness and uniqueness."
+    },
+    {
+      "slug": "palindrome-partitioning",
+      "title": "Palindrome Partitioning",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified ordered partition contracts and added independently derived fixtures. List runner now enforces original node identity, values, stable ordering, and null termination; palindrome solution explains output space."
+    },
+    {
+      "slug": "partition-list",
+      "title": "Partition List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified ordered partition contracts and added independently derived fixtures. List runner now enforces original node identity, values, stable ordering, and null termination; palindrome solution explains output space."
+    },
+    {
+      "slug": "partition-of-a-set-into-k-subsets-with-equal-sum",
+      "title": "Partition into K Equal-Sum Subsets",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified exhaustive grouping and root-to-leaf contracts; eight fixtures each. Explained positivity/symmetry pruning and conservative complexity. Path reference is iterative for maximum-height trees; text paths illustrate leaf requirement."
+    },
+    {
+      "slug": "path-sum",
+      "title": "Path Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified exhaustive grouping and root-to-leaf contracts; eight fixtures each. Explained positivity/symmetry pruning and conservative complexity. Path reference is iterative for maximum-height trees; text paths illustrate leaf requirement."
+    },
+    {
+      "slug": "path-sum-iii",
+      "title": "Path Sum III",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified nonempty downward path counting and distinct full-length permutation semantics. Added independent fixtures, including repeated prefix sums and duplicate/negative values; path map deletes inactive prefixes for O(height) space."
+    },
+    {
+      "slug": "permutations-ii",
+      "title": "Permutations II",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified nonempty downward path counting and distinct full-length permutation semantics. Added independent fixtures, including repeated prefix sums and duplicate/negative values; path map deletes inactive prefixes for O(height) space."
+    },
+    {
+      "slug": "permute-two-arrays-such-that-sum-of-every-pair-is-greater-or-equal-to-k",
+      "title": "Pair Arrays to Meet a Minimum Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Shortened titles, clarified pairing/prefix contracts, and added independently computed fixtures. Added greedy exchange proof and sorting-space correction; trie now sorts once before insertion with explicit child maps."
+    },
+    {
+      "slug": "phone-directory",
+      "title": "Contact Suggestions by Prefix",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Shortened titles, clarified pairing/prefix contracts, and added independently computed fixtures. Added greedy exchange proof and sorting-space correction; trie now sorts once before insertion with explicit child maps."
+    },
+    {
+      "slug": "populating-next-right-pointers-in-each-node",
+      "title": "Populating Next Right Pointers in Each Node",
+      "contentReview": "reviewed",
+      "diagramReview": "added",
+      "cases": 7,
+      "notes": "Clarified perfect-tree/original-node contracts and signed 32-bit bitwise scope. Added boundary fixtures; next-pointer runner validates exact original nodes and unchanged children; tree diagram shows cross-parent links."
+    },
+    {
+      "slug": "power-of-two",
+      "title": "Power of Two",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 12,
+      "notes": "Clarified perfect-tree/original-node contracts and signed 32-bit bitwise scope. Added boundary fixtures; next-pointer runner validates exact original nodes and unchanged children; tree diagram shows cross-parent links."
+    },
+    {
+      "slug": "predecessor-and-successor-practice",
+      "title": "BST Predecessor and Successor",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Shortened titles and clarified strict BST/unique value assumptions. Added boundary and skewed-tree fixtures; predecessor/successor runner now verifies original node identity and tree preservation. Explained search invariants and reconstruction bounds."
+    },
+    {
+      "slug": "preorder-to-bst-practice",
+      "title": "Build a BST from Preorder",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Shortened titles and clarified strict BST/unique value assumptions. Added boundary and skewed-tree fixtures; predecessor/successor runner now verifies original node identity and tree preservation. Explained search invariants and reconstruction bounds."
+    },
+    {
+      "slug": "prim-s-algorithm-for-minimum-spanning-tree-mst",
+      "title": "Minimum Spanning Tree with Prim\u2019s Algorithm",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 7,
+      "notes": "Clarified MST edge counting and index-based combination multiplicity; fixtures computed by spanning-tree enumeration and index combinations. Explained Prim cut invariant; combination search now limits choices to feasible suffixes with output-aware complexity."
+    },
+    {
+      "slug": "print-all-combinations-set-2",
+      "title": "Combinations of R Elements",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified MST edge counting and index-based combination multiplicity; fixtures computed by spanning-tree enumeration and index combinations. Explained Prim cut invariant; combination search now limits choices to feasible suffixes with output-aware complexity."
+    },
+    {
+      "slug": "print-all-k-sum-paths-in-a-binary-tree",
+      "title": "All Downward Paths with Sum K",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Shortened titles and clarified output order/multiplicity. Added six fixtures each. K-sum reference now uses iterative prefix-position DFS with output-sensitive complexity; palindrome mask example explicitly maps every cut pattern."
+    },
+    {
+      "slug": "print-all-palindromic-partitions-of-a-string-using-bit-manipulation",
+      "title": "Palindrome Partitions Using Bitmasks",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Shortened titles and clarified output order/multiplicity. Added six fixtures each. K-sum reference now uses iterative prefix-position DFS with output-sensitive complexity; palindrome mask example explicitly maps every cut pattern."
+    },
+    {
+      "slug": "print-all-the-duplicate-characters-in-a-string",
+      "title": "Duplicate Character Counts",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Shortened titles and clarified return shapes, case/space handling, full frequencies, and duplicate preservation. Independent character-count oracle generated 15 fixtures; corrected topics and complexity for fixed ASCII/empty strings."
+    },
+    {
+      "slug": "print-anagrams-together-practice",
+      "title": "Group Anagrams",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Shortened titles and clarified return shapes, case/space handling, full frequencies, and duplicate preservation. Independent character-count oracle generated 15 fixtures; corrected topics and complexity for fixed ASCII/empty strings."
+    },
+    {
+      "slug": "product-of-array-except-self",
+      "title": "Product of Array Except Self",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 11,
+      "notes": "Clarified excluded index, output integer bounds, stable digit passes, and duplicate handling; nine fixtures each. Removed spread-based maximum from radix reference to avoid argument limits on large arrays; max-size regression added."
+    },
+    {
+      "slug": "radix-sort-data-structures-and-algorithms-tutorials",
+      "title": "Radix Sort",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 11,
+      "notes": "Clarified excluded index, output integer bounds, stable digit passes, and duplicate handling; nine fixtures each. Removed spread-based maximum from radix reference to avoid argument limits on large arrays; max-size regression added."
+    },
+    {
+      "slug": "range-sum-of-bst",
+      "title": "Range Sum of BST",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified inclusive ranges, strict BST pruning, and class/query coordinates. Added seven BST and five multi-query matrix fixtures; matrix diagram shows inclusive cells. Expanded prefix inclusion-exclusion explanation."
+    },
+    {
+      "slug": "range-sum-query-2d-immutable",
+      "title": "2D Range Sum Queries",
+      "contentReview": "reviewed",
+      "diagramReview": "added",
+      "cases": 7,
+      "notes": "Clarified inclusive ranges, strict BST pruning, and class/query coordinates. Added seven BST and five multi-query matrix fixtures; matrix diagram shows inclusive cells. Expanded prefix inclusion-exclusion explanation."
+    },
+    {
+      "slug": "rat-in-a-maze-problem-i-practice",
+      "title": "All Paths Through a Maze",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified all simple maze paths, empty route, and in-place node ordering. Added 13 fixtures. Maze uses shared move buffer and blocked-endpoint check; reorder runner enforces exact original identities and values, including duplicate-valued nodes."
+    },
+    {
+      "slug": "rearrange-a-given-linked-list-in-place",
+      "title": "Reorder a Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified all simple maze paths, empty route, and in-place node ordering. Added 13 fixtures. Maze uses shared move buffer and blocked-endpoint check; reorder runner enforces exact original identities and values, including duplicate-valued nodes."
+    },
+    {
+      "slug": "rearrange-a-linked-list-in-zig-zag-fashion",
+      "title": "Zigzag Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified alternating inequalities, permitted value swaps, and exactly-two-value BST recovery. Added 13 fixtures; runner now enforces recovery child-link identity. Explained greedy preservation and adjacent/nonadjacent inorder inversions."
+    },
+    {
+      "slug": "recover-binary-search-tree",
+      "title": "Recover Binary Search Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified alternating inequalities, permitted value swaps, and exactly-two-value BST recovery. Added 13 fixtures; runner now enforces recovery child-link identity. Explained greedy preservation and adjacent/nonadjacent inorder inversions."
+    },
+    {
+      "slug": "redundant-connection",
+      "title": "Redundant Connection",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 7,
+      "notes": "Corrected graph/DP topic classifications. Clarified latest cycle-edge rule and arbitrary same-color group removal (not maximal-only). Added independently computed fixtures and explained carried-count DP; exhaustive small-box oracle regression added."
+    },
+    {
+      "slug": "remove-boxes",
+      "title": "Remove Boxes",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Corrected graph/DP topic classifications. Clarified latest cycle-edge rule and arbitrary same-color group removal (not maximal-only). Added independently computed fixtures and explained carried-count DP; exhaustive small-box oracle regression added."
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-array",
+      "title": "Remove Duplicates from Sorted Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified returned count versus displayed prefix object, one-per-value list semantics, and arbitrary original duplicate retention. Added seven fixtures each; list runner rejects copied nodes and changed values while accepting any original node from an equal run."
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-list",
+      "title": "Remove Duplicates from Sorted List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified returned count versus displayed prefix object, one-per-value list semantics, and arbitrary original duplicate retention. Added seven fixtures each; list runner rejects copied nodes and changed values while accepting any original node from an equal run."
+    },
+    {
+      "slug": "remove-duplicates-from-sorted-list-ii",
+      "title": "Remove Duplicates from Sorted List II",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified whole-duplicate-run removal versus target filtering, original survivor identity/order, and changed-head/empty behavior. Added eight fixtures each; runner validates exact survivors, including repeated equal-valued nodes."
+    },
+    {
+      "slug": "remove-linked-list-elements",
+      "title": "Remove Linked List Elements",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified whole-duplicate-run removal versus target filtering, original survivor identity/order, and changed-head/empty behavior. Added eight fixtures each; runner validates exact survivors, including repeated equal-valued nodes."
+    },
+    {
+      "slug": "remove-nth-node-from-end-of-list",
+      "title": "Remove Nth Node From End of List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified one-based end positions, original node identity, and ignored reorder return value. Added 13 fixtures. Runtime verifies exact nth removal even among duplicate values and reuses original-node reorder validation; explained n+1 pointer gap and cycle-free weaving."
+    },
+    {
+      "slug": "reorder-list",
+      "title": "Reorder List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Clarified one-based end positions, original node identity, and ignored reorder return value. Added 13 fixtures. Runtime verifies exact nth removal even among duplicate values and reuses original-node reorder validation; explained n+1 pointer gap and cycle-free weaving."
+    },
+    {
+      "slug": "reverse-integer",
+      "title": "Reverse Integer",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 13,
+      "notes": "Corrected numeric topics and clarified sign, zero trimming, and overflow behavior. Added 16 fixtures. Linked-list reversal now verifies exact original node order, unchanged values, and membership; explained save-next invariant and truncation toward zero."
+    },
+    {
+      "slug": "reverse-linked-list",
+      "title": "Reverse Linked List",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 8,
+      "notes": "Corrected numeric topics and clarified sign, zero trimming, and overflow behavior. Added 16 fixtures. Linked-list reversal now verifies exact original node order, unchanged values, and membership; explained save-next invariant and truncation toward zero."
+    },
+    {
+      "slug": "reverse-linked-list-ii",
+      "title": "Reverse Linked List II",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified 1-based inclusive reversal and complete k-group handling; seven fixtures each. Runner verifies exact node order and unchanged values including duplicates; solutions explain front-insertion and preflight look-ahead invariants."
+    },
+    {
+      "slug": "reverse-nodes-in-k-group",
+      "title": "Reverse Nodes in k-Group",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified 1-based inclusive reversal and complete k-group handling; seven fixtures each. Runner verifies exact node order and unchanged values including duplicates; solutions explain front-insertion and preflight look-ahead invariants."
+    },
+    {
+      "slug": "reverse-pairs",
+      "title": "Reverse Pairs",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 12,
+      "notes": "Clarified strict original-index pairs, negative duplicate values, and numeric doubling; ten pair fixtures. Eight word fixtures cover whitespace and unchanged word characters. Replaced duplicate reference function definitions with one right-to-left scan; exhaustive small pair regression added."
+    },
+    {
+      "slug": "reverse-words-in-a-string",
+      "title": "Reverse Words in a String",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified strict original-index pairs, negative duplicate values, and numeric doubling; ten pair fixtures. Eight word fixtures cover whitespace and unchanged word characters. Replaced duplicate reference function definitions with one right-to-left scan; exhaustive small pair regression added."
+    },
+    {
+      "slug": "rotate-image",
+      "title": "Rotate Image",
+      "contentReview": "reviewed",
+      "diagramReview": "added",
+      "cases": 8,
+      "notes": "Corrected topic labels and clarified clockwise mapping, mutation, simultaneous infection, empty-grid semantics, and blocked routes. Added 15 fixtures; rotation diagram and transpose mapping explanation; BFS layer proof expanded."
+    },
+    {
+      "slug": "rotten-oranges-practice",
+      "title": "Rotting Oranges",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 11,
+      "notes": "Corrected topic labels and clarified clockwise mapping, mutation, simultaneous infection, empty-grid semantics, and blocked routes. Added 15 fixtures; rotation diagram and transpose mapping explanation; BFS layer proof expanded."
+    },
+    {
+      "slug": "same-tree",
+      "title": "Same Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 10,
+      "notes": "Clarified structural versus object equality and current-array index semantics. Added 18 fixtures, corrected search difficulty/topics, and explained recursive subtree comparison and sorted-half binary search; exhaustive small rotations regression added."
+    },
+    {
+      "slug": "search-in-rotated-sorted-array",
+      "title": "Search in Rotated Sorted Array",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 12,
+      "notes": "Clarified structural versus object equality and current-array index semantics. Added 18 fixtures, corrected search difficulty/topics, and explained recursive subtree comparison and sorted-half binary search; exhaustive small rotations regression added."
+    },
+    {
+      "slug": "segregate-even-and-odd-nodes-in-a-linked-list",
+      "title": "Even-Valued Nodes Before Odd-Valued Nodes",
+      "contentReview": "reviewed",
+      "diagramReview": "not-needed",
+      "cases": 9,
+      "notes": "Clarified value parity, stable original-node grouping, zero/negative values, and unchanged all-one-group inputs. Seven fixtures added; runtime verifies exact original identity order and unchanged values."
+    },
+    {
+      "slug": "serialize-and-deserialize-binary-tree",
+      "title": "Serialize and Deserialize Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit left-child versus right-child examples explain shape ambiguity without a diagram",
+      "cases": 7,
+      "notes": "Removed editable round-trip wrapper bypass. Runner invokes serialize and deserialize in fresh scopes, requires a string and independent nodes. Clarified contract and null markers; added five fixtures and a 10000-node chain regression. Browser worker integration verification pending."
+    },
+    {
+      "slug": "set-matrix-zeroes",
+      "title": "Set Matrix Zeroes",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; a 2 \u00d7 2 before/after example makes original-zero semantics clear",
+      "cases": 10,
+      "notes": "Corrected difficulty to Medium and topics to Matrix. Clarified that only original zeros trigger changes. Added eight fixtures covering no zeros, singleton matrices, single rows/columns, independent first-row/column markers, and signed limits; 200 \u00d7 200 mutation regression passes."
+    },
+    {
+      "slug": "shortest-bridge",
+      "title": "Shortest Bridge",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible inline SVG showing a three-water-cell path; raster rendering inspected, browser theme inspection pending Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 6,
+      "notes": "Clarified square dimensions, four-direction connectivity, and flipped-water count. Added four fixtures for distant corners, broad islands, an enclosed island, and multiple possible starting points. Maximum-size and large-island regressions pass."
+    },
+    {
+      "slug": "simplify-path",
+      "title": "Simplify Path",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit segment rules and examples fully explain the string transformation",
+      "cases": 8,
+      "notes": "Corrected Stack taxonomy; specified absolute input, root handling, literal dot names, case preservation, and no filesystem access. Added six fixtures and maximum-length separator regression."
+    },
+    {
+      "slug": "sliding-window-maximum",
+      "title": "Sliding Window Maximum",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; compact three-row window/maximum table explains movement without an extra image",
+      "cases": 9,
+      "notes": "Updated taxonomy to include Array, Sliding Window, and Monotonic Queue. Specified output count/order and negative/duplicate values. Added seven fixtures and 100000-input deque regression; inspected amortized O(n) compaction and O(k) auxiliary storage."
+    },
+    {
+      "slug": "snakes-and-ladders",
+      "title": "Snakes and Ladders",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible numbering SVG; raster rendering inspected; browser light/dark verification pending Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 7,
+      "notes": "Clarified top-first input versus alternating bottom-first labels, mandatory single jumps, no overshoot, and minimum possible rolls. Excluded invalid zero destinations in constraints. Added five fixtures for jumps, non-chaining, unreachable cycles, and even-row numbering; maximum 20 \u00d7 20 regression passes. Expanded BFS reasoning."
+    },
+    {
+      "slug": "solving-cryptarithmetic-puzzles",
+      "title": "Solving Cryptarithmetic Puzzles",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; SEND + MORE numeric equality and explicit mapping example explain the contract compactly",
+      "cases": 9,
+      "notes": "Corrected mapping direction to letter-to-digit. Made one-letter nonzero restriction explicit and consistent with reference/validator; clarified all-letter coverage, arbitrary valid assignments, and 20-digit precision. Added seven fixtures for repeated letters, impossible sums, carry and zero interiors, and long words. Validator regressions cover alternative mappings, duplicate/missing digits, forbidden zero, and exact long arithmetic."
+    },
+    {
+      "slug": "sort-a-linked-list-of-0s-1s-and-2s",
+      "title": "Sort a Linked List of 0s, 1s, and 2s",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit three-value ordering and compact partition explanation suffice",
+      "cases": 10,
+      "notes": "Added eight fixtures for singleton, repeated, sorted, reverse, and mixed values. Normalized metadata and clarified mutation contract. Value-only linked-list variant now verifies unchanged original next links, with rejection regressions and 1000-node check. Array solutions explain the unclassified-region invariant; one-pass complexity remains a code-review property, not a claim made by output tests."
+    },
+    {
+      "slug": "sort-colors",
+      "title": "Sort Colors",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit three-value ordering and compact partition explanation suffice",
+      "cases": 10,
+      "notes": "Added eight fixtures for singleton, repeated, sorted, reverse, and mixed values. Normalized metadata and clarified mutation contract. Value-only linked-list variant now verifies unchanged original next links, with rejection regressions and 1000-node check. Array solutions explain the unclassified-region invariant; one-pass complexity remains a code-review property, not a claim made by output tests."
+    },
+    {
+      "slug": "sort-colors-2",
+      "title": "Sort Colors (One-Pass, Constant Space)",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit three-value ordering and compact partition explanation suffice",
+      "cases": 10,
+      "notes": "Added eight fixtures for singleton, repeated, sorted, reverse, and mixed values. Normalized metadata and clarified mutation contract. Value-only linked-list variant now verifies unchanged original next links, with rejection regressions and 1000-node check. Array solutions explain the unclassified-region invariant; one-pass complexity remains a code-review property, not a claim made by output tests."
+    },
+    {
+      "slug": "sort-list",
+      "title": "Sort List",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; run-doubling explanation describes iterative merging compactly",
+      "cases": 8,
+      "notes": "Clarified nondecreasing order, all-original-node reuse, unchanged values, and equal-value order freedom. Added runtime membership/value/count enforcement with rejection tests. Replaced recursive reference with bottom-up O(n log n), O(1)-auxiliary merge sort. Six fixtures and 50000-node regression pass."
+    },
+    {
+      "slug": "spiral-matrix",
+      "title": "Spiral Matrix",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible spiral SVG; corrected raster rendering and inspected it; browser verification pending Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 9,
+      "notes": "Clarified clockwise traversal and exactly-once output. Corrected topics; added seven fixtures covering no cells, singleton, column, rectangular shapes, and repeated/negative values."
+    },
+    {
+      "slug": "split-array-largest-sum",
+      "title": "Split Array Largest Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit example partition and sums explain the optimization",
+      "cases": 9,
+      "notes": "Clarified exactly k nonempty contiguous groups and scalar output. Explained monotonic feasibility and why at-most-k can be refined to exactly-k for nonnegative inputs. Added seven fixtures plus maximum total, k=50, and zero-input regressions."
+    },
+    {
+      "slug": "spoj-com-problem-aggrcow",
+      "title": "Aggressive Cows",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; example positions and adjacent gaps explain the scalar objective",
+      "cases": 10,
+      "notes": "Replaced source-site title, normalized taxonomy and parameter names, clarified unsorted coordinates and duplicate-coordinate semantics consistent with existing constraints. Added greedy-feasibility proof and sorting-inclusive complexity. Eight small fixtures independently enumerated; 100000-stall regressions pass."
+    },
+    {
+      "slug": "steps-by-knight-practice",
+      "title": "Minimum Knight Moves on a Board",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit coordinate offsets and both legal corner destinations explain the move compactly",
+      "cases": 9,
+      "notes": "Removed source-site title suffix; clarified zero-based row/column coordinates, bounds, zero moves, and unreachable small boards. Added six independently computed BFS fixtures. Reference now uses typed-array visited flags and queue to reduce allocations; 1000 \u00d7 1000 opposite-corner and identical-source regressions pass."
+    },
+    {
+      "slug": "strongly-connected-practice",
+      "title": "Strongly Connected Components",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit examples and contract explain the required grouping/count compactly",
+      "cases": 7,
+      "notes": "Renamed title, defined maximal directed components and adjacency labels, required complete partition including isolated vertices. Added five fixtures and 5000-vertex chain/cycle regressions. Formatted iterative Kosaraju solution for readable code display."
+    },
+    {
+      "slug": "subarray-sum-equals-k",
+      "title": "Subarray Sum Equals K",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit examples and contract explain the required grouping/count compactly",
+      "cases": 8,
+      "notes": "Corrected prefix-sum taxonomy, clarified overlapping nonempty ranges and index-based counting. Explained frequency seeding and count-before-insert order; added six brute-force-derived fixtures and a 20000-zero count regression."
+    },
+    {
+      "slug": "subarray-sums-divisible-by-k",
+      "title": "Subarray Sums Divisible by K",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit examples and contract explain the required grouping/count compactly",
+      "cases": 8,
+      "notes": "Corrected prefix-sum taxonomy and O(n+k) initialization-inclusive complexity. Clarified overlapping/zero-sum ranges and normalized negative remainders. Six brute-force-derived fixtures and 30000-zero regression pass."
+    },
+    {
+      "slug": "subset-sum-problem",
+      "title": "Subset Sum Problem",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit repeated-value examples distinguish input multiplicity from duplicate outputs",
+      "cases": 10,
+      "notes": "Clarified one-use input positions, empty subset, duplicate values, and boolean output. Corrected DP taxonomy and zero-target complexity notation; eight independently enumerated fixtures and maximum-target regressions pass."
+    },
+    {
+      "slug": "subsets-ii",
+      "title": "Subsets II",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit repeated-value examples distinguish input multiplicity from duplicate outputs",
+      "cases": 7,
+      "notes": "Clarified unique multiset subsets, empty subset, allowed multiplicities, and ignored order. Five independently enumerated fixtures; distinct/all-equal maximum-length regressions pass. Separated auxiliary from output space."
+    },
+    {
+      "slug": "subtract-two-numbers-represented-as-linked-lists",
+      "title": "Subtract Two Numbers Represented as Linked Lists",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; digit-list example and borrow explanation make ordering and normalization explicit",
+      "cases": 9,
+      "notes": "Normalized title/topic; specified digit range, input leading zeros, either operand order, normalized zero and node-head output. Replaced growing BigInt reference with O(m+n) digit subtraction. Seven exact-integer-derived fixtures and 10000-digit borrow/zero regressions pass."
+    },
+    {
+      "slug": "subtree-of-another-tree",
+      "title": "Subtree of Another Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit extra-descendant explanation and left/right mismatch cases clarify exact structure",
+      "cases": 10,
+      "notes": "Clarified nonempty bounds for both trees, all-descendant matching, left/right structure, and whole-tree matches. Added eight fixtures. Replaced recursion with explicit traversal/comparison stacks; 2000-node repeated-value and deep mismatch regressions pass."
+    },
+    {
+      "slug": "sudoku-solver",
+      "title": "Sudoku Solver",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible Sudoku SVG showing 3 \u00d7 3 boxes and example clues; raster inspected; browser verification pending Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 6,
+      "notes": "Clarified character digits, dot blanks, immutable clues, unique solution, in-place completion, and solved boards. Added four fixtures including partial rows/diagonals and digit relabeling; removed duplicate solved-board fixture caught by audit. Regression verifies returned-only, numeric-digit, and changed-clue outputs fail exact solution comparison."
+    },
+    {
+      "slug": "sum-of-distances-in-tree",
+      "title": "Sum of Distances in Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit edge-count definition and rerooting formula explain this contract without an additional graph",
+      "cases": 7,
+      "notes": "Corrected Binary Tree taxonomy; specified connected undirected tree, label bounds, edge distances, and label-ordered output. Explained subtree-size rerooting equation and formatted reference code. Five independently BFS-derived fixtures and 30000-vertex path formula regression pass."
+    },
+    {
+      "slug": "sum-of-left-leaves",
+      "title": "Sum of Left Leaves",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; example explanations explicitly identify qualifying leaves or mismatched child positions",
+      "cases": 8,
+      "notes": "Clarified root exclusion, left-child versus leaf distinction, negative values, and qualifying leaves inside right subtrees. Six fixtures plus 1000-node depth regression pass."
+    },
+    {
+      "slug": "sum-of-subarray-minimums",
+      "title": "Sum of Subarray Minimums",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; three-subarray duplicate example and explicit endpoint counting explain the contribution rule",
+      "cases": 9,
+      "notes": "Clarified nonempty index-distinct subarrays, summed minima, and modulo. Corrected monotonic-stack taxonomy. Explained asymmetric tie boundaries, sentinel flush, and safe Number arithmetic under constraints. Seven brute-force-derived fixtures and maximum-size/value BigInt-oracle regression pass."
+    },
+    {
+      "slug": "super-egg-drop",
+      "title": "Super Egg Drop",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit three-drop strategy and break/survive recurrence explain the decisions compactly",
+      "cases": 9,
+      "notes": "Clarified surviving-egg reuse, adaptive floors, and guaranteed worst-case output. Replaced O(kn) allocated table with O(k) descending coverage DP capped at n. Seven fixtures, 80 independent minimax comparisons, and maximum egg/floor checks pass."
+    },
+    {
+      "slug": "swim-in-rising-water",
+      "title": "Swim in Rising Water",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit four-direction and maximum-path-elevation contract resolves the ambiguity",
+      "cases": 7,
+      "notes": "Clarified square input, four-direction moves, submerged endpoints, instantaneous traversal, and minimax rather than path-length output. Added five independently threshold-enumerated cases; maximum-size endpoint-bound regressions pass. Tightened binary-search lower bound and formatted BFS reference."
+    },
+    {
+      "slug": "symmetric-tree",
+      "title": "Symmetric Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; example explanations explicitly identify qualifying leaves or mismatched child positions",
+      "cases": 8,
+      "notes": "Clarified exact reflected shape, missing children, value matching, and singleton behavior. Six fixtures and broad-tree mismatch/deep-tree regressions pass."
+    },
+    {
+      "slug": "text-justification",
+      "title": "Text Justification",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; quoted fixed-width strings make exact spacing inspectable",
+      "cases": 8,
+      "notes": "Removed contradictory last-line width exception. Clarified greedy packing, unsplit words, left-biased remainder gaps, single-word padding, and significant trailing spaces. Corrected topics and formatted reference. Six fixtures plus 300-word/max-width and whitespace-comparison regressions pass."
+    },
+    {
+      "slug": "the-celebrity-problem",
+      "title": "The Celebrity Problem",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit API/indexing definitions and scalar examples suffice",
+      "cases": 8,
+      "notes": "Clarified zero-based labels, directed matrix entries, callable knows API, and ignored diagonal. Explained elimination plus two-direction verification; six fixtures and 500-person positive/negative regression pass."
+    },
+    {
+      "slug": "the-kth-factor-of-n",
+      "title": "Kth Factor of n",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit API/indexing definitions and scalar examples suffice",
+      "cases": 11,
+      "notes": "Corrected unrelated matrix/BFS/DFS taxonomy to Math. Clarified positive unique divisors and one-based rank; eight enumerated fixtures cover 1, squares, primes, maximum n, and missing ranks."
+    },
+    {
+      "slug": "time-needed-to-inform-all-employees",
+      "title": "Time Needed to Inform All Employees",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; parallel-team example and explicit arrival-time rule distinguish branching from sequential delays",
+      "cases": 7,
+      "notes": "Clarified employee labels, manager-array meaning, parallel direct reports, independent branches, time-zero head, and maximum arrival time. Added five fixtures and 100000-person chain/star regressions; formatted iterative reference."
+    },
+    {
+      "slug": "topological-sort-practice",
+      "title": "Topological Sort",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit directed-edge precedence and alternate example order clarify the contract",
+      "cases": 7,
+      "notes": "Removed source-site suffix; clarified directed adjacency, complete vertex permutation, isolated/disconnected components, and any valid ordering. Explained Kahn indegree invariant. Five fixtures, alternate/invalid-order validator tests, and 10000-vertex chain regression pass."
+    },
+    {
+      "slug": "total-number-of-spanning-trees-in-a-graph",
+      "title": "Count Spanning Trees",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit edge-set definition and triangle example explain distinct spanning trees",
+      "cases": 9,
+      "notes": "Clarified simple undirected symmetric adjacency, edge-set distinctness, disconnected zero, and singleton one. Replaced floating elimination/rounding with exact BigInt fraction-free determinant. Six independently enumerated fixtures and K10/K5,5 formula regressions pass."
+    },
+    {
+      "slug": "trapping-rain-water",
+      "title": "Trapping Rain Water",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible unequal-wall basin SVG; raster inspected; browser verification pending Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 10,
+      "notes": "Clarified unit volume, open boundaries, and lower-wall limit. Corrected taxonomy and explained two-pointer accounting. Eight independently calculated fixtures and maximum-width/height regression pass."
+    },
+    {
+      "slug": "travelling-salesman-problem-using-dynamic-programming",
+      "title": "Travelling Salesman",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; directed-cost contract and explicit closed-tour rule describe the task compactly",
+      "cases": 7,
+      "notes": "Clarified complete directed costs, return edge, fixed-start equivalence, singleton result. Five permutation-enumerated fixtures. Replaced nested subset arrays with flat Uint32Array excluding city 0 (~40 MB at n=20); native Node maximum-size known-cycle regression passes. Browser worker timing remains pending."
+    },
+    {
+      "slug": "trie-data-structure",
+      "title": "Trie Data Structure",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; apple/app example clearly distinguishes terminal words from shared prefixes",
+      "cases": 6,
+      "notes": "Clarified operation results, duplicate insertion, retained longer words, persistent per-fixture state, and fresh instances. Added prefix constraints and terminal-marker explanation. Four operation fixtures plus 2000-character and 30000-call regressions pass."
+    },
+    {
+      "slug": "tug-of-war",
+      "title": "Tug of War",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit result fields and group-size rules explain this partition task",
+      "cases": 9,
+      "notes": "Added missing result-object contract, floor-size returned group, value-versus-index distinction, duplicate multiplicities, negatives, and singleton behavior. Seven combination-enumerated fixtures; tied-optimum and invalid-subset validator tests plus n=20 optimum regression pass. Complexity now accounts conservatively for subset copying."
+    },
+    {
+      "slug": "two-sum",
+      "title": "Two Sum",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; duplicate-value index example directly explains the distinction",
+      "cases": 9,
+      "notes": "Clarified original zero-based positions and equal values at distinct indices. Explained lookup-before-insert. Six unique-pair fixtures, reversed-order/reused-index/type/range validator regressions, and 10000-element late-match test pass."
+    },
+    {
+      "slug": "undirected-graph-cycle-practice",
+      "title": "Cycle in an Undirected Graph",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; explicit edge reuse, parallel-edge, and self-loop rules remove ambiguity",
+      "cases": 9,
+      "notes": "Normalized title and Union Find taxonomy. Clarified each list entry as one edge, disconnected components, self-loops, and parallel edges consistent with unrestricted existing endpoint constraints. Corrected initialization-inclusive complexity. Seven fixtures and 100000-vertex chain/late-cycle regressions pass."
+    },
+    {
+      "slug": "unique-binary-search-trees",
+      "title": "Unique Binary Search Trees",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; root-choice breakdown for n=3 explains the five shapes without extra visual bulk",
+      "cases": 8,
+      "notes": "Clarified exact count, use of every key, ordered child positions, and shape-versus-insertion-sequence distinction. Corrected taxonomy; explained empty-child base and safe maximum count. Six fixtures and independent BigInt Catalan formula checks for all n=1..19 pass."
+    },
+    {
+      "slug": "unique-binary-search-trees-ii",
+      "title": "Unique Binary Search Trees II",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; the two n=2 structures are described explicitly",
+      "cases": 4,
+      "notes": [
+        "Clarified strict BST ordering, unique structures, and returning root objects rather than serialized arrays.",
+        "Added n=3 and n=4 fixtures independently generated from insertion permutations.",
+        "Verified all 1430 distinct valid trees at n=8 and unordered comparison rejecting duplicate outputs."
+      ]
+    },
+    {
+      "slug": "unique-paths",
+      "title": "Unique Paths",
+      "contentReview": "reviewed",
+      "diagramReview": "Added accessible SVG showing all three paths in a 3 by 2 grid; rendered and inspected; final responsive/theme browser audit pending. Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 8,
+      "notes": [
+        "Clarified dimensions, permitted moves, distinct paths, empty-move singleton path, and numeric return contract.",
+        "Added singleton, long single row/column, asymmetric and large-answer fixtures.",
+        "Verified every grid within dimension and answer constraints against an independent exact BigInt combination formula.",
+        "Explained one-row DP dependencies and corrected topic taxonomy."
+      ]
+    },
+    {
+      "slug": "unique-paths-iii",
+      "title": "Unique Paths III",
+      "contentReview": "reviewed",
+      "diagramReview": "Added accessible SVG illustrating a complete six-cell route and explaining early arrival; rendered and inspected; final browser verification pending. Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 8,
+      "notes": [
+        "Clarified grid values, unique start/end, four-direction movement, and exact coverage including endpoints.",
+        "Added early-arrival, disconnected, obstacle, full-route and maximum-length fixtures from an independent subset-state counting oracle.",
+        "Fixed reference backtracking to restore the original starting-cell value.",
+        "Exhaustively checked all 480 start/end/obstacle arrangements on a 2 by 3 grid against permutation enumeration, including input restoration."
+      ]
+    },
+    {
+      "slug": "valid-number",
+      "title": "Valid Number",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; compact string examples directly explain the syntax or deletion rule",
+      "cases": 21,
+      "notes": [
+        "Specified exact integer/decimal/exponent grammar, nonempty digits, leading zeros, excluded whitespace and nonnumeric letters.",
+        "Distinguished syntactic validity from JavaScript numeric conversion and finite range; corrected topic taxonomy.",
+        "Added 18 valid/invalid boundary fixtures; checked all strings of length 1\u20135 over eight representative character classes against an independent regular-expression grammar and length-20 cases."
+      ]
+    },
+    {
+      "slug": "valid-palindrome-ii",
+      "title": "Valid Palindrome II",
+      "contentReview": "reviewed",
+      "diagramReview": "not needed; compact string examples directly explain the syntax or deletion rule",
+      "cases": 11,
+      "notes": [
+        "Clarified at most one deletion globally, retained order, and boolean return; corrected Two Pointers taxonomy.",
+        "Added singleton, already-valid, left/right deletion, internal deletion and impossible fixtures.",
+        "Checked every length 1\u20138 string over three letters against exhaustive single deletions, plus length-100000 cases."
+      ]
+    },
+    {
+      "slug": "valid-parentheses",
+      "title": "Valid Parentheses",
+      "contentReview": "reviewed",
+      "diagramReview": "added accessible inline SVG showing nested versus crossing brackets",
+      "cases": 7,
+      "notes": [
+        "Clarified string input and boolean return contract.",
+        "Corrected stack space explanation: up to n opening brackets.",
+        "Added empty, unmatched opening/closing, nested, and mismatched-type cases.",
+        "Corrected topic to Stack&Queue.",
+        "All seven cases pass in browser."
+      ]
+    },
+    {
+      "slug": "valid-square",
+      "title": "Valid Square",
+      "contentReview": "reviewed",
+      "diagramReview": "Added accessible rotated-square SVG; rendered and inspected; final browser verification pending. Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 9,
+      "notes": [
+        "Corrected unrelated Matrix/BFS/DFS taxonomy to Math and Geometry.",
+        "Clarified positive-length sides, arbitrary point order, rotated squares, and invalid duplicate/collinear points.",
+        "Explained exact squared distances and made the diagonal-to-side relation explicit in the reference.",
+        "Added rotated, translated/tilted, repeated, collinear, rectangle, rhombus, and coordinate-bound fixtures; verified all 6561 small-grid ordered point tuples with an independent perpendicular-edge oracle."
+      ]
+    },
+    {
+      "slug": "validate-binary-search-tree",
+      "title": "Validate Binary Search Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "Added accessible ancestor-bound violation SVG; rendered and inspected; final browser verification pending. Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 9,
+      "notes": [
+        "Clarified strict ordering, duplicate rejection, node-object input and level-order display; added BST topic.",
+        "Formatted iterative reference and explained inherited bounds, infinity sentinels and stack complexity.",
+        "Added duplicate, ancestor violation, valid mixed-sign, and integer-extreme fixtures.",
+        "Verified 10000-node skewed tree, deepest duplicate, and deepest ancestor violation."
+      ]
+    },
+    {
+      "slug": "vertical-order-traversal-of-a-binary-tree",
+      "title": "Vertical Order Traversal of a Binary Tree",
+      "contentReview": "reviewed",
+      "diagramReview": "A compact coordinate table directly explains the overlapping-position tie; no SVG needed.",
+      "cases": 7,
+      "notes": [
+        "Defined root/child coordinates, strict column-row-value ordering, preserved duplicates, and node-object input.",
+        "Added a tie example where left-first traversal encounters 6 before 5 but output must sort them.",
+        "Added row-before-value, duplicate-value, left/right skewed, and same-position tie fixtures.",
+        "Verified a 1000-node chain and comparator rejection of incorrect inner/outer ordering."
+      ]
+    },
+    {
+      "slug": "water-jug-problem-using-bfs",
+      "title": "Water Jug Problem Using BFS",
+      "contentReview": "reviewed",
+      "diagramReview": "A short labeled state sequence explains the pours compactly; no SVG needed.",
+      "cases": 11,
+      "notes": [
+        "Normalized title and BFS taxonomy; clarified initially empty jugs, unlimited supply, maximal pours, combined target and boolean return.",
+        "Replaced string-key/array-state BFS with typed boundary-state BFS, retaining the required search method while bounding storage to 20 MB.",
+        "Explained boundary encoding and corrected complexity to O(x+y).",
+        "Added zero, combined capacity, impossible, reversed capacity and near-limit fixtures; checked all capacities 1\u201315 and targets through combined capacity plus one against a GCD oracle, plus large reachable/unreachable searches. Browser worker timing remains part of the final audit."
+      ]
+    },
+    {
+      "slug": "weighted-job-scheduling",
+      "title": "Weighted Job Scheduling",
+      "contentReview": "reviewed",
+      "diagramReview": "A compact selected-job table makes the endpoint compatibility and example profit explicit; no SVG needed.",
+      "cases": 8,
+      "notes": [
+        "Clarified tuple fields, arbitrary input order, whole jobs, touching endpoint compatibility, duplicate intervals and scalar output.",
+        "Corrected taxonomy to DP/Binary Search/Sorting and explained the recurrence and compatible predecessor search.",
+        "Added six independently enumerated fixtures covering touching, overlapping, duplicate, competing, unsorted and extreme-time jobs.",
+        "Checked 200 deterministic generated inputs against exhaustive subsets and 100000 touching jobs with maximum total profit 1000000000."
+      ]
+    },
+    {
+      "slug": "word-break-problem-trie-solution",
+      "title": "Word Break (Trie)",
+      "contentReview": "reviewed",
+      "diagramReview": "The short cars = ca + rs counterexample directly explains competing prefixes; no SVG needed.",
+      "cases": 10,
+      "notes": [
+        "Normalized title and added DP/String taxonomy; clarified complete-word matching, reuse, original order and boolean result.",
+        "Replaced mismatched hash-set substring solution with the advertised trie plus iterative reachability DP.",
+        "Documented trie terminals, exploring longer words after a terminal, and O(D+nL) time without substring allocation.",
+        "Added reuse, greedy-trap, prefix-only, singleton, impossible-suffix and duplicate-dictionary cases.",
+        "Verified all binary strings through length 8 against exhaustive cut enumeration across six dictionaries; tested maximum string and dictionary sizes."
+      ]
+    },
+    {
+      "slug": "word-ladder",
+      "title": "Word Ladder",
+      "contentReview": "reviewed",
+      "diagramReview": "The short arrow-separated word chain directly shows each substitution and endpoint counting; no SVG needed.",
+      "cases": 8,
+      "notes": [
+        "Completed lowercase/equal-length/unique-dictionary/distinct-endpoint constraints and clarified start versus end membership.",
+        "Explained word count versus transformation count and required exactly one changed letter.",
+        "Skipped unchanged-letter candidates and explained BFS shortest-path and enqueue-time visitation.",
+        "Added direct, missing-route, start-in-dictionary and competing-route fixtures; checked all 255 nonempty subsets of an eight-word universe against an explicit Hamming-distance graph, and a 5000-word input."
+      ]
+    },
+    {
+      "slug": "word-search",
+      "title": "Word Search",
+      "contentReview": "reviewed",
+      "diagramReview": "Added accessible compact board-path SVG; rendered and inspected; final browser verification pending. Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 8,
+      "notes": [
+        "Corrected taxonomy and clarified four-direction adjacency, cell reuse, full-word matching and output contract.",
+        "Added singleton, diagonal-only, repeated-letter, prefix and reuse boundary coverage.",
+        "Verified both algorithms against independently enumerated simple paths on all 16 binary-letter 2 by 2 boards, including input restoration.",
+        "Added maximum-size input checks and early length/frequency rejection for impossible single-word searches."
+      ]
+    },
+    {
+      "slug": "word-search-ii",
+      "title": "Word Search II",
+      "contentReview": "reviewed",
+      "diagramReview": "Added accessible compact board-path SVG; rendered and inspected; final browser verification pending. Final visual sweep completed in both themes using production CSS, 350px-wide panels.",
+      "cases": 6,
+      "notes": [
+        "Corrected taxonomy and clarified four-direction adjacency, cell reuse, full-word matching and output contract.",
+        "Added singleton, diagonal-only, repeated-letter, prefix and reuse boundary coverage.",
+        "Verified both algorithms against independently enumerated simple paths on all 16 binary-letter 2 by 2 boards, including input restoration.",
+        "Added maximum-size input checks and exhausted-trie-branch pruning, unique result checks and shared-prefix continuation."
+      ]
+    }
+  ],
+  "verification": {
+    "referenceCases": 1963,
+    "referenceFailures": 0,
+    "runtimeTests": 98,
+    "formatterTests": 6,
+    "contentAuditProblems": 270,
+    "contentAuditFailures": 0,
+    "notes": [
+      "Structural and reference tests do not replace the individual semantic review.",
+      "New linked-list SVG inspected at desktop and 390px mobile; text enlarged after mobile inspection.",
+      "New tree-distance SVG visually inspected in desktop workspace.",
+      "Book allocation verified at 100,000 books and binary addition at 10,000 digits.",
+      "Stock I, II, IV solutions matched exhaustive buy/sell choices on all 81 four-day histories over prices 0, 1, 3.",
+      "Collection topic filtering now shares taxonomy slug normalization; Stack&Queue shows 22 matches, 8 when Easy is selected.",
+      "Stats completion label corrected, zero activity bars removed, equivalent primary topic labels normalized.",
+      "Read-only solution colors and Copy control inspected in browser; editor colors match in light and dark modes.",
+      "Pattern search matched a direct substring oracle for 448 binary-string cases, including overlaps.",
+      "Burst Balloons matched exhaustive burst orders for all 81 four-balloon arrays over values 0, 1, 2.",
+      "390px mobile layout retains document width 390px while long solution code scrolls within a 304px block.",
+      "Ambiguous preorder/postorder reconstruction SVG inspected in the browser; excess diagram height removed.",
+      "Random-list checker now verifies original values/links are restored and rejects copied pointers escaping into the original; positive self-reference and negative mutation cases pass.",
+      "Container With Most Water SVG visually inspected in the browser; chosen sides and shaded area agree with 49.",
+      "Critical Connections bridge SVG inspected in the browser; highlighted 1\u20133 edge and connectivity explanation agree with the fixture.",
+      "Decode Ways clarified zero-code rules and partition examples visually checked in the browser.",
+      "Tree diameter and nearest-cell SVGs inspected in the desktop workspace; highlighted paths and distance matrices match their examples. Shared output label avoids repeated Return wording.",
+      "Evaluate Division ratio-chain SVG inspected in the browser; arithmetic and reciprocal caption agree with the example. Maximum-number swaps matched 243 exhaustive small-input checks and a 30-digit fixture.",
+      "Corner-to-center maze diagram inspected in browser: arrows, landing cells, and stop-at-center caption match the successful fixture.",
+      "First-occurrence KMP matched direct substring search on 448 binary-string pairs and a 10,000-character overlapping-prefix input.",
+      "Multilevel flattening checker now verifies original node identity, unchanged values, complete membership, and strictly null child pointers. New positive and negative runtime tests pass.",
+      "Multilevel list SVG inspected in the browser; nested child 5 precedes the saved next node 6.",
+      "Intersection runner now requires the exact shared node and verifies both lists remain unchanged; copied equal-valued nodes and mutated inputs are rejected.",
+      "Production browser worker boundary checks: water jug capacities 999999 and 1000000 with target 500000 completes true without timeout; 11/11 fixtures pass. Travelling Salesman 20-city unit-cost complete graph returns 20 in 173ms on this machine; 7/7 fixtures pass. Both editors restored to starters. Timing is a local observation, not a cross-device guarantee.",
+      "Final SVG sweep begun using temporary 350px-wide review sheets with actual production CSS. First eight reviewed in dark theme: Add Two Numbers II, Add Two Numbers, Alien Dictionary, All Nodes Distance K, Allocate Minimum Pages, As Far from Land, Balanced Binary Tree, BFS. Labels, arrows, connections and highlighted values readable. Sheets /tmp/dc-final-production/diagram-review-1.html through -8.html; remaining sheets 2\u20138 pending.",
+      "Release build /tmp/dc-release-production completed successfully. All 62 diagram previews inspected in browser dark theme; final latest-release browser smoke checks remain.",
+      "Final Reset formatting-notice cleanup confirmed: format notice initially shows success, Reset hides it and console says Starter code restored. Screenshot /tmp/dc-reset-final.png."
+    ],
+    "discussionTests": 6,
+    "schoolTests": 6
+  },
+  "assetMeasurements": {
+    "source": "Completed release build /tmp/dc-release-production; editor and formatter sizes reconfirmed.",
+    "assets": [
+      {
+        "file": "codeEditor.PsijtVA-.js",
+        "bytes": 497886,
+        "gzipBytes": 166021
+      },
+      {
+        "file": "problemFormat.worker-CtWzYuaZ.js",
+        "bytes": 589,
+        "gzipBytes": 410
+      },
+      {
+        "file": "problemFormatter.Bz_oFQTf.js",
+        "bytes": 510,
+        "gzipBytes": 325
+      },
+      {
+        "file": "_slug_.astro_astro_type_script_index_0_lang.C37NzF7-.js",
+        "bytes": 32038,
+        "gzipBytes": 10992
+      }
+    ],
+    "totalInlineSvgBytes": 108107,
+    "svgCount": 62
+  },
+  "completionAudit": {
+    "content": "270/270 individually reviewed; 1963 reference cases, zero failures",
+    "renderedOutput": "270/270 current release pages audited; no issues",
+    "diagrams": "All 62 visually inspected in both themes; accessible markup validated; representative actual mobile pages checked",
+    "runtime": "98 runtime tests, 6 formatter tests, 6 discussion tests pass; production worker/formatter and boundary cases verified",
+    "build": "Release build plus school checks and Pagefind completed exit 0; final cosmetic Reset notice change verified in dev browser",
+    "remaining": [
+      "Authenticated favorite and solved persistence across reload/list/detail",
+      "Live discussion integration requires available configured service and authenticated session; no posting authorization supplied"
+    ],
+    "status": "blocked: authenticated session and available discussion service required for remaining integration verification",
+    "blockerRecheck": "Browser still shows Login; Discussion still reports unavailable. Same prerequisite has remained unresolved across more than three consecutive goal turns. Independent local work and verification completed."
+  }
+}

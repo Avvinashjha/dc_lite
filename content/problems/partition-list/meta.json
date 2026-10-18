@@ -38,6 +38,109 @@
         3
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          3
+        ],
+        3
+      ],
+      "expected": [
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        3
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          4,
+          3
+        ],
+        3
+      ],
+      "expected": [
+        5,
+        4,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          3,
+          2,
+          1
+        ],
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        1,
+        3,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          0,
+          -2,
+          0
+        ],
+        0
+      ],
+      "expected": [
+        -1,
+        -2,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        2
+      ],
+      "expected": [
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ],
+        1
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ]
     }
   ],
   "functionName": "partition",
@@ -51,7 +154,7 @@
     "argTypes": [
       "list"
     ],
-    "outputType": "list"
+    "outputType": "partitionList"
   },
   "examples": [
     {
@@ -66,5 +169,5 @@
   "sampleInput": "head = [1,4,3,2,5,2]\nx = 3",
   "sampleOutput": "[1,2,2,4,3,5]",
   "inputFormat": "Implement partition(head, x). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Return the head of the stably partitioned original nodes. The runner displays the resulting list as a value array; null is []."
 }

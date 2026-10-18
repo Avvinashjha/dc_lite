@@ -1,30 +1,40 @@
-## Kirchhoff's Matrix Tree Theorem
+## Matrix-Tree Theorem with Exact Elimination
 
-Compute any cofactor of the Laplacian matrix (degree matrix - adjacency matrix).
+Build the Laplacian: each diagonal entry is the vertex degree, and an off-diagonal entry is -1 when the two vertices are adjacent. Delete one row and the matching column. The determinant of the remaining matrix equals the spanning-tree count.
+
+Use fraction-free elimination with BigInt so intermediate arithmetic is exact. Each division is exact by the elimination invariant. A missing pivot means the determinant is zero. The empty determinant for one vertex is 1.
 
 ```javascript
 function countSpanningTrees(adj, V) {
-  const L = Array.from({length:V}, ()=>Array(V).fill(0));
-  for (let i=0;i<V;i++) for (let j=0;j<V;j++) {
-    if (i===j) L[i][j] = adj[i].length;
-    else if (adj[i].includes(j)) L[i][j] = -1;
-  }
-  const n = V-1, M = L.slice(0,n).map(r=>r.slice(0,n));
-  // Gaussian elimination for determinant
-  let det = 1;
-  for (let i=0;i<n;i++) {
-    let pivot = i;
-    for (let j=i+1;j<n;j++) if (Math.abs(M[j][i])>Math.abs(M[pivot][i])) pivot=j;
-    if (pivot!==i) { [M[i],M[pivot]]=[M[pivot],M[i]]; det*=-1; }
-    if (Math.abs(M[i][i]) < 1e-12) return 0;
-    det *= M[i][i];
-    for (let j=i+1;j<n;j++) {
-      const f=M[j][i]/M[i][i];
-      for (let k=i;k<n;k++) M[j][k]-=f*M[i][k];
+  if (V === 1) return 1;
+  const n = V - 1;
+  const matrix = Array.from({length: n}, (_, i) =>
+    Array.from({length: n}, (_, j) =>
+      i === j ? BigInt(adj[i].length) : adj[i].includes(j) ? -1n : 0n
+    )
+  );
+  let previous = 1n, sign = 1n;
+  for (let k = 0; k < n - 1; k++) {
+    let pivotRow = k;
+    while (pivotRow < n && matrix[pivotRow][k] === 0n) pivotRow++;
+    if (pivotRow === n) return 0;
+    if (pivotRow !== k) {
+      [matrix[k], matrix[pivotRow]] = [matrix[pivotRow], matrix[k]];
+      sign = -sign;
     }
+    const pivot = matrix[k][k];
+    for (let i = k + 1; i < n; i++) {
+      for (let j = k + 1; j < n; j++) {
+        matrix[i][j] = (matrix[i][j] * pivot - matrix[i][k] * matrix[k][j]) / previous;
+      }
+      matrix[i][k] = 0n;
+    }
+    previous = pivot;
   }
-  return Math.round(det);
+  return Number(sign * matrix[n - 1][n - 1]);
 }
 ```
 
-**Time:** O(V³) | **Space:** O(V²)
+For V ≤ 10, the complete graph has the largest possible count, V^(V - 2), at most 100,000,000. The final conversion to Number is therefore exact.
+
+**Time:** O(V³) arithmetic operations. **Space:** O(V²).

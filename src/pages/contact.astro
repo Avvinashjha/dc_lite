@@ -1,15 +1,13 @@
 ---
+import PageIntro from '../components/PageIntro.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getSiteConfig } from '../utils/contentLoader';
 const config = getSiteConfig();
 ---
 
 <BaseLayout title={`Contact | ${config.site.title}`} description="Get in touch with us. We'd love to hear from you.">
-  <div class="container content" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Get in Touch</h1>
-    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 3rem;">
-      Have a question, suggestion, or just want to say hi? We'd love to hear from you.
-    </p>
+  <div class="container collection-page">
+    <PageIntro title="Let’s make something better." description="Have a question, an idea, or a little feedback? We would love to hear from you." eyebrow="KEEP IN TOUCH" icon="chat" tone="peach" />
 
     <div class="contact-grid">
       <!-- Contact Methods -->

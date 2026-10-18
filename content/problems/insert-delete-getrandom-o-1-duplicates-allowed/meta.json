@@ -1,12 +1,13 @@
 {
   "draft": false,
   "id": "problem-0026",
-  "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+  "title": "Randomized Collection with Duplicates",
   "difficulty": "Hard",
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Hash Table",
+    "Design"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/insert-delete-getrandom-o-1-duplicates-allowed/",
@@ -97,13 +98,66 @@
         true,
         2
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "insert",
+            -1
+          ],
+          [
+            "insert",
+            0
+          ],
+          [
+            "insert",
+            -1
+          ],
+          [
+            "remove",
+            -1
+          ],
+          [
+            "remove",
+            0
+          ],
+          [
+            "getRandom"
+          ],
+          [
+            "remove",
+            -1
+          ],
+          [
+            "insert",
+            -1
+          ],
+          [
+            "getRandom"
+          ]
+        ]
+      ],
+      "expected": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        -1,
+        true,
+        true,
+        -1
+      ]
     }
   ],
   "functionName": "RandomizedCollection",
   "templateCode": "class RandomizedCollection {\n  constructor() {\n    // Write your implementation here.\n  }\n  insert(val) {\n    // Write your implementation here.\n  }\n  remove(val) {\n    // Write your implementation here.\n  }\n  getRandom() {\n    // Write your implementation here.\n  }\n}\n",
   "constraints": [
     "-2^31 <= val <= 2^31 - 1",
-    "At most 2 * 10^5 calls"
+    "At most 2 * 10^5 calls",
+    "getRandom is called only when the collection is nonempty."
   ],
   "runner": {
     "mode": "operations"

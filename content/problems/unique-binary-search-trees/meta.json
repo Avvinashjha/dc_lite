@@ -6,8 +6,9 @@
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "Binary Search Tree",
+    "Dynamic Programming",
+    "Combinatorics"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/unique-binary-search-trees/",
@@ -24,6 +25,42 @@
         1
       ],
       "expected": 1
+    },
+    {
+      "args": [
+        2
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": 14
+    },
+    {
+      "args": [
+        5
+      ],
+      "expected": 42
+    },
+    {
+      "args": [
+        8
+      ],
+      "expected": 1430
+    },
+    {
+      "args": [
+        15
+      ],
+      "expected": 9694845
+    },
+    {
+      "args": [
+        19
+      ],
+      "expected": 1767263190
     }
   ],
   "functionName": "numTrees",
@@ -35,7 +72,8 @@
   "examples": [
     {
       "input": "n = 3",
-      "output": "5"
+      "output": "5",
+      "explanation": "Choosing root 1 gives two shapes, root 2 gives one, and root 3 gives two: 2 + 1 + 2 = 5."
     },
     {
       "input": "n = 1",
@@ -45,5 +83,5 @@
   "sampleInput": "n = 3",
   "sampleOutput": "5",
   "inputFormat": "Implement numTrees(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the exact number of structurally distinct BSTs using each key from 1 through n exactly once. No modulo is required."
 }

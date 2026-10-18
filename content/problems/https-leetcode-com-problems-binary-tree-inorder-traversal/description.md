@@ -1,1 +1,3 @@
-You're given the `root` of a binary tree. Walk it in **inorder** order — left subtree first, then the current node, then the right subtree — and return the node values you collect, in that order. Applying this traversal to a binary search tree naturally yields the values in ascending order. Rather than relying on recursion, write an iterative version that uses an explicit stack, which makes the space usage easier to reason about.
+Given the root of a binary tree, return its node values in **inorder**: traverse the left subtree, visit the current node, then traverse the right subtree. Use an explicit stack for an iterative traversal.
+
+The tree is not necessarily a binary search tree, so the returned values need not be sorted. An empty tree returns an empty array.

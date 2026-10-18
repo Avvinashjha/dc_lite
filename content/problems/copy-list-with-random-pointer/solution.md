@@ -21,4 +21,4 @@ function copyRandomList(head) {
 }
 ```
 
-**Time:** O(n) | **Space:** O(1) extra
+**Time:** O(n) | **Space:** O(1) auxiliary space, excluding O(n) newly allocated output nodes. The separation pass restores the original next links.

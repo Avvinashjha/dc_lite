@@ -1,4 +1,5 @@
 ---
+import PageIntro from '../../components/PageIntro.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import Search from '../../components/Search.astro';
@@ -11,11 +12,8 @@ const sortedPosts = getBlogPostsSorted();
   title="Blog | DailyCoder"
   description="Browse all blog posts about web development, TypeScript, CSS, and modern web technologies."
 >
-  <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Blog</h1>
-    <p style="text-align: center; color: var(--color-text-light); font-size: 1.125rem; margin-bottom: 2rem;">
-      {sortedPosts.length} post{sortedPosts.length !== 1 ? 's' : ''} and counting
-    </p>
+  <div class="container collection-page">
+    <PageIntro title="Ideas worth a little time." description="Practical guides, thoughtful deep dives, and new perspectives for your next project." eyebrow="FROM THE DAILY CODER NOTEBOOK" icon="chat" tone="sky" />
     <Search />
     <div class="grid grid--3">
       {sortedPosts.map(post => (

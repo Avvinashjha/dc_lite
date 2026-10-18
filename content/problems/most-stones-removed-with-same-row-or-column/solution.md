@@ -1,6 +1,8 @@
 ## Union-Find (Count Components)
 
-Max removable = total stones - number of connected components.
+Connect stones that share a row or column. At least one stone must remain in each connected component. Conversely, remove leaves of a spanning tree one at a time while retaining their parents; this removes every stone except one. Therefore the maximum is total stones minus the component count.
+
+The implementation unions row IDs with column IDs instead of comparing every stone pair. Nonnegative row IDs and negative column IDs (~c = -c - 1) occupy disjoint namespaces. This prevents a row numbered 1 from being confused with column 1. Every active component contains a row, so counting row roots counts all components.
 
 ```javascript
 function removeStones(stones) {

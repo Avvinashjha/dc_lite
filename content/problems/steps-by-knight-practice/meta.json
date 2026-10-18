@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0187",
-  "title": "Steps by Knight | Practice",
+  "title": "Minimum Knight Moves on a Board",
   "difficulty": "Medium",
   "topic": "Graph",
   "topics": [
     "Graph",
     "BFS",
-    "DFS"
+    "Matrix"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Steps%20by%20Knight%20%7C%20Practice",
@@ -54,12 +54,98 @@
         ]
       ],
       "expected": -1
+    },
+    {
+      "args": [
+        3,
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": -1
+    },
+    {
+      "args": [
+        3,
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        3,
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "expected": 4
+    },
+    {
+      "args": [
+        8,
+        [
+          0,
+          0
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        8,
+        [
+          7,
+          7
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": 6
+    },
+    {
+      "args": [
+        4,
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "minSteps",
   "templateCode": "function minSteps(n, src, dest) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= N <= 1000"
+    "1 <= n <= 1000",
+    "src and dest each contain two integers: [row, column]",
+    "0 <= src[i], dest[i] < n"
   ],
   "runner": {},
   "examples": [
@@ -79,5 +165,5 @@
   "sampleInput": "n = 6\nsrc = [3,4]\ndest = [0,0]",
   "sampleOutput": "3",
   "inputFormat": "Implement minSteps(n, src, dest). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the fewest legal knight moves, 0 if src equals dest, or -1 if the destination is unreachable."
 }

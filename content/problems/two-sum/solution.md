@@ -1,6 +1,6 @@
 **Approach: Hash Map**
 
-For each number, check if `target - num` exists in a map of value → index. If it does, return the two indices. Otherwise store the current value and its index.
+For each number, check if `target - num` exists in a map of value → index. If it does, return the two indices. Otherwise store the current value and its index. Check before inserting so a value cannot pair with its own position. A later duplicate can still match an earlier occurrence.
 
 ```javascript
 function twoSum(nums, target) {

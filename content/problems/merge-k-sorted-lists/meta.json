@@ -5,7 +5,8 @@
   "difficulty": "Hard",
   "topic": "Linked-List",
   "topics": [
-    "Linked List"
+    "Linked List",
+    "Divide and Conquer"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/merge-k-sorted-lists/",
@@ -46,6 +47,123 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          [],
+          [],
+          []
+        ]
+      ],
+      "expected": []
+    },
+    {
+      "args": [
+        [
+          [],
+          [
+            1
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            -3,
+            -1,
+            2
+          ]
+        ]
+      ],
+      "expected": [
+        -3,
+        -1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            -2,
+            0,
+            2
+          ],
+          [
+            -2,
+            -2,
+            3
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        -2,
+        -2,
+        -2,
+        0,
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        1
+      ]
     }
   ],
   "functionName": "mergeKLists",
@@ -74,6 +192,6 @@
   ],
   "sampleInput": "lists = [[1,4,5],[1,3,4],[2,6]]",
   "sampleOutput": "[1,1,2,3,4,4,5,6]",
-  "inputFormat": "Implement mergeKLists(lists). Inputs below show JavaScript function arguments; there is no stdin parsing.\nEach inner array represents a linked list; the editor passes an array of list heads.",
-  "outputFormat": "Return the result described in the statement.\nReturned list heads are displayed as value arrays; a null head is []."
+  "inputFormat": "Implement mergeKLists(lists). The editor converts each inner value array into a linked-list head with val and next properties. An empty inner array becomes null; the outer array contains those heads.",
+  "outputFormat": "Return the head of one non-decreasing linked list containing every input value with its original multiplicity. If there are no nodes, return null (displayed as [])."
 }

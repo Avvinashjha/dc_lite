@@ -1,3 +1,5 @@
-You're given an `m x n` integer matrix. Whenever a cell holds the value `0`, every other cell in that cell's row and every cell in its column must also become `0`. Apply these changes directly to the given matrix.
+Given an `m × n` integer matrix, set every cell in a row or column containing an **original zero** to `0`. Modify the given matrix in place.
 
-Using O(m + n) extra space to remember which rows and columns to zero out is the straightforward route — the harder version of this problem is pulling it off with only O(1) extra space.
+Zeros introduced by your changes must not trigger further changes. For example, `[[0,1],[2,3]]` becomes `[[0,0],[0,3]]`; the bottom-right cell stays `3`.
+
+**Follow-up:** Can you use O(1) extra space? Storing the affected rows and columns in sets uses O(m + n) extra space.

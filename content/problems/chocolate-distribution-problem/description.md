@@ -1,1 +1,3 @@
-You have `N` packets of chocolates, given as array `A[]` where `A[i]` is the chocolate count in the `i`-th packet, and `M` students to hand packets to. Choose `M` of the packets — one per student — so that the gap between the largest and smallest counts handed out is as small as possible, and return that minimum gap.
+Given packet sizes in an array `arr` and `m` students, choose `m` distinct packets and give one packet to each student. Minimize the difference between the largest and smallest chosen packet sizes, and return that difference.
+
+You may choose any packets; they do not need to be adjacent in the original array.

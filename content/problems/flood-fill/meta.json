@@ -70,19 +70,88 @@
           1
         ]
       ]
+    },
+    {
+      "args": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        0,
+        0,
+        2
+      ],
+      "expected": [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        0,
+        0,
+        3
+      ],
+      "expected": [
+        [
+          3,
+          3,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          [
+            7
+          ]
+        ],
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        [
+          0
+        ]
+      ]
     }
   ],
   "functionName": "floodFill",
   "templateCode": "function floodFill(image, sr, sc, color) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= m, n <= 50",
-    "0 <= image[i][j], color < 2^16"
+    "0 <= image[i][j], color < 2^16",
+    "image has m rows and n columns; 0 <= sr < m and 0 <= sc < n."
   ],
   "runner": {},
   "examples": [
     {
       "input": "image = [[1,1,1],[1,1,0],[1,0,1]]\nsr = 1\nsc = 1\ncolor = 2",
-      "output": "[[2,2,2],[2,2,0],[2,0,1]]"
+      "output": "[[2,2,2],[2,2,0],[2,0,1]]",
+      "explanation": "The bottom-right 1 is only diagonally adjacent to the filled region, so it remains unchanged."
     },
     {
       "input": "image = [[1]]\nsr = 0\nsc = 0\ncolor = 1",
@@ -91,6 +160,6 @@
   ],
   "sampleInput": "image = [[1,1,1],[1,1,0],[1,0,1]]\nsr = 1\nsc = 1\ncolor = 2",
   "sampleOutput": "[[2,2,2],[2,2,0],[2,0,1]]",
-  "inputFormat": "Implement floodFill(image, sr, sc, color). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "image is a nonempty rectangular integer grid. sr and sc are valid zero-based row and column indices; color is the replacement color.",
+  "outputFormat": "Return the image with only the source pixel\u2019s four-connected, original-color region repainted. You may modify image in place."
 }

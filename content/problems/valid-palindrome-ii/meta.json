@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Two Pointers"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/valid-palindrome-ii/",
@@ -25,6 +25,60 @@
         "abc"
       ],
       "expected": false
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "aa"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "ab"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "racecar"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "xracecar"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "racecarx"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "abccdba"
+      ],
+      "expected": true
+    },
+    {
+      "args": [
+        "abcda"
+      ],
+      "expected": false
+    },
+    {
+      "args": [
+        "deeee"
+      ],
+      "expected": true
     }
   ],
   "functionName": "validPalindrome",
@@ -45,5 +99,5 @@
     }
   ],
   "inputFormat": "Implement validPalindrome(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return true if deleting zero or one character can make s a palindrome; otherwise return false."
 }

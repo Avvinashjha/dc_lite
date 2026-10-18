@@ -1,6 +1,6 @@
 ## Track Min and Max
 
-Maintain current min and max products (a negative min can become max when multiplied by negative).
+Maintain the smallest and largest products of subarrays ending at the current position. For each value, either start a new subarray or extend a previous one. A negative value can turn the previous minimum into the new maximum, so keep both. Save the previous maximum before updating either state. A zero naturally resets both ending products to zero; the next position may start fresh.
 
 ```javascript
 function maxProduct(nums) {

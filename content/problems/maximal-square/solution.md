@@ -1,6 +1,6 @@
 ## Approach: Dynamic Programming
 
-`dp[i][j]` represents the side length of the largest square whose bottom-right corner is at `(i,j)`. If `matrix[i][j]` is '1', `dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1`. The answer is the maximum dp value squared.
+Using a padded table, `dp[i][j]` represents the side length of the largest square whose bottom-right corner is at matrix cell `(i-1,j-1)`. If `matrix[i-1][j-1]` is '1', `dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1`. The answer is the maximum dp value squared.
 
 ```javascript
 function maximalSquare(matrix) {

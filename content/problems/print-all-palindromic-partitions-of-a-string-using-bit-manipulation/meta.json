@@ -1,12 +1,12 @@
 {
   "draft": false,
   "id": "problem-0277",
-  "title": "Print all Palindromic Partitions of a String using Bit Manipulation",
-  "difficulty": "Hard",
+  "title": "Palindrome Partitions Using Bitmasks",
+  "difficulty": "Medium",
   "topic": "Backtracking",
   "topics": [
-    "Backtracking",
-    "Recursion"
+    "String",
+    "Bit Manipulation"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Print%20all%20Palindromic%20Partitions%20of%20a%20String%20using%20Bit%20Manipulation",
@@ -39,12 +39,140 @@
           "a"
         ]
       ]
+    },
+    {
+      "args": [
+        "ab"
+      ],
+      "expected": [
+        [
+          "a",
+          "b"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "aaa"
+      ],
+      "expected": [
+        [
+          "a",
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "aa"
+        ],
+        [
+          "aa",
+          "a"
+        ],
+        [
+          "aaa"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "abba"
+      ],
+      "expected": [
+        [
+          "a",
+          "b",
+          "b",
+          "a"
+        ],
+        [
+          "a",
+          "bb",
+          "a"
+        ],
+        [
+          "abba"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "abc"
+      ],
+      "expected": [
+        [
+          "a",
+          "b",
+          "c"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "aabaa"
+      ],
+      "expected": [
+        [
+          "a",
+          "a",
+          "b",
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "a",
+          "b",
+          "aa"
+        ],
+        [
+          "a",
+          "aba",
+          "a"
+        ],
+        [
+          "aa",
+          "b",
+          "a",
+          "a"
+        ],
+        [
+          "aa",
+          "b",
+          "aa"
+        ],
+        [
+          "aabaa"
+        ]
+      ]
+    },
+    {
+      "args": [
+        "abab"
+      ],
+      "expected": [
+        [
+          "a",
+          "b",
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "bab"
+        ],
+        [
+          "aba",
+          "b"
+        ]
+      ]
     }
   ],
   "functionName": "allPalindromicPartitions",
   "templateCode": "function allPalindromicPartitions(s) {\n  // Write your solution here.\n}\n",
   "constraints": [
-    "1 <= s.length <= 15"
+    "1 <= s.length <= 15",
+    "s consists of lowercase English letters."
   ],
   "runner": {
     "unordered": true
@@ -60,5 +188,5 @@
     }
   ],
   "inputFormat": "Implement allPalindromicPartitions(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "outputFormat": "Return every distinct palindrome partition once. Substrings retain their original order; outer result order does not matter."
 }

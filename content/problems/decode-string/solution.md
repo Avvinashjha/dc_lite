@@ -16,4 +16,5 @@ function decodeString(s) {
 }
 ```
 
-**Time:** O(output length) | **Space:** O(output length)
+**Time:** O(n + W), where W is the total number of characters copied while building intermediate strings. A conservative worst-case bound is O(n × L) for encoded length n and decoded length L; nested groups may copy the same expanded text more than once.
+**Space:** O(n + L) for the stacks and live strings, including output.

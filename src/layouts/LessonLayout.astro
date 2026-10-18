@@ -111,7 +111,7 @@ function lessonIconId(type: string): string {
     <div class="lesson-drawer-backdrop" data-drawer-backdrop></div>
 
     <!-- Sidebar drawer -->
-    <aside class="lesson-sidebar" data-lesson-sidebar>
+    <aside class="lesson-sidebar" id="course-contents" data-lesson-sidebar>
       <div class="lesson-sidebar__head">
         <a href={`/courses/${course.slug}`} class="lesson-sidebar__back">
           <svg width="15" height="15" viewBox="0 0 24 24"><use href="#dc-icon-back" /></svg>
@@ -193,6 +193,8 @@ function lessonIconId(type: string): string {
           class="lesson-drawer-toggle"
           data-drawer-toggle
           aria-label="Toggle course contents"
+          aria-controls="course-contents"
+          aria-expanded="false"
         >
           <svg width="16" height="16" viewBox="0 0 24 24"><use href="#dc-icon-menu" /></svg>
           <span>Contents</span>
@@ -635,7 +637,11 @@ function lessonIconId(type: string): string {
     if (!layout) return;
     var desktopMq = window.matchMedia("(min-width: 1024px)");
 
+    var sidebar = layout.querySelector("[data-lesson-sidebar]");
+    var drawerToggle = layout.querySelector("[data-drawer-toggle]");
     function openDrawer() {
+      if (sidebar) sidebar.inert = false;
+      if (drawerToggle) drawerToggle.setAttribute("aria-expanded", "true");
       layout.classList.add("lesson-layout--drawer-open");
       // Bring the active lesson into view once the drawer is visible.
       if (typeof window.__dcScrollSidebarActive === "function") {
@@ -643,6 +649,9 @@ function lessonIconId(type: string): string {
       }
     }
     function closeDrawer() {
+      if (sidebar && sidebar.contains(document.activeElement) && drawerToggle) drawerToggle.focus();
+      if (sidebar) sidebar.inert = true;
+      if (drawerToggle) drawerToggle.setAttribute("aria-expanded", "false");
       layout.classList.remove("lesson-layout--drawer-open");
     }
     function toggleDrawer() {
@@ -717,7 +726,7 @@ function lessonIconId(type: string): string {
   .lesson-drawer-backdrop {
     position: fixed;
     inset: 52px 0 0 0;
-    background: rgba(15, 23, 42, 0.5);
+    background: rgba(16, 20, 17, 0.55);
     backdrop-filter: blur(2px);
     opacity: 0;
     visibility: hidden;
@@ -818,7 +827,7 @@ function lessonIconId(type: string): string {
     height: 100%;
     width: 0;
     border-radius: 999px;
-    background: linear-gradient(90deg, var(--color-primary), color-mix(in oklab, var(--color-primary) 55%, #22d3ee));
+    background: var(--color-primary);
     transition: width var(--transition-slow) ease;
   }
 
@@ -968,12 +977,12 @@ function lessonIconId(type: string): string {
     display: none;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--color-on-primary);
   }
   .lesson-sidebar__link--done .lesson-sidebar__status {
-    background: var(--color-success, #16a34a);
-    border-color: var(--color-success, #16a34a);
-    color: #fff;
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: var(--color-on-primary);
   }
   .lesson-sidebar__link--done .lesson-sidebar__icon {
     display: none;
@@ -1078,8 +1087,8 @@ function lessonIconId(type: string): string {
     margin-left: auto;
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--color-success, #16a34a);
-    background: color-mix(in srgb, var(--color-success, #16a34a) 12%, transparent);
+    color: var(--color-success);
+    background: color-mix(in srgb, var(--color-success) 12%, transparent);
     padding: 0.15rem 0.5rem;
     border-radius: var(--radius-md);
   }

@@ -47,7 +47,7 @@ const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
     const feedback = quiz.querySelector('.quiz__feedback');
     result.style.display = 'block';
     feedback.textContent = selected === correct ? 'Correct!' : 'Incorrect.';
-    feedback.style.color = selected === correct ? '#16a34a' : '#dc2626';
+    feedback.style.color = selected === correct ? 'var(--color-success)' : 'var(--color-danger)';
   }
 </script>
 
@@ -68,7 +68,7 @@ const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
   .quiz__badge {
     display: inline-block;
     background: var(--color-primary);
-    color: #fff;
+    color: var(--color-on-primary);
     padding: 0.2rem 0.6rem;
     border-radius: var(--radius-md);
     font-size: 0.7rem;
@@ -110,8 +110,8 @@ const quizId = `quiz-${Math.random().toString(36).slice(2, 9)}`;
     word-break: break-word;
   }
   .quiz__option:hover:not(:disabled) { border-color: var(--color-primary); background: var(--color-surface); }
-  .quiz__option--correct { border-color: #16a34a !important; background: rgba(22,163,74,.1) !important; }
-  .quiz__option--wrong { border-color: #dc2626 !important; background: rgba(220,38,38,.1) !important; }
+  .quiz__option--correct { border-color: var(--color-success) !important; background: rgba(22,163,74,.1) !important; }
+  .quiz__option--wrong { border-color: var(--color-danger) !important; background: rgba(220,38,38,.1) !important; }
   .quiz__letter {
     display: inline-flex;
     align-items: center;

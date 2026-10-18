@@ -6,7 +6,8 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Math",
+    "Greedy"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/integer-to-roman/",
@@ -25,6 +26,54 @@
         1994
       ],
       "expected": "MCMXCIV"
+    },
+    {
+      "args": [
+        1
+      ],
+      "expected": "I"
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": "IV"
+    },
+    {
+      "args": [
+        9
+      ],
+      "expected": "IX"
+    },
+    {
+      "args": [
+        40
+      ],
+      "expected": "XL"
+    },
+    {
+      "args": [
+        90
+      ],
+      "expected": "XC"
+    },
+    {
+      "args": [
+        400
+      ],
+      "expected": "CD"
+    },
+    {
+      "args": [
+        900
+      ],
+      "expected": "CM"
+    },
+    {
+      "args": [
+        3999
+      ],
+      "expected": "MMMCMXCIX"
     }
   ],
   "functionName": "intToRoman",
@@ -40,9 +89,10 @@
     },
     {
       "input": "num = 1994",
-      "output": "\"MCMXCIV\""
+      "output": "\"MCMXCIV\"",
+      "explanation": "1994 = 1000 + 900 + 90 + 4, represented by M + CM + XC + IV."
     }
   ],
-  "inputFormat": "Implement intToRoman(num). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "num is an integer from 1 through 3999.",
+  "outputFormat": "Return the standard uppercase Roman numeral with no spaces, using subtractive forms IV, IX, XL, XC, CD, and CM."
 }

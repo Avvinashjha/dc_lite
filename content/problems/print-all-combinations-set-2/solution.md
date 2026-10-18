@@ -1,30 +1,33 @@
-## Approach: Recursive Pick / Skip
+## Backtracking over Increasing Indices
 
-At each index, decide: include this element in the current combination or skip it. Move forward either way. When you've picked `r` elements, record the combination. Stop early if there aren't enough elements left to fill the remaining slots.
+Build a combination by choosing its next index from the unused suffix. Recurse from the following index so no entry is reused and original order is preserved. After returning, remove the last choice before trying another index.
+
+If `needed` positions remain, the next index cannot exceed `arr.length - needed`; later indices would leave too few entries to complete the combination. When no positions remain, save a copy of the current values.
+
+Different increasing index sequences produce different branches, even when their values match. Do not deduplicate the output. With `r = 0`, the initial empty path is saved immediately; with `r > arr.length`, return no combinations.
 
 ```javascript
 function combinations(arr, r) {
+  if (r > arr.length) return [];
   const results = [];
-
-  function combine(start, current) {
-    if (current.length === r) {
+  const current = [];
+  function combine(start) {
+    const needed = r - current.length;
+    if (needed === 0) {
       results.push([...current]);
       return;
     }
-    if (start >= arr.length) return;
-    if (arr.length - start < r - current.length) return;
-
-    current.push(arr[start]);
-    combine(start + 1, current);
-    current.pop();
-    combine(start + 1, current);
+    for (let i = start; i <= arr.length - needed; i++) {
+      current.push(arr[i]);
+      combine(i + 1);
+      current.pop();
+    }
   }
-
-  combine(0, []);
+  combine(0);
   return results;
 }
 ```
 
-**Time Complexity:** O(C(n, r) × r) — generating all C(n, r) combinations, each of size r
+**Time:** O(1 + C(n, r) × (r + 1)), including copying returned combinations. Here n is arr.length, and C(n, r) is zero when r > n.
 
-**Space Complexity:** O(n) for the pick/skip recursion depth (excluding output storage)
+**Space:** O(r + 1) auxiliary space for recursion and the current combination, plus O(C(n, r) × (r + 1)) for the output arrays.

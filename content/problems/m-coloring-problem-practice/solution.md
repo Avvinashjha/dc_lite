@@ -30,6 +30,6 @@ function canColor(graph, m, n) {
 }
 ```
 
-**Time Complexity:** O(m^n) worst case
+**Time Complexity:** O(n × m^n) worst case for m >= 2, including the neighbor scan for each attempted color. For m = 1, O(n + E), where E is the number of edges.
 
 **Space Complexity:** O(n) for the color array and recursion stack

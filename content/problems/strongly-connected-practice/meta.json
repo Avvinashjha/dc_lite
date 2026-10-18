@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0192",
-  "title": "Strongly Connected | Practice",
+  "title": "Strongly Connected Components",
   "difficulty": "Medium",
   "topic": "Graph",
   "topics": [
     "Graph",
-    "BFS",
-    "DFS"
+    "DFS",
+    "Strongly Connected Components"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Strongly%20Connected%20%7C%20Practice",
@@ -59,13 +59,150 @@
           0
         ]
       ]
+    },
+    {
+      "args": [
+        3,
+        [
+          [],
+          [],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ]
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ]
+    },
+    {
+      "args": [
+        3,
+        [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "args": [
+        5,
+        [
+          [
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4
+        ]
+      ]
+    },
+    {
+      "args": [
+        4,
+        [
+          [
+            1,
+            2
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          []
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ]
     }
   ],
   "functionName": "findSCCs",
   "templateCode": "function findSCCs(V, adj) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "1 <= V <= 5000",
-    "0 <= E <= V*(V-1)"
+    "0 <= E <= V*(V-1)",
+    "adj.length == V; adj[u] lists the destinations of directed edges from u",
+    "Vertices are labeled 0 through V - 1; no duplicate edges or self-loops"
   ],
   "runner": {
     "unordered": true,
@@ -74,7 +211,8 @@
   "examples": [
     {
       "input": "V = 5\nadj = [[1],[2],[0,3],[4],[]]",
-      "output": "[[0,1,2],[3],[4]]"
+      "output": "[[0,1,2],[3],[4]]",
+      "explanation": "Vertices 0, 1, and 2 form a directed cycle. The one-way edges from 2 to 3 and from 3 to 4 provide no return paths, so 3 and 4 are separate components."
     },
     {
       "input": "V = 1\nadj = [[]]",
@@ -84,5 +222,5 @@
   "sampleInput": "V = 5\nadj = [[1],[2],[0,3],[4],[]]",
   "sampleOutput": "[[0,1,2],[3],[4]]",
   "inputFormat": "Implement findSCCs(V, adj). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter. Order inside each group does not matter either."
+  "outputFormat": "Return the maximal strongly connected components as arrays of vertex labels. Include each vertex exactly once. Component order and vertex order within each component do not matter."
 }

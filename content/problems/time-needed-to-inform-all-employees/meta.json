@@ -48,6 +48,99 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        4,
+        0,
+        [
+          -1,
+          0,
+          1,
+          2
+        ],
+        [
+          2,
+          3,
+          4,
+          0
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        4,
+        0,
+        [
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        5,
+        0,
+        [
+          -1,
+          0,
+          0,
+          1,
+          2
+        ],
+        [
+          2,
+          7,
+          3,
+          0,
+          0
+        ]
+      ],
+      "expected": 9
+    },
+    {
+      "args": [
+        3,
+        2,
+        [
+          2,
+          0,
+          -1
+        ],
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      "expected": 5
+    },
+    {
+      "args": [
+        3,
+        0,
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": 0
     }
   ],
   "functionName": "numOfMinutes",
@@ -56,13 +149,15 @@
     "1 <= n <= 10^5",
     "0 <= headID < n; manager[headID] == -1",
     "Every other manager entry is in [0,n-1]; the hierarchy forms one rooted tree.",
-    "0 <= informTime[i] <= 1000; employees with no subordinates have informTime[i] == 0."
+    "0 <= informTime[i] <= 1000; employees with no subordinates have informTime[i] == 0.",
+    "manager.length == informTime.length == n"
   ],
   "runner": {},
   "examples": [
     {
       "input": "n = 6\nheadID = 2\nmanager = [2,2,-1,2,2,2]\ninformTime = [0,0,1,0,0,0]",
-      "output": "1"
+      "output": "1",
+      "explanation": "The head informs all five direct subordinates in parallel, taking 1 minute in total, not 5 minutes."
     },
     {
       "input": "n = 1\nheadID = 0\nmanager = [-1]\ninformTime = [0]",
@@ -72,5 +167,5 @@
   "sampleInput": "n = 6\nheadID = 2\nmanager = [2,2,-1,2,2,2]\ninformTime = [0,0,1,0,0,0]",
   "sampleOutput": "1",
   "inputFormat": "Implement numOfMinutes(n, headID, manager, informTime). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "outputFormat": "Return the earliest time, in minutes, at which every employee has received the news."
 }

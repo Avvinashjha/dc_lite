@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "Backtracking"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/generate-parentheses/",
@@ -33,6 +33,36 @@
       "expected": [
         "()"
       ]
+    },
+    {
+      "args": [
+        2
+      ],
+      "expected": [
+        "(())",
+        "()()"
+      ]
+    },
+    {
+      "args": [
+        4
+      ],
+      "expected": [
+        "(((())))",
+        "((()()))",
+        "((())())",
+        "((()))()",
+        "(()(()))",
+        "(()()())",
+        "(()())()",
+        "(())(())",
+        "(())()()",
+        "()((()))",
+        "()(()())",
+        "()(())()",
+        "()()(())",
+        "()()()()"
+      ]
     }
   ],
   "functionName": "generateParenthesis",
@@ -53,6 +83,6 @@
       "output": "[\"()\"]"
     }
   ],
-  "inputFormat": "Implement generateParenthesis(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement.\nThe order of the outer result array does not matter."
+  "inputFormat": "n is the number of opening/closing parenthesis pairs.",
+  "outputFormat": "Return every distinct balanced string of exactly n pairs, once each, in any order."
 }

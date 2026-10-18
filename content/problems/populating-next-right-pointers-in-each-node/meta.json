@@ -6,8 +6,7 @@
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "Binary Tree"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/",
@@ -46,13 +45,188 @@
         []
       ],
       "expected": []
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        [
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          -1,
+          -2,
+          -3
+        ]
+      ],
+      "expected": [
+        [
+          -1
+        ],
+        [
+          -2,
+          -3
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      ]
+    },
+    {
+      "args": [
+        [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ]
+      ],
+      "expected": [
+        [
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          5,
+          5,
+          5
+        ],
+        [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ]
+      ]
     }
   ],
   "functionName": "connect",
   "templateCode": "function connect(root) {\n  // Write your solution here.\n}\n",
   "constraints": [
     "0 <= number of nodes <= 2^12 - 1",
-    "-1000 <= Node.val <= 1000"
+    "-1000 <= Node.val <= 1000",
+    "The tree is perfect, and every next pointer initially equals null."
   ],
   "runner": {
     "argTypes": [
@@ -73,5 +247,12 @@
   "sampleInput": "root = [1,2,3,4,5,6,7]",
   "sampleOutput": "[[1],[2,3],[4,5,6,7]]",
   "inputFormat": "Implement connect(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement.\nThe output lists the values reached through next pointers at each level."
+  "outputFormat": "Return the original root after setting next pointers. The runner displays the values reached across each level.",
+  "visuals": [
+    {
+      "title": "Connect across parents, too",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 520 240\" role=\"img\" aria-labelledby=\"next-tree-title next-tree-desc\" style=\"width:100%;height:auto;max-width:520px;color:var(--color-text)\"><title id=\"next-tree-title\">Next pointers across tree levels</title><desc id=\"next-tree-desc\">Solid lines show child links. Dashed arrows connect 2 to 3, and 4 to 5 to 6 to 7. The 5 to 6 arrow crosses between parents.</desc><defs><marker id=\"next-tree-arrow\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><path d=\"M0 0L6 3L0 6\" fill=\"currentColor\"/></marker></defs><g stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\"><path d=\"M260 54L140 91\"/><path d=\"M260 54L380 91\"/><path d=\"M140 129L60 171\"/><path d=\"M140 129L200 171\"/><path d=\"M380 129L320 171\"/><path d=\"M380 129L460 171\"/><path d=\"M163 110H354\" stroke-dasharray=\"5 4\" marker-end=\"url(#next-tree-arrow)\"/><path d=\"M83 190H174\" stroke-dasharray=\"5 4\" marker-end=\"url(#next-tree-arrow)\"/><path d=\"M223 190H294\" stroke-dasharray=\"5 4\" marker-end=\"url(#next-tree-arrow)\"/><path d=\"M343 190H434\" stroke-dasharray=\"5 4\" marker-end=\"url(#next-tree-arrow)\"/><circle cx=\"260\" cy=\"35\" r=\"20\"/><circle cx=\"140\" cy=\"110\" r=\"20\"/><circle cx=\"380\" cy=\"110\" r=\"20\"/><circle cx=\"60\" cy=\"190\" r=\"20\"/><circle cx=\"200\" cy=\"190\" r=\"20\"/><circle cx=\"320\" cy=\"190\" r=\"20\"/><circle cx=\"460\" cy=\"190\" r=\"20\"/></g><g fill=\"currentColor\" font-family=\"system-ui,sans-serif\" font-size=\"15\" text-anchor=\"middle\"><text x=\"260\" y=\"40\">1</text><text x=\"140\" y=\"115\">2</text><text x=\"380\" y=\"115\">3</text><text x=\"60\" y=\"195\">4</text><text x=\"200\" y=\"195\">5</text><text x=\"320\" y=\"195\">6</text><text x=\"460\" y=\"195\">7</text><text x=\"260\" y=\"232\" font-size=\"13\">Dashed arrows = next links \u00b7 rightmost nodes point to null</text></g></svg>",
+      "caption": "The next link from 5 to 6 joins two sibling subtrees at the same level."
+    }
+  ]
 }

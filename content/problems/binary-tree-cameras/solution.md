@@ -7,8 +7,12 @@ function minCameraCover(root) {
   let cameras = 0;
   function dfs(node) {
     if (!node) return 2;
-    const l = dfs(node.left), r = dfs(node.right);
-    if (l === 0 || r === 0) { cameras++; return 1; }
+    const l = dfs(node.left),
+      r = dfs(node.right);
+    if (l === 0 || r === 0) {
+      cameras++;
+      return 1;
+    }
     if (l === 1 || r === 1) return 2;
     return 0;
   }

@@ -1,9 +1,9 @@
 {
   "draft": false,
   "id": "problem-0085",
-  "title": "Sort a linked list of 0s, 1s and 2s",
+  "title": "Sort a Linked List of 0s, 1s, and 2s",
   "difficulty": "Easy",
-  "topic": "Linked-List",
+  "topic": "Linked List",
   "topics": [
     "Linked List"
   ],
@@ -40,6 +40,122 @@
       "expected": [
         0
       ]
+    },
+    {
+      "args": [
+        [
+          2
+        ]
+      ],
+      "expected": [
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "expected": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          0,
+          0,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          0,
+          1
+        ]
+      ],
+      "expected": [
+        0,
+        1,
+        2,
+        2
+      ]
     }
   ],
   "functionName": "sortList012",
@@ -53,7 +169,8 @@
       "list"
     ],
     "outputType": "list",
-    "resultArg": 0
+    "resultArg": 0,
+    "preserveListLinks": true
   },
   "examples": [
     {
@@ -68,5 +185,5 @@
   "sampleInput": "head = [1,2,0,1,2,0]",
   "sampleOutput": "[0,0,1,1,2,2]",
   "inputFormat": "Implement sortList012(head). Inputs below show JavaScript function arguments; there is no stdin parsing.\nLinked lists use value arrays. The editor passes nodes with val and next properties; [] becomes null.",
-  "outputFormat": "Modify argument 1 in place. The editor compares its final value; the function return value is ignored.\nReturned list heads are displayed as value arrays; a null head is []."
+  "outputFormat": "Overwrite values in the existing list nodes. Keep the head, node order, and every next link unchanged. The runner displays the final values; the function return value is ignored."
 }

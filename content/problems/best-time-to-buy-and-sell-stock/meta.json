@@ -6,7 +6,7 @@
   "topic": "Array",
   "topics": [
     "Array",
-    "Two Pointers"
+    "Dynamic Programming"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
@@ -38,6 +38,35 @@
         ]
       ],
       "expected": 0
+    },
+    {
+      "args": [
+        [
+          5
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "expected": 0
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "expected": 3
     }
   ],
   "functionName": "maxProfit",
@@ -50,13 +79,14 @@
   "examples": [
     {
       "input": "prices = [7,1,5,3,6,4]",
-      "output": "5"
+      "output": "5",
+      "explanation": "Buy at 1 and later sell at 6 for a profit of 5."
     },
     {
       "input": "prices = [7,6,4,3,1]",
       "output": "0"
     }
   ],
-  "inputFormat": "Implement maxProfit(prices). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement maxProfit(prices), where prices[i] is the price on day i.",
+  "outputFormat": "The maximum profit from at most one buy followed by a sale on a later day. Return 0 if no profitable trade exists."
 }

@@ -1,3 +1,7 @@
-You're given an integer array `nums` and an integer `k`. Work out whether the array can be split into `k` groups, each non-empty, such that every group's elements add up to the same total.
+Given an array of positive integers `nums` and an integer `k`, return whether all array entries can be divided into exactly `k` nonempty groups with the same sum.
 
-**Edge cases:** When the overall sum doesn't divide evenly by `k`, no valid split exists, so return `false` right away. With `k = 1` the whole array is trivially one group, so the answer is always `true`. If any single element is larger than `totalSum / k`, it can never fit in a group, so a split is impossible.
+Each entry must belong to exactly one group. Equal values at different indices are separate entries. Groups do not need to be contiguous, and their order does not matter. Return a boolean, not the groups themselves. You may reorder the input array.
+
+For `nums = [4, 3, 2, 3, 5, 2, 1]` and `k = 4`, the groups `[5]`, `[4, 1]`, `[3, 2]`, and `[3, 2]` each sum to `5`, so return `true`.
+
+A total sum divisible by `k` is necessary but not sufficient: `[2, 2, 2]` cannot form two groups of sum `3`.

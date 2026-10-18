@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0113",
-  "title": "Implement Stack using Queues",
+  "title": "Implement Stack Using Queues",
   "difficulty": "Easy",
   "topic": "Stack&Queue",
   "topics": [
@@ -75,13 +75,114 @@
         3,
         true
       ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "push",
+            1
+          ],
+          [
+            "push",
+            2
+          ],
+          [
+            "top"
+          ],
+          [
+            "top"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "push",
+            3
+          ],
+          [
+            "pop"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ],
+          [
+            "push",
+            4
+          ],
+          [
+            "top"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        2,
+        2,
+        2,
+        null,
+        3,
+        1,
+        true,
+        null,
+        4,
+        4,
+        true
+      ]
+    },
+    {
+      "args": [
+        [],
+        [
+          [
+            "push",
+            5
+          ],
+          [
+            "push",
+            5
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ],
+          [
+            "pop"
+          ],
+          [
+            "empty"
+          ]
+        ]
+      ],
+      "expected": [
+        null,
+        null,
+        5,
+        false,
+        5,
+        true
+      ]
     }
   ],
   "functionName": "implementStackUsingQueues",
   "templateCode": "function implementStackUsingQueues() {\n  return {\n    push(x) { /* Write your implementation. */ },\n    pop() { /* Write your implementation. */ },\n    top() { /* Write your implementation. */ },\n    empty() { /* Write your implementation. */ }\n  };\n}\n",
   "constraints": [
     "1 <= x <= 9",
-    "At most 100 calls"
+    "At most 100 calls",
+    "pop and top are called only when the stack is nonempty."
   ],
   "runner": {
     "mode": "operations",

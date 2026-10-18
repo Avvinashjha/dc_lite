@@ -1,10 +1,16 @@
 ## Recursive Inorder Traversal
 
-Find two nodes where inorder sequence is violated.
+Inorder traversal should be strictly increasing. Track the previously visited node and detect a descending adjacent pair whenever `previous.val > current.val`.
+
+At the first violation, save the previous node as `first`. At every violation, update `second` to the current node. If the swapped nodes were adjacent in inorder, there is one violation and these are exactly the two nodes. If they were separated, there are two violations: the earlier larger value and the later smaller value are the misplaced nodes.
+
+Swap their values after traversal. Do not change child links. The guarantee that exactly two distinct values were swapped ensures both candidates exist.
 
 ```javascript
 function recoverTree(root) {
-  let first = null, second = null, prev = {val: -Infinity};
+  let first = null,
+    second = null,
+    prev = { val: -Infinity };
   function inorder(node) {
     if (!node) return;
     inorder(node.left);

@@ -3,7 +3,7 @@
   "id": "problem-0227",
   "title": "Climbing Stairs",
   "difficulty": "Easy",
-  "topic": "Dynamic-Programming",
+  "topic": "Dynamic Programming",
   "topics": [
     "Dynamic Programming",
     "Memoization"
@@ -29,6 +29,12 @@
         5
       ],
       "expected": 8
+    },
+    {
+      "args": [
+        1
+      ],
+      "expected": 1
     }
   ],
   "functionName": "climbStairs",
@@ -44,7 +50,8 @@
     },
     {
       "input": "n = 3",
-      "output": "3"
+      "output": "3",
+      "explanation": "The sequences are [1,1,1], [1,2], and [2,1]."
     },
     {
       "input": "n = 5",
@@ -53,6 +60,6 @@
   ],
   "sampleInput": "n = 2",
   "sampleOutput": "2",
-  "inputFormat": "Implement climbStairs(n). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement climbStairs(n), where n is the total number of steps. Each move climbs exactly 1 or 2 steps.",
+  "outputFormat": "The number of ordered move sequences whose sum is exactly n."
 }

@@ -6,7 +6,7 @@
   "topic": "String",
   "topics": [
     "String",
-    "Hash Table"
+    "String Matching"
   ],
   "platform": "LeetCode",
   "externalUrl": "https://leetcode.com/problems/longest-happy-prefix/",
@@ -25,6 +25,42 @@
         "ababab"
       ],
       "expected": "abab"
+    },
+    {
+      "args": [
+        "a"
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        "aaaa"
+      ],
+      "expected": "aaa"
+    },
+    {
+      "args": [
+        "abcd"
+      ],
+      "expected": ""
+    },
+    {
+      "args": [
+        "abcab"
+      ],
+      "expected": "ab"
+    },
+    {
+      "args": [
+        "ababcabab"
+      ],
+      "expected": "abab"
+    },
+    {
+      "args": [
+        "aabaaab"
+      ],
+      "expected": "aab"
     }
   ],
   "functionName": "longestPrefix",
@@ -44,6 +80,6 @@
       "output": "\"abab\""
     }
   ],
-  "inputFormat": "Implement longestPrefix(s). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "Implement longestPrefix(s). Receive a nonempty string of lowercase English letters.",
+  "outputFormat": "Return the longest nonempty proper prefix that is also a suffix, or \"\" if none exists."
 }

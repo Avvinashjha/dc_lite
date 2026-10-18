@@ -16,6 +16,6 @@ function longestCommonPrefix(strs) {
 }
 ```
 
-**Time Complexity:** O(S) where S is the total number of characters across all strings
+**Time Complexity:** O(N + S), where N is the number of strings and S is their total character count (including the empty-string case)
 
-**Space Complexity:** O(p) for the returned prefix, O(1) auxiliary space
+**Space Complexity:** O(p) for the returned prefix of length p, with O(1) auxiliary space

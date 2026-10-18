@@ -1,7 +1,7 @@
 {
   "draft": false,
   "id": "problem-0272",
-  "title": "Find Maximum number possible by doing at-most K swaps",
+  "title": "Largest Number After at Most K Swaps",
   "difficulty": "Hard",
   "topic": "Backtracking",
   "topics": [
@@ -34,6 +34,48 @@
         0
       ],
       "expected": "1234"
+    },
+    {
+      "args": [
+        "129814999",
+        4
+      ],
+      "expected": "999984211"
+    },
+    {
+      "args": [
+        "100",
+        1
+      ],
+      "expected": "100"
+    },
+    {
+      "args": [
+        "000",
+        10
+      ],
+      "expected": "000"
+    },
+    {
+      "args": [
+        "0012",
+        1
+      ],
+      "expected": "2010"
+    },
+    {
+      "args": [
+        "9",
+        10
+      ],
+      "expected": "9"
+    },
+    {
+      "args": [
+        "999111",
+        10
+      ],
+      "expected": "999111"
     }
   ],
   "functionName": "findMaximumNum",
@@ -58,6 +100,6 @@
       "output": "\"1234\""
     }
   ],
-  "inputFormat": "Implement findMaximumNum(num, k). Inputs below show JavaScript function arguments; there is no stdin parsing.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "num is a string of decimal digits; k is the maximum number of swaps between any two positions.",
+  "outputFormat": "Return the largest obtainable digit string. Preserve its length, including leading zeros when no larger arrangement is possible."
 }

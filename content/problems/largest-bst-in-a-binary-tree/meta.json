@@ -1,13 +1,13 @@
 {
   "draft": false,
   "id": "problem-0178",
-  "title": "Largest BST in a Binary Tree",
+  "title": "Largest BST Subtree",
   "difficulty": "Hard",
   "topic": "Tree",
   "topics": [
     "Tree",
-    "Binary Tree",
-    "DFS"
+    "Binary Search Tree",
+    "Postorder Traversal"
   ],
   "platform": "GeeksforGeeks",
   "externalUrl": "https://www.geeksforgeeks.org/?s=Largest%20BST%20in%20a%20Binary%20Tree",
@@ -36,6 +36,50 @@
         ]
       ],
       "expected": 3
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          2,
+          2,
+          3
+        ]
+      ],
+      "expected": 1
+    },
+    {
+      "args": [
+        [
+          10,
+          5,
+          15,
+          null,
+          12
+        ]
+      ],
+      "expected": 2
+    },
+    {
+      "args": [
+        [
+          10,
+          5,
+          15,
+          1,
+          8,
+          12,
+          20
+        ]
+      ],
+      "expected": 7
     }
   ],
   "functionName": "largestBstInABinaryTree",
@@ -52,7 +96,8 @@
   "examples": [
     {
       "input": "root = [10,5,15,1,8,null,7]",
-      "output": "3"
+      "output": "3",
+      "explanation": "The subtree rooted at 5 contains [5,1,8] and is a BST of size 3. The subtree rooted at 15 is invalid because its right child is 7."
     },
     {
       "input": "root = [2,1,3]",
@@ -61,6 +106,6 @@
   ],
   "sampleInput": "root = [10,5,15,1,8,null,7]",
   "sampleOutput": "3",
-  "inputFormat": "Implement largestBstInABinaryTree(root). Inputs below show JavaScript function arguments; there is no stdin parsing.\nTrees use level-order arrays with null for missing children. The editor passes nodes with val, left, and right properties; [] becomes null.",
-  "outputFormat": "Return the result described in the statement."
+  "inputFormat": "root is a nonempty binary tree with val, left, and right node properties. Test inputs use level-order arrays with null for missing children.",
+  "outputFormat": "Return the number of nodes in the largest complete rooted subtree satisfying strict BST ordering."
 }

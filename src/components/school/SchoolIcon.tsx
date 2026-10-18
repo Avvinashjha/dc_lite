@@ -2,6 +2,8 @@ import type { ComponentChildren } from 'preact';
 
 export default function SchoolIcon({ name, size = 22 }: { name: string; size?: number }) {
   const paths: Record<string, ComponentChildren> = {
+    sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></>,
+    moon: <path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10Z"/>,
     home: <><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></>,
     book: <><path d="M12 6c-3-3-7-3-10-2v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-3-1-7-1-10 2Z"/><path d="M12 6v15"/></>,
     play: <><rect x="2" y="6" width="20" height="13" rx="5"/><path d="M6 12h5M8.5 9.5v5M16 10h.01M18 14h.01"/></>,
