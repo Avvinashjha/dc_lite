@@ -1,142 +1,34 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import { getSiteConfig } from '../utils/contentLoader';
-const config = getSiteConfig();
-
-interface Props {
-  gameName: string;
-  description: string;
-  instructions: string;
-  keywords?: string;
-}
-
-const { gameName, description, instructions, keywords = '' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const gameJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'VideoGame',
-  name: gameName,
-  description,
-  url: canonicalURL.href,
-  playMode: 'SinglePlayer',
-  applicationCategory: 'Game',
-  operatingSystem: 'All',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  author: { '@type': 'Organization', name: config.site.title },
-};
+import ArcadeLayout from './ArcadeLayout.astro';
+import {games} from '../games/catalog.mjs';
+interface Props { game: (typeof games)[number]; }
+const {game} = Astro.props;
+const url = new URL(`/games/${game.slug}/`, Astro.site).href;
+const related = games.filter(g => g.slug !== game.slug && g.category === game.category).slice(0, 3);
+const schema = {'@context':'https://schema.org','@graph':[
+  {'@type':'VideoGame', '@id':url, name:game.name, description:game.description, url, image:new URL(`/games/art/${game.slug}-share.png`, Astro.site).href, genre:game.category, gamePlatform:'Web browser', applicationCategory:'GameApplication', operatingSystem:'Any modern web browser', playMode:'SinglePlayer', inLanguage:'en', isAccessibleForFree:true, offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}, publisher:{'@type':'Organization',name:'DailyCoder',url:Astro.site?.href}},
+  {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'DailyCoder',item:Astro.site?.href},{'@type':'ListItem',position:2,name:'Games',item:new URL('/games/',Astro.site).href},{'@type':'ListItem',position:3,name:game.name,item:url}]}
+]};
 ---
-
-<BaseLayout title={`${gameName} - Free Online Game | DailyCoder`} description={description}>
-  <Fragment slot="head">
-    <meta name="keywords" content={`${gameName}, ${keywords}, free online game, browser game, no download`} />
-    <meta name="robots" content="index, follow" />
-    <script type="application/ld+json" set:html={JSON.stringify(gameJsonLd)} />
-  </Fragment>
-
-  <div class="game-page">
-    <div class="container">
-      <a href="/games" class="game-back">&larr; All Games</a>
-      <div class="game-header">
-        <div>
-          <h1 class="game-title">{gameName}</h1>
-          <p class="game-desc">{description}</p>
+<ArcadeLayout title={`${game.name} — Play Free Online | DailyCoder`} description={game.description} image={`/games/art/${game.slug}-share.png`} schema={schema}>
+  <div class="arc-game-page" data-game-root data-slug={game.slug} data-title={game.name} data-accent={game.accent}>
+    <nav class="arc-breadcrumb" aria-label="Breadcrumb"><a href="/games">← All games</a><span aria-hidden="true">/</span><span>{game.category}</span></nav>
+    <div class="arc-game-heading"><div><p class="arc-eyebrow">YOUR NEXT LITTLE BREAK</p><h1>{game.name}</h1><p>{game.blurb}</p></div><button class="arc-button arc-favorite-page" data-favorite={game.slug} data-favorite-name={game.name} aria-pressed="false" aria-label={`Favorite ${game.name}`}>♡ Favorite</button></div>
+    <div class="arc-play-grid">
+      <section class="arc-machine" aria-label={`${game.name} game`}>
+        <div class="arc-machine__bar"><span><i aria-hidden="true"></i><span data-game-status>Ready when you are</span></span><div><a href="/games/" class="arc-dashboard-link" aria-label="Back to games dashboard">← Games</a><button type="button" data-pause disabled aria-label="Pause game">Pause</button><button type="button" data-restart disabled aria-label="Restart game">Restart</button><button type="button" data-sound aria-pressed="false" aria-label="Enable game sound">Sound off</button><button type="button" data-fullscreen aria-expanded="false" aria-label="Expand game">⛶</button><button type="button" class="arc-fullscreen-close" data-fullscreen-close aria-label="Exit fullscreen">✕</button></div></div>
+        <div class="arc-stage" data-stage>
+          <div class="arc-poster" data-poster><img src={`/games/art/${game.slug}.svg`} width="1200" height="720" alt="" fetchpriority="high"/><div class="arc-poster__panel"><span class="arc-eyebrow">TAKE A MOMENT. MAKE A MOVE.</span><h2>{game.name}</h2><button class="arc-button arc-button--primary" type="button" data-play>Play now <span aria-hidden="true">↗</span></button><p data-load-message aria-live="polite">Free to play. No sign-in.</p></div></div>
+          <div data-game-mount class="arc-mount" hidden></div>
+          <div class="arc-pause-overlay" data-pause-overlay hidden><span class="arc-eyebrow">TAKE YOUR TIME</span><h2>A little pause.</h2><button class="arc-button arc-button--primary" data-resume>Back to the game</button></div>
         </div>
-        <div class="game-scores">
-          <div class="game-score" id="score-display">Score: <span id="score">0</span></div>
-          <div class="game-score game-score--best" id="best-display">Best: <span id="best-score">0</span></div>
-        </div>
-      </div>
-
-      <div class="game-canvas-wrap" id="game-container" tabindex="0">
-        <slot />
-      </div>
-
-      <div class="game-controls" id="game-controls">
-        <button class="game-btn game-btn--primary" id="btn-start">Start Game</button>
-        <button class="game-btn" id="btn-restart" style="display:none;">Restart</button>
-        <button class="game-btn" id="btn-pause" style="display:none;">Pause</button>
-      </div>
-
-      <details class="game-instructions" open>
-        <summary>How to Play</summary>
-        <p set:html={instructions} />
-      </details>
-
-      <slot name="about" />
+        <p class="arc-live sr-only" data-announcement role="status" aria-live="polite" aria-atomic="true"></p>
+        <noscript><p class="arc-noscript">Enable JavaScript to play. You can read the rules and browse all games without it.</p></noscript>
+      </section>
+      <aside class="arc-field-notes"><span class="arc-eyebrow">THE SHORT VERSION</span><h2>Make yourself<br/>a little time.</h2><div class="arc-note"><span>01 / THE CONTROLS</span><p>{game.controls}</p></div><div class="arc-note"><span>02 / A FRIENDLY TIP</span><p>{game.tip}</p></div><div class="arc-note arc-note--quiet"><span>ALL YOURS</span><p>Your bests stay on this device. Sound is optional. Pause whenever you like.</p></div></aside>
     </div>
+    <section class="arc-rules"><div><span class="arc-eyebrow">A GOOD PLACE TO START</span><h2>How to play {game.name}</h2></div><ol>{game.rules.map(rule=><li>{rule}</li>)}</ol></section>
+    {related.length>0 && <section class="arc-related"><div class="arc-section-title"><h2>Another kind of break</h2><a href="/games">Explore all games ↗</a></div><div class="arc-card-grid arc-card-grid--related">{related.map(g=><a class="arc-card" href={`/games/${g.slug}`}><div class="arc-card__art"><img src={`/games/art/${g.slug}.svg`} width="1200" height="720" alt="" loading="lazy" decoding="async"/></div><div class="arc-card__body"><span class="arc-eyebrow">{g.category}</span><h3>{g.name}<span aria-hidden="true">↗</span></h3><p>{g.blurb}</p></div></a>)}</div></section>}
   </div>
-</BaseLayout>
-
-<!-- Prevent page scroll when game is focused -->
-<script is:inline>
-(function(){
-  var container = document.getElementById('game-container');
-  if (!container) return;
-  
-  // Focus game container on click
-  container.addEventListener('click', function() { container.focus(); });
-  
-  // Prevent page scroll for game keys when container is focused
-  var gameKeys = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' ','Space'];
-  document.addEventListener('keydown', function(e) {
-    if (gameKeys.indexOf(e.key) >= 0 || gameKeys.indexOf(e.code) >= 0) {
-      // Check if we're inside the game page
-      if (container.contains(document.activeElement) || document.activeElement === container || document.activeElement === document.body) {
-        e.preventDefault();
-      }
-    }
-  });
-  
-  // Auto-focus on game start
-  var startBtn = document.getElementById('btn-start');
-  if (startBtn) {
-    startBtn.addEventListener('click', function() {
-      setTimeout(function() { container.focus(); }, 100);
-    });
-  }
-  var restartBtn = document.getElementById('btn-restart');
-  if (restartBtn) {
-    restartBtn.addEventListener('click', function() {
-      setTimeout(function() { container.focus(); }, 100);
-    });
-  }
-})();
-</script>
-
-<style>
-  .game-page { padding: 1.5rem 0 4rem; }
-  .game-back { display: inline-block; color: var(--color-text-light); font-size: 0.85rem; margin-bottom: 1rem; text-decoration: none; }
-  .game-back:hover { color: var(--color-primary); text-decoration: none; }
-  .game-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-  .game-title { font-size: 1.75rem; margin-bottom: 0.25rem; }
-  .game-desc { color: var(--color-text-light); font-size: 0.9rem; }
-  .game-scores { display: flex; gap: 0.75rem; flex-shrink: 0; }
-  .game-score { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 0.4rem 0.85rem; }
-  .game-score--best { color: var(--color-primary); }
-  .game-canvas-wrap {
-    background: var(--color-surface); border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg); overflow: hidden;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 200px; outline: none;
-    width: 100%;
-  }
-  .game-canvas-wrap:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent); }
-  .game-canvas-wrap canvas { display: block; max-width: 100%; height: auto; }
-  .game-canvas-wrap > div { max-width: 100%; overflow: hidden; }
-  .game-controls { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-  .game-btn { padding: 0.5rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 150ms; }
-  .game-btn:hover { border-color: var(--color-primary); }
-  .game-btn--primary { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
-  .game-btn--primary:hover { background: var(--color-primary-dark); }
-  .game-instructions { margin-top: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
-  .game-instructions summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--color-text); }
-  .game-instructions p { padding: 0 1rem 1rem; font-size: 0.85rem; color: var(--color-text-light); line-height: 1.6; }
-  .game-about {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border);
-  }
-  .game-about h2 { font-size: 1.2rem; margin-bottom: 0.6rem; }
-  .game-about p { font-size: 0.9rem; line-height: 1.7; color: var(--color-text-light); margin-bottom: 0.6rem; }
-  @media (max-width: 640px) { .game-title { font-size: 1.4rem; } .game-header { flex-direction: column; } }
-</style>
+  <script>import '../games/launch.js';</script>
+</ArcadeLayout>

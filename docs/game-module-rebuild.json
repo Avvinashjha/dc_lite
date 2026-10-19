@@ -1,0 +1,464 @@
+{
+  "reviewedOn": "2026-10-18",
+  "scope": "Complete replacement of the fourteen existing game implementations, a dedicated DailyCoder-styled arcade, and ten new games. All original game URLs remain available through a static dynamic route.",
+  "research": {
+    "method": "Read official Google Play listings and inspected the Cricket Black, Archery Black, and All Black screenshot galleries. Android binaries were not installed or played. Store descriptions establish advertised mechanics; screenshots establish visible presentation. Improvements below are original design decisions, not claims about unobserved mechanics.",
+    "references": [
+      {
+        "name": "Cricket Black",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.cricketblack",
+        "observed": "Side-on silhouette batting, tap-to-hit timing, target chases, and two-step bowling that sets pace and pitch."
+      },
+      {
+        "name": "Archery Black",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.archeryblack",
+        "observed": "Limited arrows, a bow facing a target, tap-to-shoot timing, score attacks, target chases, and CPU competition. This is the Puran Software arrow reference; the unrelated arrow-exit puzzle is a separate extra game."
+      },
+      {
+        "name": "All Black",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.allblack",
+        "observed": "Ten compact games: Archery, Cricket, Football, Basketball, Stone Throw, Bottle Shoot, Badminton, Bomber, Boxing, Runner."
+      },
+      {
+        "name": "Football Black",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.footballblackmini",
+        "observed": "Simple tap/swipe shooting focused on scoring goals."
+      },
+      {
+        "name": "Kanche",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.kanche",
+        "observed": "Marble physics with challenge levels and multiplayer advertised."
+      },
+      {
+        "name": "Kanche 2",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.kanche2",
+        "observed": "Marble play, physical controls, and score competition advertised."
+      },
+      {
+        "name": "Blind Cricket Black",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.blindcricketblack",
+        "observed": "An audio cue grows as the ball approaches; players time a tap at the loudest point."
+      },
+      {
+        "name": "1 Brainy Shot",
+        "url": "https://play.google.com/store/apps/details?id=com.puransoftware.stonethrownew",
+        "observed": "One-shot bottle-clearing physics puzzles with designed levels."
+      }
+    ],
+    "allBlackDesignReview": [
+      {
+        "game": "Cricket",
+        "lesson": "A readable bounce and a single committed action can carry an entire game.",
+        "decision": "Implemented original Boundary Cricket: animated delivery, anticipation, bat follow-through, timing feedback, visible shot flight, score attack, 24-ball chase, and batting/bowling match."
+      },
+      {
+        "game": "Archery",
+        "lesson": "Projectile travel time makes a simple tap an interesting prediction.",
+        "decision": "Implemented Arrow & Bow with a moving target sampled at arrow arrival, clear scoring rings, ten-arrow rounds, target chase, and CPU score duel."
+      },
+      {
+        "game": "Football",
+        "lesson": "A clear target and quick retries make a strong short session.",
+        "decision": "Implemented Free Kick with direct aim controls, an animated reacting keeper, goal feedback, and ten-kick score/challenge modes."
+      },
+      {
+        "game": "Basketball",
+        "lesson": "A readable arc makes learning from misses possible.",
+        "decision": "Implemented Pocket Hoops with hold/release power, arc animation, swish scoring, moving hoop positions, and directional feedback after misses."
+      },
+      {
+        "game": "Stone Throw",
+        "lesson": "Aiming and trajectory can support authored puzzles, rather than only score attacks.",
+        "decision": "Reviewed as a future physics-puzzle candidate; not represented as shipped in this rebuild."
+      },
+      {
+        "game": "Bottle Shoot",
+        "lesson": "Distinct targets and satisfying impacts matter more than decorative UI.",
+        "decision": "Target Rush uses original moving bullseyes, centre scoring, streak multipliers, hit effects, accuracy results, and keyboard access."
+      },
+      {
+        "game": "Badminton",
+        "lesson": "Anticipation and return timing give a one-button sport depth.",
+        "decision": "Reviewed as a future sports candidate. Paddle Club is a separate original paddle game, not a badminton implementation."
+      },
+      {
+        "game": "Bomber",
+        "lesson": "Moving projectiles and moving targets require leading the shot.",
+        "decision": "Reviewed for future development; no bombing game is claimed as shipped."
+      },
+      {
+        "game": "Boxing",
+        "lesson": "A visible opening can create a fair timing challenge.",
+        "decision": "Reviewed for future development. Avoid hidden random failure; show a readable tell before an action window."
+      },
+      {
+        "game": "Runner",
+        "lesson": "Deterministic hazards and immediate retries reward learning.",
+        "decision": "Implemented Little Runner and an original eight-room platformer, One More Jump, with checkpoints, marked crumbling platforms, and predictable hazards."
+      }
+    ],
+    "furtherOriginalCandidates": [
+      "A marble garden with finite shots and physical chain reactions",
+      "One-shot bottle ricochet puzzles with solvability checks",
+      "A badminton club with clear jump and smash timing",
+      "A rhythm boxing game with readable openings"
+    ]
+  },
+  "games": [
+    {
+      "slug": "cricket",
+      "name": "Boundary Cricket",
+      "category": "Sports",
+      "url": "/games/cricket/"
+    },
+    {
+      "slug": "archery",
+      "name": "Arrow & Bow",
+      "category": "Sports",
+      "url": "/games/archery/"
+    },
+    {
+      "slug": "helicopter",
+      "name": "Cave Pilot",
+      "category": "Quick play",
+      "url": "/games/helicopter/"
+    },
+    {
+      "slug": "two-cars",
+      "name": "Two Cars",
+      "category": "Quick play",
+      "url": "/games/two-cars/"
+    },
+    {
+      "slug": "ping-pong",
+      "name": "Paddle Club",
+      "category": "Sports",
+      "url": "/games/ping-pong/"
+    },
+    {
+      "slug": "trap-tower",
+      "name": "One More Jump",
+      "category": "Quick play",
+      "url": "/games/trap-tower/"
+    },
+    {
+      "slug": "target-rush",
+      "name": "Target Rush",
+      "category": "Quick play",
+      "url": "/games/target-rush/"
+    },
+    {
+      "slug": "football",
+      "name": "Free Kick",
+      "category": "Sports",
+      "url": "/games/football/"
+    },
+    {
+      "slug": "basketball",
+      "name": "Pocket Hoops",
+      "category": "Sports",
+      "url": "/games/basketball/"
+    },
+    {
+      "slug": "snake",
+      "name": "Garden Snake",
+      "category": "Quick play",
+      "url": "/games/snake/"
+    },
+    {
+      "slug": "dino-runner",
+      "name": "Little Runner",
+      "category": "Quick play",
+      "url": "/games/dino-runner/"
+    },
+    {
+      "slug": "car-dodge",
+      "name": "Night Drive",
+      "category": "Quick play",
+      "url": "/games/car-dodge/"
+    },
+    {
+      "slug": "tetris",
+      "name": "Block Stacker",
+      "category": "Puzzles",
+      "url": "/games/tetris/"
+    },
+    {
+      "slug": "2048",
+      "name": "2048",
+      "category": "Puzzles",
+      "url": "/games/2048/"
+    },
+    {
+      "slug": "arrow-escape",
+      "name": "Arrow Escape",
+      "category": "Puzzles",
+      "url": "/games/arrow-escape/"
+    },
+    {
+      "slug": "sudoku",
+      "name": "Sudoku",
+      "category": "Puzzles",
+      "url": "/games/sudoku/"
+    },
+    {
+      "slug": "math-puzzles",
+      "name": "Math Sprint",
+      "category": "Puzzles",
+      "url": "/games/math-puzzles/"
+    },
+    {
+      "slug": "chess",
+      "name": "Chess",
+      "category": "Board & cards",
+      "url": "/games/chess/"
+    },
+    {
+      "slug": "ludo",
+      "name": "Ludo",
+      "category": "Board & cards",
+      "url": "/games/ludo/"
+    },
+    {
+      "slug": "solitaire",
+      "name": "Solitaire",
+      "category": "Board & cards",
+      "url": "/games/solitaire/"
+    },
+    {
+      "slug": "hearts",
+      "name": "Hearts",
+      "category": "Board & cards",
+      "url": "/games/hearts/"
+    },
+    {
+      "slug": "spades",
+      "name": "Spades",
+      "category": "Board & cards",
+      "url": "/games/spades/"
+    },
+    {
+      "slug": "farkle",
+      "name": "Farkle",
+      "category": "Board & cards",
+      "url": "/games/farkle/"
+    },
+    {
+      "slug": "yatzy",
+      "name": "Yatzy",
+      "category": "Board & cards",
+      "url": "/games/yatzy/"
+    }
+  ],
+  "architecture": {
+    "catalog": "src/games/catalog.mjs",
+    "layout": "src/layouts/ArcadeLayout.astro",
+    "playerShell": "src/layouts/GameLayout.astro",
+    "staticRoutes": "src/pages/games/[slug].astro",
+    "loader": "src/games/launch.js",
+    "runtime": "src/games/runtime.js",
+    "lazyPlayers": "src/games/players/",
+    "rules": "src/games/rules/",
+    "css": "src/styles/arcade.scss",
+    "artwork": "public/games/art/",
+    "isolation": "ArcadeLayout imports only shared design tokens and its own scoped stylesheet and shell. It does not import the site authentication, Firebase, sync, ads, or search runtime. No other page imports the arcade. The hub has no player launcher; a player page loads engines through dynamic imports only after Play. Chess searches in a worker created only by the Chess player. Timers, listeners, animation frames, and workers belong to an abortable per-game session.",
+    "seo": "Static, crawlable game links and unique rules; a title, description, canonical URL aligned with directory-format sitemap URLs, VideoGame and breadcrumb JSON-LD, and a local 1200\u00d7630 PNG social image per game. CollectionPage and ItemList schema for the hub. No remote game embeds or remote game media dependencies.",
+    "motion": "Delta-time simulation; capped physics substeps for action games; optional synthesized audio; reduced decorative motion; automatic pause on tab hiding/window blur; pause-aware task queue; cleanup on page exit; cancelable computer thinking.",
+    "assets": "Original code-generated SVG illustrations and PNG social cards. No images or code copied from the reference apps. Run npm run build:game-art after changing artwork generation or the catalog.",
+    "extension": "Add catalog metadata, a same-slug player module exporting mount(session), and artwork. The glob creates the lazy entry automatically; static routes, hub cards, metadata, related games, and tests use the catalog."
+  },
+  "verification": {
+    "status": "Verified: final full production build, all 26 game test groups, both emitted-resource audits and Pagefind indexing completed successfully.",
+    "rules": "26 Node test groups pass, including Cricket variation, high-shot keeper saves, Football balance distributions, Basketball flight/floor physics, denser solvable arrows, favorites persistence, held touch input, paused fullscreen Escape, and Runner standing/ducking collisions.",
+    "browser": "All 24 polished players loaded from the final production preview at 390\u00d7844 with zero browser errors or container overflow. All players were checked at 320\u00d7740, 390\u00d7844, 844\u00d7390, 768\u00d71024 and 1366\u00d7864 during the polish pass. Production lazy loading, favorites, related-game Back behavior, paused fullscreen focus/Escape and restart were verified. Additional game interactions are listed in polish.gameReview.",
+    "interactionChecks": [
+      "Farkle Bank 100 adds exactly 100",
+      "A complete Hearts hand resolves thirteen tricks, preserves totals, and rotates passing in the next hand",
+      "A complete Spades hand resolves thirteen tricks and preserves partnership totals",
+      "All thirteen Yatzy categories complete and reach a result",
+      "Chess accepts e2\u2013e4 and a legal worker reply",
+      "An entire nine-arrow introductory puzzle clears and advances to level two",
+      "Sudoku number entry, undo, and pencil notes work",
+      "Math Sprint accepts a computed answer and awards one score; initial focus stays on the answer input",
+      "Mobile block controls place a hard-dropped piece",
+      "Mobile Solitaire draws and undoes",
+      "Restarting a paused game clears inert state and restores the Pause label",
+      "Rendered dice pips fit within all five mobile dice faces",
+      "Chess pauses pending computer thinking, resumes with one legal reply, and Undo restores the previous position"
+    ],
+    "commands": [
+      "npm run test:games",
+      "npm run build",
+      "npm run audit:game-output",
+      "node scripts/audit-game-output.mjs --baseline /tmp/dc-game-baseline.json"
+    ],
+    "limits": "This is browser smoke/play testing plus rule/property tests, not a physical-device lab or a Lighthouse score claim. Reference Android apps were researched via their official listings and screenshots. No online multiplayer or global leaderboards are claimed.",
+    "productionAudit": {
+      "gamePages": 24,
+      "nonGamePagesChecked": 1348,
+      "lazyGameChunks": 31,
+      "playerInitialJavaScriptGzipBytes": 3380,
+      "hubHasNoPlayerLauncher": true,
+      "nonGamePagesHaveNoGameCodeOrStyles": true,
+      "sharedFileBaselineUnchanged": true
+    },
+    "buildNote": "Existing social-image routes could not fetch their CDN font in this environment and completed using the system-font fallback. Game artwork and runtime assets are local; final build and audits passed."
+  },
+  "polish": {
+    "reviewedOn": "2026-10-19",
+    "status": "Complete and verified against the final production output.",
+    "sharedImprovements": [
+      "Native desktop fullscreen includes the toolbar, pause/resume, restart, sound, dashboard navigation and exit. Phone/coarse-pointer browsers use a fixed expanded player without relying on fullscreen API support. Escape, focus trapping, focus return, safe areas and page scroll restoration are handled.",
+      "Held touch controls normalize keys, release held states on pause, and support deliberate repeat for block movement.",
+      "Game-to-game links replace the current game history entry. A game session stays one Back action from the games dashboard; direct game entries also receive a dashboard history anchor.",
+      "Favorite buttons on every dashboard card and game page persist locally, with a Favorites filter and storage failure handling.",
+      "Compact phone HUD/options, larger action controls, landscape side panels, and responsive canvas coordinates/cameras."
+    ],
+    "gameReview": [
+      {
+        "slug": "cricket",
+        "changes": "Dedicated portrait scene; larger readable ball; four delivery types chosen before release, varied run-up, pace, length and bounce; tighter regular/fast timing and progressive pace.",
+        "verification": "Delivery distribution/timing unit tests, portrait/landscape rendering and lifecycle checks."
+      },
+      {
+        "slug": "archery",
+        "changes": "Dedicated portrait range, wider visible target face, varied motion phase/tempo, correct portrait impact feedback.",
+        "verification": "Release consumes one arrow; all viewport and expanded-player checks."
+      },
+      {
+        "slug": "helicopter",
+        "changes": "Closer portrait view with matching pointer coordinates; varied cave phase across runs; working held lift control.",
+        "verification": "Held mobile Lift advances a live flight; all viewport checks."
+      },
+      {
+        "slug": "two-cars",
+        "changes": "Ready state before the road moves, independent controls, larger touch actions.",
+        "verification": "Both lane controls operated and distance advanced; all viewport checks."
+      },
+      {
+        "slug": "ping-pong",
+        "changes": "Vertical portrait court with correct inverse pointer mapping and horizontal paddle controls; repaired held input.",
+        "verification": "Held mobile paddle control, portrait/landscape and scoring rule review."
+      },
+      {
+        "slug": "trap-tower",
+        "changes": "Following portrait camera gives the character and platforms more screen space; repaired held movement and thumb controls.",
+        "verification": "Held Right moves in a live room; camera and platform collision code reviewed."
+      },
+      {
+        "slug": "target-rush",
+        "changes": "Spawn spacing reduces overlapping targets; target lifetime gradually increases challenge; responsive gallery.",
+        "verification": "Target hit awarded 30 points and 100% accuracy; all viewport checks."
+      },
+      {
+        "slug": "football",
+        "changes": "Two-dimensional keeper saves including high shots; hold/release power, shown wind, power/precision tradeoff; portrait goal layout. Keeper reaction/reach tuned against score distributions.",
+        "verification": "A high shot was visibly saved; seeded 1,000-shot scenarios distinguish weak kicks, high middle shots and strong corners; pause/restart verified while expanded."
+      },
+      {
+        "slug": "basketball",
+        "changes": "Continuous gravity-driven flight, descending basket checks, rim/backboard rebounds, floor bounces/settling, ball trail/shadow and net motion. Distance/height set power and meter speed varies. Dedicated portrait court.",
+        "verification": "Mobile held control scored a clean 3-point swish; trajectory tests cover scoring once, bad-power misses and settling at ground level."
+      },
+      {
+        "slug": "snake",
+        "changes": "Thumb D-pad, touch cancellation cleanup and queued input reset on pause.",
+        "verification": "Mobile direction control operated; random food and collision/tail logic reviewed; all viewport checks."
+      },
+      {
+        "slug": "dino-runner",
+        "changes": "Closer portrait camera, repaired held Duck input, correct head collision so high birds require ducking, and clearer variable-height jump instructions.",
+        "verification": "Held Jump starts a live run; regression tests prove standing/ducking bird collisions, ground hazards and airborne clearance."
+      },
+      {
+        "slug": "car-dodge",
+        "changes": "Ready state before traffic starts; larger lane controls and consistent input.",
+        "verification": "Both lane controls operated and score/distance advanced; all viewport checks."
+      },
+      {
+        "slug": "tetris",
+        "changes": "Held touch movement repeats deliberately; landscape controls use two columns so all six remain visible.",
+        "verification": "Mobile hard drop placed a piece and awarded 36 points; repeat/pause tests and row/bag rules pass."
+      },
+      {
+        "slug": "2048",
+        "changes": "Direct tile indices for reliable motion mapping, canceled swipe cleanup, larger action controls.",
+        "verification": "Mobile slide increments moves; merge-once/stuck-board tests pass."
+      },
+      {
+        "slug": "arrow-escape",
+        "changes": "Denser 9\u201313-cell boards (21 arrows in first puzzle), visible 1.05-second path-following exits, entry/collision feedback, wider hit paths and zoom/panning.",
+        "verification": "Hint/Enter removed one arrow; observed polyline points changed during exit; zoom changed to 120%; 150 seeded boards remain nonoverlapping and solvable."
+      },
+      {
+        "slug": "sudoku",
+        "changes": "Three-column phone numpad, clearer controls, automatic removal of peer notes after number entry.",
+        "verification": "Note 3 entry and Undo verified; 30 generated puzzles retain unique solutions."
+      },
+      {
+        "slug": "math-puzzles",
+        "changes": "Custom keypad avoids the phone software keyboard covering the game; clearer correct/incorrect feedback.",
+        "verification": "17 + 10 accepted as 27 and awarded 10; focus/submission guards retained."
+      },
+      {
+        "slug": "chess",
+        "changes": "Phone sizing, expanded-player controls/focus and shared navigation/favorites. Existing legal rules and worker lifecycle retained after review.",
+        "verification": "e2\u2013e4 and legal a7\u2013a5 computer reply in browser; three perft fixtures, special moves/draws and worker pause/undo checks."
+      },
+      {
+        "slug": "ludo",
+        "changes": "Large Move token buttons complement small board tokens; compact five-field phone HUD.",
+        "verification": "Rolled six, used Move token 1 and observed token step 0; exact finish/safe/capture rules pass."
+      },
+      {
+        "slug": "solitaire",
+        "changes": "5:7 card proportions, rank/suit corners, centre suits, patterned backs, felt table, readable overlapping columns and Send home action.",
+        "verification": "Portrait cards visually inspected; stock 24\u219223 and Undo\u219224; move/reveal/deal rules pass."
+      },
+      {
+        "slug": "hearts",
+        "changes": "Larger readable card faces and corners, positional motion rather than re-dealing the entire hand after selection; compact table.",
+        "verification": "Selected and passed three cards, reached legal play; first-trick/follow-suit/shooting-moon tests pass."
+      },
+      {
+        "slug": "spades",
+        "changes": "Same improved card faces/motion and mobile controls as Hearts.",
+        "verification": "Bid 3 and reached legal play; partnership, nil, trump and bag scoring tests pass."
+      },
+      {
+        "slug": "farkle",
+        "changes": "Dice remain visible through rolling transitions; roll animation is limited to unheld dice; larger controls.",
+        "verification": "Selected a five and banked exactly 50; scoring combinations and final-turn code reviewed."
+      },
+      {
+        "slug": "yatzy",
+        "changes": "Held dice stay still during roll feedback; sticky dice/roll controls when scrolling categories; larger category actions.",
+        "verification": "Held a six, scored Sixes for 12 and advanced to round 2; scoring and bonus tests pass."
+      }
+    ],
+    "viewports": {
+      "phonePortrait": [
+        "390\u00d7844: 24 players, no clipped containers/actions",
+        "320\u00d7740: 24 expanded players opened and closed, no clipped controls"
+      ],
+      "phoneLandscape": "844\u00d7390: all 24 inspected; action-game side panels/controls rechecked after fixes, no clipped side controls.",
+      "tablet": "768\u00d71024: all 24 players, no horizontal overflow.",
+      "laptop": "1366\u00d7864: all 24 players, no horizontal overflow.",
+      "desktopFullscreen": "Native fullscreen entered and exited; expanded width matched the 1728px viewport."
+    },
+    "navigationVerification": "Cricket \u2192 Archery \u2192 Paddle Club \u2192 browser Back returned directly to /games/. Directly opening Chess, reloading, and using Back also returned to the dashboard.",
+    "favoritesVerification": "Favorited Cricket from the dashboard; Favorites showed one game, retained it after reload and on the game page, then showed zero after unfavoriting.",
+    "limits": "Desktop browser with viewport emulation and native pointer holds, plus rules/physics tests. No claim of physical iOS/Android device-lab coverage or a measured Lighthouse score.",
+    "fullscreenVerification": "Desktop native fullscreen and Escape/close both exit successfully. Phone expanded player opens/closes on all 24 games. While paused, opening expanded view focuses Resume; Escape exits and preserves the paused state.",
+    "productionVerification": {
+      "all24PlayersLoad": true,
+      "browserErrors": 0,
+      "phoneContainerOverflows": 0,
+      "enginesPreloadedBeforePlay": false,
+      "backAfterThreeGames": "/games/",
+      "favoritesFilter": "1 way to play after favorite; 0 after unfavorite",
+      "pausedFullscreenEscape": "Exits expanded view and leaves game paused",
+      "fullBuildExitCode": 0
+    }
+  }
+}

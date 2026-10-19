@@ -1,82 +1,26 @@
 ---
-import PageIntro from '../../components/PageIntro.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const categories = [
-  {
-    name: 'Ready to Play', icon: '🎮',
-    games: [
-      { name: 'Snake', desc: 'Classic snake — eat, grow, survive', href: '/games/snake', icon: '🐍' },
-      { name: 'Tetris', desc: 'Stack falling blocks, clear lines', href: '/games/tetris', icon: '🧱' },
-      { name: 'Sudoku', desc: '9x9 number puzzle with difficulty levels', href: '/games/sudoku', icon: '🔢' },
-      { name: 'Chess', desc: 'Play chess against the computer', href: '/games/chess', icon: '♟️' },
-      { name: 'Ludo', desc: 'Classic board game vs AI', href: '/games/ludo', icon: '🎲' },
-    ]
-  },
-  {
-    name: 'Coming Soon', icon: '🚧',
-    games: [
-      { name: 'Math Puzzles', desc: 'Tricky math challenges', href: '#', icon: '➕' },
-      { name: 'Dino Runner', desc: 'Endless runner — jump and duck', href: '#', icon: '🦕' },
-      { name: 'Car Dodge', desc: 'Dodge traffic and collect coins', href: '#', icon: '🚗' },
-      { name: 'Cricket', desc: 'Stickman cricket batting game', href: '#', icon: '🏏' },
-      { name: 'Solitaire', desc: 'Klondike solitaire with drag & drop', href: '#', icon: '♠️' },
-      { name: 'Hearts', desc: 'Trick-taking card game vs AI', href: '#', icon: '♥️' },
-      { name: 'Spades', desc: 'Bid and take tricks vs AI', href: '#', icon: '♣️' },
-      { name: 'Farkle', desc: 'Push your luck dice game', href: '#', icon: '🎲' },
-      { name: 'Yatzy', desc: 'Roll dice and fill your scorecard', href: '#', icon: '🎯' },
-    ]
-  }
-];
-const readyCount = categories[0].games.length;
-const totalCount = categories.reduce((s, c) => s + c.games.length, 0);
+import ArcadeLayout from '../../layouts/ArcadeLayout.astro';
+import {games, categories} from '../../games/catalog.mjs';
+const schema={'@context':'https://schema.org','@type':'CollectionPage',name:'DailyCoder Games',description:'Thoughtfully made browser games for a better little break.',url:new URL('/games/',Astro.site).href,mainEntity:{'@type':'ItemList',numberOfItems:games.length,itemListElement:games.map((g,i)=>({'@type':'ListItem',position:i+1,name:g.name,url:new URL(`/games/${g.slug}/`,Astro.site).href}))}};
 ---
-
-<BaseLayout title="Free Online Games | DailyCoder" description={`Play ${readyCount} free browser games — no download, no signup. Snake, Tetris, Sudoku, and more coming soon.`}>
-  <div class="container collection-page">
-    <PageIntro title="A little play. A fresh perspective." description="Take a breather with free browser games. No downloads, just a little room to unwind." eyebrow="MAKE TIME FOR A BREAK" icon="play" tone="lavender" />
-
-    {categories.map(cat => (
-      <section class="games-section">
-        <h2 class="games-section__title">
-          <span>{cat.icon}</span> {cat.name}
-          <span class="games-section__count">{cat.games.length}</span>
-        </h2>
-        <div class="games-grid">
-          {cat.games.map(g => (
-            <a href={g.href === '#' ? undefined : g.href} aria-disabled={g.href === '#' ? 'true' : undefined} class={`game-card ${g.href === '#' ? 'game-card--disabled' : ''}`}>
-              <span class="game-card__icon">{g.icon}</span>
-              <h3 class="game-card__name">{g.name}</h3>
-              <p class="game-card__desc">{g.desc}</p>
-              {g.href === '#' && <span class="game-card__badge">Soon</span>}
-            </a>
-          ))}
-        </div>
-      </section>
-    ))}
-  </div>
-</BaseLayout>
-
-<style>
-  .games-section { margin-bottom: 2.5rem; }
-  .games-section__title { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--color-border); }
-  .games-section__count { font-size: 0.7rem; font-weight: 700; background: var(--color-code-bg); color: var(--color-text-light); padding: 0.1rem 0.5rem; border-radius: 100px; margin-left: auto; }
-  .games-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-  .game-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 1.25rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); text-decoration: none; color: inherit; transition: all 200ms; position: relative; }
-  .game-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--color-primary); text-decoration: none; color: inherit; }
-  .game-card * { text-decoration: none; }
-  .game-card--disabled { opacity: 0.5; pointer-events: none; }
-  .game-card--disabled:hover { transform: none; box-shadow: none; border-color: var(--color-border); }
-  .game-card__icon { font-size: 2rem; margin-bottom: 0.5rem; }
-  .game-card__name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem; color: var(--color-text); }
-  .game-card__desc { font-size: 0.75rem; color: var(--color-text-light); line-height: 1.3; }
-  .game-card__badge {
-    position: absolute; top: 0.5rem; right: 0.5rem;
-    font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-    background: var(--color-code-bg); color: var(--color-text-light);
-    padding: 0.15rem 0.4rem; border-radius: var(--radius-sm);
-  }
-  @media (max-width: 1024px) { .games-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 768px) { .games-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .games-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; } .game-card { padding: 1rem 0.5rem; } }
-</style>
+<ArcadeLayout title="Free Browser Games — A Better Little Break | DailyCoder" description={`Play ${games.length} free browser games: cricket, archery, helicopter, puzzles, chess, and more. Animated games with keyboard and touch controls. No account needed.`} schema={schema}>
+  <section class="arc-hero"><div class="arc-hero__copy"><p class="arc-eyebrow"><span class="arc-spark" aria-hidden="true">✳</span> THE DAILYCODER PLAYROOM</p><h1>Good for a break.<br/><em>Great for one more.</em></h1><p>A few minutes to chase a six, find your rhythm,<br class="arc-desktop"/> or put the pieces together. Just press play.</p><a class="arc-button arc-button--primary" href="/games/cricket">Find your boundary <span aria-hidden="true">↗</span></a><span class="arc-hero__footnote">No downloads. No sign-ups. All play.</span></div><a class="arc-hero__art" href="/games/cricket" aria-label="Play Boundary Cricket"><img src="/games/art/cricket.svg" width="1200" height="720" alt="An illustrated batter meeting a red cricket ball" fetchpriority="high"/><span class="arc-sticker">a little<br/><strong>GOOD SPORT</strong><span aria-hidden="true">✳</span></span><span class="arc-hero__caption">BOUNDARY CRICKET <span>Meet your next obsession ↗</span></span></a></section>
+  <div class="arc-promise"><span><i aria-hidden="true">↗</i> Pick up in seconds</span><span><i aria-hidden="true">◎</i> Made for your kind of break</span><span><i aria-hidden="true">♡</i> Free, with no account needed</span></div>
+  <section class="arc-library" aria-labelledby="library-title"><div class="arc-section-title"><div><span class="arc-eyebrow">A LITTLE SOMETHING FOR EVERY MOOD</span><h2 id="library-title">Find your next favourite.</h2></div><p data-game-count>{games.length} ways to play</p></div>
+    <div class="arc-discovery" data-discovery hidden><div class="arc-filters" role="group" aria-label="Filter games">{[...categories, "Favorites"].map((category,i)=><button type="button" data-filter={category} aria-pressed={i===0?'true':'false'}>{category}</button>)}</div><label class="arc-search"><span class="sr-only">Search games</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg><input type="search" placeholder="Find a game…" data-game-search/></label></div>
+    <div class="arc-card-grid">{games.map((g,i)=><div class="arc-card-tile" data-game-card data-slug={g.slug} data-category={g.category} data-search={`${g.name} ${g.blurb} ${g.category}`.toLowerCase()}><a class="arc-card" href={`/games/${g.slug}`}><div class="arc-card__art"><img src={`/games/art/${g.slug}.svg`} width="1200" height="720" alt="" loading={i<4?'eager':'lazy'} decoding="async"/>{g.badge&&<span class="arc-badge">{g.badge}</span>}<span class="arc-card__play" aria-hidden="true">↗</span></div><div class="arc-card__body"><div class="arc-card__meta"><span>{g.category}</span><span>{g.duration}</span></div><h3>{g.name}</h3><p>{g.blurb}</p></div></a><button type="button" class="arc-favorite" data-favorite={g.slug} data-favorite-name={g.name} aria-pressed="false" aria-label={`Favorite ${g.name}`}>♡</button></div>)}</div><p class="arc-empty" data-no-games hidden>No games found. Try another name or category.</p><p class="sr-only" data-filter-status role="status" aria-live="polite"></p>
+  </section>
+  <section class="arc-outro"><span class="arc-spark" aria-hidden="true">✳</span><h2>Play a little.<br/>Come back refreshed.</h2><p>A puzzle for a quiet moment. A quick game between ideas.<br/>There’s always a little room for play.</p><a href="/">Back to DailyCoder ↗</a></section>
+  <script>
+    import {favorites} from '../../games/preferences.js';
+    const discovery=document.querySelector('[data-discovery]');
+    if(discovery) discovery.hidden=false;
+    let active='All games';
+    const search=document.querySelector('[data-game-search]');
+    const cards=Array.from(document.querySelectorAll('[data-game-card]'));
+    function filter(){let visible=0;const term=search.value.trim().toLowerCase();for(const card of cards){const show=(active==='All games'||card.dataset.category===active||(active==='Favorites'&&favorites().has(card.dataset.slug)))&&card.dataset.search.includes(term);card.hidden=!show;if(show)visible++;}document.querySelector('[data-game-count]').textContent=`${visible} ${visible===1?'way':'ways'} to play`;document.querySelector('[data-filter-status]').textContent=`${visible} games found`;document.querySelector('[data-no-games]').hidden=visible>0;}
+    document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{active=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));filter();}));
+    search?.addEventListener('input',filter);
+    window.addEventListener('arcade:favorites',filter);
+  </script>
+</ArcadeLayout>
