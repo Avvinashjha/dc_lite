@@ -1,0 +1,215 @@
+{
+  "id": "java-files-and-resources-practice",
+  "title": "Files, NIO, and resource management — Java Practice",
+  "description": "Independent practice: The expense tracker exports and imports a local report. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-files-and-resources-practice-q1",
+      "type": "single",
+      "prompt": "Why specify UTF-8 for an export?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To encrypt the file"
+        },
+        {
+          "id": "b",
+          "text": "To prevent every I/O failure"
+        },
+        {
+          "id": "c",
+          "text": "To sort records"
+        },
+        {
+          "id": "d",
+          "text": "To make text encoding explicit and interoperable"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Encoding determines how characters become bytes.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-practice-q2",
+      "type": "single",
+      "prompt": "Is split(\",\") a complete CSV parser?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for UTF-8"
+        },
+        {
+          "id": "b",
+          "text": "Only on Windows"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Quoted commas and multiline fields need proper CSV parsing.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-practice-q3",
+      "type": "single",
+      "prompt": "Which approach fits a file too large to fit comfortably in memory?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Call System.gc before loading"
+        },
+        {
+          "id": "b",
+          "text": "Stream it in bounded pieces"
+        },
+        {
+          "id": "c",
+          "text": "Always readString"
+        },
+        {
+          "id": "d",
+          "text": "Convert it to a larger String"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Streaming bounds memory use.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-practice-q4",
+      "type": "single",
+      "prompt": "Should untrusted native Java serialized objects be deserialized by default?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only when the extension is .ser"
+        },
+        {
+          "id": "d",
+          "text": "Only when base64 encoded"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Use a deliberately validated interchange format instead.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-practice-q5",
+      "type": "single",
+      "prompt": "A relative path is resolved against what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always the source directory"
+        },
+        {
+          "id": "b",
+          "text": "Always the user desktop"
+        },
+        {
+          "id": "c",
+          "text": "Always the JDK directory"
+        },
+        {
+          "id": "d",
+          "text": "The current working directory"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Process launch location affects relative paths.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-practice-q6",
+      "type": "single",
+      "prompt": "Does normalizing ../ segments alone defeat every path-traversal risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if the path is a String"
+        },
+        {
+          "id": "b",
+          "text": "Only when the file exists"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Symlinks and boundary checks require additional care.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-practice-q7",
+      "type": "single",
+      "prompt": "How many lines are counted before the temporary file is deleted?\n\n```java\nvar path = java.nio.file.Files.createTempFile(\"expenses-\", \".txt\");\ntry {\n  java.nio.file.Files.writeString(path, \"Food:1250\\nBus:300\\n\", java.nio.charset.StandardCharsets.UTF_8);\n  try (var lines = java.nio.file.Files.lines(path, java.nio.charset.StandardCharsets.UTF_8)) {\n    System.out.println(lines.count());\n  }\n} finally {\n  java.nio.file.Files.deleteIfExists(path);\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "0"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A temporary path is allocated for this experiment. UTF-8 writes two records; the line stream counts 2. The stream closes before the temporary file is deleted.",
+      "points": 1
+    }
+  ]
+}

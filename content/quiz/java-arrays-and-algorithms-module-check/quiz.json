@@ -1,0 +1,215 @@
+{
+  "id": "java-arrays-and-algorithms-module-check",
+  "title": "Arrays and problem solving — Module Quiz",
+  "description": "Course assessment: A weather station summarizes daily temperatures.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-arrays-and-algorithms-module-check-q1",
+      "type": "single",
+      "prompt": "Can an existing Java array change its length?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if final"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes, using add"
+        },
+        {
+          "id": "d",
+          "text": "Yes, assigning length"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Create a new array or use a resizable collection.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-module-check-q2",
+      "type": "single",
+      "prompt": "What happens when an array index equals its length?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ArrayIndexOutOfBoundsException"
+        },
+        {
+          "id": "b",
+          "text": "Returns zero"
+        },
+        {
+          "id": "c",
+          "text": "Returns the last element"
+        },
+        {
+          "id": "d",
+          "text": "Expands the array"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The largest valid index is length - 1.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-module-check-q3",
+      "type": "single",
+      "prompt": "What is a safe starting maximum for a known nonempty int array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always zero"
+        },
+        {
+          "id": "b",
+          "text": "Always one"
+        },
+        {
+          "id": "c",
+          "text": "Its length"
+        },
+        {
+          "id": "d",
+          "text": "Its first element"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "An actual element handles arrays containing only negative values.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-module-check-q4",
+      "type": "single",
+      "prompt": "How does a one-pass linear scan grow with n elements?",
+      "options": [
+        {
+          "id": "a",
+          "text": "O(log n)"
+        },
+        {
+          "id": "b",
+          "text": "O(n!)"
+        },
+        {
+          "id": "c",
+          "text": "O(n)"
+        },
+        {
+          "id": "d",
+          "text": "O(1)"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "It examines at most a constant amount of work per element.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-module-check-q5",
+      "type": "single",
+      "prompt": "Does cloning an int[][] deep-copy all rows?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for negative values"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only if all rows are equal length"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The outer clone still refers to the original row arrays.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-module-check-q6",
+      "type": "single",
+      "prompt": "What value fills a newly allocated int[3]?",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "null"
+        },
+        {
+          "id": "c",
+          "text": "-1"
+        },
+        {
+          "id": "d",
+          "text": "Unspecified garbage"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Array elements receive default values.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-module-check-q7",
+      "type": "single",
+      "prompt": "Which maximum is printed for these readings?\n\n```java\nint[] temperatures = {-3, 4, 1};\nint max = temperatures[0];\nfor (int value : temperatures) {\n  if (value > max) max = value;\n}\nSystem.out.println(max);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "-3"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "max = -3, the first actual reading. 4 > -3, so max becomes 4. 1 is not greater than 4; max stays 4.",
+      "points": 1
+    }
+  ]
+}

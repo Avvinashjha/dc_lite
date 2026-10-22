@@ -1,0 +1,215 @@
+{
+  "id": "java-inheritance-and-polymorphism-module-check",
+  "title": "Inheritance and polymorphism — Module Quiz",
+  "description": "Course assessment: A checkout supports several shipping policies.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q1",
+      "type": "single",
+      "prompt": "A Shipping variable holds new Express(). Which instance fee override runs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Both automatically"
+        },
+        {
+          "id": "b",
+          "text": "Neither"
+        },
+        {
+          "id": "c",
+          "text": "Express.fee"
+        },
+        {
+          "id": "d",
+          "text": "Always Shipping.fee"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Dynamic dispatch uses the runtime receiver.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q2",
+      "type": "single",
+      "prompt": "What does @Override help verify?",
+      "options": [
+        {
+          "id": "a",
+          "text": "That code cannot throw"
+        },
+        {
+          "id": "b",
+          "text": "That a method overrides or implements a supertype method"
+        },
+        {
+          "id": "c",
+          "text": "That the method is fastest"
+        },
+        {
+          "id": "d",
+          "text": "That an object is immutable"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The compiler checks the override relationship.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q3",
+      "type": "single",
+      "prompt": "Can a final class be subclassed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes, with public"
+        },
+        {
+          "id": "c",
+          "text": "Only in the same file"
+        },
+        {
+          "id": "d",
+          "text": "Only with super"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "final prohibits extending the class.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q4",
+      "type": "single",
+      "prompt": "When is composition especially suitable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A checkout is always a kind of shipping fee"
+        },
+        {
+          "id": "b",
+          "text": "Every time a constructor exists"
+        },
+        {
+          "id": "c",
+          "text": "Only for primitive types"
+        },
+        {
+          "id": "d",
+          "text": "A checkout has a replaceable shipping policy"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A has-a relationship can delegate behavior without inheritance.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q5",
+      "type": "single",
+      "prompt": "Can a subclass directly access a private superclass field?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only with this"
+        },
+        {
+          "id": "b",
+          "text": "Only with @Override"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes, always"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Private members are accessible only within their declaring top-level class context.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q6",
+      "type": "single",
+      "prompt": "Which principle requires a subtype to honor its parent’s behavioral promises?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Garbage collection"
+        },
+        {
+          "id": "b",
+          "text": "Liskov substitution"
+        },
+        {
+          "id": "c",
+          "text": "String interning"
+        },
+        {
+          "id": "d",
+          "text": "Integer promotion"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A subtype should be usable wherever the supertype is expected.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-module-check-q7",
+      "type": "single",
+      "prompt": "Which fee is printed for the Shipping reference holding Express?\n\n```java\nclass Shipping { int fee() { return 50; } }\nclass Express extends Shipping {\n  @Override int fee() { return 100; }\n}\nShipping chosen = new Express();\nSystem.out.println(chosen.fee());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "50"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "150"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "chosen has compile-time type Shipping. Its runtime object is an Express. The override Express.fee runs and returns 100.",
+      "points": 1
+    }
+  ]
+}

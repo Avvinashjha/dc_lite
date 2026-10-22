@@ -1,0 +1,215 @@
+{
+  "id": "java-lambdas-and-streams-module-check",
+  "title": "Lambdas, streams, and Optional — Module Quiz",
+  "description": "Course assessment: A shop computes revenue from paid orders.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-lambdas-and-streams-module-check-q1",
+      "type": "single",
+      "prompt": "Which operation triggers a stream pipeline?",
+      "options": [
+        {
+          "id": "a",
+          "text": "filter alone"
+        },
+        {
+          "id": "b",
+          "text": "map alone"
+        },
+        {
+          "id": "c",
+          "text": "Calling stream alone"
+        },
+        {
+          "id": "d",
+          "text": "A terminal operation such as collect"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Intermediate operations are lazy.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-module-check-q2",
+      "type": "single",
+      "prompt": "Can a consumed stream be traversed a second time?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when it has filter"
+        },
+        {
+          "id": "b",
+          "text": "Only with a lambda"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Create a new stream from the source for another traversal.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-module-check-q3",
+      "type": "single",
+      "prompt": "Which functional interface represents a true/false test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Runnable"
+        },
+        {
+          "id": "b",
+          "text": "Predicate"
+        },
+        {
+          "id": "c",
+          "text": "Consumer"
+        },
+        {
+          "id": "d",
+          "text": "Supplier"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Predicate.test returns boolean.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-module-check-q4",
+      "type": "single",
+      "prompt": "Why avoid a shared ArrayList mutated by parallel forEach?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Concurrent mutations can race"
+        },
+        {
+          "id": "b",
+          "text": "Arrays are always faster"
+        },
+        {
+          "id": "c",
+          "text": "Streams cannot contain strings"
+        },
+        {
+          "id": "d",
+          "text": "Lists are immutable by definition"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Use a suitable collector instead of shared unsynchronized mutation.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-module-check-q5",
+      "type": "single",
+      "prompt": "Which Optional fallback is lazy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "orElse(expensive())"
+        },
+        {
+          "id": "b",
+          "text": "get()"
+        },
+        {
+          "id": "c",
+          "text": "isPresent()"
+        },
+        {
+          "id": "d",
+          "text": "orElseGet(() -> expensive())"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The supplier runs only when the Optional is empty.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-module-check-q6",
+      "type": "single",
+      "prompt": "Which operation transforms each stream element?",
+      "options": [
+        {
+          "id": "a",
+          "text": "count"
+        },
+        {
+          "id": "b",
+          "text": "close"
+        },
+        {
+          "id": "c",
+          "text": "map"
+        },
+        {
+          "id": "d",
+          "text": "filter"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "map applies a transformation; filter selects.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-module-check-q7",
+      "type": "single",
+      "prompt": "What revenue does the paid-order pipeline print?\n\n```java\nrecord Order(int total, boolean paid) {}\nvar orders = java.util.List.of(new Order(100, true), new Order(200, false), new Order(50, true));\nint revenue = orders.stream()\n  .filter(Order::paid)\n  .mapToInt(Order::total)\n  .sum();\nSystem.out.println(revenue);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "150"
+        },
+        {
+          "id": "c",
+          "text": "350"
+        },
+        {
+          "id": "d",
+          "text": "200"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Keep the paid orders of 100 and 50. Extract their integer totals. sum is the terminal operation and yields 150.",
+      "points": 1
+    }
+  ]
+}

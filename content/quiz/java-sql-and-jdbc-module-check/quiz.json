@@ -1,0 +1,215 @@
+{
+  "id": "java-sql-and-jdbc-module-check",
+  "title": "SQL, JDBC, and transactions — Module Quiz",
+  "description": "Course assessment: Persist expenses in a relational database.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-sql-and-jdbc-module-check-q1",
+      "type": "single",
+      "prompt": "How should a user-supplied SQL value be passed through JDBC?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An HTML escape function"
+        },
+        {
+          "id": "b",
+          "text": "A Java comment"
+        },
+        {
+          "id": "c",
+          "text": "A PreparedStatement parameter"
+        },
+        {
+          "id": "d",
+          "text": "String concatenation"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Binding values separates them from SQL syntax.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-module-check-q2",
+      "type": "single",
+      "prompt": "Which operation groups writes into an all-or-nothing unit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An HTTP redirect"
+        },
+        {
+          "id": "b",
+          "text": "A transaction"
+        },
+        {
+          "id": "c",
+          "text": "A HashMap"
+        },
+        {
+          "id": "d",
+          "text": "A SELECT alias"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Commit and rollback define the transaction boundary.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-module-check-q3",
+      "type": "single",
+      "prompt": "What tests SQL missing values?",
+      "options": [
+        {
+          "id": "a",
+          "text": "IS NULL"
+        },
+        {
+          "id": "b",
+          "text": "= NULL"
+        },
+        {
+          "id": "c",
+          "text": "== null"
+        },
+        {
+          "id": "d",
+          "text": "equals(NULL)"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "SQL NULL uses three-valued logic and dedicated predicates.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-module-check-q4",
+      "type": "single",
+      "prompt": "Can a ? parameter normally stand for an arbitrary table identifier?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only if the name contains no spaces"
+        },
+        {
+          "id": "c",
+          "text": "Only in SELECT"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Value parameters are not SQL identifier substitution.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-module-check-q5",
+      "type": "single",
+      "prompt": "What should happen after a failure halfway through a manual transaction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ignore the exception"
+        },
+        {
+          "id": "b",
+          "text": "Create an index"
+        },
+        {
+          "id": "c",
+          "text": "Rollback"
+        },
+        {
+          "id": "d",
+          "text": "Commit the successful half by default"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Rollback preserves the all-or-nothing contract.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-module-check-q6",
+      "type": "single",
+      "prompt": "What tradeoff does an index commonly introduce?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Automatic authorization"
+        },
+        {
+          "id": "b",
+          "text": "Faster targeted reads with extra storage and write work"
+        },
+        {
+          "id": "c",
+          "text": "Free speed for every query"
+        },
+        {
+          "id": "d",
+          "text": "No impact on inserts"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Indexes must be chosen for actual access patterns.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-module-check-q7",
+      "type": "single",
+      "prompt": "Given the stated table fixtures, which label does the prepared query print?\n\nEnvironment: Maven project with a JDBC driver, DataSource, and expenses table containing (Food,1250) and (Bus,300). This is a project fragment, not a standalone JShell program.\n\n```java\n// JDBC fragment: run inside a project with a configured DataSource named dataSource.\ntry (var connection = dataSource.getConnection();\n     var statement = connection.prepareStatement(\"SELECT label, amount FROM expenses WHERE amount >= ?\")) {\n  statement.setInt(1, 1000);\n  try (var rows = statement.executeQuery()) {\n    while (rows.next()) System.out.println(rows.getString(\"label\"));\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Food"
+        },
+        {
+          "id": "b",
+          "text": "Bus"
+        },
+        {
+          "id": "c",
+          "text": "Food\nBus"
+        },
+        {
+          "id": "d",
+          "text": "No rows"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The SQL structure is fixed; the amount placeholder is a value parameter. Parameter 1 becomes 1000. Only Food qualifies; resources close in reverse order.",
+      "points": 1
+    }
+  ]
+}

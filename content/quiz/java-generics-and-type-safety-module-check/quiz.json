@@ -1,0 +1,215 @@
+{
+  "id": "java-generics-and-type-safety-module-check",
+  "title": "Generics and type safety — Module Quiz",
+  "description": "Course assessment: A parcel locker stores different kinds of packages safely.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-generics-and-type-safety-module-check-q1",
+      "type": "single",
+      "prompt": "Is List<Integer> a subtype of List<Number>?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if empty"
+        },
+        {
+          "id": "b",
+          "text": "Only with final"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Generics are invariant unless a wildcard relationship is used.",
+      "points": 1
+    },
+    {
+      "id": "java-generics-and-type-safety-module-check-q2",
+      "type": "single",
+      "prompt": "Which type fits a read-only numeric producer parameter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "List<int>"
+        },
+        {
+          "id": "b",
+          "text": "List<? extends Number>"
+        },
+        {
+          "id": "c",
+          "text": "List<? super String>"
+        },
+        {
+          "id": "d",
+          "text": "List<Object> only"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "An extends wildcard allows reading values as Number.",
+      "points": 1
+    },
+    {
+      "id": "java-generics-and-type-safety-module-check-q3",
+      "type": "single",
+      "prompt": "Which declaration can accept Integer additions into lists of Integer, Number, or Object?",
+      "options": [
+        {
+          "id": "a",
+          "text": "List<? super Integer>"
+        },
+        {
+          "id": "b",
+          "text": "List<? extends Integer>"
+        },
+        {
+          "id": "c",
+          "text": "List<String>"
+        },
+        {
+          "id": "d",
+          "text": "List<?> with unrestricted add"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A super bound safely consumes Integer values.",
+      "points": 1
+    },
+    {
+      "id": "java-generics-and-type-safety-module-check-q4",
+      "type": "single",
+      "prompt": "Why avoid raw List?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It sorts automatically"
+        },
+        {
+          "id": "b",
+          "text": "It forbids null"
+        },
+        {
+          "id": "c",
+          "text": "It always uses more memory"
+        },
+        {
+          "id": "d",
+          "text": "It bypasses generic type checks"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Raw use can defer type errors until runtime.",
+      "points": 1
+    },
+    {
+      "id": "java-generics-and-type-safety-module-check-q5",
+      "type": "single",
+      "prompt": "Which generic argument is legal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "void"
+        },
+        {
+          "id": "b",
+          "text": "boolean"
+        },
+        {
+          "id": "c",
+          "text": "Integer"
+        },
+        {
+          "id": "d",
+          "text": "int"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Generic arguments are reference types, including wrapper classes.",
+      "points": 1
+    },
+    {
+      "id": "java-generics-and-type-safety-module-check-q6",
+      "type": "single",
+      "prompt": "Can code use new T() for an unconstrained generic T?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if T is uppercase"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only inside a loop"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Erasure and unknown constructors prevent direct construction of T.",
+      "points": 1
+    },
+    {
+      "id": "java-generics-and-type-safety-module-check-q7",
+      "type": "single",
+      "prompt": "What does the generic box example print?\n\n```java\nclass Box<T> {\n  private final T value;\n  Box(T value) { this.value = value; }\n  T get() { return value; }\n}\nBox<String> label = new Box<>(\"Parcel A\");\nSystem.out.println(label.get().toUpperCase(java.util.Locale.ROOT));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "PARCEL A"
+        },
+        {
+          "id": "b",
+          "text": "Parcel A"
+        },
+        {
+          "id": "c",
+          "text": "Object"
+        },
+        {
+          "id": "d",
+          "text": "A ClassCastException"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "T is String for this Box. The constructor receives Parcel A without a raw Object API. get() has compile-time return type String; no cast is needed.",
+      "points": 1
+    }
+  ]
+}

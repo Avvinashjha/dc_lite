@@ -1,0 +1,215 @@
+{
+  "id": "java-deployment-and-final-capstone-module-check",
+  "title": "Delivery, observability, and final capstone — Module Quiz",
+  "description": "Course assessment: Operate a secure expense API as a small production-style service.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q1",
+      "type": "single",
+      "prompt": "Where should production secrets be supplied?",
+      "options": [
+        {
+          "id": "a",
+          "text": "In screenshots in the README"
+        },
+        {
+          "id": "b",
+          "text": "Through controlled external configuration"
+        },
+        {
+          "id": "c",
+          "text": "Committed in the repository"
+        },
+        {
+          "id": "d",
+          "text": "Embedded in public JavaScript"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Keep credentials out of source and public artifacts.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q2",
+      "type": "single",
+      "prompt": "What does readiness indicate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether the instance should receive traffic"
+        },
+        {
+          "id": "b",
+          "text": "Whether every dependency will never fail"
+        },
+        {
+          "id": "c",
+          "text": "Whether the code uses records"
+        },
+        {
+          "id": "d",
+          "text": "Whether a certificate was earned"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Readiness supports traffic routing during startup and degraded states.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q3",
+      "type": "single",
+      "prompt": "What is a useful purpose of a correlation id?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Encrypt a password"
+        },
+        {
+          "id": "b",
+          "text": "Replace object authorization"
+        },
+        {
+          "id": "c",
+          "text": "Make requests idempotent automatically"
+        },
+        {
+          "id": "d",
+          "text": "Connect related diagnostic events"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Correlation supports investigation but is not access control or deduplication.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q4",
+      "type": "single",
+      "prompt": "What should graceful shutdown include?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Delete the database"
+        },
+        {
+          "id": "b",
+          "text": "Skip closing connections"
+        },
+        {
+          "id": "c",
+          "text": "Stop new work and allow bounded completion of in-flight work"
+        },
+        {
+          "id": "d",
+          "text": "Kill all requests without notice every time"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A bounded lifecycle reduces avoidable interruption and resource leaks.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q5",
+      "type": "single",
+      "prompt": "Why test a restore procedure?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To change all API identifiers"
+        },
+        {
+          "id": "b",
+          "text": "A backup is useful only if it can be restored correctly"
+        },
+        {
+          "id": "c",
+          "text": "To avoid keeping any backups"
+        },
+        {
+          "id": "d",
+          "text": "To force production downtime"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Recovery must be verified with the actual procedure.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q6",
+      "type": "single",
+      "prompt": "Which metric better exposes slow tail requests than an average alone?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A latency percentile such as p95"
+        },
+        {
+          "id": "b",
+          "text": "The number of source files"
+        },
+        {
+          "id": "c",
+          "text": "The package name length"
+        },
+        {
+          "id": "d",
+          "text": "The JDK installation path"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Percentiles reveal distribution tails hidden by an average.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-module-check-q7",
+      "type": "single",
+      "prompt": "What does System.out print, apart from the separately configured logger output?\n\nEnvironment: JShell or a Java class. The logger also emits a configured log record; its timestamp, format, and destination depend on the runtime logging configuration.\n\n```java\n// A local observability exercise using a JDK logger.\nvar logger = System.getLogger(\"expenses\");\nString requestId = \"req-42\";\nlogger.log(System.Logger.Level.INFO, \"request_id={0} operation={1}\", requestId, \"expense_created\");\nSystem.out.println(\"request tracked: \" + requestId);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "expense_created"
+        },
+        {
+          "id": "b",
+          "text": "req-42"
+        },
+        {
+          "id": "c",
+          "text": "A bearer token"
+        },
+        {
+          "id": "d",
+          "text": "request tracked: req-42"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A request identifier ties safe operational events together. The event contains an operation name, not a token or full personal payload. The displayed request id can be used to locate related logs.",
+      "points": 1
+    }
+  ]
+}

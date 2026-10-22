@@ -1,0 +1,215 @@
+{
+  "id": "java-exceptions-and-capstone-practice",
+  "title": "Exceptions and the fundamentals capstone — Java Practice",
+  "description": "Independent practice: Build a resilient command-line expense tracker. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-exceptions-and-capstone-practice-q1",
+      "type": "single",
+      "prompt": "What does try-with-resources close automatically?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every object in scope"
+        },
+        {
+          "id": "b",
+          "text": "All static fields"
+        },
+        {
+          "id": "c",
+          "text": "Only Strings"
+        },
+        {
+          "id": "d",
+          "text": "AutoCloseable resources"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The resource contract defines close().",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-practice-q2",
+      "type": "single",
+      "prompt": "Why avoid catching an exception and doing nothing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It prevents compilation always"
+        },
+        {
+          "id": "b",
+          "text": "It changes integers to null"
+        },
+        {
+          "id": "c",
+          "text": "It hides failure and can imply success"
+        },
+        {
+          "id": "d",
+          "text": "It guarantees a memory leak every time"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Handle, propagate, or record failure meaningfully.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-practice-q3",
+      "type": "single",
+      "prompt": "In what order are multiple try-with-resources resources closed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They are never closed on failure"
+        },
+        {
+          "id": "b",
+          "text": "Reverse declaration order"
+        },
+        {
+          "id": "c",
+          "text": "Declaration order"
+        },
+        {
+          "id": "d",
+          "text": "Random order"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Later resources are closed before earlier resources.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-practice-q4",
+      "type": "single",
+      "prompt": "Is NumberFormatException checked?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only for negative numbers"
+        },
+        {
+          "id": "d",
+          "text": "Only inside main"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "It extends IllegalArgumentException, an unchecked RuntimeException.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-practice-q5",
+      "type": "single",
+      "prompt": "Where is a useful place to recover from malformed CLI commands?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every getter"
+        },
+        {
+          "id": "b",
+          "text": "The record hashCode method"
+        },
+        {
+          "id": "c",
+          "text": "The compiler itself"
+        },
+        {
+          "id": "d",
+          "text": "The command-processing boundary"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The boundary can show feedback and accept another command.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-practice-q6",
+      "type": "single",
+      "prompt": "When wrapping an exception, why preserve its cause?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To erase the stack trace"
+        },
+        {
+          "id": "b",
+          "text": "To convert all errors to checked exceptions"
+        },
+        {
+          "id": "c",
+          "text": "To retain diagnostic context"
+        },
+        {
+          "id": "d",
+          "text": "To guarantee retry succeeds"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The cause records the original failure for diagnosis.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-practice-q7",
+      "type": "single",
+      "prompt": "What is printed when this positive-amount parser receives \"-10\"?\n\n```java\nint parseAmount(String text) {\n  int amount = Integer.parseInt(text);\n  if (amount <= 0) throw new IllegalArgumentException(\"Amount must be positive\");\n  return amount;\n}\ntry {\n  System.out.println(parseAmount(\"-10\"));\n} catch (IllegalArgumentException ex) {\n  System.out.println(ex.getMessage());\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "The program silently stores -10"
+        },
+        {
+          "id": "b",
+          "text": "Amount must be positive"
+        },
+        {
+          "id": "c",
+          "text": "-10"
+        },
+        {
+          "id": "d",
+          "text": "NumberFormatException"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "-10 is syntactically a valid integer. The positive-amount rule rejects -10. The catch prints the message; no invalid expense is saved.",
+      "points": 1
+    }
+  ]
+}

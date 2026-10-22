@@ -1,0 +1,215 @@
+{
+  "id": "java-files-and-resources-module-check",
+  "title": "Files, NIO, and resource management — Module Quiz",
+  "description": "Course assessment: The expense tracker exports and imports a local report.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-files-and-resources-module-check-q1",
+      "type": "single",
+      "prompt": "What does Path primarily represent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An open reader"
+        },
+        {
+          "id": "b",
+          "text": "A JSON object"
+        },
+        {
+          "id": "c",
+          "text": "A database connection"
+        },
+        {
+          "id": "d",
+          "text": "A filesystem location"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A Path does not itself open the file.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-module-check-q2",
+      "type": "single",
+      "prompt": "Which Files API result needs closing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Path.of(\"x\")"
+        },
+        {
+          "id": "b",
+          "text": "path.getFileName()"
+        },
+        {
+          "id": "c",
+          "text": "Files.lines(path)"
+        },
+        {
+          "id": "d",
+          "text": "Files.exists(path)"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The stream owns an open file resource.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-module-check-q3",
+      "type": "single",
+      "prompt": "Why specify UTF-8 for an export?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To sort records"
+        },
+        {
+          "id": "b",
+          "text": "To make text encoding explicit and interoperable"
+        },
+        {
+          "id": "c",
+          "text": "To encrypt the file"
+        },
+        {
+          "id": "d",
+          "text": "To prevent every I/O failure"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Encoding determines how characters become bytes.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-module-check-q4",
+      "type": "single",
+      "prompt": "Is split(\",\") a complete CSV parser?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only for UTF-8"
+        },
+        {
+          "id": "d",
+          "text": "Only on Windows"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Quoted commas and multiline fields need proper CSV parsing.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-module-check-q5",
+      "type": "single",
+      "prompt": "Which approach fits a file too large to fit comfortably in memory?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always readString"
+        },
+        {
+          "id": "b",
+          "text": "Convert it to a larger String"
+        },
+        {
+          "id": "c",
+          "text": "Call System.gc before loading"
+        },
+        {
+          "id": "d",
+          "text": "Stream it in bounded pieces"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Streaming bounds memory use.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-module-check-q6",
+      "type": "single",
+      "prompt": "Should untrusted native Java serialized objects be deserialized by default?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when the extension is .ser"
+        },
+        {
+          "id": "b",
+          "text": "Only when base64 encoded"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Use a deliberately validated interchange format instead.",
+      "points": 1
+    },
+    {
+      "id": "java-files-and-resources-module-check-q7",
+      "type": "single",
+      "prompt": "How many lines are counted before the temporary file is deleted?\n\n```java\nvar path = java.nio.file.Files.createTempFile(\"expenses-\", \".txt\");\ntry {\n  java.nio.file.Files.writeString(path, \"Food:1250\\nBus:300\\n\", java.nio.charset.StandardCharsets.UTF_8);\n  try (var lines = java.nio.file.Files.lines(path, java.nio.charset.StandardCharsets.UTF_8)) {\n    System.out.println(lines.count());\n  }\n} finally {\n  java.nio.file.Files.deleteIfExists(path);\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "0"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A temporary path is allocated for this experiment. UTF-8 writes two records; the line stream counts 2. The stream closes before the temporary file is deleted.",
+      "points": 1
+    }
+  ]
+}

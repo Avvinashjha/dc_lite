@@ -1,0 +1,215 @@
+{
+  "id": "java-modern-java-and-modules-module-check",
+  "title": "Modern Java, reflection, and modules — Module Quiz",
+  "description": "Course assessment: Model API outcomes and inspect explicit application metadata.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-modern-java-and-modules-module-check-q1",
+      "type": "single",
+      "prompt": "What does a sealed hierarchy make explicit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every runtime object identity"
+        },
+        {
+          "id": "b",
+          "text": "All SQL tables"
+        },
+        {
+          "id": "c",
+          "text": "A unique thread for each subtype"
+        },
+        {
+          "id": "d",
+          "text": "The permitted direct alternatives"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Permitted subtypes bound the hierarchy.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-module-check-q2",
+      "type": "single",
+      "prompt": "Which annotation retention is needed for ordinary runtime reflection?",
+      "options": [
+        {
+          "id": "a",
+          "text": "None always"
+        },
+        {
+          "id": "b",
+          "text": "COMPILE_ONLY"
+        },
+        {
+          "id": "c",
+          "text": "RUNTIME"
+        },
+        {
+          "id": "d",
+          "text": "SOURCE"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Runtime retention preserves metadata for reflective inspection.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-module-check-q3",
+      "type": "single",
+      "prompt": "Which JPMS directive permits reflective access to a package?",
+      "options": [
+        {
+          "id": "a",
+          "text": "provides alone"
+        },
+        {
+          "id": "b",
+          "text": "opens"
+        },
+        {
+          "id": "c",
+          "text": "exports alone for all private access"
+        },
+        {
+          "id": "d",
+          "text": "requires static only"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "opens controls deep reflective access under module rules.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-module-check-q4",
+      "type": "single",
+      "prompt": "What does jlink create?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A custom runtime image from a module graph"
+        },
+        {
+          "id": "b",
+          "text": "A database index"
+        },
+        {
+          "id": "c",
+          "text": "A JavaScript bundle"
+        },
+        {
+          "id": "d",
+          "text": "A public certificate"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "jlink assembles the required runtime modules.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-module-check-q5",
+      "type": "single",
+      "prompt": "Does reflection remove compile-time safety concerns?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for records"
+        },
+        {
+          "id": "c",
+          "text": "Only for public classes"
+        },
+        {
+          "id": "d",
+          "text": "No, it often moves checks to runtime"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Lookup and invocation can fail at runtime.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-module-check-q6",
+      "type": "single",
+      "prompt": "What happens to an exhaustive sealed-type switch when an uncovered permitted subtype is added and code is recompiled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It always returns null"
+        },
+        {
+          "id": "b",
+          "text": "It stops using pattern matching"
+        },
+        {
+          "id": "c",
+          "text": "It must be updated or compilation fails"
+        },
+        {
+          "id": "d",
+          "text": "It automatically invents a result"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Exhaustiveness checks expose the new alternative.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-module-check-q7",
+      "type": "single",
+      "prompt": "Which switch result is printed for the shown Success value?\n\n```java\nsealed interface Outcome permits Success, Failure {}\nrecord Success(String message) implements Outcome {}\nrecord Failure(String reason) implements Outcome {}\nString describe(Outcome result) {\n  return switch (result) {\n    case Success s -> \"OK: \" + s.message();\n    case Failure f -> \"FAIL: \" + f.reason();\n  };\n}\nSystem.out.println(describe(new Success(\"saved\")));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "null"
+        },
+        {
+          "id": "b",
+          "text": "OK: saved"
+        },
+        {
+          "id": "c",
+          "text": "FAIL: saved"
+        },
+        {
+          "id": "d",
+          "text": "Success"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The sealed interface permits Success and Failure. The runtime value is a Success. The matching arm returns OK: saved. Null is outside this sample contract.",
+      "points": 1
+    }
+  ]
+}

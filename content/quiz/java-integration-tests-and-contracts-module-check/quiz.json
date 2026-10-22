@@ -1,0 +1,215 @@
+{
+  "id": "java-integration-tests-and-contracts-module-check",
+  "title": "Integration tests and API contracts — Module Quiz",
+  "description": "Course assessment: Catch API, database, and security regressions before release.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q1",
+      "type": "single",
+      "prompt": "Which Spring test slice focuses on MVC controllers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "@DataJpaTest"
+        },
+        {
+          "id": "b",
+          "text": "@Entity"
+        },
+        {
+          "id": "c",
+          "text": "@Version"
+        },
+        {
+          "id": "d",
+          "text": "@WebMvcTest"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "WebMvcTest configures a focused web-layer test.",
+      "points": 1
+    },
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q2",
+      "type": "single",
+      "prompt": "Which slice focuses on JPA persistence?",
+      "options": [
+        {
+          "id": "a",
+          "text": "@RestController"
+        },
+        {
+          "id": "b",
+          "text": "@GetMapping"
+        },
+        {
+          "id": "c",
+          "text": "@DataJpaTest"
+        },
+        {
+          "id": "d",
+          "text": "@WebMvcTest"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "DataJpaTest targets persistence components.",
+      "points": 1
+    },
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q3",
+      "type": "single",
+      "prompt": "What does Testcontainers commonly require locally?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A second source repository"
+        },
+        {
+          "id": "b",
+          "text": "A supported container runtime"
+        },
+        {
+          "id": "c",
+          "text": "A paid cloud account always"
+        },
+        {
+          "id": "d",
+          "text": "A browser extension"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Disposable services run in containers.",
+      "points": 1
+    },
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q4",
+      "type": "single",
+      "prompt": "Why test against PostgreSQL when production uses PostgreSQL?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To catch dialect, constraint, and transaction differences"
+        },
+        {
+          "id": "b",
+          "text": "To avoid all unit tests"
+        },
+        {
+          "id": "c",
+          "text": "To make tests always slower intentionally"
+        },
+        {
+          "id": "d",
+          "text": "Because in-memory Java objects cannot be tested"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Database-family compatibility matters beyond basic SQL syntax.",
+      "points": 1
+    },
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q5",
+      "type": "single",
+      "prompt": "Do service ownership assertions alone prove HTTP authorization is wired correctly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only with records"
+        },
+        {
+          "id": "c",
+          "text": "Only with Maven"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Endpoint tests must also verify the actual security and transport path.",
+      "points": 1
+    },
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q6",
+      "type": "single",
+      "prompt": "Which test setup removes reliance on the public internet?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Retry every request forever"
+        },
+        {
+          "id": "b",
+          "text": "Disable assertions during outages"
+        },
+        {
+          "id": "c",
+          "text": "Fake the external service boundary"
+        },
+        {
+          "id": "d",
+          "text": "Use a longer sleep"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Controlled dependencies make success and failure deterministic.",
+      "points": 1
+    },
+    {
+      "id": "java-integration-tests-and-contracts-module-check-q7",
+      "type": "single",
+      "prompt": "What should these ownership assertions establish when run with the previous module’s model?\n\nEnvironment: JUnit Jupiter test source using the Expense and canRead domain example from the previous module. For HTTP tests use the project’s configured Spring MVC test support; these assertions alone are not a full endpoint test.\n\n```java\n// JUnit Jupiter test fragment in the expense service project.\n@org.junit.jupiter.api.Test\nvoid ownerCannotBeChangedByRequest() {\n  var expense = new Expense(1, \"alice\", 1250);\n  org.junit.jupiter.api.Assertions.assertTrue(canRead(\"alice\", expense));\n  org.junit.jupiter.api.Assertions.assertFalse(canRead(\"bob\", expense));\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "A failing denial assertion should be ignored as a flaky test"
+        },
+        {
+          "id": "b",
+          "text": "Both ownership assertions pass; a regression allowing bob fails the test."
+        },
+        {
+          "id": "c",
+          "text": "Both assertions prove every HTTP endpoint is secured automatically"
+        },
+        {
+          "id": "d",
+          "text": "The second assertion should allow bob"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Create an expense belonging to alice. Verify the owner path succeeds. Verify bob is denied; endpoint tests must separately verify the HTTP boundary.",
+      "points": 1
+    }
+  ]
+}

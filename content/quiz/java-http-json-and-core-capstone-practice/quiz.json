@@ -1,0 +1,215 @@
+{
+  "id": "java-http-json-and-core-capstone-practice",
+  "title": "HTTP, JSON, and the developer core capstone — Java Practice",
+  "description": "Independent practice: Turn the expense tracker into a tested application boundary. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-http-json-and-core-capstone-practice-q1",
+      "type": "single",
+      "prompt": "Which header expresses a preference for a JSON response?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Content-Length: JSON"
+        },
+        {
+          "id": "b",
+          "text": "Authorization: JSON"
+        },
+        {
+          "id": "c",
+          "text": "Location: application/json"
+        },
+        {
+          "id": "d",
+          "text": "Accept: application/json"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Accept communicates supported response media types.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-practice-q2",
+      "type": "single",
+      "prompt": "Why use a JSON parser instead of splitting strings?",
+      "options": [
+        {
+          "id": "a",
+          "text": "JSON has no arrays"
+        },
+        {
+          "id": "b",
+          "text": "Splitting encrypts input"
+        },
+        {
+          "id": "c",
+          "text": "JSON nesting and escaping require proper parsing"
+        },
+        {
+          "id": "d",
+          "text": "Every JSON value is a string"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A parser handles the format’s structure and escape rules.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-practice-q3",
+      "type": "single",
+      "prompt": "What makes a unit test for an HTTP adapter’s caller reliable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Waiting 30 seconds"
+        },
+        {
+          "id": "b",
+          "text": "A deterministic fake at the client boundary"
+        },
+        {
+          "id": "c",
+          "text": "Calling the public internet each run"
+        },
+        {
+          "id": "d",
+          "text": "Removing all assertions"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A fake supplies controlled success and failure cases.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-practice-q4",
+      "type": "single",
+      "prompt": "Why set request timeouts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To bound waiting on an external dependency"
+        },
+        {
+          "id": "b",
+          "text": "To guarantee success"
+        },
+        {
+          "id": "c",
+          "text": "To eliminate HTTP errors"
+        },
+        {
+          "id": "d",
+          "text": "To force JSON"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A timeout limits resource occupation when a dependency stalls.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-practice-q5",
+      "type": "single",
+      "prompt": "What should happen when a blocking operation is interrupted?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always swallow it"
+        },
+        {
+          "id": "b",
+          "text": "Retry forever"
+        },
+        {
+          "id": "c",
+          "text": "Convert the result to zero"
+        },
+        {
+          "id": "d",
+          "text": "Propagate interruption or restore the interrupt flag when translating"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Interruption is a cancellation signal that callers need to observe.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-practice-q6",
+      "type": "single",
+      "prompt": "Which boundary should validate external DTOs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only in the CSS"
+        },
+        {
+          "id": "b",
+          "text": "Only when logging fails"
+        },
+        {
+          "id": "c",
+          "text": "Before business operations use them"
+        },
+        {
+          "id": "d",
+          "text": "Only after database writes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Boundary validation prevents invalid external state from leaking inward.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-practice-q7",
+      "type": "single",
+      "prompt": "What method and Accept header are printed without sending a request?\n\n```java\nvar request = java.net.http.HttpRequest.newBuilder(java.net.URI.create(\"https://example.com/expenses\"))\n  .timeout(java.time.Duration.ofSeconds(5))\n  .header(\"Accept\", \"application/json\")\n  .GET()\n  .build();\nSystem.out.println(request.method());\nSystem.out.println(request.headers().firstValue(\"Accept\").orElse(\"missing\"));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "GET\ntext/plain"
+        },
+        {
+          "id": "b",
+          "text": "GET\napplication/json"
+        },
+        {
+          "id": "c",
+          "text": "POST\napplication/json"
+        },
+        {
+          "id": "d",
+          "text": "GET\nmissing"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The request targets an HTTPS endpoint; building does not send it. The request asks for JSON and has a five-second request timeout. The method is GET and the Accept header is application/json.",
+      "points": 1
+    }
+  ]
+}

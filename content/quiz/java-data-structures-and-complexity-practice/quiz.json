@@ -1,0 +1,215 @@
+{
+  "id": "java-data-structures-and-complexity-practice",
+  "title": "Data structures and algorithmic thinking — Java Practice",
+  "description": "Independent practice: A support queue needs fast lookups and prioritized work. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-data-structures-and-complexity-practice-q1",
+      "type": "single",
+      "prompt": "Which traversal finds shortest paths in an unweighted graph?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Breadth-first search"
+        },
+        {
+          "id": "b",
+          "text": "Arbitrary depth-first search"
+        },
+        {
+          "id": "c",
+          "text": "Binary search"
+        },
+        {
+          "id": "d",
+          "text": "Insertion sort"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "BFS explores vertices in increasing edge distance.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-practice-q2",
+      "type": "single",
+      "prompt": "What prevents revisiting vertices indefinitely in a cyclic graph?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A larger recursion limit alone"
+        },
+        {
+          "id": "b",
+          "text": "Sorting all vertex names"
+        },
+        {
+          "id": "c",
+          "text": "A static main method"
+        },
+        {
+          "id": "d",
+          "text": "A visited set"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Record discovered vertices before revisiting them.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-practice-q3",
+      "type": "single",
+      "prompt": "What is the expected time for a well-distributed hash lookup?",
+      "options": [
+        {
+          "id": "a",
+          "text": "O(n²) always"
+        },
+        {
+          "id": "b",
+          "text": "O(log n) always"
+        },
+        {
+          "id": "c",
+          "text": "O(1)"
+        },
+        {
+          "id": "d",
+          "text": "O(n!)"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Hashing aims for constant expected lookup under suitable assumptions.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-practice-q4",
+      "type": "single",
+      "prompt": "What must a terminating recursive routine have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No parameters"
+        },
+        {
+          "id": "b",
+          "text": "A base case and progress toward it"
+        },
+        {
+          "id": "c",
+          "text": "A static mutable counter always"
+        },
+        {
+          "id": "d",
+          "text": "A database connection"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Without progress or a reachable base case recursion can continue indefinitely.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-practice-q5",
+      "type": "single",
+      "prompt": "Which collection is usually suitable for a stack?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ArrayDeque"
+        },
+        {
+          "id": "b",
+          "text": "TreeMap"
+        },
+        {
+          "id": "c",
+          "text": "Optional"
+        },
+        {
+          "id": "d",
+          "text": "LocalDate"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Deque push/pop provide stack operations.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-practice-q6",
+      "type": "single",
+      "prompt": "Why specify a tie-breaker for equal ticket priorities?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To remove all duplicates"
+        },
+        {
+          "id": "b",
+          "text": "To make every insertion O(1)"
+        },
+        {
+          "id": "c",
+          "text": "To avoid all memory allocation"
+        },
+        {
+          "id": "d",
+          "text": "To make service ordering deterministic"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Equal priorities alone do not define a stable service order.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-practice-q7",
+      "type": "single",
+      "prompt": "In what order do repeated poll calls print these priorities?\n\n```java\nvar queue = new java.util.PriorityQueue<Integer>();\nqueue.add(3);\nqueue.add(1);\nqueue.add(2);\nwhile (!queue.isEmpty()) System.out.println(queue.poll());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "3\n2\n1"
+        },
+        {
+          "id": "b",
+          "text": "2\n1\n3"
+        },
+        {
+          "id": "c",
+          "text": "1\n2\n3"
+        },
+        {
+          "id": "d",
+          "text": "3\n1\n2"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The heap contains 3, 1, and 2; internal iteration order is not a sorting contract. The minimum 1 is removed. The next minima are 2 and 3.",
+      "points": 1
+    }
+  ]
+}

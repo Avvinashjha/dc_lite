@@ -1,0 +1,215 @@
+{
+  "id": "java-methods-and-debugging-practice",
+  "title": "Methods and debugging — Java Practice",
+  "description": "Independent practice: A restaurant reuses a tip calculator. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-methods-and-debugging-practice-q1",
+      "type": "single",
+      "prompt": "What does return do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Deletes all local variables globally"
+        },
+        {
+          "id": "b",
+          "text": "Ends the current method invocation"
+        },
+        {
+          "id": "c",
+          "text": "Always exits the JVM"
+        },
+        {
+          "id": "d",
+          "text": "Restarts the loop"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "It optionally provides a value to the caller.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-practice-q2",
+      "type": "single",
+      "prompt": "Which design makes tip calculation easiest to unit test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return the tip without console input or output"
+        },
+        {
+          "id": "b",
+          "text": "Read terminal input inside every calculation"
+        },
+        {
+          "id": "c",
+          "text": "Use a global bill variable"
+        },
+        {
+          "id": "d",
+          "text": "Print without returning a result"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Explicit inputs and outputs reduce test setup and side effects.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-practice-q3",
+      "type": "single",
+      "prompt": "A method reassigns its object parameter. Does this replace the caller’s variable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always"
+        },
+        {
+          "id": "b",
+          "text": "Only if the parameter is public"
+        },
+        {
+          "id": "c",
+          "text": "Only with final"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The reassignment changes the local copy of the reference.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-practice-q4",
+      "type": "single",
+      "prompt": "What debugger action enters a called method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Resume to completion"
+        },
+        {
+          "id": "b",
+          "text": "Delete breakpoint"
+        },
+        {
+          "id": "c",
+          "text": "Step into"
+        },
+        {
+          "id": "d",
+          "text": "Step over"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Step into follows execution into the method body.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-practice-q5",
+      "type": "single",
+      "prompt": "A local variable declared inside a block is normally visible where?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only to the garbage collector"
+        },
+        {
+          "id": "b",
+          "text": "Within that block after its declaration"
+        },
+        {
+          "id": "c",
+          "text": "Throughout all classes"
+        },
+        {
+          "id": "d",
+          "text": "Before its declaration everywhere"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Lexical scope bounds where the name is accessible.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-practice-q6",
+      "type": "single",
+      "prompt": "What should you establish before fixing a reported calculation bug?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A small reproducible failing input"
+        },
+        {
+          "id": "b",
+          "text": "A new framework"
+        },
+        {
+          "id": "c",
+          "text": "A larger monitor"
+        },
+        {
+          "id": "d",
+          "text": "A database migration"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A reproducer lets you confirm both the cause and the repair.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-practice-q7",
+      "type": "single",
+      "prompt": "What are the two printed values after tip returns?\n\n```java\nint tip(int bill, int percent) {\n  return bill * percent / 100;\n}\nint bill = 800;\nint result = tip(bill, 10);\nSystem.out.println(result);\nSystem.out.println(bill);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "80\n80"
+        },
+        {
+          "id": "b",
+          "text": "800\n80"
+        },
+        {
+          "id": "c",
+          "text": "800\n800"
+        },
+        {
+          "id": "d",
+          "text": "80\n800"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Copies 800 and 10 into the method parameters. 800 * 10 / 100 produces 80. result becomes 80; caller bill remains 800.",
+      "points": 1
+    }
+  ]
+}

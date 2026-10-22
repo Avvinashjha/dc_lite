@@ -1,0 +1,215 @@
+{
+  "id": "java-first-program-practice",
+  "title": "Your first Java program — Java Practice",
+  "description": "Independent practice: A café needs a receipt printer. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-first-program-practice-q1",
+      "type": "single",
+      "prompt": "A public class Receipt is saved in which file?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Receipt.js"
+        },
+        {
+          "id": "b",
+          "text": "Receipt.java"
+        },
+        {
+          "id": "c",
+          "text": "receipt.txt"
+        },
+        {
+          "id": "d",
+          "text": "Main.class"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A public top-level class uses a matching source filename.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-practice-q2",
+      "type": "single",
+      "prompt": "After javac Receipt.java succeeds, which command launches it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "java Receipt"
+        },
+        {
+          "id": "b",
+          "text": "java Receipt.class"
+        },
+        {
+          "id": "c",
+          "text": "javac Receipt"
+        },
+        {
+          "id": "d",
+          "text": "run Receipt.java.class"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The launcher takes the class name without .class.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-practice-q3",
+      "type": "single",
+      "prompt": "What does System.out.println(\"Hi\") add after Hi?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A semicolon"
+        },
+        {
+          "id": "b",
+          "text": "Nothing"
+        },
+        {
+          "id": "c",
+          "text": "The word null"
+        },
+        {
+          "id": "d",
+          "text": "A line terminator"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "println ends the output line.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-practice-q4",
+      "type": "single",
+      "prompt": "A missing semicolon normally causes what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A garbage collection pause"
+        },
+        {
+          "id": "b",
+          "text": "An automatic correction"
+        },
+        {
+          "id": "c",
+          "text": "A compilation error"
+        },
+        {
+          "id": "d",
+          "text": "A network timeout"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The compiler rejects invalid syntax before execution.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-practice-q5",
+      "type": "single",
+      "prompt": "Which tool is useful for evaluating a Java expression interactively?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pagefind"
+        },
+        {
+          "id": "b",
+          "text": "JShell"
+        },
+        {
+          "id": "c",
+          "text": "Git"
+        },
+        {
+          "id": "d",
+          "text": "Docker"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "JShell is a Java REPL.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-practice-q6",
+      "type": "single",
+      "prompt": "java and javac report different major versions. What should you inspect first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "PATH and JAVA_HOME"
+        },
+        {
+          "id": "b",
+          "text": "The monitor resolution"
+        },
+        {
+          "id": "c",
+          "text": "SQL indexes"
+        },
+        {
+          "id": "d",
+          "text": "The HTTP port"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The terminal may be resolving commands from different JDK installations.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-practice-q7",
+      "type": "single",
+      "prompt": "After compiling and launching Receipt, what is printed?\n\n```java\nclass Receipt {\n  public static void main(String[] args) {\n    int coffees = 2;\n    System.out.println(\"Coffees: \" + coffees);\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Coffees: 0"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "Receipt.class"
+        },
+        {
+          "id": "d",
+          "text": "Coffees: 2"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The JVM calls the entry point. No receipt has been printed. The local int holds the value 2. String concatenation produces Coffees: 2, followed by a newline.",
+      "points": 1
+    }
+  ]
+}

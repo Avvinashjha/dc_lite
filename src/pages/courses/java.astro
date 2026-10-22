@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { javaCourses, moduleSlug, publicQuizSlug, sources, researchDate } from '../../../scripts/data/java-curriculum.mjs';
+---
+
+<BaseLayout title="Java Developer Learning Path | DailyCoder" description="Explore three Java courses, 30 modules, 120 chapters, interactive walkthroughs, projects, and 33 independent practice quizzes.">
+  <div class="container java-path">
+    <PageIntro title="From your first class to your first API." description="Learn Java through familiar problems. Predict what happens, trace the code, build something useful, and check your understanding." eyebrow="JAVA DEVELOPER PATH" icon="book" tone="peach" />
+    <div class="java-path__stats" aria-label="Learning path at a glance">
+      <span><strong>3</strong> courses</span><span><strong>30</strong> modules</span>
+      <span><strong>120</strong> short chapters</span><span><strong>30</strong> local labs</span>
+      <span><strong>30</strong> module quizzes</span><span><strong>33</strong> public quizzes</span>
+    </div>
+    <p>Start with Java 25 LTS. Browser activities are guided walkthroughs; coding labs run in your own JDK or project. Time estimates include practice and capstones.</p>
+    <p><a class="button button--primary" href="/downloads/java-course-labs.zip" download>Download the three runnable reference projects</a></p>
+    <p>The download includes a Maven wrapper, tested applications, database migrations, and a README with setup and API walkthroughs.</p>
+    <nav class="java-path__nav" aria-label="Java path sections">
+      {javaCourses.map(course => <a href={`#${course.slug}`}>{course.title}</a>)}
+      <a href="#practice">Independent quizzes</a><a href="#references">Research</a>
+    </nav>
+    <section class="java-path__method">
+      <h2>Learn it by doing it</h2>
+      <ol><li><strong>Recognize the problem.</strong> Start with a café, wallet, shop, or expense service.</li>
+        <li><strong>Explore four short chapters.</strong> Learn one connected set of ideas.</li>
+        <li><strong>Predict and trace.</strong> Check a prediction, then reveal the code’s reasoning step by step.</li>
+        <li><strong>Build and verify.</strong> Complete a local lab with hints and acceptance checks.</li>
+        <li><strong>Check your understanding.</strong> Take the module quiz and review its explanations.</li></ol>
+      <p>The three capstones grow from a command-line expense tracker into a persistent application and then a secure REST API.</p>
+    </section>
+    <div class="java-path__search">
+      <label for="java-topic-search">Find a topic or chapter</label>
+      <input id="java-topic-search" type="search" placeholder="Try polymorphism, streams, SQL, or security" />
+      <p data-topic-count role="status">Showing all 30 modules.</p>
+    </div>
+    {javaCourses.map((course, courseIndex) => <section id={course.slug} class="java-path__course">
+      <header>
+        <p class="java-path__eyebrow">Course {courseIndex + 1} · {course.level} · {course.duration}</p>
+        <h2>{course.title}</h2><p>{course.description}</p>
+        <p><strong>Before you begin:</strong> {course.prerequisite}</p>
+        <p><strong>You will be able to:</strong> {course.outcome}</p>
+        <a class="button button--primary" href={`/courses/${course.slug}`}>Explore this course →</a>
+      </header>
+      <div class="java-path__modules">
+        {course.modules.map((mod, index) => <details class="java-path__module" data-java-module data-search={`${course.title} ${mod.title} ${mod.scenario} ${mod.chapters.flat().join(' ')}`.toLowerCase()}>
+          <summary><span>Module {index + 1}</span> {mod.title}</summary>
+          <p>{mod.scenario}</p>
+          <ol>{mod.chapters.map(([title, text]) => <li><strong>{title}</strong><p>{text}</p></li>)}</ol>
+          <p><strong>Lab:</strong> {mod.task}</p>
+          <p><strong>Verify:</strong> {mod.checks.join(' ')}</p>
+          <div class="java-path__nav">
+            <a href={`/courses/${course.slug}/${moduleSlug(mod, index)}/01-learn-and-explore`}>Open the lesson</a>
+            <a href={`/courses/${course.slug}/${moduleSlug(mod, index)}/02-practice-lab`}>Open the lab</a>
+            <a href={`/courses/${course.slug}/${moduleSlug(mod, index)}/03-module-quiz`}>Module quiz</a>
+            <a href={`/quiz/${publicQuizSlug(mod)}`}>Independent practice</a>
+          </div>
+        </details>)}
+      </div>
+    </section>)}
+    <p data-no-topics hidden>No matching topics. Try a broader term or clear the search.</p>
+    <section id="practice">
+      <h2>Practice independently</h2>
+      <p>These 33 quizzes also appear in the <a href="/quiz">Quiz section</a> under Java. They are available without course enrollment. They do not mark course modules complete.</p>
+      <div class="java-path__practice">
+        {javaCourses.map(course => <article><h3>{course.title}</h3>
+          <ul>{course.modules.map(mod => <li><a href={`/quiz/${publicQuizSlug(mod)}`}>{mod.title}</a> <small>7 questions</small></li>)}</ul>
+          <a href={`/quiz/${course.slug}-readiness`}>Take the 20-question readiness check →</a>
+        </article>)}
+      </div>
+      <p>Practice and module assessments share some questions for reinforcement. Each has additional questions, and every answer includes an explanation. Build the projects as well as taking the quizzes.</p>
+    </section>
+    <section id="references"><h2>Research behind the path</h2>
+      <p>Reviewed {researchDate}. The sequence moves from the language and core libraries to JVM behavior and backend development. It uses finalized Java APIs; Android, desktop UI, and deep infrastructure administration are separate specializations.</p>
+      <ul>{sources.map(([title, url]) => <li><a href={url}>{title}</a></li>)}</ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>('#java-topic-search');
+  const modules = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-java-module]'));
+  const count = document.querySelector<HTMLElement>('[data-topic-count]');
+  const empty = document.querySelector<HTMLElement>('[data-no-topics]');
+  search?.addEventListener('input', () => {
+    const words = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let visible = 0;
+    modules.forEach(module => {
+      const match = words.every(word => module.dataset.search?.includes(word));
+      module.hidden = !match;
+      if (words.length && match) module.open = true;
+      if (match) visible++;
+    });
+    if (count) count.textContent = `Showing ${visible} of ${modules.length} modules.`;
+    if (empty) empty.hidden = visible > 0;
+  });
+</script>
+
+<style>
+  .java-path { padding-bottom: 4rem; }
+  .java-path section { margin: 2.5rem 0; scroll-margin-top: 6rem; }
+  .java-path__stats, .java-path__nav { display: flex; flex-wrap: wrap; gap: .8rem 1.3rem; margin: 1.4rem 0; }
+  .java-path__stats span { background: var(--color-surface); border: 1px solid var(--color-border); padding: .8rem 1rem; border-radius: var(--radius-md); }
+  .java-path__stats strong { color: var(--color-primary); font-size: 1.3rem; }
+  .java-path__method, .java-path__search, .java-path__course > header { padding: clamp(1rem, 3vw, 2rem); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+  .java-path__method li { margin: .7rem 0; }
+  .java-path__method ol { padding-left: 1.5rem; }
+  .java-path__search label { display: block; font-weight: 700; margin-bottom: .6rem; }
+  .java-path__search input { width: 100%; padding: .9rem; border: 1px solid var(--color-border); color: var(--color-text); background: var(--color-background); border-radius: var(--radius-md); font: inherit; }
+  .java-path__eyebrow { color: var(--color-primary); text-transform: uppercase; font-size: .8rem; font-weight: 700; letter-spacing: .06em; }
+  .java-path__modules { margin-top: 1rem; }
+  .java-path__module { margin-bottom: .7rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem 1.2rem; }
+  .java-path__module[hidden] { display: none; }
+  .java-path__module summary { cursor: pointer; font-weight: 700; }
+  .java-path__module summary span { color: var(--color-text-light); margin-right: .6rem; font-size: .8rem; }
+  .java-path__module > p, .java-path__module ol { margin-top: 1rem; }
+  .java-path__module ol { padding-left: 1.5rem; }
+  .java-path__module li { margin: .8rem 0; }
+  .java-path__module li p { color: var(--color-text-light); margin-top: .3rem; }
+  .java-path__practice { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .java-path__practice article { padding: 1.3rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+  .java-path__practice ul, #references ul { padding-left: 1.1rem; }
+  .java-path__practice li { margin: .7rem 0; }
+  .java-path__practice small { display: block; color: var(--color-text-light); }
+  .java-path :is(a, input, summary):focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+  @media (max-width: 850px) { .java-path__practice { grid-template-columns: 1fr; } }
+</style>

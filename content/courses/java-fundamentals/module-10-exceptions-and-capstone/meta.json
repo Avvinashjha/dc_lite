@@ -1,0 +1,26 @@
+{
+  "title": "Exceptions and the fundamentals capstone",
+  "description": "Build a resilient command-line expense tracker.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Exceptions and the fundamentals capstone: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Exceptions and the fundamentals capstone: practical lab",
+      "type": "text",
+      "duration": "120 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Exceptions and the fundamentals capstone: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-exceptions-and-capstone-module-check",
+      "passingScore": 70
+    }
+  ]
+}

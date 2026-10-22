@@ -1,0 +1,215 @@
+{
+  "id": "java-design-and-patterns-practice",
+  "title": "Clean design and practical patterns — Java Practice",
+  "description": "Independent practice: An order service chooses a pricing policy without a growing conditional. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-design-and-patterns-practice-q1",
+      "type": "single",
+      "prompt": "When is a builder useful?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every two-field record"
+        },
+        {
+          "id": "b",
+          "text": "Only for int arrays"
+        },
+        {
+          "id": "c",
+          "text": "Only when no validation is needed"
+        },
+        {
+          "id": "d",
+          "text": "Readable construction with many optional settings"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A builder can organize construction choices and validate them.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-practice-q2",
+      "type": "single",
+      "prompt": "What should be in place before refactoring a pricing rule?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A new global variable"
+        },
+        {
+          "id": "b",
+          "text": "A second implementation of every getter"
+        },
+        {
+          "id": "c",
+          "text": "Tests of its observable behavior"
+        },
+        {
+          "id": "d",
+          "text": "A new database server"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Behavior tests detect accidental changes during restructuring.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-practice-q3",
+      "type": "single",
+      "prompt": "Does List.copyOf deeply freeze mutable element objects?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only on a server"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only for lists of size one"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "It copies the collection structure, not the internals of each element.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-practice-q4",
+      "type": "single",
+      "prompt": "What does dependency inversion encourage at a variable boundary?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Depend on a suitable abstraction"
+        },
+        {
+          "id": "b",
+          "text": "Instantiate every vendor class inside every method"
+        },
+        {
+          "id": "c",
+          "text": "Remove all constructors"
+        },
+        {
+          "id": "d",
+          "text": "Use static state for all collaborators"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A focused contract lets higher-level policy avoid vendor details.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-practice-q5",
+      "type": "single",
+      "prompt": "When should a factory add value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whenever new appears"
+        },
+        {
+          "id": "b",
+          "text": "Only when no objects are created"
+        },
+        {
+          "id": "c",
+          "text": "To hide every simple record constructor"
+        },
+        {
+          "id": "d",
+          "text": "When it centralizes meaningful construction decisions"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A factory earns its place through construction policy.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-practice-q6",
+      "type": "single",
+      "prompt": "What is a warning sign of unnecessary abstraction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A clear domain name"
+        },
+        {
+          "id": "b",
+          "text": "An immutable value object"
+        },
+        {
+          "id": "c",
+          "text": "A simple rule becomes harder to follow without a change benefit"
+        },
+        {
+          "id": "d",
+          "text": "A focused interface at an external boundary"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Abstractions should make the relevant changes easier.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-practice-q7",
+      "type": "single",
+      "prompt": "Which member price does the selected strategy print?\n\n```java\ninterface Pricing { int total(int base); }\nclass RegularPricing implements Pricing {\n  public int total(int base) { return base; }\n}\nclass MemberPricing implements Pricing {\n  public int total(int base) { return base * 9 / 10; }\n}\nPricing policy = new MemberPricing();\nSystem.out.println(policy.total(1000));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "1100"
+        },
+        {
+          "id": "b",
+          "text": "900"
+        },
+        {
+          "id": "c",
+          "text": "1000"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The caller chooses a MemberPricing implementation. total(1000) runs the membership algorithm. The same Pricing contract returns 900 without a type switch.",
+      "points": 1
+    }
+  ]
+}

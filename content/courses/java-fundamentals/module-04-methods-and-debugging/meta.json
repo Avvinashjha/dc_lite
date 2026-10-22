@@ -1,0 +1,26 @@
+{
+  "title": "Methods and debugging",
+  "description": "A restaurant reuses a tip calculator.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Methods and debugging: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Methods and debugging: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Methods and debugging: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-methods-and-debugging-module-check",
+      "passingScore": 70
+    }
+  ]
+}

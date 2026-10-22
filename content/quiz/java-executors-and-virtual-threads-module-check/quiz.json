@@ -1,0 +1,215 @@
+{
+  "id": "java-executors-and-virtual-threads-module-check",
+  "title": "Executors, futures, and virtual threads — Module Quiz",
+  "description": "Course assessment: A service makes several independent blocking lookups.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q1",
+      "type": "single",
+      "prompt": "Which workload is a good candidate for virtual threads?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only graphics rendering"
+        },
+        {
+          "id": "b",
+          "text": "Many independent blocking I/O tasks"
+        },
+        {
+          "id": "c",
+          "text": "One CPU-bound calculation needing faster arithmetic"
+        },
+        {
+          "id": "d",
+          "text": "A request to increase database capacity automatically"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Virtual threads improve scalability for waiting tasks.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q2",
+      "type": "single",
+      "prompt": "Do virtual threads enlarge the database connection pool?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only on Java 25"
+        },
+        {
+          "id": "d",
+          "text": "Only if named"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "External resource capacity remains a separate limit.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q3",
+      "type": "single",
+      "prompt": "What does Future.get(timeout, unit) time out?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The entire JVM lifetime"
+        },
+        {
+          "id": "b",
+          "text": "Every network socket automatically"
+        },
+        {
+          "id": "c",
+          "text": "The database transaction automatically"
+        },
+        {
+          "id": "d",
+          "text": "The caller’s wait for a result"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The task may continue unless cancelled or otherwise bounded.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q4",
+      "type": "single",
+      "prompt": "Who should close a task executor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every task independently"
+        },
+        {
+          "id": "b",
+          "text": "Nobody"
+        },
+        {
+          "id": "c",
+          "text": "Its lifecycle owner"
+        },
+        {
+          "id": "d",
+          "text": "The garbage collector on a schedule"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Explicit ownership prevents leaked work and resources.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q5",
+      "type": "single",
+      "prompt": "Should virtual threads usually be pooled to reuse a fixed set of them?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when they block"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only for small tasks"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Use one virtual thread per task and bound scarce resources separately.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q6",
+      "type": "single",
+      "prompt": "Does cancel(true) guarantee an immediate task stop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only for CPU loops"
+        },
+        {
+          "id": "d",
+          "text": "Only for Callable"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Interruption and cancellation are cooperative.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-module-check-q7",
+      "type": "single",
+      "prompt": "What combined result is printed, regardless of task completion order?\n\n```java\ntry (var executor = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {\n  var first = executor.submit(() -> \"stock\");\n  var second = executor.submit(() -> \"price\");\n  System.out.println(first.get() + \":\" + second.get());\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "price:stock"
+        },
+        {
+          "id": "b",
+          "text": "A randomly chosen order"
+        },
+        {
+          "id": "c",
+          "text": "stockprice"
+        },
+        {
+          "id": "d",
+          "text": "stock:price"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Two tasks receive independent virtual threads; execution order is unspecified. get waits as needed; output order is determined by concatenation, not task completion order. The executor closes after its tasks finish.",
+      "points": 1
+    }
+  ]
+}

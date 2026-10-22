@@ -1,0 +1,26 @@
+{
+  "title": "Your first Java program",
+  "description": "A café needs a receipt printer.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Your first Java program: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Your first Java program: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Your first Java program: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-first-program-module-check",
+      "passingScore": 70
+    }
+  ]
+}

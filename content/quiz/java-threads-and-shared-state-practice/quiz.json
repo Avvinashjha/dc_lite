@@ -1,0 +1,215 @@
+{
+  "id": "java-threads-and-shared-state-practice",
+  "title": "Threads, visibility, and shared state — Java Practice",
+  "description": "Independent practice: Prevent lost updates when two workers count orders. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-threads-and-shared-state-practice-q1",
+      "type": "single",
+      "prompt": "What does join provide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An automatic lock on every object"
+        },
+        {
+          "id": "b",
+          "text": "A retry policy"
+        },
+        {
+          "id": "c",
+          "text": "A wait for a thread to finish, with completion visibility guarantees"
+        },
+        {
+          "id": "d",
+          "text": "A guarantee of execution order between all threads"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A successful join establishes the required completion relationship.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-practice-q2",
+      "type": "single",
+      "prompt": "Which operation safely increments one shared integer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "String concatenation"
+        },
+        {
+          "id": "b",
+          "text": "AtomicInteger.incrementAndGet()"
+        },
+        {
+          "id": "c",
+          "text": "A plain int++"
+        },
+        {
+          "id": "d",
+          "text": "Reading a volatile field twice"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The atomic operation prevents lost updates.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-practice-q3",
+      "type": "single",
+      "prompt": "What is one common cause of deadlock?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Opposing acquisition order for shared locks"
+        },
+        {
+          "id": "b",
+          "text": "Too many immutable records"
+        },
+        {
+          "id": "c",
+          "text": "Calling equals on Strings"
+        },
+        {
+          "id": "d",
+          "text": "A single-threaded loop without locks"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Cyclic lock dependencies can leave threads waiting forever.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-practice-q4",
+      "type": "single",
+      "prompt": "Is every multi-step operation on ConcurrentHashMap automatically atomic?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only with String keys"
+        },
+        {
+          "id": "c",
+          "text": "Only when empty"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Use compute, merge, or another suitable atomic operation for compound updates.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-practice-q5",
+      "type": "single",
+      "prompt": "What can reduce synchronization needs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using a larger int"
+        },
+        {
+          "id": "b",
+          "text": "Removing joins"
+        },
+        {
+          "id": "c",
+          "text": "Confining mutable state to one thread"
+        },
+        {
+          "id": "d",
+          "text": "Making every field public"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Unshared state eliminates cross-thread races on that state.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-practice-q6",
+      "type": "single",
+      "prompt": "How should a translated InterruptedException usually be handled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Retry indefinitely"
+        },
+        {
+          "id": "b",
+          "text": "Restore the interrupt flag or propagate the interruption"
+        },
+        {
+          "id": "c",
+          "text": "Silently discard it"
+        },
+        {
+          "id": "d",
+          "text": "Always terminate the machine"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Cancellation should remain observable to the caller.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-practice-q7",
+      "type": "single",
+      "prompt": "After both joined workers complete, what count is guaranteed?\n\n```java\nvar count = new java.util.concurrent.atomic.AtomicInteger();\nThread first = new Thread(() -> { for (int i = 0; i < 1000; i++) count.incrementAndGet(); });\nThread second = new Thread(() -> { for (int i = 0; i < 1000; i++) count.incrementAndGet(); });\nfirst.start(); second.start();\nfirst.join(); second.join();\nSystem.out.println(count.get());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "2000"
+        },
+        {
+          "id": "b",
+          "text": "1000"
+        },
+        {
+          "id": "c",
+          "text": "An arbitrary value below 2000"
+        },
+        {
+          "id": "d",
+          "text": "The code cannot compile because AtomicInteger is mutable"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Two workers each perform 1000 updates; their scheduling is unspecified. Each incrementAndGet is atomic, preventing lost increments. After both joins, all 2000 increments have completed.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-http-json-and-core-capstone-module-check",
+  "title": "HTTP, JSON, and the developer core capstone — Module Quiz",
+  "description": "Course assessment: Turn the expense tracker into a tested application boundary.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q1",
+      "type": "single",
+      "prompt": "Does HttpRequest.build() send the request?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for GET"
+        },
+        {
+          "id": "c",
+          "text": "Only with a timeout"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Building configures a request; HttpClient sends it.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q2",
+      "type": "single",
+      "prompt": "An HTTP call returns status 404. What should the adapter do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assume no network exchange occurred"
+        },
+        {
+          "id": "b",
+          "text": "Retry forever"
+        },
+        {
+          "id": "c",
+          "text": "Handle the status according to its contract"
+        },
+        {
+          "id": "d",
+          "text": "Always parse it as a successful record"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "An HTTP error response is still a completed response that needs interpretation.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q3",
+      "type": "single",
+      "prompt": "Which header expresses a preference for a JSON response?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Location: application/json"
+        },
+        {
+          "id": "b",
+          "text": "Accept: application/json"
+        },
+        {
+          "id": "c",
+          "text": "Content-Length: JSON"
+        },
+        {
+          "id": "d",
+          "text": "Authorization: JSON"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Accept communicates supported response media types.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q4",
+      "type": "single",
+      "prompt": "Why use a JSON parser instead of splitting strings?",
+      "options": [
+        {
+          "id": "a",
+          "text": "JSON nesting and escaping require proper parsing"
+        },
+        {
+          "id": "b",
+          "text": "Every JSON value is a string"
+        },
+        {
+          "id": "c",
+          "text": "JSON has no arrays"
+        },
+        {
+          "id": "d",
+          "text": "Splitting encrypts input"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A parser handles the format’s structure and escape rules.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q5",
+      "type": "single",
+      "prompt": "What makes a unit test for an HTTP adapter’s caller reliable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Calling the public internet each run"
+        },
+        {
+          "id": "b",
+          "text": "Removing all assertions"
+        },
+        {
+          "id": "c",
+          "text": "Waiting 30 seconds"
+        },
+        {
+          "id": "d",
+          "text": "A deterministic fake at the client boundary"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A fake supplies controlled success and failure cases.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q6",
+      "type": "single",
+      "prompt": "Why set request timeouts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To eliminate HTTP errors"
+        },
+        {
+          "id": "b",
+          "text": "To force JSON"
+        },
+        {
+          "id": "c",
+          "text": "To bound waiting on an external dependency"
+        },
+        {
+          "id": "d",
+          "text": "To guarantee success"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A timeout limits resource occupation when a dependency stalls.",
+      "points": 1
+    },
+    {
+      "id": "java-http-json-and-core-capstone-module-check-q7",
+      "type": "single",
+      "prompt": "What method and Accept header are printed without sending a request?\n\n```java\nvar request = java.net.http.HttpRequest.newBuilder(java.net.URI.create(\"https://example.com/expenses\"))\n  .timeout(java.time.Duration.ofSeconds(5))\n  .header(\"Accept\", \"application/json\")\n  .GET()\n  .build();\nSystem.out.println(request.method());\nSystem.out.println(request.headers().firstValue(\"Accept\").orElse(\"missing\"));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "GET\ntext/plain"
+        },
+        {
+          "id": "b",
+          "text": "GET\napplication/json"
+        },
+        {
+          "id": "c",
+          "text": "POST\napplication/json"
+        },
+        {
+          "id": "d",
+          "text": "GET\nmissing"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The request targets an HTTPS endpoint; building does not send it. The request asks for JSON and has a five-second request timeout. The method is GET and the Accept header is application/json.",
+      "points": 1
+    }
+  ]
+}

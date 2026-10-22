@@ -109,6 +109,12 @@ const courseJsonLd = {
         </div>
         <h1 class="course-hero__title">{course.title}</h1>
         <p class="course-hero__desc">{course.description}</p>
+        {['java-fundamentals', 'java-developer-core', 'java-advanced'].includes(course.slug) && (
+          <p><a href="/courses/java">View the Java learning path, prerequisites, and independent quizzes →</a></p>
+        )}
+        {['java-fundamentals', 'java-developer-core', 'java-advanced'].includes(course.slug) && (
+          <p><a href="/downloads/java-course-labs.zip" download>Download runnable Java reference projects</a></p>
+        )}
         <div class="course-hero__author">
           <span class="course-hero__avatar" aria-hidden="true">{authorInitials}</span>
           <span>By {course.author}</span>

@@ -1,0 +1,215 @@
+{
+  "id": "java-values-and-types-module-check",
+  "title": "Values, types, and expressions — Module Quiz",
+  "description": "Course assessment: A grocery store calculates basket totals.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-values-and-types-module-check-q1",
+      "type": "single",
+      "prompt": "What is the value of 5 / 2 in Java?",
+      "options": [
+        {
+          "id": "a",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "text": "Compilation error"
+        },
+        {
+          "id": "c",
+          "text": "2"
+        },
+        {
+          "id": "d",
+          "text": "2.5"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Both operands are integers, so division truncates toward zero.",
+      "points": 1
+    },
+    {
+      "id": "java-values-and-types-module-check-q2",
+      "type": "single",
+      "prompt": "Which expression evaluates to 2.5?",
+      "options": [
+        {
+          "id": "a",
+          "text": "(int) 2.5"
+        },
+        {
+          "id": "b",
+          "text": "5 / 2.0"
+        },
+        {
+          "id": "c",
+          "text": "(double) (5 / 2)"
+        },
+        {
+          "id": "d",
+          "text": "5 / 2"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A floating-point operand changes the division before it happens.",
+      "points": 1
+    },
+    {
+      "id": "java-values-and-types-module-check-q3",
+      "type": "single",
+      "prompt": "Which type is a reference type?",
+      "options": [
+        {
+          "id": "a",
+          "text": "String"
+        },
+        {
+          "id": "b",
+          "text": "int"
+        },
+        {
+          "id": "c",
+          "text": "boolean"
+        },
+        {
+          "id": "d",
+          "text": "double"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "String objects are accessed through references.",
+      "points": 1
+    },
+    {
+      "id": "java-values-and-types-module-check-q4",
+      "type": "single",
+      "prompt": "What does final prevent for a local variable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mutation of every referenced object"
+        },
+        {
+          "id": "b",
+          "text": "All exceptions"
+        },
+        {
+          "id": "c",
+          "text": "Overflow"
+        },
+        {
+          "id": "d",
+          "text": "Reassignment"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "final fixes the variable binding, not the internals of an object.",
+      "points": 1
+    },
+    {
+      "id": "java-values-and-types-module-check-q5",
+      "type": "single",
+      "prompt": "Which decimal construction preserves the written decimal amount?",
+      "options": [
+        {
+          "id": "a",
+          "text": "(int) 0.10"
+        },
+        {
+          "id": "b",
+          "text": "new String(0.10)"
+        },
+        {
+          "id": "c",
+          "text": "new BigDecimal(\"0.10\")"
+        },
+        {
+          "id": "d",
+          "text": "new BigDecimal(0.10)"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The string constructor avoids importing a binary floating-point approximation.",
+      "points": 1
+    },
+    {
+      "id": "java-values-and-types-module-check-q6",
+      "type": "single",
+      "prompt": "Reading a local int before assigning it produces what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A random value"
+        },
+        {
+          "id": "b",
+          "text": "A compilation error"
+        },
+        {
+          "id": "c",
+          "text": "Zero"
+        },
+        {
+          "id": "d",
+          "text": "null"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Definite assignment is checked for local variables.",
+      "points": 1
+    },
+    {
+      "id": "java-values-and-types-module-check-q7",
+      "type": "single",
+      "prompt": "What three lines does this basket example print?\n\n```java\nint apples = 3;\nint priceInPaise = 1250;\nint total = apples * priceInPaise;\nSystem.out.println(total);\nSystem.out.println(5 / 2);\nSystem.out.println(5 / 2.0);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "3750\n2\n2.5"
+        },
+        {
+          "id": "b",
+          "text": "3750\n2.5\n2.5"
+        },
+        {
+          "id": "c",
+          "text": "3750\n2\n2"
+        },
+        {
+          "id": "d",
+          "text": "1250\n2\n2.5"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "apples = 3; priceInPaise = 1250. total = 3750 paise. No floating point rounding is involved. 5 / 2 evaluates to int 2; 5 / 2.0 evaluates to double 2.5.",
+      "points": 1
+    }
+  ]
+}

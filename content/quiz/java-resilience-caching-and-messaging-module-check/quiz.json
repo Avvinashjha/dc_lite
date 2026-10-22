@@ -1,0 +1,215 @@
+{
+  "id": "java-resilience-caching-and-messaging-module-check",
+  "title": "Resilience, caching, and messaging — Module Quiz",
+  "description": "Course assessment: Prevent duplicate charges when a dependency times out.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q1",
+      "type": "single",
+      "prompt": "A payment request times out. Does that prove the payment did not happen?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only with HTTPS"
+        },
+        {
+          "id": "b",
+          "text": "Only on a single server"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The response may be lost after the operation succeeds.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q2",
+      "type": "single",
+      "prompt": "What makes a retry safe for a state-changing operation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A faster CPU"
+        },
+        {
+          "id": "b",
+          "text": "An explicit idempotency contract"
+        },
+        {
+          "id": "c",
+          "text": "A longer stack trace"
+        },
+        {
+          "id": "d",
+          "text": "A random new payment id each time"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Repeated requests must not duplicate the intended effect.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q3",
+      "type": "single",
+      "prompt": "What does a circuit breaker do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Temporarily stops calls after failure conditions"
+        },
+        {
+          "id": "b",
+          "text": "Repairs a database"
+        },
+        {
+          "id": "c",
+          "text": "Guarantees zero failures"
+        },
+        {
+          "id": "d",
+          "text": "Encrypts all messages"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "It limits calls to an unhealthy dependency according to a policy.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q4",
+      "type": "single",
+      "prompt": "What must at-least-once message consumers expect?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Exactly one delivery automatically"
+        },
+        {
+          "id": "b",
+          "text": "No ordering concerns ever"
+        },
+        {
+          "id": "c",
+          "text": "No failures after acknowledgment"
+        },
+        {
+          "id": "d",
+          "text": "Duplicate deliveries"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Duplicate handling is part of the consumer contract.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q5",
+      "type": "single",
+      "prompt": "Why store a processed marker and business effect in one transaction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To force global ordering"
+        },
+        {
+          "id": "b",
+          "text": "To remove every retry"
+        },
+        {
+          "id": "c",
+          "text": "To avoid marking success without the effect or applying it twice after a partial commit"
+        },
+        {
+          "id": "d",
+          "text": "To bypass all database constraints"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Atomic recording connects deduplication to the effect.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q6",
+      "type": "single",
+      "prompt": "What does a cache TTL define?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A transaction isolation level"
+        },
+        {
+          "id": "b",
+          "text": "How long an entry is considered usable under the cache policy"
+        },
+        {
+          "id": "c",
+          "text": "A guarantee the source never changes"
+        },
+        {
+          "id": "d",
+          "text": "An authorization role"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "TTL is a freshness policy, not proof of current source data.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-module-check-q7",
+      "type": "single",
+      "prompt": "How many unique events does this single-threaded in-memory demonstration accept?\n\n```java\nvar processed = new java.util.HashSet<String>();\nint accepted = 0;\nfor (String eventId : java.util.List.of(\"e1\", \"e1\", \"e2\")) {\n  if (processed.add(eventId)) accepted++;\n}\nSystem.out.println(accepted);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "0"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "add succeeds; accepted becomes 1. add returns false; accepted stays 1. add succeeds; accepted becomes 2. This in-memory demo is single-threaded and not durable.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-collections-and-equality-module-check",
+  "title": "Collections and equality — Module Quiz",
+  "description": "Course assessment: An inventory system tracks stock and unique product codes.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-collections-and-equality-module-check-q1",
+      "type": "single",
+      "prompt": "Which collection models unique product codes?",
+      "options": [
+        {
+          "id": "a",
+          "text": "StringBuilder"
+        },
+        {
+          "id": "b",
+          "text": "Thread"
+        },
+        {
+          "id": "c",
+          "text": "Set"
+        },
+        {
+          "id": "d",
+          "text": "List with no validation"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A Set expresses uniqueness.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-module-check-q2",
+      "type": "single",
+      "prompt": "Which map preserves insertion iteration order?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Any Map implementation"
+        },
+        {
+          "id": "b",
+          "text": "LinkedHashMap"
+        },
+        {
+          "id": "c",
+          "text": "HashMap"
+        },
+        {
+          "id": "d",
+          "text": "IdentityHashMap"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "LinkedHashMap provides insertion order by default.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-module-check-q3",
+      "type": "single",
+      "prompt": "What happens when a hash-map key changes a field used by hashCode?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Lookup may fail to find its existing entry"
+        },
+        {
+          "id": "b",
+          "text": "The map always reindexes it"
+        },
+        {
+          "id": "c",
+          "text": "It becomes thread-safe"
+        },
+        {
+          "id": "d",
+          "text": "The key is automatically copied"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The key may no longer match its original bucket.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-module-check-q4",
+      "type": "single",
+      "prompt": "What does List.of(\"a\", \"b\").add(\"c\") do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Returns true"
+        },
+        {
+          "id": "b",
+          "text": "Creates a new list silently"
+        },
+        {
+          "id": "c",
+          "text": "Mutates a hidden array"
+        },
+        {
+          "id": "d",
+          "text": "Throws UnsupportedOperationException"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "List.of is unmodifiable.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-module-check-q5",
+      "type": "single",
+      "prompt": "Which structure supports a queue and a stack at its ends?",
+      "options": [
+        {
+          "id": "a",
+          "text": "HashSet"
+        },
+        {
+          "id": "b",
+          "text": "Optional"
+        },
+        {
+          "id": "c",
+          "text": "Deque"
+        },
+        {
+          "id": "d",
+          "text": "TreeMap"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Deque offers operations at both ends.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-module-check-q6",
+      "type": "single",
+      "prompt": "What does HashMap guarantee about key iteration order?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reverse insertion order"
+        },
+        {
+          "id": "b",
+          "text": "No specific order"
+        },
+        {
+          "id": "c",
+          "text": "Sorted order"
+        },
+        {
+          "id": "d",
+          "text": "Insertion order"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Use an ordered map when iteration order is part of the contract.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-module-check-q7",
+      "type": "single",
+      "prompt": "What count and key order does this LinkedHashMap example print?\n\n```java\nvar stock = new java.util.LinkedHashMap<String, Integer>();\nstock.put(\"tea\", 2);\nstock.merge(\"tea\", 3, Integer::sum);\nstock.put(\"coffee\", 1);\nSystem.out.println(stock.get(\"tea\"));\nSystem.out.println(stock.keySet());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "5\n[tea, coffee]"
+        },
+        {
+          "id": "b",
+          "text": "3\n[tea, coffee]"
+        },
+        {
+          "id": "c",
+          "text": "5\n[coffee, tea]"
+        },
+        {
+          "id": "d",
+          "text": "2\n[tea, coffee]"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "tea maps to 2. The existing 2 and incoming 3 combine to 5. coffee is inserted second; keys iterate as tea, coffee.",
+      "points": 1
+    }
+  ]
+}

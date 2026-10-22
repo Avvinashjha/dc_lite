@@ -1,0 +1,215 @@
+{
+  "id": "java-classes-and-encapsulation-practice",
+  "title": "Classes, objects, and encapsulation — Java Practice",
+  "description": "Independent practice: A digital wallet protects its balance. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-classes-and-encapsulation-practice-q1",
+      "type": "single",
+      "prompt": "Which member belongs to the class rather than each instance?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A constructor parameter"
+        },
+        {
+          "id": "b",
+          "text": "A static field"
+        },
+        {
+          "id": "c",
+          "text": "An instance field"
+        },
+        {
+          "id": "d",
+          "text": "this"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Static state is associated with the class.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-practice-q2",
+      "type": "single",
+      "prompt": "What should a constructor establish?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A valid initial object state"
+        },
+        {
+          "id": "b",
+          "text": "An arbitrary invalid balance"
+        },
+        {
+          "id": "c",
+          "text": "A second JVM"
+        },
+        {
+          "id": "d",
+          "text": "A global variable for every field"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Constructor validation prevents invalid instances from escaping.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-practice-q3",
+      "type": "single",
+      "prompt": "If a.equals(b) is true, which must hold?",
+      "options": [
+        {
+          "id": "a",
+          "text": "a == b"
+        },
+        {
+          "id": "b",
+          "text": "a and b have different classes"
+        },
+        {
+          "id": "c",
+          "text": "Both hash codes are zero"
+        },
+        {
+          "id": "d",
+          "text": "a.hashCode() == b.hashCode()"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The equality contract requires equal hash codes for equal objects.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-practice-q4",
+      "type": "single",
+      "prompt": "Does a private field alone make a class thread-safe?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for ints"
+        },
+        {
+          "id": "b",
+          "text": "Only with getters"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Visibility and synchronization are separate concerns.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-practice-q5",
+      "type": "single",
+      "prompt": "Why validate before subtracting a withdrawal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To allocate another wallet"
+        },
+        {
+          "id": "b",
+          "text": "A failed operation should preserve the balance"
+        },
+        {
+          "id": "c",
+          "text": "Subtraction cannot use private fields"
+        },
+        {
+          "id": "d",
+          "text": "To force integer overflow"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Validate first so rejection does not leave partial state.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-practice-q6",
+      "type": "single",
+      "prompt": "What does this refer to in an instance method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The current receiver object"
+        },
+        {
+          "id": "b",
+          "text": "The superclass only"
+        },
+        {
+          "id": "c",
+          "text": "The current source file"
+        },
+        {
+          "id": "d",
+          "text": "Every instance at once"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "this is the object on which the instance method is invoked.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-practice-q7",
+      "type": "single",
+      "prompt": "What balance is visible through first after alias.deposit(50)?\n\n```java\nclass Wallet {\n  private int balance;\n  void deposit(int amount) {\n    if (amount <= 0) throw new IllegalArgumentException(\"Positive amount required\");\n    balance = Math.addExact(balance, amount);\n  }\n  int balance() { return balance; }\n}\nWallet first = new Wallet();\nWallet alias = first;\nalias.deposit(50);\nSystem.out.println(first.balance());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "100"
+        },
+        {
+          "id": "c",
+          "text": "A new wallet is allocated, so first is unchanged"
+        },
+        {
+          "id": "d",
+          "text": "50"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "One Wallet object starts with balance 0. first and alias both refer to that same wallet. alias.deposit changes the shared object; first.balance() is 50.",
+      "points": 1
+    }
+  ]
+}

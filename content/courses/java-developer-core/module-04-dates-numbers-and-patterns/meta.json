@@ -1,0 +1,26 @@
+{
+  "title": "Dates, numbers, and text patterns",
+  "description": "A booking service schedules visits across time zones.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Dates, numbers, and text patterns: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Dates, numbers, and text patterns: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Dates, numbers, and text patterns: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-dates-numbers-and-patterns-module-check",
+      "passingScore": 70
+    }
+  ]
+}

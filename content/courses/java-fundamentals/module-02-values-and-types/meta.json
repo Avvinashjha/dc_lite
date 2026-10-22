@@ -1,0 +1,26 @@
+{
+  "title": "Values, types, and expressions",
+  "description": "A grocery store calculates basket totals.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Values, types, and expressions: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Values, types, and expressions: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Values, types, and expressions: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-values-and-types-module-check",
+      "passingScore": 70
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-collections-and-equality-practice",
+  "title": "Collections and equality — Java Practice",
+  "description": "Independent practice: An inventory system tracks stock and unique product codes. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-collections-and-equality-practice-q1",
+      "type": "single",
+      "prompt": "What happens when a hash-map key changes a field used by hashCode?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It becomes thread-safe"
+        },
+        {
+          "id": "b",
+          "text": "The key is automatically copied"
+        },
+        {
+          "id": "c",
+          "text": "Lookup may fail to find its existing entry"
+        },
+        {
+          "id": "d",
+          "text": "The map always reindexes it"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The key may no longer match its original bucket.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-practice-q2",
+      "type": "single",
+      "prompt": "What does List.of(\"a\", \"b\").add(\"c\") do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mutates a hidden array"
+        },
+        {
+          "id": "b",
+          "text": "Throws UnsupportedOperationException"
+        },
+        {
+          "id": "c",
+          "text": "Returns true"
+        },
+        {
+          "id": "d",
+          "text": "Creates a new list silently"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "List.of is unmodifiable.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-practice-q3",
+      "type": "single",
+      "prompt": "Which structure supports a queue and a stack at its ends?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Deque"
+        },
+        {
+          "id": "b",
+          "text": "TreeMap"
+        },
+        {
+          "id": "c",
+          "text": "HashSet"
+        },
+        {
+          "id": "d",
+          "text": "Optional"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Deque offers operations at both ends.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-practice-q4",
+      "type": "single",
+      "prompt": "What does HashMap guarantee about key iteration order?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sorted order"
+        },
+        {
+          "id": "b",
+          "text": "Insertion order"
+        },
+        {
+          "id": "c",
+          "text": "Reverse insertion order"
+        },
+        {
+          "id": "d",
+          "text": "No specific order"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Use an ordered map when iteration order is part of the contract.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-practice-q5",
+      "type": "single",
+      "prompt": "Which method can safely remove an element through its active iterator?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Object.finalize"
+        },
+        {
+          "id": "b",
+          "text": "Map.hashCode"
+        },
+        {
+          "id": "c",
+          "text": "Iterator.remove when supported"
+        },
+        {
+          "id": "d",
+          "text": "Always List.remove during for-each"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Iterator removal follows the iteration protocol.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-practice-q6",
+      "type": "single",
+      "prompt": "Does an unmodifiable view guarantee a separate copy of the data?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only on Java 25"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only for maps"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The backing collection may still change through another reference.",
+      "points": 1
+    },
+    {
+      "id": "java-collections-and-equality-practice-q7",
+      "type": "single",
+      "prompt": "What count and key order does this LinkedHashMap example print?\n\n```java\nvar stock = new java.util.LinkedHashMap<String, Integer>();\nstock.put(\"tea\", 2);\nstock.merge(\"tea\", 3, Integer::sum);\nstock.put(\"coffee\", 1);\nSystem.out.println(stock.get(\"tea\"));\nSystem.out.println(stock.keySet());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "5\n[tea, coffee]"
+        },
+        {
+          "id": "b",
+          "text": "3\n[tea, coffee]"
+        },
+        {
+          "id": "c",
+          "text": "5\n[coffee, tea]"
+        },
+        {
+          "id": "d",
+          "text": "2\n[tea, coffee]"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "tea maps to 2. The existing 2 and incoming 3 combine to 5. coffee is inserted second; keys iterate as tea, coffee.",
+      "points": 1
+    }
+  ]
+}

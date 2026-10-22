@@ -1,0 +1,215 @@
+{
+  "id": "java-modern-java-and-modules-practice",
+  "title": "Modern Java, reflection, and modules — Java Practice",
+  "description": "Independent practice: Model API outcomes and inspect explicit application metadata. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-modern-java-and-modules-practice-q1",
+      "type": "single",
+      "prompt": "Which JPMS directive permits reflective access to a package?",
+      "options": [
+        {
+          "id": "a",
+          "text": "exports alone for all private access"
+        },
+        {
+          "id": "b",
+          "text": "requires static only"
+        },
+        {
+          "id": "c",
+          "text": "provides alone"
+        },
+        {
+          "id": "d",
+          "text": "opens"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "opens controls deep reflective access under module rules.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-practice-q2",
+      "type": "single",
+      "prompt": "What does jlink create?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A JavaScript bundle"
+        },
+        {
+          "id": "b",
+          "text": "A public certificate"
+        },
+        {
+          "id": "c",
+          "text": "A custom runtime image from a module graph"
+        },
+        {
+          "id": "d",
+          "text": "A database index"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "jlink assembles the required runtime modules.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-practice-q3",
+      "type": "single",
+      "prompt": "Does reflection remove compile-time safety concerns?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for public classes"
+        },
+        {
+          "id": "b",
+          "text": "No, it often moves checks to runtime"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only for records"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Lookup and invocation can fail at runtime.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-practice-q4",
+      "type": "single",
+      "prompt": "What happens to an exhaustive sealed-type switch when an uncovered permitted subtype is added and code is recompiled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It must be updated or compilation fails"
+        },
+        {
+          "id": "b",
+          "text": "It automatically invents a result"
+        },
+        {
+          "id": "c",
+          "text": "It always returns null"
+        },
+        {
+          "id": "d",
+          "text": "It stops using pattern matching"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Exhaustiveness checks expose the new alternative.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-practice-q5",
+      "type": "single",
+      "prompt": "Should required labs silently depend on preview syntax?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only when code is short"
+        },
+        {
+          "id": "c",
+          "text": "Only on an LTS release"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Preview features need explicit opt-in and compatibility treatment.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-practice-q6",
+      "type": "single",
+      "prompt": "What does exports primarily expose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All files on disk"
+        },
+        {
+          "id": "b",
+          "text": "A network endpoint"
+        },
+        {
+          "id": "c",
+          "text": "Public API types in a package under module access rules"
+        },
+        {
+          "id": "d",
+          "text": "Every private field for reflection"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Normal API access and reflective openness are distinct.",
+      "points": 1
+    },
+    {
+      "id": "java-modern-java-and-modules-practice-q7",
+      "type": "single",
+      "prompt": "Which switch result is printed for the shown Success value?\n\n```java\nsealed interface Outcome permits Success, Failure {}\nrecord Success(String message) implements Outcome {}\nrecord Failure(String reason) implements Outcome {}\nString describe(Outcome result) {\n  return switch (result) {\n    case Success s -> \"OK: \" + s.message();\n    case Failure f -> \"FAIL: \" + f.reason();\n  };\n}\nSystem.out.println(describe(new Success(\"saved\")));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "null"
+        },
+        {
+          "id": "b",
+          "text": "OK: saved"
+        },
+        {
+          "id": "c",
+          "text": "FAIL: saved"
+        },
+        {
+          "id": "d",
+          "text": "Success"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The sealed interface permits Success and Failure. The runtime value is a Success. The matching arm returns OK: saved. Null is outside this sample contract.",
+      "points": 1
+    }
+  ]
+}

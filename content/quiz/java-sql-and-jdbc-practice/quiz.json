@@ -1,0 +1,215 @@
+{
+  "id": "java-sql-and-jdbc-practice",
+  "title": "SQL, JDBC, and transactions — Java Practice",
+  "description": "Independent practice: Persist expenses in a relational database. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-sql-and-jdbc-practice-q1",
+      "type": "single",
+      "prompt": "What tests SQL missing values?",
+      "options": [
+        {
+          "id": "a",
+          "text": "== null"
+        },
+        {
+          "id": "b",
+          "text": "equals(NULL)"
+        },
+        {
+          "id": "c",
+          "text": "IS NULL"
+        },
+        {
+          "id": "d",
+          "text": "= NULL"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "SQL NULL uses three-valued logic and dedicated predicates.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-practice-q2",
+      "type": "single",
+      "prompt": "Can a ? parameter normally stand for an arbitrary table identifier?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only in SELECT"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only if the name contains no spaces"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Value parameters are not SQL identifier substitution.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-practice-q3",
+      "type": "single",
+      "prompt": "What should happen after a failure halfway through a manual transaction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rollback"
+        },
+        {
+          "id": "b",
+          "text": "Commit the successful half by default"
+        },
+        {
+          "id": "c",
+          "text": "Ignore the exception"
+        },
+        {
+          "id": "d",
+          "text": "Create an index"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Rollback preserves the all-or-nothing contract.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-practice-q4",
+      "type": "single",
+      "prompt": "What tradeoff does an index commonly introduce?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Free speed for every query"
+        },
+        {
+          "id": "b",
+          "text": "No impact on inserts"
+        },
+        {
+          "id": "c",
+          "text": "Automatic authorization"
+        },
+        {
+          "id": "d",
+          "text": "Faster targeted reads with extra storage and write work"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Indexes must be chosen for actual access patterns.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-practice-q5",
+      "type": "single",
+      "prompt": "What protects uniqueness against concurrent database writers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A private field"
+        },
+        {
+          "id": "b",
+          "text": "A println"
+        },
+        {
+          "id": "c",
+          "text": "A database uniqueness constraint"
+        },
+        {
+          "id": "d",
+          "text": "A Java contains check alone"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The database must enforce the invariant atomically.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-practice-q6",
+      "type": "single",
+      "prompt": "What should happen to a borrowed pooled connection after use?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Disable all timeouts"
+        },
+        {
+          "id": "b",
+          "text": "Close it promptly to return it to the pool"
+        },
+        {
+          "id": "c",
+          "text": "Keep it forever in a static field"
+        },
+        {
+          "id": "d",
+          "text": "Delete the driver"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Pool-aware close releases the lease for other callers.",
+      "points": 1
+    },
+    {
+      "id": "java-sql-and-jdbc-practice-q7",
+      "type": "single",
+      "prompt": "Given the stated table fixtures, which label does the prepared query print?\n\nEnvironment: Maven project with a JDBC driver, DataSource, and expenses table containing (Food,1250) and (Bus,300). This is a project fragment, not a standalone JShell program.\n\n```java\n// JDBC fragment: run inside a project with a configured DataSource named dataSource.\ntry (var connection = dataSource.getConnection();\n     var statement = connection.prepareStatement(\"SELECT label, amount FROM expenses WHERE amount >= ?\")) {\n  statement.setInt(1, 1000);\n  try (var rows = statement.executeQuery()) {\n    while (rows.next()) System.out.println(rows.getString(\"label\"));\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Food"
+        },
+        {
+          "id": "b",
+          "text": "Bus"
+        },
+        {
+          "id": "c",
+          "text": "Food\nBus"
+        },
+        {
+          "id": "d",
+          "text": "No rows"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The SQL structure is fixed; the amount placeholder is a value parameter. Parameter 1 becomes 1000. Only Food qualifies; resources close in reverse order.",
+      "points": 1
+    }
+  ]
+}

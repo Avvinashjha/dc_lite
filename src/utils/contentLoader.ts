@@ -10,6 +10,10 @@ import type {
 } from '../types/post';
 
 const CONTENT_DIR = path.resolve(process.cwd(), 'content');
+// A static build reads an immutable content snapshot. Reuse resolved courses
+// across lesson routes instead of re-reading and highlighting every chapter
+// for every page. Development bypasses this cache so edits appear immediately.
+const courseBuildCache = new Map<string, Course>();
 
 // ──── Helpers ────
 
@@ -146,6 +150,7 @@ export function getCourseQuizSlugs(): Set<string> {
 }
 
 export function getCourse(slug: string): Course | null {
+  if (import.meta.env.PROD && courseBuildCache.has(slug)) return courseBuildCache.get(slug)!;
   const courseDir = path.join(CONTENT_DIR, 'courses', slug);
   const metaPath = path.join(courseDir, 'meta.json');
 
@@ -183,7 +188,9 @@ export function getCourse(slug: string): Course | null {
 
   const totalLessons = resolvedModules.reduce((sum, m) => sum + m.lessons.length, 0);
 
-  return { ...meta, slug, resolvedModules, totalLessons };
+  const course = { ...meta, slug, resolvedModules, totalLessons };
+  if (import.meta.env.PROD) courseBuildCache.set(slug, course);
+  return course;
 }
 
 export function getLesson(courseSlug: string, moduleSlug: string, lessonSlug: string): Lesson | null {

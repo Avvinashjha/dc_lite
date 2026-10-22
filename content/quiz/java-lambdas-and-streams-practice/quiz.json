@@ -1,0 +1,215 @@
+{
+  "id": "java-lambdas-and-streams-practice",
+  "title": "Lambdas, streams, and Optional — Java Practice",
+  "description": "Independent practice: A shop computes revenue from paid orders. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-lambdas-and-streams-practice-q1",
+      "type": "single",
+      "prompt": "Which functional interface represents a true/false test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Consumer"
+        },
+        {
+          "id": "b",
+          "text": "Supplier"
+        },
+        {
+          "id": "c",
+          "text": "Runnable"
+        },
+        {
+          "id": "d",
+          "text": "Predicate"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Predicate.test returns boolean.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-practice-q2",
+      "type": "single",
+      "prompt": "Why avoid a shared ArrayList mutated by parallel forEach?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Streams cannot contain strings"
+        },
+        {
+          "id": "b",
+          "text": "Lists are immutable by definition"
+        },
+        {
+          "id": "c",
+          "text": "Concurrent mutations can race"
+        },
+        {
+          "id": "d",
+          "text": "Arrays are always faster"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Use a suitable collector instead of shared unsynchronized mutation.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-practice-q3",
+      "type": "single",
+      "prompt": "Which Optional fallback is lazy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "isPresent()"
+        },
+        {
+          "id": "b",
+          "text": "orElseGet(() -> expensive())"
+        },
+        {
+          "id": "c",
+          "text": "orElse(expensive())"
+        },
+        {
+          "id": "d",
+          "text": "get()"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The supplier runs only when the Optional is empty.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-practice-q4",
+      "type": "single",
+      "prompt": "Which operation transforms each stream element?",
+      "options": [
+        {
+          "id": "a",
+          "text": "map"
+        },
+        {
+          "id": "b",
+          "text": "filter"
+        },
+        {
+          "id": "c",
+          "text": "count"
+        },
+        {
+          "id": "d",
+          "text": "close"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "map applies a transformation; filter selects.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-practice-q5",
+      "type": "single",
+      "prompt": "A lambda captures a local variable. What restriction applies?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The object must be immutable"
+        },
+        {
+          "id": "b",
+          "text": "The variable must be static"
+        },
+        {
+          "id": "c",
+          "text": "The variable must be public"
+        },
+        {
+          "id": "d",
+          "text": "The local variable must be final or effectively final"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The local binding cannot be reassigned after capture.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-practice-q6",
+      "type": "single",
+      "prompt": "Do parallel streams guarantee faster execution?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if a list is used"
+        },
+        {
+          "id": "b",
+          "text": "Only if the lambda is short"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Work size, overhead, ordering, and resource contention determine performance.",
+      "points": 1
+    },
+    {
+      "id": "java-lambdas-and-streams-practice-q7",
+      "type": "single",
+      "prompt": "What revenue does the paid-order pipeline print?\n\n```java\nrecord Order(int total, boolean paid) {}\nvar orders = java.util.List.of(new Order(100, true), new Order(200, false), new Order(50, true));\nint revenue = orders.stream()\n  .filter(Order::paid)\n  .mapToInt(Order::total)\n  .sum();\nSystem.out.println(revenue);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "150"
+        },
+        {
+          "id": "c",
+          "text": "350"
+        },
+        {
+          "id": "d",
+          "text": "200"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Keep the paid orders of 100 and 50. Extract their integer totals. sum is the terminal operation and yields 150.",
+      "points": 1
+    }
+  ]
+}

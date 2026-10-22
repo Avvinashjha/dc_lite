@@ -1,0 +1,215 @@
+{
+  "id": "java-interfaces-and-records-practice",
+  "title": "Interfaces, abstraction, and modern models — Java Practice",
+  "description": "Independent practice: A payment checkout accepts different payment providers. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-interfaces-and-records-practice-q1",
+      "type": "single",
+      "prompt": "Which accessor does record Receipt(int charged) provide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "charged()"
+        },
+        {
+          "id": "b",
+          "text": "getCharged() automatically"
+        },
+        {
+          "id": "c",
+          "text": "charged as a public field"
+        },
+        {
+          "id": "d",
+          "text": "readCharged()"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Record accessors use component names.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-practice-q2",
+      "type": "single",
+      "prompt": "Is a record containing an ArrayList automatically deeply immutable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only if the record is public"
+        },
+        {
+          "id": "c",
+          "text": "Only if the list is empty initially"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Final component references do not freeze referenced objects.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-practice-q3",
+      "type": "single",
+      "prompt": "What best models a fixed set of payment statuses?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A Thread"
+        },
+        {
+          "id": "b",
+          "text": "A Scanner"
+        },
+        {
+          "id": "c",
+          "text": "An enum"
+        },
+        {
+          "id": "d",
+          "text": "An unvalidated arbitrary int"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Enums give a named finite set of values.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-practice-q4",
+      "type": "single",
+      "prompt": "What does a sealed class restrict?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every field to primitives"
+        },
+        {
+          "id": "b",
+          "text": "Its permitted direct subtypes"
+        },
+        {
+          "id": "c",
+          "text": "All method calls"
+        },
+        {
+          "id": "d",
+          "text": "All object allocation"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Sealing controls the hierarchy boundary.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-practice-q5",
+      "type": "single",
+      "prompt": "What visibility is required when implementing an ordinary public interface method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "public"
+        },
+        {
+          "id": "b",
+          "text": "private"
+        },
+        {
+          "id": "c",
+          "text": "package-private only"
+        },
+        {
+          "id": "d",
+          "text": "Any visibility"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "An implementation cannot narrow access.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-practice-q6",
+      "type": "single",
+      "prompt": "Which construct can hold shared instance state and an abstract method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An interface instance field"
+        },
+        {
+          "id": "b",
+          "text": "An enum name string"
+        },
+        {
+          "id": "c",
+          "text": "A package declaration"
+        },
+        {
+          "id": "d",
+          "text": "An abstract class"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Abstract classes can mix state and incomplete behavior.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-practice-q7",
+      "type": "single",
+      "prompt": "What charged amount is printed by the receipt accessor?\n\n```java\ninterface Payment { int charge(int amount); }\nclass Card implements Payment {\n  public int charge(int amount) { return amount + 5; }\n}\nrecord Receipt(int charged) {}\nPayment payment = new Card();\nReceipt receipt = new Receipt(payment.charge(100));\nSystem.out.println(receipt.charged());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "text": "105"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "payment exposes charge independently of the provider. Card adds the sample provider fee, yielding 105. Receipt stores charged = 105 and exposes charged().",
+      "points": 1
+    }
+  ]
+}

@@ -1,3 +1,6 @@
+import { parseLearningLab } from '../lib/learningLab.ts';
+import type { LearningLabData } from '../types/learningLab';
+
 /**
  * Parse custom :::video, :::quiz, :::exercise blocks from markdown content.
  * Returns the HTML with blocks replaced by placeholder divs,
@@ -25,16 +28,16 @@ export interface ExerciseBlock {
   starterCode: string;
 }
 
-export type ContentBlock = VideoBlock | QuizBlock | ExerciseBlock;
+export interface LearningLabBlock { type: 'learninglab'; data: LearningLabData }
+export type ContentBlock = VideoBlock | QuizBlock | ExerciseBlock | LearningLabBlock;
 
 export function extractBlocks(markdown: string): { cleanMarkdown: string; blocks: ContentBlock[] } {
   const blocks: ContentBlock[] = [];
-  let idx = 0;
 
   const cleanMarkdown = markdown.replace(
     /:::(\w+)\n([\s\S]*?):::/g,
     (_match, type: string, body: string) => {
-      const placeholder = `<!--BLOCK_${idx}-->`;
+      const placeholder = `<!--BLOCK_${blocks.length}-->`;
 
       if (type === 'video') {
         const url = body.match(/url:\s*(.+)/)?.[1]?.trim() || '';
@@ -55,9 +58,11 @@ export function extractBlocks(markdown: string): { cleanMarkdown: string; blocks
         const description = body.match(/description:\s*(.+)/)?.[1]?.trim() || '';
         const starterCode = body.match(/starterCode:\s*\|\n([\s\S]*)/)?.[1] || '';
         blocks.push({ type: 'exercise', title, description, starterCode: starterCode.replace(/^  /gm, '') });
+      } else if (type === 'learninglab') {
+        blocks.push({ type: 'learninglab', data: parseLearningLab(body) });
+      } else {
+        return _match;
       }
-
-      idx++;
       return placeholder;
     }
   );

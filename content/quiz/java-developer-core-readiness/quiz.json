@@ -1,0 +1,579 @@
+{
+  "id": "java-developer-core-readiness",
+  "title": "Java Developer Core — Readiness Check",
+  "description": "Twenty questions spanning all ten modules of Java Developer Core. Available independently of course enrollment.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-developer-core-readiness-q1",
+      "type": "single",
+      "prompt": "Can instanceof List<String> check the element type at runtime?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only on ArrayList"
+        },
+        {
+          "id": "c",
+          "text": "Only for nonempty lists"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The parameterized element type is not reified for such a check.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q2",
+      "type": "single",
+      "prompt": "Where is the type parameter declared for a generic method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Inside the package name"
+        },
+        {
+          "id": "b",
+          "text": "Only in an import"
+        },
+        {
+          "id": "c",
+          "text": "Before the return type"
+        },
+        {
+          "id": "d",
+          "text": "After the method body"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "For example, <T> T identity(T value) declares T before T as the return type.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q3",
+      "type": "single",
+      "prompt": "Which method can safely remove an element through its active iterator?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Map.hashCode"
+        },
+        {
+          "id": "b",
+          "text": "Iterator.remove when supported"
+        },
+        {
+          "id": "c",
+          "text": "Always List.remove during for-each"
+        },
+        {
+          "id": "d",
+          "text": "Object.finalize"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Iterator removal follows the iteration protocol.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q4",
+      "type": "single",
+      "prompt": "Does an unmodifiable view guarantee a separate copy of the data?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only for maps"
+        },
+        {
+          "id": "d",
+          "text": "Only on Java 25"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The backing collection may still change through another reference.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q5",
+      "type": "single",
+      "prompt": "A lambda captures a local variable. What restriction applies?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The object must be immutable"
+        },
+        {
+          "id": "b",
+          "text": "The variable must be static"
+        },
+        {
+          "id": "c",
+          "text": "The variable must be public"
+        },
+        {
+          "id": "d",
+          "text": "The local variable must be final or effectively final"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The local binding cannot be reassigned after capture.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q6",
+      "type": "single",
+      "prompt": "Do parallel streams guarantee faster execution?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if a list is used"
+        },
+        {
+          "id": "b",
+          "text": "Only if the lambda is short"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Work size, overhead, ordering, and resource contention determine performance.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q7",
+      "type": "single",
+      "prompt": "Can a local time be ambiguous during a daylight-saving transition?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only at the equator"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Only if stored in an int"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Some zone transitions repeat local wall-clock times.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q8",
+      "type": "single",
+      "prompt": "Three rounded shares of 33.33 sum to what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "99.99"
+        },
+        {
+          "id": "b",
+          "text": "100.00"
+        },
+        {
+          "id": "c",
+          "text": "100.01"
+        },
+        {
+          "id": "d",
+          "text": "33.33"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Allocation needs an explicit policy for the remaining cent.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q9",
+      "type": "single",
+      "prompt": "A relative path is resolved against what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always the source directory"
+        },
+        {
+          "id": "b",
+          "text": "Always the user desktop"
+        },
+        {
+          "id": "c",
+          "text": "Always the JDK directory"
+        },
+        {
+          "id": "d",
+          "text": "The current working directory"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Process launch location affects relative paths.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q10",
+      "type": "single",
+      "prompt": "Does normalizing ../ segments alone defeat every path-traversal risk?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if the path is a String"
+        },
+        {
+          "id": "b",
+          "text": "Only when the file exists"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Symlinks and boundary checks require additional care.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q11",
+      "type": "single",
+      "prompt": "What should be reviewed before committing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only the editor theme"
+        },
+        {
+          "id": "b",
+          "text": "The staged diff and relevant test results"
+        },
+        {
+          "id": "c",
+          "text": "Only the commit timestamp"
+        },
+        {
+          "id": "d",
+          "text": "Only the file count"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Review the exact changes and their validation.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q12",
+      "type": "single",
+      "prompt": "Which dependency makes an expiry test nondeterministic unless controlled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The wall clock"
+        },
+        {
+          "id": "b",
+          "text": "A fixed input string"
+        },
+        {
+          "id": "c",
+          "text": "An immutable record"
+        },
+        {
+          "id": "d",
+          "text": "A pure addition method"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Injecting Clock makes time-based behavior predictable.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q13",
+      "type": "single",
+      "prompt": "When should a factory add value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whenever new appears"
+        },
+        {
+          "id": "b",
+          "text": "Only when no objects are created"
+        },
+        {
+          "id": "c",
+          "text": "To hide every simple record constructor"
+        },
+        {
+          "id": "d",
+          "text": "When it centralizes meaningful construction decisions"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A factory earns its place through construction policy.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q14",
+      "type": "single",
+      "prompt": "What is a warning sign of unnecessary abstraction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A clear domain name"
+        },
+        {
+          "id": "b",
+          "text": "An immutable value object"
+        },
+        {
+          "id": "c",
+          "text": "A simple rule becomes harder to follow without a change benefit"
+        },
+        {
+          "id": "d",
+          "text": "A focused interface at an external boundary"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Abstractions should make the relevant changes easier.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q15",
+      "type": "single",
+      "prompt": "Which collection is usually suitable for a stack?",
+      "options": [
+        {
+          "id": "a",
+          "text": "LocalDate"
+        },
+        {
+          "id": "b",
+          "text": "ArrayDeque"
+        },
+        {
+          "id": "c",
+          "text": "TreeMap"
+        },
+        {
+          "id": "d",
+          "text": "Optional"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Deque push/pop provide stack operations.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q16",
+      "type": "single",
+      "prompt": "Why specify a tie-breaker for equal ticket priorities?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To make service ordering deterministic"
+        },
+        {
+          "id": "b",
+          "text": "To remove all duplicates"
+        },
+        {
+          "id": "c",
+          "text": "To make every insertion O(1)"
+        },
+        {
+          "id": "d",
+          "text": "To avoid all memory allocation"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Equal priorities alone do not define a stable service order.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q17",
+      "type": "single",
+      "prompt": "What protects uniqueness against concurrent database writers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A Java contains check alone"
+        },
+        {
+          "id": "b",
+          "text": "A private field"
+        },
+        {
+          "id": "c",
+          "text": "A println"
+        },
+        {
+          "id": "d",
+          "text": "A database uniqueness constraint"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The database must enforce the invariant atomically.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q18",
+      "type": "single",
+      "prompt": "What should happen to a borrowed pooled connection after use?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Delete the driver"
+        },
+        {
+          "id": "b",
+          "text": "Disable all timeouts"
+        },
+        {
+          "id": "c",
+          "text": "Close it promptly to return it to the pool"
+        },
+        {
+          "id": "d",
+          "text": "Keep it forever in a static field"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Pool-aware close releases the lease for other callers.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q19",
+      "type": "single",
+      "prompt": "What should happen when a blocking operation is interrupted?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Convert the result to zero"
+        },
+        {
+          "id": "b",
+          "text": "Propagate interruption or restore the interrupt flag when translating"
+        },
+        {
+          "id": "c",
+          "text": "Always swallow it"
+        },
+        {
+          "id": "d",
+          "text": "Retry forever"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Interruption is a cancellation signal that callers need to observe.",
+      "points": 1
+    },
+    {
+      "id": "java-developer-core-readiness-q20",
+      "type": "single",
+      "prompt": "Which boundary should validate external DTOs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Before business operations use them"
+        },
+        {
+          "id": "b",
+          "text": "Only after database writes"
+        },
+        {
+          "id": "c",
+          "text": "Only in the CSS"
+        },
+        {
+          "id": "d",
+          "text": "Only when logging fails"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Boundary validation prevents invalid external state from leaking inward.",
+      "points": 1
+    }
+  ]
+}

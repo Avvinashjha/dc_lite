@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import VideoEmbed from "../components/VideoEmbed.astro";
 import Quiz from "../components/Quiz.astro";
 import Exercise from "../components/Exercise.astro";
+import LearningLab from "../components/LearningLab";
 import QuizPlayer from "../components/QuizPlayer";
 import { parseMarkdown } from "../utils/markdown";
 import { extractBlocks } from "../utils/parseBlocks";
@@ -237,6 +238,8 @@ function lessonIconId(type: string): string {
               if (!block) return null;
               if (block.type === "video")
                 return <VideoEmbed url={block.url} title={block.title} />;
+              if (block.type === "learninglab")
+                return <LearningLab client:load data={block.data} />;
               if (block.type === "quiz")
                 return (
                   <Quiz

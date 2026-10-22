@@ -1,0 +1,215 @@
+{
+  "id": "java-spring-boot-and-rest-module-check",
+  "title": "Spring Boot and REST APIs — Module Quiz",
+  "description": "Course assessment: Expose the expense tracker as a REST service.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-spring-boot-and-rest-module-check-q1",
+      "type": "single",
+      "prompt": "Which layer should translate HTTP input into an application call?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Database migration"
+        },
+        {
+          "id": "b",
+          "text": "JDK compiler"
+        },
+        {
+          "id": "c",
+          "text": "Controller"
+        },
+        {
+          "id": "d",
+          "text": "Entity equals method"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Controllers adapt transport concerns at the boundary.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-module-check-q2",
+      "type": "single",
+      "prompt": "Which injection style makes required collaborators explicit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Global singleton access everywhere"
+        },
+        {
+          "id": "b",
+          "text": "Constructor injection"
+        },
+        {
+          "id": "c",
+          "text": "Public static mutable fields"
+        },
+        {
+          "id": "d",
+          "text": "Hidden lookups in every method"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Constructors expose dependencies and allow substitution in tests.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-module-check-q3",
+      "type": "single",
+      "prompt": "Which status fits a successful resource creation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "201 Created"
+        },
+        {
+          "id": "b",
+          "text": "404 Not Found"
+        },
+        {
+          "id": "c",
+          "text": "500 Internal Server Error"
+        },
+        {
+          "id": "d",
+          "text": "401 Unauthorized"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Creation commonly includes a Location for the new resource.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-module-check-q4",
+      "type": "single",
+      "prompt": "Why use response DTOs instead of returning JPA entities directly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To eliminate JSON parsing"
+        },
+        {
+          "id": "b",
+          "text": "To make all fields public"
+        },
+        {
+          "id": "c",
+          "text": "To skip authorization"
+        },
+        {
+          "id": "d",
+          "text": "To control the external API and avoid persistence leakage"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "DTOs keep API contracts separate from storage models.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-module-check-q5",
+      "type": "single",
+      "prompt": "Which annotation requests validation of a bound request DTO?",
+      "options": [
+        {
+          "id": "a",
+          "text": "@Deprecated"
+        },
+        {
+          "id": "b",
+          "text": "@FunctionalInterface"
+        },
+        {
+          "id": "c",
+          "text": "@Valid"
+        },
+        {
+          "id": "d",
+          "text": "@Override"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Jakarta validation constraints are applied through the configured validation integration.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-module-check-q6",
+      "type": "single",
+      "prompt": "What status fits an unknown expense identifier?",
+      "options": [
+        {
+          "id": "a",
+          "text": "301 by default"
+        },
+        {
+          "id": "b",
+          "text": "404 Not Found"
+        },
+        {
+          "id": "c",
+          "text": "200 with a fake record"
+        },
+        {
+          "id": "d",
+          "text": "201 Created"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The requested resource does not exist.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-module-check-q7",
+      "type": "single",
+      "prompt": "In the configured Spring project, what response follows GET /greeting?name=Ada?\n\nEnvironment: Spring Initializr Maven project with Spring Web. Import org.springframework.web.bind.annotation.*; place the controller beneath the @SpringBootApplication package. Run ./mvnw spring-boot:run.\n\n```java\n// File: GreetingController.java in the generated Spring project package.\n@RestController\nclass GreetingController {\n  record Greeting(String message) {}\n  @GetMapping(\"/greeting\")\n  Greeting greeting(@RequestParam(defaultValue = \"Java\") String name) {\n    return new Greeting(\"Hello \" + name);\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "GET /greeting?name=Ada → 200 {\"message\":\"Hello Ada\"}"
+        },
+        {
+          "id": "b",
+          "text": "GET /greeting?name=Ada → 404"
+        },
+        {
+          "id": "c",
+          "text": "GET /greeting?name=Ada → 200 {\"message\":\"Hello Java\"}"
+        },
+        {
+          "id": "d",
+          "text": "GET /greeting?name=Ada → 201 {\"message\":\"Hello Ada\"}"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "GET /greeting?name=Ada maps to greeting. The request parameter becomes name = Ada. The returned record becomes a JSON response with message = Hello Ada.",
+      "points": 1
+    }
+  ]
+}

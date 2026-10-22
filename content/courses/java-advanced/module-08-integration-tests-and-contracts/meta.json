@@ -1,0 +1,26 @@
+{
+  "title": "Integration tests and API contracts",
+  "description": "Catch API, database, and security regressions before release.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Integration tests and API contracts: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Integration tests and API contracts: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Integration tests and API contracts: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-integration-tests-and-contracts-module-check",
+      "passingScore": 70
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-security-and-authorization-module-check",
+  "title": "Application security and authorization — Module Quiz",
+  "description": "Course assessment: Ensure each user sees only their own expenses.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-security-and-authorization-module-check-q1",
+      "type": "single",
+      "prompt": "What does authorization decide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether an identity may perform an operation on a resource"
+        },
+        {
+          "id": "b",
+          "text": "The password character count only"
+        },
+        {
+          "id": "c",
+          "text": "Whether JSON is valid"
+        },
+        {
+          "id": "d",
+          "text": "The TCP port"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Authorization is about permissions, including object ownership.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-module-check-q2",
+      "type": "single",
+      "prompt": "Is a valid login sufficient to read any expense id?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only if the id is numeric"
+        },
+        {
+          "id": "c",
+          "text": "Only for GET"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Each resource still needs an authorization check.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-module-check-q3",
+      "type": "single",
+      "prompt": "Does a signed JWT necessarily conceal its payload?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if base64 encoded"
+        },
+        {
+          "id": "b",
+          "text": "Only over HTTP"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Signing protects integrity, not confidentiality of the encoded payload.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-module-check-q4",
+      "type": "single",
+      "prompt": "Is CORS a substitute for server-side authorization?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only in production"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only for POST"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Non-browser clients and same-origin requests still need access controls.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-module-check-q5",
+      "type": "single",
+      "prompt": "Which requests need deliberate CSRF consideration?",
+      "options": [
+        {
+          "id": "a",
+          "text": "State-changing requests using ambient browser credentials such as cookies"
+        },
+        {
+          "id": "b",
+          "text": "Only requests with no credentials"
+        },
+        {
+          "id": "c",
+          "text": "Only static image reads"
+        },
+        {
+          "id": "d",
+          "text": "Only SQL queries"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Browsers may attach cookies to requests initiated by another site.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-module-check-q6",
+      "type": "single",
+      "prompt": "Where should the owner of a newly created expense come from?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An unchecked owner field in the body"
+        },
+        {
+          "id": "b",
+          "text": "The largest existing user id"
+        },
+        {
+          "id": "c",
+          "text": "A client-supplied admin flag"
+        },
+        {
+          "id": "d",
+          "text": "The authenticated server-side identity"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The caller must not assign arbitrary ownership or privileges.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-module-check-q7",
+      "type": "single",
+      "prompt": "What do the owner and other-user checks print?\n\n```java\nrecord Expense(long id, String owner, int amount) {}\nboolean canRead(String user, Expense expense) {\n  return user != null && user.equals(expense.owner());\n}\nExpense expense = new Expense(1, \"alice\", 1250);\nSystem.out.println(canRead(\"alice\", expense));\nSystem.out.println(canRead(\"bob\", expense));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "false\nfalse"
+        },
+        {
+          "id": "b",
+          "text": "false\ntrue"
+        },
+        {
+          "id": "c",
+          "text": "true\nfalse"
+        },
+        {
+          "id": "d",
+          "text": "true\ntrue"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The application receives an established user identity. alice matches the expense owner and may read it. bob is authenticated but is not authorized for this expense.",
+      "points": 1
+    }
+  ]
+}

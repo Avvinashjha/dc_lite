@@ -1,0 +1,215 @@
+{
+  "id": "java-resilience-caching-and-messaging-practice",
+  "title": "Resilience, caching, and messaging — Java Practice",
+  "description": "Independent practice: Prevent duplicate charges when a dependency times out. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q1",
+      "type": "single",
+      "prompt": "What does a circuit breaker do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Guarantees zero failures"
+        },
+        {
+          "id": "b",
+          "text": "Encrypts all messages"
+        },
+        {
+          "id": "c",
+          "text": "Temporarily stops calls after failure conditions"
+        },
+        {
+          "id": "d",
+          "text": "Repairs a database"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "It limits calls to an unhealthy dependency according to a policy.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q2",
+      "type": "single",
+      "prompt": "What must at-least-once message consumers expect?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No failures after acknowledgment"
+        },
+        {
+          "id": "b",
+          "text": "Duplicate deliveries"
+        },
+        {
+          "id": "c",
+          "text": "Exactly one delivery automatically"
+        },
+        {
+          "id": "d",
+          "text": "No ordering concerns ever"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Duplicate handling is part of the consumer contract.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q3",
+      "type": "single",
+      "prompt": "Why store a processed marker and business effect in one transaction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To avoid marking success without the effect or applying it twice after a partial commit"
+        },
+        {
+          "id": "b",
+          "text": "To bypass all database constraints"
+        },
+        {
+          "id": "c",
+          "text": "To force global ordering"
+        },
+        {
+          "id": "d",
+          "text": "To remove every retry"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Atomic recording connects deduplication to the effect.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q4",
+      "type": "single",
+      "prompt": "What does a cache TTL define?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A guarantee the source never changes"
+        },
+        {
+          "id": "b",
+          "text": "An authorization role"
+        },
+        {
+          "id": "c",
+          "text": "A transaction isolation level"
+        },
+        {
+          "id": "d",
+          "text": "How long an entry is considered usable under the cache policy"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "TTL is a freshness policy, not proof of current source data.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q5",
+      "type": "single",
+      "prompt": "What problem can retries at several layers cause?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Guaranteed recovery"
+        },
+        {
+          "id": "b",
+          "text": "A smaller request count"
+        },
+        {
+          "id": "c",
+          "text": "Multiplicative load on a failing dependency"
+        },
+        {
+          "id": "d",
+          "text": "Automatic exactly-once execution"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Nested retry loops amplify attempts.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q6",
+      "type": "single",
+      "prompt": "Does the sample HashSet deduplication survive a process restart?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only after two events"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only if ids are Strings"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Durability requires persistent state and an atomic effect policy.",
+      "points": 1
+    },
+    {
+      "id": "java-resilience-caching-and-messaging-practice-q7",
+      "type": "single",
+      "prompt": "How many unique events does this single-threaded in-memory demonstration accept?\n\n```java\nvar processed = new java.util.HashSet<String>();\nint accepted = 0;\nfor (String eventId : java.util.List.of(\"e1\", \"e1\", \"e2\")) {\n  if (processed.add(eventId)) accepted++;\n}\nSystem.out.println(accepted);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "0"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "add succeeds; accepted becomes 1. add returns false; accepted stays 1. add succeeds; accepted becomes 2. This in-memory demo is single-threaded and not durable.",
+      "points": 1
+    }
+  ]
+}

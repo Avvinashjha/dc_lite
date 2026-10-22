@@ -1,0 +1,26 @@
+{
+  "title": "Builds, unit tests, and Git",
+  "description": "A team makes the expense tracker reproducible.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Builds, unit tests, and Git: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Builds, unit tests, and Git: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Builds, unit tests, and Git: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-builds-tests-and-git-module-check",
+      "passingScore": 70
+    }
+  ]
+}

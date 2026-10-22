@@ -1,0 +1,26 @@
+{
+  "title": "Delivery, observability, and final capstone",
+  "description": "Operate a secure expense API as a small production-style service.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Delivery, observability, and final capstone: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Delivery, observability, and final capstone: practical lab",
+      "type": "text",
+      "duration": "120 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Delivery, observability, and final capstone: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-deployment-and-final-capstone-module-check",
+      "passingScore": 70
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-interfaces-and-records-module-check",
+  "title": "Interfaces, abstraction, and modern models — Module Quiz",
+  "description": "Course assessment: A payment checkout accepts different payment providers.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-interfaces-and-records-module-check-q1",
+      "type": "single",
+      "prompt": "What is the main benefit of depending on Payment rather than Card?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Implementations can change behind a stable contract"
+        },
+        {
+          "id": "b",
+          "text": "All fees become zero"
+        },
+        {
+          "id": "c",
+          "text": "The JVM skips compilation"
+        },
+        {
+          "id": "d",
+          "text": "The object becomes static"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Interfaces separate the caller from the implementation.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-module-check-q2",
+      "type": "single",
+      "prompt": "Can a class implement multiple interfaces?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Only records can"
+        },
+        {
+          "id": "c",
+          "text": "Only abstract classes can"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Java supports multiple interface types.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-module-check-q3",
+      "type": "single",
+      "prompt": "Which accessor does record Receipt(int charged) provide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "charged as a public field"
+        },
+        {
+          "id": "b",
+          "text": "readCharged()"
+        },
+        {
+          "id": "c",
+          "text": "charged()"
+        },
+        {
+          "id": "d",
+          "text": "getCharged() automatically"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Record accessors use component names.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-module-check-q4",
+      "type": "single",
+      "prompt": "Is a record containing an ArrayList automatically deeply immutable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if the list is empty initially"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only if the record is public"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Final component references do not freeze referenced objects.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-module-check-q5",
+      "type": "single",
+      "prompt": "What best models a fixed set of payment statuses?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An enum"
+        },
+        {
+          "id": "b",
+          "text": "An unvalidated arbitrary int"
+        },
+        {
+          "id": "c",
+          "text": "A Thread"
+        },
+        {
+          "id": "d",
+          "text": "A Scanner"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Enums give a named finite set of values.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-module-check-q6",
+      "type": "single",
+      "prompt": "What does a sealed class restrict?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All method calls"
+        },
+        {
+          "id": "b",
+          "text": "All object allocation"
+        },
+        {
+          "id": "c",
+          "text": "Every field to primitives"
+        },
+        {
+          "id": "d",
+          "text": "Its permitted direct subtypes"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Sealing controls the hierarchy boundary.",
+      "points": 1
+    },
+    {
+      "id": "java-interfaces-and-records-module-check-q7",
+      "type": "single",
+      "prompt": "What charged amount is printed by the receipt accessor?\n\n```java\ninterface Payment { int charge(int amount); }\nclass Card implements Payment {\n  public int charge(int amount) { return amount + 5; }\n}\nrecord Receipt(int charged) {}\nPayment payment = new Card();\nReceipt receipt = new Receipt(payment.charge(100));\nSystem.out.println(receipt.charged());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "5"
+        },
+        {
+          "id": "b",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "text": "105"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "payment exposes charge independently of the provider. Card adds the sample provider fee, yielding 105. Receipt stores charged = 105 and exposes charged().",
+      "points": 1
+    }
+  ]
+}

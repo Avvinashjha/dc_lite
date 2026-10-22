@@ -1,0 +1,215 @@
+{
+  "id": "java-exceptions-and-capstone-module-check",
+  "title": "Exceptions and the fundamentals capstone — Module Quiz",
+  "description": "Course assessment: Build a resilient command-line expense tracker.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-exceptions-and-capstone-module-check-q1",
+      "type": "single",
+      "prompt": "What must a caller do with a checked exception not caught locally?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ignore it"
+        },
+        {
+          "id": "b",
+          "text": "Turn off the compiler"
+        },
+        {
+          "id": "c",
+          "text": "Always terminate the JVM"
+        },
+        {
+          "id": "d",
+          "text": "Declare it in throws"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Checked exceptions are part of the method contract.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-module-check-q2",
+      "type": "single",
+      "prompt": "Which exception fits a negative amount supplied to a positive-amount API?",
+      "options": [
+        {
+          "id": "a",
+          "text": "InterruptedException"
+        },
+        {
+          "id": "b",
+          "text": "NoSuchMethodException"
+        },
+        {
+          "id": "c",
+          "text": "IllegalArgumentException"
+        },
+        {
+          "id": "d",
+          "text": "ClassNotFoundException"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The argument violates the operation’s precondition.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-module-check-q3",
+      "type": "single",
+      "prompt": "What does try-with-resources close automatically?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only Strings"
+        },
+        {
+          "id": "b",
+          "text": "AutoCloseable resources"
+        },
+        {
+          "id": "c",
+          "text": "Every object in scope"
+        },
+        {
+          "id": "d",
+          "text": "All static fields"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The resource contract defines close().",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-module-check-q4",
+      "type": "single",
+      "prompt": "Why avoid catching an exception and doing nothing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It hides failure and can imply success"
+        },
+        {
+          "id": "b",
+          "text": "It guarantees a memory leak every time"
+        },
+        {
+          "id": "c",
+          "text": "It prevents compilation always"
+        },
+        {
+          "id": "d",
+          "text": "It changes integers to null"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Handle, propagate, or record failure meaningfully.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-module-check-q5",
+      "type": "single",
+      "prompt": "In what order are multiple try-with-resources resources closed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Declaration order"
+        },
+        {
+          "id": "b",
+          "text": "Random order"
+        },
+        {
+          "id": "c",
+          "text": "They are never closed on failure"
+        },
+        {
+          "id": "d",
+          "text": "Reverse declaration order"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Later resources are closed before earlier resources.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-module-check-q6",
+      "type": "single",
+      "prompt": "Is NumberFormatException checked?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for negative numbers"
+        },
+        {
+          "id": "b",
+          "text": "Only inside main"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "It extends IllegalArgumentException, an unchecked RuntimeException.",
+      "points": 1
+    },
+    {
+      "id": "java-exceptions-and-capstone-module-check-q7",
+      "type": "single",
+      "prompt": "What is printed when this positive-amount parser receives \"-10\"?\n\n```java\nint parseAmount(String text) {\n  int amount = Integer.parseInt(text);\n  if (amount <= 0) throw new IllegalArgumentException(\"Amount must be positive\");\n  return amount;\n}\ntry {\n  System.out.println(parseAmount(\"-10\"));\n} catch (IllegalArgumentException ex) {\n  System.out.println(ex.getMessage());\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "The program silently stores -10"
+        },
+        {
+          "id": "b",
+          "text": "Amount must be positive"
+        },
+        {
+          "id": "c",
+          "text": "-10"
+        },
+        {
+          "id": "d",
+          "text": "NumberFormatException"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "-10 is syntactically a valid integer. The positive-amount rule rejects -10. The catch prints the message; no invalid expense is saved.",
+      "points": 1
+    }
+  ]
+}

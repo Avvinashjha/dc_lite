@@ -1,0 +1,215 @@
+{
+  "id": "java-strings-and-input-module-check",
+  "title": "Strings, text, and input — Module Quiz",
+  "description": "Course assessment: A help desk normalizes customer reference codes.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-strings-and-input-module-check-q1",
+      "type": "single",
+      "prompt": "Which operation compares String content?",
+      "options": [
+        {
+          "id": "a",
+          "text": "hashCode alone"
+        },
+        {
+          "id": "b",
+          "text": "equals"
+        },
+        {
+          "id": "c",
+          "text": "=="
+        },
+        {
+          "id": "d",
+          "text": "instanceof"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "equals tests content; == tests reference identity.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-module-check-q2",
+      "type": "single",
+      "prompt": "What does calling strip() do to the original String?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Leaves it unchanged"
+        },
+        {
+          "id": "b",
+          "text": "Mutates it"
+        },
+        {
+          "id": "c",
+          "text": "Deletes its reference"
+        },
+        {
+          "id": "d",
+          "text": "Makes it null"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "String is immutable; use the returned value.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-module-check-q3",
+      "type": "single",
+      "prompt": "Which tool fits repeated text appends inside a loop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Integer"
+        },
+        {
+          "id": "b",
+          "text": "ThreadLocal"
+        },
+        {
+          "id": "c",
+          "text": "FileLock"
+        },
+        {
+          "id": "d",
+          "text": "StringBuilder"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "StringBuilder provides mutable accumulation.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-module-check-q4",
+      "type": "single",
+      "prompt": "Does String.length() always count visible characters?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when final"
+        },
+        {
+          "id": "b",
+          "text": "Only on Linux"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "It counts UTF-16 code units, not grapheme clusters.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-module-check-q5",
+      "type": "single",
+      "prompt": "Which locale is appropriate for normalizing machine identifiers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The timezone name"
+        },
+        {
+          "id": "b",
+          "text": "Locale.ROOT"
+        },
+        {
+          "id": "c",
+          "text": "The user default in every case"
+        },
+        {
+          "id": "d",
+          "text": "A random locale"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "ROOT avoids locale-dependent case mapping for identifiers.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-module-check-q6",
+      "type": "single",
+      "prompt": "What may nextLine() return immediately after Scanner.nextInt()?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The remainder of the current line, possibly empty"
+        },
+        {
+          "id": "b",
+          "text": "Always the next integer"
+        },
+        {
+          "id": "c",
+          "text": "Always null"
+        },
+        {
+          "id": "d",
+          "text": "A StringBuilder"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "nextInt does not consume the whole line separator.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-module-check-q7",
+      "type": "single",
+      "prompt": "What does the normalization and comparison print?\n\n```java\nString raw = \"  ab-42  \";\nString code = raw.strip().toUpperCase(java.util.Locale.ROOT);\nSystem.out.println(code);\nSystem.out.println(raw.equals(code));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "AB-42\ntrue"
+        },
+        {
+          "id": "b",
+          "text": "ab-42\nfalse"
+        },
+        {
+          "id": "c",
+          "text": "  AB-42  \ntrue"
+        },
+        {
+          "id": "d",
+          "text": "AB-42\nfalse"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "raw still contains leading and trailing spaces. strip returns ab-42; uppercase with ROOT returns AB-42. raw and code contain different text, so equals returns false.",
+      "points": 1
+    }
+  ]
+}

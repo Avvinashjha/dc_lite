@@ -1,0 +1,47 @@
+name: Verify Java course labs
+on:
+  pull_request:
+    paths: ['examples/java/**', 'scripts/*java*', 'scripts/data/java-*', '.github/workflows/java-courses.yml']
+  push:
+    branches: [main, master]
+    paths: ['examples/java/**', 'scripts/*java*', 'scripts/data/java-*', '.github/workflows/java-courses.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: java_course
+          POSTGRES_PASSWORD: test-only-password
+          POSTGRES_DB: java_course
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U java_course"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:java
+      - run: npm run test:java:examples
+      - name: Verify capstones on H2 and PostgreSQL and run the named module
+        working-directory: examples/java
+        run: sh verify.sh
+        env:
+          TEST_DB_URL: jdbc:postgresql://localhost:5432/java_course
+          TEST_DB_USER: java_course
+          TEST_DB_PASSWORD: test-only-password
+      - name: Exercise the packaged API through HTTP and process restarts
+        run: npm run test:java:api

@@ -1,0 +1,215 @@
+{
+  "id": "java-classes-and-encapsulation-module-check",
+  "title": "Classes, objects, and encapsulation — Module Quiz",
+  "description": "Course assessment: A digital wallet protects its balance.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-classes-and-encapsulation-module-check-q1",
+      "type": "single",
+      "prompt": "What does assigning Wallet alias = first copy?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The balance into a new object"
+        },
+        {
+          "id": "b",
+          "text": "The reference value"
+        },
+        {
+          "id": "c",
+          "text": "The entire wallet object"
+        },
+        {
+          "id": "d",
+          "text": "The class definition"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Both variables can refer to one object.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-module-check-q2",
+      "type": "single",
+      "prompt": "Why keep a wallet balance private?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To enforce valid changes through operations"
+        },
+        {
+          "id": "b",
+          "text": "To make arithmetic faster"
+        },
+        {
+          "id": "c",
+          "text": "To guarantee thread safety"
+        },
+        {
+          "id": "d",
+          "text": "To prevent all exceptions"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Encapsulation protects the invariant through the API.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-module-check-q3",
+      "type": "single",
+      "prompt": "Which member belongs to the class rather than each instance?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An instance field"
+        },
+        {
+          "id": "b",
+          "text": "this"
+        },
+        {
+          "id": "c",
+          "text": "A constructor parameter"
+        },
+        {
+          "id": "d",
+          "text": "A static field"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Static state is associated with the class.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-module-check-q4",
+      "type": "single",
+      "prompt": "What should a constructor establish?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A second JVM"
+        },
+        {
+          "id": "b",
+          "text": "A global variable for every field"
+        },
+        {
+          "id": "c",
+          "text": "A valid initial object state"
+        },
+        {
+          "id": "d",
+          "text": "An arbitrary invalid balance"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Constructor validation prevents invalid instances from escaping.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-module-check-q5",
+      "type": "single",
+      "prompt": "If a.equals(b) is true, which must hold?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Both hash codes are zero"
+        },
+        {
+          "id": "b",
+          "text": "a.hashCode() == b.hashCode()"
+        },
+        {
+          "id": "c",
+          "text": "a == b"
+        },
+        {
+          "id": "d",
+          "text": "a and b have different classes"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The equality contract requires equal hash codes for equal objects.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-module-check-q6",
+      "type": "single",
+      "prompt": "Does a private field alone make a class thread-safe?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only for ints"
+        },
+        {
+          "id": "d",
+          "text": "Only with getters"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Visibility and synchronization are separate concerns.",
+      "points": 1
+    },
+    {
+      "id": "java-classes-and-encapsulation-module-check-q7",
+      "type": "single",
+      "prompt": "What balance is visible through first after alias.deposit(50)?\n\n```java\nclass Wallet {\n  private int balance;\n  void deposit(int amount) {\n    if (amount <= 0) throw new IllegalArgumentException(\"Positive amount required\");\n    balance = Math.addExact(balance, amount);\n  }\n  int balance() { return balance; }\n}\nWallet first = new Wallet();\nWallet alias = first;\nalias.deposit(50);\nSystem.out.println(first.balance());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "100"
+        },
+        {
+          "id": "c",
+          "text": "A new wallet is allocated, so first is unchanged"
+        },
+        {
+          "id": "d",
+          "text": "50"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "One Wallet object starts with balance 0. first and alias both refer to that same wallet. alias.deposit changes the shared object; first.balance() is 50.",
+      "points": 1
+    }
+  ]
+}

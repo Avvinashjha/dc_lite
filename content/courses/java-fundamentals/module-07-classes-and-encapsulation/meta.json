@@ -1,0 +1,26 @@
+{
+  "title": "Classes, objects, and encapsulation",
+  "description": "A digital wallet protects its balance.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Classes, objects, and encapsulation: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Classes, objects, and encapsulation: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Classes, objects, and encapsulation: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-classes-and-encapsulation-module-check",
+      "passingScore": 70
+    }
+  ]
+}

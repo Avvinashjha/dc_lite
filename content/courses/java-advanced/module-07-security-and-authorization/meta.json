@@ -1,0 +1,26 @@
+{
+  "title": "Application security and authorization",
+  "description": "Ensure each user sees only their own expenses.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Application security and authorization: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Application security and authorization: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Application security and authorization: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-security-and-authorization-module-check",
+      "passingScore": 70
+    }
+  ]
+}

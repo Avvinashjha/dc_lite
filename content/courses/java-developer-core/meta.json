@@ -1,0 +1,56 @@
+{
+  "title": "Java Developer Core",
+  "description": "Move from syntax to application development: generics, collections, streams, files, clean design, algorithms, tests, SQL/JDBC, and HTTP/JSON.",
+  "author": "DailyCoder",
+  "level": "intermediate",
+  "duration": "25–35 hours",
+  "tags": [
+    "Java",
+    "Interactive",
+    "OOP",
+    "Projects"
+  ],
+  "modules": [
+    {
+      "slug": "module-01-generics-and-type-safety",
+      "title": "Generics and type safety"
+    },
+    {
+      "slug": "module-02-collections-and-equality",
+      "title": "Collections and equality"
+    },
+    {
+      "slug": "module-03-lambdas-and-streams",
+      "title": "Lambdas, streams, and Optional"
+    },
+    {
+      "slug": "module-04-dates-numbers-and-patterns",
+      "title": "Dates, numbers, and text patterns"
+    },
+    {
+      "slug": "module-05-files-and-resources",
+      "title": "Files, NIO, and resource management"
+    },
+    {
+      "slug": "module-06-builds-tests-and-git",
+      "title": "Builds, unit tests, and Git"
+    },
+    {
+      "slug": "module-07-design-and-patterns",
+      "title": "Clean design and practical patterns"
+    },
+    {
+      "slug": "module-08-data-structures-and-complexity",
+      "title": "Data structures and algorithmic thinking"
+    },
+    {
+      "slug": "module-09-sql-and-jdbc",
+      "title": "SQL, JDBC, and transactions"
+    },
+    {
+      "slug": "module-10-http-json-and-core-capstone",
+      "title": "HTTP, JSON, and the developer core capstone"
+    }
+  ],
+  "draft": false
+}

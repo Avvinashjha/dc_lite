@@ -1,0 +1,26 @@
+{
+  "title": "Files, NIO, and resource management",
+  "description": "The expense tracker exports and imports a local report.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Files, NIO, and resource management: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Files, NIO, and resource management: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Files, NIO, and resource management: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-files-and-resources-module-check",
+      "passingScore": 70
+    }
+  ]
+}

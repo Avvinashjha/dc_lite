@@ -1,0 +1,215 @@
+{
+  "id": "java-methods-and-debugging-module-check",
+  "title": "Methods and debugging — Module Quiz",
+  "description": "Course assessment: A restaurant reuses a tip calculator.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-methods-and-debugging-module-check-q1",
+      "type": "single",
+      "prompt": "How are Java arguments passed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By source code substitution"
+        },
+        {
+          "id": "b",
+          "text": "By value"
+        },
+        {
+          "id": "c",
+          "text": "By reference for all objects"
+        },
+        {
+          "id": "d",
+          "text": "By name"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "An object argument copies the reference value, not the object itself.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-module-check-q2",
+      "type": "single",
+      "prompt": "Can two overloads differ only in return type?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes, always"
+        },
+        {
+          "id": "c",
+          "text": "Only for int"
+        },
+        {
+          "id": "d",
+          "text": "Only for public methods"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The parameter list must distinguish overloaded declarations.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-module-check-q3",
+      "type": "single",
+      "prompt": "What does return do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always exits the JVM"
+        },
+        {
+          "id": "b",
+          "text": "Restarts the loop"
+        },
+        {
+          "id": "c",
+          "text": "Deletes all local variables globally"
+        },
+        {
+          "id": "d",
+          "text": "Ends the current method invocation"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "It optionally provides a value to the caller.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-module-check-q4",
+      "type": "single",
+      "prompt": "Which design makes tip calculation easiest to unit test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Use a global bill variable"
+        },
+        {
+          "id": "b",
+          "text": "Print without returning a result"
+        },
+        {
+          "id": "c",
+          "text": "Return the tip without console input or output"
+        },
+        {
+          "id": "d",
+          "text": "Read terminal input inside every calculation"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Explicit inputs and outputs reduce test setup and side effects.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-module-check-q5",
+      "type": "single",
+      "prompt": "A method reassigns its object parameter. Does this replace the caller’s variable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only with final"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Always"
+        },
+        {
+          "id": "d",
+          "text": "Only if the parameter is public"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The reassignment changes the local copy of the reference.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-module-check-q6",
+      "type": "single",
+      "prompt": "What debugger action enters a called method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Step into"
+        },
+        {
+          "id": "b",
+          "text": "Step over"
+        },
+        {
+          "id": "c",
+          "text": "Resume to completion"
+        },
+        {
+          "id": "d",
+          "text": "Delete breakpoint"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Step into follows execution into the method body.",
+      "points": 1
+    },
+    {
+      "id": "java-methods-and-debugging-module-check-q7",
+      "type": "single",
+      "prompt": "What are the two printed values after tip returns?\n\n```java\nint tip(int bill, int percent) {\n  return bill * percent / 100;\n}\nint bill = 800;\nint result = tip(bill, 10);\nSystem.out.println(result);\nSystem.out.println(bill);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "80\n80"
+        },
+        {
+          "id": "b",
+          "text": "800\n80"
+        },
+        {
+          "id": "c",
+          "text": "800\n800"
+        },
+        {
+          "id": "d",
+          "text": "80\n800"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Copies 800 and 10 into the method parameters. 800 * 10 / 100 produces 80. result becomes 80; caller bill remains 800.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-data-structures-and-complexity-module-check",
+  "title": "Data structures and algorithmic thinking — Module Quiz",
+  "description": "Course assessment: A support queue needs fast lookups and prioritized work.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-data-structures-and-complexity-module-check-q1",
+      "type": "single",
+      "prompt": "What precondition does binary search require?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Data sorted under the search ordering"
+        },
+        {
+          "id": "b",
+          "text": "Unique data only"
+        },
+        {
+          "id": "c",
+          "text": "An odd number of items"
+        },
+        {
+          "id": "d",
+          "text": "A linked list specifically"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Without a consistent sorted order its comparisons cannot discard half the search range safely.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-module-check-q2",
+      "type": "single",
+      "prompt": "Does iterating a PriorityQueue guarantee sorted output?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for integers"
+        },
+        {
+          "id": "c",
+          "text": "Only after three inserts"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Repeated poll follows priority order; iteration does not.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-module-check-q3",
+      "type": "single",
+      "prompt": "Which traversal finds shortest paths in an unweighted graph?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Binary search"
+        },
+        {
+          "id": "b",
+          "text": "Insertion sort"
+        },
+        {
+          "id": "c",
+          "text": "Breadth-first search"
+        },
+        {
+          "id": "d",
+          "text": "Arbitrary depth-first search"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "BFS explores vertices in increasing edge distance.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-module-check-q4",
+      "type": "single",
+      "prompt": "What prevents revisiting vertices indefinitely in a cyclic graph?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A static main method"
+        },
+        {
+          "id": "b",
+          "text": "A visited set"
+        },
+        {
+          "id": "c",
+          "text": "A larger recursion limit alone"
+        },
+        {
+          "id": "d",
+          "text": "Sorting all vertex names"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Record discovered vertices before revisiting them.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-module-check-q5",
+      "type": "single",
+      "prompt": "What is the expected time for a well-distributed hash lookup?",
+      "options": [
+        {
+          "id": "a",
+          "text": "O(1)"
+        },
+        {
+          "id": "b",
+          "text": "O(n!)"
+        },
+        {
+          "id": "c",
+          "text": "O(n²) always"
+        },
+        {
+          "id": "d",
+          "text": "O(log n) always"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Hashing aims for constant expected lookup under suitable assumptions.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-module-check-q6",
+      "type": "single",
+      "prompt": "What must a terminating recursive routine have?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A static mutable counter always"
+        },
+        {
+          "id": "b",
+          "text": "A database connection"
+        },
+        {
+          "id": "c",
+          "text": "No parameters"
+        },
+        {
+          "id": "d",
+          "text": "A base case and progress toward it"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Without progress or a reachable base case recursion can continue indefinitely.",
+      "points": 1
+    },
+    {
+      "id": "java-data-structures-and-complexity-module-check-q7",
+      "type": "single",
+      "prompt": "In what order do repeated poll calls print these priorities?\n\n```java\nvar queue = new java.util.PriorityQueue<Integer>();\nqueue.add(3);\nqueue.add(1);\nqueue.add(2);\nwhile (!queue.isEmpty()) System.out.println(queue.poll());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "3\n2\n1"
+        },
+        {
+          "id": "b",
+          "text": "2\n1\n3"
+        },
+        {
+          "id": "c",
+          "text": "1\n2\n3"
+        },
+        {
+          "id": "d",
+          "text": "3\n1\n2"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The heap contains 3, 1, and 2; internal iteration order is not a sorting contract. The minimum 1 is removed. The next minima are 2 and 3.",
+      "points": 1
+    }
+  ]
+}

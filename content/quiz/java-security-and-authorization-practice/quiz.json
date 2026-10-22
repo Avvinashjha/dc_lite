@@ -1,0 +1,215 @@
+{
+  "id": "java-security-and-authorization-practice",
+  "title": "Application security and authorization — Java Practice",
+  "description": "Independent practice: Ensure each user sees only their own expenses. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-security-and-authorization-practice-q1",
+      "type": "single",
+      "prompt": "Does a signed JWT necessarily conceal its payload?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only if base64 encoded"
+        },
+        {
+          "id": "d",
+          "text": "Only over HTTP"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Signing protects integrity, not confidentiality of the encoded payload.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-practice-q2",
+      "type": "single",
+      "prompt": "Is CORS a substitute for server-side authorization?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for POST"
+        },
+        {
+          "id": "c",
+          "text": "Only in production"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Non-browser clients and same-origin requests still need access controls.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-practice-q3",
+      "type": "single",
+      "prompt": "Which requests need deliberate CSRF consideration?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only static image reads"
+        },
+        {
+          "id": "b",
+          "text": "Only SQL queries"
+        },
+        {
+          "id": "c",
+          "text": "State-changing requests using ambient browser credentials such as cookies"
+        },
+        {
+          "id": "d",
+          "text": "Only requests with no credentials"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Browsers may attach cookies to requests initiated by another site.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-practice-q4",
+      "type": "single",
+      "prompt": "Where should the owner of a newly created expense come from?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A client-supplied admin flag"
+        },
+        {
+          "id": "b",
+          "text": "The authenticated server-side identity"
+        },
+        {
+          "id": "c",
+          "text": "An unchecked owner field in the body"
+        },
+        {
+          "id": "d",
+          "text": "The largest existing user id"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The caller must not assign arbitrary ownership or privileges.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-practice-q5",
+      "type": "single",
+      "prompt": "What is appropriate for stored password verification?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A suitable adaptive password encoder"
+        },
+        {
+          "id": "b",
+          "text": "Plain text"
+        },
+        {
+          "id": "c",
+          "text": "Base64 alone"
+        },
+        {
+          "id": "d",
+          "text": "String.hashCode"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Password verification needs a purpose-built password hashing scheme.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-practice-q6",
+      "type": "single",
+      "prompt": "Which item should be excluded from routine logs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A safe correlation id"
+        },
+        {
+          "id": "b",
+          "text": "The HTTP status"
+        },
+        {
+          "id": "c",
+          "text": "A sanitized route name"
+        },
+        {
+          "id": "d",
+          "text": "Bearer tokens"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Tokens are credentials and must not leak through logs.",
+      "points": 1
+    },
+    {
+      "id": "java-security-and-authorization-practice-q7",
+      "type": "single",
+      "prompt": "What do the owner and other-user checks print?\n\n```java\nrecord Expense(long id, String owner, int amount) {}\nboolean canRead(String user, Expense expense) {\n  return user != null && user.equals(expense.owner());\n}\nExpense expense = new Expense(1, \"alice\", 1250);\nSystem.out.println(canRead(\"alice\", expense));\nSystem.out.println(canRead(\"bob\", expense));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "false\nfalse"
+        },
+        {
+          "id": "b",
+          "text": "false\ntrue"
+        },
+        {
+          "id": "c",
+          "text": "true\nfalse"
+        },
+        {
+          "id": "d",
+          "text": "true\ntrue"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The application receives an established user identity. alice matches the expense owner and may read it. bob is authenticated but is not authorized for this expense.",
+      "points": 1
+    }
+  ]
+}

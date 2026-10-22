@@ -1,0 +1,215 @@
+{
+  "id": "java-first-program-module-check",
+  "title": "Your first Java program — Module Quiz",
+  "description": "Course assessment: A café needs a receipt printer.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-first-program-module-check-q1",
+      "type": "single",
+      "prompt": "Which tool compiles Receipt.java to bytecode?",
+      "options": [
+        {
+          "id": "a",
+          "text": "javadoc"
+        },
+        {
+          "id": "b",
+          "text": "javac"
+        },
+        {
+          "id": "c",
+          "text": "java"
+        },
+        {
+          "id": "d",
+          "text": "npm"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "javac compiles source; java launches a program.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-module-check-q2",
+      "type": "single",
+      "prompt": "What runs Java bytecode?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A compatible JVM"
+        },
+        {
+          "id": "b",
+          "text": "A CSS engine"
+        },
+        {
+          "id": "c",
+          "text": "Only the original compiler"
+        },
+        {
+          "id": "d",
+          "text": "A SQL server"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The JVM executes bytecode for the target platform.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-module-check-q3",
+      "type": "single",
+      "prompt": "A public class Receipt is saved in which file?",
+      "options": [
+        {
+          "id": "a",
+          "text": "receipt.txt"
+        },
+        {
+          "id": "b",
+          "text": "Main.class"
+        },
+        {
+          "id": "c",
+          "text": "Receipt.js"
+        },
+        {
+          "id": "d",
+          "text": "Receipt.java"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A public top-level class uses a matching source filename.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-module-check-q4",
+      "type": "single",
+      "prompt": "After javac Receipt.java succeeds, which command launches it?",
+      "options": [
+        {
+          "id": "a",
+          "text": "javac Receipt"
+        },
+        {
+          "id": "b",
+          "text": "run Receipt.java.class"
+        },
+        {
+          "id": "c",
+          "text": "java Receipt"
+        },
+        {
+          "id": "d",
+          "text": "java Receipt.class"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The launcher takes the class name without .class.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-module-check-q5",
+      "type": "single",
+      "prompt": "What does System.out.println(\"Hi\") add after Hi?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The word null"
+        },
+        {
+          "id": "b",
+          "text": "A line terminator"
+        },
+        {
+          "id": "c",
+          "text": "A semicolon"
+        },
+        {
+          "id": "d",
+          "text": "Nothing"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "println ends the output line.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-module-check-q6",
+      "type": "single",
+      "prompt": "A missing semicolon normally causes what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A compilation error"
+        },
+        {
+          "id": "b",
+          "text": "A network timeout"
+        },
+        {
+          "id": "c",
+          "text": "A garbage collection pause"
+        },
+        {
+          "id": "d",
+          "text": "An automatic correction"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The compiler rejects invalid syntax before execution.",
+      "points": 1
+    },
+    {
+      "id": "java-first-program-module-check-q7",
+      "type": "single",
+      "prompt": "After compiling and launching Receipt, what is printed?\n\n```java\nclass Receipt {\n  public static void main(String[] args) {\n    int coffees = 2;\n    System.out.println(\"Coffees: \" + coffees);\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Coffees: 0"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "Receipt.class"
+        },
+        {
+          "id": "d",
+          "text": "Coffees: 2"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The JVM calls the entry point. No receipt has been printed. The local int holds the value 2. String concatenation produces Coffees: 2, followed by a newline.",
+      "points": 1
+    }
+  ]
+}

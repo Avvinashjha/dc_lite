@@ -1,0 +1,26 @@
+{
+  "title": "Resilience, caching, and messaging",
+  "description": "Prevent duplicate charges when a dependency times out.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Resilience, caching, and messaging: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Resilience, caching, and messaging: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Resilience, caching, and messaging: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-resilience-caching-and-messaging-module-check",
+      "passingScore": 70
+    }
+  ]
+}

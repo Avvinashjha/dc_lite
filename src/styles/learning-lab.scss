@@ -1,0 +1,20 @@
+.learning-lab {
+  margin: 2rem 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  min-width: 0;
+  &__eyebrow { color: var(--color-primary); font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  pre { max-width: 100%; overflow: auto; padding: 1rem; background: var(--color-code-bg); border-radius: var(--radius-md); white-space: pre; }
+  fieldset { min-width: 0; padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+  legend { padding: 0 .4rem; font-weight: 600; }
+  label { display: flex; align-items: flex-start; gap: .6rem; margin: .7rem 0; cursor: pointer; }
+  label span { white-space: pre-wrap; overflow-wrap: anywhere; }
+  input { margin-top: .3rem; flex: 0 0 auto; }
+  &__actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+  button { cursor: pointer; border: 1px solid var(--color-border); color: var(--color-text); background: var(--color-background); padding: .65rem 1rem; border-radius: var(--radius-md); font: inherit; }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+  button:disabled { opacity: .5; cursor: default; }
+  &__trace { border-left: 3px solid var(--color-primary); padding: .3rem 1rem; margin-top: 1.5rem; }
+}

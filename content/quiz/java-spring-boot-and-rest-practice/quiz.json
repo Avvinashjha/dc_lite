@@ -1,0 +1,215 @@
+{
+  "id": "java-spring-boot-and-rest-practice",
+  "title": "Spring Boot and REST APIs — Java Practice",
+  "description": "Independent practice: Expose the expense tracker as a REST service. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-spring-boot-and-rest-practice-q1",
+      "type": "single",
+      "prompt": "Which status fits a successful resource creation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "500 Internal Server Error"
+        },
+        {
+          "id": "b",
+          "text": "401 Unauthorized"
+        },
+        {
+          "id": "c",
+          "text": "201 Created"
+        },
+        {
+          "id": "d",
+          "text": "404 Not Found"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Creation commonly includes a Location for the new resource.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-practice-q2",
+      "type": "single",
+      "prompt": "Why use response DTOs instead of returning JPA entities directly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To skip authorization"
+        },
+        {
+          "id": "b",
+          "text": "To control the external API and avoid persistence leakage"
+        },
+        {
+          "id": "c",
+          "text": "To eliminate JSON parsing"
+        },
+        {
+          "id": "d",
+          "text": "To make all fields public"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "DTOs keep API contracts separate from storage models.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-practice-q3",
+      "type": "single",
+      "prompt": "Which annotation requests validation of a bound request DTO?",
+      "options": [
+        {
+          "id": "a",
+          "text": "@Valid"
+        },
+        {
+          "id": "b",
+          "text": "@Override"
+        },
+        {
+          "id": "c",
+          "text": "@Deprecated"
+        },
+        {
+          "id": "d",
+          "text": "@FunctionalInterface"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Jakarta validation constraints are applied through the configured validation integration.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-practice-q4",
+      "type": "single",
+      "prompt": "What status fits an unknown expense identifier?",
+      "options": [
+        {
+          "id": "a",
+          "text": "200 with a fake record"
+        },
+        {
+          "id": "b",
+          "text": "201 Created"
+        },
+        {
+          "id": "c",
+          "text": "301 by default"
+        },
+        {
+          "id": "d",
+          "text": "404 Not Found"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The requested resource does not exist.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-practice-q5",
+      "type": "single",
+      "prompt": "Why bound an API page size?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To avoid all indexes"
+        },
+        {
+          "id": "b",
+          "text": "To force ascending ids"
+        },
+        {
+          "id": "c",
+          "text": "To control resource use and response size"
+        },
+        {
+          "id": "d",
+          "text": "To guarantee requests never fail"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Unbounded collection requests can exhaust application and database capacity.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-practice-q6",
+      "type": "single",
+      "prompt": "Why is renaming a response field a compatibility decision?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The compiler upgrades all clients"
+        },
+        {
+          "id": "b",
+          "text": "External clients may depend on its name"
+        },
+        {
+          "id": "c",
+          "text": "Only Java reflection uses fields"
+        },
+        {
+          "id": "d",
+          "text": "HTTP ignores JSON names"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Public contracts extend beyond the service source tree.",
+      "points": 1
+    },
+    {
+      "id": "java-spring-boot-and-rest-practice-q7",
+      "type": "single",
+      "prompt": "In the configured Spring project, what response follows GET /greeting?name=Ada?\n\nEnvironment: Spring Initializr Maven project with Spring Web. Import org.springframework.web.bind.annotation.*; place the controller beneath the @SpringBootApplication package. Run ./mvnw spring-boot:run.\n\n```java\n// File: GreetingController.java in the generated Spring project package.\n@RestController\nclass GreetingController {\n  record Greeting(String message) {}\n  @GetMapping(\"/greeting\")\n  Greeting greeting(@RequestParam(defaultValue = \"Java\") String name) {\n    return new Greeting(\"Hello \" + name);\n  }\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "GET /greeting?name=Ada → 200 {\"message\":\"Hello Ada\"}"
+        },
+        {
+          "id": "b",
+          "text": "GET /greeting?name=Ada → 404"
+        },
+        {
+          "id": "c",
+          "text": "GET /greeting?name=Ada → 200 {\"message\":\"Hello Java\"}"
+        },
+        {
+          "id": "d",
+          "text": "GET /greeting?name=Ada → 201 {\"message\":\"Hello Ada\"}"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "GET /greeting?name=Ada maps to greeting. The request parameter becomes name = Ada. The returned record becomes a JSON response with message = Hello Ada.",
+      "points": 1
+    }
+  ]
+}

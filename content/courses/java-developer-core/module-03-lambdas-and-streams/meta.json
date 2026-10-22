@@ -1,0 +1,26 @@
+{
+  "title": "Lambdas, streams, and Optional",
+  "description": "A shop computes revenue from paid orders.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Lambdas, streams, and Optional: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Lambdas, streams, and Optional: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Lambdas, streams, and Optional: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-lambdas-and-streams-module-check",
+      "passingScore": 70
+    }
+  ]
+}

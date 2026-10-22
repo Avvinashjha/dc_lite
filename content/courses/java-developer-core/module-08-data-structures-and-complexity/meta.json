@@ -1,0 +1,26 @@
+{
+  "title": "Data structures and algorithmic thinking",
+  "description": "A support queue needs fast lookups and prioritized work.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Data structures and algorithmic thinking: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Data structures and algorithmic thinking: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Data structures and algorithmic thinking: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-data-structures-and-complexity-module-check",
+      "passingScore": 70
+    }
+  ]
+}

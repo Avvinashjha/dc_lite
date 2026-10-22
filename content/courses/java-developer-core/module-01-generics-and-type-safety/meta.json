@@ -1,0 +1,26 @@
+{
+  "title": "Generics and type safety",
+  "description": "A parcel locker stores different kinds of packages safely.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Generics and type safety: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Generics and type safety: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Generics and type safety: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-generics-and-type-safety-module-check",
+      "passingScore": 70
+    }
+  ]
+}

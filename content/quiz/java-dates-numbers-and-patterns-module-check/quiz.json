@@ -1,0 +1,215 @@
+{
+  "id": "java-dates-numbers-and-patterns-module-check",
+  "title": "Dates, numbers, and text patterns — Module Quiz",
+  "description": "Course assessment: A booking service schedules visits across time zones.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q1",
+      "type": "single",
+      "prompt": "Which type represents a birthday without a time zone?",
+      "options": [
+        {
+          "id": "a",
+          "text": "LocalDate"
+        },
+        {
+          "id": "b",
+          "text": "Instant"
+        },
+        {
+          "id": "c",
+          "text": "Duration"
+        },
+        {
+          "id": "d",
+          "text": "Thread"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A birthday is a calendar date.",
+      "points": 1
+    },
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q2",
+      "type": "single",
+      "prompt": "Which type identifies a point on the global timeline?",
+      "options": [
+        {
+          "id": "a",
+          "text": "LocalTime"
+        },
+        {
+          "id": "b",
+          "text": "LocalDateTime alone"
+        },
+        {
+          "id": "c",
+          "text": "Period"
+        },
+        {
+          "id": "d",
+          "text": "Instant"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Instant represents an absolute point in time.",
+      "points": 1
+    },
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q3",
+      "type": "single",
+      "prompt": "Why inject Clock into expiry logic?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To force the UTC timezone everywhere"
+        },
+        {
+          "id": "b",
+          "text": "To avoid all date parsing"
+        },
+        {
+          "id": "c",
+          "text": "To make time deterministic in tests"
+        },
+        {
+          "id": "d",
+          "text": "To speed up networking"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Tests can fix or offset time without waiting.",
+      "points": 1
+    },
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q4",
+      "type": "single",
+      "prompt": "How do BigDecimal(\"1.0\") and BigDecimal(\"1.00\") compare with compareTo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They cannot be compared"
+        },
+        {
+          "id": "b",
+          "text": "As numerically equal"
+        },
+        {
+          "id": "c",
+          "text": "As different magnitudes"
+        },
+        {
+          "id": "d",
+          "text": "As null"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "compareTo ignores scale differences when the numerical values match.",
+      "points": 1
+    },
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q5",
+      "type": "single",
+      "prompt": "Which regex method requires the whole input to match?",
+      "options": [
+        {
+          "id": "a",
+          "text": "matches"
+        },
+        {
+          "id": "b",
+          "text": "find"
+        },
+        {
+          "id": "c",
+          "text": "group"
+        },
+        {
+          "id": "d",
+          "text": "start"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "find searches for a subsequence; matches checks the whole input.",
+      "points": 1
+    },
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q6",
+      "type": "single",
+      "prompt": "What must be specified for a nonterminating decimal division when a rounded result is desired?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An HTTP header"
+        },
+        {
+          "id": "b",
+          "text": "A random seed"
+        },
+        {
+          "id": "c",
+          "text": "A hash code"
+        },
+        {
+          "id": "d",
+          "text": "A scale or precision and rounding policy"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A rounding contract makes the finite result explicit.",
+      "points": 1
+    },
+    {
+      "id": "java-dates-numbers-and-patterns-module-check-q7",
+      "type": "single",
+      "prompt": "What date and rounded decimal does the example print?\n\n```java\nvar date = java.time.LocalDate.of(2026, 10, 22);\nSystem.out.println(date.plusDays(10));\nvar amount = new java.math.BigDecimal(\"10.00\");\nSystem.out.println(amount.divide(new java.math.BigDecimal(\"3\"), 2, java.math.RoundingMode.HALF_UP));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "2026-11-01\n3"
+        },
+        {
+          "id": "b",
+          "text": "2026-11-01\n3.34"
+        },
+        {
+          "id": "c",
+          "text": "2026-11-01\n3.33"
+        },
+        {
+          "id": "d",
+          "text": "2026-10-32\n3.33"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Adding 10 days crosses the month boundary to November 1. 10 / 3 has a repeating decimal expansion. Scale 2 with HALF_UP produces 3.33.",
+      "points": 1
+    }
+  ]
+}

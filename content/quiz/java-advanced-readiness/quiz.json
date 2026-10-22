@@ -1,0 +1,579 @@
+{
+  "id": "java-advanced-readiness",
+  "title": "Advanced Java & Backend Engineering — Readiness Check",
+  "description": "Twenty questions spanning all ten modules of Advanced Java & Backend Engineering. Available independently of course enrollment.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-advanced-readiness-q1",
+      "type": "single",
+      "prompt": "What evidence helps diagnose many threads waiting on a lock?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An unrelated SQL schema"
+        },
+        {
+          "id": "b",
+          "text": "Thread dumps and lock-related runtime events"
+        },
+        {
+          "id": "c",
+          "text": "An image of the source tree"
+        },
+        {
+          "id": "d",
+          "text": "Only the pom name"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Thread state and lock ownership point to contention.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q2",
+      "type": "single",
+      "prompt": "Is process memory identical to the live Java heap?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only on Linux"
+        },
+        {
+          "id": "d",
+          "text": "Only when idle"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Native allocations, stacks, reserved memory, and other runtime structures also matter.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q3",
+      "type": "single",
+      "prompt": "What can reduce synchronization needs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Making every field public"
+        },
+        {
+          "id": "b",
+          "text": "Using a larger int"
+        },
+        {
+          "id": "c",
+          "text": "Removing joins"
+        },
+        {
+          "id": "d",
+          "text": "Confining mutable state to one thread"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Unshared state eliminates cross-thread races on that state.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q4",
+      "type": "single",
+      "prompt": "How should a translated InterruptedException usually be handled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always terminate the machine"
+        },
+        {
+          "id": "b",
+          "text": "Retry indefinitely"
+        },
+        {
+          "id": "c",
+          "text": "Restore the interrupt flag or propagate the interruption"
+        },
+        {
+          "id": "d",
+          "text": "Silently discard it"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Cancellation should remain observable to the caller.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q5",
+      "type": "single",
+      "prompt": "Why can a fixed worker pool still run out of memory?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Future always leaks"
+        },
+        {
+          "id": "b",
+          "text": "An unbounded queue can accumulate pending tasks"
+        },
+        {
+          "id": "c",
+          "text": "Every fixed pool starts infinite workers"
+        },
+        {
+          "id": "d",
+          "text": "Threads cannot share immutable data"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Worker limits do not imply queue or admission limits.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q6",
+      "type": "single",
+      "prompt": "Does the sample’s output reveal which task finished first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes, stock always finished first"
+        },
+        {
+          "id": "c",
+          "text": "Yes, price always finished first"
+        },
+        {
+          "id": "d",
+          "text": "Only on a single core"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The caller explicitly combines results in a chosen order.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q7",
+      "type": "single",
+      "prompt": "Should required labs silently depend on preview syntax?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only when code is short"
+        },
+        {
+          "id": "c",
+          "text": "Only on an LTS release"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Preview features need explicit opt-in and compatibility treatment.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q8",
+      "type": "single",
+      "prompt": "What does exports primarily expose?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All files on disk"
+        },
+        {
+          "id": "b",
+          "text": "A network endpoint"
+        },
+        {
+          "id": "c",
+          "text": "Public API types in a package under module access rules"
+        },
+        {
+          "id": "d",
+          "text": "Every private field for reflection"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Normal API access and reflective openness are distinct.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q9",
+      "type": "single",
+      "prompt": "Why bound an API page size?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To force ascending ids"
+        },
+        {
+          "id": "b",
+          "text": "To control resource use and response size"
+        },
+        {
+          "id": "c",
+          "text": "To guarantee requests never fail"
+        },
+        {
+          "id": "d",
+          "text": "To avoid all indexes"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Unbounded collection requests can exhaust application and database capacity.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q10",
+      "type": "single",
+      "prompt": "Why is renaming a response field a compatibility decision?",
+      "options": [
+        {
+          "id": "a",
+          "text": "External clients may depend on its name"
+        },
+        {
+          "id": "b",
+          "text": "Only Java reflection uses fields"
+        },
+        {
+          "id": "c",
+          "text": "HTTP ignores JSON names"
+        },
+        {
+          "id": "d",
+          "text": "The compiler upgrades all clients"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Public contracts extend beyond the service source tree.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q11",
+      "type": "single",
+      "prompt": "Should database integration tests use the production database family?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No, every SQL dialect is identical"
+        },
+        {
+          "id": "b",
+          "text": "Only for Strings"
+        },
+        {
+          "id": "c",
+          "text": "Only if there are no migrations"
+        },
+        {
+          "id": "d",
+          "text": "Yes, where practical"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Dialect and transaction differences can matter.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q12",
+      "type": "single",
+      "prompt": "Does @Transactional imply the strongest isolation level automatically?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for GET"
+        },
+        {
+          "id": "b",
+          "text": "Only for repositories"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Isolation depends on transaction configuration and database defaults.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q13",
+      "type": "single",
+      "prompt": "What is appropriate for stored password verification?",
+      "options": [
+        {
+          "id": "a",
+          "text": "String.hashCode"
+        },
+        {
+          "id": "b",
+          "text": "A suitable adaptive password encoder"
+        },
+        {
+          "id": "c",
+          "text": "Plain text"
+        },
+        {
+          "id": "d",
+          "text": "Base64 alone"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Password verification needs a purpose-built password hashing scheme.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q14",
+      "type": "single",
+      "prompt": "Which item should be excluded from routine logs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bearer tokens"
+        },
+        {
+          "id": "b",
+          "text": "A safe correlation id"
+        },
+        {
+          "id": "c",
+          "text": "The HTTP status"
+        },
+        {
+          "id": "d",
+          "text": "A sanitized route name"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Tokens are credentials and must not leak through logs.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q15",
+      "type": "single",
+      "prompt": "Which checks belong in a creation endpoint contract test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only that no exception was printed"
+        },
+        {
+          "id": "b",
+          "text": "Only the controller class name"
+        },
+        {
+          "id": "c",
+          "text": "Only the exact private call count"
+        },
+        {
+          "id": "d",
+          "text": "Status, Location, response fields, and persistence effect"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Contract tests assert observable behavior at the chosen boundary.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q16",
+      "type": "single",
+      "prompt": "Why keep full application tests selective?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They always replace all unit tests"
+        },
+        {
+          "id": "b",
+          "text": "They forbid database use"
+        },
+        {
+          "id": "c",
+          "text": "They cost more and should cover distinct integration risks"
+        },
+        {
+          "id": "d",
+          "text": "They cannot assert values"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Balance broad wiring confidence with fast focused feedback.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q17",
+      "type": "single",
+      "prompt": "What problem can retries at several layers cause?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A smaller request count"
+        },
+        {
+          "id": "b",
+          "text": "Multiplicative load on a failing dependency"
+        },
+        {
+          "id": "c",
+          "text": "Automatic exactly-once execution"
+        },
+        {
+          "id": "d",
+          "text": "Guaranteed recovery"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Nested retry loops amplify attempts.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q18",
+      "type": "single",
+      "prompt": "Does the sample HashSet deduplication survive a process restart?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only if ids are Strings"
+        },
+        {
+          "id": "d",
+          "text": "Only after two events"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Durability requires persistent state and an atomic effect policy.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q19",
+      "type": "single",
+      "prompt": "What is a safer schema rollout for a field rename used by old clients?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Drop the old column first"
+        },
+        {
+          "id": "b",
+          "text": "Silently change all response fields at once"
+        },
+        {
+          "id": "c",
+          "text": "Disable migrations"
+        },
+        {
+          "id": "d",
+          "text": "An additive compatible transition followed by deliberate removal"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Compatibility windows allow clients and application versions to transition.",
+      "points": 1
+    },
+    {
+      "id": "java-advanced-readiness-q20",
+      "type": "single",
+      "prompt": "Does passing a multiple-choice quiz prove operational readiness alone?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only with a perfect score"
+        },
+        {
+          "id": "b",
+          "text": "Only if timed"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Projects, debugging evidence, and practical operation demonstrate additional skills.",
+      "points": 1
+    }
+  ]
+}

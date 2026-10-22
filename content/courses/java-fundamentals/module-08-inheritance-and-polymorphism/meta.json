@@ -1,0 +1,26 @@
+{
+  "title": "Inheritance and polymorphism",
+  "description": "A checkout supports several shipping policies.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Inheritance and polymorphism: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Inheritance and polymorphism: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Inheritance and polymorphism: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-inheritance-and-polymorphism-module-check",
+      "passingScore": 70
+    }
+  ]
+}

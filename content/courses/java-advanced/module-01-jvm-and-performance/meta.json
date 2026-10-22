@@ -1,0 +1,26 @@
+{
+  "title": "JVM internals and performance",
+  "description": "Diagnose a service whose memory use grows over time.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "JVM internals and performance: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "JVM internals and performance: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "JVM internals and performance: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-jvm-and-performance-module-check",
+      "passingScore": 70
+    }
+  ]
+}

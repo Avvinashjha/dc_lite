@@ -1,0 +1,215 @@
+{
+  "id": "java-inheritance-and-polymorphism-practice",
+  "title": "Inheritance and polymorphism — Java Practice",
+  "description": "Independent practice: A checkout supports several shipping policies. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q1",
+      "type": "single",
+      "prompt": "Can a final class be subclassed?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only in the same file"
+        },
+        {
+          "id": "b",
+          "text": "Only with super"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes, with public"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "final prohibits extending the class.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q2",
+      "type": "single",
+      "prompt": "When is composition especially suitable?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for primitive types"
+        },
+        {
+          "id": "b",
+          "text": "A checkout has a replaceable shipping policy"
+        },
+        {
+          "id": "c",
+          "text": "A checkout is always a kind of shipping fee"
+        },
+        {
+          "id": "d",
+          "text": "Every time a constructor exists"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A has-a relationship can delegate behavior without inheritance.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q3",
+      "type": "single",
+      "prompt": "Can a subclass directly access a private superclass field?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes, always"
+        },
+        {
+          "id": "c",
+          "text": "Only with this"
+        },
+        {
+          "id": "d",
+          "text": "Only with @Override"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Private members are accessible only within their declaring top-level class context.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q4",
+      "type": "single",
+      "prompt": "Which principle requires a subtype to honor its parent’s behavioral promises?",
+      "options": [
+        {
+          "id": "a",
+          "text": "String interning"
+        },
+        {
+          "id": "b",
+          "text": "Integer promotion"
+        },
+        {
+          "id": "c",
+          "text": "Garbage collection"
+        },
+        {
+          "id": "d",
+          "text": "Liskov substitution"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A subtype should be usable wherever the supertype is expected.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q5",
+      "type": "single",
+      "prompt": "What does super(...) invoke in a constructor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The JVM launcher"
+        },
+        {
+          "id": "b",
+          "text": "A static initializer in every class"
+        },
+        {
+          "id": "c",
+          "text": "A superclass constructor"
+        },
+        {
+          "id": "d",
+          "text": "The subclass override"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "It delegates construction to the superclass.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q6",
+      "type": "single",
+      "prompt": "Are static methods dispatched like overriding instance methods?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only in interfaces"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only when final"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Static method selection follows the compile-time type.",
+      "points": 1
+    },
+    {
+      "id": "java-inheritance-and-polymorphism-practice-q7",
+      "type": "single",
+      "prompt": "Which fee is printed for the Shipping reference holding Express?\n\n```java\nclass Shipping { int fee() { return 50; } }\nclass Express extends Shipping {\n  @Override int fee() { return 100; }\n}\nShipping chosen = new Express();\nSystem.out.println(chosen.fee());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "100"
+        },
+        {
+          "id": "b",
+          "text": "50"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "150"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "chosen has compile-time type Shipping. Its runtime object is an Express. The override Express.fee runs and returns 100.",
+      "points": 1
+    }
+  ]
+}

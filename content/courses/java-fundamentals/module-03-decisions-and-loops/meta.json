@@ -1,0 +1,26 @@
+{
+  "title": "Decisions and loops",
+  "description": "A delivery service applies shipping rules.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Decisions and loops: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Decisions and loops: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Decisions and loops: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-decisions-and-loops-module-check",
+      "passingScore": 70
+    }
+  ]
+}

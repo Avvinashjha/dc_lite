@@ -1,0 +1,26 @@
+{
+  "title": "Threads, visibility, and shared state",
+  "description": "Prevent lost updates when two workers count orders.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Threads, visibility, and shared state: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Threads, visibility, and shared state: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Threads, visibility, and shared state: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-threads-and-shared-state-module-check",
+      "passingScore": 70
+    }
+  ]
+}

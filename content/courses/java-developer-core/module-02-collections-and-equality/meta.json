@@ -1,0 +1,26 @@
+{
+  "title": "Collections and equality",
+  "description": "An inventory system tracks stock and unique product codes.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Collections and equality: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Collections and equality: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Collections and equality: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-collections-and-equality-module-check",
+      "passingScore": 70
+    }
+  ]
+}

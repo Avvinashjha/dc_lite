@@ -1,0 +1,26 @@
+{
+  "title": "Arrays and problem solving",
+  "description": "A weather station summarizes daily temperatures.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Arrays and problem solving: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Arrays and problem solving: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Arrays and problem solving: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-arrays-and-algorithms-module-check",
+      "passingScore": 70
+    }
+  ]
+}

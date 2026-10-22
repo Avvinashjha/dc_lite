@@ -1,0 +1,26 @@
+{
+  "title": "HTTP, JSON, and the developer core capstone",
+  "description": "Turn the expense tracker into a tested application boundary.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "HTTP, JSON, and the developer core capstone: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "HTTP, JSON, and the developer core capstone: practical lab",
+      "type": "text",
+      "duration": "120 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "HTTP, JSON, and the developer core capstone: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-http-json-and-core-capstone-module-check",
+      "passingScore": 70
+    }
+  ]
+}

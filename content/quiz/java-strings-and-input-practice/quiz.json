@@ -1,0 +1,215 @@
+{
+  "id": "java-strings-and-input-practice",
+  "title": "Strings, text, and input — Java Practice",
+  "description": "Independent practice: A help desk normalizes customer reference codes. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-strings-and-input-practice-q1",
+      "type": "single",
+      "prompt": "Which tool fits repeated text appends inside a loop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "FileLock"
+        },
+        {
+          "id": "b",
+          "text": "StringBuilder"
+        },
+        {
+          "id": "c",
+          "text": "Integer"
+        },
+        {
+          "id": "d",
+          "text": "ThreadLocal"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "StringBuilder provides mutable accumulation.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-practice-q2",
+      "type": "single",
+      "prompt": "Does String.length() always count visible characters?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only when final"
+        },
+        {
+          "id": "d",
+          "text": "Only on Linux"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "It counts UTF-16 code units, not grapheme clusters.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-practice-q3",
+      "type": "single",
+      "prompt": "Which locale is appropriate for normalizing machine identifiers?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The user default in every case"
+        },
+        {
+          "id": "b",
+          "text": "A random locale"
+        },
+        {
+          "id": "c",
+          "text": "The timezone name"
+        },
+        {
+          "id": "d",
+          "text": "Locale.ROOT"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "ROOT avoids locale-dependent case mapping for identifiers.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-practice-q4",
+      "type": "single",
+      "prompt": "What may nextLine() return immediately after Scanner.nextInt()?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Always null"
+        },
+        {
+          "id": "b",
+          "text": "A StringBuilder"
+        },
+        {
+          "id": "c",
+          "text": "The remainder of the current line, possibly empty"
+        },
+        {
+          "id": "d",
+          "text": "Always the next integer"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "nextInt does not consume the whole line separator.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-practice-q5",
+      "type": "single",
+      "prompt": "Which check safely guards a following method call on value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "value.length() > 0"
+        },
+        {
+          "id": "b",
+          "text": "value != null && !value.isBlank()"
+        },
+        {
+          "id": "c",
+          "text": "!value.isBlank() && value != null"
+        },
+        {
+          "id": "d",
+          "text": "value.isBlank() || value == null"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Short-circuit evaluation checks null first.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-practice-q6",
+      "type": "single",
+      "prompt": "What does Integer.parseInt(\"abc\") throw?",
+      "options": [
+        {
+          "id": "a",
+          "text": "NumberFormatException"
+        },
+        {
+          "id": "b",
+          "text": "IOException"
+        },
+        {
+          "id": "c",
+          "text": "ClassNotFoundException"
+        },
+        {
+          "id": "d",
+          "text": "No exception"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The string is not a valid integer representation.",
+      "points": 1
+    },
+    {
+      "id": "java-strings-and-input-practice-q7",
+      "type": "single",
+      "prompt": "What does the normalization and comparison print?\n\n```java\nString raw = \"  ab-42  \";\nString code = raw.strip().toUpperCase(java.util.Locale.ROOT);\nSystem.out.println(code);\nSystem.out.println(raw.equals(code));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "AB-42\ntrue"
+        },
+        {
+          "id": "b",
+          "text": "ab-42\nfalse"
+        },
+        {
+          "id": "c",
+          "text": "  AB-42  \ntrue"
+        },
+        {
+          "id": "d",
+          "text": "AB-42\nfalse"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "raw still contains leading and trailing spaces. strip returns ab-42; uppercase with ROOT returns AB-42. raw and code contain different text, so equals returns false.",
+      "points": 1
+    }
+  ]
+}

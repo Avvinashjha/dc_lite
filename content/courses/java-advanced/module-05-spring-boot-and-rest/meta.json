@@ -1,0 +1,26 @@
+{
+  "title": "Spring Boot and REST APIs",
+  "description": "Expose the expense tracker as a REST service.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Spring Boot and REST APIs: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Spring Boot and REST APIs: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Spring Boot and REST APIs: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-spring-boot-and-rest-module-check",
+      "passingScore": 70
+    }
+  ]
+}

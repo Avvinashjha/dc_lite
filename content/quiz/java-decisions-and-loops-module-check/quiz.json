@@ -1,0 +1,215 @@
+{
+  "id": "java-decisions-and-loops-module-check",
+  "title": "Decisions and loops — Module Quiz",
+  "description": "Course assessment: A delivery service applies shipping rules.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-decisions-and-loops-module-check-q1",
+      "type": "single",
+      "prompt": "Which condition includes a subtotal of exactly 600?",
+      "options": [
+        {
+          "id": "a",
+          "text": "subtotal > 600"
+        },
+        {
+          "id": "b",
+          "text": "subtotal < 600"
+        },
+        {
+          "id": "c",
+          "text": "subtotal != 600"
+        },
+        {
+          "id": "d",
+          "text": "subtotal >= 600"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Greater-than-or-equal includes the boundary.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-module-check-q2",
+      "type": "single",
+      "prompt": "Which operator short-circuits when its left operand is false?",
+      "options": [
+        {
+          "id": "a",
+          "text": "|"
+        },
+        {
+          "id": "b",
+          "text": "+"
+        },
+        {
+          "id": "c",
+          "text": "&&"
+        },
+        {
+          "id": "d",
+          "text": "&"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Logical AND does not need the right operand when the result is already false.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-module-check-q3",
+      "type": "single",
+      "prompt": "What does continue do inside a loop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Restart the program"
+        },
+        {
+          "id": "b",
+          "text": "Skip the remainder of the current iteration"
+        },
+        {
+          "id": "c",
+          "text": "Exit the method"
+        },
+        {
+          "id": "d",
+          "text": "Always exit all loops"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The next iteration proceeds according to the loop construct.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-module-check-q4",
+      "type": "single",
+      "prompt": "Which index is the last valid index of a length-5 array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "text": "-1"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Array indexes start at zero.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-module-check-q5",
+      "type": "single",
+      "prompt": "How often does for (int i = 0; i < 3; i++) execute its body?",
+      "options": [
+        {
+          "id": "a",
+          "text": "2 times"
+        },
+        {
+          "id": "b",
+          "text": "4 times"
+        },
+        {
+          "id": "c",
+          "text": "Forever"
+        },
+        {
+          "id": "d",
+          "text": "3 times"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The body sees i equal to 0, 1, and 2.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-module-check-q6",
+      "type": "single",
+      "prompt": "Which switch form avoids implicit fall-through between cases?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Any switch with an int"
+        },
+        {
+          "id": "b",
+          "text": "Any switch with a String"
+        },
+        {
+          "id": "c",
+          "text": "Arrow cases using ->"
+        },
+        {
+          "id": "d",
+          "text": "Colon cases without break"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Arrow cases execute their own arm without falling into the next.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-module-check-q7",
+      "type": "single",
+      "prompt": "How many orders does this loop count as eligible?\n\n```java\nint[] orders = {400, 600, 1000};\nint free = 0;\nfor (int subtotal : orders) {\n  if (subtotal >= 600) free++;\n}\nSystem.out.println(free);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "400 >= 600 is false; free = 0. 600 meets the boundary; free = 1. 1000 meets the boundary; free = 2.",
+      "points": 1
+    }
+  ]
+}

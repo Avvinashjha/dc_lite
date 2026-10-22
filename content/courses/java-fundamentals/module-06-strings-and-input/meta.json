@@ -1,0 +1,26 @@
+{
+  "title": "Strings, text, and input",
+  "description": "A help desk normalizes customer reference codes.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "Strings, text, and input: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "Strings, text, and input: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "Strings, text, and input: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-strings-and-input-module-check",
+      "passingScore": 70
+    }
+  ]
+}

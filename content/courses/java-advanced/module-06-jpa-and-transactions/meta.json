@@ -1,0 +1,26 @@
+{
+  "title": "JPA, database migrations, and transactions",
+  "description": "Persist the expense API safely under concurrent updates.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "JPA, database migrations, and transactions: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "JPA, database migrations, and transactions: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "JPA, database migrations, and transactions: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-jpa-and-transactions-module-check",
+      "passingScore": 70
+    }
+  ]
+}

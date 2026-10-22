@@ -1,0 +1,215 @@
+{
+  "id": "java-threads-and-shared-state-module-check",
+  "title": "Threads, visibility, and shared state — Module Quiz",
+  "description": "Course assessment: Prevent lost updates when two workers count orders.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-threads-and-shared-state-module-check-q1",
+      "type": "single",
+      "prompt": "Is volatile int count followed by count++ an atomic counter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only with two threads"
+        },
+        {
+          "id": "b",
+          "text": "Only if count starts at zero"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "volatile does not make read-modify-write atomic.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-module-check-q2",
+      "type": "single",
+      "prompt": "Which Thread method schedules a new thread?",
+      "options": [
+        {
+          "id": "a",
+          "text": "hashCode()"
+        },
+        {
+          "id": "b",
+          "text": "start()"
+        },
+        {
+          "id": "c",
+          "text": "run() directly"
+        },
+        {
+          "id": "d",
+          "text": "toString()"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "start creates the independent execution; run is its body.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-module-check-q3",
+      "type": "single",
+      "prompt": "What does join provide?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A wait for a thread to finish, with completion visibility guarantees"
+        },
+        {
+          "id": "b",
+          "text": "A guarantee of execution order between all threads"
+        },
+        {
+          "id": "c",
+          "text": "An automatic lock on every object"
+        },
+        {
+          "id": "d",
+          "text": "A retry policy"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A successful join establishes the required completion relationship.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-module-check-q4",
+      "type": "single",
+      "prompt": "Which operation safely increments one shared integer?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A plain int++"
+        },
+        {
+          "id": "b",
+          "text": "Reading a volatile field twice"
+        },
+        {
+          "id": "c",
+          "text": "String concatenation"
+        },
+        {
+          "id": "d",
+          "text": "AtomicInteger.incrementAndGet()"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The atomic operation prevents lost updates.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-module-check-q5",
+      "type": "single",
+      "prompt": "What is one common cause of deadlock?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Calling equals on Strings"
+        },
+        {
+          "id": "b",
+          "text": "A single-threaded loop without locks"
+        },
+        {
+          "id": "c",
+          "text": "Opposing acquisition order for shared locks"
+        },
+        {
+          "id": "d",
+          "text": "Too many immutable records"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Cyclic lock dependencies can leave threads waiting forever.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-module-check-q6",
+      "type": "single",
+      "prompt": "Is every multi-step operation on ConcurrentHashMap automatically atomic?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when empty"
+        },
+        {
+          "id": "b",
+          "text": "No"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "Only with String keys"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Use compute, merge, or another suitable atomic operation for compound updates.",
+      "points": 1
+    },
+    {
+      "id": "java-threads-and-shared-state-module-check-q7",
+      "type": "single",
+      "prompt": "After both joined workers complete, what count is guaranteed?\n\n```java\nvar count = new java.util.concurrent.atomic.AtomicInteger();\nThread first = new Thread(() -> { for (int i = 0; i < 1000; i++) count.incrementAndGet(); });\nThread second = new Thread(() -> { for (int i = 0; i < 1000; i++) count.incrementAndGet(); });\nfirst.start(); second.start();\nfirst.join(); second.join();\nSystem.out.println(count.get());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "2000"
+        },
+        {
+          "id": "b",
+          "text": "1000"
+        },
+        {
+          "id": "c",
+          "text": "An arbitrary value below 2000"
+        },
+        {
+          "id": "d",
+          "text": "The code cannot compile because AtomicInteger is mutable"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Two workers each perform 1000 updates; their scheduling is unspecified. Each incrementAndGet is atomic, preventing lost increments. After both joins, all 2000 increments have completed.",
+      "points": 1
+    }
+  ]
+}

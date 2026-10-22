@@ -1,0 +1,215 @@
+{
+  "id": "java-jpa-and-transactions-module-check",
+  "title": "JPA, database migrations, and transactions — Module Quiz",
+  "description": "Course assessment: Persist the expense API safely under concurrent updates.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-jpa-and-transactions-module-check-q1",
+      "type": "single",
+      "prompt": "What does @Version support?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Infinite retries"
+        },
+        {
+          "id": "b",
+          "text": "A new table for every request"
+        },
+        {
+          "id": "c",
+          "text": "Optimistic concurrency checks"
+        },
+        {
+          "id": "d",
+          "text": "Automatic password hashing"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Version comparison detects conflicting updates.",
+      "points": 1
+    },
+    {
+      "id": "java-jpa-and-transactions-module-check-q2",
+      "type": "single",
+      "prompt": "What is an N+1 query problem?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A JVM bytecode limit"
+        },
+        {
+          "id": "b",
+          "text": "One initial query followed by extra queries per loaded item"
+        },
+        {
+          "id": "c",
+          "text": "A query with n + 1 columns"
+        },
+        {
+          "id": "d",
+          "text": "A syntax error in every join"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Traversing associations can unexpectedly multiply database round trips.",
+      "points": 1
+    },
+    {
+      "id": "java-jpa-and-transactions-module-check-q3",
+      "type": "single",
+      "prompt": "Why not make every relationship eager to solve query issues?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It can fetch unnecessary data and create other query costs"
+        },
+        {
+          "id": "b",
+          "text": "Eager always forbids joins"
+        },
+        {
+          "id": "c",
+          "text": "JPA only supports lazy"
+        },
+        {
+          "id": "d",
+          "text": "All entities must have no relationships"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Choose a deliberate fetch plan for each use case.",
+      "points": 1
+    },
+    {
+      "id": "java-jpa-and-transactions-module-check-q4",
+      "type": "single",
+      "prompt": "Does self-invocation normally trigger a new proxy-based @Transactional interception?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for private methods"
+        },
+        {
+          "id": "c",
+          "text": "Only with a record"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A direct internal call bypasses the proxy interception.",
+      "points": 1
+    },
+    {
+      "id": "java-jpa-and-transactions-module-check-q5",
+      "type": "single",
+      "prompt": "What manages reproducible schema evolution?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A private constructor"
+        },
+        {
+          "id": "b",
+          "text": "An editor extension alone"
+        },
+        {
+          "id": "c",
+          "text": "Versioned database migrations"
+        },
+        {
+          "id": "d",
+          "text": "Deleting all tables on every startup"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Migrations record intentional schema changes.",
+      "points": 1
+    },
+    {
+      "id": "java-jpa-and-transactions-module-check-q6",
+      "type": "single",
+      "prompt": "What should happen to an optimistic-lock conflict?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Return a fake success"
+        },
+        {
+          "id": "b",
+          "text": "Surface or handle it according to the operation’s contract"
+        },
+        {
+          "id": "c",
+          "text": "Silently overwrite the winning update"
+        },
+        {
+          "id": "d",
+          "text": "Ignore the version column"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The caller needs a deliberate conflict policy.",
+      "points": 1
+    },
+    {
+      "id": "java-jpa-and-transactions-module-check-q7",
+      "type": "single",
+      "prompt": "Two transactions load the same version. One commits first. What happens when the other flushes a stale update?\n\nEnvironment: Extend the previous Spring API project with Spring Data JPA, PostgreSQL, and Flyway. Configure a local database and a migration before running repository operations. This fragment demonstrates the versioned model.\n\n```java\n// Entity fragment in a Spring Data JPA project; imports: jakarta.persistence.*\n@Entity\nclass ExpenseEntity {\n  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)\n  Long id;\n  @Version Long version;\n  String label;\n  int amount;\n  protected ExpenseEntity() {}\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "Concurrent update with a stale version → optimistic-lock failure"
+        },
+        {
+          "id": "b",
+          "text": "Both writes always succeed and the later write silently wins"
+        },
+        {
+          "id": "c",
+          "text": "The version column is ignored because it is a Long"
+        },
+        {
+          "id": "d",
+          "text": "Every read is rejected before any update"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Two transactions load the same row and version. One transaction updates the row and increments the version. The stale version no longer matches, so the second update fails.",
+      "points": 1
+    }
+  ]
+}

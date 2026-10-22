@@ -1,0 +1,215 @@
+{
+  "id": "java-executors-and-virtual-threads-practice",
+  "title": "Executors, futures, and virtual threads — Java Practice",
+  "description": "Independent practice: A service makes several independent blocking lookups. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-executors-and-virtual-threads-practice-q1",
+      "type": "single",
+      "prompt": "What does Future.get(timeout, unit) time out?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The database transaction automatically"
+        },
+        {
+          "id": "b",
+          "text": "The caller’s wait for a result"
+        },
+        {
+          "id": "c",
+          "text": "The entire JVM lifetime"
+        },
+        {
+          "id": "d",
+          "text": "Every network socket automatically"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The task may continue unless cancelled or otherwise bounded.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-practice-q2",
+      "type": "single",
+      "prompt": "Who should close a task executor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Its lifecycle owner"
+        },
+        {
+          "id": "b",
+          "text": "The garbage collector on a schedule"
+        },
+        {
+          "id": "c",
+          "text": "Every task independently"
+        },
+        {
+          "id": "d",
+          "text": "Nobody"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Explicit ownership prevents leaked work and resources.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-practice-q3",
+      "type": "single",
+      "prompt": "Should virtual threads usually be pooled to reuse a fixed set of them?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for small tasks"
+        },
+        {
+          "id": "c",
+          "text": "Only when they block"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Use one virtual thread per task and bound scarce resources separately.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-practice-q4",
+      "type": "single",
+      "prompt": "Does cancel(true) guarantee an immediate task stop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only for CPU loops"
+        },
+        {
+          "id": "b",
+          "text": "Only for Callable"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Interruption and cancellation are cooperative.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-practice-q5",
+      "type": "single",
+      "prompt": "Why can a fixed worker pool still run out of memory?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Future always leaks"
+        },
+        {
+          "id": "b",
+          "text": "An unbounded queue can accumulate pending tasks"
+        },
+        {
+          "id": "c",
+          "text": "Every fixed pool starts infinite workers"
+        },
+        {
+          "id": "d",
+          "text": "Threads cannot share immutable data"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Worker limits do not imply queue or admission limits.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-practice-q6",
+      "type": "single",
+      "prompt": "Does the sample’s output reveal which task finished first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes, stock always finished first"
+        },
+        {
+          "id": "c",
+          "text": "Yes, price always finished first"
+        },
+        {
+          "id": "d",
+          "text": "Only on a single core"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The caller explicitly combines results in a chosen order.",
+      "points": 1
+    },
+    {
+      "id": "java-executors-and-virtual-threads-practice-q7",
+      "type": "single",
+      "prompt": "What combined result is printed, regardless of task completion order?\n\n```java\ntry (var executor = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {\n  var first = executor.submit(() -> \"stock\");\n  var second = executor.submit(() -> \"price\");\n  System.out.println(first.get() + \":\" + second.get());\n}\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "price:stock"
+        },
+        {
+          "id": "b",
+          "text": "A randomly chosen order"
+        },
+        {
+          "id": "c",
+          "text": "stockprice"
+        },
+        {
+          "id": "d",
+          "text": "stock:price"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Two tasks receive independent virtual threads; execution order is unspecified. get waits as needed; output order is determined by concatenation, not task completion order. The executor closes after its tasks finish.",
+      "points": 1
+    }
+  ]
+}

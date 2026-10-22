@@ -1,0 +1,26 @@
+{
+  "title": "SQL, JDBC, and transactions",
+  "description": "Persist expenses in a relational database.",
+  "lessons": [
+    {
+      "slug": "01-learn-and-explore",
+      "title": "SQL, JDBC, and transactions: learn and explore",
+      "type": "interactive",
+      "duration": "20 min"
+    },
+    {
+      "slug": "02-practice-lab",
+      "title": "SQL, JDBC, and transactions: practical lab",
+      "type": "text",
+      "duration": "45 min"
+    },
+    {
+      "slug": "03-module-quiz",
+      "title": "SQL, JDBC, and transactions: module quiz",
+      "type": "quiz",
+      "duration": "10 min",
+      "quizSlug": "java-sql-and-jdbc-module-check",
+      "passingScore": 70
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "Java Fundamentals",
+  "description": "Start from zero: learn Java syntax, problem solving, OOP, and error handling through everyday examples, interactive traces, and a command-line expense tracker.",
+  "author": "DailyCoder",
+  "level": "beginner",
+  "duration": "18–25 hours",
+  "tags": [
+    "Java",
+    "Interactive",
+    "OOP",
+    "Projects"
+  ],
+  "modules": [
+    {
+      "slug": "module-01-first-program",
+      "title": "Your first Java program"
+    },
+    {
+      "slug": "module-02-values-and-types",
+      "title": "Values, types, and expressions"
+    },
+    {
+      "slug": "module-03-decisions-and-loops",
+      "title": "Decisions and loops"
+    },
+    {
+      "slug": "module-04-methods-and-debugging",
+      "title": "Methods and debugging"
+    },
+    {
+      "slug": "module-05-arrays-and-algorithms",
+      "title": "Arrays and problem solving"
+    },
+    {
+      "slug": "module-06-strings-and-input",
+      "title": "Strings, text, and input"
+    },
+    {
+      "slug": "module-07-classes-and-encapsulation",
+      "title": "Classes, objects, and encapsulation"
+    },
+    {
+      "slug": "module-08-inheritance-and-polymorphism",
+      "title": "Inheritance and polymorphism"
+    },
+    {
+      "slug": "module-09-interfaces-and-records",
+      "title": "Interfaces, abstraction, and modern models"
+    },
+    {
+      "slug": "module-10-exceptions-and-capstone",
+      "title": "Exceptions and the fundamentals capstone"
+    }
+  ],
+  "draft": false
+}

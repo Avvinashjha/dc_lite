@@ -1,0 +1,56 @@
+{
+  "title": "Advanced Java & Backend Engineering",
+  "description": "Explore JVM diagnostics, concurrency, virtual threads, and modern Java, then build a secure Spring Boot API with persistence, integration tests, resilience, and delivery practices.",
+  "author": "DailyCoder",
+  "level": "advanced",
+  "duration": "35–50 hours",
+  "tags": [
+    "Java",
+    "Interactive",
+    "Spring Boot",
+    "Backend"
+  ],
+  "modules": [
+    {
+      "slug": "module-01-jvm-and-performance",
+      "title": "JVM internals and performance"
+    },
+    {
+      "slug": "module-02-threads-and-shared-state",
+      "title": "Threads, visibility, and shared state"
+    },
+    {
+      "slug": "module-03-executors-and-virtual-threads",
+      "title": "Executors, futures, and virtual threads"
+    },
+    {
+      "slug": "module-04-modern-java-and-modules",
+      "title": "Modern Java, reflection, and modules"
+    },
+    {
+      "slug": "module-05-spring-boot-and-rest",
+      "title": "Spring Boot and REST APIs"
+    },
+    {
+      "slug": "module-06-jpa-and-transactions",
+      "title": "JPA, database migrations, and transactions"
+    },
+    {
+      "slug": "module-07-security-and-authorization",
+      "title": "Application security and authorization"
+    },
+    {
+      "slug": "module-08-integration-tests-and-contracts",
+      "title": "Integration tests and API contracts"
+    },
+    {
+      "slug": "module-09-resilience-caching-and-messaging",
+      "title": "Resilience, caching, and messaging"
+    },
+    {
+      "slug": "module-10-deployment-and-final-capstone",
+      "title": "Delivery, observability, and final capstone"
+    }
+  ],
+  "draft": false
+}

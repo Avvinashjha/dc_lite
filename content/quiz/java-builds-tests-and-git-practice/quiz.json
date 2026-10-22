@@ -1,0 +1,215 @@
+{
+  "id": "java-builds-tests-and-git-practice",
+  "title": "Builds, unit tests, and Git — Java Practice",
+  "description": "Independent practice: A team makes the expense tracker reproducible. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-builds-tests-and-git-practice-q1",
+      "type": "single",
+      "prompt": "Why commit a Maven wrapper?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To bypass all tests"
+        },
+        {
+          "id": "b",
+          "text": "To hide source files"
+        },
+        {
+          "id": "c",
+          "text": "To use a declared Maven version reproducibly"
+        },
+        {
+          "id": "d",
+          "text": "To include all downloaded JARs"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The wrapper bootstraps the specified build tool.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-practice-q2",
+      "type": "single",
+      "prompt": "What should a unit test usually assert?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The order of unrelated imports"
+        },
+        {
+          "id": "b",
+          "text": "Observable behavior"
+        },
+        {
+          "id": "c",
+          "text": "Every private method name"
+        },
+        {
+          "id": "d",
+          "text": "The exact number of local variables"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Behavior assertions survive safe internal refactoring.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-practice-q3",
+      "type": "single",
+      "prompt": "Which dependency scope fits JUnit in a Maven application?",
+      "options": [
+        {
+          "id": "a",
+          "text": "test"
+        },
+        {
+          "id": "b",
+          "text": "system for every dependency"
+        },
+        {
+          "id": "c",
+          "text": "production runtime only"
+        },
+        {
+          "id": "d",
+          "text": "No scope with copied source"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Test dependencies need not become production runtime dependencies.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-practice-q4",
+      "type": "single",
+      "prompt": "What is a useful parameterized test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A test with no assertions"
+        },
+        {
+          "id": "b",
+          "text": "A test that uses random sleep"
+        },
+        {
+          "id": "c",
+          "text": "A test for every getter regardless of behavior"
+        },
+        {
+          "id": "d",
+          "text": "One behavior exercised with several meaningful inputs"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Tables of cases express boundaries and variations clearly.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-practice-q5",
+      "type": "single",
+      "prompt": "What should be reviewed before committing?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only the file count"
+        },
+        {
+          "id": "b",
+          "text": "Only the editor theme"
+        },
+        {
+          "id": "c",
+          "text": "The staged diff and relevant test results"
+        },
+        {
+          "id": "d",
+          "text": "Only the commit timestamp"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Review the exact changes and their validation.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-practice-q6",
+      "type": "single",
+      "prompt": "Which dependency makes an expiry test nondeterministic unless controlled?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A pure addition method"
+        },
+        {
+          "id": "b",
+          "text": "The wall clock"
+        },
+        {
+          "id": "c",
+          "text": "A fixed input string"
+        },
+        {
+          "id": "d",
+          "text": "An immutable record"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Injecting Clock makes time-based behavior predictable.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-practice-q7",
+      "type": "single",
+      "prompt": "What price does discounted(1000, 20) print?\n\n```java\nint discounted(int price, int percent) {\n  if (price < 0 || percent < 0 || percent > 100)\n    throw new IllegalArgumentException(\"Invalid discount\");\n  return price - price * percent / 100;\n}\nSystem.out.println(discounted(1000, 20));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "800"
+        },
+        {
+          "id": "b",
+          "text": "200"
+        },
+        {
+          "id": "c",
+          "text": "1000"
+        },
+        {
+          "id": "d",
+          "text": "1200"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "1000 and 20 satisfy the domain bounds. The discount is 200, leaving 800. A percentage of 101 must be rejected rather than creating a negative price.",
+      "points": 1
+    }
+  ]
+}

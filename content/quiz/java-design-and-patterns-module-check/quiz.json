@@ -1,0 +1,215 @@
+{
+  "id": "java-design-and-patterns-module-check",
+  "title": "Clean design and practical patterns — Module Quiz",
+  "description": "Course assessment: An order service chooses a pricing policy without a growing conditional.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-design-and-patterns-module-check-q1",
+      "type": "single",
+      "prompt": "Which pattern fits interchangeable pricing algorithms?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Singleton by default"
+        },
+        {
+          "id": "b",
+          "text": "Global mutable state"
+        },
+        {
+          "id": "c",
+          "text": "Recursive inheritance"
+        },
+        {
+          "id": "d",
+          "text": "Strategy"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Strategy encapsulates a family of replaceable behaviors.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-module-check-q2",
+      "type": "single",
+      "prompt": "Single responsibility is best understood as what?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Exactly one field"
+        },
+        {
+          "id": "b",
+          "text": "No dependencies"
+        },
+        {
+          "id": "c",
+          "text": "One coherent reason to change"
+        },
+        {
+          "id": "d",
+          "text": "Exactly one method"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Cohesive responsibility matters more than arbitrary class size.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-module-check-q3",
+      "type": "single",
+      "prompt": "When is a builder useful?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when no validation is needed"
+        },
+        {
+          "id": "b",
+          "text": "Readable construction with many optional settings"
+        },
+        {
+          "id": "c",
+          "text": "Every two-field record"
+        },
+        {
+          "id": "d",
+          "text": "Only for int arrays"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "A builder can organize construction choices and validate them.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-module-check-q4",
+      "type": "single",
+      "prompt": "What should be in place before refactoring a pricing rule?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tests of its observable behavior"
+        },
+        {
+          "id": "b",
+          "text": "A new database server"
+        },
+        {
+          "id": "c",
+          "text": "A new global variable"
+        },
+        {
+          "id": "d",
+          "text": "A second implementation of every getter"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Behavior tests detect accidental changes during restructuring.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-module-check-q5",
+      "type": "single",
+      "prompt": "Does List.copyOf deeply freeze mutable element objects?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for lists of size one"
+        },
+        {
+          "id": "c",
+          "text": "Only on a server"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "It copies the collection structure, not the internals of each element.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-module-check-q6",
+      "type": "single",
+      "prompt": "What does dependency inversion encourage at a variable boundary?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Remove all constructors"
+        },
+        {
+          "id": "b",
+          "text": "Use static state for all collaborators"
+        },
+        {
+          "id": "c",
+          "text": "Depend on a suitable abstraction"
+        },
+        {
+          "id": "d",
+          "text": "Instantiate every vendor class inside every method"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A focused contract lets higher-level policy avoid vendor details.",
+      "points": 1
+    },
+    {
+      "id": "java-design-and-patterns-module-check-q7",
+      "type": "single",
+      "prompt": "Which member price does the selected strategy print?\n\n```java\ninterface Pricing { int total(int base); }\nclass RegularPricing implements Pricing {\n  public int total(int base) { return base; }\n}\nclass MemberPricing implements Pricing {\n  public int total(int base) { return base * 9 / 10; }\n}\nPricing policy = new MemberPricing();\nSystem.out.println(policy.total(1000));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "1100"
+        },
+        {
+          "id": "b",
+          "text": "900"
+        },
+        {
+          "id": "c",
+          "text": "1000"
+        },
+        {
+          "id": "d",
+          "text": "100"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The caller chooses a MemberPricing implementation. total(1000) runs the membership algorithm. The same Pricing contract returns 900 without a type switch.",
+      "points": 1
+    }
+  ]
+}

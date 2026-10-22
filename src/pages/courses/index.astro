@@ -11,6 +11,13 @@ const courses = getCourses();
   <div class="container collection-page">
     <PageIntro title="One lesson closer." description="Build a strong foundation with hands-on courses. Start where you are and learn at your own pace." eyebrow="MAKE ROOM TO GROW" icon="book" tone="peach" />
 
+    <a href="/courses/java" class="post-card" style="display:block;margin-bottom:2rem;border-color:var(--color-primary)">
+      <span class="tag">Java developer learning path</span>
+      <h2 class="post-card__title">Three courses. One practical journey.</h2>
+      <p class="post-card__description">Explore 30 modules and 120 short chapters, with interactive walkthroughs, local projects, module assessments, and 33 independent practice quizzes.</p>
+      <span>See the complete Java curriculum →</span>
+    </a>
+
     <div class="grid grid--2">
       {courses.map(course => (
         <a href={`/courses/${course.slug}`} class="post-card" data-course-card={course.slug}>

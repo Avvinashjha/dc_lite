@@ -1,0 +1,215 @@
+{
+  "id": "java-builds-tests-and-git-module-check",
+  "title": "Builds, unit tests, and Git — Module Quiz",
+  "description": "Course assessment: A team makes the expense tracker reproducible.",
+  "category": "Java",
+  "difficulty": "medium",
+  "tags": [
+    "java",
+    "intermediate",
+    "java-developer-core"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-builds-tests-and-git-module-check-q1",
+      "type": "single",
+      "prompt": "Where does Maven conventionally place test sources?",
+      "options": [
+        {
+          "id": "a",
+          "text": "node_modules"
+        },
+        {
+          "id": "b",
+          "text": "dist"
+        },
+        {
+          "id": "c",
+          "text": "src/test/java"
+        },
+        {
+          "id": "d",
+          "text": "src/main/resources only"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Maven separates production and test source trees.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-module-check-q2",
+      "type": "single",
+      "prompt": "Which assertion verifies a documented exception?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Thread.sleep"
+        },
+        {
+          "id": "b",
+          "text": "assertThrows"
+        },
+        {
+          "id": "c",
+          "text": "assertEquals(null, everything)"
+        },
+        {
+          "id": "d",
+          "text": "println"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "assertThrows checks the failure contract directly.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-module-check-q3",
+      "type": "single",
+      "prompt": "Why commit a Maven wrapper?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To use a declared Maven version reproducibly"
+        },
+        {
+          "id": "b",
+          "text": "To include all downloaded JARs"
+        },
+        {
+          "id": "c",
+          "text": "To bypass all tests"
+        },
+        {
+          "id": "d",
+          "text": "To hide source files"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The wrapper bootstraps the specified build tool.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-module-check-q4",
+      "type": "single",
+      "prompt": "What should a unit test usually assert?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every private method name"
+        },
+        {
+          "id": "b",
+          "text": "The exact number of local variables"
+        },
+        {
+          "id": "c",
+          "text": "The order of unrelated imports"
+        },
+        {
+          "id": "d",
+          "text": "Observable behavior"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Behavior assertions survive safe internal refactoring.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-module-check-q5",
+      "type": "single",
+      "prompt": "Which dependency scope fits JUnit in a Maven application?",
+      "options": [
+        {
+          "id": "a",
+          "text": "production runtime only"
+        },
+        {
+          "id": "b",
+          "text": "No scope with copied source"
+        },
+        {
+          "id": "c",
+          "text": "test"
+        },
+        {
+          "id": "d",
+          "text": "system for every dependency"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Test dependencies need not become production runtime dependencies.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-module-check-q6",
+      "type": "single",
+      "prompt": "What is a useful parameterized test?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A test for every getter regardless of behavior"
+        },
+        {
+          "id": "b",
+          "text": "One behavior exercised with several meaningful inputs"
+        },
+        {
+          "id": "c",
+          "text": "A test with no assertions"
+        },
+        {
+          "id": "d",
+          "text": "A test that uses random sleep"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Tables of cases express boundaries and variations clearly.",
+      "points": 1
+    },
+    {
+      "id": "java-builds-tests-and-git-module-check-q7",
+      "type": "single",
+      "prompt": "What price does discounted(1000, 20) print?\n\n```java\nint discounted(int price, int percent) {\n  if (price < 0 || percent < 0 || percent > 100)\n    throw new IllegalArgumentException(\"Invalid discount\");\n  return price - price * percent / 100;\n}\nSystem.out.println(discounted(1000, 20));\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "800"
+        },
+        {
+          "id": "b",
+          "text": "200"
+        },
+        {
+          "id": "c",
+          "text": "1000"
+        },
+        {
+          "id": "d",
+          "text": "1200"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "1000 and 20 satisfy the domain bounds. The discount is 200, leaving 800. A percentage of 101 must be rejected rather than creating a negative price.",
+      "points": 1
+    }
+  ]
+}

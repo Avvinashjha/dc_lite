@@ -1,0 +1,215 @@
+{
+  "id": "java-decisions-and-loops-practice",
+  "title": "Decisions and loops — Java Practice",
+  "description": "Independent practice: A delivery service applies shipping rules. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-decisions-and-loops-practice-q1",
+      "type": "single",
+      "prompt": "What does continue do inside a loop?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Exit the method"
+        },
+        {
+          "id": "b",
+          "text": "Always exit all loops"
+        },
+        {
+          "id": "c",
+          "text": "Restart the program"
+        },
+        {
+          "id": "d",
+          "text": "Skip the remainder of the current iteration"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The next iteration proceeds according to the loop construct.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-practice-q2",
+      "type": "single",
+      "prompt": "Which index is the last valid index of a length-5 array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "text": "-1"
+        },
+        {
+          "id": "c",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "text": "5"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Array indexes start at zero.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-practice-q3",
+      "type": "single",
+      "prompt": "How often does for (int i = 0; i < 3; i++) execute its body?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Forever"
+        },
+        {
+          "id": "b",
+          "text": "3 times"
+        },
+        {
+          "id": "c",
+          "text": "2 times"
+        },
+        {
+          "id": "d",
+          "text": "4 times"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The body sees i equal to 0, 1, and 2.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-practice-q4",
+      "type": "single",
+      "prompt": "Which switch form avoids implicit fall-through between cases?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Arrow cases using ->"
+        },
+        {
+          "id": "b",
+          "text": "Colon cases without break"
+        },
+        {
+          "id": "c",
+          "text": "Any switch with an int"
+        },
+        {
+          "id": "d",
+          "text": "Any switch with a String"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Arrow cases execute their own arm without falling into the next.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-practice-q5",
+      "type": "single",
+      "prompt": "A while condition is false before its first iteration. How often does the body run?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Once"
+        },
+        {
+          "id": "b",
+          "text": "Twice"
+        },
+        {
+          "id": "c",
+          "text": "Until break"
+        },
+        {
+          "id": "d",
+          "text": "Zero times"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "while checks the condition before entering the body.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-practice-q6",
+      "type": "single",
+      "prompt": "Which is the most useful shipping-rule test set?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only a very large order"
+        },
+        {
+          "id": "b",
+          "text": "Only a nonempty array"
+        },
+        {
+          "id": "c",
+          "text": "Below, at, and above the threshold"
+        },
+        {
+          "id": "d",
+          "text": "Three unrelated variable names"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Boundary tests reveal incorrect comparison operators.",
+      "points": 1
+    },
+    {
+      "id": "java-decisions-and-loops-practice-q7",
+      "type": "single",
+      "prompt": "How many orders does this loop count as eligible?\n\n```java\nint[] orders = {400, 600, 1000};\nint free = 0;\nfor (int subtotal : orders) {\n  if (subtotal >= 600) free++;\n}\nSystem.out.println(free);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "text": "3"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "400 >= 600 is false; free = 0. 600 meets the boundary; free = 1. 1000 meets the boundary; free = 2.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-deployment-and-final-capstone-practice",
+  "title": "Delivery, observability, and final capstone — Java Practice",
+  "description": "Independent practice: Operate a secure expense API as a small production-style service. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-deployment-and-final-capstone-practice-q1",
+      "type": "single",
+      "prompt": "What is a useful purpose of a correlation id?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Make requests idempotent automatically"
+        },
+        {
+          "id": "b",
+          "text": "Connect related diagnostic events"
+        },
+        {
+          "id": "c",
+          "text": "Encrypt a password"
+        },
+        {
+          "id": "d",
+          "text": "Replace object authorization"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Correlation supports investigation but is not access control or deduplication.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-practice-q2",
+      "type": "single",
+      "prompt": "What should graceful shutdown include?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stop new work and allow bounded completion of in-flight work"
+        },
+        {
+          "id": "b",
+          "text": "Kill all requests without notice every time"
+        },
+        {
+          "id": "c",
+          "text": "Delete the database"
+        },
+        {
+          "id": "d",
+          "text": "Skip closing connections"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "A bounded lifecycle reduces avoidable interruption and resource leaks.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-practice-q3",
+      "type": "single",
+      "prompt": "Why test a restore procedure?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To avoid keeping any backups"
+        },
+        {
+          "id": "b",
+          "text": "To force production downtime"
+        },
+        {
+          "id": "c",
+          "text": "To change all API identifiers"
+        },
+        {
+          "id": "d",
+          "text": "A backup is useful only if it can be restored correctly"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Recovery must be verified with the actual procedure.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-practice-q4",
+      "type": "single",
+      "prompt": "Which metric better exposes slow tail requests than an average alone?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The package name length"
+        },
+        {
+          "id": "b",
+          "text": "The JDK installation path"
+        },
+        {
+          "id": "c",
+          "text": "A latency percentile such as p95"
+        },
+        {
+          "id": "d",
+          "text": "The number of source files"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Percentiles reveal distribution tails hidden by an average.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-practice-q5",
+      "type": "single",
+      "prompt": "What is a safer schema rollout for a field rename used by old clients?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Disable migrations"
+        },
+        {
+          "id": "b",
+          "text": "An additive compatible transition followed by deliberate removal"
+        },
+        {
+          "id": "c",
+          "text": "Drop the old column first"
+        },
+        {
+          "id": "d",
+          "text": "Silently change all response fields at once"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Compatibility windows allow clients and application versions to transition.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-practice-q6",
+      "type": "single",
+      "prompt": "Does passing a multiple-choice quiz prove operational readiness alone?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No"
+        },
+        {
+          "id": "b",
+          "text": "Yes"
+        },
+        {
+          "id": "c",
+          "text": "Only with a perfect score"
+        },
+        {
+          "id": "d",
+          "text": "Only if timed"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Projects, debugging evidence, and practical operation demonstrate additional skills.",
+      "points": 1
+    },
+    {
+      "id": "java-deployment-and-final-capstone-practice-q7",
+      "type": "single",
+      "prompt": "What does System.out print, apart from the separately configured logger output?\n\nEnvironment: JShell or a Java class. The logger also emits a configured log record; its timestamp, format, and destination depend on the runtime logging configuration.\n\n```java\n// A local observability exercise using a JDK logger.\nvar logger = System.getLogger(\"expenses\");\nString requestId = \"req-42\";\nlogger.log(System.Logger.Level.INFO, \"request_id={0} operation={1}\", requestId, \"expense_created\");\nSystem.out.println(\"request tracked: \" + requestId);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "expense_created"
+        },
+        {
+          "id": "b",
+          "text": "req-42"
+        },
+        {
+          "id": "c",
+          "text": "A bearer token"
+        },
+        {
+          "id": "d",
+          "text": "request tracked: req-42"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "A request identifier ties safe operational events together. The event contains an operation name, not a token or full personal payload. The displayed request id can be used to locate related logs.",
+      "points": 1
+    }
+  ]
+}

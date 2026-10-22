@@ -1,0 +1,579 @@
+{
+  "id": "java-fundamentals-readiness",
+  "title": "Java Fundamentals — Readiness Check",
+  "description": "Twenty questions spanning all ten modules of Java Fundamentals. Available independently of course enrollment.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-fundamentals-readiness-q1",
+      "type": "single",
+      "prompt": "Which tool is useful for evaluating a Java expression interactively?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pagefind"
+        },
+        {
+          "id": "b",
+          "text": "JShell"
+        },
+        {
+          "id": "c",
+          "text": "Git"
+        },
+        {
+          "id": "d",
+          "text": "Docker"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "JShell is a Java REPL.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q2",
+      "type": "single",
+      "prompt": "java and javac report different major versions. What should you inspect first?",
+      "options": [
+        {
+          "id": "a",
+          "text": "PATH and JAVA_HOME"
+        },
+        {
+          "id": "b",
+          "text": "The monitor resolution"
+        },
+        {
+          "id": "c",
+          "text": "SQL indexes"
+        },
+        {
+          "id": "d",
+          "text": "The HTTP port"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "The terminal may be resolving commands from different JDK installations.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q3",
+      "type": "single",
+      "prompt": "What can ordinary int addition do when the mathematical result exceeds its range?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Automatically become long"
+        },
+        {
+          "id": "b",
+          "text": "Always throw"
+        },
+        {
+          "id": "c",
+          "text": "Produce infinity"
+        },
+        {
+          "id": "d",
+          "text": "Wrap around"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Integer overflow is silent for ordinary arithmetic.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q4",
+      "type": "single",
+      "prompt": "Which method detects overflow when adding two ints?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Integer.toString"
+        },
+        {
+          "id": "b",
+          "text": "Double.parseDouble"
+        },
+        {
+          "id": "c",
+          "text": "Math.addExact"
+        },
+        {
+          "id": "d",
+          "text": "Math.abs"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "addExact throws ArithmeticException on overflow.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q5",
+      "type": "single",
+      "prompt": "A while condition is false before its first iteration. How often does the body run?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Until break"
+        },
+        {
+          "id": "b",
+          "text": "Zero times"
+        },
+        {
+          "id": "c",
+          "text": "Once"
+        },
+        {
+          "id": "d",
+          "text": "Twice"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "while checks the condition before entering the body.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q6",
+      "type": "single",
+      "prompt": "Which is the most useful shipping-rule test set?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Below, at, and above the threshold"
+        },
+        {
+          "id": "b",
+          "text": "Three unrelated variable names"
+        },
+        {
+          "id": "c",
+          "text": "Only a very large order"
+        },
+        {
+          "id": "d",
+          "text": "Only a nonempty array"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Boundary tests reveal incorrect comparison operators.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q7",
+      "type": "single",
+      "prompt": "A local variable declared inside a block is normally visible where?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Throughout all classes"
+        },
+        {
+          "id": "b",
+          "text": "Before its declaration everywhere"
+        },
+        {
+          "id": "c",
+          "text": "Only to the garbage collector"
+        },
+        {
+          "id": "d",
+          "text": "Within that block after its declaration"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Lexical scope bounds where the name is accessible.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q8",
+      "type": "single",
+      "prompt": "What should you establish before fixing a reported calculation bug?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A larger monitor"
+        },
+        {
+          "id": "b",
+          "text": "A database migration"
+        },
+        {
+          "id": "c",
+          "text": "A small reproducible failing input"
+        },
+        {
+          "id": "d",
+          "text": "A new framework"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "A reproducer lets you confirm both the cause and the repair.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q9",
+      "type": "single",
+      "prompt": "Which case exposes initializing maximum to zero incorrectly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An array with one positive value"
+        },
+        {
+          "id": "b",
+          "text": "An array of only negative numbers"
+        },
+        {
+          "id": "c",
+          "text": "An array with a positive maximum"
+        },
+        {
+          "id": "d",
+          "text": "An array with a zero maximum"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Zero would incorrectly exceed every real reading.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q10",
+      "type": "single",
+      "prompt": "What must you decide for a maximum operation on an empty array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An explicit empty-input policy"
+        },
+        {
+          "id": "b",
+          "text": "An arbitrary valid index"
+        },
+        {
+          "id": "c",
+          "text": "A mutable array length"
+        },
+        {
+          "id": "d",
+          "text": "A random default"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "There is no maximum element; reject or represent absence deliberately.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q11",
+      "type": "single",
+      "prompt": "Which check safely guards a following method call on value?",
+      "options": [
+        {
+          "id": "a",
+          "text": "!value.isBlank() && value != null"
+        },
+        {
+          "id": "b",
+          "text": "value.isBlank() || value == null"
+        },
+        {
+          "id": "c",
+          "text": "value.length() > 0"
+        },
+        {
+          "id": "d",
+          "text": "value != null && !value.isBlank()"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Short-circuit evaluation checks null first.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q12",
+      "type": "single",
+      "prompt": "What does Integer.parseInt(\"abc\") throw?",
+      "options": [
+        {
+          "id": "a",
+          "text": "ClassNotFoundException"
+        },
+        {
+          "id": "b",
+          "text": "No exception"
+        },
+        {
+          "id": "c",
+          "text": "NumberFormatException"
+        },
+        {
+          "id": "d",
+          "text": "IOException"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The string is not a valid integer representation.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q13",
+      "type": "single",
+      "prompt": "Why validate before subtracting a withdrawal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To allocate another wallet"
+        },
+        {
+          "id": "b",
+          "text": "A failed operation should preserve the balance"
+        },
+        {
+          "id": "c",
+          "text": "Subtraction cannot use private fields"
+        },
+        {
+          "id": "d",
+          "text": "To force integer overflow"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Validate first so rejection does not leave partial state.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q14",
+      "type": "single",
+      "prompt": "What does this refer to in an instance method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The current receiver object"
+        },
+        {
+          "id": "b",
+          "text": "The superclass only"
+        },
+        {
+          "id": "c",
+          "text": "The current source file"
+        },
+        {
+          "id": "d",
+          "text": "Every instance at once"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "this is the object on which the instance method is invoked.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q15",
+      "type": "single",
+      "prompt": "What does super(...) invoke in a constructor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The subclass override"
+        },
+        {
+          "id": "b",
+          "text": "The JVM launcher"
+        },
+        {
+          "id": "c",
+          "text": "A static initializer in every class"
+        },
+        {
+          "id": "d",
+          "text": "A superclass constructor"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "It delegates construction to the superclass.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q16",
+      "type": "single",
+      "prompt": "Are static methods dispatched like overriding instance methods?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only when final"
+        },
+        {
+          "id": "b",
+          "text": "Only in interfaces"
+        },
+        {
+          "id": "c",
+          "text": "No"
+        },
+        {
+          "id": "d",
+          "text": "Yes"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Static method selection follows the compile-time type.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q17",
+      "type": "single",
+      "prompt": "What visibility is required when implementing an ordinary public interface method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Any visibility"
+        },
+        {
+          "id": "b",
+          "text": "public"
+        },
+        {
+          "id": "c",
+          "text": "private"
+        },
+        {
+          "id": "d",
+          "text": "package-private only"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "An implementation cannot narrow access.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q18",
+      "type": "single",
+      "prompt": "Which construct can hold shared instance state and an abstract method?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An abstract class"
+        },
+        {
+          "id": "b",
+          "text": "An interface instance field"
+        },
+        {
+          "id": "c",
+          "text": "An enum name string"
+        },
+        {
+          "id": "d",
+          "text": "A package declaration"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "Abstract classes can mix state and incomplete behavior.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q19",
+      "type": "single",
+      "prompt": "Where is a useful place to recover from malformed CLI commands?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Every getter"
+        },
+        {
+          "id": "b",
+          "text": "The record hashCode method"
+        },
+        {
+          "id": "c",
+          "text": "The compiler itself"
+        },
+        {
+          "id": "d",
+          "text": "The command-processing boundary"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The boundary can show feedback and accept another command.",
+      "points": 1
+    },
+    {
+      "id": "java-fundamentals-readiness-q20",
+      "type": "single",
+      "prompt": "When wrapping an exception, why preserve its cause?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To erase the stack trace"
+        },
+        {
+          "id": "b",
+          "text": "To convert all errors to checked exceptions"
+        },
+        {
+          "id": "c",
+          "text": "To retain diagnostic context"
+        },
+        {
+          "id": "d",
+          "text": "To guarantee retry succeeds"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "The cause records the original failure for diagnosis.",
+      "points": 1
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "java-arrays-and-algorithms-practice",
+  "title": "Arrays and problem solving — Java Practice",
+  "description": "Independent practice: A weather station summarizes daily temperatures. Seven questions with explanations.",
+  "category": "Java",
+  "difficulty": "easy",
+  "tags": [
+    "java",
+    "beginner",
+    "java-fundamentals"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": false,
+  "questions": [
+    {
+      "id": "java-arrays-and-algorithms-practice-q1",
+      "type": "single",
+      "prompt": "What is a safe starting maximum for a known nonempty int array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Its length"
+        },
+        {
+          "id": "b",
+          "text": "Its first element"
+        },
+        {
+          "id": "c",
+          "text": "Always zero"
+        },
+        {
+          "id": "d",
+          "text": "Always one"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "An actual element handles arrays containing only negative values.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-practice-q2",
+      "type": "single",
+      "prompt": "How does a one-pass linear scan grow with n elements?",
+      "options": [
+        {
+          "id": "a",
+          "text": "O(n)"
+        },
+        {
+          "id": "b",
+          "text": "O(1)"
+        },
+        {
+          "id": "c",
+          "text": "O(log n)"
+        },
+        {
+          "id": "d",
+          "text": "O(n!)"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "It examines at most a constant amount of work per element.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-practice-q3",
+      "type": "single",
+      "prompt": "Does cloning an int[][] deep-copy all rows?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only if all rows are equal length"
+        },
+        {
+          "id": "c",
+          "text": "Only for negative values"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "The outer clone still refers to the original row arrays.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-practice-q4",
+      "type": "single",
+      "prompt": "What value fills a newly allocated int[3]?",
+      "options": [
+        {
+          "id": "a",
+          "text": "-1"
+        },
+        {
+          "id": "b",
+          "text": "Unspecified garbage"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "null"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Array elements receive default values.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-practice-q5",
+      "type": "single",
+      "prompt": "Which case exposes initializing maximum to zero incorrectly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An array with one positive value"
+        },
+        {
+          "id": "b",
+          "text": "An array of only negative numbers"
+        },
+        {
+          "id": "c",
+          "text": "An array with a positive maximum"
+        },
+        {
+          "id": "d",
+          "text": "An array with a zero maximum"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Zero would incorrectly exceed every real reading.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-practice-q6",
+      "type": "single",
+      "prompt": "What must you decide for a maximum operation on an empty array?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An explicit empty-input policy"
+        },
+        {
+          "id": "b",
+          "text": "An arbitrary valid index"
+        },
+        {
+          "id": "c",
+          "text": "A mutable array length"
+        },
+        {
+          "id": "d",
+          "text": "A random default"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "There is no maximum element; reject or represent absence deliberately.",
+      "points": 1
+    },
+    {
+      "id": "java-arrays-and-algorithms-practice-q7",
+      "type": "single",
+      "prompt": "Which maximum is printed for these readings?\n\n```java\nint[] temperatures = {-3, 4, 1};\nint max = temperatures[0];\nfor (int value : temperatures) {\n  if (value > max) max = value;\n}\nSystem.out.println(max);\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "-3"
+        },
+        {
+          "id": "b",
+          "text": "1"
+        },
+        {
+          "id": "c",
+          "text": "0"
+        },
+        {
+          "id": "d",
+          "text": "4"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "max = -3, the first actual reading. 4 > -3, so max becomes 4. 1 is not greater than 4; max stays 4.",
+      "points": 1
+    }
+  ]
+}

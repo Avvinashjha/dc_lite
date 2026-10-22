@@ -1,0 +1,215 @@
+{
+  "id": "java-jvm-and-performance-module-check",
+  "title": "JVM internals and performance — Module Quiz",
+  "description": "Course assessment: Diagnose a service whose memory use grows over time.",
+  "category": "Java",
+  "difficulty": "hard",
+  "tags": [
+    "java",
+    "advanced",
+    "java-advanced"
+  ],
+  "author": "DailyCoder",
+  "ranked": false,
+  "source": "curated",
+  "publishedAt": "2026-10-22",
+  "courseOnly": true,
+  "questions": [
+    {
+      "id": "java-jvm-and-performance-module-check-q1",
+      "type": "single",
+      "prompt": "What makes an otherwise unused object eligible for garbage collection?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Its local name was short"
+        },
+        {
+          "id": "b",
+          "text": "It has a private field"
+        },
+        {
+          "id": "c",
+          "text": "Its hash code is zero"
+        },
+        {
+          "id": "d",
+          "text": "It is no longer reachable from GC roots"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "Reachability determines retention, not whether the application intends to use it.",
+      "points": 1
+    },
+    {
+      "id": "java-jvm-and-performance-module-check-q2",
+      "type": "single",
+      "prompt": "Can a reachable, unbounded cache cause a Java memory leak?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Only if it stores primitives"
+        },
+        {
+          "id": "b",
+          "text": "Only with JNI"
+        },
+        {
+          "id": "c",
+          "text": "Yes"
+        },
+        {
+          "id": "d",
+          "text": "No, GC prevents every leak"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "GC cannot reclaim objects that are still retained.",
+      "points": 1
+    },
+    {
+      "id": "java-jvm-and-performance-module-check-q3",
+      "type": "single",
+      "prompt": "Which tool is appropriate for JVM event recordings?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Git blame"
+        },
+        {
+          "id": "b",
+          "text": "JFR"
+        },
+        {
+          "id": "c",
+          "text": "CSS Grid"
+        },
+        {
+          "id": "d",
+          "text": "javap alone"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "Java Flight Recorder captures runtime events for diagnosis.",
+      "points": 1
+    },
+    {
+      "id": "java-jvm-and-performance-module-check-q4",
+      "type": "single",
+      "prompt": "Which framework is designed for Java microbenchmarks?",
+      "options": [
+        {
+          "id": "a",
+          "text": "JMH"
+        },
+        {
+          "id": "b",
+          "text": "JUnit assertions alone"
+        },
+        {
+          "id": "c",
+          "text": "Maven clean alone"
+        },
+        {
+          "id": "d",
+          "text": "Scanner"
+        }
+      ],
+      "correct": [
+        "a"
+      ],
+      "explanation": "JMH helps manage JVM-specific benchmarking hazards.",
+      "points": 1
+    },
+    {
+      "id": "java-jvm-and-performance-module-check-q5",
+      "type": "single",
+      "prompt": "Does System.gc() guarantee immediate collection?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yes"
+        },
+        {
+          "id": "b",
+          "text": "Only for HashMaps"
+        },
+        {
+          "id": "c",
+          "text": "Only after clear"
+        },
+        {
+          "id": "d",
+          "text": "No"
+        }
+      ],
+      "correct": [
+        "d"
+      ],
+      "explanation": "It is a request and does not establish a collection schedule.",
+      "points": 1
+    },
+    {
+      "id": "java-jvm-and-performance-module-check-q6",
+      "type": "single",
+      "prompt": "Why can cold single-run timings mislead?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The wall clock is always constant"
+        },
+        {
+          "id": "b",
+          "text": "All methods allocate equally"
+        },
+        {
+          "id": "c",
+          "text": "JIT compilation and warm-up change execution"
+        },
+        {
+          "id": "d",
+          "text": "Java never compiles code"
+        }
+      ],
+      "correct": [
+        "c"
+      ],
+      "explanation": "Steady-state behavior may differ from the first invocation.",
+      "points": 1
+    },
+    {
+      "id": "java-jvm-and-performance-module-check-q7",
+      "type": "single",
+      "prompt": "What two map sizes are printed before and after clear?\n\n```java\nvar cache = new java.util.HashMap<Integer, byte[]>();\nfor (int id = 0; id < 3; id++) cache.put(id, new byte[1024]);\nSystem.out.println(cache.size());\ncache.clear();\nSystem.out.println(cache.size());\n```",
+      "options": [
+        {
+          "id": "a",
+          "text": "1\n0"
+        },
+        {
+          "id": "b",
+          "text": "3\n0"
+        },
+        {
+          "id": "c",
+          "text": "3\n3"
+        },
+        {
+          "id": "d",
+          "text": "0\n0"
+        }
+      ],
+      "correct": [
+        "b"
+      ],
+      "explanation": "The map references three arrays. They remain reachable through cache. clear removes those map references. Unreferenced arrays may become eligible for collection; no collection time is promised.",
+      "points": 1
+    }
+  ]
+}
